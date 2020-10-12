@@ -1,6 +1,7 @@
 @import "scss/index";
 
 .root{
+  margin: 14px 0 16px 0;
   &::after{
     content: "";
     display: block;

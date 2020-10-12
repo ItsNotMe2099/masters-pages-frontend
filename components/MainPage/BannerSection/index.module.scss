@@ -1,0 +1,62 @@
+.root{
+   width: 100%;
+   padding: 63px 0 59px 118px;
+   background: #FD5742;
+   border-radius: 30px;
+   position: relative;
+}
+
+.text{
+    &__big{
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 58px;
+        color: #fff;
+    }
+    &__medium{
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 26px;
+        color: #fff;
+        margin-bottom: 54px;
+    }
+    &__vsmall{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        color: #fff;
+        margin-right: 10px;
+        padding: 9px 15px 9px 15px;
+    }
+
+    &__small{
+        padding: 9px 15px 9px 15px;
+        margin-right: 10px;
+        &_active{
+            background: rgba(1, 1, 1, 0.2);
+            padding: 9px 15px 9px 15px;
+            border-radius: 10px;
+        }
+    }
+}
+
+.searchType{
+    display: flex;
+    margin-bottom: 17px;
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+.input{
+    position: relative;
+    input{
+        width: 50%;
+    }
+    button{
+        position: absolute;
+        top: 5px;
+        left: 375px;
+    }
+}

@@ -1,0 +1,30 @@
+.title{
+    margin-top: 80.17px;
+    margin-bottom: 87px;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 58px;
+    text-align: center;
+}
+
+.column{
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.columnItem{
+    display: flex;
+    width: 25%;
+}
+
+.text{
+    margin: auto 0 auto 30px;
+}
+
+.btnContainer{
+    display: flex;
+    margin-top: 62px;
+    button{
+        margin:auto
+    }
+}

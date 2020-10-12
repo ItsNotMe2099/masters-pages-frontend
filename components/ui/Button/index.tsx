@@ -1,10 +1,23 @@
 import styles from './index.module.scss'
 
-interface Props {}
+interface Props {
+  largeHeader?: boolean
+  smallHeader?: boolean
+  largeInput?: boolean
+  categoryBtn?: boolean
+  children?: any
+}
 
 export default function Button(props: Props) {
   return (
-    <button>
+    <button className={`
+    ${styles.root}
+    ${props.largeHeader && styles.largeHeader}
+    ${props.smallHeader&& styles.smallHeader}
+    ${props.largeInput&& styles.largeInput}
+    ${props.categoryBtn&& styles.categoryBtn}
+  `}>
+    {props.children}
     </button>
   )
 }

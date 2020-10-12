@@ -9,9 +9,9 @@ export default function Header(props: Props) {
     <header className={styles.root}>
       <img className={styles.logo} src='public/img/logo.svg' alt='wedo4you'/>
       <div className={styles.buttons}>
-        <Button></Button>
-        <Button></Button>
-        <Button></Button>
+        <Button largeHeader>Стать мастером</Button>
+        <Button smallHeader></Button>
+        <Button smallHeader><img src="../../../public/img/icons/person.svg" alt=""/></Button>
       </div>
     </header>
   )
