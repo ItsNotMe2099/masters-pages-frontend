@@ -14,7 +14,8 @@
 }
 
 .smallHeader{
-    padding: 17px 16px 16px 16px;
+    padding: 15px 16px 15px 16px;
+    background-color: #000;
 }
 
 .largeInput{
@@ -33,4 +34,13 @@
     font-size: 16px;
     line-height: 19px;
     color: #fff;
+}
+
+.footerBtn{
+    padding: 20px 22px 21px 22px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    background-color: #000000;
 }

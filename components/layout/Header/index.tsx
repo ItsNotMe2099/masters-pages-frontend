@@ -1,5 +1,7 @@
 import styles from './index.module.scss'
-import Button from '../../ui/Button'
+import Button from 'components/ui/Button'
+import LangSwitch from 'components/ui/LangSwitch'
+import Link from 'next/link'
 
 interface Props {}
 
@@ -7,11 +9,11 @@ export default function Header(props: Props) {
 
   return (
     <header className={styles.root}>
-      <img className={styles.logo} src='public/img/logo.svg' alt='wedo4you'/>
+      <Link href="/"><a><img className={styles.logo} src='img/logo.svg' alt='wedo4you'/></a></Link>
       <div className={styles.buttons}>
         <Button largeHeader>Стать мастером</Button>
-        <Button smallHeader></Button>
-        <Button smallHeader><img src="../../../public/img/icons/person.svg" alt=""/></Button>
+        <LangSwitch/>
+        <Button smallHeader><img src="img/icons/person.svg" alt=""/></Button>
       </div>
     </header>
   )

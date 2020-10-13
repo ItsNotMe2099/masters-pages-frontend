@@ -1,14 +1,12 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
 
-interface Props {
-  children: any
-}
+interface Props {}
 
-export default function CategoryElement(props: Props) {
+export default function CategoryIcon(props: Props) {
   return (
       <div className={styles.root}>
-        {props.children}
+        <img src='img/icons/service.svg' alt=''/>
       </div>
   )
 }
