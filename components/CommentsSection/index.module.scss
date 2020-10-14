@@ -2,11 +2,30 @@
     margin-top: 32px;
     margin-bottom: 55px;
     position: relative;
-    z-index: 2;
-}
 
+}
+.commentContainer{
+  width: 40%;
+  background-color: #EDEDED;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding: 32px 0px  42px 15px;
+  z-index: 2;
+  position: relative;
+}
+.commentBg{
+  position: absolute;
+  background-color: red;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  transform: translateX(-90%);
+  z-index: 1;
+  background-color: #EDEDED;
+}
 .head{
-    font-weight: bold;
+    font-weight: 700;
     font-size: 24px;
     margin-bottom: 57px;
 }
@@ -21,7 +40,7 @@
     font-weight: 500;
     font-size: 57px;
     color: #26BA35;
-    margin-right: 27px;    
+    margin-right: 27px;
 }
 
 .greenText{

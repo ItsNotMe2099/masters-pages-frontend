@@ -15,7 +15,6 @@ COPY enviroments/${ENV_FILE} ./.env
 
 # Building app
 RUN npm run build
-
 EXPOSE 8080/tcp
 
 # Running the app
