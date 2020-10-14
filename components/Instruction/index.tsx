@@ -1,8 +1,6 @@
 import styles from './index.module.scss'
 
-interface Props {
-  fluid?: boolean
-}
+interface Props {}
 
 export default function Instruction(props: Props) {
   return (

@@ -1,0 +1,62 @@
+.root{
+    display: flex;
+}
+
+.border{
+    border: 1px dashed #FD5742;
+    border-radius: 50px;
+    padding: 5px 5px 0 5px;
+    margin-bottom: 21px;
+}
+
+.comment{
+    display: flex;
+    img{
+        margin-right: 9px;
+    }
+}
+
+.positive{
+    font-weight: 600;
+    font-size: 14px;
+    color: #26BA35;
+    margin-right: 9px;
+}
+
+.negative{
+    font-weight: 600;
+    font-size: 14px;
+    color: #FD5742;
+    margin-right: 9px;
+}
+
+.left{
+    margin-right: 20px;
+}
+
+.name{
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+.service{
+    font-weight: 500;
+    font-size: 14px;
+    color: #369FFF;
+    margin-bottom: 9px;
+}
+
+.text{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #6D718C;
+}
+
+.inner{
+    display: flex;
+    margin: auto;
+}
+
