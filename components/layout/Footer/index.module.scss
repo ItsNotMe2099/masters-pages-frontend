@@ -1,0 +1,73 @@
+.root{
+    margin-bottom: 47.52px;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+      }
+}
+
+.logo{
+    float: left;
+    display: flex;
+    flex-direction: column;
+    div{
+        margin-top: 13px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+    }
+}
+
+.links{
+    float: left;
+    margin: 0;
+    padding: 0 0 0 130px;
+    a{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        color: #6D718C;
+    }
+}
+
+.social{
+    float: right;
+    display: flex;
+}
+
+.messengers{
+    margin-right: 70.11px;
+}
+
+.networks, .messengers{
+    a{
+        svg{
+            fill: #B5B5B5;
+        }
+
+        .whatsapp{
+            margin-right: 30.17px;
+		    &:hover{
+                fill: #28AD00
+            }
+    
+        }
+        .telegram{
+            &:hover{
+                fill: #2FA3D6;
+            }
+        }
+        .facebook{
+            margin-right: 34.97px;
+            &:hover{
+                fill: #385694
+            }
+        }
+        .vk{
+            &:hover{
+                fill: #4F7DB3
+            }
+        }
+    }
+}
