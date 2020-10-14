@@ -12,9 +12,9 @@ export default function Comment(props: Props) {
     <div className={styles.root}>
       <div className={styles.left}>
         <div className={styles.border}>
-          {props.comment1 ? <img src="img/Comment/photo1.png"/> : null}
-          {props.comment2 ? <img src="img/Comment/photo2.png"/> : null}
-          {props.comment3 ? <img src="img/Comment/photo3.png"/> : null}
+          {props.comment1 ? <img src="img/CommentsSection/Comment/photo1.png"/> : null}
+          {props.comment2 ? <img src="img/CommentsSection/Comment/photo2.png"/> : null}
+          {props.comment3 ? <img src="img/CommentsSection/Comment/photo3.png"/> : null}
         </div>
         <div className={styles.comment}>
           <div className={styles.inner}>

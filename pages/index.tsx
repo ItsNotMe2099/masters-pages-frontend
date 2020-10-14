@@ -4,6 +4,7 @@ import BannerSection from 'components/MainPage/BannerSection'
 import Categories from 'components/Categories'
 import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
+import CommentsSection from 'components/CommentsSection'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <BannerSection/>
       <Categories/>
       <Instruction/>
+      <CommentsSection/>
       <Footer/>
     </div>
   )
