@@ -15,9 +15,9 @@ export default function SignInComponent(props: Props) {
         Quick sign in:
       </div>
       <div className={styles.social}>
-        <img src="img/icons/google.svg" alt=''/>
-        <img src="img/icons/facebook.svg" alt=''/>
-        <img src="img/icons/instagram.svg" alt=''/>
+        <a href="#" target="_blank"><img src="img/icons/google.svg" alt=''/></a>
+        <a href="#" target="_blank"><img src="img/icons/facebook.svg" alt=''/></a>
+        <a href="#" target="_blank"><img src="img/icons/instagram.svg" alt=''/></a>
       </div>
       <div className={styles.headText}>
         Sign in:
@@ -27,8 +27,8 @@ export default function SignInComponent(props: Props) {
         <Link href='/'><a>Forgot password?</a></Link>
       </div>
       <div className={styles.signUp}>
-        <div>Don’t have an account yet? </div> 
-        <div><Link href='/'><a> Sign up</a></Link></div>
+        <div>Don’t have an account yet?</div> 
+        <div><Link href='/'><a>Sign up</a></Link></div>
       </div>
     </div>
   )
