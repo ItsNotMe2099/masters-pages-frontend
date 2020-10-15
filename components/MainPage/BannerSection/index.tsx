@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
-import Input from '../../ui/Input'
+import InputSearch from '../../ui/InputSearch'
 import Button from '../../ui/Button'
 
 interface Props {}
@@ -20,7 +20,7 @@ export default function BannerSection(props: Props) {
       </div>
       <form>
         <div className={styles.input}>
-          <Input
+          <InputSearch
             placeholder='Услуга или специалист'
             type='text'
           />

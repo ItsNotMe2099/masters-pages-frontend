@@ -1,20 +1,59 @@
 import styles from './index.module.scss'
-import Button from 'components/ui/Button'
-import LangSwitch from 'components/ui/LangSwitch'
 import Link from 'next/link'
+import { useState } from 'react'
+import Button from 'components/ui/Button'
+import Logo from 'components/Logo'
 
 interface Props {}
 
 export default function Header(props: Props) {
 
+  const [isAuth, setAuth] = useState(false)
+
   return (
     <header className={styles.root}>
-      <Link href="/"><a><img className={styles.logo} src='img/logo.svg' alt='wedo4you'/></a></Link>
-      <div className={styles.buttons}>
-        <Button largeHeader>Стать мастером</Button>
-        <LangSwitch/>
-        <Button smallHeader><img src="img/icons/person.svg" alt=""/></Button>
-      </div>
+      <div className={styles.container}>
+        <Logo/>
+        <ul className={styles.menu}>
+          <li><Link href="/"><a>Create a task</a></Link></li>
+          <li><Link href="/"><a>Find a task</a></Link></li>
+          <li><Link href="/"><a>Masters</a></Link></li>
+          <li><Link href="/"><a>Volunteers</a></Link></li>
+          <li><Link href="/"><a>FAQ</a></Link></li>
+        </ul>
+        <div className={styles.right}>
+          <div className={styles.langSwitch}>
+            <img className={styles.country} src='img/icons/ru.svg' alt=''/>
+            <span>RU</span>
+            <img className={styles.arrow} src='img/icons/arrow.svg' alt=''/>
+          </div>
+          {!isAuth ?
+          <div>
+          <Link href="/"><a>
+            <div className={styles.signIn}>
+              <span>Sign in</span>
+              <img src='img/icons/signIn.svg' alt=''/>
+            </div>
+          </a></Link>
+          <Link href="/"><a>
+            <div className={styles.signUp}>
+              <span>Sign up</span>
+              <img src='img/icons/signUp.svg' alt=''/>
+            </div>
+          </a></Link>
+          </div>
+          :
+          <div className={styles.master}>
+            <Link href="/"><a>
+              <span>Master mode</span>
+              <img src='img/Header/avatar.png' alt=""/>
+            </a></Link>
+            <Button largeHeader blue>Volunteer</Button>
+            <Button largeHeader green>Client</Button>
+          </div>
+          }
+        </div>
+        </div>
     </header>
   )
 }

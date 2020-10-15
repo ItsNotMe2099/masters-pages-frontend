@@ -2,6 +2,8 @@ import styles from './index.module.scss'
 
 interface Props {
   largeHeader?: boolean
+  blue?: boolean
+  green?: boolean
   smallHeader?: boolean
   largeInput?: boolean
   categoryBtn?: boolean
@@ -18,6 +20,8 @@ export default function Button(props: Props) {
        ${props.largeInput && styles.largeInput}
        ${props.categoryBtn && styles.categoryBtn}
        ${props.footerBtn && styles.footerBtn}
+       ${props.blue && styles.blue}
+       ${props.green && styles.green}
       `}>
         {props.children}
       </button>

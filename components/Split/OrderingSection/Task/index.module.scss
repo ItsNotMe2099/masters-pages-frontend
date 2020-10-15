@@ -1,0 +1,69 @@
+.root{
+    border: 1px solid #C4C4C4;
+    border-radius: 20px;
+    padding: 36px 40px;
+    margin-bottom: 30px;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+      }
+}
+
+.image{
+    width: 89px;
+    height: 98px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 20px;
+    display: flex;
+    img{
+        margin: auto;
+    }
+}
+
+.text{
+    float: left;
+}
+
+.title{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 11px;
+}
+
+.desc{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 28px;
+}
+
+.time{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    img{
+        margin-right: 13px;
+    }
+}
+
+.price{
+    float: right;
+}
+
+.priceNum{
+    color: #26BA35;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.priceType{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #6D718C;
+}

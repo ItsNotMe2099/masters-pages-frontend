@@ -1,4 +1,3 @@
-import Background from './Background'
 import Comment from './Comment'
 import styles from './index.module.scss'
 

@@ -4,17 +4,19 @@ import BannerSection from 'components/MainPage/BannerSection'
 import Categories from 'components/Categories'
 import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
-import CommentsSection from 'components/CommentsSection'
+import Split from 'components/Split'
 
 export default function Home() {
   return (
+    <>
+    <Header/>
     <div className={styles.container}>
-      <Header/>
       <BannerSection/>
       <Categories/>
       <Instruction/>
-      <CommentsSection/>
+      <Split/>
       <Footer/>
     </div>
+    </>
   )
 }
