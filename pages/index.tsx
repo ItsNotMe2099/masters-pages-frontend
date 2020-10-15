@@ -5,6 +5,7 @@ import Categories from 'components/Categories'
 import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
 import Split from 'components/Split'
+import SignInComponent from 'components/Auth/SignIn'
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Categories/>
       <Instruction/>
       <Split/>
+      <SignInComponent/>
       <Footer/>
     </div>
     </>

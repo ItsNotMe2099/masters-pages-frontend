@@ -6,14 +6,17 @@ interface Props {
   green?: boolean
   smallHeader?: boolean
   largeInput?: boolean
+  largeInputSign?: boolean
   categoryBtn?: boolean
   footerBtn?: boolean
+  closeBtn?: boolean
   children?: any
 }
 
 export default function Button(props: Props) {
   return (
-      <button className={`
+      <button 
+      className={`
        ${styles.root}
        ${props.largeHeader && styles.largeHeader}
        ${props.smallHeader && styles.smallHeader}
@@ -22,6 +25,8 @@ export default function Button(props: Props) {
        ${props.footerBtn && styles.footerBtn}
        ${props.blue && styles.blue}
        ${props.green && styles.green}
+       ${props.closeBtn && styles.closeBtn}
+       ${props.largeInputSign && styles.largeInputSign}
       `}>
         {props.children}
       </button>

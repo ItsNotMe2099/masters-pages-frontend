@@ -1,0 +1,65 @@
+.root{
+    padding: 30px 0 64px 0;
+    width: 441px;
+    height: 671px;
+    border-radius: 21px;
+    border: 1px solid #000;
+}
+
+.close{
+    float: right;
+    padding-right: 24px;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+      }
+}
+
+.headText{
+    text-align: center;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 93%;
+    margin-top: 50px;
+}
+
+.social{
+    margin-top: 27px;
+    margin-bottom: 76px;
+    display: flex;
+    justify-content: center;
+    img{
+        margin-right: 21px;
+        &:last-child{
+            margin: 0;
+        }
+    }
+}
+
+.forgot{
+    font-size: 15px;
+    text-align: center;
+    text-decoration: underline;
+    color: #373737;
+    margin-top: 17px;
+    margin-bottom: 62px;
+    text-align: center;
+}
+
+.signUp{
+    font-size: 15px;
+    text-align: center;
+    div{
+        display: inline-block;
+        padding-right: 11px;
+        text-decoration: underline;
+        &:last-child{
+            padding: 0;
+        }
+    }
+    a{
+        color: #0091E6;
+        text-decoration: underline;
+    }
+}

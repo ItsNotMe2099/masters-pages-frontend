@@ -33,6 +33,13 @@
     color: #fff;
 }
 
+.largeInputSign{
+    padding: 16px 124px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+}
+
 .categoryBtn{
     padding: 16px 25px 15px 25px;
     background: #000000;
@@ -49,4 +56,10 @@
     line-height: 19px;
     color: #FFFFFF;
     background-color: #000000;
+}
+
+.closeBtn{
+    width: 18px;
+    height: 18px;
+    background: url('../../../public/img/icons/close.svg');
 }

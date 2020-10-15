@@ -12,13 +12,15 @@ export default function Input(props: Props) {
   const { input, type } = props
   return (
     <>
+    <div className={styles.inputContainer}>
       <input 
       className={styles.input}
       type={type}
       {...input}
       >
-        <div className={styles.inputLabel}>{props.inputLabel}</div>
       </input>
+      <div className={styles.inputLabel}>{props.inputLabel}</div>
+    </div>
       {error &&
         touched && (
         <div className={styles.error}>
