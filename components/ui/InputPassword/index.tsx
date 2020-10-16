@@ -14,7 +14,6 @@ export default function InputPassword(props: Props) {
   const { error, touched } = props.meta
   const { input } = props
   return (
-    <>
     <div className={styles.inputContainer}>
       <input 
       className={styles.input}
@@ -27,12 +26,11 @@ export default function InputPassword(props: Props) {
         <a onClick={() => setIsShown(false)}><img src='img/field/show.svg' alt=''/></a>
         :
         <a onClick={() => setIsShown(true)}><img src='img/field/hide.svg' alt=''/></a>}
-    </div>
       {error &&
         touched && (
         <div className={styles.error}>
           {error}
         </div>)}
-    </>
+      </div>
   )
 }

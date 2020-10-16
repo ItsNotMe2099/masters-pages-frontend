@@ -1,14 +1,20 @@
 .input{
   border: 1px solid #C4C4C4;
   border-radius: 11px;
-  margin-top: 19px;
-  width: 100%;
+  width: 306px;
   height: 51px;
   padding: 0 16px;
 }
 
 .inputContainer{
   position: relative;
+  a{
+    position: absolute;
+    top: 35px;
+    right: 85px;
+    height: 19px;
+    cursor: pointer;
+  }
 }
 
 .inputLabel{

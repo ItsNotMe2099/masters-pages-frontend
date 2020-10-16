@@ -22,7 +22,9 @@ export default function SignInComponent(props: Props) {
       <div className={styles.headText}>
         Sign in:
       </div>
-      <SignIn/>
+      <div className={styles.center}>
+        <SignIn/>
+      </div>
       <div className={styles.forgot}>
         <Link href='/'><a>Forgot password?</a></Link>
       </div>

@@ -1,0 +1,77 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.head{
+    margin: auto auto 54px auto;
+    font-weight: 500;
+    font-size: 36px;
+}
+
+.inner{
+    margin: auto;
+    display: flex;
+    position: relative;
+}
+
+.or{
+    font-weight: 500;
+    font-size: 28px;
+    color: #4E4E4E;
+    padding: 7px 0;
+    background-color: #fff;
+    position: absolute;
+    left: -13px;
+    bottom: 230px;
+}
+
+.border{
+    border-right: 2px solid #c4c4c4;
+    position: relative;
+    margin: 0 106px 0 118px;
+}
+
+.left{
+    margin: auto;
+}
+
+.socialText{
+    font-size: 18px;
+    color: #373737;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.google{
+    width: 287px;
+    height: 50px;
+    background-color: #DC4E41;
+    border-radius: 10px;
+    display: flex;
+}
+
+.facebook{
+    width: 287px;
+    height: 50px;
+    background-color: #3B5998;
+    border-radius: 10px;
+    display: flex;
+}
+
+.instagram{
+    width: 287px;
+    height: 50px;
+    background: linear-gradient(49.12deg, #FFDD55 6.62%, #FF543E 50.06%, #C837AB 93.5%);
+    border-radius: 10px;
+    display: flex;
+}
+
+

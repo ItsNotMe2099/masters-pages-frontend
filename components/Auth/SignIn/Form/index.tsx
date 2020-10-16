@@ -7,12 +7,13 @@ import styles from './index.module.scss'
 let SignIn = props => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <Field
         name="login"
         component={Input}
         inputLabel="Phone number or email"
       />
+      <div className={styles.fakeMargin}></div>
       <Field
         name="password"
         component={InputPassword}
