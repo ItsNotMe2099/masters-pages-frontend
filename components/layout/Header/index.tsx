@@ -31,14 +31,18 @@ export default function Header(props: Props) {
           <div>
           <Link href="/"><a>
             <div className={styles.signIn}>
-              <span>Sign in</span>
-              <img src='img/icons/signIn.svg' alt=''/>
+              <a>
+                <span>Sign in</span>
+                <img src='img/icons/signIn.svg' alt=''/>
+              </a>
             </div>
           </a></Link>
           <Link href="/"><a>
             <div className={styles.signUp}>
-              <span>Sign up</span>
-              <img src='img/icons/signUp.svg' alt=''/>
+              <a>
+                <span>Sign up</span>
+                <img src='img/icons/signUp.svg' alt=''/>
+              </a>
             </div>
           </a></Link>
           </div>

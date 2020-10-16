@@ -49,6 +49,7 @@
 
 .country{
   padding-right: 5px;
+  vertical-align: middle;
 }
 
 .langSwitch{
@@ -58,6 +59,7 @@
     font-size: 14px;
     line-height: 17px;
     padding-right: 6px;
+    vertical-align: middle;
   }
 }
 
@@ -70,23 +72,31 @@
 .signIn{
   padding: 0 26px;
   border-right: 1px solid #c6c6c6;
+  img{
+    vertical-align: middle;
+  }
   span{
     text-transform: uppercase;
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     padding-right: 17px;
+    vertical-align: middle;
   }
 }
 
 .signUp{
   padding: 0 26px;
+  img{
+    vertical-align: middle;
+  }
   span{
     text-transform: uppercase;
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     padding-right: 17px;
+    vertical-align: middle;
   }
 }
 
