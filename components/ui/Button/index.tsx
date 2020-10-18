@@ -10,6 +10,7 @@ interface Props {
   categoryBtn?: boolean
   footerBtn?: boolean
   closeBtn?: boolean
+  registrationBtn?: boolean
   children?: any
 }
 
@@ -27,6 +28,7 @@ export default function Button(props: Props) {
        ${props.green && styles.green}
        ${props.closeBtn && styles.closeBtn}
        ${props.largeInputSign && styles.largeInputSign}
+       ${props.registrationBtn && styles.registrationBtn}
       `}>
         {props.children}
       </button>

@@ -1,5 +1,5 @@
 
-import RegistrationForm from 'components/Registration/Form'
+import RegistrationForm from './Form'
 import styles from './index.module.scss'
 
 interface Props {}

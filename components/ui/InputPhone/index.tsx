@@ -23,7 +23,7 @@ export default function InputPhone(props: Props) {
       <div className={styles.inputLabel}>Phone number*</div>
       <div className={styles.country}>
         <img className={styles.icon} src="img/icons/canada.svg" alt=''/>
-        <span>RU</span>
+        <span>+1</span>
         <img className={styles.arrow} src='img/icons/arrow.svg' alt=''/>
       </div>
     </div>

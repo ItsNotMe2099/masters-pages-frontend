@@ -1,12 +1,14 @@
 @import "scss/index";
 
 .root{
-
+    display: flex;
+    height: 689px;
 }
 
 .container{
     display: flex;
     flex-direction: column;
+    margin: auto;
 }
 
 .head{
@@ -40,14 +42,22 @@
 
 .left{
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    a{
+        margin: auto auto 10px auto;
+        &:last-child{
+            margin: auto;
+        }
+    }
 }
 
 .socialText{
     font-size: 18px;
     color: #373737;
-    display: flex;
-    align-items: center;
     text-align: center;
+    width: 75%;
+    margin: auto auto 28px auto;
 }
 
 .google{
@@ -56,6 +66,18 @@
     background-color: #DC4E41;
     border-radius: 10px;
     display: flex;
+    position: relative;
+    img{
+        padding-left: 24px;
+        position: absolute;
+        top: 14px;
+    }
+    div{
+        margin: auto;
+        font-weight: 600;
+        font-size: 21px;
+        color: #fff;
+    }
 }
 
 .facebook{
@@ -64,7 +86,19 @@
     background-color: #3B5998;
     border-radius: 10px;
     display: flex;
-}
+    position: relative;
+    img{
+        padding-left: 27px;
+        position: absolute;
+        top: 14px;
+    }
+    div{
+        margin: auto;
+        font-weight: 600;
+        font-size: 21px;
+        color: #fff;
+    }
+    }
 
 .instagram{
     width: 287px;
@@ -72,6 +106,18 @@
     background: linear-gradient(49.12deg, #FFDD55 6.62%, #FF543E 50.06%, #C837AB 93.5%);
     border-radius: 10px;
     display: flex;
+    position: relative;
+    img{
+        padding-left: 20px;
+        position: absolute;
+        top: 14px;
+    }
+    div{
+        margin: auto;
+        font-weight: 600;
+        font-size: 21px;
+        color: #fff;
+    }
 }
 
 

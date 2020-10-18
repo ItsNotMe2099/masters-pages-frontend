@@ -34,18 +34,20 @@ let RegistrationForm = props => {
         name="location"
         component={InputLocation}
       />
-      <Field
-        name="password"
-        component={InputPassword}
-        inputLabel="Password"
-      />
-      <Field
-        name="password-confirm"
-        component={InputPassword}
-        inputLabel="Password again"
-      />
+      <div className={styles.pwChange}>
+        <Field
+          name="password"
+          component={InputPassword}
+          inputLabel="Password"
+        />
+        <Field
+          name="password-confirm"
+          component={InputPassword}
+          inputLabel="Password again"
+        />
+      </div>
       <div className={styles.btnContainer}> 
-        <Button largeInputSign>COMPLETE REGISTRATION</Button>
+        <Button registrationBtn>COMPLETE REGISTRATION</Button>
       </div>
     </form>
   )
