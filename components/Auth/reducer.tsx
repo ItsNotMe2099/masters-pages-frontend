@@ -2,10 +2,12 @@ import ActionTypes from "./const";
 
 export interface State {
   isSignInOpen: boolean
+  isSignUpOpen: boolean
 }
 
 const initialState: State = {
-  isSignInOpen: false
+  isSignInOpen: false,
+  isSignUpOpen: false
 }
 
 export default function authReducer(state = {...initialState}, action) {
@@ -21,11 +23,11 @@ export default function authReducer(state = {...initialState}, action) {
       break
     
     case ActionTypes.SIGN_UP_OPEN:
-      state.isSignInOpen = true
+      state.isSignUpOpen = true
       break
     
     case ActionTypes.SIGN_UP_CLOSE:
-      state.isSignInOpen = false
+      state.isSignUpOpen = false
       break
   }
 

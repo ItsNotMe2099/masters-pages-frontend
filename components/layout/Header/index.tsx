@@ -13,7 +13,7 @@ interface Props {}
 export default function Header(props: Props) {
 
   const [isAuth, setAuth] = useState(false)
-  const isOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
+  const signInIsOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
   const dispatch = useDispatch()
 
   return (
@@ -67,7 +67,7 @@ export default function Header(props: Props) {
         </div>
     </header>
     <SignInComponent
-    isOpen={isOpen}
+    isOpen={signInIsOpen}
     onRequestClose={() => dispatch(signInClose())}
     />
   </>
