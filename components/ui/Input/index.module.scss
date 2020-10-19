@@ -9,6 +9,12 @@
 
 .inputContainer{
   position: relative;
+  div.ok{
+    position: absolute;
+    top: 34px;
+    right: 20px;
+    height: 19px;
+  }
 }
 
 .inputLabel{

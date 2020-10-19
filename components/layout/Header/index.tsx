@@ -3,14 +3,21 @@ import Link from 'next/link'
 import { useState } from 'react'
 import Button from 'components/ui/Button'
 import Logo from 'components/Logo'
+import SignInComponent from 'components/Auth/SignIn'
+import { useSelector, useDispatch } from 'react-redux'
+import { IRootState } from 'types'
+import { signInClose, signInOpen } from 'components/Auth/actions'
 
 interface Props {}
 
 export default function Header(props: Props) {
 
   const [isAuth, setAuth] = useState(false)
+  const isOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
+  const dispatch = useDispatch()
 
   return (
+  <>
     <header className={styles.root}>
       <div className={styles.container}>
         <Logo/>
@@ -29,22 +36,22 @@ export default function Header(props: Props) {
           </div>
           {!isAuth ?
           <div>
-          <Link href="/"><a>
+          <a onClick={() => dispatch(signInOpen())}>
             <div className={styles.signIn}>
               <a>
                 <span>Sign in</span>
                 <img src='img/icons/signIn.svg' alt=''/>
               </a>
             </div>
-          </a></Link>
-          <Link href="/"><a>
+          </a>
+          <a>
             <div className={styles.signUp}>
               <a>
                 <span>Sign up</span>
                 <img src='img/icons/signUp.svg' alt=''/>
               </a>
             </div>
-          </a></Link>
+          </a>
           </div>
           :
           <div className={styles.master}>
@@ -59,5 +66,10 @@ export default function Header(props: Props) {
         </div>
         </div>
     </header>
+    <SignInComponent
+    isOpen={isOpen}
+    onRequestClose={() => dispatch(signInClose())}
+    />
+  </>
   )
 }

@@ -12,11 +12,13 @@ interface Props {
   closeBtn?: boolean
   registrationBtn?: boolean
   children?: any
+  onClick?: (e: React.MouseEvent) => void
 }
 
 export default function Button(props: Props) {
   return (
       <button 
+      onClick={props.onClick}
       className={`
        ${styles.root}
        ${props.largeHeader && styles.largeHeader}

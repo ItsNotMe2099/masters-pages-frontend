@@ -4,6 +4,9 @@
   width: $container-lg;
   margin: auto;
   display: flex;
+  a{
+    cursor: pointer;
+  }
 }
 
 .root{

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styles from './index.module.scss'
 
 interface Props {
@@ -5,11 +6,17 @@ interface Props {
   meta: any
   input: string
   type: string
+  value: string
+  //onChange: (e: React.FormEvent<HTMLInputElement>) => void
 }
 
 export default function Input(props: Props) {
   const { error, touched } = props.meta
   const { input, type } = props
+  const [isCorrect, setIsCorrect] = useState(false)
+
+  console.log(input)
+  console.log(isCorrect)
   return (
     <>
     <div className={styles.inputContainer}>
@@ -17,9 +24,13 @@ export default function Input(props: Props) {
       className={styles.input}
       type={type}
       {...input}
+      value={props.value}
+      onChange={value => value !== undefined ? setIsCorrect(true) : setIsCorrect(false)}
       >
       </input>
       <div className={styles.inputLabel}>{props.inputLabel}</div>
+      {isCorrect && props.inputLabel !== 'Email*' ?
+      <div className={styles.ok}><img src='img/field/ok.svg' alt=''/></div> : null}
     </div>
       {error &&
         touched && (
