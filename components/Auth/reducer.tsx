@@ -16,6 +16,7 @@ export default function authReducer(state = {...initialState}, action) {
 
     case ActionTypes.SIGN_IN_OPEN:
       state.isSignInOpen = true
+      state.isSignUpOpen = false
       break
 
     case ActionTypes.SIGN_IN_CLOSE:
@@ -24,6 +25,7 @@ export default function authReducer(state = {...initialState}, action) {
     
     case ActionTypes.SIGN_UP_OPEN:
       state.isSignUpOpen = true
+      state.isSignInOpen = false
       break
     
     case ActionTypes.SIGN_UP_CLOSE:

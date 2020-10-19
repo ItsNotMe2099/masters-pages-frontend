@@ -1,33 +1,34 @@
 import Button from 'components/ui/Button'
 import { Field, reduxForm } from 'redux-form'
-import Input from 'components/ui/Input'
-import InputPassword from 'components/ui/InputPassword'
+import InputPhone from 'components/ui/InputPhone'
 import styles from './index.module.scss'
+import Checkbox from 'components/ui/Checkbox'
+import Link from 'next/link'
 
-let SignIn = props => {
+let SignUp = props => {
   const { handleSubmit } = props
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field
-        name="login"
-        component={Input}
-        inputLabel="Phone number or email"
-      />
-      <div className={styles.fakeMargin}></div>
-      <Field
-        name="password"
-        component={InputPassword}
-        inputLabel="Password"
+        name="phone"
+        component={InputPhone}
+        label="(ХХХ) XXX-XX-XX"
       />
       <div className={styles.btnContainer}> 
-        <Button green largeInputSign>LOG IN</Button>
+        <Button green largeInputSignUp>REGISTRATION</Button>
+      </div>
+      <div className={styles.terms}>
+      <Field
+        name="terms"
+        component={Checkbox}
+      ><span>I am agree with <Link href="/"><a>terms and conditions</a></Link></span></Field>
       </div>
     </form>
   )
 }
 
-SignIn = reduxForm ({
-  form: 'signIn',
-}) (SignIn)
+SignUp = reduxForm ({
+  form: 'signUp',
+}) (SignUp)
 
-export default SignIn
+export default SignUp

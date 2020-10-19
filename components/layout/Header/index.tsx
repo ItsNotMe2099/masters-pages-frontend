@@ -6,7 +6,8 @@ import Logo from 'components/Logo'
 import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
-import { signInClose, signInOpen } from 'components/Auth/actions'
+import { signInClose, signInOpen, signUpOpen, signUpClose } from 'components/Auth/actions'
+import SignUpComponent from 'components/Auth/SignUp'
 
 interface Props {}
 
@@ -14,7 +15,7 @@ export default function Header(props: Props) {
 
   const [isAuth, setAuth] = useState(false)
   const signInIsOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
-  const signUpIsOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
+  const signUpIsOpen = useSelector((state: IRootState) => state.authComponent.isSignUpOpen)
   const dispatch = useDispatch()
 
   return (
@@ -45,7 +46,7 @@ export default function Header(props: Props) {
               </a>
             </div>
           </a>
-          <a>
+          <a onClick={() => dispatch(signUpOpen())}>
             <div className={styles.signUp}>
               <a>
                 <span>Sign up</span>
@@ -70,6 +71,10 @@ export default function Header(props: Props) {
     <SignInComponent
     isOpen={signInIsOpen}
     onRequestClose={() => dispatch(signInClose())}
+    />
+    <SignUpComponent 
+    isOpen={signUpIsOpen}
+    onRequestClose={() => dispatch(signUpClose())}
     />
   </>
   )

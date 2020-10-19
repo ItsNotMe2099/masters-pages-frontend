@@ -4,6 +4,7 @@ import VK from 'components/svg/VK'
 import WhatsApp from 'components/svg/WhatsApp'
 import Link from 'next/link'
 import BannerFooter from './BannerFooter'
+import Logo from 'components/Logo'
 import styles from './index.module.scss'
 
 interface Props {}
@@ -15,8 +16,8 @@ export default function Footer(props: Props) {
     <BannerFooter/>
     <div className={styles.root}>
       <div className={styles.logo}>
-        <Link href="/"><a><img src='img/logo.svg' alt='wedo4you'/></a></Link>
-        <div>Wedo4you. 2020</div>
+        <Logo/>
+        <div className={styles.text}>Master pages. 2020</div>
       </div>
       <ul className={styles.links}>
         <li><Link href="/"><a>Новый заказ</a></Link></li>

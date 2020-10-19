@@ -7,6 +7,7 @@ interface Props {
   smallHeader?: boolean
   largeInput?: boolean
   largeInputSign?: boolean
+  largeInputSignUp?: boolean
   categoryBtn?: boolean
   footerBtn?: boolean
   closeBtn?: boolean
@@ -30,6 +31,7 @@ export default function Button(props: Props) {
        ${props.green && styles.green}
        ${props.closeBtn && styles.closeBtn}
        ${props.largeInputSign && styles.largeInputSign}
+       ${props.largeInputSignUp && styles.largeInputSignUp}
        ${props.registrationBtn && styles.registrationBtn}
       `}>
         {props.children}
