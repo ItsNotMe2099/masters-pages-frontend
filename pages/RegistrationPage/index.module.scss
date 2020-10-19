@@ -1,14 +1,14 @@
 @import "scss/index";
 
 .root{
-    display: flex;
-    height: 689px;
+    position: relative;
 }
+
 
 .container{
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 200px auto;
 }
 
 .head{

@@ -1,4 +1,4 @@
-
+import Backgrounds from './Backgrounds'
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
 
@@ -39,6 +39,7 @@ export default function RegistrationPage(props: Props) {
           </div>
         </div>
       </div>
+      <Backgrounds/>
     </div>
   )
 }

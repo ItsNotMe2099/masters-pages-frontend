@@ -14,6 +14,7 @@ export default function Header(props: Props) {
 
   const [isAuth, setAuth] = useState(false)
   const signInIsOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
+  const signUpIsOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
   const dispatch = useDispatch()
 
   return (
