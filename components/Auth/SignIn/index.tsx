@@ -3,7 +3,8 @@ import styles from './index.module.scss'
 import Link from 'next/link'
 import SignIn from './Form'
 import Modal from 'react-modal'
-import { isFileExcluded } from 'tslint/lib/configuration'
+import { useDispatch } from 'react-redux'
+import { signUpOpen } from 'components/Auth/actions'
 
 interface Props {
   isOpen: boolean
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function SignInComponent(props: Props) {
+  const dispatch = useDispatch()
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -57,7 +59,7 @@ export default function SignInComponent(props: Props) {
         </div>
         <div className={styles.signUp}>
           <div>Don’t have an account yet?</div> 
-          <div><Link href='/'><a>Sign up</a></Link></div>
+          <div><a onClick={() => dispatch(signUpOpen())}>Sign up</a></div>
         </div>
       </div>
     </Modal>

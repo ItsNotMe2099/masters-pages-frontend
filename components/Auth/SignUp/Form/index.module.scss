@@ -11,3 +11,20 @@
 .form{
     width: 306px;
 }
+
+.terms{
+    font-size: 15px;
+    color: #373737;
+    margin-top: 17px;
+    margin-bottom: 62px;
+    display: flex;
+    justify-content: center;
+    a{
+        color: #0091E6;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    input{
+        margin-right: 11px;
+    }
+}

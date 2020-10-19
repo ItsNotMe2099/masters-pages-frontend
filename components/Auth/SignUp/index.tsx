@@ -1,16 +1,18 @@
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
 import Link from 'next/link'
-import SignIn from './Form'
+import SignUp from './Form'
 import Modal from 'react-modal'
-import { isFileExcluded } from 'tslint/lib/configuration'
+import { useDispatch } from 'react-redux'
+import { signInOpen} from 'components/Auth/actions'
 
 interface Props {
   isOpen: boolean
   onRequestClose: () => void
 }
 
-export default function SignInComponent(props: Props) {
+export default function SignUpComponent(props: Props) {
+  const dispatch = useDispatch()
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -46,18 +48,15 @@ export default function SignInComponent(props: Props) {
           <a href="#" target="_blank"><img src="img/icons/facebook.svg" alt=''/></a>
           <a href="#" target="_blank"><img src="img/icons/instagram.svg" alt=''/></a>
         </div>
-        <div className={styles.headText}>
-          Sign in:
+        <div className={styles.signUpText}>
+          Sign up:
         </div>
         <div className={styles.center}>
-          <SignIn/>
-        </div>
-        <div className={styles.forgot}>
-          <Link href='/'><a>Forgot password?</a></Link>
+          <SignUp/>
         </div>
         <div className={styles.signUp}>
-          <div>Don’t have an account yet?</div> 
-          <div><Link href='/'><a>Sign up</a></Link></div>
+          <div>Already have an account?</div> 
+          <div><a onClick={() => dispatch(signInOpen())}>Sign in</a></div>
         </div>
       </div>
     </Modal>
