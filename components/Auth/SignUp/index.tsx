@@ -1,3 +1,4 @@
+import { signUpSubmit } from "components/Auth/SignUp/actions";
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
 import Link from 'next/link'
@@ -30,6 +31,9 @@ export default function SignUpComponent(props: Props) {
       inset: '0',
     },
   }
+  const handleSubmit = (data) => {
+    dispatch(signUpSubmit(data));
+  }
   return (
     <Modal
     style={customStyles}
@@ -52,10 +56,10 @@ export default function SignUpComponent(props: Props) {
           Sign up:
         </div>
         <div className={styles.center}>
-          <SignUp/>
+          <SignUp onSubmit={handleSubmit}/>
         </div>
         <div className={styles.signUp}>
-          <div>Already have an account?</div> 
+          <div>Already have an account?</div>
           <div><a onClick={() => dispatch(signInOpen())}>Sign in</a></div>
         </div>
       </div>

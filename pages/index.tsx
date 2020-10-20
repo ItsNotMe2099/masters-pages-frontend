@@ -1,3 +1,4 @@
+import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 import Header from '../components/layout/Header'
 import BannerSection from 'components/MainPage/BannerSection'
@@ -6,10 +7,10 @@ import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
 import Split from 'components/Split'
 
-export default function Home() {
+const Home = (props) => {
   return (
     <>
-    <Header/>
+    <Header {...props}/>
     <div className={styles.container}>
       <BannerSection/>
       <Categories/>
@@ -20,3 +21,4 @@ export default function Home() {
     </>
   )
 }
+export default withAuthSync(Home)

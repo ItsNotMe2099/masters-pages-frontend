@@ -9,7 +9,7 @@ let SignIn = props => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field
-        name="login"
+        name="phone"
         component={Input}
         inputLabel="Phone number or email"
       />
@@ -19,7 +19,7 @@ let SignIn = props => {
         component={InputPassword}
         inputLabel="Password"
       />
-      <div className={styles.btnContainer}> 
+      <div className={styles.btnContainer}>
         <Button green largeInputSign>LOG IN</Button>
       </div>
     </form>

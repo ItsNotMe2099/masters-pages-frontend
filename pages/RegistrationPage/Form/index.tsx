@@ -46,7 +46,7 @@ let RegistrationForm = props => {
           inputLabel="Password again"
         />
       </div>
-      <div className={styles.btnContainer}> 
+      <div className={styles.btnContainer}>
         <Button registrationBtn>COMPLETE REGISTRATION</Button>
       </div>
     </form>
@@ -57,4 +57,4 @@ RegistrationForm  = reduxForm ({
   form: 'registrationForm ',
 }) (RegistrationForm )
 
-export default RegistrationForm 
+export default RegistrationForm

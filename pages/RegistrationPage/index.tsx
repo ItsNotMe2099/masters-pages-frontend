@@ -1,10 +1,18 @@
+import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
+import { withAuthSync } from "utils/auth";
 import Backgrounds from './Backgrounds'
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
 
+import { useDispatch } from 'react-redux'
 interface Props {}
 
-export default function RegistrationPage(props: Props) {
+const RegistrationPage = (props: Props) => {
+  console.log("Props", props)
+  const dispatch = useDispatch()
+  const handleSubmit = (data) => {
+    dispatch(registrationCompleteSubmit(data));
+  }
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -35,7 +43,7 @@ export default function RegistrationPage(props: Props) {
           </div>
           <div className={styles.border}><div className={styles.or}>or</div></div>
           <div className={styles.right}>
-            <RegistrationForm/>
+            <RegistrationForm onSubmit={handleSubmit}/>
           </div>
         </div>
       </div>
@@ -43,3 +51,4 @@ export default function RegistrationPage(props: Props) {
     </div>
   )
 }
+export default withAuthSync(RegistrationPage)

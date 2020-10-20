@@ -1,3 +1,5 @@
+import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
+import { LangSelect } from "components/layout/Header/components/LangSelect";
 import styles from './index.module.scss'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -6,23 +8,68 @@ import Logo from 'components/Logo'
 import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
-import { signInClose, signInOpen, signUpOpen, signUpClose } from 'components/Auth/actions'
+import {
+  signInClose,
+  signInOpen,
+  signUpOpen,
+  signUpClose,
+  phoneConfirmOpen,
+  phoneConfirmClose
+} from 'components/Auth/actions'
 import SignUpComponent from 'components/Auth/SignUp'
+import Select, { components } from 'react-select';
+interface Props {
+  user: any
+}
+const customStyles = {
 
-interface Props {}
-
+  container: (provided, state) => ({
+    ...provided
+  }),
+  option: (provided, state) => ({
+    ...provided,
+  }),
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = 'opacity 300ms';
+    return { ...provided, opacity, transition };
+  }
+}
+const IndicatorsContainer = props => {
+  return (
+    <div style={{ background: 'red', width: '10px' }}>
+      <components.IndicatorsContainer {...props} />
+    </div>
+  );
+};
+const DropdownIndicator = (
+  props: components.DropdownIndicator
+) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <img className={styles.arrow} src='img/icons/arrow.svg' alt=''/>
+    </components.DropdownIndicator>
+  );
+};
 export default function Header(props: Props) {
+  const [lang, setLang] = useState({value: 'ru', label: 'RU'});
 
-  const [isAuth, setAuth] = useState(false)
-  const signInIsOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
-  const signUpIsOpen = useSelector((state: IRootState) => state.authComponent.isSignUpOpen)
+  console.log("Props", props.user);
+  const [isAuth, setAuth] = useState(props.user ? true : false)
+  const isSignInOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
+  const isSignUpOpen = useSelector((state: IRootState) => state.authComponent.isSignUpOpen)
+  const isPhoneConfirmOpen = useSelector((state: IRootState) => state.authComponent.isPhoneConfirmOpen)
   const dispatch = useDispatch()
 
   return (
   <>
     <header className={styles.root}>
       <div className={styles.container}>
-        <Logo/>
+        <div className={styles.logo}>
+          <Logo /></div>
         <ul className={styles.menu}>
           <li><Link href="/"><a>Create a task</a></Link></li>
           <li><Link href="/"><a>Find a task</a></Link></li>
@@ -31,13 +78,16 @@ export default function Header(props: Props) {
           <li><Link href="/"><a>FAQ</a></Link></li>
         </ul>
         <div className={styles.right}>
-          <div className={styles.langSwitch}>
+
+         <LangSelect/>
+          <div className={styles.separatorLine}></div>
+          {/*<div className={styles.langSwitch}>
             <img className={styles.country} src='img/icons/ru.svg' alt=''/>
             <span>RU</span>
             <img className={styles.arrow} src='img/icons/arrow.svg' alt=''/>
-          </div>
+          </div>*/}
           {!isAuth ?
-          <div>
+          <div className={styles.actionsContainer}>
           <a onClick={() => dispatch(signInOpen())}>
             <div className={styles.signIn}>
               <a>
@@ -46,7 +96,9 @@ export default function Header(props: Props) {
               </a>
             </div>
           </a>
-          <a onClick={() => dispatch(signUpOpen())}>
+            <div className={styles.separatorLine}></div>
+
+            <a onClick={() => dispatch(signUpOpen())}>
             <div className={styles.signUp}>
               <a>
                 <span>Sign up</span>
@@ -69,12 +121,16 @@ export default function Header(props: Props) {
         </div>
     </header>
     <SignInComponent
-    isOpen={signInIsOpen}
+    isOpen={isSignInOpen}
     onRequestClose={() => dispatch(signInClose())}
     />
-    <SignUpComponent 
-    isOpen={signUpIsOpen}
-    onRequestClose={() => dispatch(signUpClose())}
+    <SignUpComponent
+      isOpen={isSignUpOpen}
+      onRequestClose={() => dispatch(signUpClose())}
+    />
+    <PhoneConfirmComponent
+      isOpen={isPhoneConfirmOpen}
+      onRequestClose={() => dispatch(phoneConfirmClose())}
     />
   </>
   )
