@@ -8,13 +8,13 @@ export default class SimpleSlider extends Component {
   render() {
     var settings = {
       dots: false,
-      infinite: false,
+      infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
       nextArrow: <SliderControl direction='next'/>,
       prevArrow: <SliderControl direction='prev' />,
-      variableWidth: true,
+      variableWidth: false,
       adaptiveHeight: true,
       responsive: [
         {
@@ -35,6 +35,7 @@ export default class SimpleSlider extends Component {
     };
     return (
       <div className={styles.root}>
+        <div className={styles.sliderContainer}>
         <Slider {...settings}>
           <Slide text='5000 + tasks done' image='img/Slide/yes.svg'/>
           <Slide text='10 000+ tasks requested' image='img/Slide/files.svg'/>
@@ -42,6 +43,7 @@ export default class SimpleSlider extends Component {
           <Slide text='20 000 + reviews' image='img/Slide/review.svg'/>
           <Slide text='21 000 + reviews' image='img/Slide/review.svg'/>
         </Slider>
+        </div>
       </div>
     );
   }

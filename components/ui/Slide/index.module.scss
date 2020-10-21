@@ -1,19 +1,21 @@
 .root{
-  display: grid;
   padding: 37px 30px 30px 30px;
   background: #EDEDED;
   border-radius: 30px;
-  width: 298px;
-  margin-right: 30px;
+  position: relative;
+  height: 198px;
+  margin-right: 25px;
 }
+
 
 .text{
   float: left;
   font-weight: bold;
   font-size: 18px;
-  padding-bottom: 57px;
 }
 
 .image{
-  float: right;
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
 }

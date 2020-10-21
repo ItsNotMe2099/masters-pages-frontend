@@ -3,4 +3,9 @@
 .container{
   width: $container-lg;
   margin: auto;
+
+  @include xll {
+    width: $container-xll
+  }
 }
+

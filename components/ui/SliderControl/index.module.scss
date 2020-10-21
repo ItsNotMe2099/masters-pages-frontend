@@ -3,8 +3,14 @@
   border-radius: 30px;
   background-color: #ededed;
   width: 84px;
+  position: absolute;
+  right: 0px;
 }
 
 .next{
   margin-bottom: 30px;
+  top: 0px;
+}
+.prev{
+  bottom: 0px;
 }
