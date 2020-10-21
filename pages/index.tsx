@@ -6,6 +6,7 @@ import Categories from 'components/Categories'
 import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
 import Split from 'components/Split'
+import SimpleSlider from "components/MainPage/Slider";
 
 const Home = (props) => {
   return (
@@ -16,6 +17,7 @@ const Home = (props) => {
       <Categories/>
       <Instruction/>
       <Split/>
+      <SimpleSlider/>
       <Footer/>
     </div>
     </>
