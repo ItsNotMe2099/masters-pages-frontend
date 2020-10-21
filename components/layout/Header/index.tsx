@@ -9,12 +9,10 @@ import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import {
-  signInClose,
+  modalClose,
   signInOpen,
   signUpOpen,
-  signUpClose,
   phoneConfirmOpen,
-  phoneConfirmClose
 } from 'components/Auth/actions'
 import SignUpComponent from 'components/Auth/SignUp'
 import Select, { components } from 'react-select';
@@ -61,9 +59,10 @@ export default function Header(props: Props) {
 
   console.log("Props", props.user);
   const [isAuth, setAuth] = useState(props.user ? true : false)
-  const isSignInOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
+  /*const isSignInOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
   const isSignUpOpen = useSelector((state: IRootState) => state.authComponent.isSignUpOpen)
-  const isPhoneConfirmOpen = useSelector((state: IRootState) => state.authComponent.isPhoneConfirmOpen)
+  const isPhoneConfirmOpen = useSelector((state: IRootState) => state.authComponent.isPhoneConfirmOpen)*/
+  const key = useSelector((state: IRootState) => state.authComponent.modalKey)
   const dispatch = useDispatch()
 
   return (
@@ -114,16 +113,16 @@ export default function Header(props: Props) {
         </div>
       </header>
       <SignInComponent
-        isOpen={isSignInOpen}
-        onRequestClose={() => dispatch(signInClose())}
+        isOpen={key === 'signIn'}
+        onRequestClose={() => dispatch(modalClose())}
       />
       <SignUpComponent
-        isOpen={isSignUpOpen}
-        onRequestClose={() => dispatch(signUpClose())}
+        isOpen={key === 'signUp'}
+        onRequestClose={() => dispatch(modalClose())}
       />
       <PhoneConfirmComponent
-        isOpen={isPhoneConfirmOpen}
-        onRequestClose={() => dispatch(phoneConfirmClose())}
+        isOpen={key === 'phoneConfirm'}
+        onRequestClose={() => dispatch(modalClose())}
       />
     </>
   )

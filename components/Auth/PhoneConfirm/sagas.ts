@@ -1,4 +1,4 @@
-import { phoneConfirmClose, phoneConfirmOpen } from "components/Auth/actions";
+import { modalClose, phoneConfirmOpen } from "components/Auth/actions";
 import { phoneConfirmSubmit } from "components/Auth/PhoneConfirm/actions";
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
@@ -28,7 +28,7 @@ function* phoneConfirmSaga() {
 
       }
 
-      yield put(phoneConfirmClose());
+      yield put(modalClose());
     })
 
 }

@@ -14,10 +14,10 @@ const Home = (props) => {
     <Header {...props}/>
     <div className={styles.container}>
       <BannerSection/>
+      <SimpleSlider/>
       <Categories/>
       <Instruction/>
       <Split/>
-      <SimpleSlider/>
       <Footer/>
     </div>
     </>
