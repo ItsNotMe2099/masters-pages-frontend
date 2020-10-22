@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import SliderControl from 'components/ui/SliderControl'
-import Slide from "components/ui/Slide";
+import Slide from "./Slide";
 import styles from './index.module.scss'
 
 export default class SimpleSlider extends Component {

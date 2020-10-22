@@ -12,6 +12,8 @@ interface Props {
   footerBtn?: boolean
   closeBtn?: boolean
   registrationBtn?: boolean
+  resetPWBtn?: boolean
+  setNewPWBtn?: boolean
   children?: any
   onClick?: (e: React.MouseEvent) => void
 }
@@ -33,6 +35,8 @@ export default function Button(props: Props) {
        ${props.largeInputSign && styles.largeInputSign}
        ${props.largeInputSignUp && styles.largeInputSignUp}
        ${props.registrationBtn && styles.registrationBtn}
+       ${props.resetPWBtn && styles.resetPWBtn}
+       ${props.setNewPWBtn && styles.setNewPw}
       `}>
         {props.children}
       </button>

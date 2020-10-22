@@ -16,6 +16,9 @@ import {
 } from 'components/Auth/actions'
 import SignUpComponent from 'components/Auth/SignUp'
 import Select, { components } from 'react-select';
+import PWRecoveryComponent from "components/Auth/PWRecovery";
+import PWRecoverySucces from "components/Auth/PWRecovery/Success";
+import { PWRecoveryResetState } from "components/Auth/PWRecovery/actions";
 
 interface Props {
   user: any
@@ -63,6 +66,8 @@ export default function Header(props: Props) {
   const isSignUpOpen = useSelector((state: IRootState) => state.authComponent.isSignUpOpen)
   const isPhoneConfirmOpen = useSelector((state: IRootState) => state.authComponent.isPhoneConfirmOpen)*/
   const key = useSelector((state: IRootState) => state.authComponent.modalKey)
+  const isOpen = useSelector((state: IRootState) => state.PWRecovery.isOpen)
+  const isOpenSuccess = useSelector((state: IRootState) => state.PWRecovery.isOpenSuccess)
   const dispatch = useDispatch()
 
   return (
@@ -124,6 +129,12 @@ export default function Header(props: Props) {
         isOpen={key === 'phoneConfirm'}
         onRequestClose={() => dispatch(modalClose())}
       />
+      <PWRecoveryComponent
+        isOpen={isOpen}
+        onRequestClose={() => dispatch(PWRecoveryResetState())}/>
+      <PWRecoverySucces 
+        isOpen={isOpenSuccess}
+        onRequestClose={() => dispatch(PWRecoveryResetState())}/>
     </>
   )
 }

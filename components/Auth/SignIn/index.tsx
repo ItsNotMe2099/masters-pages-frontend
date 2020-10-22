@@ -1,11 +1,11 @@
 import { signInSubmit } from "components/Auth/SignIn/actions";
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
-import Link from 'next/link'
 import SignIn from './Form'
 import Modal from 'react-modal'
 import { useDispatch } from 'react-redux'
-import { signUpOpen } from 'components/Auth/actions'
+import {  PWRecoveryOpen, signUpOpen } from 'components/Auth/actions'
+import { PWRecoveryIsOpen } from "../PWRecovery/actions";
 
 interface Props {
   isOpen: boolean
@@ -59,7 +59,7 @@ export default function SignInComponent(props: Props) {
           <SignIn onSubmit={handleSubmit}/>
         </div>
         <div className={styles.forgot}>
-          <Link href='/'><a>Forgot password?</a></Link>
+          <div><a onClick={() => dispatch(PWRecoveryIsOpen())}>Forgot password?</a></div>
         </div>
         <div className={styles.signUp}>
           <div>Don’t have an account yet?</div>

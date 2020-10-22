@@ -1,9 +1,11 @@
 import {State as authState} from 'components/Auth/reducer'
 import { AuthSignUpState } from "components/Auth/SignUp/reducer";
+import { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
 
 export interface IRootState {
   authComponent: authState,
   authSignUp: AuthSignUpState
+  PWRecovery: PWRecoveryState
 }
 
 export interface BaseAction {

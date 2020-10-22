@@ -1,7 +1,7 @@
 import ActionTypes from "./const";
 
 export interface State {
-  modalKey: string
+  modalKey: string,
 }
 
 const initialState: State = {
@@ -26,6 +26,14 @@ export default function authReducer(state = {...initialState}, action) {
 
     case ActionTypes.PHONE_CONFIRM_OPEN:
       state.modalKey = 'phoneConfirm'
+      break
+
+    case ActionTypes.PASSWORD_RECOVERY_FIRST_STEP_OPEN:
+      state.modalKey = 'pwRecFirst'
+      break
+
+    case ActionTypes.PASSWORD_RECOVERY_SUCCESS:
+      state.modalKey = 'pwRecSuccess'
       break
   }
 

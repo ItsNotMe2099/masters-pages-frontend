@@ -29,6 +29,7 @@ let RegistrationForm = props => {
         name="phone"
         component={InputPhone}
         label="(ХХХ) XXX-XX-XX"
+        inputLabel="Phone*"
       />
       <Field
         name="location"

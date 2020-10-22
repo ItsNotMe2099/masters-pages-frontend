@@ -7,6 +7,7 @@ interface Props {
   input: {value: string, onChange: (val) => void}
   type: string
   label: string
+  inputLabel?: string
 }
 
 export default function InputPhone(props: Props) {
@@ -25,7 +26,7 @@ export default function InputPhone(props: Props) {
   return (
     <>
     <div className={styles.inputContainer}>
-      <div className={styles.inputLabel}>Phone number*</div>
+      <div className={styles.inputLabel}>{props.inputLabel}</div>
       <div className={styles.country}>
         <CodeSelect value={code} onChange={handleCodeChange} options={codesOptions} formatTriggerLabel={(value) => value.code}/>
       </div>
