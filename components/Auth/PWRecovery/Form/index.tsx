@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import styles from './index.module.scss'
 import InputPhone from 'components/ui/InputPhone'
 import OtpCodeInput from 'components/ui/OtpCodeInput'
+import {required} from 'utils/validations'
 
 interface Props {
   handleSubmit?
@@ -25,6 +26,7 @@ let PWRecovery = (props: Props) => {
           name="phone"
           component={InputPhone}
           label='(ХХХ) XXX-XX-XX'
+          validate={required}
         />}
       <div className={styles.btnContainer}> 
         <Button green resetPWBtn>RESET PASSWORD</Button>

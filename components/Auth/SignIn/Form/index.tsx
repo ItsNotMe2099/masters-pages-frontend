@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import Input from 'components/ui/Input'
 import InputPassword from 'components/ui/InputPassword'
 import styles from './index.module.scss'
+import {required} from 'utils/validations'
 
 let SignIn = props => {
   const { handleSubmit } = props
@@ -12,12 +13,14 @@ let SignIn = props => {
         name="phone"
         component={Input}
         inputLabel="Phone number or email"
+        validate={required}
       />
       <div className={styles.fakeMargin}></div>
       <Field
         name="password"
         component={InputPassword}
         inputLabel="Password"
+        validate={required}
       />
       <div className={styles.btnContainer}>
         <Button green largeInputSign>LOG IN</Button>

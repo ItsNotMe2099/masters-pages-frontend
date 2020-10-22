@@ -5,6 +5,7 @@ import InputPassword from 'components/ui/InputPassword'
 import styles from './index.module.scss'
 import InputPhone from 'components/ui/InputPhone'
 import InputLocation from 'components/ui/InputLocation'
+import {required, email, minL, passwordsMatch} from 'utils/validations'
 
 let RegistrationForm = props => {
   const { handleSubmit } = props
@@ -14,37 +15,44 @@ let RegistrationForm = props => {
         name="firstName"
         component={Input}
         inputLabel="First Name*"
+        validate={required}
       />
       <Field
         name="lastName"
         component={Input}
         inputLabel="Last Name*"
+        validate={required}
       />
       <Field
         name="email"
         component={Input}
         inputLabel="Email*"
+        validate={[required, email]}
       />
       <Field
         name="phone"
         component={InputPhone}
         label="(ХХХ) XXX-XX-XX"
         inputLabel="Phone*"
+        validate={required}
       />
       <Field
         name="location"
         component={InputLocation}
+        validate={required}
       />
       <div className={styles.pwChange}>
         <Field
           name="password"
           component={InputPassword}
           inputLabel="Password"
+          validate={[required, minL]}
         />
         <Field
           name="password-confirm"
           component={InputPassword}
           inputLabel="Password again"
+          validate={[required, passwordsMatch, minL]}
         />
       </div>
       <div className={styles.btnContainer}>
