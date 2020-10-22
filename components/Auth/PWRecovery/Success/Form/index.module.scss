@@ -1,10 +1,12 @@
 .btnContainer{
     display: flex;
     justify-content: center;
-    margin-top: 12px;
     margin-bottom: 64px;
 }
 
 .form{
     width: 306px;
+    input{
+        margin-bottom: 12px;
+    }
 }

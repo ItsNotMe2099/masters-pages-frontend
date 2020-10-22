@@ -56,7 +56,9 @@ export default function PWRecoverySucces(props: Props) {
         <div className={styles.text}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Habitant nulla 
         </div>
-        <PWRecoveryNewPW onSubmit={handleSubmit}/>
+        <div className={styles.center}>
+          <PWRecoveryNewPW onSubmit={handleSubmit}/>
+        </div>
       </div>
     </Modal>
   )
