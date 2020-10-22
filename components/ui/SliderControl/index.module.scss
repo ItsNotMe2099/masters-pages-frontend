@@ -1,10 +1,14 @@
 .root{
-  padding: 33px;
+  display: flex;
   border-radius: 30px;
   background-color: #ededed;
   width: 84px;
   position: absolute;
   right: 0px;
+  height: 84px;
+  img{
+    margin: auto;
+  }
 }
 
 .next{

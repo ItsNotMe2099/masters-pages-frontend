@@ -4,6 +4,7 @@
    background: #FD5742;
    border-radius: 30px;
    position: relative;
+   height: 400px;
 }
 
 .text{
@@ -63,13 +64,13 @@
 
 .man{
     position: absolute;
-    top: -43px;
+    top: -16px;
     right: 300px;
     z-index: 1;
 }
 
 .woman{
     position: absolute;
-    top: -1px;
-    right: 150px;
+    top: 25px;
+    right: 180px;
 }
