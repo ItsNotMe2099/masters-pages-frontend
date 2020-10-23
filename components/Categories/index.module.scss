@@ -1,20 +1,50 @@
+@import "scss/index";
+
 .title{
-    margin-top: 80.17px;
-    margin-bottom: 87px;
     font-weight: bold;
-    font-size: 48px;
-    line-height: 58px;
     text-align: center;
+    @include lg{
+        font-size: 48px;
+        line-height: 58px;
+        margin-top: 80.17px;
+        margin-bottom: 87px;
+    }
+    @media screen and (max-width: $sm-max){
+        font-size: 30px;
+        line-height: 36px;
+        margin-bottom: 42px;
+    }
 }
 
 .column{
-    display: flex;
-    margin-bottom: 50px;
+    @include lg{
+        display: flex;
+        margin-bottom: 50px;
+        a{
+           width: 25%;
+        }
+    }
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        @media screen and (max-width: $sm-max){
+            display: flex;
+            flex-direction: column;
+            margin: 0 20px 30px 20px;
+            a{
+                margin: 0 0 10px 0;
+            }
+        }
+    }
 }
 
 .columnItem{
     display: flex;
-    width: 25%;
 }
 
 .text{
@@ -23,8 +53,13 @@
 
 .btnContainer{
     display: flex;
-    margin-top: 62px;
+    @include lg{
+        margin-top: 62px;
+    }
+    @media screen and (max-width: $sm-max){
+        margin-top: 0;
+    }
     button{
-        margin:auto
+        margin: auto
     }
 }

@@ -10,6 +10,10 @@
   a{
     cursor: pointer;
   }
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+    margin: 0 20px;
+  }
 }
 
 .root{
@@ -58,28 +62,23 @@ align-items: center;
       }
     }
   }
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
 }
 
 .right{
   margin: auto 0 auto auto;
   display: flex;
   align-items: center;
+  @media screen and (max-width: $sm-max){
+    margin: auto;
+  }
 }
 
 .country{
   padding-right: 5px;
   vertical-align: middle;
-}
-
-.langSwitch{
-  border-right: 1px solid #c6c6c6;
-  span{
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    padding-right: 6px;
-    vertical-align: middle;
-  }
 }
 
 .arrow{
@@ -100,6 +99,9 @@ align-items: center;
     line-height: 17px;
     padding-right: 17px;
     vertical-align: middle;
+    @media screen and (max-width: $sm-max){
+      display: none;
+    }
   }
 }
 
@@ -115,6 +117,9 @@ align-items: center;
     line-height: 17px;
     padding-right: 17px;
     vertical-align: middle;
+    @media screen and (max-width: $sm-max){
+      display: none;
+    }
   }
 }
 .actionsContainer{

@@ -1,8 +1,15 @@
 @import "scss/index";
 
 .container{
-  width: $container-lg;
-  margin: auto;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
 
   @include xll {
     width: $container-xll

@@ -1,9 +1,15 @@
 @import "scss/index";
 
-
 .root{
 position: relative;
-margin-top: 89px;
+@include lg{
+  margin-top: 89px;
+}
+@media screen and (max-width: $sm-max){
+  margin: 24px auto 43px 20px;
+}
+
+
 
 }
 .sliderContainer{

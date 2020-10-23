@@ -18,10 +18,13 @@ export default class SimpleSlider extends Component {
       adaptiveHeight: true,
       responsive: [
         {
-          breakpoint: 960,
+          breakpoint: 360,
           settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            variableWidth: true,
+            adaptiveHeight: true,
           }
         },
         {
