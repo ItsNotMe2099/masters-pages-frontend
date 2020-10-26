@@ -1,22 +1,73 @@
+@import "scss/index";
+
 .root{
    width: 100%;
-   padding: 63px 0 59px 118px;
    background: #FD5742;
    border-radius: 30px;
    position: relative;
    margin-bottom: 50px;
+   @include lg{
+    padding: 63px 0 59px 118px; 
+   }
+   @media screen and (max-width: $sm-max){
+    display: flex;
+    flex-direction: column;
+    height: 553px;
+    margin: auto;
+    width: 321px;
+    padding: 30px 0;
+  }
+  button{
+    @media screen and (max-width: $sm-max){
+        width: 200px;
+        margin: 0 auto;
+    }
+  }
 }
 
 .text{
     font-weight: 600;
-    font-size: 36px;
-    line-height: 43px;
     color: #FFFFFF;
     margin-bottom: 33px;
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+    font-size: 36px;
+    line-height: 43px; 
+    margin-bottom: 33px;
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        font-size: 30px;
+        line-height: 36px;
+        color: #FFFFFF;
+        font-weight: 600;
+        text-align: center;
+        padding: 0 40px;
+    }
 }
 
 .woman{
     position: absolute;
-    top: -71px;
-    right: 85px;
+    @include lg{
+        top: -253px;
+        right: 85px;
+    }
+    @media screen and (max-width: $sm-max){
+        height: 319px;
+        right: -60px;
+    }
+}
+
+.icon{
+    @media screen and (max-width: $sm-max){
+        height: 319px;
+        width: 321px;
+        overflow: hidden;
+    }
+}
+
+.wrapper{
+    position: relative;
 }
