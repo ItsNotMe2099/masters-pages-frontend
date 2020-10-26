@@ -39,9 +39,14 @@
 
 .column{
     display: flex;
+    position: relative;
     .columnItem{
         width: 33.3%;
     }
+}
+
+.sliderContainer{
+    width: 93.28%;
 }
 
 .columnItem{

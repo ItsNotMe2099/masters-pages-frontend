@@ -1,30 +1,43 @@
+import React, { Component } from "react";
+import Slider from "react-slick";
+import SliderControl from 'components/ui/SliderControl'
 import styles from './index.module.scss'
 
-interface Props {}
-
-export default function Instruction(props: Props) {
-  return (
-    <>
-      <div className={styles.title}>Как это работает?</div>
-      <div className={styles.columnFirst}> 
-        <div className={styles.columnItem}>
-          <img className={styles.icon} src='img/icons/form1.svg' alt=''/>
-          <div className={styles.text}>Заполните<br/> критерии подбора</div>
-        </div>
-        <img className={styles.wave} src='img/icons/wave1.svg' alt=''/>
-        <img className={styles.wave__mobile} src='img/icons/waveMobile.svg' alt=''/>
-        <div className={styles.columnItem}>
-          <img className={styles.icon} src='img/icons/form2.svg' alt=''/>
-          <div className={styles.text}>Посмотрите анкеты<br/> подобранных специалистов</div>
-        </div>
-        <img className={styles.wave} src='img/icons/wave2.svg' alt=''/>
-        <img className={styles.wave__mobile} src='img/icons/waveMobile2.svg' alt=''/>
-        <div className={styles.columnItem}>
-          <img className={styles.icon} src='img/icons/chat.svg' alt=''/>
-          <div className={styles.text}>Общайтесь в чате<br/> и выберите подходящего</div>
-        </div>
-      </div>
-      <div className={styles.column}> 
+export default class SimpleSlider extends Component {
+  render() {
+    var settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      //variableWidth: false,
+      adaptiveHeight: true,
+      arrows: false,
+      responsive: [
+        {
+          breakpoint: 360,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            variableWidth: true,
+            adaptiveHeight: true,
+          }
+        },
+        {
+          breakpoint: 667,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
+    return (
+    <div className={styles.column}> 
+    <div className={styles.sliderContainer}>
+      <Slider {...settings}>
         <div className={styles.columnItem}>
           <img className={styles.icon__pay} src='img/icons/pay.svg' alt=''/>
           <div className={styles.text}>Удобная и<br/> безопасная оплата</div>
@@ -45,7 +58,9 @@ export default function Instruction(props: Props) {
           <div className={styles.text}>Wedo4you для<br/> бизнеса</div>
           <div className={styles.text__desc}>Безналичная оплата <span>бизнес-заданий</span><br/>с предоставлением закрывающих<br/>документов</div>
         </div>
-      </div>
-    </>
+      </Slider>
+    </div>
+    </div>
   )
+}
 }
