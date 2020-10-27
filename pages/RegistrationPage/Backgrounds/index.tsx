@@ -4,7 +4,7 @@ interface Props {}
 
 export default function Backgrounds(props: Props) {
   return (
-    <>
+    <div className='root'>
       <img src="/img/Registration/bg/bg.svg" className='bg1' alt=""/>
       <img src="/img/Registration/bg/bg2.svg" className='bg2' alt=""/>
       <img src="/img/Registration/bg/bg3.svg" className='bg3' alt=""/>
@@ -17,6 +17,11 @@ export default function Backgrounds(props: Props) {
       <img src="/img/Registration/bg/bg10.svg" className='bg10' alt=""/>
 
       <style jsx>{`
+
+        .root{
+          z-index: 1;
+          position: relative;
+        }
         .bg1{
           position: absolute;
           right: 0;
@@ -28,7 +33,7 @@ export default function Backgrounds(props: Props) {
           top: 30%;
         }
         .bg3{
-          bottom: -200px;
+          bottom: 0;
           right: 0;
           position: absolute;
         }
@@ -52,19 +57,19 @@ export default function Backgrounds(props: Props) {
         }
         .bg8{
           position: absolute;
-          bottom: -200px;
+          bottom: 0;
           right: 18.07%;
         }
         .bg9{
-          bottom: -200px;
+          bottom: 0;
           position: absolute;
         }
         .bg10{
-          bottom: -200px;
+          bottom: 0;
           left: 65px;
           position: absolute;
         }
       `}</style>
-    </>
+    </div>
   )
 }
