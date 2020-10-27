@@ -1,14 +1,57 @@
+@import "scss/index";
+
 .root{
     margin-bottom: 47.52px;
-    &::after{
-        content: "";
-        display: block;
-        clear: both;
-      }
+    display: flex;
+
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+
+    &__mobile{
+        display: flex;
+        flex-direction: column;
+        margin: auto auto 28px auto;
+        @include lg{
+            display: none;
+        }
+    }
+}
+
+.topMobile{
+    display: flex;
+    align-items: center;
+    margin: 24px auto 33px auto;
+    .logo{
+        margin: 0 31px 0 0;
+        .text{
+            font-size: 10px;
+        }
+    }
+    .social{
+        margin: auto;
+        padding: 0;
+        .messengers, .networks{
+            display: flex;
+        }
+    }
+}
+
+.linksMobile{
+    display: flex;
+    ul{
+        margin: 0 45px 0 0;
+        padding: 0; 
+        &:last-of-type{
+            margin: 0;
+        }
+        a{
+            font-size: 12px;
+        }
+    }
 }
 
 .logo{
-    float: left;
     display: flex;
     flex-direction: column;
     div{
@@ -22,24 +65,34 @@
 }
 
 .links{
-    float: left;
     margin: 0;
     padding: 0 0 0 130px;
+    @media screen and (max-width: $sm-max){
+        padding: 0;
+    }
     a{
+        @media screen and (max-width: $sm-max){
+            font-size: 12px;
+        }
+        @include lg{
+            font-size: 14px;
+        }
         font-weight: 500;
-        font-size: 14px;
         line-height: 24px;
         color: #6D718C;
     }
 }
 
 .social{
-    float: right;
     display: flex;
+    padding: 0 0 0 61px;
 }
 
 .messengers{
-    margin-right: 70.11px;
+    margin-right: 70px;
+    @media screen and (max-width: $sm-max){
+        margin-right: 46px; 
+    }
 }
 
 .networks, .messengers{

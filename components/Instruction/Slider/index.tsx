@@ -23,6 +23,7 @@ export default class SimpleSlider extends Component {
             arrows: false,
             variableWidth: true,
             adaptiveHeight: true,
+            centerPadding: '1000px'
           }
         },
         {

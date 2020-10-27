@@ -38,7 +38,7 @@
 }
 
 .column{
-    display: flex;
+    display: flex !important;
     position: relative;
     .columnItem{
         width: 33.3%;
