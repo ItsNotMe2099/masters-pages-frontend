@@ -8,13 +8,13 @@
 .container{
     display: flex;
     flex-direction: column;
-    z-index: 2;
     position: relative;
+    z-index: 2;
     @include lg{
         margin: 200px auto;
     }
     @media screen and (max-width: $sm-max){
-        margin: 39px 45px 43px 45px;
+        margin: 39px 19px 43px 19px;
     }
 }
 
