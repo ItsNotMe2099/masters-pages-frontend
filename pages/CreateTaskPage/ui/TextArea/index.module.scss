@@ -1,0 +1,18 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea{
+  border: 1px solid $grey300;
+  border-radius: 8px;
+  padding: 18px 30px;
+  width: auto;
+}
+
+.fluid{
+  flex: 1;
+}

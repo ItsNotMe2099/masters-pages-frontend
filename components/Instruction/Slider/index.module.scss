@@ -40,6 +40,12 @@
 .column{
     display: flex !important;
     position: relative;
+    @include lg{
+        margin-top: 144px;
+    }
+    @media screen and (max-width: $sm-max){
+        margin-top: 120px;
+    }
     .columnItem{
         width: 33.3%;
     }

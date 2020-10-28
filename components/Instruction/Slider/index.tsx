@@ -22,8 +22,7 @@ export default class SimpleSlider extends Component {
             slidesToScroll: 1,
             arrows: false,
             variableWidth: true,
-            adaptiveHeight: true,
-            centerPadding: '1000px'
+            adaptiveHeight: true
           }
         },
         {
