@@ -1,3 +1,4 @@
+import { withTranslation } from "react-i18next";
 import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 import Header from '../components/layout/Header'
@@ -23,4 +24,7 @@ const Home = (props) => {
     </>
   )
 }
-export default withAuthSync(Home)
+Home.getInitialProps = async () => ({
+  namespacesRequired: ['common', 'footer'],
+})
+export default withAuthSync(withTranslation('registration')(Home))

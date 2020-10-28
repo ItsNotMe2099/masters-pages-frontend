@@ -1,0 +1,70 @@
+{
+  "common": {
+    "back": "back"
+  },
+  "MainPage": {
+    "page_title": "Global communications"
+  },
+  "About": {
+    "page_title": "About",
+    "first_screen": {
+      "title": "Let's get acquainted!"
+    },
+    "how_does_it_work": "How does it work?",
+    "step1_title": "1. Start",
+    "step1_text": "Get to know managers and learn from the customer about the goals and tasks facing the project.",
+    "step2_title": "2. Analytics",
+    "step2_text": "Analyze the target audience of the project, analyze competitors, build the project structure and create a pilot prototype.",
+    "step3_title": "3. Development",
+    "step3_text": "Draw the design, layout, and assembly of the site or application.",
+    "step4_title": "4. Testing",
+    "step4_text": "Check previously built hypotheses, correct selected solutions and correct errors.",
+    "step5_title": "5. Integration",
+    "step5_text": "Commissioning of the project, as well as the binding of the necessary services and systems.",
+    "step6_title": "6. Development",
+    "step6_text": "Technical support, as well as regular updating and improvement of the project code."
+  },
+  "HaveProject": {
+    "leave_request": "Leave a request"
+  },
+  "Mobile": {
+    "page_title": "Mobile development"
+  },
+  "Automation": {
+    "page_title": "Business process automation"
+  },
+  "Api": {
+    "page_title": "Development Web-application and API"
+  },
+  "Support": {
+    "page_title": "Support and Development"
+  },
+  "Optimization": {
+    "page_title": "Optimization of speed applications and websitesв"
+  },
+  "Devops": {
+    "page_title": "DevOps and system administration"
+  },
+  "DownloadPresentation": {
+    "link_text": "Download presentation"
+  },
+  "Services": {
+    "page_title": "Services"
+  },
+  "MenuLinks": {
+    "about": "About us",
+    "services": "Services",
+    "contacts": "Contact"
+  },
+  "Footer": {
+    "contact_us": "To contact us"
+  },
+  "Contacts": {
+    "page_title": "Contact",
+    "title": "Contact us",
+    "call_us": "Call us",
+    "write_us": "Text us",
+    "our_office": "Our office",
+    "address": "Moscow, Ivovaya 2, office 209"
+  }
+}

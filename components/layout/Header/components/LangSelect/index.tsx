@@ -1,9 +1,11 @@
 import { useDetectOutsideClick } from "components/layout/Header/components/LangSelect/useDetectOutsideClick";
-import { useRef, useState } from "react";
+import { I18nContext } from "next-i18next";
+import { useContext, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
-
+import { i18n, Link, withTranslation } from 'i18n'
 export const LangSelect = () => {
+  const { i18n: { language } } = useContext(I18nContext)
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = (e) => {
@@ -15,11 +17,13 @@ export const LangSelect = () => {
     { value: 'en', label: 'EN' },
     { value: 'fr', label: 'FR' },
   ]
-  const [value, setValue] = useState(options[0]);
+  const [value, setValue] = useState(options.find(item => item.value === language));
 
   const handleOptionClick = (e, item) => {
-    e.preventDefault();
+    e.preventDefault()
+    console.log("SetLang", item.value);
     setValue(item);
+    i18n.changeLanguage(item.value)
     setIsActive(false);
   }
   const handleActiveOptionClick = (e) => {

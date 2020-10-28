@@ -1,11 +1,14 @@
 import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
+import { withTranslation } from "next-i18next";
 import { withAuthSync } from "utils/auth";
 import Backgrounds from './Backgrounds'
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
 
 import { useDispatch } from 'react-redux'
-interface Props {}
+interface Props {
+  t: (string) => string
+}
 
 const RegistrationPage = (props: Props) => {
   console.log("Props", props)
@@ -51,4 +54,4 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
-export default withAuthSync(RegistrationPage)
+export default withAuthSync(withTranslation('registration')(RegistrationPage))
