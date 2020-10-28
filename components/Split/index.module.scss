@@ -1,3 +1,16 @@
+@import "scss/index";
+
 .root{
  display: flex;
+ @media screen and (max-width: $sm-max){
+    display: none;
+}
+
+ &__mobile{
+    display: flex;
+    flex-direction: column;
+    @include lg{
+        display: none;
+    }
+ }
 }

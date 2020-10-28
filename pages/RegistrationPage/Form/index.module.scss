@@ -1,0 +1,18 @@
+.btnContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 33px;
+}
+
+.form{
+    width: 306px;
+}
+
+.pwChange{
+    margin-top: 32px;
+    div{
+        &:last-child{
+            margin-top: 14px;
+        }
+    }
+}

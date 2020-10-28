@@ -1,23 +1,8 @@
 @import "scss/index";
 
-.title{
-    @include lg{
-        margin-top: 110px;
-        margin-bottom: 123px;
-        font-size: 48px;
-    }
-    font-weight: bold;
-    text-align: center;
-    @media screen and (max-width: $sm-max){
-        font-weight: bold;
-        font-size: 30px;
-        margin-top: 70px;
-        margin-bottom: 49px;
-    }
-}
-
 .columnFirst{
     display: flex;
+    margin-bottom: 114px;
 }
 
 .columnItem{
@@ -55,7 +40,7 @@
 
 .icon{
     @include lg{
-        margin-bottom: 109px;
+        margin-bottom: 39px;
     }
     @media screen and (max-width: $sm-max){
         width: 60px;
@@ -65,7 +50,7 @@
 }
 
 .wave {
-    margin-bottom: 196px;
+    margin-bottom: 106px;
     @media screen and (max-width: $sm-max){
         display: none;
     }

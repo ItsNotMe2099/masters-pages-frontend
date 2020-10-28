@@ -18,8 +18,7 @@ export default function CommentsSection(props: Props) {
             <div className={styles.greenText}>положительных<br/>отзывов</div>
           </div>
           <div>
-            <div className={styles.normText}>374 189 отзывов оставили клиенты за последние<br/>
-                  12 месяцев. Из них 354 608 - положительные</div>
+            <div className={styles.normText}>374 189 отзывов оставили клиенты за последние 12 месяцев. Из них 354 608 - положительные</div>
           </div>
         </div>
       </div>

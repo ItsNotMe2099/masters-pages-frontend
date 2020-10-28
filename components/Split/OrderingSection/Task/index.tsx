@@ -16,24 +16,26 @@ export default function Task(props: Props) {
       <div className={styles.image} style={{backgroundColor: props.color}}>
         <img src={props.taskImage} alt=''/>
       </div>
-      <div className={styles.text}>
-        <div className={styles.title}>
-          {props.taskTitle}
+      <div className={styles.wrapper}>
+        <div className={styles.text}>
+          <div className={styles.title}>
+            {props.taskTitle}
+          </div>
+          <div className={styles.desc}>
+            {props.taskDesc}
+          </div>
+          <div className={styles.time}>
+            <img src='img/icons/clock.svg' alt=''/>
+            <div>{props.taskTime}</div>
+          </div>
         </div>
-        <div className={styles.desc}>
-          {props.taskDesc}
-        </div>
-        <div className={styles.time}>
-          <img src='img/icons/clock.svg' alt=''/>
-          <div>{props.taskTime}</div>
-        </div>
-      </div>
-      <div className={styles.price}>
-        <div className={styles.priceNum}>
-          {props.taskPrice}
-        </div>
-        <div className={styles.priceType}>
-          {props.priceType}
+        <div className={styles.price}>
+          <div className={styles.priceNum}>
+            {props.taskPrice}
+          </div>
+          <div className={styles.priceType}>
+            {props.priceType}
+          </div>
         </div>
       </div>
     </div>

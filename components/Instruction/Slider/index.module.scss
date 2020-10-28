@@ -18,6 +18,41 @@
 
 .columnFirst{
     display: flex;
+    @include lg{
+        margin-bottom: 144px;
+    }
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+        margin-bottom: 120px;
+    }
+}
+
+.columnText{
+    display: flex;
+    margin-bottom: 24px;
+}
+
+.columnDesc{
+    display: flex;
+    margin-bottom: 122px;
+}
+
+.column{
+    display: flex !important;
+    position: relative;
+    @include lg{
+        margin-top: 144px;
+    }
+    @media screen and (max-width: $sm-max){
+        margin-top: 120px;
+    }
+    .columnItem{
+        width: 33.3%;
+    }
+}
+
+.sliderContainer{
+    width: 93.28%;
 }
 
 .columnItem{
@@ -60,7 +95,10 @@
     @media screen and (max-width: $sm-max){
         width: 60px;
         height: 60px;
-        margin: auto auto 19px auto !important;
+        margin: auto auto 19px auto;
+    }
+    &__pay{
+        margin-bottom: 37px;
     }
 }
 

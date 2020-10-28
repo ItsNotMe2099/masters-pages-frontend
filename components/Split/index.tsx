@@ -7,9 +7,15 @@ interface Props {}
 export default function Split(props: Props) {
   return (
 
+    <>
       <div className={styles.root}>
         <CommentsSection/>
         <OrderingSection/>
       </div>
+      <div className={styles.root__mobile}>
+        <OrderingSection/>
+        <CommentsSection/>
+      </div>
+    </>
   )
 }

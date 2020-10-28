@@ -1,6 +1,20 @@
+@import "scss/index";
+
 .root{
     display: flex;
     margin-bottom: 50px;
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+
+    &__mobile{
+        display: flex;
+        margin-bottom: 50px;
+        flex-direction: column;
+        @include lg{
+            display: none;
+        }
+    }
 }
 
 .border{
@@ -10,8 +24,18 @@
     margin-bottom: 21px;
 }
 
-.comment{
+.top{
     display: flex;
+}
+
+.bottom{
+    margin: 16px 0 0 0;
+}
+
+.comment{
+    @include lg{
+        display: flex;
+    }
     img{
         margin-right: 9px;
     }

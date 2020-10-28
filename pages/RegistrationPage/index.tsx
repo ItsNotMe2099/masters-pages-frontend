@@ -44,7 +44,8 @@ const RegistrationPage = (props: Props) => {
               </div>
             </a>
           </div>
-          <div className={styles.border}><div className={styles.or}>or</div></div>
+          <div className={styles.or}>or</div>
+          <div className={styles.border}></div>
           <div className={styles.right}>
             <RegistrationForm onSubmit={handleSubmit}/>
           </div>
