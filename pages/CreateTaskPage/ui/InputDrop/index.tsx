@@ -12,13 +12,14 @@ interface Props {
 
 export default function InputDrop(props: Props) {
   const { error, touched } = props.meta
-  const { input, type } = props
+  const { input, type, label } = props
   return (
     <>
     <div className={styles.inputContainer}>
       <input 
-      className={styles.input}
+      className={`${styles.input} ${props.bank && styles.bankInput}`}
       type={type}
+      placeholder={label}
       {...input}
       >
       </input>

@@ -4,6 +4,7 @@ import Steps from 'components/Steps'
 import CreateTaskForm from "pages/CreateTaskPage/Form";
 import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
+import CreateTaskForm from './Form'
 
 const CreateTaskPage = (props) => {
   return (
