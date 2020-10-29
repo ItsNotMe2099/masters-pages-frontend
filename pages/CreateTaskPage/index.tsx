@@ -3,6 +3,7 @@ import Footer from 'components/layout/Footer'
 import Steps from 'components/Steps'
 import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
+import CreateTaskForm from './Form'
 
 const CreateTaskPage = (props) => {
   return (
@@ -17,6 +18,7 @@ const CreateTaskPage = (props) => {
         image_3='img/icons/chat2.svg'
         text_3='03. Choose a master'
         />
+        <CreateTaskForm/>
         <Footer/>
       </div>
 

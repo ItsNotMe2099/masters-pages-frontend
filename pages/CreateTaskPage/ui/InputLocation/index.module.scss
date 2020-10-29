@@ -1,25 +1,13 @@
+@import '../../scss/mixins.scss';
+
 .input{
-  border: 1px solid #C4C4C4;
-  border-radius: 11px;
-  width: 306px;
-  height: 51px;
-  padding: 0 45px 0 16px;
-  margin-top: 19px;
+  @include input
 }
 
 .inputContainer{
-  position: relative;
-  a{
-    position: absolute;
-    top: 34px;
-    right: 20px;
-    height: 19px;
-    cursor: pointer;
-  }
+  @include container
 }
 
 .error{
-  color: #FF1066;
-  font-size: 12px;
-  margin-bottom: 10px;
+  @include error
 }

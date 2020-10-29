@@ -2,17 +2,19 @@
 
 .root{
   position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
 .textarea{
-  border: 1px solid #C4C4C4;
-  border-radius: 8px;
-  padding: 18px 30px;
-  width: auto;
-}
-
-.fluid{
-  flex: 1;
+  border: 1px solid #909090;
+  border-radius: 10px;
+  padding: 10px 21px;
+  width: 863px;
+  height: 150px;
+  resize: none;
+  &::placeholder{     
+    color: #050505;   
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 600;
+  }
 }

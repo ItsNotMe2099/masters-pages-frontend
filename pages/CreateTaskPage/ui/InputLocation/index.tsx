@@ -10,13 +10,14 @@ interface Props {
 
 export default function InputLocation(props: Props) {
   const { error, touched } = props.meta
-  const { input, type } = props
+  const { input, type, label } = props
   return (
     <>
     <div className={styles.inputContainer}>
       <input 
       className={styles.input}
       type={type}
+      placeholder={label}
       {...input}
       >
       </input>
