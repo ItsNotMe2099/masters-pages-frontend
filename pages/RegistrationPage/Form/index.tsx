@@ -1,4 +1,5 @@
 import Button from 'components/ui/Button'
+import { SelectInput } from "components/ui/SelectInput";
 import { Field, reduxForm } from 'redux-form'
 import Input from 'components/ui/Input'
 import InputPassword from 'components/ui/InputPassword'
@@ -39,6 +40,11 @@ let RegistrationForm = props => {
       <Field
         name="location"
         component={InputLocation}
+        options={[{value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
+          {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
+          {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
+          {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
+          {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}]}
         validate={required}
       />
       <div className={styles.pwChange}>

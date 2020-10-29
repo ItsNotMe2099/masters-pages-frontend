@@ -16,8 +16,8 @@ export default function Task(props: Props) {
       <div className={styles.image} style={{backgroundColor: props.color}}>
         <img src={props.taskImage} alt=''/>
       </div>
-      <div className={styles.wrapper}>
-        <div className={styles.text}>
+      <div className={styles.detailsWrapper}>
+        <div className={styles.details}>
           <div className={styles.title}>
             {props.taskTitle}
           </div>

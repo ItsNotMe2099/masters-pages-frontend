@@ -1,116 +1,60 @@
 @import "scss/index";
 
-.title{
-    @include lg{
-        margin-top: 110px;
-        margin-bottom: 123px;
-        font-size: 48px;
-    }
-    font-weight: bold;
-    text-align: center;
-    @media screen and (max-width: $sm-max){
-        font-weight: bold;
-        font-size: 30px;
-        margin-top: 70px;
-        margin-bottom: 49px;
-    }
-}
-
-.columnFirst{
-    display: flex;
-    @include lg{
-        margin-bottom: 144px;
-    }
-    @media screen and (max-width: $sm-max){
-        flex-direction: column;
-        margin-bottom: 120px;
-    }
-}
-
-.columnText{
-    display: flex;
-    margin-bottom: 24px;
-}
-
-.columnDesc{
-    display: flex;
-    margin-bottom: 122px;
-}
-
-.column{
-    display: flex !important;
-    position: relative;
+.root{
+  position: relative;
     @include lg{
         margin-top: 144px;
     }
     @media screen and (max-width: $sm-max){
         margin-top: 120px;
     }
-    .columnItem{
-        width: 33.3%;
-    }
 }
 
 .sliderContainer{
-    width: 93.28%;
+
 }
 
-.columnItem{
-    display: flex;
+.slide{
+    display: flex !important;
     flex-direction: column;
+  align-items: center;
+  text-align: center;
     @media screen and (max-width: $sm-max){
         flex-direction: column;
         margin: auto;
     }
 }
-
-.text{
-    @include lg{
-        font-size: 24px;
-        line-height: 29px; 
+.slideTitle{
+  @include lg{
+    font-size: 24px;
+    line-height: 29px;
+  }
+  @media screen and (max-width: $sm-max){
+    font-size: 18px;
+    line-height: 22px;
+  }
+  font-weight: bold;
+  text-align: center;
+}
+.slideDesc{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  color: #6D718C;
+  margin-top: 24px;
+  span{
+    color: #369FFF;
+  }
+}
+.slideIcon{
+    display: flex;
+    align-items: center;
+  @include lg{
+        height: 200px;
     }
     @media screen and (max-width: $sm-max){
-        font-size: 18px;
-        line-height: 22px;
-    }
-    font-weight: bold;
-    text-align: center;
-    &__desc{
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 21px;
-        text-align: center;
-        color: #6D718C;
-        margin-top: 24px;
-        span{
-            color: #369FFF;
-        }
+        margin-bottom: 30px;
     }
 }
 
-.icon{
-    @include lg{
-        margin-bottom: 109px;
-    }
-    @media screen and (max-width: $sm-max){
-        width: 60px;
-        height: 60px;
-        margin: auto auto 19px auto;
-    }
-    &__pay{
-        margin-bottom: 37px;
-    }
-}
-
-.wave {
-    margin-bottom: 196px;
-    @media screen and (max-width: $sm-max){
-        display: none;
-    }
-    &__mobile{
-        @include lg{
-            display: none;
-        }
-        margin: 19px 0;
-    }
-}

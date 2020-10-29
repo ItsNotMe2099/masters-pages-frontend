@@ -6,6 +6,7 @@ import authSignInReducer from 'components/Auth/SignIn/reducer';
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import PWRecoveryReducer from 'components/Auth/PWRecovery/reducer'
+import locationInputReducer from 'components/ui/InputLocation/reducer'
 
 export default combineReducers({
   form: formReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   authSignIn: authSignInReducer,
   phoneConfirmReducer: phoneConfirmReducer,
   registrationComplete: registrationCompleteReducer,
-  PWRecovery: PWRecoveryReducer
+  PWRecovery: PWRecoveryReducer,
+  locationInput: locationInputReducer
 })

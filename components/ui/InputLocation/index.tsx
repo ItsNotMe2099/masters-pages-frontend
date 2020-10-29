@@ -1,31 +1,31 @@
+import { fetchLocationCity } from "components/ui/InputLocation/actions";
+import { SelectInput } from "components/ui/SelectInput";
+import { useState } from "react";
+import { IRootState } from "types";
 import styles from './index.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
 
 interface Props {
-  meta: any
-  input: string
-  type: string
+
 }
 
-export default function InputLocation(props: Props) {
-  const { error, touched } = props.meta
-  const { input, type } = props
+export default function InputLocation(props) {
+  const dispatch = useDispatch()
+  const [value, setValue] = useState();
+  const cities = useSelector((state: IRootState) => state.locationInput.cities)
+  const handleOnChange = (value) => {
+    props.input.onChange(value.value);
+  }
+  const handleOnSearchChange = (e) => {
+    const value = e.currentTarget.value;
+    console.log("HandleOnChange", e.currentTarget.value);
+    setValue(value)
+    dispatch(fetchLocationCity({
+      search: value,
+      page: 1,
+    }))
+  }
   return (
-    <>
-    <div className={styles.inputContainer}>
-      <input 
-      className={styles.input}
-      type={type}
-      {...input}
-      >
-      </input>
-      <div className={styles.inputLabel}>Location*</div>
-      <a><img src='img/field/location.svg' alt=''/></a>
-    </div>
-      {error &&
-        touched && (
-        <div className={styles.error}>
-          {error}
-        </div>)}
-    </>
+    <SelectInput {...props} options={cities} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange}/>
   )
 }

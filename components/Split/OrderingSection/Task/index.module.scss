@@ -1,6 +1,7 @@
 @import "scss/index";
 
 .root{
+  display: flex;
     border: 1px solid #C4C4C4;
     border-radius: 20px;
     @include lg{
@@ -20,7 +21,8 @@
 
 .wrapper{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+  flex: 1;
 }
 
 .image{
@@ -44,8 +46,15 @@
     }
 }
 
-.text{
-    float: left;
+.detailsWrapper{
+
+  @include lg{
+    display: flex;
+  }
+    flex: 1;
+}
+.details{
+  flex: 1;
 }
 
 .title{
@@ -90,11 +99,11 @@
         }
     }
 }
-
 .price{
-    float: right;
-}
+  justify-self: flex-end;
+  align-self: flex-start;
 
+}
 .priceNum{
     color: #26BA35;
     font-weight: bold;

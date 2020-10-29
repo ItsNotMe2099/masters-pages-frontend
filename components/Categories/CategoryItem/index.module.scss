@@ -2,36 +2,29 @@
 
 .root{
     display: flex;
+  align-items: center;
 }
 
 .icon{
-    @include lg{
-    width: 89px;
-    height: 98px;
-    }
-    background-color: #38C7D7;
-    border-radius: 20px;
-    display: flex;
-    img{
-        margin: auto;
-        @media screen and (max-width: $sm-max){
-            width: 23px;
-            height: 23px;
-        }
-    }
-    @media screen and (max-width: $sm-max){
-        width: 57px;
-        height: 64px;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 89px;
+  height: 98px;
+  border-radius: 20px;
+  text-align: center;
+  img{
+    display: block;
+  }
 }
 
-.text{
+.title{
     font-weight: bold;
-    margin: auto 30px;
+    margin-left: 30px;
     @media screen and (max-width: $sm-max){
         font-size: 16px;
     }
     @include lg{
-        font-size: 18px; 
+        font-size: 18px;
     }
 }

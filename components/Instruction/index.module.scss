@@ -1,8 +1,13 @@
 @import "scss/index";
+.root{
+  margin-top: 110px;
+  @media screen and (max-width: $sm-max){
 
+    margin-top: 70px;
+  }
+}
 .title{
     @include lg{
-        margin-top: 110px;
         margin-bottom: 123px;
         font-size: 48px;
     }
@@ -11,13 +16,15 @@
     @media screen and (max-width: $sm-max){
         font-weight: bold;
         font-size: 30px;
-        margin-top: 70px;
         margin-bottom: 49px;
     }
 }
 
-.columnFirst{
+.columns{
     display: flex;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+  }
 }
 
 .columnItem{
@@ -32,7 +39,7 @@
 .text{
     @include lg{
         font-size: 24px;
-        line-height: 29px; 
+        line-height: 29px;
     }
     @media screen and (max-width: $sm-max){
         font-size: 18px;

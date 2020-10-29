@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import SliderControl from 'components/ui/SliderControl'
 import styles from './index.module.scss'
 
 export default class SimpleSlider extends Component {
   render() {
     var settings = {
-      dots: false,
+      dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      variableWidth: true,
+      variableWidth: false,
       adaptiveHeight: true,
       arrows: false,
       responsive: [
@@ -35,32 +34,48 @@ export default class SimpleSlider extends Component {
       ]
     };
     return (
-    <div className={styles.column}> 
-    <div className={styles.sliderContainer}>
-      <Slider {...settings}>
-        <div className={styles.columnItem}>
-          <img className={styles.icon__pay} src='img/icons/pay.svg' alt=''/>
-          <div className={styles.text}>Удобная и<br/> безопасная оплата</div>
-          <div className={styles.text__desc}>При орлате через <span>Сделку без риска YouDo</span><br/>вернет деньги, если что-то пойдет не так</div>
+      <div className={styles.root}>
+        <div className={styles.sliderContainer}>
+          <Slider {...settings}>
+            <div className={styles.slide}>
+              <div className={styles.slideIcon}>
+              <img src='img/icons/pay.svg'/>
+              </div>
+              <div className={styles.slideTitle}>Удобная и<br/> безопасная оплата</div>
+              <div className={styles.slideDesc}>При орлате через <span>Сделку без риска YouDo</span><br/>вернет деньги,
+                если что-то пойдет не так
+              </div>
+            </div>
+            <div className={styles.slide}>
+              <div className={styles.slideIcon}>
+                <img src='img/icons/man.svg' />
+              </div>
+              <div className={styles.slideTitle}>Надежные<br/> исполнители</div>
+              <div className={styles.slideDesc}><span>Проверенные исполнители</span><br/>подтвердили свои документы на
+                YouDo
+              </div>
+            </div>
+            <div className={styles.slide}>
+              <div className={styles.slideIcon}>
+                <img src='img/icons/review.svg'/>
+              </div>
+              <div className={styles.slideTitle}>Достоверные<br/> отзывы</div>
+              <div className={styles.slideDesc}>Более <span>1 000 000 отзывов от заказчиков</span><br/>помогут выбрать
+                подходящего<br/>исполнителя
+              </div>
+            </div>
+            <div className={styles.slide}>
+              <div className={styles.slideIcon}>
+              <img src='img/icons/smartphone.svg' />
+              </div>
+              <div className={styles.slideTitle}>Wedo4you для<br/> бизнеса</div>
+              <div className={styles.slideDesc}>Безналичная оплата <span>бизнес-заданий</span><br/>с предоставлением
+                закрывающих<br/>документов
+              </div>
+            </div>
+          </Slider>
         </div>
-        <div className={styles.columnItem}>
-          <img src='img/icons/man.svg' alt=''/>
-          <div className={styles.text}>Надежные<br/> исполнители</div>
-          <div className={styles.text__desc}><span>Проверенные исполнители</span><br/>подтвердили свои документы на YouDo</div>
-        </div>
-        <div className={styles.columnItem}>
-          <img className={styles.icon__pay} src='img/icons/review.svg' alt=''/>
-          <div className={styles.text}>Достоверные<br/> отзывы</div>
-          <div className={styles.text__desc}>Более <span>1 000 000 отзывов от заказчиков</span><br/>помогут выбрать подходящего<br/>исполнителя</div>
-        </div>
-        <div className={styles.columnItem}>
-          <img className={styles.icon__pay} src='img/icons/smartphone.svg' alt=''/>
-          <div className={styles.text}>Wedo4you для<br/> бизнеса</div>
-          <div className={styles.text__desc}>Безналичная оплата <span>бизнес-заданий</span><br/>с предоставлением закрывающих<br/>документов</div>
-        </div>
-      </Slider>
-    </div>
-    </div>
-  )
-}
+      </div>
+    )
+  }
 }

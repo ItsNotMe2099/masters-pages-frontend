@@ -1,11 +1,11 @@
 
 import ActionTypes from "./const";
-export interface State {
+export interface PhoneConfirmState {
   formIsSuccess: boolean
   formError: string
 }
 
-const initialState: State = {
+const initialState: PhoneConfirmState = {
   formIsSuccess: false,
   formError: ''
 }

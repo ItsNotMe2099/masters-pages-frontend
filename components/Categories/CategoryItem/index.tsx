@@ -9,11 +9,13 @@ interface Props {
 
 export default function CategoryItem(props: Props) {
   return (
-    <div className={styles.root}>
-      <div className={styles.icon} style={{backgroundColor: props.color}}>
-        <img src={props.image} alt=''/>
-      </div>
-      <div className={styles.text}>{props.text}</div>
-    </div>
+      <Link href={''}>
+        <div className={styles.root}>
+        <div className={styles.icon} style={{ backgroundColor: props.color }}>
+          <img src={props.image} alt=''/>
+        </div>
+        <div className={styles.title}>{props.text}</div>
+          </div>
+      </Link>
   )
 }

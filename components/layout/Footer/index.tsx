@@ -6,98 +6,62 @@ import Link from 'next/link'
 import BannerFooter from './BannerFooter'
 import Logo from 'components/Logo'
 import styles from './index.module.scss'
-
-interface Props {}
+import format from 'date-fns/format'
+interface Props {
+}
 
 export default function Footer(props: Props) {
 
-  return (
-    <>
-    <BannerFooter/>
-    <div className={styles.root}>
-      <div className={styles.logo}>
-        <Logo/>
-        <div className={styles.text}>Master pages. 2020</div>
-      </div>
-      <ul className={styles.links}>
-        <li><Link href="/"><a>Новый заказ</a></Link></li>
-        <li><Link href="/"><a>Все услуги</a></Link></li>
-        <li><Link href="/"><a>Все отзывы</a></Link></li>
-        <li><Link href="/"><a>Истории заказов</a></Link></li>
-        <li><Link href="/"><a>Условия использования</a></Link></li>
-        <li><Link href="/"><a>Мобильная версия</a></Link></li>
-      </ul>
-      <ul className={styles.links}>
-        <li><Link href="/"><a>Новый заказ</a></Link></li>
-        <li><Link href="/"><a>Все услуги</a></Link></li>
-        <li><Link href="/"><a>Все отзывы</a></Link></li>
-        <li><Link href="/"><a>Истории заказов</a></Link></li>
-        <li><Link href="/"><a>Условия использования</a></Link></li>
-        <li><Link href="/"><a>Мобильная версия</a></Link></li>
-      </ul>
-      <ul className={styles.links}>
-        <li><Link href="/"><a>Новый заказ</a></Link></li>
-        <li><Link href="/"><a>Все услуги</a></Link></li>
-        <li><Link href="/"><a>Все отзывы</a></Link></li>
-        <li><Link href="/"><a>Истории заказов</a></Link></li>
-        <li><Link href="/"><a>Условия использования</a></Link></li>
-        <li><Link href="/"><a>Мобильная версия</a></Link></li>
-      </ul>
-      <div className={styles.social}>
-        <div className={styles.messengers}>
-          <a href="#" target="_blank"><WhatsApp className={styles.whatsapp}/></a>
-          <a href="#" target="_blank"><Telegram className={styles.telegram}/></a>
-        </div>
-        <div className={styles.networks}>
-          <a href="#" target="_blank"><Facebook className={styles.facebook}/></a>
-          <a href="#" target="_blank"><VK className={styles.vk}/></a>
-        </div>
-      </div>
+  const renderSocials = () => {
+    return <div className={styles.social}>
+        <a href="#" target="_blank"><WhatsApp className={styles.whatsapp}/></a>
+        <a href="#" target="_blank"><Telegram className={styles.telegram}/></a>
+
+        <a href="#" target="_blank"><Facebook className={styles.facebook}/></a>
+        <a href="#" target="_blank"><VK className={styles.vk}/></a>
     </div>
-    <div className={styles.root__mobile}>
-      <div className={styles.topMobile}>
+  }
+  return (
+    <div className={styles.root}>
+      <BannerFooter/>
+      <div className={styles.footerBottom}>
+
+        <div className={styles.logoContainer}>
         <div className={styles.logo}>
           <Logo/>
-          <div className={styles.text}>Master pages. 2020</div>
+          <div className={styles.text}>Master pages. {format(new Date(), 'Y')}</div>
         </div>
-        <div className={styles.social}>
-          <div className={styles.messengers}>
-            <a href="#" target="_blank"><WhatsApp className={styles.whatsapp}/></a>
-            <a href="#" target="_blank"><Telegram className={styles.telegram}/></a>
-          </div>
-          <div className={styles.networks}>
-            <a href="#" target="_blank"><Facebook className={styles.facebook}/></a>
-            <a href="#" target="_blank"><VK className={styles.vk}/></a>
-          </div>
+          <div className={styles.socialMobile}>{renderSocials()}</div>
         </div>
+        <div className={styles.menu}>
+          <ul className={styles.links}>
+            <li><Link href="/"><a>Новый заказ</a></Link></li>
+            <li><Link href="/"><a>Все услуги</a></Link></li>
+            <li><Link href="/"><a>Все отзывы</a></Link></li>
+            <li><Link href="/"><a>Истории заказов</a></Link></li>
+            <li><Link href="/"><a>Условия использования</a></Link></li>
+            <li><Link href="/"><a>Мобильная версия</a></Link></li>
+          </ul>
+          <ul className={styles.links}>
+            <li><Link href="/"><a>Новый заказ</a></Link></li>
+            <li><Link href="/"><a>Все услуги</a></Link></li>
+            <li><Link href="/"><a>Все отзывы</a></Link></li>
+            <li><Link href="/"><a>Истории заказов</a></Link></li>
+            <li><Link href="/"><a>Условия использования</a></Link></li>
+            <li><Link href="/"><a>Мобильная версия</a></Link></li>
+          </ul>
+          <ul className={styles.links}>
+            <li><Link href="/"><a>Новый заказ</a></Link></li>
+            <li><Link href="/"><a>Все услуги</a></Link></li>
+            <li><Link href="/"><a>Все отзывы</a></Link></li>
+            <li><Link href="/"><a>Истории заказов</a></Link></li>
+            <li><Link href="/"><a>Условия использования</a></Link></li>
+            <li><Link href="/"><a>Мобильная версия</a></Link></li>
+          </ul>
+        </div>
+        <div className={styles.socialDesktop}>{renderSocials()}</div>
+
       </div>
-      <div className={styles.linksMobile}>
-        <ul className={styles.links}>
-          <li><Link href="/"><a>Новый заказ</a></Link></li>
-          <li><Link href="/"><a>Все услуги</a></Link></li>
-          <li><Link href="/"><a>Все отзывы</a></Link></li>
-          <li><Link href="/"><a>Истории заказов</a></Link></li>
-          <li><Link href="/"><a>Условия использования</a></Link></li>
-          <li><Link href="/"><a>Мобильная версия</a></Link></li>
-        </ul>
-        <ul className={styles.links}>
-          <li><Link href="/"><a>Новый заказ</a></Link></li>
-          <li><Link href="/"><a>Все услуги</a></Link></li>
-          <li><Link href="/"><a>Все отзывы</a></Link></li>
-          <li><Link href="/"><a>Истории заказов</a></Link></li>
-          <li><Link href="/"><a>Условия использования</a></Link></li>
-          <li><Link href="/"><a>Мобильная версия</a></Link></li>
-        </ul>
-      </div>
-      <ul className={styles.links}>
-        <li><Link href="/"><a>Новый заказ</a></Link></li>
-        <li><Link href="/"><a>Все услуги</a></Link></li>
-        <li><Link href="/"><a>Все отзывы</a></Link></li>
-        <li><Link href="/"><a>Истории заказов</a></Link></li>
-        <li><Link href="/"><a>Условия использования</a></Link></li>
-        <li><Link href="/"><a>Мобильная версия</a></Link></li>
-      </ul>
     </div>
-    </>
   )
 }

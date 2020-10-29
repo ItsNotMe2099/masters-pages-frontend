@@ -1,11 +1,19 @@
-import {State as authState} from 'components/Auth/reducer'
-import { AuthSignUpState } from "components/Auth/SignUp/reducer";
-import { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
+import phoneConfirmReducer, { PhoneConfirmState } from "components/Auth/PhoneConfirm/reducer";
+import authReducer, {State as authState} from 'components/Auth/reducer'
+import registrationCompleteReducer, { RegistrationCompleteState } from "components/Auth/RegistrationPage/reducer";
+import authSignInReducer, { SignInState } from "components/Auth/SignIn/reducer";
+import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reducer";
+import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
+import locationInputReducer, { LocationInputState } from "components/ui/InputLocation/reducer";
 
 export interface IRootState {
   authComponent: authState,
   authSignUp: AuthSignUpState
-  PWRecovery: PWRecoveryState
+  PWRecovery: PWRecoveryState,
+  authSignIn: SignInState,
+  phoneConfirmReducer: PhoneConfirmState,
+  registrationComplete: RegistrationCompleteState,
+  locationInput: LocationInputState,
 }
 
 export interface BaseAction {

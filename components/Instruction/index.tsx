@@ -5,9 +5,9 @@ interface Props {}
 
 export default function Instruction(props: Props) {
   return (
-    <>
+    <div className={styles.root}>
       <div className={styles.title}>Как это работает?</div>
-      <div className={styles.columnFirst}> 
+      <div className={styles.columns}>
         <div className={styles.columnItem}>
           <img className={styles.icon} src='img/icons/form1.svg' alt=''/>
           <div className={styles.text}>Заполните<br/> критерии подбора</div>
@@ -26,6 +26,6 @@ export default function Instruction(props: Props) {
         </div>
       </div>
       <SimpleSlider/>
-    </>
+    </div>
   )
 }

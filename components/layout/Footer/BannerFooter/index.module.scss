@@ -5,16 +5,16 @@
    background: #FD5742;
    border-radius: 30px;
    position: relative;
-   margin-bottom: 50px;
+
    @include lg{
-    padding: 63px 0 59px 118px; 
+    padding: 63px 0 59px 118px;
    }
    @media screen and (max-width: $sm-max){
     display: flex;
     flex-direction: column;
-    height: 553px;
     margin: auto;
-    width: 321px;
+     align-items: center;
+
     padding: 30px 0;
   }
   button{
@@ -33,7 +33,7 @@
         display: none;
     }
     font-size: 36px;
-    line-height: 43px; 
+    line-height: 43px;
     margin-bottom: 33px;
     &__mobile{
         @include lg{

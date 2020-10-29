@@ -1,6 +1,6 @@
 import '../scss/app.scss'
 import 'normalize.css'
-import { appWithTranslation } from "../i18n";
+import nextI18 from "../i18n";
 import {store} from 'store'
 import { Provider } from 'react-redux';
 import App from 'next/app'
@@ -34,4 +34,4 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   return { pageProps }
 }
 
-export default appWithTranslation(MyApp)
+export default nextI18.appWithTranslation(MyApp)

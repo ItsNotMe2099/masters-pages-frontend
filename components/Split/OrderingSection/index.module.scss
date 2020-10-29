@@ -1,9 +1,19 @@
 @import "scss/index";
 
+.root{
+  padding-top: 32px;
+  @include lg{
+    padding-left: 31px;
+    width: 50%;
+  }
+  @media screen and (max-width: $sm-max){
+    padding: 0px 20px;
+  }
+
+}
 .title{
     font-weight: bold;
     line-height: 30px;
-    padding-top: 64px;
     @include lg{
         padding-bottom: 53px;
         font-size: 24px;
@@ -17,13 +27,3 @@
     }
 }
 
-.root{
-    @include lg{
-        padding-left: 31px;
-        width: 50%;
-    }
-    @media screen and (max-width: $sm-max){
-        margin: auto;
-    }
-
-}

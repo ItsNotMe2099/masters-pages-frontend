@@ -2,28 +2,39 @@ import styles from './index.module.scss'
 import Link from 'next/link'
 import Button from 'components/ui/Button'
 
-interface Props {}
+interface Props {
+}
 
 export default function BannerSection(props: Props) {
   return (
     <div className={styles.root}>
-      <div className={styles.text__big}>Освободим вас от забот</div>
-      <div className={styles.text__medium}>Найдите исполнителя под ваши задачи</div>
-      <div className={styles.people}>
-        <div className={styles.wrapper}>
-          <img className={styles.man} src='img/MainPage/man.png' alt=''/>
-          <img className={styles.woman} src='img/MainPage/woman.png' alt=''/>
+      <div className={styles.container}>
+        <div className={styles.formContainer}>
+          <div className={styles.title}>Освободим вас от забот</div>
+          <div className={styles.description}>Найдите исполнителя под ваши задачи</div>
+          <div className={styles.peopleMobile}>
+            <img src='img/MainPage/people.png' alt=''/>
+          </div>
+          <form className={styles.form} action='/search'>
+            <div className={styles.inputContainer}>
+              <input className={styles.search}
+                     placeholder='Услуга или специалист'
+                     name="query"
+                     type='text'
+              />
+              <div className={styles.inputTip}>Example: <Link href="/search?query=Looking for a pet doctor"><a>Looking for
+                a
+                pet doctor</a></Link></div>
+              <Button largeInput>Заказать</Button>
+            </div>
+
+
+          </form>
+        </div>
+        <div className={styles.peopleDesktop}>
+          <img src='img/MainPage/people.png' alt=''/>
         </div>
       </div>
-      <form className={styles.input} action='/search'>
-        <input className={styles.search}
-          placeholder='Услуга или специалист'
-          name="query"
-          type='text'
-        />
-        <div className={styles.example}>Example: <Link href="/search?query=Looking for a pet doctor"><a>Looking for a pet doctor</a></Link></div>
-        <Button largeInput>Заказать</Button>
-      </form>
     </div>
   )
 }

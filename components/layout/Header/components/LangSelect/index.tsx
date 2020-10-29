@@ -3,7 +3,7 @@ import { I18nContext } from "next-i18next";
 import { useContext, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
-import { i18n, Link, withTranslation } from 'i18n'
+import nextI18 from "i18n";
 export const LangSelect = () => {
   const { i18n: { language } } = useContext(I18nContext)
   const dropdownRef = useRef(null);
@@ -23,7 +23,7 @@ export const LangSelect = () => {
     e.preventDefault()
     console.log("SetLang", item.value);
     setValue(item);
-    i18n.changeLanguage(item.value)
+    nextI18.i18n.changeLanguage(item.value)
     setIsActive(false);
   }
   const handleActiveOptionClick = (e) => {

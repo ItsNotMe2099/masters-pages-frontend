@@ -1,46 +1,43 @@
 @import "scss/index";
-
+.root{
+  margin-top: 80px;
+  @media screen and (max-width: $sm-max){
+    margin-top: 42px;
+  }
+}
 .title{
     font-weight: bold;
     text-align: center;
     @include lg{
         font-size: 48px;
         line-height: 58px;
-        margin-top: 80.17px;
+
         margin-bottom: 87px;
     }
     @media screen and (max-width: $sm-max){
         font-size: 30px;
         line-height: 36px;
-        margin-bottom: 42px;
+        margin-bottom: 32px;
     }
 }
 
-.column{
+.list{
+
     @include lg{
-        display: flex;
-        margin-bottom: 50px;
-        a{
-           width: 25%;
-        }
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 2vw;
     }
     @media screen and (max-width: $sm-max){
-        display: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > div{
+        margin-top: 10px;
+      }
     }
 
-    &__mobile{
-        @include lg{
-            display: none;
-        }
-        @media screen and (max-width: $sm-max){
-            display: flex;
-            flex-direction: column;
-            margin: 0 20px 30px 20px;
-            a{
-                margin: 0 0 10px 0;
-            }
-        }
-    }
 }
 
 .columnItem{
@@ -57,7 +54,7 @@
         margin-top: 62px;
     }
     @media screen and (max-width: $sm-max){
-        margin-top: 0;
+        margin-top: 42px;
     }
     button{
         margin: auto

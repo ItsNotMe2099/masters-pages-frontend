@@ -1,163 +1,160 @@
 @import "scss/index";
 
-.root{
-   width: 100%;
-   background: #FD5742;
-   border-radius: 30px;
-   position: relative;
-   @media screen and (max-width: $sm-max){
+.root {
+  margin-top: 30px;
+  @media screen and (max-width: $sm-max) {
+    margin: 25px 25px 0px;
+  }
+
+}
+
+.container {
+  background: #FD5742;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  @media screen and (max-width: $sm-max) {
+    padding: 31px 10px 75px;
+    flex-direction: column;
+  }
+  @include lg {
+    flex-direction: row;
+
+    align-items: center;
+  }
+}
+.formContainer{
+  @include lg {
+    padding-left: 120px;
+  }
+}
+
+.title{
+  font-weight: bold;
+  color: #fff;
+  @include lg {
+    font-size: 48px;
+  }
+  @media screen and (max-width: $sm-max) {
+    font-size: 24px;
+    text-align: center;
+  }
+}
+.description{
+  font-weight: 500;
+  line-height: 26px;
+  color: #fff;
+  @include lg {
+    font-size: 22px;
+  }
+  @media screen and (max-width: $sm-max) {
+    font-size: 14px;
+    margin-top: 14px;
+    text-align: center;
+  }
+}
+
+
+.form {
+  margin-top: 46px;
+  @media screen and (max-width: $sm-max) {
     display: flex;
     flex-direction: column;
-    height: 553px;
-    margin: auto;
-    width: 321px;
-    padding: 0 10px;
+    margin-top: 0px;
   }
-   @include lg{
-    padding: 63px 0 59px 118px;
-    height: 400px; 
-   }
 }
+.inputContainer{
+  position: relative;
 
-.text{
-    &__big{
-        font-weight: bold;
-        line-height: 58px;
-        color: #fff;
-        @include lg{
-            font-size: 48px;
-        }
-        @media screen and (max-width: $sm-max){
-            font-size: 24px;
-            margin: 31px auto 0 auto;
-        }
-    }
-    &__medium{
-        font-weight: 500;
-        line-height: 26px;
-        color: #fff;
-        margin-bottom: 54px;
-        @include lg{
-            font-size: 22px;
-        }
-        @media screen and (max-width: $sm-max){
-            font-size: 12px;
-            margin: 0 auto 5px auto;
-        }
-    }
-    &__vsmall{
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 14px;
-        color: #fff;
-        margin-right: 10px;
-        padding: 9px 15px 9px 15px;
-    }
-
-    &__small{
-        padding: 9px 15px 9px 15px;
-        margin-right: 10px;
-        &_active{
-            background: rgba(1, 1, 1, 0.2);
-            padding: 9px 15px 9px 15px;
-            border-radius: 10px;
-        }
-    }
-}
-
-.input{
-    position: relative;
-    @media screen and (max-width: $sm-max){
-        display: flex;
-        flex-direction: column;
-    }
-    input{
-        @include lg{
-            width: 50%;
-        }
-        @media screen and (max-width: $sm-max){
-            width: 100%;
-        }
-    }
-    button{
-        @include lg{
-            position: absolute;
-            top: 5px;
-            left: 412px;
-        }
-        @media screen and (max-width: $sm-max){
-            margin-top: 12px;
-        }
-    }
-}
-
-.man{
-    position: absolute;
-    z-index: 1;
-    @media screen and (max-width: $sm-max){
-        height: 278px;
-    }
-}
-
-.woman{
-    position: absolute;
-    @include lg{
-        left: 155px;
-        top: 42px;
-    }
-    @media screen and (max-width: $sm-max){
-        height: 249px;
-        left: 105px;
-        top: 30px;
-    }
-}
-
-.search{
-    @include lg{
-        padding: 0 150px 0 19px;
-        line-height: 60px;
-    }
-    @media screen and (max-width: $sm-max){
-        margin: auto;
-        line-height: 50px;
-        padding: 0 15px;
-    }
+  text-align: center;
+  input {
+    text-align: left;
+    background: white;
     border-radius: 10px;
-    border: 0;
-    &::placeholder{
-        color: #b6b6b6;
-        font-size: 14px;
-      }
+    width: 100%;
+    border: none;
+    &::placeholder {
+      color: #b6b6b6;
+      font-size: 14px;
+    }
+    @include lg {
+      line-height: 60px;
+      font-size: 17px;
+
+      padding: 0px 158px 0px 19px;
+      flex-direction: row;
+    }
+    @media screen and (max-width: $sm-max) {
+      line-height: 50px;
+      padding: 0px 25px;
+    }
+  }
+
+  button {
+    @include lg {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+    }
+    @media screen and (max-width: $sm-max) {
+      margin-top: 12px;
+    }
+  }
 }
 
-.example{
-    margin-top: 12px;
+
+
+.inputTip {
+  margin-top: 12px;
+  color: #fff;
+  text-align: left;
+  @include lg {
+    font-size: 12px;
+  }
+  @media screen and (max-width: $sm-max) {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: underline;
     color: #fff;
-    @include lg{
-        font-size: 12px;
-    }
-    @media screen and (max-width: $sm-max){
-        font-size: 10px;
-        margin-left: 15px;
-    }
-    a{
-        text-decoration: underline;
-        color: #fff;
-    }
+  }
 }
 
-.people{
-    @include lg{
-        position: absolute;
-        top: -16px;
-        right: 480px;
-      }
-    @media screen and (max-width: $sm-max){
-        height: 278px;
-        padding: 0 28px;
-    }
-}
-
-.wrapper{
+.peopleMobile {
+  display: none;
+  @media screen and (max-width: $sm-max) {
+    display: block;
+    padding: 0px 28px;
+    margin-top: 8px;
+  }
+  img {
+    display: block;
     position: relative;
+    max-width: 100%;
+    margin-bottom: -1px;
+
+  }
+}
+
+.peopleDesktop {
+  display: none;
+  margin-top: -16px;
+  overflow: hidden;
+  @include lg {
+    display: block;
+  }
+
+  img {
+    display: block;
+    position: relative;
+    max-width: 100%;
+    margin-bottom: -1px;
+
+  }
+}
+
+.wrapper {
+  position: relative;
 }

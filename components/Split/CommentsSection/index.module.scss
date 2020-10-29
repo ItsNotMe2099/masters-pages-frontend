@@ -4,12 +4,9 @@
     position: relative;
     @include lg{
         width: 50%;
-        margin-top: 32px;
-        margin-bottom: 55px;
     }
     @media screen and (max-width: $sm-max){
-        width: 100%;
-        margin: 70px 0 50px 0;
+
     }
 
 }
@@ -17,7 +14,7 @@
   background-color: #EDEDED;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  padding: 32px 0px  42px 15px;
+  padding: 32px 20px  42px 0px;
   z-index: 2;
   position: relative;
   @include lg{
@@ -26,7 +23,8 @@
     }
   @media screen and (max-width: $sm-max){
       border-radius: 0;
-    } 
+    padding: 70px 20px 50px;
+    }
 }
 .commentBg{
   position: absolute;
@@ -38,6 +36,9 @@
   transform: translateX(-90%);
   z-index: 1;
   background-color: #EDEDED;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
 }
 .head{
     font-weight: 700;
@@ -48,7 +49,8 @@
     @media screen and (max-width: $sm-max){
         font-weight: bold;
         font-size: 30px;
-        padding: 44px 125px;
+      text-align: center;
+      margin-bottom: 42px;
     }
 }
 
@@ -67,10 +69,10 @@
     color: #26BA35;
     margin-right: 27px;
     @media screen and (max-width: $sm-max){
-        font-size: 48px;  
+        font-size: 48px;
     }
     @include lg{
-        font-size: 57px; 
+        font-size: 57px;
     }
 }
 
@@ -80,15 +82,15 @@
     color: #26BA35;
     margin-bottom: 35px;
     @media screen and (max-width: $sm-max){
-        font-size: 17px;  
+        font-size: 17px;
     }
     @include lg{
-        font-size: 24px; 
+        font-size: 24px;
     }
 }
 
 .floaters{
-    margin-bottom: 60px;
+    margin-bottom: 35px;
     &::after{
         content: "";
         display: block;
@@ -105,7 +107,7 @@
         font-size: 16px;
     }
     @media screen and (max-width: $sm-max){
-        font-size: 14px;  
+        font-size: 14px;
     }
     line-height: 30px;
 }
