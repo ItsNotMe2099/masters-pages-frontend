@@ -114,7 +114,7 @@ let CreateTaskForm = props => {
           </div>
         </div>
         <div className={styles.faq}>
-          <div className={styles.title}>FAQ</div>
+          <div className={styles.title__top}>FAQ</div>
           <Accordion title="Question #1" content="Answer"/>
           <Accordion title="Question #2" content="Answer"/>
           <Accordion title="Question #3" content="Answer"/>

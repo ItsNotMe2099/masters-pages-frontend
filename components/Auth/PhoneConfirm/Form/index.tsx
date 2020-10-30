@@ -16,7 +16,7 @@ let PhoneConfirmForm = props => {
         length={4}
       />
       <div className={styles.btnContainer}>
-        <Button green largeInputSignUp>CONFIRM</Button>
+        <Button green size="18px 0">CONFIRM</Button>
       </div>
       <div className={styles.resendSms}>
         Dont receive sms? <a href={''}>Sent again</a>.

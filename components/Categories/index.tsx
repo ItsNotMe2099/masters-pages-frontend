@@ -28,8 +28,10 @@ export default function Categories(props: Props) {
       <div className={styles.list}>
         {options.map(({icon, color, name}) =>  <CategoryItem image={icon} color={color}text={name}/>)}
       </div>
-      <div className={styles.btnContainer}>
-        <Button size={'20px 20px'} black>Все категории</Button>
+      <div className={styles.wrapper}>
+        <div className={styles.btnContainer}>
+          <Button black size="15px 25px">Все категории</Button>
+        </div>
       </div>
     </div>
   )
