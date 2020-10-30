@@ -14,15 +14,14 @@ export default function Input(props: Props) {
   const { error, touched } = props.meta
   const { input, type } = props
   const [isCorrect, setIsCorrect] = useState(false)
+  console.log("Input value", props.input.value)
   return (
     <>
     <div className={styles.inputContainer}>
-      <input 
+      <input
       className={styles.input}
       type={type}
       {...input}
-      value={props.value}
-      onChange={value => value !== undefined ? setIsCorrect(true) : setIsCorrect(false)}
       >
       </input>
       <div className={styles.inputLabel}>{props.inputLabel}</div>

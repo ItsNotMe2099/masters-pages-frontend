@@ -10,7 +10,7 @@ export function email(value: string) {
 
 export function passwordsMatch(value: string, allValues: any) {
   console.log("passwordsMatch", value, allValues)
-  return value !== allValues.new_password ? 'Пароли не совпадают' : undefined
+  return value !== allValues.passwordConfirm ? 'Пароли не совпадают' : undefined
 }
 
 const minLength = min => value =>

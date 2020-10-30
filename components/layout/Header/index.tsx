@@ -1,5 +1,6 @@
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import { LangSelect } from "components/layout/Header/components/LangSelect";
+import Socials from "components/ui/Socials";
 import styles from './index.module.scss'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -58,8 +59,16 @@ const DropdownIndicator = (
   );
 };
 export default function Header(props: Props) {
-  const [lang, setLang] = useState({ value: 'ru', label: 'RU' });
+  const [isMenuMobileOpen, setMenuMobileOpen] = useState(false);
 
+  const handleOpenMobileMenu = () => {
+    document.body.classList.add('modal-open');
+
+    setMenuMobileOpen(true);}
+  const handleCloseMobileMenu = () => {
+    document.body.classList.remove('modal-open');
+    setMenuMobileOpen(false);
+  }
   console.log("Props", props.user);
   const [isAuth, setAuth] = useState(props.user ? true : false)
   /*const isSignInOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
@@ -73,15 +82,16 @@ export default function Header(props: Props) {
   return (
     <>
       <header className={styles.root}>
-        <div className={styles.container}>
+        <div className={styles.menuDesktop}>
           <div className={styles.logo}>
-            <Logo/></div>
+            <Logo/>
+          </div>
           <ul className={styles.menu}>
-            <li><Link href="/"><a>Create a task</a></Link></li>
-            <li><Link href="/"><a>Find a task</a></Link></li>
-            <li><Link href="/"><a>Masters</a></Link></li>
-            <li><Link href="/"><a>Volunteers</a></Link></li>
-            <li><Link href="/"><a>FAQ</a></Link></li>
+            <li><Link href="/">Create a task</Link></li>
+            <li><Link href="/">Find a task</Link></li>
+            <li><Link href="/">Masters</Link></li>
+            <li><Link href="/">Volunteers</Link></li>
+            <li><Link href="/">FAQ</Link></li>
           </ul>
           <div className={styles.right}>
 
@@ -116,6 +126,60 @@ export default function Header(props: Props) {
             }
           </div>
         </div>
+
+        <div className={styles.headerMobile}>
+
+          {isAuth && <div className={styles.user}><Link href="/" >
+           <> <img src='img/Header/avatar.png' alt=""/>
+            <span>Master mode</span></>
+          </Link></div>}
+
+          {!isAuth && <Logo/>}
+
+          <div className={styles.separatorLine}></div>
+          <LangSelect/>
+          {!isMenuMobileOpen && <div className={styles.menuOpen} onClick={handleOpenMobileMenu}>
+            <img src='img/Header/menu-mobile.svg'/>
+          </div>}
+          {isMenuMobileOpen && <div className={styles.menuClose} onClick={handleCloseMobileMenu}>
+            <img src='img/Header/menu-mobile-close.svg'/>
+          </div>}
+        </div>
+        {isMenuMobileOpen && <div className={styles.dropdownMobile}>
+          <>
+          {!isAuth ?
+            <div className={styles.actionsContainer}>
+              <a className={styles.signIn} onClick={() => { handleCloseMobileMenu(); dispatch(signInOpen())}}>
+                <span>Sign in</span>
+                <img src='img/icons/signIn.svg' alt=''/>
+              </a>
+              <div className={styles.separatorLine}></div>
+              <a className={styles.signUp} onClick={() => { handleCloseMobileMenu(); dispatch(signUpOpen())}}>
+                <span>Sign up</span>
+                <img src='img/icons/signUp.svg' alt=''/>
+              </a>
+            </div>
+            :
+            <div className={styles.modesContainer}>
+
+              <Button largeHeader red>Master</Button>
+              <Button largeHeader green>Client</Button>
+              <Button largeHeader blue>Volunteer</Button>
+            </div>
+          }
+            <ul className={styles.menuMobile}>
+              <li className={styles.active}><Link href="/">Home</Link></li>
+              <li><Link href="/">Create a task</Link></li>
+              <li><Link href="/">Find a task</Link></li>
+              <li><Link href="/">Masters</Link></li>
+              <li><Link href="/">Volunteers</Link></li>
+              <li><Link href="/">FAQ</Link></li>
+            </ul>
+            <div className={styles.socials}>
+            <Socials/>
+            </div>
+            </>
+        </div>}
       </header>
       <SignInComponent
         isOpen={key === 'signIn'}
@@ -132,7 +196,7 @@ export default function Header(props: Props) {
       <PWRecoveryComponent
         isOpen={isOpen}
         onRequestClose={() => dispatch(PWRecoveryResetState())}/>
-      <PWRecoverySucces 
+      <PWRecoverySucces
         isOpen={isOpenSuccess}
         onRequestClose={() => dispatch(PWRecoveryResetState())}/>
     </>

@@ -1,0 +1,17 @@
+@import "scss/index";
+
+.container{
+  padding-top: 34px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
+}

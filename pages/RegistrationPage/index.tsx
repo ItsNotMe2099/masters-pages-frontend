@@ -7,13 +7,15 @@ import styles from './index.module.scss'
 
 import { useDispatch } from 'react-redux'
 interface Props {
-  t: (string) => string
+  t: (string) => string,
+  user?: any
 }
 
 const RegistrationPage = (props: Props) => {
-  console.log("Props", props)
+  console.log("PropsUser", props.user)
   const dispatch = useDispatch()
   const handleSubmit = (data) => {
+    console.log("HandleSubmit", data)
     dispatch(registrationCompleteSubmit(data));
   }
   return (
@@ -47,7 +49,7 @@ const RegistrationPage = (props: Props) => {
           <div className={styles.or}>or</div>
           <div className={styles.border}></div>
           <div className={styles.right}>
-            <RegistrationForm onSubmit={handleSubmit}/>
+            <RegistrationForm onSubmit={handleSubmit} initialValues={{phone: props.user?.phone}}/>
           </div>
         </div>
       </div>

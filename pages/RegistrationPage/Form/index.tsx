@@ -1,5 +1,6 @@
 import Button from 'components/ui/Button'
 import { SelectInput } from "components/ui/SelectInput";
+import { useEffect } from "react";
 import { Field, reduxForm } from 'redux-form'
 import Input from 'components/ui/Input'
 import InputPassword from 'components/ui/InputPassword'
@@ -7,9 +8,15 @@ import styles from './index.module.scss'
 import InputPhone from 'components/ui/InputPhone'
 import InputLocation from 'components/ui/InputLocation'
 import {required, email, minL, passwordsMatch} from 'utils/validations'
-
+import { formValues } from 'redux-form'
+import { change } from "redux-form";
 let RegistrationForm = props => {
   const { handleSubmit } = props
+  console.log("props form", props.change)
+  useEffect(() => {
+
+    console.log("change firstName")
+  }, [props])
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field
@@ -38,14 +45,14 @@ let RegistrationForm = props => {
         validate={required}
       />
       <Field
-        name="location"
+        name="geonameid"
         component={InputLocation}
         options={[{value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
           {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
           {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
           {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
           {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}]}
-        validate={required}
+
       />
       <div className={styles.pwChange}>
         <Field
@@ -55,7 +62,7 @@ let RegistrationForm = props => {
           validate={[required, minL]}
         />
         <Field
-          name="password-confirm"
+          name="passwordConfirm"
           component={InputPassword}
           inputLabel="Password again"
           validate={[required, passwordsMatch, minL]}
@@ -70,6 +77,9 @@ let RegistrationForm = props => {
 
 RegistrationForm  = reduxForm ({
   form: 'registrationForm ',
+
 }) (RegistrationForm )
+
+
 
 export default RegistrationForm

@@ -3,6 +3,7 @@ import styles from './index.module.scss'
 interface Props {
   largeHeader?: boolean
   blue?: boolean
+  red?: boolean
   green?: boolean
   smallHeader?: boolean
   largeInput?: boolean
@@ -20,7 +21,8 @@ interface Props {
 
 export default function Button(props: Props) {
   return (
-      <button 
+      <button
+        type={'submit'}
       onClick={props.onClick}
       className={`
        ${styles.root}
@@ -30,6 +32,7 @@ export default function Button(props: Props) {
        ${props.categoryBtn && styles.categoryBtn}
        ${props.footerBtn && styles.footerBtn}
        ${props.blue && styles.blue}
+         ${props.red && styles.red}
        ${props.green && styles.green}
        ${props.closeBtn && styles.closeBtn}
        ${props.largeInputSign && styles.largeInputSign}

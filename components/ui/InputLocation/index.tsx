@@ -14,10 +14,14 @@ export default function InputLocation(props) {
   const [value, setValue] = useState();
   const cities = useSelector((state: IRootState) => state.locationInput.cities)
   const handleOnChange = (value) => {
-    props.input.onChange(value.value);
+    console.log("OnChangeLocValue", value)
+    props.input.onChange(value);
   }
   const handleOnSearchChange = (e) => {
     const value = e.currentTarget.value;
+    if(!value){
+      return;
+    }
     console.log("HandleOnChange", e.currentTarget.value);
     setValue(value)
     dispatch(fetchLocationCity({

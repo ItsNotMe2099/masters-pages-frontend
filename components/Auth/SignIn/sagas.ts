@@ -12,7 +12,7 @@ function* signInSaga() {
   yield takeLatest(ActionTypes.SIGN_IN_SUBMIT,
     function* (action: ActionType<typeof signInSubmit>) {
       const res: IResponse = yield requestGen({
-        url: `/api/auth/signIn`,
+        url: `/api/auth/login`,
         method: 'POST',
         data: action.payload,
       } as IRequestData)

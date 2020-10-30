@@ -1,6 +1,7 @@
 @import "scss/index";
 
 .root {
+  position: relative;
   margin-top: 30px;
   @media screen and (max-width: $sm-max) {
     margin: 25px 25px 0px;
@@ -26,6 +27,7 @@
 .formContainer{
   @include lg {
     padding-left: 120px;
+    min-width: 556px;
   }
 }
 
@@ -143,6 +145,7 @@
   margin-top: -16px;
   overflow: hidden;
   @include lg {
+    padding-left: 10%;
     display: block;
   }
 

@@ -3,6 +3,9 @@
 }
 body{
   font-family: 'gilroy';
+  &.modal-open{
+    overflow-y: hidden;
+  }
 }
 input, button{
   outline:none;

@@ -16,7 +16,7 @@ export default function InputPhone(props: Props) {
   const codesOptions = Codes.map((item) => {
     return {value: item.dial_code, label: `${item.dial_code} ${item.name}`, code: item.dial_code}
   })
-  const [code, setCode] = useState(codesOptions.find((item) => item.value === '+7'));
+  const [code, setCode] = useState(codesOptions.find((item) => value ? item.value && (value.indexOf(item.value) === 0 || value.replace('+', '').indexOf(item.value.replace('+', '')) === 0) : item.value === '+7'));
   const handleInputChange = (e) => {
     onChange(`${code.value}${e.target.value}`)
   }
@@ -34,6 +34,7 @@ export default function InputPhone(props: Props) {
         className={styles.input}
         placeholder={label}
         type={type}
+        value={value.replace(code?.value, '')}
         onChange={handleInputChange}
       >
       </input>

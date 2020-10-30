@@ -10,15 +10,7 @@ const CreateTaskPage = (props) => {
     <>
       <Header {...props}/>
       <div className={styles.container}>
-        <Steps
-        image='img/icons/form1.svg'
-        text='01. Fill up task request'
-        image_2='img/icons/form3.svg'
-        text_2='02. Get offers'
-        image_3='img/icons/chat2.svg'
-        text_3='03. Choose a master'
-        />
-        <CreateTaskForm/>
+        Hello Lina
         <Footer/>
       </div>
 
