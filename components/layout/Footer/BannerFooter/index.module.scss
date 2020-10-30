@@ -5,6 +5,9 @@
    background: #FD5742;
    border-radius: 30px;
    position: relative;
+   button{
+       width: 200px;
+   }
 
    @include lg{
     padding: 63px 0 59px 118px;

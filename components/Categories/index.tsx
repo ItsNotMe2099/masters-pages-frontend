@@ -29,7 +29,7 @@ export default function Categories(props: Props) {
         {options.map(({icon, color, name}) =>  <CategoryItem image={icon} color={color}text={name}/>)}
       </div>
       <div className={styles.btnContainer}>
-        <Button categoryBtn>Все категории</Button>
+        <Button size={'20px 20px'} black>Все категории</Button>
       </div>
     </div>
   )

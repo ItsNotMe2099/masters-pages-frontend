@@ -1,20 +1,16 @@
 import styles from './index.module.scss'
 
 interface Props {
-  largeHeader?: boolean
   blue?: boolean
   red?: boolean
   green?: boolean
-  smallHeader?: boolean
-  largeInput?: boolean
-  largeInputSign?: boolean
-  largeInputSignUp?: boolean
-  categoryBtn?: boolean
-  footerBtn?: boolean
+  black?: boolean
+  grey?: boolean
   closeBtn?: boolean
-  registrationBtn?: boolean
-  resetPWBtn?: boolean
-  setNewPWBtn?: boolean
+  smallFont?: boolean
+  mediumFont?: boolean
+  largeFont?: boolean
+  size?: string
   children?: any
   onClick?: (e: React.MouseEvent) => void
 }
@@ -26,21 +22,18 @@ export default function Button(props: Props) {
       onClick={props.onClick}
       className={`
        ${styles.root}
-       ${props.largeHeader && styles.largeHeader}
-       ${props.smallHeader && styles.smallHeader}
-       ${props.largeInput && styles.largeInput}
-       ${props.categoryBtn && styles.categoryBtn}
-       ${props.footerBtn && styles.footerBtn}
        ${props.blue && styles.blue}
-         ${props.red && styles.red}
+       ${props.red && styles.red}
        ${props.green && styles.green}
+       ${props.grey && styles.grey}
+       ${props.black && styles.black}
        ${props.closeBtn && styles.closeBtn}
-       ${props.largeInputSign && styles.largeInputSign}
-       ${props.largeInputSignUp && styles.largeInputSignUp}
-       ${props.registrationBtn && styles.registrationBtn}
-       ${props.resetPWBtn && styles.resetPWBtn}
-       ${props.setNewPWBtn && styles.setNewPw}
-      `}>
+       ${props.smallFont && styles.smallFont}
+       ${props.mediumFont && styles.mediumFont}
+       ${props.largeFont && styles.largeFont}
+      `}
+      style={{padding: props.size}}
+      >
         {props.children}
       </button>
   )

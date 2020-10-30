@@ -69,7 +69,7 @@ let RegistrationForm = props => {
         />
       </div>
       <div className={styles.btnContainer}>
-        <Button registrationBtn>COMPLETE REGISTRATION</Button>
+        <Button grey size="16px 0">COMPLETE REGISTRATION</Button>
       </div>
     </form>
   )

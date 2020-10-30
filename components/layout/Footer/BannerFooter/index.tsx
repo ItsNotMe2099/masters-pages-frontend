@@ -13,7 +13,7 @@ export default function BannerFooter(props: Props) {
           <img className={styles.woman} src='img/Footer/woman.png' alt=''/>
         </div>
       </div>
-      <Button footerBtn>Стать исполнителем</Button>
+      <Button mediumFont black size="20px 0">Стать исполнителем</Button>
     </div>
   )
 }

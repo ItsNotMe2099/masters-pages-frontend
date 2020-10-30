@@ -1,0 +1,9 @@
+{
+  "menu": {
+    "createTask": "Создать задание",
+    "findTask": "Найти задание",
+    "masters": "Мастера",
+    "volunteers": "Волонтеры",
+    "faq": "FAQ"
+  }
+}

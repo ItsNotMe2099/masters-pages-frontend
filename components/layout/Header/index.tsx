@@ -1,6 +1,8 @@
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import { LangSelect } from "components/layout/Header/components/LangSelect";
 import Socials from "components/ui/Socials";
+import { withTranslation } from "react-i18next";
+import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -22,7 +24,8 @@ import PWRecoverySucces from "components/Auth/PWRecovery/Success";
 import { PWRecoveryResetState } from "components/Auth/PWRecovery/actions";
 
 interface Props {
-  user: any
+  user?: any,
+  t: (string) => string,
 }
 
 const customStyles = {
@@ -58,7 +61,7 @@ const DropdownIndicator = (
     </components.DropdownIndicator>
   );
 };
-export default function Header(props: Props) {
+const Header = (props: Props) => {
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false);
 
   const handleOpenMobileMenu = () => {
@@ -80,18 +83,18 @@ export default function Header(props: Props) {
   const dispatch = useDispatch()
 
   return (
-    <>
+    <div className={styles.rootWrapper}>
       <header className={styles.root}>
         <div className={styles.menuDesktop}>
           <div className={styles.logo}>
             <Logo/>
           </div>
           <ul className={styles.menu}>
-            <li><Link href="/">Create a task</Link></li>
-            <li><Link href="/">Find a task</Link></li>
-            <li><Link href="/">Masters</Link></li>
-            <li><Link href="/">Volunteers</Link></li>
-            <li><Link href="/">FAQ</Link></li>
+            <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
+            <li><Link href="/">{props.t('menu.findTask')}</Link></li>
+            <li><Link href="/">{props.t('menu.masters')}</Link></li>
+            <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
+            <li><Link href="/">{props.t('menu.faq')}</Link></li>
           </ul>
           <div className={styles.right}>
 
@@ -120,8 +123,8 @@ export default function Header(props: Props) {
                   <span>Master mode</span>
                   <img src='img/Header/avatar.png' alt=""/>
                 </a></Link>
-                <Button largeHeader blue>Volunteer</Button>
-                <Button largeHeader green>Client</Button>
+                <Button smallFont size="20px 0" blue>Volunteer</Button>
+                <Button smallFont size="20px 0"  green>Client</Button>
               </div>
             }
           </div>
@@ -162,14 +165,14 @@ export default function Header(props: Props) {
             :
             <div className={styles.modesContainer}>
 
-              <Button largeHeader red>Master</Button>
-              <Button largeHeader green>Client</Button>
-              <Button largeHeader blue>Volunteer</Button>
+              <Button smallFont size="10px 15px"  red>Master</Button>
+              <Button smallFont size="10px 15px"   green>Client</Button>
+              <Button smallFont size="10px 15px"  blue>Volunteer</Button>
             </div>
           }
             <ul className={styles.menuMobile}>
               <li className={styles.active}><Link href="/">Home</Link></li>
-              <li><Link href="/">Create a task</Link></li>
+              <li><Link href="/CreateTaskPage">Create a task</Link></li>
               <li><Link href="/">Find a task</Link></li>
               <li><Link href="/">Masters</Link></li>
               <li><Link href="/">Volunteers</Link></li>
@@ -199,6 +202,8 @@ export default function Header(props: Props) {
       <PWRecoverySucces
         isOpen={isOpenSuccess}
         onRequestClose={() => dispatch(PWRecoveryResetState())}/>
-    </>
+    </div>
   )
 }
+
+export default withTranslation('header')(Header)

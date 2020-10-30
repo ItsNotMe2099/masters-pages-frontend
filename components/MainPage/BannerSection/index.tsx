@@ -25,7 +25,7 @@ export default function BannerSection(props: Props) {
               <div className={styles.inputTip}>Example: <Link href="/search?query=Looking for a pet doctor"><a>Looking for
                 a
                 pet doctor</a></Link></div>
-              <Button largeInput>Заказать</Button>
+              <Button black mediumFont size="16px 0">Заказать</Button>
             </div>
 
 
