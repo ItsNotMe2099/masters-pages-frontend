@@ -1,11 +1,13 @@
 {
   "menu": {
-
+    "home": "Home",
     "createTask": "Create a task",
     "findTask": "Find a task",
     "masters": "Masters",
     "volunteers": "Volunteers",
     "faq": "FAQ"
 
-  }
+  },
+  "master": "MASTER",
+  "volunteer": "VOLUNTEER"
 }

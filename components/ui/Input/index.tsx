@@ -14,7 +14,6 @@ export default function Input(props: Props) {
   const { error, touched } = props.meta
   const { input, type } = props
   const [isCorrect, setIsCorrect] = useState(false)
-  console.log("Input value", props.input.value)
   return (
     <>
     <div className={styles.inputContainer}>

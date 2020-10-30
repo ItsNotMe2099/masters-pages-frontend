@@ -1,11 +1,17 @@
 {
   "menu": {
-
-    "createTask": "Create a task",
-    "findTask": "Find a task",
-    "masters": "Masters",
-    "volunteers": "Volunteers",
+    "home": "Главная",
+    "createTask": "Создать задание",
+    "findTask": "Найти задание",
+    "masters": "Мастера",
+    "volunteers": "Волонтеры",
     "faq": "FAQ"
-
-  }
+  },
+  "master": "МАСТЕР",
+  "volunteer": "ВОЛОНТЕР",
+  "mainBanner": {
+    "title": "Освободим вас от забот",
+    "description": "Найдите исполнителя под ваши задачи"
+  },
+  "order": "Заказать"
 }
