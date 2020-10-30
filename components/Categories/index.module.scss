@@ -50,13 +50,18 @@
 
 .btnContainer{
     display: flex;
+    width: 160px;
     @include lg{
-        margin-top: 62px;
+        margin: 62px auto auto auto;
     }
     @media screen and (max-width: $sm-max){
-        margin-top: 42px;
+        margin: 42px auto auto auto;
     }
     button{
         margin: auto
     }
+}
+
+.wrapper{
+  display: flex;
 }
