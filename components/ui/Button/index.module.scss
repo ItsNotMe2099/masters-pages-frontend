@@ -2,93 +2,44 @@
     border-radius: 10px;
     border: 0;
     cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    width: 100%;
 }
 
-.largeHeader{
-    padding: 20px 17px;
-    font-weight: 600;
+.smallFont{
     font-size: 14px;
-    line-height: 17px;
-    color: #fff;
 }
 
 .blue{
         background-color:  #0D99C6;
     }
+
+.red{
+    background-color: #FD5742;
+}
+
 .green{
         background-color: #27C60D;
     }
-
-.smallHeader{
-    padding: 15px 16px 15px 16px;
+.black{
     background-color: #000;
 }
 
-.largeInput{
-    padding: 16px 40px 15px 40px;
-    background: #000000;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    color: #fff;
+.grey{
+    background-color: #c6c6c6;
 }
 
-.largeInputSign{
-    padding: 16px 124px;
-    font-weight: bold;
+.mediumFont{
+    font-size: 16px;
+}
+
+.largeFont{
     font-size: 18px;
-    color: #fff;
-}
-
-.categoryBtn{
-    padding: 16px 25px 15px 25px;
-    background: #000000;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #fff;
-}
-
-.footerBtn{
-    padding: 20px 22px 21px 22px;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    color: #FFFFFF;
-    background-color: #000000;
 }
 
 .closeBtn{
     width: 18px;
     height: 18px;
     background: url('../../../public/img/icons/close.svg');
-}
-
-.registrationBtn{
-    padding: 16px 44px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #FFFFFF;
-    background-color: #c6c6c6;
-}
-
-.largeInputSignUp{
-    padding: 16px 91px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #fff;
-}
-
-.resetPWBtn{
-    padding: 16px 77px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #fff;
-}
-
-.setNewPw{
-    padding: 16px 57px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #fff;
 }
