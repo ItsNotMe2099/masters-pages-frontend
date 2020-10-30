@@ -1,11 +1,11 @@
 .btnContainer{
-    display: flex;
-    justify-content: center;
-    margin-top: 33px;
+    margin: auto;
+    width: 257px;
 }
 
 .form{
-    width: 306px;
+    display: flex;
+    margin-bottom: 128px;
 }
 
 .taskData{
@@ -15,4 +15,82 @@
 .mainForm{
     display: flex;
     flex-direction: column;
+}
+
+.mainComponent{
+    display: flex;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+
+    &__top{
+        font-size: 18px;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 28px; 
+    }
+}
+
+.payment{
+    margin: 46px 0 44px 0;
+    padding: 30px 60px;
+    input{
+        margin-right: 23px;
+    }
+}
+
+.or{
+    font-weight: 500;
+    font-size: 22px;
+    color: #4E4E4E;
+    padding: 11px 0;
+    background-color: #fff;
+    position: relative;
+    margin: auto 98px;
+    z-index: 1;
+}
+
+.border{
+    border: 1px solid #c4c4c4;
+    position: absolute;
+    height: 100%;
+    left: 48%;
+}
+
+.horly{
+    display: flex;
+    flex-direction: column;
+}
+
+.fields{
+   display: flex;
+}
+
+.week{
+    input{
+        margin: 0;
+    }
+}
+
+.wrapper{
+    position: relative;
+    display: flex;
+}
+
+.terms{
+    font-size: 15px;
+    color: #373737;
+    margin: auto auto 35px auto;
+    a{
+        color: #0091E6;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    input{
+        margin-right: 11px;
+    }
 }

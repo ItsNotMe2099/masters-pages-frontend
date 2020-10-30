@@ -29,6 +29,7 @@ export default function SignInComponent(props: Props) {
       margin: 'auto',
       position: 'static',
       inset: '0',
+      overflow: 'hidden',
     },
   }
   const handleSubmit = (data) => {

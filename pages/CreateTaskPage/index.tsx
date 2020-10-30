@@ -4,7 +4,6 @@ import Steps from 'components/Steps'
 import CreateTaskForm from "pages/CreateTaskPage/Form";
 import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
-import CreateTaskForm from './Form'
 
 const CreateTaskPage = (props) => {
   return (
@@ -19,6 +18,7 @@ const CreateTaskPage = (props) => {
         image_3='img/icons/chat2.svg'
         text_3='03. Choose a master'
         />
+        <div className={styles.required}>* required field</div>
         <CreateTaskForm/>
         <Footer/>
       </div>

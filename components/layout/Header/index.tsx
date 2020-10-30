@@ -77,11 +77,11 @@ export default function Header(props: Props) {
           <div className={styles.logo}>
             <Logo/></div>
           <ul className={styles.menu}>
-            <li><Link href="/"><a>Create a task</a></Link></li>
-            <li><Link href="/"><a>Find a task</a></Link></li>
-            <li><Link href="/"><a>Masters</a></Link></li>
-            <li><Link href="/"><a>Volunteers</a></Link></li>
-            <li><Link href="/"><a>FAQ</a></Link></li>
+            <li><Link href="/CreateTaskPage">Create a task</Link></li>
+            <li><Link href="/">Find a task</Link></li>
+            <li><Link href="/">Masters</Link></li>
+            <li><Link href="/">Volunteers</Link></li>
+            <li><Link href="/">FAQ</Link></li>
           </ul>
           <div className={styles.right}>
 
@@ -110,8 +110,8 @@ export default function Header(props: Props) {
                   <span>Master mode</span>
                   <img src='img/Header/avatar.png' alt=""/>
                 </a></Link>
-                <Button largeHeader blue>Volunteer</Button>
-                <Button largeHeader green>Client</Button>
+                <Button smallFont size="20px 0" blue>Volunteer</Button>
+                <Button smallFont size="20px 0"  green>Client</Button>
               </div>
             }
           </div>

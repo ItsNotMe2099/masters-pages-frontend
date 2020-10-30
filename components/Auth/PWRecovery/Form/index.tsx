@@ -29,7 +29,7 @@ let PWRecovery = (props: Props) => {
           validate={required}
         />}
       <div className={styles.btnContainer}> 
-        <Button green resetPWBtn>RESET PASSWORD</Button>
+        <Button green largeFont size="16px 0">RESET PASSWORD</Button>
       </div>
     </form>
   )

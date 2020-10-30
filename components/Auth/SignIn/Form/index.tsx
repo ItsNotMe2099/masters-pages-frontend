@@ -23,7 +23,7 @@ let SignIn = props => {
         validate={required}
       />
       <div className={styles.btnContainer}>
-        <Button green largeInputSign>LOG IN</Button>
+        <Button green largeFont size="16px 0">LOG IN</Button>
       </div>
     </form>
   )

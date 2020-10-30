@@ -57,6 +57,9 @@
 
 .form {
   margin-top: 46px;
+  button{
+    width: 30%;
+  }
   @media screen and (max-width: $sm-max) {
     display: flex;
     flex-direction: column;

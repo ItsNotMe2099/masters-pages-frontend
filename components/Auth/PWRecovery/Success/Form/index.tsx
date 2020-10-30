@@ -21,7 +21,7 @@ let PWRecoveryNewPW = (props) => {
           validate={[required, passwordsMatch, minL]}
         />
       <div className={styles.btnContainer}> 
-        <Button green setNewPWBtn>SET A NEW PASSWORD</Button>
+        <Button green largeFont size="16px 0">SET A NEW PASSWORD</Button>
       </div>
     </form>
   )

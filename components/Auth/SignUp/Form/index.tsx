@@ -17,14 +17,13 @@ let SignUp = props => {
         validate={required}
       />
       <div className={styles.btnContainer}> 
-        <Button green largeInputSignUp>REGISTRATION</Button>
+        <Button green largeFont size="16px 0">REGISTRATION</Button>
       </div>
       <div className={styles.terms}>
       <Field
         name="terms"
         component={Checkbox}
-        validate={required}
-      ><span>I am agree with <Link href="/"><a>terms and conditions</a></Link></span></Field>
+      ><span>I am agree with <Link href="/">terms and conditions</Link></span></Field>
       </div>
     </form>
   )

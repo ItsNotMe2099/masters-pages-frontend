@@ -1,4 +1,3 @@
-import BankCard from 'components/svg/BankCard'
 import styles from './index.module.scss'
 
 interface Props {
@@ -7,14 +6,15 @@ interface Props {
   type: string
   label
   placeholder?: string
+  title: string
 }
 
-export default function InputDrop(props: Props) {
+export default function InputPayment(props: Props) {
   const { error, touched } = props.meta
   const { input, type, label } = props
   return (
     <>
-    <div className={styles.inputContainer}>
+      <div className={styles.title}>{props.title}</div>
       <input 
       className={styles.input}
       type={type}
@@ -22,8 +22,6 @@ export default function InputDrop(props: Props) {
       {...input}
       >
       </input>
-      <a><img src='img/field/arrowDown.svg' alt=''/></a>
-    </div>
       {error &&
         touched && (
         <div className={styles.error}>
