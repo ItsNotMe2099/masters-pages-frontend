@@ -171,12 +171,13 @@ const Header = (props: Props) => {
             </div>
           }
             <ul className={styles.menuMobile}>
-              <li className={styles.active}><Link href="/">Home</Link></li>
-              <li><Link href="/CreateTaskPage">Create a task</Link></li>
-              <li><Link href="/">Find a task</Link></li>
-              <li><Link href="/">Masters</Link></li>
-              <li><Link href="/">Volunteers</Link></li>
-              <li><Link href="/">FAQ</Link></li>
+              <li className={styles.active}><Link href="/">{props.t('menu.home')}</Link></li>
+                <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
+                <li><Link href="/">{props.t('menu.findTask')}</Link></li>
+                <li><Link href="/">{props.t('menu.masters')}</Link></li>
+                <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
+                <li><Link href="/">{props.t('menu.faq')}</Link></li>
+
             </ul>
             <div className={styles.socials}>
             <Socials/>
