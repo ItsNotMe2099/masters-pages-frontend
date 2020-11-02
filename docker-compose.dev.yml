@@ -45,7 +45,7 @@ services:
         args:
           - APP_IMAGE=${APP_IMAGE}
       image: ${NGINX_IMAGE}
-      container_name: masters-pages-front-nginx
+      container_name: masters-pages-front-nginx-masters
       restart: ${DK_RESTART}
       networks:
         - app
