@@ -1,6 +1,7 @@
 import Accordion from 'components/ui/Accordion'
 import Button from 'components/ui/Button'
 import Checkbox from 'components/ui/Checkbox'
+import InputCategory from 'components/ui/InputCategory'
 import Link from 'next/link'
 import { Field, reduxForm } from 'redux-form'
 import Input from '../ui/Input'
@@ -37,7 +38,7 @@ let CreateTaskForm = props => {
             <div className={styles.secondColumn}>
               <Field
                 name="category"
-                component={InputDrop}
+                component={InputCategory}
                 label="Category*"
               />
               <Field
