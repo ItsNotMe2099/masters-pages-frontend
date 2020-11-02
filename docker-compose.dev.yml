@@ -38,4 +38,24 @@ services:
           LETSENCRYPT_HOST: masters-pages.dev.glob-com.ru
           LETSENCRYPT_EMAIL: sites.globcom@yandex.ru
           VIRTUAL_PORT: 80
-
+    nginx_masters:
+      build:
+        context: .
+        dockerfile: docker/nginx/Dockerfile
+        args:
+          - APP_IMAGE=${APP_IMAGE}
+      image: ${NGINX_IMAGE}
+      container_name: masters-pages-front-nginx
+      restart: ${DK_RESTART}
+      networks:
+        - app
+        - nginx-proxy
+      depends_on:
+        - app
+      environment:
+        API_HOST: http://masters-pages-api-nginx
+        ADMIN_HOST: http://masters-pages-admin
+        VIRTUAL_HOST: masterspages.ca
+        LETSENCRYPT_HOST: masterspages.ca
+        LETSENCRYPT_EMAIL: sites.globcom@yandex.ru
+        VIRTUAL_PORT: 80
