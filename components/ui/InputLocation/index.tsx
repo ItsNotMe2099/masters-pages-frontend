@@ -30,6 +30,6 @@ export default function InputLocation(props) {
     }))
   }
   return (
-    <SelectInput {...props} options={cities} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange}/>
+    <SelectInput {...props} options={cities} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange} isLocation={true}/>
   )
 }

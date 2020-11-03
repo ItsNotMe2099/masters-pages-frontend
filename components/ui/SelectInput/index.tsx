@@ -9,7 +9,7 @@ interface Props {
   onSearchChange?: (string) => void
 }
 
-export const SelectInput = ({error, touched, input,options, ...rest}) => {
+export const SelectInput = ( {error, touched, input,options,isLocation=false, isCategory=false,label, type, ...rest}) => {
 
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -32,6 +32,7 @@ export const SelectInput = ({error, touched, input,options, ...rest}) => {
   const handleOptionClick = (e, item) => {
     e.preventDefault()
     input.onChange(item.value);
+
     setIsActive(false);
     setValue(item);
     if(valueInputRef){
@@ -52,14 +53,18 @@ export const SelectInput = ({error, touched, input,options, ...rest}) => {
             {error}
           </div>)}
 
-
-        <div className={styles.inputContainer}>
+        <div className={`${isLocation && styles.inputContainer} ${isCategory && styles.inputContainer__category}`}>
           <input onClick={onClick}
                  ref={valueInputRef}
-            className={styles.input}/>
-          <div className={styles.inputLabel}>Location*</div>
-          <a><img src='img/field/location.svg' alt=''/></a>
+                 placeholder={label}
+                 type={type}
+            className={`${isLocation && styles.input} ${isCategory && styles.input__category}`}/>
+          <div className={`${isLocation && styles.inputLabel} ${isCategory && styles.inputLabel__none}`}>Location*</div>
+          <a className={`${isCategory && styles.locationImg__none}`}><img src='img/field/location.svg' alt=''/></a>
+          <a className={`${isLocation && styles.categoryImg__none}`} ><img src='img/field/arrowDown.svg' alt=''/></a>
         </div>
+
+
 
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <input
