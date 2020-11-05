@@ -77,7 +77,7 @@ export const SelectInput = ( {error, touched, input,options,isLocation=false, is
             <li className={styles.dropdownItem}
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
-                <span className={styles.dropdownItemLabel}>{item.label}</span>
+                <div className={styles.circle}></div><span className={styles.dropdownItemLabel}>{item.label}</span>
               </a>
             </li>
           ))}

@@ -15,6 +15,7 @@
 .mainForm{
     display: flex;
     flex-direction: column;
+    width: 65%;
 }
 
 .mainComponent{
@@ -31,16 +32,19 @@
         font-size: 18px;
         font-weight: bold;
         text-align: left;
-        margin-bottom: 28px; 
+        margin-bottom: 32px; 
     }
 }
 
 .payment{
-    margin: 46px 0 44px 0;
+    margin: 46px 30px 44px 0;
     padding: 30px 60px;
-    input{
-        margin-right: 23px;
-    }
+    background: #FBF8EF;
+    border-radius: 10px;
+}
+
+.first{
+    margin-right: 23px;
 }
 
 .or{
@@ -48,7 +52,7 @@
     font-size: 22px;
     color: #4E4E4E;
     padding: 11px 0;
-    background-color: #fff;
+    background: #FBF8EF;
     position: relative;
     margin: auto 98px;
     z-index: 1;
@@ -58,7 +62,7 @@
     border: 1px solid #c4c4c4;
     position: absolute;
     height: 100%;
-    left: 48%;
+    left: 50%;
 }
 
 .horly{
@@ -96,8 +100,22 @@
 }
 
 .faq{
+    width: 35%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    align-self: flex-start;
     .title__top{
-        margin-top: 15px;
-        margin-bottom: 13px;
+        margin-top: 32px;
+        margin-bottom: 15px;
+        margin-left: 30px;
     }
+}
+
+.column{
+    margin-right: 30px;
+    flex: 1;
+}
+
+.taskDesc{
+    margin-right: 30px;
 }

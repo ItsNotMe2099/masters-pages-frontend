@@ -14,7 +14,7 @@ export default function InputPayment(props: Props) {
   const { input, type, label } = props
   return (
     <>
-      <div className={styles.title}>{props.title}</div>
+      <span className={styles.title}>{props.title}</span>
       <input 
       className={styles.input}
       type={type}

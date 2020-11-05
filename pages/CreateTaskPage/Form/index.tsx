@@ -18,7 +18,7 @@ let CreateTaskForm = props => {
         <div className={styles.mainForm}>
           <div className={styles.title__top}>Fill up task request</div>
           <div className={styles.taskData}>
-            <div className={styles.firstColumn}>
+            <div className={styles.column}>
               <Field
                 name="taskTitle"
                 component={Input}
@@ -35,7 +35,7 @@ let CreateTaskForm = props => {
                 title="Master or volunteer*"
               />
             </div>
-            <div className={styles.secondColumn}>
+            <div className={styles.column}>
               <Field
                 name="category"
                 component={InputCategory}
@@ -60,7 +60,7 @@ let CreateTaskForm = props => {
           <div className={styles.horly}>
             <div className={styles.title}>Horly task</div>
             <div className={styles.fields}>
-              <div>
+              <div className={styles.first}>
                 <Field
                   name="ratePerHour"
                   component={InputPayment}
@@ -83,7 +83,7 @@ let CreateTaskForm = props => {
           <div className={styles.fixed}>
             <div className={styles.title}>Fixed price</div>
             <div className={styles.fields}>
-              <div>
+              <div className={styles.first}>
                 <Field
                   name="budget"
                   component={InputPayment}
