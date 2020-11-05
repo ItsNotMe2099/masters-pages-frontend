@@ -2,11 +2,11 @@ import Accordion from 'components/ui/Accordion'
 import Button from 'components/ui/Button'
 import Checkbox from 'components/ui/Checkbox'
 import InputCategory from 'components/ui/InputCategory'
+import InputSubCategory from 'components/ui/InputSubCategory'
 import Link from 'next/link'
 import { Field, reduxForm } from 'redux-form'
 import Input from '../ui/Input'
-import InputDrop from '../ui/InputDrop'
-import InputLocation from '../ui/InputLocation'
+import InputLocation from 'components/ui/InputLocation'
 import InputPayment from '../ui/InputPayment'
 import TextArea from '../ui/TextArea'
 import styles from './index.module.scss'
@@ -28,11 +28,12 @@ let CreateTaskForm = props => {
                 name="location"
                 component={InputLocation}
                 label="Location*"
+                isTask={true}
               />
               <Field
                 name="master"
-                component={InputDrop}
-                title="Master or volunteer*"
+                component={InputCategory}
+                label="Master or volunteer*"
               />
             </div>
             <div className={styles.column}>
@@ -43,7 +44,7 @@ let CreateTaskForm = props => {
               />
               <Field
                 name="subCategory"
-                component={InputDrop}
+                component={InputSubCategory}
                 label="Sub category*"
               />
             </div>

@@ -47,6 +47,7 @@ let RegistrationForm = props => {
       <Field
         name="geonameid"
         component={InputLocation}
+        isRegistration={true}
         options={[{value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
           {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},
           {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'}, {value: '11', label: 'wewewe'},

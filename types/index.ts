@@ -6,6 +6,7 @@ import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reduc
 import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
 import locationInputReducer, { LocationInputState } from "components/ui/InputLocation/reducer";
 import categoryInputReducer, { CategoryInputState } from "components/ui/InputCategory/reducer"
+import subCategoryInputReducer, { SubCategoryInputState } from "components/ui/InputSubCategory/reducer"
 
 export interface IRootState {
   authComponent: authState,
@@ -16,6 +17,7 @@ export interface IRootState {
   registrationComplete: RegistrationCompleteState,
   locationInput: LocationInputState,
   categoryInput: CategoryInputState
+  subCategoryInput: SubCategoryInputState
 }
 
 export interface BaseAction {

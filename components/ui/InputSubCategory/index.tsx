@@ -3,16 +3,16 @@ import { useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategory } from "./actions";
+import { fetchSubCategory } from "./actions";
 
 interface Props {
 
 }
 
-export default function InputCategory(props) {
+export default function InputSubCategory(props) {
   const dispatch = useDispatch()
   const [value, setValue] = useState();
-  const categories = useSelector((state: IRootState) => state.categoryInput.categories)
+  const categories = useSelector((state: IRootState) => state.subCategoryInput.subCategories)
   const handleOnChange = (value) => {
     console.log("OnChangeLocValue", value)
     props.input.onChange(value);
@@ -26,9 +26,11 @@ export default function InputCategory(props) {
     setValue(value)
     //dispatch(fetchCategory())
   }
+
+
   return (
-    <div onClick={() => {dispatch(fetchCategory())}}>
-    <SelectInput {...props} options={categories} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange} isCategory={true} isTask={true} onClick={() => {dispatch(fetchCategory())}}/>
+    <div onClick={() => {dispatch(fetchSubCategory())}}>
+    <SelectInput {...props} options={categories} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange} isCategory={true} isTask={true} onClick={() => {dispatch(fetchSubCategory())}}/>
     </div>
   )
 }
