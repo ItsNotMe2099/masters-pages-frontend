@@ -24,7 +24,8 @@ export default function authReducer(state = {...initialState}, action) {
       state.cities = action.payload.map(item => {
         return  {
           label: item.name,
-          value: item.geonameid
+          value: item.geonameid,
+          location: {lat: item.latitude, lng: item.longitude}
         }
       });
       break

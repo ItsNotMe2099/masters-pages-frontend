@@ -7,6 +7,7 @@ import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/re
 import locationInputReducer, { LocationInputState } from "components/ui/InputLocation/reducer";
 import categoryInputReducer, { CategoryInputState } from "components/ui/InputCategory/reducer"
 import subCategoryInputReducer, { SubCategoryInputState } from "components/ui/InputSubCategory/reducer"
+import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -18,6 +19,7 @@ export interface IRootState {
   locationInput: LocationInputState,
   categoryInput: CategoryInputState
   subCategoryInput: SubCategoryInputState
+  createTaskComplete: CreateTaskCompleteState
 }
 
 export interface BaseAction {

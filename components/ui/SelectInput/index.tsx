@@ -9,12 +9,13 @@ interface Props {
   onSearchChange?: (string) => void
 }
 
-export const SelectInput = ( {error, touched, input,options,isLocation=false, isCategory=false, isRegistration=false, isTask=false, label, type, ...rest}) => {
+export const SelectInput = ( {error, touched, input,options,isLocation=false, isCategory=false, isRegistration=false, isTask=false, isMaster=false, label, type, ...rest}) => {
 
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
   const valueInputRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const qualification = [{label: 'Master'}, {label: 'Volunteer'}]
   const onClick = (e) => {
     e.preventDefault()
     setIsActive(!isActive);
@@ -74,6 +75,18 @@ export const SelectInput = ( {error, touched, input,options,isLocation=false, is
           className={styles.inputDropDown} placeholder={label}/>
           <a className={`${isLocation && styles.categoryImg__none}`} ><img src='img/field/arrowDown.svg' alt=''/></a>
         </div>
+        {isMaster ?
+        <ul>
+          {qualification.map(item => (
+            <li className={styles.dropdownItem}
+            >
+              <a href="" onClick={(e) => handleOptionClick(e, item)}>
+                <div className={`${valueInputRef.current !== null && item.label === valueInputRef.current.value ? styles.circle__active : styles.circle}`}></div><span className={styles.dropdownItemLabel}>{item.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        :
         <ul>
           {options.map(item => (
             <li className={styles.dropdownItem}
@@ -83,8 +96,8 @@ export const SelectInput = ( {error, touched, input,options,isLocation=false, is
               </a>
             </li>
           ))}
-
         </ul>
+        }
       </nav>
     </div>
   );

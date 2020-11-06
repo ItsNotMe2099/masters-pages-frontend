@@ -20,30 +20,31 @@ let CreateTaskForm = props => {
           <div className={styles.taskData}>
             <div className={styles.column}>
               <Field
-                name="taskTitle"
+                name="title"
                 component={Input}
                 label="Task title*"
               />
               <Field
-                name="location"
+                name="geonameid"
                 component={InputLocation}
                 label="Location*"
                 isTask={true}
               />
               <Field
-                name="master"
+                name="masterRole"
                 component={InputCategory}
                 label="Master or volunteer*"
+                isMaster={true}
               />
             </div>
             <div className={styles.column}>
               <Field
-                name="category"
+                name="categoryId"
                 component={InputCategory}
                 label="Category*"
               />
               <Field
-                name="subCategory"
+                name="subCategoryId"
                 component={InputSubCategory}
                 label="Sub category*"
               />
@@ -51,7 +52,7 @@ let CreateTaskForm = props => {
           </div>
           <div className={styles.taskDesc}>
             <Field
-              name="taskDescription"
+              name="description"
               component={TextArea}
               label="Task description*"
             />
@@ -67,14 +68,19 @@ let CreateTaskForm = props => {
                   component={InputPayment}
                   label="0.01 - 100"
                   title="Rate per hour"
+                  min="0.01"
+                  max="100.00"
+                  step="0.01"
                 />
               </div>
               <div className={styles.week}>
                 <Field
-                  name="weekHours"
+                  name="maxWeekHours"
                   component={InputPayment}
                   label="1 - 40"
                   title="Max week hours"
+                  min="1"
+                  max="40"
                 />
               </div>
             </div>
@@ -90,6 +96,8 @@ let CreateTaskForm = props => {
                   component={InputPayment}
                   label="1 - 5 000"
                   title="Budget"
+                  min="1"
+                  max="5000"
                 />
               </div>
                 <div>
@@ -98,6 +106,8 @@ let CreateTaskForm = props => {
                     component={InputPayment}
                     label="max 30 days"
                     title="Estimate"
+                    min="1"
+                    max="30"
                   />
                 </div>
               </div>

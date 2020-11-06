@@ -2,11 +2,14 @@ import styles from './index.module.scss'
 
 interface Props {
   meta: any
-  input: string
+  input: number
   type: string
   label
   placeholder?: string
   title: string
+  min: number
+  max: number
+  step?: number
 }
 
 export default function InputPayment(props: Props) {
@@ -17,8 +20,11 @@ export default function InputPayment(props: Props) {
       <span className={styles.title}>{props.title}</span>
       <input 
       className={styles.input}
-      type={type}
+      type='number'
       placeholder={label}
+      min={props.min} 
+      max={props.max}
+      step={props.step}
       {...input}
       >
       </input>

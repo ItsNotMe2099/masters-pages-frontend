@@ -28,7 +28,7 @@ export default function InputCategory(props) {
   }
   return (
     <div onClick={() => {dispatch(fetchCategory())}}>
-    <SelectInput {...props} options={categories} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange} isCategory={true} isTask={true} onClick={() => {dispatch(fetchCategory())}}/>
+    <SelectInput {...props} options={categories} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange} isCategory={true} isTask={true}/>
     </div>
   )
 }

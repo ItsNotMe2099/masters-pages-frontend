@@ -19,7 +19,7 @@ export default function PWRecoverySucces(props: Props) {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       display: 'flex',
-      zIndex: '2',
+      zIndex: '4',
     },
     content : {
       width: '441px',

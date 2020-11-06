@@ -1,4 +1,4 @@
-import { fetchLocationCity } from "components/ui/InputLocation/actions";
+import { fetchLocationCity, fetchLocationCountry } from "components/ui/InputLocation/actions";
 import { SelectInput } from "components/ui/SelectInput";
 import { useState } from "react";
 import { IRootState } from "types";
@@ -29,6 +29,7 @@ export default function InputLocation(props) {
       page: 1,
     }))
   }
+
   return (
     <SelectInput {...props} options={cities} input={{value: value, onChange: handleOnChange}} onSearchChange={handleOnSearchChange} isLocation={true}/>
   )

@@ -4,8 +4,15 @@ import Steps from 'components/Steps'
 import CreateTaskForm from "pages/CreateTaskPage/Form";
 import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
+import { createTaskComplete } from 'components/CreateTaskPage/actions';
+import { useDispatch } from 'react-redux'
 
 const CreateTaskPage = (props) => {
+  const dispatch = useDispatch()
+  const handleSubmit = (data) => {
+  console.log("HandleSubmit", data)
+  dispatch(createTaskComplete(data));
+  }
   return (
     <>
       <Header {...props}/>
@@ -24,7 +31,7 @@ const CreateTaskPage = (props) => {
       <div className={styles.container}>
 
         <div className={styles.required}>* required field</div>
-        <CreateTaskForm/>
+        <CreateTaskForm onSubmit={handleSubmit}/>
         <Footer/>
       </div>
 
