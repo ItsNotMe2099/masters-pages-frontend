@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 
 interface Props {
-  type?: string
+  type?: "submit" | "button" | "reset"
   blue?: boolean
   red?: boolean
   green?: boolean
