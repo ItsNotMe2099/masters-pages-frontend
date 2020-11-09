@@ -18,7 +18,8 @@ export default function authReducer(state = {...initialState}, action) {
       console.log("action.payload", action.payload)
       state.categories = action.payload.map(item => {
         return  {
-          label: item.name
+          label: item.name,
+          value: item.id
         }
       });
       break

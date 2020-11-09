@@ -7,8 +7,8 @@ import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import PWRecoveryReducer from 'components/Auth/PWRecovery/reducer'
 import locationInputReducer from 'components/ui/InputLocation/reducer'
-import categoryInputReducer from 'components/ui/InputCategory/reducer'
-import subCategoryInputReducer from 'components/ui/InputSubCategory/reducer'
+import categoryInputReducer from 'components/CreateTaskPage/ui/InputCategory/reducer'
+import subCategoryInputReducer from 'components/CreateTaskPage/ui/InputSubCategory/reducer'
 import CreateTaskReducer from 'components/CreateTaskPage/reducer';
 
 export default combineReducers({

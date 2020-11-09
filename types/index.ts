@@ -5,8 +5,8 @@ import authSignInReducer, { SignInState } from "components/Auth/SignIn/reducer";
 import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reducer";
 import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
 import locationInputReducer, { LocationInputState } from "components/ui/InputLocation/reducer";
-import categoryInputReducer, { CategoryInputState } from "components/ui/InputCategory/reducer"
-import subCategoryInputReducer, { SubCategoryInputState } from "components/ui/InputSubCategory/reducer"
+import categoryInputReducer, { CategoryInputState } from "components/CreateTaskPage/ui/InputCategory/reducer"
+import subCategoryInputReducer, { SubCategoryInputState } from "components/CreateTaskPage/ui/InputSubCategory/reducer"
 import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
 
 export interface IRootState {
