@@ -46,8 +46,10 @@ const RegistrationPage = (props: Props) => {
               </div>
             </a>
           </div>
-          <div className={styles.or}>or</div>
-          <div className={styles.border}></div>
+          <div className={styles.separator}>
+            <div className={styles.or}>or</div>
+            <div className={styles.border}></div>
+          </div>
           <div className={styles.right}>
             <RegistrationForm onSubmit={handleSubmit} initialValues={{phone: props.user?.phone}}/>
           </div>
