@@ -33,3 +33,34 @@
     @content;
   }
 }
+
+@mixin input {
+  border: 1px solid #909090;
+  border-radius: 10px;
+  width: 100%;
+  height: 50px;
+  padding: 0 20px;
+  &::placeholder{
+    color: #050505;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+@mixin inputError {
+  border-color: #C60D0D;
+  color: #C60D0D;
+  &::placeholder{
+    color: #C60D0D;
+  }
+}
+
+@mixin error{
+  color: #C60D0D;
+  font-size: 12px;
+  margin-top: 5px;
+  position: absolute;
+  bottom: -16px;
+  left: 0px;
+}

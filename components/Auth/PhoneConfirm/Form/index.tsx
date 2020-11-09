@@ -1,13 +1,15 @@
 import Button from 'components/ui/Button'
-import OtpCodeInput from "components/ui/OtpCodeInput";
+import FormError from "components/ui/Form/FormError";
+import OtpCodeInput from "components/ui/Inputs/OtpCodeInput";
 import { Field, reduxForm } from 'redux-form'
-import InputPhone from 'components/ui/InputPhone'
+import { IRootState } from "types";
 import styles from './index.module.scss'
-import Checkbox from 'components/ui/Checkbox'
-import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux'
 
 let PhoneConfirmForm = props => {
   const { handleSubmit } = props
+  const error = useSelector((state: IRootState) => state.phoneConfirmReducer.formError)
+  console.log("ErrorPhoneConfirm", error)
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field
@@ -15,8 +17,9 @@ let PhoneConfirmForm = props => {
         component={OtpCodeInput}
         length={4}
       />
+      <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green size="18px 0">CONFIRM</Button>
+        <Button green largeFont  size="16px 0">CONFIRM</Button>
       </div>
       <div className={styles.resendSms}>
         Dont receive sms? <a href={''}>Sent again</a>.

@@ -1,0 +1,45 @@
+.root{
+  position: relative;
+  padding: 97px 67px 64px;
+
+}
+
+.close{
+    position: absolute;
+  top: 30px;
+  right: 24px;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+      }
+}
+
+.title{
+    text-align: center;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 93%;
+    margin-top: 50px;
+}
+.loader{
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  min-height: 300px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+.center, .body{
+    display: flex;
+    justify-content: center;
+  align-items: stretch;
+    flex-direction: column;
+}

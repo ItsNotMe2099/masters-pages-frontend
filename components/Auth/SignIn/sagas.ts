@@ -1,6 +1,6 @@
 import { phoneConfirmOpen } from "components/Auth/actions";
-import { signInSubmit } from "components/Auth/SignIn/actions";
-import { takeLatest, put, select } from 'redux-saga/effects'
+import { signInError, signInSubmit } from "components/Auth/SignIn/actions";
+import { takeLatest, put, select, call } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
 import ActionTypes from './const'
@@ -20,6 +20,8 @@ function* signInSaga() {
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 1 });
         window.location.href = '/';
+      }else{
+        yield put(signInError(res.err?.errors));
       }
 
     })

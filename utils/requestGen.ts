@@ -6,7 +6,6 @@ import cookie from "js-cookie";
 function* requestGen(options: IRequestData | string): Generator<any, IResponse> {
   const token = cookie.get('token') as string
   const optionsObj = typeof options === 'string' ? { url: options } : options
-//  const token = accessToken
   const res: any = yield call(request, { ...optionsObj, token })
 
   if (res.err && res.err.Code === 'TOKEN_EXPIRED') {

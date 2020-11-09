@@ -7,10 +7,13 @@ export function email(value: string) {
     ? 'Invalid email address'
     : undefined
 }
+export function phone(value: string) {
+  return !value || value.length <= 8 ? 'Введите телефон' : undefined;
+}
 
 export function passwordsMatch(value: string, allValues: any) {
   console.log("passwordsMatch", value, allValues)
-  return value !== allValues.passwordConfirm ? 'Пароли не совпадают' : undefined
+  return value !== allValues.password ? 'Пароли не совпадают' : undefined
 }
 
 const minLength = min => value =>

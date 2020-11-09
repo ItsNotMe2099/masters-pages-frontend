@@ -1,0 +1,39 @@
+.root{
+  position: relative;
+  margin-bottom: 20px;
+}
+.rootWithError{
+  label{
+    color: #C60D0D;
+  }
+}
+.rootWithLabelCross{
+  padding-top: 4px;
+}
+.inputContainer{
+  position: relative;
+}
+
+.labelCross{
+  position: absolute;
+  padding: 0 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #828282;
+  top: -7px;
+  left: 15px;
+}
+.labelStatic{
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 7px;
+}
+.icon {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

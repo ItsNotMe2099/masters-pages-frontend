@@ -1,5 +1,5 @@
 import { modalClose, phoneConfirmOpen } from "components/Auth/actions";
-import { phoneConfirmSubmit } from "components/Auth/PhoneConfirm/actions";
+import { phoneConfirmError, phoneConfirmSubmit } from "components/Auth/PhoneConfirm/actions";
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
@@ -25,10 +25,10 @@ function* phoneConfirmSaga() {
       if(!res.err) {
         cookie.set("token", res.data.accessToken, { expires: 1 });
           window.location.href = '/RegistrationPage';
-
+      }else{
+        yield put(phoneConfirmError(res.err?.errors));
       }
 
-      yield put(modalClose());
     })
 
 }

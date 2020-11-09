@@ -3,7 +3,18 @@ import { takeLatest, put, select, takeEvery } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
 import ActionTypes from './const'
-import {  PWRecoverySubmit, PWRecoverySecondSubmit, PWRecoveryIsSuccess, PWRecoveryFinalSubmit } from './actions'
+import {
+  PWRecoverySubmit,
+  PWRecoverySecondSubmit,
+  PWRecoveryIsSuccess,
+  PWRecoveryFinalSubmit,
+  PWRecoveryError,
+  PWRecoveryFinalError,
+  PWRecoverySecondError,
+  PWRecoverySuccess,
+  PWRecoverySecondSuccess,
+  PWRecoveryFinalSuccess
+} from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
 import PWRecoverySucces from "./Success";
@@ -22,7 +33,10 @@ function* PWRecoverySaga() {
       } as IRequestData)
       console.log("Res phone", res)
       if(!res.err){
+        yield put(PWRecoverySuccess())
         yield put({type: ActionTypes.RESET_PW_FIRST_STEP_SUCCESS})
+      }else{
+        yield put(PWRecoveryError(res.err?.errors))
       }
 
     })
@@ -40,9 +54,12 @@ function* PWRecoverySaga() {
         console.log("Res payload", res)
         if(!res.err){
           cookie.set("token", res.data.accessToken, { expires: 1 });
-          yield put(PWRecoveryIsSuccess());
+          yield put(PWRecoverySecondSuccess());
+          yield put(PWRecoverySuccessOpen());
+        }else{
+          yield put(PWRecoverySecondError(res.err?.errors))
         }
-  
+
       })
 
       yield takeLatest(ActionTypes.RESET_PW_FINAL_STEP_SUBMIT,
@@ -51,14 +68,17 @@ function* PWRecoverySaga() {
             url: `/api/auth/resetPass`,
             method: 'POST',
             data: {
-              password: action.payload.password_confirm,
+              password: action.payload.password,
             },
           } as IRequestData)
           console.log("Res password", res)
           if(!res.err){
+        //    yield put(PWRecoveryFinalSuccess());
             window.location.href = '';
+          }else{
+            yield put(PWRecoveryFinalError(res.err?.errors))
           }
-    
+
         })
 
 }

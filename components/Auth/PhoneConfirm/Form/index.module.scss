@@ -1,13 +1,9 @@
 .btnContainer{
-    display: flex;
-    justify-content: center;
-    margin-top: 21px;
+  margin-top: 12px;
+  button{
+    width: 100%;
+  }
 }
-
-.form{
-    width: 306px;
-}
-
 .resendSms{
     font-size: 16px;
   font-weight: 400;

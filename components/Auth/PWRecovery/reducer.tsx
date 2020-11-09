@@ -6,7 +6,9 @@ export interface PWRecoveryState {
   code: string,
   isOpen: boolean,
   isOpenSuccess: boolean,
-  password: string
+  password: string,
+  loading: boolean,
+  formError?: string | string[]
 }
 
 const initialState: PWRecoveryState = {
@@ -15,7 +17,8 @@ const initialState: PWRecoveryState = {
   code: '',
   isOpen: false,
   isOpenSuccess: false,
-  password: ''
+  password: '',
+  loading: false,
 }
 
 export default function loginSubmitReducer(state = {...initialState}, action) {
@@ -24,23 +27,36 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
 
     case ActionTypes.RESET_PW_FIRST_STEP_SUBMIT:
       state.phone = action.payload.phone
-      console.log('RESET_PW_FIRST_STEP_SUBMIT')
+      state.loading = true;
+      state.formError = null;
       break
-
     case ActionTypes.RESET_PW_FIRST_STEP_SUCCESS:
       state.formIsSuccess = true
-      console.log('RESET_PW_FIRST_STEP_SUCCESS')
+      state.loading = false;
+      break
+    case ActionTypes.RESET_PW_FIRST_STEP_ERROR:
+      state.loading = false;
+      state.formError = action.payload.error
       break
 
     case ActionTypes.RESET_PW_SECOND_STEP_SUBMIT:
       state.code = action.payload.code
-      console.log('RESET_PW_SECOND_STEP_SUBMIT')
+      state.loading = true;
+      state.formError = null;
+      break
+    case ActionTypes.RESET_PW_SECOND_STEP_SUCCESS:
+      state.formIsSuccess = true
+      state.loading = false;
+      break
+    case ActionTypes.RESET_PW_SECOND_STEP_ERROR:
+      state.loading = false;
+      state.formError = action.payload.error
       break
 
     case ActionTypes.RESET_PW_IS_OPEN:
       state.isOpen = true
       break
-    
+
     case ActionTypes.RESET_PW_IS_OPEN_SUCCESS:
       state.isOpenSuccess = true
       break
@@ -51,10 +67,21 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       state.phone = '',
       state.isOpen = false,
       state.isOpenSuccess = false
+      state.loading = false;
       break
-  
+
     case ActionTypes.RESET_PW_FINAL_STEP_SUBMIT:
       state.password = action.payload.password
+      state.loading = true;
+      state.formError = null;
+      break
+    case ActionTypes.RESET_PW_FINAL_STEP_SUCCESS:
+      state.formIsSuccess = true
+      state.loading = false;
+      break
+    case ActionTypes.RESET_PW_FINAL_STEP_ERROR:
+      state.loading = false;
+      state.formError = action.payload.error
       break
   }
 

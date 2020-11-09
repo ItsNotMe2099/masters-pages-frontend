@@ -74,12 +74,7 @@ const Header = (props: Props) => {
   }
   console.log("Props", props.user);
   const [isAuth, setAuth] = useState(props.user ? true : false)
-  /*const isSignInOpen = useSelector((state: IRootState) => state.authComponent.isSignInOpen)
-  const isSignUpOpen = useSelector((state: IRootState) => state.authComponent.isSignUpOpen)
-  const isPhoneConfirmOpen = useSelector((state: IRootState) => state.authComponent.isPhoneConfirmOpen)*/
   const key = useSelector((state: IRootState) => state.authComponent.modalKey)
-  const isOpen = useSelector((state: IRootState) => state.PWRecovery.isOpen)
-  const isOpenSuccess = useSelector((state: IRootState) => state.PWRecovery.isOpenSuccess)
   const dispatch = useDispatch()
 
   return (
@@ -198,11 +193,11 @@ const Header = (props: Props) => {
         onRequestClose={() => dispatch(modalClose())}
       />
       <PWRecoveryComponent
-        isOpen={isOpen}
-        onRequestClose={() => dispatch(PWRecoveryResetState())}/>
+        isOpen={key === 'pwRecFirst'}
+        onRequestClose={() => dispatch(modalClose())}/>
       <PWRecoverySucces
-        isOpen={isOpenSuccess}
-        onRequestClose={() => dispatch(PWRecoveryResetState())}/>
+        isOpen={key === 'pwRecSuccess'}
+        onRequestClose={() => dispatch(modalClose())}/>
     </div>
   )
 }

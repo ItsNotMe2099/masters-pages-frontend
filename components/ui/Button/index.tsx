@@ -1,11 +1,13 @@
 import styles from './index.module.scss'
 
 interface Props {
+  type?: string
   blue?: boolean
   red?: boolean
   green?: boolean
   black?: boolean
   grey?: boolean
+  bold?: boolean
   closeBtn?: boolean
   smallFont?: boolean
   mediumFont?: boolean
@@ -18,10 +20,11 @@ interface Props {
 export default function Button(props: Props) {
   return (
       <button
-        type={'submit'}
+        type={props.type}
       onClick={props.onClick}
       className={`
        ${styles.root}
+        ${props.bold && styles.bold}
        ${props.blue && styles.blue}
        ${props.red && styles.red}
        ${props.green && styles.green}
@@ -37,4 +40,7 @@ export default function Button(props: Props) {
         {props.children}
       </button>
   )
+}
+Button.defaultProps = {
+  type: 'submit'
 }

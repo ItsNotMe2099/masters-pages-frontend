@@ -10,7 +10,10 @@ interface CreateTaskData{
   ratePerHour: number,
   maxWeekHours: number,
   budget: number,
-  estimate: number
+  estimate: number,
+  address: string,
 }
 export const createTaskComplete = (data: CreateTaskData) => action(ActionTypes.CREATE_TASK, data)
 export const createTaskeReset = () => action(ActionTypes.CREATE_TASK_RESET)
+export const createTaskSuccess = () => action(ActionTypes.CREATE_TASK_SUCCESS)
+export const createTaskError = (error) => action(ActionTypes.CREATE_TASK_ERROR, {error})

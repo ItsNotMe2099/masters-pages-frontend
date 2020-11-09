@@ -1,0 +1,36 @@
+.input{
+  border: none;
+  width: 100%;
+  height: 51px;
+  border-radius: 11px;
+  padding: 0px;
+  margin: 0px;
+  &::placeholder{
+    color: #050505;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+.withPadding{
+  padding: 0 16px;
+}
+.transparent{
+  background: transparent;
+}
+.withIcon{
+  padding-right: 40px;
+}
+.withBorder{
+  border: 1px solid #C4C4C4
+}
+.inputError{
+  border-color: #C60D0D;
+  color: #C60D0D;
+  &::placeholder{
+    color: #C60D0D;
+  }
+}
+.inputContainer{
+  position: relative;
+}

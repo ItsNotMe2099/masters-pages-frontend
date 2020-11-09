@@ -3,7 +3,7 @@ import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
 import ActionTypes from './const'
-import {  signUpSubmit } from './actions'
+import { signUpError, signUpSubmit, signUpSuccess } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
 
 function* signUpSaga() {
@@ -20,7 +20,10 @@ function* signUpSaga() {
       } as IRequestData)
       console.log("Res signup", res)
       if(!res.err){
+        yield put(signUpSuccess());
         yield put(phoneConfirmOpen());
+      }else{
+        yield put(signUpError(res.err?.errors))
       }
 
     })

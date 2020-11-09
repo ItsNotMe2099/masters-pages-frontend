@@ -1,18 +1,28 @@
 import Accordion from 'components/ui/Accordion'
 import Button from 'components/ui/Button'
-import Checkbox from 'components/ui/Checkbox'
-import InputCategory from 'components/ui/InputCategory'
-import InputSubCategory from 'components/ui/InputSubCategory'
+import FormError from "components/ui/Form/FormError";
+import Checkbox from 'components/ui/Inputs/Checkbox'
+import Input from "components/ui/Inputs/Input";
+import InputAddress from "components/ui/Inputs/InputAddress";
+import InputCategory from 'components/ui/Inputs/InputCategory'
+import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
+import FileInput from "components/ui/Inputs/S3FileUpload";
+import { SelectInput } from "components/ui/Inputs/SelectInput";
+import TextArea from "components/ui/Inputs/TextArea";
 import Link from 'next/link'
-import { Field, reduxForm } from 'redux-form'
-import Input from '../ui/Input'
-import InputLocation from 'components/ui/InputLocation'
-import InputPayment from '../ui/InputPayment'
-import TextArea from '../ui/TextArea'
+import PriceSelectForm from "pages/CreateTaskPage/Form/components/PriceSelect";
+import { Field, reduxForm,formValueSelector } from 'redux-form'
+import { IRootState } from "types";
+import { required } from "utils/validations";
+import { useSelector, useDispatch } from 'react-redux'
+import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
+import { connect } from 'react-redux'
 
 let CreateTaskForm = props => {
   const { handleSubmit } = props
+  const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.mainForm}>
@@ -23,18 +33,20 @@ let CreateTaskForm = props => {
                 name="title"
                 component={Input}
                 label="Task title*"
+                validate={required}
               />
               <Field
                 name="geonameid"
                 component={InputLocation}
                 label="Location*"
-                isTask={true}
+                validate={required}
               />
               <Field
                 name="masterRole"
-                component={InputCategory}
+                component={SelectInput}
                 label="Master or volunteer*"
-                isMaster={true}
+                options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
+                validate={required}
               />
             </div>
             <div className={styles.column}>
@@ -42,78 +54,43 @@ let CreateTaskForm = props => {
                 name="categoryId"
                 component={InputCategory}
                 label="Category*"
+                validate={required}
               />
               <Field
                 name="subCategoryId"
                 component={InputSubCategory}
                 label="Sub category*"
+                categoryId={props.categoryId}
+                validate={required}
               />
             </div>
+          </div>
+          <div style={{marginRight: '30px'}}>
+          <Field
+            name="address"
+            component={InputAddress}
+            label="Address"
+          />
           </div>
           <div className={styles.taskDesc}>
             <Field
               name="description"
               component={TextArea}
               label="Task description*"
+              validate={required}
             />
           </div>
-      <div className={styles.payment}>
-        <div className={styles.wrapper}>
-          <div className={styles.horly}>
-            <div className={styles.title}>Horly task</div>
-            <div className={styles.fields}>
-              <div className={styles.first}>
-                <Field
-                  name="ratePerHour"
-                  component={InputPayment}
-                  label="0.01 - 100"
-                  title="Rate per hour"
-                  min="0.01"
-                  max="100.00"
-                  step="0.01"
-                />
-              </div>
-              <div className={styles.week}>
-                <Field
-                  name="maxWeekHours"
-                  component={InputPayment}
-                  label="1 - 40"
-                  title="Max week hours"
-                  min="1"
-                  max="40"
-                />
-              </div>
-            </div>
-          </div>
-          <div className={styles.or}>or</div>
-          <div className={styles.border}></div>
-          <div className={styles.fixed}>
-            <div className={styles.title}>Fixed price</div>
-            <div className={styles.fields}>
-              <div className={styles.first}>
-                <Field
-                  name="budget"
-                  component={InputPayment}
-                  label="1 - 5 000"
-                  title="Budget"
-                  min="1"
-                  max="5000"
-                />
-              </div>
-                <div>
-                  <Field
-                    name="estimate"
-                    component={InputPayment}
-                    label="max 30 days"
-                    title="Estimate"
-                    min="1"
-                    max="30"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <Field
+            name="photos"
+            component={FileInput}
+            label="Photos"
+            multiple={true}
+            title="Estimate"
+            min="1"
+            max="30"
+          />
+           <PriceSelectForm {...props}/>
+
         <div className={styles.terms}>
             <Field
               name="terms"
@@ -121,6 +98,7 @@ let CreateTaskForm = props => {
             ><span>I am agree with <Link href="/">terms and conditions</Link></span>
             </Field>
         </div>
+          <FormError error={error}/>
         <div className={styles.btnContainer}>
             <Button red size="14px 65px">CREATE TASK</Button>
           </div>
@@ -139,7 +117,16 @@ let CreateTaskForm = props => {
 }
 
 CreateTaskForm   = reduxForm ({
-  form: 'taskForm ',
-}) (CreateTaskForm  )
+  form: 'taskForm',
+}) (CreateTaskForm )
 
+const selector = formValueSelector('taskForm') // <-- same as form name
+CreateTaskForm = connect(state => {
+  // can select values individually
+  const categoryId = selector(state, 'categoryId')
+  console.log("getCategoryId", categoryId)
+  return {
+    categoryId
+  }
+})(CreateTaskForm)
 export default CreateTaskForm

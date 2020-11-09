@@ -1,18 +1,26 @@
 import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
 import Steps from 'components/Steps'
+import Button from "components/ui/Button";
+import Loader from "components/ui/Loader";
+import Modal from "components/ui/Modal";
 import CreateTaskForm from "pages/CreateTaskPage/Form";
+import ModalSuccess from "pages/CreateTaskPage/ui/ModalSuccess";
+import { IRootState } from "types";
 import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
 import { createTaskComplete } from 'components/CreateTaskPage/actions';
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 const CreateTaskPage = (props) => {
   const dispatch = useDispatch()
+  const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
+  const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
   const handleSubmit = (data) => {
   console.log("HandleSubmit", data)
-  dispatch(createTaskComplete(data));
+    dispatch(createTaskComplete(data));
   }
+
   return (
     <>
       <Header {...props}/>
@@ -35,6 +43,24 @@ const CreateTaskPage = (props) => {
         <Footer/>
       </div>
 
+
+      <Modal
+        {...props}
+        title={'Your task created'}
+        image={'img/icons/congratulations.svg'}
+        isOpen={isCompleted} onRequestClose={() => {
+        window.location.href = '/'
+      }}>
+
+      </Modal>
+
+      <Modal
+        {...props}
+        isOpen={isLoading} onRequestClose={() => {
+
+      }}>
+        <Loader/>
+      </Modal>
     </>
   )
 }
