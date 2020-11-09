@@ -1,9 +1,29 @@
+@import "scss/index";
+
 .root{
   display: flex;
   align-items: center;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+  &__mobile{
+    @include lg{
+      display: none;
+    }
+    .desc{
+      margin: 0 0 14px 0;
+      text-align: center;
+    }
+  }
 }
 .desc{
   color: #6D718C;
   margin-left: 20px;
   font-size: 16px
+}
+
+.btnContainer{
+  button{
+    width: 100%;
+  }
 }

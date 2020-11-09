@@ -3,6 +3,9 @@
 .root{
   position: relative;
   margin-bottom: 20px;
+  @media screen and (max-width: $sm-max){
+    margin-bottom: 40px;
+}
 }
 
 .textarea{

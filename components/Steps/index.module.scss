@@ -53,10 +53,4 @@
     @media screen and (max-width: $sm-max){
         display: none;
     }
-    &__mobile{
-        @include lg{
-            display: none;
-        }
-        margin: 19px 0;
-    }
 }

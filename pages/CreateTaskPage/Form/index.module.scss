@@ -1,21 +1,44 @@
+@import "scss/index";
+
 .btnContainer{
-    margin: auto;
-    width: 257px;
+    @include lg{
+        margin: auto;
+        width: 257px;
+    }
+    @media screen and (max-width: $sm-max){
+        button{ 
+            width: 100%;
+        }
+    }
 }
 
 .form{
     display: flex;
     margin-bottom: 128px;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+    }
 }
 
 .taskData{
     display: flex;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+    }
 }
 
 .mainForm{
     display: flex;
     flex-direction: column;
     width: 65%;
+    @media screen and (max-width: $sm-max){
+        width: 100%;
+    }
+    .title__top{
+        @media screen and (max-width: $sm-max){
+            display: none;
+        }
+}
 }
 
 .mainComponent{
@@ -60,13 +83,35 @@
         margin-bottom: 15px;
         margin-left: 30px;
     }
+    @media screen and (max-width: $sm-max){
+        width: 100%;
+        margin: 38px 0;
+        .title__top{
+            margin: 20px 0;
+            text-align: center;
+        }
+    }
 }
 
 .column{
     margin-right: 30px;
     flex: 1;
+    @media screen and (max-width: $sm-max){
+        margin: 0;
+    }
 }
 
 .taskDesc{
     margin-right: 30px;
+    @media screen and (max-width: $sm-max){
+        margin: 0;
+    }
+}
+
+.address{
+    margin-right: 30px;
+    @media screen and (max-width: $sm-max){
+        margin: 0;
+    }
+
 }

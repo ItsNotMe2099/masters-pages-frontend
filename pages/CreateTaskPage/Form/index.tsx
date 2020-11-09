@@ -65,7 +65,7 @@ let CreateTaskForm = props => {
               />
             </div>
           </div>
-          <div style={{marginRight: '30px'}}>
+          <div className={styles.address}>
           <Field
             name="address"
             component={InputAddress}

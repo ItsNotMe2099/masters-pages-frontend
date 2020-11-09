@@ -7,6 +7,9 @@
     width: $container-lg;
     margin: auto;
   }
+  @media screen and (max-width: $sm-max){
+    padding: 17px 22px 0 22px;
+}
 
   @include xll {
     width: $container-xll
@@ -32,4 +35,23 @@
   opacity: 0.5;
   font-size: 14px;
   margin-bottom: 20px;
+  @media screen and (max-width: $sm-max){
+    text-align: center;
+}
+}
+
+.footer{
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+
+.head{
+  @include lg{
+    display: none;
+  }
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
 }
