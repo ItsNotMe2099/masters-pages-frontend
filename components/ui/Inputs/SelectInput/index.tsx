@@ -79,9 +79,9 @@ export const SelectInput = (props) => {
             if(props.allowCustomInput){
               console.log("onChange", e.currentTarget.value)
               input.onChange(e.currentTarget.value)
-            }else{
-              props.onSearchChange(e.currentTarget.value)
             }
+              props.onSearchChange(e.currentTarget.value)
+
           }}
                      value={props.allowCustomInput ? input.value : null}
                      withBorder={false}
