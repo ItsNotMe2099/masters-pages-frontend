@@ -22,8 +22,9 @@ let PriceSelectForm = props => {
             <Field
               name="ratePerHour"
               component={Input}
-              label="0.01 - 100"
-              title="Rate per hour"
+              placeholder="0.01 - 100"
+              label="Rate per hour"
+              labelType={'static'}
               min="0.01"
               max="100.00"
               step="0.01"
@@ -35,8 +36,9 @@ let PriceSelectForm = props => {
             <Field
               name="maxWeekHours"
               component={Input}
-              label="1 - 40"
-              title="Max week hours"
+              placeholder="1 - 40"
+              label="Max week hours"
+              labelType={'static'}
               type={'number'}
               min="1"
               max="40"
@@ -60,8 +62,9 @@ let PriceSelectForm = props => {
             <Field
               name="budget"
               component={Input}
-              label="1 - 5 000"
-              title="Budget"
+              placeholder="1 - 5 000"
+              label="Budget"
+              labelType={'static'}
               min="1"
               max="5000"
               type={'number'}
@@ -73,8 +76,9 @@ let PriceSelectForm = props => {
             <Field
               name="estimate"
               component={Input}
-              label="max 30 days"
-              title="Estimate"
+              placeholder="max 30 days"
+              label="Estimate"
+              labelType={'static'}
               type={'number'}
               min="1"
               max="30"
