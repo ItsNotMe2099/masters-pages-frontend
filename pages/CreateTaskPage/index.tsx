@@ -5,7 +5,6 @@ import Button from "components/ui/Button";
 import Loader from "components/ui/Loader";
 import Modal from "components/ui/Modal";
 import CreateTaskForm from "pages/CreateTaskPage/Form";
-import ModalSuccess from "pages/CreateTaskPage/ui/ModalSuccess";
 import { IRootState } from "types";
 import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
