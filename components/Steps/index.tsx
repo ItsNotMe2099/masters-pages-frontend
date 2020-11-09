@@ -18,11 +18,13 @@ export default function Steps(props: Props) {
           <div className={styles.text}>{props.text}</div>
         </div>
         <img className={styles.wave} src={'img/icons/wave1.svg'} alt=''/>
+        <img className={styles.wave__mobile} src='img/icons/waveMobile.svg' alt=''/>
         <div className={styles.columnItem}>
           <img className={styles.icon} src={props.image_2} alt=''/>
           <div className={styles.text}>{props.text_2}</div>
         </div>
         <img className={styles.wave} src='img/icons/wave2.svg' alt=''/>
+        <img className={styles.wave__mobile} src='img/icons/waveMobile2.svg' alt=''/>
         <div className={styles.columnItem}>
           <img className={styles.icon} src={props.image_3} alt=''/>
           <div className={styles.text}>{props.text_3}</div>

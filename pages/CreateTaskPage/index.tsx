@@ -36,7 +36,7 @@ const CreateTaskPage = (props) => {
         </div>
       </div>
       <div className={styles.container}>
-        <div className={styles.head}>Fill up task request</div>
+
         <div className={styles.required}>* required field</div>
         <CreateTaskForm onSubmit={handleSubmit}/>
         <div className={styles.footer}>
