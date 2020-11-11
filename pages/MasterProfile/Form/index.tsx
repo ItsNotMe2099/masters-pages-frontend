@@ -53,16 +53,10 @@ let MasterForm = props => {
             <div className={styles.column}>
               <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> Nunc dictum duis risus imperdiet</div>
               <div className={styles.inputContainer}>
-              <Field
-                name="categoryId"
-                component={InputCategory}
-                label="Choose category"
-                validate={required}
-              />
+              <CheckboxSubCategory/>
               </div>
             </div>
           </div>
-          <CheckboxSubCategory/>
         </div>
         <div className={styles.important}>
           <div className={styles.head}>Important information</div>

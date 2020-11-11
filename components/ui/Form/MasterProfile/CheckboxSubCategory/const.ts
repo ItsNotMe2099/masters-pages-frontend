@@ -1,5 +1,5 @@
 enum ActionTypes {
-  FETCH_SUBCATEGORIES = 'Location/SEARCH_SUBCATEGORIES',
+  FETCH_SUBCATEGORIES = 'Checkbox/SEARCH_SUBCATEGORIES',
 }
 
 export default ActionTypes

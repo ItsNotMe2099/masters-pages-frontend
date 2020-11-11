@@ -18,7 +18,6 @@ interface Props {
 }
 
 export default function BaseInput(props: Props) {
-  console.log("propsInputChange", props.meta)
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   console.log(" error, touched",  error, touched)
  return ( <input className={`${styles.input} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
