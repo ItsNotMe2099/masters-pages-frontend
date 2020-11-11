@@ -7,6 +7,7 @@ import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/re
 import locationInputReducer, { LocationInputState } from "components/ui/Inputs/InputLocation/reducer";
 import categoryInputReducer, { CategoryInputState } from "components/ui/Inputs/InputCategory/reducer"
 import subCategoryInputReducer, { SubCategoryInputState } from "components/ui/Inputs/InputSubCategory/reducer"
+import subCategoryCheckboxReducer, { SubCategoryCheckboxState } from 'components/ui/Form/MasterProfile/CheckboxSubCategory/reducer'
 import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
 
 export interface IRootState {
@@ -19,6 +20,7 @@ export interface IRootState {
   locationInput: LocationInputState,
   categoryInput: CategoryInputState
   subCategoryInput: SubCategoryInputState
+  subCategoryCheckbox: SubCategoryCheckboxState
   createTaskComplete: CreateTaskCompleteState
 }
 

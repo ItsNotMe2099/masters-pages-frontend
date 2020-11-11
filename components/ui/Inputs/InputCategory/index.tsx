@@ -1,5 +1,5 @@
 import { SelectInput } from "components/ui/Inputs/SelectInput";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +26,7 @@ export default function InputCategory(props) {
   }
   return (
     <div onClick={() => {dispatch(fetchCategory())}}>
-      <SelectInput {...props} options={categories} onSearchChange={handleOnSearchChange} isCategory={true} isTask={true}/>
+      <SelectInput {...props} options={categories} onSearchChange={handleOnSearchChange}/>
     </div>
   )
 }

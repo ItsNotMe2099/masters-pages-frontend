@@ -6,7 +6,7 @@ export interface CategoryInputState {
 }
 
 const initialState: CategoryInputState = {
-categories: []
+categories: [],
 }
 
 export default function authReducer(state = {...initialState}, action) {

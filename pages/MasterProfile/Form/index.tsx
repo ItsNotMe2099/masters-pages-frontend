@@ -7,9 +7,11 @@ import { required } from "utils/validations";
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import InputCategory from 'components/ui/Inputs/InputCategory';
+import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
 
 let MasterForm = props => {
   const { handleSubmit } = props
+  console.log(`props: ${props}`)
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -60,6 +62,7 @@ let MasterForm = props => {
               </div>
             </div>
           </div>
+          <CheckboxSubCategory/>
         </div>
         <div className={styles.important}>
           <div className={styles.head}>Important information</div>

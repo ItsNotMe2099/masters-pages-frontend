@@ -9,6 +9,7 @@ import PWRecoveryReducer from 'components/Auth/PWRecovery/reducer'
 import locationInputReducer from 'components/ui/Inputs/InputLocation/reducer'
 import categoryInputReducer from 'components/ui/Inputs/InputCategory/reducer'
 import subCategoryInputReducer from 'components/ui/Inputs/InputSubCategory/reducer'
+import subCategoryCheckboxReducer from 'components/ui/Form/MasterProfile/CheckboxSubCategory/reducer'
 import CreateTaskReducer from 'components/CreateTaskPage/reducer';
 
 export default combineReducers({
@@ -22,5 +23,6 @@ export default combineReducers({
   locationInput: locationInputReducer,
   categoryInput: categoryInputReducer,
   subCategoryInput: subCategoryInputReducer,
-  createTaskComplete: CreateTaskReducer
+  createTaskComplete: CreateTaskReducer,
+  subCategoryCheckbox: subCategoryCheckboxReducer
 })

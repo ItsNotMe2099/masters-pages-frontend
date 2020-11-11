@@ -18,9 +18,11 @@ export default function InputSubCategory(props) {
     props.input.onChange(value);
   }
   const handleOnOpen = useCallback(() => {
+    console.log('handleOnOpen')
     dispatch(fetchSubCategory(props.categoryId))
   }, [props.categoryId])
   const handleOnSearchChange = (value) => {
+    console.log('handleOnSearchChange')
     if(!value){
       dispatch(fetchSubCategory(props.categoryId))
       return;
