@@ -20,14 +20,17 @@ export default function CheckboxSubCategory(props) {
   const [subCategoriesList, setItems] = useState([])
 
   const handleCheckbox = (event) => {
+    const value = +event.target.value
     if (event.target.checked) {
+        console.log(event.target.value)
         console.log('checked')
-        setItems([...subCategoriesList, +event.target.value])
+        setItems(subCategoriesList => [...subCategoriesList, value])
         console.log(subCategoriesList)
+        console.log(subCategoriesList.includes(+event.target.value))
     }
     else{
       console.log('not checked')
-      const index = subCategoriesList.indexOf(+event.target.value)
+      const index = subCategoriesList.lastIndexOf(value)
       setItems(subCategoriesList => subCategoriesList.splice(index, 1))
       console.log(subCategoriesList)
     }
