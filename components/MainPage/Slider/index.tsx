@@ -12,8 +12,8 @@ export default class SimpleSlider extends Component {
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      nextArrow: <SliderControl direction='next'/>,
-      prevArrow: <SliderControl direction='prev' />,
+      nextArrow: <SliderControl mainPage direction='next'/>,
+      prevArrow: <SliderControl mainPage direction='prev' />,
       variableWidth: false,
       adaptiveHeight: true,
       responsive: [

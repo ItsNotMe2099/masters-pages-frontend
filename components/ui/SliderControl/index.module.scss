@@ -6,15 +6,33 @@
   position: absolute;
   right: 0px;
   height: 84px;
+  cursor: pointer;
   img{
     margin: auto;
   }
 }
 
+.rootTask{
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+
 .next{
   margin-bottom: 30px;
-  top: 0px;
+  top: 0
 }
 .prev{
   bottom: 0px;
+
 }
+
+.nextTask{
+  bottom: 50%;
+  right: 0;
+}
+.prevTask{
+  bottom: 50%;
+  left: 0;
+}
+
