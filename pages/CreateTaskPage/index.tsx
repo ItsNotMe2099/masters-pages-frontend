@@ -10,7 +10,7 @@ import { withAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
 import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useSelector, useDispatch } from 'react-redux'
-import SimpleSlider from 'components/Steps/Slider';
+import SimpleSlider from 'components/Steps/CreateTaskPage/Slider';
 
 const CreateTaskPage = (props) => {
   const dispatch = useDispatch()

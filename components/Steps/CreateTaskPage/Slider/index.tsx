@@ -1,7 +1,7 @@
+import Step from "components/Steps";
 import SliderControl from "components/ui/SliderControl";
 import React, { Component } from "react";
 import Slider from "react-slick";
-import Step from "..";
 import styles from './index.module.scss'
 
 export default class SimpleSlider extends Component {
