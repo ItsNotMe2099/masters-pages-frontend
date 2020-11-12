@@ -19,20 +19,22 @@ export default function CheckboxSubCategory(props) {
   const [value, setValue] = useState();
   const [subCategoriesList, setItems] = useState([])
 
+  function remove (arr, indexes) {
+    var arrayOfIndexes = [].slice.call(arguments, 1);  // (1)
+    return arr.filter(function (item, index) {         // (2)
+      return arrayOfIndexes.indexOf(index) == -1;      // (3)
+    });
+  }
+
   const handleCheckbox = (event) => {
     const value = +event.target.value
     if (event.target.checked) {
-        console.log(event.target.value)
-        console.log('checked')
         setItems(subCategoriesList => [...subCategoriesList, value])
-        console.log(subCategoriesList)
-        console.log(subCategoriesList.includes(+event.target.value))
     }
     else{
-      console.log('not checked')
-      const index = subCategoriesList.lastIndexOf(value)
-      setItems(subCategoriesList => subCategoriesList.splice(index, 1))
-      console.log(subCategoriesList)
+      const index = subCategoriesList.indexOf(value)
+      //setItems(subCategoriesList.splice(index, 1))
+      setItems(subCategoriesList => remove(subCategoriesList, index))
     }
   }
 
@@ -61,14 +63,14 @@ export default function CheckboxSubCategory(props) {
         <input
         type="checkbox"
         value={item.id}
-        onChange={handleCheckbox}
+        onClick={handleCheckbox}
         >
         </input>
         <label><span>{item.name}</span></label>
         </div>
         ))}
         <div className={styles.btnContainer}>
-        <Button grey largeFont size="14px 50px">Save сategory</Button>
+        <Button grey largeFont size="14px 50px" onClick={() => alert(subCategoriesList)}>Save сategory</Button>
         </div>
     </div>
     :
