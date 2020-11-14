@@ -7,6 +7,7 @@ import { fetchSubCategory } from "./actions";
 import { required } from "utils/validations";
 import InputCategory from "components/ui/Inputs/InputCategory";
 import Button from "components/ui/Button";
+import { isTemplateExpression } from "typescript";
 
 interface Props {
 
@@ -18,6 +19,8 @@ export default function CheckboxSubCategory(props) {
   const subCategories = useSelector((state: IRootState) => state.subCategoryCheckbox.subCategories)
   const [value, setValue] = useState();
   const [subCategoriesList, setItems] = useState([])
+  const [categoriesList, setCategories] = useState([])
+  const [isSaved, setIsSaved] = useState(false)
 
   function remove (arr, indexes) {
     var arrayOfIndexes = [].slice.call(arguments, 1);  // (1)
@@ -27,7 +30,7 @@ export default function CheckboxSubCategory(props) {
   }
 
   const handleCheckbox = (event) => {
-    const value = +event.target.value
+    const value = event.target.value
     if (event.target.checked) {
         setItems(subCategoriesList => [...subCategoriesList, value])
     }
@@ -52,17 +55,17 @@ export default function CheckboxSubCategory(props) {
     <Field
       name="categoryId"
       component={InputCategory}
-      label="Category*"
+      label={"Category*"}
       validate={required}
       onChange={handleInput}
     />
-    {value ?
+    {value && !isSaved ?
     <div>
       {subCategories.map(item => (
         <div className={styles.checkbox}>
         <input
         type="checkbox"
-        value={item.id}
+        value={item.name}
         onClick={handleCheckbox}
         >
         </input>
@@ -70,12 +73,27 @@ export default function CheckboxSubCategory(props) {
         </div>
         ))}
         <div className={styles.btnContainer}>
-        <Button grey largeFont size="14px 50px" onClick={() => alert(subCategoriesList)}>Save сategory</Button>
+        <a className={styles.btn} onClick={() => subCategoriesList.length !== 0 ? setIsSaved(true) : null}>Save сategory</a>
         </div>
     </div>
     :
     null
     }
+    {isSaved ?
+    <ol className={styles.list}>
+      <li>
+        <div className={styles.listContent}>
+        <span>{subCategoriesList.join(', ')}</span>
+        <div>
+          <a><img src="img/icons/pencil.svg"/></a>
+          <a onClick={() => setIsSaved(false)}><img src="img/icons/delete.svg"/></a>
+        </div>
+       </div>
+      </li>
+    </ol>
+    :
+    null}
     </>
   )
 }
+
