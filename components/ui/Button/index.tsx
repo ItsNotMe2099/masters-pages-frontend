@@ -12,6 +12,7 @@ interface Props {
   smallFont?: boolean
   mediumFont?: boolean
   largeFont?: boolean
+  transparent?: boolean
   size?: string
   children?: any
   onClick?: (e: React.MouseEvent) => void
@@ -28,6 +29,7 @@ export default function Button(props: Props) {
        ${props.blue && styles.blue}
        ${props.red && styles.red}
        ${props.green && styles.green}
+       ${props.transparent && styles.transparent}
        ${props.grey && styles.grey}
        ${props.black && styles.black}
        ${props.closeBtn && styles.closeBtn}

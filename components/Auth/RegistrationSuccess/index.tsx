@@ -1,10 +1,7 @@
 import { signInSubmit } from "components/Auth/SignIn/actions";
 import Button from 'components/ui/Button'
 import Modal from "components/ui/Modal";
-import { IRootState } from "types";
 import styles from './index.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import {  PWRecoveryOpen, signUpOpen } from 'components/Auth/actions'
 import Link from "next/link";
 
 interface Props {
