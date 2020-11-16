@@ -22,6 +22,7 @@ import Select, { components } from 'react-select';
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
 import { PWRecoveryResetState } from "components/Auth/PWRecovery/actions";
+import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 
 interface Props {
   user?: any,
@@ -197,6 +198,9 @@ const Header = (props: Props) => {
         onRequestClose={() => dispatch(modalClose())}/>
       <PWRecoverySucces
         isOpen={key === 'pwRecSuccess'}
+        onRequestClose={() => dispatch(modalClose())}/>
+      <RegistrationSuccess 
+        isOpen={key === 'regSuccess'}
         onRequestClose={() => dispatch(modalClose())}/>
     </div>
   )

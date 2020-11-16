@@ -5,13 +5,15 @@ export interface RegistrationCompleteState {
   formError: string,
   loading: boolean,
   phone: string,
+  modalKey: string
 }
 
 const initialState: RegistrationCompleteState = {
   formIsSuccess: false,
   formError: '',
   loading: false,
-  phone: ''
+  phone: '',
+  modalKey: ''
 }
 
 export default function loginSubmitReducer(state = {...initialState}, action) {
@@ -24,6 +26,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
     case ActionTypes.REGISTRATION_COMPLETE_SUCCESS:
       state.formIsSuccess = true
       state.loading = false;
+      state.modalKey = 'regSuccess'
       break
 
     case ActionTypes.REGISTRATION_COMPLETE_ERROR:

@@ -21,6 +21,7 @@ export default function CheckboxSubCategory(props) {
   const [subCategoriesList, setItems] = useState([])
   const [categoriesList, setCategories] = useState([])
   const [isSaved, setIsSaved] = useState(false)
+  const [currentLabel, setCurrentLabel] = useState('');
 
   function remove (arr, indexes) {
     var arrayOfIndexes = [].slice.call(arguments, 1);  // (1)
@@ -56,6 +57,7 @@ export default function CheckboxSubCategory(props) {
     setValue(value); 
     console.log('working', value)
     if(value){
+      setCurrentLabel(categories.find(item => value === item.value ?.label))
       dispatch(fetchSubCategory(value))
       console.log('dispatch')
     }
@@ -67,7 +69,7 @@ export default function CheckboxSubCategory(props) {
     <ol className={styles.list}>
       <li>
         <div className={styles.listContent}>
-        <span>{subCategoriesList.join(', ')}</span>
+      <span>{currentLabel}{subCategoriesList.join(', ')}</span>
         <div>
           <a onClick={onEdit}><img src="img/icons/pencil.svg"/></a>
           <a><img src="img/icons/delete.svg"/></a>
