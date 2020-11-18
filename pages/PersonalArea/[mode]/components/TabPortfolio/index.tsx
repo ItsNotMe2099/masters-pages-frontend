@@ -1,4 +1,5 @@
 import { fetchSkillList } from "components/Skill/actions";
+import Button from "components/ui/Button";
 import Loader from "components/ui/Loader";
 import Skill from "pages/PersonalArea/[mode]/components/TabPortfolio/components/Skill";
 import SkillCategoryHeader from "pages/PersonalArea/[mode]/components/TabPortfolio/components/SkillCategoryHeader";
@@ -29,7 +30,7 @@ const TabPortfolio = (props: Props) => {
   return (
     <div className={styles.root}>
       {loading && <Loader/>}
-      {!loading && <div>
+      {!loading && <div className={styles.split}><div className={styles.categories}>
         {list.map((category) =>
           (<div>
             <SkillCategoryHeader item={category}/>
@@ -41,6 +42,8 @@ const TabPortfolio = (props: Props) => {
             )}
             </div>
           </div>))}
+      </div>
+        <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'12px 115px'}>Add Skill</Button></div>
       </div>}
     </div>
   )
