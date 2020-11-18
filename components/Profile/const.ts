@@ -1,5 +1,6 @@
 enum ActionTypes {
   CREATE_PROFILE = 'Profile/CREATE',
+
   UPDATE_PROFILE = 'Profile/UPDATE',
   FETCH_PROFILE = 'Profile/FETCH_ONE',
   CHANGE_ROLE = 'Profile/CHANGE_ROLE',

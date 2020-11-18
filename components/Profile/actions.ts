@@ -3,13 +3,7 @@ import { ProfileData } from "types";
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 
-export const createProfile = (role: string, data: ProfileData) => action(ActionTypes.CREATE_PROFILE, {
-  api: {
-    url: `/api/profile/${role}`,
-    method: 'POST',
-    data: {...data},
-  }
-})
+export const createProfile = (role: string, data: ProfileData) => action(ActionTypes.CREATE_PROFILE, {role, data})
 export const updateProfile = (id: number, data: ProfileData) => action(ActionTypes.UPDATE_PROFILE, {
   api: {
     url: `/api/profile/${id}`,

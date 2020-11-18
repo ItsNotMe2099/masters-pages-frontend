@@ -49,6 +49,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.loading = false;
       state.formError = ''
       state.formIsSuccess = true
+      state.formLoading = false
       break
     case ActionTypes.CREATE_PROFILE + ApiActionTypes.FAIL:
       state.formError = action.payload.error || 'Unknown error'
