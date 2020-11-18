@@ -13,6 +13,7 @@ import {required, email, minL, passwordsMatch} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 let RegistrationForm = props => {
   const { handleSubmit } = props
+  console.log(props)
   const error = useSelector((state: IRootState) => state.registrationComplete.formError)
   const isLoading = useSelector((state: IRootState) => state.registrationComplete.loading)
 
@@ -52,6 +53,8 @@ let RegistrationForm = props => {
         component={InputLocation}
         isRegistration={true}
         label="Location*"
+        labelType={'cross'}
+        validate={required}
       />
       <div className={styles.pwChange}>
         <Field

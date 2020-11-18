@@ -24,6 +24,8 @@ import {
 import SignUpComponent from 'components/Auth/SignUp'
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
+import RegistrationSuccess from "components/Auth/RegistrationSuccess";
+
 
 interface Props {
   user?: any,
@@ -183,6 +185,9 @@ const Header = (props: Props) => {
       <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {}}/>
       <ChangePassword isOpen={key === 'changePassword'}
                       onRequestClose={() => dispatch(modalClose())}/>
+      <RegistrationSuccess
+        isOpen={key === 'regSuccess'}
+        onRequestClose={() => dispatch(modalClose())}/>
     </div>
   )
 }

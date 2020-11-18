@@ -7,3 +7,10 @@ export const fetchSubCategory = (categoryId: number, search?: string) => action(
     method: 'GET',
   }
 })
+
+export const fetchCategory = () => action(ActionTypes.FETCH_CATEGORIES, {
+  api: {
+    url: `/api/service-category?lang=en`,
+    method: 'GET',
+  }
+})

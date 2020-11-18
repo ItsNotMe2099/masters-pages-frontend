@@ -2,7 +2,6 @@ import FormNewCategory from "components/ui/Form/MasterProfile/CheckboxSubCategor
 import { useCallback, useState } from "react";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-
 import nextId from "react-id-generator";
 interface Props {
 
@@ -27,6 +26,7 @@ export default function CheckboxSubCategory(props) {
   const dispatch = useDispatch()
   const generateKey = () => {
     return nextId("category-id-");
+
   }
   const [categories, setCategories] = useState<CategoryItem[]>([{key: generateKey()}])
   const [inEditMode, setInEditMode] = useState([]);
