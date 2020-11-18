@@ -94,16 +94,6 @@ export const withRestrictAuthSync = (WrappedComponent) =>
       }
       const user = token ? await getUser(token) : null
 
-      if (!token || !user) {
-        if(ctx.req) {
-          ctx.res.writeHead(302, { Location: "/login" });
-          ctx.res.end();
-        }else{
-          Router.push("/login");
-        }
-        return;
-      }
-
       const componentProps =
         WrappedComponent.getInitialProps &&
         (await WrappedComponent.getInitialProps(ctx));
