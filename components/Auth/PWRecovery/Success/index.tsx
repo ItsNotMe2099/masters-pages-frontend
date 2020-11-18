@@ -22,7 +22,7 @@ export default function PWRecoverySucces(props: Props) {
   return (
     <Modal {...props} loading={isLoading}>
         <div className={styles.image}>
-          <img src='img/PWRecovery/icons/shieldGreen.svg' alt=''/>
+          <img src='/img/PWRecovery/icons/shieldGreen.svg' alt=''/>
         </div>
         <div className={styles.headText}>
           Success

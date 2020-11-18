@@ -1,0 +1,16 @@
+@import 'scss/mixins.scss';
+
+.root{
+  position: relative;
+  margin-bottom: 20px;
+}
+.checkboxContainer{
+  cursor: pointer;
+}
+.checkboxLabel{
+  font-size: 14px;
+  margin-left: 15px;
+}
+.checkboxNoGrid{
+  margin-bottom: 18px;
+}

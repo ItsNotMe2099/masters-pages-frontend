@@ -10,7 +10,7 @@ export default function BannerFooter(props: Props) {
       <div className={styles.text__mobile}>Заработайте на том, что делаете лучше всех</div>
       <div className={styles.icon}>
         <div className={styles.wrapper}>
-          <img className={styles.woman} src='img/Footer/woman.png' alt=''/>
+          <img className={styles.woman} src='/img/Footer/woman.png' alt=''/>
         </div>
       </div>
       <Button mediumFont black size="20px 0">Стать исполнителем</Button>

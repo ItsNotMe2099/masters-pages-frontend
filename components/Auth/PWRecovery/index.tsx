@@ -36,7 +36,7 @@ export default function PWRecoveryComponent(props: Props) {
   return (
     <Modal {...props} loading={isLoading}>
         <div className={styles.image}>
-          <img src='img/PWRecovery/icons/shield.svg' alt=''/>
+          <img src='/img/PWRecovery/icons/shield.svg' alt=''/>
         </div>
         <div className={styles.headText}>
           Password recovery

@@ -8,8 +8,8 @@ export default function Logo(props: Props) {
     <Link href="/">
     <div className={styles.root}>
 
-            <img className={styles.iconDesktop} src='img/logo.svg' alt=''/>
-            <img className={styles.iconMobile} src='img/logo-mobile.svg' alt=''/>
+            <img className={styles.iconDesktop} src='/img/logo.svg' alt=''/>
+            <img className={styles.iconMobile} src='/img/logo-mobile.svg' alt=''/>
             <div className={styles.logoText}>Masters <span>Pages</span></div>
 
         </div>

@@ -1,21 +1,22 @@
-import Header from 'components/layout/Header'
-import Footer from 'components/layout/Footer'
-import Steps from 'components/Steps'
-import CreateTaskForm from "pages/CreateTaskPage/Form";
-import { withAuthSync } from 'utils/auth'
-import styles from './index.module.scss'
 
-const CreateTaskPage = (props) => {
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
+
+const PersonalAreaPageIndex = (props) => {
+  const router = useRouter()
+  const { mode } = router.query
+  console.log("mode", mode);
+  useEffect(() => {
+      router.replace('/PersonalArea/client/info')
+  }, [])
+
   return (
     <>
-      <Header {...props}/>
-      <div className={styles.container}>
-        Hello Lina
-        <Footer/>
-      </div>
+
 
     </>
   )
 }
 
-export default withAuthSync(CreateTaskPage)
+export default withRestrictAuthSync(PersonalAreaPageIndex)

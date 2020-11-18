@@ -1,8 +1,12 @@
+import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import { LangSelect } from "components/layout/Header/components/LangSelect";
+import ModalLoader from "components/ModalLoader";
+import { changeRole } from "components/Profile/actions";
 import Socials from "components/ui/Socials";
 import { withTranslation } from "react-i18next";
 import { withAuthSync } from "utils/auth";
+import { getMediaPath } from "utils/media";
 import styles from './index.module.scss'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -18,51 +22,18 @@ import {
   phoneConfirmOpen,
 } from 'components/Auth/actions'
 import SignUpComponent from 'components/Auth/SignUp'
-import Select, { components } from 'react-select';
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
-import { PWRecoveryResetState } from "components/Auth/PWRecovery/actions";
 
 interface Props {
   user?: any,
   t: (string) => string,
 }
 
-const customStyles = {
-
-  container: (provided, state) => ({
-    ...provided
-  }),
-  option: (provided, state) => ({
-    ...provided,
-  }),
-  control: () => ({
-    // none of react-select's styles are passed to <Control />
-  }),
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = 'opacity 300ms';
-    return { ...provided, opacity, transition };
-  }
-}
-const IndicatorsContainer = props => {
-  return (
-    <div style={{ background: 'red', width: '10px' }}>
-      <components.IndicatorsContainer {...props} />
-    </div>
-  );
-};
-const DropdownIndicator = (
-  props: components.DropdownIndicator
-) => {
-  return (
-    <components.DropdownIndicator {...props}>
-      <img className={styles.arrow} src='img/icons/arrow.svg' alt=''/>
-    </components.DropdownIndicator>
-  );
-};
 const Header = (props: Props) => {
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false);
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const role = useSelector((state: IRootState) => state.profile.role)
 
   const handleOpenMobileMenu = () => {
     document.body.classList.add('modal-open');
@@ -72,11 +43,21 @@ const Header = (props: Props) => {
     document.body.classList.remove('modal-open');
     setMenuMobileOpen(false);
   }
-  console.log("Props", props.user);
+  console.log("ProfileRole", role);
   const [isAuth, setAuth] = useState(props.user ? true : false)
   const key = useSelector((state: IRootState) => state.authComponent.modalKey)
   const dispatch = useDispatch()
 
+  const getRoleName = (role) => {
+      switch (role) {
+        case 'master':
+          return 'Master mode';
+        case 'volunteer':
+          return 'Volunteer mode';
+        default:
+          return 'Client mode';
+      }
+  }
   return (
     <div className={styles.rootWrapper}>
       <header className={styles.root}>
@@ -96,30 +77,31 @@ const Header = (props: Props) => {
             <LangSelect/>
             <div className={styles.separatorLine}></div>
             {/*<div className={styles.langSwitch}>
-            <img className={styles.country} src='img/icons/ru.svg' alt=''/>
+            <img className={styles.country} src='/img/icons/ru.svg' alt=''/>
             <span>RU</span>
-            <img className={styles.arrow} src='img/icons/arrow.svg' alt=''/>
+            <img className={styles.arrow} src='/img/icons/arrow.svg' alt=''/>
           </div>*/}
             {!isAuth ?
               <div className={styles.actionsContainer}>
                 <a className={styles.signIn} onClick={() => dispatch(signInOpen())}>
                       <span>Sign in</span>
-                      <img src='img/icons/signIn.svg' alt=''/>
+                      <img src='/img/icons/signIn.svg' alt=''/>
                 </a>
                 <div className={styles.separatorLine}></div>
                 <a className={styles.signUp} onClick={() => dispatch(signUpOpen())}>
                       <span>Sign up</span>
-                      <img src='img/icons/signUp.svg' alt=''/>
+                      <img src='/img/icons/signUp.svg' alt=''/>
                 </a>
               </div>
               :
-              <div className={styles.master}>
-                <Link href="/"><a>
-                  <span>Master mode</span>
-                  <img src='img/Header/avatar.png' alt=""/>
+              <div className={styles.profile}>
+                <Link href="/"><a className={styles.profile}>
+                  <div className={styles.profileMode}>{getRoleName(role)}</div>
+                  <img src={`${getMediaPath(profile?.photo)}`} alt=""/>
                 </a></Link>
-                <Button smallFont size="20px 0" blue>Volunteer</Button>
-                <Button smallFont size="20px 0"  green>Client</Button>
+                {role !== 'master' && <Button smallFont size="20px 0"  red onClick={() => dispatch(changeRole('master'))}>Master</Button>}
+                {role !== 'volunteer' && <Button smallFont size="20px 0" blue onClick={() => dispatch(changeRole('volunteer'))}>Volunteer</Button>}
+                {role !== 'client' && <Button smallFont size="20px 0"  green onClick={() => dispatch(changeRole('client'))}>Client</Button>}
               </div>
             }
           </div>
@@ -128,8 +110,9 @@ const Header = (props: Props) => {
         <div className={styles.headerMobile}>
 
           {isAuth && <div className={styles.user}><Link href="/" >
-           <> <img src='img/Header/avatar.png' alt=""/>
-            <span>Master mode</span></>
+           <> <img src={`${getMediaPath(profile?.photo)}`} alt=""/>
+            <span>{getRoleName(role)}</span>
+           </>
           </Link></div>}
 
           {!isAuth && <Logo/>}
@@ -137,10 +120,10 @@ const Header = (props: Props) => {
           <div className={styles.separatorLine}></div>
           <LangSelect/>
           {!isMenuMobileOpen && <div className={styles.menuOpen} onClick={handleOpenMobileMenu}>
-            <img src='img/Header/menu-mobile.svg'/>
+            <img src='/img/Header/menu-mobile.svg'/>
           </div>}
           {isMenuMobileOpen && <div className={styles.menuClose} onClick={handleCloseMobileMenu}>
-            <img src='img/Header/menu-mobile-close.svg'/>
+            <img src='/img/Header/menu-mobile-close.svg'/>
           </div>}
         </div>
         {isMenuMobileOpen && <div className={styles.dropdownMobile}>
@@ -149,20 +132,19 @@ const Header = (props: Props) => {
             <div className={styles.actionsContainer}>
               <a className={styles.signIn} onClick={() => { handleCloseMobileMenu(); dispatch(signInOpen())}}>
                 <span>Sign in</span>
-                <img src='img/icons/signIn.svg' alt=''/>
+                <img src='/img/icons/signIn.svg' alt=''/>
               </a>
               <div className={styles.separatorLine}></div>
               <a className={styles.signUp} onClick={() => { handleCloseMobileMenu(); dispatch(signUpOpen())}}>
                 <span>Sign up</span>
-                <img src='img/icons/signUp.svg' alt=''/>
+                <img src='/img/icons/signUp.svg' alt=''/>
               </a>
             </div>
             :
             <div className={styles.modesContainer}>
-
-              <Button smallFont size="10px 15px"  red>Master</Button>
-              <Button smallFont size="10px 15px"   green>Client</Button>
-              <Button smallFont size="10px 15px"  blue>Volunteer</Button>
+              {role !== 'master' && <Button smallFont size="10px 15px" red>Master</Button>}
+              {role !== 'client' && <Button smallFont size="10px 15px" green>Client</Button>}
+              {role !== 'volunteer' && <Button smallFont size="10px 15px" blue>Volunteer</Button>}
             </div>
           }
             <ul className={styles.menuMobile}>
@@ -198,6 +180,9 @@ const Header = (props: Props) => {
       <PWRecoverySucces
         isOpen={key === 'pwRecSuccess'}
         onRequestClose={() => dispatch(modalClose())}/>
+      <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {}}/>
+      <ChangePassword isOpen={key === 'changePassword'}
+                      onRequestClose={() => dispatch(modalClose())}/>
     </div>
   )
 }

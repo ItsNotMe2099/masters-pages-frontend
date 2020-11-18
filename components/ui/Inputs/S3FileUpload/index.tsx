@@ -222,7 +222,7 @@ const FileInput = (props: any & FileInputProps & FileInputOptions) => {
               key={index}
               file={file}
               loading={!!file.rawFile}
-              progress={file && file.rawFile ? fileProgress[file.rawFile.path] : 0}
+              progress={file && file.rawFile ? fileProgress[file.rawFile.path] || 0 : 0}
               onRemove={onRemove(file)}
             >
             </FileInputPreview>

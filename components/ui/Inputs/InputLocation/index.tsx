@@ -1,6 +1,6 @@
 import { fetchLocationCity, fetchLocationCountry } from "components/ui/Inputs/InputLocation/actions";
 import { SelectInput } from "components/ui/Inputs/SelectInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IRootState } from "types";
 import { useDebouncedCallback } from "use-debounce";
 import styles from './index.module.scss'
@@ -18,6 +18,12 @@ export default function InputLocation(props) {
     console.log("OnChangeLocValue", value)
     props.input.onChange(value);
   }
+  useEffect(() => {
+    dispatch(fetchLocationCity({
+      page: 1,
+      id: props.input.value
+    }))
+  }, [])
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
     console.log("search change", value)

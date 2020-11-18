@@ -16,9 +16,9 @@ export default function InputPassword(props: Props) {
   return (
     <Input {...props} type={isShown ? 'text' :'password'} icon={
       isShown ?
-        (<a onClick={() => setIsShown(false)}><img src='img/field/show.svg' alt=''/></a>)
+        (<a onClick={() => setIsShown(false)}><img src='/img/field/show.svg' alt=''/></a>)
         :
-        (<a onClick={() => setIsShown(true)}><img src='img/field/hide.svg' alt=''/></a>)
+        (<a onClick={() => setIsShown(true)}><img src='/img/field/hide.svg' alt=''/></a>)
     }/>
   )
 }

@@ -6,11 +6,15 @@ import authSignInReducer from 'components/Auth/SignIn/reducer';
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import PWRecoveryReducer from 'components/Auth/PWRecovery/reducer'
+import PWChangeReducer from 'components/Auth/ChangePassword/reducer'
 import locationInputReducer from 'components/ui/Inputs/InputLocation/reducer'
+import countryInputReducer from 'components/ui/Inputs/InputCountry/reducer'
 import categoryInputReducer from 'components/ui/Inputs/InputCategory/reducer'
 import subCategoryInputReducer from 'components/ui/Inputs/InputSubCategory/reducer'
 import subCategoryCheckboxReducer from 'components/ui/Form/MasterProfile/CheckboxSubCategory/reducer'
 import CreateTaskReducer from 'components/CreateTaskPage/reducer';
+import ProfileReducer from 'components/Profile/reducer';
+import SkillReducer from 'components/Skill/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -21,8 +25,12 @@ export default combineReducers({
   registrationComplete: registrationCompleteReducer,
   PWRecovery: PWRecoveryReducer,
   locationInput: locationInputReducer,
+  countryInput: countryInputReducer,
   categoryInput: categoryInputReducer,
   subCategoryInput: subCategoryInputReducer,
   createTaskComplete: CreateTaskReducer,
-  subCategoryCheckbox: subCategoryCheckboxReducer
+  subCategoryCheckbox: subCategoryCheckboxReducer,
+  profile: ProfileReducer,
+  changePassword: PWChangeReducer,
+  skill: SkillReducer
 })

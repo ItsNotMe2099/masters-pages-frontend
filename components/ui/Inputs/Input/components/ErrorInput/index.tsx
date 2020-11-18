@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 
 interface Props {
-  meta: {
+  meta?: {
     error: any,
     touched: boolean,
   }

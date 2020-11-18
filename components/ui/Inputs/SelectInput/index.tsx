@@ -12,6 +12,7 @@ interface Props {
   options: [{ value: string, label: string }],
   onSearchChange?: (string) => void,
   onOpenDropDown?: () => void;
+  changeWithValue?: boolean
   allowCustomInput?: boolean
 }
 
@@ -42,7 +43,11 @@ export const SelectInput = (props) => {
   const handleOptionClick = (e, item) => {
     e.preventDefault()
 
-    input.onChange(item.value);
+    if(props.changeWithValue){
+      input.onChange(item);
+    }else {
+      input.onChange(item.value);
+    }
     setIsActive(false);
     console.log("setValue", item.value)
     if (searchInputRef && searchInputRef?.current) {
@@ -56,12 +61,12 @@ export const SelectInput = (props) => {
       return;
     }
     if(props.allowCustomInput){
-      setCurrentLabel(input.value)
+      setCurrentLabel(props.changeWithValue ? input.value.label :  input.value )
     }else {
-      setCurrentLabel(props.options.find(item => input.value === item.value)?.label)
-      console.log("currentLabel", props.options, props.options.find(item => input.value === item.value), input.value)
+      setCurrentLabel(props.options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
+      console.log("currentLabel", props.options, props.options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label, input.value)
     }
-    }, [input])
+    }, [input, options])
 
   const handleActiveOptionClick = (e) => {
     e.preventDefault();
@@ -71,7 +76,7 @@ export const SelectInput = (props) => {
     <Input {...props} onClick={onClick}
            input={{value: currentLabel, onChange: null}}
            icon={<a>
-             <img src='img/field/arrowDown.svg' alt=''/></a>
+             <img src='/img/field/arrowDown.svg' alt=''/></a>
            }>
       <div ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive, [styles.dropDownWithLabelCross]: props.labelType === 'cross' })}>
         <div className={styles.inputContainer}>
@@ -87,7 +92,7 @@ export const SelectInput = (props) => {
                      withBorder={false}
                      parentRef={searchInputRef}/>
           <a className={styles.dropDownTrigger}>
-            <img src='img/field/arrowDown.svg' alt=''/>
+            <img src='/img/field/arrowDown.svg' alt=''/>
           </a>
         </div>
 
@@ -97,7 +102,7 @@ export const SelectInput = (props) => {
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
                 <div
-                  className={`${input.value === item.value ? styles.circle__active : styles.circle}`}></div>
+                  className={`${(props.changeWithValue ? input.value.value === item.value : input.value === item.value) ? styles.circle__active : styles.circle}`}></div>
                 <span className={styles.dropdownItemLabel}>{item.label}</span>
               </a>
             </li>

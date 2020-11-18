@@ -13,7 +13,7 @@ export default function BannerSection(props: Props) {
           <div className={styles.title}>Освободим вас от забот</div>
           <div className={styles.description}>Найдите исполнителя под ваши задачи</div>
           <div className={styles.peopleMobile}>
-            <img src='img/MainPage/people.png' alt=''/>
+            <img src='/img/MainPage/people.png' alt=''/>
           </div>
           <form className={styles.form} action='/search'>
             <div className={styles.inputContainer}>
@@ -32,7 +32,7 @@ export default function BannerSection(props: Props) {
           </form>
         </div>
         <div className={styles.peopleDesktop}>
-          <img src='img/MainPage/people.png' alt=''/>
+          <img src='/img/MainPage/people.png' alt=''/>
         </div>
       </div>
     </div>

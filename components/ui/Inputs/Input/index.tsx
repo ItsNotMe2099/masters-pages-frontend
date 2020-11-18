@@ -5,9 +5,9 @@ import styles from './index.module.scss'
 
 interface Props {
   label: string
-  meta: any
-  input: string
-  type: string
+  meta?: any
+  input?: any
+  type?: string
   placeholder?: string
   children?: any
   icon?: ReactElement
@@ -16,7 +16,6 @@ interface Props {
 }
 
 export default function Input({children, ...props}: Props) {
-  console.log("InputProps", props)
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   return (
     <div className={`${styles.root} ${(error && touched) && styles.rootWithError} ${props.labelType === 'cross' && styles.rootWithLabelCross}`}>
@@ -32,5 +31,5 @@ export default function Input({children, ...props}: Props) {
   )
 }
 Input.defaultProps = {
-  labelType: 'placeholder'
+  labelType: 'cross'
 }

@@ -1,6 +1,6 @@
 import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
 import { withTranslation } from "next-i18next";
-import { withAuthSync } from "utils/auth";
+import { withAuthSync, withRestrictAuthSync } from "utils/auth";
 import Backgrounds from './Backgrounds'
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
@@ -29,19 +29,19 @@ const RegistrationPage = (props: Props) => {
             </div>
             <a href="#" target="_blank">
               <div className={styles.google}>
-                <img src="img/Registration/icons/google.svg"/>
+                <img src="/img/Registration/icons/google.svg"/>
                 <div>Google</div>
               </div>
             </a>
             <a href="#" target="_blank">
               <div className={styles.facebook}>
-                <img src="img/Registration/icons/facebook.svg"/>
+                <img src="/img/Registration/icons/facebook.svg"/>
                 <div>Facebook</div>
               </div>
             </a>
             <a href="#" target="_blank">
               <div className={styles.instagram}>
-                <img src="img/Registration/icons/instagram.svg"/>
+                <img src="/img/Registration/icons/instagram.svg"/>
                 <div>Instagram</div>
               </div>
             </a>
@@ -59,4 +59,4 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
-export default withAuthSync(withTranslation('registration')(RegistrationPage))
+export default withRestrictAuthSync(withTranslation('registration')(RegistrationPage))

@@ -1,5 +1,6 @@
 import '../scss/app.scss'
 import 'normalize.css'
+import { useEffect } from "react";
 import nextI18 from "../i18n";
 import {store} from 'store'
 import { Provider } from 'react-redux';
@@ -8,11 +9,13 @@ import 'slick-carousel/slick/slick.css'
 import "slick-carousel/slick/slick-theme.css"
 
 
+import { useDispatch, useSelector } from 'react-redux'
 interface IPageProps {
   namespacesRequired: string[]
 }
 
 function MyApp({ Component, pageProps }) {
+
   return (
     <Provider store={store}>
       <Component {...pageProps} />
@@ -20,7 +23,7 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-MyApp.getInitialProps = async ({ Component, ctx }) => {
+MyApp.getInitialProps = async ({ Component, ctx, ...rest }) => {
   let pageProps: IPageProps = {
     namespacesRequired: [],
   }

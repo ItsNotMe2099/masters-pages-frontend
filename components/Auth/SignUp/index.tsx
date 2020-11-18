@@ -29,9 +29,9 @@ export default function SignUpComponent(props: Props) {
           Quick sign in:
         </div>
         <div className={styles.social}>
-          <a href="#" target="_blank"><img src="img/icons/google.svg" alt=''/></a>
-          <a href="#" target="_blank"><img src="img/icons/facebook.svg" alt=''/></a>
-          <a href="#" target="_blank"><img src="img/icons/instagram.svg" alt=''/></a>
+          <a href="#" target="_blank"><img src="/img/icons/google.svg" alt=''/></a>
+          <a href="#" target="_blank"><img src="/img/icons/facebook.svg" alt=''/></a>
+          <a href="#" target="_blank"><img src="/img/icons/instagram.svg" alt=''/></a>
         </div>
         <div className={styles.signUpText}>
           Sign up:

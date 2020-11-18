@@ -1,16 +1,23 @@
+import AvatarInput from "components/ui/AvatarInput";
 import Button from 'components/ui/Button'
 import FormError from "components/ui/Form/FormError";
-import Checkbox from 'components/ui/Inputs/Checkbox'
 import Input from "components/ui/Inputs/Input";
+import InputCheckbox from "components/ui/Inputs/InputCheckbox";
+import * as React from "react";
 import { Field, reduxForm } from 'redux-form'
+import { createTextMask } from "redux-form-input-masks";
+import { IRootState } from "types";
+import { maskBirthDate } from "utils/masks";
 import { required } from "utils/validations";
+import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
-import InputCategory from 'components/ui/Inputs/InputCategory';
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
 
 let MasterForm = props => {
   const { handleSubmit } = props
+  const error = useSelector((state: IRootState) => state.profile.formError)
+
   console.log(`props: ${props}`)
 
   return (
@@ -31,6 +38,7 @@ let MasterForm = props => {
                 component={Input}
                 label="BOD* MM / DD / YYYY"
                 validate={required}
+                {...maskBirthDate}
               />
             </div>
             <div className={styles.column}>
@@ -48,41 +56,61 @@ let MasterForm = props => {
               />
             </div>
           </div>
+          <Field
+            name="photo"
+            component={AvatarInput}
+            label="Avatar*"
+          />
           <div className={styles.title__top}>3. Choose categories</div>
           <div className={styles.taskData}>
             <div className={styles.column}>
-              <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> Nunc dictum duis risus imperdiet</div>
+              <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> Nunc dictum
+                duis risus imperdiet
+              </div>
               <div className={styles.inputContainer}>
-              <CheckboxSubCategory/>
+                <Field
+                  name="categories"
+                  component={CheckboxSubCategory}
+                  label="Categoires*"
+                  validate={required}
+                />
               </div>
             </div>
           </div>
         </div>
         <div className={styles.important}>
           <div className={styles.head}>Important information</div>
-          <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id quam at lacinia integer cursus venenatis fringilla arcu eget. Sed fames sed praesent cursus ornare fermentum. Fusce varius quisque</div>
-          <div className={styles.text__bottom}>dolor elementum neque tellus vivamus nunc. Sodales integer aenean vestibulum</div>
-        </div>
-        </div>
-        <div className={styles.container__checkbox}>
-        <div className={styles.border}></div>
-        <div className={styles.terms}>
-            <Field
-              name="terms"
-              component={Checkbox}
-            ><span>С правилами сайта ознакомился и согласен</span>
-            </Field>
-        </div>
-        <div className={styles.btnContainer}>
-            <Button red size="14px 105px">ГОТОВО</Button>
+          <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id quam at lacinia
+            integer cursus venenatis fringilla arcu eget. Sed fames sed praesent cursus ornare fermentum. Fusce varius
+            quisque
+          </div>
+          <div className={styles.text__bottom}>dolor elementum neque tellus vivamus nunc. Sodales integer aenean
+            vestibulum
           </div>
         </div>
-      </form>
+      </div>
+      <div className={styles.containerBottom}>
+        <div className={styles.separator}></div>
+        <div className={styles.terms}>
+          <Field
+            name="terms"
+            component={InputCheckbox}
+            label={<div>С <a href={''}>правилами сайта</a> ознакомился и согласен</div>}
+            validate={required}
+          />
+        </div>
+
+        <div className={styles.btnContainer}>
+          <FormError error={error}/>
+          <Button red size="14px 105px">ГОТОВО</Button>
+        </div>
+      </div>
+    </form>
   )
 }
 
-MasterForm = reduxForm ({
+MasterForm = reduxForm({
   form: 'masterForm',
-}) (MasterForm)
+})(MasterForm)
 
 export default MasterForm

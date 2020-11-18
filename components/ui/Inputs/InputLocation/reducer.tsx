@@ -2,21 +2,16 @@ import ApiActionTypes from "constants/api";
 import ActionTypes from "./const";
 
 export interface LocationInputState {
-  cities: string[],
-  countries: string[],
+  cities: string[]
 }
 
 const initialState: LocationInputState = {
-cities: [],
-  countries: []
+cities: []
 }
 
 export default function authReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.FETCH_LOCATION_CITIES:
-
-      break
-    case ActionTypes.FETCH_LOCATION_COUNTRIES:
 
       break
     case ActionTypes.FETCH_LOCATION_CITIES + ApiActionTypes.SUCCESS:
@@ -28,9 +23,6 @@ export default function authReducer(state = {...initialState}, action) {
           location: {lat: item.latitude, lng: item.longitude}
         }
       });
-      break
-    case ActionTypes.FETCH_LOCATION_COUNTRIES + ApiActionTypes.SUCCESS:
-      state.countries = action.payload
       break
 
   }

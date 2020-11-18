@@ -25,7 +25,7 @@ export default function Task(props: Props) {
             {props.taskDesc}
           </div>
           <div className={styles.time}>
-            <img src='img/icons/clock.svg' alt=''/>
+            <img src='/img/icons/clock.svg' alt=''/>
             <div>{props.taskTime}</div>
           </div>
         </div>

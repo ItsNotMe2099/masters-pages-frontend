@@ -11,7 +11,7 @@ export default function CommentsSection(props: Props) {
 
         <div className={styles.head}>Reviews</div>
       <div className={styles.floaters}>
-        <img className={styles.icon} src="img/icons/posComments.svg" alt=''/>
+        <img className={styles.icon} src="/img/icons/posComments.svg" alt=''/>
         <div className={styles.text}>
           <div>
             <div className={styles.percent}>95%</div>

@@ -1,0 +1,19 @@
+
+.root{
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 20px;
+  color: #6D718C;
+  border-bottom: 1px solid #DDDDE5;
+  z-index: 2;
+  position: relative;
+  &:hover{
+    color: #000000;
+    border-bottom: 1px solid #000000;
+  }
+
+}
+.active{
+  color: #000000;
+  border-bottom: 1px solid #000000;
+}

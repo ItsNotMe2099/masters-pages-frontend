@@ -40,8 +40,8 @@ export default class SimpleSlider extends Component {
     };
     return (
       <div className={styles.root}>
-        <img className={styles.waveLeft} src={'img/icons/wave1.svg'} alt=''/>
-        <img className={styles.waveRight} src='img/icons/wave2.svg' alt=''/>
+        <img className={styles.waveLeft} src={'/img/icons/wave1.svg'} alt=''/>
+        <img className={styles.waveRight} src='/img/icons/wave2.svg' alt=''/>
         <div className={styles.sliderContainer}>
           <Slider {...settings}>
           <div className={styles.slide}>
@@ -51,7 +51,7 @@ export default class SimpleSlider extends Component {
             />
           </div>
           <div className={styles.slide}>
-            <Step 
+            <Step
             image='img/icons/form3.svg'
             text='02. Find a task'
             />

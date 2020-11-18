@@ -12,6 +12,9 @@ export default function authReducer(state = {...initialState}, action) {
 
   switch(action.type) {
 
+    case ActionTypes.LOADER_OPEN:
+      state.modalKey = 'loader'
+      break;
     case ActionTypes.SIGN_IN_OPEN:
       state.modalKey = 'signIn'
       break
@@ -34,6 +37,9 @@ export default function authReducer(state = {...initialState}, action) {
 
     case ActionTypes.PASSWORD_RECOVERY_SUCCESS:
       state.modalKey = 'pwRecSuccess'
+      break
+    case ActionTypes.CHANGE_PASSWORD_OPEN:
+      state.modalKey = 'changePassword'
       break
   }
 

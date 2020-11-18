@@ -55,7 +55,7 @@ const FileInputPreview: FunctionComponent<Props> = props => {
           </div>
           <div className={styles.title}></div>
           <div className={styles.deleteButton} onClick={onRemove}>
-            <img src="img/icons/fileDelete.svg" alt=''/>
+            <img src="/img/icons/fileDelete.svg" alt=''/>
           </div>
        </div>
   )

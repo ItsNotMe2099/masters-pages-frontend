@@ -1,0 +1,45 @@
+.root{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-right: 20px;
+}
+.title{
+  font-size: 18px;
+  font-weight: 500;
+  color: #35363F;
+  margin-top: 12px;
+}
+.description{
+  margin-top: 10px;
+  color: #6D718C;
+  font-size: 16px;
+  line-height: 20px;
+
+}
+.priceLabel{
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
+}
+.price{
+  line-height: 22px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+}
+.slider{
+  width: 210px;
+  height: 210px;
+  background: #EEEEEE;
+}
+.sliderEmpty{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  img{
+    margin-right: -10px;
+  }
+}

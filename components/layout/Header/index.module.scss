@@ -132,15 +132,23 @@ align-items: center;
     display: block;
   }
 }
-.master{
+.profile{
   display: flex;
-  span{
+
+  .profile{
+    display: flex;
+    align-items: center;
+  }
+  .profileMode{
     padding: 0 14px 0 0px;
+
   }
   img{
-    padding-right: 12px;
-    display: inline-block;
-    vertical-align: middle;
+    object-fit: cover;
+    width: 54px;
+    height: 57px;
+    margin-right: 12px;
+    border-radius: 10px;
   }
   button{
     margin-right: 9px;

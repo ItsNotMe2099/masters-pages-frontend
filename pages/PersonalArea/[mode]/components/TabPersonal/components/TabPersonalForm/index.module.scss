@@ -1,0 +1,21 @@
+.root{
+  position: relative;
+  display: flex;
+}
+.columns{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  .column{
+    &:first-of-type{
+      margin-right: 22px;
+    }
+  }
+}
+.column{
+  flex: 1;
+}
+.button{
+  margin-top: 34px
+}
+

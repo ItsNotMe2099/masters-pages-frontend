@@ -20,7 +20,7 @@ export default function Comment(props: Props) {
         </div>
         <div className={styles.comment}>
           <div className={styles.inner}>
-            <img src="img/icons/comment.svg" alt=''/>
+            <img src="/img/icons/comment.svg" alt=''/>
             <div className={styles.positive}>{props.comments}</div>
             <div className={styles.negative}>{props.negative}</div>
           </div>
@@ -47,7 +47,7 @@ export default function Comment(props: Props) {
         <Link href="/"><a><div className={styles.service}>{props.service}</div></a></Link>
         <div className={styles.comment}>
           <div className={styles.inner}>
-            <img src="img/icons/comment.svg" alt=''/>
+            <img src="/img/icons/comment.svg" alt=''/>
             <div className={styles.positive}>{props.comments}</div>
             <div className={styles.negative}>{props.negative}</div>
           </div>

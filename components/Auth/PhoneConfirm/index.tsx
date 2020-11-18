@@ -22,7 +22,7 @@ export default function PhoneConfirmComponent(props: Props) {
       loading={isLoading}
     >
       <div className={styles.image}>
-        <img src="img/CodeConfirm/code_confirm.svg" alt=''/>
+        <img src="/img/CodeConfirm/code_confirm.svg" alt=''/>
       </div>
       <div className={styles.title}>
         Phone number confirmation:

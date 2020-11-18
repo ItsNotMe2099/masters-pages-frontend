@@ -39,7 +39,7 @@ export default class SimpleSlider extends Component {
           <Slider {...settings}>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
-              <img src='img/icons/pay.svg'/>
+              <img src='/img/icons/pay.svg'/>
               </div>
               <div className={styles.slideTitle}>Удобная и<br/> безопасная оплата</div>
               <div className={styles.slideDesc}>При орлате через <span>Сделку без риска YouDo</span><br/>вернет деньги,
@@ -48,7 +48,7 @@ export default class SimpleSlider extends Component {
             </div>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
-                <img src='img/icons/man.svg' />
+                <img src='/img/icons/man.svg' />
               </div>
               <div className={styles.slideTitle}>Надежные<br/> исполнители</div>
               <div className={styles.slideDesc}><span>Проверенные исполнители</span><br/>подтвердили свои документы на
@@ -57,7 +57,7 @@ export default class SimpleSlider extends Component {
             </div>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
-                <img src='img/icons/review.svg'/>
+                <img src='/img/icons/review.svg'/>
               </div>
               <div className={styles.slideTitle}>Достоверные<br/> отзывы</div>
               <div className={styles.slideDesc}>Более <span>1 000 000 отзывов от заказчиков</span><br/>помогут выбрать
@@ -66,7 +66,7 @@ export default class SimpleSlider extends Component {
             </div>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
-              <img src='img/icons/smartphone.svg' />
+              <img src='/img/icons/smartphone.svg' />
               </div>
               <div className={styles.slideTitle}>Wedo4you для<br/> бизнеса</div>
               <div className={styles.slideDesc}>Безналичная оплата <span>бизнес-заданий</span><br/>с предоставлением

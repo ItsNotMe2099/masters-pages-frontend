@@ -1,11 +1,15 @@
 @import "scss/index";
 
 .btnContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
     @include lg{
         margin: auto;
     }
     @media screen and (max-width: $sm-max){
-        button{ 
+        button{
             width: 100%;
         }
     }
@@ -18,11 +22,12 @@
 .container{
     display: flex;
     margin-bottom: 63px;
-    &__checkbox{
-        display: flex;
-        flex-direction: column;
-        width: 70%;
-    }
+
+}
+.containerBottom{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
 }
 
 .form{
@@ -34,7 +39,7 @@
     }
 }
 
-.border{
+.separator{
     border: 1px solid #c4c4c4;
     width: 100%;
     margin-bottom: 32px;
@@ -80,18 +85,15 @@
 }
 
 .terms{
-    font-size: 14px;
-    color:  #6D718C;
-    text-align: center;
+  display: flex;
+  justify-content: center;
     margin-bottom: 30px;
     a{
         color: #0091E6;
         text-decoration: underline;
         cursor: pointer;
     }
-    input{
-        margin-right: 11px;
-    }
+
 }
 
 .important{
@@ -153,6 +155,6 @@
     margin-bottom: 30px;
     &__bottom{
         font-size: 16px;
-        color: #6D718C; 
+        color: #6D718C;
     }
 }

@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 
 interface Props {
   isOpen: boolean
-  onRequestClose: () => void,
+  onRequestClose?: () => void,
   title?: string,
   image?: string,
   children?: any,
@@ -56,7 +56,7 @@ export default function Modal(props: Props) {
     >
       <div className={styles.root}>
         <div className={styles.close}>
-          <Button closeBtn onClick={() => { props.onRequestClose() }}></Button>
+          <Button closeBtn onClick={props.onRequestClose}></Button>
         </div>
        <div className={styles.center} ref={bodyRef}>
         {(props.image && !props.loading) && <div className={styles.image}>
