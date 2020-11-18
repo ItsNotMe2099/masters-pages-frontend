@@ -55,9 +55,9 @@ export default function Modal(props: Props) {
     onRequestClose={props.onRequestClose}
     >
       <div className={styles.root}>
-        <div className={styles.close}>
+        {!props.onRequestClose && <div className={styles.close}>
           <Button closeBtn onClick={props.onRequestClose}></Button>
-        </div>
+        </div>}
        <div className={styles.center} ref={bodyRef}>
         {(props.image && !props.loading) && <div className={styles.image}>
           <img src={props.image} />

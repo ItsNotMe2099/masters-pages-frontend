@@ -3,7 +3,7 @@ import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
 import ActionTypes from './const'
-import { registrationCompleteError, registrationCompleteSubmit } from './actions'
+import { registrationCompleteError, registrationCompleteSubmit, registrationCompleteSuccess } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
 function* registrationCompleteSaga() {
@@ -19,7 +19,7 @@ function* registrationCompleteSaga() {
       console.log("Res signup", res)
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 1 });
-        window.location.href = '/';
+        yield put(registrationCompleteSuccess())
       }else{
         yield put(registrationCompleteError(res.err?.errors));
       }

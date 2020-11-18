@@ -19,7 +19,11 @@
   display: flex;
 .button {
   width: 150px;
+  opacity: .7;
 }
+  .buttonActive{
+    opacity: 1;
+  }
 }
 .topBar{
   display: flex;

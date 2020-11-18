@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 interface Props {
   isOpen: boolean
-  onRequestClose: () => void
+  onRequestClose?: () => void
 }
 
 export default function PhoneConfirmComponent(props: Props) {

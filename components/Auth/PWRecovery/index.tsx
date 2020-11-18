@@ -10,7 +10,7 @@ import PWRecovery from "./Form";
 
 interface Props {
   isOpen: boolean
-  onRequestClose: () => void
+  onRequestClose?: () => void
 }
 
 export default function PWRecoveryComponent(props: Props) {

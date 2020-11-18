@@ -4,7 +4,7 @@ import * as React from "react";
 import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
 import Button from "components/ui/Button";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import ProfileSection from "pages/PersonalArea/[mode]/components/ProfileSection";
 import TabMessages from "pages/PersonalArea/[mode]/components/TabMessages";
 import TabOrders from "pages/PersonalArea/[mode]/components/TabOrders";
@@ -21,9 +21,15 @@ const PersonalAreaPage = (props) => {
   const router = useRouter()
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const role = useSelector((state: IRootState) => state.profile.role)
   const { mode, tab } = router.query
   console.log("mode", mode, tab);
 
+  useEffect(() => {
+    if(role && mode && role != mode){
+      router.push('/PersonalArea')
+    }
+  }, [mode, role])
   const tabs = [
     {name: 'Personal information', key: 'personal'},
     {name: 'My portfolio', key: 'portfolio'},
@@ -46,9 +52,9 @@ const PersonalAreaPage = (props) => {
           <div className={styles.hello}> Hello {profile?.firstName}</div>
 
         <div className={styles.buttonList}>
-          <Button className={styles.button} red={true} mediumFont={true} onClick={() => dispatch(changeRole('master'))} size={'12px 0px'}>Master</Button>
-          <Button className={styles.button} green={true} size={'12px 0px'} onClick={() => dispatch(changeRole('client'))} >Client</Button>
-          <Button  className={styles.button} blue={true} size={'12px 0px'} onClick={() => dispatch(changeRole('volunteer'))} >Volunteer</Button>
+          <Button className={`${styles.button} ${mode === 'master' && styles.buttonActive}`} red={true} mediumFont={true} onClick={() => dispatch(changeRole('master'))} size={'12px 0px'}>Master</Button>
+          <Button className={`${styles.button} ${mode === 'client' && styles.buttonActive}`} green={true} size={'12px 0px'} onClick={() => dispatch(changeRole('client'))} >Client</Button>
+          <Button  className={`${styles.button} ${mode === 'volunteer' && styles.buttonActive}`} blue={true} size={'12px 0px'} onClick={() => dispatch(changeRole('volunteer'))} >Volunteer</Button>
         </div>
         </div>
         <ProfileSection/>

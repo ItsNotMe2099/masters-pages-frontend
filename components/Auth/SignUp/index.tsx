@@ -11,7 +11,7 @@ import { signInOpen} from 'components/Auth/actions'
 
 interface Props {
   isOpen: boolean
-  onRequestClose: () => void
+  onRequestClose?: () => void
 }
 
 export default function SignUpComponent(props: Props) {

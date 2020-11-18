@@ -1,5 +1,5 @@
 import ApiActionTypes from "constants/api";
-import { SkillData } from "types";
+import { SkillData, SkillListItem } from "types";
 import ActionTypes from "./const";
 import cookie from "js-cookie";
 import {parse, format} from 'date-fns'

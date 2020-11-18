@@ -1,12 +1,13 @@
 import { signInSubmit } from "components/Auth/SignIn/actions";
 import Button from 'components/ui/Button'
 import Modal from "components/ui/Modal";
+import Router from "next/router";
 import styles from './index.module.scss'
 import Link from "next/link";
 
 interface Props {
   isOpen: boolean
-  onRequestClose: () => void
+  onRequestClose?: () => void
 }
 
 export default function RegistrationSuccess(props: Props) {
@@ -18,14 +19,20 @@ export default function RegistrationSuccess(props: Props) {
           THANK YOU FOR REGISTRATION
         </div>
         <div className={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.
         </div>
-        <Link href="/CreateTaskPage"><Button green size="16px 0">CREATE A TASK</Button></Link>
+        <Link href="/CreateTaskPage"><Button green size="16px 0" onClick={() => {
+          Router.push('/CreateTaskPage')
+        }}>CREATE A TASK</Button></Link>
         <div className={styles.btnContainer}>
-          <Link href=""><Button size="16px 0">BECOME A MASTER</Button></Link>
+          <Link href=""><Button size="16px 0" onClick={() => {
+            Router.push('/MasterProfile')
+          }}>BECOME A MASTER</Button></Link>
         </div>
         <div className={styles.btnContainer}>
-          <Link href=""><Button size="16px 0">BECOME A VOLUNTEER</Button></Link>
+          <Link href=""><Button size="16px 0" onClick={() => {
+            Router.push('/MasterProfile')
+          }}>BECOME A VOLUNTEER</Button></Link>
         </div>
         <Link href=""><a className={styles.link}>Look at task list</a></Link>
     </Modal>

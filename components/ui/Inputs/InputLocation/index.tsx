@@ -1,4 +1,4 @@
-import { fetchLocationCity, fetchLocationCountry } from "components/ui/Inputs/InputLocation/actions";
+import { fetchLocationCity } from "components/ui/Inputs/InputLocation/actions";
 import { SelectInput } from "components/ui/Inputs/SelectInput";
 import { useEffect, useState } from "react";
 import { IRootState } from "types";

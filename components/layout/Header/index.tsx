@@ -69,7 +69,7 @@ const Header = (props: Props) => {
           </div>
           <ul className={styles.menu}>
             <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
-            <li><Link href="/">{props.t('menu.findTask')}</Link></li>
+            <li><Link href="/SearchTaskPage">{props.t('menu.findTask')}</Link></li>
             <li><Link href="/">{props.t('menu.masters')}</Link></li>
             <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
             <li><Link href="/">{props.t('menu.faq')}</Link></li>
@@ -97,9 +97,9 @@ const Header = (props: Props) => {
               </div>
               :
               <div className={styles.profile}>
-                <Link href="/"><a className={styles.profile}>
+                <Link href="/PersonalArea"><a className={styles.profile}>
                   <div className={styles.profileMode}>{getRoleName(role)}</div>
-                  <img src={`${getMediaPath(profile?.photo)}`} alt=""/>
+                  {profile?.photo &&<img src={`${getMediaPath(profile?.photo)}`} alt=""/>}
                 </a></Link>
                 {role !== 'master' && <Button smallFont size="20px 0"  red onClick={() => dispatch(changeRole('master'))}>Master</Button>}
                 {role !== 'volunteer' && <Button smallFont size="20px 0" blue onClick={() => dispatch(changeRole('volunteer'))}>Volunteer</Button>}
@@ -111,8 +111,8 @@ const Header = (props: Props) => {
 
         <div className={styles.headerMobile}>
 
-          {isAuth && <div className={styles.user}><Link href="/" >
-           <> <img src={`${getMediaPath(profile?.photo)}`} alt=""/>
+          {isAuth && <div className={styles.user}><Link href="/PersonalArea" >
+           <> {profile?.photo && <img src={`${getMediaPath(profile?.photo)}`} alt=""/>}
             <span>{getRoleName(role)}</span>
            </>
           </Link></div>}
@@ -152,7 +152,7 @@ const Header = (props: Props) => {
             <ul className={styles.menuMobile}>
               <li className={styles.active}><Link href="/">{props.t('menu.home')}</Link></li>
                 <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
-                <li><Link href="/">{props.t('menu.findTask')}</Link></li>
+                <li><Link href="/SearchTaskPage">{props.t('menu.findTask')}</Link></li>
                 <li><Link href="/">{props.t('menu.masters')}</Link></li>
                 <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
                 <li><Link href="/">{props.t('menu.faq')}</Link></li>
@@ -185,9 +185,6 @@ const Header = (props: Props) => {
       <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {}}/>
       <ChangePassword isOpen={key === 'changePassword'}
                       onRequestClose={() => dispatch(modalClose())}/>
-      <RegistrationSuccess
-        isOpen={key === 'regSuccess'}
-        onRequestClose={() => dispatch(modalClose())}/>
     </div>
   )
 }

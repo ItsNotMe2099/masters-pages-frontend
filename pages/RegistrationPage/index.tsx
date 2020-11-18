@@ -1,11 +1,15 @@
+import { modalClose } from "components/Auth/actions";
 import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
+import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 import { withTranslation } from "next-i18next";
+import Router from "next/router";
+import { IRootState } from "types";
 import { withAuthSync, withRestrictAuthSync } from "utils/auth";
 import Backgrounds from './Backgrounds'
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 interface Props {
   t: (string) => string,
   user?: any
@@ -14,6 +18,8 @@ interface Props {
 const RegistrationPage = (props: Props) => {
   console.log("PropsUser", props.user)
   const dispatch = useDispatch()
+  const modalKey = useSelector((state: IRootState) => state.registrationComplete.modalKey)
+
   const handleSubmit = (data) => {
     console.log("HandleSubmit", data)
     dispatch(registrationCompleteSubmit(data));
@@ -56,6 +62,11 @@ const RegistrationPage = (props: Props) => {
         </div>
       </div>
       <Backgrounds/>
+      <RegistrationSuccess
+        isOpen={modalKey === 'regSuccess'}
+        onRequestClose={() =>{
+          Router.push('/')
+        }}/>
     </div>
   )
 }

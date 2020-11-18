@@ -7,7 +7,7 @@ import PWRecoveryNewPW from "./Form";
 
 interface Props {
   isOpen: boolean
-  onRequestClose: () => void
+  onRequestClose?: () => void
 }
 
 export default function PWRecoverySucces(props: Props) {
