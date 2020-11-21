@@ -1,4 +1,4 @@
-import { modalClose, signInOpen } from "components/Auth/actions";
+import { modalClose, signInOpen } from "components/Modal/actions";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
@@ -21,7 +21,7 @@ interface Props {
 const RegistrationPage = (props: Props) => {
   console.log("PropsUser", props.user)
   const dispatch = useDispatch();
-  const key = useSelector((state: IRootState) => state.authComponent.modalKey)
+  const key = useSelector((state: IRootState) => state.modal.modalKey)
   useEffect(() => {
     dispatch(signInOpen());
   }, [])

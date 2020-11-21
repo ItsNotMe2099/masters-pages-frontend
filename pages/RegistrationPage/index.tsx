@@ -1,4 +1,4 @@
-import { modalClose } from "components/Auth/actions";
+import { modalClose } from "components/Modal/actions";
 import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
 import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 import { withTranslation } from "next-i18next";

@@ -5,7 +5,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
-import {  PWRecoveryOpen, signUpOpen } from 'components/Auth/actions'
+import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
 
 interface Props {
   isOpen: boolean

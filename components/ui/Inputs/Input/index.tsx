@@ -4,7 +4,7 @@ import { ReactElement, useState } from 'react'
 import styles from './index.module.scss'
 
 interface Props {
-  label: string
+  label?: string
   meta?: any
   input?: any
   type?: string
@@ -12,7 +12,7 @@ interface Props {
   children?: any
   icon?: ReactElement
   labelType: 'placeholder' | 'cross' | 'static',
-
+  onClick?: (any) => void
 }
 
 export default function Input({children, ...props}: Props) {

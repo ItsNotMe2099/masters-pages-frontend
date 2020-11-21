@@ -1,13 +1,13 @@
-
 import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
 import AddFileButton from "components/ui/Inputs/S3FileUpload/components/AddFileBtn";
 import FileInputPreview from "components/ui/Inputs/S3FileUpload/components/FileInputPreview";
+import FileWrapper, { FileEntity } from "components/ui/Inputs/S3FileUpload/components/FileWrapper";
 import React, {
-    FunctionComponent,
-    Children,
-    cloneElement,
-    isValidElement,
-    ReactElement, useState, useCallback,
+  FunctionComponent,
+  Children,
+  cloneElement,
+  isValidElement,
+  ReactElement, useState, useCallback, useEffect,
 } from 'react'
 import PropTypes from 'prop-types'
 import { shallowEqual } from 'recompose'
@@ -18,220 +18,150 @@ import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 
 
+const transformFile = file => {
+  if (!(file instanceof File)) {
+    return file
+  }
+  const preview = URL.createObjectURL(file)
+  const transformedFile = {
+    rawFile: file,
+    preview: preview,
+  }
+  return transformedFile
+}
+const formatValue = (value): FileEntity[]  => {
+  return value ? (Array.isArray(value) ? value.map((file) => { return {path: file?.path as string || file as string}}) : [{path: value?.path as string || value as string}]) : []
+}
+
+
 export interface FileInputProps {
   accept?: string
   labelMultiple?: string
   labelSingle?: string
   maxSize?: number
   minSize?: number
-  multiple?: boolean
+  multiple?: boolean,
+  addFileButton?: ReactElement
 }
 
 export interface FileInputOptions extends DropzoneOptions {
   inputProps?: any
   onRemove?: Function
 }
+
 const FileInput = (props: any & FileInputProps & FileInputOptions) => {
-      const {
-        accept,
-        children,
-        className,
-        classes: classesOverride,
-        format,
-        helperText,
-        label,
-        labelMultiple = 'ra.input.file.upload_several',
-        labelSingle = 'ra.input.file.upload_single',
-        maxSize,
-        minSize,
-        multiple = false,
-        uploadOptions,
-        options: {
-            inputProps: inputPropsOptions,
-            ...options
-        } = {} as FileInputOptions,
-        parse,
-        placeholder,
-        resource,
-        source,
-        validate,
-        input: {value, onChange},
-        ...rest
-    } = props
+  const {
+    accept,
+    children,
+    className,
+    classes: classesOverride,
+    format,
+    helperText,
+    label,
+    labelMultiple = 'ra.input.file.upload_several',
+    labelSingle = 'ra.input.file.upload_single',
+    maxSize,
+    minSize,
+    multiple = false,
+    uploadOptions,
+    options: {
+      inputProps: inputPropsOptions,
+      ...options
+    } = {} as FileInputOptions,
+    parse,
+    placeholder,
+    resource,
+    source,
+    validate,
+    input: { value, onChange },
+    ...rest
+  } = props
+  const token = Cookies.get('token')
+  const FileWrapperUploadOptions = {
+    signingUrlMethod: 'GET',
+    accept: '*/*',
+    uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
+    signingUrlHeaders: { 'Authorization': `Bearer ${token}` },
+    signingUrlWithCredentials: false,
+    signingUrlQueryParams: { uploadType: 'avatar' },
+    autoUpload: true,
+    signingUrl: `https://masters-pages.dev.glob-com.ru/api/s3/sign`,
+    s3path: 'masters-pages/files',
+    ...uploadOptions,
+  }
 
-
-    // turn a browser dropped file structure into expected structure
-      const transformFile = file => {
-        if (!(file instanceof File)) {
-          return file
-        }
-
-
-        const preview = URL.createObjectURL(file)
-        const transformedFile = {
-          rawFile: file,
-          preview: preview,
-        }
-
-        console.log('transformedFile', transformedFile)
-
-
-        return transformedFile
+  const [files, setFiles] = useState<FileEntity[]>(formatValue(value))
+  useEffect(() => {
+    const filtered = files.filter((file => !!file.path))
+    if(multiple) {
+      if (filtered.length !== value.length) {
+        onChange(filtered.map(item => item.path))
       }
-
-      const transformFiles = (files: any[]) => {
-        console.log("TransformFile", files)
-        if (!files) {
-          return multiple ? [] : null
-        }
-
-        if (Array.isArray(files)) {
-          return files.map(transformFile);
-        }
-
-        return transformFile(files)
-      }
-
-
-
-      const files = value ? (Array.isArray(value) ? value.map((file) => file?.path || file) : [value]) : []
-
-      const [fileProgress, setFileProgress] = useState({})
-      const onFileProgress = (percentage, status, rawFile) => {
-        console.log('onFile progress', percentage)
-        const currentProgress = {}
-        currentProgress[rawFile.path] = percentage
-        setFileProgress({ ...fileProgress, ...currentProgress })
-
-        return
-        /*  if (percentage === 0) {
-              setLoading(true)
-          }
-          if (percentage === 100) {
-              setLoading(false)
-          }
-          setPercentage(percentage);*/
-      }
-
-      const onDrop = (newFiles, rejectedFiles, event) => {
-        console.log('OnDrop', files)
-        const updatedFiles = multiple ? [...files, ...newFiles] : [...newFiles]
-
-        if (multiple) {
-          onChange(transformFiles(updatedFiles))
-        } else {
-          onChange(transformFiles(updatedFiles[0]))
-        }
-        const token = Cookies.get('token')
-
-        console.log('OnDrop', files)
-        const options = {
-          files: newFiles,
-          signingUrlMethod: 'GET',
-          accept: '*/*',
-          uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
-          signingUrlHeaders: {'Authorization': `Bearer ${token}`},
-          signingUrlWithCredentials: false,
-          signingUrlQueryParams: { uploadType: 'avatar' },
-          autoUpload: true,
-          onFinishS3Put: onFinishFileUpload,
-          onProgress: onFileProgress,
-          onError: onFileUploadError,
-          signingUrl: `https://masters-pages.dev.glob-com.ru/api/s3/sign`,
-          s3path: 'masters-pages/files',
-          ...uploadOptions,
-        }
-
-        setTimeout(() => {
-          new S3Upload(options)
-        }, 300)
-
-        // eslint-disable-line
-
-        if (options.onDrop) {
-          options.onDrop(newFiles, rejectedFiles, event)
-        }
-      }
-
-      const onFileUploadError = (error) => {
-        console.error('onFileUploadError', error)
-      }
-      const onRemove = file => () => {
-        if (multiple) {
-          const filteredFiles = files.filter(
-                stateFile => !shallowEqual(stateFile, file),
-            )
-          onChange(filteredFiles as any)
-        } else {
-          onChange(null)
-        }
-
-        if (options.onRemove) {
-          options.onRemove(file)
-        }
-      }
-      const onFinishFileUpload = useCallback(
-        (result, file) => {
-          const newFile = result.fileKey
-          let newFileList
-
-          if (multiple) {
-            const filteredFiles = files.filter(
-                    stateFile => !shallowEqual(stateFile, file),
-                )
-            console.log('onFinishFileUpload', files, result.fileKey)
-
-            newFileList = [...filteredFiles, newFile]
-          } else {
-            newFileList =  [newFile]
-          }
-
-          onChange(multiple ? newFileList : newFile)
-        },
-        [value, onChange, files],
-    )
-
-
-
-      const { getRootProps, getInputProps } = useDropzone({
-        ...options,
-        accept,
-        maxSize,
-        minSize,
-        multiple,
-        onDrop,
-      })
-
-      console.log('Files', files)
-      return (
-      <div className={styles.root}>
-                <div
-                    data-testid="dropzone"
-                    className={styles.dropZone}
-                    {...getRootProps()}
-                >
-                  <AddFileButton />
-                    <input
-                        {...getInputProps()}
-                    />
-
-                </div>
-        <div className={styles.previewList}>
-          {(Array.isArray(files) ? files : [files]).map((file, index) => (
-            <FileInputPreview
-              key={index}
-              file={file}
-              loading={!!file.rawFile}
-              progress={file && file.rawFile ? fileProgress[file.rawFile.path] || 0 : 0}
-              onRemove={onRemove(file)}
-            >
-            </FileInputPreview>
-          ))}
-        </div>
-        <ErrorInput {...props}/>
-            </div>
-      )
+    }else{
+      onChange(filtered[0]?.path || null)
     }
+  }, [files])
+  const onUpload = (file: FileEntity) => {
+    console.log("onUploadFiles", files)
+
+      setFiles(oldFiles => oldFiles.map(item => {
+        return {
+          ...item,
+          ...(item.rawFile?.name === file.rawFile.name ? {path: file.path} : {})
+        }
+      }))
+  }
+  const onDrop = useCallback((newFiles, rejectedFiles, event) => {
+    const updatedFiles = multiple ? [...files, ...newFiles] : [...newFiles]
+    setFiles(updatedFiles.map(transformFile));
+  }, [files])
+
+  const onRemove = useCallback((file: FileEntity) => {
+    setFiles(files => {
+      const index = files.findIndex( item => shallowEqual(item.rawFile, file.rawFile) || item.path === file.path)
+      const newFiles = [...files];
+      newFiles.splice(index, 1);
+      return newFiles
+    });
+  },[files])
+
+  const { getRootProps, getInputProps } = useDropzone({
+    ...options,
+    accept,
+    maxSize,
+    minSize,
+    multiple,
+    onDrop,
+  })
+
+  return (
+    <div className={styles.root}>
+      <div
+        data-testid="dropzone"
+        className={styles.dropZone}
+        {...getRootProps()}
+      >
+        {props.addFileButton ? props.addFileButton : <AddFileButton/>}
+        <input
+          {...getInputProps()}
+        />
+
+      </div>
+      <div className={styles.previewList}>
+        {files.map((file, index) => (
+          <FileWrapper
+            uploadOptions={FileWrapperUploadOptions}
+            file={file}
+            isLast={index === formatValue(value).length - 1}
+            onUpload={onUpload}
+            onRemove={onRemove}
+         />
+        ))}
+      </div>
+      <ErrorInput {...props}/>
+    </div>
+  )
+}
 
 FileInput.propTypes = {
   accept: PropTypes.string,

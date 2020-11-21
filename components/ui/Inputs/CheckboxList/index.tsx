@@ -10,11 +10,12 @@ interface Props {
   allowCustomInput?: boolean,
   input: any
   changeWithValue?: boolean
+  restrictedValues: any[],
   grid: number
 }
 
 export const CheckboxList = (props) => {
-  const { meta: { error, touched }, input, options, label, type, ...rest } = props;
+  const { meta: { error, touched }, input,restrictedValues, options, label, type, ...rest } = props;
 
   const handleCheckboxChanged = useCallback((item, isChecked) => {
     if(isChecked){
@@ -31,7 +32,7 @@ export const CheckboxList = (props) => {
       gridTemplateColumns: props.grid ? Array.from({ length: props.grid }, (_, i) => '1fr').join(' ') : '',
       gridGap: '1vw'
     }}>
-      {options.map(item => (
+      {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (
         <div className={styles.checkbox}>
           <Checkbox
             checked={input.value && input.value.find && (props.changeWithValue ? !!input.value.find((it) => it.value == item.value) : input.value.indexOf(item.value) >= 0) }
@@ -55,4 +56,5 @@ export const CheckboxList = (props) => {
 
 CheckboxList.defaultProps = {
   labelType: 'static',
+  restrictedValues: []
 }

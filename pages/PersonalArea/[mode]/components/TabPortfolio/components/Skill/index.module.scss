@@ -3,6 +3,7 @@
   position: relative;
   flex-direction: column;
   margin-right: 20px;
+  margin-top: 20px;
 }
 .title{
   font-size: 18px;
@@ -32,6 +33,50 @@
 .slider{
   width: 210px;
   height: 210px;
+  border-radius: 12px;
+  position: relative;
+}
+.dots{
+  margin: 0;
+  bottom: 8px;
+  position: absolute;
+  z-index: 2;
+  padding: 0px;
+  text-align: center;
+  display: block;
+  left: 0px;
+  right: 0px;
+   li {
+    position: relative;
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+  }
+  li button {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    padding: 0;
+    background: #C4C4C4;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+  }
+  :global .slick-active {
+    button{
+      background: black;
+    }
+  }
+  li {
+
+  }
+}
+.sliderEmpty{
   background: #EEEEEE;
 }
 .sliderEmpty{
@@ -41,5 +86,50 @@
   justify-content: center;
   img{
     margin-right: -10px;
+  }
+}
+.editButton{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 2;
+  cursor: pointer;
+  width: 37px;
+  height: 37px;
+  background: white;
+  border-radius: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0, .25);
+}
+.sliderArrow{
+  text-align: center;
+  &:before{
+    display: none;
+  }
+}
+.removeButton{
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+  width: 37px;
+  height: 37px;
+  background: white;
+  border-radius: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0, .25);
+}
+.slide{
+
+  img{
+    border-radius: 12px;
+    width: 100%;
+    height: 209px;
+    object-fit: cover;
   }
 }

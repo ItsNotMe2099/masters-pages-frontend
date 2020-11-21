@@ -1,4 +1,4 @@
-import { SelectInput } from "components/ui/Inputs/SelectInput";
+import SelectInput from "components/ui/Inputs/SelectInput";
 import { useCallback, useEffect, useState } from "react";
 import { IRootState } from "types";
 import request from "utils/request";
@@ -32,6 +32,7 @@ export default function InputCategory(props) {
       })
   }
   useEffect(() => {
+    console.log("getInputValue", props.input.value)
     getSearchCategory({id: props.input.value?.value || props.input.value});
   }, [])
   const handleOnSearchChange = (value) => {

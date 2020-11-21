@@ -1,4 +1,4 @@
-import { modalClose, phoneConfirmOpen } from "components/Auth/actions";
+import { modalClose, phoneConfirmOpen } from "components/Modal/actions";
 import { changePassword, changePasswordError, changePasswordSuccess } from "components/Auth/ChangePassword/actions";
 import { signInError, signInSubmit } from "components/Auth/SignIn/actions";
 import { takeLatest, put, select, call } from 'redux-saga/effects'

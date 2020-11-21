@@ -7,7 +7,7 @@ import InputAddress from "components/ui/Inputs/InputAddress";
 import InputCategory from 'components/ui/Inputs/InputCategory'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 import FileInput from "components/ui/Inputs/S3FileUpload";
-import { SelectInput } from "components/ui/Inputs/SelectInput";
+import SelectInput from "components/ui/Inputs/SelectInput";
 import TextArea from "components/ui/Inputs/TextArea";
 import Link from 'next/link'
 import PriceSelectForm from "pages/CreateTaskPage/Form/components/PriceSelect";

@@ -19,7 +19,7 @@ const initialState: SkillState = {
   formError: '',
   formLoading: false,
   listLoading: false,
-  currentLoading: false
+  currentLoading: false,
 }
 
 const formatList = (data) => {
@@ -38,6 +38,26 @@ const formatList = (data) => {
 }
 export default function ProfileReducer(state = {...initialState}, action) {
   switch(action.type) {
+    case ActionTypes.RESET_SKILL_FORM:
+      state.formError = ''
+      state.formIsSuccess = false;
+      state.formLoading = false;
+      break
+    case ActionTypes.CREATE_SKILL_CATEGORY_REQUEST:
+      state.formError = ''
+      state.formIsSuccess = false;
+      state.formLoading = true;
+      break
+    case ActionTypes.CREATE_SKILL_CATEGORY_REQUEST + ApiActionTypes.SUCCESS:
+      state.formError = ''
+      state.formIsSuccess = true;
+      state.formLoading = false;
+      break
+    case ActionTypes.CREATE_SKILL_CATEGORY_REQUEST + ApiActionTypes.FAIL:
+      state.formError = action.payload.error || 'Unknown error'
+      state.formIsSuccess = false;
+      state.formLoading = false;
+      break
     case ActionTypes.CREATE_SKILL_REQUEST:
       state.formError = ''
       state.formIsSuccess = false;

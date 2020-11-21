@@ -1,5 +1,4 @@
 export function required(value: string | number, allValues) {
-  console.log("compare reuiqred", value, allValues)
   return value || typeof value === 'number' ? undefined : 'Обязательное поле'
 }
 

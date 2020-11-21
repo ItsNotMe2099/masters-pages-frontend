@@ -11,6 +11,7 @@ interface Props {
   parentRef?: any,
   onChange?: any,
   value?: any,
+  inputClassName?: string
   withBorder: boolean,
   transparent: boolean,
   withPadding: boolean,
@@ -19,8 +20,7 @@ interface Props {
 
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
-  console.log(" error, touched",  error, touched)
- return ( <input className={`${styles.input} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
+ return ( <input className={`${styles.input} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
    autocomplete="off"
    type={props.type || 'text'}
    ref={props.parentRef}

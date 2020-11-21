@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
-import { signInOpen} from 'components/Auth/actions'
+import { signInOpen} from 'components/Modal/actions'
 import PWRecovery from "./Form";
 
 interface Props {

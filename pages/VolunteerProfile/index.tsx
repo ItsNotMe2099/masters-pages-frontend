@@ -1,4 +1,4 @@
-import { loaderOpen, modalClose } from "components/Auth/actions";
+import { loaderOpen, modalClose } from "components/Modal/actions";
 import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
 import { createProfile } from "components/Profile/actions";

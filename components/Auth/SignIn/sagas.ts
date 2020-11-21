@@ -1,4 +1,4 @@
-import { phoneConfirmOpen } from "components/Auth/actions";
+import { phoneConfirmOpen } from "components/Modal/actions";
 import { signInError, signInSubmit } from "components/Auth/SignIn/actions";
 import { takeLatest, put, select, call } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'

@@ -7,7 +7,8 @@ interface Props {
   progress?: number,
   loading?: boolean,
   onRemove: () => void
-  file: any
+  file: any,
+  isLast?:boolean
 }
 
 const FileInputPreview: FunctionComponent<Props> = props => {
@@ -20,13 +21,10 @@ const FileInputPreview: FunctionComponent<Props> = props => {
         file,
         ...rest
     } = props
-  useEffect(() => {
-    console.log("progress", progress)
-  }, [progress])
+
   useEffect(() => {
     return () => {
       const preview = file && file.rawFile ? file.rawFile.preview : file.preview
-      console.log("preview", preview)
       if (preview) {
         window.URL.revokeObjectURL(preview)
       }
@@ -34,16 +32,15 @@ const FileInputPreview: FunctionComponent<Props> = props => {
   }, [file])
 
   const getImageSrc = (file) => {
-    console.log("getImageSrc", file)
-    const srcValue = file?.preview ? file.preview : file;
+
+    const srcValue = file?.path || file.preview;
     if(!srcValue){
       return;
     }
-    console.log("srcValue", srcValue)
     return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.REACT_APP_API_URL || 'https://masters-pages.dev.glob-com.ru'}/api/s3/uploads/${srcValue}`)}`
   }
   return (
-        <div className={styles.root}>
+        <div className={`${styles.root} ${props.isLast && styles.isLast}`}>
 
           <div className={styles.image}>
             <img

@@ -1,5 +1,5 @@
 import {  fetchLocationCountries } from "components/ui/Inputs/InputCountry/actions";
-import { SelectInput } from "components/ui/Inputs/SelectInput";
+import SelectInput from "components/ui/Inputs/SelectInput";
 import { useEffect, useState } from "react";
 import { IRootState } from "types";
 import { useDebouncedCallback } from "use-debounce";

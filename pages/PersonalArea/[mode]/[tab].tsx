@@ -23,7 +23,6 @@ const PersonalAreaPage = (props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const role = useSelector((state: IRootState) => state.profile.role)
   const { mode, tab } = router.query
-  console.log("mode", mode, tab);
 
   useEffect(() => {
     if(role && mode && role != mode){
@@ -43,19 +42,25 @@ const PersonalAreaPage = (props) => {
       link: `/PersonalArea/${mode}/${item.key}`
   }})
 
+  const getModeName = (mode) => {
+    switch (mode) {
+      case 'master':
+        return 'Master mode'
+      case 'client':
+        return 'Client mode'
+      case 'volunteer':
+        return 'Volunteer mode'
+    }
+  }
 
   return (
     <>
       <Header {...props}/>
       <div className={styles.container}>
         <div className={styles.topBar}>
-          <div className={styles.hello}> Hello {profile?.firstName}</div>
+          <div className={styles.hello}> Hello {profile?.firstName}. You are in «{getModeName(mode)}».</div>
 
-        <div className={styles.buttonList}>
-          <Button className={`${styles.button} ${mode === 'master' && styles.buttonActive}`} red={true} mediumFont={true} onClick={() => dispatch(changeRole('master'))} size={'12px 0px'}>Master</Button>
-          <Button className={`${styles.button} ${mode === 'client' && styles.buttonActive}`} green={true} size={'12px 0px'} onClick={() => dispatch(changeRole('client'))} >Client</Button>
-          <Button  className={`${styles.button} ${mode === 'volunteer' && styles.buttonActive}`} blue={true} size={'12px 0px'} onClick={() => dispatch(changeRole('volunteer'))} >Volunteer</Button>
-        </div>
+
         </div>
         <ProfileSection/>
         <Tabs tabs={tabs} activeTab={tab as string}/>

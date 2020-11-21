@@ -1,4 +1,4 @@
-import { SelectInput } from "components/ui/Inputs/SelectInput";
+import SelectInput from "components/ui/Inputs/SelectInput";
 import { useCallback, useEffect, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'

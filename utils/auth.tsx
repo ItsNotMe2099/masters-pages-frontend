@@ -87,12 +87,13 @@ export const withRestrictAuthSync = (WrappedComponent) =>
     static async getInitialProps(ctx) {
 
       const token = auth(ctx);
-      if (ctx.req && !token) {
+      const user = token ? await getUser(token) : null
+
+      if (ctx.req && (!token || !user)) {
         ctx.res.writeHead(302, { Location: "/login" });
         ctx.res.end();
         return;
       }
-      const user = token ? await getUser(token) : null
 
       const componentProps =
         WrappedComponent.getInitialProps &&

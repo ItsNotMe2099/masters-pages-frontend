@@ -1,7 +1,11 @@
 .root {
   position: relative;
+  border-radius: 21px;
+  width: 441px;
+  background: white;
   padding: 97px 67px 64px;
-
+  z-index: 5;
+  margin:  auto;
 }
 
 .close {
@@ -45,4 +49,26 @@
   align-items: stretch;
   flex-direction: column;
   text-align: center;
+}
+.frame{
+  overflow-y: scroll;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  z-index: 3;
+}
+.overlay{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.scroll{
 }

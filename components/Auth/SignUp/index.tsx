@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 import Link from 'next/link'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
-import { signInOpen} from 'components/Auth/actions'
+import { signInOpen} from 'components/Modal/actions'
 
 interface Props {
   isOpen: boolean

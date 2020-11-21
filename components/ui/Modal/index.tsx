@@ -14,7 +14,9 @@ interface Props {
   title?: string,
   image?: string,
   children?: any,
-  loading?: boolean
+  loading?: boolean,
+  className?: string,
+  closeClassName?: string
 }
 
 export default function Modal(props: Props) {
@@ -26,14 +28,16 @@ export default function Modal(props: Props) {
       zIndex: '4',
     },
     content : {
-      width: '441px',
+      width: '100%',
       borderRadius: '21px',
       padding: '0',
       border: '0',
       margin: 'auto',
       position: 'static',
       inset: '0',
-      overflow: 'hidden',
+      overflow: 'scroll',
+      background: 'none'
+
     },
   }
   useEffect(() => {
@@ -41,7 +45,6 @@ export default function Modal(props: Props) {
     if(!  bodyRef.current){
       return;
     }
-
     if(props.loading){
       bodyRef.current.style.visibility = 'hidden'
     }else{
@@ -54,8 +57,10 @@ export default function Modal(props: Props) {
     isOpen={props.isOpen}
     onRequestClose={props.onRequestClose}
     >
-      <div className={styles.root}>
-        {!props.onRequestClose && <div className={styles.close}>
+      <div className={styles.frame} >
+        <div className={styles.overlay} onClick={props.onRequestClose}/>
+      <div className={`${styles.root} ${props.className}`}>
+        {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`}>
           <Button closeBtn onClick={props.onRequestClose}></Button>
         </div>}
        <div className={styles.center} ref={bodyRef}>
@@ -70,6 +75,7 @@ export default function Modal(props: Props) {
       </div>
         {props.loading && <div className={styles.loader}><Loader/></div>}
       </div>
+</div>
     </ReactModal>
   )
 }

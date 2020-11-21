@@ -16,6 +16,12 @@
   align-items: flex-start;
 }
 .categories{
-  width: 60%;
+  width: 62.2%;
 
+}
+.category{
+  margin-top: 60px;
+  &:first-of-type{
+    margin-top: 0px;
+  }
 }

@@ -1,4 +1,4 @@
-import { phoneConfirmOpen, PWRecoverySuccessOpen } from "components/Auth/actions";
+import { phoneConfirmOpen, PWRecoverySuccessOpen } from "components/Modal/actions";
 import { takeLatest, put, select, takeEvery } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";

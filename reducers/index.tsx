@@ -15,6 +15,7 @@ import subCategoryCheckboxReducer from 'components/ui/Form/MasterProfile/Checkbo
 import CreateTaskReducer from 'components/CreateTaskPage/reducer';
 import ProfileReducer from 'components/Profile/reducer';
 import SkillReducer from 'components/Skill/reducer';
+import ModalReducer from 'components/Modal/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -32,5 +33,6 @@ export default combineReducers({
   subCategoryCheckbox: subCategoryCheckboxReducer,
   profile: ProfileReducer,
   changePassword: PWChangeReducer,
-  skill: SkillReducer
+  skill: SkillReducer,
+  modal: ModalReducer,
 })

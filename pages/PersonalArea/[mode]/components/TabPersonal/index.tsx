@@ -1,4 +1,4 @@
-import { changePasswordOpen, loaderOpen, modalClose } from "components/Auth/actions";
+import { changePasswordOpen, loaderOpen, modalClose } from "components/Modal/actions";
 import { updateProfile } from "components/Profile/actions";
 import AvatarInput from "components/ui/AvatarInput";
 import Button from "components/ui/Button";

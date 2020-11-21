@@ -1,5 +1,5 @@
 import { CheckboxList } from "components/ui/Inputs/CheckboxList";
-import { SelectInput } from "components/ui/Inputs/SelectInput";
+import SelectInput from "components/ui/Inputs/SelectInput";
 import { useCallback, useEffect, useState } from "react";
 import { IRootState } from "types";
 import request from "utils/request";
@@ -15,6 +15,7 @@ export default function CheckboxListSubCategories(props) {
   const dispatch = useDispatch()
   const [options, setOptions] = useState([]);
   useEffect( () => {
+    console.log("CategoryId updated")
      request({url: `/api/service-category/${props.categoryId}/subcategory?lang=ru`, method: 'GET'})
        .then((response) => {
          const data = response.data;

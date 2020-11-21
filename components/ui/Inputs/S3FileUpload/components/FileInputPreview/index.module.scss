@@ -6,6 +6,9 @@
   padding: 20px 0px;
   border-bottom: 1px solid #C4C4C4;
 }
+.isLast{
+  border-bottom: none;
+}
 .deleteButton{
   cursor: pointer;
   padding-right: 8px;

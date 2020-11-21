@@ -4,7 +4,6 @@ interface Props {
   error: string[] | string | null
 }
 export default function FormError({error}: Props) {
-  console.log("FORMERROR", error)
   if(!error){
     return  (<></>)
   }

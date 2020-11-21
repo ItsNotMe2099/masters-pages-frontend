@@ -5,6 +5,7 @@ import registrationCompleteReducer, { RegistrationCompleteState } from "componen
 import authSignInReducer, { SignInState } from "components/Auth/SignIn/reducer";
 import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reducer";
 import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
+import { ModalState } from "components/Modal/reducer";
 import { ProfileState } from "components/Profile/reducer";
 import { SkillState } from "components/Skill/reducer";
 import { CountryInputState } from "components/ui/Inputs/InputCountry/reducer";
@@ -29,9 +30,15 @@ export interface IRootState {
   createTaskComplete: CreateTaskCompleteState
   profile: ProfileState,
   changePassword: ChangePasswordState,
-  skill: SkillState
+  skill: SkillState,
+  modal: ModalState
 }
-
+export interface ConfirmDataModal {
+  cancelText?: string,
+  confirmText?: string
+  onConfirm: () => void,
+  onCancel?: () => void
+}
 export interface ProfileData{
   id?: number
   firstName?: string

@@ -1,6 +1,7 @@
 import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import { LangSelect } from "components/layout/Header/components/LangSelect";
+import ModalConfirm from "components/Modal/ModalConfirm";
 import ModalLoader from "components/ModalLoader";
 import { changeRole } from "components/Profile/actions";
 import Socials from "components/ui/Socials";
@@ -20,7 +21,7 @@ import {
   signInOpen,
   signUpOpen,
   phoneConfirmOpen,
-} from 'components/Auth/actions'
+} from 'components/Modal/actions'
 import SignUpComponent from 'components/Auth/SignUp'
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
@@ -47,7 +48,7 @@ const Header = (props: Props) => {
   }
   console.log("ProfileRole", role);
   const [isAuth, setAuth] = useState(props.user ? true : false)
-  const key = useSelector((state: IRootState) => state.authComponent.modalKey)
+  const key = useSelector((state: IRootState) => state.modal.modalKey)
   const dispatch = useDispatch()
 
   const getRoleName = (role) => {
@@ -185,6 +186,7 @@ const Header = (props: Props) => {
       <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {}}/>
       <ChangePassword isOpen={key === 'changePassword'}
                       onRequestClose={() => dispatch(modalClose())}/>
+                      <ModalConfirm isOpen={key === 'confirm'}    onRequestClose={() => dispatch(modalClose())}/>
     </div>
   )
 }

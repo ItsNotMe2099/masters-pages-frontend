@@ -13,16 +13,23 @@ interface Props {
   onSearchChange?: (string) => void,
   onOpenDropDown?: () => void;
   changeWithValue?: boolean
-  allowCustomInput?: boolean
+  allowCustomInput?: boolean,
+  restrictedValues: any[],
+  input?: any,
+  meta?: any,
+  label?: string,
+  labelType?: any,
+
 }
 
-export const SelectInput = (props) => {
-  const { meta: { error, touched }, input, options, onOpenDropDown, label, type, ...rest } = props;
+const SelectInput = (props: Props) => {
+  const { meta: { error, touched },restrictedValues, input, options, onOpenDropDown, label, ...rest } = props;
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
   const valueInputRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [currentLabel, setCurrentLabel] = useState('');
+  console.log("SelectValue", restrictedValues);
   const onClick = (e) => {
     e.preventDefault()
     if (!isActive && onOpenDropDown) {
@@ -64,7 +71,6 @@ export const SelectInput = (props) => {
       setCurrentLabel(props.changeWithValue ? input.value.label :  input.value )
     }else {
       setCurrentLabel(props.options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
-      console.log("currentLabel", props.options, props.options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label, input.value)
     }
     }, [input, options])
 
@@ -97,7 +103,7 @@ export const SelectInput = (props) => {
         </div>
 
         <ul>
-          {options.map(item => (
+          {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (
             <li className={styles.dropdownItem}
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
@@ -117,5 +123,7 @@ export const SelectInput = (props) => {
 SelectInput.defaultProps = {
   labelType: 'placeholder',
   onSearchChange: () => {},
-  onOpenDropDown: () => {}
+  onOpenDropDown: () => {},
+  restrictedValues: []
 }
+export default SelectInput

@@ -1,4 +1,4 @@
-import { modalClose, phoneConfirmOpen } from "components/Auth/actions";
+import { modalClose, phoneConfirmOpen } from "components/Modal/actions";
 import { phoneConfirmError, phoneConfirmSubmit } from "components/Auth/PhoneConfirm/actions";
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'

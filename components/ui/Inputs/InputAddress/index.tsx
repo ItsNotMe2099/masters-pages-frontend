@@ -1,7 +1,7 @@
 import GooglePlacesAutocompleteProps, { AutocompletionRequest } from "components/ui/Inputs/InputAddress/GooglePlacesAutocomplete.types";
 import autocompletionRequestBuilder from "components/ui/Inputs/InputAddress/helpers/autocompletionRequestBuilder";
 import injectScript from "components/ui/Inputs/InputAddress/helpers/injectScript";
-import { SelectInput } from "components/ui/Inputs/SelectInput";
+import SelectInput from "components/ui/Inputs/SelectInput";
 import { useEffect, useState } from "react";
 import { IRootState } from "types";
 import { useDebouncedCallback } from "use-debounce";
@@ -85,7 +85,10 @@ export default function InputAddress({
   }, []);
 
   return (
-    <SelectInput {...rest} allowCustomInput={true} input={input} options={options}
-                 onSearchChange={handleOnSearchChange} isLocation={true}/>
+    <SelectInput {...rest}
+                 allowCustomInput={true}
+                 input={input}
+                 options={options as [{label: string, value: any}]}
+                 onSearchChange={handleOnSearchChange}/>
   )
 }
