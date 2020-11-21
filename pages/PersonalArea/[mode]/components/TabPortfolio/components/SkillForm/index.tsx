@@ -47,21 +47,21 @@ let SkillForm = (props) => {
     <form className={styles.form} onSubmit={props.handleSubmit}>
 
       <div className={styles.container}>
-          <Field
+        {!props.initialValues?.id && <Field
             name="categoryId"
             component={InputCategory}
             label="Category"
             validate={required}
-            onChange={(val) => setCategoryId(val.value)}
-          />
-          <Field
+            onChange={(val) => setCategoryId(val)}
+          />}
+        {!props.initialValues?.id && <Field
             name="subCategoryId"
             component={RadioListSubCategories}
             label="BOD* MM / DD / YYYY"
             validate={required}
             restrictedValues={props.skills.map(item => item.subCategoryId)}
             categoryId={categoryId}
-          />
+          />}
           <Field
             name="description"
             component={TextArea}

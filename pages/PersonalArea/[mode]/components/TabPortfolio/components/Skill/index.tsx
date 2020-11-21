@@ -67,7 +67,7 @@ const Skill = ({item, onEdit, onRemove}: Props) => {
       <div className={styles.title}> {getCategoryTranslation(item.subCategory)?.name}</div>
       <div className={styles.description}> {item.description || 'Empty description'}</div>
       <div className={styles.priceLabel}>Price:</div>
-      <div className={styles.price}>{item.price ? `${item.price}` : item.ratePerHour ? `${item.ratePerHour}/hour`: 'N/A'}</div>
+      <div className={styles.price}>{item.price ? `$${item.price}` : item.ratePerHour ? `$${item.ratePerHour}/hour`: 'N/A'}</div>
     </div>
   )
 }
