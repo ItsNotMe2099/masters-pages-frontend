@@ -1,3 +1,3 @@
 export const parserNumber = (val) => {
-  return val ? parseInt(val, 10) : null
+  return val ? parseInt(val, 10) : undefined
 }

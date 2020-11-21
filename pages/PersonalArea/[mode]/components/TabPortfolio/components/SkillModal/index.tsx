@@ -1,3 +1,4 @@
+import { modalClose } from "components/Modal/actions";
 import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
 import Loader from "components/ui/Loader";
 import Modal from "components/ui/Modal";
@@ -43,7 +44,7 @@ const SkillModal = ({isOpen, category, skill, onClose}: Props) => {
         <div className={styles.title}>{skill ? 'Edit Category' : 'Add Category'}</div>
       </div>
       <div className={styles.separator}></div>
-      <SkillForm onSubmit={handleSubmit} initialValues={{priceType: 'fixed', categoryId: category?.id, ...skill}} skills={category?.skills}/>
+      <SkillForm onSubmit={handleSubmit} initialValues={{priceType: 'fixed', categoryId: category?.id, ...skill}} skills={category?.skills} onCancel={() => dispatch(modalClose())}/>
     </Modal>
   )
 }

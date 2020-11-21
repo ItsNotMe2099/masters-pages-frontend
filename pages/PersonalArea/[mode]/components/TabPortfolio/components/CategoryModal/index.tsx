@@ -1,3 +1,4 @@
+import { modalClose } from "components/Modal/actions";
 import {
   createSkill,
   createSkillCategory,
@@ -44,7 +45,7 @@ const CategoryModal = ({isOpen, onClose}: Props) => {
         <div className={styles.title}>Add Category</div>
       </div>
       <div className={styles.separator}></div>
-      <CategoryForm onSubmit={handleSubmit} />
+      <CategoryForm onSubmit={handleSubmit} onCancel={() => dispatch(modalClose())}/>
     </Modal>
   )
 }
