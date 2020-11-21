@@ -31,7 +31,7 @@ const PersonalAreaPage = (props) => {
   }, [mode, role])
   const tabs = [
     {name: 'Personal information', key: 'personal'},
-    {name: 'My portfolio', key: 'portfolio'},
+    ...(mode !== 'client' ? [{name: 'My portfolio', key: 'portfolio'}] : []),
     {name: 'Reviews and rating', key: 'reviews'},
     {name: 'Orders', key: 'orders'},
     {name: 'Messages', key: 'messages'},
