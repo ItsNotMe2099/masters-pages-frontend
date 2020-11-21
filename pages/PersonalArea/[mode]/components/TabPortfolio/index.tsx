@@ -81,7 +81,7 @@ const TabPortfolio = (props: Props) => {
             </div>
           </div>))}
       </div>
-        <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'12px 115px'} onClick={() => dispatch(skillCategoryModalOpen())}>Add Skill</Button></div>
+        <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'12px 115px'} onClick={() => dispatch(skillCategoryModalOpen())}>Add Category</Button></div>
       </div>}
 
       <SkillModal isOpen={modalKey === 'skillForm'} category={currentCategory} skill={currentSkill} onClose={() => dispatch(modalClose())}/>
