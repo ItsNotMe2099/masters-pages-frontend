@@ -38,12 +38,18 @@
   border: 1px solid #7D7D7D;
   color: #7D7D7D;
 }
+.borderRed{
+  border: 2px solid #FD5742;
+  color: #FD5742;
+}
 .grey{
   background-color: #F6F6F6;
   border: 1px solid #ACACAC;
   color: #000000;
 }
-
+.fullWidth{
+  width: 100%;
+}
 .transparent{
   background-color: transparent;
 }

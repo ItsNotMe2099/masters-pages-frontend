@@ -1,4 +1,4 @@
-import { useDetectOutsideClick } from "components/layout/Header/components/LangSelect/useDetectOutsideClick";
+import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import { I18nContext } from "next-i18next";
 import { useContext, useRef, useState } from "react";
 import styles from './index.module.scss'

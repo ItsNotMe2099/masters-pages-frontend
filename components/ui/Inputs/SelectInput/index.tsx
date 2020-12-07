@@ -1,4 +1,4 @@
-import { useDetectOutsideClick } from "components/layout/Header/components/LangSelect/useDetectOutsideClick";
+import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import Input from "components/ui/Inputs/Input";
 import BaseInput from "components/ui/Inputs/Input/components/BaseInput";
 import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
@@ -90,13 +90,12 @@ const SelectInput = (props: Props) => {
             if(props.allowCustomInput){
               console.log("onChange", e.currentTarget.value)
               input.onChange(e.currentTarget.value)
-            }
+              }
               props.onSearchChange(e.currentTarget.value)
-
-          }}
-                     value={props.allowCustomInput ? input.value : null}
-                     withBorder={false}
-                     parentRef={searchInputRef}/>
+            }}
+            value={props.allowCustomInput ? input.value : null}
+            withBorder={false}
+            parentRef={searchInputRef}/>
           <a className={styles.dropDownTrigger}>
             <img src='/img/field/arrowDown.svg' alt=''/>
           </a>

@@ -1,0 +1,19 @@
+.root{
+  position: relative;
+}
+
+.button{
+  margin-top: 34px
+}
+.rows{
+  display: table;
+}
+.row{
+  display: table-row;
+  flex-direction: column;
+  .label{
+    display: table-cell;
+    padding-right: 45px;
+  }
+}
+

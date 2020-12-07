@@ -5,6 +5,10 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     color: #6D718C;
+  margin-top: 20px;
+  &:first-of-type{
+    margin-top: 0px;
+  }
 }
 
 .main{

@@ -1,12 +1,36 @@
+import { confirmOpen } from "components/Modal/actions";
+import { deleteSkillCategory } from "components/Skill/actions";
+import Button from "components/ui/Button";
+import TabSettingsForm from "pages/PersonalArea/[mode]/components/TabSettings/components/TabSettingsForm";
 import * as React from "react";
+import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
+
+import { useSelector, useDispatch } from 'react-redux'
 interface Props {
 
 }
 const TabSettings= (props: Props) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (data) => {
+    console.log("Settings submit", data);
+  }
+  const handleRemoveAccount = () => {
+    dispatch(confirmOpen({
+      description: `Do you want to delete your account?`,
+      onConfirm: () => {
+
+      }
+    }));
+  }
   return (
     <div className={styles.root}>
-      Tab Settings
+      <div className={styles.form}>
+     <TabSettingsForm onSubmit={handleSubmit}/>
+      </div>
+      <Button className={styles.button} black={true}  size={'12px 70px'}  type={'button'} onClick={handleRemoveAccount}>Delete my account</Button>
+
     </div>
   )
 }

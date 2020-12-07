@@ -27,9 +27,9 @@ export default function Task(props: Props) {
             <img src={props.avatar} alt=''/>
           </div>
           <div className={styles.icons}>
-            <img src="img/SearchTaskPage/icons/case.svg" alt=''/>
+            <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
             <div>{props.case}</div>
-            <img src="img/SearchTaskPage/icons/like.svg" alt=''/>
+            <img src="/img/SearchTaskPage/icons/like.svg" alt=''/>
             <div>{props.likes}</div>
           </div>
         </div>
@@ -38,13 +38,13 @@ export default function Task(props: Props) {
             <div className={styles.name}>
               <div>{props.clientName}</div>
               {props.verificationIcon ?
-                <img src="img/SearchTaskPage/icons/verification.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
                 :
                 null
               }
             </div>
             <div className={styles.time}>
-              <img src="img/SearchTaskPage/icons/clock.svg" alt=''/>
+              <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
               <div className={styles.desc}>{props.taskTime}</div>
             </div>
           </div>
@@ -61,27 +61,27 @@ export default function Task(props: Props) {
         <div className={styles.bottom}>
             <div className={styles.stars}>
               <div>
-                <img src="img/SearchTaskPage/icons/star.svg" alt=''/>
-                <img src="img/SearchTaskPage/icons/star.svg" alt=''/>
-                <img src="img/SearchTaskPage/icons/star.svg" alt=''/>
-                <img src="img/SearchTaskPage/icons/star.svg" alt=''/>
-                <img src="img/SearchTaskPage/icons/halfStar.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/halfStar.svg" alt=''/>
               </div>
               <div className={styles.comments}>({props.comments})</div>
             </div>
             <div className={styles.more}>
                 <div className={styles.desc}>Read more</div>
-                <img src="img/SearchTaskPage/icons/down.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/down.svg" alt=''/>
             </div>
             <div className={styles.separatorLine}></div>
             <div className={styles.more}>
                 <div className={styles.desc}>Share</div>
-                <img src="img/SearchTaskPage/icons/share.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/share.svg" alt=''/>
             </div>
             <div className={styles.separatorLine}></div>
             <div className={styles.more}>
                 <div className={styles.desc}>Save</div>
-                <img src="img/SearchTaskPage/icons/favorite.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/favorite.svg" alt=''/>
             </div>
         </div>
       </div>
@@ -90,15 +90,15 @@ export default function Task(props: Props) {
           Payment method:
         </div>
         <div className={styles.method}>
-          <img src="img/SearchTaskPage/icons/bank.svg" alt=''/>
+          <img src="/img/SearchTaskPage/icons/bank.svg" alt=''/>
           <div className={styles.desc}>Bank account</div>
         </div>
         <div className={styles.method}>
-          <img src="img/SearchTaskPage/icons/cash.svg" alt=''/>
+          <img src="/img/SearchTaskPage/icons/cash.svg" alt=''/>
           <div className={styles.desc}>Cash</div>
         </div>
         <div className={styles.method}>
-          <img className={styles.last} src="img/SearchTaskPage/icons/safe.svg" alt=''/>
+          <img className={styles.last} src="/img/SearchTaskPage/icons/safe.svg" alt=''/>
           <div className={styles.desc}>Safe deal</div>
         </div>
         {props.fixedPrice ?

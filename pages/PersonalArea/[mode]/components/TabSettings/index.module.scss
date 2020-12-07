@@ -1,4 +1,9 @@
 .root{
   display: flex;
-  position: relative;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.form{
+  flex: 1;
 }
