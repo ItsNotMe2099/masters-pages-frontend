@@ -20,7 +20,7 @@ export const fetchProfile = (role: string) => action(ActionTypes.FETCH_PROFILE, 
 })
 
 export const changeRole = (role: string) => action(ActionTypes.CHANGE_ROLE, {role})
-export const changeRoleNative = (role: string) => action(ActionTypes.CHANGE_ROLE, {role})
+export const changeRoleNative = (role: string) => action(ActionTypes.CHANGE_ROLE_NATIVE, {role})
 export const changeRoleSuccess = (role: string) => action(ActionTypes.CHANGE_ROLE_SUCCESS, {role})
 export const fetchProfileSuccess = (data) => action(ActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS, data)
 /*

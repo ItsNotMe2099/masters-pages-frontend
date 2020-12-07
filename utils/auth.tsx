@@ -1,4 +1,4 @@
-import { changeRole } from "components/Profile/actions";
+import { changeRole, changeRoleNative } from "components/Profile/actions";
 import nextCookie from "next-cookies";
 import { getDisplayName } from "next/dist/next-server/lib/utils";
 import { Component } from "react";
@@ -56,7 +56,7 @@ export const withAuthSync = (WrappedComponent) =>
         componentDidMount() {
             window.addEventListener("storage", this.syncLogout);
             console.log("Did mount")
-          store.dispatch(changeRole(cookie.get('mode') || 'client'));
+          store.dispatch(changeRoleNative(cookie.get('mode') || 'client'));
         }
 
         // New: Remove event listener when the Component unmount and

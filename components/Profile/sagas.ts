@@ -38,7 +38,7 @@ function* ProfileSaga() {
 
     })
 
-  yield takeLatest(ActionTypes.CHANGE_ROLE,
+  yield takeLatest(ActionTypes.CHANGE_ROLE_NATIVE,
     function* (action: ActionType<typeof changeRole>) {
       console.log("CHANGREROLECALL");
       const res: IResponse = yield requestGen({
@@ -48,24 +48,10 @@ function* ProfileSaga() {
 
 
       console.log("Res_err", res.data);
-      if(res.err){
-
-      }else if(res.data && res.data.id){
+      if(!res.err && res.data && res.data.id){
         cookie.set('mode', action.payload.role);
         yield put(changeRoleSuccess(action.payload.role));
         yield put(fetchProfileSuccess(res.data));
-      }else{
-        switch (action.payload.role) {
-          case 'client':
-            Router.push("/RegistrationPage");
-            break;
-          case 'master':
-            Router.push("/MasterProfile");
-            break;
-          case 'volunteer':
-            Router.push("/VolunteerProfile");
-            break;
-        }
       }
 
     })
