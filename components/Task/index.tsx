@@ -13,12 +13,13 @@ interface Props {
   taskPrice: string
   fixedPrice?: boolean
   workHours?: string
-  verificationIcon?: boolean
+  verificationIcon?: boolean,
+  className?: string
 }
 
 export default function Task(props: Props) {
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${props.className}`}>
       <div className={styles.main}>
         <div className={styles.mainContainer}>
         <div className={styles.avatar}>
@@ -30,7 +31,7 @@ export default function Task(props: Props) {
             <div>{props.case}</div>
             <img src="img/SearchTaskPage/icons/like.svg" alt=''/>
             <div>{props.likes}</div>
-          </div> 
+          </div>
         </div>
         <div className={styles.mainInfo}>
           <div className={styles.top}>
