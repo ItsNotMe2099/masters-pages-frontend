@@ -8,6 +8,7 @@ import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/re
 import { ModalState } from "components/Modal/reducer";
 import { ProfileState } from "components/Profile/reducer";
 import { SkillState } from "components/Skill/reducer";
+import { TaskSearchState } from "components/TaskSearch/reducer";
 import { CountryInputState } from "components/ui/Inputs/InputCountry/reducer";
 import locationInputReducer, { LocationInputState } from "components/ui/Inputs/InputLocation/reducer";
 import categoryInputReducer, { CategoryInputState } from "components/ui/Inputs/InputCategory/reducer"
@@ -31,7 +32,8 @@ export interface IRootState {
   profile: ProfileState,
   changePassword: ChangePasswordState,
   skill: SkillState,
-  modal: ModalState
+  modal: ModalState,
+  taskSearch: TaskSearchState
 }
 export interface ConfirmDataModal {
   cancelText?: string,
@@ -41,6 +43,7 @@ export interface ConfirmDataModal {
 }
 export interface ProfileData{
   id?: number
+  avatar?: string
   firstName?: string
   lastName?: string
   phone?: string
@@ -82,6 +85,34 @@ export interface SkillListItem{
   skills: SkillData[]
 }
 
+export interface ITask{
+  id: number,
+  profileId: number,
+  title: string
+  description: string
+  categoryId: number,
+  subCategoryId: number,
+  masterRole: string
+  country: string
+  city: string
+  address: string
+  geonameid: number,
+  location: {
+    lng: number,
+    lat: number,
+  },
+  isExactLocation: boolean
+  ratePerHour: number,
+  maxWeekHours: number,
+  budget: number,
+  estimate: number
+  status: string
+  createdAt: string
+  updatedAt: string
+  deletedAt: string
+  profile: ProfileData
+  photos: string[]
+}
 export interface BaseAction {
   type: string
   payload: any

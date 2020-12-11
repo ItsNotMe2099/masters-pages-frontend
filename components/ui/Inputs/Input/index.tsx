@@ -11,6 +11,7 @@ interface Props {
   placeholder?: string
   children?: any
   icon?: ReactElement
+  noMargin?: boolean
   labelType: 'placeholder' | 'cross' | 'static',
   onClick?: (any) => void
 }
@@ -18,7 +19,7 @@ interface Props {
 export default function Input({children, ...props}: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   return (
-    <div className={`${styles.root} ${(error && touched) && styles.rootWithError} ${props.labelType === 'cross' && styles.rootWithLabelCross}`}>
+    <div className={`${styles.root} ${props.noMargin && styles.noMargin} ${(error && touched) && styles.rootWithError} ${props.labelType === 'cross' && styles.rootWithLabelCross}`}>
       {props.labelType === 'static' && <label className={styles.labelStatic}>{props.label}</label>}
       <div className={styles.inputContainer}>
         <BaseInput  {...props} placeholder={props.labelType === 'placeholder' ?  props.label : props.placeholder} withIcon={!!props.icon} />

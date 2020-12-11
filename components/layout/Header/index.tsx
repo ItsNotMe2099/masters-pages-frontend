@@ -1,9 +1,13 @@
 import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import { LangSelect } from "components/layout/Header/components/LangSelect";
+import { ModeSelect } from "components/layout/Header/components/ModeSelect";
+import { ProfileSelect } from "components/layout/Header/components/ProfileSelect";
 import ModalConfirm from "components/Modal/ModalConfirm";
 import ModalLoader from "components/ModalLoader";
 import { changeRole } from "components/Profile/actions";
+import MenuMobile from "components/svg/MenuMobile";
+import MenuMobileClose from "components/svg/MenuMobileClose";
 import Socials from "components/ui/Socials";
 import { withTranslation } from "react-i18next";
 import { withAuthSync } from "utils/auth";
@@ -61,78 +65,69 @@ const Header = (props: Props) => {
           return 'Client mode';
       }
   }
+  const renderMenu = (isMobile) => {
+
+    return      (<ul className={isMobile ? styles.menuMobile : styles.menu}>
+      <li className={styles.active}><Link href="/">{props.t('menu.home')}</Link></li>
+      <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
+      <li><Link href="/SearchTaskPage">{props.t('menu.findTask')}</Link></li>
+      <li><Link href="/">{props.t('menu.masters')}</Link></li>
+      <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
+      <li><Link href="/">{props.t('menu.faq')}</Link></li>
+
+    </ul>)
+  }
   return (
     <div className={styles.rootWrapper}>
-      <header className={styles.root}>
+      <header className={`${styles.root} ${isAuth && styles.rootAuth} ${role === 'client' && styles.rootClient} ${role === 'master' && styles.rootMaster} ${role === 'volunteer' && styles.rootVolunteer}`}>
         <div className={styles.menuDesktop}>
           <div className={styles.logo}>
-            <Logo/>
+            <Logo color={isAuth ? 'white': null}/>
           </div>
-          <ul className={styles.menu}>
-            <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
-            <li><Link href="/SearchTaskPage">{props.t('menu.findTask')}</Link></li>
-            <li><Link href="/">{props.t('menu.masters')}</Link></li>
-            <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
-            <li><Link href="/">{props.t('menu.faq')}</Link></li>
-          </ul>
+          {renderMenu(false)}
           <div className={styles.right}>
-
-            <LangSelect/>
+            <LangSelect isAuth={isAuth}/>
             <div className={styles.separatorLine}></div>
-            {/*<div className={styles.langSwitch}>
-            <img className={styles.country} src='/img/icons/ru.svg' alt=''/>
-            <span>RU</span>
-            <img className={styles.arrow} src='/img/icons/arrow.svg' alt=''/>
-          </div>*/}
-            {!isAuth ?
+            {!isAuth &&
               <div className={styles.actionsContainer}>
                 <a className={styles.signIn} onClick={() => dispatch(signInOpen())}>
-                      <span>Sign in</span>
-                      <img src='/img/icons/signIn.svg' alt=''/>
+                  <span>Sign in</span>
+                  <img src='/img/icons/signIn.svg' alt=''/>
                 </a>
                 <div className={styles.separatorLine}></div>
                 <a className={styles.signUp} onClick={() => dispatch(signUpOpen())}>
-                      <span>Sign up</span>
-                      <img src='/img/icons/signUp.svg' alt=''/>
+                  <span>Sign up</span>
+                  <img src='/img/icons/signUp.svg' alt=''/>
                 </a>
               </div>
-              :
-              <div className={styles.profile}>
-                <Link href="/PersonalArea"><a className={styles.profile}>
-                  <div className={styles.profileMode}>{getRoleName(role)}</div>
-                  {profile?.photo &&<img src={`${getMediaPath(profile?.photo)}`} alt=""/>}
-                </a></Link>
-                {role !== 'master' && <Button smallFont size="20px 0"  red onClick={() => dispatch(changeRole('master'))}>Master</Button>}
-                {role !== 'volunteer' && <Button smallFont size="20px 0" blue onClick={() => dispatch(changeRole('volunteer'))}>Volunteer</Button>}
-                {role !== 'client' && <Button smallFont size="20px 0"  green onClick={() => dispatch(changeRole('client'))}>Client</Button>}
-              </div>
             }
+            {isAuth   && <ModeSelect/>}
+            {isAuth   && <div className={styles.separatorLine}></div>}
+            {isAuth &&  <ProfileSelect/>}
+
           </div>
         </div>
 
         <div className={styles.headerMobile}>
 
-          {isAuth && <div className={styles.user}><Link href="/PersonalArea" >
-           <> {profile?.photo && <img src={`${getMediaPath(profile?.photo)}`} alt=""/>}
-            <span>{getRoleName(role)}</span>
-           </>
-          </Link></div>}
+          {(isAuth && isMenuMobileOpen) && <div className={styles.user}><ProfileSelect/></div>}
 
-          {!isAuth && <Logo/>}
+          {((isAuth && !isMenuMobileOpen) || !isAuth) && <Logo color={isAuth ? 'white': null}/>}
+          {isAuth &&  <ModeSelect/>}
 
-          <div className={styles.separatorLine}></div>
-          <LangSelect/>
+          {isMenuMobileOpen && <div className={styles.separatorLine}></div>}
+          {isMenuMobileOpen && <LangSelect isAuth={isAuth}/>}
           {!isMenuMobileOpen && <div className={styles.menuOpen} onClick={handleOpenMobileMenu}>
-            <img src='/img/Header/menu-mobile.svg'/>
+            <MenuMobile/>
           </div>}
           {isMenuMobileOpen && <div className={styles.menuClose} onClick={handleCloseMobileMenu}>
-            <img src='/img/Header/menu-mobile-close.svg'/>
+            <MenuMobileClose/>
           </div>}
         </div>
         {isMenuMobileOpen && <div className={styles.dropdownMobile}>
           <>
-          {!isAuth ?
-            <div className={styles.actionsContainer}>
+          {!isAuth &&
+          <div className={styles.actionsContainer}>
               <a className={styles.signIn} onClick={() => { handleCloseMobileMenu(); dispatch(signInOpen())}}>
                 <span>Sign in</span>
                 <img src='/img/icons/signIn.svg' alt=''/>
@@ -143,22 +138,11 @@ const Header = (props: Props) => {
                 <img src='/img/icons/signUp.svg' alt=''/>
               </a>
             </div>
-            :
-            <div className={styles.modesContainer}>
-              {role !== 'master' && <Button smallFont size="10px 15px" red>Master</Button>}
-              {role !== 'client' && <Button smallFont size="10px 15px" green>Client</Button>}
-              {role !== 'volunteer' && <Button smallFont size="10px 15px" blue>Volunteer</Button>}
-            </div>
-          }
-            <ul className={styles.menuMobile}>
-              <li className={styles.active}><Link href="/">{props.t('menu.home')}</Link></li>
-                <li><Link href="/CreateTaskPage">{props.t('menu.createTask')}</Link></li>
-                <li><Link href="/SearchTaskPage">{props.t('menu.findTask')}</Link></li>
-                <li><Link href="/">{props.t('menu.masters')}</Link></li>
-                <li><Link href="/">{props.t('menu.volunteers')}</Link></li>
-                <li><Link href="/">{props.t('menu.faq')}</Link></li>
 
-            </ul>
+          }
+
+
+            {renderMenu(true)}
             <div className={styles.socials}>
             <Socials/>
             </div>

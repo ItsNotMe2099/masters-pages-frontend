@@ -1,6 +1,6 @@
 @import "scss/index";
 .rootWrapper{
-  height: 68px;
+  height: 77px;
 
 }
 .menuDesktop{
@@ -19,7 +19,7 @@
 }
 
 .root{
-  box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.2);
     position: fixed;
   top: 0px;
   left: 0px;
@@ -27,12 +27,50 @@
   z-index: 3;
   background: white;
 }
+.rootAuth{
+  a{
+    color: white;
+  }
+
+  .separatorLine{
+    background: white;
+  }
+  .menuClose{
+    svg{
+      fill: white;
+      rect{
+        fill: white;
+      }
+    }
+  }
+
+  .menuOpen{
+    svg{
+      rect {
+        fill: white;
+      }
+    }
+  }
+}
+.rootClient{
+  background: #27C60D;
+
+}
+.rootMaster{
+  background: #E4474E;
+}
+.rootVolunteer{
+  background: #0D99C6;
+}
 
 .logo{
 display: flex;
 align-items: center;
   a{
     vertical-align: middle;
+  }
+  .separatorLine{
+    background: white;
   }
 }
 
@@ -254,5 +292,8 @@ align-items: center;
   font-weight: 600;
   span{
     margin-left: 9px;
+  }
+  @media screen and (max-width: $sm-max){
+    margin-right: 8px;
   }
 }

@@ -1,6 +1,6 @@
 import Task from "components/Task";
+import Tabs from "components/ui/Tabs";
 import { useRouter } from "next/router";
-import Tabs from "pages/PersonalArea/[mode]/components/TabOrders/components/Tabs";
 import * as React from "react";
 import styles from './index.module.scss'
 interface Props {
@@ -22,7 +22,7 @@ const TabOrders = (props: Props) => {
     }})
   return (
     <div className={styles.root}>
-      <Tabs tabs={tabs} activeTab={tabSubPage as string}/>
+      <Tabs style={'round'} tabs={tabs} activeTab={tabSubPage as string}/>
       <div className={styles.tasks}>
         <Task
           className={styles.taskItem}

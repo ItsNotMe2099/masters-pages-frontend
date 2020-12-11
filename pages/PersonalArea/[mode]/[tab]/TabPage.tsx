@@ -1,4 +1,5 @@
 import { changeRole, fetchProfile } from "components/Profile/actions";
+import Tabs from "components/ui/Tabs";
 import { useEffect } from "react";
 import * as React from "react";
 import Header from 'components/layout/Header'
@@ -11,7 +12,7 @@ import TabOrders from "pages/PersonalArea/[mode]/components/TabOrders";
 import TabPersonal from "pages/PersonalArea/[mode]/components/TabPersonal";
 import TabPortfolio from "pages/PersonalArea/[mode]/components/TabPortfolio";
 import TabReviews from "pages/PersonalArea/[mode]/components/TabReviews";
-import Tabs from "pages/PersonalArea/[mode]/components/Tabs";
+
 import TabSettings from "pages/PersonalArea/[mode]/components/TabSettings";
 import { IRootState } from "types";
 import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
@@ -63,14 +64,14 @@ const TabPage = (props) => {
 
         </div>
         <ProfileSection/>
-        <Tabs tabs={tabs} activeTab={tab as string}/>
+        <Tabs style={'outline'} tabs={tabs} activeTab={tab as string}/>
         <div className={styles.tab}>
-          {tab === 'personal' && <TabPersonal/>}
-          {tab === 'portfolio' && <TabPortfolio/>}
-          {tab === 'reviews' && <TabReviews/>}
-          {tab === 'orders' && <TabOrders/>}
-          {tab === 'messages' && <TabMessages/>}
-          {tab === 'settings' && <TabSettings/>}
+          {tab === 'personal' && <TabPersonal {...props}/>}
+          {tab === 'portfolio' && <TabPortfolio {...props}/>}
+          {tab === 'reviews' && <TabReviews {...props}/>}
+          {tab === 'orders' && <TabOrders {...props}/>}
+          {tab === 'messages' && <TabMessages {...props}/>}
+          {tab === 'settings' && <TabSettings {...props}/>}
         </div>
         <Footer/>
       </div>

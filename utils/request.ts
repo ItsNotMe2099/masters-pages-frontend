@@ -2,7 +2,7 @@ import { IRequestData, IResponse } from 'types'
 
 function request(requestData: IRequestData): Promise<IResponse> {
   const { url, method, data, token, host } = requestData
-  const defaultHost = `${process.env.REACT_APP_API_URL || 'https://masters-pages.dev.glob-com.ru'}`
+  const defaultHost = `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}`
 console.log(`Bearer ${token}` )
   return (
     fetch(`${host || defaultHost}${url}`, {

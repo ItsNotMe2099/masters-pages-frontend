@@ -7,6 +7,7 @@ import PWChangeSaga from "components/Auth/ChangePassword/sagas";
 import CreateTaskCompleteSaga from "components/CreateTaskPage/sagas";
 import ProfileSaga from "components/Profile/sagas";
 import SkillSaga from "components/Skill/sagas";
+import TaskSearchSaga from "components/TaskSearch/sagas";
 import { all } from 'redux-saga/effects'
 import apiSaga from "sagas/apiSaga";
 
@@ -21,6 +22,7 @@ export const rootSaga = function* root() {
     CreateTaskCompleteSaga(),
     ProfileSaga(),
     PWChangeSaga(),
-    SkillSaga()
+    SkillSaga(),
+    TaskSearchSaga()
   ]);
 };
