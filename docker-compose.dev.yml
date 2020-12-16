@@ -11,7 +11,7 @@ services:
           context: .
           dockerfile: docker/app/Dockerfile
           args:
-            - ENV_FILE=.env.prod
+            - ENV_FILE=.env.dev
         image: ${APP_IMAGE}
         container_name: masters-pages-front-app
         restart: ${DK_RESTART}
