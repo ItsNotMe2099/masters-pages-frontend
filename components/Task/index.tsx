@@ -6,12 +6,14 @@ import styles from './index.module.scss'
 
 interface Props {
   task: ITask,
-  className?: string
+  className?: string,
+  isActive?: boolean,
+  onClick?: (ITask) => void
 }
 
-export default function Task({task, className}: Props) {
+export default function Task({task, className, isActive, onClick}: Props) {
   return (
-    <div className={`${styles.root} ${className}`}>
+    <div className={`${styles.root} ${className} ${isActive && styles.isActive}`} onClick={() => onClick(task)}>
       <div className={styles.profile}>
         <Avatar image={task.profile?.avatar}/>
         <div className={styles.icons}>

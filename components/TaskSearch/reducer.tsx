@@ -7,7 +7,9 @@ export interface TaskSearchState {
   total: number,
   page: number,
   filter: any,
-  sort?: string,
+  useLocationFilter: boolean,
+  exactLocation: boolean
+  sort?: {},
   sortOrder?: string
 }
 
@@ -17,6 +19,10 @@ const initialState: TaskSearchState = {
   total: 0,
   page: 1,
   filter: {},
+  sort: 'id',
+  sortOrder: 'DESC',
+  useLocationFilter: false,
+  exactLocation: false
 }
 
 export default function TaskSearchReducer(state = {...initialState}, action) {
@@ -31,7 +37,12 @@ export default function TaskSearchReducer(state = {...initialState}, action) {
       state.filter = action.payload;
       break
     case ActionTypes.TASK_LIST_SET_SORT:
-        state.sort = action.payload;
+      state.sort = action.payload;
+      break
+    case ActionTypes.TASK_LIST_SET_USE_LOCATION_FILTER:
+      console.log("TASK_LIST_SET_USE_LOCATION_FILTER", action.payload)
+      state.useLocationFilter = action.payload.useFilter;
+      state.exactLocation = action.payload.exactLocation;
       break
     case ActionTypes.FETCH_TASK_LIST_REQUEST:
       state.listLoading = true;

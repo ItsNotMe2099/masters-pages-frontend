@@ -33,6 +33,7 @@ const SearchTaskListView = (props: Props) => {
   const tasks = useSelector((state: IRootState) => state.taskSearch.list)
   const total = useSelector((state: IRootState) => state.taskSearch.total)
   const page = useSelector((state: IRootState) => state.taskSearch.page)
+  const role = useSelector((state: IRootState) => state.profile.role)
 
   useEffect(() => {
     if(router.query.filter) {
@@ -73,7 +74,7 @@ const SearchTaskListView = (props: Props) => {
   return (
     <>
     <Header {...props}/>
-    <div className={styles.filters}>
+    <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
         <SearchTaskFilter initialValues={getQueryFilter()}/>
       </div>

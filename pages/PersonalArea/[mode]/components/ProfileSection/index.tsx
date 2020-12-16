@@ -1,3 +1,4 @@
+import Avatar from "components/ui/Avatar";
 import * as React from "react";
 import Button from "components/ui/Button";
 import Input from "components/ui/Inputs/Input";
@@ -13,7 +14,7 @@ const ProfileSection = (props) => {
   return (
     <div className={styles.root}>
       <div className={styles.details}>
-        <div className={styles.avatar}><img src={`${getMediaPath(profile?.photo)}`}/></div>
+        <div className={styles.avatar}><Avatar image={profile?.photo}/> </div>
         <div className={styles.detailsInfo}>
           <div className={styles.location}><label>Location:</label> <span>{profile?.city}</span></div>
           <div className={styles.stat}>
