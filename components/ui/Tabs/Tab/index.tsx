@@ -21,7 +21,8 @@ const Tab = ({name, link, style, onClick, isActive}: Props) => {
 
   return (
     <Link href={`${link}`}>
-      <a className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${style === 'round' && styles.round} ${style === 'outline' && styles.outline} ${isActive && styles.active}`} onClick={handleClick}>{name}</a>
+      <a className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${style === 'round' && styles.round} ${style === 'outline' && styles.outline} ${isActive && styles.active}`} onClick={handleClick}>{name}
+      </a>
     </Link>
   )
 }

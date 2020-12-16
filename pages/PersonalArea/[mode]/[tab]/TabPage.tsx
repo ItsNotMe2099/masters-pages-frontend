@@ -1,6 +1,6 @@
 import { changeRole, fetchProfile } from "components/Profile/actions";
 import Tabs from "components/ui/Tabs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as React from "react";
 import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
@@ -12,7 +12,6 @@ import TabOrders from "pages/PersonalArea/[mode]/components/TabOrders";
 import TabPersonal from "pages/PersonalArea/[mode]/components/TabPersonal";
 import TabPortfolio from "pages/PersonalArea/[mode]/components/TabPortfolio";
 import TabReviews from "pages/PersonalArea/[mode]/components/TabReviews";
-
 import TabSettings from "pages/PersonalArea/[mode]/components/TabSettings";
 import { IRootState } from "types";
 import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
@@ -24,6 +23,7 @@ const TabPage = (props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const role = useSelector((state: IRootState) => state.profile.role)
   const { mode, tab } = router.query
+  const [show, setIsShow] = useState(false)
 
   useEffect(() => {
     if(role && mode && role != mode){
@@ -64,6 +64,7 @@ const TabPage = (props) => {
 
         </div>
         <ProfileSection/>
+        <div className={styles.notMobile}>
         <Tabs style={'outline'} tabs={tabs} activeTab={tab as string}/>
         <div className={styles.tab}>
           {tab === 'personal' && <TabPersonal {...props}/>}
@@ -72,6 +73,19 @@ const TabPage = (props) => {
           {tab === 'orders' && <TabOrders {...props}/>}
           {tab === 'messages' && <TabMessages {...props}/>}
           {tab === 'settings' && <TabSettings {...props}/>}
+        </div>
+        </div>
+        <div className={styles.mobile}>
+          {tabs.map(item => (
+            <a className={styles.dropdown} onClick={() => show ? setIsShow(false) : setIsShow(true)}><span>{item.name}</span> <img src="/img/icons/arrowDown.svg" alt=""/>
+                {item.key === 'personal' && show ? <TabPersonal {...props}/> : null}
+                {item.key === 'portfolio' && show ? <TabPortfolio {...props}/> :null}
+                {item.key === 'reviews' && <TabReviews {...props}/>}
+                {item.key === 'orders' && show ? <TabOrders {...props}/> : null}
+                {item.key === 'messages' && show ? <TabMessages {...props}/> : null}
+                {item.key === 'settings' && show ? <TabSettings {...props}/> : null}
+            </a>
+          ))}
         </div>
         <Footer/>
       </div>
