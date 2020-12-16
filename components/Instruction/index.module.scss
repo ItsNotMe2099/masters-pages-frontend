@@ -20,8 +20,17 @@
     }
 }
 
-.columns{
+.images{
     display: flex;
+    position: relative;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+  }
+}
+
+.texts{
+    display: flex;
+    margin-top: 109px;
   @media screen and (max-width: $sm-max) {
     flex-direction: column;
   }
@@ -29,6 +38,7 @@
 
 .columnItem{
     display: flex;
+    flex: 1;
     flex-direction: column;
     @media screen and (max-width: $sm-max){
         flex-direction: column;
@@ -37,9 +47,12 @@
 }
 
 .text{
+    color: #000000;
     @include lg{
         font-size: 24px;
         line-height: 29px;
+        flex: 1;
+        margin-top: 109px;
     }
     @media screen and (max-width: $sm-max){
         font-size: 18px;
@@ -61,9 +74,7 @@
 }
 
 .icon{
-    @include lg{
-        margin-bottom: 109px;
-    }
+    margin: auto;
     @media screen and (max-width: $sm-max){
         width: 60px;
         height: 60px;
@@ -71,8 +82,11 @@
     }
 }
 
-.wave {
-    margin-bottom: 196px;
+.waveLeft {
+    position: absolute;
+    right: 56%;
+    bottom: 70%;
+    width: 20%;
     @media screen and (max-width: $sm-max){
         display: none;
     }
@@ -82,4 +96,33 @@
         }
         margin: 19px 0;
     }
+}
+
+.waveRight {
+    position: absolute;
+    left: 56%;
+    bottom: 75%;
+    width: 20%;
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        margin: 19px 0;
+    }
+}
+
+.wave {
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        margin: 19px auto;
+    }
+}
+
+.waveContainer{
+    display: flex;
 }

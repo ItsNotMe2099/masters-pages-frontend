@@ -38,6 +38,7 @@
 }
 
 .icon{
+    flex: 1;
     @include lg{
         margin-bottom: 39px;
     }
