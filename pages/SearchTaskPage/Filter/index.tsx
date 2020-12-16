@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const queryString = require('query-string')
 interface Props {
   initialValues?: any
+  collapsed?: boolean
 }
 const SearchTaskFilter = (props: Props) => {
   const dispatch = useDispatch()

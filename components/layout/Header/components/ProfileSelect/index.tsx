@@ -1,6 +1,7 @@
 import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import { changeRole } from "components/Profile/actions";
 import ArrowDropDown from "components/svg/ArrowDropDown";
+import Avatar from "components/ui/Avatar";
 import { I18nContext } from "next-i18next";
 import { useRouter } from "next/router";
 import { useContext, useRef, useState } from "react";
@@ -45,8 +46,7 @@ export const ProfileSelect = () => {
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={cx(styles.dropDownTrigger, { [styles.dropDownTriggerActive]: isActive })}>
-        <div className={styles.photo}>{profile?.photo ? <img src={`${getMediaPath(profile?.photo)}`} alt=""/> :
-          <div className={styles.emptyPhoto}></div>}</div>
+        <div className={styles.photo}><Avatar size={'small'} image={profile?.photo}/></div>
         <ArrowDropDown/>
 
       </a>

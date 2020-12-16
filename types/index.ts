@@ -9,6 +9,7 @@ import { ModalState } from "components/Modal/reducer";
 import { ProfileState } from "components/Profile/reducer";
 import { SkillState } from "components/Skill/reducer";
 import { TaskSearchState } from "components/TaskSearch/reducer";
+import { TaskUserState } from "components/TaskUser/reducer";
 import { CountryInputState } from "components/ui/Inputs/InputCountry/reducer";
 import locationInputReducer, { LocationInputState } from "components/ui/Inputs/InputLocation/reducer";
 import categoryInputReducer, { CategoryInputState } from "components/ui/Inputs/InputCategory/reducer"
@@ -33,7 +34,8 @@ export interface IRootState {
   changePassword: ChangePasswordState,
   skill: SkillState,
   modal: ModalState,
-  taskSearch: TaskSearchState
+  taskSearch: TaskSearchState,
+  taskUser: TaskUserState
 }
 export interface ConfirmDataModal {
   cancelText?: string,
@@ -124,6 +126,7 @@ export interface IRequestData {
   data?: any
   token?: string
   host?: string
+  profileRole?: string
 }
 
 export interface IResponse {

@@ -36,8 +36,8 @@ const SearchTaskListView = (props: Props) => {
 
   useEffect(() => {
     if(router.query.filter) {
-      console.log("Set filter", JSON.parse(router.query.filter))
-      dispatch(setFilterTaskSearch(JSON.parse(router.query.filter)));
+      console.log("Set filter", JSON.parse((router.query as any).filter))
+      dispatch(setFilterTaskSearch(JSON.parse((router.query as any).filter)));
     }
   }, [])
 
@@ -62,8 +62,8 @@ const SearchTaskListView = (props: Props) => {
   }
   const getQueryFilter = () => {
     try {
-      if(router.query.filter) {
-        return JSON.parse(router.query.filter);
+      if((router.query as any).filter) {
+        return JSON.parse((router.query as any).filter);
       }
     }catch (e) {
 

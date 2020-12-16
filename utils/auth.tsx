@@ -23,12 +23,23 @@ export const logout = () => {
 const getUser = async (token) => {
   try {
     const res = await request({ url: '/api/auth/currentUser', token, method: 'GET' })
-   if(res.err){
-     return;
-   }
+    if(res.err){
+      return;
+    }
     return res.data;
   }catch (e) {
     console.error("ErrorCurrentUser", e);
+  }
+}
+const getProfile = async (token) => {
+  try {
+    const res = await request({ url: '/api/profile', token , method: 'GET' })
+    if(res.err){
+      return;
+    }
+    return res.data;
+  }catch (e) {
+    console.error("ErrorCurrentProfile", e);
   }
 }
 export const withAuthSync = (WrappedComponent) =>

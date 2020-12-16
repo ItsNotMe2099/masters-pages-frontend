@@ -1,8 +1,8 @@
 import { IRequestData, IResponse } from 'types'
 
 function request(requestData: IRequestData): Promise<IResponse> {
-  const { url, method, data, token, host } = requestData
-  const defaultHost = `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}`
+  const { url, method, data, token, host, profileRole } = requestData
+  const defaultHost = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}`
 console.log(`Bearer ${token}` )
   return (
     fetch(`${host || defaultHost}${url}`, {
@@ -10,6 +10,7 @@ console.log(`Bearer ${token}` )
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : '',
+        'profile-role': profileRole
       },
       body: data ? JSON.stringify(data) : null,
     })

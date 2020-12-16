@@ -4,6 +4,7 @@ import phoneConfirmReducer from 'components/Auth/PhoneConfirm/reducer';
 import registrationCompleteReducer from 'components/Auth/RegistrationPage/reducer';
 import authSignInReducer from 'components/Auth/SignIn/reducer';
 import TaskSearchReducer from "components/TaskSearch/reducer";
+import TaskUserReducer from "components/TaskUser/reducer";
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
 import PWRecoveryReducer from 'components/Auth/PWRecovery/reducer'
@@ -36,5 +37,6 @@ export default combineReducers({
   changePassword: PWChangeReducer,
   skill: SkillReducer,
   modal: ModalReducer,
-  taskSearch: TaskSearchReducer
+  taskSearch: TaskSearchReducer,
+  taskUser: TaskUserReducer,
 })

@@ -56,7 +56,7 @@
   flex-direction: row;
   position: relative;
   z-index: 7;
-  svg{
+  > svg{
     width: 10px;
     height: 7px;
     path {
@@ -64,7 +64,7 @@
     }
   }
   @media screen and (max-width: $sm-max){
-    svg{
+    > svg{
       width: 5px;
       height: 4px;
       path {
@@ -79,7 +79,7 @@
   }
 }
 .dropDownTriggerActive{
-  svg{
+  > svg{
     path {
       fill: black;
     }

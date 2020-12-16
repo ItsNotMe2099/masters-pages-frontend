@@ -9,11 +9,11 @@ import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 interface Props{
   collapsed: boolean
   handleSubmit:() => void
-  onChange?:(data) => void
-  categoryId: number,
+  onChange?:(data: any) => void
+  categoryId: number
   initialValues: any
 }
-let SearchTaskForm = (props: Props) => {
+let SearchTaskForm = (props) => {
   const { handleSubmit, collapsed } = props
 
   return (
@@ -126,7 +126,7 @@ let SearchTaskForm = (props: Props) => {
   )
 }
 
- SearchTaskForm   = reduxForm ({
+SearchTaskForm  = reduxForm ({
   form: 'searchTaskForm',
 }) (SearchTaskForm)
 
