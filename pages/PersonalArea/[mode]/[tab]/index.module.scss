@@ -45,3 +45,24 @@ font-size: 18px;
 .tab{
   padding: 35px 0px 35px;
 }
+
+.notMobile{
+  @media screen and (max-width: $sm-max) {
+    display: none;
+  }
+}
+
+.mobile{
+  display: none;
+  @media screen and (max-width: $sm-max) {
+    display: block;
+  }
+}
+
+.dropdown{
+  display: flex;
+  padding: 25px 20px;
+  span{
+    flex: 1;
+  }
+}
