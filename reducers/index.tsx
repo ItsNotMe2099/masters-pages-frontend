@@ -18,6 +18,8 @@ import CreateTaskReducer from 'components/CreateTaskPage/reducer';
 import ProfileReducer from 'components/Profile/reducer';
 import SkillReducer from 'components/Skill/reducer';
 import ModalReducer from 'components/Modal/reducer';
+import SavedSearchesReducer from 'components/SavedSearches/reducer';
+import SavedPeopleReducer from 'components/SavedPeople/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -39,4 +41,6 @@ export default combineReducers({
   modal: ModalReducer,
   taskSearch: TaskSearchReducer,
   taskUser: TaskUserReducer,
+  savedSearch: SavedSearchesReducer,
+  savedPeople: SavedPeopleReducer
 })

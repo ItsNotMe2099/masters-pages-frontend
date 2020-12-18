@@ -17,6 +17,9 @@ import { IRootState } from "types";
 import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import { TabSelect } from "components/TabSelect";
+import TabSaved from "../components/TabSaved";
 const TabPage = (props) => {
   const router = useRouter()
   const dispatch = useDispatch();
@@ -36,6 +39,7 @@ const TabPage = (props) => {
     {name: 'Reviews and rating', key: 'reviews'},
     {name: 'Orders', key: 'orders'},
     {name: 'Messages', key: 'messages'},
+    {name: 'Saved', key: 'saved'},
     {name: 'Settings', key: 'settings'},
   ].map(item => {
     return{
@@ -64,7 +68,6 @@ const TabPage = (props) => {
 
         </div>
         <ProfileSection/>
-        <div className={styles.notMobile}>
         <Tabs style={'outline'} tabs={tabs} activeTab={tab as string}/>
         <div className={styles.tab}>
           {tab === 'personal' && <TabPersonal {...props}/>}
@@ -72,20 +75,8 @@ const TabPage = (props) => {
           {tab === 'reviews' && <TabReviews {...props}/>}
           {tab === 'orders' && <TabOrders {...props}/>}
           {tab === 'messages' && <TabMessages {...props}/>}
+          {tab === 'saved' && <TabSaved {...props}/>}
           {tab === 'settings' && <TabSettings {...props}/>}
-        </div>
-        </div>
-        <div className={styles.mobile}>
-          {tabs.map(item => (
-            <a className={styles.dropdown} onClick={() => show ? setIsShow(false) : setIsShow(true)}><span>{item.name}</span> <img src="/img/icons/arrowDown.svg" alt=""/>
-                {item.key === 'personal' && show ? <TabPersonal {...props}/> : null}
-                {item.key === 'portfolio' && show ? <TabPortfolio {...props}/> :null}
-                {item.key === 'reviews' && <TabReviews {...props}/>}
-                {item.key === 'orders' && show ? <TabOrders {...props}/> : null}
-                {item.key === 'messages' && show ? <TabMessages {...props}/> : null}
-                {item.key === 'settings' && show ? <TabSettings {...props}/> : null}
-            </a>
-          ))}
         </div>
         <Footer/>
       </div>

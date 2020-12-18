@@ -11,6 +11,7 @@ interface Props {
   whiteRed?: boolean
   uppercase?: boolean
   borderGrey?: boolean
+  borderLightGrey?: boolean
   borderRed?: boolean,
   bold?: boolean
   closeBtn?: boolean
@@ -42,6 +43,7 @@ export default function Button(props: Props) {
        ${props.fullWidth && styles.fullWidth}
        ${props.white && styles.white}
        ${props.borderGrey && styles.borderGrey}
+       ${props.borderLightGrey && styles.borderLightGrey}
        ${props.borderRed && styles.borderRed}
        ${props.whiteRed && styles.whiteRed}
        ${props.uppercase && styles.uppercase}
