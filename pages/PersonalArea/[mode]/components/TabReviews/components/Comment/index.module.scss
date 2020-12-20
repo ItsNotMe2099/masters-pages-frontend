@@ -46,6 +46,7 @@
   font-size: 14px;
   color: #6D718C;
   margin-top: 7px;
+  width: 90%;
 }
 
 .images{
@@ -58,4 +59,50 @@
 
 .commentBottom{
   padding-top: 18px;
+}
+
+.number{
+  border-radius: 3px;
+  background: #27C60D;
+  opacity: 0.5;
+  display: flex;
+  width: 56px;
+  height: 56px;
+  span{
+    font-weight: 500;
+    font-size: 14px;
+    color: #2C7021;
+    margin: auto;
+  }
+}
+
+.arrow{
+  float: right;
+  margin-right: 17px;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.comment{
+  border: 0.3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #FFFFFF;
+  padding: 11px 0 16px 15px;
+  width: 75%;
+  float: right;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.textSection{
+  font-weight: 500;
+  font-size: 13px;
+  color: #6D718C;
+  margin-top: 8px;
 }

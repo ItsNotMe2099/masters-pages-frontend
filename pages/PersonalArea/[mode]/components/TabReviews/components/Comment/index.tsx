@@ -20,14 +20,21 @@ const Comment = (props: Props) => {
         <div className={styles.images}>
           <img src="/img/icons/Rectangle 1134431.png" alt=""/>
           <img src="/img/icons/Rectangle 1134432.png" alt=""/>
-          <img src="/img/icons/Rectangle 1134433.png" alt=""/>
+          <div className={styles.number}><span>+15</span></div>
         </div>
       </div>
     </div>
         <div className={styles.commentBottom}>
           <div className={styles.comment}>
-            
+            <Avatar mini/>
+            <div className={styles.textSection}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices risus a purus accumsan felis morbi ipsum, urna arcu. Gravida hac eget ullamcorper enim id justo, nec. Nunc at faucibus cras fusce. Et convallis risus, fames in id nibh. In volutpat consectetur risus metus massa venenatis. Bibendum.</div>
+            <div className={styles.images}>
+              <img src="/img/icons/Rectangle 1134431.png" alt=""/>
+              <img src="/img/icons/Rectangle 1134432.png" alt=""/>
+              <div className={styles.number}><span>+3</span></div>
           </div>
+          </div>
+          <img className={styles.arrow} src="/img/icons/commentArrow.svg" alt=""/>
         </div>
       </div>
   )

@@ -6,7 +6,7 @@ interface Props {
 const Avatar = (props: Props) => {
   return (
     <div className={styles.root}>
-      <img className={styles.avatar} src="/img/icons/Ellipse 2.png" alt=''/>
+      <img className={props.mini ? styles.avatarMini : styles.avatar} src="/img/icons/Ellipse 2.png" alt=''/>
       <div className={props.mini ? styles.otherMini : styles.other}>
         <div className={props.mini ? styles.nameMini : styles.name}>Ronald Richards</div>
         <div className={props.mini? styles.stars__mini : styles.stars}>
