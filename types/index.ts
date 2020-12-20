@@ -17,6 +17,8 @@ import categoryInputReducer, { CategoryInputState } from "components/ui/Inputs/I
 import subCategoryInputReducer, { SubCategoryInputState } from "components/ui/Inputs/InputSubCategory/reducer"
 import subCategoryCheckboxReducer, { SubCategoryCheckboxState } from 'components/ui/Form/MasterProfile/CheckboxSubCategory/reducer'
 import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
+import { SavedSearchesState } from "components/SavedSearches/reducer";
+import { SavedPeopleState } from "components/SavedPeople/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -38,6 +40,8 @@ export interface IRootState {
   taskSearch: TaskSearchState,
   taskUser: TaskUserState,
   taskOffer: TaskOfferState
+  savedSearch: SavedSearchesState
+  savedPeople: SavedPeopleState
 }
 export interface ConfirmDataModal {
   cancelText?: string,
@@ -120,6 +124,29 @@ export interface ITask{
   profile: ProfileData
   photos: string[]
 }
+
+export interface ISavedSearch{
+
+}
+
+export interface ISavedPeople{
+  id: number,
+  profileId: number,
+  title: string
+  description: string
+  categoryId: number,
+  subCategoryId: number,
+  masterRole: string
+  country: string
+  city: string
+  address: string
+  geonameid: number,
+  location: {
+    lng: number,
+    lat: number,
+  }
+}
+
 export interface BaseAction {
   type: string
   payload: any
