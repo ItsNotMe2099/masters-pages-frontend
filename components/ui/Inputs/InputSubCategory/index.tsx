@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSubCategory } from "./actions";
+import { fetchSubCategory, resetSubCategory } from "./actions";
 
 interface Props {
 
@@ -33,6 +33,11 @@ export default function InputSubCategory(props) {
 
   useEffect(() => {
     console.log("change CategoryId", props.categoryId);
+    if(props.categoryId) {
+      dispatch(fetchSubCategory(props.categoryId))
+    }else{
+      dispatch(resetSubCategory());
+    }
   }, [props.categoryId])
 
   return (

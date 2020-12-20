@@ -5,12 +5,17 @@
   border-radius: 11px;
   padding: 0px;
   margin: 0px;
+  font-size: 14px;
   &::placeholder{
     color: #050505;
     opacity: 1;
     font-size: 14px;
     font-weight: 600;
   }
+}
+.inputSmall{
+  height: 44px;
+  border-radius: 6px;
 }
 .withPadding{
   padding: 0 16px;

@@ -51,6 +51,15 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.SKILL_CATEGORY_MODAL_OPEN:
       state.modalKey = 'skillCategoryForm'
       break
+    case ActionTypes.TASK_UPDATE_MODAL_OPEN:
+      state.modalKey = 'tabOrderEditModal'
+      break
+    case ActionTypes.TASK_OFFER_ACCEPT_OPEN:
+      state.modalKey = 'taskOfferAcceptModal'
+      break
+    case ActionTypes.TASK_SHARE_OPEN:
+      state.modalKey = 'taskShareModal'
+      break
     case ActionTypes.CONFIRM_MODAL_OPEN:
       state.modalKey = 'confirm'
       state.confirmData = action.payload

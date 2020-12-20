@@ -14,6 +14,7 @@ interface Props {
   noMargin?: boolean
   labelType: 'placeholder' | 'cross' | 'static',
   onClick?: (any) => void
+  onIconClick?: (e) => void
 }
 
 export default function Input({children, ...props}: Props) {
@@ -24,7 +25,7 @@ export default function Input({children, ...props}: Props) {
       <div className={styles.inputContainer}>
         <BaseInput  {...props} placeholder={props.labelType === 'placeholder' ?  props.label : props.placeholder} withIcon={!!props.icon} />
         {props.labelType === 'cross' && <label className={styles.labelCross}>{props.label}</label>}
-        {props.icon && <div className={styles.icon}> {props.icon}</div>}
+        {props.icon && <div className={styles.icon} onClick={props.onIconClick}> {props.icon}</div>}
        </div>
       {children}
       <ErrorInput {...props} />

@@ -19,6 +19,10 @@ interface Props {
   meta?: any,
   label?: string,
   labelType?: any,
+  size?: any,
+  withIcon?: boolean,
+  showEmpty?: boolean,
+  emptyText?: string
 
 }
 
@@ -29,9 +33,19 @@ const SelectInput = (props: Props) => {
   const valueInputRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [currentLabel, setCurrentLabel] = useState('');
-  console.log("SelectValue", restrictedValues);
+
+  const getSizeClass = (size) => {
+    console.log("Size class", size)
+    switch (size) {
+      case 'small':
+        return styles.dropDownSmall;
+      case 'normal':
+      default:
+        return styles.dropDownNormal;
+    }
+  }
   const onClick = (e) => {
-    e.preventDefault()
+    e?.preventDefault()
     if (!isActive && onOpenDropDown) {
       onOpenDropDown();
     }
@@ -58,20 +72,32 @@ const SelectInput = (props: Props) => {
     setIsActive(false);
     console.log("setValue", item.value)
     if (searchInputRef && searchInputRef?.current) {
-
       searchInputRef.current.value = '';
     }
 
+  }
+  const handleOptionEmptyClick = (e) => {
+    e.preventDefault()
+    input.onChange(null);
+    setIsActive(false);
+    if (searchInputRef && searchInputRef?.current) {
+      searchInputRef.current.value = '';
+    }
+    setCurrentLabel('');
   }
   useEffect(() => {
     if(!input){
       return;
     }
+    let _setCurrentLabel = null;
     if(props.allowCustomInput){
-      setCurrentLabel(props.changeWithValue ? input.value.label :  input.value )
+      _setCurrentLabel = (props.changeWithValue ? input.value.label :  input.value )
     }else {
-      setCurrentLabel(props.options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
+      _setCurrentLabel = (options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
     }
+    console.log("_setCurrentLabel", _setCurrentLabel)
+
+    setCurrentLabel(_setCurrentLabel);
     }, [input, options])
 
   const handleActiveOptionClick = (e) => {
@@ -81,10 +107,11 @@ const SelectInput = (props: Props) => {
   return (
     <Input {...props} onClick={onClick}
            input={{value: currentLabel, onChange: null}}
-           icon={<a>
-             <img src='/img/field/arrowDown.svg' alt=''/></a>
+           onIconClick={onClick}
+           icon={
+             <img src={`/img/field/${props.size === 'small' ? 'arrowDownRed' : 'arrowDown'}.svg`} alt=''/>
            }>
-      <div ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive, [styles.dropDownWithLabelCross]: props.labelType === 'cross' })}>
+      <div ref={dropdownRef} className={`${cx(styles.dropDown, { [styles.dropDownActive]: isActive, [styles.dropDownWithLabelCross]: props.labelType === 'cross' })} ${getSizeClass(props.size)}`}>
         <div className={styles.inputContainer}>
           <BaseInput onChange={(e) => {
             if(props.allowCustomInput){
@@ -96,18 +123,25 @@ const SelectInput = (props: Props) => {
             value={props.allowCustomInput ? input.value : null}
             withBorder={false}
             parentRef={searchInputRef}/>
-          <a className={styles.dropDownTrigger}>
-            <img src='/img/field/arrowDown.svg' alt=''/>
-          </a>
+          <div className={styles.dropDownTrigger}>
+            <img src={`/img/field/${props.size === 'small' ? 'arrowDownRed' : 'arrowDown'}.svg`} alt=''/>
+          </div>
         </div>
 
         <ul>
+          {props.showEmpty && <li className={styles.dropdownItem}>
+            <a href="" onClick={handleOptionEmptyClick}>
+              {props.withIcon && <div
+                className={`${input.value ? styles.circle__active : styles.circle}`}></div>}
+              <span className={styles.dropdownItemLabel}>{props.emptyText || 'Не использовать'}</span>
+            </a>
+          </li>}
           {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (
             <li className={styles.dropdownItem}
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
-                <div
-                  className={`${(props.changeWithValue ? input.value.value === item.value : input.value === item.value) ? styles.circle__active : styles.circle}`}></div>
+                {props.withIcon && <div
+                  className={`${(props.changeWithValue ? input.value.value === item.value : input.value === item.value) ? styles.circle__active : styles.circle}`}></div>}
                 <span className={styles.dropdownItemLabel}>{item.label}</span>
               </a>
             </li>
@@ -123,6 +157,7 @@ SelectInput.defaultProps = {
   labelType: 'placeholder',
   onSearchChange: () => {},
   onOpenDropDown: () => {},
-  restrictedValues: []
+  restrictedValues: [],
+  withIcon: true
 }
 export default SelectInput

@@ -7,3 +7,5 @@ export const fetchSubCategory = (categoryId: number, search?: string) => action(
     method: 'GET',
   }
 })
+
+export const resetSubCategory = () => action(ActionTypes.RESET_SUBCATEGORIES)

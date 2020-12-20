@@ -1,5 +1,6 @@
 import { confirmOpen, modalClose, skillCategoryModalOpen, skillModalOpen } from "components/Modal/actions";
 import { deleteSkill, deleteSkillCategory, fetchSkillList } from "components/Skill/actions";
+import TaskShareModal from "components/TaskShareModal";
 import Button from "components/ui/Button";
 import Loader from "components/ui/Loader";
 import CategoryModal from "pages/PersonalArea/[mode]/components/TabPortfolio/components/CategoryModal";

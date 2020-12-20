@@ -2,14 +2,18 @@
 .root {
   position: relative;
   border-radius: 21px;
-  width: 441px;
   background: white;
   padding: 97px 67px 64px;
-  z-index: 5;
   margin:  auto;
   @media screen and (max-width: $sm-max){
-    width: 100%;
+    width: 100% !important;
   }
+}
+.rootNormal{
+  width: 441px;
+}
+.rootLarge{
+  width: 946px
 }
 
 .close {

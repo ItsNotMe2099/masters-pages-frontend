@@ -6,12 +6,12 @@ import styles from './index.module.scss'
 let PriceSelectForm = props => {
   const { handleSubmit } = props
   const handleHourFieldChange = () => {
-    props.change('budget', "");
-    props.change('estimate', "");
+    props.change('budget', null);
+    props.change('estimate', null);
   }
   const handleFixedFieldChange = () => {
-    props.change('ratePerHour', "");
-    props.change('maxWeekHours', "");
+    props.change('ratePerHour', null);
+    props.change('maxWeekHours', null);
   }
   return (
     <div className={styles.root}>
@@ -28,7 +28,7 @@ let PriceSelectForm = props => {
               min="0.01"
               max="100.00"
               step="0.01"
-              parse={value => parseInt(value, 10)}
+              parse={value => value ? parseFloat(value) : ''}
               onChange={handleHourFieldChange}
             />
           </div>
@@ -42,7 +42,7 @@ let PriceSelectForm = props => {
               type={'number'}
               min="1"
               max="40"
-              parse={value => parseInt(value, 10)}
+              parse={value => value ? parseFloat(value) : ''}
               onChange={handleHourFieldChange}
             />
           </div>
@@ -68,7 +68,7 @@ let PriceSelectForm = props => {
               min="1"
               max="5000"
               type={'number'}
-              parse={value => parseInt(value, 10)}
+              parse={value => value ? parseFloat(value) : ''}
               onChange={handleFixedFieldChange}
             />
           </div>
@@ -82,7 +82,7 @@ let PriceSelectForm = props => {
               type={'number'}
               min="1"
               max="30"
-              parse={value => parseInt(value, 10)}
+              parse={value => value ? parseFloat(value) : ''}
               onChange={handleFixedFieldChange}
             />
           </div>

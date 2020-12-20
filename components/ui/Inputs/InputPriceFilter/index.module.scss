@@ -1,0 +1,66 @@
+.root{
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.dropDown {
+  background: #ffffff;
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  left: -2px;
+  border: 1px solid #909090;
+  visibility: hidden;
+  //transform: translateY(-20px);
+  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  //box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 3;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+.dropDownActive{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropDownTrigger {
+  position: absolute;
+  top: 0px;
+  bottom: 2px;
+  right: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+
+.inputContainer{
+  position: relative;
+  input{
+    height: 51px;
+  }
+}
+
+
+.inputLabel{
+  position: absolute;
+  padding: 0 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #828282;
+  top: 10px;
+  left: 15px;
+
+  &__none{
+    display: none;
+  }
+}
+
+.container{
+  padding: 16px;
+}

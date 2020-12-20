@@ -1,6 +1,6 @@
 import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import { I18nContext } from "next-i18next";
-import { ReactElement, useContext, useRef, useState } from "react";
+import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
 import nextI18 from "i18n";
@@ -11,7 +11,8 @@ interface OptionItem{
 interface Props {
   options: OptionItem[]
   item: (item: OptionItem) => ReactElement,
-  onChange?: (item) => void
+  onChange?: (item) => void,
+  value?: any,
 }
 export const DropDown = (props: Props) => {
   const dropdownRef = useRef(null);
@@ -23,6 +24,12 @@ export const DropDown = (props: Props) => {
 
   const [value, setValue] = useState(props.options[0]);
 
+  useEffect(() => {
+    console.log("SOrtwewewe", props.value, props.options.filter(item => !value || item.value != value.value))
+    if(props.value){
+      setValue(props.options.find(item => item.value === props.value))
+    }
+  }, [props.value, props.options])
   const handleOptionClick = (e, item) => {
     e.preventDefault()
     console.log("SetLang", item.value);
@@ -52,8 +59,7 @@ export const DropDown = (props: Props) => {
                  alt=''/></a></li>
           }
           {props.options.filter(item => !value || item.value != value.value).map(item => (
-            <li className={styles.dropdownItem}
-            >
+            <li className={styles.dropdownItem}>
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
                 {props.item(item)}
               </a>

@@ -3,6 +3,7 @@ import authSignUpReducer from 'components/Auth/SignUp/reducer';
 import phoneConfirmReducer from 'components/Auth/PhoneConfirm/reducer';
 import registrationCompleteReducer from 'components/Auth/RegistrationPage/reducer';
 import authSignInReducer from 'components/Auth/SignIn/reducer';
+import TaskOfferReducer from "components/TaskOffer/reducer";
 import TaskSearchReducer from "components/TaskSearch/reducer";
 import TaskUserReducer from "components/TaskUser/reducer";
 import {combineReducers} from 'redux';
@@ -39,4 +40,5 @@ export default combineReducers({
   modal: ModalReducer,
   taskSearch: TaskSearchReducer,
   taskUser: TaskUserReducer,
+  taskOffer: TaskOfferReducer,
 })

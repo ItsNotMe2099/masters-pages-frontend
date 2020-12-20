@@ -12,7 +12,6 @@ const initialState: SubCategoryInputState = {
 export default function authReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.FETCH_SUBCATEGORIES:
-
       break
     case ActionTypes.FETCH_SUBCATEGORIES + ApiActionTypes.SUCCESS:
       console.log("action.payload", action.payload)
@@ -23,6 +22,9 @@ export default function authReducer(state = {...initialState}, action) {
         }
       });
       break
+    case ActionTypes.RESET_SUBCATEGORIES:
+      state.subCategories = [];
+      break;
   }
   return state
 }

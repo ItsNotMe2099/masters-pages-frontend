@@ -15,14 +15,15 @@ function* TaskSearchSaga() {
       const sort = yield select((state: IRootState) => state.taskSearch.sort)
       const sortOrder = yield select((state: IRootState) => state.taskSearch.sortOrder)
       const page = yield select((state: IRootState) => state.taskSearch.page)
-      console.log("Sort", sort)
+      console.log("FETCH_TASK_LIST", action.payload)
       yield put(fetchTaskSearchListRequest({
           ...filter,
           sort,
         sortOrder,
           page,
         ...(useLocationFilter ? {exactLocation} : {}),
-          limit: 10
+          limit: 10,
+        ...action.payload
         }));
 
     })

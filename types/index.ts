@@ -8,6 +8,7 @@ import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/re
 import { ModalState } from "components/Modal/reducer";
 import { ProfileState } from "components/Profile/reducer";
 import { SkillState } from "components/Skill/reducer";
+import { TaskOfferState } from "components/TaskOffer/reducer";
 import { TaskSearchState } from "components/TaskSearch/reducer";
 import { TaskUserState } from "components/TaskUser/reducer";
 import { CountryInputState } from "components/ui/Inputs/InputCountry/reducer";
@@ -35,7 +36,8 @@ export interface IRootState {
   skill: SkillState,
   modal: ModalState,
   taskSearch: TaskSearchState,
-  taskUser: TaskUserState
+  taskUser: TaskUserState,
+  taskOffer: TaskOfferState
 }
 export interface ConfirmDataModal {
   cancelText?: string,
@@ -67,6 +69,7 @@ export interface Category{
   id?: number
   name?: string
   icon: string,
+  translations: any[]
 }
 export interface SkillData{
   id?: number
@@ -103,6 +106,8 @@ export interface ITask{
     lng: number,
     lat: number,
   },
+  category: Category,
+  subCategory: Category,
   isExactLocation: boolean
   ratePerHour: number,
   maxWeekHours: number,

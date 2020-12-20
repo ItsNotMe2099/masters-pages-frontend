@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void,
+  size?: 'normal' | 'large'
   title?: string,
   image?: string,
   children?: any,
@@ -51,6 +52,15 @@ export default function Modal(props: Props) {
       bodyRef.current.style.visibility = 'inherit'
     }
   }, [props.loading])
+  const getSizeClass = (size) => {
+    switch (size) {
+      case 'large':
+        return styles.rootLarge;
+      case 'normal':
+      default:
+        return styles.rootNormal;
+    }
+  }
   return (
     <ReactModal
     style={customStyles}
@@ -59,7 +69,7 @@ export default function Modal(props: Props) {
     >
       <div className={styles.frame} >
         <div className={styles.overlay} onClick={props.onRequestClose}/>
-      <div className={`${styles.root} ${props.className}`}>
+      <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
         {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`}>
           <Button closeBtn onClick={props.onRequestClose}></Button>
         </div>}
@@ -78,4 +88,7 @@ export default function Modal(props: Props) {
 </div>
     </ReactModal>
   )
+}
+Modal.defaultProps = {
+  size: 'normal'
 }

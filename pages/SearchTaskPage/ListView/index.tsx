@@ -5,13 +5,14 @@ import {
   setFilterTaskSearch, setPageTaskSearch,
   setSortTaskSearch
 } from "components/TaskSearch/actions";
+import TaskShareModal from "components/TaskShareModal";
 import Button from "components/ui/Button";
 import { DropDown } from "components/ui/DropDown";
 import Input from "components/ui/Inputs/Input";
 import Loader from "components/ui/Loader";
 import { useRouter } from "next/router";
 import SearchTaskFilter from "pages/SearchTaskPage/Filter";
-import { useEffect } from "react";
+import { default as React, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { IRootState } from "types";
 import { withAuthSync } from "utils/auth";
@@ -29,20 +30,17 @@ interface Props {
 const SearchTaskListView = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter();
+  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const loading = useSelector((state: IRootState) => state.taskSearch.listLoading)
+  const sortType = useSelector((state: IRootState) => state.taskSearch.sortType)
+  const filter = useSelector((state: IRootState) => state.taskSearch.filter)
   const tasks = useSelector((state: IRootState) => state.taskSearch.list)
   const total = useSelector((state: IRootState) => state.taskSearch.total)
   const page = useSelector((state: IRootState) => state.taskSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
 
   useEffect(() => {
-    if(router.query.filter) {
-      console.log("Set filter", JSON.parse((router.query as any).filter))
-      dispatch(setFilterTaskSearch(JSON.parse((router.query as any).filter)));
-    }
-  }, [])
-
-  useEffect(() => {
+    console.log('fetch search')
     dispatch(fetchTaskSearchList())
   }, [])
 
@@ -52,6 +50,7 @@ const SearchTaskListView = (props: Props) => {
     dispatch(setSortTaskSearch(item.value));
     dispatch(resetTaskSearchList())
     dispatch(fetchTaskSearchList())
+    router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
   const handleScrollNext = () => {
     console.log("HandleNext", page)
@@ -96,18 +95,18 @@ const SearchTaskListView = (props: Props) => {
         </Sticky>
       </div>
       <div className={styles.tasks} id={'tasks-list'}>
-        {!loading && <div className={styles.tasksTobBar}>
-          <div className={styles.tasksAmount}>Tasks: <span>{total}</span></div>
+         <div className={styles.tasksTobBar}>
+           {!loading && <div className={styles.tasksAmount}>Tasks: <span>{total}</span></div>}
           {tasks.length > 0 && <div className={styles.tasksSort}>
             <span>Sort by:</span>
-            <DropDown onChange={handleSortChange} options={[{value: 'newFirst', label: 'New First'},
-              {value: 'newFirst', label: 'New First'},
+            <DropDown onChange={handleSortChange} value={sortType} options={[
+              {value: 'newFirst',  label: 'New First'},
               {value: 'highPrice', label: 'Highest price'},
               {value: 'lowPrice', label: 'Lowest price'}]}
                       item={(item) => <div>{item?.label}</div>}
             />
           </div>}
-        </div>}
+        </div>
         {(loading && total > 0) && <Loader/>}
         {total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data

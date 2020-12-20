@@ -32,11 +32,14 @@
   flex-direction: column;
   width: 32%;
 
+  max-width: 224px;
   .title {
     padding: 0;
   }
 }
-
+.paymentLarge{
+  max-width: 255px;
+}
 .avatar {
   display: flex;
   flex-direction: column;
@@ -69,23 +72,38 @@
 .top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .name {
   display: flex;
   flex: 1;
 
-  div {
-    margin-right: 11px;
-    font-weight: bold;
-    font-size: 20px;
-    color: #000;
+
+}
+.taskTitle{
+  flex: 1;
+  .title{
+    padding-top: 0px;
   }
+}
+.category{
+  margin-top: 8px;
+  font-size: 14px;
+  img{
+    margin: 0px 10px;
+  }
+}
+.nameText{
+  margin-right: 11px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
 }
 
 .time {
   display: flex;
-
+  padding-left: 15px;
   div {
     margin: auto;
     padding: 0;
@@ -148,11 +166,15 @@
 
 .btnContainer {
   margin-top: 13px;
-
+  flex-direction: row;
+  display: flex;
   button {
     color: #000;
     width: 100%;
     border: 1px solid #000000;
+    &:nth-child(2n){
+      margin-left: 8px;
+    }
   }
 }
 
@@ -185,7 +207,7 @@
   }
 }
 
-.more {
+.actionButton {
   display: flex;
 
   div {
@@ -197,4 +219,16 @@
 .comments {
   font-weight: bold;
   font-size: 12px;
+}
+.status{
+  font-size: 14px;
+  color: #909090;
+}
+.statusRed{
+  color: #E4474E;
+
+}
+.statusGreen{
+  color: #27C60D;
+
 }

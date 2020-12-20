@@ -1,4 +1,5 @@
 import InputCategory from 'components/ui/Inputs/InputCategory'
+import InputPriceFilter from "components/ui/Inputs/InputPriceFilter";
 import SelectInput from "components/ui/Inputs/SelectInput";
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import InputLocation from 'components/ui/Inputs/InputLocation'
@@ -15,7 +16,7 @@ interface Props{
 }
 let SearchTaskForm = (props) => {
   const { handleSubmit, collapsed } = props
-
+  console.log("SearchTaskForm", props.form)
   return (
     <form onSubmit={handleSubmit}>
 
@@ -26,6 +27,8 @@ let SearchTaskForm = (props) => {
               component={InputCategory}
               label="Category"
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="radius"
@@ -39,6 +42,8 @@ let SearchTaskForm = (props) => {
                 {label: 'Страна', value: 2000},
                 {label: 'Весь мир', value: null},
               ]}
+
+              withIcon={false}
               noMargin={true}
             />
             <Field
@@ -48,13 +53,18 @@ let SearchTaskForm = (props) => {
               options={[
                 {label: 'Online', value: 'online'},
               ]}
+
+              withIcon={false}
               noMargin={true}
+              showEmpty={true}
             />
             <Field
               name="price"
               label="Price"
-              component={InputCategory}
+              component={InputPriceFilter}
               noMargin={true}
+              formKey={`${collapsed ? 'collapsed' : ''}${props.form}`}
+              withIcon={false}
             />
             <Field
               name="subCategoryId"
@@ -62,12 +72,16 @@ let SearchTaskForm = (props) => {
               label="Subcategory"
               categoryId={props.categoryId}
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="geonameid"
               component={InputLocation}
               label="Location"
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="rating"
@@ -81,6 +95,8 @@ let SearchTaskForm = (props) => {
                 {label: '5', value: 5},
               ]}
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="payment"
@@ -92,6 +108,8 @@ let SearchTaskForm = (props) => {
                 {label: 'Card', value: 'card'},
               ]}
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
           </>}
           {collapsed && <>
@@ -100,6 +118,8 @@ let SearchTaskForm = (props) => {
               component={InputCategory}
               label="Category"
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="subCategoryId"
@@ -107,18 +127,24 @@ let SearchTaskForm = (props) => {
               label="Subcategory"
               categoryId={props.categoryId}
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="geonameid"
               component={InputLocation}
               label="Location"
               noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
             <Field
               name="price"
               label="Price"
-              component={InputCategory}
+              component={InputPriceFilter}
               noMargin={true}
+              formKey={`${collapsed ? 'collapsed' : ''}${props.form}`}
+              withIcon={false}
             />
           </>}
         </div>

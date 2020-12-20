@@ -1,15 +1,19 @@
+import { setSortTaskSearch } from "components/TaskSearch/actions";
 import ApiActionTypes from "constants/api";
 import { ITask, SkillData, SkillListItem } from "types";
 import ActionTypes from "./const";
+
 export interface TaskSearchState {
   list: ITask[],
   listLoading: boolean,
+  currentTask?: ITask,
   total: number,
   page: number,
   filter: any,
   useLocationFilter: boolean,
   exactLocation: boolean
-  sort?: {},
+  sortType: string,
+  sort: string,
   sortOrder?: string
 }
 
@@ -19,14 +23,18 @@ const initialState: TaskSearchState = {
   total: 0,
   page: 1,
   filter: {},
+  sortType: '',
   sort: 'id',
   sortOrder: 'DESC',
   useLocationFilter: false,
   exactLocation: false
 }
 
-export default function TaskSearchReducer(state = {...initialState}, action) {
-  switch(action.type) {
+export default function TaskSearchReducer(state = { ...initialState }, action) {
+  switch (action.type) {
+    case ActionTypes.TASK_LIST_SET_CURRENT_TASK:
+      state.currentTask = action.payload;
+      break
     case ActionTypes.FETCH_TASK_LIST:
 
       break
@@ -37,7 +45,23 @@ export default function TaskSearchReducer(state = {...initialState}, action) {
       state.filter = action.payload;
       break
     case ActionTypes.TASK_LIST_SET_SORT:
-      state.sort = action.payload;
+      state.sortType = action.payload;
+      switch (action.payload) {
+        case 'newFirst':
+          state.sort = 'id'
+          state.sortOrder = 'DESC'
+
+          break;
+        case 'highPrice':
+          state.sort = 'budget'
+          state.sortOrder = 'DESC'
+
+          break;
+        case 'lowPrice':
+          state.sort = 'budget'
+          state.sortOrder = 'ASC'
+          break;
+      }
       break
     case ActionTypes.TASK_LIST_SET_USE_LOCATION_FILTER:
       console.log("TASK_LIST_SET_USE_LOCATION_FILTER", action.payload)
