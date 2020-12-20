@@ -1,5 +1,5 @@
 import Button from "components/ui/Button";
-import * as React from "react";
+import {useState} from "react";
 import styles from './index.module.scss'
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   number: number
 }
 const SavedPeople = (props: Props) => {
+  const [show, setIsShow] = useState(false)
 
   return (
       <section className={styles.item}>
@@ -23,6 +24,7 @@ const SavedPeople = (props: Props) => {
             <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
             <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
         </div>
+        <div className={show ? styles.categoriesGrid : styles.categories}>
         <div className={styles.category}>
           <div className={styles.text}>{props.firstCategory}</div>
           <img src="/img/icons/triangleDown.svg" alt=""/>
@@ -35,6 +37,8 @@ const SavedPeople = (props: Props) => {
           <div className={styles.text}>{props.thirdCategory}</div>
           <img src="/img/icons/triangleDown.svg" alt=""/>
         </div>
+        {show ?
+        <>
         <div className={styles.category}>
           <div className={styles.text}>{props.firstCategory}</div>
           <img src="/img/icons/triangleDown.svg" alt=""/>
@@ -47,6 +51,9 @@ const SavedPeople = (props: Props) => {
           <div className={styles.text}>{props.thirdCategory}</div>
           <img src="/img/icons/triangleDown.svg" alt=""/>
         </div>
+        </>
+        : null}</div>
+        <a className={styles.switch} onClick={() => show ? setIsShow(false) : setIsShow(true)}>{show ? <span>Hide</span> : <span>Show more</span>}</a>
         <div className={styles.number}>
           <div className={styles.textNumber}>+{props.number}</div>
         </div>

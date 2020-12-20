@@ -55,6 +55,7 @@
   font-size: 14px;
   opacity: 0.7;
   color: #000000;
+  font-weight: bold;
 }
 
 .btnRemove{
@@ -63,4 +64,27 @@
 
 .btn{
   margin: auto 0;
+}
+
+.categories{
+  display: flex;
+}
+
+.categoriesGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 7px;
+}
+
+.switch{
+  flex: 1;
+  display: flex;
+  margin: auto;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: #6D718C;
+  span{
+    margin: auto;
+  }
 }
