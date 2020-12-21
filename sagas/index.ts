@@ -12,6 +12,8 @@ import TaskSearchSaga from "components/TaskSearch/sagas";
 import TaskUserSaga from "components/TaskUser/sagas";
 import { all } from 'redux-saga/effects'
 import apiSaga from "sagas/apiSaga";
+import SavedPeopleSaga from "components/SavedPeople/sagas";
+import SavedSearchesSaga from "components/SavedSearches/sagas";
 
 export const rootSaga = function* root() {
   yield all([
@@ -27,6 +29,8 @@ export const rootSaga = function* root() {
     SkillSaga(),
     TaskSearchSaga(),
     TaskUserSaga(),
-    TaskOfferSaga()
+    TaskOfferSaga(),
+    SavedPeopleSaga(),
+    SavedSearchesSaga()
   ]);
 };
