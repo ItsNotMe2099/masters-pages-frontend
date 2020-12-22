@@ -43,7 +43,10 @@ function* PWRecoverySaga() {
 
     yield takeLatest(ActionTypes.RESET_PW_SECOND_STEP_SUBMIT,
       function* (action: ActionType<typeof PWRecoverySecondSubmit>) {
-        const res: IResponse = yield requestGen({
+
+        yield put(PWRecoverySecondSuccess());
+        yield put(PWRecoverySuccessOpen());
+      /*const res: IResponse = yield requestGen({
           url: `/api/auth/phoneConfirmation`,
           method: 'POST',
           data: {
@@ -58,24 +61,30 @@ function* PWRecoverySaga() {
           yield put(PWRecoverySuccessOpen());
         }else{
           yield put(PWRecoverySecondError(res.err?.errors))
-        }
+        }*/
 
       })
 
       yield takeLatest(ActionTypes.RESET_PW_FINAL_STEP_SUBMIT,
         function* (action: ActionType<typeof PWRecoveryFinalSubmit>) {
+          const phone = yield select((state: IRootState) => state.PWRecovery.phone)
+          const code = yield select((state: IRootState) => state.PWRecovery.code)
+
           const res: IResponse = yield requestGen({
-            url: `/api/auth/resetPass`,
+            url: `/api/auth/passwordChangeConfirmation`,
             method: 'POST',
             data: {
-              password: action.payload.password,
+              newPassword: action.payload.password,
+              code: code,
+              phone: phone,
             },
           } as IRequestData)
           console.log("Res password", res)
           if(!res.err){
-        //    yield put(PWRecoveryFinalSuccess());
+            cookie.set("token", res.data.accessToken, { expires: 1 });
             window.location.href = '';
           }else{
+
             yield put(PWRecoveryFinalError(res.err?.errors))
           }
 
