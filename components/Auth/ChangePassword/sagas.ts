@@ -11,6 +11,7 @@ function* signInSaga() {
 
   yield takeLatest(ActionTypes.CHANGE_PASSWORD,
     function* (action: ActionType<typeof changePassword>) {
+
       const res: IResponse = yield requestGen({
         url: `/api/auth/resetPassByCurrentUser`,
         method: 'POST',

@@ -16,6 +16,7 @@ export default function ChangePassword(props: Props) {
   const isLoading = useSelector((state: IRootState) => state.changePassword.loading)
 
   const handleSubmit = (data) => {
+    console.log("handleSubmit", data)
     dispatch(changePassword(data));
   }
   return (
