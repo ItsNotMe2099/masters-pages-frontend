@@ -143,3 +143,27 @@ export interface IResponse {
   data: any
   err: any
 }
+
+export interface ISavedSearches {
+  keywords: string
+  categoryId: number
+  subCategoryId: number
+  masterRole: string
+  country: string
+  city: string
+  geonameid: number
+  radius: number
+  ratePerHourMin: number
+  ratePerHourMax: number
+  maxWeekHoursMin: number
+  maxWeekHoursMax: number
+  budgetMin: number
+  budgetMax: number
+  estimateMin: number
+  estimateMax: number
+  lat: number
+  lng: number
+  sort: string
+  sortOrder: string
+  exactLocation: string
+  }
