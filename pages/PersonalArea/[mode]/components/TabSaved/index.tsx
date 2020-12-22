@@ -53,7 +53,7 @@ const TabSaved = (props: Props) => {
       }))} activeTab={tabSubPage as string}/>
       <div className={styles.tasks}>
         {tabSubPage === "people" &&
-          <>{savedPeople.map(item => <SavedPeople 
+          <>{people.map(item => <SavedPeople 
             name={item.name} 
             firstCategory={item.category1}
             secondCategory={item.category2}
@@ -63,7 +63,7 @@ const TabSaved = (props: Props) => {
         }
         {tabSubPage === "search" &&
           <>
-          {savedSearches.map(item => <SavedSearches
+          {searches.map(item => <SavedSearches
             type={item.type} 
             category={item.category}
             subCategory={item.subCategory}

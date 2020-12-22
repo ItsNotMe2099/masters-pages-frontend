@@ -125,28 +125,6 @@ export interface ITask{
   photos: string[]
 }
 
-export interface ISavedSearch{
-
-}
-
-export interface ISavedPeople{
-  id: number,
-  profileId: number,
-  title: string
-  description: string
-  categoryId: number,
-  subCategoryId: number,
-  masterRole: string
-  country: string
-  city: string
-  address: string
-  geonameid: number,
-  location: {
-    lng: number,
-    lat: number,
-  }
-}
-
 export interface BaseAction {
   type: string
   payload: any
