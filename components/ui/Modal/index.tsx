@@ -6,18 +6,24 @@ import styles from './index.module.scss'
 
 import ReactModal from 'react-modal'
 import { useDispatch } from 'react-redux'
+import ModalHeader from "./Header";
 
 
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void,
-  size?: 'normal' | 'large'
+  size?: 'normal' | 'large' | 'medium'
   title?: string,
   image?: string,
   children?: any,
   loading?: boolean,
   className?: string,
   closeClassName?: string
+  headerJob?: boolean
+  headerXP?: boolean
+  firstName?: string
+  lastName?: string
+  img?: string
 }
 
 export default function Modal(props: Props) {
@@ -56,6 +62,8 @@ export default function Modal(props: Props) {
     switch (size) {
       case 'large':
         return styles.rootLarge;
+      case 'medium':
+        return styles.rootMedium;
       case 'normal':
       default:
         return styles.rootNormal;
@@ -70,6 +78,7 @@ export default function Modal(props: Props) {
       <div className={styles.frame} >
         <div className={styles.overlay} onClick={props.onRequestClose}/>
       <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
+        {props.headerJob ? <ModalHeader jobDone firstName={props.firstName} lastName={props.lastName} img={props.img}/> : props.headerXP ? <ModalHeader/> : null}
         {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`}>
           <Button closeBtn onClick={props.onRequestClose}></Button>
         </div>}

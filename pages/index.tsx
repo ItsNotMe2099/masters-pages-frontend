@@ -8,8 +8,18 @@ import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
 import Split from 'components/Split'
 import SimpleSlider from "components/MainPage/Slider";
+import FinishingTaskModal from "components/FinishingTaskModal";
+import {
+  modalClose,
+  signInOpen,
+  signUpOpen,
+  phoneConfirmOpen,
+} from 'components/Modal/actions'
+import { useSelector, useDispatch } from 'react-redux'
+import Rating from "components/ui/Inputs/Rating";
 
 const Home = (props) => {
+  const dispatch = useDispatch()
   return (
     <>
     <Header {...props}/>
@@ -20,6 +30,8 @@ const Home = (props) => {
       <Instruction/>
       <Split/>
       <Footer/>
+      {/*<FinishingTaskModal firstName="Savannah" lastName="Nguyen" money="500" job="Courier one time job!" isOpen onRequestClose={() => dispatch(modalClose())}/>
+      <Rating/>*/}
     </div>
     </>
   )
