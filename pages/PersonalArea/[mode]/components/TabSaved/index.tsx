@@ -54,22 +54,14 @@ const TabSaved = (props: Props) => {
       <div className={styles.tasks}>
         {tabSubPage === "people" &&
           <>{people.map(item => <SavedPeople 
-            name={item.name} 
-            firstCategory={item.category1}
-            secondCategory={item.category2}
-            thirdCategory={item.category3}
-            number={item.number}
+            item={item}
             />)}</>
         }
         {tabSubPage === "search" &&
           <>
           {searches.map(item => <SavedSearches
-            type={item.type} 
-            category={item.category}
-            subCategory={item.subCategory}
-            location={item.location}
-            rating={item.rating}
-            number={item.number}
+            type="Master search" 
+            item={item}
             />)}
           </>
         }

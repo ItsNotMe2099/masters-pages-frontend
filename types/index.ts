@@ -150,3 +150,56 @@ export interface IResponse {
   data: any
   err: any
 }
+
+export interface ISavedSearches {
+  keywords: string
+  categoryId: number
+  subCategoryId: number
+  masterRole: string
+  country: string
+  city: string
+  geonameid: number
+  radius: number
+  ratePerHourMin: number
+  ratePerHourMax: number
+  maxWeekHoursMin: number
+  maxWeekHoursMax: number
+  budgetMin: number
+  budgetMax: number
+  estimateMin: number
+  estimateMax: number
+  lat: number
+  lng: number
+  sort: string
+  sortOrder: string
+  exactLocation: string
+  }
+
+  export interface ISavedPeople {
+      id: number
+      userId: number
+      role: string
+      firstName: string
+      lastName: string
+      phone: string
+      email: string
+      birthday: null
+      country: string
+      city: string
+      region: null
+      zipcode: null
+      address1: null
+      address2: null
+      geonameid: number
+      location: {
+          lng: number,
+          lat: number
+      },
+      isExactLocation: boolean
+      createdAt: string
+      updatedAt: string
+      deletedAt: null
+      photoObject: null
+      skills: []
+      photo: null
+  }
