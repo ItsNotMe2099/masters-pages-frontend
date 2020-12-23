@@ -11,7 +11,7 @@ interface Props {
   tabs: TabOption[],
   activeTab: string,
   onChange?: (item) => void
-  style?: 'fullwidth' | 'round' | 'outline'
+  style?: 'fullwidth' | 'round' | 'roundSmall' | 'outline'
 }
 const Tabs = ({tabs, activeTab, onChange, style}: Props) => {
   const handleChange = (item: TabOption) => {
@@ -20,7 +20,7 @@ const Tabs = ({tabs, activeTab, onChange, style}: Props) => {
     }
   }
   return (
-    <div className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${style === 'round' && styles.round} ${style === 'outline' && styles.outline}`}>
+    <div className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${(style === 'round' || style === 'roundSmall') && styles.round} ${style === 'outline' && styles.outline}`}>
       {tabs.map(item => <Tab name={item.name} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null} style={style}/>)}
       <div className={styles.border}/>
     </div>

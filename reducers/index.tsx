@@ -3,6 +3,7 @@ import authSignUpReducer from 'components/Auth/SignUp/reducer';
 import phoneConfirmReducer from 'components/Auth/PhoneConfirm/reducer';
 import registrationCompleteReducer from 'components/Auth/RegistrationPage/reducer';
 import authSignInReducer from 'components/Auth/SignIn/reducer';
+import ProfileSearchReducer from "components/ProfileSearch/reducer";
 import TaskOfferReducer from "components/TaskOffer/reducer";
 import TaskSearchReducer from "components/TaskSearch/reducer";
 import TaskUserReducer from "components/TaskUser/reducer";
@@ -41,6 +42,7 @@ export default combineReducers({
   skill: SkillReducer,
   modal: ModalReducer,
   taskSearch: TaskSearchReducer,
+  profileSearch: ProfileSearchReducer,
   taskUser: TaskUserReducer,
   taskOffer: TaskOfferReducer,
   savedSearch: SavedSearchesReducer,

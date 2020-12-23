@@ -1,6 +1,8 @@
+import { confirmOpen } from "components/Modal/actions";
+import { saveProfileSearchList } from "components/ProfileSearch/actions";
 import {
   fetchTaskSearchList,
-  resetTaskSearchList,
+  resetTaskSearchList, saveTaskSearchList,
   saveTaskSearchListRequest,
   setFilterTaskSearch
 } from "components/TaskSearch/actions";
@@ -37,10 +39,13 @@ const SearchTaskFilter = (props: Props) => {
     }
   }
   const handleSaveSearch = () => {
-      console.log("Save filter", filter);
-      dispatch(saveTaskSearchListRequest(filter));
+    dispatch(confirmOpen({
+      description: `Do you want to save current search?`,
+      onConfirm: () => {
+        dispatch(saveTaskSearchList(filter));
+      }
+    }));
   }
-  console.log("PROPSFORM1", props.form)
   return <>
     <SearchTaskForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
     {!props.collapsed && <div className={styles.saveSearchWrapper}>

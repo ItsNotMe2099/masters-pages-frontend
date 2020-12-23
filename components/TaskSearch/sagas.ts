@@ -1,5 +1,10 @@
 
-import { fetchTaskSearchList, fetchTaskSearchListRequest } from "components/TaskSearch/actions";
+import { confirmChangeData, modalClose } from "components/Modal/actions";
+import {
+  fetchTaskSearchList,
+  fetchTaskSearchListRequest, saveTaskSearchList,
+  saveTaskSearchListRequest
+} from "components/TaskSearch/actions";
 import ApiActionTypes from "constants/api";
 import { takeLatest, put, take, select } from 'redux-saga/effects'
 import { IRootState } from "types";
@@ -25,6 +30,14 @@ function* TaskSearchSaga() {
           limit: 10,
         ...action.payload
         }));
+
+    })
+  yield takeLatest(ActionTypes.TASK_LIST_SAVE_SEARCH,
+    function* (action: ActionType<typeof saveTaskSearchList>) {
+      yield put(confirmChangeData({loading: true}));
+      yield put(saveTaskSearchListRequest(action.payload));
+      yield take([ActionTypes.TASK_LIST_SAVE_SEARCH_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_LIST_SAVE_SEARCH_REQUEST + ApiActionTypes.FAIL])
+      yield put(modalClose());
 
     })
 }

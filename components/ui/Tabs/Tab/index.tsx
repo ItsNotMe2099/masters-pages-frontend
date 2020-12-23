@@ -7,11 +7,12 @@ interface Props {
   link?: string,
   isActive: boolean,
   onClick?: () => void
-  style: 'fullwidth' | 'round' | 'outline'
+  style: 'fullwidth' | 'round' | 'roundSmall' | 'outline'
 }
 const Tab = ({name, link, style, onClick, isActive}: Props) => {
   const router = useRouter();
   const handleClick = (e) => {
+    console.log("HandleClick", onClick)
     if(onClick){
       e.preventDefault();
       onClick()
@@ -21,7 +22,7 @@ const Tab = ({name, link, style, onClick, isActive}: Props) => {
 
   return (
     <Link href={`${link}`}>
-      <a className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${style === 'round' && styles.round} ${style === 'outline' && styles.outline} ${isActive && styles.active}`} onClick={handleClick}>{name}
+      <a className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${style === 'round' && styles.round} ${style === 'roundSmall' && styles.roundSmall} ${style === 'outline' && styles.outline} ${isActive && styles.active}`} onClick={handleClick}>{name}
       </a>
     </Link>
   )

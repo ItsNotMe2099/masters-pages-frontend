@@ -1,0 +1,17 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    font-weight: bold;
+  }
+}
+.title{
+
+}
+.icon{
+  margin-left: 8px;
+}

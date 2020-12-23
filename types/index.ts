@@ -7,6 +7,7 @@ import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reduc
 import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
 import { ModalState } from "components/Modal/reducer";
 import { ProfileState } from "components/Profile/reducer";
+import { ProfileSearchState } from "components/ProfileSearch/reducer";
 import { SkillState } from "components/Skill/reducer";
 import { TaskOfferState } from "components/TaskOffer/reducer";
 import { TaskSearchState } from "components/TaskSearch/reducer";
@@ -38,10 +39,15 @@ export interface IRootState {
   skill: SkillState,
   modal: ModalState,
   taskSearch: TaskSearchState,
+  profileSearch: ProfileSearchState,
   taskUser: TaskUserState,
   taskOffer: TaskOfferState
   savedSearch: SavedSearchesState
   savedPeople: SavedPeopleState
+}
+export interface ILocation {
+  lng: number,
+  lat: number,
 }
 export interface ConfirmDataModal {
   cancelText?: string,
@@ -65,8 +71,11 @@ export interface ProfileData{
   address1?: string
   address2?: string
   photo ?: string
+  geoname?: any,
+  location?: ILocation,
   preferredCategories ?: number[],
-  preferredSubCategories ?: number[]
+  preferredSubCategories ?: number[],
+  skills?: SkillData[]
 }
 
 export interface Category{
@@ -85,7 +94,8 @@ export interface SkillData{
   category?: Category
   photos?: string[],
   ratePerHour: number,
-  price: number
+  price: number,
+  skills: SkillData[]
 }
 export interface SkillListItem{
   id?: number
@@ -106,10 +116,7 @@ export interface ITask{
   city: string
   address: string
   geonameid: number,
-  location: {
-    lng: number,
-    lat: number,
-  },
+  location: ILocation,
   category: Category,
   subCategory: Category,
   isExactLocation: boolean

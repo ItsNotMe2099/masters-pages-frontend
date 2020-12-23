@@ -6,6 +6,7 @@ import signUpSaga from "components/Auth/SignUp/sagas";
 import PWChangeSaga from "components/Auth/ChangePassword/sagas";
 import CreateTaskCompleteSaga from "components/CreateTaskPage/sagas";
 import ProfileSaga from "components/Profile/sagas";
+import ProfileSearchSaga from "components/ProfileSearch/sagas";
 import SkillSaga from "components/Skill/sagas";
 import TaskOfferSaga from "components/TaskOffer/sagas";
 import TaskSearchSaga from "components/TaskSearch/sagas";
@@ -28,6 +29,7 @@ export const rootSaga = function* root() {
     PWChangeSaga(),
     SkillSaga(),
     TaskSearchSaga(),
+    ProfileSearchSaga(),
     TaskUserSaga(),
     TaskOfferSaga(),
     SavedPeopleSaga(),
