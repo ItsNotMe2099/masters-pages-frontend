@@ -42,6 +42,7 @@ export interface FileInputProps {
   minSize?: number
   multiple?: boolean,
   addFileButton?: ReactElement
+  altView?: boolean
 }
 
 export interface FileInputOptions extends DropzoneOptions {
@@ -141,7 +142,7 @@ const FileInput = (props: any & FileInputProps & FileInputOptions) => {
         className={styles.dropZone}
         {...getRootProps()}
       >
-        {props.addFileButton ? props.addFileButton : <AddFileButton/>}
+        {props.addFileButton ? props.addFileButton : props.altView ? <AddFileButton altView/> : <AddFileButton/>}
         <input
           {...getInputProps()}
         />

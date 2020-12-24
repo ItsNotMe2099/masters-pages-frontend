@@ -13,6 +13,7 @@ interface Props {
   borderGrey?: boolean
   borderLightGrey?: boolean
   borderRed?: boolean,
+  borderC4?: boolean
   bold?: boolean
   closeBtn?: boolean
   smallFont?: boolean
@@ -45,6 +46,7 @@ export default function Button(props: Props) {
        ${props.borderGrey && styles.borderGrey}
        ${props.borderLightGrey && styles.borderLightGrey}
        ${props.borderRed && styles.borderRed}
+       ${props.borderC4 && styles.borderC4}
        ${props.whiteRed && styles.whiteRed}
        ${props.uppercase && styles.uppercase}
        ${props.black && styles.black}

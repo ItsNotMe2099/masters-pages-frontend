@@ -3,7 +3,17 @@ import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 import styles from './index.module.scss'
 
-const AddFileButton = () => (
+interface Props {
+  altView?: boolean
+}
+
+const AddFileButton = (props: Props) => (
+  <>
+  {props.altView ? 
+    <div className={styles.alt}>
+      <a> <img src="/img/icons/staple.svg" alt=''/> attach photos</a>
+    </div>
+    :
   <>
   <div className={styles.root}>
   <Button  type={'button'} grey={true} mediumFont={true} bold={true} size="8px 25px">  <img src="/img/icons/camera.svg" alt=''/> choose photo</Button>
@@ -20,7 +30,7 @@ const AddFileButton = () => (
 <Button  type={'button'} grey={true} mediumFont={true} bold={true} size="8px 25px">  <img src="/img/icons/camera.svg" alt=''/> choose photo</Button>
 </div>
 </div>
-</>
+</>}</>
 )
 
 export default AddFileButton

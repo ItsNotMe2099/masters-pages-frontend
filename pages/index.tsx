@@ -16,7 +16,6 @@ import {
   phoneConfirmOpen,
 } from 'components/Modal/actions'
 import { useSelector, useDispatch } from 'react-redux'
-import Rating from "components/ui/Inputs/Rating";
 
 const Home = (props) => {
   const dispatch = useDispatch()
@@ -30,8 +29,7 @@ const Home = (props) => {
       <Instruction/>
       <Split/>
       <Footer/>
-      {/*<FinishingTaskModal firstName="Savannah" lastName="Nguyen" money="500" job="Courier one time job!" isOpen onRequestClose={() => dispatch(modalClose())}/>
-      <Rating/>*/}
+      <FinishingTaskModal firstName="Savannah" lastName="Nguyen" money="500" job="Courier one time job!" isOpen onRequestClose={() => dispatch(modalClose())}/>
     </div>
     </>
   )
