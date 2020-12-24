@@ -10,9 +10,7 @@ interface Props {
 const AddFileButton = (props: Props) => (
   <>
   {props.altView ? 
-    <div className={styles.alt}>
-      <a> <img src="/img/icons/staple.svg" alt=''/> attach photos</a>
-    </div>
+      <a className={styles.alt}> <img src="/img/icons/staple.svg" alt=''/> attach photos</a>
     :
   <>
   <div className={styles.root}>
