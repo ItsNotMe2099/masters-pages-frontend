@@ -73,8 +73,8 @@ let FinishingTaskForm = props => {
       </div>
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button transparent bold smallFont size="10px 28px" borderC4>NOT DONE</Button>
-        <Button red bold smallFont size="10px 37px">JOB IS DONE</Button>
+        <Button transparent bold smallFont size="10px 32px" borderC4>NOT DONE</Button>
+        <Button red bold smallFont size="10px 65px">JOB IS DONE</Button>
       </div>
     </form>
   )
