@@ -29,10 +29,15 @@
 }
 
 .alt{
-  display: flex;
+  float: left;
   cursor: pointer;
   img{
     margin-right: 9px;
     margin-left: 10px;
+  }
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }
