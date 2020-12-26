@@ -29,7 +29,7 @@ const Home = (props) => {
       <Instruction/>
       <Split/>
       <Footer/>
-      <FinishingTaskModal firstName="Savannah" lastName="Nguyen" money="500" job="Courier one time job!" isOpen onRequestClose={() => dispatch(modalClose())}/>
+      <FinishingTaskModal firstName="Savannah" lastName="Nguyen" money="500" job="Courier one time job!" isOpen={false} onRequestClose={() => dispatch(modalClose())}/>
     </div>
     </>
   )
