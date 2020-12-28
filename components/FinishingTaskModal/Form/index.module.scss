@@ -1,3 +1,5 @@
+@import "scss/index";
+
 .form{
     display: flex;
     flex-direction: column;
@@ -58,10 +60,11 @@
     justify-content: center;
     button{
         font-family: Roboto;
+        border-radius: 6px;
         &:first-child{
             margin-right: 14px;
-        }
     }
+}
 }
 
 .upload{

@@ -24,6 +24,7 @@ interface Props {
   firstName?: string
   lastName?: string
   img?: string
+  job?: string
 }
 
 export default function Modal(props: Props) {
@@ -78,7 +79,7 @@ export default function Modal(props: Props) {
       <div className={styles.frame} >
         <div className={styles.overlay} onClick={props.onRequestClose}/>
       <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
-        {props.headerJob ? <ModalHeader jobDone firstName={props.firstName} lastName={props.lastName} img={props.img}/> : props.headerXP ? <ModalHeader/> : null}
+        {props.headerJob ? <ModalHeader jobDone job={props.job} firstName={props.firstName} lastName={props.lastName} img={props.img}/> : props.headerXP ? <ModalHeader/> : null}
         {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`}>
           <Button closeBtn onClick={props.onRequestClose}></Button>
         </div>}

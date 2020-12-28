@@ -1,33 +1,16 @@
+@import "scss/index";
+
 .root{
-    padding: 0;   
+    padding: 0;
+    @media screen and (max-width: $sm-max){
+        border-radius: 0;
+      } 
 }
 
 .innards{
-    padding: 19px 22px 33px 28px; 
+    padding: 0 22px 33px 28px; 
     display: flex;
     flex-direction: column;
-}
-
-.top{
-    display: flex;
-    justify-content: space-between;
-}
-
-.job{
-    font-weight: bold;
-    font-size: 14px;
-    color: #6D718C;
-    text-decoration-line: underline;
-}
-
-.details{
-    font-weight: 500;
-    font-size: 14px;
-    color: #2A2C39;
-    cursor: pointer;
-    span{
-        margin-right: 13px;
-    }
 }
 
 .hide{
@@ -43,7 +26,6 @@
     background-color: #fef7e9;
     margin-right: -22px;
     margin-left: -28px;
-    margin-top: 17px;
     display: flex;
     font-size: 14px;
     color: #5E5E5E;

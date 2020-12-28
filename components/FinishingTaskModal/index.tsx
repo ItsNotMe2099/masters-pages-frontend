@@ -25,15 +25,10 @@ export default function FinishingTaskModal(props: Props) {
     firstName={props.firstName}
     lastName={props.lastName}
     img={props.img}
+    job={props.job}
     >
 
         <div className={styles.innards}>
-          <div className={styles.top}>
-            <div className={styles.job}>{props.job}</div>
-            <a className={styles.details} onClick={() => show ? setShowAll(false) : setShowAll(true)}>
-              {show ? <span>Hide</span> : <span>See details</span>}<img className={show ? styles.hide : null} src="img/icons/arrowDetails.svg" alt=''/>
-            </a>
-          </div>
           <div className={styles.money}>
             You own: <span> &nbsp;$ {props.money}</span>
           </div>
