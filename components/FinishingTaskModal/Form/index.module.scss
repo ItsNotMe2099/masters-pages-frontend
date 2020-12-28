@@ -61,6 +61,9 @@
     button{
         font-family: Roboto;
         border-radius: 6px;
+        @media screen and (max-width: $sm-max){
+            font-size: 12px;
+          } 
         &:first-child{
             margin-right: 14px;
     }
