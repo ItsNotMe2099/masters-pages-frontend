@@ -7,7 +7,7 @@ interface Props {
   onRequestClose?: () => void
 }
 
-export default function SuccessTaskModal(props: Props) {
+export default function SuccessFeedbackModal(props: Props) {
 
   return (
     <Modal{...props} className={styles.root} closeClassName={styles.close} >
