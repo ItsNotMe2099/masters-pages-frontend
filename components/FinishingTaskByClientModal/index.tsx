@@ -1,7 +1,6 @@
 import Modal from "components/ui/Modal";
 import styles from './index.module.scss'
-import { useState } from "react";
-import FinishingTaskForm from "./Form";
+import FinishingTaskByClientForm from "./Form";
 
 interface Props {
   isOpen: boolean
@@ -13,9 +12,8 @@ interface Props {
   img?: string
 }
 
-export default function FinishingTaskModal(props: Props) {
+export default function FinishingTaskByClientModal(props: Props) {
 
-  const [show, setShowAll] = useState(false)
   const handleSubmit = () => {
     
   }
@@ -33,7 +31,7 @@ export default function FinishingTaskModal(props: Props) {
             You own: <span> &nbsp;$ {props.money}</span>
           </div>
           <div className={styles.rate}>Please rate {props.firstName} work!</div>
-          <div className={styles.form}><FinishingTaskForm onSubmit={handleSubmit}/></div>
+          <div className={styles.form}><FinishingTaskByClientForm onSubmit={handleSubmit}/></div>
         </div>
     </Modal>
   )

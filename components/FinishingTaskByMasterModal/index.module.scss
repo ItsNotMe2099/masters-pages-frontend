@@ -1,0 +1,51 @@
+@import "scss/index";
+
+.root{
+    padding: 0;
+    @media screen and (max-width: $sm-max){
+        border-radius: 0;
+      } 
+}
+
+.innards{
+    padding: 0 22px 33px 28px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.hide{
+    transform: rotate(180deg);
+  }
+
+.close{
+    top: 24px;
+    right: 22px;
+}
+
+.money{
+    background-color: #fef7e9;
+    margin-right: -22px;
+    margin-left: -28px;
+    display: flex;
+    font-size: 14px;
+    color: #5E5E5E;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    span{
+        font-weight: 500;
+        font-size: 19px;
+        color: #050505;
+    }
+}
+
+.rate{
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+    margin-top: 21px;
+}
+
+.form{
+    margin-top: 24px;
+}

@@ -8,17 +8,8 @@ import Instruction from 'components/Instruction'
 import Footer from 'components/layout/Footer'
 import Split from 'components/Split'
 import SimpleSlider from "components/MainPage/Slider";
-import FinishingTaskModal from "components/FinishingTaskModal";
-import {
-  modalClose,
-  signInOpen,
-  signUpOpen,
-  phoneConfirmOpen,
-} from 'components/Modal/actions'
-import { useSelector, useDispatch } from 'react-redux'
 
 const Home = (props) => {
-  const dispatch = useDispatch()
   return (
     <>
     <Header {...props}/>
