@@ -46,7 +46,7 @@ font-size: 18px;
   padding: 35px 0px 35px;
 }
 
-.notMobile{
+.desktop{
   @media screen and (max-width: $sm-max) {
     display: none;
   }
@@ -56,6 +56,8 @@ font-size: 18px;
   display: none;
   @media screen and (max-width: $sm-max) {
     display: block;
+    padding: 0 20px;
+    margin-top: 20px;
   }
 }
 

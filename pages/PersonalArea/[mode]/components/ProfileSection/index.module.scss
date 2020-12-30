@@ -93,6 +93,9 @@
 flex: 1;
   .personalLinkWrapper{
   width: 360px;
+  @media screen and (max-width: $sm-max) {
+    width: auto;
+  }
 }
 }
 .buttonArea{

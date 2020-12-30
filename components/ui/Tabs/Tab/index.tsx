@@ -7,7 +7,7 @@ interface Props {
   link?: string,
   isActive: boolean,
   onClick?: () => void
-  style: 'fullwidth' | 'round' | 'roundSmall' | 'outline'
+  style?: 'fullwidth' | 'round' | 'roundSmall' | 'outline'
 }
 const Tab = ({name, link, style, onClick, isActive}: Props) => {
   const router = useRouter();

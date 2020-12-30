@@ -17,7 +17,6 @@ import { IRootState } from "types";
 import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
 import { TabSelect } from "components/TabSelect";
 import TabSaved from "../components/TabSaved";
 const TabPage = (props) => {
@@ -26,7 +25,6 @@ const TabPage = (props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const role = useSelector((state: IRootState) => state.profile.role)
   const { mode, tab } = router.query
-  const [show, setIsShow] = useState(false)
 
   useEffect(() => {
     if(role && mode && role != mode){
@@ -68,7 +66,10 @@ const TabPage = (props) => {
 
         </div>
         <ProfileSection/>
+        <div className={styles.desktop}>
         <Tabs style={'outline'} tabs={tabs} activeTab={tab as string}/>
+        </div>
+        <div className={styles.mobile}><TabSelect tabs={tabs} activeTab={tab as string}/></div>
         <div className={styles.tab}>
           {tab === 'personal' && <TabPersonal {...props}/>}
           {tab === 'portfolio' && <TabPortfolio {...props}/>}
