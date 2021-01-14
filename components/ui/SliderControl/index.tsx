@@ -12,7 +12,7 @@ interface Props {
 export default function SliderControl(props: Props) {
   return (
     <div onClick={props.onClick} className={`${props.mainPage && styles.root} ${props.taskPage && styles.rootTask} 
-    ${props.mainPage ? props.direction === 'next' ? styles.next : styles.prev : props.direction === 'next' ? styles.nextTask : styles.prevTask} ${props.className} ${props.arrowClassName}`}>
+    ${props.mainPage ? (props.direction === 'next' ? styles.next : styles.prev) : props.direction === 'next' ? styles.nextTask : styles.prevTask} ${props.className} ${props.arrowClassName}`}>
       {props.direction === 'next' && (
         <>
         {props.mainPage ?

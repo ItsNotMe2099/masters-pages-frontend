@@ -1,6 +1,7 @@
 @import "scss/index";
 
 .root{
+    position: relative;
     @include lg{
         margin-top: 144px;
     }
