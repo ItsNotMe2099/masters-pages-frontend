@@ -1,3 +1,5 @@
+@import "scss/index";
+
 .root{
   margin-bottom: 20px;
   display: flex;
@@ -22,6 +24,10 @@
   border: 1px solid #909090;
   border-radius: 10px;
   position: relative;
+  @media screen and (max-width: $sm-max){
+    width: 75px;
+    height: 94px;
+}
 }
 .info{
   height: 150px;
@@ -31,12 +37,31 @@
   justify-content: space-between;
   margin-left: 34px;
   font-size: 16px;
+  @media screen and (max-width: $sm-max){
+    margin-left: 20px;
+    font-weight: 500;
+    height: 95px;
+}
 }
 .infoActions{
   display: flex;
   align-items: center;
+  @media screen and (max-width: $sm-max){
+    display: none;
+ }
+  &__mobile{
+    display: flex;
+    margin-bottom: 41px;
+    @media screen and (min-width: $md-min){
+      display: none;
+   }
+}
 }
 .infoActionItem{
+  @media screen and (max-width: $sm-max){
+    margin: auto;
+ }
+  font-weight: 600;
   color: #5AA7FB;
   text-decoration: underline;
   display: flex;

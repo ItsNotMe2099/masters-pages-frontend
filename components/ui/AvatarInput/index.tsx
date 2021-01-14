@@ -220,6 +220,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
       console.log('Files', files)
       return (
+        <>
       <div className={`${styles.root} ${!!(files.length > 0) && styles.hasBackDrop}`}>
 
         <div className={styles.preview}>
@@ -257,9 +258,13 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
             {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>Delete photo <img src={'/img/icons/link-cross.svg'} /></div>}
           </div>
         </div>
-
         <ErrorInput {...props}/>
             </div>
+            <div className={styles.infoActions__mobile}>
+            <div className={styles.infoActionItem} onClick={handleChangePhoto}>Change photo <img src={'/img/icons/link-arrow-left.svg'} /></div>
+            {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>Delete photo <img src={'/img/icons/link-cross.svg'} /></div>}
+          </div>
+          </>
       )
     }
 
