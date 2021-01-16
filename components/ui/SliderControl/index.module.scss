@@ -10,21 +10,32 @@
   img{
     margin: auto;
   }
+  &::before{
+    display: none;
+  }
+  &:hover{
+    background-color: #ededed;
+  }
 }
 
 .rootTask{
   position: absolute;
   z-index: 1;
   cursor: pointer;
+  &::before{
+    display: none;
+  }
 }
 
 .next{
   margin-bottom: 30px;
-  top: 0
+  top: 40px;
+  right: -12px;
 }
 .prev{
-  bottom: 0px;
-
+  top: 155px;
+  left: auto;
+  right: -12px;
 }
 
 .nextTask{

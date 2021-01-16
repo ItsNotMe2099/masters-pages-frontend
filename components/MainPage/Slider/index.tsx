@@ -25,13 +25,15 @@ export default class SimpleSlider extends Component {
             arrows: false,
             variableWidth: true,
             adaptiveHeight: true,
+            dots: false
           }
         },
         {
           breakpoint: 667,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            dots: false
           }
         }
       ]

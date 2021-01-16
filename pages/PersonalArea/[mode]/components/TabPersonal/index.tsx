@@ -47,7 +47,7 @@ const TabPersonal = (props: Props) => {
         <div className={styles.avatarForm}>
           {profile?.id && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
         </div>
-        <Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => dispatch(changePasswordOpen())} >Change Password</Button>
+        <div className={styles.wrapper}><Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => dispatch(changePasswordOpen())} >Change Password</Button></div>
       </div>
       <div className={styles.separator}/>
       <div className={styles.form}>
