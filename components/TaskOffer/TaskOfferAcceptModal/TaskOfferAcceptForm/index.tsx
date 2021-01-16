@@ -8,12 +8,15 @@ import CreateTaskForm from "pages/CreateTaskPage/Form";
 import { useEffect, useState } from "react";
 import * as React from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { IRootState } from "types";
+import { IRootState, ITask } from "types";
 import { connect,  } from 'react-redux'
+import { maskBirthDate } from "utils/masks";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-
+interface Props{
+  task: ITask
+}
 let TaskOfferAcceptForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)
 
@@ -43,15 +46,15 @@ let TaskOfferAcceptForm = (props) => {
 
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
-            <div className={styles.taskPriceDetailsItemLabel}>Fixed price:</div>
-            <div className={styles.taskPriceDetailsItemValue}>$ 500</div>
+            <div className={styles.taskPriceDetailsItemLabel}>{props.task.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+            <div className={styles.taskPriceDetailsItemValue}>$ {props.task.priceType === 'fixed' ? props.task.budget : `${props.task.ratePerHour}/h`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>Dead line:</div>
-            <div className={styles.taskPriceDetailsItemValue}>1 day</div>
+            <div className={styles.taskPriceDetailsItemValue}>{props.task.deadline || 'N/A'}</div>
           </div>
         </div>
-      <div className={styles.offerDetails}>
+      {props.offerAcceptType === 'custom' && <div className={styles.offerDetails}>
         <div className={styles.offerDetailsForRow}>
           <div className={styles.offerDetailsForRowLabel}>Price:</div>
           <div className={styles.offerDetailsForRowFields}>
@@ -90,21 +93,20 @@ let TaskOfferAcceptForm = (props) => {
           <div className={styles.offerDetailsForRowLabel}>Deadline:</div>
           <div className={styles.offerDetailsForRowFields}>
             <div className={styles.offerDetailsForRowFieldsWrapper}>
-            <Field
-              name="estimate"
-              component={Input}
-              validate={required}
-              size={'small'}
-              labelType={'placeholder'}
-              label={'Enter days'}
-              parse={(value) => value ? parseInt(value, 10) : null}
-
-            />
+              <Field
+                name="deadline"
+                component={Input}
+                label="Deadline"
+                validate={required}
+                size={'small'}
+                labelType={'placeholder'}
+                {...maskBirthDate}
+              />
             </div>
 
           </div>
         </div>
-      </div>
+      </div>}
 
       <div className={styles.containerButtons}>
       <FormError error={error}/>

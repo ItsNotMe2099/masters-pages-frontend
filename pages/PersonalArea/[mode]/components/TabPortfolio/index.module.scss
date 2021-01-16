@@ -3,7 +3,10 @@
   position: relative;
 }
 .skillList{
-  display: flex;
+  overflow: hidden;
+  > div{
+    float: left;
+  }
 }
 .split{
   display: flex;

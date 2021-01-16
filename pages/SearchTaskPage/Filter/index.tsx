@@ -1,5 +1,6 @@
 import { confirmOpen } from "components/Modal/actions";
 import { saveProfileSearchList } from "components/ProfileSearch/actions";
+import BookmarkSvg from "components/svg/Bookmark";
 import {
   fetchTaskSearchList,
   resetTaskSearchList, saveTaskSearchList,
@@ -29,7 +30,7 @@ const SearchTaskFilter = (props: Props) => {
   const handleFilterChange = (data) => {
     console.log("handleFilterChange", data)
     if(props.onChange){
-        props.onChange(data);
+        props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined});
     }else{
       dispatch(setFilterTaskSearch(data));
       dispatch(resetTaskSearchList())
@@ -49,7 +50,7 @@ const SearchTaskFilter = (props: Props) => {
   return <>
     <SearchTaskForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
     {!props.collapsed && <div className={styles.saveSearchWrapper}>
-    <div className={styles.saveSearch} onClick={handleSaveSearch}>Save the search </div><img src={'/img/icons/like-icon.svg'}/>
+    <div className={styles.saveSearch} onClick={handleSaveSearch}>Save the search </div><BookmarkSvg color={'white'}/>
    </div>}
    </>
 }

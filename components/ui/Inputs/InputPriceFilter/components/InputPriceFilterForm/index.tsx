@@ -21,9 +21,21 @@ let InputPriceFilterForm = (props) => {
   console.log("InputPriceFilterForm", props.form)
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
-
-      <div className={styles.column}>
+      <div>
         <Field
+          name="type"
+          component={SelectInput}
+          withIcon={false}
+          size={'small'}
+          validate={required}
+          options={[
+            {label: 'Fixed price', value: 'fixed'},
+            {label: 'Rate per hour', value: 'rate'}
+          ]}
+        />
+      </div>
+      <div className={styles.column}>
+      <Field
         name="min"
         label="Min"
         size={'small'}
@@ -31,9 +43,9 @@ let InputPriceFilterForm = (props) => {
         noMargin={true}
         format={(value) => `$ ${value || ''}`}
         parse={parserPrice}     />
-      </div>
+
       <div className={styles.separator}>-</div>
-      <div className={styles.column}>
+
       <Field
         name="max"
         size={'small'}

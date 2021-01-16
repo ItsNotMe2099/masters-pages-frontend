@@ -7,7 +7,12 @@ export const fetchTaskSearchList = (data:any = {} ) => action(ActionTypes.FETCH_
 
 export const fetchTaskSearchListRequest = (data: any) => action(ActionTypes.FETCH_TASK_LIST_REQUEST, {
   api: {
-    url: `/api/tasks/search?${queryString.stringify({...data, budgetMin: data.price?.min, budgetMax: data.price?.max, price: undefined})}`,
+    url: `/api/tasks/search?${queryString.stringify({
+      ...data,
+      ...(data.price && data.price.type === 'fixed' ? { budgetMin: data.price?.min, budgetMax: data.price?.max} : {}),
+      ...(data.price && data.price.type === 'rate' ? { ratePerHourMin: data.price?.min, ratePerHourMax: data.price?.max} : {}),
+      price: undefined
+    })}`,
     method: 'GET',
   }
 })

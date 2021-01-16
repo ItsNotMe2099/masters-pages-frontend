@@ -1,4 +1,5 @@
 import { confirmOpen, taskOfferAcceptOpen, taskShareOpen } from "components/Modal/actions";
+import { saveProfileRequest } from "components/SavedPeople/actions";
 import { deleteSkill } from "components/Skill/actions";
 import ArrowRight from "components/svg/ArrowRight";
 import Avatar from "components/ui/Avatar";
@@ -8,7 +9,7 @@ import SliderControl from "components/ui/SliderControl";
 import Tabs from "components/ui/Tabs";
 import { format } from "date-fns";
 import { default as React, useState } from "react";
-import { ITask, ProfileData } from "types";
+import { IRootState, ITask, ProfileData } from "types";
 import { getMediaPath } from "utils/media";
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
@@ -34,11 +35,18 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
 
   const [currentCategoryTab, setCurrentCategoryTab] = useState(`${(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0])?.id}`);
   const [currentSkill, setCurrentSkill] = useState(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0]);
+  const savingProfileId = useSelector((state: IRootState) => state.savedPeople.savingProfileId)
+
   const handleOffer = () => {
 
   }
   const handleReadMore = () => {
 
+  }
+
+  const handleSave = () => {
+
+    dispatch(saveProfileRequest(profile.id));
   }
 
   const handleChangeTab = (tab) => {
@@ -142,7 +150,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
 
           <div className={styles.bottom}>
            <ProfileActionButton title={'View profile'} icon={'arrow-right-small'} onClick={handleReadMore}/>
-            <ProfileActionButton title={'Save'} icon={'bookmark'} onClick={handleReadMore}/>
+            <ProfileActionButton isLoading={savingProfileId === profile.id} title={'Save'} icon={'bookmark'} onClick={handleSave}/>
           </div>
         </div>
 

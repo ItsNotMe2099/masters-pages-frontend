@@ -20,15 +20,6 @@ const TabSaved = (props: Props) => {
   const people = useSelector((state: IRootState) => state.savedPeople.list)
 
   const { mode, tab, tabSubPage } = router.query
-  const savedPeople = [{name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15},
-  {name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15},
-  {name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15},
-  {name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15}
-  ]
-  const savedSearches = [{type: "Master search", category: "Art and design", subCategory: "Logo design", location: "Toronto", rating: "5 stars only", number: 3},
-  {type: "Task search", category: "Art and design", subCategory: "Logo design", location: "Toronto", rating: "5 stars only", number: 3},
-  {type: "Master search", category: "Art and design", subCategory: "Logo design", location: "Toronto", rating: "5 stars only", number: 3}
-  ]
 
   const tabs = [
     {name: 'People', key: 'people'},
@@ -40,10 +31,7 @@ const TabSaved = (props: Props) => {
       link: `/PersonalArea/${mode}/${tab}/${item.key}`
     }})
 
-    useEffect(() => {
-      dispatch(fetchSavedSearches())
-      dispatch(fetchSavedPeople())
-    }, [])
+
 
   return (
     <div className={styles.root}>
@@ -53,17 +41,10 @@ const TabSaved = (props: Props) => {
       }))} activeTab={tabSubPage as string}/>
       <div className={styles.tasks}>
         {tabSubPage === "people" &&
-          <>{people.map(item => <SavedPeople 
-            item={item}
-            />)}</>
+          <SavedPeople/>
         }
         {tabSubPage === "search" &&
-          <>
-          {searches.map(item => <SavedSearches
-            type="Master search" 
-            item={item}
-            />)}
-          </>
+        <SavedSearches/>
         }
       </div>
     </div>

@@ -11,8 +11,10 @@ import SelectInput from "components/ui/Inputs/SelectInput";
 import TextArea from "components/ui/Inputs/TextArea";
 import Link from 'next/link'
 import PriceSelectForm from "pages/CreateTaskPage/Form/components/PriceSelect";
+import * as React from "react";
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import { IRootState } from "types";
+import { maskBirthDate } from "utils/masks";
 import { required } from "utils/validations";
 import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
@@ -64,6 +66,25 @@ let CreateTaskForm = props => {
                 validate={required}
               />
             </div>
+          </div>
+          <div className={styles.column}>
+            <Field
+              name="executionType"
+              component={SelectInput}
+              label="Execution Type*"
+              options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
+              validate={required}
+              labelType={'cross'}
+            />
+            <Field
+              name="deadline"
+              component={Input}
+              label="Deadline"
+              validate={required}
+
+              labelType={'cross'}
+              {...maskBirthDate}
+            />
           </div>
           <div className={styles.address}>
           <Field

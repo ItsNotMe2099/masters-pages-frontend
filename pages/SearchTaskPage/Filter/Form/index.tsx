@@ -1,6 +1,8 @@
+import Input from "components/ui/Inputs/Input";
 import InputCategory from 'components/ui/Inputs/InputCategory'
 import InputPriceFilter from "components/ui/Inputs/InputPriceFilter";
 import SelectInput from "components/ui/Inputs/SelectInput";
+import * as React from "react";
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
@@ -47,12 +49,10 @@ let SearchTaskForm = (props) => {
               noMargin={true}
             />
             <Field
-              name="type"
-              label="Type of task"
+              name="executionType"
+              label="Execution Type"
               component={SelectInput}
-              options={[
-                {label: 'Online', value: 'online'},
-              ]}
+              options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
 
               withIcon={false}
               noMargin={true}
@@ -99,17 +99,14 @@ let SearchTaskForm = (props) => {
               showEmpty={true}
             />
             <Field
-              name="payment"
-              label="Payment type"
-              component={SelectInput}
-              options={[
-                {label: 'Any', value: null},
-                {label: 'Cash', value: 'cash'},
-                {label: 'Card', value: 'card'},
-              ]}
+              name="keyword"
+              label="Keywords"
+              component={Input}
+              labelType={'placeholder'}
               noMargin={true}
               withIcon={false}
               showEmpty={true}
+              debounce={1000}
             />
           </>}
           {collapsed && <>

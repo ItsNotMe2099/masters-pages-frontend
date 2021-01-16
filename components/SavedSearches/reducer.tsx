@@ -15,7 +15,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_SAVED_SEARCHES:
 
       break
-    
+
     case ActionTypes.FETCH_SAVED_SEARCHES_REQUEST:
       state.isLoading = true;
       break
@@ -26,6 +26,10 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_SAVED_SEARCHES_REQUEST + ApiActionTypes.FAIL:
       state.isLoading = false;
+      break
+    case ActionTypes.DELETE_SAVED_SEARCHES_REQUEST + ApiActionTypes.SUCCESS:
+      console.log("Delete success", action.payload);
+      state.list = state.list.filter(item => item.id !== action.payload.id)
       break
   }
 

@@ -13,13 +13,7 @@ const SearchTaskPage = (props) => {
   const [showMap, setShowMap] = useState(false)
 
   useEffect(() => {
-    if(router.query.filter) {
-      console.log("Set filter", JSON.parse((router.query as any).filter))
-      dispatch(setFilterTaskSearch(JSON.parse((router.query as any).filter)));
-    }
-    if(router.query.sortType) {
-      dispatch(setSortTaskSearch((router.query as any).sortType));
-    }
+
   }, [])
   return (
     <>

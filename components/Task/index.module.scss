@@ -116,15 +116,6 @@
 }
 
 
-.title {
-  font-weight: bold;
-  font-size: 18px;
-  padding-top: 20px;
-
-  span {
-    margin-right: 22px;
-  }
-}
 
 .desc {
   font-weight: 500;
@@ -155,14 +146,25 @@
     margin-left: 2px;
   }
 }
-
-.price {
+.priceDetails{
+  display: flex;
+  flex-direction: row;
+}
+.priceDetailsLabel {
   font-weight: bold;
   font-size: 14px;
   color: #000;
-  margin-top: 15px;
 }
 
+
+.priceDetailsValue {
+  font-weight: bold;
+  font-size: 18px;
+
+  span {
+    margin-right: 22px;
+  }
+}
 
 .btnContainer {
   margin-top: 13px;

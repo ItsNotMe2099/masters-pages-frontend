@@ -52,7 +52,7 @@ const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
         </div>
         <div className={styles.taskDescription}>{task?.description}</div>
       </div>
-      <TaskOfferAcceptForm task={task} onSubmit={handleSubmit} initialValues={{offerAcceptType: 'agree', offerPriceType: 'fixed'}}  onCancel={() => dispatch(modalClose())}/>
+      <TaskOfferAcceptForm task={task} onSubmit={handleSubmit} initialValues={{offerAcceptType: 'agree', offerPriceType: task?.priceType, budget: task?.budgetMax, ratePerHour: task?.ratePerHour, deadline: task?.deadline}}  onCancel={() => dispatch(modalClose())}/>
     </Modal>
   )
 }

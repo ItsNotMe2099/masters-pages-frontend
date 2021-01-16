@@ -7,11 +7,10 @@ let PriceSelectForm = props => {
   const { handleSubmit } = props
   const handleHourFieldChange = () => {
     props.change('budget', null);
-    props.change('estimate', null);
   }
   const handleFixedFieldChange = () => {
     props.change('ratePerHour', null);
-    props.change('maxWeekHours', null);
+    props.change('estimate', null);
   }
   return (
     <div className={styles.root}>
@@ -34,14 +33,14 @@ let PriceSelectForm = props => {
           </div>
           <div className={styles.inputHour}>
             <Field
-              name="maxWeekHours"
+              name="estimate"
               component={Input}
-              placeholder="1 - 40"
-              label="Max week hours"
+              placeholder="max 30 days"
+              label="Estimate"
               labelType={'static'}
               type={'number'}
               min="1"
-              max="40"
+              max="30"
               parse={value => value ? parseFloat(value) : ''}
               onChange={handleHourFieldChange}
             />
@@ -73,18 +72,7 @@ let PriceSelectForm = props => {
             />
           </div>
           <div  className={styles.inputFixed}>
-            <Field
-              name="estimate"
-              component={Input}
-              placeholder="max 30 days"
-              label="Estimate"
-              labelType={'static'}
-              type={'number'}
-              min="1"
-              max="30"
-              parse={value => value ? parseFloat(value) : ''}
-              onChange={handleFixedFieldChange}
-            />
+
           </div>
         </div>
       </div>

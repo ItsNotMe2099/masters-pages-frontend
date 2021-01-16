@@ -121,15 +121,17 @@ export interface ITask{
   subCategory: Category,
   isExactLocation: boolean
   ratePerHour: number,
-  maxWeekHours: number,
   budget: number,
   estimate: number
   status: string
   createdAt: string
   updatedAt: string
   deletedAt: string
-  profile: ProfileData
-  photos: string[]
+  profile: ProfileData,
+  deadline: string,
+  priceType: string,
+  photos: string[],
+  profileHasNegotiations: boolean
 }
 
 export interface BaseAction {
@@ -151,14 +153,18 @@ export interface IResponse {
   err: any
 }
 
-export interface ISavedSearches {
+export interface ISavedSearchItem {
+  id: number,
   keywords: string
   categoryId: number
   subCategoryId: number
+  category: Category,
+  subCategory: Category,
   masterRole: string
   country: string
   city: string
-  geonameid: number
+  geonameid: number,
+  geoname: any,
   radius: number
   ratePerHourMin: number
   ratePerHourMax: number

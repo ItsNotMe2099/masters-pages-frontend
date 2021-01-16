@@ -1,5 +1,6 @@
 import { confirmOpen, taskOfferAcceptOpen, taskShareOpen } from "components/Modal/actions";
 import { deleteSkill } from "components/Skill/actions";
+import BookmarkSvg from "components/svg/Bookmark";
 import TaskActionButton from "components/Task/components/ActionButton";
 import { acceptTaskOffer, taskOfferSetCurrentTask } from "components/TaskOffer/actions";
 import { taskSearchSetCurrentTask } from "components/TaskSearch/actions";
@@ -145,7 +146,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
           <div className={styles.separatorLine}/>
           <TaskActionButton title={'Share'} icon={'share'} onClick={handleShare}/>
           <div className={styles.separatorLine}/>
-          <TaskActionButton title={'Save'} icon={'favorite'} onClick={handleFavorite}/>
+          <TaskActionButton title={'Save'} icon={<BookmarkSvg/> } onClick={handleFavorite}/>
         </div>}
         {actionsType === 'client' && <div className={styles.bottom}>
           <TaskActionButton title={'Read more'} icon={'down'} onClick={handleReadMore}/>
@@ -185,30 +186,39 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
           <img className={styles.last} src="/img/SearchTaskPage/icons/safe.svg" alt=''/>
           <div className={styles.desc}>Safe deal</div>
         </div>
+        <div className={styles.priceDetails}>
         {task.budget ?
-          <>
-          <div className={styles.price}>
+          <div className={styles.priceDetailsItem}>
+          <div className={styles.priceDetailsLabel}>
             Fixed price:
           </div>
-          <div className={styles.title}>
+          <div className={styles.priceDetailsValue}>
             less then <span>${task.budget}</span>
           </div>
-          </>
+          </div>
           :
-          task.ratePerHour && <>
-          <div className={styles.price}>
+          task.ratePerHour && <div className={styles.priceDetailsItem}>
+          <div className={styles.priceDetailsLabel}>
             Hourly:
           </div>
-          <div className={styles.title}>
+          <div className={styles.priceDetailsValue}>
             <span>${task.ratePerHour}/h</span>
-            <span>{task.maxWeekHours}h/week</span>
           </div>
-          </>
+          </div>
           }
+          {task.deadline && <div className={styles.priceDetailsItem}>
+          <div className={styles.priceDetailsLabel}>
+            Deadline:
+          </div>
+          <div className={styles.priceDetailsValue}>
+            <span>${ format(new Date(task.deadline), 'MM.dd.yyy')}</span>
+          </div>
+        </div>}
+        </div>
           <div className={styles.btnContainer}>
-            {actionsType === 'public' && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT TASK</Button>}
-            {(actionsType !== 'public' && task.status !== 'in_progress') && <Button bold smallFont transparent size='16px 0'>Messages</Button>}
-            {(actionsType === 'master' && task.status === 'published') && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>Accept</Button>}
+            {(actionsType === 'public' && !task.profileHasNegotiations) && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT TASK</Button>}
+            { ((actionsType !== 'public' && task.status !== 'in_progress') || task.profileHasNegotiations) && <Button bold smallFont transparent size='16px 0'>Messages</Button>}
+            {(actionsType === 'master' && task.status === 'published' && !task.profileHasNegotiations)  && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>Accept</Button>}
           </div>
       </div>
     </div>

@@ -1,24 +1,11 @@
 import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
-import { LangSelect } from "components/layout/Header/components/LangSelect";
-import { ModeSelect } from "components/layout/Header/components/ModeSelect";
-import { ProfileSelect } from "components/layout/Header/components/ProfileSelect";
 import ModalConfirm from "components/Modal/ModalConfirm";
 import ModalLoader from "components/ModalLoader";
-import { changeRole } from "components/Profile/actions";
-import MenuMobile from "components/svg/MenuMobile";
-import MenuMobileClose from "components/svg/MenuMobileClose";
 import TaskOfferAcceptModal from "components/TaskOffer/TaskOfferAcceptModal";
 import TaskShareModal from "components/TaskShareModal";
-import Socials from "components/ui/Socials";
 import { withTranslation } from "react-i18next";
-import { withAuthSync } from "utils/auth";
-import { getMediaPath } from "utils/media";
-import styles from './index.module.scss'
-import Link from 'next/link'
 import { default as React, useState } from 'react'
-import Button from 'components/ui/Button'
-import Logo from 'components/Logo'
 import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'

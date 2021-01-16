@@ -79,6 +79,7 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
     case ActionTypes.FETCH_TASK_LIST_REQUEST + ApiActionTypes.FAIL:
       state.listLoading = false;
       break
+
     case ActionTypes.RESET_TASK_LIST:
       state.listLoading = false;
       state.list = []

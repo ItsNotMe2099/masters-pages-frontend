@@ -6,6 +6,7 @@ import {
   setFilterProfileSearch
 } from "components/ProfileSearch/actions";
 import SearchProfileForm from "components/SearchPage/Filter/Form";
+import BookmarkSvg from "components/svg/Bookmark";
 import { setPublishedTaskUser } from "components/TaskUser/actions";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -50,7 +51,8 @@ const SearchProfileFilter = (props: Props) => {
   return <>
     <SearchProfileForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
     {!props.collapsed && <div className={styles.saveSearchWrapper}>
-    <div className={styles.saveSearch} onClick={handleSaveSearch}>Save the search </div><img src={'/img/icons/like-icon.svg'}/>
+    <div className={styles.saveSearch} onClick={handleSaveSearch}>Save the search</div>
+      <BookmarkSvg color={'white'}/>
    </div>}
    </>
 }
