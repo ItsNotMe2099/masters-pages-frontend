@@ -1,9 +1,15 @@
+@import "scss/index";
+
 .root{
   display: flex;
   position: relative;
   flex-direction: column;
   margin-right: 20px;
   margin-top: 20px;
+  @media screen and (max-width: $sm-max) {
+    margin-right: 0;
+    width: 100%;
+  }
 }
 .title{
   font-size: 18px;
@@ -35,6 +41,9 @@
   height: 210px;
   border-radius: 12px;
   position: relative;
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+  }
 }
 .dots{
   margin: 0;
