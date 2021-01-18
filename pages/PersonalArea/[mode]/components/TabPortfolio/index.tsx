@@ -70,8 +70,8 @@ const TabPortfolio = (props: Props) => {
     <div className={styles.root}>
         <div className={styles.fill}>Fill up your profile to get the<br/> best results</div>
         <div className={styles.add}>
-          <div className={list.length ? styles.check :styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>01.</span>} Add Category</span></div>
-          <div className={list.length ? styles.check :styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>01.</span>} Add Sub Category</span></div>
+          <div className={list.length ? styles.check : styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>01.</span>} Add Category</span></div>
+          <div className={list.length ? styles.check : styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>} Add Sub Category</span></div>
           <div className={styles.addItem}><span>03. Upload photos</span></div>
           <div className={styles.addItem}><span>04. Add description</span></div>
           <div className={styles.addItem}><span>05. Set a price</span></div>
