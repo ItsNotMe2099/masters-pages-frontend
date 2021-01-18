@@ -20,6 +20,7 @@ import subCategoryCheckboxReducer, { SubCategoryCheckboxState } from 'components
 import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
 import { SavedSearchesState } from "components/SavedSearches/reducer";
 import { SavedPeopleState } from "components/SavedPeople/reducer";
+import { SavedTasksState } from "components/SavedTasks/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -44,6 +45,7 @@ export interface IRootState {
   taskOffer: TaskOfferState
   savedSearch: SavedSearchesState
   savedPeople: SavedPeopleState
+  savedTasks: SavedTasksState
 }
 export interface ILocation {
   lng: number,

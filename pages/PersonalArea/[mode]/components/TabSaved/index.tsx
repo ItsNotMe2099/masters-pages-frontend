@@ -8,6 +8,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSavedSearches } from "components/SavedSearches/actions";
 import { fetchSavedPeople } from "components/SavedPeople/actions";
+import { fetchSavedTasks } from "components/SavedTasks/actions";
 import SavedPeople from "./components/SavedPeople";
 import SavedSearches from "./components/SavedSearches";
 interface Props {
@@ -18,17 +19,10 @@ const TabSaved = (props: Props) => {
   const dispatch = useDispatch()
   const searches = useSelector((state: IRootState) => state.savedSearch.list)
   const people = useSelector((state: IRootState) => state.savedPeople.list)
+  //const tasks = useSelector((state: IRootState) => state.savedTasks.list)
 
   const { mode, tab, tabSubPage } = router.query
-  const savedPeople = [{name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15},
-  {name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15},
-  {name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15},
-  {name: "Jacob Jones", category1: "Art and design", category2: "Fitness", category3: "Courier", number: 15}
-  ]
-  const savedSearches = [{type: "Master search", category: "Art and design", subCategory: "Logo design", location: "Toronto", rating: "5 stars only", number: 3},
-  {type: "Task search", category: "Art and design", subCategory: "Logo design", location: "Toronto", rating: "5 stars only", number: 3},
-  {type: "Master search", category: "Art and design", subCategory: "Logo design", location: "Toronto", rating: "5 stars only", number: 3}
-  ]
+
 
   const tabs = [
     {name: 'People', key: 'people'},
@@ -43,6 +37,7 @@ const TabSaved = (props: Props) => {
     useEffect(() => {
       dispatch(fetchSavedSearches())
       dispatch(fetchSavedPeople())
+      dispatch(fetchSavedTasks())
     }, [])
 
   return (
@@ -63,6 +58,11 @@ const TabSaved = (props: Props) => {
             type="Master search" 
             item={item}
             />)}
+          </>
+        }
+        {tabSubPage === "tasks" &&
+          <>
+
           </>
         }
       </div>
