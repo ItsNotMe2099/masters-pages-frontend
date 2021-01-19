@@ -19,6 +19,12 @@
 .filters{
   background: #E4474E;
   padding: 40px 0 40px;
+  @media screen and (max-width: $sm-max){
+    padding: 0 22px 12px 22px;
+    margin-top: -10px;
+    position: relative;
+    z-index: 3;
+  }
 }
 .filtersVolunteer{
   background: #0D99C6;
@@ -30,9 +36,52 @@
 .form{
   width: 1250px;
   margin: auto;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+    display: none;
+  }
+  &__mobile{
+    @media screen and (min-width: $md-min){
+      display: none;
+    }
+    form{
+      margin-bottom: 15px;
+    }
+    a{
+      cursor: pointer;
+      display: flex;
+      margin-top: 15px;
+      div{
+        margin: auto;
+      }
+      span{
+        font-weight: 500;
+        font-size: 14px;
+        color: #fff;
+        line-height: 17px;
+        margin-right: 10px;
+      }
+      svg{
+        height: 16px;
+      }
+    }
+  }
 }
 .sidebar{
   width: 328px;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+    padding: 0 22px;
+    background-image: url("../../../public/img/icons/mapBackgrnd.png");
+    display: flex;
+    justify-content: center;
+    height: 85px;
+    background-size: cover;
+    box-shadow: (0px 33.0756px 44.1008px rgba(0, 0, 0, 0.04)), (0px 22.0504px 33.0756px rgba(0, 0, 0, 0.04)), (0px 5.51261px 11.0252px rgba(0, 0, 0, 0.04)), (0px 0px 1.37815px rgba(0, 0, 0, 0.04));
+    div{
+      width: 100%;
+    }
+  }
 }
 .sidebarWrapper{
 
@@ -40,6 +89,9 @@
 .tasks{
   flex: 1;
   padding-left: 30px;
+  @media screen and (max-width: $sm-max){
+    padding: 0 22px;
+  }
 }
 .taskItem{
 
@@ -49,14 +101,24 @@
   height: 250px;
   border-radius: 12px;
   overflow: hidden;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
 }
 .tasksContainer{
   display: flex;
   padding: 30px 0px;
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+    padding: 0;
+  }
 }
 .tasksTobBar{
   display: flex;
   margin-bottom: 18px;
+  @media screen and (max-width: $sm-max){
+    margin-top: 25px;
+  }
 }
 .tasksAmount{
   flex: 1;
@@ -78,10 +140,17 @@
   border-radius: 20px;
   padding: 26px;
   margin-top: 30px;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
 }
 .filterLabel{
   font-size: 16px;
   font-weight: 700;
   line-height: 36px;
   color: #000000;
+}
+
+.hide{
+  transform: rotate(180deg);
 }

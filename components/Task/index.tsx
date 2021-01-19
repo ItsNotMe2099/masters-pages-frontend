@@ -91,6 +91,11 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       {actionsType === 'public' && <div className={styles.profile}>
         <Avatar image={task.profile?.avatar}/>
+        <div className={styles.mobileWrapper}>
+          <div className={styles.name__mobile}>
+              <div className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</div>
+              <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
+            </div>
         <div className={styles.icons}>
           <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
           <div>0</div>
@@ -104,6 +109,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
             <img src="/img/SearchTaskPage/icons/halfStar.svg" alt=''/>
           <div className={styles.comments}>(0)</div>
+        </div>
         </div>
       </div>}
       <div className={styles.main}>
@@ -173,6 +179,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         <div className={styles.titleLeft}>
           Payment method:
         </div>
+        <div className={styles.methodWrapper}>
         <div className={styles.method}>
           <img src="/img/SearchTaskPage/icons/bank.svg" alt=''/>
           <div className={styles.desc}>Bank account</div>
@@ -181,21 +188,22 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
           <img src="/img/SearchTaskPage/icons/cash.svg" alt=''/>
           <div className={styles.desc}>Cash</div>
         </div>
-        <div className={styles.method}>
+        <div className={styles.methodSafe}>
           <img className={styles.last} src="/img/SearchTaskPage/icons/safe.svg" alt=''/>
           <div className={styles.desc}>Safe deal</div>
         </div>
+        </div>
         {task.budget ?
-          <>
+          <div className={styles.priceWrapper}>
           <div className={styles.price}>
             Fixed price:
           </div>
           <div className={styles.title}>
             less then <span>${task.budget}</span>
           </div>
-          </>
+          </div>
           :
-          task.ratePerHour && <>
+          task.ratePerHour && <div className={styles.priceWrapper}>
           <div className={styles.price}>
             Hourly:
           </div>
@@ -203,7 +211,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             <span>${task.ratePerHour}/h</span>
             <span>{task.maxWeekHours}h/week</span>
           </div>
-          </>
+          </div>
           }
           <div className={styles.btnContainer}>
             {actionsType === 'public' && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT TASK</Button>}

@@ -12,7 +12,7 @@ import Input from "components/ui/Inputs/Input";
 import Loader from "components/ui/Loader";
 import { useRouter } from "next/router";
 import SearchTaskFilter from "pages/SearchTaskPage/Filter";
-import { default as React, useEffect } from "react";
+import { default as React, useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { IRootState } from "types";
 import { withAuthSync } from "utils/auth";
@@ -23,6 +23,7 @@ import Task from "components/Task";
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Sticky from 'react-stickynode';
+import ArrowDown from "components/svg/ArrowDown";
 const queryString = require('query-string')
 interface Props {
   onShowMap: () => void
@@ -38,6 +39,7 @@ const SearchTaskListView = (props: Props) => {
   const total = useSelector((state: IRootState) => state.taskSearch.total)
   const page = useSelector((state: IRootState) => state.taskSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
+  const [isShow, setIsShow] = useState(false)
 
   useEffect(() => {
     console.log('fetch search')
@@ -76,6 +78,15 @@ const SearchTaskListView = (props: Props) => {
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
         <SearchTaskFilter initialValues={getQueryFilter()}/>
+      </div>
+      <div className={styles.form__mobile}>
+        {isShow ?
+        <SearchTaskFilter initialValues={getQueryFilter()}/>
+        :
+        <SearchTaskFilter collapsed initialValues={getQueryFilter()}/>}
+        <a onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
+          <div>{isShow ? <span>Hide</span> : <span>Show more options</span>}<img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/></div>
+        </a>
       </div>
     </div>
     <div className={styles.container}>

@@ -130,22 +130,6 @@ let SearchTaskForm = (props) => {
               withIcon={false}
               showEmpty={true}
             />
-            <Field
-              name="geonameid"
-              component={InputLocation}
-              label="Location"
-              noMargin={true}
-              withIcon={false}
-              showEmpty={true}
-            />
-            <Field
-              name="price"
-              label="Price"
-              component={InputPriceFilter}
-              noMargin={true}
-              formKey={`${collapsed ? 'collapsed' : ''}${props.form}`}
-              withIcon={false}
-            />
           </>}
         </div>
       </form>

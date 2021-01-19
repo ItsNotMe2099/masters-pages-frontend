@@ -82,7 +82,7 @@ const Header = (props: Props) => {
   }
   return (
     <div className={styles.rootWrapper}>
-      <header className={`${styles.root} ${isAuth && styles.rootAuth} ${role === 'client' && styles.rootClient} ${role === 'master' && styles.rootMaster} ${role === 'volunteer' && styles.rootVolunteer}`}>
+      <header className={`${!isMenuMobileOpen ? styles.root : styles.root__open} ${isAuth && styles.rootAuth} ${role === 'client' && styles.rootClient} ${role === 'master' && styles.rootMaster} ${role === 'volunteer' && styles.rootVolunteer}`}>
         <div className={styles.menuDesktop}>
           <div className={styles.logo}>
             <Logo color={isAuth ? 'white': null}/>
