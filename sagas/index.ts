@@ -16,6 +16,7 @@ import apiSaga from "sagas/apiSaga";
 import SavedPeopleSaga from "components/SavedPeople/sagas";
 import SavedSearchesSaga from "components/SavedSearches/sagas";
 import SavedTasksSaga from "components/SavedTasks/sagas";
+import ProfileFeedbackSaga from "components/ProfileFeedback/sagas";
 
 export const rootSaga = function* root() {
   yield all([
@@ -35,6 +36,7 @@ export const rootSaga = function* root() {
     TaskOfferSaga(),
     SavedPeopleSaga(),
     SavedSearchesSaga(),
-    SavedTasksSaga()
+    SavedTasksSaga(),
+    ProfileFeedbackSaga()
   ]);
 };

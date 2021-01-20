@@ -1,12 +1,12 @@
 import Button from "components/ui/Button";
 import {useState} from "react";
-import { ISavedPeople } from "types";
+import { ISavedTasks } from "types";
 import styles from './index.module.scss'
 
 interface Props {
-  item: ISavedPeople
+  item: ISavedTasks
 }
-const SavedPeople = (props: Props) => {
+const SavedTasks = (props: Props) => {
   const [show, setIsShow] = useState(false)
   const { item } = props
   const categories = ["Art and design", "Fitness", "Courier", "Art and design", "Fitness", "Courier"]
@@ -14,7 +14,7 @@ const SavedPeople = (props: Props) => {
   return (
       <section className={styles.item}>
         <div className={styles.name}>
-          <div className={styles.nameText}>{item.firstName} {item.lastName}</div>
+          <div className={styles.nameText}>{item} {item}</div>
         </div>
         <div className={styles.stars}>
             <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
@@ -42,4 +42,4 @@ const SavedPeople = (props: Props) => {
   )
 }
 
-export default SavedPeople
+export default SavedTasks

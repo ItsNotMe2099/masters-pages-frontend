@@ -22,6 +22,8 @@ import SkillReducer from 'components/Skill/reducer';
 import ModalReducer from 'components/Modal/reducer';
 import SavedSearchesReducer from 'components/SavedSearches/reducer';
 import SavedPeopleReducer from 'components/SavedPeople/reducer';
+import SavedTasksReducer from 'components/SavedTasks/reducer';
+import ProfileFeedbackReducer from 'components/ProfileFeedback/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -46,5 +48,7 @@ export default combineReducers({
   taskUser: TaskUserReducer,
   taskOffer: TaskOfferReducer,
   savedSearch: SavedSearchesReducer,
-  savedPeople: SavedPeopleReducer
+  savedPeople: SavedPeopleReducer,
+  savedTasks: SavedTasksReducer,
+  profileFeedback: ProfileFeedbackReducer
 })

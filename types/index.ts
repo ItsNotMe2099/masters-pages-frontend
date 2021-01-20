@@ -21,6 +21,7 @@ import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
 import { SavedSearchesState } from "components/SavedSearches/reducer";
 import { SavedPeopleState } from "components/SavedPeople/reducer";
 import { SavedTasksState } from "components/SavedTasks/reducer";
+import { ProfileFeedbackState } from "components/ProfileFeedback/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -46,6 +47,7 @@ export interface IRootState {
   savedSearch: SavedSearchesState
   savedPeople: SavedPeopleState
   savedTasks: SavedTasksState
+  profileFeedback: ProfileFeedbackState
 }
 export interface ILocation {
   lng: number,
@@ -204,4 +206,225 @@ export interface ISavedSearches {
       photoObject: null
       skills: []
       photo: null
+  }
+
+  export interface ISavedTasks {
+    id: number
+    profileId: number
+    masterId: number
+    title: string
+    description: string
+    categoryId: number
+    subCategoryId: number
+    masterRole: string
+    executionType: string
+    country: null
+    city: null
+    address: string
+    geonameid: number
+    location: {
+        lng: number
+        lat: number
+    },
+    isExactLocation: boolean
+    ratePerHour: null
+    budget: number
+    estimate: number
+    status: string
+    deadline: null
+    createdAt: string
+    updatedAt: string
+    deletedAt: null
+    profile: {
+        id: number
+        userId: number
+        role: string
+        firstName: string
+        lastName: string
+        phone: string
+        email: string
+        birthday: null
+        country: null
+        city: string
+        region: null
+        zipcode: null
+        address1: null
+        address2: null
+        geonameid: null
+        location: null
+        isExactLocation: boolean
+        createdAt: string
+        updatedAt: string
+        deletedAt: null
+        photo: null
+    },
+    category: {
+        id: number
+        createdAt: string
+        updatedAt: string
+        iconUrl: null
+        color: null
+        isMain: boolean
+        parentId: null
+        sort: number
+        translations: [
+            {
+                id: number
+                createdAt: string
+                updatedAt: string
+                languageCode: string
+                name: string
+                description: string
+                baseId: number
+            }
+        ]
+    },
+    subCategory: {
+        id: number
+        createdAt: string
+        updatedAt: string
+        iconUrl: null
+        color: null
+        isMain: boolean
+        parentId: number
+        sort: number
+        translations: [
+            {
+                id: number,
+                createdAt: string
+                updatedAt: string
+                languageCode: string
+                name: string
+                description: string
+                baseId: number
+            }
+        ]
+    },
+    photosObjects: [
+        {
+            id: string
+            urlS3: string
+            createdAt: string
+            updatedAt: string
+            deletedAt: null
+        }
+    ],
+    feedback: {
+        id: number
+        target: string
+        fromProfileId: number
+        toProfileId: number
+        taskId: number
+        workQuality: number
+        politeness: number
+        deadlines: number
+        extraExpenses: number
+        reccommend: number
+        description: string
+        usability: null
+        masterSearchSpeed: null
+        willUseAgain: null
+        willReccommend: null
+        showInFirstPage: boolean
+        createdAt: string
+        updatedAt: string
+        deletedAt: null
+        photos: null
+    },
+    photos: string[]
+    priceType: string
+}
+
+  export interface IFeedbacksToProfile {
+      id: number
+      target: string
+      fromProfileId: number
+      toProfileId: number
+      taskId: number
+      workQuality: number
+      politeness: number
+      deadlines: number
+      extraExpenses: number
+      reccommend: number
+      description: string
+      usability: null
+      masterSearchSpeed: null
+      willUseAgain: null
+      willReccommend: null
+      showInFirstPage: boolean
+      createdAt: string
+      updatedAt: string
+      deletedAt: null,
+      photosObjects: [
+          {
+              id: number
+              urlS3: string
+              createdAt: string
+              updatedAt: string
+              deletedAt: null
+          }
+      ]
+      task: {
+          id: number
+          profileId: number
+          masterId: number
+          title: string
+          description: string
+          categoryId: number
+          subCategoryId: number
+          masterRole: string
+          executionType: string
+          country: null
+          city: null
+          address: string
+          geonameid: number
+          location: {
+              lng: number
+              lat: number
+          },
+          isExactLocation: boolean
+          ratePerHour: null
+          budget: number
+          estimate: number
+          status: string
+          deadline: null
+          createdAt: string
+          updatedAt: string
+          deletedAt: null
+          photosObjects: [
+              {
+                  id: string,
+                  urlS3: string
+                  createdAt: string
+                  updatedAt: string
+                  deletedAt: null
+              }
+          ],
+          photos: string[]
+          priceType: string
+      },
+      fromProfile: {
+          id: number
+          userId: number
+          role: string
+          firstName: string
+          lastName: string
+          phone: string
+          email: string
+          birthday: null
+          country: null
+          city: string
+          region: null
+          zipcode: null
+          address1: null
+          address2: null
+          geonameid: null
+          location: null
+          isExactLocation: boolean
+          createdAt: string
+          updatedAt: string
+          deletedAt: null
+          photo: null
+      },
+      photos: string[]
   }
