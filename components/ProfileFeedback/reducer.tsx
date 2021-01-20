@@ -4,12 +4,14 @@ export interface ProfileFeedbackState {
   list: any[]
   listLatest: any[]
   isLoading: boolean
+  total: number
 }
 
 const initialState: ProfileFeedbackState = {
   list: [],
   listLatest: [],
-  isLoading: false
+  isLoading: false,
+  total: 0
 }
 
 export default function TaskUserReducer(state = {...initialState}, action) {
@@ -25,6 +27,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
       state.list = action.payload.data
+      state.total = action.payload.total
       console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS")
       break
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.FAIL:

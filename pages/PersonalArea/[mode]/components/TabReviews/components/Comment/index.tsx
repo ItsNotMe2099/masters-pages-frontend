@@ -2,6 +2,7 @@ import Avatar from "../../components/Avatar";
 import * as React from "react";
 import styles from './index.module.scss'
 import { IFeedbacksToProfile } from "types";
+import format from 'date-fns/format'
 
 interface Props {
   item: IFeedbacksToProfile
@@ -12,9 +13,9 @@ const Comment = (props: Props) => {
     <div className={styles.root}>
     <div className={styles.commentTop}>
       <div className={styles.top}>
-        <Avatar/>
+        <Avatar item={item}/>
           <div className={styles.date}>
-              {item.updatedAt}
+          {format(new Date(item.task.updatedAt), 'MM/dd/yyy hh:mm')}
           </div>
       </div>
       <div className={styles.taskText}>
@@ -29,7 +30,7 @@ const Comment = (props: Props) => {
     </div>
         <div className={styles.commentBottom}>
           <div className={styles.comment}>
-            <Avatar mini/>
+            <Avatar mini item={item}/>
             <div className={styles.textSection}>{item.description}</div>
             <div className={styles.images}>
               <img src="/img/icons/Rectangle 1134431.png" alt=""/>
