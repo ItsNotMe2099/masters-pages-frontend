@@ -4,5 +4,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 1vw;
-  grid-row-gap: 1vw;
+    grid-row-gap: 1vw;
+    @media screen and (max-width: $sm-max){
+      display: flex;
+      flex-direction: column;
+      grid-row-gap: 16px;
+  }
 }

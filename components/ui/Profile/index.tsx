@@ -84,6 +84,11 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.profile}>
         <Avatar image={profile.avatar}/>
+        <div className={styles.mobileWrapper}>
+        <div className={styles.name__mobile}>
+              <div className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
+              <img src="/img/iconsTck.svg" alt=''/>
+            </div>
         <div className={styles.icons}>
           <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
           <div>0</div>
@@ -97,6 +102,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
           <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
           <img src="/img/SearchTaskPage/icons/halfStar.svg" alt=''/>
           <div className={styles.comments}>(0)</div>
+        </div>
         </div>
       </div>
       <div className={styles.main}>
@@ -114,7 +120,6 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
 
           <div className={styles.desc}>
             <Tabs style={'roundSmall'} onChange={handleChangeTab} activeTab={currentCategoryTab} tabs={profile.skills.map(skill => ({key: `${skill.id}`, name: getCategoryTranslation(skill)?.name, }))}/>
-
           </div>
 
           <div className={styles.skillsContainer}>
@@ -139,7 +144,6 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
               <ArrowRight/>
             </div>
           </div>
-
           <div className={styles.bottom}>
            <ProfileActionButton title={'View profile'} icon={'arrow-right-small'} onClick={handleReadMore}/>
             <ProfileActionButton title={'Save'} icon={'bookmark'} onClick={handleReadMore}/>

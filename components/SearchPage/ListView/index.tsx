@@ -13,7 +13,7 @@ import Input from "components/ui/Inputs/Input";
 import Loader from "components/ui/Loader";
 import Profile from "components/ui/Profile";
 import { useRouter } from "next/router";
-import { default as React, useEffect } from "react";
+import { default as React, useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { IRootState } from "types";
 import { withAuthSync } from "utils/auth";
@@ -40,6 +40,7 @@ const SearchProfileListView = (props: Props) => {
   const total = useSelector((state: IRootState) => state.profileSearch.total)
   const page = useSelector((state: IRootState) => state.profileSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
+  const [isShow, setIsShow] = useState(false)
 
   console.log("Tasks", tasks);
   useEffect(() => {
@@ -81,6 +82,15 @@ const SearchProfileListView = (props: Props) => {
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
         <SearchProfileFilter  searchRole={props.searchRole} initialValues={getQueryFilter()}/>
+      </div>
+      <div className={styles.form__mobile}>
+        {isShow ?
+        <SearchProfileFilter initialValues={getQueryFilter()}/>
+        :
+        <SearchProfileFilter collapsed initialValues={getQueryFilter()}/>}
+        <a onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
+          <div>{isShow ? <span>Hide</span> : <span>Show more options</span>}<img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/></div>
+        </a>
       </div>
     </div>
     <div className={styles.container}>

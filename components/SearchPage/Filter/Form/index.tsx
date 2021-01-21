@@ -31,6 +31,15 @@ let SearchProfileForm = (props) => {
               showEmpty={true}
             />
             <Field
+              name="subCategoryId"
+              component={InputSubCategory}
+              label="Subcategory"
+              categoryId={props.categoryId}
+              noMargin={true}
+              withIcon={false}
+              showEmpty={true}
+            />
+            <Field
               name="radius"
               label="Radius of search"
               component={SelectInput}
@@ -65,15 +74,6 @@ let SearchProfileForm = (props) => {
               noMargin={true}
               formKey={`${collapsed ? 'collapsed' : ''}${props.form}`}
               withIcon={false}
-            />
-            <Field
-              name="subCategoryId"
-              component={InputSubCategory}
-              label="Subcategory"
-              categoryId={props.categoryId}
-              noMargin={true}
-              withIcon={false}
-              showEmpty={true}
             />
             <Field
               name="geonameid"
@@ -111,25 +111,6 @@ let SearchProfileForm = (props) => {
               withIcon={false}
               showEmpty={true}
             />
-          </>}
-          {collapsed && <>
-            <Field
-              name="categoryId"
-              component={InputCategory}
-              label="Category"
-              noMargin={true}
-              withIcon={false}
-              showEmpty={true}
-            />
-            <Field
-              name="subCategoryId"
-              component={InputSubCategory}
-              label="Subcategory"
-              categoryId={props.categoryId}
-              noMargin={true}
-              withIcon={false}
-              showEmpty={true}
-            />
             <Field
               name="geonameid"
               component={InputLocation}
@@ -145,6 +126,25 @@ let SearchProfileForm = (props) => {
               noMargin={true}
               formKey={`${collapsed ? 'collapsed' : ''}${props.form}`}
               withIcon={false}
+            />
+            </>}
+            {collapsed && <>
+              <Field
+              name="categoryId"
+              component={InputCategory}
+              label="Category"
+              noMargin={true}
+              withIcon={false}
+              showEmpty={true}
+            />
+            <Field
+              name="subCategoryId"
+              component={InputSubCategory}
+              label="Subcategory"
+              categoryId={props.categoryId}
+              noMargin={true}
+              withIcon={false}
+              showEmpty={true}
             />
           </>}
         </div>
