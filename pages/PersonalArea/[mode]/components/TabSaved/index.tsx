@@ -11,6 +11,7 @@ import { fetchSavedPeople } from "components/SavedPeople/actions";
 import { fetchSavedTasks } from "components/SavedTasks/actions";
 import SavedPeople from "./components/SavedPeople";
 import SavedSearches from "./components/SavedSearches";
+import SavedTasks from "./components/SavedTasks";
 interface Props {
 
 }
@@ -19,7 +20,7 @@ const TabSaved = (props: Props) => {
   const dispatch = useDispatch()
   const searches = useSelector((state: IRootState) => state.savedSearch.list)
   const people = useSelector((state: IRootState) => state.savedPeople.list)
-  //const tasks = useSelector((state: IRootState) => state.savedTasks.list)
+  const tasks = useSelector((state: IRootState) => state.savedTasks.list)
 
   const { mode, tab, tabSubPage } = router.query
 
@@ -62,7 +63,9 @@ const TabSaved = (props: Props) => {
         }
         {tabSubPage === "tasks" &&
           <>
-
+          {tasks.map(item => <SavedTasks
+            item={item}
+            />)}
           </>
         }
       </div>

@@ -31,7 +31,7 @@ const TabReviews = (props: Props) => {
       <div className={styles.top}>
       <div>
         <div className={styles.percent}>95%</div>
-        <div className={styles.greenText}>Positive reviews based on 423</div>
+        <div className={styles.greenText}>Positive reviews based on {total}</div>
       </div>
       <div className={styles.simpleText}>Lorem ipsum dolor sit amet, consectetur adipiscing<br/> elit. Fermentum mattis sed quam enim.</div>
       <div className={styles.dropdown}>
@@ -47,7 +47,7 @@ const TabReviews = (props: Props) => {
           loader={<Loader/>}>
           {feedbacks.map(item => <Comment item={item}/>)}
         </InfiniteScroll>}
-      <div className={total > 1 ? styles.btnContainer : styles.none}><Button black size="20px 40px"><span>Load more ({total -1}) : </span></Button></div>
+      <div className={total > 1 ? styles.btnContainer : styles.none}><Button black size="20px 40px"><span>Load more ({total -1})</span></Button></div>
     </div>
   )
 }

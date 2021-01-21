@@ -31,6 +31,9 @@
   margin-bottom: 35px;
   font-weight: 500;
   font-size: 24px;
+  @media screen and (min-width: $md-min) {
+    margin-right: 63px;
+  }
   @media screen and (max-width: $sm-max) {
     margin-bottom: 13px;
   }
