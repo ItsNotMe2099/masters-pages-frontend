@@ -1,15 +1,12 @@
 import { modalClose } from "components/Modal/actions";
 import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
-import { acceptTaskOffer } from "components/TaskOffer/actions";
-import TaskOfferAcceptForm from "components/TaskOffer/TaskOfferAcceptModal/TaskOfferAcceptForm";
-import Loader from "components/ui/Loader";
+import { taskNegotiationCreateTaskResponse } from "components/TaskNegotiation/actions";
+import TaskOfferAcceptForm from "components/TaskNegotiation/TaskOfferAcceptModal/TaskOfferAcceptForm";
+
 import Modal from "components/ui/Modal";
-import SkillForm from "pages/PersonalArea/[mode]/components/TabPortfolio/components/SkillForm";
 import { useEffect } from "react";
 import * as React from "react";
 import { IRootState, ITask, SkillData, SkillListItem } from "types";
-import { getMediaPath } from "utils/media";
-import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -18,7 +15,7 @@ interface Props {
   onClose: () => void
 }
 const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
-  const loading = useSelector((state: IRootState) => state.taskOffer.formLoading)
+  const loading = useSelector((state: IRootState) => state.taskOffer.taskResponseLoading)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
 
   console.log("Tassss", task)
@@ -31,7 +28,7 @@ const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
   const handleSubmit = (data) => {
     console.log("submit data", data)
 
-      dispatch(acceptTaskOffer(task.id, data))
+      dispatch(taskNegotiationCreateTaskResponse(task.id, data))
   }
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>

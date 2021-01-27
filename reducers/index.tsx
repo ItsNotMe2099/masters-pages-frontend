@@ -3,8 +3,9 @@ import authSignUpReducer from 'components/Auth/SignUp/reducer';
 import phoneConfirmReducer from 'components/Auth/PhoneConfirm/reducer';
 import registrationCompleteReducer from 'components/Auth/RegistrationPage/reducer';
 import authSignInReducer from 'components/Auth/SignIn/reducer';
+import ChatReducer from "components/Chat/reducer";
 import ProfileSearchReducer from "components/ProfileSearch/reducer";
-import TaskOfferReducer from "components/TaskOffer/reducer";
+import TaskOfferReducer from "components/TaskNegotiation/reducer";
 import TaskSearchReducer from "components/TaskSearch/reducer";
 import TaskUserReducer from "components/TaskUser/reducer";
 import {combineReducers} from 'redux';
@@ -46,5 +47,6 @@ export default combineReducers({
   taskUser: TaskUserReducer,
   taskOffer: TaskOfferReducer,
   savedSearch: SavedSearchesReducer,
-  savedPeople: SavedPeopleReducer
+  savedPeople: SavedPeopleReducer,
+  chat: ChatReducer,
 })

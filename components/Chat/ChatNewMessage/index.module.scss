@@ -1,0 +1,66 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+
+  background: #F3F3F3;
+  border-radius: 8px;
+  border: 1px solid #CCCCCC
+}
+.actions{
+
+}
+.action{
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+}
+.form{
+  flex: 1;
+  display: flex;
+}
+.messageForm{
+  flex: 1;
+}
+
+
+.message{
+  flex: 1;
+}
+.messageField{
+
+  box-sizing: border-box;
+  textarea {
+    display: block;
+    height: auto;
+    min-height: 54px;
+    border: none;
+    border-radius: 0px;
+    border-left: 1px solid #C4C4C4;
+    border-right: 1px solid #C4C4C4;
+    border-top: none;
+    border-bottom: none;
+    box-sizing: border-box;
+  }
+  margin-bottom: 0px;
+}
+.button{
+  display: flex;
+  align-items: center;
+  width: 65px;
+  justify-content: center;
+}
+.loader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 56px;
+  background: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  img{
+    display: block;
+    max-width: 30px;
+  }
+}

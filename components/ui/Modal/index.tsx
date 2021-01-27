@@ -1,7 +1,7 @@
 import { signInSubmit } from "components/Auth/SignIn/actions";
 import Button from 'components/ui/Button'
 import Loader from "components/ui/Loader";
-import { createRef, useEffect, useRef } from "react";
+import { createRef, ReactElement, useEffect, useRef } from "react";
 import styles from './index.module.scss'
 
 import ReactModal from 'react-modal'
@@ -18,13 +18,8 @@ interface Props {
   children?: any,
   loading?: boolean,
   className?: string,
-  closeClassName?: string
-  headerJob?: boolean
-  headerXP?: boolean
-  firstName?: string
-  lastName?: string
-  img?: string
-  job?: string
+  closeClassName?: string,
+  header?: ReactElement
 }
 
 export default function Modal(props: Props) {
@@ -79,7 +74,6 @@ export default function Modal(props: Props) {
       <div className={styles.frame} >
         <div className={styles.overlay} onClick={props.onRequestClose}/>
       <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
-        {props.headerJob ? <ModalHeader jobDone job={props.job} firstName={props.firstName} lastName={props.lastName} img={props.img}/> : props.headerXP ? <ModalHeader/> : null}
         {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`}>
           <Button closeBtn onClick={props.onRequestClose}></Button>
         </div>}

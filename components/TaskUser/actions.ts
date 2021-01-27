@@ -19,6 +19,22 @@ export const fetchTaskUserListRequest = (data: any) => action(ActionTypes.FETCH_
     method: 'GET',
   }
 })
+
+export const fetchTaskUserResponseRequest = (taskId: number, data: any) => action(ActionTypes.FETCH_TASK_USER_RESPONSES_LIST_REQUEST, {
+  api: {
+    url: `/api/tasks/${taskId}/responses?${queryString.stringify(data)}`,
+    method: 'GET',
+  }
+})
+
+export const fetchTaskResponseRequest = (taskId: number, taskNegotiationId: number) => action(ActionTypes.TASK_RESPONSE_FETCH_REQUEST, {
+  api: {
+    url: `/api/tasks/${taskId}/responses/${taskNegotiationId}`,
+    method: 'GET',
+  }
+})
+
+
 export const resetTaskUserList = () => action(ActionTypes.RESET_TASK_USER_LIST)
 export const setPageTaskUser = (page: number) => action(ActionTypes.TASK_USER_LIST_SET_PAGE, page)
 export const setFilterTaskUser = (data: any) => action(ActionTypes.TASK_USER_LIST_SET_FILTER, data)

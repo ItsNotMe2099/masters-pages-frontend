@@ -1,8 +1,13 @@
 import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
+import FinishingTaskByClientModal from "components/FinishingTaskByClientModal";
+import FinishingTaskByMasterModal from "components/FinishingTaskByMasterModal";
 import ModalConfirm from "components/Modal/ModalConfirm";
 import ModalLoader from "components/ModalLoader";
-import TaskOfferAcceptModal from "components/TaskOffer/TaskOfferAcceptModal";
+import TaskEditConditionsModal from "components/TaskNegotiation/TaskEditConditionsModal";
+import TaskHireMasterModal from "components/TaskNegotiation/TaskHireMasterModal";
+import TaskMarkAsDoneModal from "components/TaskNegotiation/TaskMarkAsDoneModal";
+import TaskOfferAcceptModal from "components/TaskNegotiation/TaskOfferAcceptModal";
 import TaskShareModal from "components/TaskShareModal";
 import { withTranslation } from "react-i18next";
 import { default as React, useState } from 'react'
@@ -54,9 +59,14 @@ const Modals = (props: Props) => {
       <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {}}/>
       <ChangePassword isOpen={key === 'changePassword'}
                       onRequestClose={() => dispatch(modalClose())}/>
-      <TaskOfferAcceptModal isOpen={key === 'taskOfferAcceptModal'} onClose={() => dispatch(modalClose())}/>
+      <TaskOfferAcceptModal isOpen={key === 'taskOfferCreateModal'} onClose={() => dispatch(modalClose())}/>
       <TaskShareModal isOpen={key === 'taskShareModal'}/>
                       <ModalConfirm isOpen={key === 'confirm'}    onRequestClose={() => dispatch(modalClose())}/>
+      {key === 'taskHireMasterModal' && <TaskHireMasterModal isOpen={key === 'taskHireMasterModal'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'taskMarkAsDoneModal' && <TaskMarkAsDoneModal isOpen={key === 'taskMarkAsDoneModal'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'taskEditConditionsModal' && <TaskEditConditionsModal isOpen={key === 'taskEditConditionsModal'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'finishTaskAsClientOpen' && <FinishingTaskByClientModal isOpen={key === 'finishTaskAsClientOpen'}/>}
+      {key === 'finishTaskAsMasterOpen' && <FinishingTaskByMasterModal isOpen={key === 'finishTaskAsMasterOpen'}/>}
     </>
   )
 }

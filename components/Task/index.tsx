@@ -2,13 +2,16 @@ import { confirmOpen, taskOfferAcceptOpen, taskShareOpen } from "components/Moda
 import { deleteSkill } from "components/Skill/actions";
 import BookmarkSvg from "components/svg/Bookmark";
 import TaskActionButton from "components/Task/components/ActionButton";
-import { acceptTaskOffer, taskOfferSetCurrentTask } from "components/TaskOffer/actions";
+import TaskResponse from "components/Task/components/TaskResponse";
+import { taskNegotiationSetCurrentTask } from "components/TaskNegotiation/actions";
 import { taskSearchSetCurrentTask } from "components/TaskSearch/actions";
-import { deleteTaskUser, setPublishedTaskUser } from "components/TaskUser/actions";
+import { deleteTaskUser, fetchTaskUserResponseRequest, setPublishedTaskUser } from "components/TaskUser/actions";
 import Avatar from "components/ui/Avatar";
 import Button from 'components/ui/Button'
+import { DropDown } from "components/ui/DropDown";
 import { format } from "date-fns";
-import { ITask } from "types";
+import { default as React, useEffect, useState } from "react";
+import { ITask, ITaskNegotiation } from "types";
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,10 +30,12 @@ interface Props {
 
 export default function Task({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish}: Props) {
   const dispatch = useDispatch();
+  const [sortType, setSortType] = useState('newFirst');
 
-  const renderActionButton = (title: string, icon: string) => {
+  useEffect(() => {
+    dispatch(fetchTaskUserResponseRequest(task.id, {limit: 1, ...getSortData(sortType)}));
+  }, [])
 
-  }
   const handlePublish = () => {
     dispatch(confirmOpen({
       description: `Do you want to publish task «${task.title}»?`,
@@ -64,11 +69,15 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
       }
     }));
   }
+
   const handlePause = () => {
 
   }
   const handleReadMore = () => {
 
+  }
+  const handleLoadMore = () => {
+    dispatch(fetchTaskUserResponseRequest(task.id, {page: 1, limit: 1000, ...getSortData(sortType)}));
   }
   const handleShare = () => {
     dispatch(taskSearchSetCurrentTask(task));
@@ -79,7 +88,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   }
 
   const handleAccept = () => {
-    dispatch(taskOfferSetCurrentTask(task));
+    dispatch(taskNegotiationSetCurrentTask(task));
     dispatch(taskOfferAcceptOpen());
   }
 
@@ -88,8 +97,22 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
       onEdit(task);
     }
   }
+  const getSortData = (sortType) => {
+    switch (sortType) {
+      case 'newFirst':
+        return {sort: 'createdAt', sortOrder: 'DESC'}
+      case 'oldFirst':
+        return {sort: 'createdAt', sortOrder: 'ASC'}
+    }
+  }
+  const handleSortChange = (sort) => {
+    console.log("SortType", sort);
+    setSortType(sort.value);
+    dispatch(fetchTaskUserResponseRequest(task.id, {page: 1, limit: task.responses?.total <= task.responses?.data?.length ? 1000 : 1, ...getSortData(sort.value)}));
+  }
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
+      <div className={styles.wrapper}>
       {actionsType === 'public' && <div className={styles.profile}>
         <Avatar image={task.profile?.avatar}/>
         <div className={styles.icons}>
@@ -114,11 +137,10 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
               <div className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</div>
               <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
             </div>}
-            {(actionsType === 'client' ) && <div className={styles.taskTitle}>
+            {(actionsType === 'client') && <div className={styles.taskTitle}>
               <div className={styles.title}>{task.title}</div>
-
             </div>}
-            {(actionsType !== 'public' ) && <div className={styles.status}>
+            {(actionsType !== 'public') && <div className={styles.status}>
               {task.status}
             </div>}
             <div className={styles.time}>
@@ -211,7 +233,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             Deadline:
           </div>
           <div className={styles.priceDetailsValue}>
-            <span>${ format(new Date(task.deadline), 'MM.dd.yyy')}</span>
+            <span>{ format(new Date(task.deadline), 'MM.dd.yyy')}</span>
           </div>
         </div>}
         </div>
@@ -221,6 +243,26 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             {(actionsType === 'master' && task.status === 'published' && !task.profileHasNegotiations)  && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>Accept</Button>}
           </div>
       </div>
+      </div>
+      {task.responses?.total > 0 && <div className={styles.responses}>
+        <div className={styles.responsesTop}>
+        <div className={styles.responsesTitle}>Masters list ({task.responses?.total})</div>
+        {task.responses?.total > 0 && <div className={styles.tasksSort}>
+          <span>Sort by:</span>
+          <DropDown onChange={handleSortChange} value={sortType} options={[
+            {value: 'newFirst',  label: 'New First'},
+            {value: 'oldFirst', label: 'Old First'}
+            ]} item={(item) => <div>{item?.label}</div>}
+          />
+        </div>}
+        </div>
+        <div className={styles.responsesList}>
+         {(task.responses?.data ? task.responses?.data : []).map(response => <TaskResponse response={response}/>)}
+        </div>
+        <div className={styles.loadMoreArea}>
+          {task.responses?.total > task.responses?.data?.length && <div className={styles.loadMore} onClick={handleLoadMore}>Load more</div>}
+        </div>
+      </div>}
     </div>
   )
 }

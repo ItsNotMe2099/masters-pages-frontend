@@ -3,7 +3,7 @@ import ActionTypes from "./const";
 import cookie from "js-cookie";
 import {parse, format} from 'date-fns'
 export interface ProfileState {
-  currentProfile: any
+  currentProfile: ICurr
   formIsSuccess: boolean
   formError: string,
   loading: boolean,

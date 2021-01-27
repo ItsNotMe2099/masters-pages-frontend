@@ -6,17 +6,17 @@ interface Props {
   placeholder?: string
   input
   label
-  type
+  labelType?: string
+  className?:string
 }
 
 export default function TextArea(props: Props) {
   const { error, touched } = props.meta
-  const { input, label, type } = props
+  const { input, label } = props
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${props.className}`}>
       <textarea
         className={`${styles.textarea} ${(error && touched) && styles.textareaError}`}
-        type={type}
         placeholder={label}
         {...input}
       />

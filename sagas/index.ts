@@ -4,11 +4,13 @@ import registrationCompleteSaga from "components/Auth/RegistrationPage/sagas";
 import signInSaga from "components/Auth/SignIn/sagas";
 import signUpSaga from "components/Auth/SignUp/sagas";
 import PWChangeSaga from "components/Auth/ChangePassword/sagas";
+import ChatSocketSaga from "components/Chat/chatSocketSaga";
+import ChatSaga from "components/Chat/sagas";
 import CreateTaskCompleteSaga from "components/CreateTaskPage/sagas";
 import ProfileSaga from "components/Profile/sagas";
 import ProfileSearchSaga from "components/ProfileSearch/sagas";
 import SkillSaga from "components/Skill/sagas";
-import TaskOfferSaga from "components/TaskOffer/sagas";
+import TaskOfferSaga from "components/TaskNegotiation/sagas";
 import TaskSearchSaga from "components/TaskSearch/sagas";
 import TaskUserSaga from "components/TaskUser/sagas";
 import { all } from 'redux-saga/effects'
@@ -33,6 +35,8 @@ export const rootSaga = function* root() {
     TaskUserSaga(),
     TaskOfferSaga(),
     SavedPeopleSaga(),
-    SavedSearchesSaga()
+    SavedSearchesSaga(),
+    ChatSaga(),
+    ChatSocketSaga()
   ]);
 };

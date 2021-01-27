@@ -10,11 +10,11 @@ interface Props {
 export default function FeedbackModal(props: Props) {
 
   const handleSubmit = () => {
-    
+
   }
 
   return (
-    <Modal{...props} headerXP className={styles.root} size="medium" closeClassName={styles.close} 
+    <Modal{...props}  className={styles.root} size="medium" closeClassName={styles.close}
     >
 
         <div className={styles.innards}>

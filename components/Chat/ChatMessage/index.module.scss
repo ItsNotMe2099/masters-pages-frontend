@@ -1,0 +1,27 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  padding: 4px 29px;
+}
+.rootAuthor{
+  .time{
+    order: 1;
+    text-align: right;
+    margin-left: 0px;
+    margin-right: 9px;
+  }
+  .message{
+    order: 2;
+  }
+}
+.message{
+}
+.time{
+  color: #3C4039;
+  font-size: 12px;
+  font-weight: 400;
+  flex: 1;
+  text-align: left;
+  margin-left: 9px;
+}

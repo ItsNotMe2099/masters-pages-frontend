@@ -84,6 +84,39 @@ export default function TaskUserReducer(state = {...initialState}, action) {
 
       break
 
+    case ActionTypes.FETCH_TASK_USER_RESPONSES_LIST_REQUEST + ApiActionTypes.SUCCESS:
+      const taskId = action.payload?.data?.length > 0 ? action.payload?.data[0].taskId : null;
+      console.log("fetch Reponsed", taskId, )
+      state.list = state.list.map((item) => {
+        if(taskId && item.id === taskId){
+          console.log("AddResponses to Task", taskId, action.payload)
+          return {...item, responses: action.payload};
+        }
+        return {...item};
+      })
+      break;
+
+    case ActionTypes.TASK_RESPONSE_FETCH_REQUEST + ApiActionTypes.SUCCESS:
+
+      console.log("state filter", state.filter)
+      console.log("sent_to_client", action.payload)
+      state.list = state.list.map((item) => {
+        if( item.id === action.payload.taskId){
+          console.log("sent_to_client", action.payload)
+          return {...item, responses: {...item.responses, data: (item.responses?.data || []).map((response) => response.id == action.payload.id ? {...response, ...action.payload} : response)}};
+        }
+        return item;
+      })
+
+      state.list = state.list.map(item => {
+        if(item.id === action.payload.id){
+          console.log("replace task item")
+          return action.payload;
+        }
+        return item;
+      }).filter(item => !state.filter?.status || item.status === state.filter.status)
+      break
+
     case ActionTypes.RESET_TASK_USER_LIST:
       state.listLoading = false;
       state.list = []

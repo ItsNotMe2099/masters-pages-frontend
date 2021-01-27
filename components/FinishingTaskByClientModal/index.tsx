@@ -1,36 +1,38 @@
+import Logo from "components/Logo";
+import { modalClose } from "components/Modal/actions";
 import Modal from "components/ui/Modal";
+import { IRootState } from "types";
 import styles from './index.module.scss'
 import FinishingTaskByClientForm from "./Form";
 
+import { useSelector, useDispatch } from 'react-redux'
 interface Props {
   isOpen: boolean
-  onRequestClose?: () => void
-  job: string
-  money: string
-  firstName?: string
-  lastName?: string
-  img?: string
 }
 
 export default function FinishingTaskByClientModal(props: Props) {
-
-  const handleSubmit = () => {
-    
+  const dispatch = useDispatch();
+  const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
+  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  const handleSubmit = (data) => {
+    console.log("HandleSubmit", data);
+  }
+  const handleClose = () => {
+    dispatch(modalClose());
   }
 
+
   return (
-    <Modal{...props} headerJob className={styles.root} size="medium" closeClassName={styles.close} 
-    firstName={props.firstName}
-    lastName={props.lastName}
-    img={props.img}
-    job={props.job}
+    <Modal{...props}  className={styles.root} size="medium" closeClassName={styles.close}
+
+    onRequestClose={handleClose}
     >
 
         <div className={styles.innards}>
-          <div className={styles.money}>
+          {/*<div className={styles.money}>
             You own: <span> &nbsp;$ {props.money}</span>
-          </div>
-          <div className={styles.rate}>Please rate {props.firstName} work!</div>
+          </div>*/}
+          <div className={styles.rate}>Please rate {task.master.firstName} work!</div>
           <div className={styles.form}><FinishingTaskByClientForm onSubmit={handleSubmit}/></div>
         </div>
     </Modal>

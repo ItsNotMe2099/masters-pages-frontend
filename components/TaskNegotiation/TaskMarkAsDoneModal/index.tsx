@@ -1,0 +1,85 @@
+import { modalClose } from "components/Modal/actions";
+import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
+import {
+  taskNegotiationCreateTaskResponse,
+  taskNegotiationFetchLastConditions,
+  taskNegotiationHireMaster
+} from "components/TaskNegotiation/actions";
+
+import Button from "components/ui/Button";
+import Loader from "components/ui/Loader";
+
+import Modal from "components/ui/Modal";
+import { format } from "date-fns";
+import { useEffect } from "react";
+import * as React from "react";
+import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import styles from './index.module.scss'
+
+import { useSelector, useDispatch } from 'react-redux'
+interface Props {
+  isOpen: boolean,
+  onClose: () => void
+}
+const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
+  const loading = useSelector((state: IRootState) => state.taskOffer.actionLoading)
+  const taskNegotiationLoading = useSelector((state: IRootState) => state.taskOffer.lastConditionLoading)
+  const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
+  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+
+      dispatch(taskNegotiationFetchLastConditions(task.id))
+
+  }, [])
+  const handleSubmit = () => {
+    console.log("HandleSubmit");
+
+    dispatch(taskNegotiation(task.id))
+  }
+  return (
+    <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
+      <div className={styles.header}>
+        <div className={styles.icon}>
+          <img  src={`/img/icons/dollar.svg`}/>
+        </div>
+        <div className={styles.title}>Finishing task</div>
+      </div>
+
+      {taskNegotiationLoading || !taskNegotiation ? <Loader/> : <>
+      <div className={styles.task}>
+        <div className={styles.taskHeader}>
+        <div className={styles.taskTitle}>{task?.title}</div>
+        <div className={styles.taskExpires}>
+          <div className={styles.taskExpiresLabel}>Expire in:</div>
+          <div className={styles.taskExpiresValue}>23:46:23</div>
+        </div>
+        </div>
+        <div className={styles.taskDescription}>{task?.description}</div>
+      </div>
+
+      <div className={styles.taskPriceDetails}>
+        <div className={styles.taskPriceDetailsItem}>
+          <div className={styles.taskPriceDetailsItemLabel}>{taskNegotiation.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+          <div className={styles.taskPriceDetailsItemValue}>$ {taskNegotiation.priceType === 'fixed' ? taskNegotiation.budget : `${taskNegotiation.ratePerHour}/h`}</div>
+        </div>
+        <div className={styles.taskPriceDetailsItem}>
+          <div className={styles.taskPriceDetailsItemLabel}>Dead line:</div>
+          <div className={styles.taskPriceDetailsItemValue}>{taskNegotiation.deadline ? format(new Date(task.deadline), 'MM.dd.yyy') : 'N/A'} </div>
+        </div>
+      </div>
+
+      <div className={styles.containerButtons}>
+        <div className={styles.buttons}>
+          <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={onClose}>Cancel</Button>
+          <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>Mark as done</Button>
+        </div>
+      </div>
+      </>}
+
+     </Modal>
+  )
+}
+
+export default TaskMarkAsDoneModal

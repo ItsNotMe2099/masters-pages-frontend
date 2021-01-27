@@ -1,8 +1,0 @@
-enum ActionTypes {
-  TASK_OFFER_ACCEPT = 'TaskOffer/TASK_OFFER_ACCEPT',
-  TASK_OFFER_ACCEPT_REQUEST = 'TaskOffer/TASK_OFFER_ACCEPT_REQUEST',
-  TASK_OFFER_SET_CURRENT_TASK = 'TaskOffer/TASK_OFFER_SET_CURRENT_TASK',
-
-}
-
-export default ActionTypes
