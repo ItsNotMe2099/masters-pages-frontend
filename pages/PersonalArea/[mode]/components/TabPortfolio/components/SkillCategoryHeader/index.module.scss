@@ -1,3 +1,5 @@
+@import "scss/index";
+
 .root{
   display: flex;
   position: relative;
@@ -6,12 +8,18 @@
   align-items: center;
   padding: 0 20px;
   border-radius: 10px;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+    padding: 0;
+  }
 }
 .title{
   font-size: 18px;
   font-weight: 400;
   flex: 1;
-
+  @media screen and (max-width: $sm-max) {
+    padding: 14px 21px;
+  }
 }
 .icon{
   margin-right: 12px;
@@ -19,6 +27,9 @@
 .actions{
   display: flex;
   align-items: center;
+  @media screen and (max-width: $sm-max) {
+    padding: 20px 0;
+  }
 }
 .actionItem{
   cursor: pointer;

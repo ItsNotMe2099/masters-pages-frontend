@@ -1,3 +1,5 @@
+@import "scss/index";
+
 .root{
   display: flex;
   position: relative;
@@ -7,6 +9,10 @@
 
 .top{
   display: flex;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+    padding: 0 20px;
+  }
 }
 
 .percent{
@@ -25,11 +31,21 @@
   margin-bottom: 35px;
   font-weight: 500;
   font-size: 24px;
+  @media screen and (min-width: $md-min) {
+    margin-right: 63px;
+  }
+  @media screen and (max-width: $sm-max) {
+    margin-bottom: 13px;
+  }
 }
 
 .simpleText{
   font-size: 16px;
   color: #000000;
+  line-height: 30px;
+  @media screen and (max-width: $sm-max) {
+    display: none;
+  }
 }
 
 .comment{
@@ -53,18 +69,33 @@
     font-weight: 600;
     font-size: 16px;
   }
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+    padding: 0 20px;
+    button{
+      width: 100%;
+    }
+  }
 }
 
 .dropdown{
-  padding: 20px 21px;
+  padding: 16px 21px;
   border: 1px solid #7D7D7D;
   border-radius: 10px;
   width: 25%;
-  margin: 0 auto auto 87px;
+  margin: 10px auto auto 70px;
+  @media screen and (max-width: $sm-max) {
+    margin: 0;
+    width: 100%;
+  }
 }
 
 .value{
   font-weight: bold;
   font-size: 14px;
   color: #7D7D7D;
+}
+
+.none{
+  display: none;
 }

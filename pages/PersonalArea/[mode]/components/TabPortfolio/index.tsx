@@ -68,7 +68,16 @@ const TabPortfolio = (props: Props) => {
   }
   return (
     <div className={styles.root}>
-      {loading && <Loader/>}
+        <div className={styles.fill}>Fill up your profile to get the<br/> best results</div>
+        <div className={styles.add}>
+          <div className={list.length ? styles.check : styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>01.</span>} Add Category</span></div>
+          <div className={list.length ? styles.check : styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>} Add Sub Category</span></div>
+          <div className={styles.addItem}><span>03. Upload photos</span></div>
+          <div className={styles.addItem}><span>04. Add description</span></div>
+          <div className={styles.addItem}><span>05. Set a price</span></div>
+        </div>
+        <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'15px 50px'} onClick={() => dispatch(skillCategoryModalOpen())}><span>Add new category</span></Button></div>
+        {loading && <Loader/>}
       {!loading && <div className={styles.split}><div className={styles.categories}>
         {list.map((category) =>
           (<div className={styles.category}>
@@ -82,7 +91,6 @@ const TabPortfolio = (props: Props) => {
             </div>
           </div>))}
       </div>
-        <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'12px 115px'} onClick={() => dispatch(skillCategoryModalOpen())}>Add Category</Button></div>
       </div>}
 
       <SkillModal isOpen={modalKey === 'skillForm'} category={currentCategory} skill={currentSkill} onClose={() => dispatch(modalClose())}/>

@@ -8,6 +8,9 @@
   &:first-of-type {
     margin-top: 0px;
   }
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+  }
 }
 .wrapper{
   display: flex;
@@ -17,6 +20,10 @@
 }
 .profile{
   padding: 20px 0px 20px 20px;
+  @media screen and (max-width: $sm-max){
+    display: flex;
+    border-bottom: 1px solid #cccccc;
+  }
 }
 
 .main {
@@ -33,8 +40,16 @@
   border-radius: 20px;
   flex-direction: column;
   width: 32%;
-
-  max-width: 224px;
+  @media screen and (min-width: $md-min){
+    max-width: 224px;
+  }
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
   .title {
     padding: 0;
   }
@@ -68,6 +83,10 @@
 
   div {
     flex: 1;
+    @media screen and (max-width: $sm-max){
+      flex: 0;
+      margin-right: 21px;
+    }
   }
 }
 
@@ -75,12 +94,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+
+.mobileWrapper{
+  @media screen and (max-width: $sm-max){
+    margin: auto 0 auto 19px;
+  }
 }
 
 .name {
   display: flex;
   flex: 1;
-
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+  &__mobile{
+    display: flex;
+    @media screen and (min-width: $md-min){
+      display: none;
+    }
+  }
 
 }
 .taskTitle{
@@ -118,6 +154,21 @@
 }
 
 
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 20px;
+  @media screen and (max-width: $sm-max){
+    text-align: center;
+    padding: 0;
+    margin: auto 0;
+  }
+
+  span {
+    margin-right: 22px;
+  }
+}
+
 
 .desc {
   font-weight: 500;
@@ -129,6 +180,9 @@
   font-weight: bold;
   font-size: 16px;
   color: #000;
+  @media screen and (min-width: $md-min){
+    text-align: center;
+  }
 }
 
 .method {
@@ -141,7 +195,29 @@
 
   img {
     margin-right: 9px;
+    @media screen and (max-width: $sm-max){
+      width: 16px;
+    }
   }
+}
+
+  .methodSafe {
+    display: flex;
+    margin-top: 8px;
+    @media screen and (max-width: $sm-max){
+      flex: 1;
+    }
+
+    div {
+      padding: 0;
+    }
+
+    img {
+      margin-right: 9px;
+      @media screen and (max-width: $sm-max){
+        width: 16px;
+      }
+    }
 
   .last {
     margin-right: 11px;
@@ -156,6 +232,11 @@
   font-weight: bold;
   font-size: 14px;
   color: #000;
+
+  margin-top: 15px;
+  @media screen and (max-width: $sm-max){
+    margin: auto 8px auto 0;
+  }
 }
 
 
@@ -236,6 +317,7 @@
   color: #27C60D;
 
 }
+
 .responses{
   padding: 22px 28px 12px 28px ;
   border-top: 1px solid #C4C4C4;
@@ -277,5 +359,19 @@
   display: flex;
   span{
     margin-right: 8px;
+  }
+}
+
+.methodWrapper{
+  @media screen and (max-width: $sm-max){
+    display: flex;
+    grid-gap: 12px;
+  }
+}
+
+.priceWrapper{
+  @media screen and (max-width: $sm-max){
+    display: flex;
+    margin-top: 22px;
   }
 }

@@ -21,8 +21,15 @@
   border-radius: 13px;
   width: 119px;
   height: 149px;
+  @media screen and (max-width: $sm-max){
+    width: 71px;
+    height: 89px;
+  }
   svg{
     width: 71px !important;
     height: 86px !important;
+    @media screen and (max-width: $sm-max){
+      height: 50px !important;
+    }
   }
 }
