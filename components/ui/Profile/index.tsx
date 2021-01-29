@@ -15,6 +15,7 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import Slider from "react-slick";
+import { TabSelect } from "./components/TabSelect";
 
 interface Props {
   profile: ProfileData,

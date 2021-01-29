@@ -19,7 +19,6 @@ export const fetchLatestFeedbacksToProfileRequest = () => action(ActionTypes.FET
   }
 })
 
-
 export const createFeedBackMasterRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_MASTER_REQUEST, {
   api: {
     url: '/api/feedback/master',
@@ -35,3 +34,5 @@ export const createFeedBackSiteRequest = (data: any) => action(ActionTypes.CREAT
     data
   }
 })
+export const setPageFeedback = (page: number) => action(ActionTypes.FEEDBACK_SET_PAGE, page)
+

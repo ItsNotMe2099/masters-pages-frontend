@@ -5,13 +5,13 @@ import * as React from "react";
 import { IRootState, SkillListItem } from "types";
 import { getMediaPath } from "utils/media";
 import { getCategoryTranslation } from "utils/translations";
-import styles from 'components/Portfolio/SkillCategoryHeader/index.module.scss'
+import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {
   item: SkillListItem,
-  onAdd?:(SkillListItem) => void,
-  onRemove?:(SkillListItem) => void,
+  onAdd:(SkillListItem) => void,
+  onRemove:(SkillListItem) => void,
 }
 const SkillCategoryHeader = ({item, onAdd, onRemove}: Props) => {
   return (
