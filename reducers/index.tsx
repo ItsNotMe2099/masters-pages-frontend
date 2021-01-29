@@ -24,6 +24,7 @@ import SavedSearchesReducer from 'components/SavedSearches/reducer';
 import SavedPeopleReducer from 'components/SavedPeople/reducer';
 import SavedTasksReducer from 'components/SavedTasks/reducer';
 import ProfileFeedbackReducer from 'components/ProfileFeedback/reducer';
+import PublicProfileReducer from 'components/PublicProfile/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -50,5 +51,6 @@ export default combineReducers({
   savedSearch: SavedSearchesReducer,
   savedPeople: SavedPeopleReducer,
   savedTasks: SavedTasksReducer,
-  profileFeedback: ProfileFeedbackReducer
+  profileFeedback: ProfileFeedbackReducer,
+  publicProfile: PublicProfileReducer
 })

@@ -18,3 +18,5 @@ export const fetchLatestFeedbacksToProfileRequest = () => action(ActionTypes.FET
     method: 'GET',
   }
 })
+
+export const setPageFeedback = (page: number) => action(ActionTypes.FEEDBACK_SET_PAGE, page)

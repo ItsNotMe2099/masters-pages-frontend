@@ -51,7 +51,7 @@ const TabReviews = (props: Props) => {
           loader={<Loader/>}>
           {(load ? feedbacks : feedbacks.slice(0, 1)).map(item => <Comment item={item}/>)}
         </InfiniteScroll>}
-      <div className={total <= 1 || load || loading ? styles.none : styles.btnContainer}>
+      <div className={total === 1 || load || loading ? styles.none : styles.btnContainer}>
         <Button onClick={() => setLoadMore(true)} black size="20px 40px"><span>Load more ({total -1})</span></Button>
       </div>
     </div>

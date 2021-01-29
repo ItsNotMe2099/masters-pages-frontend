@@ -10,8 +10,8 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {
   item: SkillListItem,
-  onAdd?:(SkillListItem) => void,
-  onRemove?:(SkillListItem) => void,
+  onAdd:(SkillListItem) => void,
+  onRemove:(SkillListItem) => void,
 }
 const SkillCategoryHeader = ({item, onAdd, onRemove}: Props) => {
   return (

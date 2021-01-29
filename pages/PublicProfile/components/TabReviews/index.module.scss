@@ -1,0 +1,101 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.top{
+  display: flex;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+}
+
+.percent{
+  float: left;
+  font-weight: 500;
+  color: #26BA35;
+  margin-right: 17px;
+  font-weight: bold;
+  font-size: 57px;
+}
+
+.greenText{
+  font-weight: bold;
+  line-height: 29px;
+  color: #26BA35;
+  margin-bottom: 35px;
+  font-weight: 500;
+  font-size: 24px;
+  @media screen and (min-width: $md-min) {
+    margin-right: 63px;
+  }
+  @media screen and (max-width: $sm-max) {
+    margin-bottom: 13px;
+  }
+}
+
+.simpleText{
+  font-size: 16px;
+  color: #000000;
+  line-height: 30px;
+  @media screen and (max-width: $sm-max) {
+    display: none;
+  }
+}
+
+.comment{
+  padding: 18px 35px 42px 26px;
+}
+
+.commentTop{
+  display: flex;
+  justify-content: space-between;
+}
+
+.date{
+  font-weight: 500;
+  font-size: 14px;
+  color: #6D718C;
+}
+
+.btnContainer{
+  margin: 45px auto auto auto;
+  span{
+    font-weight: 600;
+    font-size: 16px;
+  }
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+    padding: 0 20px;
+    button{
+      width: 100%;
+    }
+  }
+}
+
+.dropdown{
+  padding: 16px 21px;
+  border: 1px solid #7D7D7D;
+  border-radius: 10px;
+  width: 25%;
+  margin: 10px auto auto 70px;
+  @media screen and (max-width: $sm-max) {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+.value{
+  font-weight: bold;
+  font-size: 14px;
+  color: #7D7D7D;
+}
+
+.none{
+  display: none;
+}

@@ -22,6 +22,7 @@ import { SavedSearchesState } from "components/SavedSearches/reducer";
 import { SavedPeopleState } from "components/SavedPeople/reducer";
 import { SavedTasksState } from "components/SavedTasks/reducer";
 import { ProfileFeedbackState } from "components/ProfileFeedback/reducer";
+import { PublicProfileState } from "components/PublicProfile/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -48,6 +49,7 @@ export interface IRootState {
   savedPeople: SavedPeopleState
   savedTasks: SavedTasksState
   profileFeedback: ProfileFeedbackState
+  publicProfile: PublicProfileState
 }
 export interface ILocation {
   lng: number,
@@ -80,6 +82,38 @@ export interface ProfileData{
   preferredCategories ?: number[],
   preferredSubCategories ?: number[],
   skills?: SkillData[]
+}
+
+export interface FullProfileData{
+    id: number
+    userId: number
+    role: string
+    firstName: string
+    lastName: string
+    phone: string
+    email: string
+    birthday: string
+    country: string
+    city: string
+    region: string
+    zipcode: string
+    address1: string
+    address2: string
+    geonameid: number
+    location: null
+    isExactLocation: boolean
+    createdAt: string
+    updatedAt: string
+    deletedAt: null
+    photoObject: {
+        id: string
+        urlS3: string
+        createdAt: string
+        updatedAt: string
+        deletedAt: null
+    },
+    skills: SkillData[]
+    photo: string
 }
 
 export interface Category{
