@@ -11,7 +11,8 @@ import Button from "components/ui/Button";
 
 import Modal from "components/ui/Modal";
 import { format } from "date-fns";
-import { router } from "next/client";
+import { useRouter } from "next/router";
+
 import { useEffect } from "react";
 import * as React from "react";
 import { IRootState, ITask, SkillData, SkillListItem } from "types";
@@ -29,6 +30,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   const response = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleDecline = (e) => {
     dispatch(confirmOpen({
