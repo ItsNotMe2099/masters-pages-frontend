@@ -1,9 +1,10 @@
 import ApiActionTypes from "constants/api";
+import { ProfileData } from "types";
 import ActionTypes from "./const";
 import cookie from "js-cookie";
 import {parse, format} from 'date-fns'
 export interface ProfileState {
-  currentProfile: ICurr
+  currentProfile: ProfileData
   formIsSuccess: boolean
   formError: string,
   loading: boolean,

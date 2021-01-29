@@ -3,7 +3,7 @@ import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "compon
 import {
   taskNegotiationCreateTaskResponse,
   taskNegotiationFetchLastConditions,
-  taskNegotiationHireMaster
+  taskNegotiationHireMaster, taskNegotiationMarkAsDone
 } from "components/TaskNegotiation/actions";
 
 import Button from "components/ui/Button";
@@ -36,7 +36,7 @@ const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
   const handleSubmit = () => {
     console.log("HandleSubmit");
 
-    dispatch(taskNegotiation(task.id))
+    dispatch(taskNegotiationMarkAsDone(task.id))
   }
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>

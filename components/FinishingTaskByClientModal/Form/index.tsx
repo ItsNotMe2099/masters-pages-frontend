@@ -10,7 +10,7 @@ import FileInput from 'components/ui/Inputs/S3FileUpload';
 
 let FinishingTaskByClientForm = props => {
   const { handleSubmit } = props
-  const error = useSelector((state: IRootState) => state.authSignIn.formError)
+  const error = useSelector((state: IRootState) => state.taskOffer.formError)
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

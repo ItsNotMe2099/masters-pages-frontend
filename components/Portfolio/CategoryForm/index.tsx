@@ -8,7 +8,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from "types";
 import { arrayNotEmpty, required } from "utils/validations";
-import styles from './index.module.scss'
+import styles from 'components/Portfolio/CategoryForm/index.module.scss'
 import { Field, reduxForm } from 'redux-form'
 
 let CategoryForm = (props) => {

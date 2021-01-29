@@ -57,6 +57,9 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_OFFER_CREATE_OPEN:
       state.modalKey = 'taskOfferCreateModal'
       break
+    case ActionTypes.TASK_OFFER_SHOW_OPEN:
+      state.modalKey = 'taskOfferShow'
+      break
     case ActionTypes.TASK_SHARE_OPEN:
       state.modalKey = 'taskShareModal'
       break
@@ -74,6 +77,15 @@ export default function authReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FINISH_TASK_AS_MASTER_OPEN:
       state.modalKey = 'finishTaskAsMasterOpen'
+      break
+    case ActionTypes.FEEDBACK_SITE_OPEN:
+      state.modalKey = 'feedbackSiteModal'
+      break
+    case ActionTypes.FEEDBACK_SUCCESS_OPEN:
+      state.modalKey = 'feedbackSuccessModal'
+      break
+    case ActionTypes.TASK_SUCCESS_OPEN:
+      state.modalKey = 'taskSuccessModal'
       break
     case ActionTypes.CONFIRM_MODAL_OPEN:
       state.modalKey = 'confirm'

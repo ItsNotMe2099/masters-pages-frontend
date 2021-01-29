@@ -6,7 +6,7 @@ import * as React from "react";
 import { IRootState, SkillData, SkillListItem } from "types";
 import { getMediaPath } from "utils/media";
 import { getCategoryTranslation } from "utils/translations";
-import styles from './index.module.scss'
+import styles from 'components/Portfolio/Skill/index.module.scss'
 import Slider from "react-slick";
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {

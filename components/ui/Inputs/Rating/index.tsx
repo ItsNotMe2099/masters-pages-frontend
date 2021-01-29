@@ -13,7 +13,7 @@ export default function Rating(props: Props) {
 
   return (
     <div className={styles.stars}>
-      <div onClick={() => onChange(1)}><StarRating/></div>
+      <div onClick={() => onChange(1)}>{value >= 1 ? <StarRating/> : <StarRatingStroke/>}</div>
       <div onClick={() => onChange(2)}>{value >= 2 ? <StarRating/> : <StarRatingStroke/>}</div>
       <div onClick={() => onChange(3)}>{value >= 3 ? <StarRating/> : <StarRatingStroke/>}</div>
       <div onClick={() => onChange(4)}>{value >= 4 ? <StarRating/> : <StarRatingStroke/>}</div>

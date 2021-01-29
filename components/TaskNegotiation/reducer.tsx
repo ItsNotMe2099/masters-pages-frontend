@@ -10,7 +10,9 @@ export interface TaskOfferState {
   actionLoading: boolean,
   editConditionsLoading: boolean,
   editConditionsError?: string,
-  currentTask?: ITask
+  currentTask?: ITask,
+  formLoading: boolean,
+  formError?: string
 
 }
 
@@ -20,9 +22,11 @@ const initialState: TaskOfferState = {
   lastCondition: null,
   actionLoading: false,
   editConditionsLoading: false,
+  formLoading: false
 }
 
 export default function TaskOfferReducer(state = {...initialState}, action) {
+
   switch(action.type) {
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_TASK:
       console.log("TASK_OFFER_SET_CURRENT_TASK", action.payload)
@@ -49,6 +53,19 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_NEGOTIATION_EDIT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS:
       state.lastCondition = action.payload;
       break
+    case ActionTypes.TASK_NEGOTIATION_FINISH:
+      console.log("TASK_NEGOTIATION_FINISH LOADING");
+      state.formLoading = true;
+      break
+    case ActionTypes.TASK_NEGOTIATION_FINISH + ApiActionTypes.SUCCESS:
+      state.formLoading = false;
+      break
+    case ActionTypes.TASK_NEGOTIATION_FINISH + ApiActionTypes.FAIL:
+      state.formLoading = false;
+      state.formError = action.payload.error;
+      break
+
+
 
 
     case ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_RESPONSE:

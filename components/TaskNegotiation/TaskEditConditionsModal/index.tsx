@@ -50,7 +50,7 @@ const TaskEditConditionsModal = ({isOpen, onClose}: Props) => {
         </div>
         <div className={styles.taskDescription}>{task?.description}</div>
       </div>
-      <TaskEditConditionsForm taskNegotiation={taskNegotiation} onSubmit={handleSubmit} initialValues={{ offerPriceType: taskNegotiation?.budget ? 'fixed' : 'rate', budget: taskNegotiation?.budget, ratePerHour: taskNegotiation?.ratePerHour, deadline: taskNegotiation.deadline ? format(new Date(taskNegotiation.deadline), 'MM/dd/yyy') : null}}  onCancel={() => dispatch(modalClose())}/>
+      <TaskEditConditionsForm taskNegotiation={taskNegotiation} onSubmit={handleSubmit} initialValues={{ offerPriceType: taskNegotiation?.priceType, budget: taskNegotiation?.budget, ratePerHour: taskNegotiation?.ratePerHour, deadline: taskNegotiation.deadline ? format(new Date(taskNegotiation.deadline), 'MM/dd/yyy') : null}}  onCancel={() => dispatch(modalClose())}/>
     </Modal>
   )
 }

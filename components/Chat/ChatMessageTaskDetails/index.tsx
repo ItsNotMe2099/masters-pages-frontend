@@ -25,9 +25,10 @@ interface Props {
   showHire?: boolean
   showEdit?: boolean
   showReject?: boolean
+  showFinish?: boolean
 }
 
-export default function ChatMessageTaskDetails({message, task, showHire, showEdit, showReject, outDatedText}: Props) {
+export default function ChatMessageTaskDetails({message, task, showHire, showEdit, showReject, showFinish, outDatedText}: Props) {
   console.log("taskNegotiation", message.taskNegotiation)
   const dispatch = useDispatch();
   const handleReject = () => {
@@ -87,8 +88,9 @@ export default function ChatMessageTaskDetails({message, task, showHire, showEdi
        {!outDatedText && <div className={styles.actions}>
        {showReject && <Button className={`${styles.action}`} onClick={handleReject}>Reject</Button>}
        {showEdit && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleEdit}>Edit</Button>}
-       {showHire && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Hire Master</Button>}
-     </div>}
+         {showHire && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Hire Master</Button>}
+         {showFinish && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Finish Task</Button>}
+       </div>}
      {getStatus() === 'accepted' && <div className={`${styles.status} ${styles.statusGreen}`}>Accepted <MarkIcon color={'#27C60D'}/></div>}
      {getStatus() === 'declined' && <div className={styles.status}>Declined <CloseIcon color={'#000000'}/></div>}
      </div>

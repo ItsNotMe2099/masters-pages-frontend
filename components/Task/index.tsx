@@ -10,6 +10,7 @@ import Avatar from "components/ui/Avatar";
 import Button from 'components/ui/Button'
 import { DropDown } from "components/ui/DropDown";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
 import { default as React, useEffect, useState } from "react";
 import { ITask, ITaskNegotiation } from "types";
 import { getCategoryTranslation } from "utils/translations";
@@ -31,7 +32,7 @@ interface Props {
 export default function Task({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish}: Props) {
   const dispatch = useDispatch();
   const [sortType, setSortType] = useState('newFirst');
-
+  const router = useRouter();
   useEffect(() => {
     dispatch(fetchTaskUserResponseRequest(task.id, {limit: 1, ...getSortData(sortType)}));
   }, [])
@@ -105,11 +106,21 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         return {sort: 'createdAt', sortOrder: 'ASC'}
     }
   }
+  const handleMessages = () => {
+    if(actionsType === 'master'){
+      const response = task.negotiations[0];
+      router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`);
+    }else if(actionsType === 'client'){
+     // router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`);
+    }
+
+  }
   const handleSortChange = (sort) => {
     console.log("SortType", sort);
     setSortType(sort.value);
     dispatch(fetchTaskUserResponseRequest(task.id, {page: 1, limit: task.responses?.total <= task.responses?.data?.length ? 1000 : 1, ...getSortData(sort.value)}));
   }
+  const canEdit = actionsType === 'client';
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.wrapper}>
@@ -199,6 +210,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         </div>}
       </div>
       <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
+
         <div className={styles.titleLeft}>
           Payment method:
         </div>
@@ -246,12 +258,13 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             <span>{ format(new Date(task.deadline), 'MM.dd.yyy')}</span>
           </div>
         </div>}
+        <div className={styles.btnContainer}>
+          {(actionsType === 'public' && !task.profileHasNegotiations) && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT TASK</Button>}
+          { ((actionsType !== 'public' && ['done', 'in_progress','published', 'cancel'].includes(task.status) && ((actionsType === 'master' && task.negotiations?.length > 0 ) || (actionsType === 'client' && task.status !== 'published')))) && <Button bold smallFont transparent size='16px 0' onClick={handleMessages}>Messages</Button>}
+          {(actionsType === 'master' && task.status === 'published' && !task.profileHasNegotiations)  && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>Accept</Button>}
         </div>
-          <div className={styles.btnContainer}>
-            {(actionsType === 'public' && !task.profileHasNegotiations) && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT TASK</Button>}
-            { ((actionsType !== 'public' && task.status !== 'in_progress') || task.profileHasNegotiations) && <Button bold smallFont transparent size='16px 0'>Messages</Button>}
-            {(actionsType === 'master' && task.status === 'published' && !task.profileHasNegotiations)  && <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>Accept</Button>}
-          </div>
+      </div>
+
       </div>
 
       {task.responses?.total > 0 && <div className={styles.responses}>
@@ -267,7 +280,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         </div>}
         </div>
         <div className={styles.responsesList}>
-         {(task.responses?.data ? task.responses?.data : []).map(response => <TaskResponse response={response}/>)}
+         {(task.responses?.data ? task.responses?.data : []).map(response => <TaskResponse response={response} task={task}/>)}
         </div>
         <div className={styles.loadMoreArea}>
           {task.responses?.total > task.responses?.data?.length && <div className={styles.loadMore} onClick={handleLoadMore}>Load more</div>}

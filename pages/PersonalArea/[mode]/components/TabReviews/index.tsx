@@ -35,8 +35,8 @@ const TabReviews = (props: Props) => {
       </div>
       <div className={styles.simpleText}>Lorem ipsum dolor sit amet, consectetur adipiscing<br/> elit. Fermentum mattis sed quam enim.</div>
       <div className={styles.dropdown}>
-        <DropDownInput 
-        options={options} item={(item) => 
+        <DropDownInput
+        options={options} item={(item) =>
         <div className={styles.value}>{item?.label}</div>}/></div>
       </div>
       {(loading && total > 0) && <Loader/>}

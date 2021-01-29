@@ -28,9 +28,10 @@ export const ProfileSelect = () => {
   }
   const options = [
     { value: 'profile', label: 'Your profile', link: `/PersonalArea` },
-    { value: 'messages', label: 'Messages', link: `/PersonalArea/${role}/messages` },
-    { value: 'settings', label: 'Settings', link: `/PersonalArea/${role}/settings` },
+    { value: 'messages', label: 'Messages', link: `/Chat` },
+    { value: 'reviews', label: 'Reviews', link: `/PersonalArea/${role}/reviews` },
     { value: 'orders', label: 'Orders', link: `/PersonalArea/${role}/orders` },
+    { value: 'settings', label: 'Settings', link: `/PersonalArea/${role}/settings` },
     { value: 'logout', label: 'Logout' },
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));

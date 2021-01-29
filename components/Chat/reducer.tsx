@@ -47,6 +47,7 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         chatPageLoading: false
       }
     case ActionTypes.FETCH_CHAT_LIST + ApiActionTypes.SUCCESS:
+      console.log("Fetch chatList");
       return {
         ...state,
         chatList: (action.payload as any).data,
@@ -65,6 +66,7 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         messages: [],
       }
     case ActionTypes.FETCH_CHAT + ApiActionTypes.SUCCESS:
+      console.log("Fetch chat");
       return {
         ...state,
         chatLoading: false,
@@ -94,9 +96,34 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
         lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
-
       }
     case ActionTypes.FETCH_CHAT_DIALOG + ApiActionTypes.FAIL:
+      return {
+        ...state,
+        chatLoading: false,
+      }
+    case ActionTypes.FETCH_CHAT + ApiActionTypes.FAIL:
+      return {
+        ...state,
+        chatLoading: false,
+      }
+
+    case ActionTypes.FETCH_CHAT_TASK_DIALOG:
+      return {
+        ...state,
+        chatLoading: true,
+        messages: [],
+      }
+    case ActionTypes.FETCH_CHAT_TASK_DIALOG + ApiActionTypes.SUCCESS:
+      return {
+        ...state,
+        chatLoading: false,
+        chat: action.payload,
+        messages: (action.payload as any).messages.data,
+        totalMessages: (action.payload as any).messages.total,
+        lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
+      }
+    case ActionTypes.FETCH_CHAT_TASK_DIALOG + ApiActionTypes.FAIL:
       return {
         ...state,
         chatLoading: false,

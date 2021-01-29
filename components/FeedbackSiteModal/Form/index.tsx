@@ -13,7 +13,7 @@ import FileInput from 'components/ui/Inputs/S3FileUpload';
 
 let FeedbackForm = props => {
   const { handleSubmit } = props
-  const error = useSelector((state: IRootState) => state.authSignIn.formError)
+  const error = useSelector((state: IRootState) => state.profileFeedback.formError)
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

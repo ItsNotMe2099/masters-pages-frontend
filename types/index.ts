@@ -185,6 +185,7 @@ export interface ITask{
   profileHasNegotiations: boolean
   masterId: number
   master: ProfileData,
+  negotiations: ITaskNegotiation[]
   responses: {
     data: ITaskNegotiation[],
     total: number

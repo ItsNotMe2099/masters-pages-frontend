@@ -81,7 +81,7 @@ export default function BaseInput(props: Props) {
     setDebounceFieldValue(evt.target.value);
   }, [ setDebouncing, call, setDebounceFieldValue ]);
 
-  const onBlur = useCallback((evt: FocusEvent<HTMLInputElement>) => {
+  const onBlur = useCallback((evt) => {
     call.cancel();
     setDebouncing(false);
     if(props.input?.onChange) {
@@ -92,7 +92,7 @@ export default function BaseInput(props: Props) {
     }
   }, [ call, setDebouncing, props.input?.onChange, props.input?.onBlur ]);
 
-  const onKeyDown = useCallback((evt: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = useCallback((evt) => {
     if (evt.keyCode === 13) {
       call.cancel();
       setDebouncing(false);

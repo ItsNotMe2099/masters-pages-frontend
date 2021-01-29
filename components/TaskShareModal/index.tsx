@@ -14,7 +14,7 @@ const TaskShareModal = ({isOpen}: Props) => {
   const task = useSelector((state: IRootState) => state.taskSearch.currentTask)
 
   const getHost = () => {
-    if (typeof document !==  'undefined') {
+    if (process.browser) {
       return `${document?.location?.protocol}://${document?.location?.origin}/task/${task?.id}`
     }
   }

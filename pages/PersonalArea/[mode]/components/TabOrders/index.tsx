@@ -37,11 +37,10 @@ const TabOrders = (props: Props) => {
 
   const tabs = [
     ...(role === 'client' ? [{name: 'Drafts', key: 'draft'}, {name: 'Published', key: 'published'}] : []),
-
-    ...(role !== 'client' ? [{name: 'Pending', key: 'published'}] : []),
+    ...(role !== 'client' ? [{name: 'Responses', key: 'responses'}, {name: 'Declined', key: 'declined_responses'}, {name: 'Offers', key: 'offers'}] : []),
     {name: 'Negotiation', key: 'negotiation'},
     {name: 'In progress', key: 'in_progress'},
-    {name: 'Closed', key: 'closed'},
+    {name: 'Closed', key: 'done'},
   ].map(item => {
     return{
       ...item,
@@ -62,6 +61,7 @@ const TabOrders = (props: Props) => {
     setCurrentTaskEdit(task);
     dispatch(taskUpdateOpen());
   }
+
   return (
     <div className={styles.root}>
       <Tabs style={'round'} tabs={tabs.map((tab => {
@@ -71,13 +71,13 @@ const TabOrders = (props: Props) => {
         return {...tab, name: `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={tabSubPage as string}/>
       <div className={styles.tasks}>
-        {(loading && total > 0) && <Loader/>}
-        {total > 0 && <InfiniteScroll
+        {(loading && total === 0) && <Loader/>}
+        {!loading && total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data
           next={handleScrollNext}
           hasMore={total > tasks.length}
-          loader={<Loader/>}>
-          {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={'client'} showProfile={false}/>)}
+          loader={loading ? <Loader/> : null}>
+          {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={role === 'client' ? 'client' : 'master'} showProfile={false}/>)}
         </InfiniteScroll>}
       </div>
       <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'} onClose={() => dispatch(modalClose())}/>

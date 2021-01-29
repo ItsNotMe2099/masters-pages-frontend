@@ -12,7 +12,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 interface Props {
-
+  isTaskChat?: boolean
 }
 
 export default function Chat(props: Props) {
@@ -20,7 +20,9 @@ export default function Chat(props: Props) {
   const chat = useSelector((state: IRootState) => state.chat.chat)
   const chatList = useSelector((state: IRootState) => state.chat.chatList)
   const chatListLoading = useSelector((state: IRootState) => state.chat.chatListLoading)
-  const [activeTab, setActiveTab] = useState('people')
+  const {isTaskChat} = props;
+  const [activeTab, setActiveTab] = useState(isTaskChat ? 'people' : 'tasks')
+
   const handleSubmit = () => {
 
   }
@@ -29,6 +31,15 @@ export default function Chat(props: Props) {
       dispatch(taskNegotiationFetchLastConditions(chat.task?.id));
     }
   }, [chat])
+
+  useEffect(() => {
+    console.log("isTaskChat", isTaskChat)
+    if(isTaskChat){
+      dispatch(fetchChatTasksList());
+    }else{
+      dispatch(fetchChatWithUsersList());
+    }
+  }, [isTaskChat])
 
   const tabs = [
     { name: 'People', key: 'people' },
@@ -46,13 +57,16 @@ export default function Chat(props: Props) {
   if(chatListLoading){
     return <div className={styles.rootLoading}><Loader/></div>
   }
+  console.log("chatList", chatList)
   return (
     <div className={styles.root}>
       <div className={styles.chatList}>
         <Tabs tabs={tabs} activeTab={activeTab} tabClassName={styles.tab} onChange={handleChangeTab}/>
 
 
-        {chatList.map(chatItem => <ChatListItem key={chat?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
+        <div>
+        {chatList.map(chatItem => <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
+        </div>
       </div>
       <div className={styles.chatMessages}>
         {chat && <ChatMessageList chat={chat}/>}

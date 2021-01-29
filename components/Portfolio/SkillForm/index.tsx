@@ -18,7 +18,7 @@ import { IRootState } from "types";
 import { parserNumber } from "utils/formatters";
 import { maskBirthDate } from "utils/masks";
 import { arrayNotEmpty, required } from "utils/validations";
-import styles from './index.module.scss'
+import styles from 'components/Portfolio/SkillForm/index.module.scss'
 import { Field, reduxForm } from 'redux-form'
 
 let SkillForm = (props) => {

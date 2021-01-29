@@ -44,7 +44,8 @@ export default function ChatTitle({chat}: Props) {
     dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation));
     dispatch(finishTaskAsClientOpen());
   }
-  const isInProgress =  (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
+  const isInProgress =  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
+  const isFinished =  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
   return (
    <div className={styles.root}>
 
@@ -56,6 +57,7 @@ export default function ChatTitle({chat}: Props) {
      {chat.task.status == ITaskStatus.Published && <Button className={styles.action} onClick={handleEditConditions}>Negotiate offer</Button>}
      {lastNegotiation !== null && lastNegotiation.authorId == profile.id && !(lastNegotiation.state === ITaskNegotiationState.Declined || lastNegotiation.state === ITaskNegotiationState.Accepted) && <div className={styles.status}>Waiting for negotiation response</div>}
      {isInProgress && <div className={`${styles.status} ${styles.statusGreen}`}>Tack accepted <MarkIcon color={'#27C60D'}/></div>}
+     {isFinished && <div className={`${styles.status} ${styles.statusGreen}`}>Tack finished <MarkIcon color={'#27C60D'}/></div>}
 
    </div>
   )

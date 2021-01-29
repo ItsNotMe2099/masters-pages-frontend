@@ -29,11 +29,15 @@ const Header = (props: Props) => {
   const role = useSelector((state: IRootState) => state.profile.role)
 
   const handleOpenMobileMenu = () => {
-    document.body.classList.add('modal-open');
+    if (process.browser) {
+      document.body.classList.add('modal-open');
+    }
 
     setMenuMobileOpen(true);}
   const handleCloseMobileMenu = () => {
-    document.body.classList.remove('modal-open');
+    if (process.browser) {
+      document.body.classList.remove('modal-open');
+    }
     setMenuMobileOpen(false);
   }
   console.log("ProfileRole", role);

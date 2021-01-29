@@ -1,5 +1,5 @@
 import Chat from "components/Chat";
-import { fetchChat, fetchChatListFirst } from "components/Chat/actions";
+import { fetchChat, fetchChaTaskDialog, fetchChatListFirst } from "components/Chat/actions";
 import ChatPageLayout from "components/layout/ChatLayout";
 import Header from 'components/layout/Header'
 import { useRouter } from "next/router";
@@ -10,12 +10,9 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const ChatPage = (props) => {
   const dispatch = useDispatch()
-  const router = useRouter()
-  useEffect(() => {
-    dispatch(fetchChatListFirst());
-  }, [router.query.chatId])
+
   return (
-    <ChatPageLayout {...props}/>
+    <ChatPageLayout {...props} isTaskChat={true}/>
   )
 }
 

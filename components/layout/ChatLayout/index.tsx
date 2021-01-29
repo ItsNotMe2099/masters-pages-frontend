@@ -6,7 +6,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 interface Props {
-
+  isTaskChat?: boolean
 }
 /*
   Пользовательский чат -> Открыли страницу -> Получили нужны чат
@@ -22,7 +22,7 @@ export default function ChatPageLayout(props: Props) {
     <div className={styles.root}>
      <Header {...props}/>
       <div className={styles.chat}>
-        {chatPageLoading ? <Loader/> : <Chat/>}
+        {chatPageLoading ? <Loader/> : <Chat {...props}/>}
       </div>
     </div>
   )

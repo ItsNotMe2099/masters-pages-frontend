@@ -1,5 +1,6 @@
 import Logo from "components/Logo";
 import { modalClose } from "components/Modal/actions";
+import { taskNegotiationFinish } from "components/TaskNegotiation/actions";
 import Modal from "components/ui/Modal";
 import { IRootState } from "types";
 import styles from './index.module.scss'
@@ -14,8 +15,10 @@ export default function FinishingTaskByClientModal(props: Props) {
   const dispatch = useDispatch();
   const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  const formLoading = useSelector((state: IRootState) => state.taskOffer.formLoading)
   const handleSubmit = (data) => {
     console.log("HandleSubmit", data);
+    dispatch(taskNegotiationFinish(taskNegotiation.taskId, {...data, taskId: taskNegotiation.taskId}));
   }
   const handleClose = () => {
     dispatch(modalClose());
@@ -23,7 +26,7 @@ export default function FinishingTaskByClientModal(props: Props) {
 
 
   return (
-    <Modal{...props}  className={styles.root} size="medium" closeClassName={styles.close}
+    <Modal{...props} loading={formLoading} className={styles.root} size="medium" closeClassName={styles.close}
 
     onRequestClose={handleClose}
     >

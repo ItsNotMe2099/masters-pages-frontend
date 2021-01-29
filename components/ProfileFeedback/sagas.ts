@@ -1,4 +1,11 @@
-import { fetchFeedbacksToProfile, fetchFeedbacksToProfileRequest, fetchLatestFeedbacksToProfile, fetchLatestFeedbacksToProfileRequest } from "components/ProfileFeedback/actions";
+import { feedbackSuccessOpen } from "components/Modal/actions";
+import {
+  createFeedBackSite, createFeedBackSiteRequest,
+  fetchFeedbacksToProfile,
+  fetchFeedbacksToProfileRequest,
+  fetchLatestFeedbacksToProfile,
+  fetchLatestFeedbacksToProfileRequest
+} from "components/ProfileFeedback/actions";
 import ApiActionTypes from "constants/api";
 import { takeLatest, put, take, select } from 'redux-saga/effects'
 import { IRootState } from "types";
@@ -13,7 +20,14 @@ function* ProfileFeedbackSaga() {
   yield takeLatest(ActionTypes.FETCH_LATEST_FEEDBACKS_TO_PROFILE,
     function* (action: ActionType<typeof fetchLatestFeedbacksToProfile>) {
       yield put(fetchLatestFeedbacksToProfileRequest());
-  
+
+    })
+
+  yield takeLatest(ActionTypes.CREATE_FEEDBACK_SITE,
+    function* (action: ActionType<typeof createFeedBackSite>) {
+    console.log("CREATE_FEEDBACK_SITE", action.payload.data);
+      yield put(createFeedBackSiteRequest(action.payload.data));
+      yield put(feedbackSuccessOpen());
     })
 }
 

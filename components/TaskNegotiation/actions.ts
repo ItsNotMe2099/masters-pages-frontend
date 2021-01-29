@@ -1,3 +1,4 @@
+import ApiActionTypes from "constants/api";
 import { IChatMessage, ITask, ITaskNegotiation } from "types";
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
@@ -33,10 +34,10 @@ export const taskNegotiationAcceptTaskResponseRequest = (taskNegotiationId: numb
 
 
 export const taskNegotiationMarkAsDone = (taskId: number) => action(ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE, {taskId})
-export const taskNegotiationMarkAsDoneRequest = (taskNegotiationId: number) => action(ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE_REQUEST, {
+export const taskNegotiationMarkAsDoneRequest = (taskId: number) => action(ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE_REQUEST, {
   api: {
-    url: `/api/task-negotiation/${taskNegotiationId}/mark-as-done`,
-    method: 'GET',
+    url: `/api/task-negotiation/${taskId}/mark-as-done`,
+    method: 'POST',
   }
 })
 
@@ -81,7 +82,10 @@ export const taskNegotiationDeclineTaskOfferRequest = (taskNegotiationId: number
     method: 'GET',
   }
 })
+export const  taskNegotiationFinish = (taskId: number, feedback: any) => action(ActionTypes.TASK_NEGOTIATION_FINISH,{taskId, feedback})
 
+export const  taskNegotiationFinishFailed = (error: any) => action(ActionTypes.TASK_NEGOTIATION_FINISH + ApiActionTypes.FAIL,{error})
+export const  taskNegotiationFinishSuccess = () => action(ActionTypes.TASK_NEGOTIATION_FINISH + ApiActionTypes.SUCCESS,{})
 export const  taskNegotiationAcceptAsCompleted = (taskNegotiationId: number) => action(ActionTypes.TASK_NEGOTIATION_ACCEPT_AS_COMPLETED, {
   api: {
     url: `/api/task-negotiation/${taskNegotiationId}/accept-as-completed`,
