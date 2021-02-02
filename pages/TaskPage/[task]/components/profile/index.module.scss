@@ -1,0 +1,79 @@
+@import "scss/index";
+
+.profile{
+  padding: 20px 0px 20px 20px;
+  @media screen and (max-width: $sm-max){
+    display: flex;
+    border-bottom: 1px solid #cccccc;
+  }
+}
+
+.mobileWrapper{
+  @media screen and (max-width: $sm-max){
+    margin: auto 0 auto 19px;
+  }
+}
+
+.name {
+  display: flex;
+  flex: 1;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+  &__mobile{
+    display: flex;
+    @media screen and (min-width: $md-min){
+      display: none;
+    }
+  }
+
+}
+
+.nameText{
+  margin-right: 11px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
+}
+
+.icons {
+  display: flex;
+  font-weight: bold;
+  font-size: 12px;
+  color: #6D718C;
+  margin-top: 15px;
+  align-items: flex-end;
+
+  img {
+    margin-right: 5px;
+  }
+
+  div {
+    flex: 1;
+    @media screen and (max-width: $sm-max){
+      flex: 0;
+      margin-right: 21px;
+    }
+  }
+}
+
+.stars {
+  display: flex;
+  margin-top: 6px;
+  img{
+    margin-left: 3px;
+    &:first-of-type{
+      margin-left: 0px;
+    }
+  }
+  div {
+    margin-left: 8px;
+    line-height: 16px;
+
+  }
+}
+
+.comments {
+  font-weight: bold;
+  font-size: 12px;
+}
