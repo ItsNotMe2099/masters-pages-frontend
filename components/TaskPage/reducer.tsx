@@ -9,7 +9,7 @@ export interface TaskPageState {
 
 const initialState: TaskPageState = {
   loading: false,
-  task: {}
+  task: null
 }
 
 export default function ProfileReducer(state = {...initialState}, action) {

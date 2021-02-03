@@ -10,7 +10,8 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 const ProfileSection = (props) => {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const profile = useSelector((state: IRootState) => state.publicProfile.profile)
+
   return (
     <div className={styles.root}>
       <div className={styles.details}>
@@ -55,11 +56,7 @@ const ProfileSection = (props) => {
 
       </div>
       <div className={styles.separator}></div>
-      <div className={styles.personalLink}>
-        <div className={styles.personalLinkWrapper}>
-        <Input label={'Personal link:'}  input={{value: 'sdsdsdsd'}} labelType={'static'} type={'text'}/>
-       </div>
-      </div>
+
     </div>
   )
 }

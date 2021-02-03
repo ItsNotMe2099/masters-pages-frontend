@@ -33,12 +33,12 @@ const TaskPage = (props) => {
     dispatch(fetchTaskById(router.query.task))
     console.log("FETCH!!!!!!!!!")
   },[])
-  
+
 
   return (
     <>
       <Header {...props}/>
-      {task.profile === undefined ?
+      {!task ?
 
       <Loader/>
 

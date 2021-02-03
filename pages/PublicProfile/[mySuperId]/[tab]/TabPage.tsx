@@ -17,16 +17,16 @@ import { fetchProfileById } from "components/PublicProfile/actions";
 
 const TabPage = (props) => {
   const router = useRouter()
-  const { tab, mySuperId } = router.query
+  const { mySuperId } = router.query
   const dispatch = useDispatch()
   const profile = useSelector((state: IRootState) => state.publicProfile.profile)
-
+  const tab = router.query.tab ? router.query.tab : (profile.role !== 'client' ? 'portfolio' : 'reviews');
   React.useEffect(() => {
     dispatch(fetchProfileById(router.query.mySuperId))
   },[])
 
   const tabs = [
-    {name: 'Portfolio', key: 'portfolio'},
+    ...(profile.role !== 'client' ? [{name: 'Portfolio', key: 'portfolio'}] : []),
     {name: 'Reviews and rating', key: 'reviews'}
   ].map(item => {
     return{
@@ -45,11 +45,11 @@ const TabPage = (props) => {
         </div>
         <ProfileSection/>
         <div className={styles.desktop}>
-        <Tabs style={'outline'} tabs={tabs} activeTab={tab as string}/>
+        <Tabs style={'outline'} tabs={tabs} activeTab={!tab ? 'portfolio' : tab as string}/>
         </div>
         <div className={styles.mobile}><TabSelect tabs={tabs} activeTab={tab as string}/></div>
         <div className={styles.tab}>
-          {tab === 'portfolio' && <TabPortfolio {...props}/>}
+          {!tab || tab === 'portfolio' && <TabPortfolio {...props}/>}
           {tab === 'reviews' && <TabReviews {...props}/>}
         </div>
         <Footer/>

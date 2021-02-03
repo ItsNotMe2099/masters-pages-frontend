@@ -12,13 +12,14 @@ interface Props {
   item: SkillListItem,
   onAdd?:(SkillListItem) => void,
   onRemove?:(SkillListItem) => void,
+  allowEdit?: boolean
 }
-const SkillCategoryHeader = ({item, onAdd, onRemove}: Props) => {
+const SkillCategoryHeader = ({allowEdit, item, onAdd, onRemove}: Props) => {
   return (
     <div className={styles.root}>
       {item.icon && <div className={styles.icon}> <img src={getMediaPath(item.icon)}/></div>}
       <div className={styles.title}> {getCategoryTranslation(item)?.name}</div>
-      <div className={styles.actions}>
+      {allowEdit && <div className={styles.actions}>
         <div className={styles.actionItem} onClick={() => onRemove(item)}>
           Delete category
           <img src={'/img/icons/basket.svg'}/>
@@ -28,7 +29,7 @@ const SkillCategoryHeader = ({item, onAdd, onRemove}: Props) => {
           Add
           <img src={'/img/icons/plus.svg'}/>
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

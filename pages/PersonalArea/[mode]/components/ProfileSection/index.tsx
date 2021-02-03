@@ -1,4 +1,5 @@
 import Avatar from "components/ui/Avatar";
+import { useRouter } from "next/router";
 import * as React from "react";
 import Button from "components/ui/Button";
 import Input from "components/ui/Inputs/Input";
@@ -10,6 +11,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 const ProfileSection = (props) => {
+  const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   return (
     <div className={styles.root}>
@@ -57,11 +59,11 @@ const ProfileSection = (props) => {
       <div className={styles.separator}></div>
       <div className={styles.personalLink}>
         <div className={styles.personalLinkWrapper}>
-        <Input label={'Personal link:'}  input={{value: 'sdsdsdsd'}} labelType={'static'} type={'text'}/>
+        <Input label={'Personal link:'}  input={{value: `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}`}} labelType={'static'} type={'text'}/>
        </div>
       </div>
       <div className={styles.buttonArea}>
-      <Button white={true} borderGrey={true} bold={true} size={'12px 23px'} >Look how people see your account</Button>
+      <Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => router.push(`/PublicProfile/${profile.id}`)}>Look how people see your account</Button>
       </div>
     </div>
   )

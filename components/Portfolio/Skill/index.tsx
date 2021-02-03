@@ -13,8 +13,9 @@ interface Props {
   item: SkillData,
   onEdit: (SkillData) => void
   onRemove: (SkillData) => void
+  allowEdit?: boolean
 }
-const Skill = ({item, onEdit, onRemove}: Props) => {
+const Skill = ({allowEdit, item, onEdit, onRemove}: Props) => {
   var settings = {
     dots: true,
     infinite: true,
@@ -49,12 +50,12 @@ const Skill = ({item, onEdit, onRemove}: Props) => {
   };
   return (
     <div className={styles.root}>
-      <div className={styles.editButton} onClick={() => onEdit(item)}>
+      {allowEdit && <div className={styles.editButton} onClick={() => onEdit(item)}>
         <img src={'/img/icons/pencil.svg'}/>
-      </div>
-      <div className={styles.removeButton} onClick={() => onRemove(item)}>
+      </div>}
+      {allowEdit && <div className={styles.removeButton} onClick={() => onRemove(item)}>
         <img src={'/img/icons/delete.svg'}/>
-      </div>
+      </div>}
       <div className={`${styles.slider} ${item.photos.length === 0 && styles.sliderEmpty}`}>
         {item.photos.length === 0 &&
         <img src={'/img/icons/no-image.svg'}/>}

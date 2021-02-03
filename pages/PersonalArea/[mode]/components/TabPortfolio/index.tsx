@@ -66,31 +66,42 @@ const TabPortfolio = (props: Props) => {
       }
     }));
   }
+  const hasCategory = list.length > 0;
+  const hasSubCategory = list.find(category => category.skills.length > 0) || false;
+  const hasPhotos = list.find(category => category.skills.find(skill => skill.photos.length > 0))
+  const hasDescription = list.find(category => category.skills.find(skill => skill.description))
+  const hasPrice = list.find(category => category.skills.find(skill => skill.price || skill.ratePerHour))
+
   return (
     <div className={styles.root}>
-        <div className={styles.fill}>Fill up your profile to get the<br/> best results</div>
-        <div className={styles.add}>
-          <div className={list.length ? styles.check : styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>01.</span>} Add Category</span></div>
-          <div className={list.length ? styles.check : styles.addItem}><span>{list.length ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>} Add Sub Category</span></div>
-          <div className={styles.addItem}><span>03. Upload photos</span></div>
-          <div className={styles.addItem}><span>04. Add description</span></div>
-          <div className={styles.addItem}><span>05. Set a price</span></div>
+      {loading && <Loader/>}
+      {!loading && <div className={styles.header}>
+        <div className={styles.fillState}>
+      <div className={styles.fillStateTitle}>Fill up your profile to get the best results</div>
+      <div className={styles.fillStateItems}>
+        <div className={`${styles.fillStateItem} ${hasCategory && styles.fillStateItemActive}`}>{hasCategory ? <img src="/img/icons/check.svg" alt=""/> : <span>01.</span>} Add Category</div>
+        <div className={`${styles.fillStateItem} ${hasSubCategory && styles.fillStateItemActive}`}>{hasSubCategory ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>} Add Sub Category</div>
+        <div className={`${styles.fillStateItem} ${hasPhotos && styles.fillStateItemActive}`}>{hasPhotos ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>}Upload photos</div>
+        <div className={`${styles.fillStateItem} ${hasDescription && styles.fillStateItemActive}`}>{hasDescription ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>} Add description</div>
+        <div className={`${styles.fillStateItem} ${hasPrice && styles.fillStateItemActive}`}>{hasPrice ? <img src="/img/icons/check.svg" alt=""/> : <span>02.</span>} Set a price</div>
+      </div>
         </div>
+
         <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'15px 50px'} onClick={() => dispatch(skillCategoryModalOpen())}><span>Add new category</span></Button></div>
-        {loading && <Loader/>}
-      {!loading && <div className={styles.split}><div className={styles.categories}>
+      </div>}
+
+      {!loading && <div className={styles.categories}>
         {list.map((category) =>
           (<div className={styles.category}>
-            <SkillCategoryHeader item={category} onAdd={handleAddSkill} onRemove={handleRemoveCategory}/>
+            <SkillCategoryHeader item={category} onAdd={handleAddSkill} onRemove={handleRemoveCategory} allowEdit={true}/>
             <div className={styles.skillList}>
             {category.skills.map((skill) =>
               (
-                <Skill item={skill} onEdit={handleEditSkill} onRemove={handleRemoveSkill}/>
+                <Skill item={skill} onEdit={handleEditSkill} onRemove={handleRemoveSkill} allowEdit={true}/>
               )
             )}
             </div>
           </div>))}
-      </div>
       </div>}
 
       <SkillModal isOpen={modalKey === 'skillForm'} category={currentCategory} skill={currentSkill} onClose={() => dispatch(modalClose())}/>

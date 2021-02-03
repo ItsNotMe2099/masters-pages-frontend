@@ -41,15 +41,6 @@ const TabPortfolio = (props: Props) => {
   }
   return (
     <div className={styles.root}>
-        <div className={styles.fill}>Fill up your profile to get the<br/> best results</div>
-        <div className={styles.add}>
-          <div className={styles.addItem}><span><span>01.</span> Add Category</span></div>
-          <div className={styles.addItem}><span><span>02.</span> Add Sub Category</span></div>
-          <div className={styles.addItem}><span>03. Upload photos</span></div>
-          <div className={styles.addItem}><span>04. Add description</span></div>
-          <div className={styles.addItem}><span>05. Set a price</span></div>
-        </div>
-        <div className={styles.buttons}><Button white={true} borderGrey={true} bold={true} size={'15px 50px'} onClick={() => dispatch(skillCategoryModalOpen())}><span>Add new category</span></Button></div>
       { <div className={styles.split}><div className={styles.categories}>
         {list.map((category) =>
           (<div className={styles.category}>

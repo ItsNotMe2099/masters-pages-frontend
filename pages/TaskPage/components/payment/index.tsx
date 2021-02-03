@@ -1,3 +1,4 @@
+import Map from "components/Map";
 import { changeRole, fetchProfile } from "components/Profile/actions";
 import Tabs from "components/ui/Tabs";
 import { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ const Payment = (props: Props) => {
 
   const dispatch = useDispatch()
   const handleAccept = () => {
-    
+
   }
 
 
@@ -78,6 +79,7 @@ const Payment = (props: Props) => {
           </div>
           </div>
           <div className={styles.map}>
+            <Map/>
           </div>
       </div>
     </>

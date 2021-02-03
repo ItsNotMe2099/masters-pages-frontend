@@ -1,5 +1,6 @@
 import ApiActionTypes from "constants/api";
 import { SkillData, SkillListItem } from "types";
+import { formatSkillList } from "utils/skills";
 import ActionTypes from "./const";
 import cookie from "js-cookie";
 import {parse, format} from 'date-fns'
@@ -22,20 +23,6 @@ const initialState: SkillState = {
   currentLoading: false,
 }
 
-const formatList = (data) => {
-  const categoryMap = {};
-  for(const item of data){
-    if(!categoryMap[item.categoryId]){
-      categoryMap[item.categoryId] = {...item.category, skills: []}
-    }
-    categoryMap[item.categoryId].skills.push(item);
-  }
-  const list = []
-  for (const [key, value] of Object.entries(categoryMap)) {
-    list.push(value);
-  }
-  return list;
-}
 export default function ProfileReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.RESET_SKILL_FORM:
@@ -108,7 +95,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.listLoading = true;
       break
     case ActionTypes.FETCH_SKILL_LIST + ApiActionTypes.SUCCESS:
-      state.list = formatList(action.payload)
+      state.list = formatSkillList(action.payload)
       state.listLoading = false;
       break
     case ActionTypes.FETCH_SKILL_LIST + ApiActionTypes.FAIL:

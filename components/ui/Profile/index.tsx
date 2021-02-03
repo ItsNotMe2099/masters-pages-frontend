@@ -12,6 +12,7 @@ import ProfileActionButton from "components/ui/Profile/components/ActionButton";
 import SliderControl from "components/ui/SliderControl";
 import Tabs from "components/ui/Tabs";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
 import { default as React, useState } from "react";
 import { IRootState, ITask, ProfileData } from "types";
 import { getMediaPath } from "utils/media";
@@ -37,7 +38,7 @@ interface Props {
 
 export default function Profile({ actionsType,selectedCategoryId, selectedSubCategoryId, profile, className, isActive, onEdit, onDelete, onPublish, onUnPublish }: Props) {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const [currentCategoryTab, setCurrentCategoryTab] = useState(`${(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0])?.id}`);
   const [currentSkill, setCurrentSkill] = useState(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0]);
   const savingProfileId = useSelector((state: IRootState) => state.savedPeople.savingProfileId)
@@ -99,7 +100,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       <div className={styles.profile}>
         <Avatar image={profile.avatar}/>
         <div className={styles.mobileWrapper}>
-        <div className={styles.name__mobile}>
+        <div className={styles.name__mobile} onClick={() => router.push(`/PublicProfile/${profile.id}`)}>
               <div className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>
@@ -123,7 +124,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
         <div className={styles.mainInfo}>
           <div className={styles.top}>
             <div className={styles.name}>
-              <div
+              <div onClick={() => router.push(`/PublicProfile/${profile.id}`)}
                 className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>

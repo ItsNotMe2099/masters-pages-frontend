@@ -10,20 +10,24 @@
 }
 .skillList{
 
-
-  display: flex;
+  overflow: hidden;
   @media screen and (max-width: $sm-max) {
     margin-top: 50px;
-    flex-direction: column;
 
   }
 }
-.split{
+.header{
   display: flex;
-  width: 100%;
+  flex-direction: row;
+  align-items: center;
   @media screen and (max-width: $sm-max) {
     flex-direction: column;
-    margin-top: 20px;
+  }
+}
+.fillState{
+  width: 70%;
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
   }
 }
 .buttons{
@@ -32,20 +36,25 @@
   flex: 1;
   align-items: flex-start;
   @media screen and (max-width: $sm-max) {
-    margin-top: 56px;
+    display: block;
     font-size: 14px;
+    margin-top: 56px;
+    width: 100%;
     button{
       width: 100%;
     }
   }
 }
+
 .categories{
-  width: 62.2%;
+  margin-top: 30px;
+  width: 70%;
   @media screen and (max-width: $sm-max) {
     width: 100%;
+    margin-top: 20px;
   }
-
 }
+
 .category{
   margin-top: 60px;
   &:first-of-type{
@@ -53,48 +62,46 @@
   }
 }
 
-.fill{
+.fillStateTitle{
   font-weight: 600;
   font-size: 18px;
   color: #000;
   text-align: center;
 }
 
-.add{
+.fillStateItems{
   display: flex;
-  flex-direction: column;
-  margin-top: 25px;
-  div{
-    &:first-child{
-      margin: 0;
-    }
+  flex-direction: row;
+  justify-items: center;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+
   }
+
 }
 
-.addItem{
+.fillStateItem{
   margin-top: 10px;
-  padding-top: 16px;
-  padding-bottom: 15px;
-  padding-left: 42px;
+  padding: 16px 16px;
   border-radius: 10px;
   background-color: #fae3e3;
   font-size: 15px;
-  span{
-    color: #000;
-    opacity: 0.8;
+  margin-left: 6px;
+  &:first-of-type{
+    margin-left: 0px;
   }
+  @media screen and (max-width: $sm-max) {
+    margin-left: 0px;
+  }
+  color: #000;
+  opacity: 0.8;
 }
 
-.check{
-  margin-top: 10px;
-  padding-top: 16px;
-  padding-bottom: 15px;
-  padding-left: 17px;
-  border-radius: 10px;
+.fillStateItemActive{
   background-color: #d9f5d5;
   color: #000;
-  font-size: 15px;
+  opacity: 1;
   img{
-    padding-right: 12px;
+    margin-right: 12px;
   }
 }
