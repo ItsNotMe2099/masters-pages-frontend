@@ -16,36 +16,45 @@ import { IRootState } from "types";
 import { fetchProfileById } from "components/PublicProfile/actions";
 import { fetchTaskById } from "components/TaskPage/actions";
 import Avatar from "components/ui/Avatar";
-import Profile from "./components/profile";
-import Description from "./components/description";
-import Payment from "./components/payment";
+import Profile from "../components/profile";
+import Description from "../components/description";
+import Payment from "../components/payment";
+import { withRestrictAuthSync } from "utils/auth";
+import Loader from "components/ui/Loader";
 
 const TaskPage = (props) => {
   const router = useRouter()
-  const { task } = router.query
+  //const { task } = router.query
   const dispatch = useDispatch()
+  const task = useSelector((state: IRootState) => state.taskPage.task)
+  const loading = useSelector((state: IRootState) => state.taskPage.loading)
 
   React.useEffect(() => {
     dispatch(fetchTaskById(router.query.task))
+    console.log("FETCH!!!!!!!!!")
   },[])
-
-
+  
 
   return (
     <>
       <Header {...props}/>
+      {task.profile === undefined ?
+
+      <Loader/>
+
+      :
         <div className={styles.root}>
           <div className={styles.left}>
-            <Profile/>
-            <Description/>
+            <Profile task={task}/>
+            <Description task={task}/>
           </div>
           <div className={styles.right}>
-            <Payment/>
+            <Payment task={task}/>
           </div>
-        </div>
+        </div>}
       <Footer/>
       </>
   )
 }
 
-export default TaskPage
+export default withRestrictAuthSync(TaskPage)

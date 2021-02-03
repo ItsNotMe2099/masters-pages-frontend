@@ -12,21 +12,21 @@ import TabReviews from "pages/PublicProfile/components/TabReviews";
 import styles from './index.module.scss'
 import { TabSelect } from "components/TabSelect";
 import { useSelector, useDispatch } from 'react-redux'
-import { IRootState } from "types";
+import { IRootState, ITask } from "types";
 import { fetchProfileById } from "components/PublicProfile/actions";
 import { fetchTaskById } from "components/TaskPage/actions";
 
-const TaskPage = (props) => {
-  const router = useRouter()
-  const { task } = router.query
+interface Props {
+  task: ITask
+}
+
+
+const Payment = (props: Props) => {
+
   const dispatch = useDispatch()
   const handleAccept = () => {
     
   }
-
-  React.useEffect(() => {
-    dispatch(fetchTaskById(router.query.task))
-  },[])
 
 
 
@@ -51,15 +51,25 @@ const TaskPage = (props) => {
           <div className={styles.desc}>Safe deal</div>
         </div>
         </div>
-         <div className={styles.priceWrapper}>
+        {props.task.budget ?
+          <div className={styles.priceWrapper}>
+          <div className={styles.price}>
+            Fixed price:
+          </div>
+          <div className={styles.title}>
+            less then <span>${props.task.budget}</span>
+          </div>
+          </div>
+          :
+          props.task.ratePerHour && <div className={styles.priceWrapper}>
           <div className={styles.price}>
             Hourly:
           </div>
           <div className={styles.title}>
-            <span>$10/h</span>
-            <span>10h/week</span>
+            <span>${props.task.ratePerHour}/h</span>
           </div>
           </div>
+          }
           <div className={styles.btnContainer}>
             <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT TASK</Button>
           </div>
@@ -74,4 +84,4 @@ const TaskPage = (props) => {
   )
 }
 
-export default TaskPage
+export default Payment

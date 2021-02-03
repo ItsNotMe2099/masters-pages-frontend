@@ -11,8 +11,13 @@ import TabPortfolio from "pages/PublicProfile/components/TabPortfolio";
 import TabReviews from "pages/PublicProfile/components/TabReviews";
 import styles from './index.module.scss'
 import Avatar from "components/ui/Avatar";
+import { ITask } from "types";
 
-const Profile = (props) => {
+interface Props {
+  task: ITask
+}
+
+const Profile = (props: Props) => {
 
 
   return (
@@ -20,7 +25,7 @@ const Profile = (props) => {
               <Avatar/>
               <div className={styles.mobileWrapper}>
                 <div className={styles.name__mobile}>
-                  <div className={styles.nameText}>Jenny Wilson</div>
+                  <div className={styles.nameText}>{props.task.profile.firstName} {props.task.profile.lastName}</div>
                   <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
                 </div>
               <div className={styles.icons}>
