@@ -113,11 +113,11 @@ let CreateTaskForm = props => {
            <PriceSelectForm {...props}/>
 
         <div className={styles.terms}>
-            <Field
-              name="terms"
-              component={Checkbox}
-            ><span>I am agree with <Link href="/">terms and conditions</Link></span>
-            </Field>
+          <Field
+            name="terms"
+            component={Checkbox}
+            label={<div>I am agree with <Link href="/">terms and conditions</Link></div>}
+          />
         </div>
           <FormError error={error}/>
         <div className={styles.btnContainer}>
