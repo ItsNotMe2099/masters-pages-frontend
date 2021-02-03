@@ -39,6 +39,7 @@ export const resetTaskUserList = () => action(ActionTypes.RESET_TASK_USER_LIST)
 export const setPageTaskUser = (page: number) => action(ActionTypes.TASK_USER_LIST_SET_PAGE, page)
 export const setFilterTaskUser = (data: any) => action(ActionTypes.TASK_USER_LIST_SET_FILTER, data)
 export const setSortTaskUser = (data: any) => action(ActionTypes.TASK_USER_LIST_SET_SORT, data)
+export const setSortOrderTaskUser = (data: any) => action(ActionTypes.TASK_USER_LIST_SET_SORT_ORDER, data)
 
 export const deleteTaskUser = (taskId: number) => action(ActionTypes.TASK_USER_DELETE, {taskId})
 export const deleteTaskUserRequest = (taskId: number) => action(ActionTypes.TASK_USER_DELETE_REQUEST, {

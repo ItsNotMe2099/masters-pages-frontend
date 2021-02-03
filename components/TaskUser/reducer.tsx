@@ -9,8 +9,8 @@ export interface TaskUserState {
   total: number,
   page: number,
   filter: any,
-  sort?: string,
-  sortOrder?: string,
+  sort?: 'createdAt',
+  sortOrder?: 'DESC',
   stat: any[]
 }
 
@@ -39,6 +39,9 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       state.filter = action.payload;
       break
     case ActionTypes.TASK_USER_LIST_SET_SORT:
+      state.sort = action.payload;
+      break
+    case ActionTypes.TASK_USER_LIST_SET_SORT_ORDER:
       state.sort = action.payload;
       break
     case ActionTypes.FETCH_TASK_USER_LIST_REQUEST:

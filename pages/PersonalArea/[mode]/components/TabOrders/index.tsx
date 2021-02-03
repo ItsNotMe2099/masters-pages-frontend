@@ -6,7 +6,7 @@ import {
   fetchTaskUserList,
   fetchTaskUserStatRequest, resetTaskUserList,
   setFilterTaskUser,
-  setPageTaskUser
+  setPageTaskUser, setSortOrderTaskUser, setSortTaskUser
 } from "components/TaskUser/actions";
 import Loader from "components/ui/Loader";
 import Tabs from "components/ui/Tabs";
@@ -48,6 +48,14 @@ const TabOrders = (props: Props) => {
     }})
   useEffect(() => {
     dispatch(setFilterTaskUser({status: tabSubPage}))
+    if(['published', 'in_progress'].includes(tabSubPage as string)){
+      dispatch(setSortTaskUser('deadline'));
+      dispatch(setSortOrderTaskUser('DESC'));
+    }else{
+      dispatch(setSortTaskUser('createdAt'));
+      dispatch(setSortOrderTaskUser('DESC'));
+    }
+
     dispatch(resetTaskUserList())
     dispatch(fetchTaskUserList())
     dispatch(fetchTaskUserStatRequest());

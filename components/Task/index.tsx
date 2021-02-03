@@ -309,7 +309,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
               <div className={styles.time}>
                 <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
                 <div
-                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy hh:mm') : ''} {index}</div>
+                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy hh:mm') : ''}</div>
               </div>
             </div>
             <div>

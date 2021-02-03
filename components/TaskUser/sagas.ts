@@ -19,12 +19,15 @@ function* TaskUserSaga() {
   yield takeLatest(ActionTypes.FETCH_TASK_USER_LIST,
     function* (action: ActionType<typeof fetchTaskUserList>) {
       const filter = yield select((state: IRootState) => state.taskUser.filter)
-      const sort = yield select((state: IRootState) => state.taskUser.sort)
+      const sort = yield select((state: IRootState) => state.taskSearch.sort)
+      const sortOrder = yield select((state: IRootState) => state.taskSearch.sortOrder)
       const page = yield select((state: IRootState) => state.taskUser.page)
       console.log("Request filter", filter)
       yield put(fetchTaskUserListRequest({
           ...filter,
           page,
+        sort,
+        sortOrder,
           limit: 10
         }));
 
