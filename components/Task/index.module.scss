@@ -126,6 +126,8 @@
   }
 }
 .category{
+  display: flex;
+  align-items: center;
   margin-top: 8px;
   font-size: 14px;
   img{
@@ -311,7 +313,6 @@
 }
 .statusRed{
   color: #E4474E;
-
 }
 .statusGreen{
   color: #27C60D;

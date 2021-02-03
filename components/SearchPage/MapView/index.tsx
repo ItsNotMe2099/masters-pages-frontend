@@ -1,3 +1,4 @@
+import Modals from "components/layout/Modals";
 import Map from "components/Map";
 import MapHeader from "components/SearchPage/MapView/MapHeader";
 import MapTaskMarker from "components/svg/MapTaskMarker";
@@ -207,6 +208,7 @@ const SearchProfileMapView = (props: Props) => {
           </div>
         </div>
       </div>
+      <Modals/>
     </div>
   )
 }

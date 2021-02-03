@@ -94,3 +94,14 @@ export const setAcceptTaskUserRequest = (taskNegotiationId: number) => action(Ac
 })
 
 export const resetTaskUserUpdateForm = () => action(ActionTypes.TASK_USER_RESET_UPDATE_FORM)
+
+
+export const taskUserRemoveFromList = (taskId: number) => action(ActionTypes.TASK_USER_REMOVE_FROM_LIST, {taskId})
+
+export const taskCancel = (taskId: number) => action(ActionTypes.TASK_CANCEL, {taskId})
+export const taskCancelRequest = (taskNegotiationId: number) => action(ActionTypes.TASK_CANCEL_REQUEST, {
+  api: {
+    url: `/api/task-negotiation/${taskNegotiationId}/cancel-task`,
+    method: 'POST',
+  }
+})

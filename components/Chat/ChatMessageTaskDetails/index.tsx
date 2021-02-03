@@ -4,8 +4,10 @@ import { deleteSkill } from "components/Skill/actions";
 import CloseIcon from "components/svg/CloseIcon";
 import MarkIcon from "components/svg/MarkIcon";
 import {
+  taskNegotiationAcceptConditions,
+  taskNegotiationAcceptConditionsRequest, taskNegotiationAcceptTaskOffer,
   taskNegotiationDeclineConditions,
-  taskNegotiationDeclineConditionsRequest, taskNegotiationSetCurrentMessage,
+  taskNegotiationDeclineConditionsRequest, taskNegotiationDeclineTaskOffer, taskNegotiationSetCurrentMessage,
   taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
 } from "components/TaskNegotiation/actions";
@@ -14,10 +16,11 @@ import AvatarRound from "components/ui/AvatarRound";
 import Button from "components/ui/Button";
 import Modal from "components/ui/Modal";
 import { format } from "date-fns";
-import { IChat, IChatMessage, ITask, ITaskNegotiationState } from "types";
+import { IChat, IChatMessage, ITask, ITaskNegotiationState, ITaskNegotiationType } from "types";
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+
 interface Props {
   message: IChatMessage,
   task: ITask,
@@ -26,18 +29,47 @@ interface Props {
   showEdit?: boolean
   showReject?: boolean
   showFinish?: boolean
+  showAccept?: boolean
 }
 
-export default function ChatMessageTaskDetails({message, task, showHire, showEdit, showReject, showFinish, outDatedText}: Props) {
+export default function ChatMessageTaskDetails({ message, task, showHire, showEdit, showReject, showFinish, showAccept, outDatedText }: Props) {
   console.log("taskNegotiation", message.taskNegotiation)
   const dispatch = useDispatch();
   const handleReject = () => {
-    dispatch(confirmOpen({
-      description: `Are you sure that you want to reject an offer?`,
-      onConfirm: () => {
-        dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id));
-      }
-    }));
+    if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer){
+      dispatch(confirmOpen({
+        description: `Are you sure that you want to reject an offer?`,
+        onConfirm: () => {
+          dispatch(taskNegotiationDeclineTaskOffer(message.taskNegotiation));
+        }
+      }));
+    }else{
+      dispatch(confirmOpen({
+        description: `Are you sure that you want to reject conditions?`,
+        onConfirm: () => {
+          dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id));
+        }
+      }));
+    }
+
+  }
+
+  const handleAccept = () => {
+    if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer) {
+      dispatch(confirmOpen({
+        description: `Are you sure that you want to accept an offer?`,
+        onConfirm: () => {
+          dispatch(taskNegotiationAcceptTaskOffer(message.taskNegotiation));
+        }
+      }));
+    }else{
+      dispatch(confirmOpen({
+        description: `Are you sure that you want to accept conditions?`,
+        onConfirm: () => {
+          dispatch(taskNegotiationAcceptConditions(message.taskNegotiation.id, message.id));
+        }
+      }));
+    }
   }
 
   const handleEdit = () => {
@@ -53,48 +85,56 @@ export default function ChatMessageTaskDetails({message, task, showHire, showEdi
     dispatch(taskHireMasterOpen());
   }
   const getStatus = () => {
-      switch (message.taskNegotiation.state) {
-        case ITaskNegotiationState.Accepted:
-          return 'accepted'
-        case ITaskNegotiationState.Declined:
-          return 'declined'
-        case ITaskNegotiationState.SentToMaster:
-        case ITaskNegotiationState.SentToClient:
-        default:
-          return null;
-      }
+    switch (message.taskNegotiation.state) {
+      case ITaskNegotiationState.Accepted:
+        return 'accepted'
+      case ITaskNegotiationState.Declined:
+        return 'declined'
+      case ITaskNegotiationState.SentToMaster:
+      case ITaskNegotiationState.SentToClient:
+      default:
+        return null;
+    }
   }
   return (
-   <div className={styles.root}>
-     <div className={styles.header}>
-       <div className={styles.icon}><img src={'/img/icons/money.svg'}/></div>
-       <div className={styles.title}>{task.title}</div>
-     </div>
-     <div className={styles.description}>
-       {task.description}
-     </div>
-     <div className={styles.details}>
-       <div className={styles.detailsItem}>
-       <div className={styles.detailsLabel}>{message.taskNegotiation.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
-       <div className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? message.taskNegotiation.budget : `${message.taskNegotiation.ratePerHour}/h`}</div>
-       </div>
-       <div className={styles.detailsItem}>
-         <div className={styles.detailsLabel}>Dead line:</div>
-         <div className={styles.detailsValue}>{message.taskNegotiation.deadline ? format(new Date(message.taskNegotiation.deadline), 'MM/dd/yyyy') : '-'}</div>
-       </div>
-     </div>
-     <div className={styles.bottom}>
-       {outDatedText && <div className={styles.outdated}>{outDatedText}</div>}
-       {!outDatedText && <div className={styles.actions}>
-       {showReject && <Button className={`${styles.action}`} onClick={handleReject}>Reject</Button>}
-       {showEdit && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleEdit}>Edit</Button>}
-         {showHire && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Hire Master</Button>}
-         {showFinish && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Finish Task</Button>}
-       </div>}
-     {getStatus() === 'accepted' && <div className={`${styles.status} ${styles.statusGreen}`}>Accepted <MarkIcon color={'#27C60D'}/></div>}
-     {getStatus() === 'declined' && <div className={styles.status}>Declined <CloseIcon color={'#000000'}/></div>}
-     </div>
+    <div className={styles.root}>
+      <div className={styles.header}>
+        <div className={styles.icon}><img src={'/img/icons/money.svg'}/></div>
+        <div className={styles.title}>{task.title}</div>
+      </div>
+      <div className={styles.description}>
+        {task.description}
+      </div>
+      <div className={styles.details}>
+        <div className={styles.detailsItem}>
+          <div
+            className={styles.detailsLabel}>{message.taskNegotiation.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+          <div
+            className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? message.taskNegotiation.budget : `${message.taskNegotiation.ratePerHour}/h`}</div>
+        </div>
+        <div className={styles.detailsItem}>
+          <div className={styles.detailsLabel}>Dead line:</div>
+          <div
+            className={styles.detailsValue}>{message.taskNegotiation.deadline ? format(new Date(message.taskNegotiation.deadline), 'MM/dd/yyyy') : '-'}</div>
+        </div>
+      </div>
+      <div className={styles.bottom}>
+        {outDatedText && <div className={styles.outdated}>{outDatedText}</div>}
+        {!outDatedText && <div className={styles.actions}>
+          {showReject && <Button className={`${styles.action}`} onClick={handleReject}>Reject</Button>}
+          {showEdit && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleEdit}>Edit</Button>}
+          {showHire &&
+          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Hire Master</Button>}
+          {showAccept &&
+          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleAccept}>Accept</Button>}
+          {showFinish &&
+          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Finish Task</Button>}
+        </div>}
+        {getStatus() === 'accepted' &&
+        <div className={`${styles.status} ${styles.statusGreen}`}>Accepted <MarkIcon color={'#27C60D'}/></div>}
+        {getStatus() === 'declined' && <div className={styles.status}>Declined <CloseIcon color={'#000000'}/></div>}
+      </div>
 
-   </div>
+    </div>
   )
 }

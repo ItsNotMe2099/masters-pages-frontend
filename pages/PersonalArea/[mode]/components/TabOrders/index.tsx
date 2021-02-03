@@ -40,7 +40,7 @@ const TabOrders = (props: Props) => {
     ...(role !== 'client' ? [{name: 'Responses', key: 'responses'}, {name: 'Declined', key: 'declined_responses'}, {name: 'Offers', key: 'offers'}] : []),
     {name: 'Negotiation', key: 'negotiation'},
     {name: 'In progress', key: 'in_progress'},
-    {name: 'Closed', key: 'done'},
+    {name: 'Closed', key: 'closed'},
   ].map(item => {
     return{
       ...item,
@@ -52,6 +52,12 @@ const TabOrders = (props: Props) => {
     dispatch(fetchTaskUserList())
     dispatch(fetchTaskUserStatRequest());
   }, [tabSubPage])
+  useEffect(() => {
+    return () => {
+      console.log("TaskUserListReset");
+      dispatch(resetTaskUserList());
+    }
+  }, []);
   const handleScrollNext = () => {
     console.log("HandleNext", page)
     dispatch(setPageTaskUser(page + 1))
@@ -72,7 +78,7 @@ const TabOrders = (props: Props) => {
       }))} activeTab={tabSubPage as string}/>
       <div className={styles.tasks}>
         {(loading && total === 0) && <Loader/>}
-        {!loading && total > 0 && <InfiniteScroll
+        {total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data
           next={handleScrollNext}
           hasMore={total > tasks.length}

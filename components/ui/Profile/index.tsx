@@ -1,7 +1,11 @@
-import { confirmOpen, taskOfferAcceptOpen, taskShareOpen } from "components/Modal/actions";
+import { confirmOpen, taskOfferAcceptOpen, taskOfferOpen, taskShareOpen } from "components/Modal/actions";
 import { saveProfileRequest } from "components/SavedPeople/actions";
 import { deleteSkill } from "components/Skill/actions";
 import ArrowRight from "components/svg/ArrowRight";
+import {
+  taskNegotiationSendOfferSetLoading,
+  taskNegotiationSetCurrentProfile
+} from "components/TaskNegotiation/actions";
 import Avatar from "components/ui/Avatar";
 import Button from 'components/ui/Button'
 import ProfileActionButton from "components/ui/Profile/components/ActionButton";
@@ -39,7 +43,8 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
   const savingProfileId = useSelector((state: IRootState) => state.savedPeople.savingProfileId)
 
   const handleOffer = () => {
-
+    dispatch(taskNegotiationSetCurrentProfile(profile));
+    dispatch(taskOfferOpen());
   }
   const handleReadMore = () => {
 

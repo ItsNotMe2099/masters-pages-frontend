@@ -1,12 +1,9 @@
 import { confirmOpen, modalClose, skillCategoryModalOpen, skillModalOpen } from "components/Modal/actions";
+import Skill from "components/Portfolio/Skill";
+import SkillCategoryHeader from "components/Portfolio/SkillCategoryHeader";
 import { deleteSkill, deleteSkillCategory, fetchSkillList } from "components/Skill/actions";
-import TaskShareModal from "components/TaskShareModal";
 import Button from "components/ui/Button";
-import Loader from "components/ui/Loader";
-import CategoryModal from "pages/PersonalArea/[mode]/components/TabPortfolio/components/CategoryModal";
-import Skill from "pages/PersonalArea/[mode]/components/TabPortfolio/components/Skill";
-import SkillCategoryHeader from "pages/PersonalArea/[mode]/components/TabPortfolio/components/SkillCategoryHeader";
-import SkillModal from "pages/PersonalArea/[mode]/components/TabPortfolio/components/SkillModal";
+
 import { useEffect, useState } from "react";
 import * as React from "react";
 import { IRootState, SkillData, SkillListItem } from "types";
@@ -23,8 +20,6 @@ const TabPortfolio = (props: Props) => {
   const profile = useSelector((state: IRootState) => state.publicProfile.profile)
   const list = useSelector((state: IRootState) => state.publicProfile.skills)
 
-  const [currentCategory, setCurrentCategory] = useState(null);
-  const [currentSkill, setCurrentSkill] = useState(null);
   useEffect(() => {
     dispatch(fetchProfileById(profile.id))
   }, [])
@@ -32,35 +27,17 @@ const TabPortfolio = (props: Props) => {
     console.log("List", list);
   }, [list])
   const handleAddSkill = (item: SkillListItem) => {
-    setCurrentSkill(null);
-    setCurrentCategory(item);
-    console.log("HandleAddSkill", item)
-    dispatch(skillModalOpen());
+
   }
 
   const handleRemoveSkill = (item: SkillData) => {
-    dispatch(confirmOpen({
-      description: `Do you want to delete «${getCategoryTranslation(item.subCategory).name}»?`,
-      onConfirm: () => {
-        dispatch(deleteSkill(profile.id, item.id))
-      }
-    }));
+
   }
   const handleEditSkill = (item: SkillData) => {
-    console.log("ListEdit", item, list,list.find(cat => cat.id === item.categoryId))
-    setCurrentCategory(list.find(cat => cat.id === item.categoryId));
-    setCurrentSkill(item);
-    dispatch(skillModalOpen());
+
   }
   const handleRemoveCategory = (item: SkillListItem) => {
-    console.log("handleRemoveCategory", item.id)
-    dispatch(confirmOpen({
-      description: `Do you want to delete «${getCategoryTranslation(item).name}»?`,
 
-      onConfirm: () => {
-        dispatch(deleteSkillCategory(profile.id, item.id))
-      }
-    }));
   }
   return (
     <div className={styles.root}>

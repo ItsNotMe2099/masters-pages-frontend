@@ -3,8 +3,9 @@ import styles from './index.module.scss'
 interface Props {
   value: number,
   isActive: boolean
-  label: string,
+  label?: string,
   className?: string
+  children?: any
   onChange: (boolean) => void
 }
 export default function Radio(props: Props) {
@@ -18,7 +19,8 @@ export default function Radio(props: Props) {
   return (
     <div className={`${styles.root} ${props.className || ''}`} onClick={handleClick}>
       {props.isActive ? <img src={'/img/icons/radio-active.svg'} /> : <img src={'/img/icons/radio.svg'} />}
-      <div className={styles.label}>{props.label}</div>
+      {props.children && props.children.length ? props.children : <div className={styles.label}>{props.label}</div>}
+
     </div>
   )
 }

@@ -11,6 +11,7 @@ import TaskEditConditionsModal from "components/TaskNegotiation/TaskEditConditio
 import TaskHireMasterModal from "components/TaskNegotiation/TaskHireMasterModal";
 import TaskMarkAsDoneModal from "components/TaskNegotiation/TaskMarkAsDoneModal";
 import TaskOfferAcceptModal from "components/TaskNegotiation/TaskOfferAcceptModal";
+import TaskOfferModal from "components/TaskNegotiation/TaskOfferModal";
 import TaskOfferShowModal from "components/TaskNegotiation/TaskOfferShow";
 import TaskShareModal from "components/TaskShareModal";
 import { withTranslation } from "react-i18next";
@@ -31,14 +32,14 @@ import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 
 
 interface Props {
-  user?: any,
-  t: (string) => string,
+
 }
 
 const Modals = (props: Props) => {
   const dispatch = useDispatch()
   const key = useSelector((state: IRootState) => state.modal.modalKey)
 
+  console.log("Modalkey", key);
   return (
     <>
 
@@ -79,6 +80,8 @@ const Modals = (props: Props) => {
       {key === 'taskSuccessModal' && <SuccessTaskModal isOpen={key === 'taskSuccessModal'}/>}
       {key === 'feedbackSuccessModal' && <SuccessFeedbackModal isOpen={key === 'feedbackSuccessModal'}/>}
       {key === 'taskOfferShow' && <TaskOfferShowModal isOpen={key === 'taskOfferShow'} onClose={() => dispatch(modalClose())}/>}
+
+      {key === 'taskOfferModal' && <TaskOfferModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
     </>
   )
 }

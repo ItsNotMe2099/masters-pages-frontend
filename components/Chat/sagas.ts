@@ -30,9 +30,13 @@ function* ChatSaga() {
     const { message } = action.payload
     if(message.profileId !== profile.id &&  message.type === IChatMessageType.TaskNegotiation){
       const chat = yield select((state: IRootState) => state.chat.chat);
-      console.log("PerformNewLast");
+
       if(chat.taskId) {
         yield put(taskNegotiationFetchLastConditions(chat.taskId));
+      }
+      if(['master_assigned', 'task_completed'].includes(message.taskNegotiation.type)){
+        console.log("Chat update");
+        yield put(fetchChat(chat.id));
       }
     }
     if (message.profileId !== profile.id || message.type === IChatMessageType.TaskNegotiation) {

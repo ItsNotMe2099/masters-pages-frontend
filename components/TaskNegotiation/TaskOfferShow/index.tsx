@@ -47,7 +47,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
     dispatch(confirmOpen({
       description: `Do you want to accept response from ${response.profile?.firstName} ${response.profile?.lastName}?`,
       onConfirm: () => {
-        dispatch(taskNegotiationAcceptTaskResponse(response.taskId, response.id))
+        dispatch(taskNegotiationAcceptTaskResponse(response))
       },
       onCancel: () => {
         dispatch(taskShowOffer());

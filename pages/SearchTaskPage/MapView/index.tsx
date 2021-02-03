@@ -1,3 +1,4 @@
+import Modals from "components/layout/Modals";
 import Map from "components/Map";
 import MapTaskMarker from "components/svg/MapTaskMarker";
 import Task from "components/Task";
@@ -14,7 +15,6 @@ import Tabs from "components/ui/Tabs";
 import { useRouter } from "next/router";
 import MapHeader from "pages/SearchTaskPage/MapView/MapHeader";
 import { useEffect, useRef, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { IRootState, ITask } from "types";
 import { inBounds } from "utils/locaion";
 import styles from './index.module.scss'
@@ -131,7 +131,7 @@ const SearchTaskMapView = (props: Props) => {
                 </div>
               </div>
 
-              {(loading && total > 0) && <Loader/>}
+              {(loading && total === 0) && <Loader/>}
               {(!loading && total > 0) && tasks.filter(item =>  bounds ? inBounds(item.location, bounds) : true).map(task => <Task task={task} isActive={task.id === activeId} onClick={handleTaskListClick}/>)}
 
 
@@ -204,6 +204,7 @@ const SearchTaskMapView = (props: Props) => {
           </div>
         </div>
       </div>
+      <Modals/>
     </div>
   )
 }

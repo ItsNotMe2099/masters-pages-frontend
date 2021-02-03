@@ -1,3 +1,4 @@
+import Modals from "components/layout/Modals";
 import Facebook from 'components/svg/Facebook'
 import Telegram from 'components/svg/Telegram'
 import VK from 'components/svg/VK'
@@ -62,6 +63,7 @@ export default function Footer(props: Props) {
         <div className={styles.socialDesktop}>{renderSocials()}</div>
 
       </div>
+      <Modals/>
     </div>
   )
 }

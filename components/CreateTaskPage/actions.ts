@@ -15,5 +15,5 @@ interface CreateTaskData{
 }
 export const createTaskComplete = (data: CreateTaskData) => action(ActionTypes.CREATE_TASK, data)
 export const createTaskeReset = () => action(ActionTypes.CREATE_TASK_RESET)
-export const createTaskSuccess = () => action(ActionTypes.CREATE_TASK_SUCCESS)
+export const createTaskSuccess = (data) => action(ActionTypes.CREATE_TASK_SUCCESS, data)
 export const createTaskError = (error) => action(ActionTypes.CREATE_TASK_ERROR, {error})

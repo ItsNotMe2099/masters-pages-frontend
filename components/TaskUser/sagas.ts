@@ -1,4 +1,5 @@
 
+import { fetchChat } from "components/Chat/actions";
 import { confirmChangeData, modalClose } from "components/Modal/actions";
 import {
   deleteTaskUser,
@@ -7,7 +8,7 @@ import {
   fetchTaskUserList,
   fetchTaskUserListRequest, fetchTaskUserStatRequest,
   setPublishedTaskUser,
-  setPublishedTaskUserRequest, updateTaskUser, updateTaskUserRequest
+  setPublishedTaskUserRequest, taskCancel, taskCancelRequest, updateTaskUser, updateTaskUserRequest
 } from "components/TaskUser/actions";
 import ApiActionTypes from "constants/api";
 import { takeLatest, put, take, select } from 'redux-saga/effects'
@@ -68,6 +69,28 @@ function* TaskUserSaga() {
         yield take([ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL])
         console.log("UPDATE TASK SUCCESS")
         yield put(modalClose());
+      }
+    });
+
+  yield takeLatest(ActionTypes.TASK_CANCEL,
+    function* (action: ActionType<typeof taskCancel>) {
+      console.log("TASK_USER_UPDATE")
+      yield put(confirmChangeData({loading: true}));
+      yield put(taskCancelRequest(action.payload.taskId));
+      const result = yield take([ActionTypes.TASK_CANCEL_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_UPDATE_REQUEST + ApiActionTypes.FAIL])
+
+      if(result.type === ActionTypes.TASK_CANCEL_REQUEST + ApiActionTypes.SUCCESS){
+        yield put(fetchOneTaskUserRequest(action.payload.taskId));
+        yield take([ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL])
+        console.log("UPDATE TASK SUCCESS")
+        const chat = yield select((state: IRootState) => state.chat.chat);
+
+        if (chat) {
+          yield put(fetchChat(chat.id));
+        }
+
+        yield put(modalClose());
+
       }
     })
 }

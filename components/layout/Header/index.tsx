@@ -25,7 +25,6 @@ interface Props {
 
 const Header = (props: Props) => {
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false);
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const role = useSelector((state: IRootState) => state.profile.role)
 
   const handleOpenMobileMenu = () => {
@@ -42,7 +41,6 @@ const Header = (props: Props) => {
   }
   console.log("ProfileRole", role);
   const [isAuth, setAuth] = useState(props.user ? true : false)
-  const key = useSelector((state: IRootState) => state.modal.modalKey)
   const dispatch = useDispatch()
 
   const getRoleName = (role) => {
@@ -139,7 +137,6 @@ const Header = (props: Props) => {
             </>
         </div>}
       </header>
-      <Modals/>
       </div>
   )
 }

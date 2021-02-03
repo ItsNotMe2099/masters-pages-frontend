@@ -25,3 +25,4 @@ export const taskEditConditionsOpen = () => action(ActionTypes.TASK_EDIT_CONDITI
 export const feedbackSiteOpen = () => action(ActionTypes.FEEDBACK_SITE_OPEN)
 export const feedbackSuccessOpen = () => action(ActionTypes.FEEDBACK_SUCCESS_OPEN)
 export const taskSuccessOpen = () => action(ActionTypes.TASK_SUCCESS_OPEN)
+export const taskOfferOpen = () => action(ActionTypes.TASK_OFFER_OPEN)

@@ -1,0 +1,90 @@
+
+import ChatMessage from "components/Chat/ChatMessage";
+import { taskNegotiationSendOffer } from "components/TaskNegotiation/actions";
+import {
+  fetchTaskUserList,
+  fetchTaskUserListRequest,
+  resetTaskUserList,
+  setPageTaskUser
+} from "components/TaskUser/actions";
+import Button from "components/ui/Button";
+import Radio from "components/ui/Inputs/RadioList/Radio";
+import Loader from "components/ui/Loader";
+
+import Modal from "components/ui/Modal";
+import { useEffect, useState } from "react";
+import * as React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import styles from './index.module.scss'
+
+import { useSelector, useDispatch } from 'react-redux'
+interface Props {
+  onCancel: () => void
+}
+const TaskOfferOrderList = (props: Props) => {
+  const dispatch = useDispatch();
+  const [activeTask, setActiveTask] = useState(null);
+  const total = useSelector((state: IRootState) => state.taskUser.total)
+  const page = useSelector((state: IRootState) => state.taskUser.page)
+  const list = useSelector((state: IRootState) => state.taskUser.list)
+  const loading = useSelector((state: IRootState) => state.taskUser.listLoading)
+  const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
+  const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
+
+  const filter = {
+    status: 'published'
+  }
+  useEffect(() => {
+    console.log("fetchTaskUserListRequest");
+    dispatch(fetchTaskUserListRequest({
+      ...filter,
+      page,
+      limit: 10
+    }));
+      return () => {
+        dispatch(resetTaskUserList());
+      }
+  }, [])
+  const handleSubmit = (data) => {
+    if(!activeTask){
+      return;
+    }
+    console.log("submit data", data)
+    dispatch(taskNegotiationSendOffer(activeTask.id, currentProfile.id));
+
+  }
+  const handleScrollNext = () => {
+    console.log("HandleNext", page)
+    dispatch(setPageTaskUser(page + 1))
+    dispatch(fetchTaskUserList())
+  }
+  const handleChange = (item) => {
+    setActiveTask(item);
+  }
+
+  return (
+    <div className={styles.root}>
+     {((loading && total === 0) || sendOfferLoading) && <Loader/>}
+      {total > 0 && !sendOfferLoading && <div className={styles.orders} id={'task-offer-orders'}>
+       <InfiniteScroll
+       dataLength={list.length} //This is important field to render the next data
+       next={handleScrollNext}
+       scrollableTarget={"task-offer-orders"}
+       hasMore={total > list.length}
+       loader={<Loader/>}>
+       {list.map(item => <Radio className={styles.radioItem} value={item} isActive={activeTask && activeTask.id === item.id}  onChange={handleChange}>
+         <div className={styles.radioItemTitle}>{item.title}</div>
+         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${item.budget}` : `free`) : `$${item.ratePerHour}/h`}</div>
+       </Radio>)}
+     </InfiniteScroll>
+     </div>}
+      {!sendOfferLoading && <div className={styles.buttons}>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} disabled={!activeTask} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>Send offer</Button>
+      </div>}
+    </div>
+  )
+}
+
+export default TaskOfferOrderList

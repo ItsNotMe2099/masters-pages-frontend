@@ -55,11 +55,12 @@ const FileWrapper = (props: Props) => {
   }
   useEffect(() => {
     if (file.rawFile &&  !(file.rawFile as any)._uploading) {
-      console.log("Upload");
+      console.log("Upload", uploadOptions);
       (file.rawFile as any)._uploading = true;
       const options = {
         ...uploadOptions,
         files: [file.rawFile],
+
         onFinishS3Put: onFinishFileUpload,
         onProgress: onProgress,
         onError: onFileUploadError,

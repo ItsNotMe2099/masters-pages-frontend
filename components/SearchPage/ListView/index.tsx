@@ -32,7 +32,6 @@ interface Props {
 const SearchProfileListView = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter();
-  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const loading = useSelector((state: IRootState) => state.profileSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
   const filter = useSelector((state: IRootState) => state.profileSearch.filter)

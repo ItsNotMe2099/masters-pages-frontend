@@ -20,7 +20,7 @@ const SearchTaskPage = (props) => {
       {showMap ?
       <SearchTaskMapView onShowList={() => setShowMap(false)} {...props}/> :
       <SearchTaskListView onShowMap={() => setShowMap(true)} {...props}/>}
-      <Modals/>
+
   </>
   )
 }

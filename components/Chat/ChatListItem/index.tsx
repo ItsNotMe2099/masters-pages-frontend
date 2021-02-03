@@ -26,7 +26,7 @@ export default function ChatListItem({chat, isActive}: Props) {
    <div className={`${styles.root} ${isActive && styles.rootActive}`} onClick={handleClick}>
       <AvatarRound image={profile.avatar} name={profile.firstName}/>
       <div className={styles.info}>
-        <div className={styles.title}>{chat.task ? chat.task.title : `${profile.firstName} ${profile.lastName}`}</div>
+        <div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>
         <div className={styles.time}>{formatDistance(new Date(), new Date(chat.lastMessageAt))}</div>
       </div>
      {chat.totalUnread > 0 && <div className={styles.notification}>{chat.totalUnread} new</div>}

@@ -1,5 +1,5 @@
 import ApiActionTypes from "constants/api";
-import { IChatMessage, ITask, ITaskNegotiation, SkillData, SkillListItem } from "types";
+import { IChatMessage, ITask, ITaskNegotiation, ProfileData, SkillData, SkillListItem } from "types";
 import ActionTypes from "./const";
 export interface TaskOfferState {
   taskResponseLoading: boolean
@@ -11,8 +11,10 @@ export interface TaskOfferState {
   editConditionsLoading: boolean,
   editConditionsError?: string,
   currentTask?: ITask,
+  currentProfile?: ProfileData,
   formLoading: boolean,
   formError?: string
+  sendOfferLoading: boolean,
 
 }
 
@@ -22,7 +24,8 @@ const initialState: TaskOfferState = {
   lastCondition: null,
   actionLoading: false,
   editConditionsLoading: false,
-  formLoading: false
+  formLoading: false,
+  sendOfferLoading: false
 }
 
 export default function TaskOfferReducer(state = {...initialState}, action) {
@@ -32,6 +35,10 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
       console.log("TASK_OFFER_SET_CURRENT_TASK", action.payload)
       state.currentTask = action.payload;
       break
+    case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_PROFILE:
+      console.log("TASK_NEGOTIATION_SET_CURRENT_PROFILE", action.payload)
+      state.currentProfile = action.payload;
+      break
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_NEGOTIATION:
       console.log("TASK_OFFER_SET_CURRENT_TASK", action.payload)
       state.currentTaskNegotiation = action.payload;
@@ -39,6 +46,10 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_MESSAGE:
       console.log("TASK_NEGOTIATION_SET_CURRENT_MESSAGE", action.payload)
       state.currentMessage = action.payload;
+      break;
+    case ActionTypes.TASK_NEGOTIATION_SEND_OFFER_LOADING:
+      console.log("TASK_NEGOTIATION_SEND_OFFER_LOADING", action.payload)
+      state.sendOfferLoading = action.payload;
       break;
     case ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE_REQUEST:
       state.taskResponseLoading = true;

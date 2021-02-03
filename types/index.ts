@@ -151,6 +151,7 @@ export enum ITaskNegotiationType {
   TaskNegotiation = 'task_negotiation',
   MarkAsDone = 'mark_as_done',
   TaskCompleted = 'task_completed',
+  TaskCanceled = 'task_canceled',
   MasterAssigned = 'master_assigned',
 }
 
@@ -182,6 +183,7 @@ export interface ITaskNegotiation{
 export enum ITaskStatus {
   Draft = 'draft',
   Published = 'published',
+  PrivatelyPublished = 'privately_published',
   Negotiation = 'negotiation',
   Paused = 'paused',
   Canceled = 'canceled',
@@ -216,7 +218,7 @@ export interface ITask{
   deadline: string,
   priceType: string,
   photos: string[],
-  profileHasNegotiations: boolean
+  lastNegotiation: ITaskNegotiation
   masterId: number
   master: ProfileData,
   negotiations: ITaskNegotiation[]

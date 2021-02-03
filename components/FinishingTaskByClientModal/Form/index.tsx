@@ -70,8 +70,8 @@ let FinishingTaskByClientForm = props => {
       </div>
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button type="button" transparent bold smallFont size="10px 32px" borderC4>NOT DONE</Button>
-        <Button red bold smallFont size="10px 45px">JOB IS DONE</Button>
+        <Button type="button" transparent bold smallFont size="10px 32px" borderC4 onClick={props.onClose}>NOT DONE</Button>
+        <Button red bold smallFont size="10px 45px" >JOB IS DONE</Button>
       </div>
     </form>
   )

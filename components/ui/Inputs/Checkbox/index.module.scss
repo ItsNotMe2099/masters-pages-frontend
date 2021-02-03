@@ -7,3 +7,17 @@
     margin-bottom: 35px;
 }
 }
+.wrapper{
+  display: flex;
+  flex-direction: row;
+}
+.checkboxContainer{
+  cursor: pointer;
+}
+.checkboxLabel{
+  font-size: 14px;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

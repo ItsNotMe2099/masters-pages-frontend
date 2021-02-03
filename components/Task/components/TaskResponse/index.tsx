@@ -30,7 +30,7 @@ export default function TaskResponse({ response, task }: Props) {
     dispatch(confirmOpen({
       description: `Do you want to accept response from ${response.profile?.firstName} ${response.profile?.lastName}?`,
       onConfirm: () => {
-        dispatch(taskNegotiationAcceptTaskResponse(response.taskId, response.id))
+        dispatch(taskNegotiationAcceptTaskResponse(response))
       }
     }));
   }

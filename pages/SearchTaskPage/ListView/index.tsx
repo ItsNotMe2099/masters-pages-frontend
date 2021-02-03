@@ -31,7 +31,6 @@ interface Props {
 const SearchTaskListView = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter();
-  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const loading = useSelector((state: IRootState) => state.taskSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.taskSearch.sortType)
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
@@ -126,18 +125,20 @@ const SearchTaskListView = (props: Props) => {
             />
           </div>}
         </div>
-        {(loading && total > 0) && <Loader/>}
+        {(loading && total === 0) && <Loader/>}
         {total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data
           next={handleScrollNext}
           hasMore={total > tasks.length}
-          loader={<Loader/>}>
-          {tasks.map(task => <Task task={task}/>)}
+          loader={<Loader/>}
+        >
+          {tasks.map((task, index) => <Task key={task.id} task={task} index={index}/>)}
         </InfiniteScroll>}
       </div>
       </div>
       <Footer/>
     </div>
+
     </>
   )
 }

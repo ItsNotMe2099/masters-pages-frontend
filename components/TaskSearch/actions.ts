@@ -16,6 +16,13 @@ export const fetchTaskSearchListRequest = (data: any) => action(ActionTypes.FETC
     method: 'GET',
   }
 })
+export const fetchTaskSearchOneRequest = (taskId: number) => action(ActionTypes.FETCH_TASK_LIST_ONE_REQUEST, {
+  api: {
+    url: `/api/tasks/${taskId}`,
+    method: 'GET'
+  }
+})
+
 
 export const resetTaskSearchList = () => action(ActionTypes.RESET_TASK_LIST)
 export const setPageTaskSearch = (page: number) => action(ActionTypes.TASK_LIST_SET_PAGE, page)
