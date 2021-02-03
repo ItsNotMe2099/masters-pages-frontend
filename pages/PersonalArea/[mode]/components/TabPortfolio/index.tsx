@@ -3,10 +3,10 @@ import { deleteSkill, deleteSkillCategory, fetchSkillList } from "components/Ski
 import TaskShareModal from "components/TaskShareModal";
 import Button from "components/ui/Button";
 import Loader from "components/ui/Loader";
-import CategoryModal from "pages/PersonalArea/[mode]/components/TabPortfolio/components/CategoryModal";
-import Skill from "pages/PersonalArea/[mode]/components/TabPortfolio/components/Skill";
-import SkillCategoryHeader from "pages/PersonalArea/[mode]/components/TabPortfolio/components/SkillCategoryHeader";
-import SkillModal from "pages/PersonalArea/[mode]/components/TabPortfolio/components/SkillModal";
+import CategoryModal from "components/Portfolio/CategoryModal";
+import Skill from "components/Portfolio/Skill";
+import SkillCategoryHeader from "components/Portfolio/SkillCategoryHeader";
+import SkillModal from "components/Portfolio/SkillModal";
 import { useEffect, useState } from "react";
 import * as React from "react";
 import { IRootState, SkillData, SkillListItem } from "types";
@@ -30,7 +30,7 @@ const TabPortfolio = (props: Props) => {
     if(!profile?.id){
       return
     }
-    dispatch(fetchSkillList(profile.id))
+    dispatch(fetchSkillList())
   }, [profile])
   useEffect(() => {
     console.log("List", list);
@@ -46,7 +46,7 @@ const TabPortfolio = (props: Props) => {
     dispatch(confirmOpen({
       description: `Do you want to delete «${getCategoryTranslation(item.subCategory).name}»?`,
       onConfirm: () => {
-        dispatch(deleteSkill(profile.id, item.id))
+        dispatch(deleteSkill(item.id))
       }
     }));
   }
@@ -62,7 +62,7 @@ const TabPortfolio = (props: Props) => {
       description: `Do you want to delete «${getCategoryTranslation(item).name}»?`,
 
       onConfirm: () => {
-        dispatch(deleteSkillCategory(profile.id, item.id))
+        dispatch(deleteSkillCategory(item.id))
       }
     }));
   }

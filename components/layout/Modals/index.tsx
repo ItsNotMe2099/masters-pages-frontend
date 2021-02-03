@@ -1,24 +1,21 @@
 import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
-import { LangSelect } from "components/layout/Header/components/LangSelect";
-import { ModeSelect } from "components/layout/Header/components/ModeSelect";
-import { ProfileSelect } from "components/layout/Header/components/ProfileSelect";
+import FeedbackSiteModal from "components/FeedbackSiteModal";
+import FinishingTaskByClientModal from "components/FinishingTaskByClientModal";
+import FinishingTaskByMasterModal from "components/FinishingTaskByMasterModal";
 import ModalConfirm from "components/Modal/ModalConfirm";
 import ModalLoader from "components/ModalLoader";
-import { changeRole } from "components/Profile/actions";
-import MenuMobile from "components/svg/MenuMobile";
-import MenuMobileClose from "components/svg/MenuMobileClose";
-import TaskOfferAcceptModal from "components/TaskOffer/TaskOfferAcceptModal";
+import SuccessFeedbackModal from "components/SuccessFeedbackModal";
+import SuccessTaskModal from "components/SuccessTaskModal";
+import TaskEditConditionsModal from "components/TaskNegotiation/TaskEditConditionsModal";
+import TaskHireMasterModal from "components/TaskNegotiation/TaskHireMasterModal";
+import TaskMarkAsDoneModal from "components/TaskNegotiation/TaskMarkAsDoneModal";
+import TaskOfferAcceptModal from "components/TaskNegotiation/TaskOfferAcceptModal";
+import TaskOfferModal from "components/TaskNegotiation/TaskOfferModal";
+import TaskOfferShowModal from "components/TaskNegotiation/TaskOfferShow";
 import TaskShareModal from "components/TaskShareModal";
-import Socials from "components/ui/Socials";
 import { withTranslation } from "react-i18next";
-import { withAuthSync } from "utils/auth";
-import { getMediaPath } from "utils/media";
-import styles from './index.module.scss'
-import Link from 'next/link'
 import { default as React, useState } from 'react'
-import Button from 'components/ui/Button'
-import Logo from 'components/Logo'
 import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
@@ -35,14 +32,14 @@ import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 
 
 interface Props {
-  user?: any,
-  t: (string) => string,
+
 }
 
 const Modals = (props: Props) => {
   const dispatch = useDispatch()
   const key = useSelector((state: IRootState) => state.modal.modalKey)
 
+  console.log("Modalkey", key);
   return (
     <>
 
@@ -64,12 +61,27 @@ const Modals = (props: Props) => {
       <PWRecoverySucces
         isOpen={key === 'pwRecSuccess'}
         onRequestClose={() => dispatch(modalClose())}/>
-      <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {}}/>
+      <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {
+      }}/>
       <ChangePassword isOpen={key === 'changePassword'}
                       onRequestClose={() => dispatch(modalClose())}/>
-      <TaskOfferAcceptModal isOpen={key === 'taskOfferAcceptModal'} onClose={() => dispatch(modalClose())}/>
+      <TaskOfferAcceptModal isOpen={key === 'taskOfferCreateModal'} onClose={() => dispatch(modalClose())}/>
       <TaskShareModal isOpen={key === 'taskShareModal'}/>
-                      <ModalConfirm isOpen={key === 'confirm'}    onRequestClose={() => dispatch(modalClose())}/>
+      <ModalConfirm isOpen={key === 'confirm'} onRequestClose={() => dispatch(modalClose())}/>
+      {key === 'taskHireMasterModal' &&
+      <TaskHireMasterModal isOpen={key === 'taskHireMasterModal'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'taskMarkAsDoneModal' &&
+      <TaskMarkAsDoneModal isOpen={key === 'taskMarkAsDoneModal'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'taskEditConditionsModal' &&
+      <TaskEditConditionsModal isOpen={key === 'taskEditConditionsModal'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'finishTaskAsClientOpen' && <FinishingTaskByClientModal isOpen={key === 'finishTaskAsClientOpen'}/>}
+      {key === 'finishTaskAsMasterOpen' && <FinishingTaskByMasterModal isOpen={key === 'finishTaskAsMasterOpen'}/>}
+      {key === 'feedbackSiteModal' && <FeedbackSiteModal isOpen={key === 'feedbackSiteModal'}/>}
+      {key === 'taskSuccessModal' && <SuccessTaskModal isOpen={key === 'taskSuccessModal'}/>}
+      {key === 'feedbackSuccessModal' && <SuccessFeedbackModal isOpen={key === 'feedbackSuccessModal'}/>}
+      {key === 'taskOfferShow' && <TaskOfferShowModal isOpen={key === 'taskOfferShow'} onClose={() => dispatch(modalClose())}/>}
+
+      {key === 'taskOfferModal' && <TaskOfferModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
     </>
   )
 }

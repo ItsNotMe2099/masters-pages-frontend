@@ -21,9 +21,7 @@ const TabSaved = (props: Props) => {
   const searches = useSelector((state: IRootState) => state.savedSearch.list)
   const people = useSelector((state: IRootState) => state.savedPeople.list)
   const tasks = useSelector((state: IRootState) => state.savedTasks.list)
-
   const { mode, tab, tabSubPage } = router.query
-
 
   const tabs = [
     {name: 'People', key: 'people'},
@@ -36,10 +34,11 @@ const TabSaved = (props: Props) => {
     }})
 
     useEffect(() => {
-      dispatch(fetchSavedSearches())
-      dispatch(fetchSavedPeople())
-      dispatch(fetchSavedTasks())
+      dispatch(fetchSavedSearches());
+      dispatch(fetchSavedPeople());
+      dispatch(fetchSavedTasks());
     }, [])
+
 
   return (
     <div className={styles.root}>
@@ -49,17 +48,10 @@ const TabSaved = (props: Props) => {
       }))} activeTab={tabSubPage as string}/>
       <div className={styles.tasks}>
         {tabSubPage === "people" &&
-          <>{people.map(item => <SavedPeople 
-            item={item}
-            />)}</>
+          <SavedPeople/>
         }
         {tabSubPage === "search" &&
-          <>
-          {searches.map(item => <SavedSearches
-            type="Master search" 
-            item={item}
-            />)}
-          </>
+        <SavedSearches/>
         }
         {tabSubPage === "tasks" &&
           <>

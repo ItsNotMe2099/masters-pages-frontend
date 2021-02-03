@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 
 interface Props {
   type?: "submit" | "button" | "reset"
+  disabled?: boolean
   blue?: boolean
   red?: boolean
   green?: boolean
@@ -32,9 +33,11 @@ export default function Button(props: Props) {
     <button
       type={props.type}
       onClick={props.onClick}
+      disabled={props.disabled}
       className={`
        ${styles.root}
        ${props.className && props.className}
+       ${props.disabled && styles.disabled}
        ${props.bold && styles.bold}
        ${props.blue && styles.blue}
        ${props.red && styles.red}

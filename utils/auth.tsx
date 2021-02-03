@@ -67,6 +67,9 @@ export const withAuthSync = (WrappedComponent) =>
         componentDidMount() {
             window.addEventListener("storage", this.syncLogout);
             console.log("Did mount")
+          if(!cookie.get('mode')){
+            cookie.set('mode', 'client')
+          }
           store.dispatch(changeRoleNative(cookie.get('mode') || 'client'));
         }
 

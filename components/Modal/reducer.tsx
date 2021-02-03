@@ -54,11 +54,41 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_UPDATE_MODAL_OPEN:
       state.modalKey = 'tabOrderEditModal'
       break
-    case ActionTypes.TASK_OFFER_ACCEPT_OPEN:
-      state.modalKey = 'taskOfferAcceptModal'
+    case ActionTypes.TASK_OFFER_CREATE_OPEN:
+      state.modalKey = 'taskOfferCreateModal'
+      break
+    case ActionTypes.TASK_OFFER_SHOW_OPEN:
+      state.modalKey = 'taskOfferShow'
       break
     case ActionTypes.TASK_SHARE_OPEN:
       state.modalKey = 'taskShareModal'
+      break
+    case ActionTypes.TASK_HIRE_MASTER_OPEN:
+      state.modalKey = 'taskHireMasterModal'
+      break
+    case ActionTypes.TASK_MARK_AS_DONE_OPEN:
+      state.modalKey = 'taskMarkAsDoneModal'
+      break
+    case ActionTypes.TASK_EDIT_CONDITIONS_OPEN:
+      state.modalKey = 'taskEditConditionsModal'
+      break
+    case ActionTypes.FINISH_TASK_AS_CLIENT_OPEN:
+      state.modalKey = 'finishTaskAsClientOpen'
+      break
+    case ActionTypes.FINISH_TASK_AS_MASTER_OPEN:
+      state.modalKey = 'finishTaskAsMasterOpen'
+      break
+    case ActionTypes.FEEDBACK_SITE_OPEN:
+      state.modalKey = 'feedbackSiteModal'
+      break
+    case ActionTypes.FEEDBACK_SUCCESS_OPEN:
+      state.modalKey = 'feedbackSuccessModal'
+      break
+    case ActionTypes.TASK_SUCCESS_OPEN:
+      state.modalKey = 'taskSuccessModal'
+      break
+    case ActionTypes.TASK_OFFER_OPEN:
+      state.modalKey = 'taskOfferModal'
       break
     case ActionTypes.CONFIRM_MODAL_OPEN:
       state.modalKey = 'confirm'

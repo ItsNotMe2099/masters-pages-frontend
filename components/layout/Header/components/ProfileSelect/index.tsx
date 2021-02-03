@@ -12,7 +12,8 @@ import cx from 'classnames'
 import nextI18 from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
-
+import cookie from "js-cookie";
+import Router from "next/router";
 export const ProfileSelect = () => {
   const role = useSelector((state: IRootState) => state.profile.role)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -26,16 +27,22 @@ export const ProfileSelect = () => {
     setIsActive(!isActive);
   }
   const options = [
-    { value: 'logout', label: 'Your profile', link: `/PersonalArea` },
-    { value: 'messages', label: 'Messages', link: `/PersonalArea/${role}/messages` },
-    { value: 'settings', label: 'Settings', link: `/PersonalArea/${role}/settings` },
+    { value: 'profile', label: 'Your profile', link: `/PersonalArea` },
+    { value: 'messages', label: 'Messages', link: `/Chat` },
+    { value: 'reviews', label: 'Reviews', link: `/PersonalArea/${role}/reviews` },
     { value: 'orders', label: 'Orders', link: `/PersonalArea/${role}/orders` },
+    { value: 'settings', label: 'Settings', link: `/PersonalArea/${role}/settings` },
     { value: 'logout', label: 'Logout' },
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
+    if(item.value === 'logout'){
+      cookie.remove("token");
+      Router.push('/');
+      return;
+    }
     console.log("SetLang", item.value);
     if (item.link) {
       router.push(item.link)

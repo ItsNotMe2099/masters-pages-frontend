@@ -9,7 +9,7 @@ interface Props {
 
 const AddFileButton = (props: Props) => (
   <>
-  {props.altView ? 
+  {props.altView ?
       <a className={styles.alt}> <img src="/img/icons/staple.svg" alt=''/> attach photos</a>
     :
   <>

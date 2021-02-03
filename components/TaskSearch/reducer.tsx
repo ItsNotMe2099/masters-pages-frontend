@@ -79,6 +79,16 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
     case ActionTypes.FETCH_TASK_LIST_REQUEST + ApiActionTypes.FAIL:
       state.listLoading = false;
       break
+
+    case ActionTypes.FETCH_TASK_LIST_ONE_REQUEST + ApiActionTypes.SUCCESS:
+      state.list = state.list.map(item => {
+        if (item.id === action.payload.id) {
+          console.log("replace task item")
+          return action.payload;
+        }
+        return item;
+      })
+      break
     case ActionTypes.RESET_TASK_LIST:
       state.listLoading = false;
       state.list = []

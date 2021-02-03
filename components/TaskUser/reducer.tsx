@@ -1,6 +1,7 @@
 import ApiActionTypes from "constants/api";
 import { ITask, SkillData, SkillListItem } from "types";
 import ActionTypes from "./const";
+
 export interface TaskUserState {
   list: ITask[],
   listLoading: boolean,
@@ -23,8 +24,8 @@ const initialState: TaskUserState = {
   stat: []
 }
 
-export default function TaskUserReducer(state = {...initialState}, action) {
-  switch(action.type) {
+export default function TaskUserReducer(state = { ...initialState }, action) {
+  switch (action.type) {
     case ActionTypes.FETCH_TASK_USER_STAT + ApiActionTypes.SUCCESS:
       state.stat = action.payload
       break
@@ -38,7 +39,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       state.filter = action.payload;
       break
     case ActionTypes.TASK_USER_LIST_SET_SORT:
-        state.sort = action.payload;
+      state.sort = action.payload;
       break
     case ActionTypes.FETCH_TASK_USER_LIST_REQUEST:
       state.listLoading = true;
@@ -69,21 +70,105 @@ export default function TaskUserReducer(state = {...initialState}, action) {
 
     case ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS:
       state.formUpdateLoading = false;
-
-      console.log("state filter", state.filter)
+      let removeItem = false;
       state.list = state.list.map(item => {
-        if(item.id === action.payload.id){
+        if (item.id === action.payload.id) {
           console.log("replace task item")
           return action.payload;
         }
         return item;
-      }).filter(item => !state.filter?.status || item.status === state.filter.status)
+      }).filter(item => {
+        console.log("state.filter.status", state.filter.status, item.status)
+        if (state.filter.status === 'in_progress' && item.id === action.payload.id && item.status !== 'in_progress') {
+          removeItem = true;
+          return false
+        }
+        return true;
+      });
+      if (removeItem) {
+        state.total -= 1;
+        state.stat = state.stat.map((i) => {
+          if (i.task_status === 'in_progress') {
+            i.count -= 1;
+          }
+          if (i.task_status === 'closed') {
+            i.count += 1;
+          }
+          return i;
+        })
+      }
       break
     case ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL:
       state.formUpdateLoading = false;
 
       break
 
+    case ActionTypes.FETCH_TASK_USER_RESPONSES_LIST_REQUEST + ApiActionTypes.SUCCESS:
+      const taskId = action.payload?.data?.length > 0 ? action.payload?.data[0].taskId : null;
+      console.log("fetch Reponsed", taskId,)
+      state.list = state.list.map((item) => {
+        if (taskId && item.id === taskId) {
+          console.log("AddResponses to Task", taskId, action.payload)
+          return { ...item, responses: action.payload };
+        }
+        return { ...item };
+      })
+      break;
+
+    case ActionTypes.TASK_RESPONSE_FETCH_REQUEST + ApiActionTypes.SUCCESS:
+
+      console.log("state filter", state.filter)
+      console.log("sent_to_client", action.payload)
+      state.list = state.list.map((item) => {
+        if (item.id === action.payload.taskId) {
+          console.log("sent_to_client", action.payload)
+          return { ...item,
+            responses: {
+              ...item.responses,
+              data: (item.responses?.data || []).map((response) => response.id == action.payload.id ? { ...response, ...action.payload } : response)
+            }
+          };
+        }
+        return item;
+      })
+
+      if (action.payload.state === 'accepted') {
+        let removeItem = false;
+        state.list = state.list.filter(item => {
+          if (state.filter.status === 'published' && item.id === action.payload.taskId) {
+            removeItem = true;
+            return false
+          }
+          return true;
+        })
+        if (removeItem) {
+          state.total -= 1;
+          state.stat = state.stat.map((i) => {
+            if (i.task_status === 'published') {
+              i.count -= 1;
+            }
+            if (i.task_status === 'negotiation') {
+              i.count += 1;
+            }
+            return i;
+          })
+        }
+      }
+      break
+
+    case ActionTypes.TASK_USER_REMOVE_FROM_LIST:
+      const isFind = state.list.find(item => item.id === action.payload.taskId)
+      if(isFind) {
+        state.list = state.list.filter(item => item.id !== action.payload.taskId);
+        state.total -= 1;
+        state.stat = state.stat.map((i) => {
+          if (i.task_status === state.filter.status) {
+            i.count -= 1;
+          }
+          return i;
+        })
+      }
+      break;
     case ActionTypes.RESET_TASK_USER_LIST:
       state.listLoading = false;
       state.list = []

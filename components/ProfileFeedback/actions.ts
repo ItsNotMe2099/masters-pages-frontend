@@ -19,4 +19,20 @@ export const fetchLatestFeedbacksToProfileRequest = () => action(ActionTypes.FET
   }
 })
 
+export const createFeedBackMasterRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_MASTER_REQUEST, {
+  api: {
+    url: '/api/feedback/master',
+    method: 'POST',
+    data
+  }
+})
+export const createFeedBackSite = (data: any) => action(ActionTypes.CREATE_FEEDBACK_SITE, {data})
+export const createFeedBackSiteRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_SITE_REQUEST, {
+  api: {
+    url: '/api/feedback/site',
+    method: 'POST',
+    data
+  }
+})
 export const setPageFeedback = (page: number) => action(ActionTypes.FEEDBACK_SET_PAGE, page)
+

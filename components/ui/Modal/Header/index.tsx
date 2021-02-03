@@ -18,7 +18,7 @@ export default function ModalHeader(props: Props) {
     <div className={styles.root}>
     <div className={styles.job}>
       {props.jobDone ?
-        <> 
+        <>
           <div className={styles.avatar}><img src={props.img} alt=""/></div>
           <div className={styles.name}>{props.firstName} {props.lastName}</div>
           <div className={styles.text}>marked job like a<span> done</span></div>

@@ -2,7 +2,7 @@ import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import { changeRole } from "components/Profile/actions";
 import ArrowDropDown from "components/svg/ArrowDropDown";
 import { I18nContext } from "next-i18next";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import cx from 'classnames'
@@ -24,8 +24,12 @@ export const ModeSelect = () => {
     { value: 'master', label: 'Master' },
     { value: 'volunteer', label: 'Volunteer' },
   ]
+  console.log("Roles", role, options)
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 
+  useEffect(() => {
+    setValue(options.find(item => role ? item.value === role : item.value === 'client'));
+  }, [role]);
   const handleOptionClick = (e, item) => {
     e.preventDefault()
     setValue(item);

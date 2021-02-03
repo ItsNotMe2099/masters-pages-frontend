@@ -1,0 +1,32 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
+}
+.rootLoading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chatList{
+  width: 427px;
+  border-right: 1px solid #DDDDE5;
+}
+.chatMessages{
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  width: 100%;
+}
+.tab{
+  font-weight: 500;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: none;
+  background: #eeeef2;
+}

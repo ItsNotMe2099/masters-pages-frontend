@@ -1,0 +1,55 @@
+.root{
+  padding: 20px 0px 0px 0px;
+
+}
+.orders{
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0px 35px;
+}
+.radioItem{
+  display: flex;
+  margin-top: 12px;
+  &:first-of-type{
+    margin-top: 0;
+  }
+  &:hover{
+    .radioItemTitle{
+      color: #3B3C45;
+    }
+  }
+}
+.radioItemTitle{
+  flex: 1;
+  color: #6D718C;
+  text-decoration: underline;
+  font-size: 14px;
+  margin-left: 11px;
+  font-weight: 700;
+
+}
+.radioItemPrice{
+  color: #303138;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.buttons{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding: 0px 35px;
+}
+.button{
+  height: 38px;
+  text-transform: uppercase;
+}
+.buttonSubmit{
+  flex: 1;
+  margin-left: 15px;
+}
+.containerButtons{
+  padding: 20px 28px 0px;
+  text-align: center;
+}
+

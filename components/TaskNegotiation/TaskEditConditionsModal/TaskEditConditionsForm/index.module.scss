@@ -1,0 +1,101 @@
+.root{
+  position: relative;
+  display: flex;
+
+}
+.priceSection{
+  background: #fef6e9;
+  display: flex;
+  padding: 10px 33px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+.container{
+  padding: 18px 23px;
+}
+.taskPriceDetails{
+  display: flex;
+  flex-direction: row;
+  background: #fef5e6;
+  padding: 18px 28px;
+  align-items: center;
+  justify-content: center;
+
+}
+.taskPriceDetailsItem{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &:last-of-type{
+    margin-left: 33px;
+  }
+}
+.taskPriceDetailsItemLabel{
+  font-size: 14px;
+  font-weight: 400;
+  color: #5E5E5E;
+}
+.taskPriceDetailsItemValue{
+  font-size: 19px;
+  font-weight: 500;
+  color: #5E5E5E;
+  margin-left: 16px;
+}
+.offerDetails{
+  background: #fdebcf;
+  padding: 15px 28px;
+  display: table;
+}
+.offerDetailsForRow{
+  display: table-row;
+  flex-direction: row;
+  align-items: center;
+  &:last-of-type{
+    >div {
+      padding-top: 13px;
+    }
+  }
+}
+.offerDetailsForRowLabel{
+  display: table-cell;
+  padding-right: 17px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5E5E5E;
+
+}
+.offerDetailsForRowFields{
+  display: table-cell;
+
+}
+.offerDetailsForRowFieldsWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > div{
+    flex: 1;
+    margin: 0px;
+    padding: 0px;
+    &:nth-child(2n){
+      margin-left: 11px;
+    }
+  }
+}
+.buttons{
+  display: flex;
+  justify-content: flex-end;
+}
+.button{
+  height: 38px;
+  text-transform: uppercase;
+}
+.buttonSubmit{
+  flex: 1;
+  margin-left: 15px;
+}
+.containerButtons{
+  padding: 20px 28px 0px;
+  text-align: center;
+}

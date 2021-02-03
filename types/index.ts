@@ -5,11 +5,12 @@ import registrationCompleteReducer, { RegistrationCompleteState } from "componen
 import authSignInReducer, { SignInState } from "components/Auth/SignIn/reducer";
 import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reducer";
 import PWRecoveryReducer, { PWRecoveryState} from "components/Auth/PWRecovery/reducer"
+import { ChatState } from "components/Chat/reducer";
 import { ModalState } from "components/Modal/reducer";
 import { ProfileState } from "components/Profile/reducer";
 import { ProfileSearchState } from "components/ProfileSearch/reducer";
 import { SkillState } from "components/Skill/reducer";
-import { TaskOfferState } from "components/TaskOffer/reducer";
+import { TaskOfferState } from "components/TaskNegotiation/reducer";
 import { TaskSearchState } from "components/TaskSearch/reducer";
 import { TaskUserState } from "components/TaskUser/reducer";
 import { CountryInputState } from "components/ui/Inputs/InputCountry/reducer";
@@ -48,6 +49,7 @@ export interface IRootState {
   taskOffer: TaskOfferState
   savedSearch: SavedSearchesState
   savedPeople: SavedPeopleState
+  chat: ChatState
   savedTasks: SavedTasksState
   profileFeedback: ProfileFeedbackState
   publicProfile: PublicProfileState
@@ -144,6 +146,52 @@ export interface SkillListItem{
   skills: SkillData[]
 }
 
+
+export enum ITaskNegotiationType {
+  ResponseToTask = 'response_to_task',
+  TaskOffer = 'task_offer',
+  TaskNegotiation = 'task_negotiation',
+  MarkAsDone = 'mark_as_done',
+  TaskCompleted = 'task_completed',
+  TaskCanceled = 'task_canceled',
+  MasterAssigned = 'master_assigned',
+}
+
+export enum ITaskNegotiationState {
+  SentToMaster = 'sent_to_master',
+  SentToClient = 'sent_to_client',
+  Declined = 'declined',
+  Accepted = 'accepted',
+}
+
+export interface ITaskNegotiation{
+  id: number,
+  profile: ProfileData,
+  profileId: number,
+  authorId: number,
+  clientId: number,
+  taskId: number,
+  type: ITaskNegotiationType,
+  state: ITaskNegotiationState,
+  message: string,
+  ratePerHour: number,
+  budget: number,
+  estimate: number,
+  deadline: string,
+  createdAt: string,
+  priceType: 'fixed' | 'rate'
+
+}
+export enum ITaskStatus {
+  Draft = 'draft',
+  Published = 'published',
+  PrivatelyPublished = 'privately_published',
+  Negotiation = 'negotiation',
+  Paused = 'paused',
+  Canceled = 'canceled',
+  InProgress = 'in_progress',
+  Done = 'done',
+}
 export interface ITask{
   id: number,
   profileId: number,
@@ -161,15 +209,25 @@ export interface ITask{
   subCategory: Category,
   isExactLocation: boolean
   ratePerHour: number,
-  maxWeekHours: number,
   budget: number,
   estimate: number
-  status: string
+  status: ITaskStatus
   createdAt: string
   updatedAt: string
   deletedAt: string
-  profile: ProfileData
-  photos: string[]
+  profile: ProfileData,
+
+  deadline: string,
+  priceType: string,
+  photos: string[],
+  lastNegotiation: ITaskNegotiation
+  masterId: number
+  master: ProfileData,
+  negotiations: ITaskNegotiation[]
+  responses: {
+    data: ITaskNegotiation[],
+    total: number
+  }
 }
 
 export interface BaseAction {
@@ -191,14 +249,18 @@ export interface IResponse {
   err: any
 }
 
-export interface ISavedSearches {
+export interface ISavedSearchItem {
+  id: number,
   keywords: string
   categoryId: number
   subCategoryId: number
+  category: Category,
+  subCategory: Category,
   masterRole: string
   country: string
   city: string
-  geonameid: number
+  geonameid: number,
+  geoname: any,
   radius: number
   ratePerHourMin: number
   ratePerHourMax: number
@@ -215,7 +277,7 @@ export interface ISavedSearches {
   exactLocation: string
   }
 
-  export interface ISavedPeople {
+export interface ISavedPeople {
       id: number
       userId: number
       role: string
@@ -242,7 +304,60 @@ export interface ISavedSearches {
       photoObject: null
       skills: []
       photo: null
-  }
+}
+export interface IChat{
+  id: number;
+  name: string;
+  isGroup: boolean;
+  task: ITask;
+  taskId: number;
+  profile: ProfileData;
+  profileId: number;
+  lastMessage: string;
+  participant: ProfileData;
+  participantId: number;
+  profiles: ProfileData[]
+  lastMessageAt: string
+  createdAt: string
+  totalUnread: number
+}
+export enum IChatMessageType {
+  Text = 'text',
+  File = 'file',
+  Voice = 'voice',
+  Image = 'image',
+  TaskNegotiation = 'task_negotiation',
+}
+export interface IUserFile {
+  id: number
+  urlS3: string
+}
+export interface IChatMessageProfile {
+  id: number
+  profile: ProfileData
+  profileId: number
+  message: IChatMessage
+  messageId: number
+  read: boolean
+  readAt: string
+  createdAt: string
+}
+export interface IChatMessage{
+  id: number;
+  type: IChatMessageType
+  message: string
+  isRead: boolean
+  isSent: boolean
+  taskNegotiation: ITaskNegotiation
+  taskNegotiationId: number
+  chat: IChat
+  chatId: number
+  profile: ProfileData
+  profileId: number
+  profileStates: IChatMessageProfile[]
+  files: IUserFile[]
+  createdAt: Date
+}
 
   export interface ISavedTasks {
     id: number
@@ -463,4 +578,4 @@ export interface ISavedSearches {
           photo: null
       },
       photos: string[]
-  }
+}

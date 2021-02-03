@@ -33,7 +33,7 @@ function* CreateTaskCompleteSaga() {
       } as IRequestData)
 
       if(!res.err){
-        yield put(createTaskSuccess());
+        yield put(createTaskSuccess(res.data));
       }else{
         yield put(createTaskError(res.err?.errors));
       }

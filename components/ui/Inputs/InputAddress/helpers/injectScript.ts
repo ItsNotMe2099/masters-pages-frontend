@@ -34,47 +34,50 @@ const injectScript = (apiKey: string): Promise<void> => {
       injectionState = constants.INJECTION_STATE_IN_PROGRESS;
 
       return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
+        if (process.browser) {
+          const script = document.createElement('script');
 
-        script.type = 'text/javascript';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-        script.async = true;
-        script.defer = true;
+          script.type = 'text/javascript';
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+          script.async = true;
+          script.defer = true;
 
-        const onScriptLoad = () => {
-          // Resolve current promise
-          resolve();
-          // Resolve the pending promises in their respective order
-          onScriptLoadCallbacks.forEach((cb) => cb());
+          const onScriptLoad = () => {
+            // Resolve current promise
+            resolve();
+            // Resolve the pending promises in their respective order
+            onScriptLoadCallbacks.forEach((cb) => cb());
 
-          cleanup();
-        };
-        const onScriptLoadError = () => {
-          // Reject all promises with this error
-          injectionError = new Error('[react-google-places-autocomplete] Could not inject Google script');
-          // Reject current promise with the error
-          reject(injectionError);
-          // Reject all pending promises in their respective order with the error
-          onScriptLoadErrorCallbacks.forEach((cb) => cb(injectionError));
+            cleanup();
+          };
+          const onScriptLoadError = () => {
+            // Reject all promises with this error
+            injectionError = new Error('[react-google-places-autocomplete] Could not inject Google script');
+            // Reject current promise with the error
+            reject(injectionError);
+            // Reject all pending promises in their respective order with the error
+            onScriptLoadErrorCallbacks.forEach((cb) => cb(injectionError));
 
-          cleanup();
-        };
+            cleanup();
+          };
 
-        // Release callbacks and unregister listeners
-        const cleanup = () => {
-          script.removeEventListener('load', onScriptLoad);
-          script.removeEventListener('error', onScriptLoadError);
-          onScriptLoadCallbacks = [];
-          onScriptLoadErrorCallbacks = [];
-          injectionState = constants.INJECTION_STATE_DONE;
-        };
+          // Release callbacks and unregister listeners
+          const cleanup = () => {
+            script.removeEventListener('load', onScriptLoad);
+            script.removeEventListener('error', onScriptLoadError);
+            onScriptLoadCallbacks = [];
+            onScriptLoadErrorCallbacks = [];
+            injectionState = constants.INJECTION_STATE_DONE;
+          };
 
-        script.addEventListener('load', onScriptLoad);
-        script.addEventListener('error', onScriptLoadError);
+          script.addEventListener('load', onScriptLoad);
+          script.addEventListener('error', onScriptLoadError);
 
-        document.body.appendChild(script);
+          document.body.appendChild(script);
+        }
       });
-  }
+      }
+
 };
 
 export default injectScript;

@@ -33,7 +33,7 @@ const SearchMasterPage = (props) => {
       {showMap ?
       <SearchProfileMapView  searchRole={'master'} onShowList={() => setShowMap(false)} {...props}/> :
       <SearchProfileListView  searchRole={'master'}  onShowMap={() => setShowMap(true)} {...props}/>}
-      <Modals/>
+
   </>
   )
 }

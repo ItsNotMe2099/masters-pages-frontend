@@ -9,10 +9,13 @@
   }
 }
 .skillList{
+
+
   display: flex;
   @media screen and (max-width: $sm-max) {
     margin-top: 50px;
     flex-direction: column;
+
   }
 }
 .split{

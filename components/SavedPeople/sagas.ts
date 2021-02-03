@@ -1,4 +1,11 @@
-import { fetchSavedPeople, fetchSavedPeopleRequest } from "components/SavedPeople/actions";
+import { confirmChangeData, modalClose } from "components/Modal/actions";
+import {
+  deleteSavedPeople,
+  deleteSavedPeopleRequest,
+  fetchSavedPeople,
+  fetchSavedPeopleRequest
+} from "components/SavedPeople/actions";
+import { deleteSavedSearch, deleteSavedSearchRequest } from "components/SavedSearches/actions";
 import ApiActionTypes from "constants/api";
 import { takeLatest, put, take, select } from 'redux-saga/effects'
 import { IRootState } from "types";
@@ -9,6 +16,16 @@ function* SavedPeopleSaga() {
     function* (action: ActionType<typeof fetchSavedPeople>) {
       yield put(fetchSavedPeopleRequest());
 
+    })
+  yield takeLatest(ActionTypes.DELETE_SAVED_PEOPLE,
+    function* (action: ActionType<typeof deleteSavedPeople>) {
+      yield put(confirmChangeData({loading: true}));
+      yield put(deleteSavedPeopleRequest(action.payload.id));
+      const result = yield take([ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL])
+      if(result.type === ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS){
+        console.log("DELETE SavedSearch SUCCESS")
+        yield put(modalClose());
+      }
     })
 }
 

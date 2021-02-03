@@ -49,7 +49,6 @@ function* ProfileSaga() {
 
       console.log("Res_err", res.data);
       if(!res.err && res.data && res.data.id){
-        cookie.set('mode', action.payload.role);
         yield put(changeRoleSuccess(action.payload.role));
         yield put(fetchProfileSuccess(res.data));
       }

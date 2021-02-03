@@ -1,10 +1,13 @@
 .root{
   position: relative;
   display: flex;
+  flex-direction: column;
+}
+.column{
+  display: flex;
   flex-direction: row;
   align-items: center;
 }
-
 .separator{
   padding: 0 16px;
 }

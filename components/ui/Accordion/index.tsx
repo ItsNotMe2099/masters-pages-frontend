@@ -26,7 +26,7 @@ export default function Accordion(props: Props) {
         <ArrowDown/>
       </a>
       <div ref={content} style={{maxHeight: `${setHeight}`}} className={styles.accordion__content}>
-        <div 
+        <div
         className={styles.accordion__text}
         dangerouslySetInnerHTML={{ __html: props.content}}
         >
