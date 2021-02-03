@@ -41,7 +41,7 @@ const SearchTaskListView = (props: Props) => {
   const [isShow, setIsShow] = useState(false)
 
   useEffect(() => {
-    console.log('fetch search')
+    dispatch(resetTaskSearchList());
     if(router.query.filter) {
       console.log("Set filter", JSON.parse((router.query as any).filter))
       dispatch(setFilterTaskSearch(JSON.parse((router.query as any).filter)));
