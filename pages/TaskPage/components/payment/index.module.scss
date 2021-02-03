@@ -1,0 +1,146 @@
+@import "scss/index";
+
+.payment {
+  padding: 20px;
+  display: flex;
+  background: #F6F6F6;
+  border-radius: 20px;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 18px;
+  color: #373948;
+  margin-top: 1px;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .title {
+    padding: 0;
+  }
+}
+
+.titleLeft {
+  font-weight: bold;
+  font-size: 16px;
+  color: #000;
+  @media screen and (max-width: $sm-max){
+    text-align: center;
+  }
+}
+
+.method {
+  display: flex;
+  margin-top: 8px;
+
+  div {
+    padding: 0;
+  }
+
+  img {
+    margin-right: 9px;
+    width: 16px;
+  }
+}
+
+.methodWrapper{
+  display: flex;
+  grid-gap: 12px;
+  @media screen and (max-width: $sm-max){
+    margin: auto;
+  }
+}
+
+.methodSafe {
+  display: flex;
+  margin-top: 8px;
+  flex: 1;
+
+  div {
+    padding: 0;
+  }
+
+  img {
+    margin-right: 9px;
+    @media screen and (max-width: $sm-max){
+      width: 16px;
+    }
+  }
+
+.last {
+  margin-right: 11px;
+  margin-left: 2px;
+}
+}
+
+.price {
+font-weight: bold;
+font-size: 14px;
+color: #000;
+margin-top: 31px;
+@media screen and (max-width: $sm-max){
+  margin: auto 8px auto 0;
+}
+}
+
+.desc {
+  font-weight: 500;
+  font-size: 14px;
+  padding-top: 5px;
+}
+
+.btnContainer {
+  margin-top: 31px;
+  flex-direction: row;
+  display: flex;
+  button {
+    color: #000;
+    width: 100%;
+    border: 1px solid #000000;
+    &:nth-child(2n){
+      margin-left: 8px;
+    }
+  }
+  @media screen and (max-width: $sm-max){
+    margin-top: 18px;
+    margin-bottom: 17px;
+  }
+}
+
+.map{
+  background-image: url("../../../../public/img/Rectangle 31.png");
+  height: 366px;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: -20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-top: 5px;
+}
+
+.priceWrapper{
+  @media screen and (max-width: $sm-max){
+    display: flex;
+    margin-top: 22px;
+    justify-content: center;
+  }
+}
+
+.location{
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  margin-top: 31px;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+
+.grey{
+  @media screen and (max-width: $sm-max){
+    display: flex;
+    flex-direction: column;
+  }
+}

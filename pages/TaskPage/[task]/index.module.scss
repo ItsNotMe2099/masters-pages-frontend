@@ -1,0 +1,44 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  width: 100%;
+  margin-top: 23px !important;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+  }
+}
+
+.left{
+  display: flex;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 70%;
+  margin-right: 24px;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+    flex-direction: column;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.right{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+  }
+}

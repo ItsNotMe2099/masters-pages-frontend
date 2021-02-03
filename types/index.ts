@@ -24,6 +24,7 @@ import { SavedPeopleState } from "components/SavedPeople/reducer";
 import { SavedTasksState } from "components/SavedTasks/reducer";
 import { ProfileFeedbackState } from "components/ProfileFeedback/reducer";
 import { PublicProfileState } from "components/PublicProfile/reducer";
+import { TaskPageState } from "components/TaskPage/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -52,6 +53,7 @@ export interface IRootState {
   savedTasks: SavedTasksState
   profileFeedback: ProfileFeedbackState
   publicProfile: PublicProfileState
+  taskPage: TaskPageState
 }
 export interface ILocation {
   lng: number,

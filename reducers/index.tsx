@@ -26,6 +26,7 @@ import SavedPeopleReducer from 'components/SavedPeople/reducer';
 import SavedTasksReducer from 'components/SavedTasks/reducer';
 import ProfileFeedbackReducer from 'components/ProfileFeedback/reducer';
 import PublicProfileReducer from 'components/PublicProfile/reducer';
+import TaskPageReducer from 'components/TaskPage/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -54,5 +55,6 @@ export default combineReducers({
   chat: ChatReducer,
   savedTasks: SavedTasksReducer,
   profileFeedback: ProfileFeedbackReducer,
-  publicProfile: PublicProfileReducer
+  publicProfile: PublicProfileReducer,
+  taskPage: TaskPageReducer
 })
