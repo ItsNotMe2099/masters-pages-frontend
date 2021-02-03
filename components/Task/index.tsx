@@ -11,6 +11,7 @@ import { ITask } from "types";
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import Link from "next/link";
 
 interface Props {
   task: ITask,
@@ -120,7 +121,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
               <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
             </div>}
             {(actionsType === 'client' ) && <div className={styles.taskTitle}>
-              <div className={styles.title}>{task.title}</div>
+            <div className={styles.title}>{task.title}</div>
 
             </div>}
             {(actionsType !== 'public' ) && <div className={styles.status}>
@@ -137,9 +138,9 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
               <img src={'/img/icons/arrow2.svg'}/>
               {getCategoryTranslation(task.subCategory)?.name}
             </div>}
-            {actionsType !== 'client' &&  <div className={styles.title}>
+            {actionsType !== 'client' &&  <Link href={`/TaskPage/${task.id}`}><div className={styles.title}>
               {task.title}
-            </div>}
+            </div></Link>}
 
             <div className={styles.desc}>
               {task.description}

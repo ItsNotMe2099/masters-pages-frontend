@@ -52,7 +52,7 @@ const TaskPage = (props) => {
             <Payment task={task}/>
           </div>
         </div>}
-      <Footer/>
+      <div className={styles.container}><Footer/></div>
       </>
   )
 }

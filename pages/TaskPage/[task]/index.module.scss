@@ -42,3 +42,15 @@
     width: 100%;
   }
 }
+
+.container{
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
+  width: 100%;
+}
