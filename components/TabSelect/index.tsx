@@ -32,14 +32,7 @@ export const TabSelect = ({tabs, activeTab, onChange}: Props) => {
   return (
     <div className={styles.root}>
       <a href="#" onClick={handleClick} className={cx(styles.dropDownTrigger)}>
-      {activeTab === "personal" ? <span>Personal information</span> :
-      activeTab === "portfolio" ? <span>My portfolio</span> :
-      activeTab === "reviews" ? <span>Rewiews and rating</span> :
-      activeTab === "orders" ? <span>Orders</span> :
-      activeTab === "messages" ? <span>Messages</span> :
-      activeTab === "saved" ? <span>Saved</span> :
-      activeTab === "settings" ? <span>Settings</span> :
-      null }
+        {tabs.map(item => activeTab === item.key && <span>{item.name}</span>)}
       <img src="/img/field/arrowDown.svg" alt=""/>
       </a>
        <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>

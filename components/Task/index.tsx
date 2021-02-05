@@ -303,6 +303,9 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
               {(actionsType === 'client') && <div className={styles.taskTitle}>
                 <div className={styles.title}>{task.title}</div>
               </div>}
+              <div className={styles.mobile}>{actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><div className={styles.title}>
+                {task.title}
+              </div></Link>}</div>
               {(actionsType !== 'public') && <div className={`${styles.status} ${getStatusClassName()}`}>
                 {getStatusText()}
               </div>}
@@ -314,9 +317,14 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             </div>
             <div>
               {actionsType === 'client' && renderCategory()}
-              {actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><div className={styles.title}>
+              <div className={styles.timeMobile}>
+                <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
+                <div
+                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy hh:mm') : ''}</div>
+              </div>
+              <div className={styles.desktop}>{actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><div className={styles.title}>
                 {task.title}
-              </div></Link>}
+              </div></Link>}</div>
               {['public', 'master'].includes(actionsType) && renderCategory()}
               <div className={styles.desc}>
                 {task.description}

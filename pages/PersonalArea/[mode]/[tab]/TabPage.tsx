@@ -19,6 +19,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from "components/TabSelect";
 import TabSaved from "../components/TabSaved";
+import Link from "next/link";
 const TabPage = (props) => {
   const router = useRouter()
   const dispatch = useDispatch();
@@ -60,17 +61,29 @@ const TabPage = (props) => {
     <>
       <Header {...props}/>
       <div className={styles.container}>
+      <div className={styles.desktop}>
         <div className={styles.topBar}>
           <div className={styles.hello}> Hello {profile?.firstName}. You are in «{getModeName(mode)}».</div>
-
-
+      </div>
+      </div>
+      <div className={styles.mobile}>
+         <div className={styles.topBar}>
+         {tab !== 'orders' ?
+         <div className={styles.hello}> Hello {profile?.firstName}. You are in «{getModeName(mode)}».</div>
+         :
+         <><img src="/img/icons/Vector 9.svg" alt=""/><Link href={`/PersonalArea/${mode}/personal`}><a className={styles.back}>back</a></Link><div className={styles.orders}>Orders</div></>}
+      </div>
         </div>
-        <ProfileSection/>
+
         <div className={styles.desktop}>
+        <ProfileSection/>
         <Tabs style={'outline'} tabs={tabs} activeTab={tab as string}/>
         </div>
-        <div className={styles.mobile}><TabSelect tabs={tabs} activeTab={tab as string}/></div>
-        <div className={styles.tab}>
+        {tab !== 'orders' && <><div className={styles.mobile}>
+          <ProfileSection/>
+          <div className={styles.select}><TabSelect tabs={tabs} activeTab={tab as string}/></div>
+        </div></>}
+        <div className={tab !== 'orders' ? styles.tab : styles.tabOrders}>
           {tab === 'personal' && <TabPersonal {...props}/>}
           {tab === 'portfolio' && <TabPortfolio {...props}/>}
           {tab === 'reviews' && <TabReviews {...props}/>}

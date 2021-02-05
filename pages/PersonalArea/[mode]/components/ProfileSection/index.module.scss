@@ -4,7 +4,6 @@
   margin-top: 45px;
   @media screen and (max-width: $sm-max) {
     flex-direction: column;
-    padding: 0 20px;
   }
 }
 .separator{
@@ -22,6 +21,10 @@
       width: 98px;
       height: 111px;
       object-fit: cover;
+      @media screen and (max-width: $sm-max) {
+        width: 71px;
+        height: 89px;
+      }
     }
   }
   .detailsInfo{

@@ -14,6 +14,9 @@
 }
 .wrapper{
   display: flex;
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+  }
 }
 .isActive{
    border: 3px solid #FD5742
@@ -56,6 +59,9 @@
 }
 .paymentLarge{
   max-width: 255px;
+  @media screen and (max-width: $sm-max){
+    max-width: 100%;
+  }
 }
 .avatar {
   display: flex;
@@ -94,9 +100,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: $sm-max){
-    display: none;
-  }
 }
 
 .mobileWrapper{
@@ -123,6 +126,9 @@
   flex: 1;
   .title{
     padding-top: 0px;
+  }
+  @media screen and (max-width: $sm-max){
+    flex: 0;
   }
 }
 .category{
@@ -152,6 +158,30 @@
   img {
     margin-right: 9px;
   }
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+
+}
+
+.timeMobile {
+  display: flex;
+  padding: 12px 0;
+  justify-content: center;
+  border-top: 1px solid #C4C4C4;
+  border-bottom: 1px solid #C4C4C4;
+  margin: 17px -20px 0 -20px;
+  div {
+    padding: 0;
+    margin-top: 0;
+  }
+
+  img {
+    margin-right: 9px;
+  }
+  @media screen and (min-width: $md-min){
+    display: none;
+  }
 
 }
 
@@ -177,6 +207,9 @@
   font-weight: 500;
   font-size: 14px;
   padding-top: 5px;
+  @media screen and (max-width: $sm-max){
+    margin-top: 14px;
+  }
 }
 
 .titleLeft {
@@ -184,6 +217,9 @@
   font-size: 16px;
   color: #000;
   @media screen and (min-width: $md-min){
+    text-align: center;
+  }
+  @media screen and (max-width: $sm-max){
     text-align: center;
   }
 }
@@ -194,6 +230,7 @@
 
   div {
     padding: 0;
+    margin: 0;
   }
 
   img {
@@ -213,6 +250,7 @@
 
     div {
       padding: 0;
+      margin: 0;
     }
 
     img {
@@ -272,11 +310,27 @@
   background: #414141;
   margin: 0px 22px;
   opacity: 0.3;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
 }
 
 .bottom {
   display: flex;
   margin-top: 10px;
+  @media screen and (max-width: $sm-max){
+    font-weight: 500;
+    font-size: 14px;
+    div{
+      margin-right: 20px;
+      &:last-child{
+        margin: 0;
+      }
+      div{
+        margin: 0;
+      }
+    }
+  }
 }
 
 .stars {
@@ -375,5 +429,18 @@
   @media screen and (max-width: $sm-max){
     display: flex;
     margin-top: 22px;
+  }
+}
+
+.mobile{
+  display: none;
+  @media screen and (max-width: $sm-max) {
+    display: block;
+  }
+}
+
+.desktop{
+  @media screen and (max-width: $sm-max) {
+    display: none;
   }
 }

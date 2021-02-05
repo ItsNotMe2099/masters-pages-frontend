@@ -18,6 +18,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { IRootState, ITask } from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import { TabSelect } from "components/TabSelect";
 interface Props {
 
 }
@@ -78,12 +79,23 @@ const TabOrders = (props: Props) => {
 
   return (
     <div className={styles.root}>
+      <div className={styles.desktop}>
       <Tabs style={'round'} tabs={tabs.map((tab => {
         console.log("Stat", stat)
         const statResult = stat.find(item => item.task_status === tab.key);
 
         return {...tab, name: `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={tabSubPage as string}/>
+      </div>
+      <div className={styles.mobile}>
+        <TabSelect tabs={tabs.map((tab => {
+        console.log("Stat", stat)
+        const statResult = stat.find(item => item.task_status === tab.key);
+
+        return {...tab, name: `${tab.name} (${statResult ? statResult.count : 0})`}
+      }))} activeTab={tabSubPage as string}/>
+
+        </div>
       <div className={styles.tasks}>
         {(loading && total === 0) && <Loader/>}
         {total > 0 && <InfiniteScroll
