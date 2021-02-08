@@ -24,8 +24,8 @@ export const TabSelect = ({tabs, activeTab, onChange}: Props) => {
     e.preventDefault()
     setIsActive(!isActive);
   }
-  const handleOptionClick = (item) => {
-    console.log(item)
+  const handleOptionClick = () => {
+    setIsActive(false);
   }
 
 
@@ -36,7 +36,7 @@ export const TabSelect = ({tabs, activeTab, onChange}: Props) => {
       <img src="/img/field/arrowDown.svg" alt=""/>
       </a>
        <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
-       {tabs.map(item => <Tab name={item.name} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null}/>)}
+       <div className={styles.option} onClick={() => setIsActive(false)}>{tabs.map(item => <Tab name={item.name} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null}/>)}</div>
        </nav>
     </div>
   );

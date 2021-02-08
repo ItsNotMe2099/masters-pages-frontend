@@ -86,3 +86,8 @@ position: relative;
 .isActive{
   color: #27AE60;
 }
+
+.option{
+  display: flex;
+  flex-direction: column;
+}
