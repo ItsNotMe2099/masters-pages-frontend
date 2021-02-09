@@ -1,8 +1,10 @@
 import Avatar from "../../components/Avatar";
 import * as React from "react";
 import styles from './index.module.scss'
-import { IFeedbacksToProfile } from "types";
+import { IFeedbacksToProfile, IRootState } from "types";
 import format from 'date-fns/format'
+import { useRouter } from "next/router";
+import { useSelector, useDispatch } from 'react-redux'
 
 interface Props {
   item: IFeedbacksToProfile

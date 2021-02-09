@@ -24,10 +24,6 @@ export const TabSelect = ({tabs, activeTab, onChange}: Props) => {
     e.preventDefault()
     setIsActive(!isActive);
   }
-  const handleOptionClick = () => {
-    setIsActive(false);
-  }
-
 
   return (
     <div className={styles.root}>

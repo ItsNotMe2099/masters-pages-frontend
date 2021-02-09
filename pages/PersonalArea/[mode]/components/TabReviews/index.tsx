@@ -10,6 +10,7 @@ import { fetchFeedbacksToProfile, setPageFeedback } from "components/ProfileFeed
 import { IFeedbacksToProfile, IRootState } from "types";
 import Loader from "components/ui/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useRouter } from "next/router";
 
 interface Props {
 

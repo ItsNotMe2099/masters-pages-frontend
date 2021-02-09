@@ -25,6 +25,7 @@ import { SavedTasksState } from "components/SavedTasks/reducer";
 import { ProfileFeedbackState } from "components/ProfileFeedback/reducer";
 import { PublicProfileState } from "components/PublicProfile/reducer";
 import { TaskPageState } from "components/TaskPage/reducer";
+import { TaskSearchWithLimitState } from "components/Split/OrderingSection/Task/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -54,6 +55,7 @@ export interface IRootState {
   profileFeedback: ProfileFeedbackState
   publicProfile: PublicProfileState
   taskPage: TaskPageState
+  taskSearchWithLimit: TaskSearchWithLimitState
 }
 export interface ILocation {
   lng: number,
@@ -219,7 +221,7 @@ export interface ITask{
 
   deadline: string,
   priceType: string,
-  photos: string[],
+  photosObjects: any[],
   lastNegotiation: ITaskNegotiation
   masterId: number
   master: ProfileData,

@@ -1,63 +1,43 @@
 import Link from 'next/link'
+import { useEffect } from 'react'
 import styles from './index.module.scss'
 import Task from './Task'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchTaskSearchListWithLimit } from './Task/actions'
+import { IRootState } from 'types'
+import Loader from 'components/ui/Loader'
 
 interface Props {}
 
 export default function OrderingSection(props: Props) {
+
+
+  const dispatch = useDispatch()
+  const tasks = useSelector((state: IRootState) => state.taskSearchWithLimit.task)
+  useEffect(() => {
+    dispatch(fetchTaskSearchListWithLimit(4))
+  }, [])
+
   return (
     <div className={styles.root}>
       <div className={styles.title}>
         People ordering right now
       </div>
-      <Link href="/">
+      {!tasks ?
+
+      <Loader/>
+      :
+      
+      tasks.map(task => 
+        <Link href="/">
         <a>
-          <Task taskTitle='Task title' 
-          taskDesc='Non cras rhoncus dignissim aliquam facilisi.' 
-          taskTime='30m ago'
-          taskPrice='$1000'
-          priceType='Fixed price'
-          taskImage='img/icons/design.svg'
+          <Task task={task}
+          taskImage='img/icons/design.svg' 
           color='#A4E4B6'
           />
         </a>
       </Link>
-      <Link href="/">
-        <a>
-          <Task taskTitle='Task title' 
-          taskDesc='Non cras rhoncus dignissim aliquam facilisi.' 
-          taskTime='1h ago'
-          taskPrice='$10/h'
-          priceType='10h a week'
-          taskImage='img/icons/design.svg'
-          color='#A4E4B6'
-          />
-        </a>
-      </Link>
-      <Link href="/">
-        <a>
-          <Task taskTitle='Task title' 
-          taskDesc='Non cras rhoncus dignissim aliquam facilisi.' 
-          taskTime='1h ago'
-          taskPrice='$1000'
-          priceType='Fixed price'
-          taskImage='img/icons/design.svg'
-          color='#A4E4B6'
-          />
-        </a>
-      </Link>
-      <Link href="/">
-        <a>
-          <Task taskTitle='Task title' 
-          taskDesc='Non cras rhoncus dignissim aliquam facilisi.' 
-          taskTime='1h ago'
-          taskPrice='$10/h'
-          priceType='10h a week'
-          taskImage='img/icons/interpreter.svg'
-          color='#958EFE'
-          />
-        </a>
-      </Link>
+        )}
     </div>
   )
 }

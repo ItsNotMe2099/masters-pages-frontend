@@ -27,6 +27,7 @@ import SavedTasksReducer from 'components/SavedTasks/reducer';
 import ProfileFeedbackReducer from 'components/ProfileFeedback/reducer';
 import PublicProfileReducer from 'components/PublicProfile/reducer';
 import TaskPageReducer from 'components/TaskPage/reducer';
+import TaskSearchListWithLimitReducer from 'components/Split/OrderingSection/Task/reducer';
 
 export default combineReducers({
   form: formReducer,
@@ -56,5 +57,6 @@ export default combineReducers({
   savedTasks: SavedTasksReducer,
   profileFeedback: ProfileFeedbackReducer,
   publicProfile: PublicProfileReducer,
-  taskPage: TaskPageReducer
+  taskPage: TaskPageReducer,
+  taskSearchWithLimit: TaskSearchListWithLimitReducer
 })
