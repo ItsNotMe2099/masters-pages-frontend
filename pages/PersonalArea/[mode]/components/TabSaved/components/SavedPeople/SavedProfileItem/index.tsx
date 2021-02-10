@@ -44,7 +44,7 @@ const SavedProfileItem = (props: Props) => {
       <div className={show ? styles.categoriesGrid : styles.categories}>
         {(show ? item.skills : item.skills.slice(0, 3)).map(item => (
           <div className={styles.category}>
-            <div className={styles.text}>{item}</div>
+            <div className={styles.text}>{item.title}</div>
             <img src="/img/icons/triangleDown.svg" alt=""/>
           </div>
         ))}

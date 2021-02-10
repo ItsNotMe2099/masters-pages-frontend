@@ -4,12 +4,13 @@ export interface SavedPeopleState {
   list: any[]
   isLoading: boolean,
   savingProfileId?: number,
+  listTotal: number
 }
 
 const initialState: SavedPeopleState = {
   list: [],
   isLoading: false,
-
+  listTotal: 0
 }
 
 export default function TaskUserReducer(state = {...initialState}, action) {
@@ -24,7 +25,8 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
       state.list = action.payload.data
-      console.log('payload!!!', action.payload)
+      state.listTotal = action.payload.total
+      console.log('payload data!!!', action.payload.data)
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL:
       state.isLoading = false;

@@ -21,7 +21,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_SAVED_SEARCHES_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
-      state.list = action.payload
+      state.list = action.payload.data
       console.log('payloadSearches!!!', action.payload)
       break
     case ActionTypes.FETCH_SAVED_SEARCHES_REQUEST + ApiActionTypes.FAIL:
