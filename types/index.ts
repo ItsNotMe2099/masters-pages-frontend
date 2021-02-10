@@ -304,7 +304,7 @@ export interface ISavedPeople {
       updatedAt: string
       deletedAt: null
       photoObject: null
-      skills: []
+      skills: SkillData[]
       photo: null
 }
 export interface IChat{

@@ -4,9 +4,9 @@ const queryString = require('query-string')
 
 export const fetchSavedPeople = () => action(ActionTypes.FETCH_SAVED_PEOPLE)
 
-export const fetchSavedPeopleRequest = () => action(ActionTypes.FETCH_SAVED_PEOPLE_REQUEST, {
+export const fetchSavedPeopleRequest = (page?: number, limit?: number) => action(ActionTypes.FETCH_SAVED_PEOPLE_REQUEST, {
   api: {
-    url: `/api/profile/saved-profiles`,
+    url: `/api/profile/saved-profiles?page=${page || 1}&limit=${limit || 1}`,
     method: 'GET',
   }
 })
