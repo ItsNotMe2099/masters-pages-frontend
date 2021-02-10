@@ -1,5 +1,5 @@
 import Chat from "components/Chat";
-import { fetchChat, fetchChatListFirst } from "components/Chat/actions";
+import { fetchChat, fetchChaTaskDialog, fetchChatDialog, fetchChatListFirst } from "components/Chat/actions";
 import ChatPageLayout from "components/layout/ChatLayout";
 import Header from 'components/layout/Header'
 import Modals from "components/layout/Modals";
@@ -12,11 +12,13 @@ import { useSelector, useDispatch } from 'react-redux'
 const ChatPage = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { profileId} = router.query;
   useEffect(() => {
-    dispatch(fetchChatListFirst());
+    dispatch(fetchChatDialog(parseInt(profileId as string, 10)));
+
   }, [router.query.chatId])
   return (<>
-      <ChatPageLayout {...props} isTaskChat={true}/>
+      <ChatPageLayout {...props} isTaskChat={false}/>
       <Modals/>
     </>
   )

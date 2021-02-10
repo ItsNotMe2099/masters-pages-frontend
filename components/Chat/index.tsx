@@ -21,7 +21,7 @@ export default function Chat(props: Props) {
   const chatList = useSelector((state: IRootState) => state.chat.chatList)
   const chatListLoading = useSelector((state: IRootState) => state.chat.chatListLoading)
   const {isTaskChat} = props;
-  const [activeTab, setActiveTab] = useState(isTaskChat ? 'people' : 'tasks')
+  const [activeTab, setActiveTab] = useState(isTaskChat ? 'tasks' : 'people')
 
   const handleSubmit = () => {
 
@@ -62,8 +62,6 @@ export default function Chat(props: Props) {
     <div className={styles.root}>
       <div className={styles.chatList}>
         <Tabs tabs={tabs} activeTab={activeTab} tabClassName={styles.tab} onChange={handleChangeTab}/>
-
-
         <div>
         {chatList.map(chatItem => <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
         </div>

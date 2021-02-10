@@ -57,23 +57,23 @@ export default function ChatTitle({chat}: Props) {
     }));
   }
 
-  const isInProgress =  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
-  const isFinished =  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
-  const isCanceled =  chat.task.status == ITaskStatus.Canceled;
+  const isInProgress = chat.task &&  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
+  const isFinished =  chat.task &&  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
+  const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled;
   return (
    <div className={styles.root}>
 
      <AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/>
      {<div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>}
-     {!isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>Cancel</Button>}
-     {isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleMarkAsDone}>Mark as done</Button>}
-     {isInProgress && profile.role === 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleFinish}>Finish Task</Button>}
-     {!isInProgress && !isFinished && lastNegotiation !== null && profile.role === 'client' && ((lastNegotiation.authorId === profile.id && lastNegotiation.state === ITaskNegotiationState.Accepted) || (lastNegotiation.authorId !== profile.id && ![ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state)) || (lastNegotiation.authorId === profile.id && lastNegotiation.type === ITaskNegotiationType.TaskOffer && [ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state))) && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHireMaster}>Hire master</Button>}
-     {!isInProgress && !isFinished && chat.task.status == ITaskStatus.Published && <Button className={styles.action} onClick={handleEditConditions}>Negotiate offer</Button>}
-     {!isInProgress && !isFinished && lastNegotiation !== null && lastNegotiation.authorId == profile.id && !(lastNegotiation.state === ITaskNegotiationState.Declined || lastNegotiation.state === ITaskNegotiationState.Accepted) && <div className={styles.status}>Waiting for negotiation response</div>}
-     {isInProgress && <div className={`${styles.status} ${styles.statusGreen}`}>Tack accepted <MarkIcon color={'#27C60D'}/></div>}
-     {isFinished && <div className={`${styles.status} ${styles.statusGreen}`}>Tack finished <MarkIcon color={'#27C60D'}/></div>}
-     {isCanceled && <div className={`${styles.status}`}>Tack canceled <CloseIcon /></div>}
+     { chat.task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>Cancel</Button>}
+     { chat.task && isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleMarkAsDone}>Mark as done</Button>}
+     { chat.task && isInProgress && profile.role === 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleFinish}>Finish Task</Button>}
+     { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && profile.role === 'client' && ((lastNegotiation.authorId === profile.id && lastNegotiation.state === ITaskNegotiationState.Accepted) || (lastNegotiation.authorId !== profile.id && ![ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state)) || (lastNegotiation.authorId === profile.id && lastNegotiation.type === ITaskNegotiationType.TaskOffer && [ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state))) && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHireMaster}>Hire master</Button>}
+     { chat.task && !isInProgress && !isFinished && chat.task.status == ITaskStatus.Published && <Button className={styles.action} onClick={handleEditConditions}>Negotiate offer</Button>}
+     { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && lastNegotiation.authorId == profile.id && !(lastNegotiation.state === ITaskNegotiationState.Declined || lastNegotiation.state === ITaskNegotiationState.Accepted) && <div className={styles.status}>Waiting for negotiation response</div>}
+     { chat.task && isInProgress && <div className={`${styles.status} ${styles.statusGreen}`}>Tack accepted <MarkIcon color={'#27C60D'}/></div>}
+     { chat.task && isFinished && <div className={`${styles.status} ${styles.statusGreen}`}>Tack finished <MarkIcon color={'#27C60D'}/></div>}
+     { chat.task && isCanceled && <div className={`${styles.status}`}>Tack canceled <CloseIcon /></div>}
 
    </div>
   )

@@ -60,7 +60,6 @@ const FileWrapper = (props: Props) => {
       const options = {
         ...uploadOptions,
         files: [file.rawFile],
-
         onFinishS3Put: onFinishFileUpload,
         onProgress: onProgress,
         onError: onFileUploadError,

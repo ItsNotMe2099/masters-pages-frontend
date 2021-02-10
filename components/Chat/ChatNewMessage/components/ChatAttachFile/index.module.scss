@@ -1,0 +1,12 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  width: 65px;
+  justify-content: center;
+}
+.action{
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+}

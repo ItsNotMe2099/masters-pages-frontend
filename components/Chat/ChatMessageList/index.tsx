@@ -99,7 +99,7 @@ export default function ChatMessageList({chat}: Props) {
       </div>
       <div className={styles.messages} ref={scrollableTarget} id="chat-messages">
         {(messagesLoading && total === 0) && <Loader/>}
-        {total > 0 && <InfiniteScroll
+        {messages.length > 0 && <InfiniteScroll
           style={{ display: 'flex', flexDirection: 'column-reverse', paddingBottom: '80px' }}
           dataLength={messages.length} //This is important field to render the next data
           next={handleScrollNext}
@@ -112,9 +112,9 @@ export default function ChatMessageList({chat}: Props) {
 
 
       </div>
-      <div className={styles.newMessage}>
+    {(!messagesLoading || total > 0) && <div className={styles.newMessage}>
         <ChatNewMessage/>
-      </div>
+      </div>}
     </div>
   )
 }

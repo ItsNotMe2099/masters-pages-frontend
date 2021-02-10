@@ -1,5 +1,5 @@
 import {
-  confirmOpen,
+  confirmOpen, feedbackByMasterOpen,
   finishTaskAsClientOpen,
   taskMarkAsDoneOpen,
   taskOfferAcceptOpen,
@@ -136,6 +136,10 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
       }
     }));
   }
+  const handleFeedbackByMaster = () => {
+    dispatch(taskNegotiationSetCurrentTask(task));
+    dispatch(feedbackByMasterOpen());
+  }
 
   const handleEdit = () => {
     if (onEdit) {
@@ -183,9 +187,13 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
       actions.push('cancel')
       actions.push('markAsCompleted');
     }
+
   } else if (actionsType === 'master') {
     if (['in_progress'].includes(task.status)) {
       actions.push('markAsCompleted');
+    }
+    if (['done'].includes(task.status) && !task.feedbacks.find(f => f.target === 'client')) {
+      actions.push('feedbackToClient');
     }
   } else if (actionsType === 'public') {
     actions.push('share');
@@ -245,6 +253,8 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         return <TaskActionButton title={'Share'} icon={'share'} onClick={handleShare}/>;
       case 'save':
         return <TaskActionButton title={'Save'} icon={<BookmarkSvg/>} onClick={handleFavorite}/>;
+      case 'feedbackToClient':
+        return <TaskActionButton title={'Post feedback'} icon={'mark'}  onClick={handleFeedbackByMaster}/>;
     }
   }
 
