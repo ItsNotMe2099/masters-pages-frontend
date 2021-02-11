@@ -76,7 +76,7 @@ export default function authReducer(state = {...initialState}, action) {
       state.modalKey = 'finishTaskAsClientOpen'
       break
     case ActionTypes.FINISH_TASK_AS_MASTER_OPEN:
-      state.modalKey = 'finishTaskAsMasterOpen'
+      state.modalKey = 'feedbackByMasterOpen'
       break
     case ActionTypes.FEEDBACK_SITE_OPEN:
       state.modalKey = 'feedbackSiteModal'

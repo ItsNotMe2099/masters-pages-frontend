@@ -8,14 +8,21 @@
   font-weight: 400;
   font-size: 16px;
   display: flex;
+  flex-direction: row;
   align-items: center;
 
+}
+.rootRight{
+  text-align: right;
 }
 .rootLarge{
   min-width: 554px;
 }
-.message{
+.messageWrapper{
   flex: 1;
+}
+.message{
+
 }
 .suffixText{
   font-weight: 500;
@@ -26,4 +33,44 @@
 }
 .suffixTextGreen{
   color: #27C60D;
+}
+.files{
+
+}
+.filesSpacer{
+  height: 10px;
+}
+.image{
+  cursor: pointer;
+  img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  video{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+  }
+  canvas{
+    display: none;
+
+  }
+}
+.file{
+
+  display: flex;
+  align-items: center;
+  img{
+    max-width: 16px;
+    margin-right: 8px;
+  }
+  a{
+    text-decoration: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
 }

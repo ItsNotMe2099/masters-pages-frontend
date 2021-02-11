@@ -64,3 +64,43 @@
     max-width: 30px;
   }
 }
+
+.preview{
+  position: relative;
+  width: 65px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.previewImage{
+  display: block;
+  object-fit: cover;
+  width: 65px;
+  height: 56px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.previewDocument{
+  max-width: 35px;
+
+}
+.removeFile{
+  position: absolute;
+  z-index: 2;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0, .25);
+  svg{
+    width: 8px;
+    height: 8px;
+  }
+}

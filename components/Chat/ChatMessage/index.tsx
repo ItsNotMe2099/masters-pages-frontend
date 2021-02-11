@@ -52,7 +52,7 @@ export default function ChatMessage({ message, chat }: Props) {
   const renderMessages = (): ReactElement[] => {
     switch (message.type) {
       case IChatMessageType.Text:
-        return [<ChatMessageText message={message.message}/>]
+        return [<ChatMessageText message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
       case IChatMessageType.TaskNegotiation:
         const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? `Task outdated ${message.taskNegotiation.id} ${lastCondition.id}` : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {

@@ -50,7 +50,8 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
       console.log("Fetch chatList");
       return {
         ...state,
-        chatList: (action.payload as any).data,
+        chatList: (action.payload as any).data.map(chat => ({...chat, totalUnread: chat && chat.id === action.payload.id ? 0 : chat.totalUnread})),
+
         chatListTotal: (action.payload as any).total,
       }
     case ActionTypes.FETCH_CHAT_LIST + ApiActionTypes.FAIL:
@@ -71,7 +72,7 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         ...state,
         chatLoading: false,
         chat: action.payload,
-
+        chatList: state.chatList.map(chat => ({...chat, totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread})),
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
         lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
@@ -93,6 +94,7 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         ...state,
         chatLoading: false,
         chat: action.payload,
+        chatList: state.chatList.map(chat => ({...chat, totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread})),
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
         lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
@@ -119,6 +121,7 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         ...state,
         chatLoading: false,
         chat: action.payload,
+        chatList: state.chatList.map(chat => ({...chat, totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread})),
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
         lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,

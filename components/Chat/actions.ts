@@ -44,6 +44,6 @@ export const newChatMessageAddToList = (params = {}) => action(ActionTypes.CHAT_
 export const chatLogout = (params = {}) => action(ActionTypes.CHAT_LOGOUT, params)
 export const chatLogin = (params = {}) => action(ActionTypes.CHAT_LOGIN, params)
 export const attachPhoto = (params = {}) => action(ActionTypes.CHAT_ATTACH_PHOTO, params)
-export const sendMessage = ({message, chatId}) => action(ActionTypes.CHAT_SEND_MESSAGE, {message, chatId})
+export const sendMessage = ({message, chatId, files}) => action(ActionTypes.CHAT_SEND_MESSAGE, {message, chatId, files})
 export const sendMessageSuccess = (payload) => action(ActionTypes.CHAT_SEND_MESSAGE + ApiActionTypes.SUCCESS, payload)
 export const sendMessageFailed = (payload) => action(ActionTypes.CHAT_SEND_MESSAGE + ApiActionTypes.FAIL, payload)

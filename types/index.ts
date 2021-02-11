@@ -230,6 +230,7 @@ export interface ITask{
     data: ITaskNegotiation[],
     total: number
   }
+  feedbacks: IFeedbacksToProfile[]
 }
 
 export interface BaseAction {

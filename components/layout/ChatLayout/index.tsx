@@ -17,12 +17,13 @@ interface Props {
 
 export default function ChatPageLayout(props: Props) {
   const dispatch = useDispatch()
-  const chatPageLoading = useSelector((state: IRootState) => state.chat.chatPageLoading)
+  const chatLoading = useSelector((state: IRootState) => state.chat.chatLoading)
+  const chat = useSelector((state: IRootState) => state.chat.chat)
   return (
     <div className={styles.root}>
      <Header {...props}/>
       <div className={styles.chat}>
-        {chatPageLoading ? <Loader/> : <Chat {...props}/>}
+        {chatLoading && chat === null ? <Loader/> : <Chat {...props}/>}
       </div>
     </div>
   )

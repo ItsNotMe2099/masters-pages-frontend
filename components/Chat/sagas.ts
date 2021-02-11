@@ -62,7 +62,18 @@ function* ChatSaga() {
 
   yield takeLatest(ActionTypes.CHAT_ATTACH_PHOTO, function* (action: ActionType<any>) {
 
+    const res = yield requestGen({
+      url: `/api/chat/messages`,
+      method: 'POST',
+      data: action.payload,
+    })
 
+
+    if (res.err) {
+      yield put(sendMessageFailed(res.err))
+    } else {
+      yield put(sendMessageSuccess(res.data))
+    }
   })
 }
 

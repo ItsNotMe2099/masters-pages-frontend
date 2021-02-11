@@ -2,7 +2,7 @@ import ChangePassword from "components/Auth/ChangePassword";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import FeedbackSiteModal from "components/FeedbackSiteModal";
 import FinishingTaskByClientModal from "components/FinishingTaskByClientModal";
-import FinishingTaskByMasterModal from "components/FinishingTaskByMasterModal";
+import FeedbackByMasterModal from "components/FeedbackByMasterModal";
 import ModalConfirm from "components/Modal/ModalConfirm";
 import ModalLoader from "components/ModalLoader";
 import SuccessFeedbackModal from "components/SuccessFeedbackModal";
@@ -75,7 +75,7 @@ const Modals = (props: Props) => {
       {key === 'taskEditConditionsModal' &&
       <TaskEditConditionsModal isOpen={key === 'taskEditConditionsModal'} onClose={() => dispatch(modalClose())}/>}
       {key === 'finishTaskAsClientOpen' && <FinishingTaskByClientModal isOpen={key === 'finishTaskAsClientOpen'}/>}
-      {key === 'finishTaskAsMasterOpen' && <FinishingTaskByMasterModal isOpen={key === 'finishTaskAsMasterOpen'}/>}
+      {key === 'feedbackByMasterOpen' && <FeedbackByMasterModal isOpen={key === 'feedbackByMasterOpen'}/>}
       {key === 'feedbackSiteModal' && <FeedbackSiteModal isOpen={key === 'feedbackSiteModal'}/>}
       {key === 'taskSuccessModal' && <SuccessTaskModal isOpen={key === 'taskSuccessModal'}/>}
       {key === 'feedbackSuccessModal' && <SuccessFeedbackModal isOpen={key === 'feedbackSuccessModal'}/>}
