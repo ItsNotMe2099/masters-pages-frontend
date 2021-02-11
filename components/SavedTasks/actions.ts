@@ -4,9 +4,11 @@ const queryString = require('query-string')
 
 export const fetchSavedTasks = () => action(ActionTypes.FETCH_SAVED_TASKS)
 
-export const fetchSavedTasksRequest = () => action(ActionTypes.FETCH_SAVED_TASKS_REQUEST, {
+export const fetchSavedTasksRequest = (page?: number, limit?: number) => action(ActionTypes.FETCH_SAVED_TASKS_REQUEST, {
   api: {
-    url: `/api/profile/saved-tasks`,
+    url: `/api/profile/saved-tasks?page=${page || 1}&limit=${limit || 10}`,
     method: 'GET',
   }
 })
+
+export const resetSavedTasksList = () => action(ActionTypes.RESET_SAVED_TASKS_LIST)

@@ -24,7 +24,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
-      state.list = action.payload.data
+      state.list = [...state.list, ...action.payload.data]
       state.listTotal = action.payload.total
       console.log('payload data!!!', action.payload.data)
       break
@@ -45,6 +45,11 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.SAVE_PEOPLE_REQUEST + ApiActionTypes.FAIL:
       state.savingProfileId = null;
       break;
+    case ActionTypes.RESET_SAVED_PEOPLE_LIST:
+      state.isLoading = false;
+      state.list = []
+      state.listTotal = 0
+      break
   }
 
   return state

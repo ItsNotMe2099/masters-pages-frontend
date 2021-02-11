@@ -6,7 +6,7 @@ export const fetchSavedPeople = () => action(ActionTypes.FETCH_SAVED_PEOPLE)
 
 export const fetchSavedPeopleRequest = (page?: number, limit?: number) => action(ActionTypes.FETCH_SAVED_PEOPLE_REQUEST, {
   api: {
-    url: `/api/profile/saved-profiles?page=${page || 1}&limit=${limit || 1}`,
+    url: `/api/profile/saved-profiles?page=${page || 1}&limit=${limit || 10}`,
     method: 'GET',
   }
 })
@@ -28,3 +28,5 @@ export const deleteSavedPeopleRequest = (id: number) => action(ActionTypes.DELET
     method: 'DELETE'
   }
 })
+
+export const resetSavedPeopleList = () => action(ActionTypes.RESET_SAVED_PEOPLE_LIST)

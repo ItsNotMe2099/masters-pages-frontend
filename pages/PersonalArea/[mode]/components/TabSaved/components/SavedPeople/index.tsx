@@ -1,5 +1,5 @@
 
-import { fetchSavedPeople, fetchSavedPeopleRequest } from "components/SavedPeople/actions";
+import { fetchSavedPeople, fetchSavedPeopleRequest, resetSavedPeopleList } from "components/SavedPeople/actions";
 import SavedProfileItem from "pages/PersonalArea/[mode]/components/TabSaved/components/SavedPeople/SavedProfileItem";
 import { useEffect, useState } from "react";
 import { IRootState } from "types";
@@ -13,22 +13,24 @@ const SavedPeople = (props: Props) => {
   const dispatch = useDispatch()
   const list = useSelector((state: IRootState) => state.savedPeople.list)
   const total = useSelector((state: IRootState) => state.savedPeople.listTotal)
-  const [limit, setLimit] = useState(1)
+  const [page, setPage] = useState(1)
 
   console.log("LIST!!!!",list.length)
 
   useEffect(() => {
+    console.log("PAGE!!!!!!",page)
+    dispatch(resetSavedPeopleList())
     dispatch(fetchSavedPeople())
   }, [])
 
   const handleScrollNext = () => {
-    setLimit(limit + 1)
-    dispatch(fetchSavedPeopleRequest(1, limit))
-    console.log("handleScrollNext", limit)
+    setPage(page + 1)
+    dispatch(fetchSavedPeopleRequest(page + 1))
   }
 
   return (
     <>
+    {total > 0 &&
     <InfiniteScroll
       dataLength={list.length}
       next={handleScrollNext}
@@ -37,6 +39,7 @@ const SavedPeople = (props: Props) => {
       >
       {list.map(item => (<SavedProfileItem key={item.id} item={item}/>))}
       </InfiniteScroll>
+}
     </>
   )
 }

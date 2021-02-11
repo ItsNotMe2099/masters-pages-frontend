@@ -1,23 +1,41 @@
+import { fetchSavedPeople } from "components/SavedPeople/actions";
+import { fetchSavedTasks, fetchSavedTasksRequest, resetSavedTasksList } from "components/SavedTasks/actions";
 import Button from "components/ui/Button";
-import {useState} from "react";
-import { ISavedTasks } from "types";
-import styles from './index.module.scss'
-import format from 'date-fns/format'
-
+import { useEffect, useState } from "react";
+import { IRootState } from "types";
+import { useSelector, useDispatch } from 'react-redux'
+import InfiniteScroll from "react-infinite-scroll-component";
+import SavedTaskItem from "./SavedTaskItem";
 interface Props {
-  item: ISavedTasks
 }
 const SavedTasks = (props: Props) => {
-  const { item } = props
+  const dispatch = useDispatch()
+  const list = useSelector((state: IRootState) => state.savedTasks.list)
+  const total = useSelector((state: IRootState) => state.savedTasks.listTotal)
+  const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    dispatch(resetSavedTasksList())
+    dispatch(fetchSavedTasks())
+  }, [])
+
+  const handleScrollNext = () => {
+    setPage(page + 1)
+    dispatch(fetchSavedTasksRequest(page + 1))
+  }
 
   return (
-      <section className={styles.item}>
-        <div className={styles.date}>{format(new Date(item.updatedAt), 'MM.dd.yyy hh:mm')}</div>
-        <div className={styles.title}>{item.title}</div>
-        <div className={styles.price}>{item.priceType === "fixed" ? <span>${item.budget}</span> : <span>${item.ratePerHour}/h</span>}</div>
-        <div className={styles.btnRemove}><Button size="8px 32px" white borderLightGrey>Remove</Button></div>
-        <div className={styles.btn}><Button size="8px 32px" white borderLightGrey>Go to task</Button></div>
-      </section>
+      <>
+      {total > 0 &&
+    <InfiniteScroll
+      dataLength={list.length}
+      next={handleScrollNext}
+      hasMore={total > list.length}
+      loader={<div>LOADING...</div>}
+      >
+        {list.map(item => <SavedTaskItem key={item.id} item={item}/>)}
+        </InfiniteScroll>}
+      </>
   )
 }
 

@@ -33,12 +33,6 @@ const TabSaved = (props: Props) => {
       link: `/PersonalArea/${mode}/${tab}/${item.key}`
     }})
 
-    useEffect(() => {
-      dispatch(fetchSavedSearches());
-      dispatch(fetchSavedPeople());
-      dispatch(fetchSavedTasks());
-    }, [])
-
 
   return (
     <div className={styles.root}>
@@ -55,9 +49,7 @@ const TabSaved = (props: Props) => {
         }
         {tabSubPage === "tasks" &&
           <>
-          {tasks.map(item => <SavedTasks
-            item={item}
-            />)}
+          <SavedTasks/>
           </>
         }
       </div>

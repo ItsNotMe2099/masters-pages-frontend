@@ -5,9 +5,9 @@ const queryString = require('query-string')
 
 export const fetchSavedSearches = () => action(ActionTypes.FETCH_SAVED_SEARCHES)
 
-export const fetchSavedSearchesRequest = () => action(ActionTypes.FETCH_SAVED_SEARCHES_REQUEST, {
+export const fetchSavedSearchesRequest = (page?: number, limit?: number) => action(ActionTypes.FETCH_SAVED_SEARCHES_REQUEST, {
   api: {
-    url: `/api/task-searches`,
+    url: `/api/task-searches?page=${page || 1}&limit=${limit || 10}`,
     method: 'GET',
   }
 })
@@ -20,3 +20,5 @@ export const deleteSavedSearchRequest = (id: number) => action(ActionTypes.DELET
     method: 'DELETE'
   }
 })
+
+export const resetSavedSearchesList = () => action(ActionTypes.RESET_SAVED_SEARCHES_LIST)
