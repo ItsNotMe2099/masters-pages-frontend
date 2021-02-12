@@ -20,6 +20,9 @@ const ComingSoon = (props) => {
     </Head>
     <body className={styles.body}>
       <div className={styles.root}>
+        <div className={styles.imgMobile}>
+          <img src="/img/ComingSoon/Frame 5.svg" alt=""/>
+        </div>
         <div className={styles.text}>
           <div className={styles.title}>Welcome to MASTERSPAGES</div>
           <div className={styles.ad}>

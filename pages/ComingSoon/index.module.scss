@@ -12,6 +12,9 @@
   width: 100%;
   display: flex;
   position: relative;
+  @media screen and (max-width: 1024px){
+    flex-direction: column;
+  }
 }
 
 .text{
@@ -20,6 +23,11 @@
   margin: auto;
   padding-left: 200px;
   padding-top: 10%;
+  width: 50%;
+  @media screen and (max-width: 1024px){
+    padding-left: 0;
+    padding-top: 30px;
+  }
 }
 
 .title{
@@ -34,6 +42,9 @@
   font-size: 16px;
   color: #fff;
   line-height: 22px;
+  @media screen and (max-width: 1024px){
+    margin-top: 30px;
+  }
 }
 
 .list{
@@ -56,12 +67,18 @@
   font-weight: bold;
   font-size: 30px;
   color: #EDF6F9;
+  @media screen and (max-width: 1024px){
+    margin-top: 30px;
+  }
 }
 
 .social{
   display: flex;
   margin-top: 21px;
   align-items: center;
+  @media screen and (max-width: 1024px){
+    margin-bottom: 30px;
+  }
 a{
   display: block;
   margin-left: 30px;
@@ -87,5 +104,25 @@ a{
 }
 
 .img{
-  
+  width: 50%;
+  position: relative;
+  z-index: 1;
+  @media screen and (max-width: 1024px){
+    display: none;
+  }
+  img{
+    max-width: 100%;
+  }
+}
+.imgMobile{
+  width: 50%;
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  @media screen and (min-width: 1025px){
+    display: none;
+  }
+  img{
+    max-width: 100%;
+  }
 }

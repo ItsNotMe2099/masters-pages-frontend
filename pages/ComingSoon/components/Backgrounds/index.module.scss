@@ -1,10 +1,35 @@
 @import "scss/index";
 
 .bg1{
-  position: absolute
+  position: absolute;
+  left: 0;
 }
 
 .bg2{
   position: absolute;
   right: 0;
+}
+
+.containerLeft{
+  width: 50%;
+  position: absolute;
+  left: 0;
+  @media screen and (max-width: 1024px){
+    top: 0;
+  }
+  img{
+    max-width: 100%;
+  }
+}
+
+.containerRight{
+  width: 50%;
+  position: absolute;
+  right: 0;
+  @media screen and (max-width: 1024px){
+    top: 0;
+  }
+  img{
+    max-width: 100%;
+  }
 }

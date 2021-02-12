@@ -5,8 +5,8 @@ interface Props {}
 export default function Backgrounds(props: Props) {
   return (
     <>
-      <img src="/img/ComingSoon/bg1.svg" className={styles.bg1} alt=""/>
-      <img src="/img/ComingSoon/bg2.svg" className={styles.bg2} alt=""/>
+      <div className={styles.containerLeft}><img src="/img/ComingSoon/bg1.svg" className={styles.bg1} alt=""/></div>
+      <div className={styles.containerRight}><img src="/img/ComingSoon/bg2.svg" className={styles.bg2} alt=""/></div>
     </>
   )
 }
