@@ -34,7 +34,7 @@ export default function FeedbackByMasterModal(props: Props) {
         <div className={styles.innards}>
           <div className={styles.rate}>Please rate {task.profile.firstName} !</div>
           <div className={styles.money}>
-            You own: <span> &nbsp;$ {lastConditions.budget}</span>
+            You own: <span> &nbsp;$ {lastConditions?.budget}</span>
           </div>
 
           <div className={styles.form}>

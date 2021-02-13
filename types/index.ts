@@ -82,12 +82,19 @@ export interface ProfileData{
   zipcode?: string
   address1?: string
   address2?: string
-  photo ?: string
+  photo?: string
   geoname?: any,
   location?: ILocation,
   preferredCategories ?: number[],
   preferredSubCategories ?: number[],
   skills?: SkillData[]
+  totalNotificationsCount?: number
+  feedbackNotificationsCount?: number
+  messageNotificationsCount?: number
+  taskOfferNotificationsCount?: number
+  taskResponseNotificationsCount?: number
+  taskOfferDeclinedNotificationsCount?: number
+  taskResponseDeclinedNotificationsCount?: number
 }
 
 export interface FullProfileData{

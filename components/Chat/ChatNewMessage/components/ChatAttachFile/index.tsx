@@ -55,7 +55,7 @@ export default function ChatAttachFile(props: Props) {
   const onDrop = (files, rejectedFiles, event) => {
     const token = Cookies.get('token')
     const options = {
-      signingUrlMethod: "GET",
+      signingUrlMethod: 'GET',
       accept: '*/*',
       uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
       signingUrlHeaders: { 'Authorization': `Bearer ${token}`},
@@ -71,7 +71,7 @@ export default function ChatAttachFile(props: Props) {
       ...{}
     }
     props.onFileDrop(transformFile(files[0]));
-    new S3Upload(options)
+    new S3Upload(options as any)
 
   }
 

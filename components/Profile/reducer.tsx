@@ -20,9 +20,7 @@ const initialState: ProfileState = {
   loading: false,
   isCompleted: false,
   role: null,
-  currentProfile: {
-    photo: null,
-  }
+  currentProfile: null
 }
 
 export default function ProfileReducer(state = {...initialState}, action) {
