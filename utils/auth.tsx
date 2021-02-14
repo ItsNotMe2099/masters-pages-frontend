@@ -49,7 +49,7 @@ export const withAuthSync = (WrappedComponent) =>
         static async getInitialProps(ctx) {
             const token = auth(ctx);
 
-         if( ctx.req.headers.host === 'masterspages.ca' &&  ctx.req.url !== 'ComingSoon'){
+         if(ctx.req && ctx.req.headers.host === 'masterspages.ca' &&  ctx.req.url !== 'ComingSoon'){
             ctx.res.writeHead(302, { Location: "/ComingSoon" });
             ctx.res.end();
             return;
@@ -111,12 +111,12 @@ export const withRestrictAuthSync = (WrappedComponent) =>
       const user = token ? await getUser(token) : null
       console.log("req host", ctx.req );
 
-      if( ctx.req.headers.host === 'masterspages.ca' &&  ctx.req.url !== 'ComingSoon'){
+      if(ctx.req && ctx.req.headers.host === 'masterspages.ca' &&  ctx.req.url !== 'ComingSoon'){
         ctx.res.writeHead(302, { Location: "/ComingSoon" });
         ctx.res.end();
         return;
       }
-      
+
       if (ctx.req && (!token || !user)) {
           ctx.res.writeHead(302, { Location: "/login" });
           ctx.res.end();
