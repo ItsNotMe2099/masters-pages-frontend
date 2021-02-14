@@ -54,7 +54,7 @@ export const ProfileSelect = () => {
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={cx(styles.dropDownTrigger, { [styles.dropDownTriggerActive]: isActive })}>
-        <div className={styles.photo}><NotificationBadge amount={profile.totalNotificationsCount}/> <Avatar size={'small'} image={profile?.photo}/></div>
+        <div className={styles.photo}><NotificationBadge amount={profile?.totalNotificationsCount}/> <Avatar size={'small'} image={profile?.photo}/></div>
         <ArrowDropDown/>
 
       </a>
