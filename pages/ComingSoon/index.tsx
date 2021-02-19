@@ -8,8 +8,8 @@ const ComingSoon = (props) => {
 
   const renderSocials = () => {
     return <div className={styles.social}>
-        <a href="https://www.instagram.com/masterspages/" target="_blank"><Facebook className={styles.facebook}/></a>
-        <a href="https://www.facebook.com/masterspages" target="_blank"><Instagram className={styles.instagram}/></a>
+        <a href="https://www.facebook.com/masterspages" target="_blank"><Facebook className={styles.facebook}/></a>
+        <a href="https://www.instagram.com/masterspages" target="_blank"><Instagram className={styles.instagram}/></a>
     </div>
   }
 
