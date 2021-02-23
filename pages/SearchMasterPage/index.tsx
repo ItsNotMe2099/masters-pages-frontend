@@ -9,7 +9,7 @@ import SearchProfileListView from "components/SearchPage/ListView";
 import SearchProfileMapView from "components/SearchPage/MapView";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { withAuthSync } from "utils/auth";
+import {getAuthServerSide} from "utils/auth";
 import { useDispatch, useSelector } from 'react-redux'
 const queryString = require('query-string')
 const SearchMasterPage = (props) => {
@@ -37,4 +37,5 @@ const SearchMasterPage = (props) => {
   </>
   )
 }
-export default withAuthSync(SearchMasterPage)
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default SearchMasterPage

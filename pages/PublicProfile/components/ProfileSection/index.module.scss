@@ -84,7 +84,7 @@
 .separator{
   width: 1px;
   background: #C4C4C4;
-  height: 100px;
+  height: 111px;
   align-self: stretch;
   margin-left: 49px;
   margin-right: 39px;
@@ -105,6 +105,44 @@ flex: 1;
     font-size: 14px;
     button{
       width: 100%;
+    }
+  }
+}
+
+.statistic {
+  .statItem {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+
+    &:first-of-type {
+
+    }
+
+    .statItemLabel {
+      font-weight: 500;
+      font-size: 14px;
+      color: #6D718C;
+    }
+
+    .statItemValue {
+      flex: 1;
+      text-align: right;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 21px;
+      color: #373948;
+      margin-left: 10px;
+    }
+  }
+}
+.buttonArea{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  button{
+    &:last-of-type{
+      margin-left: 16px;
     }
   }
 }

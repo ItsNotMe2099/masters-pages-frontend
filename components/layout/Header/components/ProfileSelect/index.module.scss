@@ -78,6 +78,10 @@
     }
   }
 }
+.dropdownItemLabel{
+  position: relative;
+}
+
 .dropDownTriggerActive{
   > svg{
     path {

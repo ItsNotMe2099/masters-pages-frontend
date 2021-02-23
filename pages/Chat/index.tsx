@@ -6,7 +6,7 @@ import Modals from "components/layout/Modals";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { withAuthSync } from 'utils/auth'
+import {getAuthServerSide} from 'utils/auth'
 import { useSelector, useDispatch } from 'react-redux'
 
 const ChatPage = (props) => {
@@ -18,5 +18,5 @@ const ChatPage = (props) => {
     </>
   )
 }
-
-export default withAuthSync(ChatPage)
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default ChatPage

@@ -4,15 +4,16 @@ import * as React from "react";
 import Button from "components/ui/Button";
 import Input from "components/ui/Inputs/Input";
 import { IRootState } from "types";
-import { withAuthSync } from 'utils/auth'
 import StarRatings from 'react-star-ratings';
 import { getMediaPath } from "utils/media";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import formatDistance from "date-fns/formatDistance";
 
 const ProfileSection = (props) => {
   const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+
   return (
     <div className={styles.root}>
       <div className={styles.details}>
@@ -22,21 +23,18 @@ const ProfileSection = (props) => {
           <div className={styles.stat}>
             <div className={styles.statItem}>
               <img src={'/img/icons/job.svg'}/>
-              <span>15</span>
+              <span>{profile.tasksCount || 0}</span>
             </div>
             <div className={styles.statItem}>
               <img src={'/img/icons/like.svg'}/>
-              <span>1079</span>
+              <span>{profile.feedbacksCount || 0}</span>
             </div>
-            <div className={styles.statItem}>
-              <img src={'/img/icons/views.svg'}/>
-              <span>2079</span>
-            </div>
+
           </div>
         <div className={styles.rating}>
           <div className={styles.ratingStars}>
         <StarRatings
-          rating={4.5}
+          rating={profile.rating || 0}
           starRatedColor="#F2B705"
           starEmptyColor={'#616161'}
           numberOfStars={5}
@@ -48,10 +46,10 @@ const ProfileSection = (props) => {
 
         />
           </div>
-          <div className={styles.ratingValue}>(321)</div>
+          <div className={styles.ratingValue}>({profile.rating || 0})</div>
         </div>
           <div className={styles.registered}>
-            <label>Registered:</label> 3 months ago
+            <label>Registered:</label> {formatDistance(new Date(), new Date(profile.createdAt))} ago
           </div>
         </div>
 

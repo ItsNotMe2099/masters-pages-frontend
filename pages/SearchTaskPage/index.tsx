@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import SearchTaskListView from "pages/SearchTaskPage/ListView";
 import SearchTaskMapView from "pages/SearchTaskPage/MapView";
 import { useEffect, useState } from "react";
-import { withAuthSync } from "utils/auth";
+import {getAuthServerSide} from "utils/auth";
 import { useDispatch, useSelector } from 'react-redux'
 const queryString = require('query-string')
 const SearchTaskPage = (props) => {
@@ -24,4 +24,5 @@ const SearchTaskPage = (props) => {
   </>
   )
 }
-export default withAuthSync(SearchTaskPage)
+export const getServerSideProps = getAuthServerSide();
+export default SearchTaskPage;

@@ -26,6 +26,7 @@ import { ProfileFeedbackState } from "components/ProfileFeedback/reducer";
 import { PublicProfileState } from "components/PublicProfile/reducer";
 import { TaskPageState } from "components/TaskPage/reducer";
 import { TaskSearchWithLimitState } from "components/Split/OrderingSection/Task/reducer";
+import {StatState} from "../components/Stat/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -56,6 +57,7 @@ export interface IRootState {
   publicProfile: PublicProfileState
   taskPage: TaskPageState
   taskSearchWithLimit: TaskSearchWithLimitState
+  stat: StatState
 }
 export interface ILocation {
   lng: number,
@@ -64,7 +66,7 @@ export interface ILocation {
 export interface ConfirmDataModal {
   cancelText?: string,
   confirmText?: string
-  onConfirm: () => void,
+  onConfirm?: () => void,
   onCancel?: () => void
 }
 export interface ProfileData{
@@ -84,6 +86,7 @@ export interface ProfileData{
   address2?: string
   photo?: string
   geoname?: any,
+  rating?: number
   location?: ILocation,
   preferredCategories ?: number[],
   preferredSubCategories ?: number[],
@@ -95,6 +98,10 @@ export interface ProfileData{
   taskResponseNotificationsCount?: number
   taskOfferDeclinedNotificationsCount?: number
   taskResponseDeclinedNotificationsCount?: number
+  feedbacksCount?: number
+  tasksCount?: number
+  totalAmount?: number
+  totalHours?: number
 }
 
 export interface FullProfileData{
@@ -188,6 +195,7 @@ export interface ITaskNegotiation{
   estimate: number,
   deadline: string,
   createdAt: string,
+  isRead: boolean,
   priceType: 'fixed' | 'rate'
 
 }
@@ -238,6 +246,14 @@ export interface ITask{
     total: number
   }
   feedbacks: IFeedbacksToProfile[]
+}
+
+export interface IStat{
+  tasksCount: number,
+  tasksDoneCount: number,
+  tasksDonePerMonth: number,
+  mastersCount: number,
+  feedbacksCount: number
 }
 
 export interface BaseAction {

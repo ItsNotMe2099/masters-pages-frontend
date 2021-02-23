@@ -1,11 +1,20 @@
-import React, { Component } from "react";
+import React, {Component, useEffect} from "react";
 import Slider from "react-slick";
 import SliderControl from 'components/ui/SliderControl'
 import Slide from "./Slide";
 import styles from './index.module.scss'
+import {IRootState} from "../../../types";
+import { useSelector, useDispatch } from 'react-redux'
+import {fetchStatRequest} from "../../Stat/actions";
+interface Props{
 
-export default class SimpleSlider extends Component {
-  render() {
+}
+export default function SimpleSlider(props: Props) {
+  const dispatch = useDispatch()
+  const stat = useSelector((state: IRootState) => state.stat.stat)
+  useEffect(() => {
+    dispatch(fetchStatRequest());
+  }, [])
     var settings = {
       dots: false,
       infinite: true,
@@ -42,14 +51,14 @@ export default class SimpleSlider extends Component {
       <div className={styles.root}>
         <div className={styles.sliderContainer}>
         <Slider {...settings}>
-          <Slide text='5000 + tasks done' image='img/Slide/yes.svg'/>
-          <Slide text='10 000+ tasks requested' image='img/Slide/files.svg'/>
-          <Slide text='3000+ masters on website' image='img/Slide/plumber-man.svg'/>
-          <Slide text='20 000 + reviews' image='img/Slide/review.svg'/>
-          <Slide text='21 000 + reviews' image='img/Slide/review.svg'/>
+          <Slide text={`${stat?.tasksDoneCount || ''} + tasks done`} image='img/Slide/yes.svg'/>
+          <Slide text={`${stat?.tasksCount || ''} + tasks requested`} image='img/Slide/files.svg'/>
+          <Slide text={`${stat?.mastersCount || ''} + masters on website`} image='img/Slide/plumber-man.svg'/>
+          <Slide text={`${stat?.feedbacksCount || ''} + reviews`} image='img/Slide/review.svg'/>
+          <Slide text={`${stat?.tasksDonePerMonth || ''} + task done per month`} image='img/Slide/review.svg'/>
         </Slider>
         </div>
       </div>
     );
-  }
+
 }

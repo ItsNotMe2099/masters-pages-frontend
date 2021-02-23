@@ -13,16 +13,20 @@ import { useDispatch } from 'react-redux'
 interface Props {
   amount?:number
   size?: string
+  top?: string,
+  right?: string
+  border?: boolean
 }
 
-export default function NotificationBadge({size, amount}: Props) {
+export default function NotificationBadge({size, amount, border, right, top}: Props) {
 
   return (
-    <div className={`${styles.root} ${size === 'small' && styles.small} ${size === 'normal' && styles.normal}`}>
+    <div className={`${styles.root} ${border && styles.border} ${size === 'small' && styles.small} ${size === 'normal' && styles.normal}`} style={{ ...(right ? {right} : {}), ...(top ? {top} : {}), }}>
       {amount || ''}
     </div>
   )
 }
 NotificationBadge.defaultProps = {
-  size: 'normal'
+  size: 'normal',
+  border: true
 }

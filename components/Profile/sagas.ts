@@ -40,19 +40,7 @@ function* ProfileSaga() {
 
   yield takeLatest(ActionTypes.CHANGE_ROLE_NATIVE,
     function* (action: ActionType<typeof changeRole>) {
-      console.log("CHANGREROLECALL");
-      const res: IResponse = yield requestGen({
-        url: `/api/profile/role/${action.payload.role}`,
-        method: 'GET',
-      } as IRequestData)
-
-
-      console.log("Res_err", res.data);
-      if(!res.err && res.data && res.data.id){
         yield put(changeRoleSuccess(action.payload.role));
-        yield put(fetchProfileSuccess(res.data));
-      }
-
     })
 
   yield takeLatest(ActionTypes.CREATE_PROFILE,

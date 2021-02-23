@@ -15,7 +15,6 @@ import SearchTaskFilter from "pages/SearchTaskPage/Filter";
 import { default as React, useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { IRootState } from "types";
-import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
@@ -31,6 +30,8 @@ interface Props {
 const SearchTaskListView = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter();
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+console.log("CurrentProfile", profile);
   const loading = useSelector((state: IRootState) => state.taskSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.taskSearch.sortType)
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)

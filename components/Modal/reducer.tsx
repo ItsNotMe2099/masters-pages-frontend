@@ -8,7 +8,7 @@ export interface ModalState {
 const initialState: ModalState = {
   modalKey: '',
   confirmData: {
-    onConfirm: () => {}
+
   }
 }
 

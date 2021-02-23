@@ -243,17 +243,13 @@
 
 .stars {
   display: flex;
+  align-items: center;
   margin-top: 6px;
-  img{
-    margin-left: 3px;
-    &:first-of-type{
-      margin-left: 0px;
-    }
-  }
-  div {
-    margin-left: 8px;
-    line-height: 16px;
 
+  .comments {
+    margin-left: 8px;
+    font-weight: bold;
+    font-size: 12px;
   }
 }
 
@@ -266,10 +262,7 @@
   }
 }
 
-.comments {
-  font-weight: bold;
-  font-size: 12px;
-}
+
 .status{
   font-size: 14px;
   color: #909090;

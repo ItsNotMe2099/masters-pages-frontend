@@ -14,13 +14,10 @@ import Loader from "components/ui/Loader";
 import Profile from "components/ui/Profile";
 import { useRouter } from "next/router";
 import { default as React, useEffect, useState } from "react";
-import { withTranslation } from "react-i18next";
 import { IRootState } from "types";
-import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
-import Task from "components/Task";
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Sticky from 'react-stickynode';

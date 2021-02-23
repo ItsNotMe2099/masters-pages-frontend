@@ -5,7 +5,7 @@ import { createProfile } from "components/Profile/actions";
 import Steps from 'components/Steps'
 import { useEffect } from "react";
 import { IRootState } from "types";
-import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
+import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useDispatch, useSelector } from 'react-redux'
@@ -57,5 +57,5 @@ const MasterProfile = (props) => {
     </>
   )
 }
-
-export default withRestrictAuthSync(MasterProfile)
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default MasterProfile

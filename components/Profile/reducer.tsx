@@ -32,7 +32,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS:
       state.loading = false;
-      console.log("ProfileFetched", action.payload);
+      console.log("SetCurrrentProfile")
       state.currentProfile = {...action.payload, birthday: action.payload.birthday ? format(parse(action.payload.birthday, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy') : null }
       break
     case ActionTypes.FETCH_PROFILE + ApiActionTypes.FAIL:

@@ -6,6 +6,7 @@ interface TabOption {
   name: string,
   link?: string,
   key: string,
+  badge?: number
 }
 interface Props {
   tabs: TabOption[],
@@ -22,7 +23,7 @@ const Tabs = ({tabs, activeTab, onChange, style, tabClassName}: Props) => {
   }
   return (
     <div className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${(style === 'round' || style === 'roundSmall') && styles.round} ${style === 'outline' && styles.outline}`}>
-      {tabs.map(item => <Tab name={item.name} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null} className={tabClassName} style={style}/>)}
+      {tabs.map(item => <Tab name={item.name} badge={item.badge} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null} className={tabClassName} style={style}/>)}
       <div className={styles.border}/>
     </div>
   )

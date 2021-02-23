@@ -25,6 +25,7 @@ interface Props {
 const TabOrders = (props: Props) => {
   const router = useRouter()
   const dispatch = useDispatch()
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.taskUser.listLoading)
   const tasks = useSelector((state: IRootState) => state.taskUser.list)
   const total = useSelector((state: IRootState) => state.taskUser.total)
@@ -35,10 +36,9 @@ const TabOrders = (props: Props) => {
   const [currentTaskEdit, setCurrentTaskEdit] = useState(null);
 
   const { mode, tab, tabSubPage } = router.query
-
   const tabs = [
-    ...(role === 'client' ? [{name: 'Drafts', key: 'draft'}, {name: 'Published', key: 'published'}] : []),
-    ...(role !== 'client' ? [{name: 'Responses', key: 'responses'}, {name: 'Declined', key: 'declined_responses'}, {name: 'Offers', key: 'offers'}] : []),
+    ...(role === 'client' ? [{name: 'Drafts', key: 'draft'}, {name: 'Published', key: 'published', badge: profile.taskResponseNotificationsCount}] : []),
+    ...(role !== 'client' ? [{name: 'Responses', key: 'responses'}, {name: 'Declined', key: 'declined_responses', badge: profile.taskResponseDeclinedNotificationsCount}, {name: 'Offers', key: 'offers', badge: profile.taskOfferNotificationsCount}] : []),
     {name: 'Negotiation', key: 'negotiation'},
     {name: 'In progress', key: 'in_progress'},
     {name: 'Closed', key: 'closed'},

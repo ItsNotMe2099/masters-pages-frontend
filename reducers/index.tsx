@@ -28,6 +28,7 @@ import ProfileFeedbackReducer from 'components/ProfileFeedback/reducer';
 import PublicProfileReducer from 'components/PublicProfile/reducer';
 import TaskPageReducer from 'components/TaskPage/reducer';
 import TaskSearchListWithLimitReducer from 'components/Split/OrderingSection/Task/reducer';
+import StatReducer from "../components/Stat/reducer";
 
 export default combineReducers({
   form: formReducer,
@@ -58,5 +59,6 @@ export default combineReducers({
   profileFeedback: ProfileFeedbackReducer,
   publicProfile: PublicProfileReducer,
   taskPage: TaskPageReducer,
-  taskSearchWithLimit: TaskSearchListWithLimitReducer
+  taskSearchWithLimit: TaskSearchListWithLimitReducer,
+  stat: StatReducer
 })

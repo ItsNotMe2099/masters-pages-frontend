@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@types/socket.io-client": "^1.4.35",
+    "@types/webpack-env": "^1.16.0",
     "classnames": "^2.2.6",
+    "combine-reducers-global-state": "^1.0.1",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "fslightbox-react": "^1.6.2",

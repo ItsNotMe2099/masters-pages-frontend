@@ -35,7 +35,6 @@ const SelectInput = (props: Props) => {
   const [currentLabel, setCurrentLabel] = useState('');
 
   const getSizeClass = (size) => {
-    console.log("Size class", size)
     switch (size) {
       case 'small':
         return styles.dropDownSmall;

@@ -1,9 +1,9 @@
 import TabPage from "pages/PublicProfile/[mySuperId]/[tab]/TabPage";
 import * as React from "react";
-import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
+import {getAuthServerSide} from "../../../../utils/auth";
 
 const TabIndexPage = (props) => {
   return (<TabPage {...props}/>)
 }
-
-export default withAuthSync(TabIndexPage)
+export const getServerSideProps = getAuthServerSide();
+export default TabIndexPage

@@ -3,15 +3,20 @@
   width: 16px;
   height: 16px;
   background: #FD5742;
-  border: 3px solid white;
   position: absolute;
-  right: -4px;
-  top: -4px;
+  right: -8px;
+  top: -8px;
   border-radius: 100%;
   font-size: 9px;
   display: flex;
+  color: white;
   align-items: center;
   justify-content: center;
+}
+.border{
+  border: 3px solid white;
+  width: 20px;
+  height: 20px;
 }
 .small{
 
