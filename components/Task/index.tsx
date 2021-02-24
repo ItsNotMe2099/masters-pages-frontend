@@ -5,6 +5,8 @@ import {
   taskOfferAcceptOpen,
   taskShareOpen
 } from "components/Modal/actions";
+
+import StarRatings from 'react-star-ratings';
 import BookmarkSvg from "components/svg/Bookmark";
 import TaskActionButton from "components/Task/components/ActionButton";
 import TaskResponse from "components/Task/components/TaskResponse";
@@ -31,6 +33,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from "types";
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
+import StarRating from "../svg/StarRating";
 
 interface Props {
   task: ITask,
@@ -276,7 +279,8 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   }
   const canEdit = actionsType === 'client';
   return (
-    <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
+    <div className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
+
       <div className={styles.wrapper}>
         {actionsType === 'public' && <div className={styles.profile}>
           <Avatar image={task.profile?.avatar}/>
@@ -288,17 +292,24 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             </div>
             <div className={styles.icons}>
               <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
-              <div>0</div>
+              <div>{task.profile.tasksCount || 0}</div>
               <img src="/img/SearchTaskPage/icons/like.svg" alt=''/>
-              <div>0</div>
+              <div>{task.profile.feedbacksCount || 0}</div>
             </div>
             <div className={styles.stars}>
-              <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
-              <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
-              <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
-              <img src="/img/SearchTaskPage/icons/star.svg" alt=''/>
-              <img src="/img/SearchTaskPage/icons/halfStar.svg" alt=''/>
-              <div className={styles.comments}>(0)</div>
+              <StarRatings
+                rating={task.profile.rating || 0}
+                starRatedColor="#F2B705"
+                starEmptyColor={'#616161'}
+                numberOfStars={5}
+                name='rating'
+                svgIconPath={'M4.08729 13.7644C3.74325 13.9408 3.35287 13.6316 3.42239 13.2367L4.16216 9.0209L1.02213 6.02971C0.728899 5.74985 0.88131 5.23824 1.27437 5.18298L5.63993 4.56264L7.58651 0.706016C7.7621 0.358411 8.23716 0.358411 8.41274 0.706016L10.3593 4.56264L14.7249 5.18298C15.1179 5.23824 15.2704 5.74985 14.9771 6.02971L11.8371 9.0209L12.5769 13.2367C12.6464 13.6316 12.256 13.9408 11.912 13.7644L7.99829 11.7536L4.0864 13.7644H4.08729Z'}
+                svgIconViewBox={'0 0 16 14'}
+                starDimension={'16px'}
+                starSpacing={'1px'}
+
+              />
+              <div className={styles.comments}>({task.profile.rating || 0})</div>
             </div>
           </div>
         </div>}
@@ -398,7 +409,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
             </div>
           </div>}
           <div className={styles.btnContainer}>
-            {(actionsType === 'public' && profile.role !== 'client' && !task.lastNegotiation) &&
+            {(actionsType === 'public' && profile && profile.role !== 'client' && !task.lastNegotiation) &&
             <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>ACCEPT TASK</Button>}
             {((actionsType !== 'public' && ![ITaskStatus.Draft].includes(task.status) && ((actionsType === 'master' && task.negotiations?.length > 0 && [ITaskNegotiationState.Accepted].includes(task.negotiations[0].state)) || (actionsType === 'client' && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status)) || (actionsType === 'master' &&  task.masterId === profile.id && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status))))) &&
             <Button bold smallFont transparent size='16px 0' onClick={handleMessages}>Messages</Button>}

@@ -14,17 +14,19 @@ import { TabSelect } from "components/TabSelect";
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from "types";
 import { fetchProfileById } from "components/PublicProfile/actions";
+import Modals from "../../../../components/layout/Modals";
 
 const TabPage = (props) => {
   const router = useRouter()
   const { mySuperId } = router.query
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.publicProfile.profile)
+  const profile = props.profile
   const tab = router.query.tab ? router.query.tab : (profile.role !== 'client' ? 'portfolio' : 'reviews');
   React.useEffect(() => {
     dispatch(fetchProfileById(router.query.mySuperId))
   },[])
 
+  console.log("Profile1", profile)
   const tabs = [
     ...(profile.role !== 'client' ? [{name: 'Portfolio', key: 'portfolio'}] : []),
     {name: 'Reviews and rating', key: 'reviews'}
@@ -37,13 +39,13 @@ const TabPage = (props) => {
   return (
     <>
       <Header {...props}/>
-      <div className={styles.container}>
+      {profile && <div className={styles.container}>
         <div className={styles.topBar}>
           <div className={styles.hello}>{profile.firstName} {profile.lastName}</div>
 
 
         </div>
-        <ProfileSection/>
+        <ProfileSection profile={props.profile} publicProfile={profile}/>
         <div className={styles.desktop}>
         <Tabs style={'outline'} tabs={tabs} activeTab={!tab ? 'portfolio' : tab as string}/>
         </div>
@@ -52,11 +54,12 @@ const TabPage = (props) => {
           {!tab || tab === 'portfolio' && <TabPortfolio {...props}/>}
           {tab === 'reviews' && <TabReviews {...props}/>}
         </div>
+        <Modals/>
         <Footer/>
-      </div>
+      </div>}
 
     </>
   )
-}
+};
 
 export default TabPage

@@ -2,6 +2,7 @@ import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import { changeRole } from "components/Profile/actions";
 import ArrowDropDown from "components/svg/ArrowDropDown";
 import Avatar from "components/ui/Avatar";
+import NotificationBadge from "components/ui/NotificationBadge";
 import { I18nContext } from "next-i18next";
 import { useRouter } from "next/router";
 import { useContext, useRef, useState } from "react";
@@ -26,11 +27,12 @@ export const ProfileSelect = () => {
     e.preventDefault()
     setIsActive(!isActive);
   }
+
   const options = [
     { value: 'profile', label: 'Your profile', link: `/PersonalArea` },
-    { value: 'messages', label: 'Messages', link: `/Chat` },
-    { value: 'reviews', label: 'Reviews', link: `/PersonalArea/${role}/reviews` },
-    { value: 'orders', label: 'Orders', link: `/PersonalArea/${role}/orders` },
+    { value: 'messages', badge: profile.messageNotificationsCount, label: 'Messages', link: `/Chat` },
+    { value: 'reviews', label: 'Reviews', badge: profile.feedbackNotificationsCount,  link: `/PersonalArea/${role}/reviews` },
+    { value: 'orders', label: 'Orders', badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount,  link: `/PersonalArea/${role}/orders` },
     { value: 'settings', label: 'Settings', link: `/PersonalArea/${role}/settings` },
     { value: 'logout', label: 'Logout' },
   ]
@@ -53,7 +55,7 @@ export const ProfileSelect = () => {
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={cx(styles.dropDownTrigger, { [styles.dropDownTriggerActive]: isActive })}>
-        <div className={styles.photo}><Avatar size={'small'} image={profile?.photo}/></div>
+        <div className={styles.photo}>{profile?.totalNotificationsCount > 0 && <NotificationBadge amount={profile?.totalNotificationsCount}/>} <Avatar size={'small'} image={profile?.photo}/></div>
         <ArrowDropDown/>
 
       </a>
@@ -63,7 +65,8 @@ export const ProfileSelect = () => {
           {options.filter(item => !value || item.value != value.value).map(item => (
             <li className={styles.dropdownItem}>
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
-                <span className={styles.dropdownItemLabel}>{item.label}</span>
+                <span className={styles.dropdownItemLabel}>{item.label}       {item.badge > 0 && <NotificationBadge border={false} right={'-16px'} top={'3px'} amount={item.badge}/>}</span>
+
               </a>
             </li>
           ))}

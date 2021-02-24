@@ -19,7 +19,7 @@ import Avatar from "components/ui/Avatar";
 import Profile from "../components/profile";
 import Description from "../components/description";
 import Payment from "../components/payment";
-import { withRestrictAuthSync } from "utils/auth";
+import {getAuthServerSide} from "utils/auth";
 import Loader from "components/ui/Loader";
 
 const TaskPage = (props) => {
@@ -56,5 +56,5 @@ const TaskPage = (props) => {
       </>
   )
 }
-
-export default withRestrictAuthSync(TaskPage)
+export const getServerSideProps = getAuthServerSide();
+export default TaskPage

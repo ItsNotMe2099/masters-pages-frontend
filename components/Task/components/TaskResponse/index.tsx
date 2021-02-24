@@ -10,6 +10,7 @@ import { cloneElement, ReactElement } from "react";
 import { ITask, ITaskNegotiation } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import NotificationBadge from "../../../ui/NotificationBadge";
 interface Props {
   response: ITaskNegotiation,
   task: ITask
@@ -43,6 +44,7 @@ export default function TaskResponse({ response, task }: Props) {
     dispatch(taskShowOffer());
   }
   return ( <div className={styles.root}>
+    {!response.isRead && <NotificationBadge/> }
     <div className={styles.time}>{format(new Date(response.createdAt), 'MM.dd.yyy hh:mm')}</div>
     <div className={styles.profile}>{response.profile?.firstName} {response.profile?.lastName}</div>
     <div className={styles.rating}></div>

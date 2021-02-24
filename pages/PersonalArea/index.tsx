@@ -2,7 +2,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { IRootState } from "types";
-import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
+import {getAuthServerSide} from 'utils/auth'
 
 import { useSelector, useDispatch } from 'react-redux'
 const PersonalAreaPageIndex = (props) => {
@@ -21,5 +21,5 @@ const PersonalAreaPageIndex = (props) => {
     </>
   )
 }
-
-export default withRestrictAuthSync(PersonalAreaPageIndex)
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default PersonalAreaPageIndex

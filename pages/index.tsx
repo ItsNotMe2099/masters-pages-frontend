@@ -1,5 +1,5 @@
 import { withTranslation } from "react-i18next";
-import { withAuthSync } from "utils/auth";
+import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
 import Header from '../components/layout/Header'
 import BannerSection from 'components/MainPage/BannerSection'
@@ -27,4 +27,5 @@ const Home = (props) => {
 Home.getInitialProps = async () => ({
   namespacesRequired: ['common', 'footer'],
 })
-export default withAuthSync(withTranslation('registration')(Home))
+export const getServerSideProps = getAuthServerSide();
+export default withTranslation('registration')(Home)

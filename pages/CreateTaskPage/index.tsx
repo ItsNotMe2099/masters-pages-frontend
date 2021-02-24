@@ -6,7 +6,7 @@ import Loader from "components/ui/Loader";
 import Modal from "components/ui/Modal";
 import CreateTaskForm from "pages/CreateTaskPage/Form";
 import { IRootState } from "types";
-import { withAuthSync } from 'utils/auth'
+import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useSelector, useDispatch } from 'react-redux'
@@ -59,5 +59,5 @@ const CreateTaskPage = (props) => {
     </>
   )
 }
-
-export default withAuthSync(CreateTaskPage)
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default CreateTaskPage

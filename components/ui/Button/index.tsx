@@ -29,6 +29,7 @@ interface Props {
 }
 
 export default function Button(props: Props) {
+
   return (
     <button
       type={props.type}

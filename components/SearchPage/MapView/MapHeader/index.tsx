@@ -5,7 +5,6 @@ import { fetchProfileSearchList, resetProfileSearchList, setFilterProfileSearch 
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IRootState } from "types";
-import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'

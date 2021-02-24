@@ -78,6 +78,10 @@
     }
   }
 }
+.dropdownItemLabel{
+  position: relative;
+}
+
 .dropDownTriggerActive{
   > svg{
     path {
@@ -112,6 +116,7 @@
   vertical-align: middle;
 }
 .photo{
+  position: relative;
   margin-right: 12px;
   height: 57px;
   @media screen and (max-width: $sm-max){

@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import SearchTaskFilter from "pages/SearchTaskPage/Filter";
 import { useState } from "react";
 import { IRootState } from "types";
-import { withAuthSync } from "utils/auth";
 import styles from './index.module.scss'
 const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'
@@ -52,4 +51,4 @@ const MapHeader = (props) => {
 
   )
 }
-export default withAuthSync(MapHeader)
+export default MapHeader

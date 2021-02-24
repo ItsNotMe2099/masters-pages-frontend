@@ -37,7 +37,6 @@ interface Props {
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
-  console.log("props1111", props)
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':

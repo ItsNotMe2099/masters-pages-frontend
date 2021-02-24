@@ -1,9 +1,9 @@
 import TabPage from "pages/PersonalArea/[mode]/[tab]/TabPage";
 import * as React from "react";
-import { withRestrictAuthSync } from 'utils/auth'
+import {getAuthServerSide} from 'utils/auth'
 
 const TabIndexPage = (props) => {
   return (<TabPage {...props}/>)
 }
-
-export default withRestrictAuthSync(TabIndexPage)
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default TabIndexPage

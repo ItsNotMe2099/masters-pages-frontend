@@ -8,8 +8,6 @@ import { withTranslation } from "next-i18next";
 import Backgrounds from "pages/RegistrationPage/Backgrounds";
 import { useEffect } from "react";
 import { IRootState } from "types";
-import { withAuthSync, withRestrictAuthSync } from "utils/auth";
-
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'

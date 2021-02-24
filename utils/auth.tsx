@@ -1,13 +1,12 @@
-import { changeRole, changeRoleNative } from "components/Profile/actions";
+import {changeRole, changeRoleNative, fetchProfileSuccess} from "components/Profile/actions";
 import nextCookie from "next-cookies";
 import { getDisplayName } from "next/dist/next-server/lib/utils";
 import { Component } from "react";
 import cookie from "js-cookie";
 import Router from "next/router";
 import jwt_decode from "jwt-decode";
-import { store } from "store";
 import request from "utils/request";
-
+import {wrapper} from 'store';
 
 export const auth = ctx => {
     const { token } = nextCookie(ctx);
@@ -22,6 +21,7 @@ export const logout = () => {
 };
 const getUser = async (token) => {
   try {
+    console.log("getUser", token);
     const res = await request({ url: '/api/auth/currentUser', token, method: 'GET' })
     if(res.err){
       return;
@@ -31,9 +31,9 @@ const getUser = async (token) => {
     console.error("ErrorCurrentUser", e);
   }
 }
-const getProfile = async (token) => {
+const getProfile = async (token, role) => {
   try {
-    const res = await request({ url: '/api/profile', token , method: 'GET' })
+    const res = await request({ url: `/api/profile/role/${role}`, token , method: 'GET' })
     if(res.err){
       return;
     }
@@ -42,109 +42,34 @@ const getProfile = async (token) => {
     console.error("ErrorCurrentProfile", e);
   }
 }
-export const withAuthSync = (WrappedComponent) =>
-    class extends Component {
-        static displayName = `withAuthSync(${getDisplayName(WrappedComponent)})`;
 
-        static async getInitialProps(ctx) {
-            const token = auth(ctx);
-            const user = token ? await getUser(token) : null
-            const componentProps =
-                WrappedComponent.getInitialProps &&
-                (await WrappedComponent.getInitialProps(ctx));
+export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrapper.getServerSideProps(async (ctx) => {
+  const token = auth(ctx);
 
-            return { ...componentProps, token, user };
-        }
+  if (ctx.req && ['masterspages.ca', 'masterspages.com'].includes(ctx.req.headers.host) && ctx.req.url !== 'ComingSoon') {
+    ctx.res.writeHead(302, {Location: "/ComingSoon"});
+    ctx.res.end();
+    return;
+  }
+  const { mode } = nextCookie(ctx);
+  console.log("get Init", mode);
+  const user = token ? await getUser(token) : null
+  if(!user && redirect){
+    ctx.res.writeHead(302, { Location: "/login" });
+    ctx.res.end();
+    return;
+  }
+  if(!user){
+    return {props: {}};
+  }
+  const profile = token && user ? await getProfile(token, mode || 'client') : null;
+  if (ctx.req && profile) {
 
-        // New: We bind our methods
-        constructor(props) {
-            super(props);
-
-            this.syncLogout = this.syncLogout.bind(this);
-        }
-
-        // New: Add event listener when a restricted Page Component mounts
-        componentDidMount() {
-            window.addEventListener("storage", this.syncLogout);
-            console.log("Did mount")
-          if(!cookie.get('mode')){
-            cookie.set('mode', 'client')
-          }
-          store.dispatch(changeRoleNative(cookie.get('mode') || 'client'));
-        }
-
-        // New: Remove event listener when the Component unmount and
-        // delete all data
-        componentWillUnmount() {
-            window.removeEventListener("storage", this.syncLogout);
-            window.localStorage.removeItem("logout");
-        }
-
-        // New: Method to redirect the user when the event is called
-        syncLogout(event) {
-            if (event.key === "logout") {
-                console.log("logged out from storage!");
-                Router.push("/login");
-            }
-        }
-
-        render() {
-            return <WrappedComponent {...this.props} />;
-        }
-    };
+    ctx.store.dispatch(changeRoleNative(mode || 'client'));
+    ctx.store.dispatch(fetchProfileSuccess(profile));
+  }
+  return {props: { token, user, profile}};
+})
 
 
-export const withRestrictAuthSync = (WrappedComponent) =>
-  class extends Component {
-    static displayName = `withRestrictAuthSync(${getDisplayName(WrappedComponent)})`;
 
-    static async getInitialProps(ctx) {
-
-      const token = auth(ctx);
-      const user = token ? await getUser(token) : null
-
-      if (ctx.req && (!token || !user)) {
-          ctx.res.writeHead(302, { Location: "/login" });
-          ctx.res.end();
-          return;
-      }
-
-      const componentProps =
-        WrappedComponent.getInitialProps &&
-        (await WrappedComponent.getInitialProps(ctx));
-
-      return { ...componentProps, token, user };
-    }
-
-    // New: We bind our methods
-    constructor(props) {
-      super(props);
-
-      this.syncLogout = this.syncLogout.bind(this);
-    }
-
-    // New: Add event listener when a restricted Page Component mounts
-    componentDidMount() {
-      window.addEventListener("storage", this.syncLogout);
-      store.dispatch(changeRole(cookie.get('mode') || 'client'));
-    }
-
-    // New: Remove event listener when the Component unmount and
-    // delete all data
-    componentWillUnmount() {
-      window.removeEventListener("storage", this.syncLogout);
-      window.localStorage.removeItem("logout");
-    }
-
-    // New: Method to redirect the user when the event is called
-    syncLogout(event) {
-      if (event.key === "logout") {
-        console.log("logged out from storage!");
-        Router.push("/login");
-      }
-    }
-
-    render() {
-      return <WrappedComponent {...this.props} />;
-    }
-  };

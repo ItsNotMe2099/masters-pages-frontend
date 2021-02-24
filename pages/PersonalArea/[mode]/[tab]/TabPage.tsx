@@ -14,12 +14,12 @@ import TabPortfolio from "pages/PersonalArea/[mode]/components/TabPortfolio";
 import TabReviews from "pages/PersonalArea/[mode]/components/TabReviews";
 import TabSettings from "pages/PersonalArea/[mode]/components/TabSettings";
 import { IRootState } from "types";
-import { withAuthSync, withRestrictAuthSync } from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from "components/TabSelect";
 import TabSaved from "../components/TabSaved";
 import Link from "next/link";
+import NotificationBadge from "../../../../components/ui/NotificationBadge";
 const TabPage = (props) => {
   const router = useRouter()
   const dispatch = useDispatch();
@@ -32,12 +32,13 @@ const TabPage = (props) => {
       router.push('/PersonalArea')
     }
   }, [mode, role])
+
   const tabs = [
     {name: 'Personal information', key: 'personal'},
     ...(mode !== 'client' ? [{name: 'My portfolio', key: 'portfolio'}] : []),
-    {name: 'Reviews and rating', key: 'reviews'},
-    {name: 'Orders', key: 'orders'},
-    {name: 'Messages', key: 'messages'},
+    {name: 'Reviews and rating', key: 'reviews', badge: profile.feedbackNotificationsCount},
+    {name: 'Orders', key: 'orders', badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount},
+    {name: 'Messages', key: 'messages',  badge: profile.messageNotificationsCount },
     {name: 'Saved', key: 'saved'},
     {name: 'Settings', key: 'settings'},
   ].map(item => {

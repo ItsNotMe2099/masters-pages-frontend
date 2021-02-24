@@ -4,7 +4,7 @@ import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 import { withTranslation } from "next-i18next";
 import Router from "next/router";
 import { IRootState } from "types";
-import { withAuthSync, withRestrictAuthSync } from "utils/auth";
+import {getAuthServerSide} from "utils/auth";
 import Backgrounds from './Backgrounds'
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
@@ -70,4 +70,5 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
-export default withRestrictAuthSync(withTranslation('registration')(RegistrationPage))
+export const getServerSideProps = getAuthServerSide({redirect: true});
+export default withTranslation('registration')(RegistrationPage)
