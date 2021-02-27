@@ -7,6 +7,7 @@ import InputPhone from 'components/ui/Inputs/InputPhone'
 import OtpCodeInput from 'components/ui/Inputs/OtpCodeInput'
 import { phone, required } from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
   handleSubmit?
   onSubmit
@@ -14,6 +15,7 @@ interface Props {
 }
 
 let PWRecovery = (props: Props) => {
+  const { t } = useTranslation('common');
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.PWRecovery.formError)
   return (
@@ -29,12 +31,12 @@ let PWRecovery = (props: Props) => {
         <Field
           name="phone"
           component={InputPhone}
-          label='Phone'
+          label={t('auth.passwordRecovery.fieldPhone')}
           validate={phone}
         />}
         <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green largeFont size="16px 0">RESET PASSWORD</Button>
+        <Button green largeFont size="16px 0">{t('auth.passwordRecovery.buttonReset')}</Button>
       </div>
     </form>
   )

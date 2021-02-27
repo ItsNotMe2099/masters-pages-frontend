@@ -12,10 +12,12 @@ import { fetchSavedTasks } from "components/SavedTasks/actions";
 import SavedPeople from "./components/SavedPeople";
 import SavedSearches from "./components/SavedSearches";
 import SavedTasks from "./components/SavedTasks";
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
-
+  t?: (string) => string,
 }
 const TabSaved = (props: Props) => {
+  const { t } = useTranslation('common');
   const router = useRouter()
   const dispatch = useDispatch()
   const searches = useSelector((state: IRootState) => state.savedSearch.list)
@@ -24,9 +26,9 @@ const TabSaved = (props: Props) => {
   const { mode, tab, tabSubPage } = router.query
 
   const tabs = [
-    {name: 'People', key: 'people'},
-    {name: 'Search', key: 'search'},
-    {name: 'Tasks', key: 'tasks'},
+    {name: t('personalArea.tabSaved.menu.people'), key: 'people'},
+    {name: t('personalArea.tabSaved.menu.search'), key: 'search'},
+    {name: t('personalArea.tabSaved.menu.tasks'), key: 'tasks'},
   ].map(item => {
     return{
       ...item,

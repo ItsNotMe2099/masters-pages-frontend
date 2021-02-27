@@ -4,22 +4,24 @@ import Modal from "components/ui/Modal";
 import Router from "next/router";
 import styles from './index.module.scss'
 import Link from "next/link";
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isOpen: boolean
-  onRequestClose?: () => void
+  onRequestClose?: () => void,
+  t?: (string) => string,
 }
 
-export default function RegistrationSuccess(props: Props) {
-
+const RegistrationSuccess = (props: Props) => {
+  const { t } = useTranslation('common');
   return (
     <Modal{...props} image='img/Modal/success.svg'>
 
         <div className={styles.headText}>
-          THANK YOU FOR REGISTRATION
+          {t('auth.registrationSuccess.title')}
         </div>
         <div className={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.
+          {t('auth.registrationSuccess.description')}
         </div>
         <Link href="/CreateTaskPage"><Button green size="16px 0" onClick={() => {
           Router.push('/CreateTaskPage')
@@ -27,14 +29,15 @@ export default function RegistrationSuccess(props: Props) {
         <div className={styles.btnContainer}>
           <Link href=""><Button size="16px 0" onClick={() => {
             Router.push('/MasterProfile')
-          }}>BECOME A MASTER</Button></Link>
+          }}> {t('auth.registrationSuccess.buttonBecomeMaster')}</Button></Link>
         </div>
         <div className={styles.btnContainer}>
           <Link href=""><Button size="16px 0" onClick={() => {
             Router.push('/MasterProfile')
-          }}>BECOME A VOLUNTEER</Button></Link>
+          }}> {t('auth.registrationSuccess.buttonBecomeVolunteer')}</Button></Link>
         </div>
-        <Link href=""><a className={styles.link}>Look at task list</a></Link>
+        <Link href="/SearchTaskPage"><a className={styles.link}>{t('auth.registrationSuccess.lookAtTaskList')}</a></Link>
     </Modal>
   )
 }
+export default RegistrationSuccess;

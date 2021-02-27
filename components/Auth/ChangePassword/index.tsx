@@ -5,13 +5,15 @@ import Modal from "components/ui/Modal";
 import { IRootState } from "types";
 import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isOpen: boolean
-  onRequestClose?: () => void
+  onRequestClose?: () => void,
 }
 
-export default function ChangePassword(props: Props) {
+const ChangePassword = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.changePassword.loading)
 
@@ -20,9 +22,10 @@ export default function ChangePassword(props: Props) {
     dispatch(changePassword(data));
   }
   return (
-    <Modal{...props} title={'Change Password'} loading={isLoading}>
+    <Modal{...props} title={t('auth.changePassword.title')} loading={isLoading}>
          <SignIn onSubmit={handleSubmit}/>
 
     </Modal>
   )
 }
+export default ChangePassword

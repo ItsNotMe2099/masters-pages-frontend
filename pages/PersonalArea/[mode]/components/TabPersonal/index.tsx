@@ -9,10 +9,11 @@ import * as React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from "types";
 import styles from './index.module.scss'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
-
 }
 const TabPersonal = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
@@ -47,7 +48,7 @@ const TabPersonal = (props: Props) => {
         <div className={styles.avatarForm}>
           {profile?.id && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
         </div>
-        <div className={styles.wrapper}><Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => dispatch(changePasswordOpen())} >Change Password</Button></div>
+        <div className={styles.wrapper}><Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => dispatch(changePasswordOpen())} >{t('personalArea.tabProfile.buttonChangePassword')}</Button></div>
       </div>
       <div className={styles.separator}/>
       <div className={styles.form}>

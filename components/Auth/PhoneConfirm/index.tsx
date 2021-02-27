@@ -4,13 +4,15 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
 }
 
-export default function PhoneConfirmComponent(props: Props) {
+const PhoneConfirmComponent = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.phoneConfirmReducer.loading)
   const handleSubmit = (data) => {
@@ -25,12 +27,13 @@ export default function PhoneConfirmComponent(props: Props) {
         <img src="/img/CodeConfirm/code_confirm.svg" alt=''/>
       </div>
       <div className={styles.title}>
-        Phone number confirmation:
+        {t('auth.phoneConfirm.title')}
       </div>
       <div className={styles.text}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat
+        {t('auth.phoneConfirm.description')}
       </div>
         <SignUp onSubmit={handleSubmit}/>
     </Modal>
   )
 }
+export default PhoneConfirmComponent;

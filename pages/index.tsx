@@ -28,4 +28,4 @@ Home.getInitialProps = async () => ({
   namespacesRequired: ['common', 'footer'],
 })
 export const getServerSideProps = getAuthServerSide();
-export default withTranslation('registration')(Home)
+export default Home

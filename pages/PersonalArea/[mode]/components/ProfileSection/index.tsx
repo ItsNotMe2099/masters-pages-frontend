@@ -9,8 +9,10 @@ import { getMediaPath } from "utils/media";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import formatDistance from "date-fns/formatDistance";
+import {withTranslation} from "react-i18next";
 
 const ProfileSection = (props) => {
+  const {t} = props;
   const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 
@@ -19,7 +21,7 @@ const ProfileSection = (props) => {
       <div className={styles.details}>
         <div className={styles.avatar}><Avatar image={profile?.photo}/> </div>
         <div className={styles.detailsInfo}>
-          <div className={styles.location}><label>Location:</label> <span>{profile?.city}</span></div>
+          <div className={styles.location}><label>{t('personalArea.profile.location')}:</label> <span>{profile?.city}</span></div>
           <div className={styles.stat}>
             <div className={styles.statItem}>
               <img src={'/img/icons/job.svg'}/>
@@ -49,7 +51,7 @@ const ProfileSection = (props) => {
           <div className={styles.ratingValue}>({profile.rating || 0})</div>
         </div>
           <div className={styles.registered}>
-            <label>Registered:</label> {formatDistance(new Date(), new Date(profile.createdAt))} ago
+            <label>{t('personalArea.profile.registered')}:</label> {formatDistance(new Date(), new Date(profile.createdAt))} ago
           </div>
         </div>
 
@@ -57,14 +59,14 @@ const ProfileSection = (props) => {
       <div className={styles.separator}></div>
       <div className={styles.personalLink}>
         <div className={styles.personalLinkWrapper}>
-        <Input label={'Personal link:'}  input={{value: `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}`}} labelType={'static'} type={'text'}/>
+        <Input label={`${t('personalArea.profile.personalLink')}:`}  input={{value: `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}`}} labelType={'static'} type={'text'}/>
        </div>
       </div>
       <div className={styles.buttonArea}>
-      <Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => router.push(`/PublicProfile/${profile.id}`)}>Look how people see your account</Button>
+      <Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => router.push(`/PublicProfile/${profile.id}`)}>{t('personalArea.profile.lookHowPeopleSeeYourAccount')}</Button>
       </div>
     </div>
   )
 }
 
-export default ProfileSection
+export default withTranslation('common')(ProfileSection)

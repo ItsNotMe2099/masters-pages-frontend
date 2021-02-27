@@ -6,7 +6,12 @@
         width: 100%;
     }
 }
-
+.logout{
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
+}
 
 .formLoader{
   position: absolute;

@@ -5,11 +5,13 @@ import { Field, reduxForm } from 'redux-form'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 
 let PhoneConfirmForm = props => {
+  const { t } = useTranslation('common');
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.phoneConfirmReducer.formError)
-  console.log("ErrorPhoneConfirm", error)
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field
@@ -19,10 +21,10 @@ let PhoneConfirmForm = props => {
       />
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green largeFont  size="16px 0">CONFIRM</Button>
+        <Button green largeFont  size="16px 0">{t('auth.phoneConfirm.buttonConfirm')}</Button>
       </div>
       <div className={styles.resendSms}>
-        Dont receive sms? <a href={''}>Sent again</a>.
+        {t('auth.phoneConfirm.dontReceiveSms')} <a href={''}>{t('auth.phoneConfirm.sendAgain')}</a>.
       </div>
     </form>
   )

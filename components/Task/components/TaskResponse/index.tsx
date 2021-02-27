@@ -11,17 +11,19 @@ import { ITask, ITaskNegotiation } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import NotificationBadge from "../../../ui/NotificationBadge";
+import {useTranslation} from "react-i18next";
 interface Props {
   response: ITaskNegotiation,
-  task: ITask
+  task: ITask,
 }
 
-export default function TaskResponse({ response, task }: Props) {
+const TaskResponse = ({ response, task }: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const router = useRouter();
   const handleDecline = (e) => {
     dispatch(confirmOpen({
-      description: `Do you want to decline response from ${response.profile?.firstName} ${response.profile?.lastName}?`,
+      description: `${t('taskResponse.confirmDecline')} ${response.profile?.firstName} ${response.profile?.lastName}?`,
       onConfirm: () => {
         dispatch(taskNegotiationDeclineTaskResponse(response.taskId, response.id))
       }
@@ -29,7 +31,7 @@ export default function TaskResponse({ response, task }: Props) {
   }
   const handleAccept = (e) => {
     dispatch(confirmOpen({
-      description: `Do you want to accept response from ${response.profile?.firstName} ${response.profile?.lastName}?`,
+      description: `${t('taskResponse.confirmAccept')} ${response.profile?.firstName} ${response.profile?.lastName}?`,
       onConfirm: () => {
         dispatch(taskNegotiationAcceptTaskResponse(response))
       }
@@ -51,11 +53,12 @@ export default function TaskResponse({ response, task }: Props) {
     <div className={styles.message} onClick={handleShowOffer}><img src={'/img/icons/chat_small.svg'} />{response.message}</div>
     <div className={styles.priceDetails}>{response.budget ? `$ ${response.budget}` : `$ ${response.ratePerHour}/h`}</div>
     <div className={styles.priceDetails}></div>
-    {response.state === 'declined' && <div className={styles.declined}>Declined</div>}
+    {response.state === 'declined' && <div className={styles.declined}>{t('taskResponse.declined')}</div>}
     {response.state !== 'declined' && <div className={styles.actions}>
-      {![ 'accepted', 'declined'].includes(response.state) && <div className={styles.action} onClick={handleDecline}>Decline</div>}
-      {response.state === 'accepted' && <div className={styles.action} onClick={handleMessages}>Messages</div>}
-      {response.state !== 'accepted' && <div className={styles.action} onClick={handleAccept}>Accept</div>}
+      {![ 'accepted', 'declined'].includes(response.state) && <div className={styles.action} onClick={handleDecline}>{t('taskResponse.decline')}</div>}
+      {response.state === 'accepted' && <div className={styles.action} onClick={handleMessages}>{t('taskResponse.messages')}</div>}
+      {response.state !== 'accepted' && <div className={styles.action} onClick={handleAccept}>{t('taskResponse.accept')}</div>}
     </div>}
   </div>);
 }
+export default TaskResponse

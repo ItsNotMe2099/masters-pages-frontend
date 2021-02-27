@@ -36,6 +36,14 @@
     background: white;
   }
 }
+.completeRegistration{
+  color: #FD5742;
+  cursor: pointer;
+  text-transform: uppercase;
+  &:hover{
+    text-decoration: underline;
+  }
+}
 .rootAuth{
   a{
     color: white;

@@ -15,7 +15,7 @@ interface Props {
 
  */
 
-export default function ChatPageLayout(props: Props) {
+export default function ChatPageLayout(props) {
   const dispatch = useDispatch()
   const chatLoading = useSelector((state: IRootState) => state.chat.chatLoading)
   const chat = useSelector((state: IRootState) => state.chat.chat)

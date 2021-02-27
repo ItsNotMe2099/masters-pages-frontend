@@ -6,7 +6,9 @@ import styles from './index.module.scss'
 import InputPassword from 'components/ui/Inputs/InputPassword'
 import {required, passwordsMatch, minL} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 let PWRecoveryNewPW = (props) => {
+  const { t } = useTranslation('common');
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.PWRecovery.formError)
   return (
@@ -14,18 +16,18 @@ let PWRecoveryNewPW = (props) => {
         <Field
           name="password"
           component={InputPassword}
-          inputLabel='New password'
+          label={t('auth.passwordReset.fieldNewPassword')}
           validate={[required, minL]}
         />
         <Field
           name="passwordConfirm"
           component={InputPassword}
-          inputLabel='Password confirm'
+          label={t('auth.passwordReset.fieldNewPasswordConfirm')}
           validate={[required, passwordsMatch, minL]}
         />
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green largeFont size="16px 0">SET A NEW PASSWORD</Button>
+        <Button green largeFont size="16px 0">{t('auth.passwordReset.buttonSetNewPassword')}</Button>
       </div>
     </form>
   )

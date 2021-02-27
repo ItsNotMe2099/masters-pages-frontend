@@ -4,13 +4,15 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import PWRecoveryNewPW from "./Form";
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isOpen: boolean
-  onRequestClose?: () => void
+  onRequestClose?: () => void,
 }
 
-export default function PWRecoverySucces(props: Props) {
+const PWRecoverySuccess = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
 
@@ -25,12 +27,13 @@ export default function PWRecoverySucces(props: Props) {
           <img src='/img/PWRecovery/icons/shieldGreen.svg' alt=''/>
         </div>
         <div className={styles.headText}>
-          Success
+          {t('auth.passwordReset.title')}
         </div>
         <div className={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Habitant nulla
+          {t('auth.passwordReset.description')}
         </div>
           <PWRecoveryNewPW onSubmit={handleSubmit}/>
     </Modal>
   )
 }
+export default PWRecoverySuccess;

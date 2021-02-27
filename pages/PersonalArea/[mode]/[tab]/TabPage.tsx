@@ -20,7 +20,9 @@ import { TabSelect } from "components/TabSelect";
 import TabSaved from "../components/TabSaved";
 import Link from "next/link";
 import NotificationBadge from "../../../../components/ui/NotificationBadge";
+import {withTranslation} from "react-i18next";
 const TabPage = (props) => {
+  const {t} = props
   const router = useRouter()
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -34,13 +36,13 @@ const TabPage = (props) => {
   }, [mode, role])
 
   const tabs = [
-    {name: 'Personal information', key: 'personal'},
-    ...(mode !== 'client' ? [{name: 'My portfolio', key: 'portfolio'}] : []),
-    {name: 'Reviews and rating', key: 'reviews', badge: profile.feedbackNotificationsCount},
-    {name: 'Orders', key: 'orders', badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount},
-    {name: 'Messages', key: 'messages',  badge: profile.messageNotificationsCount },
-    {name: 'Saved', key: 'saved'},
-    {name: 'Settings', key: 'settings'},
+    {name: t('personalArea.menu.profile'), key: 'personal'},
+    ...(mode !== 'client' ? [{name: t('personalArea.menu.portfolio'), key: 'portfolio'}] : []),
+    {name: t('personalArea.menu.reviews'), key: 'reviews', badge: profile.feedbackNotificationsCount},
+    {name: t('personalArea.menu.orders'), key: 'orders', badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount},
+    {name: t('personalArea.menu.messages'), key: 'messages',  badge: profile.messageNotificationsCount },
+    {name: t('personalArea.menu.saved'), key: 'saved'},
+    {name: t('personalArea.menu.settings'), key: 'settings'},
   ].map(item => {
     return{
       ...item,
@@ -50,11 +52,11 @@ const TabPage = (props) => {
   const getModeName = (mode) => {
     switch (mode) {
       case 'master':
-        return 'Master mode'
+        return t('personalArea.profile.modeMaster')
       case 'client':
-        return 'Client mode'
+        return t('personalArea.profile.modeClient')
       case 'volunteer':
-        return 'Volunteer mode'
+        return t('personalArea.profile.modeVolunteer')
     }
   }
 
@@ -64,15 +66,15 @@ const TabPage = (props) => {
       <div className={styles.container}>
       <div className={styles.desktop}>
         <div className={styles.topBar}>
-          <div className={styles.hello}> Hello {profile?.firstName}. You are in «{getModeName(mode)}».</div>
+          <div className={styles.hello}> {t('personalArea.profile.hello')} {profile?.firstName}. {t('personalArea.profile.youAreIn')} «{getModeName(mode)}».</div>
       </div>
       </div>
       <div className={styles.mobile}>
          <div className={styles.topBar}>
          {tab !== 'orders' ?
-         <div className={styles.hello}> Hello {profile?.firstName}. You are in «{getModeName(mode)}».</div>
+         <div className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {t('personalArea.profile.youAreIn')} «{getModeName(mode)}».</div>
          :
-         <><img src="/img/icons/Vector 9.svg" alt=""/><Link href={`/PersonalArea/${mode}/personal`}><a className={styles.back}>back</a></Link><div className={styles.orders}>Orders</div></>}
+         <><img src="/img/icons/Vector 9.svg" alt=""/><Link href={`/PersonalArea/${mode}/personal`}><a className={styles.back}>{t('personalArea.profile.mobileBack')}</a></Link><div className={styles.orders}>{t('personalArea.profile.mobileOrders')}</div></>}
       </div>
         </div>
 
@@ -99,5 +101,4 @@ const TabPage = (props) => {
     </>
   )
 }
-
-export default TabPage
+export default withTranslation('common')(TabPage)

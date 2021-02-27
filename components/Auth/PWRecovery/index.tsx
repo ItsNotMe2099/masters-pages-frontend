@@ -7,13 +7,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import { signInOpen} from 'components/Modal/actions'
 import PWRecovery from "./Form";
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isOpen: boolean
-  onRequestClose?: () => void
+  onRequestClose?: () => void,
 }
 
-export default function PWRecoveryComponent(props: Props) {
+const PWRecoveryComponent = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const firstStepIsComplete = useSelector((state: IRootState) => state.PWRecovery.formIsSuccess)
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
@@ -39,10 +41,10 @@ export default function PWRecoveryComponent(props: Props) {
           <img src='/img/PWRecovery/icons/shield.svg' alt=''/>
         </div>
         <div className={styles.headText}>
-          Password recovery
+          {t('auth.passwordRecovery.title')}
         </div>
         <div className={styles.text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisi dolor mauris pretium tortor lectus.
+          {t('auth.passwordRecovery.description')}
         </div>
         <div className={styles.fakeMargin}></div>
           {firstStepIsComplete ?
@@ -51,9 +53,10 @@ export default function PWRecoveryComponent(props: Props) {
           <PWRecovery firstStep onSubmit={handleSubmit}/>}
 
         <div className={styles.signUp}>
-          <div>Remember password?</div>
-          <div><a onClick={() => dispatch(signInOpen())}>Sign in</a></div>
+          <div>        {t('auth.passwordRecovery.rememberPassword')}</div>
+          <div><a onClick={() => dispatch(signInOpen())}>{t('auth.signInLink')}</a></div>
         </div>
     </Modal>
   )
 }
+export default PWRecoveryComponent

@@ -19,10 +19,11 @@ import { IRootState, ITask } from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from "components/TabSelect";
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
-
 }
 const TabOrders = (props: Props) => {
+  const { t } = useTranslation('common');
   const router = useRouter()
   const dispatch = useDispatch()
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -37,11 +38,12 @@ const TabOrders = (props: Props) => {
 
   const { mode, tab, tabSubPage } = router.query
   const tabs = [
-    ...(role === 'client' ? [{name: 'Drafts', key: 'draft'}, {name: 'Published', key: 'published', badge: profile.taskResponseNotificationsCount}] : []),
-    ...(role !== 'client' ? [{name: 'Responses', key: 'responses'}, {name: 'Declined', key: 'declined_responses', badge: profile.taskResponseDeclinedNotificationsCount}, {name: 'Offers', key: 'offers', badge: profile.taskOfferNotificationsCount}] : []),
-    {name: 'Negotiation', key: 'negotiation'},
-    {name: 'In progress', key: 'in_progress'},
-    {name: 'Closed', key: 'closed'},
+    ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: 'draft'}, {name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.taskResponseNotificationsCount}] : []),
+    ...(role !== 'client' ? [{name: t('personalArea.tabOrders.menu.responses'), key: 'responses'}, {name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.taskResponseDeclinedNotificationsCount},
+      {name: t('personalArea.tabOrders.menu.offers'), key: 'offers', badge: profile.taskOfferNotificationsCount}] : []),
+    {name: t('personalArea.tabOrders.menu.negotiation'), key: 'negotiation'},
+    {name: t('personalArea.tabOrders.menu.inProgress'), key: 'in_progress'},
+    {name: t('personalArea.tabOrders.menu.closed'), key: 'closed'},
   ].map(item => {
     return{
       ...item,
@@ -63,12 +65,10 @@ const TabOrders = (props: Props) => {
   }, [tabSubPage])
   useEffect(() => {
     return () => {
-      console.log("TaskUserListReset");
       dispatch(resetTaskUserList());
     }
   }, []);
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
     dispatch(setPageTaskUser(page + 1))
     dispatch(fetchTaskUserList())
   }
@@ -89,7 +89,6 @@ const TabOrders = (props: Props) => {
       </div>
       <div className={styles.mobile}>
         <TabSelect tabs={tabs.map((tab => {
-        console.log("Stat", stat)
         const statResult = stat.find(item => item.task_status === tab.key);
 
         return {...tab, name: `${tab.name} (${statResult ? statResult.count : 0})`}
@@ -111,5 +110,4 @@ const TabOrders = (props: Props) => {
     </div>
   )
 }
-
 export default TabOrders

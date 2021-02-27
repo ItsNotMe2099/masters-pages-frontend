@@ -9,7 +9,9 @@ import cx from 'classnames'
 import nextI18 from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
-export const ModeSelect = () => {
+import {useTranslation, withTranslation} from "react-i18next";
+ const ModeSelect = () => {
+   const { t } = useTranslation('common');
   const role = useSelector((state: IRootState) => state.profile.role)
   const dispatch = useDispatch()
 
@@ -69,3 +71,4 @@ export const ModeSelect = () => {
     </div>
   );
 };
+export default ModeSelect

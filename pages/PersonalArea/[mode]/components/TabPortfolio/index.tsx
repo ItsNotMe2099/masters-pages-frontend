@@ -15,9 +15,10 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {
-
+  t?: (string) => string,
 }
 const TabPortfolio = (props: Props) => {
+  const {t} = props;
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const list = useSelector((state: IRootState) => state.skill.list)

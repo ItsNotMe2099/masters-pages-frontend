@@ -11,8 +11,10 @@ import { maskBirthDate } from "utils/masks";
 import { required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
+import {useTranslation, withTranslation} from "react-i18next";
 
 let TabPersonalForm = (props) => {
+  const { t } = useTranslation('common');
   const error = useSelector((state: IRootState) => state.profile.formError)
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
@@ -21,7 +23,7 @@ let TabPersonalForm = (props) => {
           <Field
             name="firstName"
             component={Input}
-            label="First name*"
+            label={t('personalArea.tabProfile.fieldFirstName')}
             labelType="placeholder"
             validate={required}
           />
@@ -29,14 +31,14 @@ let TabPersonalForm = (props) => {
             name="birthday"
             component={Input}
             labelType="placeholder"
-            label="BOD* MM / DD / YYYY"
+            label={t('personalArea.tabProfile.fieldBirthDate')}
           />
         </div>
         <div className={styles.column}>
           <Field
             name="lastName"
             component={Input}
-            label="Last name*"
+            label={t('personalArea.tabProfile.fieldLastName')}
             labelType="placeholder"
             validate={required}
           />
@@ -44,7 +46,7 @@ let TabPersonalForm = (props) => {
             name="zipcode"
             component={Input}
             labelType="placeholder"
-            label="ZIP Code"
+            label={t('personalArea.tabProfile.fieldZip')}
           />
         </div>
       </div>
@@ -52,14 +54,14 @@ let TabPersonalForm = (props) => {
         name="address1"
         component={Input}
         labelType="placeholder"
-        label="Address"
+        label={t('personalArea.tabProfile.fieldAddress')}
 
       />
       <Field
         name="address2"
         component={Input}
         labelType="placeholder"
-        label="Address2"
+        label={t('personalArea.tabProfile.fieldAddress2')}
       />
 
       <div className={styles.columns}>
@@ -68,7 +70,7 @@ let TabPersonalForm = (props) => {
             name="country"
             component={InputCountry}
             labelType="placeholder"
-            label="Country*"
+            label={t('personalArea.tabProfile.fieldCountry')}
           />
         </div>
         <div className={styles.column}>
@@ -77,13 +79,13 @@ let TabPersonalForm = (props) => {
             name="geonameid"
             component={InputLocation}
             labelType="placeholder"
-            label="Location*"
+            label={t('personalArea.tabProfile.fieldLocation')}
           />
         </div>
       </div>
 
       <FormError error={error}/>
-      <div className={styles.wrapper}><Button className={styles.button} grey={true} bold={true} size={'12px 70px'} >Save changes</Button></div>
+      <div className={styles.wrapper}><Button className={styles.button} grey={true} bold={true} size={'12px 70px'} >{t('personalArea.tabProfile.buttonSave')}</Button></div>
 
     </form>
   )
@@ -93,7 +95,7 @@ let TabPersonalForm = (props) => {
 TabPersonalForm  = reduxForm({
   form: 'tabPersonalForm',
 
-}) (TabPersonalForm )
+}) (TabPersonalForm)
 
 
 export default TabPersonalForm

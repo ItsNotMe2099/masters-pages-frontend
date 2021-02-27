@@ -5,7 +5,16 @@
     "findTask": "Найти задание",
     "masters": "Мастера",
     "volunteers": "Волонтеры",
-    "faq": "FAQ"
+    "faq": "FAQ",
+
+    "signIn": "Вход",
+    "signUp": "Регистрация",
+    "profile": "Профиль",
+    "messages": "Сообщения",
+    "reviews": "Отзывы",
+    "orders": "Заказы",
+    "settings": "Настройки",
+    "logout": "Выход"
   },
   "master": "МАСТЕР",
   "volunteer": "ВОЛОНТЕР",

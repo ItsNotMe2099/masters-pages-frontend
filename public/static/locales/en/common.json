@@ -5,9 +5,217 @@
     "findTask": "Find a task",
     "masters": "Masters",
     "volunteers": "Volunteers",
-    "faq": "FAQ"
-
+    "faq": "FAQ",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "messages": "Messages",
+    "reviews": "Review",
+    "orders": "Orders",
+    "settings": "Settings",
+    "logout": "Logout",
+    "completeRegistration": "Complete registration"
+  },
+  "validation": {
+    "email": "Wrong email format",
+    "passwordMatch": "Wrong email format",
+    "required": "Field required",
+    "phone": "Wrong phone format"
   },
   "master": "MASTER",
-  "volunteer": "VOLUNTEER"
+  "volunteer": "VOLUNTEER",
+  "agreeWith": "I am agree with",
+  "termsAndConditions": "terms and conditions",
+  "auth": {
+    "titleQuick": "Quick Sign in",
+    "signIn": {
+      "title": "Sign in",
+      "fieldLogin": "Phone number or email",
+      "fieldPassword": "Password",
+      "buttonLogin": "LOG IN",
+      "forgotPassword": "Forgot password?",
+      "dontHaveAccount": "Don’t have an account yet?"
+    },
+    "signUpLink": "Sign Up",
+    "signInLink": "Sign In",
+    "signUp": {
+      "title": "Sign up",
+      "fieldPhone": "Phone",
+      "buttonRegistration": "REGISTRATION",
+      "alreadyHaveAccount": "Don’t have an account yet?"
+    },
+    "phoneConfirm": {
+      "title": "Phone number confirmation:",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat",
+      "buttonConfirm": "CONFIRM",
+      "sendAgain": "Send again",
+      "dontReceiveSms": "Dont receive sms?"
+    },
+    "registrationPage": {
+      "title": "Registration complete",
+      "buttonCompleteRegistration": "COMPLETE REGISTRATION",
+      "fieldFirstName": "First Name",
+      "fieldLastName": "Last Name",
+      "fieldEmail": "Email",
+      "fieldPhone": "Phone",
+      "fieldLocation": "Location*",
+      "fieldPassword": "Password",
+      "fieldPasswordConfirm": "Password again",
+      "logout": "Logout"
+    },
+    "registrationSuccess": {
+      "title": "THANK YOU FOR REGISTRATION",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.",
+      "buttonCreateTask": "CREATE A TASK",
+      "buttonBecomeMaster": "BECOME A MASTER",
+      "buttonBecomeVolunteer": "BECOME A VOLUNTEER",
+      "lookAtTaskList": "Look at task list"
+    },
+    "passwordRecovery": {
+      "title": "Password recovery",
+      "description": "Recover your password by your phone",
+      "fieldPhone": "Phone",
+      "buttonReset": "RESET PASSWORD",
+      "rememberPassword": "Remember password?"
+    },
+    "passwordReset": {
+      "title": "Success",
+      "description": "Enter you new password",
+      "fieldNewPassword": "New password",
+      "fieldNewPasswordConfirm": "Password confirm",
+      "buttonSetNewPassword": "SET NEW PASSWORD"
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "fieldOldPassword": "Old password",
+      "fieldNewPassword": "New password",
+      "fieldNewPasswordConfirm": "Password confirm",
+      "buttonChangePassword": "Change password"
+    }
+  },
+  "personalArea": {
+    "profile": {
+      "hello": "Hello",
+      "youAreIn": "You are in",
+      "modeClient": "Client mode",
+      "modeMaster": "Master mode",
+      "modeVolunteer": "Volunteer mode",
+      "location": "Location",
+      "registered": "Registered",
+      "personalLink": "Personal link",
+      "lookHowPeopleSeeYourAccount": "Look how people see your account",
+      "mobileOrders": "Orders",
+      "mobileBack": "Back"
+    },
+    "menu": {
+      "profile": "Personal information",
+      "reviews": "Reviews and rating",
+      "orders": "Orders",
+      "messages": "Messages",
+      "saved": "Saved",
+      "settings": "Settings",
+      "portfolio": "My Portfolio"
+    },
+    "tabProfile": {
+      "requiredField": "required field",
+      "buttonChangePassword": "Change Password",
+      "fieldFirstName": "First Name",
+      "fieldLastName": "Last Name",
+      "fieldBirthDate": "BOD* MM / DD / YYYY",
+      "fieldZip": "ZIP Code",
+      "fieldAddress": "Address",
+      "fieldAddress2": "Address 2",
+      "fieldCountry": "Country*",
+      "fieldLocation": "Location*",
+      "buttonSave": "Save changes"
+    },
+    "tabOrders": {
+      "menu": {
+        "draft": "Drafts",
+        "published": "Published",
+        "negotiation": "Negotiation",
+        "inProgress": "In Progress",
+        "closed": "Closed",
+        "offers": "Offers",
+        "declined": "Declined",
+        "responses": "Responses"
+      }
+    },
+    "tabFeedback": {
+    },
+    "tabSaved": {
+      "menu": {
+        "people": "People",
+        "search": "Search",
+        "tasks": "Tasks"
+      }
+    },
+    "tabSettings": {
+    }
+  },
+  "forms": {
+    "avatarInput": {
+      "uploadYourPhoto": "Upload your photo",
+      "formatAllowed": "Format allowed PNG and JPEG",
+      "minimalSize": "Minimal size",
+      "changePhoto": "Change Photo",
+      "deletePhoto": "Delete Photo"
+    }
+  },
+  "task": {
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "private": "Private",
+      "inProgress": "In progress",
+      "done": "Done",
+      "canceled": "Canceled"
+    },
+    "readMore": "Read more",
+    "edit": "Edit",
+    "delete": "Delete",
+    "publish": "Publish",
+    "unPublish": "Unpublish",
+    "cancel": "Cancel task",
+    "markAsCompleted": "Mark as completed",
+    "share": "Share",
+    "save": "Save",
+    "feedbackToClient": "Post feedback",
+    "paymentMethod": "Payment method",
+    "paymentMethodBank": "Bank account",
+    "paymentMethodCash": "Cash",
+    "paymentMethodSafeDeal": "Safe deal",
+    "deadline": "Deadline",
+    "fixedPrice": "Fixed price",
+    "acceptTask": "ACCEPT TASK",
+    "messages": "Messages",
+    "decline": "Decline",
+    "accept": "Accept",
+    "youDeclined": "You declined",
+    "loadMore": "Load more",
+    "confirmPublish": "Do you want to publish task",
+    "confirmUnPublish": "Do you want to unpublish task",
+    "confirmDelete": "Do you want to delete task",
+    "confirmCancel": "Are you sure that you want to cancel task",
+    "confirmAccept": "Are you sure that you want to accept an offer",
+    "confirmDecline": "Are you sure that you want to reject an offer",
+    "masterList": "Master list",
+    "lessThen": "less then"
+  },
+  "hourly": "Hourly",
+  "deadline": "Deadline",
+  "loadMore": "Load more",
+  "sort": {
+    "title": "Sort by",
+    "newFirst": "New First",
+    "oldFirst": "Old First"
+  },
+  "taskResponse": {
+    "declined": "Declined",
+    "decline": "Decline",
+    "messages": "Messages",
+    "accept": "Accept",
+    "confirmDecline": "Do you want to decline response from",
+    "confirmAccept": "Do you want to accept response from"
+  }
 }

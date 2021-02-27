@@ -1,8 +1,7 @@
 import Button from "components/ui/Button";
-import Comment from "./components/Comment";
+
 import * as React from "react";
 import styles from './index.module.scss'
-import { DropDown } from "components/ui/DropDown";
 import { DropDownInput } from "components/ui/DropDownInput";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,11 +10,13 @@ import { IFeedbacksToProfile, IRootState } from "types";
 import Loader from "components/ui/Loader";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from "next/router";
+import Review from "../../../../../components/Review";
 
 interface Props {
-
+  t?: (string) => string,
 }
 const TabReviews = (props: Props) => {
+  const {t} = props;
   const options = [{label: 'New first', value: 'New first'}, {label: 'Old first', value: 'Old first'}]
   const feedbacks = useSelector((state: IRootState) => state.profileFeedback.list)
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
@@ -50,7 +51,7 @@ const TabReviews = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > feedbacks.length}
           loader={<Loader/>}>
-          {(load ? feedbacks : feedbacks.slice(0, 1)).map(item => <Comment item={item}/>)}
+          {(load ? feedbacks : feedbacks.slice(0, 1)).map(item => <Review item={item}/>)}
         </InfiniteScroll>}
       <div className={total <= 1 || load || loading ? styles.none : styles.btnContainer}>
         <Button onClick={() => setLoadMore(true)} black size="20px 40px"><span>Load more ({total -1})</span></Button>

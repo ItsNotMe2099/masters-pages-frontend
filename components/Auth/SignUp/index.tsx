@@ -8,13 +8,15 @@ import Link from 'next/link'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInOpen} from 'components/Modal/actions'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
-  isOpen: boolean
-  onRequestClose?: () => void
+  isOpen?: boolean
+  onRequestClose?: () => void,
 }
 
-export default function SignUpComponent(props: Props) {
+const SignUpComponent = (props: Props) =>  {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.authSignUp.loading)
   const handleSubmit = (data) => {
@@ -26,21 +28,21 @@ export default function SignUpComponent(props: Props) {
   return (
     <Modal {...props} loading={isLoading}>
         <div className={styles.headText}>
-          Quick sign in:
+          {t('auth.titleQuick')}
         </div>
         <div className={styles.social}>
-          <a href="#" target="_blank"><img src="/img/icons/google.svg" alt=''/></a>
-          <a href="#" target="_blank"><img src="/img/icons/facebook.svg" alt=''/></a>
-          <a href="#" target="_blank"><img src="/img/icons/instagram.svg" alt=''/></a>
+          <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/auth/google/login`}><img src="/img/icons/google.svg" alt=''/></a>
+          <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/auth/facebook/login`}><img src="/img/icons/facebook.svg" alt=''/></a>
         </div>
         <div className={styles.signUpText}>
-          Sign up:
+          {t('auth.signUp.title')}
         </div>
           <SignUp onSubmit={handleSubmit}/>
         <div className={styles.signUp}>
-          <div>Already have an account?</div>
-          <div><a onClick={() => dispatch(signInOpen())}>Sign in</a></div>
+          <div>{t('auth.signUp.alreadyHaveAccount')}</div>
+          <div><a onClick={() => dispatch(signInOpen())}>{t('auth.signInLink')}</a></div>
         </div>
     </Modal>
   )
 }
+export default SignUpComponent

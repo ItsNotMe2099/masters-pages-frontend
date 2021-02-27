@@ -541,67 +541,8 @@ export interface IChatMessage{
               deletedAt: null
           }
       ]
-      task: {
-          id: number
-          profileId: number
-          masterId: number
-          title: string
-          description: string
-          categoryId: number
-          subCategoryId: number
-          masterRole: string
-          executionType: string
-          country: null
-          city: null
-          address: string
-          geonameid: number
-          location: {
-              lng: number
-              lat: number
-          },
-          isExactLocation: boolean
-          ratePerHour: null
-          budget: number
-          estimate: number
-          status: string
-          deadline: null
-          createdAt: string
-          updatedAt: string
-          deletedAt: null
-          photosObjects: [
-              {
-                  id: string,
-                  urlS3: string
-                  createdAt: string
-                  updatedAt: string
-                  deletedAt: null
-              }
-          ],
-          photos: string[]
-          priceType: string
-      },
-      fromProfile: {
-          id: number
-          userId: number
-          role: string
-          firstName: string
-          lastName: string
-          phone: string
-          email: string
-          birthday: null
-          country: null
-          city: string
-          region: null
-          zipcode: null
-          address1: null
-          address2: null
-          geonameid: null
-          location: null
-          isExactLocation: boolean
-          createdAt: string
-          updatedAt: string
-          deletedAt: null
-          photo: null
-      },
+      task: ITask,
+      fromProfile: ProfileData
+      toProfile: ProfileData
       photos: string[]
 }

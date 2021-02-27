@@ -3,8 +3,7 @@ import {
   createFeedBackSite, createFeedBackSiteRequest,
   fetchFeedbacksToProfile,
   fetchFeedbacksToProfileRequest,
-  fetchLatestFeedbacksToProfile,
-  fetchLatestFeedbacksToProfileRequest
+   fetchFeedbacksMainPageRequest
 } from "components/ProfileFeedback/actions";
 import ApiActionTypes from "constants/api";
 import { takeLatest, put, take, select } from 'redux-saga/effects'
@@ -15,11 +14,6 @@ function* ProfileFeedbackSaga() {
   yield takeLatest(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE,
     function* (action: ActionType<typeof fetchFeedbacksToProfile>) {
       yield put(fetchFeedbacksToProfileRequest());
-
-    })
-  yield takeLatest(ActionTypes.FETCH_LATEST_FEEDBACKS_TO_PROFILE,
-    function* (action: ActionType<typeof fetchLatestFeedbacksToProfile>) {
-      yield put(fetchLatestFeedbacksToProfileRequest());
 
     })
 

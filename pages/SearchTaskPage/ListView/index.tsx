@@ -13,7 +13,7 @@ import Loader from "components/ui/Loader";
 import { useRouter } from "next/router";
 import SearchTaskFilter from "pages/SearchTaskPage/Filter";
 import { default as React, useEffect, useState } from "react";
-import { withTranslation } from "react-i18next";
+import {useTranslation, withTranslation} from "react-i18next";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import Header from 'components/layout/Header'
@@ -28,6 +28,7 @@ interface Props {
   onShowMap: () => void
 }
 const SearchTaskListView = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)

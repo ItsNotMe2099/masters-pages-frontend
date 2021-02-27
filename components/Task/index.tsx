@@ -34,6 +34,7 @@ import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskSt
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import StarRating from "../svg/StarRating";
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   task: ITask,
@@ -48,7 +49,8 @@ interface Props {
   onUnPublish?: (task: ITask) => void,
 }
 
-export default function Task({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish, index }: Props) {
+const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish, index }: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const [sortType, setSortType] = useState('newFirst');
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -62,7 +64,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
 
   const handlePublish = () => {
     dispatch(confirmOpen({
-      description: `Do you want to publish task «${task.title}»?`,
+      description: `${t('task.confirmPublish')} «${task.title}»?`,
       onConfirm: () => {
         dispatch(setPublishedTaskUser(task.id, true))
       }
@@ -70,7 +72,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   }
   const handleUnPublish = () => {
     dispatch(confirmOpen({
-      description: `Do you want to unpublish task «${task.title}»?`,
+      description: `${t('task.confirmUnPublish')} «${task.title}»?`,
       onConfirm: () => {
         dispatch(setPublishedTaskUser(task.id, false))
       }
@@ -78,7 +80,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   }
   const handleDelete = () => {
     dispatch(confirmOpen({
-      description: `Do you want to publish task «${task.title}»?`,
+      description: `${t('task.confirmDelete')} «${task.title}»?`,
       onConfirm: () => {
         dispatch(deleteTaskUser(task.id))
       }
@@ -98,7 +100,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
 
   const handleCancel = () => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to cancel task?`,
+      description: `${t('task.confirmCancel')}?`,
       onConfirm: () => {
         dispatch(taskCancel(task.id));
       }
@@ -124,7 +126,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   }
   const handleAccept = () => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to accept an offer?`,
+      description: `${t('task.confirmAccept')}?`,
       onConfirm: () => {
         dispatch(taskNegotiationAcceptTaskOffer(task.negotiations[0]));
       }
@@ -133,7 +135,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
 
   const handleDecline = () => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to reject an offer?`,
+      description: `${t('task.confirmDecline')}?`,
       onConfirm: () => {
         dispatch(taskNegotiationDeclineTaskOffer(task.negotiations[0]));
       }
@@ -205,17 +207,17 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   const getStatusText = () => {
     switch (task.status) {
       case ITaskStatus.Draft:
-        return 'Draft';
+        return t('task.status.draft');
       case ITaskStatus.Published:
-        return 'Published';
+        return t('task.status.published');
       case ITaskStatus.PrivatelyPublished:
-        return 'Private';
+        return t('task.status.private');
       case ITaskStatus.InProgress:
-        return 'In progress';
+        return t('task.status.inProgress');
       case ITaskStatus.Done:
-        return 'Done';
+        return t('task.status.done');
       case ITaskStatus.Canceled:
-        return 'Canceled'
+        return t('task.status.canceled');
     }
   }
   const getStatusClassName = () => {
@@ -239,25 +241,25 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
   const renderActionButton = (action) => {
     switch (action) {
       case 'readMore':
-        return <TaskActionButton title={'Read more'} icon={'down'} onClick={handleReadMore}/>;
+        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>;
       case 'edit':
-        return <TaskActionButton title={'Edit'} icon={'arrow-right'} onClick={handleEdit}/>;
+        return <TaskActionButton title={t('task.edit')} icon={'arrow-right'} onClick={handleEdit}/>;
       case 'delete':
-        return <TaskActionButton title={'Delete'} icon={'delete'} onClick={handleDelete}/>;
+        return <TaskActionButton title={t('task.delete')} icon={'delete'} onClick={handleDelete}/>;
       case 'publish':
-        return <TaskActionButton title={'Publish'} icon={'publish'} onClick={handlePublish}/>;
+        return <TaskActionButton title={t('task.publish')} icon={'publish'} onClick={handlePublish}/>;
       case 'unPublish':
-        return <TaskActionButton title={'Unpublish'} icon={'unpublish'} onClick={handleUnPublish}/>;
+        return <TaskActionButton title={t('task.unPublish')} icon={'unpublish'} onClick={handleUnPublish}/>;
       case 'cancel':
-        return <TaskActionButton title={'Cancel task'} icon={'delete'} onClick={handleCancel}/>;
+        return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel}/>;
       case 'markAsCompleted':
-        return <TaskActionButton title={'Mark as completed'} icon={'mark'} onClick={handleTaskComplete}/>;
+        return <TaskActionButton title={t('task.markAsCompleted')} icon={'mark'} onClick={handleTaskComplete}/>;
       case 'share':
-        return <TaskActionButton title={'Share'} icon={'share'} onClick={handleShare}/>;
+        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>;
       case 'save':
-        return <TaskActionButton title={'Save'} icon={<BookmarkSvg/>} onClick={handleFavorite}/>;
+        return <TaskActionButton title={t('task.save')} icon={<BookmarkSvg/>} onClick={handleFavorite}/>;
       case 'feedbackToClient':
-        return <TaskActionButton title={'Post feedback'} icon={'mark'}  onClick={handleFeedbackByMaster}/>;
+        return <TaskActionButton title={t('task.postFeedback')} icon={'mark'}  onClick={handleFeedbackByMaster}/>;
     }
   }
 
@@ -362,30 +364,30 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
 
           <div className={styles.titleLeft}>
-            Payment method:
+            {t('task.paymentMethod')}
           </div>
           <div className={styles.methodWrapper}>
             <div className={styles.method}>
               <img src="/img/SearchTaskPage/icons/bank.svg" alt=''/>
-              <div className={styles.desc}>Bank account</div>
+              <div className={styles.desc}>   {t('task.paymentMethodBank')}</div>
             </div>
             <div className={styles.method}>
               <img src="/img/SearchTaskPage/icons/cash.svg" alt=''/>
-              <div className={styles.desc}>Cash</div>
+              <div className={styles.desc}>{t('task.paymentMethodCash')}</div>
             </div>
             <div className={styles.methodSafe}>
               <img className={styles.last} src="/img/SearchTaskPage/icons/safe.svg" alt=''/>
-              <div className={styles.desc}>Safe deal</div>
+              <div className={styles.desc}>{t('task.paymentMethodSafeDeal')}</div>
             </div>
 
           </div>
           {task.budget ?
             <div className={styles.priceWrapper}>
               <div className={styles.price}>
-                Fixed price:
+                {t('task.fixedPrice')} :
               </div>
               <div className={styles.priceDetailsValue}>
-                less then <span>${task.budget}</span>
+                {t('task.lessThen')} <span>${task.budget}</span>
               </div>
             </div>
             :
@@ -393,7 +395,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
 
             task.ratePerHour && <div className={styles.priceWrapper}>
               <div className={styles.price}>
-                Hourly:
+                {t('task.hourly')} :
               </div>
               <div className={styles.priceDetailsValue}>
                 <span>${task.ratePerHour}/h</span>
@@ -402,7 +404,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
           }
           {task.deadline && <div className={styles.priceDetailsItem}>
             <div className={styles.priceDetailsLabel}>
-              Deadline:
+              {t('task.deadline')} :
             </div>
             <div className={styles.priceDetailsValue}>
               <span>{format(new Date(task.deadline), 'MM.dd.yyy')}</span>
@@ -410,17 +412,17 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
           </div>}
           <div className={styles.btnContainer}>
             {(actionsType === 'public' && profile && profile.role !== 'client' && !task.lastNegotiation) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>ACCEPT TASK</Button>}
+            <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>    {t('task.acceptTask')} </Button>}
             {((actionsType !== 'public' && ![ITaskStatus.Draft].includes(task.status) && ((actionsType === 'master' && task.negotiations?.length > 0 && [ITaskNegotiationState.Accepted].includes(task.negotiations[0].state)) || (actionsType === 'client' && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status)) || (actionsType === 'master' &&  task.masterId === profile.id && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status))))) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleMessages}>Messages</Button>}
+            <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
             {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>Decline</Button>}
+            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}> {t('task.decline')} </Button>}
             {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>Accept</Button>}
+            <Button bold smallFont transparent size='16px 0' onClick={handleAccept}> {t('task.accept')} </Button>}
             {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.Declined) &&
-            <div className={styles.actionStatus}>You declined</div>}
+            <div className={styles.actionStatus}> {t('task.youDeclined')} </div>}
             {(actionsType === 'public' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.lastNegotiation && task.lastNegotiation.state === ITaskNegotiationState.Accepted) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleMessages}>Messages</Button>}
+            <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
           </div>
         </div>
 
@@ -428,12 +430,12 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
 
       {task.responses?.total > 0 && <div className={styles.responses}>
         <div className={styles.responsesTop}>
-          <div className={styles.responsesTitle}>Masters list ({task.responses?.total})</div>
+          <div className={styles.responsesTitle}>{t('task.masterList')} ({task.responses?.total})</div>
           {task.responses?.total > 0 && <div className={styles.tasksSort}>
-            <span>Sort by:</span>
+            <span>{t('sort.title')}</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
-              { value: 'newFirst', label: 'New First' },
-              { value: 'oldFirst', label: 'Old First' }
+              { value: 'newFirst', label: t('sort.newFirst') },
+              { value: 'oldFirst', label: t('sort.oldFirst') }
             ]} item={(item) => <div>{item?.label}</div>}
             />
           </div>}
@@ -444,7 +446,7 @@ export default function Task({ actionsType, task, className, isActive, onEdit, o
         </div>
         <div className={styles.loadMoreArea}>
           {task.responses?.total > task.responses?.data?.length &&
-          <div className={styles.loadMore} onClick={handleLoadMore}>Load more</div>}
+          <div className={styles.loadMore} onClick={handleLoadMore}>{t('loadMore')}</div>}
         </div>
       </div>}
     </div>
@@ -454,3 +456,5 @@ Task.defaultProps = {
   showProfile: true,
   actionsType: 'public'
 }
+
+export default Task

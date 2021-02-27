@@ -7,7 +7,7 @@ interface Props {
   mini?: boolean
   item: IFeedbacksToProfile
 }
-const Avatar = (props: Props) => {
+const ReviewAvatar = (props: Props) => {
   const { item } = props
   return (
     <div className={styles.root}>
@@ -26,4 +26,4 @@ const Avatar = (props: Props) => {
   )
 }
 
-export default Avatar
+export default ReviewAvatar

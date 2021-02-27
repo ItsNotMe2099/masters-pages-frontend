@@ -10,7 +10,7 @@ import ModalHeader from "./Header";
 
 
 interface Props {
-  isOpen: boolean
+  isOpen?: boolean
   onRequestClose?: () => void,
   size?: 'normal' | 'large' | 'medium'
   title?: string,

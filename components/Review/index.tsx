@@ -1,28 +1,26 @@
-import Avatar from "../../components/Avatar";
 import * as React from "react";
 import styles from './index.module.scss'
 import { IFeedbacksToProfile, IRootState } from "types";
 import format from 'date-fns/format'
-import { useRouter } from "next/router";
-import { useSelector, useDispatch } from 'react-redux'
+import ReviewAvatar from "./components/ReviewAvatar";
 
 interface Props {
   item: IFeedbacksToProfile
 }
-const Comment = (props: Props) => {
+const Review = (props: Props) => {
   const { item } = props
   return (
     <div className={styles.root}>
     <div className={styles.commentTop}>
       <div className={styles.top}>
-        <Avatar item={item}/>
+        <ReviewAvatar item={item}/>
           <div className={styles.date}>
-          {format(new Date(item.task.updatedAt), 'MM/dd/yyy hh:mm')}
+          {format(new Date(item.createdAt), 'MM/dd/yyy hh:mm')}
           </div>
       </div>
       <div className={styles.taskText}>
-        <div className={styles.title}>{item.task.title}</div>
-        <div className={styles.text}>{item.task.description}</div>
+        <div className={styles.title}>{item.task?.title}</div>
+        <div className={styles.text}>{item.task?.description}</div>
         <div className={styles.images}>
           <img src="/img/icons/Rectangle 1134431.png" alt=""/>
           <img src="/img/icons/Rectangle 1134432.png" alt=""/>
@@ -32,7 +30,7 @@ const Comment = (props: Props) => {
     </div>
         <div className={styles.commentBottom}>
           <div className={styles.comment}>
-            <Avatar mini item={item}/>
+            <ReviewAvatar mini item={item}/>
             <div className={styles.textSection}>{item.description}</div>
             <div className={styles.images}>
               <img src="/img/icons/Rectangle 1134431.png" alt=""/>
@@ -46,4 +44,4 @@ const Comment = (props: Props) => {
   )
 }
 
-export default Comment
+export default Review

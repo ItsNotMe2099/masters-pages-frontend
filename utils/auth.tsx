@@ -51,6 +51,10 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     ctx.res.end();
     return;
   }
+  console.log("Query", ctx.req);
+ // if(ctx.req.url.includes('RegistrationPage') && ctx.req.query.token){
+
+  //}
   const { mode } = nextCookie(ctx);
   console.log("get Init", mode);
   const user = token ? await getUser(token) : null
@@ -62,13 +66,23 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
   if(!user){
     return {props: {}};
   }
+  if(user && !user.isRegistrationCompleted &&  !ctx.req.url.includes('RegistrationPage')){
+    ctx.res.writeHead(302, { Location: "/RegistrationPage" });
+    ctx.res.end();
+  }
+  if(user && user.isRegistrationCompleted && ctx.req.url.includes('RegistrationPage')){
+    ctx.res.writeHead(404, { });
+    ctx.res.end();
+  }
   const profile = token && user ? await getProfile(token, mode || 'client') : null;
+  console.log("url", ctx.req.url)
+
   if (ctx.req && profile) {
 
     ctx.store.dispatch(changeRoleNative(mode || 'client'));
     ctx.store.dispatch(fetchProfileSuccess(profile));
   }
-  return {props: { token, user, profile}};
+  return {props: { token, user, ...(profile ? {profile} : {})}};
 })
 
 

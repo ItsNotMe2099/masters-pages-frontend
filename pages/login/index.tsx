@@ -11,13 +11,13 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
 interface Props {
-  t: (string) => string,
   user?: any
 }
 
 const RegistrationPage = (props: Props) => {
-  console.log("PropsUser", props.user)
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const key = useSelector((state: IRootState) => state.modal.modalKey)
   useEffect(() => {
@@ -43,4 +43,4 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
-export default withTranslation('registration')(RegistrationPage)
+export default RegistrationPage

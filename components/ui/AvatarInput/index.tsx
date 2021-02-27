@@ -16,6 +16,7 @@ import S3Upload from 'react-s3-uploader/s3upload'
 import styles from './index.module.scss'
 
 import Cookies from 'js-cookie'
+import {withTranslation} from "react-i18next";
 
 
 export interface AvatarInputProps {
@@ -26,7 +27,8 @@ export interface AvatarInputProps {
   minSize?: number
   multiple?: boolean,
   handleChangePhoto?: (string) => {}
-  handleDeletePhoto?: () => {}
+  handleDeletePhoto?: () => {},
+  t?: (string) => string,
 }
 
 export interface AvatarInputOptions extends DropzoneOptions {
@@ -58,6 +60,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         resource,
         source,
         validate,
+        t,
         input: {value, onChange},
         ...rest
     } = props
@@ -248,21 +251,19 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           {files.length > 0 && <div className={styles.backdrop}/>}
         </div>
         <div className={styles.info}>
-          <div>Upload your photo</div>
-
-          <div> Format allowed PNG and JPEG</div>
-
-          <div> Minimal size: 180×180 px.</div>
+          <div>{t('forms.avatarInput.uploadYourPhoto')}</div>
+          <div>{t('forms.avatarInput.formatAllowed')}</div>
+          <div>{t('forms.avatarInput.minimalSize')}: 180×180 px.</div>
           <div className={styles.infoActions}>
-            <div className={styles.infoActionItem} onClick={handleChangePhoto}>Change photo <img src={'/img/icons/link-arrow-left.svg'} /></div>
-            {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>Delete photo <img src={'/img/icons/link-cross.svg'} /></div>}
+            <div className={styles.infoActionItem} onClick={handleChangePhoto}>{t('forms.avatarInput.changePhoto')} <img src={'/img/icons/link-arrow-left.svg'} /></div>
+            {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>{t('forms.avatarInput.deletePhoto')} <img src={'/img/icons/link-cross.svg'} /></div>}
           </div>
         </div>
         <ErrorInput {...props}/>
             </div>
             <div className={styles.infoActions__mobile}>
-            <div className={styles.infoActionItem} onClick={handleChangePhoto}>Change photo <img src={'/img/icons/link-arrow-left.svg'} /></div>
-            {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>Delete photo <img src={'/img/icons/link-cross.svg'} /></div>}
+            <div className={styles.infoActionItem} onClick={handleChangePhoto}>{t('forms.avatarInput.changePhoto')} <img src={'/img/icons/link-arrow-left.svg'} /></div>
+            {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>{t('forms.avatarInput.deletePhoto')}  <img src={'/img/icons/link-cross.svg'} /></div>}
           </div>
           </>
       )
@@ -287,4 +288,4 @@ AvatarInput.propTypes = {
   placeholder: PropTypes.node,
 }
 
-export default AvatarInput
+export default withTranslation('common')(AvatarInput)

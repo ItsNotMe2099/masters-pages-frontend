@@ -1,4 +1,4 @@
-@import "scss/index";
+@import "../../scss/index";
 
 .root{
     display: flex;
@@ -19,8 +19,8 @@
 
 .border{
     border: 1px dashed #FD5742;
-    border-radius: 50px;
-    padding: 5px 5px 0 5px;
+    border-radius: 100%;
+    padding: 5px;
     margin-bottom: 21px;
   @media screen and (max-width: $sm-max) {
     margin-bottom: 0px;

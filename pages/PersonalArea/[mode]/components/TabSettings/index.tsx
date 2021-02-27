@@ -8,9 +8,10 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {
-
+  t?: (string) => string,
 }
 const TabSettings= (props: Props) => {
+  const {t} = props;
   const dispatch = useDispatch();
 
   const handleSubmit = (data) => {

@@ -10,24 +10,23 @@ import RegistrationForm from './Form'
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
 interface Props {
-  t: (string) => string,
   user?: any
 }
 
 const RegistrationPage = (props: Props) => {
-  console.log("PropsUser", props.user)
+  const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const modalKey = useSelector((state: IRootState) => state.registrationComplete.modalKey)
 
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data)
     dispatch(registrationCompleteSubmit(data));
   }
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        <div className={styles.head}>Registration complete</div>
+        <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>
           <div className={styles.left}>
             <div className={styles.socialText}>
@@ -71,4 +70,4 @@ const RegistrationPage = (props: Props) => {
   )
 }
 export const getServerSideProps = getAuthServerSide({redirect: true});
-export default withTranslation('registration')(RegistrationPage)
+export default RegistrationPage

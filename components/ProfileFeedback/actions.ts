@@ -1,5 +1,6 @@
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
+const queryString = require('query-string')
 
 export const fetchFeedbacksToProfile = () => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE)
 
@@ -10,11 +11,16 @@ export const fetchFeedbacksToProfileRequest = () => action(ActionTypes.FETCH_FEE
   }
 })
 
-export const fetchLatestFeedbacksToProfile = () => action(ActionTypes.FETCH_LATEST_FEEDBACKS_TO_PROFILE)
-
-export const fetchLatestFeedbacksToProfileRequest = () => action(ActionTypes.FETCH_LATEST_FEEDBACKS_TO_PROFILE_REQUEST, {
+export const fetchFeedbacksSiteRequest = (data: any) => action(ActionTypes.FETCH_FEEDBACKS_SITE_REQUEST, {
   api: {
-    url: '/api/feedback/latest?page=1&limit=50&sort=createdAt&sortOrder=DESC',
+    url: `/api/feedback/site?${queryString.stringify(data)}`,
+    method: 'GET',
+  }
+})
+
+export const fetchFeedbacksMainPageRequest = () => action(ActionTypes.FETCH_FEEDBACKS_MAIN_PAGE_REQUEST, {
+  api: {
+    url: '/api/feedback/main-page?page=1&limit=3&sort=createdAt&sortOrder=DESC',
     method: 'GET',
   }
 })
@@ -35,4 +41,5 @@ export const createFeedBackSiteRequest = (data: any) => action(ActionTypes.CREAT
   }
 })
 export const setPageFeedback = (page: number) => action(ActionTypes.FEEDBACK_SET_PAGE, page)
+export const resetFeedbackList = () => action(ActionTypes.RESET_FEEDBACK_LIST)
 

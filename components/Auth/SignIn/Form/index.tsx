@@ -7,9 +7,11 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import {required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 
 let SignIn = props => {
-  const { handleSubmit } = props
+  const { t } = useTranslation('common');
+  const { handleSubmit} = props
   const error = useSelector((state: IRootState) => state.authSignIn.formError)
 
   return (
@@ -17,20 +19,20 @@ let SignIn = props => {
       <Field
         name="phone"
         component={Input}
-        label="Phone number or email"
+        label={t('auth.signIn.fieldLogin')}
         validate={required}
         labelType={'cross'}
       />
       <Field
         name="password"
         component={InputPassword}
-        label="Password"
+        label={t('auth.signIn.fieldPassword')}
         validate={required}
         labelType={'cross'}
       />
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green largeFont size="16px 0">LOG IN</Button>
+        <Button green largeFont size="16px 0">{t('auth.signIn.buttonLogin')}</Button>
       </div>
     </form>
   )
