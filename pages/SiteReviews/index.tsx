@@ -57,8 +57,6 @@ const SiteReviews = (props) => {
     </>
   )
 }
-SiteReviews.getInitialProps = async () => ({
-  namespacesRequired: ['common', 'footer'],
-})
+
 export const getServerSideProps = getAuthServerSide();
 export default SiteReviews

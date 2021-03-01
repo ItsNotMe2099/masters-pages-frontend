@@ -24,8 +24,5 @@ const Home = (props) => {
     </>
   )
 }
-Home.getInitialProps = async () => ({
-  namespacesRequired: ['common', 'footer'],
-})
 export const getServerSideProps = getAuthServerSide();
 export default Home
