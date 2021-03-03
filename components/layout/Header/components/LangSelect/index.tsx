@@ -37,7 +37,7 @@ export const LangSelect = (props: Props) => {
   return (
     <div className={`${styles.root} ${props.isAuth && styles.rootAuth}`}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
-        <img className={styles.dropdownItemIcon} src={`/img/icons/ru.svg`} alt=''/>
+        <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
         <span className={styles.dropdownItemLabel}>{value.label}</span>
         <ArrowDropDown/>
       </a>
@@ -45,7 +45,7 @@ export const LangSelect = (props: Props) => {
         <ul>
           {value &&
           <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
-            <img className={styles.dropdownItemIcon} src={`/img/icons/ru.svg`} alt=''/>
+            <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
             <span className={styles.dropdownItemLabel}>{value.label}</span>
             <img className={styles.arrowActive}
                  src={`/img/icons/arrow_active.svg`}
@@ -55,7 +55,7 @@ export const LangSelect = (props: Props) => {
             <li className={styles.dropdownItem}
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
-                <img className={styles.dropdownItemIcon} src={`/img/icons/ru.svg`} alt=''/>
+                <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${item.value}.svg`} alt=''/>
                 <span className={styles.dropdownItemLabel}>{item.label}</span>
               </a>
             </li>

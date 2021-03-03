@@ -34,6 +34,7 @@
   color: #000;
   font-weight: 600;
   display: flex;
+
   &:hover{
     .dropdownItemLabel {
       font-weight: 700;
@@ -46,6 +47,7 @@
        font-weight: 600;
        padding: 7.5px 15px;
        display: flex;
+       align-items: center;
   }
   &:hover{
     .dropdownItemLabel {
@@ -54,8 +56,13 @@
   }
 }
 .dropdownItemIcon{
-  padding-right: 5px;
+  border: 1px solid #DADADA;
+
+  margin-right: 5px;
   vertical-align: middle;
+  width: 20px;
+  height: 13px;
+  object-fit: cover;
 }
 .dropdownItemLabel{
   font-weight: 600;
@@ -63,13 +70,14 @@
   line-height: 17px;
   padding-right: 6px;
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .arrowActive{
   margin-left: 6px;
 }
 .arrow{
-  padding-left: 6px;
+  padding-left: 0px;
   display: inline-block;
   vertical-align: middle;
 }

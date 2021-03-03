@@ -3,13 +3,16 @@ import ArrowDown from "components/svg/ArrowDown";
 import { fetchTaskSearchList, resetTaskSearchList, setFilterTaskSearch } from "components/TaskSearch/actions";
 import { useRouter } from "next/router";
 import SearchTaskFilter from "pages/SearchTaskPage/Filter";
-import { useState } from "react";
+import {default as React, useState} from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
+import Header from "../../../../components/layout/Header";
 
 const MapHeader = (props) => {
+  const {t} = useTranslation()
   const [expanded, setExpanded] = useState(false)
   const router = useRouter();
   const dispatch = useDispatch()
@@ -28,7 +31,6 @@ const MapHeader = (props) => {
     }
     return {}
   }
-  console.log("get query Filter", getQueryFilter())
   const handleOnChangeFilter = (data) => {
     dispatch(setFilterTaskSearch(data));
     dispatch(resetTaskSearchList())
@@ -36,19 +38,28 @@ const MapHeader = (props) => {
     router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
   }
   return (
-      <div className={styles.root}>
+    <>
+      <div className={styles.headerMobile}>
+        <Header {...props}/>
+      </div>
+      <div  className={`${styles.root} ${expanded && styles.opened}`}>
+
         <div className={`${styles.container}`}>
           <div className={styles.logo}>
             <Logo color={'white'}/>
           </div>
-          <div className={styles.form}>
+          <div className={`${styles.form}`}>
             <SearchTaskFilter form={'searchTaskFormMap'} onChange={handleOnChangeFilter} collapsed={!expanded} initialValues={getQueryFilter()}/>
+
+            <div onClick={handleMoreClick} className={styles.moreMobile}>
+             {expanded ? <span>Hide</span> : <span>{t('taskSearch.filter.showMoreOptions')}</span>}<img className={expanded ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/>
+            </div>
           </div>
 
-          <div className={styles.more} onClick={handleMoreClick}>{expanded ? 'Less' : 'More' } <ArrowDown color={'white'}/></div>
+          <div className={styles.more} onClick={handleMoreClick}>{expanded ? t('taskSearch.filter.less') : t('taskSearch.filter.more')  } <ArrowDown color={'white'}/></div>
         </div>
       </div>
-
+</>
   )
 }
 export default MapHeader

@@ -26,11 +26,12 @@
   "volunteer": "VOLUNTEER",
   "agreeWith": "I am agree with",
   "termsAndConditions": "terms and conditions",
+  "back": "Back",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {
       "title": "Sign in",
-      "fieldLogin": "Phone number or email",
+      "fieldLogin": "Phone number",
       "fieldPassword": "Password",
       "buttonLogin": "LOG IN",
       "forgotPassword": "Forgot password?",
@@ -104,8 +105,7 @@
       "registered": "Registered",
       "personalLink": "Personal link",
       "lookHowPeopleSeeYourAccount": "Look how people see your account",
-      "mobileOrders": "Orders",
-      "mobileBack": "Back"
+      "mobileOrders": "Orders"
     },
     "menu": {
       "profile": "Personal information",
@@ -154,12 +154,47 @@
     }
   },
   "forms": {
+    "requiredFieldsTip": "required field",
     "avatarInput": {
       "uploadYourPhoto": "Upload your photo",
       "formatAllowed": "Format allowed PNG and JPEG",
       "minimalSize": "Minimal size",
       "changePhoto": "Change Photo",
       "deletePhoto": "Delete Photo"
+    },
+    "fileInput": {
+      "title": "choose photo",
+      "description": "Upload your photo, Format allowed PNG and JPEG"
+    },
+    "radiusOfSearchInput": {
+      "values": {
+        "km": "km",
+        "province": "Province",
+        "country": "Country",
+        "world": "World"
+      }
+    },
+    "executionTypeInput": {
+      "values": {
+        "physical": "Physical",
+        "virtual": "Virtual",
+        "combo": "Combo"
+      }
+    },
+    "priceFilterInput": {
+      "from": "From",
+      "under": "Under",
+      "min": "Min",
+      "max": "Max"
+    },
+    "priceTypeInput": {
+      "values": {
+        "fixed": "Fixed price",
+        "rate": "Rate per hour"
+      }
+    },
+    "selectInput": {
+      "emptyActionText": "Dont use"
     }
   },
   "task": {
@@ -208,7 +243,9 @@
   "sort": {
     "title": "Sort by",
     "newFirst": "New First",
-    "oldFirst": "Old First"
+    "oldFirst": "Old First",
+    "highestPrice": "Highest price",
+    "lowestPrice": "Lowest price"
   },
   "taskResponse": {
     "declined": "Declined",
@@ -217,5 +254,85 @@
     "accept": "Accept",
     "confirmDecline": "Do you want to decline response from",
     "confirmAccept": "Do you want to accept response from"
+  },
+  "createTask": {
+    "stat": "View [{{count}}] suitable Masters",
+    "stepFillUpTaskRequest": "Fill up task request",
+    "stepGetOffers": "Get offers",
+    "stepChooseMaster": "Choose a master",
+    "fieldTitle": "Task title",
+    "fieldCategory": "Category",
+    "fieldLocation": "Location",
+    "fieldSubCategory": "Sub category",
+    "fieldMasterType": "Master or volunteer",
+    "fieldExecutionType": "Execution Type",
+    "fieldDeadline": "Deadline",
+    "fieldAddress": "Address",
+    "fieldDescription": "Task description",
+    "buttonCreateTask": "CREATE TASK",
+    "faq": "FAQ",
+    "successTitle": "Your task created",
+    "priceSelect": {
+      "or": "or",
+      "hourlyTaskTitle": "Hourly task",
+      "fixedPriceTaskTitle": "Fixed price",
+      "fieldRatePerHour": "Rate per hour",
+      "fieldEstimate": "Estimate",
+      "fieldBudget": "Budget"
+    }
+  },
+  "taskSearch": {
+    "tasks": "Tasks",
+    "showOnTheMap": "Show on the map",
+    "filter": {
+      "fieldCategory": "Category",
+      "fieldSubCategory": "Subcategory",
+      "fieldRadiusOfSearch": "Radius of search",
+      "fieldLocation": "Location",
+      "fieldExecutionType": "Execution Type",
+      "fieldClientRating": "Client rating",
+      "fieldPrice": "Price",
+      "fieldKeywords": "Keywords",
+      "more": "More",
+      "less": "Less",
+      "showMoreOptions": "Show more options",
+      "hideMoreOptions": "Hide"
+    },
+    "saveTheSearch": "Save the search",
+    "saveTheSearchConfirm": "Do you want to save current search?",
+    "exactLocationTab": "Exact location",
+    "approximateLocationTab": "Approximate location"
+  },
+  "profileSearch": {
+    "masters": "Masters",
+    "volunteers": "Volunteers",
+    "showOnTheMap": "Show on the map",
+
+    "filter": {
+      "fieldCategory": "Category",
+      "fieldSubCategory": "Subcategory",
+      "fieldRadiusOfSearch": "Radius of search",
+      "fieldLocation": "Location",
+      "fieldExecutionType": "Execution Type",
+      "fieldClientRating": "Client rating",
+      "fieldPrice": "Price",
+      "fieldKeywords": "Keywords",
+      "more": "More",
+      "less": "Less",
+      "showMoreOptions": "Show more options",
+      "hideMoreOptions": "Hide"
+    },
+    "saveTheSearch": "Save the search",
+    "saveTheSearchConfirm": "Do you want to save current search?",
+    "exactLocationTab": "Exact location",
+    "approximateLocationTab": "Approximate location"
+  },
+  "createMasterProfile": {
+
+  },
+  "confirmModal": {
+    "title": "Are you sure?",
+    "buttonConfirm": "Confirm",
+    "buttonCancel": "Cancel"
   }
 }

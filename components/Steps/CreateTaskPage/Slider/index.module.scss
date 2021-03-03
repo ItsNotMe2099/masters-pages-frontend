@@ -3,12 +3,27 @@
 .root{
   position: relative;
 }
-
+.slides{
+  display: flex;
+  &__mobile{
+    display: none;
+    @media screen and (max-width: $sm-max){
+      display: block;
+    }
+  }
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
 .slide{
+  flex: 1;
     display: flex !important;
     flex-direction: column;
   align-items: center;
   text-align: center;
+  img{
+
+  }
     @media screen and (max-width: $sm-max){
         flex-direction: column;
         margin: auto;

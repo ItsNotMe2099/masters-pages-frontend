@@ -7,13 +7,11 @@ interface Props {
 
 export default function Step(props: Props) {
   return (
-    <>
-      <div className={styles.columnFirst}> 
-        <div className={styles.columnItem}>
+
+        <div className={styles.root}>
           <img className={styles.icon} src={props.image} alt=''/>
           <div className={styles.text}>{props.text}</div>
         </div>
-      </div>
-    </>
+
   )
 }

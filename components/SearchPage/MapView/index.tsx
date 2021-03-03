@@ -22,6 +22,7 @@ import { inBounds } from "utils/locaion";
 import styles from './index.module.scss'
 import useSupercluster from "use-supercluster";
 import { useDispatch, useSelector } from 'react-redux'
+import {useTranslation} from "react-i18next";
 const queryString = require('query-string')
 
 const Marker = ({ children, lat, lng }) => children;
@@ -32,6 +33,7 @@ interface Props {
 }
 
 const SearchProfileMapView = (props: Props) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('exactLocation')
@@ -94,12 +96,11 @@ const SearchProfileMapView = (props: Props) => {
   }
 
   const tabs = [
-    { name: 'Exact location', key: 'exactLocation' },
-    { name: 'Approximate location', key: 'approximateLocation' },
+    { name: t('profileSearch.exactLocationTab'), key: 'exactLocation' },
+    { name: t('profileSearch.approximateLocationTab'), key: 'approximateLocation' },
   ];
   const handleChangeTab = (item) => {
     setActiveTab(item.key);
-    console.log("HandleChangeTab", item);
     if (item.key === 'exactLocation') {
       dispatch(setUseLocationFilter(true, true));
     } else {
@@ -125,11 +126,11 @@ const SearchProfileMapView = (props: Props) => {
               <div className={styles.tasksTobBar}>
                 <div className={styles.tasksAmount}>{props.searchRole === 'master' ? 'Masters' : 'Volunteers'}: <span>{total}</span></div>
                 <div className={styles.tasksSort}>
-                  <span>Sort by:</span>
+                  <span>{t('sort.title')}:</span>
                   <DropDown onChange={handleSortChange} value={sortType} options={[
-                    { value: 'newFirst', label: 'New First' },
-                    { value: 'highPrice', label: 'Highest price' },
-                    { value: 'lowPrice', label: 'Lowest price' }]}
+                    {value: 'newFirst',  label: t('sort.newFirst')},
+                    {value: 'highPrice', label: t('sort.highestPrice')},
+                    {value: 'lowPrice', label: t('sort.lowestPrice')}]}
                             item={(item) => <div>{item?.label}</div>}
                   />
                 </div>
@@ -143,7 +144,7 @@ const SearchProfileMapView = (props: Props) => {
             </div>
           </div>
           <div className={styles.map}>
-            <Button className={styles.backButton} whiteRed uppercase onClick={props.onShowList}>Back</Button>
+            <Button className={styles.backButton} whiteRed uppercase onClick={props.onShowList}>{t('back')}</Button>
             <Map center={center} onGoogleApiLoaded={({ map }) => {
               mapRef.current = map;
             }}

@@ -74,7 +74,7 @@ const TabPage = (props) => {
          {tab !== 'orders' ?
          <div className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {t('personalArea.profile.youAreIn')} «{getModeName(mode)}».</div>
          :
-         <><img src="/img/icons/Vector 9.svg" alt=""/><Link href={`/PersonalArea/${mode}/personal`}><a className={styles.back}>{t('personalArea.profile.mobileBack')}</a></Link><div className={styles.orders}>{t('personalArea.profile.mobileOrders')}</div></>}
+         <><img src="/img/icons/Vector 9.svg" alt=""/><Link href={`/PersonalArea/${mode}/personal`}><a className={styles.back}>{t('back')}</a></Link><div className={styles.orders}>{t('personalArea.profile.mobileOrders')}</div></>}
       </div>
         </div>
 

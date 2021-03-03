@@ -8,6 +8,7 @@ import styles from './index.module.scss'
 import {required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
+import InputPhone from "../../../ui/Inputs/InputPhone";
 
 let SignIn = props => {
   const { t } = useTranslation('common');
@@ -18,7 +19,7 @@ let SignIn = props => {
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field
         name="phone"
-        component={Input}
+        component={InputPhone}
         label={t('auth.signIn.fieldLogin')}
         validate={required}
         labelType={'cross'}

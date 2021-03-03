@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from "types";
 import styles from './index.module.scss'
+import {useTranslation} from "react-i18next";
 const queryString = require('query-string')
 interface Props {
   initialValues?: any
@@ -21,6 +22,8 @@ interface Props {
   form?: string
 }
 const SearchTaskFilter = (props: Props) => {
+
+  const { t } = useTranslation();
   const dispatch = useDispatch()
   const router = useRouter();
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
@@ -28,7 +31,6 @@ const SearchTaskFilter = (props: Props) => {
 
   const [showMap, setShowMap] = useState(false)
   const handleFilterChange = (data) => {
-    console.log("handleFilterChange", data)
     if(props.onChange){
         props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined});
     }else{
@@ -41,7 +43,7 @@ const SearchTaskFilter = (props: Props) => {
   }
   const handleSaveSearch = () => {
     dispatch(confirmOpen({
-      description: `Do you want to save current search?`,
+      description: t('taskSearch.saveTheSearchConfirm'),
       onConfirm: () => {
         dispatch(saveTaskSearchList(filter));
       }
@@ -50,7 +52,7 @@ const SearchTaskFilter = (props: Props) => {
   return <>
     <SearchTaskForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
     {!props.collapsed && <div className={styles.saveSearchWrapper}>
-    <div className={styles.saveSearch} onClick={handleSaveSearch}>Save the search </div><BookmarkSvg color={'white'}/>
+    <div className={styles.saveSearch} onClick={handleSaveSearch}>{t('taskSearch.saveTheSearch')}</div><BookmarkSvg color={'white'}/>
    </div>}
    </>
 }

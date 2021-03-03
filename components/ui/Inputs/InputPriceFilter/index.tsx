@@ -6,6 +6,7 @@ import SelectInput from "components/ui/Inputs/SelectInput";
 import { useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
+import {useTranslation} from "react-i18next";
 
 interface Props {
   input?: any,
@@ -16,9 +17,11 @@ interface Props {
   type: string
   formKey?: string
   inputLabel?: string
+  className?: string
 }
 
 export default function InputPriceFilter(props: Props) {
+  const {t} = useTranslation()
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
   const { input } = props
@@ -26,15 +29,11 @@ export default function InputPriceFilter(props: Props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [val, setVal] = useState(null);
-
-  console.log("PROPSFORM", props.formKey);
   useEffect(() => {
-    console.log("SetInputValue", input.value)
     setVal(input.value);
   }, [input.value])
   useEffect(() => {
     if(!isActive && val){
-      console.log("setonChange", val)
       input.onChange(val);
     }
   }, [isActive])
@@ -43,29 +42,26 @@ export default function InputPriceFilter(props: Props) {
     setIsActive(!isActive);
   }
   const handleOnChange = (data) => {
-    console.log("onCHange", data);
     setVal(data)
   }
   const formatVal = (data) => {
     if(!data){
       return '';
     }
-    console.log("FormatVal", data);
     if(!data.min && !data.max){
       return '';
     }
     if(!data.max){
-      return `From $${data.min}`
+      return `${t('priceFilterInput.from')} $${data.min}`
     }
     if(!data.min && data.max){
       console.log("FFF", data);
-      return `Under $${data.max}`
+      return `${t('priceFilterInput.under')} $${data.max}`
     }
 
 
     return `$${data.min} - $${data.max}`
   }
-  console.log("input.value", input.value)
 
   return (
     <Input {...props} onClick={onClick}

@@ -42,6 +42,7 @@
   font-weight: 600;
   display: flex;
   align-items: center;
+
   &:hover{
     .dropdownItemLabel {
       font-weight: 700;
@@ -54,6 +55,7 @@
        font-weight: 600;
        padding: 7.5px 15px;
        display: flex;
+    align-items: center;
     color: black !important;
   }
   &:hover{
@@ -63,8 +65,13 @@
   }
 }
 .dropdownItemIcon{
-  padding-right: 5px;
+  border: 1px solid #DADADA;
+
+  margin-right: 5px;
   vertical-align: middle;
+  width: 27px;
+  height: 19px;
+  object-fit: cover;
 }
 .dropdownItemLabel{
   font-weight: 600;

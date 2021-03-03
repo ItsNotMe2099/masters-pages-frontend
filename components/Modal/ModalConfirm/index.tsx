@@ -7,6 +7,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean
   onRequestClose: () => void,
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function ModalConfirm(props: Props) {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   const data = useSelector((state: IRootState) => state.modal.confirmData)
 
@@ -29,11 +31,11 @@ export default function ModalConfirm(props: Props) {
       loading={data.loading}
       {...props}
     >
-      <div className={styles.title}>{data.title || 'Are you sure?'}</div>
+      <div className={styles.title}>{data.title || t('confirmModal.title')}</div>
       {data.description && <div className={styles.description}>{data.description}</div>}
       <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCancel}>{data.cancelText ? data.cancelText : 'Cancel'}</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={data.onConfirm}>{data.confirmText ? data.confirmText : 'Confirm'}</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCancel}>{data.cancelText ? data.cancelText : t('confirmModal.buttonCancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={data.onConfirm}>{data.confirmText ? data.confirmText : t('confirmModal.buttonConfirm')}</Button>
       </div>
 
     </Modal>

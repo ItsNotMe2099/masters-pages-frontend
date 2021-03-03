@@ -16,6 +16,14 @@
     width: 31px !important;
     height: 38px !important;
   }
+  @media screen and (max-width: $sm-max){
+    width: 31px !important;
+    height: 32px !important;
+    svg{
+      width: 31px !important;
+      height: 32px !important;
+    }
+  }
 }
 .normal{
   border-radius: 13px;

@@ -11,3 +11,23 @@
       grid-row-gap: 16px;
     }
 }
+.additionFieldsCollapsed{
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+.filterPrice{
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+.filterSubCategory{
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+.filterLocation{
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}

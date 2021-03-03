@@ -24,19 +24,27 @@
   align-items: stretch;
   height: 100%;
   max-height: 100%;
+  @media (max-width: $sm-max){
+    flex-direction: column;
+  }
 }
 
 .tasks{
   flex: 1;
   display: flex;
   flex-direction: column;
-
+  @media (max-width: $sm-max){
+    flex: 0;
+  }
 
 }
 .tasksWrapper{
   flex: 1;
   padding: 0px 30px 20px;
   overflow-y: auto;
+  @media (max-width: $sm-max){
+    display: none;
+  }
 }
 
 .map{
@@ -53,6 +61,7 @@
 .tasksContainer{
   display: flex;
   padding: 30px 0px;
+
 }
 .tasksTobBar{
   display: flex;

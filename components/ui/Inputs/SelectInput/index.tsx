@@ -7,6 +7,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
 import nextI18 from "i18n";
+import {useTranslation} from "react-i18next";
 
 interface Props {
   options: [{ value: string, label: string }],
@@ -27,6 +28,7 @@ interface Props {
 }
 
 const SelectInput = (props: Props) => {
+  const {t} = useTranslation()
   const { meta: { error, touched },restrictedValues, input, options, onOpenDropDown, label, ...rest } = props;
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -132,7 +134,7 @@ const SelectInput = (props: Props) => {
             <a href="" onClick={handleOptionEmptyClick}>
               {props.withIcon && <div
                 className={`${input.value ? styles.circle__active : styles.circle}`}></div>}
-              <span className={styles.dropdownItemLabel}>{props.emptyText || 'Не использовать'}</span>
+              <span className={styles.dropdownItemLabel}>{props.emptyText || t('forms.selectInput.emptyActionText')}</span>
             </a>
           </li>}
           {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (

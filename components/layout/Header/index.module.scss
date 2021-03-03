@@ -1,6 +1,6 @@
 @import "scss/index";
 .rootWrapper{
-  height: 77px;
+  height: 68px;
 
 }
 .menuDesktop{
@@ -24,7 +24,7 @@
   top: 0px;
   left: 0px;
   right: 0px;
-  z-index: 3;
+  z-index: 4;
   background: white;
   &__open{
     box-shadow: 0px 1px 9px rgba(0, 0, 0, 0.2);

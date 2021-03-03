@@ -20,33 +20,44 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
+import {useTranslation} from "react-i18next";
+const queryString = require('query-string')
 
 let CreateTaskForm = props => {
-  const { handleSubmit } = props
+  const {t} = useTranslation()
+  const { handleSubmit, onChangeForStat } = props
   const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
+  const searchStatCount = useSelector((state: IRootState) => state.profileSearch.searchStatCount)
+  const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
 
+  const getSearchStatFilterLink = () => {
+    console.log("StatFilter", statFilter.masterRole);
+    return `/${statFilter.masterRole === 'volunteer' ?'SearchVolunteerPage' : 'SearchMasterPage'}/?${queryString.stringify({filter: JSON.stringify(statFilter)}, {encode: true}).replace(/(")/g, '%22')}`
+  }
+  //=%7B"categoryId"%3A4%2C"subCategoryId"%3A11%7D
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.mainForm}>
-          <div className={styles.title__top}>Fill up task request</div>
+          <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
           <div className={styles.taskData}>
             <div className={styles.column}>
               <Field
                 name="title"
                 component={Input}
-                label="Task title*"
+                label={`${t('createTask.fieldTitle')}`}
                 validate={required}
               />
               <Field
                 name="geonameid"
                 component={InputLocation}
-                label="Location*"
+                label={`${t('createTask.fieldLocation')}`}
                 validate={required}
               />
               <Field
                 name="masterRole"
+                onChange={(value) => onChangeForStat('masterRole', value)}
                 component={SelectInput}
-                label="Master or volunteer*"
+                label={`${t('createTask.fieldMasterType')}`}
                 options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
                 validate={required}
               />
@@ -55,13 +66,15 @@ let CreateTaskForm = props => {
               <Field
                 name="categoryId"
                 component={InputCategory}
-                label="Category*"
+                onChange={(value) => onChangeForStat('categoryId', value)}
+                label={`${t('createTask.fieldCategory')}`}
                 validate={required}
               />
               <Field
                 name="subCategoryId"
                 component={InputSubCategory}
-                label="Sub category*"
+                onChange={(value) => onChangeForStat('subCategoryId', value)}
+                label={`${t('createTask.fieldSubCategory')}`}
                 categoryId={props.categoryId}
                 validate={required}
               />
@@ -71,7 +84,7 @@ let CreateTaskForm = props => {
             <Field
               name="executionType"
               component={SelectInput}
-              label="Execution Type*"
+              label={`${t('createTask.fieldExecutionType')}`}
               options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
               validate={required}
               labelType={'cross'}
@@ -79,7 +92,7 @@ let CreateTaskForm = props => {
             <Field
               name="deadline"
               component={Input}
-              label="Deadline"
+              label={`${t('createTask.fieldDeadline')}`}
               validate={required}
 
               labelType={'cross'}
@@ -90,14 +103,14 @@ let CreateTaskForm = props => {
           <Field
             name="address"
             component={InputAddress}
-            label="Address"
+            label={`${t('createTask.fieldAddress')}`}
           />
           </div>
           <div className={styles.taskDesc}>
             <Field
               name="description"
               component={TextArea}
-              label="Task description*"
+              label={`${t('createTask.fieldDescription')}`}
               validate={required}
             />
           </div>
@@ -116,16 +129,23 @@ let CreateTaskForm = props => {
           <Field
             name="terms"
             component={Checkbox}
-            label={<div>I am agree with <Link href="/">terms and conditions</Link></div>}
+            label={<div>{t('agreeWith')} <Link href="/">{t('termsAndConditions')}</Link></div>}
           />
         </div>
           <FormError error={error}/>
         <div className={styles.btnContainer}>
-            <Button red size="14px 65px">CREATE TASK</Button>
+            <Button red size="14px 65px">{t('createTask.buttonCreateTask')}</Button>
           </div>
         </div>
-        <div className={styles.faq}>
-          <div className={styles.title__top}>FAQ</div>
+      <div className={styles.right}>
+      {searchStatCount && <div className={styles.stat}>
+        <Link href={getSearchStatFilterLink()}>
+          <a>{t('createTask.stat', {count: searchStatCount})}</a>
+        </Link>
+      </div>}
+
+      <div className={styles.faq}>
+          <div className={styles.title__top}>{t('createTask.faq')}</div>
           <Accordion title="Question #1" content="Answer"/>
           <Accordion title="Question #2" content="Answer"/>
           <Accordion title="Question #3" content="Answer"/>
@@ -133,6 +153,7 @@ let CreateTaskForm = props => {
           <Accordion title="Question #5" content="Answer"/>
           <Accordion title="Question #6" content="Answer"/>
         </div>
+      </div>
       </form>
   )
 }

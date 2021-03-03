@@ -24,15 +24,20 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Sticky from 'react-stickynode';
 import ArrowDown from "components/svg/ArrowDown";
 const queryString = require('query-string')
+import {
+  useWindowSize,
+  useWindowWidth,
+  useWindowHeight,
+} from '@react-hook/window-size'
 interface Props {
   onShowMap: () => void
 }
 const SearchTaskListView = (props: Props) => {
+  const width = useWindowWidth()
   const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-console.log("CurrentProfile", profile);
   const loading = useSelector((state: IRootState) => state.taskSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.taskSearch.sortType)
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
@@ -40,12 +45,11 @@ console.log("CurrentProfile", profile);
   const total = useSelector((state: IRootState) => state.taskSearch.total)
   const page = useSelector((state: IRootState) => state.taskSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
-  const [isShow, setIsShow] = useState(false)
-
+  const [isShow, setIsShow] = useState(width > 700)
+  console.log("WindowWidth", isShow )
   useEffect(() => {
     dispatch(resetTaskSearchList());
     if(router.query.filter) {
-      console.log("Set filter", JSON.parse((router.query as any).filter))
       dispatch(setFilterTaskSearch(JSON.parse((router.query as any).filter)));
     }
     if(router.query.sortType) {
@@ -56,14 +60,12 @@ console.log("CurrentProfile", profile);
 
 
   const handleSortChange = (item) => {
-    console.log("ChangeSort", item)
     dispatch(setSortTaskSearch(item.value));
     dispatch(resetTaskSearchList())
     dispatch(fetchTaskSearchList())
     router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
     dispatch(setPageTaskSearch(page + 1))
     dispatch(fetchTaskSearchList())
   }
@@ -73,7 +75,6 @@ console.log("CurrentProfile", profile);
   const getQueryFilter = () => {
     try {
       if((router.query as any).filter) {
-        console.log("Filter", JSON.parse((router.query as any).filter))
         return JSON.parse((router.query as any).filter);
       }
     }catch (e) {
@@ -86,16 +87,11 @@ console.log("CurrentProfile", profile);
     <Header {...props}/>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
-        <SearchTaskFilter initialValues={getQueryFilter()}/>
-      </div>
-      <div className={styles.form__mobile}>
-        {isShow ?
-        <SearchTaskFilter initialValues={getQueryFilter()}/>
-        :
-        <SearchTaskFilter collapsed initialValues={getQueryFilter()}/>}
-        <a onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
-          <div>{isShow ? <span>Hide</span> : <span>Show more options</span>}<img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/></div>
-        </a>
+        <SearchTaskFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
+        <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
+          {isShow ? <span>{t('taskSearch.filter.hideMoreOptions')}</span> : <span>{t('taskSearch.filter.showMoreOptions')}</span>}
+          <img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/>
+        </div>
       </div>
     </div>
     <div className={styles.container}>
@@ -106,23 +102,23 @@ console.log("CurrentProfile", profile);
         <div className={styles.map}>
           <Map/>
         </div>
-        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={props.onShowMap}>Show on the map</Button>
-        <div className={styles.filter}>
+        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={props.onShowMap}>{t('taskSearch.showOnTheMap')}</Button>
+            {/*<div className={styles.filter}>
           <div className={styles.filterLabel}>Key words</div>
           <Input input={{value: null, onChange: () => {}}}/>
-        </div>
+        </div>*/}
           </div>
         </Sticky>
       </div>
       <div className={styles.tasks} id={'tasks-list'}>
          <div className={styles.tasksTobBar}>
-           {!loading && <div className={styles.tasksAmount}>Tasks: <span>{total}</span></div>}
+           {!loading && <div className={styles.tasksAmount}>{t('taskSearch.tasks')}: <span>{total}</span></div>}
           {tasks.length > 0 && <div className={styles.tasksSort}>
-            <span>Sort by:</span>
+            <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: 'New First'},
-              {value: 'highPrice', label: 'Highest price'},
-              {value: 'lowPrice', label: 'Lowest price'}]}
+              {value: 'newFirst',  label: t('sort.newFirst')},
+              {value: 'highPrice', label: t('sort.highestPrice')},
+              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
                       item={(item) => <div>{item?.label}</div>}
             />
           </div>}

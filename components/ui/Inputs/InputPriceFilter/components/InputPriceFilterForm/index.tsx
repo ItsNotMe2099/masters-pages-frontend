@@ -12,8 +12,10 @@ import { parserPrice } from "utils/formatters";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
+import {useTranslation} from "react-i18next";
 
 let InputPriceFilterForm = (props) => {
+  const {t} = useTranslation()
   const error = useSelector((state: IRootState) => state.profile.formError)
 
   console.log("InputPriceFilterForm", props.form)
@@ -27,15 +29,15 @@ let InputPriceFilterForm = (props) => {
           size={'small'}
           validate={required}
           options={[
-            {label: 'Fixed price', value: 'fixed'},
-            {label: 'Rate per hour', value: 'rate'}
+            {label: t('forms.priceTypeInput.values.fixed'), value: 'fixed'},
+            {label:  t('forms.priceTypeInput.values.rate'), value: 'rate'}
           ]}
         />
       </div>
       <div className={styles.column}>
       <Field
         name="min"
-        label="Min"
+        label={t('forms.priceFilterInput.min')}
         size={'small'}
         component={Input}
         noMargin={true}
@@ -47,7 +49,7 @@ let InputPriceFilterForm = (props) => {
       <Field
         name="max"
         size={'small'}
-        label="Max"
+        label={t('forms.priceFilterInput.max')}
         component={Input}
         noMargin={true}
         format={(value) => `$ ${value || ''}`}

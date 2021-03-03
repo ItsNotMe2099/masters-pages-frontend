@@ -11,6 +11,14 @@ export const fetchProfileSearchListRequest = (data: any) => action(ActionTypes.F
     method: 'GET',
   }
 })
+export const fetchProfileSearchStatRequest = (data: any) => action(ActionTypes.FETCH_PROFILE_SEARCH_STAT_REQUEST, {
+  api: {
+    url: `/api/profile/search?${queryString.stringify({...data, budgetMin: data.price?.min, budgetMax: data.price?.max, price: undefined})}`,
+    method: 'GET',
+  }
+})
+export const setSearchStatFilter = (data: any) => action(ActionTypes.SET_SEARCH_STAT_FILTER, data)
+export const resetSearchStat = () => action(ActionTypes.RESET_SEARCH_STAT)
 
 export const resetProfileSearchList = () => action(ActionTypes.RESET_PROFILE_SEARCH)
 export const setPageProfileSearch = (page: number) => action(ActionTypes.PROFILE_SEARCH_SET_PAGE, page)
@@ -26,5 +34,6 @@ export const saveProfileSearchListRequest = (data: any) => action(ActionTypes.PR
     data,
   }
 })
+
 
 export const setRoleProfileSearch = (role) => action(ActionTypes.PROFILE_SEARCH_SET_ROLE, role)

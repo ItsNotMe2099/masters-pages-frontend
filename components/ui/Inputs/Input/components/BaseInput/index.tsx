@@ -4,6 +4,7 @@ import styles from './index.module.scss'
 import { WrappedFieldProps } from 'redux-form';
 import debounce from 'lodash.debounce';
 
+import InputMask from 'react-input-mask'
 type OnChange = (evt: React.ChangeEvent<HTMLInputElement>) => any;
 
 interface Indexed {
@@ -26,6 +27,9 @@ interface Props {
   onChange?: any,
   value?: any,
   size?: any
+  mask?: string
+  alwaysShowMask?: boolean
+  maskChar?: string
   inputClassName?: string
   withBorder: boolean,
   transparent: boolean,
@@ -36,7 +40,7 @@ interface Props {
 
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
-
+  const {mask} = props;
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
@@ -101,16 +105,23 @@ export default function BaseInput(props: Props) {
     }
   }, [ call, setDebouncing, props.input?.onChange ]);
 
-  return ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
-                  autocomplete="off"
-                  type={props.type || 'text'}
-                  ref={props.parentRef}
-                  {...props}
-                  {...props.input}
-                  value={debounceFieldValue}
-    {...(props.debounce > 0 ? {value: debounceFieldValue, onChange, onBlur, onKeyDown} :
+  const renderInput = (inputProps) => {
+    return  ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
+                     autocomplete="off"
+                     type={props.type || 'text'}
+                     ref={props.parentRef}
+                     {...props}
+                     {...inputProps}
+                     {...(props.debounce > 0 ? {value: debounceFieldValue, onChange, onBlur, onKeyDown} :
 
-      {})}/>)
+                       {})}/>)
+  }
+  return mask ? (
+    <InputMask mask={mask}    {...(props.debounce > 0 ? {value: debounceFieldValue} : {value: props.input.value, onChange: props.input.onChange}) }  maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
+      {(inputProps) => renderInput(inputProps)}
+    </InputMask>
+  ) : renderInput(props.input);
+
 }
 BaseInput.defaultProps = {
   withBorder: true,

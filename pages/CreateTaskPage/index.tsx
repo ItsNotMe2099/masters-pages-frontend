@@ -11,14 +11,39 @@ import styles from './index.module.scss'
 import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useSelector, useDispatch } from 'react-redux'
 import SimpleSlider from 'components/Steps/CreateTaskPage/Slider';
+import {
+  fetchProfileSearchStatRequest,
+  resetSearchStat,
+  setSearchStatFilter
+} from "../../components/ProfileSearch/actions";
+import {useEffect, useState} from "react";
+import {useTranslation} from "react-i18next";
 
 const CreateTaskPage = (props) => {
+  const {t} = useTranslation()
   const dispatch = useDispatch()
   const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
   const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
+  const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
+
+  useEffect(() => {
+    dispatch(resetSearchStat());
+    return () => {
+      dispatch(resetSearchStat());
+    }
+  }, [])
   const handleSubmit = (data) => {
   console.log("HandleSubmit", data)
     dispatch(createTaskComplete(data));
+  }
+  const handleChangeForStat = (key, value) => {
+  console.log("handleChangeForStat", key, value);
+    statFilter[key] = value;
+    dispatch(setSearchStatFilter(statFilter));
+    dispatch(fetchProfileSearchStatRequest({
+      limit: 1,
+      ...statFilter
+    }));
   }
 
   return (
@@ -31,8 +56,8 @@ const CreateTaskPage = (props) => {
       </div>
       <div className={styles.container}>
 
-        <div className={styles.required}>* required field</div>
-        <CreateTaskForm onSubmit={handleSubmit}/>
+        <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
+        <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat}/>
         <div className={styles.footer}>
           <Footer/>
         </div>
@@ -41,7 +66,7 @@ const CreateTaskPage = (props) => {
 
       <Modal
         {...props}
-        title={'Your task created'}
+        title={t('createTask.successTitle')}
         image={'img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
         window.location.href = '/'

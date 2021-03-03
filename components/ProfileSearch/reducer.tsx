@@ -20,6 +20,8 @@ const formatSkillList = (data) => {
 
 
 export interface ProfileSearchState {
+  searchStatCount?: number,
+  searchStatFilter: any
   list: ProfileData[],
   listLoading: boolean,
   role: 'master' | 'volunteer'
@@ -37,6 +39,7 @@ export interface ProfileSearchState {
 const initialState: ProfileSearchState = {
   list: [],
   listLoading: false,
+  searchStatFilter: {},
   total: 0,
   page: 1,
   filter: {},
@@ -106,6 +109,17 @@ export default function ProfileSearchReducer(state = { ...initialState }, action
     case ActionTypes.PROFILE_SEARCH_SET_ROLE:
       console.log("SetRole", action.payload)
         state.role = action.payload;
+      break;
+    case ActionTypes.SET_SEARCH_STAT_FILTER:
+      state.searchStatFilter = action.payload;
+      break;
+    case ActionTypes.FETCH_PROFILE_SEARCH_STAT_REQUEST + ApiActionTypes.SUCCESS:
+      console.log("StatData", action.payload.total);
+      state.searchStatCount = action.payload.total;
+      break;
+    case ActionTypes.RESET_SEARCH_STAT:
+      state.searchStatFilter = {};
+      state.searchStatCount = null;
       break;
   }
 

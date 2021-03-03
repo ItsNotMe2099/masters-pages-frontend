@@ -21,6 +21,9 @@ import Footer from 'components/layout/Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Sticky from 'react-stickynode';
+import SearchTaskFilter from "../../../pages/SearchTaskPage/Filter";
+import {useTranslation} from "react-i18next";
+import {useWindowWidth} from "@react-hook/window-size";
 const queryString = require('query-string')
 interface Props {
   searchRole: 'master' | 'volunteer',
@@ -29,6 +32,8 @@ interface Props {
 const SearchProfileListView = (props: Props) => {
   const dispatch = useDispatch()
   const router = useRouter();
+  const { t } = useTranslation('common');
+  const width = useWindowWidth()
   const loading = useSelector((state: IRootState) => state.profileSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
   const filter = useSelector((state: IRootState) => state.profileSearch.filter)
@@ -36,7 +41,7 @@ const SearchProfileListView = (props: Props) => {
   const total = useSelector((state: IRootState) => state.profileSearch.total)
   const page = useSelector((state: IRootState) => state.profileSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
-  const [isShow, setIsShow] = useState(false)
+  const [isShow, setIsShow] = useState(width > 700)
 
   console.log("Tasks", tasks);
   useEffect(() => {
@@ -77,17 +82,13 @@ const SearchProfileListView = (props: Props) => {
     <Header {...props}/>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
-        <SearchProfileFilter  searchRole={props.searchRole} initialValues={getQueryFilter()}/>
+        <SearchTaskFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
+        <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
+          {isShow ? <span>{t('profileSearch.filter.hideMoreOptions')}</span> : <span>{t('profileSearch.filter.showMoreOptions')}</span>}
+          <img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/>
+        </div>
       </div>
-      <div className={styles.form__mobile}>
-        {isShow ?
-        <SearchProfileFilter initialValues={getQueryFilter()}/>
-        :
-        <SearchProfileFilter collapsed initialValues={getQueryFilter()}/>}
-        <a onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
-          <div>{isShow ? <span>Hide</span> : <span>Show more options</span>}<img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/></div>
-        </a>
-      </div>
+
     </div>
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
@@ -97,23 +98,23 @@ const SearchProfileListView = (props: Props) => {
         <div className={styles.map}>
           <Map/>
         </div>
-        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={props.onShowMap}>Show on the map</Button>
-        <div className={styles.filter}>
+        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={props.onShowMap}>{t('profileSearch.showOnTheMap')}</Button>
+            {/*<div className={styles.filter}>
           <div className={styles.filterLabel}>Key words</div>
           <Input input={{value: null, onChange: () => {}}}/>
-        </div>
+        </div>*/}
           </div>
         </Sticky>
       </div>
       <div className={styles.tasks} id={'tasks-list'}>
          <div className={styles.tasksTobBar}>
-           {!loading && <div className={styles.tasksAmount}>{props.searchRole === 'master' ? 'Masters' : 'Volunteers'}: <span>{total}</span></div>}
+           {!loading && <div className={styles.tasksAmount}>{props.searchRole === 'master' ? t('profileSearch.masters') : t('profileSearch.volunteers') }: <span>{total}</span></div>}
           {tasks.length > 0 && <div className={styles.tasksSort}>
-            <span>Sort by:</span>
+            <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: 'New First'},
-              {value: 'highPrice', label: 'Highest price'},
-              {value: 'lowPrice', label: 'Lowest price'}]}
+              {value: 'newFirst',  label: t('sort.newFirst')},
+              {value: 'highPrice', label: t('sort.highestPrice')},
+              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
                       item={(item) => <div>{item?.label}</div>}
             />
           </div>}

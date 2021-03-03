@@ -4,6 +4,28 @@
   align-items: stretch;
   background: #E4474E;
   padding: 30px 9px;
+  @media (max-width: $sm-max){
+    display: block;
+    padding: 13px 22px;
+  }
+  &.opened {
+    @media (max-width: $sm-max) {
+      position: fixed;
+      top: 68px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow-y: auto;
+      z-index: 3;
+    }
+  }
+}
+
+.headerMobile{
+  display: none;
+  @media (max-width: $sm-max){
+    display: block;
+  }
 }
 
 .container{
@@ -11,6 +33,9 @@
   flex-direction: row;
   width: 100%;
 
+  @media (max-width: $sm-max){
+    display: block;
+  }
   @include lg{
     width: $container-lg;
     margin: auto;
@@ -22,6 +47,9 @@
 }
 .logo{
   margin-right: 30px;
+  @media (max-width: $sm-max){
+    display: none;
+  }
 }
 .more{
   color: #ffffff;
@@ -31,8 +59,26 @@
   align-items: center;
   margin-left: 30px;
   cursor: pointer;
-
+  @media (max-width: $sm-max){
+    display: none;
+  }
   svg{
     margin-left: 15px;
+  }
+}
+.moreMobile{
+  margin-top: 15px;
+  display: none;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  line-height: 17px;
+  img {
+    margin-left: 10px;
+  }
+  @media (max-width: $sm-max){
+    display: block;
   }
 }

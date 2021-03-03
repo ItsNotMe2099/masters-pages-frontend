@@ -2,8 +2,10 @@ import Input from "components/ui/Inputs/Input";
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 
 import styles from './index.module.scss'
+import {useTranslation} from "react-i18next";
 
 let PriceSelectForm = props => {
+  const {t} = useTranslation();
   const { handleSubmit } = props
   const handleHourFieldChange = () => {
     props.change('budget', null);
@@ -15,14 +17,14 @@ let PriceSelectForm = props => {
   return (
     <div className={styles.root}>
       <div className={styles.hourlySection}>
-        <div className={styles.title}>Horly task</div>
+        <div className={styles.title}>{t('createTask.priceSelect.hourlyTaskTitle')}</div>
         <div className={styles.fields}>
           <div className={styles.inputHour}>
             <Field
               name="ratePerHour"
               component={Input}
               placeholder="0.01 - 100"
-              label="Rate per hour"
+              label={t('createTask.priceSelect.fieldRatePerHour')}
               labelType={'static'}
               min="0.01"
               max="100.00"
@@ -36,7 +38,7 @@ let PriceSelectForm = props => {
               name="estimate"
               component={Input}
               placeholder="max 30 days"
-              label="Estimate"
+              label={t('createTask.priceSelect.fieldEstimate')}
               labelType={'static'}
               type={'number'}
               min="1"
@@ -49,20 +51,20 @@ let PriceSelectForm = props => {
       </div>
       <div className={styles.orSection}>
         <div className={styles.orWrapper}>
-        <div className={styles.orText}>or</div>
+        <div className={styles.orText}>{t('createTask.priceSelect.or')}</div>
         <div className={styles.orBorder}></div>
         </div>
       </div>
 
       <div className={styles.fixedSection}>
-        <div className={styles.title}>Fixed price</div>
+        <div className={styles.title}>{t('createTask.priceSelect.fixedPriceTaskTitle')}</div>
         <div className={styles.fields}>
           <div className={styles.inputFixed}>
             <Field
               name="budget"
               component={Input}
               placeholder="1 - 5 000"
-              label="Budget"
+              label={t('createTask.priceSelect.fieldBudget')}
               labelType={'static'}
               min="1"
               max="5000"

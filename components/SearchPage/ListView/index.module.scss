@@ -19,9 +19,9 @@
 .filters{
   background: #E4474E;
   padding: 40px 0 40px;
+
   @media screen and (max-width: $sm-max){
-    padding: 0 22px 12px 22px;
-    margin-top: -10px;
+    padding: 12px 22px 12px 22px;
     position: relative;
     z-index: 3;
   }
@@ -34,38 +34,37 @@
 }
 
 .form{
-  width: 1250px;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
   margin: auto;
-  @media screen and (max-width: $sm-max){
-    width: 100%;
+  .more {
     display: none;
   }
-  &__mobile{
-    @media screen and (min-width: $md-min){
-      display: none;
-    }
-    form{
-      margin-bottom: 15px;
-    }
-    a{
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+
+    .more {
       cursor: pointer;
-      display: flex;
+      display: block;
       margin-top: 15px;
-      div{
-        margin: auto;
+      text-align: center;
+      font-weight: 500;
+      font-size: 14px;
+      color: #fff;
+      line-height: 17px;
+      img {
+        margin-left: 10px;
       }
-      span{
-        font-weight: 500;
-        font-size: 14px;
-        color: #fff;
-        line-height: 17px;
-        margin-right: 10px;
-      }
-      svg{
-        height: 16px;
-      }
+
     }
   }
+
 }
 .sidebar{
   width: 328px;
@@ -78,6 +77,11 @@
     height: 85px;
     background-size: cover;
     box-shadow: (0px 33.0756px 44.1008px rgba(0, 0, 0, 0.04)), (0px 22.0504px 33.0756px rgba(0, 0, 0, 0.04)), (0px 5.51261px 11.0252px rgba(0, 0, 0, 0.04)), (0px 0px 1.37815px rgba(0, 0, 0, 0.04));
+    :global .sticky-inner-wrapper {
+      position: static!important;
+      transform: none !important;
+      width: auto !important;
+    }
     div{
       width: 100%;
     }

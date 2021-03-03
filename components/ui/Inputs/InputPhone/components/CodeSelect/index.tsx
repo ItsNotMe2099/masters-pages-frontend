@@ -10,11 +10,11 @@ export const CodeSelect = (props) => {
     e.preventDefault()
     setIsActive(!isActive);
   }
-  const [value, setValue] = useState(props.value);
-
+  const value = props.value;
+  const code = value?.code;
+  console.log("SetValueFlag", value, code)
   const handleOptionClick = (e, item) => {
     e.preventDefault();
-    setValue(item);
     setIsActive(false);
 
     props.onChange(item);
@@ -26,15 +26,14 @@ export const CodeSelect = (props) => {
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
-        <img className={styles.dropdownItemIcon} src={`img/icons/ru.svg`} alt=''/>
-        <span className={styles.dropdownItemLabel}>{props.formatTriggerLabel ? props.formatTriggerLabel(value) : value.label}</span>
+        <img className={styles.dropdownItemIcon} src={`img/icons/flags/${code?.toLowerCase()}.svg`} alt=''/>
         <img className={styles.arrow} src={`img/icons/arrow.svg`} alt=''/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <ul>
           {value &&
           <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
-            <img className={styles.dropdownItemIcon} src={`img/icons/ru.svg`} alt=''/>
+            <img className={styles.dropdownItemIcon} src={`img/icons/flags/${code?.toLowerCase()}.svg`} alt=''/>
             <span className={styles.dropdownItemLabel}>{value.label}</span>
             <img className={styles.arrowActive}
                  src={`img/icons/arrow_active.svg`}
@@ -44,7 +43,7 @@ export const CodeSelect = (props) => {
             <li className={styles.dropdownItem}
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
-                <img className={styles.dropdownItemIcon} src={`img/icons/ru.svg`} alt=''/>
+                <img className={styles.dropdownItemIcon} src={`img/icons/flags/${item.code.toLowerCase()}.svg`} alt=''/>
                 <span className={styles.dropdownItemLabel}>{item.label}</span>
               </a>
             </li>

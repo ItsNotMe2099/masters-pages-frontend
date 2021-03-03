@@ -1,12 +1,11 @@
 @import "scss/index";
 
-.columnFirst{
-    display: flex;
-}
 
-.columnItem{
+
+.root{
     display: flex;
     flex-direction: column;
+    align-items: center;
     @media screen and (max-width: $sm-max){
         flex-direction: column;
         margin: auto;
@@ -16,11 +15,11 @@
 .text{
     @include lg{
         font-size: 24px;
-        line-height: 29px;
+
     }
     @media screen and (max-width: $sm-max){
         font-size: 18px;
-        line-height: 22px;
+
     }
     font-weight: bold;
     text-align: center;
@@ -38,7 +37,7 @@
 }
 
 .icon{
-    flex: 1;
+  max-width: 70px;
     @include lg{
         margin-bottom: 39px;
     }
