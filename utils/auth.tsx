@@ -9,6 +9,9 @@ import request from "utils/request";
 import {wrapper} from 'store';
 
 export const auth = ctx => {
+  if(ctx.req.url.includes('RegistrationPage') && ctx.query.token){
+      return ctx.query.token;
+  }
     const { token } = nextCookie(ctx);
     return token;
 };
@@ -51,10 +54,8 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     ctx.res.end();
     return;
   }
-  console.log("Query", ctx.req);
- // if(ctx.req.url.includes('RegistrationPage') && ctx.req.query.token){
+  console.log("Query", ctx.query);
 
-  //}
   const { mode } = nextCookie(ctx);
   console.log("get Init", mode);
   const user = token ? await getUser(token) : null
