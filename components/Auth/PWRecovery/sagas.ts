@@ -13,7 +13,7 @@ import {
   PWRecoverySecondError,
   PWRecoverySuccess,
   PWRecoverySecondSuccess,
-  PWRecoveryFinalSuccess
+  PWRecoveryFinalSuccess, PWRecoverySetCode
 } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
@@ -32,7 +32,11 @@ function* PWRecoverySaga() {
         },
       } as IRequestData)
       console.log("Res phone", res)
+
       if(!res.err){
+        if(res.data.code){
+          yield put(PWRecoverySetCode(res.data.code));
+        }
         yield put(PWRecoverySuccess())
         yield put({type: ActionTypes.RESET_PW_FIRST_STEP_SUCCESS})
       }else{

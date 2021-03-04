@@ -4,6 +4,7 @@ export interface PWRecoveryState {
   formIsSuccess: boolean
   phone: string,
   code: string,
+  codeSet?: string,
   isOpen: boolean,
   isOpenSuccess: boolean,
   password: string,
@@ -38,7 +39,10 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       state.loading = false;
       state.formError = action.payload.error
       break
-
+    case ActionTypes.RESET_PW_SET_CODE:
+      state.codeSet = action.payload;
+      console.log("     state.codeSet",      state.codeSet)
+      break;
     case ActionTypes.RESET_PW_SECOND_STEP_SUBMIT:
       state.code = action.payload.code
       state.loading = true;

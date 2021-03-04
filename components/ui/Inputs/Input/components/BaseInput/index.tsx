@@ -28,6 +28,7 @@ interface Props {
   value?: any,
   size?: any
   mask?: string
+  disabled?: boolean
   alwaysShowMask?: boolean
   maskChar?: string
   inputClassName?: string
@@ -40,6 +41,7 @@ interface Props {
 
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
+  console.log("PropsForm", props)
   const {mask} = props;
   const getSizeClass = (size) => {
     switch (size) {
@@ -106,6 +108,7 @@ export default function BaseInput(props: Props) {
   }, [ call, setDebouncing, props.input?.onChange ]);
 
   const renderInput = (inputProps) => {
+    console.log("InputProps", inputProps)
     return  ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
                      autocomplete="off"
                      type={props.type || 'text'}
@@ -117,7 +120,7 @@ export default function BaseInput(props: Props) {
                        {})}/>)
   }
   return mask ? (
-    <InputMask mask={mask}    {...(props.debounce > 0 ? {value: debounceFieldValue} : {value: props.input.value, onChange: props.input.onChange}) }  maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
+    <InputMask mask={mask}  disabled={props.disabled}   {...(props.debounce > 0 ? {value: debounceFieldValue} : {value: props.input.value, onChange: props.input.onChange}) }  maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
       {(inputProps) => renderInput(inputProps)}
     </InputMask>
   ) : renderInput(props.input);

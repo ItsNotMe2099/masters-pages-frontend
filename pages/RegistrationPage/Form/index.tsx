@@ -15,7 +15,10 @@ import {withTranslation} from "next-i18next";
 import Router from "next/router";
 import cookie from "js-cookie";
 import {useTranslation} from "react-i18next";
+import {registrationPhoneOpen} from "../../../components/Modal/actions";
+import {registrationPhoneSetCallback} from "../../../components/Auth/RegistrationPhone/actions";
 let RegistrationForm = props => {
+  const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const { handleSubmit } = props
   console.log(props)
@@ -26,7 +29,14 @@ let RegistrationForm = props => {
       cookie.remove("token");
       Router.push('/');
       return;
+  }
+  const handlePhoneClick = () => {
 
+    dispatch(registrationPhoneSetCallback((phone) => {
+      console.log("CBPHONE", phone);
+      props.change('phone', phone);
+    }));
+    dispatch(registrationPhoneOpen());
   }
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -50,10 +60,12 @@ let RegistrationForm = props => {
         label={t('auth.registrationPage.fieldEmail')}
         validate={[required, email]}
         labelType={'cross'}
+        disabled={!!props.initialValues.email}
       />
       <Field
         name="phone"
         component={InputPhone}
+        onClick={handlePhoneClick}
         label={t('auth.registrationPage.fieldPhone')}
         validate={required}
         labelType={'cross'}
@@ -67,7 +79,7 @@ let RegistrationForm = props => {
         labelType={'cross'}
         validate={required}
       />
-      <div className={styles.pwChange}>
+      {!props.hidePassword && <div className={styles.pwChange}>
         <Field
           name="password"
           component={InputPassword}
@@ -82,7 +94,7 @@ let RegistrationForm = props => {
           validate={[required, passwordsMatch, minL]}
           labelType={'cross'}
         />
-      </div>
+      </div>}
       <FormError error={error}/>
       <div className={styles.btnContainer}>
         <Button green size="16px 0">{t('auth.registrationPage.buttonCompleteRegistration')}</Button>

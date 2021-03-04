@@ -1,5 +1,7 @@
 import {changeRole, changeRoleNative, fetchProfileSuccess} from "components/Profile/actions";
 import nextCookie from "next-cookies";
+import { parseCookies, setCookie, destroyCookie } from 'nookies'
+
 import { getDisplayName } from "next/dist/next-server/lib/utils";
 import { Component } from "react";
 import cookie from "js-cookie";
@@ -10,6 +12,10 @@ import {wrapper} from 'store';
 
 export const auth = ctx => {
   if(ctx.req.url.includes('RegistrationPage') && ctx.query.token){
+    setCookie(ctx, 'token', ctx.query.token, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    })
       return ctx.query.token;
   }
     const { token } = nextCookie(ctx);

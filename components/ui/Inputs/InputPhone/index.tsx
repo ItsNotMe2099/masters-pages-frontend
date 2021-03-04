@@ -12,10 +12,12 @@ import minMetadata from 'libphonenumber-js/metadata.min'
 const metadata = new Metadata(minMetadata)
 interface Props {
   meta: any
-  input: { value: string, onChange: (val) => void }
+  input: { value: string, onChange: (val) => void, name: string }
   type: string
   label: string
-  inputLabel?: string
+  disabled?: boolean
+  inputLabel?: string,
+  onClick: () => void
 }
 const codesOptions = Codes.filter(item => item.dial_code).map((item) => {
   return {value: item.dial_code, label: `${item.dial_code}`, code: item.code}
@@ -81,8 +83,17 @@ export default function InputPhone(props: Props) {
   }
   console.log("Update code", code);
 
+  const handleClick = (e) =>
+  {
+    console.log("HandleClick")
+    if(props.onClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      props.onClick();
+    }
+  }
   return (
-    <div className={styles.root}>
+    <div className={styles.root} onClick={handleClick}>
       <div className={`${styles.inputContainer} ${(error && touched) && styles.inputError}`}>
         <label className={styles.inputLabel}>{props.label}</label>
         <div className={styles.country}>
@@ -90,13 +101,14 @@ export default function InputPhone(props: Props) {
                       formatTriggerLabel={(value) => value.value}/>
         </div>
         <BaseInput
-
           withBorder={false}
           transparent={true}
           withPadding={false}
           maskChar={''}
           mask={maskBuilder(value)}
+          disabled={props.disabled}
           input={{
+            name: props.input.name,
             value: value,
             onChange: handleInputChange
           }}

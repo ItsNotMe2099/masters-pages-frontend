@@ -19,7 +19,7 @@ const PWRecoveryComponent = (props: Props) => {
   const dispatch = useDispatch()
   const firstStepIsComplete = useSelector((state: IRootState) => state.PWRecovery.formIsSuccess)
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
-
+  const code = useSelector((state: IRootState) => state.PWRecovery.codeSet)
   useEffect(() => {
     if(props.isOpen){
     dispatch(PWRecoveryResetState());
@@ -46,7 +46,9 @@ const PWRecoveryComponent = (props: Props) => {
         <div className={styles.text}>
           {t('auth.passwordRecovery.description')}
         </div>
-        <div className={styles.fakeMargin}></div>
+      {(firstStepIsComplete && code) && <div className={styles.code}>Code: {code}</div>}
+
+      <div className={styles.fakeMargin}></div>
           {firstStepIsComplete ?
           <PWRecovery onSubmit={handleSubmitSecondStep}/>
           :

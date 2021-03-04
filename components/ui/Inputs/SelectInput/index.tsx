@@ -107,7 +107,7 @@ const SelectInput = (props: Props) => {
   }
   return (
     <Input {...props} onClick={onClick}
-           input={{value: currentLabel, onChange: null}}
+           input={{value: currentLabel, onChange: null, name: props.input.name}}
            onIconClick={onClick}
            icon={
              <img src={`/img/field/${props.size === 'small' ? 'arrowDownRed' : 'arrowDown'}.svg`} alt=''/>
@@ -122,6 +122,9 @@ const SelectInput = (props: Props) => {
               props.onSearchChange(e.currentTarget.value)
             }}
             value={props.allowCustomInput ? input.value : null}
+                     input={{
+                       name: props.input.name
+                     }}
             withBorder={false}
             parentRef={searchInputRef}/>
           <div className={styles.dropDownTrigger}>

@@ -26,7 +26,6 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
     case ActionTypes.REGISTRATION_COMPLETE_SUCCESS:
       state.formIsSuccess = true
       state.loading = false;
-      state.modalKey = 'regSuccess'
       break
 
     case ActionTypes.REGISTRATION_COMPLETE_ERROR:

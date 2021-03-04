@@ -34,7 +34,15 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.PHONE_CONFIRM_OPEN:
       state.modalKey = 'phoneConfirm'
       break
-
+    case ActionTypes.REGISTRATION_PHONE_OPEN:
+      state.modalKey = 'registrationPhone'
+      break
+    case ActionTypes.REGISTRATION_PHONE_CONFIRM_OPEN:
+      state.modalKey = 'registrationPhoneConfirm'
+      break
+    case ActionTypes.REGISTRATION_SUCCESS_OPEN:
+      state.modalKey = 'registrationSuccess'
+      break
     case ActionTypes.PASSWORD_RECOVERY_FIRST_STEP_OPEN:
       state.modalKey = 'pwRecFirst'
       break

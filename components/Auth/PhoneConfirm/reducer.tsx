@@ -4,6 +4,7 @@ export interface PhoneConfirmState {
   formIsSuccess: boolean
   formError: string,
   loading: boolean,
+  code?: string
 }
 
 const initialState: PhoneConfirmState = {
@@ -15,6 +16,9 @@ const initialState: PhoneConfirmState = {
 export default function loginSubmitReducer(state = {...initialState}, action) {
 
   switch(action.type) {
+    case ActionTypes.PHONE_CONFIRM_SET_CODE:
+      state.code = action.payload
+      break
     case ActionTypes.PHONE_CONFIRM_SUBMIT:
       state.formIsSuccess = false
       state.loading = true;

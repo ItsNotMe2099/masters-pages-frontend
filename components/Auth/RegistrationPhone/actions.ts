@@ -1,0 +1,27 @@
+import ActionTypes from './const'
+import { action } from 'typesafe-actions'
+interface registrationPhoneSubmitData{
+  phone: string
+}
+export const registrationPhoneSubmit = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_SUBMIT, data)
+export const registrationPhoneSubmitRequest = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST, {
+  api: {
+    url: `/api/auth/register`,
+    method: 'POST',
+    data
+  },
+})
+
+export const registrationPhoneSetCallback = (cb: (phone) => void) => action(ActionTypes.REGISTRATION_PHONE_SET_CALLBACK, cb)
+export const registrationPhoneReset = () => action(ActionTypes.REGISTRATION_PHONE_RESET)
+export const registrationPhoneConfirm = ({code}) => action(ActionTypes.REGISTRATION_PHONE_CONFIRM, {code})
+export const registrationPhoneChangeRequest = ({phone, code}) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST, {
+  api: {
+    url: `/api/auth/phoneChangeConfirmation`,
+    method: 'POST',
+    data: {
+      phone,
+      code
+    },
+  },
+})

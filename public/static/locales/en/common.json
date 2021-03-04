@@ -92,6 +92,11 @@
       "fieldNewPassword": "New password",
       "fieldNewPasswordConfirm": "Password confirm",
       "buttonChangePassword": "Change password"
+    },
+    "registrationPhone": {
+      "title": "Phone confirm",
+      "fieldPhone": "Phone number",
+      "buttonConfirm": "CONFIRM PHONE"
     }
   },
   "personalArea": {

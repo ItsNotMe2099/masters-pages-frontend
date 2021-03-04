@@ -29,12 +29,14 @@ import PublicProfileReducer from 'components/PublicProfile/reducer';
 import TaskPageReducer from 'components/TaskPage/reducer';
 import TaskSearchListWithLimitReducer from 'components/Split/OrderingSection/Task/reducer';
 import StatReducer from "../components/Stat/reducer";
+import registrationPhoneReducer from "../components/Auth/RegistrationPhone/reducer";
 
 export default combineReducers({
   form: formReducer,
   authComponent: authReducer,
   authSignUp: authSignUpReducer,
   authSignIn: authSignInReducer,
+  registrationPhone: registrationPhoneReducer,
   phoneConfirmReducer: phoneConfirmReducer,
   registrationComplete: registrationCompleteReducer,
   PWRecovery: PWRecoveryReducer,

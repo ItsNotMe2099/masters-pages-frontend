@@ -27,12 +27,14 @@ import { PublicProfileState } from "components/PublicProfile/reducer";
 import { TaskPageState } from "components/TaskPage/reducer";
 import { TaskSearchWithLimitState } from "components/Split/OrderingSection/Task/reducer";
 import {StatState} from "../components/Stat/reducer";
+import {RegistrationPhoneState} from "../components/Auth/RegistrationPhone/reducer";
 
 export interface IRootState {
   authComponent: authState,
   authSignUp: AuthSignUpState
   PWRecovery: PWRecoveryState,
   authSignIn: SignInState,
+  registrationPhone: RegistrationPhoneState,
   phoneConfirmReducer: PhoneConfirmState,
   registrationComplete: RegistrationCompleteState,
   locationInput: LocationInputState,

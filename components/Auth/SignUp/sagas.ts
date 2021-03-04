@@ -5,6 +5,7 @@ import requestGen from "utils/requestGen";
 import ActionTypes from './const'
 import { signUpError, signUpSubmit, signUpSuccess } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
+import {phoneConfirmSetCode} from "../PhoneConfirm/actions";
 
 function* signUpSaga() {
 
@@ -19,7 +20,11 @@ function* signUpSaga() {
         },
       } as IRequestData)
       console.log("Res signup", res)
+
       if(!res.err){
+        if(res.data.code){
+          yield put(phoneConfirmSetCode(res.data.code));
+        }
         yield put(signUpSuccess());
         yield put(phoneConfirmOpen());
       }else{

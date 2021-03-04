@@ -14,7 +14,7 @@ interface PWRecoveryFinalData{
 export const PWRecoverySubmit = (data: PWRecoveryData) => action(ActionTypes.RESET_PW_FIRST_STEP_SUBMIT, data)
 export const PWRecoveryError = (error) => action(ActionTypes.RESET_PW_FIRST_STEP_ERROR, {error})
 export const PWRecoverySuccess = () => action(ActionTypes.RESET_PW_FIRST_STEP_SUCCESS)
-
+export const PWRecoverySetCode = (code) => action(ActionTypes.RESET_PW_SET_CODE, code)
 export const PWRecoverySecondSubmit = (data: PWRecoveryDataSecond) => action(ActionTypes.RESET_PW_SECOND_STEP_SUBMIT, data)
 export const PWRecoverySecondError = (error) => action(ActionTypes.RESET_PW_SECOND_STEP_ERROR, {error})
 export const PWRecoverySecondSuccess = () => action(ActionTypes.RESET_PW_SECOND_STEP_SUCCESS)

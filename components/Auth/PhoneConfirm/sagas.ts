@@ -18,13 +18,14 @@ function* phoneConfirmSaga() {
         method: 'POST',
         data: {
           code: action.payload.code,
-          phone
+          phone: phone
         },
       } as IRequestData)
       console.log("Res signup", res)
       if(!res.err) {
         cookie.set("token", res.data.accessToken, { expires: 1 });
           window.location.href = '/RegistrationPage';
+
       }else{
         yield put(phoneConfirmError(res.err?.errors));
       }
