@@ -32,36 +32,9 @@ const RegistrationPage = (props: Props) => {
       <div className={styles.container}>
         <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>
-          <div className={styles.left}>
-            <div className={styles.socialText}>
-              Use social media to finish registration
-            </div>
-            <a href="#" target="_blank">
-              <div className={styles.google}>
-                <img src="/img/Registration/icons/google.svg"/>
-                <div>Google</div>
-              </div>
-            </a>
-            <a href="#" target="_blank">
-              <div className={styles.facebook}>
-                <img src="/img/Registration/icons/facebook.svg"/>
-                <div>Facebook</div>
-              </div>
-            </a>
-            <a href="#" target="_blank">
-              <div className={styles.instagram}>
-                <img src="/img/Registration/icons/instagram.svg"/>
-                <div>Instagram</div>
-              </div>
-            </a>
-          </div>
-          <div className={styles.separator}>
-            <div className={styles.or}>or</div>
-            <div className={styles.border}></div>
-          </div>
-          <div className={styles.right}>
+
             <RegistrationForm hidePassword={!!router.query.token}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
-          </div>
+          
         </div>
       </div>
       <Backgrounds/>
