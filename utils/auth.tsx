@@ -73,7 +73,7 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
   if(!user){
     return {props: {}};
   }
-  if(user && !user.isRegistrationCompleted &&  !ctx.req.url.includes('RegistrationPage')){
+  if(user && !user.isRegistrationCompleted && redirect &&  !ctx.req.url.includes('RegistrationPage')){
     ctx.res.writeHead(302, { Location: "/RegistrationPage" });
     ctx.res.end();
   }
