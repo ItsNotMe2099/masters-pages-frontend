@@ -41,9 +41,9 @@ let TabSettingsForm = (props) => {
           <div className={styles.label}>{t('personalArea.tabSettings.fieldLanguage')}:</div>
           <div className={styles.field}>
             <Field
-              name={t('personalArea.tabSettings.fieldLanguage')}
+              name={'language'}
               component={SelectInput}
-              label="Language"
+              label={t('personalArea.tabSettings.fieldLanguage')}
               validate={required}
               options={[{label: 'EN', value: 'en'}, {label: 'RU', value: 'ru'}, {label: 'FR', value: 'fr'}]}
             />
