@@ -15,7 +15,7 @@ interface Props {
 const RegistrationSuccess = (props: Props) => {
   const { t } = useTranslation('common');
   return (
-    <Modal{...props} image='img/Modal/success.svg'>
+    <Modal{...props} image='/img/Modal/success.svg'>
 
         <div className={styles.headText}>
           {t('auth.registrationSuccess.title')}

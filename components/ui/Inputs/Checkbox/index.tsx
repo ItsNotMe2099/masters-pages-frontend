@@ -18,14 +18,14 @@ export default function Checkbox(props: Props) {
   const { input } = props
 
   const [id] = useState(_uniqueId('prefix-'));
-  console.log("checkbox meta",  props.meta)
+  console.log("checkbox meta",props.input.name,  props.label ? styles.checkboxLabel : styles.checkboxLabelHidden)
   return (
     <div className={styles.root}>
     <div className={styles.wrapper}>
 
         <ReactCheckbox
           checked={input.value}
-          icon={<img src={'/img/icons/checkbox-checked.svg'} style={{ width: 21 }} alt="" />}
+          icon={<img src={'/img/icons/checkbox-checked.svg'} style={{ width: 21, height: 21 }} alt="" />}
           borderColor="#e6e6e6"
           borderRadius={2}
           size={21}
@@ -35,7 +35,7 @@ export default function Checkbox(props: Props) {
           label={typeof props.label === 'string' ? props.label : null}
           onChange={input.onChange}
         />
-        {typeof props.label !== 'string' ? <div className={styles.checkboxLabel} onClick={() => input.onChange(!input.value)} >{props.label}</div> : null}
+        {typeof props.label !== 'string' && props.label ? <div className={styles.checkboxLabel} onClick={() => input.onChange(!input.value)} >{props.label}</div> : null}
     </div>
     <ErrorInput {...props}/>
     </div>

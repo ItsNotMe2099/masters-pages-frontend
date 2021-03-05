@@ -32,7 +32,7 @@ let PWRecovery = (props: Props) => {
           name="phone"
           component={InputPhone}
           label={t('auth.passwordRecovery.fieldPhone')}
-          validate={phone}
+          validate={[required, phone]}
         />}
         <FormError error={error}/>
       <div className={styles.btnContainer}>

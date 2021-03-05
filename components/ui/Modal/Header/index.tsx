@@ -34,7 +34,7 @@ export default function ModalHeader(props: Props) {
       <div className={styles.top}>
         <div className={styles.work}>{props.job}</div>
           <a className={styles.details} onClick={() => show ? setShowAll(false) : setShowAll(true)}>
-            {show ? <span>Hide</span> : <span>See details</span>}<img className={show ? styles.hide : null} src="img/icons/arrowDetails.svg" alt=''/>
+            {show ? <span>Hide</span> : <span>See details</span>}<img className={show ? styles.hide : null} src="/img/icons/arrowDetails.svg" alt=''/>
           </a>
       </div>
       : null}

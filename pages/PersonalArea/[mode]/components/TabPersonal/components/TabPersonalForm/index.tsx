@@ -16,6 +16,7 @@ import {useTranslation, withTranslation} from "react-i18next";
 let TabPersonalForm = (props) => {
   const { t } = useTranslation('common');
   const error = useSelector((state: IRootState) => state.profile.formError)
+  console.log("ProfileForm Init values", props.initialValues);
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.columns}>

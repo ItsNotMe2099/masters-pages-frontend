@@ -30,6 +30,8 @@ import TaskPageReducer from 'components/TaskPage/reducer';
 import TaskSearchListWithLimitReducer from 'components/Split/OrderingSection/Task/reducer';
 import StatReducer from "../components/Stat/reducer";
 import registrationPhoneReducer from "../components/Auth/RegistrationPhone/reducer";
+import PushReducer from "../components/Push/reducer";
+import ProfileSettingsReducer from "../components/ProfileSettings/reducer";
 
 export default combineReducers({
   form: formReducer,
@@ -62,5 +64,7 @@ export default combineReducers({
   publicProfile: PublicProfileReducer,
   taskPage: TaskPageReducer,
   taskSearchWithLimit: TaskSearchListWithLimitReducer,
-  stat: StatReducer
+  stat: StatReducer,
+  push: PushReducer,
+  profileSettings: ProfileSettingsReducer
 })

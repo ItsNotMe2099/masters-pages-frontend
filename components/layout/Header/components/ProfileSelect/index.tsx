@@ -3,19 +3,14 @@ import { changeRole } from "components/Profile/actions";
 import ArrowDropDown from "components/svg/ArrowDropDown";
 import Avatar from "components/ui/Avatar";
 import NotificationBadge from "components/ui/NotificationBadge";
-import { I18nContext } from "next-i18next";
 import { useRouter } from "next/router";
 import { useContext, useRef, useState } from "react";
 import { IRootState } from "types";
-import { getMediaPath } from "utils/media";
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
-
 import { useSelector, useDispatch } from 'react-redux'
-import cookie from "js-cookie";
-import Router from "next/router";
 import {useTranslation} from "react-i18next";
+import {logout} from "../../../../Auth/actions";
 
 const ProfileSelect = (props) => {
   const { t } = useTranslation('common');
@@ -44,8 +39,7 @@ const ProfileSelect = (props) => {
   const handleOptionClick = (e, item) => {
     e.preventDefault()
     if(item.value === 'logout'){
-      cookie.remove("token");
-      Router.push('/');
+      dispatch(logout());
       return;
     }
     console.log("SetLang", item.value);

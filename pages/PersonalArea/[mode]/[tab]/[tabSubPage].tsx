@@ -1,6 +1,9 @@
-import TabPage from "pages/PersonalArea/[mode]/[tab]/TabPage";
 import {getAuthServerSide} from "utils/auth";
-
+import dynamic from "next/dynamic";
+const TabPage = dynamic(
+  () => import('pages/PersonalArea/[mode]/[tab]/TabPage'),
+  { ssr: false }
+)
 const TabSubPage = (props) => {
   return (<TabPage {...props}/>)
 }

@@ -13,7 +13,7 @@ import InputPhone from "../../../ui/Inputs/InputPhone";
 let SignIn = props => {
   const { t } = useTranslation('common');
   const { handleSubmit} = props
-  const error = useSelector((state: IRootState) => state.authSignIn.formError)
+  const error = useSelector((state: IRootState) => state.registrationPhone.formError)
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

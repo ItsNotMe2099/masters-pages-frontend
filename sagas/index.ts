@@ -19,10 +19,14 @@ import SavedPeopleSaga from "components/SavedPeople/sagas";
 import SavedSearchesSaga from "components/SavedSearches/sagas";
 import SavedTasksSaga from "components/SavedTasks/sagas";
 import ProfileFeedbackSaga from "components/ProfileFeedback/sagas";
-import registrationPhoneSaga from "../components/Auth/RegistrationPhone/sagas";
+import registrationPhoneSaga from "components/Auth/RegistrationPhone/sagas";
+import authSaga from "components/Auth/sagas";
+import pushSaga from "components/Push/sagas";
+import profileSettingsSaga from "../components/ProfileSettings/sagas";
 
 export const rootSaga = function* root() {
   yield all([
+    authSaga(),
     apiSaga(),
     signUpSaga(),
     phoneConfirmSaga(),
@@ -43,6 +47,8 @@ export const rootSaga = function* root() {
     ChatSaga(),
     ChatSocketSaga(),
     SavedTasksSaga(),
-    ProfileFeedbackSaga()
+    ProfileFeedbackSaga(),
+    pushSaga(),
+    profileSettingsSaga()
   ]);
 };

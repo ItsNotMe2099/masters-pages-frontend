@@ -29,6 +29,7 @@ import SignUpComponent from 'components/Auth/SignUp'
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
 import RegistrationSuccess from "components/Auth/RegistrationSuccess";
+import ProfileEmailChangeModal from "../../ProfileEmailChangeModal";
 
 
 interface Props {
@@ -80,6 +81,7 @@ const Modals = (props: Props) => {
       {key === 'taskSuccessModal' && <SuccessTaskModal isOpen={key === 'taskSuccessModal'}/>}
       {key === 'feedbackSuccessModal' && <SuccessFeedbackModal isOpen={key === 'feedbackSuccessModal'}/>}
       {key === 'taskOfferShow' && <TaskOfferShowModal isOpen={key === 'taskOfferShow'} onClose={() => dispatch(modalClose())}/>}
+      {key === 'emailChangeModal' && <ProfileEmailChangeModal isOpen={true}/>}
 
       {key === 'taskOfferModal' && <TaskOfferModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
     </>

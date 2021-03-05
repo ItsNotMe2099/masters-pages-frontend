@@ -34,7 +34,7 @@ const RegistrationPage = (props: Props) => {
         <div className={styles.inner}>
 
             <RegistrationForm hidePassword={!!router.query.token}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
-          
+
         </div>
       </div>
       <Backgrounds/>

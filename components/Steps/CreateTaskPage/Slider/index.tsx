@@ -46,19 +46,19 @@ const SimpleSlider = () => {
         <div className={styles.slides}>
           <div className={styles.slide}>
             <Step
-              image='img/icons/form1.svg'
+              image='/img/icons/form1.svg'
               text={`01. ${t('createTask.stepFillUpTaskRequest')}`}
             />
           </div>
           <div className={styles.slide}>
             <Step
-              image='img/icons/form3.svg'
+              image='/img/icons/form3.svg'
               text={`02. ${t('createTask.stepGetOffers')}`}
             />
           </div>
           <div className={styles.slide}>
             <Step
-              image='img/icons/chat2.svg'
+              image='/img/icons/chat2.svg'
               text={`03. ${t('createTask.stepChooseMaster')}`}
             />
           </div>
@@ -67,19 +67,19 @@ const SimpleSlider = () => {
           <Slider {...settings}>
           <div className={styles.slide}>
             <Step
-              image='img/icons/form1.svg'
+              image='/img/icons/form1.svg'
               text={`01. ${t('createTask.stepFillUpTaskRequest')}`}
             />
           </div>
           <div className={styles.slide}>
             <Step
-              image='img/icons/form3.svg'
+              image='/img/icons/form3.svg'
               text={`02. ${t('createTask.stepGetOffers')}`}
             />
           </div>
           <div className={styles.slide}>
             <Step
-              image='img/icons/chat2.svg'
+              image='/img/icons/chat2.svg'
               text={`03. ${t('createTask.stepChooseMaster')}`}
             />
           </div>

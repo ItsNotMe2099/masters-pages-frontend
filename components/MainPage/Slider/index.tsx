@@ -51,11 +51,11 @@ export default function SimpleSlider(props: Props) {
       <div className={styles.root}>
         <div className={styles.sliderContainer}>
         <Slider {...settings}>
-          <Slide text={`${stat?.tasksDoneCount || ''} + tasks done`} image='img/Slide/yes.svg'/>
-          <Slide text={`${stat?.tasksCount || ''} + tasks requested`} image='img/Slide/files.svg'/>
-          <Slide text={`${stat?.mastersCount || ''} + masters on website`} image='img/Slide/plumber-man.svg'/>
-          <Slide text={`${stat?.feedbacksCount || ''} + reviews`} image='img/Slide/review.svg'/>
-          <Slide text={`${stat?.tasksDonePerMonth || ''} + task done per month`} image='img/Slide/review.svg'/>
+          <Slide text={`${stat?.tasksDoneCount || ''} + tasks done`} image='/img/Slide/yes.svg'/>
+          <Slide text={`${stat?.tasksCount || ''} + tasks requested`} image='/img/Slide/files.svg'/>
+          <Slide text={`${stat?.mastersCount || ''} + masters on website`} image='/img/Slide/plumber-man.svg'/>
+          <Slide text={`${stat?.feedbacksCount || ''} + reviews`} image='/img/Slide/review.svg'/>
+          <Slide text={`${stat?.tasksDonePerMonth || ''} + task done per month`} image='/img/Slide/review.svg'/>
         </Slider>
         </div>
       </div>

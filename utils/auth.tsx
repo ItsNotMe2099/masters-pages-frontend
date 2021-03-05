@@ -1,17 +1,11 @@
 import {changeRole, changeRoleNative, fetchProfileSuccess} from "components/Profile/actions";
 import nextCookie from "next-cookies";
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
-
-import { getDisplayName } from "next/dist/next-server/lib/utils";
-import { Component } from "react";
-import cookie from "js-cookie";
-import Router from "next/router";
-import jwt_decode from "jwt-decode";
 import request from "utils/request";
 import {wrapper} from 'store';
 
 export const auth = ctx => {
-  if(ctx.req.url.includes('RegistrationPage') && ctx.query.token){
+  if((ctx.req.url.includes('RegistrationPage') || ctx.req.url === '/' || !ctx.req.url)  && ctx.query.token){
     setCookie(ctx, 'token', ctx.query.token, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
@@ -22,12 +16,6 @@ export const auth = ctx => {
     return token;
 };
 
-export const logout = () => {
-    cookie.remove("token");
-    // To trigger the event listener we save some random data into the `logout` key
-    //window.localStorage.setItem("logout", Date.now()); // new
-    Router.push("/auth/login");
-};
 const getUser = async (token) => {
   try {
     console.log("getUser", token);

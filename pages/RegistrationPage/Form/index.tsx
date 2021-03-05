@@ -11,12 +11,10 @@ import InputPhone from 'components/ui/Inputs/InputPhone'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import {required, email, minL, passwordsMatch} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
-import {withTranslation} from "next-i18next";
-import Router from "next/router";
-import cookie from "js-cookie";
 import {useTranslation} from "react-i18next";
-import {registrationPhoneOpen} from "../../../components/Modal/actions";
-import {registrationPhoneSetCallback} from "../../../components/Auth/RegistrationPhone/actions";
+import {registrationPhoneOpen} from "components/Modal/actions";
+import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
+import {logout} from "components/Auth/actions";
 let RegistrationForm = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
@@ -26,14 +24,10 @@ let RegistrationForm = props => {
   const isLoading = useSelector((state: IRootState) => state.registrationComplete.loading)
 
   const handleLogout = () => {
-      cookie.remove("token");
-      Router.push('/');
-      return;
+    dispatch(logout());
   }
   const handlePhoneClick = () => {
-
     dispatch(registrationPhoneSetCallback((phone) => {
-      console.log("CBPHONE", phone);
       props.change('phone', phone);
     }));
     dispatch(registrationPhoneOpen());

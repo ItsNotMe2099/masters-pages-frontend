@@ -27,12 +27,12 @@ export default function OrderingSection(props: Props) {
 
       <Loader/>
       :
-      
-      tasks.map(task => 
+
+      tasks.map(task =>
         <Link href="/">
         <a>
           <Task task={task}
-          taskImage='img/icons/design.svg' 
+          taskImage='/img/icons/design.svg'
           color='#A4E4B6'
           />
         </a>

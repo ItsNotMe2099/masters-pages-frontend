@@ -67,7 +67,7 @@ const CreateTaskPage = (props) => {
       <Modal
         {...props}
         title={t('createTask.successTitle')}
-        image={'img/icons/congratulations.svg'}
+        image={'/img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
         window.location.href = '/'
       }}>

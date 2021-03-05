@@ -18,6 +18,7 @@ const TabPersonal = (props: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
 
+  console.log("Tab Profile", props)
   useEffect(() => {
     if(formLoading){
       dispatch(loaderOpen());

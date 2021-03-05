@@ -46,19 +46,19 @@ export default class SimpleSlider extends Component {
           <Slider {...settings}>
           <div className={styles.slide}>
             <Step
-            image='img/icons/form1.svg'
+            image='/img/icons/form1.svg'
             text='01. Complete profile'
             />
           </div>
           <div className={styles.slide}>
             <Step
-            image='img/icons/form3.svg'
+            image='/img/icons/form3.svg'
             text='02. Find a task'
             />
           </div>
           <div className={styles.slide}>
             <Step
-            image='img/icons/file.svg'
+            image='/img/icons/file.svg'
             text='03. Do task and earn money'
             />
           </div>

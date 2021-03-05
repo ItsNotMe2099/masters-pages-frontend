@@ -71,6 +71,11 @@ export default function ProfileReducer(state = {...initialState}, action) {
     case ActionTypes.CHANGE_ROLE_SUCCESS:
       state.role = action.payload.role;
       break
+    case ActionTypes.FORM_RESET:
+      state.formError = null;
+      state.formIsSuccess = false;
+      state.formLoading = false;
+      break
   }
 
   return state

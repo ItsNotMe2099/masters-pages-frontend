@@ -28,6 +28,8 @@ import { TaskPageState } from "components/TaskPage/reducer";
 import { TaskSearchWithLimitState } from "components/Split/OrderingSection/Task/reducer";
 import {StatState} from "../components/Stat/reducer";
 import {RegistrationPhoneState} from "../components/Auth/RegistrationPhone/reducer";
+import {PushState} from "../components/Push/reducer";
+import {ProfileSettingsState} from "../components/ProfileSettings/reducer";
 
 export interface IRootState {
   authComponent: authState,
@@ -60,6 +62,8 @@ export interface IRootState {
   taskPage: TaskPageState
   taskSearchWithLimit: TaskSearchWithLimitState
   stat: StatState
+  push: PushState,
+  profileSettings: ProfileSettingsState
 }
 export interface ILocation {
   lng: number,
@@ -104,6 +108,22 @@ export interface ProfileData{
   tasksCount?: number
   totalAmount?: number
   totalHours?: number
+}
+export interface IProfileSettingsNotificationItem{
+  push: boolean,
+  email: boolean
+}
+export interface IProfileSettingsNotification{
+  messages: IProfileSettingsNotificationItem
+  newTaskOffer: IProfileSettingsNotificationItem
+  newTaskResponse: IProfileSettingsNotificationItem
+  taskOfferDeclined: IProfileSettingsNotificationItem
+  taskResponseDeclined: IProfileSettingsNotificationItem
+  newFeedback: IProfileSettingsNotificationItem
+}
+export interface IProfileSettings{
+  language?: string
+  notifications: IProfileSettingsNotification
 }
 
 export interface FullProfileData{

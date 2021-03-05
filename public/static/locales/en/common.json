@@ -95,6 +95,7 @@
     },
     "registrationPhone": {
       "title": "Phone confirm",
+      "titleChange": "Phone change",
       "fieldPhone": "Phone number",
       "buttonConfirm": "CONFIRM PHONE"
     }
@@ -156,6 +157,31 @@
       }
     },
     "tabSettings": {
+      "change": "Change",
+      "deleteMyAccount": "Delete my profile",
+      "buttonSave": "Save changes",
+      "fieldLanguage": "Language",
+      "fieldPhone": "Phone",
+      "fieldEmail": "Profile email",
+      "fieldNotificationSettings": "Notification settings",
+      "push": "Push",
+      "email": "Email",
+      "deleteMyAccountConfirm": "Do you want to delete your profile?",
+      "notificationSettings": {
+        "messages": "Messages",
+        "newTaskOffer": "Task offer",
+        "newTaskResponse": "Task response",
+        "newFeedback": "New feedback",
+        "taskOfferDeclined": "Task offer declined",
+        "taskResponseDeclined": "Task response declined"
+      }
+    },
+    "emailChange": {
+      "title": "Change email",
+      "titleSuccess": "Email changes",
+      "fieldEmail": "New Email",
+      "success": "Please check your email inbox for verification.",
+      "buttonConfirm": "CHANGE EMAIL"
     }
   },
   "forms": {

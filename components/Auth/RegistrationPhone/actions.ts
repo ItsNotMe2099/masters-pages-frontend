@@ -12,10 +12,20 @@ export const registrationPhoneSubmitRequest = (data: registrationPhoneSubmitData
   },
 })
 
+export const registrationPhoneChange = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE, data)
+export const registrationPhoneChangeRequest = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST, {
+  api: {
+    url: `/api/auth/phoneChange`,
+    method: 'POST',
+    data
+  },
+})
+
+
 export const registrationPhoneSetCallback = (cb: (phone) => void) => action(ActionTypes.REGISTRATION_PHONE_SET_CALLBACK, cb)
 export const registrationPhoneReset = () => action(ActionTypes.REGISTRATION_PHONE_RESET)
 export const registrationPhoneConfirm = ({code}) => action(ActionTypes.REGISTRATION_PHONE_CONFIRM, {code})
-export const registrationPhoneChangeRequest = ({phone, code}) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST, {
+export const registrationPhoneChangeConfirmRequest = ({phone, code}) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST, {
   api: {
     url: `/api/auth/phoneChangeConfirmation`,
     method: 'POST',

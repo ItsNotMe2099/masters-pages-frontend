@@ -12,59 +12,62 @@ import { maskBirthDate } from "utils/masks";
 import { required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
+import NotificationsForm from "../NotificationsForm";
+import {profileEmailChangeOpen, registrationPhoneOpen} from "components/Modal/actions";
+import {useState} from "react";
+import {registrationPhoneSetCallback} from "../../../../../../../components/Auth/RegistrationPhone/actions";
+import {useTranslation} from "react-i18next";
 
 let TabSettingsForm = (props) => {
-  const error = useSelector((state: IRootState) => state.profile.formError)
+  const {t} = useTranslation();
+  const dispatch = useDispatch();
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const error = useSelector((state: IRootState) => state.profileSettings.formError)
+  const loading = useSelector((state: IRootState) => state.profileSettings.formLoading)
+  const [newPhone, setNewPhone] = useState();
+  const handleEmailChange = () => {
+    dispatch(profileEmailChangeOpen());
+  }
+  const handlePhoneChange = () => {
+    dispatch(registrationPhoneSetCallback((phone) => setNewPhone(phone)));
+    dispatch(registrationPhoneOpen());
+  }
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
+
       <div className={styles.rows}>
+
         <div className={styles.row}>
-          <div className={styles.label}>Main currency:</div>
-          <Field
-            name="currency"
-            component={SelectInput}
-            label="Main currency"
-            validate={required}
-            options={[{label: 'Canadian dollar', value: 'USD'}]}
-          />
+          <div className={styles.label}>{t('personalArea.tabSettings.fieldLanguage')}:</div>
+          <div className={styles.field}>
+            <Field
+              name={t('personalArea.tabSettings.fieldLanguage')}
+              component={SelectInput}
+              label="Language"
+              validate={required}
+              options={[{label: 'EN', value: 'en'}, {label: 'RU', value: 'ru'}, {label: 'FR', value: 'fr'}]}
+            />
+          </div>
         </div>
 
         <div className={styles.row}>
-          <div className={styles.label}>Language:</div>
-          <Field
-            name="language"
-            component={SelectInput}
-            label="Language"
-            validate={required}
-            options={[{label: 'RU', value: 'ru'}]}
-          />
+          <div className={styles.label}>{t('personalArea.tabSettings.fieldEmail')}:</div>
+          <div className={styles.field}>
+            {profile.email} <div className={styles.change} onClick={handleEmailChange}>{t('personalArea.tabSettings.change')}</div>
+          </div>
         </div>
-
         <div className={styles.row}>
-          <div className={styles.label}>Language:</div>
-          <Field
-            name="sendNotifications"
-            component={SelectInput}
-            label="Send notification"
-            validate={required}
-            options={[{label: 'To all devices', value: 'all'}]}
-          />
-        </div>
-
-        <div className={styles.row}>
-          <div className={styles.label}>Region:</div>
-          <Field
-            name="region"
-            component={SelectInput}
-            label="Region"
-            options={[{label: 'Whole world', value: ''}]}
-          />
+          <div className={styles.label}>{t('personalArea.tabSettings.fieldPhone')}:</div>
+          <div className={styles.field}>
+            {newPhone || profile.phone} <div className={styles.change} onClick={handlePhoneChange}>{t('personalArea.tabSettings.change')}</div>
+          </div>
         </div>
 
       </div>
+      <NotificationsForm {...props}/>
 
        <FormError error={error}/>
-      <Button className={styles.button} grey={true} bold={true} size={'12px 70px'}  type={'submit'}>Save changes</Button>
+      <Button className={styles.button} disabled={loading} grey={true} bold={true} size={'12px 70px'}  type={'submit'}>{t('personalArea.tabSettings.buttonSave')}</Button>
 
 
     </form>

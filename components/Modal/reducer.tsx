@@ -98,6 +98,9 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_OFFER_OPEN:
       state.modalKey = 'taskOfferModal'
       break
+    case ActionTypes.EMAIL_CHANGE_OPEN:
+      state.modalKey = 'emailChangeModal'
+      break
     case ActionTypes.CONFIRM_MODAL_OPEN:
       state.modalKey = 'confirm'
       state.confirmData = action.payload
@@ -105,6 +108,7 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.CHANGE_CONFIRM_DATA:
       state.confirmData = action.payload
       break
+
   }
 
   return state
