@@ -19,36 +19,48 @@ interface Props {
   inputLabel?: string,
   onClick: () => void
 }
-const codesOptions = Codes.filter(item => item.dial_code).map((item) => {
-  return {value: item.dial_code, label: `${item.dial_code}`, code: item.code}
-}).sort((a, b) => a.value.replace(/[^\d]/g, '') < b.value.replace(/[^\d]/g, '') ? -1 : 1 )
+const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
+  const value = metadata.metadata.countries[key];
+  return {value: key, label: `+${value[0]}`, code: key, sort: parseInt(value[0], 10)}
+}).sort((a, b) => a.sort < b.sort ? -1 : 1 )
+
+const findCountryCode = (value) => {
+  const cleanValue = value.replace(/[^\d]/g, '');
+  const codes = metadata.metadata.country_calling_codes;
+  const key = Object.keys(codes).reverse().find(key => cleanValue.indexOf(key) === 0)
+  if(key){
+    const val = codes[key][0] === 'US' ? 'CA' : codes[key][0];
+    return {value: val, label: `+${key}`, code: val, sort: 0}
+  }
+}
 
 export default function InputPhone(props: Props) {
   const {error, touched} = props.meta ? props.meta : {error: null, touched: false}
-
+  const [changed, setChanged] = useState(false);
   const {input: {value, onChange}, type, label} = props
-
-   console.log("ValueSet", value);
-  const [code, setCode] = useState(codesOptions.find((item) => value ? item.value && (value.indexOf(item.value) === 0 || value.replace('+', '').indexOf(item.value.replace('+', '')) === 0) : item.value === '+1'));
+  const [code, setCode] = useState( findCountryCode(value) || findCountryCode('1'));
 
   const handleInputChange = (e) => {
     const value = e.target.value;
     const phoneNumber = parsePhoneNumber(value)
-    console.log("SetValue", phoneNumber)
     onChange(value.replace(/[^\d]/g, ''))
     if (phoneNumber) {
-      const codeValue = {code: phoneNumber.country, value: `+ ${phoneNumber.countryCallingCode}`, label: `+ ${phoneNumber.countryCallingCode}`};
-      console.log("phoneNumber", codeValue)
+      const codeValue = phoneNumber.country ? {code: phoneNumber.country, value: `+ ${phoneNumber.countryCallingCode}`, label: `+ ${phoneNumber.countryCallingCode}`, sort: 0} : findCountryCode(value);
       if(codeValue) {
-        setTimeout(() =>       setCode(codeValue), 300)
-
+        setTimeout(() => setCode(codeValue),200);
+      }
+    }else{
+      const codeValue = findCountryCode(value);
+      if(codeValue) {
+        setTimeout(() => setCode(codeValue),200);
       }
     }
-    console.log("OnChange", value.replace(/[^\d]/g, ''))
+    setChanged(true);
 
   }
   const handleCodeChange = (val) => {
-    console.log("HandleCodeChange", val)
+
+    setChanged(true);
     setCode(val)
     onChange(val.value.replace(/[^\d]/g, ''));
   }
@@ -62,7 +74,6 @@ export default function InputPhone(props: Props) {
         totalLength = 13;
       }
       const addChars = totalLength > 0 ? Array.apply(null, { length: (totalLength - 6)}).map(i => '9').join('') : '9999999';
-      console.log("addChars", addChars)
       if(totalLength < 6){
         return `+ ${Array.apply(null, { length: phoneNumber?.countryCallingCode.length }).map(i => '9').join('')} ${Array.apply(null, { length: totalLength }).map(i => '9').join('')}`
       }
@@ -81,11 +92,8 @@ export default function InputPhone(props: Props) {
     }
     return '+ 9 999-999'
   }
-  console.log("Update code", code);
 
-  const handleClick = (e) =>
-  {
-    console.log("HandleClick")
+  const handleClick = (e) => {
     if(props.onClick) {
       e.preventDefault();
       e.stopPropagation();
@@ -109,7 +117,7 @@ export default function InputPhone(props: Props) {
           disabled={props.disabled}
           input={{
             name: props.input.name,
-            value: value,
+            value: !value && !changed && code ? code.label.replace(/[^\d]/g, '') : value,
             onChange: handleInputChange
           }}
         />

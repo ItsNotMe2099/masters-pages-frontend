@@ -1,3 +1,4 @@
+import parsePhoneNumber, {isPossiblePhoneNumber} from 'libphonenumber-js'
 export function required(value: string | number, allValues) {
   return value || typeof value === 'number' ? undefined : 'required'
 }
@@ -8,7 +9,7 @@ export function email(value: string) {
     : undefined
 }
 export function phone(value: string) {
-  return !value || value.length <= 8 ? 'phone' : undefined;
+  return !isPossiblePhoneNumber(`+${value}`) ? 'phone' : undefined;
 }
 
 export function passwordsMatch(value: string, allValues: any) {

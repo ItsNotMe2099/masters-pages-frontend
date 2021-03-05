@@ -6,7 +6,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import Checkbox from 'components/ui/Inputs/Checkbox'
 import Link from 'next/link'
-import { required } from 'utils/validations'
+import {phone, required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import * as React from "react";
 import {useTranslation, withTranslation} from "react-i18next";
@@ -22,7 +22,7 @@ let SignUp = props => {
         name="phone"
         component={InputPhone}
         label={t('auth.signUp.fieldPhone')}
-        validate={required}
+        validate={[required, phone]}
       />
       <FormError error={error}/>
       <div className={styles.btnContainer}>

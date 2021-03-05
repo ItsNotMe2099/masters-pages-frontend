@@ -5,7 +5,7 @@ import Input from 'components/ui/Inputs/Input'
 import InputPassword from 'components/ui/Inputs/InputPassword'
 import { IRootState } from "types";
 import styles from './index.module.scss'
-import {required} from 'utils/validations'
+import {required, phone} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
 import InputPhone from "../../../ui/Inputs/InputPhone";
@@ -21,7 +21,7 @@ let SignIn = props => {
         name="phone"
         component={InputPhone}
         label={t('auth.signIn.fieldLogin')}
-        validate={required}
+        validate={[required, phone]}
         labelType={'cross'}
       />
       <Field
