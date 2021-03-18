@@ -18,9 +18,10 @@
   },
   "validation": {
     "email": "Wrong email format",
-    "passwordMatch": "Wrong email format",
+    "passwordMatch": "Password does not match",
     "required": "Field required",
-    "phone": "Wrong phone format"
+    "phone": "Wrong phone format",
+    "passwordMinLength8": "Must be 8 characters or more"
   },
   "master": "MASTER",
   "volunteer": "VOLUNTEER",

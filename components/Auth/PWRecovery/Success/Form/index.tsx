@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import InputPassword from 'components/ui/Inputs/InputPassword'
-import {required, passwordsMatch, minL} from 'utils/validations'
+import {required, passwordsMatch, minL, passwordMinLength} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
 let PWRecoveryNewPW = (props) => {
@@ -17,13 +17,13 @@ let PWRecoveryNewPW = (props) => {
           name="password"
           component={InputPassword}
           label={t('auth.passwordReset.fieldNewPassword')}
-          validate={[required, minL]}
+          validate={[required, passwordMinLength]}
         />
         <Field
           name="passwordConfirm"
           component={InputPassword}
           label={t('auth.passwordReset.fieldNewPasswordConfirm')}
-          validate={[required, passwordsMatch, minL]}
+          validate={[required, passwordsMatch, passwordMinLength]}
         />
       <FormError error={error}/>
       <div className={styles.btnContainer}>

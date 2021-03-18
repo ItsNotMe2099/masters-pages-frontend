@@ -9,7 +9,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import InputPhone from 'components/ui/Inputs/InputPhone'
 import InputLocation from 'components/ui/Inputs/InputLocation'
-import {required, email, minL, passwordsMatch} from 'utils/validations'
+import {required, email, minL, passwordsMatch, passwordMinLength} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import {registrationPhoneOpen} from "components/Modal/actions";
@@ -78,14 +78,14 @@ let RegistrationForm = props => {
           name="password"
           component={InputPassword}
           label={t('auth.registrationPage.fieldPassword')}
-          validate={[required, minL]}
+          validate={[required, passwordMinLength]}
           labelType={'cross'}
         />
         <Field
           name="passwordConfirm"
           component={InputPassword}
           label={t('auth.registrationPage.fieldPasswordConfirm')}
-          validate={[required, passwordsMatch, minL]}
+          validate={[required, passwordsMatch, passwordMinLength]}
           labelType={'cross'}
         />
       </div>}

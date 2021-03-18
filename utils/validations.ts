@@ -20,8 +20,10 @@ export function passwordsMatch(value: string, allValues: any) {
 const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
 
+export const passwordMinLength = value =>
+  value && value.length < 6 ? `passwordMinLength8` : undefined
+
 export const arrayNotEmpty =  value => {
   console.log("Array notEmpty", value)
  return !value || value.length === 0 ? `Select something` : undefined
 }
-export const minL = minLength(8)

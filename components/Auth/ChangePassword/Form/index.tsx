@@ -5,7 +5,7 @@ import Input from 'components/ui/Inputs/Input'
 import InputPassword from 'components/ui/Inputs/InputPassword'
 import { IRootState } from "types";
 import styles from './index.module.scss'
-import { minL, passwordsMatch, required } from 'utils/validations'
+import {minL, passwordMinLength, passwordsMatch, required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
 
@@ -27,14 +27,14 @@ let ChangePasswordForm = props => {
         name="newPassword"
         component={InputPassword}
         label={t('auth.changePassword.fieldNewPassword')}
-        validate={[required, minL]}
+        validate={[required, passwordMinLength]}
         labelType={'cross'}
       />
       <Field
         name="passwordConfirm"
         component={InputPassword}
         label={t('auth.changePassword.fieldNewPasswordConfirm')}
-        validate={[required, passwordsMatch, minL]}
+        validate={[required, passwordsMatch, passwordMinLength]}
         labelType={'cross'}
       />
       <FormError error={error}/>
