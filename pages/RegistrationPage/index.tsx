@@ -33,7 +33,7 @@ const RegistrationPage = (props: Props) => {
         <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>
 
-            <RegistrationForm hidePassword={!!router.query.token}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
+            <RegistrationForm isSocialAuth={!!router.query.socialAuth}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
 
         </div>
       </div>

@@ -59,10 +59,10 @@ export default function InputPhone(props: Props) {
 
   }
   const handleCodeChange = (val) => {
-
+    console.log("codeChange", val)
     setChanged(true);
     setCode(val)
-    onChange(val.value.replace(/[^\d]/g, ''));
+    onChange(val.label.replace(/[^\d]/g, ''));
   }
   const maskBuilder = v => {
     const phoneNumber = parsePhoneNumber(`+${v}`)

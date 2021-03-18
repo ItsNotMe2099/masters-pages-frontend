@@ -59,7 +59,7 @@ let RegistrationForm = props => {
       <Field
         name="phone"
         component={InputPhone}
-        onClick={handlePhoneClick}
+        onClick={props.isSocialAuth ? handlePhoneClick : null}
         label={t('auth.registrationPage.fieldPhone')}
         validate={required}
         labelType={'cross'}
@@ -73,7 +73,7 @@ let RegistrationForm = props => {
         labelType={'cross'}
         validate={required}
       />
-      {!props.hidePassword && <div className={styles.pwChange}>
+      {!props.isSocialAuth && <div className={styles.pwChange}>
         <Field
           name="password"
           component={InputPassword}
