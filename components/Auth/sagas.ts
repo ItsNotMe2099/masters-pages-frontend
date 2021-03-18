@@ -13,8 +13,7 @@ function* authSaga() {
         yield put(deleteDeviceRequest(deviceId));
       cookie.remove("token");
       cookie.remove("mode");
-
-      Router.push("/");
+      window.location.href = '/';
     })
 }
 
