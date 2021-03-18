@@ -41,7 +41,7 @@ const RegistrationPage = (props: Props) => {
       <RegistrationSuccess
         isOpen={modalKey === 'registrationSuccess'}
         onRequestClose={() =>{
-          Router.push('/')
+          window.location.href = '/PersonalArea'
         }}/>
       {modalKey === 'registrationPhone' && <RegistrationPhone
         isOpen={true}
