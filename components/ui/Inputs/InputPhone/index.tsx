@@ -19,17 +19,26 @@ interface Props {
   inputLabel?: string,
   onClick: () => void
 }
+const codeDoubles = {
+  '1': 'CA',
+  '590': 'FR',
+  '47': 'ND',
+  '290': 'SH',
+  '262': 'RE',
+  '44': 'GB',
+  '61': 'AU',
+}
 const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
   const value = metadata.metadata.countries[key];
-  return {value: key, label: `+${value[0]}`, code: key, sort: parseInt(value[0], 10)}
+  return {value: key, label: `+${value[0]}`, phoneCode: value[0].replace(/[^\d]/g, ''), code: key, sort: parseInt(value[0], 10)}
 }).sort((a, b) => a.sort < b.sort ? -1 : 1 )
-
+  .filter(item => !codeDoubles[item.phoneCode] || (codeDoubles[item.phoneCode] && codeDoubles[item.phoneCode] === item.value))
 const findCountryCode = (value) => {
   const cleanValue = value.replace(/[^\d]/g, '');
   const codes = metadata.metadata.country_calling_codes;
   const key = Object.keys(codes).reverse().find(key => cleanValue.indexOf(key) === 0)
   if(key){
-    const val = codes[key][0] === 'US' ? 'CA' : codes[key][0];
+    const val = codeDoubles[key] ? codeDoubles[key] : codes[key][0];
     return {value: val, label: `+${key}`, code: val, sort: 0}
   }
 }
@@ -45,7 +54,8 @@ export default function InputPhone(props: Props) {
     const phoneNumber = parsePhoneNumber(value)
     onChange(value.replace(/[^\d]/g, ''))
     if (phoneNumber) {
-      const codeValue = phoneNumber.country ? {code: phoneNumber.country, value: `+ ${phoneNumber.countryCallingCode}`, label: `+ ${phoneNumber.countryCallingCode}`, sort: 0} : findCountryCode(value);
+      const country = (phoneNumber.country && codeDoubles[phoneNumber.country]) ? codeDoubles[phoneNumber.country] : (phoneNumber.country ? phoneNumber.country : null);
+      const codeValue = country ? {code: country, value: country, label: `+ ${phoneNumber.countryCallingCode}`, sort: 0} : findCountryCode(value);
       if(codeValue) {
         setTimeout(() => setCode(codeValue),200);
       }
@@ -59,7 +69,6 @@ export default function InputPhone(props: Props) {
 
   }
   const handleCodeChange = (val) => {
-    console.log("codeChange", val)
     setChanged(true);
     setCode(val)
     onChange(val.label.replace(/[^\d]/g, ''));
