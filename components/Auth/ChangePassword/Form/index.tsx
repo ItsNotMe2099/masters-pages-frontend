@@ -5,7 +5,7 @@ import Input from 'components/ui/Inputs/Input'
 import InputPassword from 'components/ui/Inputs/InputPassword'
 import { IRootState } from "types";
 import styles from './index.module.scss'
-import {minL, passwordMinLength, passwordsMatch, required} from 'utils/validations'
+import {passwordMinLength, passwordsMatch, required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
 

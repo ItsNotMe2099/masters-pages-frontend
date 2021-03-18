@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import InputPassword from 'components/ui/Inputs/InputPassword'
-import {required, passwordsMatch, minL, passwordMinLength} from 'utils/validations'
+import {required, passwordsMatch, passwordMinLength} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
 let PWRecoveryNewPW = (props) => {

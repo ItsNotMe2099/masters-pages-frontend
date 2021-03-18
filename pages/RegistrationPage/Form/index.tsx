@@ -9,7 +9,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import InputPhone from 'components/ui/Inputs/InputPhone'
 import InputLocation from 'components/ui/Inputs/InputLocation'
-import {required, email, minL, passwordsMatch, passwordMinLength} from 'utils/validations'
+import {required, email, passwordsMatch, passwordMinLength} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import {registrationPhoneOpen} from "components/Modal/actions";
