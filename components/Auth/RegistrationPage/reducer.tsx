@@ -29,7 +29,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
 
     case ActionTypes.REGISTRATION_COMPLETE_ERROR:
-      state.formError = action.payload.error
+      state.formError = action.payload.error || 'Unknown error'
       state.loading = false;
       break
 

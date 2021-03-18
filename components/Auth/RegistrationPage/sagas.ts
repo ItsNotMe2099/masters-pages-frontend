@@ -1,4 +1,4 @@
-import { phoneConfirmOpen } from "components/Modal/actions";
+import {phoneConfirmOpen, registrationSuccessOpen} from "components/Modal/actions";
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
@@ -20,6 +20,7 @@ function* registrationCompleteSaga() {
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 1 });
         yield put(registrationCompleteSuccess())
+        yield put(registrationSuccessOpen());
       }else{
         yield put(registrationCompleteError(res.err?.errors));
       }

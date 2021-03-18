@@ -5,13 +5,6 @@ import request from "utils/request";
 import {wrapper} from 'store';
 
 export const auth = ctx => {
-  if((ctx.req.url.includes('RegistrationPage') || ctx.req.url === '/' || !ctx.req.url)  && ctx.query.token){
-    setCookie(ctx, 'token', ctx.query.token, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    })
-      return ctx.query.token;
-  }
     const { token } = nextCookie(ctx);
     return token;
 };
@@ -66,7 +59,7 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     ctx.res.end();
   }
   if(user && user.isRegistrationCompleted && ctx.req.url.includes('RegistrationPage')){
-    ctx.res.writeHead(404, { });
+    ctx.res.writeHead(404, { Location: "/" });
     ctx.res.end();
   }
   const profile = token && user ? await getProfile(token, mode || 'client') : null;
