@@ -30,6 +30,11 @@ export default function changePasswordSubmitReducer(state = {...initialState}, a
       state.loading = false;
       console.log("get error",  action.payload)
       break
+    case ActionTypes.CHANGE_PASSWORD_RESET:
+      state.formIsSuccess = false
+      state.loading = false;
+      state.formError = null;
+      break;
   }
 
   return state

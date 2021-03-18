@@ -1,4 +1,4 @@
-import { signInSubmit } from "components/Auth/SignIn/actions";
+import {signInReset, signInSubmit} from "components/Auth/SignIn/actions";
 import Button from 'components/ui/Button'
 import Modal from "components/ui/Modal";
 import { IRootState } from "types";
@@ -7,6 +7,7 @@ import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
 import {useTranslation, withTranslation} from "react-i18next";
+import {useEffect} from 'react'
 
 interface Props {
   isOpen?: boolean
@@ -18,6 +19,9 @@ const SignInComponent = (props: Props) => {
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.authSignIn.loading)
 
+  useEffect(() => {
+    dispatch(signInReset());
+  }, [])
   const handleSubmit = (data) => {
     dispatch(signInSubmit(data));
   }

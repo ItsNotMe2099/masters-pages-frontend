@@ -21,10 +21,8 @@ const PWRecoveryComponent = (props: Props) => {
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
   const code = useSelector((state: IRootState) => state.PWRecovery.codeSet)
   useEffect(() => {
-    if(props.isOpen){
     dispatch(PWRecoveryResetState());
-    }
-  }, [props.isOpen])
+  }, [])
   const handleSubmit = (data) => {
     dispatch(PWRecoverySubmit(data));
     console.log(data)

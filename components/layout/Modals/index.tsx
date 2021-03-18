@@ -40,35 +40,34 @@ const Modals = (props: Props) => {
   const dispatch = useDispatch()
   const key = useSelector((state: IRootState) => state.modal.modalKey)
 
-  console.log("Modalkey", key);
   return (
     <>
+      {key === 'signIn' && <SignInComponent
+        isOpen={true}
+        onRequestClose={() => dispatch(modalClose())}
+      />}
+      {key === 'signUp' && <SignUpComponent
+        isOpen={true}
+        onRequestClose={() => dispatch(modalClose())}
+      />}
+      {key === 'phoneConfirm' && <PhoneConfirmComponent
+        isOpen={true}
+        onRequestClose={() => dispatch(modalClose())}
+      />}
+      {key === 'pwRecFirst' && <PWRecoveryComponent
+        isOpen={true}
+        onRequestClose={() => dispatch(modalClose())}/>}
+      {key === 'pwRecFirst' && <PWRecoverySucces
+        isOpen={true}
+        onRequestClose={() => dispatch(modalClose())}/>}
 
-      <SignInComponent
-        isOpen={key === 'signIn'}
-        onRequestClose={() => dispatch(modalClose())}
-      />
-      <SignUpComponent
-        isOpen={key === 'signUp'}
-        onRequestClose={() => dispatch(modalClose())}
-      />
-      <PhoneConfirmComponent
-        isOpen={key === 'phoneConfirm'}
-        onRequestClose={() => dispatch(modalClose())}
-      />
-      <PWRecoveryComponent
-        isOpen={key === 'pwRecFirst'}
-        onRequestClose={() => dispatch(modalClose())}/>
-      <PWRecoverySucces
-        isOpen={key === 'pwRecSuccess'}
-        onRequestClose={() => dispatch(modalClose())}/>
+      {key === 'changePassword' && <ChangePassword isOpen={true}
+                      onRequestClose={() => dispatch(modalClose())}/>}
+      {key === 'taskOfferCreateModal' &&  <TaskOfferAcceptModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
+      {key === 'taskShareModal' && <TaskShareModal isOpen={true}/>}
+      <ModalConfirm isOpen={key === 'confirm'} onRequestClose={() => dispatch(modalClose())}/>
       <ModalLoader isOpen={key === 'loader'} onRequestClose={() => {
       }}/>
-      <ChangePassword isOpen={key === 'changePassword'}
-                      onRequestClose={() => dispatch(modalClose())}/>
-      <TaskOfferAcceptModal isOpen={key === 'taskOfferCreateModal'} onClose={() => dispatch(modalClose())}/>
-      <TaskShareModal isOpen={key === 'taskShareModal'}/>
-      <ModalConfirm isOpen={key === 'confirm'} onRequestClose={() => dispatch(modalClose())}/>
       {key === 'taskHireMasterModal' &&
       <TaskHireMasterModal isOpen={key === 'taskHireMasterModal'} onClose={() => dispatch(modalClose())}/>}
       {key === 'taskMarkAsDoneModal' &&
