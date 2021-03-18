@@ -11,11 +11,11 @@ export const auth = ctx => {
 
 const getUser = async (token) => {
   try {
-    console.log("getUser", token);
     const res = await request({ url: '/api/auth/currentUser', token, method: 'GET' })
     if(res.err){
       return;
     }
+
     return res.data;
   }catch (e) {
     console.error("ErrorCurrentUser", e);
@@ -41,10 +41,8 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     ctx.res.end();
     return;
   }
-  console.log("Query", ctx.query);
 
-  const { mode } = nextCookie(ctx);
-  console.log("get Init", mode);
+  const mode = nextCookie(ctx)?.mode || 'client';
   const user = token ? await getUser(token) : null
   if(!user && redirect){
     ctx.res.writeHead(302, { Location: "/login" });
@@ -62,14 +60,26 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     ctx.res.writeHead(404, { Location: "/" });
     ctx.res.end();
   }
-  const profile = token && user ? await getProfile(token, mode || 'client') : null;
-  console.log("url", ctx.req.url)
 
+  if(user.profiles.length === 0 && user.isRegistrationCompleted){
+    //Недостежимый кейс но может случиться
+    destroyCookie(ctx, 'mode');
+    destroyCookie(ctx, 'token');
+    return {props: {}};
+  }
+  const profile = token && user && user.isRegistrationCompleted ? await getProfile(token, user.profiles.find(profile => profile.role === mode) ? mode : user.profiles[0].role) : null;
+
+  if(profile && profile.role !== mode){
+    setCookie(ctx, 'mode', profile.role, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    })
+  }
   if (ctx.req && profile) {
-
-    ctx.store.dispatch(changeRoleNative(mode || 'client'));
+    ctx.store.dispatch(changeRoleNative(mode));
     ctx.store.dispatch(fetchProfileSuccess(profile));
   }
+
   return {props: { token, user, ...(profile ? {profile} : {})}};
 })
 
