@@ -26,7 +26,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
 
     case ActionTypes.SIGN_IN_ERROR:
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       state.loading = false;
       console.log("get error",  action.payload)
       break

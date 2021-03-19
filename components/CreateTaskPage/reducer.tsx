@@ -25,7 +25,7 @@ export default function CreateTaskReducer(state = {...initialState}, action) {
       break
 
     case ActionTypes.CREATE_TASK_ERROR:
-      state.formError = action.payload.error || 'Unknown error'
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       state.loading = false;
       break
     case ActionTypes.CREATE_TASK_SUCCESS:

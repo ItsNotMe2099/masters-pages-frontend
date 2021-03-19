@@ -8,7 +8,7 @@ import { Field, reduxForm } from 'redux-form'
 import { createTextMask } from "redux-form-input-masks";
 import { IRootState } from "types";
 import { maskBirthDate } from "utils/masks";
-import { required } from "utils/validations";
+import {birthdate, date, required} from "utils/validations";
 import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
@@ -34,11 +34,11 @@ let MasterForm = props => {
                 validate={required}
               />
               <Field
-                name="birth"
+                name="birthday"
                 component={Input}
                 label="BOD* MM / DD / YYYY"
-                validate={required}
-                {...maskBirthDate}
+                validate={[date, birthdate]}
+                mask={'99/99/9999'}
               />
             </div>
             <div className={styles.column}>

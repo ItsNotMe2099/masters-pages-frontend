@@ -96,15 +96,17 @@ const SelectInput = (props: Props) => {
     }else {
       _setCurrentLabel = (options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
     }
-    console.log("_setCurrentLabel", _setCurrentLabel)
+    console.log("_setCurrentLabel", _setCurrentLabel, input.value)
 
-    setCurrentLabel(_setCurrentLabel);
+
+    setCurrentLabel(_setCurrentLabel || '');
     }, [input, options])
 
   const handleActiveOptionClick = (e) => {
     e.preventDefault();
     setIsActive(false);
   }
+  console.log("CurrentLabel", currentLabel)
   return (
     <Input {...props} onClick={onClick}
            input={{value: currentLabel, onChange: null, name: props.input.name}}

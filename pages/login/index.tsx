@@ -4,14 +4,14 @@ import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
 import SignInComponent from "components/Auth/SignIn";
 import SignUpComponent from "components/Auth/SignUp";
-import { withTranslation } from "next-i18next";
-import Backgrounds from "pages/RegistrationPage/Backgrounds";
+
 import { useEffect } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
+import Backgrounds from 'components/Backgrounds'
 interface Props {
   user?: any
 }

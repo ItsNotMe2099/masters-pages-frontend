@@ -3,29 +3,32 @@ import AvatarInputPreview from "components/ui/AvatarInput/components/AvatarInput
 import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
 import AddFileButton from "components/ui/Inputs/S3FileUpload/components/AddFileBtn";
 import React, {
-    FunctionComponent,
-    Children,
-    cloneElement,
-    isValidElement,
-    ReactElement, useState, useCallback,
+  FunctionComponent,
+  Children,
+  cloneElement,
+  isValidElement,
+  ReactElement, useState, useCallback, useRef,
 } from 'react'
 import PropTypes from 'prop-types'
 import { shallowEqual } from 'recompose'
-import { useDropzone, DropzoneOptions } from 'react-dropzone'
+import Dropzone, {DropzoneOptions} from 'react-dropzone';
 import S3Upload from 'react-s3-uploader/s3upload'
 import styles from './index.module.scss'
 
 import Cookies from 'js-cookie'
 import {withTranslation} from "react-i18next";
+import FormError from 'components/ui/Form/FormError'
 
 
 export interface AvatarInputProps {
-  accept?: string
+  accept?: string | string[]
   labelMultiple?: string
   labelSingle?: string
   maxSize?: number
   minSize?: number
   multiple?: boolean,
+  error?: any,
+  loading?: boolean
   handleChangePhoto?: (string) => {}
   handleDeletePhoto?: () => {},
   t?: (string) => string,
@@ -64,12 +67,14 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         input: {value, onChange},
         ...rest
     } = props
-
+  const [error, setError] = useState(null);
+  const dropZoneRef = useRef(null);
 
   const handleChangePhoto = () => {
-    if(props.handleChangePhoto){
-      props.handleChangePhoto(value);
+    if (dropZoneRef.current) {
+      dropZoneRef.current.open()
     }
+
   }
   const handleDeletePhoto = useCallback(() => {
         onChange(null)
@@ -136,6 +141,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         console.log('OnDrop', files)
         const updatedFiles = multiple ? [...files, ...newFiles] : [...newFiles]
 
+        setError(null);
         if (multiple) {
           onChange(transformFiles(updatedFiles))
         } else {
@@ -174,6 +180,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
       const onFileUploadError = (error) => {
         console.error('onFileUploadError', error)
+          setError(error);
       }
       const onRemove = file => () => {
         if (multiple) {
@@ -188,6 +195,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         if (options.onRemove) {
           options.onRemove(file)
         }
+        setError(null);
       }
       const onFinishFileUpload = useCallback(
         (result, file) => {
@@ -206,30 +214,46 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           }
 
           onChange(multiple ? newFileList : newFile)
+
+          if(props.handleChangePhoto){
+            props.handleChangePhoto(multiple ? newFileList : newFile);
+          }
         },
         [value, onChange, files],
     )
 
+  const onDropRejected = (error) => {
+    if(error.length > 0 && error[0].errors.length > 0){
+      console.log("onError", error[0].errors[0].message);
+      setError(error[0].errors[0].message);
+    }
+
+  }
 
 
-      const { getRootProps, getInputProps } = useDropzone({
+
+      const dopZoneProps = {
         ...options,
-        accept,
         maxSize,
         minSize,
         multiple,
+        accept,
         onDrop,
-      })
+        onDropRejected,
+      }
 
       console.log('Files', files)
       return (
         <>
       <div className={`${styles.root} ${!!(files.length > 0) && styles.hasBackDrop}`}>
+        <Dropzone ref={dropZoneRef}   {...dopZoneProps}>
+          {({getRootProps, getInputProps, acceptedFiles}) =>
+            <div className={styles.preview}>
 
-        <div className={styles.preview}>
           <div
             data-testid="dropzone"
             className={styles.dropZone}
+
             {...getRootProps()}
           >
             <AvatarAddFileBtn isLoading={!!(files.length > 0 && files[0].rawFile)} hasImage={files.length > 0 && !files[0].rawFile}/>
@@ -242,25 +266,29 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
             <AvatarInputPreview
               key={index}
               file={file}
-              loading={!!file.rawFile}
-              progress={file && file.rawFile ? fileProgress[file.rawFile.path] || 0 : 0}
+              loading={!!file.rawFile || props.loading}
+              progress={file && file.rawFile ? fileProgress[file.rawFile.path] || 0 : ( props.loading ? 100 : 0)}
               onRemove={onRemove(file)}
             >
             </AvatarInputPreview>
           ))}
           {files.length > 0 && <div className={styles.backdrop}/>}
-        </div>
+        </div>}
+       </Dropzone>
         <div className={styles.info}>
           <div>{t('forms.avatarInput.uploadYourPhoto')}</div>
           <div>{t('forms.avatarInput.formatAllowed')}</div>
           <div>{t('forms.avatarInput.minimalSize')}: 180×180 px.</div>
+          <ErrorInput />
+          {(error || props.error) && <FormError error={error || props.error}/>}
           <div className={styles.infoActions}>
             <div className={styles.infoActionItem} onClick={handleChangePhoto}>{t('forms.avatarInput.changePhoto')} <img src={'/img/icons/link-arrow-left.svg'} /></div>
             {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>{t('forms.avatarInput.deletePhoto')} <img src={'/img/icons/link-cross.svg'} /></div>}
           </div>
         </div>
-        <ErrorInput {...props}/>
+
             </div>
+
             <div className={styles.infoActions__mobile}>
             <div className={styles.infoActionItem} onClick={handleChangePhoto}>{t('forms.avatarInput.changePhoto')} <img src={'/img/icons/link-arrow-left.svg'} /></div>
             {files.length > 0 &&  <div className={styles.infoActionItem} onClick={handleDeletePhoto}>{t('forms.avatarInput.deletePhoto')}  <img src={'/img/icons/link-cross.svg'} /></div>}
@@ -286,6 +314,10 @@ AvatarInput.propTypes = {
   resource: PropTypes.string,
   source: PropTypes.string,
   placeholder: PropTypes.node,
+}
+AvatarInput.defaultProps = {
+  maxSize: 5242880,
+  accept: ["image/jpeg", "image/png"]
 }
 
 export default withTranslation('common')(AvatarInput)

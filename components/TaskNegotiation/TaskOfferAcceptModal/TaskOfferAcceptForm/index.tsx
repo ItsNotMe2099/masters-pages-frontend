@@ -99,8 +99,7 @@ let TaskOfferAcceptForm = (props) => {
                 validate={required}
                 size={'small'}
                 labelType={'placeholder'}
-
-                {...maskBirthDate}
+                mask={'99/99/9999'}
               />
             </div>
 

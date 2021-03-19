@@ -96,7 +96,7 @@ let CreateTaskForm = props => {
               validate={required}
 
               labelType={'cross'}
-              {...maskBirthDate}
+              mask={'99/99/9999'}
             />
           </div>
           <div className={styles.address}>

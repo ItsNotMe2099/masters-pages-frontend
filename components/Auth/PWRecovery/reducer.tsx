@@ -37,7 +37,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
     case ActionTypes.RESET_PW_FIRST_STEP_ERROR:
       state.loading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break
     case ActionTypes.RESET_PW_SET_CODE:
       state.codeSet = action.payload;
@@ -54,7 +54,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
     case ActionTypes.RESET_PW_SECOND_STEP_ERROR:
       state.loading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break
 
     case ActionTypes.RESET_PW_IS_OPEN:
@@ -85,7 +85,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
     case ActionTypes.RESET_PW_FINAL_STEP_ERROR:
       state.loading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break
   }
 

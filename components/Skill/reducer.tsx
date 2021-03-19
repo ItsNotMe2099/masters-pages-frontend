@@ -41,7 +41,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.formLoading = false;
       break
     case ActionTypes.CREATE_SKILL_CATEGORY_REQUEST + ApiActionTypes.FAIL:
-      state.formError = action.payload.error || 'Unknown error'
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
       state.formIsSuccess = false;
       state.formLoading = false;
       break
@@ -56,7 +56,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.formLoading = false;
       break
     case ActionTypes.CREATE_SKILL_REQUEST + ApiActionTypes.FAIL:
-      state.formError = action.payload.error || 'Unknown error'
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
       state.formIsSuccess = false;
       state.formLoading = false;
       break
@@ -71,7 +71,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.formLoading = false;
       break
     case ActionTypes.UPDATE_SKILL_REQUEST + ApiActionTypes.FAIL:
-      state.formError = action.payload.error || 'Unknown error'
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
       state.formIsSuccess = false;
       state.formLoading = false;
       break
@@ -86,7 +86,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.formLoading = false;
       break
     case ActionTypes.DELETE_SKILL_REQUEST + ApiActionTypes.FAIL:
-      state.formError = action.payload.error || 'Unknown error'
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
       state.formIsSuccess = false;
       state.formLoading = false;
       break

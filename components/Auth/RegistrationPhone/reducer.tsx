@@ -35,7 +35,7 @@ export default function registrationPhoneReducer(state = {...initialState}, acti
       break
 
     case ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST + ApiActionTypes.FAIL:
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       state.loading = false;
       console.log("get error",  action.payload)
       break
@@ -53,7 +53,7 @@ export default function registrationPhoneReducer(state = {...initialState}, acti
       break
 
     case ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST + ApiActionTypes.FAIL:
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       state.loading = false;
       console.log("get error",  action.payload)
       break
@@ -81,7 +81,7 @@ export default function registrationPhoneReducer(state = {...initialState}, acti
       break
 
     case ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.FAIL:
-      state.formConfirmError = action.payload.error
+      state.formConfirmError = action.payload.error || action.payload.errors || 'Unknow error'
       state.confirmLoading = false;
       console.log("get error",  action.payload)
       break

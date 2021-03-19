@@ -9,13 +9,14 @@ const sagaMiddleware = createSagaMiddleware();
 
 
 export const reducer = (state, action) => {
-  if (action.type === HYDRATE) {
+  if (action.type === HYDRATE && !state.hydrated) {
     return {
+
       ...state, // use previous state
-      ...action.payload // apply delta from hydration
+      ...(action.payload.profile ? {profile: action.payload.profile} : {})
+
     };
   }
-
   return reducers(state, action);
 };
 

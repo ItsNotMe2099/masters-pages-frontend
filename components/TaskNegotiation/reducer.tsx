@@ -73,7 +73,7 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
       break
     case ActionTypes.TASK_NEGOTIATION_FINISH + ApiActionTypes.FAIL:
       state.formLoading = false;
-      state.formError = action.payload.error;
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error';
       break
 
 

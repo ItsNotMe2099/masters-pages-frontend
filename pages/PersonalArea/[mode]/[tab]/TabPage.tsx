@@ -29,6 +29,7 @@ const TabPage = (props) => {
   const role = useSelector((state: IRootState) => state.profile.role)
   const { mode, tab } = router.query
 
+  console.log("TabPageProfile", profile);
   useEffect(() => {
     if(role && mode && role != mode){
       router.push('/PersonalArea')

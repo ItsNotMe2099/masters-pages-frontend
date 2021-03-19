@@ -1,5 +1,5 @@
 import { changePasswordOpen, loaderOpen, modalClose } from "components/Modal/actions";
-import { updateProfile } from "components/Profile/actions";
+import {updateProfile, updateProfileAvatar} from "components/Profile/actions";
 import AvatarInput from "components/ui/AvatarInput";
 import Button from "components/ui/Button";
 import AvatarForm from "pages/PersonalArea/[mode]/components/TabPersonal/components/AvatarForm";
@@ -26,22 +26,22 @@ const TabPersonal = (props: Props) => {
       dispatch(modalClose());
     }
   }, [formLoading])
-  const handleSubmit = useCallback((data) => {
-    dispatch(updateProfile( profile.id, data));
-  }, [profile]);
+  const handleSubmit = (data) => {
+    dispatch(updateProfile(profile.id, data));
+  };
   useEffect(() => {
     console.log("Profile photo", profile.photo)
 
   }, [profile])
-  const handleSubmitAvatar = useCallback((data) => {
+  const handleSubmitAvatar =(data) => {
     console.log("Handle Submit Avatar", data)
-    dispatch(updateProfile( profile.id, {photo: data.photo}));
-  }, [profile]);
+    dispatch(updateProfileAvatar(profile.id, {photo: data.photo}));
+  }
 
-  const handleDeleteAvatar = useCallback(() => {
+  const handleDeleteAvatar = () => {
     console.log("Handle delete Avatar")
-    dispatch(updateProfile( profile.id, {photo: null}));
-  }, [profile]);
+    dispatch(updateProfile(profile.id, {photo: null}));
+  }
   return (
     <div className={styles.root}>
       <div className={styles.formTip}>*required field</div>
@@ -53,7 +53,7 @@ const TabPersonal = (props: Props) => {
       </div>
       <div className={styles.separator}/>
       <div className={styles.form}>
-        {profile?.id && <TabPersonalForm onSubmit={handleSubmit} initialValues={profile}/>}
+        {profile?.id && <TabPersonalForm onSubmit={handleSubmit} initialValues={{...profile, countryCode: profile.geoname.country}}/>}
       </div>
     </div>
   )

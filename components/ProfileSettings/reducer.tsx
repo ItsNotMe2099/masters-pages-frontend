@@ -36,7 +36,7 @@ export default function ProfileSettingsReducer(state = {...initialState}, action
       break
     case ActionTypes.UPDATE_PROFILE_SETTINGS_REQUEST + ApiActionTypes.FAIL:
       state.formLoading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break
 
 

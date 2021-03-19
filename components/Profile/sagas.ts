@@ -2,6 +2,7 @@ import ApiActionTypes from "constants/api";
 import {takeLatest, put, select, take} from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
 import requestGen from "utils/requestGen";
+import { action as Action } from 'typesafe-actions'
 import ActionTypes from './const'
 import {
   changeProfileEmail,
@@ -10,7 +11,7 @@ import {
   createProfile,
   deleteProfile,
   deleteProfileRequest,
-  fetchProfileSuccess, updateProfile
+  fetchProfileSuccess, updateProfile, updateProfileAvatar
 } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
 import Router from "next/router";
@@ -32,6 +33,10 @@ function* ProfileSaga() {
         yield put(changeRoleSuccess(action.payload.role));
         yield put(fetchProfileSuccess(res.data));
       }else{
+
+        yield put(changeRoleSuccess(action.payload.role));
+        yield put(fetchProfileSuccess({}));
+        return;
         switch (action.payload.role) {
           case 'client':
             Router.push("/RegistrationPage");
@@ -95,6 +100,15 @@ function* ProfileSaga() {
       yield put(updateProfile(action.payload.id, {email: action.payload.email}));
       const result = yield take([ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL])
 
+    })
+  yield takeLatest(ActionTypes.UPDATE_PROFILE_AVATAR,
+    function* (action: ActionType<typeof updateProfileAvatar>) {
+
+      yield put(updateProfile(action.payload.id,  action.payload.data));
+      const result = yield take([ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL, ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS ])
+      if(result.type === ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL) {
+        yield put(Action(ActionTypes.UPDATE_PROFILE_AVATAR + ApiActionTypes.FAIL, result.payload));
+      }
     })
 
 }

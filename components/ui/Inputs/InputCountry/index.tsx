@@ -14,6 +14,7 @@ export default function InputCountry(props) {
   const dispatch = useDispatch()
   const [value, setValue] = useState();
   const countries = useSelector((state: IRootState) => state.countryInput.countries)
+  console.log("CountryValue", props.input.value);
   const handleOnChange = (value) => {
     console.log("OnChangeLocValue", value)
     props.input.onChange(value);
@@ -21,6 +22,7 @@ export default function InputCountry(props) {
   useEffect(() => {
     dispatch(fetchLocationCountries({
       page: 1,
+      country: props.input.value,
     }))
   }, [])
   const handleOnSearchChange = useDebouncedCallback((value) => {
@@ -33,6 +35,7 @@ export default function InputCountry(props) {
     dispatch(fetchLocationCountries({
       search: value,
       page: 1,
+      country: props.input.value,
     }))
   }, 400);
 

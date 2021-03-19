@@ -18,7 +18,7 @@ export default function authReducer(state = {...initialState}, action) {
       state.countries = action.payload.map(item => {
         return  {
           label: item.country_name,
-          value: item.geonameid
+          value: item.country_code
         }
       });
       break

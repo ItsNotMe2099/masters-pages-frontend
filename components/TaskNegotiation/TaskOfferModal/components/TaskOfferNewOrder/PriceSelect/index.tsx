@@ -55,7 +55,7 @@ let PriceSelectFormMini = props => {
         validate={required}
         size={'small'}
         labelType={'static'}
-        {...maskBirthDate}
+        mask={'99/99/9999'}
       />
     </div>
   )

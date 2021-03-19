@@ -29,7 +29,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
 
     case ActionTypes.PHONE_CONFIRM_ERROR:
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       state.loading = false;
       break
 

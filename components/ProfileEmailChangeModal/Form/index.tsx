@@ -23,7 +23,7 @@ let ProfileEmailChangeForm = props => {
         name="email"
         label={t('personalArea.emailChange.fieldEmail')}
         component={Input}
-        validation={[email, required]}
+        validate={[required, email]}
       />
       <FormError error={error}/>
       <div className={styles.btnContainer}>

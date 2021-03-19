@@ -75,7 +75,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break;
     case ActionTypes.CREATE_FEEDBACK_MASTER_REQUEST + ApiActionTypes.FAIL:
       state.formLoading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break;
 
     case ActionTypes.CREATE_FEEDBACK_CLIENT_REQUEST:
@@ -86,7 +86,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break;
     case ActionTypes.CREATE_FEEDBACK_CLIENT_REQUEST + ApiActionTypes.FAIL:
       state.formLoading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break;
 
     case ActionTypes.CREATE_FEEDBACK_SITE_REQUEST:
@@ -97,7 +97,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break;
     case ActionTypes.CREATE_FEEDBACK_SITE_REQUEST + ApiActionTypes.FAIL:
       state.formLoading = false;
-      state.formError = action.payload.error
+      state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break;
     case ActionTypes.RESET_FEEDBACK_LIST:
       state.list = [];

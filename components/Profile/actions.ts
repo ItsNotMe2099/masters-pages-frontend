@@ -5,7 +5,7 @@ import { action } from 'typesafe-actions'
 
 
 export const changeProfileEmail = (id: number, email: string) => action(ActionTypes.CHANGE_EMAIL, {id, email})
-
+export const updateProfileAvatar = (id: number, data: ProfileData) => action(ActionTypes.UPDATE_PROFILE_AVATAR, {id, data})
 export const createProfile = (role: string, data: ProfileData) => action(ActionTypes.CREATE_PROFILE, {role, data})
 export const updateProfile = (id: number, data: ProfileData) => action(ActionTypes.UPDATE_PROFILE, {
   api: {

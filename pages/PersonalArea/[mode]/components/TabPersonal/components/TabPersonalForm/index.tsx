@@ -5,18 +5,21 @@ import Input from "components/ui/Inputs/Input";
 import InputCountry from "components/ui/Inputs/InputCountry";
 import InputLocation from "components/ui/Inputs/InputLocation";
 import * as React from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
 import { IRootState } from "types";
 import { maskBirthDate } from "utils/masks";
-import { required } from "utils/validations";
+import {birthdate, date, required} from "utils/validations";
 import styles from './index.module.scss'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import {useTranslation, withTranslation} from "react-i18next";
+import TabOrderForm from 'pages/PersonalArea/[mode]/components/TabOrders/components/TabOrderModal/TabOrderForm'
+import {useEffect} from 'react'
 
 let TabPersonalForm = (props) => {
   const { t } = useTranslation('common');
   const error = useSelector((state: IRootState) => state.profile.formError)
   console.log("ProfileForm Init values", props.initialValues);
+
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <div className={styles.columns}>
@@ -31,8 +34,10 @@ let TabPersonalForm = (props) => {
           <Field
             name="birthday"
             component={Input}
+            mask={'99/99/9999'}
             labelType="placeholder"
             label={t('personalArea.tabProfile.fieldBirthDate')}
+            validate={[date, birthdate]}
           />
         </div>
         <div className={styles.column}>
@@ -68,8 +73,11 @@ let TabPersonalForm = (props) => {
       <div className={styles.columns}>
         <div className={styles.column}>
           <Field
-            name="country"
+            name="countryCode"
             component={InputCountry}
+            onChange={() =>  {
+              console.log("SetGeonameIdNull")
+              props.change('geonameid', null)}}
             labelType="placeholder"
             label={t('personalArea.tabProfile.fieldCountry')}
           />
@@ -79,6 +87,7 @@ let TabPersonalForm = (props) => {
           <Field
             name="geonameid"
             component={InputLocation}
+            countryCode={props.countryCode}
             labelType="placeholder"
             label={t('personalArea.tabProfile.fieldLocation')}
           />
@@ -99,4 +108,13 @@ TabPersonalForm  = reduxForm({
 }) (TabPersonalForm)
 
 
+const selector = formValueSelector('tabPersonalForm') // <-- same as form name
+TabPersonalForm = connect(state => {
+  const countryCode = selector(state, 'countryCode')
+  const geonameid = selector(state, 'geonameid')
+  return {
+    countryCode,
+    geonameid
+  }
+})(TabPersonalForm)
 export default TabPersonalForm
