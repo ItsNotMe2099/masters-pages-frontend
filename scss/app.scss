@@ -4,9 +4,6 @@
 body{
   font-family: 'gilroy';
   color: #6D718C;
-  &.modal-open{
-    overflow-y: hidden;
-  }
 }
 input, button{
   outline:none;
@@ -30,7 +27,10 @@ form{
 
 
 .ReactModal__Body--open {
-  overflow: hidden;
+
+  @media screen and (max-width: $sm-max){
+    overflow: hidden;
+  }
   position: fixed;
   width: 100%;
   height: 100%;
