@@ -7,13 +7,11 @@ import { IRootState } from "types";
 import {getAuthServerSide} from "utils/auth";
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
-
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import RegistrationPhone from "../../components/Auth/RegistrationPhone";
 import RegistrationPhoneConfirm from "../../components/Auth/RegistrationPhoneConfirm";
 import Backgrounds from 'components/Backgrounds'
-import TaskEditConditionsForm from 'components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm'
 interface Props {
   user?: any
 }
@@ -39,11 +37,11 @@ const RegistrationPage = (props: Props) => {
         </div>
       </div>
       <Backgrounds/>
-      <RegistrationSuccess
-        isOpen={modalKey === 'registrationSuccess'}
+      {modalKey === 'registrationSuccess' && <RegistrationSuccess
+        isOpen={true}
         onRequestClose={() =>{
           window.location.href = '/PersonalArea'
-        }}/>
+        }}/>}
       {modalKey === 'registrationPhone' && <RegistrationPhone
         isOpen={true}
         onRequestClose={() =>{
