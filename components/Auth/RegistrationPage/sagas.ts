@@ -24,7 +24,6 @@ function* registrationCompleteSaga() {
       yield take([ProfileActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS, ProfileActionTypes.FETCH_PROFILE + ApiActionTypes.FAIL])
 
       if(!res.err){
-        cookie.set("token", res.data.accessToken, { expires: 1 });
         yield put(registrationCompleteSuccess())
         yield put(registrationSuccessOpen());
       }else{
