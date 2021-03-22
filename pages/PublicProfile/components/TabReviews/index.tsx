@@ -39,8 +39,8 @@ const TabReviews = (props: Props) => {
       </div>
       <div className={styles.simpleText}>Lorem ipsum dolor sit amet, consectetur adipiscing<br/> elit. Fermentum mattis sed quam enim.</div>
       <div className={styles.dropdown}>
-        <DropDownInput 
-        options={options} item={(item) => 
+        <DropDownInput
+        options={options} item={(item) =>
         <div className={styles.value}>{item?.label}</div>}/></div>
       </div>
       {(loading && total > 0) && <Loader/>}
@@ -51,9 +51,6 @@ const TabReviews = (props: Props) => {
           loader={<Loader/>}>
           {(load ? feedbacks : feedbacks.slice(0, 1)).map(item => <Comment item={item}/>)}
         </InfiniteScroll>}
-      <div className={total === 1 || load || loading ? styles.none : styles.btnContainer}>
-        <Button onClick={() => setLoadMore(true)} black size="20px 40px"><span>Load more ({total -1})</span></Button>
-      </div>
     </div>
   )
 }
