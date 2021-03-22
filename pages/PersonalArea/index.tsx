@@ -11,7 +11,7 @@ const PersonalAreaPageIndex = (props) => {
   const role = useSelector((state: IRootState) => state.profile.role)
   console.log("mode", mode);
   useEffect(() => {
-      router.replace(`/PersonalArea/${role}/personal`)
+      router.replace(`/PersonalArea/personal`)
   }, [])
 
   return (

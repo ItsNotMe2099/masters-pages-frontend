@@ -115,7 +115,7 @@ export default function BaseInput(props: Props) {
                      ref={props.parentRef}
                      {...props}
                      {...inputProps}
-                     value={inputProps.value}
+                     value={inputProps?.value}
                      {...(props.debounce > 0 ? {value: debounceFieldValue, onChange, onBlur, onKeyDown} :
 
                        {})}/>)

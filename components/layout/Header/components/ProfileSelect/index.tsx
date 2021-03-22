@@ -29,9 +29,9 @@ const ProfileSelect = (props) => {
   const options = [
     { value: 'profile', label: t('menu.profile'), link: `/PersonalArea` },
     { value: 'messages', badge: profile.messageNotificationsCount, label: t('menu.messages'), link: `/Chat` },
-    { value: 'reviews', label: t('menu.reviews'), badge: profile.feedbackNotificationsCount,  link: `/PersonalArea/${role}/reviews` },
-    { value: 'orders', label: t('menu.orders'), badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount,  link: `/PersonalArea/${role}/orders` },
-    { value: 'settings', label: t('menu.settings'), link: `/PersonalArea/${role}/settings` },
+    { value: 'reviews', label: t('menu.reviews'), badge: profile.feedbackNotificationsCount,  link: `/PersonalArea/reviews` },
+    { value: 'orders', label: t('menu.orders'), badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount,  link: `/PersonalArea/orders` },
+    { value: 'settings', label: t('menu.settings'), link: `/PersonalArea/settings` },
     { value: 'logout', label: t('menu.logout') },
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
