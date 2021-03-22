@@ -4,7 +4,7 @@ interface Props {}
 
 export default function Backgrounds(props: Props) {
   return (
-    <>
+    <div>
       <img src="/img/Registration/bg/bg.svg" className={styles.bg1} alt=""/>
       <img src="/img/Registration/bgMobile/bg.svg" className={styles.bg1__mobile} alt=""/>
       <img src="/img/Registration/bgMobile/bg2.svg" className={styles.bg2__mobile} alt=""/>
@@ -23,6 +23,6 @@ export default function Backgrounds(props: Props) {
       <img src="/img/Registration/bg/bg8.svg" className={styles.bg8} alt=""/>
       <img src="/img/Registration/bg/bg9.svg" className={styles.bg9} alt=""/>
       <img src="/img/Registration/bg/bg10.svg" className={styles.bg10} alt=""/>
-    </>
+    </div>
   )
 }
