@@ -10,7 +10,7 @@ import {
   changeRoleSuccess,
   createProfile,
   deleteProfile,
-  deleteProfileRequest,
+  deleteProfileRequest, fetchProfile,
   fetchProfileSuccess, updateProfile, updateProfileAvatar
 } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
@@ -110,6 +110,7 @@ function* ProfileSaga() {
         yield put(Action(ActionTypes.UPDATE_PROFILE_AVATAR + ApiActionTypes.FAIL, result.payload));
       }
     })
+
 
 }
 

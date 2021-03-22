@@ -27,7 +27,7 @@ import {
 } from 'components/Modal/actions'
 import SignUpComponent from 'components/Auth/SignUp'
 import PWRecoveryComponent from "components/Auth/PWRecovery";
-import PWRecoverySucces from "components/Auth/PWRecovery/Success";
+import PWRecoverySuccess from "components/Auth/PWRecovery/Success";
 import RegistrationSuccess from "components/Auth/RegistrationSuccess";
 import ProfileEmailChangeModal from "../../ProfileEmailChangeModal";
 
@@ -57,7 +57,7 @@ const Modals = (props: Props) => {
       {key === 'pwRecFirst' && <PWRecoveryComponent
         isOpen={true}
         onRequestClose={() => dispatch(modalClose())}/>}
-      {key === 'pwRecFirst' && <PWRecoverySucces
+      {key === 'pwRecSuccess' && <PWRecoverySuccess
         isOpen={true}
         onRequestClose={() => dispatch(modalClose())}/>}
 

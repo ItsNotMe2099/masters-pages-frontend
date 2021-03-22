@@ -6,6 +6,7 @@ import requestGen from "utils/requestGen";
 import ActionTypes from './const'
 import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
+import {afterAuthRedirect} from 'utils/auth'
 function* signInSaga() {
 
 
@@ -19,7 +20,7 @@ function* signInSaga() {
       console.log("Res signup", res)
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 1 });
-        window.location.href = '/';
+        afterAuthRedirect();
       }else{
         yield put(signInError(res.err?.errors));
       }

@@ -3,7 +3,7 @@ import nextCookie from "next-cookies";
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
 import request from "utils/request";
 import {wrapper} from 'store';
-
+import Router from "next/router";
 export const auth = ctx => {
     const { token } = nextCookie(ctx);
     return token;
@@ -41,11 +41,12 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     ctx.res.end();
     return;
   }
-
+  console.log("token", token)
   const mode = nextCookie(ctx)?.mode || 'client';
   const user = token ? await getUser(token) : null
+  console.log("AuthUSer", user);
   if(!user && redirect){
-    ctx.res.writeHead(302, { Location: "/login" });
+    ctx.res.writeHead(302, { Location: `/login?redirect=${ctx.req.url}` });
     ctx.res.end();
     return;
   }
@@ -85,3 +86,6 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
 
 
 
+export const afterAuthRedirect = () => {
+      window.location.href = (Router.query.redirect as string) || '/PersonalArea'
+}

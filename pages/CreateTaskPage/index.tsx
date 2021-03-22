@@ -18,9 +18,11 @@ import {
 } from "../../components/ProfileSearch/actions";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
+import {useRouter} from 'next/router'
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
+  const router = useRouter();
   const dispatch = useDispatch()
   const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
   const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
@@ -69,7 +71,7 @@ const CreateTaskPage = (props) => {
         title={t('createTask.successTitle')}
         image={'/img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
-        window.location.href = '/'
+        router.push('/PersonalArea/orders');
       }}>
 
       </Modal>

@@ -26,14 +26,14 @@ const RegistrationPage = (props: Props) => {
   const handleSubmit = (data) => {
     dispatch(registrationCompleteSubmit(data));
   }
-  console.log("PropsUser", modalKey)
+  console.log("PropsUser", props.user)
   return (
     <div className={styles.root}>
       <div className={styles.container}>
         <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>
 
-            <RegistrationForm isSocialAuth={!!router.query.socialAuth}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
+            <RegistrationForm isSocialAuth={!!router.query.socialAuth || !props.user.phone}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
 
         </div>
       </div>

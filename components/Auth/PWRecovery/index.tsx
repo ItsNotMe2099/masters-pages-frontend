@@ -20,6 +20,7 @@ const PWRecoveryComponent = (props: Props) => {
   const firstStepIsComplete = useSelector((state: IRootState) => state.PWRecovery.formIsSuccess)
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
   const code = useSelector((state: IRootState) => state.PWRecovery.codeSet)
+  console.log("firstStepIsComplete", firstStepIsComplete)
   useEffect(() => {
     dispatch(PWRecoveryResetState());
   }, [])

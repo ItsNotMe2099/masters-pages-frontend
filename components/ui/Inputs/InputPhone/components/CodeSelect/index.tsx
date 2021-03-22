@@ -8,6 +8,9 @@ export const CodeSelect = (props) => {
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = (e) => {
     e.preventDefault()
+    if(props.disabled){
+      return;
+    }
     setIsActive(!isActive);
   }
   const value = props.value;

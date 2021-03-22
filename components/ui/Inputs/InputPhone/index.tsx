@@ -20,14 +20,9 @@ interface Props {
   onClick: () => void
 }
 const codeDoubles = {
-  '1': 'CA',
-  '590': 'FR',
-  '47': 'ND',
-  '290': 'SH',
-  '262': 'RE',
-  '44': 'GB',
-  '61': 'AU',
+
 }
+console.log("Codes", metadata.metadata.country_calling_codes)
 const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
   const value = metadata.metadata.countries[key];
   return {value: key, label: `+${value[0]}`, phoneCode: value[0].replace(/[^\d]/g, ''), code: key, sort: parseInt(value[0], 10)}
@@ -114,7 +109,7 @@ export default function InputPhone(props: Props) {
       <div className={`${styles.inputContainer} ${(error && touched) && styles.inputError}`}>
         <label className={styles.inputLabel}>{props.label}</label>
         <div className={styles.country}>
-          <CodeSelect value={code} onChange={handleCodeChange} options={codesOptions}
+          <CodeSelect disabled={props.disabled} value={code} onChange={handleCodeChange} options={codesOptions}
                       formatTriggerLabel={(value) => value.value}/>
         </div>
         <BaseInput
