@@ -16,9 +16,9 @@ export const updateProfile = (id: number, data: ProfileData) => action(ActionTyp
 })
 export const fetchProfile = (role: string) => action(ActionTypes.FETCH_PROFILE, {
   api: {
-    url: `/api/profile`,
+    url: `/api/profile/${role}`,
     method: 'POST',
-    data: {role},
+    data: {},
   }
 })
 

@@ -5,11 +5,12 @@ import {useEffect, useState} from "react";
 import styles from './index.module.scss'
 import Codes from './codes'
 import parsePhoneNumber, {isPossiblePhoneNumber} from 'libphonenumber-js'
-import { Metadata } from 'libphonenumber-js/core'
+import {Metadata} from 'libphonenumber-js/core'
 // @ts-ignore
 import minMetadata from 'libphonenumber-js/metadata.min'
 // @ts-ignore
 const metadata = new Metadata(minMetadata)
+
 interface Props {
   meta: any
   input: { value: string, onChange: (val) => void, name: string }
@@ -19,20 +20,25 @@ interface Props {
   inputLabel?: string,
   onClick: () => void
 }
-const codeDoubles = {
 
-}
+const codeDoubles = {}
 console.log("Codes", metadata.metadata.country_calling_codes)
 const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
   const value = metadata.metadata.countries[key];
-  return {value: key, label: `+${value[0]}`, phoneCode: value[0].replace(/[^\d]/g, ''), code: key, sort: parseInt(value[0], 10)}
-}).sort((a, b) => a.sort < b.sort ? -1 : 1 )
+  return {
+    value: key,
+    label: `+${value[0]}`,
+    phoneCode: value[0].replace(/[^\d]/g, ''),
+    code: key,
+    sort: parseInt(value[0], 10)
+  }
+}).sort((a, b) => a.sort < b.sort ? -1 : 1)
   .filter(item => !codeDoubles[item.phoneCode] || (codeDoubles[item.phoneCode] && codeDoubles[item.phoneCode] === item.value))
 const findCountryCode = (value) => {
   const cleanValue = value.replace(/[^\d]/g, '');
   const codes = metadata.metadata.country_calling_codes;
   const key = Object.keys(codes).reverse().find(key => cleanValue.indexOf(key) === 0)
-  if(key){
+  if (key) {
     const val = codeDoubles[key] ? codeDoubles[key] : codes[key][0];
     return {value: val, label: `+${key}`, code: val, sort: 0}
   }
@@ -42,25 +48,34 @@ export default function InputPhone(props: Props) {
   const {error, touched} = props.meta ? props.meta : {error: null, touched: false}
   const [changed, setChanged] = useState(false);
   const {input: {value, onChange}, type, label} = props
-  const [code, setCode] = useState( findCountryCode(value) || findCountryCode('1'));
+  const [code, setCode] = useState(findCountryCode(value) || findCountryCode('1'));
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
+  useEffect(() => {
+    calcCode(value)
+  }, [value])
+  const calcCode = (value) => {
     const phoneNumber = parsePhoneNumber(value)
-    onChange(value.replace(/[^\d]/g, ''))
     if (phoneNumber) {
       const country = (phoneNumber.country && codeDoubles[phoneNumber.country]) ? codeDoubles[phoneNumber.country] : (phoneNumber.country ? phoneNumber.country : null);
-      const codeValue = country ? {code: country, value: country, label: `+ ${phoneNumber.countryCallingCode}`, sort: 0} : findCountryCode(value);
-      if(codeValue) {
-        setTimeout(() => setCode(codeValue),200);
+      const codeValue = country ? {
+        code: country,
+        value: country,
+        label: `+ ${phoneNumber.countryCallingCode}`,
+        sort: 0
+      } : findCountryCode(value);
+      if (codeValue) {
+        setTimeout(() => setCode(codeValue), 200);
       }
-    }else{
+    } else {
       const codeValue = findCountryCode(value);
-      if(codeValue) {
-        setTimeout(() => setCode(codeValue),200);
+      if (codeValue) {
+        setTimeout(() => setCode(codeValue), 200);
       }
     }
     setChanged(true);
+  }
+  const handleInputChange = (e) => {
+    onChange(e.target.value.replace(/[^\d]/g, ''))
 
   }
   const handleCodeChange = (val) => {
@@ -70,16 +85,16 @@ export default function InputPhone(props: Props) {
   }
   const maskBuilder = v => {
     const phoneNumber = parsePhoneNumber(`+${v}`)
-    if(phoneNumber) {
+    if (phoneNumber) {
       metadata.country(phoneNumber.country)
       let totalLength = metadata.numberingPlan ? Math.max(metadata.numberingPlan.possibleLengths()) : 13;
 
-      if(!totalLength){
+      if (!totalLength) {
         totalLength = 13;
       }
-      const addChars = totalLength > 0 ? Array.apply(null, { length: (totalLength - 6)}).map(i => '9').join('') : '9999999';
-      if(totalLength < 6){
-        return `+ ${Array.apply(null, { length: phoneNumber?.countryCallingCode.length }).map(i => '9').join('')} ${Array.apply(null, { length: totalLength }).map(i => '9').join('')}`
+      const addChars = totalLength > 0 ? Array.apply(null, {length: (totalLength - 6)}).map(i => '9').join('') : '9999999';
+      if (totalLength < 6) {
+        return `+ ${Array.apply(null, {length: phoneNumber?.countryCallingCode.length}).map(i => '9').join('')} ${Array.apply(null, {length: totalLength}).map(i => '9').join('')}`
       }
       if (phoneNumber?.countryCallingCode.length === 1) {
         return `+ 9 999-999${addChars ? `-${addChars}` : ''}`
@@ -90,15 +105,15 @@ export default function InputPhone(props: Props) {
       if (phoneNumber?.countryCallingCode.length === 3) {
         return `+ 999 999-999${addChars ? `-${addChars}` : ''}`
       }
-    }else if(code){
-      return `+ ${Array.apply(null, { length: code.value.length - 1 }).map(i => '9').join('')} ${Array.apply(null, { length: 13 }).map(i => '9').join('')}`
+    } else if (code) {
+      return `+ ${Array.apply(null, {length: code.value.length - 1}).map(i => '9').join('')} ${Array.apply(null, {length: 13}).map(i => '9').join('')}`
 
     }
     return '+ 9 999-999'
   }
 
   const handleClick = (e) => {
-    if(props.onClick) {
+    if (props.onClick) {
       e.preventDefault();
       e.stopPropagation();
       props.onClick();

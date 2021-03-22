@@ -21,7 +21,6 @@ let RegistrationForm = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const { handleSubmit } = props
-  console.log('dfgsdfsdfdsf', props.phone)
   const error = useSelector((state: IRootState) => state.registrationComplete.formError)
   const isLoading = useSelector((state: IRootState) => state.registrationComplete.loading)
 
