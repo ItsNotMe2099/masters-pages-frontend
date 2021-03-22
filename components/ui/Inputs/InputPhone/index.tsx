@@ -21,7 +21,16 @@ interface Props {
   onClick: () => void
 }
 
-const codeDoubles = {}
+const codeDoubles = {
+  '1': ['CA', 'US'],
+  '590': 'FR',
+  '47': 'NO',
+  '290': 'SH',
+  '262': 'RE',
+  '44': 'GB',
+  '61': 'AU',
+}
+
 console.log("Codes", metadata.metadata.country_calling_codes)
 const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
   const value = metadata.metadata.countries[key];
@@ -33,13 +42,13 @@ const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
     sort: parseInt(value[0], 10)
   }
 }).sort((a, b) => a.sort < b.sort ? -1 : 1)
-  .filter(item => !codeDoubles[item.phoneCode] || (codeDoubles[item.phoneCode] && codeDoubles[item.phoneCode] === item.value))
+  .filter(item => !codeDoubles[item.phoneCode] || (codeDoubles[item.phoneCode] && !Array.isArray(codeDoubles[item.phoneCode]) && codeDoubles[item.phoneCode] === item.value) || (codeDoubles[item.phoneCode] && Array.isArray(codeDoubles[item.phoneCode]) && codeDoubles[item.phoneCode].includes(item.value)))
 const findCountryCode = (value) => {
   const cleanValue = value.replace(/[^\d]/g, '');
   const codes = metadata.metadata.country_calling_codes;
   const key = Object.keys(codes).reverse().find(key => cleanValue.indexOf(key) === 0)
   if (key) {
-    const val = codeDoubles[key] ? codeDoubles[key] : codes[key][0];
+    const val = codeDoubles[key] ? (Array.isArray(codeDoubles[key]) ? codeDoubles[key][0] : codeDoubles[key]) : codes[key][0];
     return {value: val, label: `+${key}`, code: val, sort: 0}
   }
 }
@@ -51,12 +60,16 @@ export default function InputPhone(props: Props) {
   const [code, setCode] = useState(findCountryCode(value) || findCountryCode('1'));
 
   useEffect(() => {
-    calcCode(value)
+    if(value) {
+      calcCode(value)
+    }
   }, [value])
   const calcCode = (value) => {
-    const phoneNumber = parsePhoneNumber(value)
+    const phoneNumber = parsePhoneNumber(`+${value}`)
+
     if (phoneNumber) {
-      const country = (phoneNumber.country && codeDoubles[phoneNumber.country]) ? codeDoubles[phoneNumber.country] : (phoneNumber.country ? phoneNumber.country : null);
+
+      const country = phoneNumber.country ? phoneNumber.country : null;
       const codeValue = country ? {
         code: country,
         value: country,
