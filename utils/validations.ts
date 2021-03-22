@@ -24,9 +24,11 @@ const minLength = min => value =>
 export const passwordMinLength = value =>
   value && value.length < 6 ? `passwordMinLength8` : undefined
 
-export const arrayNotEmpty =  value => {
-  console.log("Array notEmpty", value)
- return !value || value.length === 0 ? `Select something` : undefined
+export const arrayNotEmpty = (message?) => {
+  return (value) => {
+    console.log("Array notEmpty", value)
+    return (!value || value.length === 0) ? (message || `selectSomething`) : undefined
+  }
 }
 
 export const date =  value => {

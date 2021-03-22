@@ -22,7 +22,10 @@
     "required": "Field required",
     "phone": "Wrong phone format",
     "passwordMinLength8": "Must be 8 characters or more",
-    "birthdate": "Not valid birthdate"
+    "birthdate": "Not valid birthdate",
+    "selectSomething": "Select one or more values",
+    "selectCategory": "Add one or more categories",
+    "selectSubCategory": "Add one or more sub categories"
   },
   "master": "MASTER",
   "volunteer": "VOLUNTEER",

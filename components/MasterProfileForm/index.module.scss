@@ -22,12 +22,18 @@
 .container{
     display: flex;
     margin-bottom: 63px;
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+  }
 
 }
-.containerBottom{
+.footer{
   display: flex;
   flex-direction: column;
   width: 70%;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+  }
 }
 
 .form{

@@ -9,12 +9,15 @@ import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useDispatch, useSelector } from 'react-redux'
-import MasterForm from './Form'
+
 import SimpleSlider from 'components/Steps/MasterProfile/Slider'
+import MasterForm from 'components/MasterProfileForm'
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+
 
   useEffect(() => {
     if(formLoading){
@@ -46,10 +49,14 @@ const MasterProfile = (props) => {
 
         <div className={styles.required}>* required field</div>
         <MasterForm onSubmit={handleSubmit} initialValues={{
-          firstName: props.user?.firstName,
-          lastName: props.user?.lastName,
-          geonameid: props.user?.geonameid,
+          firstName: profile?.firstName,
+          lastName: profile?.lastName,
+          countryCode: profile?.geoname?.countryCode,
+          geonameid: profile?.geonameid,
+          birthday: profile?.birthday,
+          photo: profile?.photo,
         }}/>
+
         <div className={styles.footer}>
           <Footer/>
         </div>

@@ -53,7 +53,15 @@ const TabPersonal = (props: Props) => {
       </div>
       <div className={styles.separator}/>
       <div className={styles.form}>
-        {profile?.id && <TabPersonalForm onSubmit={handleSubmit} initialValues={{...profile, countryCode: profile.geoname?.country}}/>}
+        {profile?.id && <TabPersonalForm onSubmit={handleSubmit} initialValues={{
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          birthday: profile.birthday,
+          postcode: profile.postcode,
+          address1: profile.address1,
+          address2: profile.address2,
+          geonameid: profile.geonameid,
+          countryCode: profile.geoname?.country}}/>}
       </div>
     </div>
   )

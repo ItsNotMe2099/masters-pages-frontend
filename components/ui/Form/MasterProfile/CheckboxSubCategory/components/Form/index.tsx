@@ -12,13 +12,18 @@ import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import InputCategory from 'components/ui/Inputs/InputCategory';
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
+const categoryRequired = (value) => {
+  return  !value || !value.value ? 'required' : ''
+}
+const subCategoryRequired = (value) => {
+  return  !value || value.length === 0 ? 'selectSubCategory' : ''
+}
 
 let FormNewCategory = props => {
   const { handleSubmit } = props
   const [categoryId, setCategoryId] = useState(null);
 
   useEffect(() => {
-    console.log("Props Init", props)
     const categoryId = props.initialValues?.category?.value
     if(categoryId){
       setCategoryId(categoryId);
@@ -31,21 +36,21 @@ let FormNewCategory = props => {
                 name="category"
                 component={InputCategory}
                 label="Category"
-                validate={required}
+                validate={categoryRequired}
                 changeWithValue={true}
                 onChange={(val) => setCategoryId(val.value)}
 
               />
-              <Field
+      <Field
                 name="subCategories"
                 component={CheckboxListSubCategories}
                 label="BOD* MM / DD / YYYY"
-                validate={arrayNotEmpty}
+                validate={[subCategoryRequired]}
                 categoryId={categoryId}
                 grid={2}
                 changeWithValue={true}
               />
-      <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>Save category</Button>
+      <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>Add category</Button>
 
       </form>
   )

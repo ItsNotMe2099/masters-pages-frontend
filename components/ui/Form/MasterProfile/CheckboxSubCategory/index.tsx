@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import nextId from "react-id-generator";
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 interface Props {
 
 }
@@ -75,7 +76,6 @@ export default function CheckboxSubCategory(props) {
           label: item.name
         }
       })}} onSubmit={(data) => {
-
         return handleEdit({id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
           return {
             id: item.value,
@@ -86,6 +86,7 @@ export default function CheckboxSubCategory(props) {
       </div>)
   }
   return (
+    <>
       <ol className={styles.root}>
         {categories.map((category, key) =>
           <li  key={category.key}>
@@ -96,6 +97,10 @@ export default function CheckboxSubCategory(props) {
           </li>)}
 
       </ol>
+      <div className={styles.errors}>
+        <ErrorInput {...props}/>
+      </div>
+      </>
 
   )
 }

@@ -8,7 +8,7 @@ import { Field, reduxForm } from 'redux-form'
 import { createTextMask } from "redux-form-input-masks";
 import { IRootState } from "types";
 import { maskBirthDate } from "utils/masks";
-import {birthdate, date, required} from "utils/validations";
+import {arrayNotEmpty, birthdate, date, required} from "utils/validations";
 import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
@@ -17,10 +17,8 @@ import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCat
 let MasterForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
-
-  console.log(`props: ${props}`)
-
   return (
+    <div>
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.container}>
         <div className={styles.mainForm}>
@@ -37,7 +35,7 @@ let MasterForm = props => {
                 name="birthday"
                 component={Input}
                 label="BOD* MM / DD / YYYY"
-                validate={[date, birthdate]}
+                validate={[required, date, birthdate]}
                 mask={'99/99/9999'}
               />
             </div>
@@ -71,8 +69,8 @@ let MasterForm = props => {
                 <Field
                   name="categories"
                   component={CheckboxSubCategory}
-                  label="Categoires*"
-                  validate={required}
+                  label="Categories*"
+                  validate={[arrayNotEmpty('selectCategory')]}
                 />
               </div>
             </div>
@@ -89,8 +87,8 @@ let MasterForm = props => {
           </div>
         </div>
       </div>
-      <div className={styles.containerBottom}>
-        <div className={styles.separator}></div>
+      <div className={styles.footer}>
+        <div className={styles.separator}/>
         <div className={styles.terms}>
           <Field
             name="terms"
@@ -106,6 +104,7 @@ let MasterForm = props => {
         </div>
       </div>
     </form>
+      </div>
   )
 }
 
