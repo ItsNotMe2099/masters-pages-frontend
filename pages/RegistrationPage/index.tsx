@@ -29,19 +29,21 @@ const RegistrationPage = (props: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.container}>
+        {modalKey === 'registrationSuccess' ?  <RegistrationSuccess
+            isOpen={true}
+            onRequestClose={() =>{
+              window.location.href = '/PersonalArea'
+            }}/> : <>
         <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>
 
-            <RegistrationForm isSocialAuth={props.user.regType !== 'site'}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
+          <RegistrationForm isSocialAuth={props.user?.regType !== 'site'}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
 
         </div>
+          </>}
       </div>
       <Backgrounds/>
-      {modalKey === 'registrationSuccess' && <RegistrationSuccess
-        isOpen={true}
-        onRequestClose={() =>{
-          window.location.href = '/PersonalArea'
-        }}/>}
+
       {modalKey === 'registrationPhone' && <RegistrationPhone
         isOpen={true}
         onRequestClose={() =>{

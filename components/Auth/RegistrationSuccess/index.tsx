@@ -15,8 +15,8 @@ interface Props {
 const RegistrationSuccess = (props: Props) => {
   const { t } = useTranslation('common');
   return (
-    <Modal{...props} image='/img/Modal/success.svg'>
-
+    <div className={styles.root}>
+        <img src={'/img/Modal/success.svg'}/>
         <div className={styles.headText}>
           {t('auth.registrationSuccess.title')}
         </div>
@@ -37,7 +37,7 @@ const RegistrationSuccess = (props: Props) => {
           }}> {t('auth.registrationSuccess.buttonBecomeVolunteer')}</Button></Link>
         </div>
         <Link href="/SearchTaskPage"><a className={styles.link}>{t('auth.registrationSuccess.lookAtTaskList')}</a></Link>
-    </Modal>
+    </div>
   )
 }
 export default RegistrationSuccess;

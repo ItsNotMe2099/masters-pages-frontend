@@ -1,3 +1,15 @@
+.root{
+  width: 441px;
+  position: relative;
+  padding: 0px 67px;
+  z-index: 5;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
 .headText{
     font-weight: bold;
     font-size: 21px;
