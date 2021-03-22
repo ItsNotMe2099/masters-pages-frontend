@@ -2,7 +2,8 @@ import Button from 'components/ui/Button'
 import FormError from "components/ui/Form/FormError";
 import Loader from "components/ui/Loader";
 import { useEffect } from "react";
-import { Field, reduxForm } from 'redux-form'
+import * as React from "react";
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import Input from 'components/ui/Inputs/Input'
 import InputPassword from 'components/ui/Inputs/InputPassword'
 import { IRootState } from "types";
@@ -10,16 +11,17 @@ import styles from './index.module.scss'
 import InputPhone from 'components/ui/Inputs/InputPhone'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import {required, email, passwordsMatch, passwordMinLength} from 'utils/validations'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, connect } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import {registrationPhoneOpen} from "components/Modal/actions";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
 import {logout} from "components/Auth/actions";
+import TaskEditConditionsForm from 'components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm'
 let RegistrationForm = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const { handleSubmit } = props
-  console.log(props)
+  console.log('dfgsdfsdfdsf', props.phone)
   const error = useSelector((state: IRootState) => state.registrationComplete.formError)
   const isLoading = useSelector((state: IRootState) => state.registrationComplete.loading)
 
@@ -59,7 +61,7 @@ let RegistrationForm = props => {
       <Field
         name="phone"
         component={InputPhone}
-        onClick={props.isSocialAuth ? handlePhoneClick : null}
+        onClick={(!props.phone && !props.initialValues.phone) ? handlePhoneClick : null}
         label={t('auth.registrationPage.fieldPhone')}
         validate={required}
         labelType={'cross'}
@@ -102,11 +104,18 @@ let RegistrationForm = props => {
   )
 }
 
-RegistrationForm  = reduxForm ({
-  form: 'registrationForm ',
+
+
+RegistrationForm  = reduxForm({
+  form: 'registrationForm',
 
 }) (RegistrationForm )
-
-
+const selector = formValueSelector('registrationForm') // <-- same as form name
+RegistrationForm = connect(state => {
+  const phone = selector(state, 'phone')
+  return {
+    phone
+  }
+})(RegistrationForm)
 
 export default RegistrationForm

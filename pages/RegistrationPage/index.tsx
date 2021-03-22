@@ -13,6 +13,7 @@ import {useTranslation} from "react-i18next";
 import RegistrationPhone from "../../components/Auth/RegistrationPhone";
 import RegistrationPhoneConfirm from "../../components/Auth/RegistrationPhoneConfirm";
 import Backgrounds from 'components/Backgrounds'
+import TaskEditConditionsForm from 'components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm'
 interface Props {
   user?: any
 }
@@ -33,7 +34,7 @@ const RegistrationPage = (props: Props) => {
         <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>
 
-            <RegistrationForm isSocialAuth={!!router.query.socialAuth || !props.user.phone}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
+            <RegistrationForm isSocialAuth={props.user.regType !== 'site'}onSubmit={handleSubmit} initialValues={{phone: props.user?.phone, email: props.user?.email, firstName: props.user?.firstName, lastName: props.user?.lastName}}/>
 
         </div>
       </div>
@@ -56,5 +57,6 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
+
 export const getServerSideProps = getAuthServerSide({redirect: true});
 export default RegistrationPage
