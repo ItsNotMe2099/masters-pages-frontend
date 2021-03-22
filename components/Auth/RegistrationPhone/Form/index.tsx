@@ -17,8 +17,15 @@ let SignIn = props => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      {(props.userHasPassword && props.userPhoneChange) && <Field
+        name="password"
+        component={InputPassword}
+        label={t('auth.registrationPhone.fieldPassword')}
+        validate={required}
+        labelType={'cross'}
+      />}
       <Field
-        name="phone"
+        name={props.userPhoneChange ? 'newPhone' : 'phone'}
         component={InputPhone}
         label={t('auth.registrationPhone.fieldPhone')}
         validate={required}

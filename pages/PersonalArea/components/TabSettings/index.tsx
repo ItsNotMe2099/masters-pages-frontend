@@ -20,6 +20,7 @@ import RegistrationPhoneConfirm from "components/Auth/RegistrationPhoneConfirm";
 import {useTranslation} from "react-i18next";
 interface Props {
   t?: (string) => string,
+  user?: any
 }
 const TabSettings= (props: Props) => {
   const {t} = useTranslation();
@@ -58,6 +59,7 @@ const TabSettings= (props: Props) => {
       {modalKey === 'registrationPhone' && <RegistrationPhone
         isOpen={true}
         userPhoneChange={true}
+        userHasPassword={props.user?.regType === 'site'}
         onRequestClose={() =>{
           dispatch(modalClose())
         }}/>}

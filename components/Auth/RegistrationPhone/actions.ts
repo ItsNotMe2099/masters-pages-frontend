@@ -1,7 +1,13 @@
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 interface registrationPhoneSubmitData{
-  phone: string
+  phone: string,
+  password?: string
+}
+
+interface changePhoneSubmitData{
+  newPhone: string,
+  password?: string
 }
 export const registrationPhoneSubmit = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_SUBMIT, data)
 export const registrationPhoneSubmitRequest = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST, {
@@ -12,8 +18,8 @@ export const registrationPhoneSubmitRequest = (data: registrationPhoneSubmitData
   },
 })
 
-export const registrationPhoneChange = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE, data)
-export const registrationPhoneChangeRequest = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST, {
+export const registrationPhoneChange = (data: changePhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE, data)
+export const registrationPhoneChangeRequest = (data: changePhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST, {
   api: {
     url: `/api/auth/phoneChange`,
     method: 'POST',

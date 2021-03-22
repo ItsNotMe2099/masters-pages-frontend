@@ -13,7 +13,8 @@ import {useEffect} from "react";
 interface Props {
   isOpen?: boolean
   onRequestClose?: () => void,
-  userPhoneChange?: boolean
+  userPhoneChange?: boolean,
+  userHasPassword?: boolean
 }
 
 const RegistrationPhone = (props: Props) => {
@@ -22,7 +23,6 @@ const RegistrationPhone = (props: Props) => {
   const isLoading = useSelector((state: IRootState) => state.registrationPhone.loading)
 
   useEffect(() => {
-    console.log("Call reset")
     dispatch(registrationPhoneReset());
   }, [])
   const handleSubmit = (data) => {
@@ -38,7 +38,7 @@ const RegistrationPhone = (props: Props) => {
         <div className={styles.headText}>
           {t(props.userPhoneChange ? 'auth.registrationPhone.titleChange' : 'auth.registrationPhone.title')}
         </div>
-         <SignIn onSubmit={handleSubmit}/>
+         <SignIn userPhoneChange={props.userPhoneChange} userHasPassword={props.userHasPassword} onSubmit={handleSubmit}/>
     </Modal>
   )
 }
