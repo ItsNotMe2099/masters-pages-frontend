@@ -33,10 +33,7 @@ function* ProfileSaga() {
         yield put(changeRoleSuccess(action.payload.role));
         yield put(fetchProfileSuccess(res.data));
       }else{
-
-        yield put(changeRoleSuccess(action.payload.role));
-        yield put(fetchProfileSuccess({}));
-        return;
+        
         switch (action.payload.role) {
           case 'client':
             Router.push("/RegistrationPage");
