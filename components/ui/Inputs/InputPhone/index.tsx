@@ -31,7 +31,6 @@ const codeDoubles = {
   '61': 'AU',
 }
 
-console.log("Codes", metadata.metadata.country_calling_codes)
 const codesOptions = Object.keys(metadata.metadata.countries).map((key) => {
   const value = metadata.metadata.countries[key];
   return {

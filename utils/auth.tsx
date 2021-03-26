@@ -45,6 +45,7 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
   const mode = nextCookie(ctx)?.mode || 'client';
   const user = token ? await getUser(token) : null
   console.log("AuthUSer", user);
+
   if(!user && redirect){
     ctx.res.writeHead(302, { Location: `/login?redirect=${ctx.req.url}` });
     ctx.res.end();
@@ -53,14 +54,17 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
   if(!user){
     return {props: {}};
   }
-  if(user && !user.isRegistrationCompleted && redirect &&  !ctx.req.url.includes('RegistrationPage')){
+  if(user && !user.isRegistrationCompleted && (redirect) &&  !ctx.req.url.includes('RegistrationPage')){
     ctx.res.writeHead(302, { Location: "/RegistrationPage" });
     ctx.res.end();
+    return;
   }
   if(user && user.isRegistrationCompleted && ctx.req.url.includes('RegistrationPage')){
     ctx.res.writeHead(404, { Location: "/" });
     ctx.res.end();
+    return;
   }
+
 
   if(user.profiles.length === 0 && user.isRegistrationCompleted){
     //Недостежимый кейс но может случиться

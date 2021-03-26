@@ -1,0 +1,49 @@
+.root{
+  display: flex;
+  border-radius: 100%;
+  background-color: rgba(255,255,255, 0.3);
+  border: 1px solid rgba(255,255,255, 0.3);
+  width: 64px;
+  height: 64px;
+  z-index: 3;
+  position: absolute;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  svg{
+
+    }
+  &::before{
+    display: none;
+  }
+  &:hover{
+    background-color: #ededed;
+    svg{
+      path {
+        stroke: black;
+      }
+    }
+  }
+}
+.white{
+  background: white;
+  svg{
+    path {
+      stroke: #373948;
+    }
+  }
+}
+
+
+
+.next{
+  right: 4%;
+}
+.prev{
+  svg{
+    margin-left: -2px;
+  }
+  left: 4%;
+}
+
+

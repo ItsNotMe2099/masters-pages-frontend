@@ -102,6 +102,7 @@
       "title": "Phone confirm",
       "titleChange": "Phone change",
       "fieldPhone": "Phone number",
+      "fieldPassword": "Your password",
       "buttonConfirm": "CONFIRM PHONE"
     }
   },
