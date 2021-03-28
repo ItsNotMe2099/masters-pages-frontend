@@ -19,7 +19,7 @@ const LastSlide = (props: Props) => {
           With MastersPages you will enjoy this game even more.
           MastersPages will make sure your successes are recognized and rewarded.</div>
         <div className={styles.subTitle}>TREAT YOUR BUSINESS WITH A NEW THRILL!</div>
-        <MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>
+        {/*<MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>*/}
       </div>
     </div>
   )

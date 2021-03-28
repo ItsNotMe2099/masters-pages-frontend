@@ -32,8 +32,8 @@ const MainSectionHeader = (props: Props) => {
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
           <div className={styles.actionsButtons}>
-          <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>
-          <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>
+            {/* <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>
+          <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>*/}
           </div>
         </div>
       </div>

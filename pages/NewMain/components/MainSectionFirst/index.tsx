@@ -62,7 +62,7 @@ const MainSectionFirst = (props) => {
         <div className={styles.description}>
           Organize smooth flow of your business in the most efficient way in one place with MastersPages:
         </div>
-        <MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>
+        <MainSectionButton>We go live in May 2021</MainSectionButton>
         </div>
         <div className={styles.rightSide}>
           <Label label={'Advertise'} index={0}/>

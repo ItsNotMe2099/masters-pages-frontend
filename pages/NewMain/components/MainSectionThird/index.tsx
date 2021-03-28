@@ -36,7 +36,7 @@ const MainSectionThird = (props) => {
 
 
         </div>
-        <MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>
+          {/*<MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>*/}
         </div>
         <div className={styles.rightSide}>
           <img className={styles.monitor} src={'/img/Main/monitor.png'}/>
