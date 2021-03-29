@@ -15,33 +15,54 @@ const MainSectionThird = (props) => {
 
   const dispatch = useDispatch()
   const [currentIndex, setCurrentIndex] = useState(0);
-  const handleNextClick = () => {
-    setCurrentIndex(index => index === features.length - 1 ? 0 : index + 1);
-  }
   const features = [
     'Tell your story or pitch your services in text of video',
-   'Present your credentials – Education, Professional experiences',
+    'Present your credentials – Education, Professional experiences',
     'Brag your achievements – Post pictures, videos of things you made, or services your rendered',
-   'Let others speak for you - every job you do, every service you render makes someone happy.'
+    'Let others speak for you - every job you do, every service you render makes someone happy.',
+
+    'Tell your story or pitch your services in text of video',
+    'Present your credentials – Education, Professional experiences',
+    'Brag your achievements – Post pictures, videos of things you made, or services your rendered',
+    'Let others speak for you - every job you do, every service you render makes someone happy.'
 
   ]
+  const handleNextClick = () => {
+    console.log(" features.length",  features)
+    setCurrentIndex(index => index === features.length - 1 ? 0 : index + 1);
+  }
+
 
   return (
-    <div className={styles.root}>
-      <div className={styles.container}>
+    <div className={`${styles.root} ${currentIndex > 3 && styles.rootRight }`}>
+      { currentIndex <= 3 && <div className={styles.container}>
         <div className={styles.leftSide}>
-        <div className={styles.title}>Here is how it works</div>
-        <div className={styles.list}>
-          {features.map((feature, index) => <ListItem label={feature} isActive={index === currentIndex}/>)}
+          <div className={styles.title}>Here is how it works</div>
+          <div className={styles.list}>
+            {[...features].splice(0, 4).map((feature, index) => <ListItem label={feature} isActive={index === currentIndex}/>)}
 
-
-        </div>
+          </div>
           {/*<MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>*/}
         </div>
         <div className={styles.rightSide}>
           <img className={styles.monitor} src={'/img/Main/monitor.png'}/>
         </div>
-      </div>
+      </div>}
+
+      { currentIndex > 3 && <div className={styles.container}>
+        <div className={styles.rightSide}>
+          <img className={styles.monitor} src={'/img/Main/monitor.png'}/>
+        </div>
+        <div className={styles.leftSide}>
+          <div className={styles.title}>Here is how it works</div>
+          <div className={styles.list}>
+            {[...features].splice(3, 4).map((feature, index) => <ListItem label={feature} isActive={(index + 4) === currentIndex}/>)}
+
+
+          </div>
+          {/*<MainSectionButton onClick={() => dispatch(signUpOpen())}>Free sign up</MainSectionButton>*/}
+        </div>
+      </div>}
       <MainSliderControl className={styles.arrowNext} onClick={handleNextClick} white={true} direction={'next'}/>
       <div className={styles.footer}/>
     </div>
