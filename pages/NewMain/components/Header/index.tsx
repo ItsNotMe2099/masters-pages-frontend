@@ -33,8 +33,8 @@ const MainSectionHeader = (props: Props) => {
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
           <div className={styles.actionsButtons}>
-            {isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>}
-            {isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>}
+            {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>}
+            {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>}
           </div>
         </div>
       </div>
