@@ -10,6 +10,7 @@ interface Props{
 }
 
 const MainSectionHeader = (props: Props) => {
+ const isProd = ['masterspages.ca', 'masterspages.com'].includes(window ? window.location.hostname : '');
   const dispatch = useDispatch()
   return (
     <div  className={styles.root}>
@@ -32,8 +33,8 @@ const MainSectionHeader = (props: Props) => {
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
           <div className={styles.actionsButtons}>
-            {/* <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>
-          <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>*/}
+            {isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>}
+            {isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>}
           </div>
         </div>
       </div>
