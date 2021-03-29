@@ -16,15 +16,15 @@ const MainSectionThird = (props) => {
   const dispatch = useDispatch()
   const [currentIndex, setCurrentIndex] = useState(0);
   const features = [
-    'Tell your story or pitch your services in text of video',
-    'Present your credentials – Education, Professional experiences',
-    'Brag your achievements – Post pictures, videos of things you made, or services your rendered',
-    'Let others speak for you - every job you do, every service you render makes someone happy.',
+    'Create your account on MastersPages.com (Sign Up)',
+    'Fill in your Master’s profile / Share your profile link via your advertising efforts (Facebook, Instagram, banners, tap-link, etc)',
+    'Invite your customers to join your community on MastersPages',
+    'Plan your tasks or get service requests from your customers',
 
-    'Tell your story or pitch your services in text of video',
-    'Present your credentials – Education, Professional experiences',
-    'Brag your achievements – Post pictures, videos of things you made, or services your rendered',
-    'Let others speak for you - every job you do, every service you render makes someone happy.'
+    'Update your profile and Publish your works regularly',
+    'Collect reviews',
+    'Get new orders from new customers',
+    'Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle'
 
   ]
   const handleNextClick = () => {
