@@ -19,7 +19,6 @@ export const LangSelect = (props: Props) => {
   const options = [
     { value: 'ru', label: 'RU' },
     { value: 'en', label: 'EN' },
-    { value: 'fr', label: 'FR' },
   ]
   const [value, setValue] = useState(options.find(item => item.value === language));
 
