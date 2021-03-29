@@ -36,7 +36,7 @@ const getProfile = async (token, role) => {
 export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrapper.getServerSideProps(async (ctx) => {
   const token = auth(ctx);
 
-  if (ctx.req && ['masterspages.ca', 'masterspages.com'].includes(ctx.req.headers.host) && (!ctx.req.url || ctx.req.url === '/')) {
+  if (ctx.req && ['masterspages.ca', 'masterspages.com', 'masterspages.ru'].includes(ctx.req.headers.host) && (!ctx.req.url || ctx.req.url === '/')) {
     ctx.res.writeHead(302, {Location: "/"});
     ctx.res.end();
     return;
