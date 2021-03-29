@@ -6,10 +6,14 @@ import MainSectionThird from 'pages/NewMain/components/MainSectionThird'
 import MainSectionHeader from 'pages/NewMain/components/Header'
 import MainSectionFooter from 'pages/NewMain/components/Footer'
 import Modals from 'components/layout/Modals'
-
+import Head from 'next/head
 const NewMain = (props) => {
   return (
     <>
+    <Head>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    </Head>
     <div className={styles.root}>
       <MainSectionHeader/>
       <MainSectionFirst/>
