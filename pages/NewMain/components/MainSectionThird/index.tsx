@@ -56,7 +56,7 @@ const MainSectionThird = (props) => {
         <div className={styles.leftSide}>
           <div className={styles.title}>Here is how it works</div>
           <div className={styles.list}>
-            {[...features].splice(3, 4).map((feature, index) => <ListItem label={feature} isActive={(index + 4) === currentIndex}/>)}
+            {[...features].splice(4, 4).map((feature, index) => <ListItem label={feature} isActive={(index + 4) === currentIndex}/>)}
 
 
           </div>

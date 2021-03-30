@@ -67,7 +67,7 @@ const MainSectionFirst = (props) => {
         <div className={styles.rightSide}>
           <Label label={'Advertise'} index={0}/>
           <Label label={'Communicate'} index={1}/>
-          <Label label={'Time'} index={2}/>
+          <Label label={'Time manage'} index={2}/>
           <div className={styles.labelSeparator}/>
           <Label label={'Note'} index={3}/>
           <Label label={'Organize'} index={4}/>

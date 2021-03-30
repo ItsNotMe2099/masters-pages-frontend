@@ -20,7 +20,7 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </div>
         <div className={styles.menu}>
-          <div className={styles.menuItem}>
+          {/* <div className={styles.menuItem}>
             <Link href={'menu'}>Home</Link>
           </div>
           <div className={styles.menuItem}>
@@ -28,7 +28,7 @@ const MainSectionHeader = (props: Props) => {
           </div>
           <div className={styles.menuItem}>
             <Link href={'menu'}>Contact us</Link>
-          </div>
+          </div>*/}
         </div>
         <div className={styles.actions}>
           <div className={styles.actionsButtons}>
