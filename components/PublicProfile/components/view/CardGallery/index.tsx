@@ -11,6 +11,7 @@ const CardGallery = (props: Props) => {
   const {profile} = props;
   return (
     <Card className={styles.root} title={'Gallery'}>
+      <div className={styles.list}>
       <GalleryItem/>
       <GalleryItem/>
       <GalleryItem/>
@@ -18,6 +19,7 @@ const CardGallery = (props: Props) => {
       <GalleryItem/>
       <GalleryItem/>
       <GalleryItem/>
+      </div>
     </Card>
   )
 }

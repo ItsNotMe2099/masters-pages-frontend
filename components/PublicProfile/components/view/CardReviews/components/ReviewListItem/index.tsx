@@ -9,7 +9,7 @@ import * as React from 'react'
 import StarRatings from 'react-star-ratings';
 import {format} from 'date-fns'
 interface Props{
-  feedback: IFeedbacksToProfile
+  feedback: IFeedbacksToProfile | any
 }
 const ReviewListItem = ({feedback}: Props) => {
 

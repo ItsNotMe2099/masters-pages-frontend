@@ -1,18 +1,50 @@
 @import "scss/index";
 .root{
+  float: left;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 13px;
   &:first-of-type{
     margin-top: 0px;
   }
 }
 .image{
-  width: 267px;
-  height: 267px;
   img {
     max-width: 100%;
     object-fit: contain;
+  }
+}
+.info{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 14px;
+  padding: 14px 12px;
+  .details{
+    padding-right: 12px;
+
+    .title{
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .description{
+      margin-top: 4px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  .stat{
+    display: flex;
+    align-items: center;
+    .statItem{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      &:first-of-type{
+        margin-right: 15px;
+      }
+      img{
+        margin-right: 5px;
+      }
+    }
   }
 }

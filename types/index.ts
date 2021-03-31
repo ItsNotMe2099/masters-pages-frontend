@@ -108,7 +108,7 @@ export interface ProfileData{
   tasksCount?: number
   totalAmount?: number
   totalHours?: number,
-  bio: {
+  bio?: {
     bio: string,
     visible: false
   }

@@ -16,7 +16,7 @@ const CardReviews = (props: Props) => {
   ];
   return (
     <Card className={styles.root} title={'Reviews'}>
-      {list.map(item => <ReviewListItem feedback={item as IFeedbacksToProfile}/>)}
+      {list.map(item => <ReviewListItem feedback={item}/>)}
     </Card>
   )
 }

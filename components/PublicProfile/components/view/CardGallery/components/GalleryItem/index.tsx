@@ -20,7 +20,10 @@ const GalleryItem = (props: Props) => {
           <div className={styles.title}>My new logo</div>
           <div className={styles.description}>sds ds dsdsds ds ds</div>
         </div>
-        <div className={styles.stat}></div>
+        <div className={styles.stat}>
+          <div className={styles.statItem}><img src={'/img/icons/likes.svg'}/> 154</div>
+          <div className={styles.statItem}><img src={'/img/icons/comments.svg'}/> 256</div>
+        </div>
       </div>
     </div>
   )
