@@ -27,13 +27,13 @@ module.exports = {
         ],
         rules: {
           'no-empty': [2],
+          'max-len': [0, 120],
           'no-regex-spaces': [2],
-          'no-console': [0],
-          'no-alert': [0],
+          'no-console': [2],
+          'no-alert': [2],
           'no-eval': [2],
           'no-debugger': [2],
-          'no-bitwise': [0],
-          'key-spacing': [2, {
+          'key-spacing': [1, {
             "beforeColon": false,
             "afterColon": true
           }],
