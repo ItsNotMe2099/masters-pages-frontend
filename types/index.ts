@@ -107,7 +107,11 @@ export interface ProfileData{
   feedbacksCount?: number
   tasksCount?: number
   totalAmount?: number
-  totalHours?: number
+  totalHours?: number,
+  bio: {
+    bio: string,
+    visible: false
+  }
 }
 export interface IProfileSettingsNotificationItem{
   push: boolean,

@@ -1,0 +1,51 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
+  color: #6D718C;
+  &:first-of-type{
+    margin-top: 0px;
+  }
+}
+.leftColumn{
+  width: 116px;
+}
+.rightColumn{
+  flex: 1;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.experience{
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .position{
+    margin-top: 2px;
+    font-size: 15px;
+    color: #000000;
+  }
+  .dates{
+    margin-left: 6px;
+    font-size: 14px;
+  }
+}
+.company{
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+}
+.description{
+  margin-top: 8px;
+  line-height: 24px;
+  font-size: 14px;
+}
+.actions{
+  display: flex;
+  margin-top: 8px;
+}
+

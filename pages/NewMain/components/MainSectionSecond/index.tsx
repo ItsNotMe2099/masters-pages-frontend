@@ -51,7 +51,7 @@ const MainSectionSecond = (props) => {
         },
         {icon: 'emotions.svg', text: 'Give your customers the pleasure of sharing their gratitude.'},
         {icon: 'underwriting.svg', text: 'Underwriting – publish verified references and reviews of your works.'},
-        {icon: 'pages.svg', text: 'Underwriting – publish verified references and reviews of your works'},
+        {icon: 'pages.svg', text: 'Set separate page for each of your talents'},
 
       ]
     },
@@ -78,7 +78,7 @@ information is one-click-away.`,
     },
     {
       title: `“Time is money”`,
-      description: `. It is impossible to beat this famous quote by Benjamin Franklin, who was known for
+      description: `It is impossible to beat this famous quote by Benjamin Franklin, who was known for
 his productivity and various talents. In his 84 years, he became not only a prominent politician and
 diplomat, but also an actor, musician, inventor, and satirist.
 
