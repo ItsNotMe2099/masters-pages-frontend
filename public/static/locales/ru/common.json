@@ -13,6 +13,7 @@
     "reviews": "Review","Рассмотрение",
     "orders": "Orders","Заказы",
     "settings": "Settings","Настройки",
+    "calendar": "Calendar","Календарь",
     "logout": "Logout","Выйти",
     "completeRegistration": "Complete registration","Завершить регистрацию"
   },
@@ -114,7 +115,8 @@
       "messages": "Messages","Сообщения",
       "saved": "Saved","Сохраненное",
       "settings": "Settings","Настройки",
-      "portfolio": "My Portfolio","Мое портфолио"
+      "portfolio": "My Portfolio","Мое портфолио",
+      "calendar": "Calendar","Календарь",
     },
     "tabProfile": {
       "requiredField": "required field","Обязательное поле",

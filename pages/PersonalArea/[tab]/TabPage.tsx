@@ -13,6 +13,7 @@ import TabPersonal from "pages/PersonalArea/components/TabPersonal";
 import TabPortfolio from "pages/PersonalArea/components/TabPortfolio";
 import TabReviews from "pages/PersonalArea/components/TabReviews";
 import TabSettings from "pages/PersonalArea/components/TabSettings";
+import TabCalendar from "pages/PersonalArea/components/TabCalendar";
 import { IRootState } from "types";
 import styles from 'pages/PersonalArea/[tab]/index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
@@ -37,6 +38,7 @@ const TabPage = (props) => {
     {name: t('personalArea.menu.messages'), key: 'messages',  badge: profile.messageNotificationsCount },
     {name: t('personalArea.menu.saved'), key: 'saved'},
     {name: t('personalArea.menu.settings'), key: 'settings'},
+    {name: t('personalArea.menu.calendar'), key: 'calendar'}
   ].map(item => {
     return{
       ...item,
@@ -88,6 +90,7 @@ const TabPage = (props) => {
           {tab === 'messages' && <TabMessages {...props}/>}
           {tab === 'saved' && <TabSaved {...props}/>}
           {tab === 'settings' && <TabSettings {...props}/>}
+          {tab === 'calendar' && <TabCalendar {...props}/>}
         </div>
         <Footer/>
       </div>

@@ -32,6 +32,7 @@ const ProfileSelect = (props) => {
     { value: 'reviews', label: t('menu.reviews'), badge: profile.feedbackNotificationsCount,  link: `/PersonalArea/reviews` },
     { value: 'orders', label: t('menu.orders'), badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount,  link: `/PersonalArea/orders` },
     { value: 'settings', label: t('menu.settings'), link: `/PersonalArea/settings` },
+    { value: 'calendar', label: t('menu.calendar'), link: `/PersonalArea/calendar` },
     { value: 'logout', label: t('menu.logout') },
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));

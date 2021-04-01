@@ -13,6 +13,7 @@
     "reviews": "Review",
     "orders": "Orders",
     "settings": "Settings",
+    "calendar": "Calendar",
     "logout": "Logout",
     "completeRegistration": "Complete registration"
   },
@@ -126,7 +127,8 @@
       "messages": "Messages",
       "saved": "Saved",
       "settings": "Settings",
-      "portfolio": "My Portfolio"
+      "portfolio": "My Portfolio",
+      "calendar": "Calendar"
     },
     "tabProfile": {
       "requiredField": "required field",
