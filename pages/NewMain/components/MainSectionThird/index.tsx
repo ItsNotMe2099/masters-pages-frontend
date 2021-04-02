@@ -10,6 +10,11 @@ const ListItem = ({label, isActive}: {label: string, isActive: boolean}) => {
     <img src={'/img/Main/icons/mark.svg'}/> {label}
   </div>)
 }
+const DotItem = ({index, isActive, onClick}: {index: number, isActive: boolean, onClick: () => void}) => {
+  return (<div className={`${styles.dotItem} ${isActive && styles.dotItemActive}`} onClick={onClick}>
+    <button>{index}</button>
+  </div>)
+}
 
 const MainSectionThird = (props) => {
 
@@ -64,6 +69,9 @@ const MainSectionThird = (props) => {
         </div>
       </div>}
       <MainSliderControl className={styles.arrowNext} onClick={handleNextClick} white={true} direction={'next'}/>
+      <div className={styles.dots}>
+        {Array.from(Array(features.length).keys()).map(index => <DotItem onClick={() => setCurrentIndex(index)} index={index} isActive={index === currentIndex}/>)}
+      </div>
       <div className={styles.footer}/>
     </div>
   )
