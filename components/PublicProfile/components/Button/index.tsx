@@ -11,6 +11,7 @@ interface Props {
   blank?: boolean
   onClick?: (e: any) => void
 
+  target: string
   color?: 'white' | 'transparent' | 'green'
   size?: 'normal' | 'small'
   like?: boolean
@@ -34,14 +35,14 @@ export default function Button(props: Props) {
         <a
           onClick={props.onClick}
           href={props.href}
-          target='_blank'
+          target={props.target}
           className={`${styles.link} ${getClassName()}`}
         >
           {props.children}
         </a>
         </Link>
         :
-          <button onClick={props.onClick} className={`${styles.btn} ${getClassName()}`}>
+          <button onClick={props.onClick} type={props.type} disabled={props.disabled} className={`${styles.btn} ${getClassName()}`}>
             {props.children}
           </button>
 
@@ -52,5 +53,6 @@ export default function Button(props: Props) {
 Button.defaultProps = {
   type: 'button',
   color: 'white',
-  size: 'normal'
+  size: 'normal',
+  target: '_blank'
 }

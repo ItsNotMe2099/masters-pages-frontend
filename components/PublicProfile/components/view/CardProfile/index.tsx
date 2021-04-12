@@ -1,20 +1,38 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import {ProfileData} from 'types'
+import {IRootState, ProfileData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import Avatar from 'components/ui/Avatar'
 import StarRatings from 'react-star-ratings';
 import Button from 'components/PublicProfile/components/Button'
 import UserIcon from 'components/svg/UserIcon'
+import {useSelector, useDispatch} from 'react-redux'
+import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
+import Link from 'next/link'
+import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
+import {taskOfferOpen} from 'components/Modal/actions'
 interface Props{
-  profile: ProfileData
+  profile: ProfileData,
+  isEdit: boolean
 }
 const CardProfile = (props: Props) => {
-  const {profile} = props;
+  const {profile, isEdit} = props;
+  const dispatch = useDispatch();
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
+  const recommendationLoading = useSelector((state: IRootState) => state.profileRecommendation.formLoading);
+  const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
+
+  const handleRecommend = () => {
+    dispatch(createProfileRecommendation(profile.id));
+  }
+  const handleSendOffer = () => {
+    dispatch(taskNegotiationSetCurrentProfile(profile));
+    dispatch(taskOfferOpen());
+  }
   return (
     <Card className={styles.root}>
-      <Avatar size={'large'} image={profile.avatar}/>
-      <div className={styles.name}>{profile.firstName} {profile.lastName}</div>
+      <a href={`/PublicProfile/${profile.id}`}><Avatar size={'large'} image={profile.avatar}/></a>
+      <a href={`/PublicProfile/${profile.id}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
       <div className={styles.stat}>
         <div className={styles.statItem}>
           <img src={'/img/icons/job.svg'}/>
@@ -49,12 +67,14 @@ const CardProfile = (props: Props) => {
         <div className={styles.lastSeenValue}>3 min ago</div>
       </div>
       <div className={styles.actions}>
-        <Button className={styles.actionSendMessage}>Send message</Button>
-        <Button className={styles.actionSendOffer}>Send Offer</Button>
+
+
+        <Button className={styles.actionSendMessage} href={`/Chat/dialog/${profile.id}`}>Send message</Button>
+        {currentProfile?.role === 'client' && <Button className={styles.actionSendOffer} onClick={handleSendOffer}>Send Offer</Button>}
       </div>
       <div className={styles.followers}>
-        <div className={styles.followersValue}><UserIcon/> 873 followers </div>
-        <Button className={styles.actionFollow} color={'green'}>Follow</Button>
+        <div className={styles.followersValue}><UserIcon/> {recommendationTotal} recommended </div>
+        <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleRecommend}>Recommend</Button>
       </div>
     </Card>
   )

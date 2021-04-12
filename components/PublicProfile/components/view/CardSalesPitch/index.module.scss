@@ -1,5 +1,28 @@
 @import "scss/index";
 .root{
-
+display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.leftColumn{
+  width: 50%;
+  padding-right: 20px;
+}
+.rightColumn{
+  width: 50%;
+text-align: center;
+  padding-left: 20px;
 }
 
+.image{
+  max-width: 100%;
+  border-radius: 3px;
+  max-height: 236px;
+}
+.video{
+
+  max-height: 236px;
+  video{
+    border-radius: 3px;
+  }
+}

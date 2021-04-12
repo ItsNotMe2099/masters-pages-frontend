@@ -32,6 +32,12 @@ import StatReducer from "../components/Stat/reducer";
 import registrationPhoneReducer from "../components/Auth/RegistrationPhone/reducer";
 import PushReducer from "../components/Push/reducer";
 import ProfileSettingsReducer from "../components/ProfileSettings/reducer";
+import ProfileWorkExperienceReducer from 'components/ProfileWorkExpirience/reducer'
+import ProfileTabReducer from 'components/ProfileTab/reducer'
+import ProfilePortfolioReducer from 'components/ProfilePortfolio/reducer'
+import ProfileGalleryReducer from 'components/ProfileGallery/reducer'
+import ProfileStatReducer from 'components/ProfileStat/reducer'
+import ProfileRecommendationReducer from 'components/ProfileRecommendations/reducer'
 
 export default combineReducers({
   form: formReducer,
@@ -66,5 +72,11 @@ export default combineReducers({
   taskSearchWithLimit: TaskSearchListWithLimitReducer,
   stat: StatReducer,
   push: PushReducer,
-  profileSettings: ProfileSettingsReducer
+  profileSettings: ProfileSettingsReducer,
+  profileWorkExperience: ProfileWorkExperienceReducer,
+  profileTab: ProfileTabReducer,
+  profilePortfolio: ProfilePortfolioReducer,
+  profileGallery: ProfileGalleryReducer,
+  profileStat: ProfileStatReducer,
+  profileRecommendation: ProfileRecommendationReducer
 })

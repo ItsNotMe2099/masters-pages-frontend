@@ -22,15 +22,27 @@ const TabReviews = (props: Props) => {
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
   const total = useSelector((state: IRootState) => state.profileFeedback.total)
   const page = useSelector((state: IRootState) => state.profileFeedback.page)
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const [load, setLoadMore] = useState(false)
   const dispatch = useDispatch()
+  const limit = 10;
   const handleScrollNext = () => {
     console.log("HandleNext", page)
+
+    dispatch(fetchFeedbacksToProfile({
+      profileId: profile.id,
+      page: page + 1,
+      limit,
+    }))
     dispatch(setPageFeedback(page + 1))
-    dispatch(fetchFeedbacksToProfile())
   }
   useEffect(() => {
-    dispatch(fetchFeedbacksToProfile())
+    dispatch(fetchFeedbacksToProfile({
+      profileId: profile.id,
+      page: page + 1,
+      limit,
+      }
+    ))
   }, [])
   return (
     <div className={styles.root}>

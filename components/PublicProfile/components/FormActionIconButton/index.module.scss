@@ -1,0 +1,61 @@
+@import "scss/index";
+
+.root {
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 100%;
+  padding: 0px;
+  background: rgba(109, 113, 140, 0.1);
+  width: 16px;
+  height: 16px;
+  &:hover {
+    .title{
+      color: #000000;
+    }
+    .icon {
+      svg {
+        path {
+          fill: #000000;
+        }
+      }
+    }
+  }
+}
+
+.icon{
+  width: 8px;
+  height: 8px;
+  svg{
+    path{
+      fill: #6D718C;
+    }
+  }
+}
+.title{
+  margin-top: 0px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #6D718C;
+}
+.red{
+
+  &:hover{
+    background: rgba(216, 0, 39, 0.5);
+    .icon {
+        path {
+          stroke: #FFFFFF;
+
+        }
+    }
+  }
+}

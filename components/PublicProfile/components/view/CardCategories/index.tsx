@@ -1,27 +1,66 @@
 import styles from './index.module.scss'
 
-import {ProfileData} from 'types'
+import {IRootState, ProfileData, SkillData, SkillListItem} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import {formatSkillList} from 'utils/skills'
 import Accordion from 'components/PublicProfile/components/view/CardCategories/components/Accordion'
 import {getCategoryTranslation} from 'utils/translations'
+
+import { useSelector, useDispatch } from 'react-redux'
 import Tab from 'components/PublicProfile/components/Tab'
+import {hideProfileForm, showProfileForm, updateProfileByForm} from 'components/Profile/actions'
+import CardCategoryForm from 'components/PublicProfile/components/view/CardCategories/components/Form'
+import FormActionButton from 'components/PublicProfile/components/FormActionButton'
+import {createSkillCategory, deleteSkill, deleteSkillCategory} from 'components/Skill/actions'
+import FormActionIconButton from 'components/PublicProfile/components/FormActionIconButton'
+import {confirmOpen} from 'components/Modal/actions'
+import {taskNegotiationDeclineTaskResponse} from 'components/TaskNegotiation/actions'
 interface Props{
-  profile: ProfileData
+  profile: ProfileData,
+  isEdit: boolean
 }
 const CardCategories = (props: Props) => {
-  const {profile} = props;
-  const list = formatSkillList(profile.skills);
-  console.log("SkillList", list);
+  const dispatch = useDispatch();
+  const formLoading = useSelector((state: IRootState) => state.skill.formLoading)
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
+  const {profile, isEdit} = props;
+  const skills = props.isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
+  console.log("ProfileSet", skills);
+  const handleEditClick = () => {
+    dispatch(showProfileForm( 'categories'));
+  }
+  const handleSubmit = (data) => {
+    console.log("HandleSubmit", data);
+    dispatch(createSkillCategory(data))
+   }
+  const handleCancel = () => {
+    dispatch(hideProfileForm( 'categories'));
+  }
+
+  const handleRemoveCategory = (item: SkillListItem) => {
+    console.log("handleRemoveCategory", item.id)
+    dispatch(confirmOpen({
+      description: `Do you want to delete «${getCategoryTranslation(item).name}»?`,
+
+      onConfirm: () => {
+        dispatch(deleteSkillCategory(item.id))
+      }
+    }));
+  }
+  const handleRemoveSkill = (item: SkillData) => {
+    dispatch(confirmOpen({
+      description: `Do you want to delete «${getCategoryTranslation(item.subCategory).name}»?`,
+      onConfirm: () => {
+        dispatch(deleteSkill(item.id))
+      }
+    }));
+  }
   return (
-    <Card className={styles.root} title={'Works in the following categories'}>
-      {list.map((category) => <Accordion title={getCategoryTranslation(category)?.name} >
-        {category.skills.map(skill => <Tab title={getCategoryTranslation(skill.subCategory)?.name}/>)}
-        {category.skills.map(skill => <Tab title={getCategoryTranslation(skill.subCategory)?.name}/>)}
-        {category.skills.map(skill => <Tab title={getCategoryTranslation(skill.subCategory)?.name}/>)}
-        {category.skills.map(skill => <Tab title={getCategoryTranslation(skill.subCategory)?.name}/>)}
-        {category.skills.map(skill => <Tab title={getCategoryTranslation(skill.subCategory)?.name}/>)}
+    <Card isHidden={!isEdit && skills.length === 0} className={styles.root} isLoading={showForm && formLoading} title={'Works in the following categories'} toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleEditClick}/>] : []}>
+      {skills.map((category) => <Accordion title={<><div className={styles.accordionTitle}>{getCategoryTranslation(category.category)?.name}</div> <FormActionIconButton type={'delete'} onClick={ () => handleRemoveCategory(category)} /></>} >
+        {category.skills.map(skill => skill.subCategory ? <Tab><div className={styles.tabTitle}>{getCategoryTranslation(skill.subCategory)?.name}</div> <FormActionIconButton type={'delete'} onClick={() => handleRemoveSkill(skill)}/></Tab> : null)}
       </Accordion>)}
+      {showForm && <CardCategoryForm onSubmit={handleSubmit} onCancel={handleCancel}/>}
     </Card>
   )
 }

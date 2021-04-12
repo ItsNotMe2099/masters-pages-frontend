@@ -1,0 +1,46 @@
+import styles from './index.module.scss'
+import Tab from 'components/PublicProfile/components/Tab'
+import ProfileTabComponent from 'components/PublicProfile/components/ProfileTab'
+import {IProfileTab, IRootState, SkillData} from 'types'
+import {createProfileTab, updateProfileTab} from 'components/ProfileTab/actions'
+import { useSelector, useDispatch } from 'react-redux'
+interface  ITab{
+  id: number,
+  name: string,
+}
+interface Props{
+  skill: SkillData,
+  isEdit: boolean,
+  type: 'gallery' | 'portfolio',
+  onChangeTab: (tab) => void,
+  currentTab: IProfileTab
+}
+const ProfileTabs = (props: Props) => {
+  const {currentTab} = props;
+  const dispatch = useDispatch();
+  const tabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === props.type);
+
+  const handleNewSubmit = (title) => {
+      dispatch(createProfileTab({type: props.type, categoryId: props.skill.categoryId, subCategoryId: props.skill.subCategoryId, title}, `profileTab_${props.type}New`));
+
+  }
+  const handleEditSubmit = (tab, title) => {
+    dispatch(updateProfileTab(tab.id, {title}, `profileTab_${props.type}${tab.id}`));
+
+  }
+  const handleShowAdd = (tab, data) => {
+
+  }
+  const handleTabClick = (tab) => {
+    props.onChangeTab(tab);
+  }
+  return (
+    <div className={`${styles.root}`}>
+      <ProfileTabComponent isActive={!currentTab} type={props.type} isAll={true} onClick={() => handleTabClick(null)}/>
+      {tabs.map(tab => <ProfileTabComponent isActive={tab.id === currentTab?.id}  isEdit={props.isEdit} type={props.type} profileTab={tab}  onSubmit={(title) => handleEditSubmit(tab, title)} onClick={() => handleTabClick(tab)} />)}
+      {props.isEdit && <ProfileTabComponent isEdit={props.isEdit} type={props.type}  isNew={true} onSubmit={handleNewSubmit}/>}
+    </div>
+  )
+}
+
+export default ProfileTabs

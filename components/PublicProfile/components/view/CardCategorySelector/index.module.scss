@@ -1,0 +1,33 @@
+@import "scss/index";
+.root{
+  margin-left: -10px;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+.category{
+  position: relative;
+  float: left;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+.subCategories{
+  flex: 1;
+}
+.tabTitle{
+  margin-right: 8px;
+}
+.accordionTitle{
+  margin-right: 8px;
+}
+.separator{
+  width: 1px;
+  height: 30px;
+  background: #C4C4C4;
+  margin-left: 20px;
+}

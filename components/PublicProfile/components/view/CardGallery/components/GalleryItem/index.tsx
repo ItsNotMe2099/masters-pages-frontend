@@ -1,29 +1,42 @@
 import styles from './index.module.scss'
 
-import {ProfileData} from 'types'
-import Card from 'components/PublicProfile/components/Card'
-import LocationIcon from 'components/svg/LocationIcon'
-import UserIcon from 'components/svg/UserIcon'
+import {IProfileGalleryItem, ProfileData} from 'types'
+import {getMediaPath} from 'utils/media'
+import FormActionButton from 'components/PublicProfile/components/FormActionButton'
+
 
 interface Props{
-
+  model: IProfileGalleryItem,
+  isEdit: boolean,
+  onEdit: (model) => void,
+  onDelete: (model) => void,
+  onClick: (model) => void
 }
-const GalleryItem = (props: Props) => {
+const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
 
+  const handleClick = () => {
+    onClick(model);
+  }
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img src={'/img/tmp/gallery_item.png'}/>
+        <img src={getMediaPath(model.photo)} onClick={handleClick}/>
+        {isEdit && <div className={styles.editActions}>
+
+          <FormActionButton type={'edit'} title={'Edit'} onClick={ () => onEdit(model)}/>
+          <FormActionButton type={'delete'} title={'Delete'} onClick={ () => onDelete(model)}/>
+        </div>}
       </div>
       <div className={styles.info}>
         <div className={styles.details}>
-          <div className={styles.title}>My new logo</div>
-          <div className={styles.description}>sds ds dsdsds ds ds</div>
+          <div className={styles.title} onClick={handleClick}>{model.title}</div>
+          <div className={styles.description}>{model.description}</div>
         </div>
         <div className={styles.stat}>
-          <div className={styles.statItem}><img src={'/img/icons/likes.svg'}/> 154</div>
-          <div className={styles.statItem}><img src={'/img/icons/comments.svg'}/> 256</div>
+          <div className={styles.statItem}><img src={'/img/icons/likes.svg'}/>{model.likesCount}</div>
+          <div className={styles.statItem}><img src={'/img/icons/comments.svg'}/>{model.commentsCount}</div>
         </div>
+
       </div>
     </div>
   )

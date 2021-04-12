@@ -1,5 +1,6 @@
 @import "scss/index";
 .root{
+  position: relative;
   background: white;
   border: 1px solid #C4C4C4;
   color: #343434;
@@ -8,4 +9,29 @@
   font-size: 14px;
   font-weight: 500;
 
+}
+.hidden{
+  display: none;
+}
+.toolbar{
+  position: absolute;
+  cursor: pointer;
+  right: 34px;
+  top: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.loader{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: rgba(255, 255, 255, 0.6);
+  > div{
+    justify-content: center;
+  }
 }

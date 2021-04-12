@@ -1,0 +1,70 @@
+@import "scss/index";
+.root{
+  padding: 6px 0px;
+}
+.form{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+
+.message{
+  flex: 1;
+}
+.messageField{
+
+  box-sizing: border-box;
+  textarea {
+    display: block;
+    height: auto;
+    min-height: 68px;
+    border: none;
+    color: rgba(0, 0, 0, 0.5);
+    padding-right: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  margin: 0px;
+}
+.button{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 46px;
+  height: 44px;
+  border-radius: 5px;
+  justify-content: center;
+  background: #27C60D;
+  svg{
+    margin-left: -2px;
+    path{
+      fill: #FFFFFF;
+    }
+  }
+  &:hover{
+    background: #6D718C;
+    svg{
+      path{
+
+      }
+    }
+  }
+}
+.loader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 44px;
+  background: white;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  img{
+    display: block;
+    max-width: 30px;
+  }
+}

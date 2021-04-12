@@ -23,6 +23,12 @@ import registrationPhoneSaga from "components/Auth/RegistrationPhone/sagas";
 import authSaga from "components/Auth/sagas";
 import pushSaga from "components/Push/sagas";
 import profileSettingsSaga from "../components/ProfileSettings/sagas";
+import ProfileWorkExperienceSaga from "../components/ProfileWorkExpirience/sagas";
+import ProfileTabSaga from 'components/ProfileTab/sagas'
+import ProfilePortfolioSaga from 'components/ProfilePortfolio/sagas'
+import ProfileGallerySaga from 'components/ProfileGallery/sagas'
+import ProfileStatSaga from 'components/ProfileStat/sagas'
+import ProfileRecommendationSaga from 'components/ProfileRecommendations/sagas'
 
 export const rootSaga = function* root() {
   yield all([
@@ -49,6 +55,12 @@ export const rootSaga = function* root() {
     SavedTasksSaga(),
     ProfileFeedbackSaga(),
     pushSaga(),
-    profileSettingsSaga()
+    profileSettingsSaga(),
+    ProfileWorkExperienceSaga(),
+    ProfileTabSaga(),
+    ProfilePortfolioSaga(),
+    ProfileGallerySaga(),
+    ProfileStatSaga(),
+    ProfileRecommendationSaga()
   ]);
 };

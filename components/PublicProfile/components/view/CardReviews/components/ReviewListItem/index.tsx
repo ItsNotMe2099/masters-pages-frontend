@@ -8,15 +8,19 @@ import * as React from 'react'
 
 import StarRatings from 'react-star-ratings';
 import {format} from 'date-fns'
+import Avatar from 'components/ui/Avatar'
 interface Props{
   feedback: IFeedbacksToProfile | any
 }
 const ReviewListItem = ({feedback}: Props) => {
 
+  console.log("FeebackItem", feedback);
   return (
     <div className={styles.root}>
-      <UserIcon/>
+
+      <div className={styles.header}>
      <div className={styles.nameWrapper}>
+       <Avatar size={'exSmall'} image={feedback.fromProfile.photo}/>
       <div className={styles.name}>{feedback.fromProfile.firstName} {feedback.fromProfile.lastName}</div>
       <StarRatings
         rating={(feedback as any).rating || 0}
@@ -31,6 +35,11 @@ const ReviewListItem = ({feedback}: Props) => {
       />
      </div>
       <div className={styles.time}>{ format(new Date(feedback.createdAt), 'MM.dd.yy hh:mm')}</div>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.task}>{feedback.task.title}</div>
+        <div className={styles.description}>{feedback.description}</div>
+      </div>
     </div>
   )
 }

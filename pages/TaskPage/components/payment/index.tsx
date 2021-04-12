@@ -1,21 +1,9 @@
 import Map from "components/Map";
-import { changeRole, fetchProfile } from "components/Profile/actions";
-import Tabs from "components/ui/Tabs";
-import { useEffect, useState } from "react";
 import * as React from "react";
-import Header from 'components/layout/Header'
-import Footer from 'components/layout/Footer'
 import Button from "components/ui/Button";
-import { Router, useRouter } from "next/router";
-import ProfileSection from "pages/PublicProfile/components/ProfileSection";
-import TabPortfolio from "pages/PublicProfile/components/TabPortfolio";
-import TabReviews from "pages/PublicProfile/components/TabReviews";
 import styles from './index.module.scss'
-import { TabSelect } from "components/TabSelect";
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState, ITask } from "types";
-import { fetchProfileById } from "components/PublicProfile/actions";
-import { fetchTaskById } from "components/TaskPage/actions";
 
 interface Props {
   task: ITask

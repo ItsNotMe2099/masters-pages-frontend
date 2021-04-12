@@ -3,7 +3,7 @@ import React, {useState, useRef} from 'react'
 import ArrowDown from 'components/svg/ArrowDown'
 
 interface Props {
-  title: string
+  title: any
   children: any
 }
 

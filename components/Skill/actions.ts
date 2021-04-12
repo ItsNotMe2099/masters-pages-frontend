@@ -21,6 +21,7 @@ export const createSkillRequest = (data: SkillData) => action(ActionTypes.CREATE
 })
 
 export const updateSkill = (skillId: number, data: SkillData) => action(ActionTypes.UPDATE_SKILL, { skillId, data})
+export const updateSkillByForm = (skillId: number, data: SkillData, key: string) => action(ActionTypes.UPDATE_SKILL_BY_FORM, { skillId, data, key})
 export const updateSkillRequest = (skillId: number, data: SkillData) => action(ActionTypes.UPDATE_SKILL_REQUEST, {
   api: {
     url: `/api/profile/skill/${skillId}`,

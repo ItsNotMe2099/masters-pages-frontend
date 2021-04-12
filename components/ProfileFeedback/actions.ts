@@ -1,12 +1,34 @@
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
+export interface IProfileFeedbackList{
+  profileId: number,
+  subCategoryId?: number
+  page: number,
+  limit: number,
 
-export const fetchFeedbacksToProfile = () => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE)
+}
+export const fetchFeedbacksToProfile = (data: IProfileFeedbackList) => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE, {data})
 
-export const fetchFeedbacksToProfileRequest = () => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST, {
+export const fetchFeedbacksToProfileRequest = (data: IProfileFeedbackList) => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST, {
   api: {
-    url: `/api/feedback?page=1&limit=50&sort=createdAt&sortOrder=DESC`,
+    url: `/api/feedback/profile?${queryString.stringify({...data,
+      sort: 'createdAt',
+      sortOrder: 'DESC'
+    })}`,
+    method: 'GET',
+  }
+})
+
+export const fetchFeedbacksToProfileShortRequest = (profileId) => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_SHORT_REQUEST, {
+  api: {
+    url: `/api/feedback/profile?${queryString.stringify({
+      profileId,
+      limit: 3,
+      page: 1,
+      sort: 'createdAt',
+      sortOrder: 'DESC'
+    })}`,
     method: 'GET',
   }
 })

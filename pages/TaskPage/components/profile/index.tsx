@@ -1,14 +1,4 @@
-import { changeRole, fetchProfile } from "components/Profile/actions";
-import Tabs from "components/ui/Tabs";
-import { useEffect, useState } from "react";
 import * as React from "react";
-import Header from 'components/layout/Header'
-import Footer from 'components/layout/Footer'
-import Button from "components/ui/Button";
-import { Router, useRouter } from "next/router";
-import ProfileSection from "pages/PublicProfile/components/ProfileSection";
-import TabPortfolio from "pages/PublicProfile/components/TabPortfolio";
-import TabReviews from "pages/PublicProfile/components/TabReviews";
 import styles from './index.module.scss'
 import Avatar from "components/ui/Avatar";
 import { ITask } from "types";

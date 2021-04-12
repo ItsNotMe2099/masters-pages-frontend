@@ -13,7 +13,7 @@ import ActionTypes from './const'
 function* ProfileFeedbackSaga() {
   yield takeLatest(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE,
     function* (action: ActionType<typeof fetchFeedbacksToProfile>) {
-      yield put(fetchFeedbacksToProfileRequest());
+      yield put(fetchFeedbacksToProfileRequest(action.payload.data));
 
     })
 

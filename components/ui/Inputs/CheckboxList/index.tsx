@@ -17,6 +17,7 @@ interface Props {
 export const CheckboxList = (props) => {
   const { meta: { error, touched }, input,restrictedValues, options, label, type, ...rest } = props;
 
+  console.log("hasError", error);
   const handleCheckboxChanged = useCallback((item, isChecked) => {
     if(isChecked){
       console.log("OnChange",[...input.value, props.changeWithValue ? item : item.value])

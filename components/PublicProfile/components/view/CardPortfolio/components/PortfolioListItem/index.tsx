@@ -1,40 +1,99 @@
 import styles from './index.module.scss'
 
-import {ProfileData} from 'types'
+import {IProfilePortfolio, ProfileData} from 'types'
 import UserIcon from 'components/svg/UserIcon'
 import Button from 'components/PublicProfile/components/Button'
+import FormActionButton from 'components/PublicProfile/components/FormActionButton'
+import {getMediaPath} from 'utils/media'
 
 interface Props{
-
+  model: IProfilePortfolio,
+  onEdit: (model) => void,
+  onDelete: (model) => void,
+  isEdit: boolean
 }
-const PortfolioListItem = (props: Props) => {
+const PortfolioListItem = ({onEdit, onDelete, model, isEdit}: Props) => {
 
+  const getFileIcon = (fileName) => {
+    const ext = fileName.split('.').pop();
+
+    switch (ext){
+      case 'psd':
+        return 'psd';
+      case 'eps':
+        return 'eps';
+      case 'pdf':
+        return 'pdf';
+      case 'txt':
+        return 'txt';
+      case 'doc':
+        return 'doc';
+      case 'docx':
+        return 'docx';
+      case 'png':
+        return 'png';
+      case 'ppt':
+        return 'ppt';
+      case 'pptx':
+        return 'pptx';
+      case 'ai':
+        return 'ai';
+      case 'tif':
+        return 'tif';
+      case 'tiff':
+        return 'tiff';
+      case 'jpg':
+        return 'jpg';
+      case 'jpeg':
+        return 'jpg';
+      case 'gif':
+        return 'gif';
+      case 'zip':
+        return 'zip';
+      case 'svg':
+        return 'svg';
+      case 'avi':
+        return 'avi';
+      case 'mov':
+        return 'mov';
+      default:
+        return 'unknowm';
+
+    }
+  }
   return (
     <div className={styles.root}>
       <div className={styles.leftColumn}>
-        <img src={''}/>
+        {model.photo && <img src={getMediaPath(model.photo)}/>}
+        {!model.photo && <div className={styles.emptyImage}><img src={'/img/Profile/portfolio_item.svg'}/></div>}
       </div>
       <div className={styles.centerColumn}>
         <div className={styles.header}>
-          <div className={styles.name}>Marketing expert</div>
-          <div className={styles.duration}> from 07.09.19 - 02.06.20 - 2 years</div>
+          <div className={styles.leftHeader}>
+          <div className={styles.name}>{model.title}</div>
+          <div className={styles.duration}>{model.length}</div>
+          </div>
+          {isEdit && <div className={styles.editActions}>
+
+            <FormActionButton type={'edit'} title={'Edit'} onClick={ () => onEdit(model)}/>
+            <FormActionButton type={'delete'} title={'Delete'} onClick={ () => onDelete(model)}/>
+          </div>}
         </div>
         <div className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit lobortis consequat quis pulvinar suspendisse. Sed eu amet, auctor fermentum posuere convallis.
-
+          {model.description}
         </div>
         <div className={styles.actions}>
-        <Button href={'https://yandex.ru'} size={'small'}>Visit website</Button>
+          {model.link && <Button href={model.link} size={'small'}>Visit website</Button>}
         </div>
       </div>
 
-      <div className={styles.rightColumn}>
+      {model.files.length > 0 && <div className={styles.rightColumn}>
         <div className={styles.filesTitle}>Attached files</div>
         <div className={styles.files}>
-        <div className={styles.file}><img src={'/img/icons/file_types/psd.svg'}/> <div className={styles.fileName}>Source.psd</div></div>
-        <div className={styles.file}><img src={'/img/icons/file_types/pdf.svg'}/> <div className={styles.fileName}>Source.pdf</div></div>
+          {model.files.map((file =>  <a href={getMediaPath(file)} target={'_blank'} className={styles.file}><img src={`/img/icons/file_types/${getFileIcon(file)}.svg`}/></a>))}
+
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

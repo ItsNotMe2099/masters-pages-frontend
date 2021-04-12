@@ -11,7 +11,20 @@
   }
 }
 .leftColumn{
-  width: 116px;
+  width: 159px;
+  img{
+    vertical-align: middle;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+.emptyImage{
+  width: 159px;
+  height: 159px;
+  background: #C4C4C4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .centerColumn{
   flex: 1;
@@ -34,12 +47,25 @@
     color: #000000;
   }
 }
+
+.leftHeader{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.editActions{
+  display: flex;
+  flex-direction: row;
+}
 .files{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 .file{
+  cursor: pointer;
+  text-decoration: none;
   margin-top: 10px;
   margin-left: 10px;
   font-size: 13px;

@@ -1,8 +1,8 @@
 import ApiActionTypes from "constants/api";
 import {takeLatest, put, select, take} from 'redux-saga/effects'
-import { ActionType } from 'typesafe-actions'
+import {ActionType} from 'typesafe-actions'
 import requestGen from "utils/requestGen";
-import { action as Action } from 'typesafe-actions'
+import {action as Action} from 'typesafe-actions'
 import ActionTypes from './const'
 import {
   changeProfileEmail,
@@ -11,14 +11,15 @@ import {
   createProfile,
   deleteProfile,
   deleteProfileRequest, fetchProfile,
-  fetchProfileSuccess, updateProfile, updateProfileAvatar
+  fetchProfileSuccess, hideProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm
 } from './actions'
-import { IRequestData, IResponse, IRootState } from 'types'
+import {IRequestData, IResponse, IRootState} from 'types'
 import Router from "next/router";
 import cookie from "js-cookie";
 import {setPushTokenRequest} from "../Push/actions";
 import {confirmChangeData, modalClose} from "../Modal/actions";
 import {logout} from "../Auth/actions";
+
 function* ProfileSaga() {
   yield takeLatest(ActionTypes.CHANGE_ROLE,
     function* (action: ActionType<typeof changeRole>) {
@@ -28,11 +29,11 @@ function* ProfileSaga() {
         method: 'GET',
       } as IRequestData)
 
-      if(!res.err && res.data && res.data.id){
+      if (!res.err && res.data && res.data.id) {
         cookie.set('mode', action.payload.role);
         yield put(changeRoleSuccess(action.payload.role));
         yield put(fetchProfileSuccess(res.data));
-      }else{
+      } else {
         switch (action.payload.role) {
           case 'client':
             Router.push("/RegistrationPage");
@@ -50,7 +51,7 @@ function* ProfileSaga() {
 
   yield takeLatest(ActionTypes.CHANGE_ROLE_NATIVE,
     function* (action: ActionType<typeof changeRole>) {
-        yield put(changeRoleSuccess(action.payload.role));
+      yield put(changeRoleSuccess(action.payload.role));
     })
 
   yield takeLatest(ActionTypes.CREATE_PROFILE,
@@ -64,10 +65,10 @@ function* ProfileSaga() {
 
 
       console.log("Res_err", res.data);
-      if(res.err){
+      if (res.err) {
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.FAIL, payload: {error: res.err}});
-      }else if(res.data && res.data.id){
+      } else if (res.data && res.data.id) {
         cookie.set('mode', action.payload.role);
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.SUCCESS});
@@ -100,14 +101,21 @@ function* ProfileSaga() {
   yield takeLatest(ActionTypes.UPDATE_PROFILE_AVATAR,
     function* (action: ActionType<typeof updateProfileAvatar>) {
 
-      yield put(updateProfile(action.payload.id,  action.payload.data));
-      const result = yield take([ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL, ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS ])
-      if(result.type === ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL) {
+      yield put(updateProfile(action.payload.id, action.payload.data));
+      const result = yield take([ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL, ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS])
+      if (result.type === ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL) {
         yield put(Action(ActionTypes.UPDATE_PROFILE_AVATAR + ApiActionTypes.FAIL, result.payload));
       }
     })
 
-
+  yield takeLatest(ActionTypes.UPDATE_PROFILE_BY_FORM,
+    function* (action: ActionType<typeof updateProfileByForm>) {
+      yield put(updateProfile(action.payload.id, action.payload.data));
+      const result = yield take([ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL])
+      if (result.type === ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS) {
+        yield put(hideProfileForm(action.payload.key));
+      }
+    })
 }
 
 export default ProfileSaga

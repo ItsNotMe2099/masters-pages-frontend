@@ -37,12 +37,21 @@ export const date =  value => {
   }
   try {
     console.log("Try parse")
-    const date = parse(value, 'MM/dd/yyyy', new Date());
+    let date = parse(value, 'MM/dd/yyyy', new Date());
     console.log("Date", date)
+    if(!isValid(date)){
+      date = parse(value, 'yyyy-mm-dd', new Date());
+    }
     return  !isValid(date) ? 'date' : undefined;
   }catch (e){
+    try {
+      console.log("validateDate", value);
+      const date = parse(value, 'yyyy-mm-dd', new Date());
+      return !isValid(date) ? 'date' : undefined;
+    }catch (e){
+      return 'date'
+    }
 
-    return 'date'
   }
 
 }

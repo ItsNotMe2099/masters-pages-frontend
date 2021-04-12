@@ -10,6 +10,7 @@
 }
 .name{
   margin-left: 10px;
+  flex: 1;
 }
 .nameOnline{
   color: #27C60D;
@@ -20,3 +21,8 @@
   }
 }
 
+.actions{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}

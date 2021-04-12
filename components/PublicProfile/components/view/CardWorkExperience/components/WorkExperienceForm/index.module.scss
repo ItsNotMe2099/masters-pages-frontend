@@ -1,0 +1,19 @@
+.root{
+
+  max-width: 385px;
+
+}
+.dates{
+  display: flex;
+  align-items: center;
+  > div:last-of-type{
+    margin-left: 15px;
+  }
+}
+.buttons{
+  display: flex;
+  align-items: center;
+  > button{
+    margin-right: 15px;
+  }
+}

@@ -3,7 +3,10 @@ import ActionTypes from "./const";
 export interface ProfileFeedbackState {
   list: any[]
   listLatest: any[]
+  listShort: any[]
   isLoading: boolean
+  isLoadingShort: boolean
+  totalShort: number
   formError?: string
   formLoading: boolean
   total: number
@@ -13,9 +16,12 @@ export interface ProfileFeedbackState {
 const initialState: ProfileFeedbackState = {
   list: [],
   listLatest: [],
+  listShort: [],
   isLoading: false,
   formLoading: false,
+  isLoadingShort: false,
   total: 0,
+  totalShort: 0,
   page: 1
 
 }
@@ -37,13 +43,25 @@ export default function TaskUserReducer(state = {...initialState}, action) {
 
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
-      state.list = action.payload.data
+      state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
-      console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS")
+      console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS", state.list)
       break
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.FAIL:
       state.isLoading = false;
       break
+
+    case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_SHORT_REQUEST + ApiActionTypes.SUCCESS:
+      state.isLoadingShort = false;
+      state.listShort = action.payload.data
+      state.totalShort = action.payload.total
+      console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS", state.list)
+      break
+    case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_SHORT_REQUEST + ApiActionTypes.FAIL:
+      state.isLoadingShort = false;
+      break
+
+
 
     case ActionTypes.FETCH_FEEDBACKS_MAIN_PAGE_REQUEST:
       state.isLoading = true;

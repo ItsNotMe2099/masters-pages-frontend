@@ -16,6 +16,10 @@ export default function CheckboxListSubCategories(props) {
   const [options, setOptions] = useState([]);
   useEffect( () => {
     console.log("CategoryId updated")
+    if(!props.categoryId){
+      setOptions([]);
+      return;
+    }
      request({url: `/api/service-category/${props.categoryId}/subcategory?lang=ru`, method: 'GET'})
        .then((response) => {
          const data = response.data;

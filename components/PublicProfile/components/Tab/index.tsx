@@ -4,11 +4,12 @@ interface Props{
   title?: string,
   children?: any
   className?: string,
-  isActive?: boolean
+  isActive?: boolean,
+  onClick?: () => void
 }
 const Tab = (props: Props) => {
   return (
-    <div className={`${styles.root} ${props.isActive && styles.rootActive} ${props.className} `}>
+    <div className={`${styles.root} ${props.isActive && styles.rootActive} ${props.className} `} onClick={props.onClick}>
       {props.children ? props.children : (props.title || '')}
     </div>
   )
