@@ -696,3 +696,10 @@ export interface IProfileRecommendation{
   recommendedProfile: ProfileData,
   createdAt: string
 }
+export interface IEvent {
+  id?: number,
+  title?: string,
+  start: Date
+  end: Date
+}
+

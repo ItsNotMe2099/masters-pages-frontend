@@ -1,5 +1,95 @@
-@import "../../../scss/index";
+@import "scss/index";
+$borderColor: #dcdbdc;
 .root{
-  background: #E5E5E5;
-  color: white;
+  background: white;
+  color: rgba(0,0,0, 0.5);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: stretch;
+  :global .rbc-event-label{
+    display: none;
+  }
+  :global .rbc-event{
+    border: none;
+    padding: 0px;
+    background: none;
+  }
+  :global .rbc-day-slot .rbc-event{
+    border: none;
+  }
+  :global .rbc-day-slot .rbc-background-event{
+    border: none;
+  }
+  :global .rbc-day-bg + .rbc-day-bg {
+    background: white;
+    border-left: 1px solid $borderColor;
+  }
+  :global .rbc-time-content > * + * > *{
+    border-left: 1px solid $borderColor;
+  }
+  :global .rbc-time-content .rbc-time-column:nth-child(2) .rbc-timeslot-group{
+    border-left: none !important;
+  }
+  :global .rbc-time-content .rbc-time-column:nth-child(1) .rbc-timeslot-group{
+    border-bottom: none !important;
+  }
+  :global .rbc-time-content .rbc-time-column:nth-child(1) .rbc-timeslot-group .rbc-label{
+    font-size: 12px;
+    font-weight: 500;
+  }
+  :global .rbc-timeslot-group {
+    border-bottom: 1px solid $borderColor;
+  }
+  :global .rbc-time-content{
+    border-top: 1px solid $borderColor;
+  }
+  :global .rbc-time-header-content{
+    border-left: 1px solid $borderColor;
+  }
+  :global .rbc-header + .rbc-header{
+    border-left: 1px solid $borderColor;
+    border-bottom: 1px solid $borderColor;
+  }
+  :global .rbc-header{
+    border-bottom: 1px solid $borderColor;
+  }
+  :global .rbc-time-header.rbc-overflowing{
+
+  }
+  :global .rbc-time-view{
+    border: none;
+  }
+  :global .rbc-time-view .rbc-row.rbc-time-header-cell{
+    min-height: 64px;
+  }
+
+  :global .rbc-timeslot-group{
+      min-height: 73px;
+  }
+  :global .rbc-day-slot .rbc-time-slot{
+    border-top: 1px solid #f6f6f6;
+  }
+  :global .rbc-month-view{
+    border: none;
+  }
+  :global .rbc-month-header .rbc-header{
+    font-weight: 700;
+    font-size: 11px;
+    color: #71717A;
+    text-transform: uppercase;
+    padding: 10px 0px;
+  }
+}
+.currentDay{
+  background: #EFF6FF !important;
+
+}
+.weekendDay{
+  background: #FAFAFA !important;
+}
+.rightSide{
+  padding-left: 300px;
+  height: 100%;
 }

@@ -1,7 +1,8 @@
 @import "scss/index";
 .rootWrapper{
-  height: 68px;
-
+  height: 77px;
+  min-height: 77px;
+  width: 100%;
 }
 .menuDesktop{
   width: $container-lg;

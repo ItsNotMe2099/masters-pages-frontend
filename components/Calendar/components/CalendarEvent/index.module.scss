@@ -1,0 +1,80 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+ justify-content: stretch;
+  color: #333333;
+  font-size: 12px;
+  border-radius: 4px;
+  height: 100%;
+  &__green{
+    background: #6FCF97;
+  }
+  &__red{
+    background: #FFBCBC;
+  }
+
+  &__blue{
+    background: #A8CDFF;
+  }
+  &__grey{
+    background: #BBBBBB;
+  }
+}
+
+.leftBorder{
+  width: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.border {
+  &__green {
+    background: #219653;
+  }
+
+  &__red {
+    background: #EB5757;
+  }
+
+  &__orange {
+    background: #F2994A;
+  }
+
+  &__yellow {
+    background: #F2C94C;
+  }
+
+  &__red {
+    background: #EB5757;
+  }
+
+  &__grey {
+    background: #828282;
+  }
+}
+.wrapper{
+  padding: 6px 4px;
+}
+.time{
+    text-transform: uppercase;
+  font-weight: 500;
+}
+.title{
+  font-weight: 400;
+
+}
+.task{
+  font-weight: 600;
+
+}
+.author{
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 5px;
+  .avatar{
+    margin-right: 9px;
+  }
+}
+

@@ -1,0 +1,76 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+ justify-content: stretch;
+  color: #333333;
+  font-size: 12px;
+  border-radius: 4px;
+  height: 100%;
+  overflow: hidden;
+  &__green{
+    background: #6FCF97;
+  }
+  &__red{
+    background: #FFBCBC;
+  }
+
+  &__blue{
+    background: #A8CDFF;
+  }
+  &__grey{
+    background: #BBBBBB;
+  }
+}
+
+.leftBorder{
+  width: 26px;
+  height: 26px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg{
+    width: 14px;
+    height: 12px;
+    path{
+      fill: white;
+    }
+  }
+}
+.border {
+  &__green {
+    background: #219653;
+  }
+
+  &__red {
+    background: #EB5757;
+  }
+
+  &__orange {
+    background: #F2994A;
+  }
+
+  &__yellow {
+    background: #F2C94C;
+  }
+
+  &__red {
+    background: #EB5757;
+  }
+
+  &__grey {
+    background: #828282;
+  }
+}
+.author{
+  display: flex;
+  align-items: center;
+  color: #333333;
+  font-weight: 700;
+  padding: 5px 4px;
+  text-overflow: ellipsis;
+
+}
+
