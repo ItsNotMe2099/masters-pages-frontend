@@ -2,8 +2,11 @@ import styles from './index.module.scss'
 import Tab from 'components/PublicProfile/components/Tab'
 import ProfileTabComponent from 'components/PublicProfile/components/ProfileTab'
 import {IProfileTab, IRootState, SkillData} from 'types'
-import {createProfileTab, updateProfileTab} from 'components/ProfileTab/actions'
+import {createProfileTab, deleteProfileTab, updateProfileTab} from 'components/ProfileTab/actions'
 import { useSelector, useDispatch } from 'react-redux'
+import {confirmOpen} from 'components/Modal/actions'
+import {deleteProfilePortfolio} from 'components/ProfilePortfolio/actions'
+import {hideProfileForm} from 'components/Profile/actions'
 interface  ITab{
   id: number,
   name: string,
@@ -21,11 +24,27 @@ const ProfileTabs = (props: Props) => {
   const tabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === props.type);
 
   const handleNewSubmit = (title) => {
+    if(!title && !title.trim()){
+      dispatch(hideProfileForm(`profileTab_${props.type}New`));
+    }else{
       dispatch(createProfileTab({type: props.type, categoryId: props.skill.categoryId, subCategoryId: props.skill.subCategoryId, title}, `profileTab_${props.type}New`));
+
+    }
+
 
   }
   const handleEditSubmit = (tab, title) => {
-    dispatch(updateProfileTab(tab.id, {title}, `profileTab_${props.type}${tab.id}`));
+    if(title){
+      dispatch(updateProfileTab(tab.id, {title}, `profileTab_${props.type}${tab.id}`));
+
+    }else{
+      dispatch(confirmOpen({
+        description: `Are you sure that you want to delete tab «${tab.title} and everything inside»?`,
+        onConfirm: () => {
+          dispatch(deleteProfileTab(tab.id, `profileTab_${props.type}${tab.id}`));
+        }
+      }));
+    }
 
   }
   const handleShowAdd = (tab, data) => {

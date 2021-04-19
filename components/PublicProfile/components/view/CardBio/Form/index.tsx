@@ -26,6 +26,7 @@ let CardBioForm = (props: Props) => {
         component={TextArea}
         labelType="placeholder"
         label={'BIO'}
+        maxlength={1000}
       />
 
       <FormError error={error}/>

@@ -6,7 +6,7 @@ import cx from 'classnames'
 import nextI18 from "i18n";
 interface OptionItem{
   label: string
-  value: string
+  value: any
 }
 interface Props {
   options: OptionItem[]
@@ -25,7 +25,6 @@ export const DropDownCategory = (props: Props) => {
   const [value, setValue] = useState(props.options[0]);
 
   useEffect(() => {
-    console.log("SOrtwewewe", props.value, props.options.filter(item => !value || item.value != value.value))
     if(props.value){
       setValue(props.options.find(item => item.value === props.value))
     }

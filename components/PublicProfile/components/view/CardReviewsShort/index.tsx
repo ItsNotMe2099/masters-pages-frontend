@@ -24,7 +24,7 @@ const CardReviewsShort = (props: Props) => {
     <Card isHidden={total === 0} className={styles.root} title={total > 0 ?  `Reviews (${total})` : 'Reviews'}>
 
       {!listLoading && list.map(item => <ReviewShortListItem feedback={item}/>)}
-      {total > 0 && <a  className={styles.seeAll} href={`/PublicProfile/${profile.id}/Recommendations`}>See all</a>}
+      {total > 0 && <a  className={styles.seeAll} href={`/PublicProfile/${profile.id}/Reviews`}>See all</a>}
     </Card>
   )
 }

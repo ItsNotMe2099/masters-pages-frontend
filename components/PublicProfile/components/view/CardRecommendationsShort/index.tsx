@@ -23,7 +23,6 @@ const CardRecommendationsShort = (props: Props) => {
   const total = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   const dispatch = useDispatch();
 
-  console.log("ListShort", list);
   useEffect(() => {
     dispatch(fetchProfileRecommendationShortList(profile.id));
   }, [profile])
@@ -31,7 +30,7 @@ const CardRecommendationsShort = (props: Props) => {
     <Card isHidden={total === 0} className={styles.root} title={total > 0 ? `Recommendations (${total})` : 'Recommendations'}>
       {/*list.map(item => <RecommendationListItem profile={item}/>)*/}
       {!listLoading && list.map(item => <RecommendationListItemShort model={item}/>)}
-      {total > 0 && <a  className={styles.seeAll} href={`/PublicProfile/${profile.id}/Reviews`}>See all</a>}
+      {total > 0 && <a  className={styles.seeAll} href={`/PublicProfile/${profile.id}/Recommendations`}>See all</a>}
     </Card>
   )
 }

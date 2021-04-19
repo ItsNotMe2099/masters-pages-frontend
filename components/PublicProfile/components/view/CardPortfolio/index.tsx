@@ -68,12 +68,26 @@ const CardPortfolio = (props: Props) => {
       categoryId: skill.categoryId,
       subCategoryId: skill.subCategoryId,
       page: 1,
+      sort: 'createdAt',
+      sortOrder: sortType == 'newFirst' ? 'DESC' : 'ASC',
       limit
     }));
     dispatch(setProfilePortfolioTab(null));
   }, [skill]);
   const handleSortChange = (sort) => {
-
+    console.log("SortChange", sort);
+    setSortType(sort.value);
+    dispatch(resetProfilePortfolioList());
+    dispatch(fetchProfilePortfolioList({
+      ...(currentTab ? {profileTabId: currentTab.id} : {}),
+      profileId: profile.id,
+      categoryId: skill.categoryId,
+      subCategoryId: skill.subCategoryId,
+      page: 1,
+      sort: 'createdAt',
+      sortOrder: sort.value === 'newFirst' ? 'DESC' : 'ASC',
+      limit
+    }));
   }
   const handleChangeTab = (tab: IProfileTab) => {
     dispatch(resetProfilePortfolioList());
@@ -84,6 +98,8 @@ const CardPortfolio = (props: Props) => {
       categoryId: skill.categoryId,
       subCategoryId: skill.subCategoryId,
       page: 1,
+      sort: 'createdAt',
+      sortOrder: sortType == 'newFirst' ? 'DESC' : 'ASC',
       limit
     }));
   }
@@ -134,7 +150,7 @@ const CardPortfolio = (props: Props) => {
   }
 
   return (
-    <Card  isHidden={!isEdit && !listLoading && total === 0}  isLoading={formLoading} className={styles.root} title={'Portfolio'}
+    <Card  isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  isLoading={formLoading} className={styles.root} title={'Portfolio'}
           toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>] : []}>
       {!showForm && <>
         <div className={styles.panel}>
@@ -144,8 +160,7 @@ const CardPortfolio = (props: Props) => {
           </div>
           <DropDown onChange={handleSortChange} value={sortType} options={[
             {value: 'newFirst', label: t('sort.newFirst')},
-            {value: 'highPrice', label: t('sort.highestPrice')},
-            {value: 'lowPrice', label: t('sort.lowestPrice')}]}
+            {value: 'oldFirst', label: t('sort.oldFirst')}]}
                     item={(item) => <div>{item?.label}</div>}
           />
         </div>

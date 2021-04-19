@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-import {IRootState, ProfileData, SkillData, SkillListItem} from 'types'
+import {Category, IRootState, ProfileData, SkillData, SkillListItem} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import {formatSkillList} from 'utils/skills'
 import Accordion from 'components/PublicProfile/components/view/CardCategories/components/Accordion'
@@ -15,6 +15,7 @@ interface Props{
   isEdit: boolean,
   category,
   subCategory,
+  categories: SkillData[]
   onCategoryChange: (categoryId, subCategoryId) => void
 }
 const CardCategorySelector = (props: Props) => {
@@ -22,13 +23,15 @@ const CardCategorySelector = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
   const {profile} = props;
-  const categories = props.isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
+  const categories = props.categories
 
  console.log("Categories", categories);
 
   const handleChangeCategory = (category) => {
-    console.log("ChangeCategory", category,categories);
-    props.onCategoryChange(categories.find(cat => cat.category.id === category.value), null);
+
+    const newCategory = categories.find(cat => cat.category.id === category.value);
+    console.log("ChangeCategory", newCategory.skills[0],categories);
+    props.onCategoryChange(newCategory, newCategory.skills[0]);
   }
   const handleChangeSubCategory = (subCategory) => {
     props.onCategoryChange(props.category, subCategory)

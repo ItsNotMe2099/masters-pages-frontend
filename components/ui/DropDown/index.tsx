@@ -25,7 +25,6 @@ export const DropDown = (props: Props) => {
   const [value, setValue] = useState(props.options[0]);
 
   useEffect(() => {
-    console.log("SOrtwewewe", props.value, props.options.filter(item => !value || item.value != value.value))
     if(props.value){
       setValue(props.options.find(item => item.value === props.value))
     }

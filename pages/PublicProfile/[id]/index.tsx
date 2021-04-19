@@ -38,9 +38,7 @@ const NewMain = (props) => {
 
       for (const category of categories) {
         const exists = category.skills.find(skill => skill.id === currentSkill.id);
-        console.log("Categories2", category.skills);
         if (exists) {
-          console.log("isExists2", exists);
           setTimeout(() => {
             dispatch(setCurrentSkill(exists));
             setCategory(category);
@@ -64,18 +62,21 @@ const NewMain = (props) => {
   }, [currentSkill]);
 
   useEffect(() => {
-    console.log("Category updated");
+    const subCategoryId = parseInt(router.query.subCategoryId as string, 10);
+    console.log("Category updatedRoute", currentSkill?.subCategoryId, router.query.subCategoryId);
+    if(subCategoryId === currentSkill?.subCategoryId){
+      return;
+    }
+    console.log("Category updatedRoute1", currentSkill?.subCategoryId, router.query.subCategoryId);
+
     const categories = formatSkillList(profile.skills);
 
     if (router.query.subCategoryId && categories.length > 0) {
-      const subCategoryId = parseInt(router.query.subCategoryId as string, 10);
-      console.log("skillId", subCategoryId);
+
 
       for (const category of categories) {
         const exists = category.skills.find(skill => skill.subCategoryId === subCategoryId);
-        console.log("Categories", category.skills);
         if (exists) {
-          console.log("isExists", exists);
           setTimeout(() => {
             dispatch(setCurrentSkill(exists));
             setCategory(category);
@@ -93,7 +94,7 @@ const NewMain = (props) => {
     if (isEdit) {
       dispatch(fetchSkillList());
     }
-  }, [])
+  }, [isEdit])
   const handleCategoryChange = (category, subCategory) => {
     setCategory(category);
 
@@ -109,7 +110,7 @@ const NewMain = (props) => {
     <ProfilePageLayout {...props} profile={profile} isEdit={isEdit}>
       {!router.query.subCategoryId && <CardProfileStat profile={profile}/>}
       {currentSkill && <>
-        <CardCategorySelector profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
+        <CardCategorySelector categories={categories} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
                               onCategoryChange={handleCategoryChange}/>
         <CardSalesPitch profile={profile} isEdit={isEdit} skill={currentSkill}/>
         <CardWorkExperience profile={profile} isEdit={isEdit} skill={currentSkill}/>

@@ -41,7 +41,6 @@ const Header = (props) => {
     }
     setMenuMobileOpen(false);
   }
-  console.log("ProfileRole", role);
   const [isAuth, setAuth] = useState(props.user ? true : false)
   const dispatch = useDispatch()
 

@@ -28,8 +28,12 @@ const ProfileTab = (props: Props) => {
       setValue('');
     }
   }, [showForm])
-  const handleEditClick = () => {
+  const handleEditClick = (e) => {
+    e.stopPropagation();
     dispatch(showProfileForm( formEditKey));
+  }
+  const handleInputClick = (e) => {
+    e.stopPropagation();
   }
   const handleDeleteClick = () => {
 
@@ -47,7 +51,7 @@ const ProfileTab = (props: Props) => {
   }
   return (
     <div className={`${styles.root} ${props.isEdit && styles.rootEdit}  ${showForm && styles.rootForm} ${(props.isActive && !showForm) && styles.rootActive} ${props.isNew && styles.rootNew}`} onClick={props.isNew ? handleNewClick : props.onClick}>
-      {showForm && !props.isAll ? <form onSubmit={handleSubmit}><input className={styles.input} value={value} onChange={handleInputChange}/></form> : props.isNew ? 'Add new' : (props.isAll ? 'All' : props.profileTab.title || '')}
+      {showForm && !props.isAll ? <form onSubmit={handleSubmit}><input className={styles.input} value={value} onClick={handleInputClick} onChange={handleInputChange}/></form> : props.isNew ? 'Add new' : (props.isAll ? 'All' : props.profileTab.title || '')}
       {(props.isEdit && !props.isNew && !showForm) && <div className={styles.editBtn}><FormActionIconButton type={'edit'} onClick={handleEditClick}/></div>}
       {(showForm) && <div className={styles.deleteBtn}><FormActionIconButton type={'delete'} onClick={handleDeleteClick}/></div>}
     </div>

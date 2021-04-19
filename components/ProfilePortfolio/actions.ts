@@ -8,6 +8,8 @@ interface IProfilePortfolioList{
   categoryId: number,
   subCategoryId: number,
   page: number,
+  sort?: string,
+  sortOrder?: string
   limit: 10,
 }
 export const resetProfilePortfolioForm = () => action(ActionTypes.RESET_PROFILE_PORTFOLIO_FORM)

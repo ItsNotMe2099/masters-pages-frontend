@@ -25,12 +25,10 @@ const CardCategories = (props: Props) => {
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
   const {profile, isEdit} = props;
   const skills = props.isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
-  console.log("ProfileSet", skills);
   const handleEditClick = () => {
     dispatch(showProfileForm( 'categories'));
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     dispatch(createSkillCategory(data))
    }
   const handleCancel = () => {
@@ -38,7 +36,6 @@ const CardCategories = (props: Props) => {
   }
 
   const handleRemoveCategory = (item: SkillListItem) => {
-    console.log("handleRemoveCategory", item.id)
     dispatch(confirmOpen({
       description: `Do you want to delete «${getCategoryTranslation(item).name}»?`,
 

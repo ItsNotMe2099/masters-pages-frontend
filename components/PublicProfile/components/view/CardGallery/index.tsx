@@ -135,7 +135,7 @@ const CardGallery = (props: Props) => {
   }
 
   return (
-    <Card isHidden={!isEdit && !listLoading && total === 0}  className={styles.root} title={'Gallery'} toolbar={ isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>]: []}>
+    <Card isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  className={styles.root} title={'Gallery'} toolbar={ isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>]: []}>
       {!showForm && <><div className={styles.panel}>
         <div className={styles.tabs}>
           <ProfileTabs type={'gallery'} currentTab={currentTab} skill={skill} isEdit={isEdit} onChangeTab={handleChangeTab}/>

@@ -14,9 +14,9 @@ export const parserPrice = (value) => {
   }
   return parseFloat(valueFormatted)
 }
-export const parseDate = (date, formatStr = 'yyyy-mm-dd') => {
+export const parseDate = (date, formatStr = 'yyyy-MM-dd') => {
   return parse(date, formatStr, new Date());
 }
-export const formatDate = (date, formatStr = 'dd.mm.yyyy') => {
+export const formatDate = (date, formatStr = 'dd.MM.yyyy') => {
   return format(parseDate(date), formatStr)
 }

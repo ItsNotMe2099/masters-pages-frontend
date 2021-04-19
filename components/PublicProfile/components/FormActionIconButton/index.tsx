@@ -9,13 +9,12 @@ import FormDeleteIcon from 'components/svg/FormDeleteIcon'
 interface Props {
   type: 'edit' | 'create' | 'moveDown' | 'moveUp' | 'delete',
   children?: any
-  onClick: () => void
+  onClick: (e?) => void
 }
 
 export default function FormActionIconButton({type, children, onClick}: Props) {
 
   const getIcon = () => {
-    console.log("IconType", type)
    switch (type){
      case 'edit':
        return <FormEditIcon className={styles.icon}/>

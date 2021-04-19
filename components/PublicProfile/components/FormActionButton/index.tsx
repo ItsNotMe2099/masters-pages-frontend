@@ -16,7 +16,6 @@ interface Props {
 export default function FormActionButton({type, title, children, onClick}: Props) {
 
   const getIcon = () => {
-    console.log("IconType", type)
    switch (type){
      case 'edit':
        return <FormEditIcon className={styles.icon}/>

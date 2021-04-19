@@ -26,7 +26,6 @@ import {useTranslation, withTranslation} from "react-i18next";
     { value: 'master', label: 'Master' },
     { value: 'volunteer', label: 'Volunteer' },
   ]
-  console.log("Roles", role, options)
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 
   useEffect(() => {

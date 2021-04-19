@@ -38,6 +38,7 @@ export default function ProfileRecommendationReducer(state = {...initialState}, 
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
+
       break
     case ActionTypes.CREATE_PROFILE_RECOMMENDATION_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'

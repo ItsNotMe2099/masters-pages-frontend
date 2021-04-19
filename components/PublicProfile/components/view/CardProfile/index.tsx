@@ -66,15 +66,15 @@ const CardProfile = (props: Props) => {
         <div className={styles.lastSeenLabel}>last seen:</div>
         <div className={styles.lastSeenValue}>3 min ago</div>
       </div>
-      <div className={styles.actions}>
+      {!isEdit && <div className={styles.actions}>
 
 
         <Button className={styles.actionSendMessage} href={`/Chat/dialog/${profile.id}`}>Send message</Button>
         {currentProfile?.role === 'client' && <Button className={styles.actionSendOffer} onClick={handleSendOffer}>Send Offer</Button>}
-      </div>
+      </div>}
       <div className={styles.followers}>
         <div className={styles.followersValue}><UserIcon/> {recommendationTotal} recommended </div>
-        <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleRecommend}>Recommend</Button>
+        {!isEdit && <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleRecommend}>Recommend</Button>}
       </div>
     </Card>
   )

@@ -31,6 +31,9 @@ export interface AvatarInputProps {
   loading?: boolean
   handleChangePhoto?: (string) => {}
   handleDeletePhoto?: () => {},
+  infoTitle?: string
+  infoFormatAllowed?: string
+  infoRequirements?: string
   t?: (string) => string,
 }
 
@@ -50,7 +53,10 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         label,
         labelMultiple = 'ra.input.file.upload_several',
         labelSingle = 'ra.input.file.upload_single',
-        maxSize,
+        infoTitle,
+  infoFormatAllowed,
+  infoRequirements,
+  maxSize,
         minSize,
         multiple = false,
         uploadOptions,
@@ -276,9 +282,9 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         </div>}
        </Dropzone>
         <div className={styles.info}>
-          <div>{t('forms.avatarInput.uploadYourPhoto')}</div>
-          <div>{t('forms.avatarInput.formatAllowed')}</div>
-          <div>{t('forms.avatarInput.minimalSize')}: 180×180 px.</div>
+          <div>{infoTitle || t('forms.avatarInput.uploadYourPhoto')}</div>
+          <div>{infoFormatAllowed || t('forms.avatarInput.formatAllowed')}</div>
+          <div>{infoRequirements || `${t('forms.avatarInput.minimalSize')}: 180×180 px.`}</div>
           <ErrorInput />
           {(error || props.error) && <FormError error={error || props.error}/>}
           <div className={styles.infoActions}>

@@ -8,7 +8,9 @@ interface IProfileGalleryList{
   categoryId: number,
   subCategoryId: number,
   limit: number,
-  page: number
+  page: number,
+  sort?: string,
+  sortOrder?: string
 }
 
 interface IProfileGalleryItemCommentList{

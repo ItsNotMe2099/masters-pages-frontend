@@ -53,6 +53,7 @@ export default function ProfileTabReducer(state = {...initialState}, action) {
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
+      state.list = state.list.map(item => item.id === action.payload.id ? ({...item, ...action.payload}) : item);
       break
     case ActionTypes.UPDATE_PROFILE_TAB_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
@@ -68,6 +69,7 @@ export default function ProfileTabReducer(state = {...initialState}, action) {
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
+      state.list = state.list.filter(item => item.id !== action.payload.id);
       break
     case ActionTypes.DELETE_PROFILE_TAB_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'

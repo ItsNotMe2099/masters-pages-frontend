@@ -48,6 +48,7 @@ function* ProfileTabSaga() {
       if(result.type === ActionTypes.DELETE_PROFILE_TAB_REQUEST + ApiActionTypes.SUCCESS){
         console.log("DELETE SKILL SUCCESS")
         yield put(modalClose());
+        yield put(hideProfileForm(action.payload.formKey));
       //  yield put(fetchSkillList());
       }
     })

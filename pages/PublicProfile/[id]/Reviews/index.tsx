@@ -33,13 +33,10 @@ const ProfileReviews = (props) => {
     const categories = formatSkillList(profile.skills);
     if (!category && !currentSkill && categories.length > 0) {
       const subCategoryId = parseInt(router.query.subCategoryId as string, 10);
-      console.log("skillId", subCategoryId);
       if (subCategoryId) {
         for (const category of categories) {
           const exists = category.skills.find(skill => skill.subCategoryId === subCategoryId);
-          console.log("Categories", category.skills);
           if (exists) {
-            console.log("isExists", exists);
             dispatch(setCurrentSkill(exists));
             setCategory(category);
             return;
@@ -90,7 +87,7 @@ const ProfileReviews = (props) => {
   return (
     <ProfilePageLayout {...props} profile={profile} isEdit={isEdit}>
       {category &&
-      <CardCategorySelector profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
+      <CardCategorySelector categories={categories} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
                             onCategoryChange={handleCategoryChange}/>}
       {(currentSkill && router.query.subCategoryId || !router.query.subCategoryId) && <CardReviews profile={profile} skill={currentSkill}/>}
     </ProfilePageLayout>

@@ -39,7 +39,7 @@ export const fetchProfileTab = (id: number) => action(ActionTypes.FETCH_PROFILE_
     method: 'GET',
   }
 })
-export const deleteProfileTab = (id: number) => action(ActionTypes.DELETE_PROFILE_TAB, { id})
+export const deleteProfileTab = (id: number, formKey: string) => action(ActionTypes.DELETE_PROFILE_TAB, { id, formKey})
 export const deleteProfileTabRequest = (id: number) => action(ActionTypes.DELETE_PROFILE_TAB_REQUEST, {
   api: {
     url: `/api/profile-tab/${id}`,

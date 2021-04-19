@@ -3,7 +3,6 @@ import { IRequestData, IResponse } from 'types'
 function request(requestData: IRequestData): Promise<IResponse> {
   const { url, method, data, token, host, profileRole } = requestData
   const defaultHost = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}`
-console.log(`Bearer ${token}` )
   return (
     fetch(`${host || defaultHost}${url}`, {
       method: method || 'GET',

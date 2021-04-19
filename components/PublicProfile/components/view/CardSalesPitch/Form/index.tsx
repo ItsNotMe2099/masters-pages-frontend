@@ -38,6 +38,8 @@ let SalesPitchForm = (props: Props) => {
           maxSize={5242880 * 10}
           labelType="placeholder"
           label={'Upload photo'}
+          infoTitle={'Upload photo or video'}
+          infoFormatAllowed={'Format allowed: PNG, JPEG, MP4'}
         />
         </div>
       </div>
