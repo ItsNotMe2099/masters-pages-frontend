@@ -29,6 +29,7 @@ import {
   useWindowWidth,
   useWindowHeight,
 } from '@react-hook/window-size'
+import Layout from 'components/layout/Layout'
 interface Props {
   onShowMap: () => void
 }
@@ -83,8 +84,8 @@ const SearchTaskListView = (props: Props) => {
     return {}
   }
   return (
-    <>
-    <Header {...props}/>
+    <Layout>
+
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
         <SearchTaskFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
@@ -137,7 +138,7 @@ const SearchTaskListView = (props: Props) => {
       <Footer/>
     </div>
 
-    </>
+    </Layout>
   )
 }
 export default SearchTaskListView

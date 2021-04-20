@@ -8,7 +8,7 @@ import InputCountry from "components/ui/Inputs/InputCountry";
 import InputLocation from "components/ui/Inputs/InputLocation";
 import { RadioList } from "components/ui/Inputs/RadioList";
 import RadioListSubCategories from "components/ui/Inputs/RadioListSubCategories";
-import FileInput from "components/ui/Inputs/S3FileUpload";
+import FileInput from "components/ui/Inputs/FilesUploadInput";
 import SelectInput from "components/ui/Inputs/SelectInput";
 import TextArea from "components/ui/Inputs/TextArea";
 import { useEffect, useState } from "react";

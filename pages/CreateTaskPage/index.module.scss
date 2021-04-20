@@ -27,9 +27,11 @@
 }
 .steps{
   padding: 60px 0;
+  margin: -22px -22px 0px -22px;
   background: #F7F7F7;
   @media screen and (max-width: $sm-max){
     padding: 55px 20px 23px;
+    margin: 0px;
   }
 }
 

@@ -57,6 +57,7 @@ import {
   getDayRange,
 } from '@wojtekmaj/date-utils';
 import CalendarEventMonth from 'components/Calendar/components/CalendarEventMonth'
+import Layout from 'components/layout/Layout'
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -222,8 +223,8 @@ setEvents((events) =>  events.map(existingEvent => {
    }
   }
   return (
+    <Layout>
     <div className={styles.root}>
-      <Header {...props}/>
       <CalendarSideBar currentDate={currentDate} onChange={handleSideBarDateChange} events={events}/>
       <div className={styles.rightSide}>
       <div className={styles.toolbar}>
@@ -265,6 +266,7 @@ setEvents((events) =>  events.map(existingEvent => {
       </div>
       <Modals/>
     </div>
+    </Layout>
   )
 }
 export const getServerSideProps = getAuthServerSide({redirect: true});

@@ -6,7 +6,7 @@ import styles from './index.module.scss'
 import { useSelector } from 'react-redux'
 import Rating from 'components/ui/Inputs/Rating';
 import TextArea from 'components/ui/Inputs/TextArea';
-import FileInput from 'components/ui/Inputs/S3FileUpload';
+import FileInput from 'components/ui/Inputs/FilesUploadInput';
 
 let FinishingTaskByMasterForm = props => {
   const { handleSubmit } = props

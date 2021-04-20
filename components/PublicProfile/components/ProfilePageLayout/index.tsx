@@ -18,6 +18,7 @@ import {ReactElement, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/actions'
 import CardRecommendationsShort from 'components/PublicProfile/components/view/CardRecommendationsShort'
+import Layout from 'components/layout/Layout'
 
 interface Props{
   profile: ProfileData,
@@ -28,8 +29,8 @@ const ProfilePageLayout = (props: Props) => {
   const {profile, isEdit} = props;
 
   return (
-    <div className={styles.root}>
-      <Header {...props}/>
+    <Layout>
+
       <div className={styles.container}>
         <div className={styles.leftColumn}>
           <CardProfile profile={profile} isEdit={isEdit}/>
@@ -46,7 +47,7 @@ const ProfilePageLayout = (props: Props) => {
         </div>
       </div>
       <Modals/>
-    </div>
+    </Layout>
   )
 }
 

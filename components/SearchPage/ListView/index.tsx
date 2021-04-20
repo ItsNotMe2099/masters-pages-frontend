@@ -24,6 +24,7 @@ import Sticky from 'react-stickynode';
 import SearchTaskFilter from "../../../pages/SearchTaskPage/Filter";
 import {useTranslation} from "react-i18next";
 import {useWindowWidth} from "@react-hook/window-size";
+import Layout from 'components/layout/Layout'
 const queryString = require('query-string')
 interface Props {
   searchRole: 'master' | 'volunteer',
@@ -78,8 +79,7 @@ const SearchProfileListView = (props: Props) => {
     return {}
   }
   return (
-    <>
-    <Header {...props}/>
+    <Layout>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
         <SearchTaskFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
@@ -131,7 +131,7 @@ const SearchProfileListView = (props: Props) => {
       </div>
       <Footer/>
     </div>
-    </>
+    </Layout>
   )
 }
 export default SearchProfileListView

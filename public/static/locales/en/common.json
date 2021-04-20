@@ -8,14 +8,28 @@
     "faq": "FAQ",
     "signIn": "Sign In",
     "signUp": "Sign Up",
-    "profile": "Profile",
-    "messages": "Messages",
+
     "reviews": "Review",
-    "orders": "Orders",
-    "settings": "Settings",
+
     "calendar": "Calendar",
     "logout": "Logout",
-    "completeRegistration": "Complete registration"
+    "completeRegistration": "Complete registration",
+
+    "profile": "Profile",
+    "share": "Share",
+    "invite": "Invite",
+    "order": "Order",
+    "orders": "Orders",
+    "events": "Events",
+    "messages": "Messages",
+    "findOrders": "Find orders",
+    "findClients": "Find clients",
+    "posts": "Posts",
+    "news": "News",
+    "subscriptions": "Subscriptions",
+    "account": "Account",
+    "settings": "Settings",
+    "reports": "Reports"
   },
   "validation": {
     "email": "Wrong email format",

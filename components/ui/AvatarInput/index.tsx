@@ -1,7 +1,7 @@
 import AvatarAddFileBtn from "components/ui/AvatarInput/components/AvatarAddFileBtn";
 import AvatarInputPreview from "components/ui/AvatarInput/components/AvatarInputPreview";
 import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import AddFileButton from "components/ui/Inputs/S3FileUpload/components/AddFileBtn";
+import AddFileButton from "components/ui/Inputs/FilesUploadInput/components/AddFileBtn";
 import React, {
   FunctionComponent,
   Children,

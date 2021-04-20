@@ -8,7 +8,7 @@ import InputAddress from "components/ui/Inputs/InputAddress";
 import InputCategory from "components/ui/Inputs/InputCategory";
 import InputLocation from "components/ui/Inputs/InputLocation";
 import InputSubCategory from "components/ui/Inputs/InputSubCategory";
-import FileInput from "components/ui/Inputs/S3FileUpload";
+import FileInput from "components/ui/Inputs/FilesUploadInput";
 import SelectInput from "components/ui/Inputs/SelectInput";
 import TextArea from "components/ui/Inputs/TextArea";
 import Loader from "components/ui/Loader";

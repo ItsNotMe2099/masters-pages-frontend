@@ -1,0 +1,98 @@
+@import "scss/index";
+.root{
+  position: relative;
+  min-height: 100%;
+  height: 100%;
+  padding-top: 60px;
+}
+.header{
+  position: fixed;
+  left: 190px;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: white;
+  border-bottom: 1px #C4C4C4 solid;
+  z-index: 3;
+  padding: 0px 32px;
+  .headerLeft{
+    flex: 1;
+  }
+}
+.leftMenu{
+  position: fixed;
+  width: 190px;
+  left: 0px;
+  bottom: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.modeClient {
+  .leftMenu {
+    background: #27AE60;
+  }
+  .logo{
+    background: #1A9F52;
+  }
+}
+.modeMaster{
+  .leftMenu {
+
+    background: #EB5757;
+  }
+  .logo{
+    background: #DA4C4C;
+
+  }
+}
+.modeVoluenteer{
+  .leftMenu {
+
+    background: #199AC2;
+  }
+  .logo{
+    background: #128FB7;
+  }
+}
+
+.modeAgency {
+  .leftMenu {
+    background: #F2B705;
+  }
+  .logo{
+    background: #E2AB05;
+  }
+}
+.logo{
+  padding: 0px 13px;
+  min-height: 59px;
+  max-height: 59px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.hello{
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 19px;
+  color: #000000;
+}
+.container{
+  position: relative;
+  margin-left: 190px;
+  padding-top: 22px;
+  padding-left: 22px;
+  padding-right: 22px;
+  padding-bottom: 60px;
+  min-height: 100%;
+  height: 100%;
+}

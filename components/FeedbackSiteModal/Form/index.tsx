@@ -9,7 +9,7 @@ import {required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import Rating from 'components/ui/Inputs/Rating';
 import TextArea from 'components/ui/Inputs/TextArea';
-import FileInput from 'components/ui/Inputs/S3FileUpload';
+import FileInput from 'components/ui/Inputs/FilesUploadInput';
 
 let FeedbackForm = props => {
   const { handleSubmit } = props

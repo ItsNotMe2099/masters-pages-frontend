@@ -6,7 +6,7 @@ import Input from "components/ui/Inputs/Input";
 import InputAddress from "components/ui/Inputs/InputAddress";
 import InputCategory from 'components/ui/Inputs/InputCategory'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
-import FileInput from "components/ui/Inputs/S3FileUpload";
+import FileInput from "components/ui/Inputs/FilesUploadInput";
 import SelectInput from "components/ui/Inputs/SelectInput";
 import TextArea from "components/ui/Inputs/TextArea";
 import Link from 'next/link'

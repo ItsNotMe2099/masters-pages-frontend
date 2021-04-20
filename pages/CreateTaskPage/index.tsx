@@ -19,6 +19,7 @@ import {
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useRouter} from 'next/router'
+import Layout from 'components/layout/Layout'
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
@@ -49,8 +50,7 @@ const CreateTaskPage = (props) => {
   }
 
   return (
-    <>
-      <Header {...props}/>
+    <Layout>
       <div className={styles.steps}>
         <div className={styles.stepsContainer}>
         <SimpleSlider/>
@@ -60,9 +60,7 @@ const CreateTaskPage = (props) => {
 
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
         <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat}/>
-        <div className={styles.footer}>
-          <Footer/>
-        </div>
+
       </div>
 
 
@@ -83,7 +81,7 @@ const CreateTaskPage = (props) => {
       }}>
         <Loader/>
       </Modal>
-    </>
+    </Layout>
   )
 }
 export const getServerSideProps = getAuthServerSide({redirect: true});

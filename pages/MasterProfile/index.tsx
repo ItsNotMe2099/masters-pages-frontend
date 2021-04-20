@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import SimpleSlider from 'components/Steps/MasterProfile/Slider'
 import MasterForm from 'components/MasterProfileForm'
+import Layout from 'components/layout/Layout'
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()
@@ -38,8 +39,7 @@ const MasterProfile = (props) => {
   }
 
   return (
-    <>
-      <Header {...props}/>
+    <Layout>
       <div className={styles.steps}>
         <div className={styles.stepsContainer}>
         <SimpleSlider/>
@@ -57,11 +57,8 @@ const MasterProfile = (props) => {
           photo: profile?.photo,
         }}/>
 
-        <div className={styles.footer}>
-          <Footer/>
-        </div>
       </div>
-    </>
+    </Layout>
   )
 }
 export const getServerSideProps = getAuthServerSide({redirect: true});

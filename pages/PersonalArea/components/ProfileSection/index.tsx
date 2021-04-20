@@ -6,13 +6,13 @@ import Input from "components/ui/Inputs/Input";
 import { IRootState } from "types";
 import StarRatings from 'react-star-ratings';
 import { getMediaPath } from "utils/media";
-import styles from 'pages/PersonalArea/components/ProfileSection/index.module.scss'
+import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import formatDistance from "date-fns/formatDistance";
-import {withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "react-i18next";
 
 const ProfileSection = (props) => {
-  const {t} = props;
+  const {t} = useTranslation();
   const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 

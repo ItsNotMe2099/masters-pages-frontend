@@ -21,6 +21,7 @@ import styles from './index.module.scss'
 import useSupercluster from "use-supercluster";
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
+import Layout from 'components/layout/Layout'
 const queryString = require('query-string')
 
 const Marker = ({ children, lat, lng }) => children;
@@ -110,6 +111,7 @@ const SearchTaskMapView = (props: Props) => {
 
   }
   return (
+    <Layout>
     <div className={styles.root}>
       <MapHeader />
       <div className={styles.container}>
@@ -205,6 +207,7 @@ const SearchTaskMapView = (props: Props) => {
       </div>
       <Modals/>
     </div>
+    </Layout>
   )
 }
 export default SearchTaskMapView
