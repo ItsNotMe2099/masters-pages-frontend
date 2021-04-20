@@ -10,7 +10,6 @@
   left: 190px;
   right: 0px;
   top: 0px;
-  width: 100%;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -21,6 +20,9 @@
   padding: 0px 32px;
   .headerLeft{
     flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 }
 .leftMenu{
