@@ -35,9 +35,12 @@ const ProfileRecommendations = (props) => {
       dispatch(fetchSkillList());
     }
   }, [])
+  const handleCategoryChange = () => {
+
+  }
 
   return (
-    <ProfilePageLayout {...props} profile={profile} isEdit={isEdit}>
+    <ProfilePageLayout {...props} profile={profile} isEdit={isEdit} onCategoryChange={handleCategoryChange}>
      <CardRecommendations profile={profile}/>
     </ProfilePageLayout>
   )

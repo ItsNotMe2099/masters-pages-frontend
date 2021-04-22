@@ -16,7 +16,7 @@ interface Props{
   category,
   subCategory,
   categories: SkillData[]
-  onCategoryChange: (categoryId, subCategoryId) => void
+  onCategoryChange: (category, subCategory) => void
 }
 const CardCategorySelector = (props: Props) => {
   const dispatch = useDispatch();

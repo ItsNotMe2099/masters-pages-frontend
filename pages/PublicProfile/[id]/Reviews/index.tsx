@@ -85,7 +85,7 @@ const ProfileReviews = (props) => {
 
   }
   return (
-    <ProfilePageLayout {...props} profile={profile} isEdit={isEdit}>
+    <ProfilePageLayout {...props} profile={profile} isEdit={isEdit} onCategoryChange={handleCategoryChange}>
       {category &&
       <CardCategorySelector categories={categories} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
                             onCategoryChange={handleCategoryChange}/>}

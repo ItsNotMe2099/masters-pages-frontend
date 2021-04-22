@@ -13,6 +13,7 @@ interface Props {
   icon?: string
   mode?: string
   badge?: string
+
   onClick?: () => void
 }
 

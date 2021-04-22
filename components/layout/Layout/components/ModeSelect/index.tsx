@@ -22,9 +22,9 @@ import {useTranslation, withTranslation} from "react-i18next";
     setIsActive(!isActive);
   }
   const options = [
-    { value: 'client', label: 'Client' },
-    { value: 'master', label: 'Master' },
-    { value: 'volunteer', label: 'Volunteer' },
+    { value: 'client', label: 'Client Mode' },
+    { value: 'master', label: 'Master Mode' },
+    { value: 'volunteer', label: 'Volunteer Mode' },
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 
@@ -41,21 +41,27 @@ import {useTranslation, withTranslation} from "react-i18next";
     e.preventDefault();
     setIsActive(false);
   }
+
+   const getModeClass = () => {
+     switch (value?.value) {
+       case 'master':
+         return styles.modeMaster;
+       case 'volunteer':
+         return styles.modeVolunteer;
+       case 'client':
+       default:
+         return styles.modeClient;
+     }
+   }
+
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${getModeClass()}`}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
-        <span className={styles.dropdownItemLabel}>{value.label}</span>
+        <div className={styles.dropdownItemLabel}>{value.label}</div>
         <ArrowDropDown/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <ul>
-          {value &&
-          <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
-            <span className={styles.dropdownItemLabel}>{value.label}</span>
-            <img className={styles.arrowActive}
-                 src={`/img/icons/arrow_active.svg`}
-                 alt=''/></a></li>
-          }
           {options.filter(item => !value || item.value != value.value).map(item => (
             <li className={styles.dropdownItem}
             >

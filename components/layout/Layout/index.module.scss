@@ -37,6 +37,10 @@
   overflow: hidden;
   z-index: 1;
 }
+.menuSeparator{
+  height: 1px;
+  width: 100%;
+}
 
 .modeClient {
   .leftMenu {
@@ -45,6 +49,10 @@
   .logo{
     background: #1A9F52;
   }
+  .menuSeparator{
+    background: #22E775;
+  }
+
 }
 .modeMaster{
   .leftMenu {
@@ -53,8 +61,11 @@
   }
   .logo{
     background: #DA4C4C;
-
   }
+  .menuSeparator{
+    background: #FF9292;
+  }
+
 }
 .modeVoluenteer{
   .leftMenu {
@@ -64,6 +75,10 @@
   .logo{
     background: #128FB7;
   }
+  .menuSeparator{
+    background: rgba(255,255,255, 0.5);
+  }
+
 }
 
 .modeAgency {

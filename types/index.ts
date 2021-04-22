@@ -104,6 +104,7 @@ export interface ProfileData {
   lastName?: string
   phone?: string
   email?: string
+  role?: string
   geonameid?: string
   birthday?: string
   country?: string

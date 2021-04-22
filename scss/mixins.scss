@@ -1,4 +1,20 @@
 @import 'variables';
+
+@mixin container($uid: container, $small: 640px, $medium: 768px, $large: 1024px, $xlarge: 1060px) {
+  $container: (
+    '': 100%,
+    '-sm': $small,
+    '-md': $medium,
+    '-lg': $large,
+    '-xl': $xlarge,
+  );
+  @each $prop, $value in $container {
+    .#{$uid}#{$prop} {
+      max-width: $value;
+    }
+  }
+}
+
 // Small devices
 @mixin sm {
   @media (min-width: #{$screen-sm-min}) {

@@ -18,6 +18,7 @@ import {useRouter} from 'next/router'
 import CardProfileStat from 'components/PublicProfile/components/view/CardProfileStat'
 import CardReviewsShort from 'components/PublicProfile/components/view/CardReviewsShort'
 import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLayout'
+import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 
 interface Props {
   profile: ProfileData
@@ -107,9 +108,15 @@ const NewMain = (props) => {
   }
   console.log("CurrentSkill", currentSkill);
   return (
-    <ProfilePageLayout {...props} profile={profile} isEdit={isEdit}>
+    <ProfilePageLayout {...props} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
+      {profile.role === 'client' ? <>
+
+          <CardReviews profile={profile} />
+          </>
+
+        : <>
       {!router.query.subCategoryId && <CardProfileStat profile={profile}/>}
-      {currentSkill && <>
+      {currentSkill  && <>
         <CardCategorySelector categories={categories} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
                               onCategoryChange={handleCategoryChange}/>
         <CardSalesPitch profile={profile} isEdit={isEdit} skill={currentSkill}/>
@@ -117,6 +124,7 @@ const NewMain = (props) => {
         <CardPortfolio profile={profile} isEdit={isEdit} skill={currentSkill}/>
         <CardGallery profile={profile} isEdit={isEdit} skill={currentSkill}/>
       </>}
+     </>}
     </ProfilePageLayout>
   )
 }

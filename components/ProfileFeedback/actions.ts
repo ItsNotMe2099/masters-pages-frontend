@@ -20,10 +20,11 @@ export const fetchFeedbacksToProfileRequest = (data: IProfileFeedbackList) => ac
   }
 })
 
-export const fetchFeedbacksToProfileShortRequest = (profileId) => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_SHORT_REQUEST, {
+export const fetchFeedbacksToProfileShortRequest = (profileId, subCategoryId?: number) => action(ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_SHORT_REQUEST, {
   api: {
     url: `/api/feedback/profile?${queryString.stringify({
       profileId,
+      subCategoryId,
       limit: 3,
       page: 1,
       sort: 'createdAt',

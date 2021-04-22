@@ -11,6 +11,9 @@ import {createProfileRecommendation} from 'components/ProfileRecommendations/act
 import Link from 'next/link'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {taskOfferOpen} from 'components/Modal/actions'
+import {showProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm} from 'components/Profile/actions'
+import AvatarForm from 'pages/PersonalArea/profile/components/AvatarForm'
+import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 interface Props{
   profile: ProfileData,
   isEdit: boolean
@@ -21,7 +24,10 @@ const CardProfile = (props: Props) => {
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
   const recommendationLoading = useSelector((state: IRootState) => state.profileRecommendation.formLoading);
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
-
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
+  const handleEditClick = () => {
+    dispatch(showProfileForm( 'avatar'));
+  }
   const handleRecommend = () => {
     dispatch(createProfileRecommendation(profile.id));
   }
@@ -29,9 +35,20 @@ const CardProfile = (props: Props) => {
     dispatch(taskNegotiationSetCurrentProfile(profile));
     dispatch(taskOfferOpen());
   }
+  const handleSubmitAvatar =(data) => {
+    console.log("Handle Submit Avatar", data)
+    dispatch(updateProfileAvatar(profile.id, {photo: data.photo}, 'avatar'));
+  }
+
+  const handleDeleteAvatar = () => {
+    console.log("Handle delete Avatar")
+    dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
+  }
   return (
-    <Card className={styles.root}>
-      <a href={`/PublicProfile/${profile.id}`}><Avatar size={'large'} image={profile.avatar}/></a>
+    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={'Edit'} onClick={handleEditClick}/>] : []}>
+
+        {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
+        {(!showForm || !isEdit) &&  <a href={`/PublicProfile/${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
       <a href={`/PublicProfile/${profile.id}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
       <div className={styles.stat}>
         <div className={styles.statItem}>

@@ -5,13 +5,15 @@
 .dropDown {
   background: #ffffff;
   position: absolute;
-  top: -15px;
-  right: -15px;
+  top: 32px;
+  right: 0px;
+  min-width: 160px;
   opacity: 0;
   visibility: hidden;
   z-index: 7;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 9px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   padding: 7.5px 0px;
   ul {
     list-style: none;
@@ -26,11 +28,17 @@
 }
 
 .dropDownTrigger {
+  cursor: pointer;
+  background: #EB5757;
   text-decoration: none;
-  color: #000;
-  font-weight: 600;
+  padding: 0px 9px;
+  height: 32px;
+  color: white;
+  border-radius: 3px;
+
   display: flex;
   align-items: center;
+  min-width: 160px;
   &:hover{
     .dropdownItemLabel {
       font-weight: 700;
@@ -74,6 +82,7 @@
 .dropdownItemLabel{
   font-weight: 600;
   font-size: 14px;
+  flex: 1;
   line-height: 17px;
   margin-right: 10px;
   vertical-align: middle;

@@ -23,11 +23,13 @@ import Layout from 'components/layout/Layout'
 interface Props{
   profile: ProfileData,
   isEdit: boolean,
-  children?: any
+  children?: any,
+  subCategory: any,
+  onCategoryChange: (categoryId, subCategoryId) => void
 }
 const ProfilePageLayout = (props: Props) => {
-  const {profile, isEdit} = props;
-
+  const {profile, isEdit, onCategoryChange, subCategory} = props;
+  const isMaster = ['master', 'volunteer'].includes(profile.role);
   return (
     <Layout>
 
@@ -35,11 +37,11 @@ const ProfilePageLayout = (props: Props) => {
         <div className={styles.leftColumn}>
           <CardProfile profile={profile} isEdit={isEdit}/>
           <CardPreferWorkIn profile={profile} isEdit={isEdit}/>
-          <CardCategories profile={profile} isEdit={isEdit}/>
+          {isMaster && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
           <CardLanguages profile={profile} isEdit={isEdit}/>
-          <CardBio profile={profile} isEdit={isEdit}/>
-          <CardRecommendationsShort profile={profile}/>
-          <CardReviewsShort profile={profile}/>
+          {isMaster && <CardBio profile={profile} isEdit={isEdit}/>}
+          {isMaster && <CardRecommendationsShort profile={profile}/>}
+          <CardReviewsShort profile={profile} subCategory={subCategory}/>
           {/*<CardRewards profile={profile}/>*/}
         </div>
         <div className={styles.rightColumn}>

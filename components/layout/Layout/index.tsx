@@ -6,9 +6,10 @@ import {default as React, ReactElement} from 'react'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'
 import {LangSelect} from 'components/layout/Header/components/LangSelect'
-import ModeSelect from 'components/layout/Header/components/ModeSelect'
+
 import {useRouter} from 'next/router'
 import {logout} from 'components/Auth/actions'
+import ModeSelect from 'components/layout/Layout/components/ModeSelect'
 
 interface Props {
   children?: ReactElement[] | ReactElement
@@ -56,10 +57,10 @@ export default function Layout(props: Props) {
     {title: t('menu.messages'), icon: 'messages', link: '/Chat'},
     {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage'},
     {title: t('menu.findClients'), icon: 'find-clients', link: '/SearchMasterPage'},
-    {title: t('menu.posts'), icon: 'posts', link: ''},
+    {title: t('menu.posts'), icon: 'posts', link: '', isSeparator: true},
     {title: t('menu.news'), icon: 'news', link: ''},
     {title: t('menu.subscriptions'), icon: 'subscriptions', link: ''},
-    {title: t('menu.account'), icon: 'account', link: '/PersonalArea/profile'},
+    {title: t('menu.account'), icon: 'account', link: '/PersonalArea/profile', isSeparator: true},
     {title: t('menu.settings'), icon: 'settings', link: '/PersonalArea/settings'},
     {title: t('menu.reports'), icon: 'reports', link: ''},
   ]
@@ -72,7 +73,7 @@ export default function Layout(props: Props) {
       <div className={styles.logo}>
         <Logo color={'white'}/>
       </div>
-      {items.map(item => <MenuItem isActive={item.link && currentRoute.indexOf(`${item.link}`) >= 0} title={item.title} icon={item.icon} link={item.link} mode={role}/>)}
+      {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem isActive={item.link && currentRoute.indexOf(`${item.link}`) >= 0} title={item.title} icon={item.icon} link={item.link} mode={role}/></>)}
       <MenuItem isActive={false} onClick={handleLogout} title={t('menu.logout')} icon={'logout'} link={'logout'} mode={role}/>
     </div>
       <div className={styles.header}>

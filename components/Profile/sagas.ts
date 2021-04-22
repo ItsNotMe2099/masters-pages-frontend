@@ -106,6 +106,11 @@ function* ProfileSaga() {
       if (result.type === ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL) {
         yield put(Action(ActionTypes.UPDATE_PROFILE_AVATAR + ApiActionTypes.FAIL, result.payload));
       }
+      if (result.type === ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS) {
+        if(action.payload.formKey){
+          yield put(hideProfileForm(action.payload.formKey));
+        }
+      }
     })
 
   yield takeLatest(ActionTypes.UPDATE_PROFILE_BY_FORM,

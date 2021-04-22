@@ -17,13 +17,15 @@ import {confirmOpen} from 'components/Modal/actions'
 import {taskNegotiationDeclineTaskResponse} from 'components/TaskNegotiation/actions'
 interface Props{
   profile: ProfileData,
-  isEdit: boolean
+  isEdit: boolean,
+  subCategory,
+  onCategoryChange: (categoryId, subCategoryId) => void
 }
 const CardCategories = (props: Props) => {
   const dispatch = useDispatch();
   const formLoading = useSelector((state: IRootState) => state.skill.formLoading)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
-  const {profile, isEdit} = props;
+  const {profile, isEdit, onCategoryChange, subCategory} = props;
   const skills = props.isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
   const handleEditClick = () => {
     dispatch(showProfileForm( 'categories'));
@@ -52,10 +54,13 @@ const CardCategories = (props: Props) => {
       }
     }));
   }
+  const handleSkillClick = (item: SkillData) => {
+    onCategoryChange(item.categoryId, item.subCategoryId);
+  }
   return (
     <Card isHidden={!isEdit && skills.length === 0} className={styles.root} isLoading={showForm && formLoading} title={'Works in the following categories'} toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleEditClick}/>] : []}>
       {skills.map((category) => <Accordion title={<><div className={styles.accordionTitle}>{getCategoryTranslation(category.category)?.name}</div> <FormActionIconButton type={'delete'} onClick={ () => handleRemoveCategory(category)} /></>} >
-        {category.skills.map(skill => skill.subCategory ? <Tab><div className={styles.tabTitle}>{getCategoryTranslation(skill.subCategory)?.name}</div> <FormActionIconButton type={'delete'} onClick={() => handleRemoveSkill(skill)}/></Tab> : null)}
+        {category.skills.map(skill => skill.subCategory ? <Tab isActive={subCategory?.subCategory.id === skill.subCategory.id} onClick={() => onCategoryChange(category, skill)}><div className={styles.tabTitle}>{getCategoryTranslation(skill.subCategory)?.name}</div> {isEdit && <FormActionIconButton type={'delete'} onClick={() => handleRemoveSkill(skill)}/>}</Tab> : null)}
       </Accordion>)}
       {showForm && <CardCategoryForm onSubmit={handleSubmit} onCancel={handleCancel}/>}
     </Card>
