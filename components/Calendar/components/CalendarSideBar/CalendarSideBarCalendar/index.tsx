@@ -32,6 +32,9 @@ export default function CalendarSideBarCalendar(props: Props) {
 
   useEffect(() => {
     console.log("SetValueOutside", value);
+    const beginOfMonth = new Date(value.getFullYear(), value.getMonth(), 1);
+
+    setActiveStartDate(beginOfMonth);
   }, [value])
 
   const handlePrevClick = () => {

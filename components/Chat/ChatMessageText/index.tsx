@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import VideoThumbnail from 'react-video-thumbnail';
 import formatDistance from 'date-fns/formatDistance'
 import FsLightbox from 'fslightbox-react';
+import ChatMessage from 'components/Chat/ChatMessage'
 interface Props {
   message: string
   files?: any[]
@@ -20,9 +21,10 @@ interface Props {
   suffixText?: string
   large?: boolean
   isRight?: boolean
+  size: 'small' | 'normal'
 }
 
-export default function ChatMessageText({message, files, isRight, suffixIcon, suffixColor, suffixText, large}: Props) {
+export default function ChatMessageText({message, files, size, isRight, suffixIcon, suffixColor, suffixText, large}: Props) {
 
   const [showGallery, setShowGallery] = useState(false);
   const getIcon = () => {
@@ -63,7 +65,7 @@ export default function ChatMessageText({message, files, isRight, suffixIcon, su
 
   const mediaFiles = files ? files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)) : [];
   return (
-   <div className={`${styles.root} ${large && styles.rootLarge} ${isRight && styles.rootRight}`}>
+   <div className={`${styles.root}  ${size === 'small' && styles.rootSmall} ${large && styles.rootLarge} ${isRight && styles.rootRight}`}>
      <div className={styles.messageWrapper}>
      {files && files.length > 0 && <div className={styles.files}>{files.map(file => renderFile(file.urlS3))}</div>}
      {files && files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)).length > 0 &&
@@ -79,4 +81,8 @@ export default function ChatMessageText({message, files, isRight, suffixIcon, su
      {suffixIcon && <div className={styles.suffixIcon}>{getIcon()}</div>}
    </div>
   )
+}
+
+ChatMessageText.defaultProps = {
+  size: 'normal'
 }

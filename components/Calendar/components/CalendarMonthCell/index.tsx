@@ -1,7 +1,6 @@
 import styles from './index.module.scss'
-import {IEvent} from 'types'
+import {IEvent, IRootState} from 'types'
 import {format} from 'date-fns'
-
 interface Props {
   label: string,
   date: Date,

@@ -13,6 +13,7 @@
     border-radius: 10px;
   }
 }
+
 .small{
   border-radius: 10px;
   width: 54px;
@@ -42,10 +43,19 @@
 
 }
 
+.exExSmall{
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  svg{
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
 .square{
   border-radius: 10px;
-  width: 127px;
-  height: 127px;
+  width: 16px;
+  height: 16px;
   svg{
     width: 70px !important;
     height: 70px !important;

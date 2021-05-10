@@ -1,30 +1,33 @@
-import { fetchChat } from "components/Chat/actions";
 import ChatMessageAction from "components/Chat/ChatMessageAction";
 import ChatMessageTaskDetails from "components/Chat/ChatMessageTaskDetails";
 import ChatMessageText from "components/Chat/ChatMessageText";
-import { confirmOpen, finishTaskAsClientOpen } from "components/Modal/actions";
+import {confirmOpen, finishTaskAsClientOpen} from "components/Modal/actions";
 import {
   taskNegotiationDeclineConditions,
   taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
 } from "components/TaskNegotiation/actions";
-import Avatar from "components/ui/Avatar";
-import AvatarRound from "components/ui/AvatarRound";
-import Modal from "components/ui/Modal";
-import { format } from "date-fns";
-import { IChat, IChatMessage, IChatMessageType, IRootState, ITaskNegotiationState, ITaskNegotiationType } from "types";
+import {format} from "date-fns";
+import {
+  IChat,
+  IChatMessage,
+  IChatMessageType,
+  IEventLogRecordType,
+  IRootState,
+  ITaskNegotiationState,
+  ITaskNegotiationType
+} from "types";
 import styles from './index.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
-import React, { ReactElement } from 'react'
-
-import formatDistance from 'date-fns/formatDistance'
+import {useDispatch, useSelector} from 'react-redux'
+import React, {ReactElement} from 'react'
 
 interface Props {
   message: IChatMessage
-  chat: IChat
+  chat: IChat,
+  size: 'small' | 'normal'
 }
 
-export default function ChatMessage({ message, chat }: Props) {
+export default function ChatMessage({ message, chat, size }: Props) {
   const dispatch =  useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const lastCondition = useSelector((state: IRootState) => state.taskOffer.lastCondition)
@@ -51,8 +54,36 @@ export default function ChatMessage({ message, chat }: Props) {
   }
   const renderMessages = (): ReactElement[] => {
     switch (message.type) {
+      case IChatMessageType.EventLogRecord:
+          let text = '';
+          let profileText = message.profileId === profile.id ? `You` : `${profile.firstName} ${profile.lastName}`
+          switch (message.eventLogRecordType){
+            case IEventLogRecordType.Created:
+              text = `${profileText} created event`;
+              break;
+            case IEventLogRecordType.StatusChanged:
+              text = `${profileText} changed status to ${message.eventLogRecordData.newStatus}`;
+              break;
+            case IEventLogRecordType.DetailesChanged:
+              text = `${profileText} changed event details`;
+              break;
+            case IEventLogRecordType.CommentAdded:
+              text = `${profileText} comment added`;
+              break;
+            case IEventLogRecordType.FileUploaded:
+              text = `${profileText} attached file`;
+              break;
+            case IEventLogRecordType.FeedbackAdded:
+              text = `${profileText} added feedback`;
+              break;
+
+          }
+        return [<ChatMessageText size={size} message={text} files={message.files} isRight={message.profileId === profile.id}/>]
+
       case IChatMessageType.Text:
-        return [<ChatMessageText message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
+        return [<ChatMessageText size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
+      case IChatMessageType.File:
+        return [<ChatMessageText size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
       case IChatMessageType.TaskNegotiation:
         const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? `Task outdated ${message.taskNegotiation.id} ${lastCondition.id}` : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {
@@ -179,4 +210,7 @@ export default function ChatMessage({ message, chat }: Props) {
       {messages.map((item, index) => renderMessage(React.cloneElement(item), index === messages.length - 1))}
     </>
   )
+}
+ChatMessage.defaultProps = {
+  size: 'normal'
 }

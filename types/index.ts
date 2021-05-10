@@ -38,6 +38,7 @@ import {ProfileStatState} from 'components/ProfileStat/reducer'
 import ProfileStatItemCard
   from 'components/PublicProfile/components/view/CardProfileStat/components/ProfileStatItemCard'
 import {ProfileRecommendationState} from 'components/ProfileRecommendations/reducer'
+import {EventsState} from 'components/Events/reducer'
 
 export interface IRootState {
   authComponent: authState,
@@ -78,6 +79,7 @@ export interface IRootState {
   profileGallery: ProfileGalleryState
   profileStat: ProfileStatState
   profileRecommendation: ProfileRecommendationState
+  event: EventsState
 }
 
 export interface ILocation {
@@ -487,12 +489,24 @@ export interface IChat {
   totalUnread: number
 }
 
+export enum IEventLogRecordType {
+  Created = 'created',
+  StatusChanged = 'status_changed',
+  DetailesChanged = 'detailes_changed',
+  CommentAdded = 'comment_added',
+  FileUploaded = 'file_uploaded',
+  FeedbackAdded = 'feedback_added',
+}
+export interface IEventLogRecordData{
+  newStatus: EventStatus
+}
 export enum IChatMessageType {
   Text = 'text',
   File = 'file',
   Voice = 'voice',
   Image = 'image',
   TaskNegotiation = 'task_negotiation',
+  EventLogRecord = 'event_log_record'
 }
 
 export interface IUserFile {
@@ -526,6 +540,8 @@ export interface IChatMessage {
   profileStates: IChatMessageProfile[]
   files: IUserFile[]
   createdAt: Date
+  eventLogRecordType: IEventLogRecordType
+  eventLogRecordData: IEventLogRecordData
 }
 
 export interface ISavedTasks {
@@ -697,10 +713,59 @@ export interface IProfileRecommendation{
   recommendedProfile: ProfileData,
   createdAt: string
 }
+export enum EventStatus {
+  Draft = 'draft',
+  Planned = 'planned',
+  Confirmed = 'confirmed',
+  Declined = 'declined',
+  Completed = 'completed',
+  Approved = 'approved',
+  Rejected = 'rejected',
+  Overdue = 'overdue',
+  Deleted = 'deleted',
+}
+export interface IEventColorStatus {
+  id: number,
+  color: string
+}
+
+export class IEventExpense {
+  type: string;
+  amount: number;
+  currency: string;
+}
+
 export interface IEvent {
   id?: number,
   title?: string,
-  start: Date
-  end: Date
+  status?: EventStatus
+  isOverdue?: boolean
+  start?: Date
+  end?: Date
+  actualStart?: Date,
+  actualEnd?: Date,
+  task?: ITask,
+  participant?: ProfileData
+  author?: ProfileData
+  unreadTextMessagesCount?: number
+  unreadMediaMessagesCount?: number
+  expenses?: IEventExpense[]
+  actualExpenses?: IEventExpense[]
+  participantId?: number
+  authorId?: number
+  ratePerHour?: number
+  actualRatePerHour?: number
+  estimate?: number,
+  totalHours?: number
+  meetingLink?: string
+
+  country?: string;
+  city?: string;
+  region?: string;
+  zipcode?: string;
+  address1?: string;
+  address2?: string;
+
+  isAuthor?: boolean
 }
 

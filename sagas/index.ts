@@ -29,6 +29,7 @@ import ProfilePortfolioSaga from 'components/ProfilePortfolio/sagas'
 import ProfileGallerySaga from 'components/ProfileGallery/sagas'
 import ProfileStatSaga from 'components/ProfileStat/sagas'
 import ProfileRecommendationSaga from 'components/ProfileRecommendations/sagas'
+import EventSaga from 'components/Events/sagas'
 
 export const rootSaga = function* root() {
   yield all([
@@ -61,6 +62,7 @@ export const rootSaga = function* root() {
     ProfilePortfolioSaga(),
     ProfileGallerySaga(),
     ProfileStatSaga(),
-    ProfileRecommendationSaga()
+    ProfileRecommendationSaga(),
+    EventSaga()
   ]);
 };

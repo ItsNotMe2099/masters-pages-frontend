@@ -31,3 +31,7 @@ export const profileEmailChangeOpen = () => action(ActionTypes.EMAIL_CHANGE_OPEN
 export const registrationSuccessOpen = () => action(ActionTypes.REGISTRATION_SUCCESS_OPEN)
 export const registrationPhoneOpen = () => action(ActionTypes.REGISTRATION_PHONE_OPEN)
 export const registrationPhoneConfirmOpen = () => action(ActionTypes.REGISTRATION_PHONE_CONFIRM_OPEN)
+export const createEventOpen = () => action(ActionTypes.EVENT_CREATE_OPEN)
+export const editEventOpen = () => action(ActionTypes.EVENT_EDIT_OPEN)
+export const eventExpensePlannedOpen = () => action(ActionTypes.EVENT_EXPENSE_PLANNED_OPEN)
+export const eventExpenseActualOpen = () => action(ActionTypes.EVENT_EXPENSE_ACTUAL_OPEN)

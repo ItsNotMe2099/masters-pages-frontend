@@ -11,7 +11,11 @@
 }
 .toolbar{
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  .timezone{
+    flex: 1;
+    font-size: 18px;
+  }
 }
 .events{
   margin-top: 20px;

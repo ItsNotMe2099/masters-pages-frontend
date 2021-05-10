@@ -21,6 +21,12 @@ export const fetchChatDialog = (profileId: number) => action(ActionTypes.FETCH_C
 export const fetchChaTaskDialog = (taskId: number, profileId: number) => action(ActionTypes.FETCH_CHAT_TASK_DIALOG, {
   api: `/api/chat/task-dialog/${profileId}/${taskId}`,
 })
+export const fetchChatEventDialog = (eventId: number, profileId: number) => action(ActionTypes.FETCH_CHAT_EVENT_DIALOG, {
+  api: `/api/chat/event-dialog/${profileId}/${eventId}`,
+})
+export const fetchChatEventLogDialog = (eventId: number, profileId: number) => action(ActionTypes.FETCH_CHAT_EVENT_DIALOG, {
+  api: `/api/chat/event-log-dialog/${profileId}/${eventId}`,
+})
 
 export const fetchChatMessages = ({chatId, lastCreatedAt}) => action(ActionTypes.FETCH_CHAT_MESSAGES, {
   api: `/api/chat/${chatId}/messages?lastCreatedAt=${lastCreatedAt}`,

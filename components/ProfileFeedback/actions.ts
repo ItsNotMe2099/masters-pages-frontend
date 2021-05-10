@@ -48,6 +48,22 @@ export const fetchFeedbacksMainPageRequest = () => action(ActionTypes.FETCH_FEED
   }
 })
 
+export const createFeedBackEventMasterRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST, {
+  api: {
+    url: '/api/feedback/master',
+    method: 'POST',
+    data
+  }
+})
+
+export const createFeedBackEventClientRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST, {
+  api: {
+    url: '/api/feedback/client',
+    method: 'POST',
+    data
+  }
+})
+
 export const createFeedBackMasterRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_MASTER_REQUEST, {
   api: {
     url: '/api/feedback/master',

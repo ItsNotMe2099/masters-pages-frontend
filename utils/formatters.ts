@@ -8,7 +8,7 @@ export const parserPrice = (value) => {
   if(!value){
     return null
   }
-  const valueFormatted = value?.replace('$', '').replace(/\s/g, '');
+  const valueFormatted = value?.replace ? value?.replace('$', '').replace(/\s/g, '') : value;
   if(!valueFormatted){
     return null
   }

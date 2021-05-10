@@ -22,7 +22,9 @@ let NotificationsForm = props => {
     {key: 'newTaskResponse', title: t('personalArea.tabSettings.notificationSettings.newTaskResponse')},
     {key: 'newFeedback', title: t('personalArea.tabSettings.notificationSettings.newFeedback')},
     {key: 'taskOfferDeclined', title: t('personalArea.tabSettings.notificationSettings.taskOfferDeclined')},
-    {key: 'taskResponseDeclined', title: t('personalArea.tabSettings.notificationSettings.taskResponseDeclined')},
+    {key: 'eventPlanned', title: 'Event planned'},
+    {key: 'eventStatusChanged', title: 'Event status changed'},
+    {key: 'eventRemind', title: 'Event remind'},
   ];
   return (
     <div className={styles.root}>

@@ -1,7 +1,7 @@
 import ApiActionTypes from "constants/api";
-import { bool } from "prop-types";
-import { IChat, IChatMessage } from "types";
-import { ActionType } from 'typesafe-actions'
+import {bool} from "prop-types";
+import {IChat, IChatMessage} from "types";
+import {ActionType} from 'typesafe-actions'
 import ActionTypes from './const'
 import * as appActions from './actions'
 
@@ -33,7 +33,7 @@ const initialState: ChatState = {
   lastMessageId: 0,
 }
 
-function ChatReducer(state = { ...initialState }, action: ActionType<typeof appActions>) {
+function ChatReducer(state = {...initialState}, action: ActionType<typeof appActions>) {
 
   switch (action.type) {
     case ActionTypes.FETCH_CHAT_LIST_FIRST:
@@ -50,7 +50,10 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
       console.log("Fetch chatList");
       return {
         ...state,
-        chatList: (action.payload as any).data.map(chat => ({...chat, totalUnread: chat && chat.id === action.payload.id ? 0 : chat.totalUnread})),
+        chatList: (action.payload as any).data.map(chat => ({
+          ...chat,
+          totalUnread: chat && chat.id === action.payload.id ? 0 : chat.totalUnread
+        })),
 
         chatListTotal: (action.payload as any).total,
       }
@@ -72,10 +75,13 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         ...state,
         chatLoading: false,
         chat: action.payload,
-        chatList: state.chatList.map(chat => ({...chat, totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread})),
+        chatList: state.chatList.map(chat => ({
+          ...chat,
+          totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread
+        })),
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
-        lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
+        lastMessageId: (action.payload as any).messages.data.length > 0 ? (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
       }
     case ActionTypes.FETCH_CHAT + ApiActionTypes.FAIL:
       return {
@@ -94,10 +100,13 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         ...state,
         chatLoading: false,
         chat: action.payload,
-        chatList: state.chatList.map(chat => ({...chat, totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread})),
+        chatList: state.chatList.map(chat => ({
+          ...chat,
+          totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread
+        })),
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
-        lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
+        lastMessageId: (action.payload as any).messages.data.length > 0 ? (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
       }
     case ActionTypes.FETCH_CHAT_DIALOG + ApiActionTypes.FAIL:
       return {
@@ -121,12 +130,43 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
         ...state,
         chatLoading: false,
         chat: action.payload,
-        chatList: state.chatList.map(chat => ({...chat, totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread})),
+        chatList: state.chatList.map(chat => ({
+          ...chat,
+          totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread
+        })),
         messages: (action.payload as any).messages.data,
         totalMessages: (action.payload as any).messages.total,
-        lastMessageId: (action.payload as any).messages.data.length > 0 ?  (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
+        lastMessageId: (action.payload as any).messages.data.length > 0 ? (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
       }
     case ActionTypes.FETCH_CHAT_TASK_DIALOG + ApiActionTypes.FAIL:
+      return {
+        ...state,
+        chatLoading: false,
+      }
+
+    case ActionTypes.FETCH_CHAT_EVENT_DIALOG:
+    case ActionTypes.FETCH_CHAT_EVENT_LOG_DIALOG:
+      return {
+        ...state,
+        chatLoading: true,
+        messages: [],
+      }
+    case ActionTypes.FETCH_CHAT_EVENT_DIALOG + ApiActionTypes.SUCCESS:
+    case ActionTypes.FETCH_CHAT_EVENT_LOG_DIALOG + ApiActionTypes.SUCCESS:
+      return {
+        ...state,
+        chatLoading: false,
+        chat: action.payload,
+        chatList: state.chatList.map(chat => ({
+          ...chat,
+          totalUnread: chat.id === action.payload.id ? 0 : chat.totalUnread
+        })),
+        messages: (action.payload as any).messages.data,
+        totalMessages: (action.payload as any).messages.total,
+        lastMessageId: (action.payload as any).messages.data.length > 0 ? (action.payload as any).messages.data[(action.payload as any).messages.data.length - 1].id : null,
+      }
+    case ActionTypes.FETCH_CHAT_EVENT_DIALOG + ApiActionTypes.FAIL:
+    case ActionTypes.FETCH_CHAT_EVENT_LOG_DIALOG + ApiActionTypes.FAIL:
       return {
         ...state,
         chatLoading: false,
@@ -183,19 +223,21 @@ function ChatReducer(state = { ...initialState }, action: ActionType<typeof appA
       return {
         ...state,
         messages: state.messages.map((message) => {
-          return { ...message, profileStates: message.profileStates.map(state => ({...state, read: true})) }
+          return {...message, profileStates: message.profileStates.map(state => ({...state, read: true}))}
         }),
       }
     case ActionTypes.FETCH_CHAT_ONE_MESSAGE + ApiActionTypes.SUCCESS:
-      console.log("RED FETCH_CHAT_ONE_MESSAGE" )
-      return {...state,
+      console.log("RED FETCH_CHAT_ONE_MESSAGE")
+      return {
+        ...state,
         messages: state.messages.map((message) => {
-        if(message.id === action.payload.id){
-          console.log("REPLACE MESSAGE, action payload", action.payload);
-          return {...message, ...action.payload};
-        }
-        return message
-      })}
+          if (message.id === action.payload.id) {
+            console.log("REPLACE MESSAGE, action payload", action.payload);
+            return {...message, ...action.payload};
+          }
+          return message
+        })
+      }
     case ActionTypes.CHAT_MESSAGES_RESET:
       return {
         ...state,

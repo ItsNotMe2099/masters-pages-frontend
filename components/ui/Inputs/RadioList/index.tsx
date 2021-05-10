@@ -13,6 +13,7 @@ interface Props {
   changeWithValue?: boolean
   restrictedValues: any[],
   grid: number
+  label: string
 }
 
 export const RadioList = (props) => {
@@ -25,7 +26,10 @@ export const RadioList = (props) => {
   }
 
   return (
-    <div className={styles.root} style={{
+    <div className={styles.root}>
+      {label && <div className={styles.label}>{label}</div>}
+
+      <div  style={{
       display: (props.grid) ? 'grid' : 'block',
       gridTemplateColumns: props.grid ? Array.from({ length: props.grid }, (_, i) => '1fr').join(' ') : '',
       gridGap: '1vw'
@@ -39,6 +43,7 @@ export const RadioList = (props) => {
       ))}
       <ErrorInput {...props}/>
       </div>
+    </div>
 
   );
 };

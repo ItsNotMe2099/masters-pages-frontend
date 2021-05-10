@@ -1,8 +1,16 @@
-.stars{
+.stars {
   display: flex;
   cursor: pointer;
+
+  .star {
+    margin-right: 6px;
+
+    &:last-of-type {
+      margin-right: 0px;
+    }
+  }
 }
 
-.input{
+.input {
   display: none;
 }

@@ -7,23 +7,52 @@
   font-size: 12px;
   font-weight: 500;
   margin-bottom: 11px;
+  cursor: pointer;
   &:last-of-type{
     margin-bottom: 0px;
+  }
+  :global .tooltip-container{
+    --tooltipBackground: rgba(255, 246, 187, 1);
+    padding: 0px;
+    border: none;
+
+  }
+  :global .tooltip-arrow{
+    &::before {
+      border-color: transparent !important;
+    }
   }
 }
 
 .circle{
   width: 12px;
   height: 12px;
-  border-radius: 100%;
+  display: flex;
+  flex-direction: row;
 }
-.circle {
+.circleLeft{
+  width: 6px;
+  height: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.circleRight{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  width: 6px;
+  height: 12px;
+}
+.circleSide {
   &__green {
     background: #219653;
   }
 
   &__red {
     background: #EB5757;
+  }
+
+  &__blue{
+    background: #2F80ED;
   }
 
   &__orange {

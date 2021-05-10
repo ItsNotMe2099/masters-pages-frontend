@@ -12,6 +12,32 @@
   align-items: center;
 
 }
+.rootSmall{
+  padding: 10px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333333;
+
+  .image{
+    cursor: pointer;
+    img{
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+    }
+    video{
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      display: block;
+    }
+    canvas{
+      display: none;
+
+    }
+  }
+
+}
 .rootRight{
   text-align: right;
 }

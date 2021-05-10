@@ -22,6 +22,7 @@ import {useTranslation, withTranslation} from "react-i18next";
 import Layout from 'components/layout/Layout'
 import {getAuthServerSide} from 'utils/auth'
 import TabOrderModal from 'pages/PersonalArea/orders/[orderType]/components/TabOrderModal'
+import Modals from 'components/layout/Modals'
 interface Props {
 }
 const TabOrders = (props: Props) => {
@@ -111,6 +112,7 @@ const TabOrders = (props: Props) => {
       <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'} onClose={() => dispatch(modalClose())}/>
 
     </div>
+      <Modals/>
     </Layout>
   )
 }

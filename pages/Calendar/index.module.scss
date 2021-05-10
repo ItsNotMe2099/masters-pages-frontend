@@ -15,9 +15,17 @@ $borderColor: #dcdbdc;
     border: none;
     padding: 0px;
     background: none;
+
+  }
+  :global .rbc-row-content{
+
+  }
+  :global .rbc-month-row{
+    overflow: inherit;
   }
   :global .rbc-day-slot .rbc-event{
     border: none;
+    overflow: inherit;
   }
   :global .rbc-day-slot .rbc-background-event{
     border: none;

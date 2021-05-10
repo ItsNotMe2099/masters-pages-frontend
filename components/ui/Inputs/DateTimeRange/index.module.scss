@@ -1,0 +1,56 @@
+.root{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20px;
+}
+.calendarIcon{
+margin-right: 12px;
+}
+.inputWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.spacer{
+  flex: 1;
+}
+.input{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #DEDEDE;
+  border-radius: 4px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  padding-left: 12px;
+  padding-right: 8px;
+  background: white;
+
+}
+
+.dateRange{
+  position: absolute;
+  z-index: 5;
+  top: 30px;
+  visibility: hidden;
+}
+.dateRangeOpen{
+
+  visibility: visible;
+}
+.timeRange{
+  width: 87px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.separator{
+  width: 1px;
+  background: #C4C4C4;
+  height: 26px;
+  margin-left: 10px;
+  margin-right: 2px;
+}

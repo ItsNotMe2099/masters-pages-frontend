@@ -11,14 +11,14 @@ import { useDispatch } from 'react-redux'
 
 
 interface Props {
-  size?: 'small' | 'normal' | 'large' | 'exSmall' | 'square',
+  size?: 'small' | 'normal' | 'large' | 'exSmall' | 'exExSmall' | 'square',
   image?: string
 }
 
 export default function Avatar({size, image}: Props) {
 
   return (
-    <div className={`${styles.root} ${size === 'exSmall' && styles.exSmall}  ${size === 'square' && styles.square} ${size === 'small' && styles.small} ${size === 'normal' && styles.normal} ${size === 'large' && styles.large}`}>
+    <div className={`${styles.root} ${size === 'exSmall' && styles.exSmall} ${size === 'exExSmall' && styles.exExSmall}  ${size === 'square' && styles.square} ${size === 'small' && styles.small} ${size === 'normal' && styles.normal} ${size === 'large' && styles.large}`}>
       {image ? <img src={getMediaPath(image)}/> : <AvatarSvg/>}
     </div>
   )
