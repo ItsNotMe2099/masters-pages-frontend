@@ -129,3 +129,5 @@ export const completeEventRequest = (id: number) => action(ActionTypes.COMPLETE_
 
 export const resetEventList = () => action(ActionTypes.RESET_EVENT_LIST)
 export const currentEventSetEditMode = () => action(ActionTypes.CURRENT_EVENT_SET_EDIT_MODE)
+export const setCurrentEventNext = () => action(ActionTypes.SET_CURRENT_EVENT_NEXT)
+export const setCurrentEventPrevious = () => action(ActionTypes.SET_CURRENT_EVENT_PREVIOUS)

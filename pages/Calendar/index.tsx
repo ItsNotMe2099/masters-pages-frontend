@@ -4,7 +4,7 @@ import Modals from 'components/layout/Modals'
 import {wrapper} from 'store'
 import request from 'utils/request'
 import * as dates from 'date-arithmetic'
-import {IRootState, ProfileData} from 'types'
+import {EventStatus, IRootState, ProfileData} from 'types'
 import Header from 'components/layout/Header'
 import {Calendar, Views, momentLocalizer} from "react-big-calendar";
 import moment from "moment";
@@ -61,7 +61,7 @@ import Layout from 'components/layout/Layout'
 import NewEventModal from 'components/Calendar/components/NewEventModal'
 import {confirmOpen, createEventOpen, editEventOpen, modalClose} from 'components/Modal/actions'
 import {
-  currentEventSetEditMode,
+  currentEventSetEditMode, fetchEvent,
   fetchEventCalendarList,
   fetchEventList,
   fetchEventSidebar,
@@ -88,13 +88,13 @@ const CalendarPage = (props) => {
   let firstOfWeek = localizer.startOfWeek()
   let startWeek = dates.startOf(new Date(), 'week', firstOfWeek)
   let endWeek = dates.endOf(new Date, 'week', firstOfWeek)
-
+  const currentEvent = useSelector((state: IRootState) => state.event.currentEvent)
+  const currentLoading = useSelector((state: IRootState) => state.event.currentLoading)
   const toolbar = useRef(null);
   const currentViewRef = useRef(null);
   const events = useSelector((state: IRootState) => state.event.list)
   const [newEventRange, setNewEventRange] = useState(null);
 
-  const [currentEditEvent, setCurrentEditEvent] = useState();
   const [currentEditEventRange, setCurrentEditEventRange] = useState(null);
   const [currentView, setCurrentView] = useState(Views.WEEK);
   const [rangeStartDate, setRangeStartDate] = useState(startWeek);
@@ -153,16 +153,26 @@ const CalendarPage = (props) => {
   }
 
   const moveEvent = ({event, start, end, isAllDay}: any) => {
+    if([EventStatus.Approved, EventStatus.Deleted].includes(event.status)) {
+      return;
+    }
     console.log("moveEvent", start, end);
-    setCurrentEditEvent(event);
-    dispatch(currentEventSetEditMode());
+    dispatch(fetchEvent(event.id))
+    if(![EventStatus.Draft, EventStatus.Confirmed].includes(event.status)) {
+      dispatch(currentEventSetEditMode());
+    }
     setCurrentEditEventRange({start, end});
     dispatch(editEventOpen());
   }
 
   const resizeEvent = ({event, start, end}) => {
-    setCurrentEditEvent(event);
-    dispatch(currentEventSetEditMode());
+    if([EventStatus.Approved, EventStatus.Deleted].includes(event.status)) {
+      return;
+    }
+    dispatch(fetchEvent(event.id))
+    if(![EventStatus.Draft, EventStatus.Confirmed].includes(event.status)) {
+      dispatch(currentEventSetEditMode());
+    }
     setCurrentEditEventRange({start, end});
     dispatch(editEventOpen());
   }
@@ -175,7 +185,7 @@ const CalendarPage = (props) => {
     dispatch(createEventOpen());
   }
   const handleClickEvent = (event) => {
-    setCurrentEditEvent(event);
+    dispatch(fetchEvent(event.id))
     setCurrentEditEventRange(null);
     dispatch(editEventOpen());
   }
@@ -308,8 +318,8 @@ return (
 
       {modelKey === 'eventCreateModal' &&
       <NewEventModal range={newEventRange} isOpen={true} onClose={() => dispatch(modalClose())}/>}
-      {(['confirm','eventEditModal', 'eventExpensePlannedModal', 'eventExpenseActualModal'].includes(modelKey) && currentEditEvent) &&
-      <EditEventModal range={currentEditEventRange} event={currentEditEvent} isOpen={true} onClose={() => dispatch(modalClose())}/>}
+      {(['confirm','eventEditModal', 'eventExpensePlannedModal', 'eventExpenseActualModal'].includes(modelKey) && (currentEvent || currentLoading)) &&
+      <EditEventModal range={currentEditEventRange} isOpen={true} onClose={() => dispatch(modalClose())}/>}
         </div>
   </Layout>
 );

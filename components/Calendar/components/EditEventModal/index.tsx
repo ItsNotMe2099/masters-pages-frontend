@@ -7,7 +7,11 @@ import {EventStatus, IEvent, IRootState} from "types";
 import styles from './index.module.scss'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {fetchEvent, resetEventForm, submitEvent, updateEvent, updateEventExpenses} from 'components/Events/actions'
+import {
+  resetEventForm, setCurrentEventNext, setCurrentEventPrevious,
+  submitEvent,
+  updateEventExpenses
+} from 'components/Events/actions'
 import TimePlaceChargeForm from 'components/Calendar/components/EditEventModal/components/TimePlaceChargeForm'
 import InfoTab from 'components/Calendar/components/EditEventModal/InfoTab'
 import Loader from 'components/ui/Loader'
@@ -15,17 +19,18 @@ import ChatTab from 'components/Calendar/components/EditEventModal/components/Ch
 import EventExpenseModal from 'components/Calendar/components/EventExpenseModal'
 import {editEventOpen, eventExpenseActualOpen, eventExpensePlannedOpen, modalClose} from 'components/Modal/actions'
 import {getEventCompletedAllowed, getEventPlannedAllowed} from 'utils/event'
+import ArrowLeftSmall from 'components/svg/ArrowLeftSmall'
+import ArrowRightSmall from 'components/svg/ArrowRightSmall'
+import {setProfileGalleryCurrentItemIndex} from 'components/ProfileGallery/actions'
 
 interface Props {
   isOpen: boolean,
-  event?: IEvent,
   range?: { start?: Date, end?: Date },
   onClose: () => void
 }
 
 const EditEventModal = (props: Props) => {
   const {isOpen, onClose, range} = props;
-  const eventId = props.event.id;
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
 
 
@@ -49,8 +54,8 @@ const EditEventModal = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const event = useSelector((state: IRootState) => state.event.currentEvent)
   const currentLoading = useSelector((state: IRootState) => state.event.currentLoading)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const isAuthor = event && profile.id === event.authorId
+
+
 
   const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null;
   const newRangeEnd = getEventPlannedAllowed(event) ? range?.end : null;
@@ -130,9 +135,13 @@ const EditEventModal = (props: Props) => {
     }
   }
 
-  useEffect(() => {
-    dispatch(fetchEvent(eventId))
-  }, [])
+  const handleNextClick = () => {
+      dispatch(setCurrentEventNext())
+
+  }
+  const handlePrevClick = () => {
+      dispatch(setCurrentEventPrevious())
+  }
 
   const actualStart = event ? event.actualStart || event.start : 0;
   const actualEnd = event ? event.actualEnd || event.end : 0;
@@ -142,7 +151,11 @@ const EditEventModal = (props: Props) => {
              onRequestClose={onClose}>
         {(event && !currentLoading) &&
         <Tabs activeTab={activeTab} onChange={handleChangeTab} tabClassName={styles.mainTab} tabs={tabs}/>}
-        {(event && !currentLoading) && <div className={styles.nav}>{event.title}</div>}
+        {(event && !currentLoading) && <div className={styles.nav}>
+         <div className={styles.navArrow} onClick={handlePrevClick}><ArrowLeftSmall/></div>
+         <div className={styles.navTitle}> {event.title}</div>
+          <div className={styles.navArrow} onClick={handleNextClick}><ArrowRightSmall/></div>
+        </div>}
 
         {(event && !currentLoading) && <div className={styles.body}>
           {activeTab === 'time' && <TimePlaceChargeForm event={event}

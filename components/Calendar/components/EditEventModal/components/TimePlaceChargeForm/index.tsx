@@ -178,9 +178,10 @@ let TimePlaceChargeForm = (props: Props) => {
     dispatch(confirmOpen({
       description: `You are confirming your consent with completion of event as recorded.  This action can not be undone. Do you want to proceed?`,
       onConfirm: () => {
-        dispatch(setSubmitEvent('complete'));
         dispatch(editEventOpen());
+        dispatch(setSubmitEvent('complete'));
         handleSubmit(e);
+
       },
       onCancel: () => {
         dispatch(editEventOpen());
@@ -198,8 +199,9 @@ let TimePlaceChargeForm = (props: Props) => {
     dispatch(confirmOpen({
       description: `Approval is final and can not be undone. Do you want to proceed?`,
       onConfirm: () => {
-        dispatch(approveEventRequest(event.id))
         dispatch(editEventOpen());
+        dispatch(approveEventRequest(event.id))
+
       },
       onCancel: () => {
         dispatch(editEventOpen());

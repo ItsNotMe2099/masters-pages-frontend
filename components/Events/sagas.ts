@@ -11,13 +11,18 @@ import {
   createEventRequest,
   deleteEvent,
   deleteEventRequest,
-  editEventRequest,
-  sendEventRequest,
+  editEventRequest, fetchEvent,
+  sendEventRequest, setCurrentEventNext, setCurrentEventPrevious,
   submitEvent,
   updateEvent,
   updateEventCancel,
   updateEventRequest
 } from 'components/Events/actions'
+import {
+  fetchProfileGalleryItemCommentList,
+  fetchProfileGalleryList, setProfileGalleryCurrentItem,
+  setProfileGalleryCurrentItemIndex
+} from 'components/ProfileGallery/actions'
 
 function* EventSaga() {
   console.log("EventSaga")
@@ -35,9 +40,9 @@ function* EventSaga() {
   yield takeLatest(ActionTypes.SUBMIT_EVENT,
     function* (action: ActionType<typeof submitEvent>) {
       const submitEvent = yield select((state: IRootState) => state.event.submitEvent)
-     let result;
+      let result;
       console.log("submitEvent", submitEvent);
-      switch (submitEvent){
+      switch (submitEvent) {
         case 'draftWithEdit':
           yield put(editEventRequest(action.payload.event.id));
           result = yield take([ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.FAIL])
@@ -71,6 +76,11 @@ function* EventSaga() {
           yield put(sendEventRequest(action.payload.event.id));
           break;
         case 'complete':
+          yield put(editEventRequest(action.payload.event.id));
+          result = yield take([ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.FAIL])
+          if (result.type !== ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.SUCCESS) {
+            return;
+          }
           yield put(updateEvent(action.payload.event, action.payload.data));
           result = yield take([ActionTypes.UPDATE_EVENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_EVENT_REQUEST + ApiActionTypes.FAIL])
           if (result.type !== ActionTypes.UPDATE_EVENT_REQUEST + ApiActionTypes.SUCCESS) {
@@ -93,7 +103,7 @@ function* EventSaga() {
         console.log("UPDATE_EVENT SUCCESS")
         const submitEvent = yield select((state: IRootState) => state.event.submitEvent)
 
-        if(!submitEvent || ['draftWithEdit'].includes(submitEvent)) {
+        if (!submitEvent || ['draftWithEdit'].includes(submitEvent)) {
           yield put(modalClose());
         }
       } else {
@@ -138,6 +148,35 @@ function* EventSaga() {
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
     });
+
+  yield takeLatest(ActionTypes.SET_CURRENT_EVENT_NEXT,
+    function* (action: ActionType<typeof setCurrentEventNext>) {
+      const currentEvent = (yield select((state: IRootState) => state.event.currentEvent))
+      const list = (yield select((state: IRootState) => state.event.list)).sort((a, b) => a.actualStart.getTime() - b.actualStart.getTime());
+      const currentItemIndex = parseInt(Object.keys(list).find(k=> list[k].id === currentEvent.id), 10);
+    console.log("currentItemIndex", currentItemIndex, list)
+      let nextEvent = list[currentItemIndex + 1];
+
+      if (nextEvent) {
+        yield put(fetchEvent(nextEvent.id));
+      }
+
+    })
+  yield takeLatest(ActionTypes.SET_CURRENT_EVENT_PREVIOUS,
+    function* (action: ActionType<typeof setCurrentEventPrevious>) {
+      const currentEvent = (yield select((state: IRootState) => state.event.currentEvent))
+      const list = (yield select((state: IRootState) => state.event.list)).sort((a, b) => a.actualStart.getTime() - b.actualStart.getTime());
+      const currentItemIndex = parseInt(Object.keys(list).find(k=> list[k].id === currentEvent.id), 10);
+
+
+      let nextEvent = list[currentItemIndex - 1];
+
+      if (nextEvent) {
+        yield put(fetchEvent(nextEvent.id));
+      }
+
+    })
+
 }
 
 export default EventSaga

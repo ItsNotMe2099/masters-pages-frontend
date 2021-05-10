@@ -1,10 +1,26 @@
 .root{
-display: flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   background: #FAFAFA;
   border: 1px solid #D6D6D6;
   padding: 10px 19px 23px 19px;
+}
+.title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  text-align: left;
+  margin-bottom: 12px;
+  .separator{
+    width: 1px;
+    height: 11px;
+    background: rgba(196, 196, 196, 1);
+    margin: 0px 14px;
+  }
 }
 .labels{
   margin-top: 20px;

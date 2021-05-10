@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import DateTime from 'components/ui/Inputs/DateTime'
-import {differenceInHours} from 'date-fns'
+import {differenceInHours, format} from 'date-fns'
 
 interface Props {
   price?: {total: number, rate: number}
@@ -61,6 +61,10 @@ let EventInputsForm = (props: Props) => {
     });
   }
   return (
+    <>
+      <div className={styles.title}>Event inputs <div className={styles.separator}/>
+        <div className={styles.timezone}>{format(new Date(), 'zzzz')}</div>
+      </div>
      <div className={styles.root}>
        <div className={styles.labels}>
          <div className={styles.label}>Start:</div>
@@ -115,6 +119,7 @@ let EventInputsForm = (props: Props) => {
 
        </div>
     </div>
+    </>
   )
 }
 
