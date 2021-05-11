@@ -9,10 +9,17 @@ import {
   completeEventRequest,
   createEvent,
   createEventRequest,
+  createFeedBackEventClient,
+  createFeedBackEventClientRequest,
+  createFeedBackEventMaster,
+  createFeedBackEventMasterRequest,
   deleteEvent,
   deleteEventRequest,
-  editEventRequest, fetchEvent,
-  sendEventRequest, setCurrentEventNext, setCurrentEventPrevious,
+  editEventRequest,
+  fetchEvent,
+  sendEventRequest,
+  setCurrentEventNext,
+  setCurrentEventPrevious,
   submitEvent,
   updateEvent,
   updateEventCancel,
@@ -175,6 +182,28 @@ function* EventSaga() {
         yield put(fetchEvent(nextEvent.id));
       }
 
+    })
+
+  yield takeLatest(ActionTypes.CREATE_FEEDBACK_EVENT_MASTER,
+    function* (action: ActionType<typeof createFeedBackEventMaster>) {
+      yield put(createFeedBackEventMasterRequest(action.payload.data));
+      const result = yield take([ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.FAIL])
+      if (result.type === ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.SUCCESS) {
+        console.log("CREATE Feedback Event master SUCCESS")
+        yield put(fetchEvent(action.payload.data.eventId));
+
+      }
+    })
+
+  yield takeLatest(ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT,
+    function* (action: ActionType<typeof createFeedBackEventClient>) {
+      yield put(createFeedBackEventClientRequest(action.payload.data));
+      const result = yield take([ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.FAIL])
+      if (result.type === ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.SUCCESS) {
+        console.log("CREATE Feedback Event client SUCCESS")
+        yield put(fetchEvent(action.payload.data.eventId));
+
+      }
     })
 
 }

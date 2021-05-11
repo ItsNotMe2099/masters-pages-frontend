@@ -83,14 +83,17 @@ export default function CalendarEventMonth(props: Props) {
     }
 
   }
+  const unreadCount = event.unreadTextMessagesCount + event.unreadMediaMessagesCount;
+  const otherSide = event.isAuthor ? event.participant : event.author;
   // @ts-ignore
   return (
     <div className={`${styles.root} ${getRootClass()}`} ref={setTriggerRef}>
       <div className={`${styles.leftBorder} ${getBorderClass()}`} ref={ref}>
-        {event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg/>}
-      </div>
+        {unreadCount > 0 && <div className={styles.notification}>{unreadCount > 10 ? '!' : unreadCount}</div>}
+        {unreadCount === 0  && <>  {otherSide.photo ? <Avatar image={otherSide.photo} size={'exExSmall'} /> : <AvatarSvg/>}</>}
+       </div>
         <div className={`${styles.author}`}>
-          <div className={styles.authorName}>{event.participant.firstName} {event.participant.lastName}</div></div>
+          <div className={styles.authorName}>{otherSide.firstName} {otherSide.lastName}</div></div>
       {visible  && (
         <div
           ref={setTooltipRef}

@@ -27,8 +27,12 @@
 .title{
   font-size: 16px;
   color: #000000;
+
   .profileName{
     font-weight: 600;
+    &:hover{
+      text-decoration: underline;
+    }
   }
 }
 .mark{

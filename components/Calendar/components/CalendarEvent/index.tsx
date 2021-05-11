@@ -74,6 +74,9 @@ export default function CalendarEvent(props: Props) {
     }
 
   }
+  const unreadCount = event.unreadTextMessagesCount + event.unreadMediaMessagesCount;
+
+  const otherSide = event.isAuthor ? event.participant : event.author;
   // @ts-ignore
   return (
     <div className={`${styles.root} ${getRootClass()}`}  ref={setTriggerRef}>
@@ -81,8 +84,12 @@ export default function CalendarEvent(props: Props) {
       <div className={styles.wrapper}>
         <div className={styles.time}>{format(getEventPlannedAllowed(event) ? event.start : event.actualStart, 'HH:mm')} - {format(getEventPlannedAllowed(event) ? event.end :  event.actualEnd, 'HH:mm')}</div>
         <div className={`${styles.author} ${getBorderClass()}`}>
-         <div className={styles.avatar}> {event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg/>}</div>
-          <div className={styles.authorName}>{event.participant.firstName} {event.participant.lastName}</div></div>
+         <div className={styles.avatar}>
+           {unreadCount > 0 && <div className={styles.notification}>{unreadCount > 10 ? '!' : unreadCount}</div>}
+           {unreadCount === 0  && <>  {otherSide.photo ? <Avatar image={otherSide.photo} size={'exExSmall'} /> : <AvatarSvg/>}</>}
+
+         </div>
+          <div className={styles.authorName}>{otherSide.firstName} {otherSide.lastName}</div></div>
         <div className={styles.task}>{event.task?.title}</div>
         <div className={styles.title}>{event.title}</div>
       </div>

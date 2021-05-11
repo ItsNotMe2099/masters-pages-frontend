@@ -10,10 +10,10 @@ import Loader from 'components/ui/Loader'
 import EventReview from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview'
 
 interface Props {
-  event?: IEvent
+  event?: IEvent,
 }
-const Tab = ({name, key, disabled, onClick}) => {
-  return <div className={`${styles.tab} ${disabled && styles.tab__disabled}`} onClick={!disabled ? onClick : null}>
+const Tab = ({name, isActive, key, disabled, onClick}) => {
+  return <div className={`${styles.tab} ${disabled && styles.tab__disabled} ${isActive && styles.tab__active}`} onClick={!disabled ? onClick : null}>
     {name}
   </div>
 }
@@ -25,10 +25,10 @@ const ChatTab = ({event}: Props) => {
   const tabs = [
     { name: 'Pre-event', key: 'preEvent', disabled: [EventStatus.Completed, EventStatus.Approved, EventStatus.Rejected].includes(event.status)},
     { name: 'Post-event', key: 'postEvent', disabled: ![EventStatus.Completed, EventStatus.Approved, EventStatus.Rejected].includes(event.status) },
-    { name: 'Review', key: 'review', disabled: ![EventStatus.Completed, EventStatus.Approved].includes(event.status) },
+    { name: 'Review', key: 'review', disabled: ![EventStatus.Approved].includes(event.status) },
   ];
 
-  const [activeTab, setActiveTab] = useState(tabs.find(item => !item.disabled)?.key)
+  const [activeTab, setActiveTab] = useState([EventStatus.Approved].includes(event.status) ? tabs[tabs.length - 1].key : tabs.find(item => !item.disabled)?.key)
 
   useEffect(() => {
     dispatch(fetchChatEventDialog(event.id, event.participantId));
@@ -40,11 +40,11 @@ const ChatTab = ({event}: Props) => {
   return (
     <div className={styles.root} >
       <div className={styles.tabs}>
-        {tabs.map(tab => <Tab name={tab.name} key={tab.key} disabled={tab.disabled} onClick={() => handleChangeTab(tab)}/>)}
+        {tabs.map(tab => <Tab  isActive={activeTab === tab.key} name={tab.name} key={tab.key} disabled={tab.disabled} onClick={() => handleChangeTab(tab)}/>)}
       </div>
       {['preEvent', 'postEvent'].includes(activeTab)  && <div className={styles.chatMessages}>
         {chatLoading && <Loader/>}
-        {chat && <EventChatMessageList chat={chat}/>}
+        {chat && <EventChatMessageList event={event} chat={chat}/>}
       </div>}
         {activeTab === 'review' && <EventReview event={event}/>}
 

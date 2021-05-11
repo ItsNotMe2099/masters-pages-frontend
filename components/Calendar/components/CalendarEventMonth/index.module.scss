@@ -38,7 +38,21 @@
     background: #F2994A;
   }
 }
+.notification{
+  background: #EB5757;
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 11px;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 600;
 
+}
 .leftBorder{
   width: 26px;
   min-width: 26px;

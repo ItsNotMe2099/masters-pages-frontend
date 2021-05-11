@@ -18,6 +18,7 @@ export interface EventsState {
   currentProfileTab?: IProfileTab,
   formIsSuccess: boolean
   formError: string,
+  formFeedbackError: string,
   listLoading: boolean,
   listCalendarLoading: boolean,
   listSidebarLoading: boolean,
@@ -39,6 +40,7 @@ const initialState: EventsState = {
   page: 1,
   formIsSuccess: false,
   formError: '',
+  formFeedbackError: '',
   formLoading: false,
   listLoading: false,
   listCalendarLoading: false,
@@ -48,18 +50,15 @@ const initialState: EventsState = {
 }
 
 const formatEvent = (event) => {
-  if(event.id === 16){
-    console.log("EVENTFORMAT", event, {
-      actualStart: new Date(event.actualStart || event.start),
-      actualEnd: new Date(event.actualEnd || event.end),
-    })
-  }
+
   return {
     ...event,
     start: new Date(event.start),
     end: new Date(event.end),
     actualStart: new Date(event.actualStart || event.start),
     actualEnd: new Date(event.actualEnd || event.end),
+    unreadTextMessagesCount: parseInt(event.unreadTextMessagesCount, 10),
+    unreadMediaMessagesCount: parseInt(event.unreadMediaMessagesCount, 10),
   }
 }
 const getEventDots = (events) => {
@@ -87,6 +86,15 @@ export default function EventsReducer(state = {...initialState}, action) {
       state.submitEvent = null;
       state.isCurrentEventEditMode = false;
       break
+    case ActionTypes.RESET_FEEDBACK_EVENT_FORM:
+      state.formFeedbackError = ''
+      break
+    case ActionTypes.EMPTY_EVENT_UNREAD:
+      const mapEvent = i => i.id === action.payload.event.id ? ({...i, unreadTextMessagesCount: 0, unreadMediaMessagesCount: 0}) : i;
+      state.list = state.list.map(mapEvent);
+      state.listSideBar = state.listSideBar.map(mapEvent);
+      state.listCalendar = state.listCalendar.map(mapEvent);
+      break;
     case ActionTypes.CURRENT_EVENT_SET_EDIT_MODE:
       state.isCurrentEventEditMode = true;
       break;
@@ -128,6 +136,24 @@ export default function EventsReducer(state = {...initialState}, action) {
       state.formError = ''
       state.formIsSuccess = false;
       state.formLoading = true;
+      break
+    case ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST:
+    case ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST:
+      state.formFeedbackError = ''
+      state.formIsSuccess = false;
+      state.formLoading = true;
+      break
+    case ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.SUCCESS:
+    case ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.SUCCESS:
+      state.formFeedbackError = ''
+      state.formIsSuccess = true;
+      state.formLoading = false;
+      break
+    case ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.FAIL:
+    case ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.FAIL:
+      state.formFeedbackError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
+      state.formIsSuccess = false;
+      state.formLoading = false;
       break
     case ActionTypes.UPDATE_EVENT_REQUEST + ApiActionTypes.SUCCESS:
     case ActionTypes.SEND_EVENT_REQUEST + ApiActionTypes.SUCCESS:

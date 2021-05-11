@@ -8,9 +8,11 @@ import Modal from "components/ui/Modal";
 import Profile from "components/ui/Profile";
 import { default as React, useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { IChat, IRootState } from "types";
+import {IChat, IEvent, IRootState} from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import {emptyEventUnread} from 'components/Events/actions'
+import {event} from 'next/dist/build/output/log'
 
 /*
   task chat
@@ -21,10 +23,11 @@ import { useSelector, useDispatch } from 'react-redux'
 interface Props {
   chat: IChat
   onRequestClose?: () => void,
-  hasNewMessage?: boolean
+  hasNewMessage?: boolean,
+  event?: IEvent
 }
 
-export default function EventChatMessageList({chat, hasNewMessage}: Props) {
+export default function EventChatMessageList({chat, event, hasNewMessage}: Props) {
   const dispatch = useDispatch()
 
   const messages = useSelector((state: IRootState) => state.chat.messages)
@@ -60,6 +63,9 @@ export default function EventChatMessageList({chat, hasNewMessage}: Props) {
       }
       if (ids.length > 0) {
         dispatch(updateChatMessagesState({ ids, read: true }))
+        if(event) {
+          dispatch(emptyEventUnread(event));
+        }
       }
     }, 4000)
 

@@ -673,6 +673,7 @@ export interface ISavedTasks {
 
 export interface IFeedbacksToProfile {
   id: number
+  title: string,
   target: string
   fromProfileId: number
   toProfileId: number
@@ -691,6 +692,7 @@ export interface IFeedbacksToProfile {
   createdAt: string
   updatedAt: string
   deletedAt: null,
+  mark: number
   photosObjects: [
     {
       id: number
@@ -747,6 +749,7 @@ export interface IEvent {
   task?: ITask,
   participant?: ProfileData
   author?: ProfileData
+  feedbacks?: IFeedbacksToProfile[],
   unreadTextMessagesCount?: number
   unreadMediaMessagesCount?: number
   expenses?: IEventExpense[]

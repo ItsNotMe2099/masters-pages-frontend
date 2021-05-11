@@ -50,17 +50,14 @@ interface Props {
 }
 
 let EventReviewForm = ({event, handleSubmit}: Props) => {
-  const error = useSelector((state: IRootState) => state.event.formError)
+  const error = useSelector((state: IRootState) => state.event.formFeedbackError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-
-  const isAuthor = profile.id !== event.participant.id
-
+  const otherSide = event.isAuthor ? event.participant : event.author;
 
 
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
-      <div className={styles.title}>Describe your work experience with <span className={styles.profileName}>{event.participant.firstName} {event.participant.lastName}</span></div>
+      <div className={styles.title}>Describe your work experience with  <a href={`/PublicProfile/${otherSide.id}`} target={'_blank'} className={styles.profileName}>{otherSide.firstName} {otherSide.lastName}</a></div>
       <Field
         name="title"
         component={Input}
@@ -77,6 +74,7 @@ let EventReviewForm = ({event, handleSubmit}: Props) => {
         component={Rating}
       />
       </div>
+      <FormError error={error}/>
       {!formLoading && <div className={styles.buttons}>
 
 

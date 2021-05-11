@@ -9,6 +9,7 @@ interface IEventList{
   limit?: number
 }
 export const resetEventForm = () => action(ActionTypes.RESET_EVENT_FORM)
+export const resetFeedbackEventForm = () => action(ActionTypes.RESET_FEEDBACK_EVENT_FORM)
 
 
 export const updateEventExpenses = (type, data: IEventExpense[]) => action(ActionTypes.UPDATE_EVENT_EXPENSES, {type, data})
@@ -126,6 +127,25 @@ export const completeEventRequest = (id: number) => action(ActionTypes.COMPLETE_
   }
 })
 
+export const createFeedBackEventMaster = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_MASTER, {data})
+
+export const createFeedBackEventMasterRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST, {
+  api: {
+    url: '/api/feedback/master',
+    method: 'POST',
+    data
+  }
+})
+export const createFeedBackEventClient = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT, {data})
+
+export const createFeedBackEventClientRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST, {
+  api: {
+    url: '/api/feedback/client',
+    method: 'POST',
+    data
+  }
+})
+export const emptyEventUnread = (event: IEvent) => action(ActionTypes.EMPTY_EVENT_UNREAD, {event})
 
 export const resetEventList = () => action(ActionTypes.RESET_EVENT_LIST)
 export const currentEventSetEditMode = () => action(ActionTypes.CURRENT_EVENT_SET_EDIT_MODE)

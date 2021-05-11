@@ -44,6 +44,9 @@
   &__disabled{
     opacity: 0.5;
   }
+  &__active{
+    background: #F2994A;
+  }
   border-radius: 5px;
   padding: 12px 15px;
   text-align: center;
