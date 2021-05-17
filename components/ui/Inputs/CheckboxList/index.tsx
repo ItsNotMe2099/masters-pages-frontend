@@ -12,6 +12,7 @@ interface Props {
   changeWithValue?: boolean
   restrictedValues: any[],
   grid: number
+  flex: string
 }
 
 export const CheckboxList = (props) => {
@@ -28,10 +29,11 @@ export const CheckboxList = (props) => {
   }, [input.value])
 
   return (
-    <div className={styles.root} style={{
-      display: (props.grid) ? 'grid' : 'block',
-      gridTemplateColumns: props.grid ? Array.from({ length: props.grid }, (_, i) => '1fr').join(' ') : '',
-      gridGap: '1vw'
+    <div className={`${styles.root} ${props.flex === 'row' && styles.flexRow} ${props.flex === 'column' && styles.flexColumn}`} style={{
+   ...(props.grid ? {display: 'grid',
+     gridTemplateColumns: props.grid ? Array.from({ length: props.grid }, (_, i) => '1fr').join(' ') : '',
+     gridGap: '1vw'} : {}),
+
     }}>
       {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (
         <div className={styles.checkbox}>

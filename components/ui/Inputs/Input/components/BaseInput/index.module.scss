@@ -17,6 +17,9 @@
 .inputSmall{
   height: 44px;
   border-radius: 6px;
+  &.withIcon{
+    padding-right: 20px;
+  }
 }
 .withPadding{
   padding: 0 16px;

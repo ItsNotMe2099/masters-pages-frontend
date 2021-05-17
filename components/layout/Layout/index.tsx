@@ -49,8 +49,8 @@ export default function Layout(props: Props) {
 
   const items = [
     {title: t('menu.profile'), icon: 'profile', link: `/PublicProfile/${profile.id}`},
-    {title: t('menu.share'), icon: 'share', link: ''},
-    {title: t('menu.invite'), icon: 'invite', link: ''},
+    {title: t('menu.share'), icon: 'share', link: '/Share'},
+    {title: t('menu.invite'), icon: 'invite', link: '/Invite'},
     {title: t('menu.order'), icon: 'order', link: '/CreateTaskPage'},
     {title: t('menu.orders'), icon: 'orders', link: '/PersonalArea/orders'},
     {title: t('menu.events'), icon: 'events', link: '/Calendar'},

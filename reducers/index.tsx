@@ -39,6 +39,8 @@ import ProfileGalleryReducer from 'components/ProfileGallery/reducer'
 import ProfileStatReducer from 'components/ProfileStat/reducer'
 import ProfileRecommendationReducer from 'components/ProfileRecommendations/reducer'
 import EventsReducer from 'components/Events/reducer'
+import ShareReducer from 'components/Share/reducer'
+import InviteReducer from 'components/Invite/reducer'
 
 export default combineReducers({
   form: formReducer,
@@ -80,5 +82,7 @@ export default combineReducers({
   profileGallery: ProfileGalleryReducer,
   profileStat: ProfileStatReducer,
   profileRecommendation: ProfileRecommendationReducer,
-  event: EventsReducer
+  event: EventsReducer,
+  share: ShareReducer,
+  invite: InviteReducer,
 })

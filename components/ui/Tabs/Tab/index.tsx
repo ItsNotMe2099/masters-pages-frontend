@@ -9,11 +9,13 @@ interface Props {
   link?: string,
   isActive: boolean,
   onClick?: () => void
-  style?: 'fullwidth' | 'round' | 'roundSmall' | 'outline'
+  style?: 'fullwidth' | 'round' | 'roundSmall' | 'outline' | 'fullWidthRound'
   className?: string
+  isFirst: boolean
+  isLast: boolean
 
 }
-const Tab = ({name, link, style, onClick, isActive, className, badge}: Props) => {
+const Tab = ({name, link, style, onClick, isActive, className, badge, isFirst, isLast}: Props) => {
   const router = useRouter();
   const handleClick = (e) => {
     console.log("HandleClick", onClick)
@@ -26,7 +28,7 @@ const Tab = ({name, link, style, onClick, isActive, className, badge}: Props) =>
 
   return (
     <Link href={`${link}`}>
-      <a className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${style === 'round' && styles.round} ${style === 'roundSmall' && styles.roundSmall} ${style === 'outline' && styles.outline} ${isActive && styles.active} ${className}`} onClick={handleClick}>{name}
+      <a className={`${styles.root} ${isFirst && styles.isFirst} ${isLast && styles.isLast} ${style === 'fullwidth' && styles.fullWidth} ${style === 'fullWidthRound' && styles.fullWidthRound} ${style === 'round' && styles.round} ${style === 'roundSmall' && styles.roundSmall} ${style === 'outline' && styles.outline} ${isActive && styles.active} ${className}`} onClick={handleClick}>{name}
         {badge > 0 && <NotificationBadge right={style === 'round' ? '18px' : '4px'} top={style === 'round' ? '10px' : '6px'} border={style === 'round'} amount={badge}/>}
       </a>
     </Link>

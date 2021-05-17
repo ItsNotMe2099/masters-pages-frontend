@@ -23,7 +23,7 @@ const Tabs = ({tabs, activeTab, onChange, style, tabClassName}: Props) => {
   }
   return (
     <div className={`${styles.root} ${style === 'fullwidth' && styles.fullWidth} ${(style === 'round' || style === 'roundSmall') && styles.round} ${style === 'outline' && styles.outline}`}>
-      {tabs.map(item => <Tab name={item.name} badge={item.badge} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null} className={tabClassName} style={style}/>)}
+      {tabs.map((item, index) => <Tab isFirst={index === 0}  isLast={tabs.length - 1 == index} name={item.name} badge={item.badge} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(item) : null} className={tabClassName} style={style}/>)}
       <div className={styles.border}/>
     </div>
   )

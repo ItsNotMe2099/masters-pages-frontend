@@ -1,0 +1,20 @@
+@import "scss/index";
+.root{
+}
+
+.rowSelect{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  > div{
+    margin-bottom: 0px;
+    max-width: 150px;
+    &:first-of-type{
+      margin-right: 16px;
+    }
+  }
+}
+.rowCheckboxes{
+  margin-top: 20px;
+}

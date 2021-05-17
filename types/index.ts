@@ -39,6 +39,8 @@ import ProfileStatItemCard
   from 'components/PublicProfile/components/view/CardProfileStat/components/ProfileStatItemCard'
 import {ProfileRecommendationState} from 'components/ProfileRecommendations/reducer'
 import {EventsState} from 'components/Events/reducer'
+import {ShareState} from 'components/Share/reducer'
+import {InviteState} from 'components/Invite/reducer'
 
 export interface IRootState {
   authComponent: authState,
@@ -79,7 +81,9 @@ export interface IRootState {
   profileGallery: ProfileGalleryState
   profileStat: ProfileStatState
   profileRecommendation: ProfileRecommendationState
-  event: EventsState
+  event: EventsState,
+  share: ShareState,
+  invite: InviteState
 }
 
 export interface ILocation {
@@ -772,3 +776,14 @@ export interface IEvent {
   isAuthor?: boolean
 }
 
+
+export interface ISharePersonalLabel {
+  style: 'vertical' | 'horizontal',
+  theme: 'light' | 'dark',
+  options: {
+    qrCode: boolean,
+    webAddress: boolean,
+    name: boolean,
+    phone: boolean,
+  }
+}

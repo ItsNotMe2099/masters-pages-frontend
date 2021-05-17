@@ -1,0 +1,117 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+
+.logoIcon{
+  width: 40px;
+
+}
+.logoText{
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 15px;
+  max-width: 59px;
+
+  @media screen and (max-width: $sm-max){
+    font-size: 12px;
+    line-height: 13px;
+  }
+  span{
+    color: #FD5742;
+  }
+}
+.wrapper{
+  display: flex;
+  border: 1px #000000 dashed;
+
+  &.light{
+    background-color: white;
+    color: #6D718C;
+    .name{
+      color: black;
+    }
+    .phone {
+      svg {
+        path {
+          fill: #6D718C;
+        }
+      }
+    }
+  }
+  &.dark{
+    background-color: black;
+    color: white;
+    border-color: white;
+    .phone{
+      svg{
+        path {
+          fill: white;
+        }
+      }
+    }
+
+  }
+  &.vertical{
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    .logo{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .logoIcon{
+        margin-right: 9px;
+
+      }
+
+    }
+    .info{
+      margin-top: 20px;
+    }
+  }
+  &.horizontal{
+    padding: 15px;
+    flex-direction: row;
+    align-items: center;
+    .logo{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      .logoText{
+        margin-top: 12px;
+      }
+
+    }
+    .info{
+      margin-left: 25px;
+
+    }
+  }
+}
+.name{
+  font-weight: 600;
+  font-size: 28px;
+}
+.mpId{
+  margin-top: 4px;
+  font-weight: 500;
+  font-size: 18px;
+}
+.phone{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 24px;
+  font-weight: 600;
+  svg{
+    margin-right: 8px;
+  }
+}
