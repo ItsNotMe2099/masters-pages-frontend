@@ -71,11 +71,7 @@ const StateButton = ({event, type}: Props) => {
           return 'Declined';
         }
         if([EventStatus.Confirmed].includes(event.status)){
-          if(currentProfile.role === 'client'){
-            return 'Planned';
-          }else{
-            return 'Confirmed';
-          }
+           return 'Planned';
         }
 
         if([EventStatus.Completed].includes(event.status)){
@@ -103,11 +99,7 @@ const StateButton = ({event, type}: Props) => {
           return 'Planned';
         }
         if([EventStatus.Confirmed].includes(event.status)){
-          if(currentProfile.role === 'client'){
             return 'Planned';
-          }else{
-            return 'Confirmed';
-          }
         }
         if([EventStatus.Completed].includes(event.status)){
           return 'Completed';
