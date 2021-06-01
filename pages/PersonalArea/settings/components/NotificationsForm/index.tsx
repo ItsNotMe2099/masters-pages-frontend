@@ -25,6 +25,7 @@ let NotificationsForm = props => {
     {key: 'eventPlanned', title: 'Event planned'},
     {key: 'eventStatusChanged', title: 'Event status changed'},
     {key: 'eventRemind', title: 'Event remind'},
+    {key: 'news', title: 'News'},
   ];
   return (
     <div className={styles.root}>

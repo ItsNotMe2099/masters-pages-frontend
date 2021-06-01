@@ -57,6 +57,17 @@
     background: #FAFAFA;
     border: 1px solid #E0E0E0;
     border-radius: 4px;
+    .actions{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .separator{
+      height: 1px;
+      background: #E0E0E0;
+      margin: 19px -20px;
+    }
     .category{
       .field{
         margin-top: 14px;
@@ -163,4 +174,48 @@
     }
   }
 }
+
+.status{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 40px;
+  padding: 0px 13px;
+  border-radius: 4px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #FFFFFF;
+  &__green {
+    background: #27AE60;
+  }
+
+  &__red {
+    background: #C51212;
+  }
+
+  &__orange {
+    background: #F2994A;
+  }
+
+  &__blue{
+    background: #2F80ED;
+  }
+
+  &__grey {
+    background: #A6A6A6;
+  }
+
+  .icon{
+    margin-right: 10px;
+  }
+  .type{
+    font-weight: 500;
+    font-size: 12px;
+    color: #F2F2F2;
+    flex: 1;
+  }
+
+}
+
 

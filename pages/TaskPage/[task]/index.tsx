@@ -6,7 +6,7 @@ import {Router, useRouter} from "next/router";
 import styles from './index.module.scss'
 import {TabSelect} from "components/TabSelect";
 import {useSelector, useDispatch} from 'react-redux'
-import {IRootState} from "types";
+import {IRootState, ITaskStatus} from "types";
 import {getAuthServerSide} from "utils/auth";
 import Loader from "components/ui/Loader";
 import Layout from 'components/layout/Layout'
@@ -22,12 +22,19 @@ import EditEventModal from 'components/Calendar/components/EditEventModal'
 import Modals from 'components/layout/Modals'
 import TaskReview from 'pages/TaskPage/components/TaskReview'
 import {fetchOneTaskUserRequest, fetchTaskStatsById} from 'components/TaskUser/actions'
-import {getEventPlannedAllowed} from 'utils/event'
+import {getEventColor, getEventPlannedAllowed} from 'utils/event'
+import Button from 'components/ui/Button'
+import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
+import {useTranslation} from 'react-i18next'
+import MarkIcon from 'components/svg/MarkIcon'
+import FileList from 'components/ui/FileList'
 
 const TaskPage = (props) => {
   const router = useRouter()
+  const {t} = useTranslation();
   //const { task } = router.query
   const dispatch = useDispatch()
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const events = useSelector((state: IRootState) => state.event.list)
   const eventsLoading = useSelector((state: IRootState) => state.event.listLoading)
   const eventsTotal = useSelector((state: IRootState) => state.event.total)
@@ -88,6 +95,50 @@ const TaskPage = (props) => {
     dispatch(fetchEvent(event.id))
     dispatch(editEventOpen());
   }
+  const handleRecommend = () => {
+    dispatch(createProfileRecommendation(currentProfile.role === 'client' ? task.masterId : task.profileId));
+  }
+
+  const isMarkVisible = () => {
+    return [ITaskStatus.Done].includes(task.status);
+  }
+
+  const getStatusColor = () => {
+    switch (task.status){
+
+      case ITaskStatus.Canceled:
+      case ITaskStatus.Paused:
+        return styles.status__red;
+      case ITaskStatus.Draft:
+        return styles.status__grey;
+      case ITaskStatus.Negotiation:
+      case ITaskStatus.Published:
+      case ITaskStatus.PrivatelyPublished:
+        return styles.status__blue;
+      case ITaskStatus.InProgress:
+        return styles.status__orange;
+      case ITaskStatus.Done:
+        return styles.status__green;
+
+    }
+  }
+  const getStatusText = () => {
+    switch (task.status) {
+      case ITaskStatus.Draft:
+        return t('task.status.draft');
+      case ITaskStatus.Published:
+        return t('task.status.published');
+      case ITaskStatus.PrivatelyPublished:
+        return t('task.status.private');
+      case ITaskStatus.InProgress:
+        return t('task.status.inProgress');
+      case ITaskStatus.Done:
+        return t('task.status.done');
+      case ITaskStatus.Canceled:
+        return t('task.status.canceled');
+    }
+  }
+
 
 
   return (
@@ -163,6 +214,16 @@ const TaskPage = (props) => {
           <TaskReview task={task}/>
         </div>
         <div className={styles.rightSide}>
+          <div className={styles.actions}>
+            <Button red={true} size={'12px 40px'} onClick={handleRecommend}>Recommend</Button>
+          </div>
+          <div className={styles.separator}/>
+          <div className={`${styles.status} ${getStatusColor()}`}>
+            <div className={styles.type}>Status</div>
+            {isMarkVisible() && <MarkIcon className={styles.icon} color={'#ffffff'}/>}
+            <div className={styles.statusText}>{getStatusText()}</div>
+          </div>
+          <div className={styles.separator}/>
           <div className={styles.category}>
             <div className={styles.field}>
               <div className={styles.label}>Category</div>
@@ -175,6 +236,10 @@ const TaskPage = (props) => {
             </div>
 
           </div>
+          {task.photos.length > 0 &&<>
+            <div className={styles.separator}/>
+          <FileList files={task.photos}/>
+          </>}
         </div>
       </div>}
       <div className={styles.eventsWrapper}>
