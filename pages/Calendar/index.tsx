@@ -15,7 +15,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import {default as React, useEffect, useRef, useState} from 'react'
 import {SampleEvents} from 'data/events'
 import CalendarEvent from 'components/Calendar/components/CalendarEvent'
-import {add, format, isSameDay, isWeekend} from 'date-fns'
+import {add, addDays, format, isSameDay, isWeekend} from 'date-fns'
 import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
 import CalendarMonthHeaderCell from 'components/Calendar/components/CalendarMonthHeaderCell'
 import CalendarToolbar from 'components/Calendar/components/CalendarToolbar'
@@ -119,8 +119,8 @@ const CalendarPage = (props) => {
 
   useEffect(() => {
     dispatch(fetchEventCalendarList({
-      start: format(getMonthStart(currentDate), 'yyyy-MM-dd 00:00:00 XXX'),
-      end: format(getMonthEnd(currentDate), 'yyyy-MM-dd 23:59:59 XXX')
+      start: format(addDays(getMonthStart(currentDate), -7), 'yyyy-MM-dd 00:00:00 XXX'),
+      end: format(addDays(getMonthEnd(currentDate), 7), 'yyyy-MM-dd 23:59:59 XXX')
     }));
 
 
