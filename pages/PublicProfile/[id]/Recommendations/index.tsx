@@ -15,7 +15,7 @@ import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {setCurrentSkill} from 'components/Profile/actions'
 import {wrapper} from 'store'
 import CardReviews from 'components/PublicProfile/components/view/CardReviews'
-import {fetchProfileRecommendationList} from 'components/ProfileRecommendations/actions'
+import {fetchProfileRecommendationForProfileList} from 'components/ProfileRecommendations/actions'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
 interface Props{
   profile: ProfileData

@@ -6,7 +6,8 @@ interface IEventList{
   start: string,
   end: string,
   page?: number
-  limit?: number
+  limit?: number,
+  taskId?: number
 }
 export const resetEventForm = () => action(ActionTypes.RESET_EVENT_FORM)
 export const resetFeedbackEventForm = () => action(ActionTypes.RESET_FEEDBACK_EVENT_FORM)

@@ -9,41 +9,48 @@ import TextArea from 'components/ui/Inputs/TextArea';
 import FileInput from 'components/ui/Inputs/FilesUploadInput';
 
 let FinishingTaskByMasterForm = props => {
-  const { handleSubmit } = props
+  const { handleSubmit, onCancel } = props
   const error = useSelector((state: IRootState) => state.authSignIn.formError)
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.section}>
-        <div className={styles.text}><span>Work quality :</span></div>
+        <div className={styles.text}>Timeliness and completeness of payment:</div>
         <Field
-          name="quality"
+          name="timelinessAndСompletenessOfPayment"
           component={Rating}
         />
       </div>
       <div className={styles.section}>
-      <div className={styles.text__polite}>Politness :</div>
+      <div className={styles.text}>The presence of nagging and unfounded remarks:</div>
         <Field
-          name="politness"
+          name="presenceOfNaggingAndUnfoundedRemarks"
           component={Rating}
         />
       </div>
       <div className={styles.section}>
-      <div className={styles.text__deadline}>Deadlines :</div>
+      <div className={styles.text}>Respect and courtesy:</div>
         <Field
-          name="deadlines"
+          name="respectAndCourtesy"
           component={Rating}
         />
       </div>
       <div className={styles.section}>
-      <div className={styles.text__expences}>Extra expenses :</div>
+        <div className={styles.text}>The accordance between the description and real work :</div>
         <Field
-          name="expenses"
+          name="accordanceBetweenDescriptionAndRealWork"
           component={Rating}
         />
       </div>
       <div className={styles.section}>
-      <div className={styles.text__reccomend}>Reccomend :</div>
+        <div className={styles.text}>The adequacy of the requirements:</div>
+        <Field
+          name="adequacyOfRequirements"
+          component={Rating}
+        />
+      </div>
+      <div className={styles.section}>
+      <div className={styles.text}>Reccomend:</div>
         <Field
           name="reccomend"
           component={Rating}
@@ -51,7 +58,7 @@ let FinishingTaskByMasterForm = props => {
       </div>
       <div className={styles.textArea}>
       <Field
-        name="feedback"
+        name="description"
         label="Leave a feedback here (optional)"
         component={TextArea}
       />
@@ -70,8 +77,8 @@ let FinishingTaskByMasterForm = props => {
       </div>
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button type="button" transparent bold smallFont size="10px 32px" borderC4>NOT DONE</Button>
-        <Button red bold smallFont size="10px 45px">JOB IS DONE</Button>
+        <Button type="button" transparent bold smallFont size="10px 32px" borderC4 onClick={onCancel}>CANCEL</Button>
+        <Button red bold smallFont size="10px 45px">SEND</Button>
       </div>
     </form>
   )

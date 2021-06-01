@@ -1,11 +1,15 @@
 import ApiActionTypes from "constants/api";
-import { ITask, SkillData, SkillListItem } from "types";
+import {ITask, ITaskStats, SkillData, SkillListItem} from "types";
 import ActionTypes from "./const";
 
 export interface TaskUserState {
   list: ITask[],
   listLoading: boolean,
+  current: ITask,
+  currentLoading: boolean,
   formUpdateLoading: boolean
+  statLoading: boolean
+  stats: ITaskStats
   total: number,
   page: number,
   filter: any,
@@ -17,7 +21,11 @@ export interface TaskUserState {
 const initialState: TaskUserState = {
   list: [],
   listLoading: false,
+  current: null,
+  currentLoading: false,
   formUpdateLoading: false,
+  statLoading: false,
+  stats: null,
   total: 0,
   page: 1,
   filter: {},
@@ -72,6 +80,7 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       break
 
     case ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS:
+      state.current = action.payload;
       state.formUpdateLoading = false;
       let removeItem = false;
       state.list = state.list.map(item => {
@@ -119,9 +128,6 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       break;
 
     case ActionTypes.TASK_RESPONSE_FETCH_REQUEST + ApiActionTypes.SUCCESS:
-
-      console.log("state filter", state.filter)
-      console.log("sent_to_client", action.payload)
       state.list = state.list.map((item) => {
         if (item.id === action.payload.taskId) {
           console.log("sent_to_client", action.payload)
@@ -172,6 +178,16 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
         })
       }
       break;
+    case ActionTypes.FETCH_TASK_STATS_BY_ID:
+      state.statLoading = true;
+      break
+    case ActionTypes.FETCH_TASK_STATS_BY_ID + ApiActionTypes.SUCCESS:
+      state.stats = action.payload
+      state.statLoading = false;
+      break
+    case ActionTypes.FETCH_TASK_STATS_BY_ID + ApiActionTypes.FAIL:
+      state.statLoading = false;
+      break
     case ActionTypes.RESET_TASK_USER_LIST:
       state.listLoading = false;
       state.list = []

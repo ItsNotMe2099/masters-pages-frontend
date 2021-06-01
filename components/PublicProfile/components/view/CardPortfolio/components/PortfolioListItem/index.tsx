@@ -5,6 +5,7 @@ import UserIcon from 'components/svg/UserIcon'
 import Button from 'components/PublicProfile/components/Button'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {getMediaPath} from 'utils/media'
+import FileList from 'components/ui/FileList'
 
 interface Props{
   model: IProfilePortfolio,
@@ -89,10 +90,7 @@ const PortfolioListItem = ({onEdit, onDelete, model, isEdit}: Props) => {
 
       {model.files.length > 0 && <div className={styles.rightColumn}>
         <div className={styles.filesTitle}>Attached files</div>
-        <div className={styles.files}>
-          {model.files.map((file =>  <a href={getMediaPath(file)} target={'_blank'} className={styles.file}><img src={`/img/icons/file_types/${getFileIcon(file)}.svg`}/></a>))}
-
-        </div>
+        <FileList files={model.files}/>
       </div>}
     </div>
   )

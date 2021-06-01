@@ -1,0 +1,19 @@
+.root{
+
+  padding: 0px 33px;
+  text-align: left;
+
+}
+.addFileButtonDesc{
+  color: #6D718C;
+  margin-top: 12px;
+  font-size: 16px;
+  text-align: left;
+}
+.buttons{
+  display: flex;
+  align-items: center;
+  > button{
+    margin-right: 15px;
+  }
+}

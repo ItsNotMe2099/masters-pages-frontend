@@ -1,0 +1,70 @@
+@import "scss/index";
+
+.container{
+  margin: 0px -22px;
+}
+
+.filterBy{
+  width: 100%;
+  .filterValue{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    > div{
+      margin-left: 10px;
+      &:first-of-type{
+        margin-left: 0px;
+      }
+    }
+  }
+}
+.list{
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.report{
+  padding: 0px 50px;
+  display: table;
+  text-align: center;
+  .reportHeader{
+    display: table-row;
+    .reportCell{
+      display: table-cell;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 11px;
+      vertical-align: middle;
+
+    }
+  }
+  .reportRow{
+    display: table-row;
+    font-size: 16px;
+    color: #333333;
+    &:nth-child(even){
+        background-color: #e6f8e3;
+    }
+    &:nth-child(even){
+
+    }
+    .reportCell{
+      display: table-cell;
+      padding: 16px 11px;
+      border-right: 1px solid #B6B6B6;
+      vertical-align: middle;
+      &:last-of-type{
+        border-right: none;
+      }
+    }
+  }
+}
+.actions{
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 50px;
+}

@@ -1,0 +1,12 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.list{
+  display: table;
+  width: 100%;
+}
+

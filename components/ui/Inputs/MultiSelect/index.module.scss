@@ -1,0 +1,138 @@
+@import 'scss/mixins.scss';
+
+
+.dropDownSmall{
+  .inputContainer{
+    position: relative;
+    input{
+      height: 44px;
+    }
+  }
+}
+.inputError{
+  @include inputError
+}
+
+.inputContainer{
+  position: relative;
+  input{
+    height: 51px;
+  }
+}
+
+
+.inputLabel{
+  position: absolute;
+  padding: 0 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #828282;
+  top: 10px;
+  left: 15px;
+
+  &__none{
+    display: none;
+  }
+}
+
+.error{
+  @include error
+}
+.root{
+  position: relative;
+}
+.field{
+  cursor: pointer;
+  background: white;
+  border: 1px solid #DFDFDF;
+  border-radius: 3px;
+  padding: 9px 16px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &.fieldActive{
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+  svg{
+    margin-left: 10px;
+    path {
+      fill: #FF0000;
+    }
+  }
+}
+.fieldLabel{
+}
+.fieldCount{
+  border-radius: 30px;
+  padding: 3px 5px;
+  background: rgba(253, 87, 66, 1);
+  margin-left: 4px;
+  font-size: 10px;
+  color: white;
+}
+.dropDown {
+  background: #ffffff;
+  position: absolute;
+  top: 42px;
+  left: 0px;
+  width: 200px;
+  border: 1px solid #DFDFDF;
+  border-radius: 3px;
+  visibility: hidden;
+
+  z-index: 3;
+
+}
+.dropDownActive{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.checkbox{
+  margin-bottom: 0px;
+}
+.dropdownItem {
+  padding: 9px 9px;
+}
+.dropdownItemIcon{
+  padding-right: 5px;
+  vertical-align: middle;
+}
+.dropdownItemLabel{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  padding-right: 0px;
+  vertical-align: middle;
+  color: #6D718C;
+  @media screen and (max-width: $sm-max){
+
+  }
+}
+
+.arrowActive{
+  margin-left: 6px;
+}
+.arrow{
+  padding-left: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.circle{
+  width: 21px;
+  height: 21px;
+  border-radius: 50px;
+  border: 1px solid #E5E5E5;
+  margin-right: 8px;
+  &__active{
+    width: 21px;
+    height: 21px;
+    border-radius: 50px;
+    border: 7px solid #27C60D;
+    margin-right: 11px;
+  }
+}

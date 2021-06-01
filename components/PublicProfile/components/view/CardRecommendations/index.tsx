@@ -11,7 +11,7 @@ import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchProfileRecommendationList, setPageProfileRecommendation} from 'components/ProfileRecommendations/actions'
+import {fetchProfileRecommendationForProfileList, setPageProfileRecommendation} from 'components/ProfileRecommendations/actions'
 
 interface Props{
   profile: ProfileData
@@ -27,7 +27,7 @@ const CardRecommendations = (props: Props) => {
 
   useEffect(() => {
     dispatch(resetFeedbackList());
-    dispatch(fetchProfileRecommendationList(profile.id, {
+    dispatch(fetchProfileRecommendationForProfileList(profile.id, {
       page: 1,
       limit
     }))
@@ -36,7 +36,7 @@ const CardRecommendations = (props: Props) => {
 
   const handleScrollNext = () => {
     dispatch(setPageProfileRecommendation(page + 1))
-    dispatch(fetchProfileRecommendationList(profile.id, {
+    dispatch(fetchProfileRecommendationForProfileList(profile.id, {
       page: page + 1,
       limit
     }));

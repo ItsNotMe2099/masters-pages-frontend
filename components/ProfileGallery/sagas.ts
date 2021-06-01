@@ -31,9 +31,9 @@ function* ProfileGallerySaga() {
         console.log("CREATE SKILL SUCCESS")
         if (action.payload.formKey) {
           yield put(hideProfileForm(action.payload.formKey));
+        }else{
+          yield put(modalClose());
         }
-
-
       }
     })
   yield takeLatest(ActionTypes.SET_PROFILE_GALLERY_CURRENT_INDEX,
@@ -85,6 +85,8 @@ function* ProfileGallerySaga() {
         console.log("UPDATE_PROFILE_GALLERY SUCCESS")
         if (action.payload.formKey) {
           yield put(hideProfileForm(action.payload.formKey));
+        }else{
+          yield put(modalClose());
         }
 
       }

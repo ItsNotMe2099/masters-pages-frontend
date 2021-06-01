@@ -15,7 +15,8 @@ import {
   approveEventRequest,
   confirmEventRequest,
   declineEventRequest,
-  deleteEvent, rejectEventRequest,
+  deleteEvent,
+  rejectEventRequest,
   setSubmitEvent
 } from 'components/Events/actions'
 import {confirmOpen, editEventOpen} from 'components/Modal/actions'
@@ -60,7 +61,10 @@ let TimePlaceChargeForm = (props: Props) => {
   const isAuthor = isTempEdit || profile.id === event.authorId
   const dispatch = useDispatch();
 
-  const isPlannedDisabled = !((isTempEdit || isCurrentEventEditMode) && getEventPlannedAllowed(event)) || [EventStatus.Draft].includes(event.status);
+  let isPlannedDisabled = !((isTempEdit || isCurrentEventEditMode) && getEventPlannedAllowed(event));
+  if([EventStatus.Draft].includes(event.status)){
+    isPlannedDisabled = false;
+  }
   const isCompletedDisabled =  !((!(isTempEdit || isCurrentEventEditMode) && [EventStatus.Confirmed].includes(event.status)) || (isTempEdit && [EventStatus.Completed].includes(event.status)));
   console.log("isPlannedDisabled", event.status, isPlannedDisabled, isCurrentEventEditMode );
   console.log("isCompletedDisabled", event.status, isCompletedDisabled );

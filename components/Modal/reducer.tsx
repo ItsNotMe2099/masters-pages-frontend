@@ -113,6 +113,9 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.EVENT_EXPENSE_ACTUAL_OPEN:
       state.modalKey = 'eventExpenseActualModal'
       break
+    case ActionTypes.POST_EDIT_OPEN:
+      state.modalKey = 'postEditOpen'
+      break
     case ActionTypes.CONFIRM_MODAL_OPEN:
       state.modalKey = 'confirm'
       state.confirmData = action.payload

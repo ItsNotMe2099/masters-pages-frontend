@@ -2,34 +2,34 @@ import ApiActionTypes from "constants/api";
 import ActionTypes from "./const";
 export interface SavedPeopleState {
   list: any[]
-  isLoading: boolean,
+  listLoading: boolean,
   savingProfileId?: number,
-  listTotal: number
+  total: number
+  page: number
 }
 
 const initialState: SavedPeopleState = {
   list: [],
-  isLoading: false,
-  listTotal: 0
+  listLoading: false,
+  total: 0,
+  page: 1
 }
 
 export default function TaskUserReducer(state = {...initialState}, action) {
   switch(action.type) {
-    case ActionTypes.FETCH_SAVED_PEOPLE:
 
-      break
 
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST:
-      state.isLoading = true;
+      state.listLoading = true;
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
-      state.isLoading = false;
+      state.listLoading = false;
       state.list = [...state.list, ...action.payload.data]
-      state.listTotal = action.payload.total
+      state.total = action.payload.total
       console.log('payload data!!!', action.payload.data)
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL:
-      state.isLoading = false;
+      state.listLoading = false;
       break
     case ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
       console.log("Delete success", action.payload);
@@ -46,9 +46,10 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       state.savingProfileId = null;
       break;
     case ActionTypes.RESET_SAVED_PEOPLE_LIST:
-      state.isLoading = false;
+      state.listLoading = false;
       state.list = []
-      state.listTotal = 0
+      state.total = 0
+      state.page = 1;
       break
   }
 

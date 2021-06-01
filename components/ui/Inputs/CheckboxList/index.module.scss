@@ -15,6 +15,21 @@
     }
   }
 }
+.flexFloat{
+  display: block;
+  &::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+  > div{
+    float: left;
+    margin-right: 25px;
+    &:last-of-type{
+      margin-right: 0px;
+    }
+  }
+}
 .flexColumn{
   display: flex;
   flex-direction: column;

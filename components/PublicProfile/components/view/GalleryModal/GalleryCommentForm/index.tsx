@@ -10,19 +10,24 @@ import { Field, reduxForm } from 'redux-form'
 import { useSelector, useDispatch } from 'react-redux';
 import NewMessage from 'components/svg/NewMessage'
 import {createProfileGalleryComment} from 'components/ProfileGallery/actions'
+import {createNewsComment} from 'components/News/actions'
 interface Props {
-
+  isNews?: boolean
 }
 
-export default function GalleryNewComment(props: Props) {
+export default function GalleryNewComment({isNews}: Props) {
   const dispatch = useDispatch()
   const { commentSentError, commentIsSending, commentSentSuccess} = useSelector((state: IRootState) => state.profileGallery)
-  const galleryItem = useSelector((state: IRootState) => state.profileGallery.currentItem)
+  const galleryItem = useSelector((state: IRootState) =>  isNews ?  state.news.currentItem : state.profileGallery.currentItem)
   const [message, setMessage] = useState('');
 
   const handleSendMessage = () => {
     if(message && galleryItem) {
-      dispatch(createProfileGalleryComment({ content: message, profileGalleryId: galleryItem.id }, () => setMessage('')))
+      if(isNews){
+        dispatch(createNewsComment({ content: message, profileGalleryId: galleryItem.id }, () => setMessage('')))
+      }else{
+        dispatch(createProfileGalleryComment({ content: message, profileGalleryId: galleryItem.id }, () => setMessage('')))
+      }
     }
   }
 

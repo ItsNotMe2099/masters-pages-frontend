@@ -26,7 +26,6 @@ import SavedPeopleReducer from 'components/SavedPeople/reducer';
 import SavedTasksReducer from 'components/SavedTasks/reducer';
 import ProfileFeedbackReducer from 'components/ProfileFeedback/reducer';
 import PublicProfileReducer from 'components/PublicProfile/reducer';
-import TaskPageReducer from 'components/TaskPage/reducer';
 import TaskSearchListWithLimitReducer from 'components/Split/OrderingSection/Task/reducer';
 import StatReducer from "../components/Stat/reducer";
 import registrationPhoneReducer from "../components/Auth/RegistrationPhone/reducer";
@@ -41,6 +40,10 @@ import ProfileRecommendationReducer from 'components/ProfileRecommendations/redu
 import EventsReducer from 'components/Events/reducer'
 import ShareReducer from 'components/Share/reducer'
 import InviteReducer from 'components/Invite/reducer'
+import PostReducer from 'components/Post/reducer'
+import NewsReducer from 'components/News/reducer'
+import FollowerReducer from 'components/Follower/reducer'
+import ReportReducer from 'components/Report/reducer'
 
 export default combineReducers({
   form: formReducer,
@@ -71,7 +74,6 @@ export default combineReducers({
   savedTasks: SavedTasksReducer,
   profileFeedback: ProfileFeedbackReducer,
   publicProfile: PublicProfileReducer,
-  taskPage: TaskPageReducer,
   taskSearchWithLimit: TaskSearchListWithLimitReducer,
   stat: StatReducer,
   push: PushReducer,
@@ -85,4 +87,8 @@ export default combineReducers({
   event: EventsReducer,
   share: ShareReducer,
   invite: InviteReducer,
+  post: PostReducer,
+  news: NewsReducer,
+  follower: FollowerReducer,
+  report: ReportReducer,
 })

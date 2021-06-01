@@ -13,6 +13,7 @@ interface Props {
   restrictedValues: any[],
   grid: number
   flex: string
+  checkboxClassName?: string
 }
 
 export const CheckboxList = (props) => {
@@ -29,7 +30,7 @@ export const CheckboxList = (props) => {
   }, [input.value])
 
   return (
-    <div className={`${styles.root} ${props.flex === 'row' && styles.flexRow} ${props.flex === 'column' && styles.flexColumn}`} style={{
+    <div className={`${styles.root} ${props.flex === 'row' && styles.flexRow}  ${props.flex === 'float' && styles.flexFloat} ${props.flex === 'column' && styles.flexColumn}`} style={{
    ...(props.grid ? {display: 'grid',
      gridTemplateColumns: props.grid ? Array.from({ length: props.grid }, (_, i) => '1fr').join(' ') : '',
      gridGap: '1vw'} : {}),
@@ -43,7 +44,7 @@ export const CheckboxList = (props) => {
             borderColor="#e6e6e6"
             borderRadius={2}
             size={21}
-            containerClassName={`${styles.checkboxContainer} ${!props.grid && styles.checkboxNoGrid}`}
+            containerClassName={`${styles.checkboxContainer} ${!props.grid && styles.checkboxNoGrid} ${props.checkboxClassName}`}
             labelClassName={styles.checkboxLabel}
             labelStyle={{}}
             label={item.label}

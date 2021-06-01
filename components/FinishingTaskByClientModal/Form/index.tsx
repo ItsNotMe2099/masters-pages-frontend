@@ -51,7 +51,7 @@ let FinishingTaskByClientForm = props => {
       </div>
       <div className={styles.textArea}>
       <Field
-        name="feedback"
+        name="description"
         label="Leave a feedback here (optional)"
         component={TextArea}
       />

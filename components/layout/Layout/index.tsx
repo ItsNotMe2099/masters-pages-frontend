@@ -57,12 +57,12 @@ export default function Layout(props: Props) {
     {title: t('menu.messages'), icon: 'messages', link: '/Chat'},
     {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage'},
     {title: t('menu.findClients'), icon: 'find-clients', link: '/SearchMasterPage'},
-    {title: t('menu.posts'), icon: 'posts', link: '', isSeparator: true},
-    {title: t('menu.news'), icon: 'news', link: ''},
-    {title: t('menu.subscriptions'), icon: 'subscriptions', link: ''},
+    {title: t('menu.posts'), icon: 'posts', link: '/Posts', isSeparator: true},
+    {title: t('menu.news'), icon: 'news', link: '/News'},
+    {title: 'Contacts', icon: 'subscriptions', link: '/Contacts'},
     {title: t('menu.account'), icon: 'account', link: '/PersonalArea/profile', isSeparator: true},
     {title: t('menu.settings'), icon: 'settings', link: '/PersonalArea/settings'},
-    {title: t('menu.reports'), icon: 'reports', link: ''},
+    {title: t('menu.reports'), icon: 'reports', link: '/Report'},
   ]
   const handleLogout = () => {
     dispatch(logout());

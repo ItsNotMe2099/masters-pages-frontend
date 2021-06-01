@@ -4,11 +4,11 @@ import styles from './index.module.scss'
 import _uniqueId from 'lodash/uniqueId';
 import ReactCheckbox from "react-custom-checkbox";
 interface Props {
-  meta: any
+  meta?: any
   input: any
-  type: string
   children?: string,
   label: ReactElement | string
+  className?: string
   //value: string
   //onChange: (e: React.FormEvent<HTMLInputElement>) => void
 }
@@ -20,7 +20,7 @@ export default function Checkbox(props: Props) {
   const [id] = useState(_uniqueId('prefix-'));
   console.log("checkbox meta",props.input.name,  props.label ? styles.checkboxLabel : styles.checkboxLabelHidden)
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${props.className}`}>
     <div className={styles.wrapper}>
 
         <ReactCheckbox

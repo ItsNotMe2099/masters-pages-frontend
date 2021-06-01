@@ -45,7 +45,6 @@ const CardGallery = (props: Props) => {
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'gallery');
   const list = useSelector((state: IRootState) => state.profileGallery.list);
   const listLoading = useSelector((state: IRootState) => state.profileGallery.listLoading);
-  const formLoading = useSelector((state: IRootState) => state.profileGallery.formLoading);
   const total = useSelector((state: IRootState) => state.profileGallery.total)
   const page = useSelector((state: IRootState) => state.profileGallery.page)
   const [currentEditModel, setCurrentEditModel] = useState(null);

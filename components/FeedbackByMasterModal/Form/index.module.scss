@@ -7,7 +7,7 @@
 
 .section{
     display: flex;
-    justify-content: center;
+  align-items: center;
     margin-top: 11px;
 }
 
@@ -15,31 +15,9 @@
     font-weight: 500;
     font-size: 16px;
     color: #000000;
-    margin: auto 20px auto 0;
-    &__polite{
-        margin: auto 20px auto 27px; 
-        font-weight: 500;
-        font-size: 16px;
-        color: #000000;
-    }
-    &__deadline{
-        margin: auto 20px auto 18px;
-        font-weight: 500;
-        font-size: 16px;
-        color: #000000;
-    }
-    &__expences{
-        margin: auto 20px auto -20px;
-        font-weight: 500;
-        font-size: 16px;
-        color: #000000;
-    }
-    &__reccomend{
-        margin: auto 20px auto 2px;
-        font-weight: 500;
-        font-size: 16px;
-        color: #000000;
-    }
+    flex: 1;
+  text-align: left;
+  padding-right: 15px;
 }
 
 .textArea{
@@ -63,7 +41,7 @@
         border-radius: 6px;
         @media screen and (max-width: $sm-max){
             font-size: 12px;
-          } 
+          }
         &:first-child{
             margin-right: 14px;
     }

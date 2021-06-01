@@ -3,9 +3,8 @@ import { format } from 'date-fns'
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { ITask } from 'types'
-import { taskOfferAcceptOpen } from 'components/Modal/actions'
 import * as React from "react";
-import { fetchTaskById } from 'components/TaskPage/actions'
+
 
 interface Props {
   task: ITask

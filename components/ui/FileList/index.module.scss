@@ -1,0 +1,22 @@
+@import "scss/index";
+
+.files{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.file{
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6D718C;
+  &:first-of-type{
+    margin-left: 0px;
+  }
+  .fileName{
+    margin-top: 10px;
+  }
+}

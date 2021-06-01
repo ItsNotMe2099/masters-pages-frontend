@@ -13,19 +13,22 @@ import * as React from 'react'
 
 interface Props {
   input: any,
-  showIcon: boolean
-  disabled: boolean
+  showIcon?: boolean
+  disabled?: boolean,
+  showTime?: boolean,
+  className?: string,
+  inputClassName?: string
 }
 
 export default function DateTimeRange(props: Props) {
-  const {disabled} = props;
+  const {disabled, inputClassName} = props;
   const { value, onChange } = props.input;
 
   const dateRangeRef = useRef(null);
   const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
   useEffect(() => {
+      console.log("USeEffectValue", value);
     if(!value){
-      console
       onChange({
         start: new Date(),
         end: addHours(new Date(), 1)
@@ -69,13 +72,13 @@ export default function DateTimeRange(props: Props) {
   console.log("isDateRangeOpen", isDateRangeOpen);
   console.log("CalendarValue", value);
   return (
-    <div className={styles.root} ref={dateRangeRef}>
+    <div className={`${props.className} ${styles.root}`} ref={dateRangeRef}>
       <div className={styles.inputWrapper}>
-        <div className={styles.input}>
+        <div className={`${inputClassName} ${styles.input}`}>
           {props.showIcon && <CalendarIcon className={styles.calendarIcon}/>}
         <div className={styles.inputDate} onClick={() => setDateRangeOpen(true)}>{getDateRange()}</div>
-        <div className={styles.separator}/>
-        <div className={styles.timeRange}>
+          {props.showTime && <div className={styles.separator}/>}
+          {props.showTime && <div className={styles.timeRange}>
           <TimePicker input={{
             value: value.start ? moment(value.start) : null,
             onChange: handleStartTime
@@ -104,7 +107,7 @@ export default function DateTimeRange(props: Props) {
                         return range(min);
 
                       }}/>
-        </div>
+        </div>}
         </div>
         <div className={styles.spacer}></div>
       </div>
@@ -128,5 +131,6 @@ export default function DateTimeRange(props: Props) {
   );
 }
 DateTimeRange.defaultProps = {
-  showIcon: true
+  showIcon: true,
+  showTime: true
 }

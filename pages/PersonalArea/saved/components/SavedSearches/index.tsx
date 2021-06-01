@@ -1,4 +1,3 @@
-import { fetchSavedPeople } from "components/SavedPeople/actions";
 import { fetchSavedSearches, fetchSavedSearchesRequest, resetSavedSearchesList } from "components/SavedSearches/actions";
 import Button from "components/ui/Button";
 import { useEffect, useState } from "react";

@@ -100,7 +100,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.profile}>
-        <Avatar image={profile.avatar}/>
+        <Avatar image={profile.photo}/>
         <div className={styles.mobileWrapper}>
         <div className={styles.name__mobile} onClick={() => router.push(`/PublicProfile/${profile.id}`)}>
               <div className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>

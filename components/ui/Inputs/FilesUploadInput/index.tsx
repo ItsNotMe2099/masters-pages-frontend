@@ -15,6 +15,7 @@ import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 import nextId from "react-id-generator";
 import { useDispatch} from 'react-redux'
+import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -84,7 +85,16 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   const dispatch = useDispatch()
   const token = Cookies.get('token')
   const FileWrapperUploadOptions = {
-    headers: { 'x-amz-acl': 'public-read',  'Authorization': `Bearer ${token}`},
+    signingUrlMethod: 'GET',
+    accept: '*/*',
+    uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
+    signingUrlHeaders: { 'Authorization': `Bearer ${token}` },
+    signingUrlWithCredentials: false,
+    signingUrlQueryParams: { uploadType: 'avatar' },
+    autoUpload: true,
+    signingUrl: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/s3/sign`,
+    s3path: 'masters-pages/files',
+
     ...uploadOptions,
   }
 
@@ -93,7 +103,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   useEffect(() => {
     const filtered = files.filter((file => !!file.path))
     if(multiple) {
-      onChange(filtered.map(item => { console.log("Item", item); return {path: item.path, catalogId: item.catalogId, mediaId: item.mediaId, key: item.key, ...(item as any).data}}))
+      onChange(filtered.map(item => item.path))
 
     }else{
       onChange(filtered[0]?.path || null)
@@ -186,8 +196,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
           className={styles.uploadDropZone}
           {...getRootProps()}
         >
-          <img src="/img/icons/upload_file.svg" alt=''/>
-          <span>Вы можете добавить<br/>сюда еще один файл</span>
+          {props.addFileButton ? props.addFileButton : props.altView ? <AddFileButton altView/> : <AddFileButton/>}
           <input
             {...getInputProps()}
           />

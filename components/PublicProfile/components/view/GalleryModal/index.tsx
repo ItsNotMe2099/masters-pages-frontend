@@ -23,59 +23,86 @@ import GalleryItem from 'components/PublicProfile/components/view/CardGallery/co
 import {default as React} from 'react'
 import GalleryCommentItem from 'components/PublicProfile/components/view/GalleryModal/GalleryCommentItem'
 import LikeIcon from 'components/svg/LikeIcon'
+import {
+  createNewsLikeRequest,
+  fetchNewsItemCommentList, setNewsCurrentItemIndex,
+  setPageNewsCurrentItemCommentsPage
+} from 'components/News/actions'
 
 interface Props {
   isOpen: boolean,
+  isNews?: boolean
   onClose: () => void
 }
 
 export default function GalleryModal(props: Props) {
+  const {isNews} = props;
   const dispatch = useDispatch();
 
-  const model = useSelector((state: IRootState) => state.profileGallery.currentItem)
-  const currentIndex = useSelector((state: IRootState) => state.profileGallery.currentItemIndex)
-  const total = useSelector((state: IRootState) => state.profileGallery.total)
-  const likeIsSending = useSelector((state: IRootState) => state.profileGallery.likeIsSending);
-  const commentsList = useSelector((state: IRootState) => state.profileGallery.currentItemCommentList);
-  const commentsLoading = useSelector((state: IRootState) => state.profileGallery.currentItemCommentLoading);
-  const commentsTotal = useSelector((state: IRootState) => state.profileGallery.currentItemCommentTotal)
-  const commentsPage = useSelector((state: IRootState) => state.profileGallery.currentItemCommentPage)
+  const model = useSelector((state: IRootState) => isNews ? state.news.currentItem : state.profileGallery.currentItem);
+  const currentIndex = useSelector((state: IRootState) => isNews ? state.news.currentItemIndex : state.profileGallery.currentItemIndex)
+  const total = useSelector((state: IRootState) => isNews ? state.news.total : state.profileGallery.total)
+  const likeIsSending = useSelector((state: IRootState) => isNews ? state.news.likeIsSending : state.profileGallery.likeIsSending);
+  const commentsList = useSelector((state: IRootState) => isNews ? state.news.currentItemCommentList : state.profileGallery.currentItemCommentList);
+  const commentsLoading = useSelector((state: IRootState) => isNews ? state.news.currentItemCommentLoading : state.profileGallery.currentItemCommentLoading);
+  const commentsTotal = useSelector((state: IRootState) => isNews ? state.news.currentItemCommentTotal : state.profileGallery.currentItemCommentTotal)
+  const commentsPage = useSelector((state: IRootState) => isNews ? state.news.currentItemCommentPage : state.profileGallery.currentItemCommentPage)
   const commentLimit = 10;
 
   const handleScrollNext = () => {
-    dispatch(setPageProfileGalleryCurrentItemCommentsPage(commentsPage + 1))
-    dispatch(fetchProfileGalleryItemCommentList({
-      type: 'gallery',
-      profileGalleryId: model.id,
-      page: commentsPage + 1,
-      limit: commentLimit
-    }));
+    if(isNews){
+      dispatch(setPageNewsCurrentItemCommentsPage(commentsPage + 1))
+      dispatch(fetchNewsItemCommentList({
+        type: 'gallery',
+        profileGalleryId: model.id,
+        page: commentsPage + 1,
+        limit: commentLimit
+      }));
+    }else {
+      dispatch(setPageProfileGalleryCurrentItemCommentsPage(commentsPage + 1))
+      dispatch(fetchProfileGalleryItemCommentList({
+        type: 'gallery',
+        profileGalleryId: model.id,
+        page: commentsPage + 1,
+        limit: commentLimit
+      }));
+    }
   }
 
   const handleLike = () => {
-    dispatch(createProfileGalleryLikeRequest(model.id));
+    if(isNews) {
+      dispatch(createNewsLikeRequest(model.id));
+    }else{
+      dispatch(createProfileGalleryLikeRequest(model.id));
+    }
   }
   const handleClose = () => {
     props.onClose();
   }
   const handleNextClick = () => {
-
-    console.log("HandleNext", currentIndex, total);
     if (currentIndex + 1 < total) {
-      dispatch(setProfileGalleryCurrentItemIndex(currentIndex + 1))
+      if(isNews){
+        dispatch(setNewsCurrentItemIndex(currentIndex + 1))
+      }else{
+        dispatch(setProfileGalleryCurrentItemIndex(currentIndex + 1))
+      }
+
     }
   }
   const handlePrevClick = () => {
     if (currentIndex > 0) {
-      dispatch(setProfileGalleryCurrentItemIndex(currentIndex - 1))
+      if(isNews){
+        dispatch(setNewsCurrentItemIndex(currentIndex - 1))
+      }else{
+        dispatch(setProfileGalleryCurrentItemIndex(currentIndex - 1))
+      }
+
     }
   }
 
   return (
     <Modal{...props} className={styles.modal} loading={false} size="medium" closeClassName={styles.close}
-
-          onRequestClose={handleClose}
-    >
+          onRequestClose={handleClose}>
       <div className={styles.arrowLeft} onClick={handlePrevClick}>
         {currentIndex > 0 && <MainSliderArrowLeft/>}
       </div>
@@ -107,7 +134,7 @@ export default function GalleryModal(props: Props) {
               <div className={styles.statItem}>{likeIsSending ? <div className={styles.likeLoader}><Loader/></div> : <><div onClick={handleLike}><LikeIcon className={styles.likeIcon}/></div>{model.likesCount}</>}</div>
               <div className={styles.statItem}><img src={'/img/icons/comments.svg'}/>{model.commentsCount}</div>
             </div>
-            {model.commentsAllowed && <GalleryNewComment/>}
+            {model.commentsAllowed && <GalleryNewComment isNews={isNews}/>}
           </div>
         </div>
       </div>

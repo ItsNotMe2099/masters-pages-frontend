@@ -7,6 +7,7 @@ export const useDetectOutsideClick = (el, initialState) => {
     const pageClickEvent = (e) => {
       // If the active element exists and is clicked outside of
       if (el.current !== null && !el.current.contains(e.target)) {
+        console.log("Page click event", el.current, e.target);
         setIsActive(!isActive);
       }
     };

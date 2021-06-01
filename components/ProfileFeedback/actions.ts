@@ -56,7 +56,8 @@ export const createFeedBackEventMasterRequest = (data: any) => action(ActionType
   }
 })
 
-export const createFeedBackEventClientRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST, {
+export const createFeedBackClient = (data: any) => action(ActionTypes.CREATE_FEEDBACK_CLIENT, {data})
+export const createFeedBackClientRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_CLIENT_REQUEST, {
   api: {
     url: '/api/feedback/client',
     method: 'POST',
@@ -64,6 +65,14 @@ export const createFeedBackEventClientRequest = (data: any) => action(ActionType
   }
 })
 
+
+export const createFeedBackEventClientRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST, {
+  api: {
+    url: '/api/feedback/client',
+    method: 'POST',
+    data
+  }
+})
 export const createFeedBackMasterRequest = (data: any) => action(ActionTypes.CREATE_FEEDBACK_MASTER_REQUEST, {
   api: {
     url: '/api/feedback/master',

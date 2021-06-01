@@ -75,7 +75,7 @@ const Modals = (props: Props) => {
       {key === 'taskEditConditionsModal' &&
       <TaskEditConditionsModal isOpen={key === 'taskEditConditionsModal'} onClose={() => dispatch(modalClose())}/>}
       {key === 'finishTaskAsClientOpen' && <FinishingTaskByClientModal isOpen={key === 'finishTaskAsClientOpen'}/>}
-      {key === 'feedbackByMasterOpen' && <FeedbackByMasterModal isOpen={key === 'feedbackByMasterOpen'}/>}
+      {key === 'feedbackByMasterOpen' && <FeedbackByMasterModal isOpen={key === 'feedbackByMasterOpen'} onRequestClose={() => dispatch(modalClose())}/>}
       {key === 'feedbackSiteModal' && <FeedbackSiteModal isOpen={key === 'feedbackSiteModal'}/>}
       {key === 'taskSuccessModal' && <SuccessTaskModal isOpen={key === 'taskSuccessModal'}/>}
       {key === 'feedbackSuccessModal' && <SuccessFeedbackModal isOpen={key === 'feedbackSuccessModal'}/>}

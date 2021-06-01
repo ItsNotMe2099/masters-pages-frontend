@@ -16,6 +16,7 @@ interface Props {
   onClick?: (any) => void
   onIconClick?: (e) => void
   hidden?: boolean
+  size?: any
 }
 
 export default function Input({children, ...props}: Props) {

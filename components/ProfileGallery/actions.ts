@@ -5,8 +5,8 @@ const queryString = require('query-string')
 interface IProfileGalleryList{
   profileTabId?: number
   profileId: number,
-  categoryId: number,
-  subCategoryId: number,
+  categoryId?: number,
+  subCategoryId?: number,
   limit: number,
   page: number,
   sort?: string,
@@ -21,7 +21,7 @@ interface IProfileGalleryItemCommentList{
 }
 export const resetProfileGalleryForm = () => action(ActionTypes.RESET_PROFILE_GALLERY_FORM)
 
-export const createProfileGallery = (data: IProfileGalleryItem, formKey: string) => action(ActionTypes.CREATE_PROFILE_GALLERY, { data, formKey})
+export const createProfileGallery = (data: IProfileGalleryItem, formKey?: string) => action(ActionTypes.CREATE_PROFILE_GALLERY, { data, formKey})
 export const createProfileGalleryRequest = (data: IProfileGalleryItem) => action(ActionTypes.CREATE_PROFILE_GALLERY_REQUEST, {
   api: {
     url: `/api/profile-gallery`,
@@ -30,7 +30,7 @@ export const createProfileGalleryRequest = (data: IProfileGalleryItem) => action
   }
 })
 
-export const updateProfileGallery = (id: number, data: IProfileGalleryItem, formKey: string) => action(ActionTypes.UPDATE_PROFILE_GALLERY, { id, data, formKey})
+export const updateProfileGallery = (id: number, data: IProfileGalleryItem, formKey?: string) => action(ActionTypes.UPDATE_PROFILE_GALLERY, { id, data, formKey})
 export const updateProfileGalleryRequest = (id: number, data: IProfileGalleryItem) => action(ActionTypes.UPDATE_PROFILE_GALLERY_REQUEST, {
   api: {
     url: `/api/profile-gallery/${id}`,

@@ -2,7 +2,6 @@ import { confirmChangeData, modalClose } from "components/Modal/actions";
 import {
   deleteSavedPeople,
   deleteSavedPeopleRequest,
-  fetchSavedPeople,
   fetchSavedPeopleRequest
 } from "components/SavedPeople/actions";
 import { deleteSavedSearch, deleteSavedSearchRequest } from "components/SavedSearches/actions";
@@ -12,11 +11,7 @@ import { IRootState } from "types";
 import { ActionType } from 'typesafe-actions'
 import ActionTypes from './const'
 function* SavedPeopleSaga() {
-  yield takeLatest(ActionTypes.FETCH_SAVED_PEOPLE,
-    function* (action: ActionType<typeof fetchSavedPeople>) {
-      yield put(fetchSavedPeopleRequest());
 
-    })
   yield takeLatest(ActionTypes.DELETE_SAVED_PEOPLE,
     function* (action: ActionType<typeof deleteSavedPeople>) {
       yield put(confirmChangeData({loading: true}));

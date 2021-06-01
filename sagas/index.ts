@@ -32,6 +32,10 @@ import ProfileRecommendationSaga from 'components/ProfileRecommendations/sagas'
 import EventSaga from 'components/Events/sagas'
 import ShareSaga from 'components/Share/sagas'
 import InviteSaga from 'components/Invite/sagas'
+import PostSaga from 'components/Post/sagas'
+import NewsSaga from 'components/News/sagas'
+import FollowerSaga from 'components/Follower/sagas'
+import ReportSaga from 'components/Report/sagas'
 
 export const rootSaga = function* root() {
   yield all([
@@ -67,6 +71,10 @@ export const rootSaga = function* root() {
     ProfileRecommendationSaga(),
     EventSaga(),
     ShareSaga(),
-    InviteSaga()
+    InviteSaga(),
+    PostSaga(),
+    NewsSaga(),
+    FollowerSaga(),
+    ReportSaga(),
   ]);
 };

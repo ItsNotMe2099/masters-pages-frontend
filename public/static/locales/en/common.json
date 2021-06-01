@@ -387,5 +387,13 @@
     "title": "Are you sure?",
     "buttonConfirm": "Confirm",
     "buttonCancel": "Cancel"
+  },
+  "contacts": {
+    "menu": {
+      "messages": "Messages",
+      "subscriptions": "News Subscriptions",
+      "saved": "Saved",
+      "recommendations": "Recommendations"
+    }
   }
 }

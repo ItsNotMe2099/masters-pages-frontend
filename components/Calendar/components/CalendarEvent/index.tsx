@@ -10,7 +10,10 @@ import CalendarEventToolTip from 'components/Calendar/components/CalendarEventTo
 import Avatar from 'components/ui/Avatar'
 import AvatarSvg from 'components/svg/AvatarSvg'
 interface Props {
-  event: IEvent
+  event: IEvent,
+  className?: string,
+  onClick?: () => void
+  showDate?: boolean
 }
 
 export default function CalendarEvent(props: Props) {
@@ -79,7 +82,7 @@ export default function CalendarEvent(props: Props) {
   const otherSide = event.isAuthor ? event.participant : event.author;
   // @ts-ignore
   return (
-    <div className={`${styles.root} ${getRootClass()}`}  ref={setTriggerRef}>
+    <div className={`${styles.root} ${getRootClass()} ${props.className}`} onClick={props.onClick} ref={setTriggerRef}>
       <div className={`${styles.leftBorder} ${getBorderClass()}`}></div>
       <div className={styles.wrapper}>
         <div className={styles.time}>{format(getEventPlannedAllowed(event) ? event.start : event.actualStart, 'HH:mm')} - {format(getEventPlannedAllowed(event) ? event.end :  event.actualEnd, 'HH:mm')}</div>

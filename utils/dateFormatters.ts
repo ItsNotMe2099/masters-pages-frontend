@@ -6,6 +6,7 @@ import {
   getCenturyStart,
   getPreviousCenturyStart,
   getNextCenturyStart,
+  getNextCenturyEnd,
   getCenturyEnd,
   getPreviousCenturyEnd,
   getCenturyRange,
@@ -13,6 +14,7 @@ import {
   getDecadeStart,
   getPreviousDecadeStart,
   getNextDecadeStart,
+  getNextDecadeEnd,
   getDecadeEnd,
   getPreviousDecadeEnd,
   getDecadeRange,
@@ -20,6 +22,7 @@ import {
   getYearStart,
   getPreviousYearStart,
   getNextYearStart,
+  getNextYearEnd,
   getYearEnd,
   getPreviousYearEnd,
   getYearRange,
@@ -27,6 +30,7 @@ import {
   getMonthStart,
   getPreviousMonthStart,
   getNextMonthStart,
+  getNextMonthEnd,
   getMonthEnd,
   getPreviousMonthEnd,
   getMonthRange,
@@ -35,6 +39,7 @@ import {
   getDayEnd,
   getDayRange,
 } from '@wojtekmaj/date-utils';
+import {addDays, endOfWeek, startOfWeek} from 'date-fns'
 
 const formatMonthYearOptions = { month: 'long', year: 'numeric' };
 const formatYearOptions = { year: 'numeric' };
@@ -79,6 +84,10 @@ export const getBeginPrevious = (rangeType, date) => {
       return getPreviousYearStart(date);
     case 'month':
       return getPreviousMonthStart(date);
+    case 'week':
+      return startOfWeek(new Date(date.getTime()  - 7 * 24 * 60 * 60 * 1000));
+    case 'day':
+      return addDays(date, -1);
     default:
       throw new Error(`Invalid rangeType: ${rangeType}`);
   }
@@ -94,6 +103,50 @@ export const getBeginNext = (rangeType, date) => {
       return getNextYearStart(date);
     case 'month':
       return getNextMonthStart(date);
+    case 'week':
+      return startOfWeek(new Date(date.getTime()  + 7 * 24 * 60 * 60 * 1000));
+    case 'day':
+      return addDays(date, 1);
+    default:
+      throw new Error(`Invalid rangeType: ${rangeType}`);
+  }
+}
+
+
+
+export const getEndPrevious = (rangeType, date) => {
+  switch (rangeType) {
+    case 'century':
+      return getPreviousCenturyEnd(date);
+    case 'decade':
+      return getPreviousDecadeEnd(date);
+    case 'year':
+      return getPreviousYearEnd(date);
+    case 'month':
+      return getPreviousMonthEnd(date);
+    case 'week':
+      return endOfWeek(new Date(date.getTime()  - 7 * 24 * 60 * 60 * 1000));
+    case 'day':
+      return addDays(date, -1);
+    default:
+      throw new Error(`Invalid rangeType: ${rangeType}`);
+  }
+}
+
+export const getEndNext = (rangeType, date) => {
+  switch (rangeType) {
+    case 'century':
+      return getNextCenturyEnd(date);
+    case 'decade':
+      return getNextDecadeEnd(date);
+    case 'year':
+      return getNextYearEnd(date);
+    case 'month':
+      return getNextMonthEnd(date);
+    case 'week':
+      return startOfWeek(new Date(date.getTime()  + 7 * 24 * 60 * 60 * 1000));
+    case 'day':
+      return addDays(date, 1);
     default:
       throw new Error(`Invalid rangeType: ${rangeType}`);
   }
@@ -104,7 +157,21 @@ export const getBegin = (rangeType, date) => {
     case 'decade': return getDecadeStart(date);
     case 'year': return getYearStart(date);
     case 'month': return getMonthStart(date);
+    case 'week': return startOfWeek(date);
     case 'day': return getDayStart(date);
+    default: throw new Error(`Invalid rangeType: ${rangeType}`);
+  }
+}
+
+
+export const getEnd = (rangeType, date) => {
+  switch (rangeType) {
+    case 'century': return getCenturyEnd(date);
+    case 'decade': return getDecadeEnd(date);
+    case 'year': return getYearEnd(date);
+    case 'month': return getMonthEnd(date);
+    case 'week': return endOfWeek(date);
+    case 'day': return getDayEnd(date);
     default: throw new Error(`Invalid rangeType: ${rangeType}`);
   }
 }

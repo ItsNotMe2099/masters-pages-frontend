@@ -76,6 +76,13 @@ export const fetchOneTaskUserRequest = (taskId: number) => action(ActionTypes.TA
     method: 'GET'
   }
 })
+export const fetchTaskStatsById = (id) => action(ActionTypes.FETCH_TASK_STATS_BY_ID, {
+  api: {
+    url: `/api/tasks/${id}/stats`,
+    method: 'GET',
+  }
+})
+
 
 export const setCompletedTaskUser = (taskId: number) => action(ActionTypes.TASK_USER_SET_COMPLETED, {taskId})
 export const setCompletedTaskUserRequest = (taskNegotiationId: number) => action(ActionTypes.TASK_USER_SET_COMPLETED_REQUEST, {

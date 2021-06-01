@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 import FinishingTaskByMasterForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
+import {createFeedBackClient} from 'components/ProfileFeedback/actions'
 
 interface Props {
   isOpen: boolean
@@ -23,8 +24,8 @@ export default function FeedbackByMasterModal(props: Props) {
   useEffect(() => {
     dispatch(taskNegotiationFetchLastConditions(task.id));
   }, [])
-  const handleSubmit = () => {
-
+  const handleSubmit = (data) => {
+      dispatch(createFeedBackClient({...data, taskId: task.id}));
   }
 
   return (
@@ -38,7 +39,7 @@ export default function FeedbackByMasterModal(props: Props) {
           </div>
 
           <div className={styles.form}>
-            <FinishingTaskByMasterForm onSubmit={handleSubmit}/>
+            <FinishingTaskByMasterForm onCancel={props.onRequestClose} onSubmit={handleSubmit}/>
           </div>
         </div>
     </Modal>

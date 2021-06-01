@@ -1,5 +1,5 @@
 
-import { fetchSavedPeople, fetchSavedPeopleRequest, resetSavedPeopleList } from "components/SavedPeople/actions";
+import { fetchSavedPeopleRequest, resetSavedPeopleList } from "components/SavedPeople/actions";
 import { useEffect, useState } from "react";
 import { IRootState } from "types";
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,7 +12,7 @@ interface Props {
 const SavedPeople = (props: Props) => {
   const dispatch = useDispatch()
   const list = useSelector((state: IRootState) => state.savedPeople.list)
-  const total = useSelector((state: IRootState) => state.savedPeople.listTotal)
+  const total = useSelector((state: IRootState) => state.savedPeople.total)
   const [page, setPage] = useState(1)
 
   console.log("LIST!!!!",list.length)
@@ -20,12 +20,11 @@ const SavedPeople = (props: Props) => {
   useEffect(() => {
     console.log("PAGE!!!!!!",page)
     dispatch(resetSavedPeopleList())
-    dispatch(fetchSavedPeople())
   }, [])
 
   const handleScrollNext = () => {
     setPage(page + 1)
-    dispatch(fetchSavedPeopleRequest(page + 1))
+    dispatch(fetchSavedPeopleRequest({page: page + 1}))
   }
 
   return (

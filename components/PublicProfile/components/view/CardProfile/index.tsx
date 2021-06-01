@@ -14,6 +14,7 @@ import {taskOfferOpen} from 'components/Modal/actions'
 import {showProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm} from 'components/Profile/actions'
 import AvatarForm from 'pages/PersonalArea/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
+import {createFollower} from 'components/Follower/actions'
 interface Props{
   profile: ProfileData,
   isEdit: boolean
@@ -22,7 +23,7 @@ const CardProfile = (props: Props) => {
   const {profile, isEdit} = props;
   const dispatch = useDispatch();
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const recommendationLoading = useSelector((state: IRootState) => state.profileRecommendation.formLoading);
+  const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading);
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
   const handleEditClick = () => {
@@ -30,6 +31,9 @@ const CardProfile = (props: Props) => {
   }
   const handleRecommend = () => {
     dispatch(createProfileRecommendation(profile.id));
+  }
+  const handleSubscribe = () => {
+    dispatch(createFollower({profileId: profile.id}));
   }
   const handleSendOffer = () => {
     dispatch(taskNegotiationSetCurrentProfile(profile));
@@ -91,7 +95,7 @@ const CardProfile = (props: Props) => {
       </div>}
       <div className={styles.followers}>
         <div className={styles.followersValue}><UserIcon/> {recommendationTotal} recommended </div>
-        {!isEdit && <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleRecommend}>Recommend</Button>}
+        {!isEdit && <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>Subscribe</Button>}
       </div>
     </Card>
   )

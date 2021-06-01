@@ -1,6 +1,4 @@
-import { fetchSavedPeople } from "components/SavedPeople/actions";
 import { fetchSavedTasks, fetchSavedTasksRequest, resetSavedTasksList } from "components/SavedTasks/actions";
-import Button from "components/ui/Button";
 import { useEffect, useState } from "react";
 import { IRootState } from "types";
 import { useSelector, useDispatch } from 'react-redux'

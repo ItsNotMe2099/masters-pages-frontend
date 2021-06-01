@@ -67,7 +67,6 @@ import {
   fetchEventSidebar,
   updateEvent
 } from 'components/Events/actions'
-import {getBeginPrevious} from 'components/Calendar/components/CalendarSideBar/CalendarSideBarCalendar/formatters'
 import EditEventModal from 'components/Calendar/components/EditEventModal'
 import ModalConfirm from 'components/Modal/ModalConfirm'
 import EventExpenseModal from 'components/Calendar/components/EventExpenseModal'

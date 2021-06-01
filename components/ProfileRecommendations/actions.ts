@@ -17,9 +17,32 @@ export const createProfileRecommendationRequest = (profileId: number) => action(
   }
 })
 
-export const fetchProfileRecommendationList = (profileId: number, data: IProfileRecommendationList) => action(ActionTypes.FETCH_PROFILE_RECOMMENDATION_LIST, {
+
+export const deleteProfileRecommendation = (recommendationId: number) => action(ActionTypes.DELETE_PROFILE_RECOMMENDATION, { recommendationId })
+export const deleteProfileRecommendationRequest = (recommendationId: number) => action(ActionTypes.DELETE_PROFILE_RECOMMENDATION_REQUEST, {
+  api: {
+    url: `/api/profile-recommendations/${recommendationId}`,
+    method: 'DELETE',
+    data: {
+      recommendationId
+    },
+  }
+})
+
+export const fetchProfileRecommendationForProfileList = (profileId: number, data: IProfileRecommendationList) => action(ActionTypes.FETCH_PROFILE_RECOMMENDATION_LIST, {
   api: {
     url: `/api/profile-recommendations/${profileId}?${queryString.stringify({
+      ...data,
+      sort: 'createdAt',
+      sortOrder: 'DESC'
+    })}`,
+    method: 'GET',
+  }
+})
+
+export const fetchProfileRecommendationList = (profileId: number, data: IProfileRecommendationList) => action(ActionTypes.FETCH_PROFILE_RECOMMENDATION_LIST, {
+  api: {
+    url: `/api/profile-recommendations?${queryString.stringify({
       ...data,
       sort: 'createdAt',
       sortOrder: 'DESC'

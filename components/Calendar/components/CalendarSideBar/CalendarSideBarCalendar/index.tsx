@@ -15,7 +15,7 @@ import {
   formatYear, getBegin,
   getBeginNext,
   getBeginPrevious, getCenturyLabel, getDecadeLabel
-} from './formatters'
+} from 'utils/dateFormatters'
 
 
 interface Props {

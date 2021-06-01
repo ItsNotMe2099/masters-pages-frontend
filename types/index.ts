@@ -24,7 +24,6 @@ import {SavedPeopleState} from "components/SavedPeople/reducer";
 import {SavedTasksState} from "components/SavedTasks/reducer";
 import {ProfileFeedbackState} from "components/ProfileFeedback/reducer";
 import {PublicProfileState} from "components/PublicProfile/reducer";
-import {TaskPageState} from "components/TaskPage/reducer";
 import {TaskSearchWithLimitState} from "components/Split/OrderingSection/Task/reducer";
 import {StatState} from "../components/Stat/reducer";
 import {RegistrationPhoneState} from "../components/Auth/RegistrationPhone/reducer";
@@ -41,6 +40,10 @@ import {ProfileRecommendationState} from 'components/ProfileRecommendations/redu
 import {EventsState} from 'components/Events/reducer'
 import {ShareState} from 'components/Share/reducer'
 import {InviteState} from 'components/Invite/reducer'
+import {PostState} from 'components/Post/reducer'
+import {NewsState} from 'components/News/reducer'
+import {FollowerState} from 'components/Follower/reducer'
+import {ReportState} from 'components/Report/reducer'
 
 export interface IRootState {
   authComponent: authState,
@@ -70,7 +73,6 @@ export interface IRootState {
   savedTasks: SavedTasksState
   profileFeedback: ProfileFeedbackState
   publicProfile: PublicProfileState
-  taskPage: TaskPageState
   taskSearchWithLimit: TaskSearchWithLimitState
   stat: StatState
   push: PushState,
@@ -79,11 +81,15 @@ export interface IRootState {
   profileTab: ProfileTabState,
   profilePortfolio: ProfilePortfolioState
   profileGallery: ProfileGalleryState
+  news: NewsState
   profileStat: ProfileStatState
   profileRecommendation: ProfileRecommendationState
   event: EventsState,
   share: ShareState,
-  invite: InviteState
+  invite: InviteState,
+  post: PostState,
+  follower: FollowerState,
+  report: ReportState
 }
 
 export interface ILocation {
@@ -681,7 +687,7 @@ export interface IFeedbacksToProfile {
   target: string
   fromProfileId: number
   toProfileId: number
-  taskId: number
+  totalMark: number
   workQuality: number
   politeness: number
   deadlines: number
@@ -707,6 +713,8 @@ export interface IFeedbacksToProfile {
     }
   ]
   task: ITask,
+  taskId: number,
+  eventId: number
   fromProfile: ProfileData
   toProfile: ProfileData
   photos: string[]
@@ -786,4 +794,51 @@ export interface ISharePersonalLabel {
     name: boolean,
     phone: boolean,
   }
+}
+
+export interface IReportFilterProfileItem{
+  id: number,
+  name: string
+
+}
+export interface IReportFilterTaskItem{
+  id: number,
+  title: string
+
+}
+export interface IReportFilter{
+  categoriesFilter: {
+    total: number,
+    data: SkillData[],
+  }
+  subCategoriesFilter: {
+    total: number,
+    data: SkillData[],
+  }
+  clientsFilter: {
+    total: number,
+    data: IReportFilterProfileItem[],
+  }
+  mastersFilter: {
+    total: number,
+    data: IReportFilterProfileItem[],
+  }
+  tasksFilter: {
+    total: number,
+    data: IReportFilterTaskItem[],
+  }
+}
+
+export interface ITaskStats{
+  eventsCompleted: number,
+  eventsPlanned: number,
+  plannedTime: number,
+  completedTime: number,
+  plannedAmount: number,
+  completedAmount: number,
+  plannedCharges: number,
+  completedCharges: number,
+  reviews: number,
+  plannedExpenses: number,
+  completedExpenses: number
 }
