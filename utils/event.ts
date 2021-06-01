@@ -262,7 +262,7 @@ export const getEventStatusName =  (event: IEvent, {
   }
 }
 export const getEventPlannedAllowed = (event) => {
-  return [EventStatus.Planned, EventStatus.Confirmed, EventStatus.Declined, EventStatus.Draft].includes(event?.status);
+  return [EventStatus.Planned, EventStatus.Declined, EventStatus.Draft].includes(event?.status);
 }
 export const getEventCompletedAllowed = (event) => {
   return [EventStatus.Confirmed, EventStatus.Completed].includes(event?.status);
