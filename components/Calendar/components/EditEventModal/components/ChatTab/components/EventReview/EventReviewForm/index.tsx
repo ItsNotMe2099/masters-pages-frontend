@@ -72,6 +72,7 @@ let EventReviewForm = ({event, handleSubmit}: Props) => {
       <Field
         name="mark"
         component={Rating}
+        validate={required}
       />
       </div>
       <FormError error={error}/>
