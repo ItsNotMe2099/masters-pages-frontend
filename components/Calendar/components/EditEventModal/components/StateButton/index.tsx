@@ -16,7 +16,7 @@ const StateButton = ({event, type}: Props) => {
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
   const isOtherSide =  (currentProfile.role !== type)
   const showAuthor = type === currentProfile.role && event.isAuthor || type !== currentProfile.role && !event.isAuthor;
-
+  const isOverdue = event.isOverdue && currentProfile.role !== 'client' && type === 'master'
   const router = useRouter();
   const handleClick = (e) => {
 
@@ -25,13 +25,15 @@ const StateButton = ({event, type}: Props) => {
 
   const isMarkVisible = () => {
     const color = getEventColor(event, {
-      isOtherSide: type !== currentProfile.role
+      isOtherSide: type !== currentProfile.role,
+      isOverdue
     });
     return ['green', 'blue'].includes(color);
   }
   const getClass = () => {
     const color = getEventColor(event, {
-      isOtherSide: type !== currentProfile.role
+      isOtherSide: type !== currentProfile.role,
+      isOverdue
     });
     console.log("getColorEventState", showAuthor,currentProfile.role, type, event.isAuthor,color)
     switch (color){
@@ -73,6 +75,9 @@ const StateButton = ({event, type}: Props) => {
         if([EventStatus.Confirmed].includes(event.status)){
            return 'Planned';
         }
+        if(isOverdue){
+          return 'Overdue'
+        }
 
         if([EventStatus.Completed].includes(event.status)){
           return 'Pending';
@@ -100,6 +105,9 @@ const StateButton = ({event, type}: Props) => {
         }
         if([EventStatus.Confirmed].includes(event.status)){
             return 'Planned';
+        }
+        if(isOverdue){
+          return 'Overdue'
         }
         if([EventStatus.Completed].includes(event.status)){
           return 'Completed';

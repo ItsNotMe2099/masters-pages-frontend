@@ -44,6 +44,7 @@ import PostReducer from 'components/Post/reducer'
 import NewsReducer from 'components/News/reducer'
 import FollowerReducer from 'components/Follower/reducer'
 import ReportReducer from 'components/Report/reducer'
+import ContactsReducer from 'components/Contacts/reducer'
 
 export default combineReducers({
   form: formReducer,
@@ -91,4 +92,5 @@ export default combineReducers({
   news: NewsReducer,
   follower: FollowerReducer,
   report: ReportReducer,
+  contacts: ContactsReducer
 })

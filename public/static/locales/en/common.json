@@ -23,13 +23,16 @@
     "events": "Events",
     "messages": "Messages",
     "findOrders": "Find orders",
-    "findClients": "Find masters",
+    "findClients": "Find clients",
+    "findMaster": "Find Master",
+    "findVolunteer": "Find Volunteer",
     "posts": "Posts",
     "news": "News",
     "subscriptions": "Subscriptions",
     "account": "Account",
     "settings": "Settings",
-    "reports": "Reports"
+    "reports": "Reports",
+    "contacts": "Contacts"
   },
   "validation": {
     "email": "Wrong email format",

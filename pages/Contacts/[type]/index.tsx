@@ -22,6 +22,7 @@ import Tabs from 'components/ui/Tabs'
 import ContactsSubscriptions from 'components/Contacts/ContactsSubscriptions'
 import ContactsSaved from 'components/Contacts/ContactsSaved'
 import ContactsRecommendations from 'components/Contacts/ContactsRecommendations'
+import ContactsMessages from 'components/Contacts/ContactsMessages'
 
 const ContactsTypePage = (props) => {
   const {t} = useTranslation()
@@ -48,7 +49,7 @@ const ContactsTypePage = (props) => {
           <Tabs style={'round'} tabs={tabs} activeTab={type as string}/>
 
         </div>
-
+        {type === 'messages' &&       <ContactsMessages/>}
         {type === 'subscriptions' &&       <ContactsSubscriptions/>}
         {type === 'saved' &&       <ContactsSaved/>}
         {type === 'recommendations' &&       <ContactsRecommendations/>}

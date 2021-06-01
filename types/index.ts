@@ -44,6 +44,7 @@ import {PostState} from 'components/Post/reducer'
 import {NewsState} from 'components/News/reducer'
 import {FollowerState} from 'components/Follower/reducer'
 import {ReportState} from 'components/Report/reducer'
+import {ContactsState} from 'components/Contacts/reducer'
 
 export interface IRootState {
   authComponent: authState,
@@ -90,6 +91,7 @@ export interface IRootState {
   post: PostState,
   follower: FollowerState,
   report: ReportState
+  contacts: ContactsState
 }
 
 export interface ILocation {

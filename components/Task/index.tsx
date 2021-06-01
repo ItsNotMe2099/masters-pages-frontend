@@ -324,11 +324,11 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
               </div>}
               {(actionsType === 'client') && <div className={styles.taskTitle}>
-                <div className={styles.title}>{task.title}</div>
+                <Link href={`/TaskPage/${task.id}`}><a className={styles.title}>{task.title}</a></Link>
               </div>}
-              <div className={styles.mobile}>{actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><div className={styles.title}>
+              <div className={styles.mobile}>{actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><a className={styles.title}>
                 {task.title}
-              </div></Link>}</div>
+              </a></Link>}</div>
               {(actionsType !== 'public') && <div className={`${styles.status} ${getStatusClassName()}`}>
                 {getStatusText()}
               </div>}

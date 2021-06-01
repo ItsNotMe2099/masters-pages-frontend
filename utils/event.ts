@@ -137,11 +137,13 @@ export const getEventBorderColor = (event: IEvent, currentRole) => {
 
 interface EventColorOptions{
   isOtherSide: boolean
-  showUnreadAlert?: boolean
+  showUnreadAlert?: boolean,
+  isOverdue?: boolean
 }
 export const getEventColor = (event: IEvent, {
   isOtherSide,
-  showUnreadAlert = false
+  showUnreadAlert = false,
+  isOverdue = false,
 }: EventColorOptions) => {
   const showAuthor = !isOtherSide && event.isAuthor || isOtherSide && !event.isAuthor;
   if(showAuthor){
@@ -157,7 +159,10 @@ export const getEventColor = (event: IEvent, {
     if([EventStatus.Confirmed].includes(event.status)){
       return 'blue';
     }
-    if(isOtherSide && [EventStatus.Completed].includes(event.status) && (event.unreadMediaMessagesCount > 0 || event.unreadTextMessagesCount > 0)){
+    if(isOverdue){
+      return 'red';
+    }
+    if(showUnreadAlert && isOtherSide && [EventStatus.Completed].includes(event.status) && (event.unreadMediaMessagesCount > 0 || event.unreadTextMessagesCount > 0)){
       return 'red';
     }
     if([EventStatus.Completed].includes(event.status)){

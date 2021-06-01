@@ -1,58 +1,45 @@
 import ApiActionTypes from "constants/api";
-import {IProfileGalleryItem, IProfileTab, SkillData, SkillListItem} from "types";
-import ActionTypes from "./const";
-export interface NewsState {
-  list: IProfileGalleryItem[],
-  currentItem: IProfileGalleryItem
-  currentItemIndex: number
-  currentItemCommentList: any[],
-  currentItemCommentTotal: number,
-  currentItemCommentLoading: boolean,
-  currentItemCommentPage: number
-  commentIsSending: boolean,
-  commentSentSuccess: boolean,
-  commentSentError: any,
+import {IProfileGalleryItem, IProfileTab, ProfileData, SkillData, SkillListItem} from "types";
+import ActionTypes from './const'
 
-  likeIsSending: boolean
-  likeSentError: any,
-
+export interface ContactsState {
+  list: ProfileData[],
   page: number
   total: number
-  currentProfileTab?: IProfileGalleryItem,
-  formIsSuccess: boolean
-  formError: string,
   listLoading: boolean,
-  currentItemLoading: boolean
-  formLoading: boolean,
 }
 
-const initialState: NewsState = {
+const initialState: ContactsState = {
   list: [],
   total: 0,
   page: 1,
-  formIsSuccess: false,
-  formError: '',
-  formLoading: false,
   listLoading: false,
-  currentItem: null,
-  currentItemIndex: 0,
-  currentItemLoading: false,
-  currentItemCommentList: [],
-  currentItemCommentTotal: 0,
-  currentItemCommentPage: 1,
-  currentItemCommentLoading: false,
-
-  commentIsSending: false,
-  commentSentSuccess: false,
-  commentSentError: null,
-
-  likeIsSending: false,
-  likeSentError: null
 }
 
-export default function NewsReducer(state = {...initialState}, action) {
+export default function ContactsReducer(state = {...initialState}, action) {
   switch(action.type) {
 
+    case ActionTypes.FETCH_MESSAGES_CONTACT_LIST:
+      state.listLoading = true;
+      break
+    case ActionTypes.FETCH_MESSAGES_CONTACT_LIST + ApiActionTypes.SUCCESS:
+      state.list = [...state.list, ...action.payload.data];
+      state.total = action.payload.total
+      state.listLoading = false;
+      break
+    case ActionTypes.FETCH_MESSAGES_CONTACT_LIST + ApiActionTypes.FAIL:
+      state.listLoading = false;
+      break
+
+    case ActionTypes.RESET_MESSAGES_CONTACT_LIST:
+      state.listLoading = false;
+      state.total = 0;
+      state.page = 1;
+      state.list = [];
+      break
+    case ActionTypes.SET_MESSAGES_CONTACT_PAGE:
+      state.page = action.payload;
+      break
   }
 
   return state

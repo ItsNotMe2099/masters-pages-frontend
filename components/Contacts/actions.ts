@@ -2,7 +2,7 @@ import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab, SkillData} fro
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
-interface INewsList{
+interface IContactsList{
   profileId?: number,
   limit: number,
   page: number,
@@ -10,45 +10,18 @@ interface INewsList{
   sortOrder?: string
 }
 
-interface INewsItemCommentList{
+interface IContactsItemCommentList{
   type: string
   profileGalleryId: number,
   limit: number,
   page: number
 }
-export const fetchNewsList = (data: INewsList) => action(ActionTypes.FETCH_NEWS_LIST, {
+export const fetchContactsList = (data: IContactsList) => action(ActionTypes.FETCH_MESSAGES_CONTACT_LIST, {
   api: {
-    url: `/api/news?${queryString.stringify(data)}`,
+    url: `/api/chat/contacts?${queryString.stringify(data)}`,
     method: 'GET',
   }
 })
 
-
-export const fetchNewsItemCommentList = (data: INewsItemCommentList) => action(ActionTypes.FETCH_NEWS_ITEM_COMMENT_LIST_REQUEST, {
-  api: {
-    url: `/api/comment?${queryString.stringify(data)}`,
-    method: 'GET',
-  }
-})
-
-export const createNewsLikeRequest = (profileGalleryId: number) => action(ActionTypes.CREATE_NEWS_COMMENT_LIKE_REQUEST, {
-  api: {
-    url: `/api/like`,
-    method: 'NEWS',
-    data: {
-      profileGalleryId
-    }
-  }
-})
-
-
-export const setNewsTab = (tab: IProfileTab) => action(ActionTypes.SET_NEWS_TAB, { tab })
-
-export const resetNewsList = () => action(ActionTypes.RESET_NEWS_LIST)
-export const setPageNewsCurrentItemCommentsPage = (page: number) => action(ActionTypes.SET_NEWS_ITEM_COMMENT_PAGE, page)
-export const setNewsCurrentItem = (item: IProfileGalleryItem) => action(ActionTypes.SET_NEWS_CURRENT, item)
-export const setNewsCurrentItemIndex = (index: number) => action(ActionTypes.SET_NEWS_CURRENT_INDEX, index)
-
-export const createNewsComment = (data: IProfileGalleryComment, onSuccess) => action(ActionTypes.CREATE_NEWS_COMMENT, {data, onSuccess})
-export const createNewsCommentSuccess = (data: IProfileGalleryItem) => action(ActionTypes.CREATE_NEWS_COMMENT_SUCCESS, data)
-export const createNewsCommentFailed = (err: any) => action(ActionTypes.CREATE_NEWS_COMMENT_FAIL, err)
+export const resetContactsList = () => action(ActionTypes.RESET_MESSAGES_CONTACT_LIST)
+export const setPageContactsList = (page: number) => action(ActionTypes.SET_MESSAGES_CONTACT_PAGE, page)
