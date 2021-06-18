@@ -23,6 +23,7 @@ import Layout from 'components/layout/Layout'
 import {getAuthServerSide} from 'utils/auth'
 import TabOrderModal from 'pages/PersonalArea/orders/[orderType]/components/TabOrderModal'
 import Modals from 'components/layout/Modals'
+import Button from 'components/ui/Button'
 interface Props {
 }
 const TabOrders = (props: Props) => {
@@ -83,6 +84,10 @@ const TabOrders = (props: Props) => {
   return (
     <Layout>
     <div className={styles.root}>
+      <div className={styles.actions}>
+      <Button  red={true} bold={true} size={'12px 40px'}
+              type={'button'} onClick={() => router.push('/CreateTaskPage')}>Create new order</Button>
+      </div>
       <div className={styles.desktop}>
       <Tabs style={'round'} tabs={tabs.map((tab => {
         console.log("Stat", stat)

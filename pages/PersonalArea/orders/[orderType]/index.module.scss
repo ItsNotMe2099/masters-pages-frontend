@@ -5,6 +5,9 @@
   flex-direction: column;
   position: relative;
 }
+.actions{
+  display: flex;
+}
 .tasks{
   padding: 12px;
   border: 1px solid  #EDEDED;
