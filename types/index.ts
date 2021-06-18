@@ -134,13 +134,15 @@ export interface ProfileData {
   preferredCategories?: number[],
   preferredSubCategories?: number[],
   skills?: SkillData[]
-  totalNotificationsCount?: number
-  feedbackNotificationsCount?: number
-  messageNotificationsCount?: number
-  taskOfferNotificationsCount?: number
-  taskResponseNotificationsCount?: number
-  taskOfferDeclinedNotificationsCount?: number
-  taskResponseDeclinedNotificationsCount?: number
+  notificationTotalCount?: number
+  notificationFeedbackCount?: number
+  notificationMessageCount?: number
+  notificationTaskOfferCount?: number
+  notificationTaskResponseCount?: number
+  notificationTaskOfferDeclinedCount?: number
+  notificationTaskResponseDeclinedCount?: number
+  notificationEventCount?: number
+  notificationNewsCount?: number
   feedbacksCount?: number
   tasksCount?: number
   totalAmount?: number

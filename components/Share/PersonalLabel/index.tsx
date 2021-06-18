@@ -28,7 +28,7 @@ export default function SharePersonalLabel(props: Props) {
       webAddress: true
     }
   });
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}${subCategoryId ? `?subCategoryId=${subCategoryId}` : ''}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
 
   const handleChange = (data) => {
     console.log("handleChange", data)
@@ -53,7 +53,7 @@ export default function SharePersonalLabel(props: Props) {
       <div className={styles.title}>Your personal label</div>
       <div className={styles.description}>Use your personal MP label as email signature , letter head, business cards logo or place on your outdoor ads</div>
       <PersonalLabelForm onChange={handleChange} initialValues={settings}/>
-      <div className={styles.shareLabel}><ShareLabel ref={labelRef} link={shareUrl} settings={settings} name={`${profile.firstName} ${profile.lastName}`} phone={phone} id={profile.id}/></div>
+      <div className={styles.shareLabel}><ShareLabel ref={labelRef} link={shareUrl} settings={settings} name={`${profile.firstName} ${profile.lastName}`} phone={phone} id={subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}/></div>
       <div className={styles.btnContainer}>
         <Button size={'small'} onClick={handleDownloadPdf}>Download PDF</Button>
         <Button size={'small'} onClick={handleDownloadImage}>Download image</Button>

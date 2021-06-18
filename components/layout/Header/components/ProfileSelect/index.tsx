@@ -28,9 +28,9 @@ const ProfileSelect = (props) => {
 
   const options = [
     { value: 'profile', label: t('menu.profile'), link: `/PersonalArea` },
-    { value: 'messages', badge: profile.messageNotificationsCount, label: t('menu.messages'), link: `/Chat` },
-    { value: 'reviews', label: t('menu.reviews'), badge: profile.feedbackNotificationsCount,  link: `/PersonalArea/reviews` },
-    { value: 'orders', label: t('menu.orders'), badge: profile.taskResponseDeclinedNotificationsCount + profile.taskOfferDeclinedNotificationsCount + profile.taskResponseNotificationsCount + profile.taskOfferNotificationsCount,  link: `/PersonalArea/orders` },
+    { value: 'messages', badge: profile.notificationMessageCount, label: t('menu.messages'), link: `/Chat` },
+    { value: 'reviews', label: t('menu.reviews'), badge: profile.notificationFeedbackCount,  link: `/PersonalArea/reviews` },
+    { value: 'orders', label: t('menu.orders'), badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount,  link: `/PersonalArea/orders` },
     { value: 'settings', label: t('menu.settings'), link: `/PersonalArea/settings` },
     { value: 'calendar', label: t('menu.calendar'), link: `/PersonalArea/calendar` },
     { value: 'logout', label: t('menu.logout') },
@@ -53,7 +53,7 @@ const ProfileSelect = (props) => {
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={cx(styles.dropDownTrigger, { [styles.dropDownTriggerActive]: isActive })}>
-        <div className={styles.photo}>{profile?.totalNotificationsCount > 0 && <NotificationBadge amount={profile?.totalNotificationsCount}/>} <Avatar size={'small'} image={profile?.photo}/></div>
+        <div className={styles.photo}>{profile?.notificationTotalCount > 0 && <NotificationBadge amount={profile?.notificationTotalCount}/>} <Avatar size={'small'} image={profile?.photo}/></div>
         <ArrowDropDown/>
 
       </a>

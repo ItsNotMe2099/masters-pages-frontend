@@ -57,12 +57,13 @@ const SharePage = (props) => {
     }
   }
 
+  console.log("skills", skills);
   return (
     <Layout>
 
       <div className={styles.container}>
         <div className={styles.skills}>
-        {skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={getCategoryTranslation(skill.subCategory).name} onClick={() => setActiveSkill(skill)}/> : null)}
+        {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category).name}/${getCategoryTranslation(skill.subCategory).name}`} onClick={() => setActiveSkill(skill)}/> : null))}
         </div>
         <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>
         <div className={styles.content}>{getTabContent(activeTab)}</div>

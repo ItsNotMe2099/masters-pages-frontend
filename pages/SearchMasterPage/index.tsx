@@ -37,5 +37,6 @@ const SearchMasterPage = (props) => {
   </>
   )
 }
+
 export const getServerSideProps = getAuthServerSide({redirect: true});
 export default SearchMasterPage

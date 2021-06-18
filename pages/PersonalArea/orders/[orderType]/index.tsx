@@ -41,9 +41,9 @@ const TabOrders = (props: Props) => {
 
   const { orderType } = router.query
   const tabs = [
-    ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: 'draft'}, {name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.taskResponseNotificationsCount}] : []),
-    ...(role !== 'client' ? [{name: t('personalArea.tabOrders.menu.responses'), key: 'responses'}, {name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.taskResponseDeclinedNotificationsCount},
-      {name: t('personalArea.tabOrders.menu.offers'), key: 'offers', badge: profile.taskOfferNotificationsCount}] : []),
+    ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: 'draft'}, {name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount}] : []),
+    ...(role !== 'client' ? [{name: t('personalArea.tabOrders.menu.responses'), key: 'responses'}, {name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.notificationTaskResponseDeclinedCount},
+      {name: t('personalArea.tabOrders.menu.offers'), key: 'offers', badge: profile.notificationTaskOfferCount}] : []),
     {name: t('personalArea.tabOrders.menu.negotiation'), key: 'negotiation'},
     {name: t('personalArea.tabOrders.menu.inProgress'), key: 'in_progress'},
     {name: t('personalArea.tabOrders.menu.closed'), key: 'closed'},

@@ -21,6 +21,7 @@ import {useTranslation, withTranslation} from "react-i18next";
     e.preventDefault()
     setIsActive(!isActive);
   }
+
   const options = [
     { value: 'client', label: 'Client Mode' },
     { value: 'master', label: 'Master Mode' },
@@ -28,6 +29,7 @@ import {useTranslation, withTranslation} from "react-i18next";
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 
+  console.log("InitValue", value);
   useEffect(() => {
     setValue(options.find(item => role ? item.value === role : item.value === 'client'));
   }, [role]);

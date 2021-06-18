@@ -39,12 +39,12 @@ let EventReview = ({event}: Props) => {
     <div className={styles.root}>
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
-        <a href={`/PublicProfile/${otherSide.id}`}  target={'_blank'}
+        <a href={`/id${otherSide.id}`}  target={'_blank'}
            className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> review not available yet
       </div>}
       {otherReview && <>
         <div className={styles.reviewTitle}>
-          <a href={`/PublicProfile/${otherSide.id}`}  target={'_blank'}
+          <a href={`/id${otherSide.id}`}  target={'_blank'}
              className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> review:
 
         </div>

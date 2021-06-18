@@ -102,7 +102,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       <div className={styles.profile}>
         <Avatar image={profile.photo}/>
         <div className={styles.mobileWrapper}>
-        <div className={styles.name__mobile} onClick={() => router.push(`/PublicProfile/${profile.id}`)}>
+        <div className={styles.name__mobile} onClick={() => router.push(`/id${profile.id}`)}>
               <div className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>
@@ -133,7 +133,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
         <div className={styles.mainInfo}>
           <div className={styles.top}>
             <div className={styles.name}>
-              <div onClick={() => router.push(`/PublicProfile/${profile.id}`)}
+              <div onClick={() => router.push(`/id${profile.id}`)}
                 className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>

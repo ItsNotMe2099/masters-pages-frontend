@@ -52,8 +52,8 @@ const CardProfile = (props: Props) => {
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={'Edit'} onClick={handleEditClick}/>] : []}>
 
         {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
-        {(!showForm || !isEdit) &&  <a href={`/PublicProfile/${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
-      <a href={`/PublicProfile/${profile.id}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
+        {(!showForm || !isEdit) &&  <a href={`/id${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
+      <a href={`/id${profile.id}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
       <div className={styles.stat}>
         <div className={styles.statItem}>
           <img src={'/img/icons/job.svg'}/>

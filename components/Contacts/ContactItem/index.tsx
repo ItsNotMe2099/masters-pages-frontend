@@ -66,8 +66,8 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
           </div>
             <div className={styles.cell}>
         <div className={styles.actions}>
-          <Button className={styles.action} href={`/PublicProfile/${profile.id}`} onClick={handleActionProfile}>Profile</Button>
-          <Button className={styles.action} href={`/PublicProfile/${profile.id}`}>All Posts</Button>
+          <Button className={styles.action} href={`/id${profile.id}`} onClick={handleActionProfile}>Profile</Button>
+          <Button className={styles.action} href={`/id${profile.id}`}>All Posts</Button>
           <Button className={styles.action} onClick={handleActionNewOrder}>New Order</Button>
           <Button  className={styles.action} onClick={handleActionUnsubscribe}>{deleteActionName}</Button>
         </div>

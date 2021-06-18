@@ -1,6 +1,22 @@
 @import "scss/index";
 .root{
   position: relative;
+  &.modeMaster{
+    .dropDownTrigger{
+      background: #EB5757;
+    }
+  }
+  &.modeClient{
+    .dropDownTrigger{
+      background: #27AE60;
+    }
+
+  }
+  &.modeVolunteer{
+    .dropDownTrigger {
+      background: #199AC2;
+    }
+  }
 }
 .dropDown {
   background: #ffffff;
@@ -29,7 +45,6 @@
 
 .dropDownTrigger {
   cursor: pointer;
-  background: #EB5757;
   text-decoration: none;
   padding: 0px 9px;
   height: 32px;

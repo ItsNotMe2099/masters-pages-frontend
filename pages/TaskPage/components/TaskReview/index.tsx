@@ -41,7 +41,7 @@ let TaskReview = ({task}: Props) => {
     <div className={styles.root}>
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
-        <a href={`/PublicProfile/${otherSide.id}`}  target={'_blank'}
+        <a href={`/id${otherSide.id}`}  target={'_blank'}
            className={styles.author}><Avatar size={'exSmall'} image={otherSide.photo}/>{otherSide.firstName} {otherSide.lastName}</a> review not available yet
       </div>}
       {otherReview && <>

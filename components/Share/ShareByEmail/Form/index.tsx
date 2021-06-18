@@ -27,7 +27,8 @@ let ShareByEmailForm = (props: Props) => {
   const success = useSelector((state: IRootState) => state.share.formIsSuccess);
 
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}${subCategoryId ? `?subCategoryId=${subCategoryId}` : ''}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
+
   const handleReset = () => {
     reset()
     dispatch(resetShareByEmail());

@@ -13,7 +13,7 @@ import Link from 'next/link'
 interface Props {
   name: string,
   phone: string,
-  id: number,
+  id: string,
   link?: string
   settings: ISharePersonalLabel,
   subCategoryId?: number

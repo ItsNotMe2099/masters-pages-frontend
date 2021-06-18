@@ -24,6 +24,7 @@ const CardReviews = (props: Props) => {
   const page = useSelector((state: IRootState) => state.profileFeedback.page)
   const  limit = 30;
 
+  console.log("CardReviewsShow")
   useEffect(() => {
     dispatch(resetFeedbackList());
     dispatch(fetchFeedbacksToProfileRequest({

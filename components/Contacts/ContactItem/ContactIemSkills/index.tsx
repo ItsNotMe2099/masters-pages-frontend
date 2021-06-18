@@ -9,7 +9,7 @@ import Card from 'components/PublicProfile/components/Card'
 import Button from 'components/PublicProfile/components/Button'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {taskOfferOpen} from 'components/Modal/actions'
-import DynamicOverflow from "react-dynamic-overflow";
+import DynamicOverflow from "utils/DynamicOverflow";
 import { useDispatch, useSelector } from 'react-redux'
 import {getCategoryTranslation} from 'utils/translations'
 import {SkillDropDown} from 'components/Contacts/ContactItem/SkillDropDown'
@@ -43,22 +43,20 @@ const ContactIemSkills = ({profile}: Props) => {
   return (
     <div className={styles.mainRoot}>
         <DynamicOverflow
-          list={({ tabRef }) => (profile.skills.filter(item => item.subCategory).map((item, index)  => (
-            <Link href={`/PublicProfile/${profile.id}?subCategoryId=${item.subCategoryId}`}>
-            <a ref={index === 0 ? tabRef : null} className={styles.skill}>
-              {getCategoryTranslation(item.subCategory).name}
+          list={({ nodeRef }) => (profile.skills.filter(item => item.subCategory).map((item, index)  => (
+            <Link href={`/id${profile.id}?subCategoryId=${item.subCategoryId}`}>
+            <a ref={nodeRef} className={styles.skill}>
+              {getCategoryTranslation(item.category).name}/{getCategoryTranslation(item.subCategory).name}
             </a>
             </Link>
           )))}
         >
           {
-            ({ visibleElements, overflowElements, containerRef }) => {
+            ({ visibleElements, overflowElements, containerRef, moreNodeRef }) => {
               return (
                 <div ref={containerRef}  className={`${styles.root} ${getRootClass()}`}>
-                  <div className={styles.wrapper}>
-                  {visibleElements}
-                  </div>
-                  {overflowElements.length > 0 && <div className={styles.dropDownWrapper}>
+                 {visibleElements}
+                  {overflowElements.length > 0 && <div className={styles.dropDownWrapper} ref={moreNodeRef}>
                     <SkillDropDown dropdownClassName={`${styles.dropDown} ${getDropDownClass()}`}>
                       {overflowElements}
                     </SkillDropDown>

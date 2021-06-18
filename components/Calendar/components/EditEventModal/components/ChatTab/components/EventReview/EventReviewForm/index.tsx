@@ -57,7 +57,7 @@ let EventReviewForm = ({event, handleSubmit}: Props) => {
 
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
-      <div className={styles.title}>Describe your work experience with  <a href={`/PublicProfile/${otherSide.id}`} target={'_blank'} className={styles.profileName}>{otherSide.firstName} {otherSide.lastName}</a></div>
+      <div className={styles.title}>Describe your work experience with  <a href={`/id${otherSide.id}`} target={'_blank'} className={styles.profileName}>{otherSide.firstName} {otherSide.lastName}</a></div>
       <Field
         name="title"
         component={Input}

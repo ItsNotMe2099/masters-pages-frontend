@@ -15,7 +15,7 @@ export default function ShareBySocialMedia({subCategoryId}: Props) {
   const dispatch = useDispatch()
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
 
-  const shareUrl = `https://masterspages.dev.glob-com.ru/PublicProfile/${profile.id}${subCategoryId ? `?subCategoryId=${subCategoryId}` : ''}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
 
   return (
     <div className={styles.root}>

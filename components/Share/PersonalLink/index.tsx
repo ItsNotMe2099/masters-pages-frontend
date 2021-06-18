@@ -12,7 +12,7 @@ interface Props {
 export default function SharePersonalLink({subCategoryId}: Props) {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
   const dispatch = useDispatch()
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}${subCategoryId ? `?subCategoryId=${subCategoryId}` : ''}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
   const [isCopied, setIsCopied] = useState(false);
   useEffect(() => {
 
