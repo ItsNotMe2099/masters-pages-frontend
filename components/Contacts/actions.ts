@@ -16,12 +16,21 @@ interface IContactsItemCommentList{
   limit: number,
   page: number
 }
-export const fetchContactsList = (data: IContactsList) => action(ActionTypes.FETCH_MESSAGES_CONTACT_LIST, {
+export const fetchChatContactsList = (data: IContactsList) => action(ActionTypes.FETCH_MESSAGES_CONTACT_LIST, {
   api: {
     url: `/api/chat/contacts?${queryString.stringify(data)}`,
     method: 'GET',
   }
 })
 
-export const resetContactsList = () => action(ActionTypes.RESET_MESSAGES_CONTACT_LIST)
-export const setPageContactsList = (page: number) => action(ActionTypes.SET_MESSAGES_CONTACT_PAGE, page)
+export const fetchProfileContacts = (data: IContactsList) => action(ActionTypes.FETCH_CONTACT_LIST, {
+  api: {
+    url: `/api/profile-contacts?${queryString.stringify(data)}`,
+    method: 'GET',
+  }
+})
+
+export const resetProfileContactsList = () => action(ActionTypes.RESET_PROFILE_CONTACT_LIST)
+
+export const resetContactsChatList = () => action(ActionTypes.RESET_MESSAGES_CONTACT_LIST)
+export const setPageContactsChatList = (page: number) => action(ActionTypes.SET_MESSAGES_CONTACT_PAGE, page)

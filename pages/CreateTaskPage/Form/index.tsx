@@ -22,15 +22,22 @@ import styles from './index.module.scss'
 import { connect } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
+import {useEffect} from 'react'
 const queryString = require('query-string')
+import {fetchProfileContacts} from 'components/Contacts/actions'
 
 let CreateTaskForm = props => {
   const {t} = useTranslation()
+  const dispatch = useDispatch()
   const { handleSubmit, onChangeForStat } = props
   const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
   const searchStatCount = useSelector((state: IRootState) => state.profileSearch.searchStatCount)
   const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
+  const contacts = useSelector((state: IRootState) => state.contacts.contactsList);
 
+  useEffect(() => {
+    dispatch(fetchProfileContacts({page: 1, limit: 100}));
+  }, [])
   const getSearchStatFilterLink = () => {
     console.log("StatFilter", statFilter.masterRole);
     return `/${statFilter.masterRole === 'volunteer' ?'SearchVolunteerPage' : 'SearchMasterPage'}/?${queryString.stringify({filter: JSON.stringify(statFilter)}, {encode: true}).replace(/(")/g, '%22')}`
@@ -49,6 +56,14 @@ let CreateTaskForm = props => {
                 component={Input}
                 label={`${t('createTask.fieldTitle')}`}
                 validate={required}
+              />
+              <Field
+                name="profileId"
+                component={SelectInput}
+                label={`Profile`}
+                options={contacts.map(item => ({label: `${item.contactProfile.firstName} ${item.contactProfile.lastName}`, value: item.contactProfile.id}))}
+                size={'small'}
+                labelType={'static'}
               />
               <Field
                 name="geonameid"

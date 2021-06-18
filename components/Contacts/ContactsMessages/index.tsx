@@ -1,15 +1,4 @@
-import {confirmOpen, modalClose, taskUpdateOpen} from "components/Modal/actions";
-import Task from "components/Task";
-import { fetchTaskSearchList, setPageTaskSearch } from "components/TaskSearch/actions";
-import TaskShareModal from "components/TaskShareModal";
-import {
-  fetchTaskUserList,
-  fetchTaskUserStatRequest, resetTaskUserList,
-  setFilterTaskUser,
-  setPageTaskUser, setSortOrderTaskUser, setSortTaskUser
-} from "components/TaskUser/actions";
 import Loader from "components/ui/Loader";
-import Tabs from "components/ui/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import * as React from "react";
@@ -27,7 +16,7 @@ import {fetchFollowerList, resetFollowerList, setPageFollower} from 'components/
 import ContactItem from 'components/Contacts/ContactItem'
 import {deleteSavedPeople, fetchSavedPeopleRequest, resetSavedPeopleList} from 'components/SavedPeople/actions'
 import ContactsToolbar from 'components/Contacts/ContactsToolbar'
-import {fetchContactsList, resetContactsList, setPageContactsList} from 'components/Contacts/actions'
+import {fetchChatContactsList, resetContactsChatList, setPageContactsChatList} from 'components/Contacts/actions'
 interface Props {
 }
 const ContactsMessages = (props: Props) => {
@@ -44,19 +33,19 @@ const ContactsMessages = (props: Props) => {
   const [subCategory, setSubCategory] = useState('all');
   useEffect(() => {
 
-    dispatch(resetContactsList())
-    dispatch(fetchContactsList({
+    dispatch(resetContactsChatList())
+    dispatch(fetchChatContactsList({
         page: 1,
       limit: 10,
     }));
     return () => {
-      dispatch(resetContactsList());
+      dispatch(resetContactsChatList());
     }
   }, [])
 
   const handleScrollNext = () => {
-    dispatch(setPageContactsList(page + 1))
-    dispatch(fetchContactsList({
+    dispatch(setPageContactsChatList(page + 1))
+    dispatch(fetchChatContactsList({
       page: page + 1,
       limit: 10,
     }));
