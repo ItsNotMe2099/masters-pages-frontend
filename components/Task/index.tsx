@@ -35,6 +35,7 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import StarRating from "../svg/StarRating";
 import {useTranslation, withTranslation} from "react-i18next";
+import {getCurrencySymbol} from 'data/currency'
 
 interface Props {
   task: ITask,
@@ -387,7 +388,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 {t('task.fixedPrice')} :
               </div>
               <div className={styles.priceDetailsValue}>
-                {t('task.lessThen')} <span>${task.budget}</span>
+                {t('task.lessThen')} <span>{getCurrencySymbol(task.currency)}{task.budget}</span>
               </div>
             </div>
             :
@@ -398,7 +399,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 {t('task.hourly')} :
               </div>
               <div className={styles.priceDetailsValue}>
-                <span>${task.ratePerHour}/h</span>
+                <span>{getCurrencySymbol(task.currency)}{task.ratePerHour}/h</span>
               </div>
             </div>
           }

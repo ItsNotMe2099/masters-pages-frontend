@@ -138,9 +138,11 @@ TaskOfferNewOrder = connect(state => {
   const categoryId = selector(state, 'categoryId')
   console.log("getCategoryId", categoryId, state)
   const offerPriceType = selector(state, 'offerPriceType')
+  const currency = selector(state, 'currency')
 
   return {
     categoryId,
+    currency,
     offerPriceType: !offerPriceType ? 'fixed' : offerPriceType,
   }
 })(TaskOfferNewOrder)

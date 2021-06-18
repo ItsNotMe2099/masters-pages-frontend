@@ -13,11 +13,13 @@ import { maskBirthDate } from "utils/masks";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
+import {getCurrencySymbol} from 'data/currency'
 interface Props{
   task: ITask
 }
 let TaskOfferAcceptForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)
+  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
 
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
@@ -74,14 +76,14 @@ let TaskOfferAcceptForm = (props) => {
               size={'small'}
               component={Input}
               validate={required}
-              format={(value) => `$ ${value || ''}`}
-              parse={(value) => value ? parseFloat(value?.replace('$', '').replace(/\s/g, '')) : null}     />}
+              format={(value) => `${getCurrencySymbol(task.currency)} ${value || ''}`}
+              parse={(value) => value ? parseFloat(value?.replace(getCurrencySymbol(task.currency), '').replace(/\s/g, '')) : null}     />}
             {props.offerPriceType === 'rate' && <Field
               name="ratePerHour"
               component={Input}
               size={'small'}
-              format={(value) => `$ ${value || ''}`}
-              parse={(value) => value ? parseFloat(value?.replace('$', '').replace(/\s/g, '')) : null}
+              format={(value) => `${getCurrencySymbol(task.currency)} ${value || ''}`}
+              parse={(value) => value ? parseFloat(value?.replace(getCurrencySymbol(task.currency), '').replace(/\s/g, '')) : null}
 
               validate={required}
             />}

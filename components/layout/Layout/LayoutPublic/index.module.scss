@@ -1,0 +1,70 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+
+  padding-top: 60px;
+  background: #F8F6F9;
+}
+
+
+
+.header{
+  background: white;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  padding: 0px 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 3;
+  font-weight: 700;
+  color: #000000;
+  .title{
+    flex: 1;
+    padding-left: 34px;
+
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    color: black;
+    img{
+      margin-right: 16px;
+    }
+
+    .logoTitle{
+      font-weight: 700;
+      font-size: 20px;
+      span{
+        color: #FD5742;
+      }
+    }
+  }
+  .actions{
+    display: flex;
+    align-items: center;
+    .actionsButtons{
+      display: flex;
+      align-items: center;
+      margin-left: 30px;
+      > .actionButton{
+        width: 140px;
+        text-transform: uppercase;
+        &:first-of-type{
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+
+
+}
+.container{
+  position: relative;
+
+  padding: 32px 22px 60px;
+
+}

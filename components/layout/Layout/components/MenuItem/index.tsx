@@ -12,7 +12,7 @@ interface Props {
   link?: string
   icon?: string
   mode?: string
-  badge?: string
+  badge?: number
 
   onClick?: () => void
 }
@@ -46,8 +46,8 @@ export default function MenuItem(props: Props) {
         <div className={styles.title}>
           {title}
         </div>
-        {badge && <div className={styles.badge}>
-          {badge}
+        {badge > 0 && <div className={styles.badge}>
+          {badge > 100 ? '99+' : badge}
         </div>}
       </a>
     </Link>

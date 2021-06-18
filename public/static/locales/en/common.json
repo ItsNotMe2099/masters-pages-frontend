@@ -45,8 +45,8 @@
     "selectCategory": "Add one or more categories",
     "selectSubCategory": "Add one or more sub categories"
   },
-  "master": "MASTER",
-  "volunteer": "VOLUNTEER",
+  "master": "Master",
+  "volunteer": "Volunteer",
   "agreeWith": "I am agree with",
   "termsAndConditions": "terms and conditions",
   "back": "Back",

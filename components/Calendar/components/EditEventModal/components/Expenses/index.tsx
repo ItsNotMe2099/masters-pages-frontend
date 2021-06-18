@@ -6,6 +6,7 @@ import MarkIcon from 'components/svg/MarkIcon'
 import AddCircleIcon from 'components/svg/AddCircleIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import {eventExpenseActualOpen, eventExpensePlannedOpen} from 'components/Modal/actions'
+import {getCurrencySymbol} from 'data/currency'
 interface Props {
   event: IEvent,
   type: 'actual' | 'planned',
@@ -54,12 +55,12 @@ const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBud
       {items.length > 0 && <div className={styles.items}>
         {items.map(item => <div className={styles.row}>
           <div className={styles.label}>{item.type}</div>
-          <div className={styles.value}>{item.amount}$</div>
+          <div className={styles.value}>{item.amount}{getCurrencySymbol(event.task?.currency)}</div>
         </div>)}
       </div>}
      <div className={styles.total}>
         <div className={styles.label}>Total:</div>
-        <div className={styles.value}>{getTotalAmount()}$</div>
+        <div className={styles.value}>{getTotalAmount()}{getCurrencySymbol(event.task?.currency)}</div>
       </div>
     </div>
   )

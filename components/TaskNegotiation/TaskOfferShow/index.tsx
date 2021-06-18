@@ -19,6 +19,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {getCurrencySymbol} from 'data/currency'
 
 interface Props {
   isOpen: boolean,
@@ -82,7 +83,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>{response.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
-            <div className={styles.taskPriceDetailsItemValue}>$ {response.priceType === 'fixed' ? response.budget : `${response.ratePerHour}/h`}</div>
+            <div className={styles.taskPriceDetailsItemValue}>$ {response.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/h`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>Dead line:</div>

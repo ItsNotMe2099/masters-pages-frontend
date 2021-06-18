@@ -12,7 +12,7 @@ interface Props {
   onClick?: (e: any) => void
 
   target: string
-  color?: 'white' | 'transparent' | 'green'
+  color?: 'white' | 'transparent' | 'green' | 'red'
   size?: 'normal' | 'small'
   like?: boolean
 }
@@ -22,7 +22,7 @@ export default function Button(props: Props) {
   const getClassName = () => {
     return (
       `${props.size === 'normal' && styles.sizeNormal} ${props.size === 'small' && styles.sizeSmall}
-      ${props.color === 'white' && styles.white} ${props.color === 'green' && styles.green} ${props.color === 'transparent' && styles.transparent}
+      ${props.color === 'white' && styles.white} ${props.color === 'green' && styles.green} ${props.color === 'red' && styles.red} ${props.color === 'transparent' && styles.transparent}
       ${props.className && props.className}
           `
     )

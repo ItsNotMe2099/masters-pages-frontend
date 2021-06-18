@@ -19,6 +19,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {getCurrencySymbol} from 'data/currency'
 interface Props {
   onCancel: () => void
 }
@@ -75,7 +76,7 @@ const TaskOfferOrderList = (props: Props) => {
        loader={<Loader/>}>
        {list.map(item => <Radio className={styles.radioItem} value={item} isActive={activeTask && activeTask.id === item.id}  onChange={handleChange}>
          <div className={styles.radioItemTitle}>{item.title}</div>
-         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${item.budget}` : `free`) : `$${item.ratePerHour}/h`}</div>
+         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${getCurrencySymbol(item.currency)}  ${item.budget}` : `free`) : `${getCurrencySymbol(item.currency)} ${item.ratePerHour}/h`}</div>
        </Radio>)}
      </InfiniteScroll>
      </div>}

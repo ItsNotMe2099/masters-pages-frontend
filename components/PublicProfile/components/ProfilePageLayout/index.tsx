@@ -14,11 +14,12 @@ import CardRewards from 'components/PublicProfile/components/view/CardRewards'
 
 import Modals from 'components/layout/Modals'
 import {ProfileData} from 'types'
-import {ReactElement, useEffect} from 'react'
+import {default as React, ReactElement, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/actions'
 import CardRecommendationsShort from 'components/PublicProfile/components/view/CardRecommendationsShort'
 import Layout from 'components/layout/Layout'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   profile: ProfileData,
@@ -31,8 +32,20 @@ const ProfilePageLayout = (props: Props) => {
   const {profile, isEdit, onCategoryChange, subCategory} = props;
   const isMaster = ['master', 'volunteer'].includes(profile.role);
   console.log("MainSubCateogory", subCategory);
+  const {t} = useTranslation();
+  const getRoleClass = () => {
+    switch (profile.role) {
+      case 'master':
+        return styles.roleMaster;
+      case 'volunteer':
+        return styles.roleVolunteer;
+      case 'client':
+      default:
+        return styles.roleClient;
+    }
+  }
   return (
-    <Layout>
+    <Layout title={<>Hello guest you are looking at <span className={getRoleClass()}>{t(profile.role)} profile</span> of {profile.firstName} {profile.lastName}</>}>
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>

@@ -21,6 +21,7 @@ import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
 import {useTranslation} from "react-i18next";
+import InputCurrency from 'components/ui/Inputs/InputCurrency'
 const queryString = require('query-string')
 
 let CreateTaskForm = props => {
@@ -43,6 +44,8 @@ let CreateTaskForm = props => {
             <div className={styles.column}>
               <Field
                 name="title"
+                size={'small'}
+                labelType={'static'}
                 component={Input}
                 label={`${t('createTask.fieldTitle')}`}
                 validate={required}
@@ -52,6 +55,8 @@ let CreateTaskForm = props => {
                 component={InputLocation}
                 label={`${t('createTask.fieldLocation')}`}
                 validate={required}
+                size={'small'}
+                labelType={'static'}
               />
               <Field
                 name="masterRole"
@@ -60,6 +65,8 @@ let CreateTaskForm = props => {
                 label={`${t('createTask.fieldMasterType')}`}
                 options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
                 validate={required}
+                size={'small'}
+                labelType={'static'}
               />
             </div>
             <div className={styles.column}>
@@ -69,6 +76,8 @@ let CreateTaskForm = props => {
                 onChange={(value) => onChangeForStat('categoryId', value)}
                 label={`${t('createTask.fieldCategory')}`}
                 validate={required}
+                size={'small'}
+                labelType={'static'}
               />
               <Field
                 name="subCategoryId"
@@ -77,6 +86,8 @@ let CreateTaskForm = props => {
                 label={`${t('createTask.fieldSubCategory')}`}
                 categoryId={props.categoryId}
                 validate={required}
+                size={'small'}
+                labelType={'static'}
               />
             </div>
           </div>
@@ -87,15 +98,16 @@ let CreateTaskForm = props => {
               label={`${t('createTask.fieldExecutionType')}`}
               options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
               validate={required}
-              labelType={'cross'}
+              size={'small'}
+              labelType={'static'}
             />
             <Field
               name="deadline"
               component={Input}
               label={`${t('createTask.fieldDeadline')}`}
               validate={required}
-
-              labelType={'cross'}
+              size={'small'}
+              labelType={'static'}
               mask={'99/99/9999'}
             />
           </div>
@@ -103,15 +115,30 @@ let CreateTaskForm = props => {
           <Field
             name="address"
             component={InputAddress}
+            size={'small'}
+            labelType={'static'}
             label={`${t('createTask.fieldAddress')}`}
           />
+            <Field
+              name="currency"
+              component={InputCurrency}
+              withIcon={false}
+
+              label="Currency:"
+              size={'small'}
+              labelType={'static'}
+              validate={required}
+            />
           </div>
+
           <div className={styles.taskDesc}>
             <Field
               name="description"
               component={TextArea}
               label={`${t('createTask.fieldDescription')}`}
               validate={required}
+              size={'small'}
+              labelType={'static'}
             />
           </div>
           <Field

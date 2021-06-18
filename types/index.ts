@@ -387,7 +387,7 @@ export interface ITask {
   updatedAt: string
   deletedAt: string
   profile: ProfileData,
-
+  currency: string
   deadline: string,
   priceType: string,
   photosObjects: any[],

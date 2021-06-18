@@ -15,10 +15,11 @@ interface Props {
   input: any,
   showIcon: boolean
   disabled?: boolean
+  currency: string
 }
 
 export default function TimeExpense(props: Props) {
-  const {disabled} = props;
+  const {disabled, currency} = props;
   const { value = {rate: 0, total: 0}, onChange } = props.input;
   const inputRateRef = useRef(null);
   const inputDurationRef = useRef(null);
@@ -61,7 +62,7 @@ export default function TimeExpense(props: Props) {
     <div className={`${styles.root} ${disabled && styles.rootDisabled}`}>
         <div className={styles.inputWrapper} onClick={handleInputRateWrapperClick}>
           <div className={styles.inputClick}></div>
-          <span className={styles.inputText}>$</span>
+          <span className={styles.inputText}>{currency}</span>
         <input disabled={disabled} ref={inputRateRef} className={styles.input} style={{width:  `${(formatValueString(value.rate).length + 1) * 6}px` }} onChange={handleChangeRate} value={value.rate}/>
           <span className={styles.inputText}>/hr</span>
         </div>

@@ -20,6 +20,7 @@ import { IChat, IChatMessage, ITask, ITaskNegotiationState, ITaskNegotiationType
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import {getCurrencySymbol} from 'data/currency'
 
 interface Props {
   message: IChatMessage,
@@ -110,7 +111,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
           <div
             className={styles.detailsLabel}>{message.taskNegotiation.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
           <div
-            className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? message.taskNegotiation.budget : `${message.taskNegotiation.ratePerHour}/h`}</div>
+            className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.ratePerHour}/h`}</div>
         </div>
         <div className={styles.detailsItem}>
           <div className={styles.detailsLabel}>Dead line:</div>

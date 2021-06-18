@@ -9,6 +9,7 @@ import Expenses from 'components/Calendar/components/EditEventModal/components/E
 import {IEvent} from 'types'
 import {useState} from 'react'
 import {parserNumber, parserPrice} from 'utils/formatters'
+import {getCurrencySymbol} from 'data/currency'
 
 interface Props {
   event?: IEvent,
@@ -20,7 +21,7 @@ interface Props {
   isCompletedDisabled?: boolean
 }
 let PricingForm = (props: Props) => {
-  const {priceType, change, isPlannedDisabled, isCompletedDisabled} = props;
+  const {priceType, change, isPlannedDisabled, isCompletedDisabled, event} = props;
 
   const parseTimeExpense = (val) => {
     return {
@@ -51,6 +52,7 @@ let PricingForm = (props: Props) => {
            name="price"
            component={TimeExpense}
            showIcon={false}
+           currency={getCurrencySymbol(event.task?.currency)}
            label="Start"
            onChange={handleChangedPricePlanned}
            parse={parseTimeExpense}
@@ -76,6 +78,7 @@ let PricingForm = (props: Props) => {
            name="actualPrice"
            component={TimeExpense}
            showIcon={false}
+           currency={getCurrencySymbol(event.task?.currency)}
            label="Start"
            disabled={isCompletedDisabled}
            parse={parseTimeExpense}

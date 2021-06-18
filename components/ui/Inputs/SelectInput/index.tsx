@@ -134,7 +134,7 @@ const SelectInput = (props: Props) => {
           </div>
         </div>
 
-        <ul>
+        <ul className={styles.dropDownList}>
           {props.showEmpty && <li className={styles.dropdownItem}>
             <a href="" onClick={handleOptionEmptyClick}>
               {props.withIcon && <div

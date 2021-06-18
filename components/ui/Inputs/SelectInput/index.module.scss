@@ -49,6 +49,7 @@
   left: -2px;
   border: 1px solid #909090;
   visibility: hidden;
+
   //transform: translateY(-20px);
   //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   //box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
@@ -79,7 +80,10 @@
   display: flex;
   align-items: center;
 }
-
+.dropDownList{
+  max-height: 200px;
+  overflow-y: auto;
+}
 .dropdownItem {
 
   a {

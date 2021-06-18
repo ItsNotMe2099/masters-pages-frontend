@@ -59,7 +59,7 @@ const CardCategories = (props: Props) => {
   }
   return (
     <Card isHidden={!isEdit && skills.length === 0} className={styles.root} isLoading={showForm && formLoading} title={'Works in the following categories'} toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleEditClick}/>] : []}>
-      {skills.map((category) => <Accordion title={<><div className={styles.accordionTitle}>{getCategoryTranslation(category.category)?.name}</div> <FormActionIconButton type={'delete'} onClick={ () => handleRemoveCategory(category)} /></>} >
+      {skills.map((category) => <Accordion title={<><div className={styles.accordionTitle}>{getCategoryTranslation(category.category)?.name}</div> {isEdit && <FormActionIconButton type={'delete'} onClick={ () => handleRemoveCategory(category)} />}</>} >
         {category.skills.map(skill => skill.subCategory ? <Tab isActive={subCategory?.subCategory.id === skill.subCategory.id} onClick={() => onCategoryChange(category, skill)}><div className={styles.tabTitle}>{getCategoryTranslation(skill.subCategory)?.name}</div> {isEdit && <FormActionIconButton type={'delete'} onClick={() => handleRemoveSkill(skill)}/>}</Tab> : null)}
       </Accordion>)}
       {showForm && <CardCategoryForm onSubmit={handleSubmit} onCancel={handleCancel}/>}

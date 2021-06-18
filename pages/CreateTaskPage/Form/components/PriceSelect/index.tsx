@@ -3,6 +3,7 @@ import { Field, reduxForm,formValueSelector } from 'redux-form'
 
 import styles from './index.module.scss'
 import {useTranslation} from "react-i18next";
+import * as React from 'react'
 
 let PriceSelectForm = props => {
   const {t} = useTranslation();
@@ -25,6 +26,7 @@ let PriceSelectForm = props => {
               component={Input}
               placeholder="0.01 - 100"
               label={t('createTask.priceSelect.fieldRatePerHour')}
+              size={'small'}
               labelType={'static'}
               min="0.01"
               max="100.00"
@@ -39,6 +41,7 @@ let PriceSelectForm = props => {
               component={Input}
               placeholder="max 30 days"
               label={t('createTask.priceSelect.fieldEstimate')}
+              size={'small'}
               labelType={'static'}
               type={'number'}
               min="1"
@@ -65,6 +68,7 @@ let PriceSelectForm = props => {
               component={Input}
               placeholder="1 - 5 000"
               label={t('createTask.priceSelect.fieldBudget')}
+              size={'small'}
               labelType={'static'}
               min="1"
               max="5000"

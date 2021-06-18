@@ -6,6 +6,9 @@ import { maskBirthDate } from "utils/masks";
 import { required } from "utils/validations";
 
 import styles from './index.module.scss'
+import {getCurrencySymbol} from 'data/currency'
+import InputCurrency from 'components/ui/Inputs/InputCurrency'
+import {parserPrice} from 'utils/formatters'
 
 let PriceSelectFormMini = props => {
   const { handleSubmit } = props
@@ -36,18 +39,27 @@ let PriceSelectFormMini = props => {
           size={'small'}
           component={Input}
           validate={required}
-          format={(value) => `$ ${value || ''}`}
-          parse={(value) => value ? parseFloat(value?.replace('$', '').replace(/\s/g, '')) : null}/>}
+          format={(value) => `${getCurrencySymbol(props.currency)}   ${value || ''}`}
+          parse={parserPrice}/>}
         {props.offerPriceType === 'rate' && <Field
           name="ratePerHour"
           component={Input}
           size={'small'}
-          format={(value) => `$ ${value || ''}`}
-          parse={(value) => value ? parseFloat(value?.replace('$', '').replace(/\s/g, '')) : null}
+          format={(value) => `${getCurrencySymbol(props.currency)}   ${value || ''}`}
+          parse={parserPrice}
 
           validate={required}
         />}
       </div>
+      <Field
+        name="currency"
+        component={InputCurrency}
+        withIcon={false}
+        size={'small'}
+        label="Currency:"
+        labelType={'static'}
+        validate={required}
+      />
       <Field
         name="deadline"
         component={Input}
@@ -57,6 +69,7 @@ let PriceSelectFormMini = props => {
         labelType={'static'}
         mask={'99/99/9999'}
       />
+
     </div>
   )
 }
