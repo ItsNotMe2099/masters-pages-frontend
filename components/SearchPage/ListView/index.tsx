@@ -25,6 +25,7 @@ import SearchTaskFilter from "../../../pages/SearchTaskPage/Filter";
 import {useTranslation} from "react-i18next";
 import {useWindowWidth} from "@react-hook/window-size";
 import Layout from 'components/layout/Layout'
+import Modals from 'components/layout/Modals'
 const queryString = require('query-string')
 interface Props {
   searchRole: 'master' | 'volunteer',
@@ -82,7 +83,7 @@ const SearchProfileListView = (props: Props) => {
     <Layout>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
-        <SearchTaskFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
+        <SearchProfileFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
         <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
           {isShow ? <span>{t('profileSearch.filter.hideMoreOptions')}</span> : <span>{t('profileSearch.filter.showMoreOptions')}</span>}
           <img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/>
@@ -129,8 +130,8 @@ const SearchProfileListView = (props: Props) => {
         </InfiniteScroll>}
       </div>
       </div>
-      <Footer/>
     </div>
+      <Modals/>
     </Layout>
   )
 }

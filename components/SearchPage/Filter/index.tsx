@@ -1,8 +1,7 @@
 import { confirmOpen } from "components/Modal/actions";
 import {
   fetchProfileSearchList,
-  resetProfileSearchList, saveProfileSearchList,
-  saveProfileSearchListRequest,
+  resetProfileSearchList,
   setFilterProfileSearch
 } from "components/ProfileSearch/actions";
 import SearchProfileForm from "components/SearchPage/Filter/Form";
@@ -14,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import {useTranslation} from "react-i18next";
+import SavedSearchList from 'components/SavedSearchList'
 const queryString = require('query-string')
 interface Props {
   initialValues?: any
@@ -42,20 +42,12 @@ const SearchProfileFilter = (props: Props) => {
 
     }
   }
-  const handleSaveSearch = () => {
-      dispatch(confirmOpen({
-        description: t('profileSearch.saveTheSearchConfirm'),
-        onConfirm: () => {
-          dispatch(saveProfileSearchList(filter));
-        }
-      }));
-  }
-  return <>
+
+  console.log("Dsdsd", props.collapsed )
+  return <div>
     <SearchProfileForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
-    {!props.collapsed && <div className={styles.saveSearchWrapper}>
-    <div className={styles.saveSearch} onClick={handleSaveSearch}>{t('profileSearch.saveTheSearch')}</div>
-      <BookmarkSvg color={'white'}/>
-   </div>}
-   </>
+    {!props.collapsed && <SavedSearchList type={'profile'} onChange={handleFilterChange}/>}
+
+  </div>
 }
 export default SearchProfileFilter

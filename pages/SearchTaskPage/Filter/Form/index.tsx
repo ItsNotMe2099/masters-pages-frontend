@@ -10,6 +10,10 @@ import { connect } from 'react-redux'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 import {useTranslation} from "react-i18next";
 import {useWindowWidth} from "@react-hook/window-size";
+import {IRootState} from 'types'
+import {useEffect} from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
 
 interface Props{
   collapsed: boolean
@@ -19,11 +23,27 @@ interface Props{
   initialValues: any
 }
 let SearchTaskForm = (props) => {
+  const {change} = props;
   const { t } = useTranslation();
   const width = useWindowWidth()
   const { handleSubmit, collapsed } = props
   console.log("Collapse1d", collapsed)
+  const filter = useSelector((state: IRootState) => state.taskSearch.filter)
+
+  useEffect(() => {
+    change('categoryId', filter.categoryId)
+    change('subCategoryId', filter.subCategoryId)
+    change('geonameid', filter.geonameid)
+    change('executionType', filter.executionType)
+    change('categoryId', filter.categoryId)
+    change('rating', filter.rating)
+    change('radius', filter.radius)
+    change('keywords', filter.keywords)
+    console.log("FilterChange", filter)
+    change('price', filter.price)
+  }, [filter])
   const isMobile = width < 700;
+
   return (
     <form onSubmit={handleSubmit} className={styles.root}>
           {collapsed ? <>
@@ -94,9 +114,9 @@ let SearchTaskForm = (props) => {
                 label={t('taskSearch.filter.fieldExecutionType')}
                 component={SelectInput}
                 options={[
-                  {value: t('forms.radiusOfSearchInput.values.province'), label: 'Physical'},
-                  {value: t('forms.radiusOfSearchInput.values.virtual'), label: 'Virtual'},
-                  {value: t('forms.radiusOfSearchInput.values.combo'), label: 'Combo'}
+                  {label: t('forms.executionTypeInput.values.physical'), value: 'physical'},
+                  {label: t('forms.executionTypeInput.values.virtual'), value: 'virtual'},
+                  {label: t('forms.executionTypeInput.values.combo'), value: 'combo'}
                 ]}
                 withIcon={false}
                 noMargin={true}

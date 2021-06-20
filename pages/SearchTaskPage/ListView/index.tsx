@@ -30,6 +30,7 @@ import {
   useWindowHeight,
 } from '@react-hook/window-size'
 import Layout from 'components/layout/Layout'
+import Modals from 'components/layout/Modals'
 interface Props {
   onShowMap: () => void
 }
@@ -135,9 +136,9 @@ const SearchTaskListView = (props: Props) => {
         </InfiniteScroll>}
       </div>
       </div>
-      <Footer/>
-    </div>
 
+    </div>
+    <Modals/>
     </Layout>
   )
 }

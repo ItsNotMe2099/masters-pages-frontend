@@ -15,7 +15,7 @@ import ContactIemSkills from 'components/Contacts/ContactItem/ContactIemSkills'
 interface Props {
   profile: ProfileData,
   deleteActionName: string
-  onDelete: (profile) => void
+  onDelete?: (profile) => void
 }
 
 const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
@@ -69,7 +69,7 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
           <Button className={styles.action} href={`/id${profile.id}`} onClick={handleActionProfile}>Profile</Button>
           <Button className={styles.action} href={`/id${profile.id}`}>All Posts</Button>
           <Button className={styles.action} onClick={handleActionNewOrder}>New Order</Button>
-          <Button  className={styles.action} onClick={handleActionUnsubscribe}>{deleteActionName}</Button>
+          {onDelete && <Button  className={styles.action} onClick={handleActionUnsubscribe}>{deleteActionName}</Button>}
         </div>
             </div>
     </div>

@@ -1,10 +1,7 @@
-import { confirmOpen } from "components/Modal/actions";
-import { saveProfileSearchList } from "components/ProfileSearch/actions";
-import BookmarkSvg from "components/svg/Bookmark";
+
 import {
   fetchTaskSearchList,
-  resetTaskSearchList, saveTaskSearchList,
-  saveTaskSearchListRequest,
+  resetTaskSearchList,
   setFilterTaskSearch
 } from "components/TaskSearch/actions";
 import { useRouter } from "next/router";
@@ -14,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import {useTranslation} from "react-i18next";
+import SavedSearchList from 'components/SavedSearchList'
 const queryString = require('query-string')
 interface Props {
   initialValues?: any
@@ -35,25 +33,18 @@ const SearchTaskFilter = (props: Props) => {
         props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined});
     }else{
       dispatch(setFilterTaskSearch(data));
+      console.log("Filter, data", data)
       dispatch(resetTaskSearchList())
       dispatch(fetchTaskSearchList())
       router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
 
     }
   }
-  const handleSaveSearch = () => {
-    dispatch(confirmOpen({
-      description: t('taskSearch.saveTheSearchConfirm'),
-      onConfirm: () => {
-        dispatch(saveTaskSearchList(filter));
-      }
-    }));
-  }
-  return <>
+
+  console.log("props.collapsed", props.collapsed)
+  return <div>
     <SearchTaskForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
-    {!props.collapsed && <div className={styles.saveSearchWrapper}>
-    <div className={styles.saveSearch} onClick={handleSaveSearch}>{t('taskSearch.saveTheSearch')}</div><BookmarkSvg color={'white'}/>
-   </div>}
-   </>
+    {!props.collapsed && <SavedSearchList type={'task'} onChange={handleFilterChange}/>}
+   </div>
 }
 export default SearchTaskFilter

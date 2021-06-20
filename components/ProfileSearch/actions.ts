@@ -26,14 +26,6 @@ export const taskSearchSetCurrentTask = (task: ITask) => action(ActionTypes.PROF
 export const setFilterProfileSearch = (data: any) => action(ActionTypes.PROFILE_SEARCH_SET_FILTER, data)
 export const setSortProfileSearch = (data: string) => action(ActionTypes.PROFILE_SEARCH_SET_SORT, data)
 export const setUseLocationFilter = (useFilter: boolean, exactLocation: boolean) => action(ActionTypes.PROFILE_SEARCH_SET_USE_LOCATION_FILTER, {useFilter, exactLocation})
-export const saveProfileSearchList = (data: any) => action(ActionTypes.PROFILE_SEARCH_SAVE_SEARCH, data)
-export const saveProfileSearchListRequest = (data: any) => action(ActionTypes.PROFILE_SEARCH_SAVE_SEARCH_REQUEST, {
-  api: {
-    url: `/api/profile-searches`,
-    method: 'POST',
-    data,
-  }
-})
 
 
 export const setRoleProfileSearch = (role) => action(ActionTypes.PROFILE_SEARCH_SET_ROLE, role)

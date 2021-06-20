@@ -1,12 +1,8 @@
-
-import { confirmChangeData, modalClose } from "components/Modal/actions";
 import {
   fetchProfileSearchList,
-  fetchProfileSearchListRequest, saveProfileSearchList,
-  saveProfileSearchListRequest
+  fetchProfileSearchListRequest
 } from "components/ProfileSearch/actions";
-import { deleteTaskUser, deleteTaskUserRequest, fetchTaskUserStatRequest } from "components/TaskUser/actions";
-import ApiActionTypes from "constants/api";
+
 import { takeLatest, put, take, select } from 'redux-saga/effects'
 import { IRootState } from "types";
 import { ActionType } from 'typesafe-actions'
@@ -37,14 +33,6 @@ function* ProfileSearchSaga() {
 
     })
 
-  yield takeLatest(ActionTypes.PROFILE_SEARCH_SAVE_SEARCH,
-    function* (action: ActionType<typeof saveProfileSearchList>) {
-      yield put(confirmChangeData({loading: true}));
-      yield put(saveProfileSearchListRequest(action.payload));
-      yield take([ActionTypes.PROFILE_SEARCH_SAVE_SEARCH_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.PROFILE_SEARCH_SAVE_SEARCH_REQUEST + ApiActionTypes.FAIL])
-      yield put(modalClose());
-
-    })
 
 }
 

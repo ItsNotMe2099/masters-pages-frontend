@@ -27,6 +27,9 @@ export const DropDown = (props: Props) => {
   useEffect(() => {
     if(props.value){
       setValue(props.options.find(item => item.value === props.value))
+    }else if(props.options.find(item => !item.value)){
+      setValue(props.options.find(item => !item.value))
+
     }
   }, [props.value, props.options])
   const handleOptionClick = (e, item) => {
@@ -49,7 +52,7 @@ export const DropDown = (props: Props) => {
         <img className={styles.arrow} src={`/img/icons/arrow.svg`} alt=''/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
-        <ul>
+        <ul className={styles.dropDownList}>
           {value &&
           <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
             {props.item(value)}

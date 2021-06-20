@@ -60,7 +60,7 @@ export default function LayoutAuthorized(props: Props) {
       {title: t('menu.findMaster'), icon: 'find-clients', link: '/SearchMasterPage', isSeparator: true},
       {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage'},
     ] : [
-      {title: t('menu.findClients'), icon: 'find-clients', link: '/SearchTaskPage', isSeparator: true}
+      {title: t('menu.findClients'), icon: 'find-clients', link: '/SearchClientPage', isSeparator: true}
     ]),
 
     {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},

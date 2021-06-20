@@ -25,6 +25,7 @@ class DynamicOverflow extends React.Component {
      */
     this.calculateSize();
     setTimeout(() => this.calculateSize(), 300)
+    setTimeout(() => this.calculateSize(), 1000)
   }
 
   componentWillUnmount() {

@@ -37,10 +37,8 @@ const ContactsSaved = (props: Props) => {
   const list = useSelector((state: IRootState) => state.savedPeople.list)
   const total = useSelector((state: IRootState) => state.savedPeople.total)
   const page = useSelector((state: IRootState) => state.savedPeople.page)
-  const [sortType, setSortType] = useState('asc');
-  const [userType, setUserType] = useState('all');
-  const [category, setCategory] = useState('all');
-  const [subCategory, setSubCategory] = useState('all');
+  const [filter, setFilter] = useState({sortOrder: 'ASC', categoryId: null, subCategoryId: null, role: null});
+
   useEffect(() => {
 
     dispatch(resetSavedPeopleList())
@@ -69,24 +67,25 @@ const ContactsSaved = (props: Props) => {
     }));
 
   }
-  const handleSortChange = (sortType) => {
-
+  const handleSortChange = (sortOrder) => {
+    setFilter(filter => ({...filter, sortOrder}));
   }
 
-  const handleCategoryChange = (category) => {
-
+  const handleCategoryChange = (categoryId) => {
+    setFilter(filter => ({...filter, categoryId}));
   }
-  const handleSubCategoryChange = (subCategory) => {
-
+  const handleSubCategoryChange = (subCategoryId) => {
+    setFilter(filter => ({...filter, subCategoryId}));
   }
 
-  const handleUserTypeChange = (userType) => {
-
+  const handleRoleChange = (role) => {
+    setFilter(filter => ({...filter, role}));
+    console.log("Filter", filter);
   }
 
   return (
     <div className={styles.root}>
-      <ContactsToolbar onSortChange={handleSortChange} sortType={sortType} category={category} subCategory={subCategory} userType={userType} onCategoryChange={handleCategoryChange} onSubCategoryChange={handleSubCategoryChange} onUserTypeChange={handleUserTypeChange} total={total} totalName={'Saved'}/>
+      <ContactsToolbar onSortChange={handleSortChange} sortOrder={filter.sortOrder} category={filter.categoryId} subCategory={filter.subCategoryId} userType={filter.role} onCategoryChange={handleCategoryChange} onSubCategoryChange={handleSubCategoryChange} onUserTypeChange={handleRoleChange} total={total} totalName={'Saved'}/>
 
       <div >
         {(loading && total === 0) && <Loader/>}

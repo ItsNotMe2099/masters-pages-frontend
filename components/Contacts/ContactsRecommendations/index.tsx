@@ -45,10 +45,8 @@ const ContactsRecommendations = (props: Props) => {
   const list = useSelector((state: IRootState) => state.profileRecommendation.list)
   const total = useSelector((state: IRootState) => state.profileRecommendation.total)
   const page = useSelector((state: IRootState) => state.profileRecommendation.page)
-  const [sortType, setSortType] = useState('asc');
-  const [userType, setUserType] = useState('all');
-  const [category, setCategory] = useState('all');
-  const [subCategory, setSubCategory] = useState('all');
+  const [filter, setFilter] = useState({sortOrder: 'ASC', categoryId: null, subCategoryId: null, role: null});
+
   useEffect(() => {
 
     dispatch(resetProfileRecommendationList())
@@ -80,24 +78,26 @@ const ContactsRecommendations = (props: Props) => {
 
   }
 
-  const handleSortChange = (sortType) => {
-
-  }
-  const handleCategoryChange = (category) => {
-
-  }
-  const handleSubCategoryChange = (subCategory) => {
-
+  const handleSortChange = (sortOrder) => {
+    setFilter(filter => ({...filter, sortOrder}));
   }
 
-  const handleUserTypeChange = (userType) => {
+  const handleCategoryChange = (categoryId) => {
+    setFilter(filter => ({...filter, categoryId}));
+  }
+  const handleSubCategoryChange = (subCategoryId) => {
+    setFilter(filter => ({...filter, subCategoryId}));
+  }
 
+  const handleRoleChange = (role) => {
+    setFilter(filter => ({...filter, role}));
+    console.log("Filter", filter);
   }
 
 
   return (
     <div className={styles.root}>
-      <ContactsToolbar onSortChange={handleSortChange} sortType={sortType} category={category} subCategory={subCategory} userType={userType} onCategoryChange={handleCategoryChange} onSubCategoryChange={handleSubCategoryChange} onUserTypeChange={handleUserTypeChange} total={total} totalName={'Recommendations'}/>
+      <ContactsToolbar onSortChange={handleSortChange} sortOrder={filter.sortOrder} category={filter.categoryId} subCategory={filter.subCategoryId} userType={filter.role} onCategoryChange={handleCategoryChange} onSubCategoryChange={handleSubCategoryChange} onUserTypeChange={handleRoleChange} total={total} totalName={'Saved'}/>
 
       <div >
         {(loading && total === 0) && <Loader/>}

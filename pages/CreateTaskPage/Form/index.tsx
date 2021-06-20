@@ -25,6 +25,7 @@ import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import {useEffect} from 'react'
 const queryString = require('query-string')
 import {fetchProfileContacts} from 'components/Contacts/actions'
+import {RadioList} from 'components/ui/Inputs/RadioList'
 
 let CreateTaskForm = props => {
   const {t} = useTranslation()
@@ -56,6 +57,14 @@ let CreateTaskForm = props => {
                 component={Input}
                 label={`${t('createTask.fieldTitle')}`}
                 validate={required}
+              />
+              <Field
+                name="status"
+                component={RadioList}
+                label={`Type`}
+                options={[{label: 'Public', value: 'public'}, {label: 'Private', value: 'private'}]}
+                size={'small'}
+                labelType={'static'}
               />
               <Field
                 name="profileId"

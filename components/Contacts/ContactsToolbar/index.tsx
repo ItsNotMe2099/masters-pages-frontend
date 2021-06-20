@@ -34,27 +34,40 @@ import {
 } from 'components/ProfileRecommendations/actions'
 import {DropDown} from 'components/ui/DropDown'
 import Input from 'components/ui/Inputs/Input'
+import {fetchCategory} from 'components/ui/Inputs/InputCategory/actions'
+import {fetchSubCategory} from 'components/ui/Inputs/InputSubCategory/actions'
+import {getCategoryTranslation} from 'utils/translations'
 interface Props {
-  onSortChange: (sortType) => void,
-  sortType: string,
-  onUserTypeChange: (sortType) => void,
+  onSortChange: (sortOrder) => void,
+  sortOrder: string,
+  onUserTypeChange: (sortOrder) => void,
   userType: string,
 
-  onCategoryChange: (sortType) => void,
-  category: string,
+  onCategoryChange: (sortOrder) => void,
+  category: number,
 
-  onSubCategoryChange: (sortType) => void,
-  subCategory: string,
+  onSubCategoryChange: (sortOrder) => void,
+  subCategory: number,
 
   total: number,
   totalName: string
 }
 const ContactsToolbar = (props: Props) => {
-  const {onSortChange, sortType, total, totalName, subCategory, category, userType, onCategoryChange, onSubCategoryChange, onUserTypeChange} = props;
-  const { t } = useTranslation('common');
+  const {onSortChange, sortOrder, total, totalName, subCategory, category, userType, onCategoryChange, onSubCategoryChange, onUserTypeChange} = props;
+  const [ t , {language}] = useTranslation('common');
   const router = useRouter()
+  const categories = useSelector((state: IRootState) => state.categoryInput.categories)
+  const subCategories = useSelector((state: IRootState) => state.subCategoryInput.subCategories)
   const dispatch = useDispatch()
-
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, [])
+  const handleCategoryChange = (val) => {
+    dispatch(fetchSubCategory(val.value));
+    onCategoryChange(val.value);
+    onSubCategoryChange(null);
+  }
+  console.log("LLLLL", language)
   return (
     <div className={styles.root}>
       <div className={styles.search}>
@@ -67,17 +80,21 @@ const ContactsToolbar = (props: Props) => {
       </div>
       <div className={`${styles.filter} ${styles.category}`}>
         <div className={styles.label}>Category:</div>
-        <DropDown onChange={onCategoryChange} value={category} options={[
-          {value: 'all',  label: 'all'},
-
+        <DropDown onChange={handleCategoryChange} value={category} options={[
+        {value: null,  label: 'all'},
+        ...categories.map(item => ({ value: item.id,
+            label: getCategoryTranslation(item, language)?.name})).sort((a,b)=> (a.label > b.label ? 1 : -1))
         ]}
                   item={(item) => <div>{item?.label}</div>}
         />
       </div>
       <div className={`${styles.filter} ${styles.subCategory}`}>
         <div className={styles.label}>Sub category:</div>
-        <DropDown onChange={onSubCategoryChange} value={subCategory} options={[
-          {value: 'all',  label: 'all'},
+        <DropDown onChange={(val) => onSubCategoryChange(val?.value)} value={subCategory} options={[
+          {value: null,  label: 'all'},
+          ...subCategories.map(item => ({ value: item.id,
+            label: getCategoryTranslation(item, language)?.name})).sort((a,b)=> (a.label > b.label ? 1 : -1))
+
         ]}
                   item={(item) => <div>{item?.label}</div>}
         />
@@ -85,7 +102,7 @@ const ContactsToolbar = (props: Props) => {
       <div className={styles.separator}/>
       <div className={`${styles.filter} ${styles.userType}`}>
         <div className={styles.label}>User type:</div>
-        <DropDown onChange={onUserTypeChange} value={userType} options={[
+        <DropDown onChange={(val) => onUserTypeChange(val.value)} value={userType} options={[
           {value: 'all',  label: 'all'},
           {value: 'client',  label: 'client'},
           {value: 'master',  label: 'master'},
@@ -96,7 +113,7 @@ const ContactsToolbar = (props: Props) => {
       </div>
       <div className={`${styles.filter} ${styles.sort}`}>
         <div className={styles.label}>Sort by:</div>
-        <DropDown onChange={onSortChange} value={sortType} options={[
+        <DropDown onChange={(val) => onSortChange(val.value)} value={sortOrder} options={[
           {value: 'asc',  label: 'a-z'},
           {value: 'desc',  label: 'z-a'},
      ]}

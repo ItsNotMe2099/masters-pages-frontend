@@ -431,6 +431,7 @@ export interface IResponse {
 
 export interface ISavedSearchItem {
   id: number,
+  name: string
   keywords: string
   categoryId: number
   subCategoryId: number

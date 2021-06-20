@@ -10,7 +10,9 @@ import {useWindowWidth} from "@react-hook/window-size";
 import Input from "../../../ui/Inputs/Input";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-
+import {IRootState} from 'types'
+import {useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 interface Props{
   collapsed: boolean
   handleSubmit:() => void
@@ -19,11 +21,26 @@ interface Props{
   initialValues: any
 }
 let SearchProfileForm = (props) => {
+  const {change} = props;
   const { t } = useTranslation();
   const { handleSubmit, collapsed } = props
   const width = useWindowWidth()
   console.log("SearchProfileForm", props.form)
   const isMobile = width < 700;
+  const filter = useSelector((state: IRootState) => state.taskSearch.filter)
+
+  useEffect(() => {
+    change('categoryId', filter.categoryId)
+    change('subCategoryId', filter.subCategoryId)
+    change('geonameid', filter.geonameid)
+    change('executionType', filter.executionType)
+    change('categoryId', filter.categoryId)
+    change('rating', filter.rating)
+    change('radius', filter.radius)
+    change('keywords', filter.keywords)
+    console.log("FilterChange", filter)
+    change('price', filter.price)
+  }, [filter])
   return (
     <form onSubmit={handleSubmit}>
 
@@ -96,9 +113,9 @@ let SearchProfileForm = (props) => {
                 label={t('profileSearch.filter.fieldExecutionType')}
                 component={SelectInput}
                 options={[
-                  {value: t('forms.radiusOfSearchInput.values.province'), label: 'Physical'},
-                  {value: t('forms.radiusOfSearchInput.values.virtual'), label: 'Virtual'},
-                  {value: t('forms.radiusOfSearchInput.values.combo'), label: 'Combo'}
+                  {label: t('forms.executionTypeInput.values.physical'), value: 'physical'},
+                  {label: t('forms.executionTypeInput.values.virtual'), value: 'virtual'},
+                  {label: t('forms.executionTypeInput.values.combo'), value: 'combo'}
                 ]}
                 withIcon={false}
                 noMargin={true}

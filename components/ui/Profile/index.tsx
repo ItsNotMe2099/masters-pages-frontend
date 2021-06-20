@@ -169,7 +169,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
             </div>
           </div>
           <div className={styles.bottom}>
-           <ProfileActionButton title={'View profile'} icon={'arrow-right-small'} onClick={handleReadMore}/>
+           <ProfileActionButton href={`/id${profile.id}`} title={'View profile'} icon={'arrow-right-small'} onClick={handleReadMore}/>
             <ProfileActionButton isLoading={savingProfileId === profile.id} title={'Save'} icon={'bookmark'} onClick={handleSave}/>
           </div>
         </div>
@@ -199,7 +199,8 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
 
         </div>
         <div className={styles.btnContainer}>
-          <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>OFFER TASK</Button>
+          {profile.role !== 'client' && <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>OFFER TASK</Button>}
+          {profile.role === 'client' && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>SEND MESSAGE</Button>}
 
         </div>
       </div>

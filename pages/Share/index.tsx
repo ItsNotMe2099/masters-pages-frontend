@@ -37,8 +37,9 @@ const SharePage = (props) => {
     dispatch(fetchSkillList());
   }, [])
   const tabs = [
-    { name: 'Personal link', key: 'personalLink' },
+
     { name: 'Share by email', key: 'shareByEmail' },
+    { name: 'Personal link', key: 'personalLink' },
     { name: 'Share by Social media', key: 'shareBySocialMedia' },
     { name: 'Personal label', key: 'personalLabel' },
   ]

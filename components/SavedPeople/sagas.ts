@@ -4,7 +4,6 @@ import {
   deleteSavedPeopleRequest,
   fetchSavedPeopleRequest
 } from "components/SavedPeople/actions";
-import { deleteSavedSearch, deleteSavedSearchRequest } from "components/SavedSearches/actions";
 import ApiActionTypes from "constants/api";
 import { takeLatest, put, take, select } from 'redux-saga/effects'
 import { IRootState } from "types";

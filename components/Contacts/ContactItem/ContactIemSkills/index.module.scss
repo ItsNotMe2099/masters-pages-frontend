@@ -1,6 +1,8 @@
 @import "scss/index";
 .mainRoot{
   padding-right: 68px;
+  clip: auto;
+  overflow-x: clip;
 }
 .root{
 

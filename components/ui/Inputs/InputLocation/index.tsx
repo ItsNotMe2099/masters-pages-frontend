@@ -30,6 +30,15 @@ export default function InputLocation(props: Props) {
       country: props.countryCode
     }))
   }, [props.countryCode])
+  useEffect(() => {
+    if(props.input.value && !cities.find(item => item.id == props.input.value)) {
+      dispatch(fetchLocationCity({
+        page: 1,
+        id: props.input.value,
+        country: props.countryCode
+      }))
+    }
+  }, [props.input.value])
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
     console.log("search change", value)
