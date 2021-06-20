@@ -169,7 +169,8 @@
         "closed": "Closed",
         "offers": "Offers",
         "declined": "Declined",
-        "responses": "Responses"
+        "responses": "Responses",
+        "saved": "Saved"
       }
     },
     "tabFeedback": {

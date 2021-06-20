@@ -24,23 +24,25 @@ import {getAuthServerSide} from 'utils/auth'
 import TabOrderModal from 'pages/PersonalArea/orders/[orderType]/components/TabOrderModal'
 import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
+import {fetchSavedTasks, fetchSavedTasksRequest, resetSavedTasksList} from 'components/SavedTasks/actions'
 interface Props {
 }
 const TabOrders = (props: Props) => {
   const { t } = useTranslation('common');
   const router = useRouter()
   const dispatch = useDispatch()
+
+  const { orderType } = router.query
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const loading = useSelector((state: IRootState) => state.taskUser.listLoading)
-  const tasks = useSelector((state: IRootState) => state.taskUser.list)
-  const total = useSelector((state: IRootState) => state.taskUser.total)
+  const loading = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.isLoading) : useSelector((state: IRootState) => state.taskUser.listLoading)
+  const tasks = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.list) :  useSelector((state: IRootState) => state.taskUser.list)
+  const total = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.listTotal) : useSelector((state: IRootState) => state.taskUser.total)
   const page = useSelector((state: IRootState) => state.taskUser.page)
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
   const role = useSelector((state: IRootState) => state.profile.role)
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentTaskEdit, setCurrentTaskEdit] = useState(null);
 
-  const { orderType } = router.query
   const tabs = [
     ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: 'draft'}, {name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount}] : []),
     ...(role !== 'client' ? [{name: t('personalArea.tabOrders.menu.responses'), key: 'responses'}, {name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.notificationTaskResponseDeclinedCount},
@@ -48,12 +50,19 @@ const TabOrders = (props: Props) => {
     {name: t('personalArea.tabOrders.menu.negotiation'), key: 'negotiation'},
     {name: t('personalArea.tabOrders.menu.inProgress'), key: 'in_progress'},
     {name: t('personalArea.tabOrders.menu.closed'), key: 'closed'},
+    {name: t('personalArea.tabOrders.menu.saved'), key: 'saved'},
   ].map(item => {
     return{
       ...item,
       link: `/PersonalArea/orders/${item.key}`
     }})
   useEffect(() => {
+    if(orderType === 'saved'){
+      dispatch(resetSavedTasksList());
+      dispatch(resetTaskUserList())
+      dispatch(fetchSavedTasksRequest(1, 10))
+      return;
+    }
     dispatch(setFilterTaskUser({status: orderType}))
     if(['published', 'in_progress'].includes(orderType as string)){
       dispatch(setSortTaskUser('deadline'));
@@ -69,12 +78,21 @@ const TabOrders = (props: Props) => {
   }, [orderType])
   useEffect(() => {
     return () => {
-      dispatch(resetTaskUserList());
+      if(orderType === 'saved') {
+        dispatch(resetSavedTasksList());
+      }
+        dispatch(resetTaskUserList());
+
     }
   }, []);
   const handleScrollNext = () => {
-    dispatch(setPageTaskUser(page + 1))
-    dispatch(fetchTaskUserList())
+    if(orderType === 'saved'){
+      dispatch(setPageTaskUser(page + 1))
+      dispatch(fetchSavedTasksRequest(page + 1, 10))
+    }else {
+      dispatch(setPageTaskUser(page + 1))
+      dispatch(fetchTaskUserList())
+    }
   }
   const handleTaskEdit = (task: ITask) => {
     setCurrentTaskEdit(task);
@@ -93,7 +111,7 @@ const TabOrders = (props: Props) => {
         console.log("Stat", stat)
         const statResult = stat.find(item => item.task_status === tab.key);
 
-        return {...tab, name: `${tab.name} (${statResult ? statResult.count : 0})`}
+        return {...tab, name: orderType === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={orderType as string}/>
       </div>
       <div className={styles.mobile}>
