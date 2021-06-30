@@ -5,13 +5,13 @@ import {useTranslation, withTranslation} from "react-i18next";
 import {getAuthServerSide} from 'utils/auth'
 import Avatar from 'components/ui/Avatar'
 import StarRatings from 'react-star-ratings';
-import Card from 'components/PublicProfile/components/Card'
 import Button from 'components/PublicProfile/components/Button'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {taskOfferOpen} from 'components/Modal/actions'
 
 import { useDispatch, useSelector } from 'react-redux'
-import ContactIemSkills from 'components/Contacts/ContactItem/ContactIemSkills'
+import {SkillDropDown} from 'components/Contacts/ContactItem/SkillDropDown'
+import {getCategoryTranslation} from 'utils/translations'
 interface Props {
   profile: ProfileData,
   deleteActionName: string
@@ -29,6 +29,7 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
     dispatch(taskNegotiationSetCurrentProfile(profile));
     dispatch(taskOfferOpen());
   }
+
   const handleActionUnsubscribe = () => {
     onDelete(profile);
   }
@@ -62,7 +63,11 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
         <div className={styles.separator}/>
         </div>
           <div className={styles.cell}>
-        <ContactIemSkills profile={profile} />
+            <SkillDropDown role={profile.role}
+                           items={profile.skills.filter(item => item.subCategory).map((item, index)  => ({
+                             label: `${getCategoryTranslation(item.category).name}/${getCategoryTranslation(item.subCategory).name}`,
+                             link: `/sk${item.id}`
+                           }))}/>
           </div>
             <div className={styles.cell}>
         <div className={styles.actions}>

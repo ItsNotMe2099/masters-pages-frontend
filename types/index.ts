@@ -111,6 +111,10 @@ export interface IProfilePreferWorkIn {
   location: string
 }
 
+export interface ContactData {
+  contactProfile: ProfileData,
+  contactProfileId: number
+}
 export interface ProfileData {
   id?: number
   avatar?: string

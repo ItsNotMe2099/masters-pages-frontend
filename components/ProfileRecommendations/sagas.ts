@@ -10,7 +10,6 @@ import {
   deleteProfileRecommendationRequest,
   fetchProfileRecommendationShortList
 } from 'components/ProfileRecommendations/actions'
-import {deleteSavedPeople, deleteSavedPeopleRequest} from 'components/SavedPeople/actions'
 import {confirmChangeData, modalClose} from 'components/Modal/actions'
 function* ProfileRecommendationSaga() {
   console.log("ProfileRecommendationSaga")

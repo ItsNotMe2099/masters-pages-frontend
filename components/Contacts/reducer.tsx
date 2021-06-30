@@ -1,70 +1,55 @@
 import ApiActionTypes from "constants/api";
-import {IProfileGalleryItem, IProfileTab, ProfileData, SkillData, SkillListItem} from "types";
+import {ContactData, IProfileGalleryItem, IProfileTab, ProfileData, SkillData, SkillListItem} from "types";
 import ActionTypes from './const'
+import FollowerActionTypes from 'components/Follower/const'
 
 export interface ContactsState {
-  list: ProfileData[],
-  contactsList: any[]
+  list: ContactData[],
   page: number
   total: number
-  totalContacts: number
   listLoading: boolean,
-  contactsListLoading: boolean,
 }
 
 const initialState: ContactsState = {
   list: [],
-  contactsList: [],
-  totalContacts: 0,
   total: 0,
   page: 1,
-  listLoading: false,
-  contactsListLoading: false
+  listLoading: false
 }
 
 export default function ContactsReducer(state = {...initialState}, action) {
   switch(action.type) {
 
-    case ActionTypes.FETCH_MESSAGES_CONTACT_LIST:
+    case ActionTypes.FETCH_PROFILE_CONTACT_LIST:
       state.listLoading = true;
       break
-    case ActionTypes.FETCH_MESSAGES_CONTACT_LIST + ApiActionTypes.SUCCESS:
+    case ActionTypes.FETCH_PROFILE_CONTACT_LIST + ApiActionTypes.SUCCESS:
       state.list = [...state.list, ...action.payload.data];
       state.total = action.payload.total
       state.listLoading = false;
       break
-    case ActionTypes.FETCH_MESSAGES_CONTACT_LIST + ApiActionTypes.FAIL:
+    case ActionTypes.FETCH_PROFILE_CONTACT_LIST + ApiActionTypes.FAIL:
       state.listLoading = false;
       break
-
-    case ActionTypes.FETCH_CONTACT_LIST:
-      state.contactsListLoading = true;
+    case ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
+      console.log("Delete success1", action.payload);
+      state.list = state.list.filter(item => item.contactProfileId !== action.payload.id)
       break
-    case ActionTypes.FETCH_CONTACT_LIST + ApiActionTypes.SUCCESS:
-      state.contactsList = [...state.list, ...action.payload.data];
-      state.totalContacts = action.payload.total
-      state.contactsListLoading = false;
+    case FollowerActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS:
+      console.log("Delete success2", action.payload);
+      state.list = state.list.filter(item => item.contactProfileId !== action.payload.targetProfileId)
       break
-    case ActionTypes.FETCH_CONTACT_LIST + ApiActionTypes.FAIL:
-      state.contactsListLoading = false;
-      break
-
-    case ActionTypes.RESET_MESSAGES_CONTACT_LIST:
-      state.listLoading = false;
-      state.total = 0;
-      state.page = 1;
-      state.list = [];
+    case ActionTypes.SET_PAGE_PROFILE_CONTACT_LIST:
+      state.page = action.payload;
       break
 
     case ActionTypes.RESET_PROFILE_CONTACT_LIST:
-      state.contactsListLoading = false;
-      state.totalContacts = 0;
-      state.contactsList = [];
+      state.listLoading = false;
+      state.total = 0;
+      state.list = [];
+      state.page = 1;
       break
 
-    case ActionTypes.SET_MESSAGES_CONTACT_PAGE:
-      state.page = action.payload;
-      break
   }
 
   return state

@@ -1,15 +1,3 @@
-import {confirmOpen, modalClose, taskUpdateOpen} from "components/Modal/actions";
-import Task from "components/Task";
-import { fetchTaskSearchList, setPageTaskSearch } from "components/TaskSearch/actions";
-import TaskShareModal from "components/TaskShareModal";
-import {
-  fetchTaskUserList,
-  fetchTaskUserStatRequest, resetTaskUserList,
-  setFilterTaskUser,
-  setPageTaskUser, setSortOrderTaskUser, setSortTaskUser
-} from "components/TaskUser/actions";
-import Loader from "components/ui/Loader";
-import Tabs from "components/ui/Tabs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import * as React from "react";
@@ -19,24 +7,14 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from "components/TabSelect";
 import {useTranslation, withTranslation} from "react-i18next";
-import Layout from 'components/layout/Layout'
-import {getAuthServerSide} from 'utils/auth'
-import TabOrderModal from 'pages/PersonalArea/orders/[orderType]/components/TabOrderModal'
-import Modals from 'components/layout/Modals'
-import {fetchFollowerList, resetFollowerList, setPageFollower} from 'components/Follower/actions'
-import ContactItem from 'components/Contacts/ContactItem'
-import {deleteSavedPeople, fetchSavedPeopleRequest, resetSavedPeopleList} from 'components/SavedPeople/actions'
-import {
-  deleteProfileRecommendation,
-  fetchProfileRecommendationForProfileList,
-  fetchProfileRecommendationList,
-  resetProfileRecommendationList, setPageProfileRecommendation
-} from 'components/ProfileRecommendations/actions'
+
 import {DropDown} from 'components/ui/DropDown'
 import Input from 'components/ui/Inputs/Input'
 import {fetchCategory} from 'components/ui/Inputs/InputCategory/actions'
 import {fetchSubCategory} from 'components/ui/Inputs/InputSubCategory/actions'
 import {getCategoryTranslation} from 'utils/translations'
+
+import {useThrottleFn} from '@react-cmpt/use-throttle'
 interface Props {
   onSortChange: (sortOrder) => void,
   sortOrder: string,
@@ -48,7 +26,7 @@ interface Props {
 
   onSubCategoryChange: (sortOrder) => void,
   subCategory: number,
-
+  onSearchChange: (value) => void
   total: number,
   totalName: string
 }
@@ -59,6 +37,10 @@ const ContactsToolbar = (props: Props) => {
   const categories = useSelector((state: IRootState) => state.categoryInput.categories)
   const subCategories = useSelector((state: IRootState) => state.subCategoryInput.subCategories)
   const dispatch = useDispatch()
+  const { callback: onChangeSearch, cancel, callPending } = useThrottleFn((val) => {
+      console.log("EventChange", val)
+    props.onSearchChange(val)
+  }, 300);
   useEffect(() => {
     dispatch(fetchCategory());
   }, [])
@@ -71,7 +53,10 @@ const ContactsToolbar = (props: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.search}>
-      <Input placeholder={'Search'} size={'small'} input={{value: null, onChange: () => {}}}/>
+      <Input placeholder={'Search'} size={'small'} input={{value: null, onChange: (e) => {
+        console.log("Change", e)
+          onChangeSearch(e.currentTarget.value);
+        } }}/>
       </div>
       <div className={`${styles.filter} ${styles.sort}`}>
         <div className={styles.label}>{totalName}:</div>

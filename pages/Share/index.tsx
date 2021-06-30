@@ -39,7 +39,7 @@ const SharePage = (props) => {
   const tabs = [
 
     { name: 'Share by email', key: 'shareByEmail' },
-    { name: 'Personal link', key: 'personalLink' },
+    { name: 'Profile link', key: 'personalLink' },
     { name: 'Share by Social media', key: 'shareBySocialMedia' },
     { name: 'Personal label', key: 'personalLabel' },
   ]

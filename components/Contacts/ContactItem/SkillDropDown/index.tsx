@@ -3,18 +3,17 @@ import { I18nContext } from "next-i18next";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
-import ArrowDownSmall from 'components/svg/ArrowDownSmall'
 import ArrowDropDown from 'components/svg/ArrowDropDown'
+import Link from 'next/link';
 interface OptionItem{
   label: string
-  value: string
+  link: string
 }
 interface Props {
-  children: ReactElement[]
+  role?: string
   onChange?: (item) => void,
   value?: any,
-  dropdownClassName?: string
+  items: OptionItem[]
 }
 export const SkillDropDown = (props: Props) => {
   const dropdownRef = useRef(null);
@@ -23,15 +22,24 @@ export const SkillDropDown = (props: Props) => {
     e.preventDefault()
     setIsActive(!isActive);
   }
-
+  const getDropDownClass = () => {
+    switch (props.role){
+      case 'master':
+        return styles.master;
+      case 'client':
+        return styles.client;
+      case 'volunteer':
+        return styles.volunteer;
+    }
+  }
 
   return (
-    <div className={styles.root}>
+    <div className={cx(styles.root)}>
       <a onClick={onClick} className={`${styles.dropDownTrigger} ${isActive && styles.dropDownTriggerActive}`}>
-        +{props.children.length} <ArrowDropDown/>
+        Categories +{props.items.length} <ArrowDropDown/>
       </a>
-      <nav ref={dropdownRef} className={cx(styles.dropDown, props.dropdownClassName, { [styles.dropDownActive]: isActive })}>
-        {props.children}
+      <nav ref={dropdownRef} className={cx(styles.dropDown,  getDropDownClass(), { [styles.dropDownActive]: isActive })}>
+        {props.items.map(item => <Link href={item.link}><a className={styles.skill}>{item.label}</a></Link>)}
       </nav>
     </div>
   );

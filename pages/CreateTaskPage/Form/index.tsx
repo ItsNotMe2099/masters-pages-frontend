@@ -34,7 +34,7 @@ let CreateTaskForm = props => {
   const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
   const searchStatCount = useSelector((state: IRootState) => state.profileSearch.searchStatCount)
   const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
-  const contacts = useSelector((state: IRootState) => state.contacts.contactsList);
+  const contacts = useSelector((state: IRootState) => state.contacts.list);
 
   useEffect(() => {
     dispatch(fetchProfileContacts({page: 1, limit: 100}));

@@ -31,10 +31,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL:
       state.listLoading = false;
       break
-    case ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
-      console.log("Delete success", action.payload);
-      state.list = state.list.filter(item => item.id !== action.payload.id)
-      break
+
     case ActionTypes.SAVE_PEOPLE_REQUEST:
       state.savingProfileId = action.payload.api.data.profileId;
       break;
