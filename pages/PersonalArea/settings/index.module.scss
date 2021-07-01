@@ -23,10 +23,23 @@
  }
 .form{
   flex: 1;
+  max-width: 600px;
   @media screen and (max-width: $sm-max){
     flex: auto;
     width: 100%;
     margin-bottom: 30px;
   }
+}
+.title{
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-top: 50px;
+  &:first-of-type{
+
+  }
+}
+.fieldset{
+  margin-top: 18px;
 }
 

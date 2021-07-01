@@ -21,6 +21,7 @@ import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLa
 import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
 import PostList from 'components/Post/PostList'
+import CardPosts from 'components/PublicProfile/components/view/CardPosts'
 
 interface Props {
   profile: ProfileData,
@@ -115,7 +116,7 @@ const PublicProfile = (props) => {
   return (
     <ProfilePageLayout {...props} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
-      {props.showType ==='news' ? <PostList profileId={profile.id}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
+      {props.showType ==='news' ? <CardPosts profile={profile}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
 
           <CardReviews profile={profile} />
           </>

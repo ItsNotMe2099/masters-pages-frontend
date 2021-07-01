@@ -53,7 +53,8 @@ const PostList = (props: Props) => {
   const total = useSelector((state: IRootState) => state.profileGallery.total)
   const page = useSelector((state: IRootState) => state.profileGallery.page)
   const list = useSelector((state: IRootState) => state.profileGallery.list)
-
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const isEdit = currentProfile && currentProfile.id === props.profileId;
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -84,10 +85,7 @@ const PostList = (props: Props) => {
     dispatch(setProfileGalleryCurrentItemIndex(index))
     setIsGalleryOpen(true)
   }
-  const handleCreate = () => {
-    setCurrentEditPost(null);
-    dispatch(postEditOpen());
-  }
+
   const handleDelete = (model: IProfileGalleryItem) => {
     dispatch(confirmOpen({
       description: `Are you sure that you want to delete «${model.title}»?`,
@@ -111,9 +109,9 @@ const PostList = (props: Props) => {
           className={styles.list}
           hasMore={total > list.length}
           loader={listLoading ? <Loader/> : null}>
-          {list.map((item, index) => <PostItem isEdit={true} model={item} onClick={(model) => showGallery(model, index)} onEdit={handleEdit} onDelete={handleDelete}/>)}
+          {list.map((item, index) => <PostItem isEdit={isEdit} model={item} onClick={(model) => showGallery(model, index)} onEdit={handleEdit} onDelete={handleDelete}/>)}
         </InfiniteScroll>}
-        {isGalleryOpen && <GalleryModal isNews={!!props.profileId} isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)}/>}
+        {isGalleryOpen && <GalleryModal isNews={false} isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)}/>}
 
 
     </div>
