@@ -20,11 +20,12 @@ import CardReviewsShort from 'components/PublicProfile/components/view/CardRevie
 import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLayout'
 import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
+import PostList from 'components/Post/PostList'
 
 interface Props {
   profile: ProfileData,
   skill: SkillData,
-  showType: 'reviews' | 'recommendations' | 'profile'
+  showType: 'reviews' | 'recommendations' | 'profile' | 'news'
 }
 
 const PublicProfile = (props) => {
@@ -113,7 +114,8 @@ const PublicProfile = (props) => {
   console.log("CurrentSkill", currentSkill);
   return (
     <ProfilePageLayout {...props} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
-      {profile.role === 'client' && props.showType ==='profile' ? <>
+
+      {props.showType ==='news' ? <PostList profileId={profile.id}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
 
           <CardReviews profile={profile} />
           </>

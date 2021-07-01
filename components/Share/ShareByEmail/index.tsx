@@ -4,6 +4,7 @@ import ShareByEmailForm from 'components/Share/ShareByEmail/Form'
 import {shareByEmailRequest} from 'components/Share/actions'
 
 interface Props {
+  customLink?: string
   subCategoryId?: number
 }
 
@@ -15,7 +16,7 @@ export default function ShareByEmail(props: Props) {
   }
   return (
     <div className={styles.root}>
-      <ShareByEmailForm onSubmit={handleSubmit}/>
+      <ShareByEmailForm {...props} onSubmit={handleSubmit}/>
     </div>
   )
 }

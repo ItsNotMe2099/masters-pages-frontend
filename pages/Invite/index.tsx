@@ -28,10 +28,8 @@ const InvitePage = (props) => {
   const dispatch = useDispatch()
   const [activeSkill, setActiveSkill] = useState(null);
   const skills =  useSelector((state: IRootState) => state.skill.list) ;
+  const [customLink, setCustomLink] = useState();
 
-  useEffect(() => {
-    setActiveSkill(skills.find(skill => skill.subCategoryId))
-  }, [skills])
 
   useEffect(() => {
     dispatch(fetchSkillList());
@@ -40,16 +38,26 @@ const InvitePage = (props) => {
   const handleSubmit = (data) => {
     dispatch(inviteRequest(data));
   }
-
+  const handleSkillClick = (skill) => {
+    setActiveSkill(skill);
+    setCustomLink(null);
+  }
+  const handleCustomLinkClick = (type) => {
+    setActiveSkill(null);
+    setCustomLink(type);
+  }
   return (
     <Layout>
 
       <div className={styles.container}>
         <div className={styles.skills}>
-        {skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={getCategoryTranslation(skill.subCategory).name} onClick={() => setActiveSkill(skill)}/> : null)}
+          <Tab isActive={!customLink && !activeSkill} title={`All`} onClick={() => handleCustomLinkClick(null)}/>
+          <Tab isActive={customLink === 'news'} title={`News`} onClick={() => handleCustomLinkClick('news')}/>
+
+          {skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={getCategoryTranslation(skill.subCategory).name} onClick={() => handleSkillClick(skill)}/> : null)}
         </div>
         <div className={styles.content}>
-          <InviteForm onSubmit={handleSubmit} subCategoryId={activeSkill?.id}/>
+          <InviteForm customLink={customLink} onSubmit={handleSubmit} subCategoryId={activeSkill?.id}/>
         </div>
       </div>
 

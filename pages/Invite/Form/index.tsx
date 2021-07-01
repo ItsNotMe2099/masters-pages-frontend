@@ -13,6 +13,7 @@ import {resetInviteForm} from 'components/Invite/actions'
 
 const queryString = require('query-string')
 interface Props {
+  customLink?: string
   subCategoryId?: number,
   onSubmit?
   handleSubmit?
@@ -22,13 +23,13 @@ let InviteForm = (props: Props) => {
   const {t} = useTranslation()
   const dispatch = useDispatch()
 
-  const { handleSubmit, subCategoryId, reset } = props
+  const { handleSubmit, subCategoryId, reset, customLink } = props
   const error = useSelector((state: IRootState) => state.invite.formError);
   const loading = useSelector((state: IRootState) => state.invite.formLoading);
   const success = useSelector((state: IRootState) => state.invite.formIsSuccess);
 
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const inviteUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/PublicProfile/${profile.id}${subCategoryId ? `?subCategoryId=${subCategoryId}` : ''}`;
+  const inviteUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
   const handleReset = () => {
     reset()
     dispatch(resetInviteForm());

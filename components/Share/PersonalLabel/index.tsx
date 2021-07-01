@@ -9,13 +9,14 @@ import {useRef, useState} from 'react'
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
 
 interface Props {
+  customLink?: string
   subCategoryId?: number
   phone: string
 }
 
 export default function SharePersonalLabel(props: Props) {
   const dispatch = useDispatch()
-  const {phone, subCategoryId} = props;
+  const {phone, subCategoryId, customLink} = props;
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
   const labelRef = useRef(null);
   const [settings, setSettings] = useState<ISharePersonalLabel>({
@@ -28,7 +29,7 @@ export default function SharePersonalLabel(props: Props) {
       webAddress: true
     }
   });
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
 
   const handleChange = (data) => {
     console.log("handleChange", data)

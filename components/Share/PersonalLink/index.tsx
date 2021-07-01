@@ -6,13 +6,14 @@ import {IRootState} from 'types'
 import {useEffect, useState} from 'react'
 
 interface Props {
+  customLink?: string
   subCategoryId?: number
 }
 
-export default function SharePersonalLink({subCategoryId}: Props) {
+export default function SharePersonalLink({subCategoryId, customLink}: Props) {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
   const dispatch = useDispatch()
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
   const [isCopied, setIsCopied] = useState(false);
   useEffect(() => {
 

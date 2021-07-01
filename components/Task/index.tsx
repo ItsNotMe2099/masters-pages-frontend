@@ -36,6 +36,7 @@ import styles from './index.module.scss'
 import StarRating from "../svg/StarRating";
 import {useTranslation, withTranslation} from "react-i18next";
 import {getCurrencySymbol} from 'data/currency'
+import {saveTaskRequest} from 'components/SavedTasks/actions'
 
 interface Props {
   task: ITask,
@@ -118,7 +119,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     dispatch(taskShareOpen());
   }
   const handleFavorite = () => {
-
+    dispatch(saveTaskRequest(task.id))
   }
 
   const handleAcceptAsMasterToClient = () => {

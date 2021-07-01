@@ -2,14 +2,18 @@ import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import MenuItem from 'components/layout/Layout/components/MenuItem'
 import {useTranslation} from 'react-i18next'
-import {default as React, ReactElement} from 'react'
+import {default as React, ReactElement, useEffect, useRef, useState} from 'react'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'
 import {LangSelect} from 'components/layout/Header/components/LangSelect'
-
+import cx from 'classnames';
 import {useRouter} from 'next/router'
 import {logout} from 'components/Auth/actions'
 import ModeSelect from 'components/layout/Layout/components/ModeSelect'
+import {fetchProfile} from 'components/Profile/actions'
+import NotificationSelect from 'components/layout/Layout/components/NotificationSelect'
+import LogoSvg from 'components/svg/Logo'
+import cookie from "js-cookie";
 
 interface Props {
   children?: ReactElement[] | ReactElement
@@ -20,6 +24,15 @@ export default function LayoutAuthorized(props: Props) {
   const {route: currentRoute} = useRouter();
   const role = useSelector((state: IRootState) => state.profile.role)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const intervalRef = useRef(null);
+  const [collapsed, setCollapsed] = useState(false);
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+     dispatch(fetchProfile(profile.role));
+    }, 10000)
+    setCollapsed(!!cookie.get("menu-collapsed"))
+    return () => clearInterval(intervalRef.current);
+  }, []);
 
   const {t} = useTranslation();
   const dispatch = useDispatch()
@@ -73,11 +86,22 @@ export default function LayoutAuthorized(props: Props) {
   const handleLogout = () => {
     dispatch(logout());
   }
+  const handleCollapse = () => {
+    if(!collapsed) {
+
+      cookie.set("menu-collapsed", '1', {expires: 60 * 60* 24 * 365});
+    }else{
+      cookie.remove("menu-collapsed");
+    }
+    setCollapsed(!collapsed);
+  }
   return (
-    <div className={`${styles.root}  ${getModeClass()}`}>
+    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed})}>
       <div className={styles.leftMenu}>
         <div className={styles.logo}>
-          <Logo color={'white'}/>
+          {collapsed && <LogoSvg className={styles.logoCollapsed} color={'white'}/>}
+          {!collapsed && <Logo color={'white'}/>}
+          <div className={styles.collapseMenu} onClick={handleCollapse}/>
         </div>
         {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
           isActive={item.link && currentRoute.indexOf(`${item.link}`) >= 0} title={item.title} icon={item.icon}
@@ -92,6 +116,7 @@ export default function LayoutAuthorized(props: Props) {
           </div>
           <ModeSelect/>
         </div>
+        <NotificationSelect/>
         <LangSelect isAuth={false}/>
       </div>
       <div className={styles.container}>

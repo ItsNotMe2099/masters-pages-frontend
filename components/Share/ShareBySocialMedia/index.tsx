@@ -8,14 +8,15 @@ import {
 } from 'react-share'
 import {IRootState} from 'types'
 interface Props {
+  customLink?: string
   subCategoryId?: number
 }
 
-export default function ShareBySocialMedia({subCategoryId}: Props) {
+export default function ShareBySocialMedia({subCategoryId, customLink}: Props) {
   const dispatch = useDispatch()
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
 
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
 
   return (
     <div className={styles.root}>

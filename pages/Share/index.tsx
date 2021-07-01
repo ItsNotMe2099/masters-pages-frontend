@@ -27,11 +27,9 @@ const SharePage = (props) => {
   const router = useRouter();
   const dispatch = useDispatch()
   const [activeSkill, setActiveSkill] = useState(null);
+  const [customLink, setCustomLink] = useState();
   const skills =  useSelector((state: IRootState) => state.skill.list) ;
 
-  useEffect(() => {
-    setActiveSkill(skills.find(skill => skill.subCategoryId))
-  }, [skills])
 
   useEffect(() => {
     dispatch(fetchSkillList());
@@ -48,23 +46,33 @@ const SharePage = (props) => {
   const getTabContent = (activeTab) => {
     switch (activeTab){
       case 'personalLink':
-        return <SharePersonalLink subCategoryId={activeSkill?.id}/>
+        return <SharePersonalLink  customLink={customLink !== 'all' ? customLink : ''} subCategoryId={activeSkill?.id}/>
       case 'shareByEmail':
-        return <ShareByEmail subCategoryId={activeSkill?.id}/>
+        return <ShareByEmail  customLink={customLink !== 'all' ? customLink : ''} subCategoryId={activeSkill?.id}/>
       case 'shareBySocialMedia':
-        return <ShareBySocialMedia subCategoryId={activeSkill?.id}/>
+        return <ShareBySocialMedia  customLink={customLink !== 'all' ? customLink : ''} subCategoryId={activeSkill?.id}/>
       case 'personalLabel':
-        return <SharePersonalLabel subCategoryId={activeSkill?.id} phone={props.user.phone}/>
+        return <SharePersonalLabel  customLink={customLink !== 'all' ? customLink : ''} subCategoryId={activeSkill?.id} phone={props.user.phone}/>
     }
   }
 
   console.log("skills", skills);
+  const handleSkillClick = (skill) => {
+    setActiveSkill(skill);
+    setCustomLink(null);
+  }
+  const handleCustomLinkClick = (type) => {
+    setActiveSkill(null);
+    setCustomLink(type);
+  }
   return (
     <Layout>
 
       <div className={styles.container}>
         <div className={styles.skills}>
-        {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category).name}/${getCategoryTranslation(skill.subCategory).name}`} onClick={() => setActiveSkill(skill)}/> : null))}
+          <Tab isActive={!customLink && !activeSkill} title={`All`} onClick={() => handleCustomLinkClick(null)}/>
+          <Tab isActive={customLink === 'news'} title={`News`} onClick={() => handleCustomLinkClick('news')}/>
+        {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category).name}/${getCategoryTranslation(skill.subCategory).name}`} onClick={() => handleSkillClick(skill)}/> : null))}
         </div>
         <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>
         <div className={styles.content}>{getTabContent(activeTab)}</div>

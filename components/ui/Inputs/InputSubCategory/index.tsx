@@ -4,6 +4,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSubCategory, resetSubCategory } from "./actions";
+import {getCategoryTranslation} from 'utils/translations'
 
 interface Props {
 
@@ -41,6 +42,9 @@ export default function InputSubCategory(props) {
   }, [props.categoryId])
 
   return (
-    <SelectInput {...props} options={categories} onSearchChange={handleOnSearchChange} onOpenDropDown={handleOnOpen} isCategory={true} isTask={true}/>
+    <SelectInput {...props} options={categories.map(item => ({
+      value: item.value,
+      label: getCategoryTranslation(item)?.name
+    }))} onSearchChange={handleOnSearchChange} onOpenDropDown={handleOnOpen} isCategory={true} isTask={true}/>
   )
 }

@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 
-import {IProfileGalleryItem, IRootState} from 'types'
+import {IProfileGalleryItem, IRootState, ProfileData} from 'types'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {
@@ -24,39 +24,39 @@ import {confirmOpen, modalClose, postEditOpen} from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import Modals from 'components/layout/Modals'
 import PostList from 'components/Post/PostList'
+import {wrapper} from 'store'
+import request from 'utils/request'
+import ProfileCard from 'components/ui/ProfileCard'
 interface Props{
-  profileId?: number
+  profile?: ProfileData
 }
-const PostsPage = (props: Props) => {
+const ProfilePostsPage = ({profile}: Props) => {
   const {t} = useTranslation()
   const router = useRouter();
   const dispatch = useDispatch()
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const [currentEditPost, setCurrentEditPost] = useState(null);
 
-
-  const handleCreate = () => {
-    setCurrentEditPost(null);
-    dispatch(postEditOpen());
-  }
-  const handleEdit = (item) => {
-    setCurrentEditPost(item);
-    dispatch(postEditOpen());
-  }
 
   return (
     <Layout>
       <div className={styles.container}>
-        <div className={styles.header}>
-          <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>Create a post</Button>
-        </div>
-       <PostList onEdit={handleEdit}/>
+        <div className={styles.title}>Posts by {profile.firstName} {profile.lastName}</div>
+          <ProfileCard profile={profile}/>
+        <PostList profileId={profile.id}/>
       </div>
-      {modalKey === 'postEditOpen' && <PostModal currentEditPost={currentEditPost} isOpen={true} onClose={() => dispatch(modalClose())}/>}
 
       <Modals/>
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
-export default PostsPage
+
+export default ProfilePostsPage
+
+export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+  console.log("ctxQuery", ctx.query.profile)
+  const res = await getAuthServerSide()(ctx as any);
+  const id = ctx.query.id as string;
+  const profile = (await request({ url: `/api/profile/${id}`, method: 'GET' }))?.data
+
+  return {props: {...(res as any).props, profile}};
+});

@@ -93,7 +93,9 @@ const SearchProfileListView = (props: Props) => {
     </div>
     <div className={styles.container}>
       <div className={styles.tasksContainer}>
-      <div className={styles.sidebar}>
+        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={props.onShowMap}>{t('taskSearch.showOnTheMap')}</Button>
+
+        <div className={styles.sidebar}>
         <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
           <div className={styles.sidebarWrapper}>
         <div className={styles.map}>

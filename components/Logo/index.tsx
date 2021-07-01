@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 interface Props {
   color?: string,
   link?: string
+
 }
 
 export default function Logo(props: Props) {

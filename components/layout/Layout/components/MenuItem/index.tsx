@@ -42,7 +42,9 @@ export default function MenuItem(props: Props) {
     <Link href={link}>
       <a className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()}`}  onClick={handleClick}>
       <div className={styles.border}/>
+      <div className={styles.imageWrapper}>
       <img className={styles.icon} src={`/img/LeftMenu/${icon}.svg`}/>
+      </div>
         <div className={styles.title}>
           {title}
         </div>

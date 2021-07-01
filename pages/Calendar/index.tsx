@@ -72,6 +72,7 @@ import ModalConfirm from 'components/Modal/ModalConfirm'
 import EventExpenseModal from 'components/Calendar/components/EventExpenseModal'
 import {getCategoryTranslation} from 'utils/translations'
 import {deleteSkill} from 'components/Skill/actions'
+import {fetchProfile} from 'components/Profile/actions'
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
@@ -100,7 +101,17 @@ const CalendarPage = (props) => {
   const [rangeEndDate, setRangeEndDate] = useState(endWeek);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [draggedEvent, setDraggedEvent] = useState(null);
-
+  const intervalRef = useRef(null);
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      dispatch(fetchEventList({
+        start: format(rangeStartDate, 'yyyy-MM-dd 00:00:00 XXX'),
+        end: format(rangeEndDate, 'yyyy-MM-dd 23:59:59 XXX'),
+        limit: 1000
+      }))
+    }, 10000)
+    return () => clearInterval(intervalRef.current);
+  }, []);
   useEffect(() => {
     currentViewRef.current = currentView;
   })

@@ -56,7 +56,7 @@ export default function Button(props: Props) {
       [styles.mediumFont]: props.mediumFont,
       [styles.largeFont]: props.largeFont,
 
-    });
+    }, props.className);
   }
   return (props.href ? <Link href={props.href}>
         <a href={props.href} className={getClasses()}

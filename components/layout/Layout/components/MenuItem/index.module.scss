@@ -9,7 +9,7 @@
   align-items: center;
   flex-direction: row;
   color: white;
-  padding: 0px 13px 0px 21px;
+  padding: 0px 13px 0px 12px;
 
 }
 .modeClient{
@@ -27,8 +27,11 @@
     background: #22A3CC;
   }
 }
+.imageWrapper{
+  min-width: 33px;
+}
 .icon{
-  margin-right: 6px;
+
 }
 .isActive{
   .border{

@@ -11,6 +11,7 @@ interface TabOption {
 interface Props {
   tabs: TabOption[],
   activeTab: string,
+
   onChange?: (item) => void
   style?: 'fullwidth' | 'round' | 'roundSmall' | 'outline' | 'fullWidthRound',
   tabClassName?: string

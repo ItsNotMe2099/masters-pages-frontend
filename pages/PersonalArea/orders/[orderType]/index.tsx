@@ -61,6 +61,7 @@ const TabOrders = (props: Props) => {
       dispatch(resetSavedTasksList());
       dispatch(resetTaskUserList())
       dispatch(fetchSavedTasksRequest(1, 10))
+      dispatch(fetchTaskUserStatRequest());
       return;
     }
     dispatch(setFilterTaskUser({status: orderType}))
@@ -107,11 +108,11 @@ const TabOrders = (props: Props) => {
               type={'button'} onClick={() => router.push('/CreateTaskPage')}>Create new order</Button>
       </div>
       <div className={styles.desktop}>
-      <Tabs style={'round'} tabs={tabs.map((tab => {
+        <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
         console.log("Stat", stat)
         const statResult = stat.find(item => item.task_status === tab.key);
 
-        return {...tab, name: orderType === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}
+        return {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={orderType as string}/>
       </div>
       <div className={styles.mobile}>
@@ -129,7 +130,7 @@ const TabOrders = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > tasks.length}
           loader={loading ? <Loader/> : null}>
-          {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={role === 'client' ? 'client' : 'master'} showProfile={false}/>)}
+          {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved'? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false}/>)}
         </InfiniteScroll>}
       </div>
       <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'} onClose={() => dispatch(modalClose())}/>

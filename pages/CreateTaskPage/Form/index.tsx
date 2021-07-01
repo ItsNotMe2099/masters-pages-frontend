@@ -40,8 +40,7 @@ let CreateTaskForm = props => {
     dispatch(fetchProfileContacts({page: 1, limit: 100}));
   }, [])
   const getSearchStatFilterLink = () => {
-    console.log("StatFilter", statFilter.masterRole);
-    return `/${statFilter.masterRole === 'volunteer' ?'SearchVolunteerPage' : 'SearchMasterPage'}/?${queryString.stringify({filter: JSON.stringify(statFilter)}, {encode: true}).replace(/(")/g, '%22')}`
+     return `/${statFilter.masterRole === 'volunteer' ?'SearchVolunteerPage' : 'SearchMasterPage'}/?${queryString.stringify({filter: JSON.stringify(statFilter)}, {encode: true}).replace(/(")/g, '%22')}`
   }
   //=%7B"categoryId"%3A4%2C"subCategoryId"%3A11%7D
   return (
@@ -59,21 +58,22 @@ let CreateTaskForm = props => {
                 validate={required}
               />
               <Field
-                name="status"
+                name="visibilityType"
                 component={RadioList}
                 label={`Type`}
                 options={[{label: 'Public', value: 'public'}, {label: 'Private', value: 'private'}]}
                 size={'small'}
                 labelType={'static'}
               />
-              <Field
+              {props.visibilityType === 'private' && <Field
                 name="profileId"
                 component={SelectInput}
                 label={`Profile`}
                 options={contacts.map(item => ({label: `${item.contactProfile.firstName} ${item.contactProfile.lastName}`, value: item.contactProfile.id}))}
                 size={'small'}
+                validate={required}
                 labelType={'static'}
-              />
+              />}
               <Field
                 name="geonameid"
                 component={InputLocation}
@@ -215,11 +215,11 @@ CreateTaskForm   = reduxForm ({
 
 const selector = formValueSelector('taskForm') // <-- same as form name
 CreateTaskForm = connect(state => {
-  // can select values individually
   const categoryId = selector(state, 'categoryId')
-  console.log("getCategoryId", categoryId)
+  const visibilityType = selector(state, 'visibilityType')
   return {
-    categoryId
+    categoryId,
+    visibilityType
   }
 })(CreateTaskForm)
 export default CreateTaskForm
