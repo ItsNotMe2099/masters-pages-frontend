@@ -34,9 +34,10 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const chat = res.data;
   const otherProfileId = chat.profileId === profile.id ? chat.participantId : chat.profileId;
   if(chat.eventId){
+    ctx.res.writeHead(302, { Location: `/Calendar?eventId=${chat.eventId}` });
 
   }else if(chat.taskId){
-
+    ctx.res.writeHead(302, { Location: `/Chat/task-dialog/${otherProfileId}` });
   }else{
      ctx.res.writeHead(302, { Location: `/Chat/dialog/${otherProfileId}` });
   }

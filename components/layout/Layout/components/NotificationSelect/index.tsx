@@ -20,6 +20,8 @@ import {useRouter} from 'next/router'
  const NotificationSelect = () => {
    const { t } = useTranslation('common');
    const router = useRouter();
+
+   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const role = useSelector((state: IRootState) => state.profile.role)
   const dispatch = useDispatch()
    const [items, setItems] = useState([]);
@@ -95,10 +97,13 @@ import {useRouter} from 'next/router'
       }
     setIsActive(false);
    }
-  console.log("CheckItemLength", items.length , total)
+   const notificationCount =  profile.notificationNewsCount + profile.notificationMessageCount + profile.notificationEventCount + profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount
+
+   console.log("CheckItemLength", items.length , total)
   return (
     <div className={styles.root}>
       <Bell className={styles.bell} onClick={onClick} />
+      {notificationCount > 0 && <div className={styles.badge}/>}
       <div ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        <div className={styles.items} id={'notifications-dropdown'}>
         {(loading && total === 0) && <Loader/>}

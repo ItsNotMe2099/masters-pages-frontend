@@ -59,7 +59,6 @@ export default function LayoutAuthorized(props: Props) {
     }
   }
 
-
   const items = [
     {title: t('menu.profile'), icon: 'profile', link: `/id${profile?.id}`},
     {title: t('menu.share'), icon: 'share', link: '/Share'},
