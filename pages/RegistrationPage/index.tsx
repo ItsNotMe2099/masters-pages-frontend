@@ -32,7 +32,7 @@ const RegistrationPage = (props: Props) => {
         {modalKey === 'registrationSuccess' ?  <RegistrationSuccess
             isOpen={true}
             onRequestClose={() =>{
-              window.location.href = '/PersonalArea'
+              window.location.href = '/me'
             }}/> : <>
         <div className={styles.head}>{t('auth.registrationPage.title')}</div>
         <div className={styles.inner}>

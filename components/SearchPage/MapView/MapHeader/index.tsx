@@ -33,12 +33,24 @@ const MapHeader = (props: Props) => {
     }
     return {}
   }
+
+  const getSearchPageLink = () => {
+
+    switch (props.searchRole){
+      case 'master':
+        return 'SearchMasterPage'
+      case 'volunteer':
+        return 'SearchVolunteerPage'
+      default:
+        return 'SearchClientPage'
+    }
+  }
   console.log("get query Filter", getQueryFilter())
   const handleOnChangeFilter = (data) => {
     dispatch(setFilterProfileSearch(data));
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 10000}))
-    router.replace(`/Search${props.searchRole === 'master' ? 'Master' : 'Volunteer'}ePage?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
+    router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
   }
   return (
     <>

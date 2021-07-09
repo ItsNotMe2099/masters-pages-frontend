@@ -14,6 +14,7 @@ import {IRootState} from 'types'
 import {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 interface Props{
+  type: 'master' | 'client'
   collapsed: boolean
   handleSubmit:() => void
   onChange?:(data: any) => void
@@ -44,7 +45,7 @@ let SearchProfileForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
 
-        <div className={styles.root}>
+      {props.type === 'master' ? <div className={styles.root}>
           {collapsed ? <>
               <Field
                 name="categoryId"
@@ -85,28 +86,12 @@ let SearchProfileForm = (props) => {
             :
             <>
               <Field
-                name="categoryId"
-                component={InputCategory}
-                label={t('profileSearch.filter.fieldCategory')}
+                name="mainCategoryId"
+                component={InputSubCategory}
+                label={t('profileSearch.filter.fieldMainCategory')}
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
-              />
-              <Field
-                name="radius"
-                label={t('profileSearch.filter.fieldRadiusOfSearch')}
-                component={SelectInput}
-                options={[
-                  {label: `10 ${t('forms.radiusOfSearchInput.values.km')}`, value: 10},
-                  {label: `50 ${t('forms.radiusOfSearchInput.values.km')}`, value: 50},
-                  {label: `100 ${t('forms.radiusOfSearchInput.values.km')}`, value: 100},
-                  {label: t('forms.radiusOfSearchInput.values.province'), value: 500},
-                  {label: t('forms.radiusOfSearchInput.values.country'), value: 2000},
-                  {label: t('forms.radiusOfSearchInput.values.world'), value: null},
-                ]}
-
-                withIcon={false}
-                noMargin={true}
               />
               <Field
                 name="executionType"
@@ -119,6 +104,38 @@ let SearchProfileForm = (props) => {
                 ]}
                 withIcon={false}
                 noMargin={true}
+                showEmpty={true}
+              />
+              <Field
+                name="rating"
+                label={t('profileSearch.filter.fieldClientRating')}
+                component={SelectInput}
+                options={[
+                  {label: '1', value: 1},
+                  {label: '2', value: 2},
+                  {label: '3', value: 3},
+                  {label: '4', value: 4},
+                  {label: '5', value: 5},
+                ]}
+                noMargin={true}
+                withIcon={false}
+                showEmpty={true}
+              />
+              <Field
+                name="categoryId"
+                component={InputSubCategory}
+                label={t('profileSearch.filter.fieldCategory')}
+                categoryId={props.mainCategoryId}
+                noMargin={true}
+                withIcon={false}
+                showEmpty={true}
+              />
+              <Field
+                name="geonameid"
+                component={InputLocation}
+                label={t('profileSearch.filter.fieldLocation')}
+                noMargin={true}
+                withIcon={false}
                 showEmpty={true}
               />
               <Field
@@ -139,30 +156,28 @@ let SearchProfileForm = (props) => {
                 showEmpty={true}
               />
               <Field
-                name="geonameid"
-                component={InputLocation}
-                label={t('profileSearch.filter.fieldLocation')}
-                noMargin={true}
-                withIcon={false}
-                showEmpty={true}
-              />
-              <Field
-                name="rating"
-                label={t('profileSearch.filter.fieldClientRating')}
+                name="radius"
+                label={t('profileSearch.filter.fieldRadiusOfSearch')}
                 component={SelectInput}
                 options={[
-                  {label: '1', value: 1},
-                  {label: '2', value: 2},
-                  {label: '3', value: 3},
-                  {label: '4', value: 4},
-                  {label: '5', value: 5},
+                  {label: `10 ${t('forms.radiusOfSearchInput.values.km')}`, value: 10},
+                  {label: `50 ${t('forms.radiusOfSearchInput.values.km')}`, value: 50},
+                  {label: `100 ${t('forms.radiusOfSearchInput.values.km')}`, value: 100},
+                  {label: t('forms.radiusOfSearchInput.values.province'), value: 500},
+                  {label: t('forms.radiusOfSearchInput.values.country'), value: 2000},
+                  {label: t('forms.radiusOfSearchInput.values.world'), value: null},
                 ]}
-                noMargin={true}
+
                 withIcon={false}
-                showEmpty={true}
+                noMargin={true}
               />
+
+
+
+
+
               <Field
-                name="keyword"
+                name="keywords"
                 label={t('profileSearch.filter.fieldKeywords')}
                 component={Input}
                 labelType={'placeholder'}
@@ -173,7 +188,43 @@ let SearchProfileForm = (props) => {
               />
 
             </>}
-        </div>
+        </div> : <div className={styles.root}>
+        <Field
+          name="keywords"
+          label={t('profileSearch.filter.fieldKeywords')}
+          component={Input}
+          labelType={'placeholder'}
+          noMargin={true}
+          withIcon={false}
+          showEmpty={true}
+          debounce={1000}
+        />
+        <Field
+          name="geonameid"
+          component={InputLocation}
+          label={t('profileSearch.filter.fieldLocation')}
+          noMargin={true}
+          withIcon={false}
+          showEmpty={true}
+        />
+        <Field
+          name="radius"
+          label={t('profileSearch.filter.fieldRadiusOfSearch')}
+          component={SelectInput}
+          options={[
+            {label: `10 ${t('forms.radiusOfSearchInput.values.km')}`, value: 10},
+            {label: `50 ${t('forms.radiusOfSearchInput.values.km')}`, value: 50},
+            {label: `100 ${t('forms.radiusOfSearchInput.values.km')}`, value: 100},
+            {label: t('forms.radiusOfSearchInput.values.province'), value: 500},
+            {label: t('forms.radiusOfSearchInput.values.country'), value: 2000},
+            {label: t('forms.radiusOfSearchInput.values.world'), value: null},
+          ]}
+
+          withIcon={false}
+          noMargin={true}
+        />
+
+      </div>}
       </form>
   )
 }
@@ -184,6 +235,7 @@ SearchProfileForm  = reduxForm ({
 
 const selector = formValueSelector('searchTaskForm') // <-- same as form name
 SearchProfileForm = connect(state => {
+  const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
   return {
     categoryId,

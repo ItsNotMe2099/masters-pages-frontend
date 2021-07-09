@@ -24,6 +24,7 @@ let CardCategoryForm = (props: Props) => {
   const { t } = useTranslation('common');
   const error = useSelector((state: IRootState) => state.profile.formError)
   const [categoryId, setCategoryId] = useState(null);
+  const [mainCategoryId, setMainCategoryId] = useState(null);
 
   useEffect(() => {
     const categoryId = props.initialValues?.categoryId
@@ -35,17 +36,29 @@ let CardCategoryForm = (props: Props) => {
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <Field
+        name="mainCategoryId"
+        component={InputSubCategory}
+        size={'small'}
+        label="Main Category"
+        onChange={(val) =>{
+
+          setMainCategoryId(val)}
+        }
+      />
+      {mainCategoryId && <Field
         name="categoryId"
-        component={InputCategory}
+        component={InputSubCategory}
         size={'small'}
         label="Category"
+
+        categoryId={mainCategoryId}
         onChange={(val) =>{
           console.log("SetCateogry", val);
           setCategoryId(val)}
         }
-      />
+      />}
       {categoryId && <Field
-        name="subCategories"
+        name="subCategoryId"
         component={InputSubCategory}
         size={'small'}
         label="Sub Category"

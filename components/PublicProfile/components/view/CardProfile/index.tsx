@@ -12,7 +12,7 @@ import Link from 'next/link'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {taskOfferOpen} from 'components/Modal/actions'
 import {showProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm} from 'components/Profile/actions'
-import AvatarForm from 'pages/PersonalArea/profile/components/AvatarForm'
+import AvatarForm from 'pages/me/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
 interface Props{

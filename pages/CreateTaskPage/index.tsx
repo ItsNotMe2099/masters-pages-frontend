@@ -69,7 +69,7 @@ const CreateTaskPage = (props) => {
         title={t('createTask.successTitle')}
         image={'/img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
-        router.push('/PersonalArea/orders');
+        router.push('/orders');
       }}>
 
       </Modal>

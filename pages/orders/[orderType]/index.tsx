@@ -21,7 +21,7 @@ import { TabSelect } from "components/TabSelect";
 import {useTranslation, withTranslation} from "react-i18next";
 import Layout from 'components/layout/Layout'
 import {getAuthServerSide} from 'utils/auth'
-import TabOrderModal from 'pages/PersonalArea/orders/[orderType]/components/TabOrderModal'
+import TabOrderModal from 'pages/orders/[orderType]/components/TabOrderModal'
 import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
 import {fetchSavedTasks, fetchSavedTasksRequest, resetSavedTasksList} from 'components/SavedTasks/actions'
@@ -54,7 +54,7 @@ const TabOrders = (props: Props) => {
   ].map(item => {
     return{
       ...item,
-      link: `/PersonalArea/orders/${item.key}`
+      link: `/orders/${item.key}`
     }})
   useEffect(() => {
     if(orderType === 'saved'){

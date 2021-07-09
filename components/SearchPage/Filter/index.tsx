@@ -31,6 +31,18 @@ const SearchProfileFilter = (props: Props) => {
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
 
   const [showMap, setShowMap] = useState(false)
+
+  const getSearchPageLink = () => {
+
+    switch (props.searchRole){
+      case 'master':
+        return 'SearchMasterPage'
+      case 'volunteer':
+        return 'SearchVolunteerPage'
+      default:
+        return 'SearchClientPage'
+    }
+  }
   const handleFilterChange = (data) => {
     if(props.onChange){
         props.onChange(data);
@@ -38,7 +50,7 @@ const SearchProfileFilter = (props: Props) => {
       dispatch(setFilterProfileSearch(data));
       dispatch(resetProfileSearchList())
       dispatch(fetchProfileSearchList())
-      router.replace(`/Search${props.searchRole === 'master' ? 'Master' : 'Volunteer'}Page?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
+      router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
 
     }
   }

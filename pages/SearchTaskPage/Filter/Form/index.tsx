@@ -86,9 +86,74 @@ let SearchTaskForm = (props) => {
             :
             <>
               <Field
+                name="mainCategoryId"
+                component={InputSubCategory}
+                label={t('taskSearch.filter.fieldMainCategory')}
+                noMargin={true}
+                withIcon={false}
+                showEmpty={true}
+              />
+              <Field
+                name="executionType"
+                label={t('taskSearch.filter.fieldExecutionType')}
+                component={SelectInput}
+                options={[
+                  {label: t('forms.executionTypeInput.values.physical'), value: 'physical'},
+                  {label: t('forms.executionTypeInput.values.virtual'), value: 'virtual'},
+                  {label: t('forms.executionTypeInput.values.combo'), value: 'combo'}
+                ]}
+                withIcon={false}
+                noMargin={true}
+                showEmpty={true}
+              />
+              <Field
+                name="rating"
+                label={t('taskSearch.filter.fieldClientRating')}
+                component={SelectInput}
+                options={[
+                  {label: '1', value: 1},
+                  {label: '2', value: 2},
+                  {label: '3', value: 3},
+                  {label: '4', value: 4},
+                  {label: '5', value: 5},
+                ]}
+                noMargin={true}
+                withIcon={false}
+                showEmpty={true}
+              />
+              <Field
                 name="categoryId"
-                component={InputCategory}
-                label={t('taskSearch.filter.fieldCategory')}
+                component={InputSubCategory}
+                label={t('taskSearch.filter.fieldSubCategory')}
+                categoryId={props.mainCategoryId}
+                noMargin={true}
+                withIcon={false}
+                showEmpty={true}
+              />
+              <Field
+                name="geonameid"
+                component={InputLocation}
+                label={t('taskSearch.filter.fieldLocation')}
+                noMargin={true}
+                withIcon={false}
+                showEmpty={true}
+              />
+
+              <Field
+                name="price"
+                label={t('taskSearch.filter.fieldPrice')}
+                component={InputPriceFilter}
+                noMargin={true}
+                formKey={`${props.form}`}
+                withIcon={false}
+              />
+
+
+              <Field
+                name="subCategoryId"
+                component={InputSubCategory}
+                label={t('taskSearch.filter.fieldSubCategory')}
+                categoryId={props.categoryId}
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
@@ -109,59 +174,9 @@ let SearchTaskForm = (props) => {
                 withIcon={false}
                 noMargin={true}
               />
-              <Field
-                name="executionType"
-                label={t('taskSearch.filter.fieldExecutionType')}
-                component={SelectInput}
-                options={[
-                  {label: t('forms.executionTypeInput.values.physical'), value: 'physical'},
-                  {label: t('forms.executionTypeInput.values.virtual'), value: 'virtual'},
-                  {label: t('forms.executionTypeInput.values.combo'), value: 'combo'}
-                ]}
-                withIcon={false}
-                noMargin={true}
-                showEmpty={true}
-              />
-              <Field
-                name="price"
-                label={t('taskSearch.filter.fieldPrice')}
-                component={InputPriceFilter}
-                noMargin={true}
-                formKey={`${props.form}`}
-                withIcon={false}
-              />
-              <Field
-                name="subCategoryId"
-                component={InputSubCategory}
-                label={t('taskSearch.filter.fieldSubCategory')}
-                categoryId={props.categoryId}
-                noMargin={true}
-                withIcon={false}
-                showEmpty={true}
-              />
-              <Field
-                name="geonameid"
-                component={InputLocation}
-                label={t('taskSearch.filter.fieldLocation')}
-                noMargin={true}
-                withIcon={false}
-                showEmpty={true}
-              />
-              <Field
-                name="rating"
-                label={t('taskSearch.filter.fieldClientRating')}
-                component={SelectInput}
-                options={[
-                  {label: '1', value: 1},
-                  {label: '2', value: 2},
-                  {label: '3', value: 3},
-                  {label: '4', value: 4},
-                  {label: '5', value: 5},
-                ]}
-                noMargin={true}
-                withIcon={false}
-                showEmpty={true}
-              />
+
+
+
               <Field
                 name="keyword"
                 label={t('taskSearch.filter.fieldKeywords')}
@@ -183,9 +198,11 @@ SearchTaskForm  = reduxForm ({
 
 const selector = formValueSelector('searchTaskForm') // <-- same as form name
 SearchTaskForm = connect(state => {
+  const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
   return {
     categoryId,
+    mainCategoryId,
   }
 })(SearchTaskForm)
 

@@ -19,13 +19,13 @@ import RegistrationPhoneConfirm from "components/Auth/RegistrationPhoneConfirm";
 import {useTranslation} from "react-i18next";
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
-import TabSettingsForm from 'pages/PersonalArea/settings/components/TabSettingsForm'
+import TabSettingsForm from 'pages/me/settings/components/TabSettingsForm'
 import TabPersonalForm from './components/TabPersonalForm'
-import {TabEmailForm} from 'pages/PersonalArea/settings/components/TabEmailForm'
-import {TabPhoneForm} from 'pages/PersonalArea/settings/components/TabPhoneForm'
-import TabNotificationsForm from 'pages/PersonalArea/settings/components/TabNotificationsForm'
+import TabEmailForm from 'pages/me/settings/components/TabEmailForm'
+import TabPhoneForm from 'pages/me/settings/components/TabPhoneForm'
+import TabNotificationsForm from 'pages/me/settings/components/TabNotificationsForm'
 import Modals from 'components/layout/Modals'
-import TabLanguageForm from 'pages/PersonalArea/settings/components/TabLanguageForm'
+import TabLanguageForm from 'pages/me/settings/components/TabLanguageForm'
 interface Props {
   t?: (string) => string,
   user?: any

@@ -77,12 +77,23 @@ const SearchProfileMapView = (props: Props) => {
       dispatch(setUseLocationFilter(false, false));
     }
   }, [])
+  const getSearchPageLink = () => {
+    console.log("GetSearchRole", props.searchRole)
+    switch (props.searchRole){
+      case 'master':
+        return 'SearchMasterPage'
+      case 'volunteer':
+        return 'SearchVolunteerPage'
+      default:
+        return 'SearchClientPage'
+    }
+  }
   const handleSortChange = (item) => {
     console.log("ChangeSort", item)
     dispatch(setSortProfileSearch(item.value));
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 100000}))
-    router.replace(`/Search${props.searchRole === 'master' ? 'Master' : 'Volunteer'}Page?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
+    router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
 

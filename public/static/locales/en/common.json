@@ -318,6 +318,7 @@
     "stepGetOffers": "Get offers",
     "stepChooseMaster": "Choose a master",
     "fieldTitle": "Task title",
+    "fieldMainCategory": "Main category",
     "fieldCategory": "Category",
     "fieldLocation": "Location",
     "fieldSubCategory": "Sub category",
@@ -342,6 +343,7 @@
     "tasks": "Tasks",
     "showOnTheMap": "Show on the map",
     "filter": {
+      "fieldMainCategory": "Main category",
       "fieldCategory": "Category",
       "fieldSubCategory": "Subcategory",
       "fieldRadiusOfSearch": "Radius of search",
@@ -361,11 +363,13 @@
     "approximateLocationTab": "Approximate location"
   },
   "profileSearch": {
-    "masters": "Masters",
-    "volunteers": "Volunteers",
+    "master": "Masters",
+    "client": "clients",
+    "volunteer": "Volunteers",
     "showOnTheMap": "Show on the map",
 
     "filter": {
+      "fieldMainCategory": "Main category",
       "fieldCategory": "Category",
       "fieldSubCategory": "Subcategory",
       "fieldRadiusOfSearch": "Radius of search",

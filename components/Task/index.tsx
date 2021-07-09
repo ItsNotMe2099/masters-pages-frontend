@@ -52,7 +52,7 @@ interface Props {
 }
 
 const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish, index }: Props) => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const dispatch = useDispatch();
   const [sortType, setSortType] = useState('newFirst');
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -267,9 +267,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
 
   const renderCategory = () => {
     return <div className={styles.category}>
-      <div> {getCategoryTranslation(task.category)?.name}</div>
-      <img src={'/img/icons/arrow2.svg'}/>
-      <div>{getCategoryTranslation(task.subCategory)?.name}</div>
+      <div>{getCategoryTranslation(task.mainCategory, i18n.language)?.name}/{getCategoryTranslation(task.category, i18n.language)?.name}/{getCategoryTranslation(task.subCategory, i18n.language)?.name}</div>
     </div>
   }
 

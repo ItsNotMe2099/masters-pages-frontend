@@ -5,14 +5,11 @@ import { IRootState } from "types";
 import {getAuthServerSide} from 'utils/auth'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {wrapper} from 'store'
+import request from 'utils/request'
 const PersonalAreaPageIndex = (props) => {
   const router = useRouter()
   const { mode } = router.query
-  const role = useSelector((state: IRootState) => state.profile.role)
-  console.log("mode", mode);
-  useEffect(() => {
-      router.replace(`/PersonalArea/profile`)
-  }, [])
 
   return (
     <>
@@ -21,5 +18,11 @@ const PersonalAreaPageIndex = (props) => {
     </>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+
+export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+  const res = await getAuthServerSide({redirect: true})(ctx as any);
+  const profile = (res as any).props.profile;
+  ctx.res.writeHead(302, { Location: `/id${profile.id}` });
+  ctx.res.end();
+});
 export default PersonalAreaPageIndex

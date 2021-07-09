@@ -9,37 +9,28 @@ import {profileEmailChangeOpen, registrationPhoneOpen} from "components/Modal/ac
 import {useState} from "react";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
 import {useTranslation} from "react-i18next";
-import NotificationsForm from 'pages/PersonalArea/settings/components/NotificationsForm'
+import NotificationsForm from 'pages/me/settings/components/NotificationsForm'
 
-let TabNotificationsForm = (props) => {
+const TabEmailForm = (props) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const error = useSelector((state: IRootState) => state.profileSettings.formError)
-  const loading = useSelector((state: IRootState) => state.profileSettings.formLoading)
-  const [newPhone, setNewPhone] = useState();
+
   const handleEmailChange = () => {
     dispatch(profileEmailChangeOpen());
   }
-  const handlePhoneChange = () => {
-    dispatch(registrationPhoneSetCallback((phone) => setNewPhone(phone)));
-    dispatch(registrationPhoneOpen());
-  }
+
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
-      <NotificationsForm {...props}/>
-       <FormError error={error}/>
-      <Button className={styles.button} disabled={loading} grey={true} bold={true} size={'12px 70px'}  type={'submit'}>{t('personalArea.tabSettings.buttonSave')}</Button>
+      <div className={styles.row}>
+        <div className={styles.label}>{t('personalArea.tabSettings.fieldEmail')}:</div>
+        <div className={styles.field}>
+          {profile.email} <div className={styles.change} onClick={handleEmailChange}>{t('personalArea.tabSettings.change')}</div>
+        </div>
+      </div>
 
     </form>
   )
 }
 
-
-TabNotificationsForm  = reduxForm({
-  form: 'tabNotificationsForm',
-
-}) (TabNotificationsForm )
-
-
-export default TabNotificationsForm
+export default TabEmailForm;

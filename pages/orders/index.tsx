@@ -12,7 +12,7 @@ const TabOrders = (props: Props) => {
   const router = useRouter();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   useEffect(() => {
-  router.replace( profile.role === 'client' ? '/PersonalArea/orders/published' : '/PersonalArea/orders/negotiation');
+  router.replace( profile.role === 'client' ? '/orders/published' : '/orders/negotiation');
   }, []);
   return <></>
 }

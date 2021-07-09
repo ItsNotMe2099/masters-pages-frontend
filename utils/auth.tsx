@@ -91,5 +91,13 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
 
 
 export const afterAuthRedirect = () => {
-      window.location.href = (Router.query.redirect as string) || '/PersonalArea'
+  if((Router.query.redirect as string) ){
+    window.location.href = (Router.query.redirect as string) ;
+  }else{
+    meRedirect();
+  }
+
+}
+export const meRedirect = () => {
+  Router.push("/me");
 }

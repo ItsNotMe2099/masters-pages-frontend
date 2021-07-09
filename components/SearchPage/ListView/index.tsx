@@ -45,6 +45,17 @@ const SearchProfileListView = (props: Props) => {
   const role = useSelector((state: IRootState) => state.profile.role)
   const [isShow, setIsShow] = useState(width > 700)
 
+  const getSearchPageLink = () => {
+    console.log("GetSearchRole", props.searchRole)
+    switch (props.searchRole){
+      case 'master':
+        return 'SearchMasterPage'
+      case 'volunteer':
+        return 'SearchVolunteerPage'
+      default:
+        return 'SearchClientPage'
+    }
+  }
   console.log("Tasks", tasks);
   useEffect(() => {
     console.log('fetch search')
@@ -59,7 +70,7 @@ const SearchProfileListView = (props: Props) => {
     dispatch(setSortProfileSearch(item.value));
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList())
-    router.replace(`/Search${props.searchRole === 'master' ? 'Master' : 'Volunteer'}Page?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
+    router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
   const handleScrollNext = () => {
     console.log("HandleNext", page)
@@ -111,8 +122,8 @@ const SearchProfileListView = (props: Props) => {
       </div>
       <div className={styles.tasks} id={'tasks-list'}>
          <div className={styles.tasksTobBar}>
-           {!loading && <div className={styles.tasksAmount}>{props.searchRole === 'master' ? t('profileSearch.masters') : t('profileSearch.volunteers') }: <span>{total}</span></div>}
-          {tasks.length > 0 && <div className={styles.tasksSort}>
+           {!loading && <div className={styles.tasksAmount}>{t(`profileSearch.${props.searchRole}`)}: <span>{total}</span></div>}
+          {/*tasks.length > 0 && <div className={styles.tasksSort}>
             <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
               {value: 'newFirst',  label: t('sort.newFirst')},
@@ -120,7 +131,7 @@ const SearchProfileListView = (props: Props) => {
               {value: 'lowPrice', label: t('sort.lowestPrice')}]}
                       item={(item) => <div>{item?.label}</div>}
             />
-          </div>}
+          </div>*/}
         </div>
         {(loading && total > 0) && <Loader/>}
         {total > 0 && <InfiniteScroll

@@ -9,9 +9,9 @@ import {profileEmailChangeOpen, registrationPhoneOpen} from "components/Modal/ac
 import {useState} from "react";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
 import {useTranslation} from "react-i18next";
-import NotificationsForm from 'pages/PersonalArea/settings/components/NotificationsForm'
+import NotificationsForm from 'pages/me/settings/components/NotificationsForm'
 
-export const TabPhoneForm = (props) => {
+ const TabPhoneForm = (props) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -35,4 +35,5 @@ export const TabPhoneForm = (props) => {
     )
 
 }
+export default TabPhoneForm;
 

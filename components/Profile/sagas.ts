@@ -19,6 +19,7 @@ import cookie from "js-cookie";
 import {setPushTokenRequest} from "../Push/actions";
 import {confirmChangeData, modalClose} from "../Modal/actions";
 import {logout} from "../Auth/actions";
+import {meRedirect} from 'utils/auth'
 
 function* ProfileSaga() {
   yield takeLatest(ActionTypes.CHANGE_ROLE,
@@ -31,8 +32,7 @@ function* ProfileSaga() {
 
       if (!res.err && res.data && res.data.id) {
         cookie.set('mode', action.payload.role);
-        yield put(changeRoleSuccess(action.payload.role));
-        yield put(fetchProfileSuccess(res.data));
+        meRedirect()
       } else {
         switch (action.payload.role) {
           case 'client':
@@ -73,7 +73,7 @@ function* ProfileSaga() {
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.SUCCESS});
         yield put(changeRoleSuccess(action.payload.role));
-        Router.push('/PersonalArea')
+        Router.push('/me')
       }
 
     })

@@ -223,6 +223,7 @@ export interface SkillData {
   description?: string
   categoryId: number,
   subCategoryId: number,
+  mainCategory?: Category
   subCategory?: Category
   category?: Category
   photos?: string[],
@@ -380,6 +381,7 @@ export interface ITask {
   address: string
   geonameid: number,
   location: ILocation,
+  mainCategory: Category,
   category: Category,
   subCategory: Category,
   isExactLocation: boolean
@@ -439,6 +441,7 @@ export interface ISavedSearchItem {
   keywords: string
   categoryId: number
   subCategoryId: number
+  mainCategory: Category,
   category: Category,
   subCategory: Category,
   masterRole: string

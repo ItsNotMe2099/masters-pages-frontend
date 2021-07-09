@@ -27,10 +27,10 @@ const ProfileSelect = (props) => {
   }
 
   const options = [
-    { value: 'profile', label: t('menu.profile'), link: `/PersonalArea` },
+    { value: 'profile', label: t('menu.profile'), link: `/me` },
     { value: 'messages', badge: profile.notificationMessageCount, label: t('menu.messages'), link: `/Chat` },
     { value: 'reviews', label: t('menu.reviews'), badge: profile.notificationFeedbackCount,  link: `/PersonalArea/reviews` },
-    { value: 'orders', label: t('menu.orders'), badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount,  link: `/PersonalArea/orders` },
+    { value: 'orders', label: t('menu.orders'), badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount,  link: `/orders` },
     { value: 'settings', label: t('menu.settings'), link: `/PersonalArea/settings` },
     { value: 'calendar', label: t('menu.calendar'), link: `/PersonalArea/calendar` },
     { value: 'logout', label: t('menu.logout') },

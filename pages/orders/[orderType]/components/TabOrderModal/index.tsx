@@ -8,7 +8,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import TabOrderForm from 'pages/PersonalArea/orders/[orderType]/components/TabOrderModal/TabOrderForm'
+import TabOrderForm from 'pages/orders/[orderType]/components/TabOrderModal/TabOrderForm'
 interface Props {
   isOpen: boolean,
   task: ITask,

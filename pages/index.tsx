@@ -10,7 +10,7 @@ const Home = (props) => {
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const res = await getAuthServerSide()(ctx as any);
   if((res as any).props.user){
-    ctx.res.writeHead(302, { Location: "/PersonalArea" });
+    ctx.res.writeHead(302, { Location: "/me" });
     ctx.res.end();
     return;
   }

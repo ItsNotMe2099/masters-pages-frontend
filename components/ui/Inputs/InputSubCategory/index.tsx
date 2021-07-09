@@ -5,46 +5,53 @@ import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSubCategory, resetSubCategory } from "./actions";
 import {getCategoryTranslation} from 'utils/translations'
-
+import request from 'utils/request'
+import queryString from  'query-string';
+import {useTranslation} from 'react-i18next'
 interface Props {
 
 }
 
 export default function InputSubCategory(props) {
+  const {t, i18n} = useTranslation();
   const dispatch = useDispatch()
   const [value, setValue] = useState();
-  const categories = useSelector((state: IRootState) => state.subCategoryInput.subCategories)
-  const handleOnChange = (value) => {
-    console.log("OnChangeLocValue", value)
-    props.input.onChange(value);
-  }
-  const handleOnOpen = useCallback(() => {
-    console.log('handleOnOpen')
-    dispatch(fetchSubCategory(props.categoryId))
-  }, [props.categoryId])
-  const handleOnSearchChange = (value) => {
-    console.log('handleOnSearchChange')
-    if(!value){
-      dispatch(fetchSubCategory(props.categoryId))
-      return;
+
+  const [options, setOptions] = useState([]);
+  useEffect(() => {
+    if(props.input.value){
+      getSearchCategory();
     }
-    dispatch(fetchSubCategory(props.categoryId, value))
+
+  }, [i18n.language])
+
+  const getSearchCategory = (search = '') => {
+    return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.input?.value})}`, method: 'GET'})
+      .then((response) => {
+        const data = response.data;
+        console.log("Response", data)
+        setOptions(data ? data.map(item => {
+          return {
+            value: item.id,
+            label: item.name,
+          }
+        }) : [])
+      })
+  }
+  const handleOnOpen = () => {
+    getSearchCategory(value);
+  }
+  const handleOnSearchChange = (value) => {
     setValue(value)
+    getSearchCategory(value);
   }
 
   useEffect(() => {
     console.log("change CategoryId", props.categoryId);
-    if(props.categoryId) {
-      dispatch(fetchSubCategory(props.categoryId))
-    }else{
-      dispatch(resetSubCategory());
-    }
+
   }, [props.categoryId])
 
   return (
-    <SelectInput {...props} options={categories.map(item => ({
-      value: item.value,
-      label: getCategoryTranslation(item)?.name
-    }))} onSearchChange={handleOnSearchChange} onOpenDropDown={handleOnOpen} isCategory={true} isTask={true}/>
+    <SelectInput {...props} options={options} onSearchChange={handleOnSearchChange} onOpenDropDown={handleOnOpen} isCategory={true} isTask={true}/>
   )
 }

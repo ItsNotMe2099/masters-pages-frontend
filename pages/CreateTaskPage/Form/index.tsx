@@ -95,11 +95,27 @@ let CreateTaskForm = props => {
             </div>
             <div className={styles.column}>
               <Field
-                name="categoryId"
-                component={InputCategory}
-                onChange={(value) => onChangeForStat('categoryId', value)}
+                name="mainCategoryId"
+                component={InputSubCategory}
+                onChange={(value) => {
+                  props.change('categoryId', null);
+                  props.change('subCategoryId', null);
+                  onChangeForStat('mainCategoryId', value)}}
                 label={`${t('createTask.fieldCategory')}`}
                 validate={required}
+                size={'small'}
+                labelType={'static'}
+              />
+              <Field
+                name="categoryId"
+                component={InputSubCategory}
+                onChange={(value) => {
+                  props.change('categoryId', null);
+                  props.change('subCategoryId', null);
+                  onChangeForStat('categoryId', value)}}
+                label={`${t('createTask.fieldCategory')}`}
+                validate={required}
+                categoryId={props.mainCategoryId}
                 size={'small'}
                 labelType={'static'}
               />
@@ -215,9 +231,11 @@ CreateTaskForm   = reduxForm ({
 
 const selector = formValueSelector('taskForm') // <-- same as form name
 CreateTaskForm = connect(state => {
+  const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
   const visibilityType = selector(state, 'visibilityType')
   return {
+    mainCategoryId,
     categoryId,
     visibilityType
   }

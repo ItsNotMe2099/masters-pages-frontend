@@ -16,9 +16,9 @@ import {profileEmailChangeOpen, registrationPhoneOpen} from "components/Modal/ac
 import {useState} from "react";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
 import {useTranslation} from "react-i18next";
-import NotificationsForm from 'pages/PersonalArea/settings/components/NotificationsForm'
+import NotificationsForm from 'pages/me/settings/components/NotificationsForm'
 
-let TabLanguageForm = (props) => {
+let TabSettingsForm = (props) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -51,6 +51,13 @@ let TabLanguageForm = (props) => {
         </div>
 
 
+        <div className={styles.row}>
+          <div className={styles.label}>{t('personalArea.tabSettings.fieldPhone')}:</div>
+          <div className={styles.field}>
+            {newPhone || profile.phone} <div className={styles.change} onClick={handlePhoneChange}>{t('personalArea.tabSettings.change')}</div>
+          </div>
+        </div>
+
       </div>
 
        <FormError error={error}/>
@@ -62,10 +69,10 @@ let TabLanguageForm = (props) => {
 }
 
 
-TabLanguageForm  = reduxForm({
-  form: 'TabLanguageForm',
+TabSettingsForm  = reduxForm({
+  form: 'tabSettingsForm',
 
-}) (TabLanguageForm )
+}) (TabSettingsForm )
 
 
-export default TabLanguageForm
+export default TabSettingsForm
