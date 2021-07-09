@@ -23,6 +23,7 @@ import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import Slider from "react-slick";
 import { TabSelect } from "./components/TabSelect";
+import BookmarkSvg from 'components/svg/Bookmark'
 
 interface Props {
   profile: ProfileData,
@@ -169,8 +170,8 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
             </div>
           </div>
           <div className={styles.bottom}>
-           <ProfileActionButton href={`/id${profile.id}`} title={'View profile'} icon={'arrow-right-small'} onClick={handleReadMore}/>
-            <ProfileActionButton isLoading={savingProfileId === profile.id} title={'Save'} icon={'bookmark'} onClick={handleSave}/>
+           <ProfileActionButton href={`/id${profile.id}`} title={'View profile'} icon={<img className={styles.icon} src={`'arrow-right-small'`} alt=''/>} onClick={handleReadMore}/>
+            <ProfileActionButton isLoading={savingProfileId === profile.id} title={profile.isSavedByCurrentProfile ? 'Saved' : 'Save'} icon={<BookmarkSvg isSaved={profile.isSavedByCurrentProfile}/>} onClick={handleSave}/>
           </div>
         </div>
 

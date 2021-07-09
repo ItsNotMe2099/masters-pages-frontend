@@ -73,6 +73,7 @@ import EventExpenseModal from 'components/Calendar/components/EventExpenseModal'
 import {getCategoryTranslation} from 'utils/translations'
 import {deleteSkill} from 'components/Skill/actions'
 import {fetchProfile} from 'components/Profile/actions'
+import {useRouter} from 'next/router'
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
@@ -83,6 +84,8 @@ interface Props {
 
 const CalendarPage = (props) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  console.log("RouterQuery", router.query)
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const modelKey = useSelector((state: IRootState) => state.modal.modalKey)
   let firstOfWeek = localizer.startOfWeek()
@@ -102,6 +105,12 @@ const CalendarPage = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [draggedEvent, setDraggedEvent] = useState(null);
   const intervalRef = useRef(null);
+  useEffect(() => {
+    if( router.query.eventId){
+      dispatch(fetchEvent(parseInt(router.query.eventId as string, 10) ))
+      dispatch(editEventOpen());
+    }
+  },  [router.query.eventId]);
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       dispatch(fetchEventList({
@@ -179,12 +188,11 @@ const CalendarPage = (props) => {
     if([EventStatus.Approved, EventStatus.Deleted].includes(event.status)) {
       return;
     }
-    dispatch(fetchEvent(event.id))
     if(![EventStatus.Draft, EventStatus.Confirmed].includes(event.status)) {
       dispatch(currentEventSetEditMode());
     }
     setCurrentEditEventRange({start, end});
-    dispatch(editEventOpen());
+    router.push(`/Calendar?eventId=${event.id}`, null, {shallow: true});
   }
 
   const newEvent = (_event) => {
@@ -195,9 +203,9 @@ const CalendarPage = (props) => {
     dispatch(createEventOpen());
   }
   const handleClickEvent = (event) => {
-    dispatch(fetchEvent(event.id))
+    router.push(`/Calendar?eventId=${event.id}`, null, {shallow: true});
     setCurrentEditEventRange(null);
-    dispatch(editEventOpen());
+
   }
   const getDayColor = (date) => {
     if (isSameDay(date, new Date())) {

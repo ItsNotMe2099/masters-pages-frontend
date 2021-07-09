@@ -153,6 +153,7 @@ export interface ProfileData {
   totalHours?: number,
   preferToWorkIn?: IProfilePreferWorkIn[]
   languages?: string[]
+  isSavedByCurrentProfile?: boolean
   bio?: {
     bio: string,
     visible: false
@@ -401,6 +402,7 @@ export interface ITask {
   masterId: number
   master: ProfileData,
   negotiations: ITaskNegotiation[]
+  isSavedByCurrentProfile?: boolean
   responses: {
     data: ITaskNegotiation[],
     total: number
@@ -853,4 +855,20 @@ export interface ITaskStats{
   reviews: number,
   plannedExpenses: number,
   completedExpenses: number
+}
+
+
+export enum NotificationType {
+  Messages = 'messages',
+  TaskOffer = 'task_offer',
+  TaskResponse = 'task_response',
+  TaskOfferDeclined = 'task_offer_declined',
+  TaskResponseDeclined = 'task_response_declined',
+  Feedback = 'feedback',
+  RegistrationCompleted = 'registration_completed',
+  EmailVerification = 'email_verification',
+  EventPlanned = 'event_planned',
+  EventStatusChanged = 'event_status_changed',
+  EventRemind = 'event_remind',
+  News = 'news',
 }

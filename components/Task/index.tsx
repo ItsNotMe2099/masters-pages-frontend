@@ -259,7 +259,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       case 'share':
         return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>;
       case 'save':
-        return <TaskActionButton title={t('task.save')} icon={<BookmarkSvg/>} onClick={handleFavorite}/>;
+        return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')} icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>;
       case 'feedbackToClient':
         return <TaskActionButton title={t('task.postFeedback')} icon={'mark'}  onClick={handleFeedbackByMaster}/>;
     }

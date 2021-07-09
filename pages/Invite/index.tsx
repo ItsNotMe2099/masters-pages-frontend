@@ -23,7 +23,7 @@ import InviteForm from 'pages/Invite/Form'
 import {inviteRequest} from 'components/Invite/actions'
 
 const InvitePage = (props) => {
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation('common');
   const router = useRouter();
   const dispatch = useDispatch()
   const [activeSkill, setActiveSkill] = useState(null);
@@ -54,7 +54,7 @@ const InvitePage = (props) => {
           <Tab isActive={!customLink && !activeSkill} title={`All`} onClick={() => handleCustomLinkClick(null)}/>
           <Tab isActive={customLink === 'news'} title={`News`} onClick={() => handleCustomLinkClick('news')}/>
 
-          {skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={getCategoryTranslation(skill.subCategory).name} onClick={() => handleSkillClick(skill)}/> : null)}
+          {skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category, i18n.language).name}/${getCategoryTranslation(skill.subCategory, i18n.language).name}`} onClick={() => handleSkillClick(skill)}/> : null)}
         </div>
         <div className={styles.content}>
           <InviteForm customLink={customLink} onSubmit={handleSubmit} subCategoryId={activeSkill?.id}/>

@@ -20,7 +20,7 @@ interface Props {
 }
 
 const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
-  const {t} = useTranslation('common');
+  const {t, i18n} = useTranslation('common');
   const dispatch = useDispatch();
   const handleActionProfile = () => {
 
@@ -43,11 +43,11 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
         <div className={styles.separator}/>
         </div>
           <div className={styles.cell}>
-            <SkillDropDown role={profile.role}
+            {profile.role !== 'client' && <SkillDropDown role={profile.role}
                            items={profile.skills.filter(item => item.subCategory).map((item, index)  => ({
-                             label: `${getCategoryTranslation(item.category).name}/${getCategoryTranslation(item.subCategory).name}`,
+                             label: `${getCategoryTranslation(item.mainCategory, i18n.language).name}${getCategoryTranslation(item.category, i18n.language).name}/${getCategoryTranslation(item.subCategory, i18n.language).name}`,
                              link: `/sk${item.id}`
-                           }))}/>
+                           }))}/>}
           </div>
             <div className={styles.cell}>
         <div className={styles.actions}>

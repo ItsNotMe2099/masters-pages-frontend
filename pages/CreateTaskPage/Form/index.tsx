@@ -101,7 +101,7 @@ let CreateTaskForm = props => {
                   props.change('categoryId', null);
                   props.change('subCategoryId', null);
                   onChangeForStat('mainCategoryId', value)}}
-                label={`${t('createTask.fieldCategory')}`}
+                label={`${t('createTask.fieldMainCategory')}`}
                 validate={required}
                 size={'small'}
                 labelType={'static'}

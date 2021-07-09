@@ -13,9 +13,15 @@
     font-weight: bold;
   }
 }
+.button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .title{
 
 }
 .icon{
+  display: flex;
   margin-left: 8px;
 }

@@ -64,7 +64,7 @@ const EditEventModal = (props: Props) => {
 
   const tabs = [
     {name: 'Time Place Charge', key: 'time'},
-    {name: 'Chat & Review', key: 'chat'},
+    {name: 'Chat & Review', key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
     {name: 'Info', key: 'info'},
   ];
 

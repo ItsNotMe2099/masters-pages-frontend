@@ -3,10 +3,19 @@
   position: relative;
   margin-right: 20px;
 }
+.bell{
+  cursor: pointer;
+  &:hover{
+    path{
+      fill: #DC2626;
+    }
+
+  }
+}
 .dropDown {
   background: #ffffff;
   position: absolute;
-  top: -15px;
+  top: auto;
   right: -15px;
   opacity: 0;
   visibility: hidden;
@@ -26,69 +35,20 @@
     transform: translateY(0);
 }
 
-.dropDownTrigger {
-  text-decoration: none;
-  color: #000;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  &:hover{
-    .dropdownItemLabel {
-      font-weight: 700;
-    }
-  }
-  svg{
-    width: 10px;
-    height: 7px;
-    path {
-      fill: white;
-    }
-  }
-  @media screen and (max-width: $sm-max){
-    svg{
-      width: 5px;
-      height: 4px;
-      path {
-        fill: white;
-      }
-    }
-  }
+.items{
+  max-height: 200px;
+  width: 200px;
+  overflow-y: auto;
 }
-
-.dropdownItem {
-  a {
-       font-weight: 600;
-       padding: 7.5px 15px;
-       display: flex;
-    color: black !important;
-  }
-  &:hover{
-    .dropdownItemLabel {
-      font-weight: 700;
-    }
-  }
-}
-.dropdownItemIcon{
-  padding-right: 5px;
-  vertical-align: middle;
-}
-.dropdownItemLabel{
-  font-weight: 600;
+.item{
+  cursor: pointer;
+  padding: 8px 12px;
   font-size: 14px;
-  line-height: 17px;
-  margin-right: 10px;
-  vertical-align: middle;
-  text-transform: uppercase;
-  @media screen and (max-width: $sm-max){
+  &:hover{
+    background: #F3F3F3;
+  }
+  p{
+    display: inline;
 
   }
-}
-
-.arrowActive{
-  margin-left: 6px;
-}
-.arrow{
-  padding-left: 6px;
-  display: inline-block;
-  vertical-align: middle;
 }

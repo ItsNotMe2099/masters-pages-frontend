@@ -124,7 +124,7 @@ let SearchTaskForm = (props) => {
               <Field
                 name="categoryId"
                 component={InputSubCategory}
-                label={t('taskSearch.filter.fieldSubCategory')}
+                label={t('taskSearch.filter.fieldCategory')}
                 categoryId={props.mainCategoryId}
                 noMargin={true}
                 withIcon={false}

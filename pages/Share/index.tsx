@@ -23,7 +23,7 @@ import Tab from 'components/PublicProfile/components/Tab'
 import {getCategoryTranslation} from 'utils/translations'
 
 const SharePage = (props) => {
-  const {t} = useTranslation()
+  const {t, i18n} = useTranslation('common');
   const router = useRouter();
   const dispatch = useDispatch()
   const [activeSkill, setActiveSkill] = useState(null);
@@ -72,7 +72,7 @@ const SharePage = (props) => {
         <div className={styles.skills}>
           <Tab isActive={!customLink && !activeSkill} title={`All`} onClick={() => handleCustomLinkClick(null)}/>
           <Tab isActive={customLink === 'news'} title={`News`} onClick={() => handleCustomLinkClick('news')}/>
-        {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category).name}/${getCategoryTranslation(skill.subCategory).name}`} onClick={() => handleSkillClick(skill)}/> : null))}
+        {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category, i18n.language).name}/${getCategoryTranslation(skill.subCategory, i18n.language).name}`} onClick={() => handleSkillClick(skill)}/> : null))}
         </div>
         <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>
         <div className={styles.content}>{getTabContent(activeTab)}</div>
