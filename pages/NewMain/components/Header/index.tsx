@@ -10,7 +10,7 @@ interface Props{
 }
 
 const MainSectionHeader = (props: Props) => {
- const isProd = ['masterspages.ca', 'masterspages.com', 'masterspages.ru'].includes(typeof window !== 'undefined' ? window.location.hostname : '');
+ const isProd =  false;
   const dispatch = useDispatch()
   return (
     <div  className={styles.root}>
