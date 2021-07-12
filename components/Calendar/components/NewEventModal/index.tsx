@@ -11,6 +11,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import NewEventForm from 'components/Calendar/components/NewEventModal/components/NewEventForm'
 import {createEvent} from 'components/Events/actions'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean,
   range?: any,
@@ -19,11 +20,12 @@ interface Props {
 const NewEventModal = ({isOpen, onClose, range}: Props) => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('tasks')
+  const { t } = useTranslation('common');
 
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const tabs = [
-    { name: 'Available tasks', key: 'tasks' },
-    { name: 'Private task', key: 'newTask' },
+    { name: t('availableTasks'), key: 'tasks' },
+    { name: t('privateTasks'), key: 'newTask' },
   ];
   const filter = {
     status: 'in_progress'
@@ -58,7 +60,7 @@ const NewEventModal = ({isOpen, onClose, range}: Props) => {
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
 
-        <div className={styles.title}>New Event</div>
+        <div className={styles.title}>{t('newEvent')}</div>
       </div>
       <div className={styles.body}>
         <NewEventForm initialValues={{...(range ? {timeRange: range} : {})}} onCancel={handleCancel} onSubmit={handleSubmitNewEvent}/>

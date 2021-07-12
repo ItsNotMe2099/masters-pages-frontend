@@ -1,155 +1,200 @@
 {
   "menu": {
-    "home": ,"Главная страница",
-    "createTask": "Create a task","Создать задачу",
-    "findTask": "Find a task","Найти задачу",
-    "masters": "Masters","Мастера",
-    "volunteers": "Volunteers","Волонтеры",
-    "faq": "FAQ","Часто задаваемые вопросы",
-    "signIn": "Sign In","Войти",
-    "signUp": "Sign Up","Зарегистрироваться",
-    "profile": "Profile","Профиль",
-    "messages": "Messages","Сообщения",
-    "reviews": "Review","Рассмотрение",
-    "orders": "Orders","Заказы",
-    "settings": "Settings","Настройки",
-    "calendar": "Calendar","Календарь",
-    "logout": "Logout","Выйти",
-    "completeRegistration": "Complete registration","Завершить регистрацию"
+    "home": "Главная страница",
+    "createTask": "Создать задачу",
+    "findTask": "Найти задачу",
+    "masters": "Мастера",
+    "volunteers": "Волонтеры",
+    "faq": "Часто задаваемые вопросы",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться",
+    "reviews": "Рассмотрение",
+    "calendar": "Календарь",
+    "logout": "Выйти",
+    "completeRegistration": "Завершить регистрацию",
+    "profile": "Профиль",
+    "share": "Поделиться",
+    "invite": "Пригласить",
+    "order": "Заказ",
+    "orders": "Заказы",
+    "events": "События",
+    "messages": "Сообщения",
+    "findOrders": "Find orders",
+    "findClients": "Найти клиентов",
+    "findMaster": "Найти Мастера",
+    "findVolunteer": "Найти Волонтера",
+    "posts": "Сообщения",
+    "news": "Новости",
+    "subscriptions": "Подписки",
+    "account": "Аккаунт",
+    "settings": "Настройки",
+    "reports": "Репорты",
+    "contacts": "Контакты"
   },
   "validation": {
-    "email": "Wrong email format","Неправильный формат электронной почты",
-    "passwordMatch": "Wrong email format","Неправильный формат электронной почты",
-    "required": "Field required","Обязательное поле",
-    "phone": "Wrong phone format","Неправильный формат телефона"
+    "email": "Неправильный формат электронной почты",
+    "passwordMatch": "Неправильный формат электронной почты",
+    "required": "Обязательное поле",
+    "phone": "Неправильный формат телефона"
   },
-  "master": "MASTER","Мастер",
-  "volunteer": "VOLUNTEER","Волонтер",
-  "agreeWith": "I am agree with","Я согласен с",
-  "termsAndConditions": "terms and conditions","Срок и условия",
+  "master": "Мастер",
+  "day": "День",
+  "week": "Неделя",
+  "month": "Месяц",
+  "agenda": "Agenda",
+  "orderNumber": "Номер заказа:",
+  "volunteer": "Волонтер",
+  "agreeWith": "Я согласен с",
+  "termsAndConditions": "Срок и условия",
+  "back": "Назад",
+  "status": "Статус",
+  "client": "Клиент",
+  "eventNumber": "Номер события",
+  "eventTitle": "Название события",
+  "orderTitle": "Название заказа",
+  "startTime": "Начало",
+  "endTime": "Окончание",
+  "newEvent": "Новое событие",
+  "log": "Лог",
+  "createEvent": "Создать событие",
+  "date": "Дата",
+  "priceType": "Тип оплаты:",
+  "perHour": "Почасовая",
+  "fixed": "Фиксированная",
+  "availableTasks": "Доступные задачи",
+  "privateTasks": "Приватные задачи",
   "auth": {
-    "titleQuick": "Quick Sign in","Быстрый вход",
+    "titleQuick": "Быстрый вход",
     "signIn": {
-      "title": "Sign in","Войти",
-      "fieldLogin": "Phone number or email","Телефонный номер или электронная почта",
-      "fieldPassword": "Password","Пароль",
-      "buttonLogin": "LOG IN","Авторизоваться",
-      "forgotPassword": "Forgot password?","Забыли пароль?",
-      "dontHaveAccount": "Don’t have an account yet?","У вас еще нет аккаунта?"
+      "title": "Войти",
+      "fieldLogin": "Телефон или электронная почта",
+      "fieldPassword": "Пароль",
+      "buttonLogin": "Авторизоваться",
+      "forgotPassword": "Забыли пароль?",
+      "dontHaveAccount": "У вас еще нет аккаунта?"
     },
-    "signUpLink": "Sign Up","Зарегистрироваться",
-    "signInLink": "Sign In","Войти",
+    "signUpLink": "Зарегистрироваться",
+    "signInLink": "Войти",
     "signUp": {
-      "title": "Sign up","Зарегистрироваться",
-      "fieldPhone": "Phone","Телефон",
-      "buttonRegistration": "REGISTRATION","Регистрация",
-      "alreadyHaveAccount": "Don’t have an account yet?","У вас еще нет аккаунта?"
+      "title": "Зарегистрироваться",
+      "fieldPhone": "Телефон",
+      "buttonRegistration": "Регистрация",
+      "alreadyHaveAccount": "У вас еще нет аккаунта?"
     },
     "phoneConfirm": {
-      "title": "Phone number confirmation:","Подтверждение номера телефона:",
+      "title": "Подтверждение номера телефона:",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat",
-      "buttonConfirm": "CONFIRM","Подтвердить"
-      "sendAgain": "Send again","Отправьте еще раз",
-      "dontReceiveSms": "Dont receive sms?","Не получили СМС?"
+      "buttonConfirm": "Подтвердить",
+      "sendAgain": "Отправьте еще раз",
+      "dontReceiveSms": "Не получили СМС?",
+      "code": "Код:"
     },
     "registrationPage": {
-      "title": "Registration complete","Регистрация завершена",
-      "buttonCompleteRegistration": "COMPLETE REGISTRATION","Завершить регистрацию",
-      "fieldFirstName": "First Name","Имя",
-      "fieldLastName": "Last Name","Фамилия",
-      "fieldEmail": "Email","Электронная почта",
-      "fieldPhone": "Phone","Телефон",
-      "fieldLocation": "Location*","Место расположения",
-      "fieldPassword": "Password","Пароль"
-      "fieldPasswordConfirm": "Password again","Еще раз пароль",
-      "logout": "Logout","Выйти"
+      "title": "Регистрация завершена",
+      "buttonCompleteRegistration": "Завершить регистрацию",
+      "fieldFirstName": "Имя",
+      "fieldLastName": "Фамилия",
+      "fieldEmail": "Электронная почта",
+      "fieldPhone": "Телефон",
+      "fieldLocation": "Место расположения",
+      "fieldPassword": "Пароль",
+      "fieldPasswordConfirm": "Еще раз пароль",
+      "logout": "Выйти"
     },
     "registrationSuccess": {
-      "title": "THANK YOU FOR REGISTRATION","Спасибо за регистрацию",
+      "title": "Спасибо за регистрацию",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.",
-      "buttonCreateTask": "CREATE A TASK","Создать задачу",
-      "buttonBecomeMaster": "BECOME A MASTER","Стать мастером",
-      "buttonBecomeVolunteer": "BECOME A VOLUNTEER","Стать волонтером",
-      "lookAtTaskList": "Look at task list","Посмотреть список задач"
+      "buttonCreateTask": "Создать задачу",
+      "buttonBecomeMaster": "Стать мастером",
+      "buttonBecomeVolunteer": "Стать волонтером",
+      "lookAtTaskList": "Посмотреть список задач"
     },
     "passwordRecovery": {
-      "title": "Password recovery","Восстановление пароля",
-      "description": "Recover your password by your phone","Восстановите пароль по номеру телефона",
-      "fieldPhone": "Phone","Телефон",
-      "buttonReset": "RESET PASSWORD","Сбросить пароль",
-      "rememberPassword": "Remember password?","Напомнить пароль?"
+      "title": "Восстановление пароля",
+      "description": "Восстановите пароль по номеру телефона",
+      "fieldPhone": "Телефон",
+      "buttonReset": "Сбросить пароль",
+      "rememberPassword": "Напомнить пароль?"
     },
     "passwordReset": {
-      "title": "Success","Успех",
-      "description": "Enter you new password","Введите ваш новый пароль",
-      "fieldNewPassword": "New password","Новый пароль"
-      "fieldNewPasswordConfirm": "Password confirm","Подтверждение пароля"
-      "buttonSetNewPassword": "SET NEW PASSWORD","Установить новый пароль"
+      "title": "Успех",
+      "description": "Введите ваш новый пароль",
+      "fieldNewPassword": "Новый пароль",
+      "fieldNewPasswordConfirm": "Подтверждение пароля",
+      "buttonSetNewPassword": "Установить новый пароль"
     },
     "changePassword": {
-      "title": "Change Password","Сменить пароль",
-      "fieldOldPassword": "Old password","Старый пароль",
-      "fieldNewPassword": "New password","Новый пароль",
-      "fieldNewPasswordConfirm": "Password confirm","Подтверждение пароля"
-      "buttonChangePassword": "Change password","Сменить пароль"
+      "title": "Сменить пароль",
+      "fieldOldPassword": "Старый пароль",
+      "fieldNewPassword": "Новый пароль",
+      "fieldNewPasswordConfirm": "Подтверждение пароля",
+      "buttonChangePassword": "Сменить пароль"
     }
   },
   "personalArea": {
     "profile": {
-      "hello": "Hello","Привет",
-      "youAreIn": "You are in","Ты в",
-      "modeClient": "Client mode","Клиент мод",
-      "modeMaster": "Master mode","Мастер мод",
-      "modeVolunteer": "Volunteer mode","Волонтер мод",
-      "location": "Location","Местоположение",
-      "registered": "Registered","Зарегистрирован",
-      "personalLink": "Personal link","Персональная ссылка",
-      "lookHowPeopleSeeYourAccount": "Look how people see your account","Посмотрите как люди видят ваш аккаунт",
-      "mobileOrders": "Orders","Заказы",
-      "mobileBack": "Back","Назад"
+      "hello": "Привет",
+      "youAreIn": "Ты в",
+      "modeClient": "Клиент мод",
+      "modeMaster": "Мастер мод",
+      "modeVolunteer": "Волонтер мод",
+      "location": "Местоположение",
+      "registered": "Зарегистрирован",
+      "personalLink": "Персональная ссылка",
+      "lookHowPeopleSeeYourAccount": "Посмотрите как люди видят ваш аккаунт",
+      "mobileOrders": "Заказы",
+      "mobileBack": "Назад",
+      "reviews": "Отзывы",
+      "recommended": "рекомендуют",
+      "sendMessage": "Отправить сообщение",
+      "sendOffer": "Отправить Предложение",
+      "subscribe": "Подписаться",
+      "guestLookingAt": ""
     },
     "menu": {
-      "profile": "Personal information","Персональная информация",
-      "reviews": "Reviews and rating","Отзывы и рейтинг",
-      "orders": "Orders","Заказы",
-      "messages": "Messages","Сообщения",
-      "saved": "Saved","Сохраненное",
-      "settings": "Settings","Настройки",
-      "portfolio": "My Portfolio","Мое портфолио",
-      "calendar": "Calendar","Календарь",
+      "profile": "Персональная информация",
+      "reviews": "Отзывы и рейтинг",
+      "orders": "Заказы",
+      "messages":"Сообщения",
+      "saved": "Сохраненное",
+      "settings": "Настройки",
+      "portfolio": "Мое портфолио",
+      "calendar": "Календарь"
     },
     "tabProfile": {
-      "requiredField": "required field","Обязательное поле",
-      "buttonChangePassword": "Change Password","Сменить пароль",
-      "fieldFirstName": "First Name","Имя",
-      "fieldLastName": "Last Name","Фамилия",
-      "fieldBirthDate": "BOD* MM / DD / YYYY","день / месяц / год",
-      "fieldZip": "ZIP Code","Индекс",
-      "fieldAddress": "Address","Адрес 1",
-      "fieldAddress2": "Address 2","Адрес 2",
-      "fieldCountry": "Country*","Страна",
-      "fieldLocation": "Location*","Местоположение",
-      "buttonSave": "Save changes","Сохранить изменения"
+      "requiredField": "Обязательное поле",
+      "buttonChangePassword": "Сменить пароль",
+      "fieldFirstName": "Имя",
+      "fieldLastName": "Фамилия",
+      "fieldBirthDate": "день / месяц / год",
+      "fieldZip": "Индекс",
+      "fieldAddress": "Адрес 1",
+      "fieldAddress2": "Адрес 2",
+      "fieldCountry": "Страна",
+      "fieldLocation": "Местоположение",
+      "buttonSave": "Сохранить изменения"
     },
     "tabOrders": {
       "menu": {
-        "draft": "Drafts","Черновики",
-        "published": "Published","Опубликовано",
-        "negotiation": "Negotiation","Переговоры",
-        "inProgress": "In Progress","В ходе выполнения",
-        "closed": "Closed","Закрыто",
-        "offers": "Offers","Предложения",
-        "declined": "Declined","Отклонено",
-        "responses": "Responses","Отзывы"
+        "draft": "Черновики",
+        "published": "Опубликовано",
+        "negotiation": "Переговоры",
+        "inProgress": "В ходе выполнения",
+        "saved": "Сохраненные",
+        "closed": "Закрыто",
+        "offers": "Предложения",
+        "declined": "Отклонено",
+        "responses": "Отзывы",
+        "create": "Создать новый заказ"
       }
     },
     "tabFeedback": {
     },
     "tabSaved": {
       "menu": {
-        "people": "People","Люди",
-        "search": "Search","Поиск",
-        "tasks": "Tasks","Задачи"
+        "people": "Люди",
+        "search": "Поиск",
+        "tasks": "Задачи"
       }
     },
     "tabSettings": {
@@ -157,67 +202,164 @@
   },
   "forms": {
     "avatarInput": {
-      "uploadYourPhoto": "Upload your photo","Загрузить ваше фото",
-      "formatAllowed": "Format allowed PNG and JPEG","Разрешенный формат PNG и JPEG",
-      "minimalSize": "Minimal size","Минимальный размер"
-      "changePhoto": "Change Photo","Сменить фото",
-      "deletePhoto": "Delete Photo","Удалить фото"
+      "uploadYourPhoto": "Загрузить ваше фото",
+      "formatAllowed": "Разрешенный формат PNG и JPEG",
+      "minimalSize": "Минимальный размер",
+      "changePhoto": "Сменить фото",
+      "deletePhoto": "Удалить фото"
     }
   },
   "task": {
     "status": {
-      "draft": "Draft","Черновики",
-      "published": "Published","Опубликовано",
-      "private": "Private","Приватные",
-      "inProgress": "In progress","В ходе выполнения",
-      "done": "Done","Выполнено",
-      "canceled": "Canceled","Отменено"
+      "draft": "Черновики",
+      "published": "Опубликовано",
+      "private": "Приватные",
+      "inProgress": "В ходе выполнения",
+      "done": "Выполнено",
+      "canceled": "Отменено"
     },
-    "readMore": "Read more","Прочитать больше",
-    "edit": "Edit","Изменить",
-    "delete": "Delete","Удалить",
-    "publish": "Publish","Опубликовать"
-    "unPublish": "Unpublish","Отменить публикацию",
-    "cancel": "Cancel task","Отменить задачу",
-    "markAsCompleted": "Mark as completed","Отметить как завершенное"
-    "share": "Share","Поделиться"б
-    "save": "Save","Сохранить"б
-    "feedbackToClient": "Post feedback","Оставить отзыв",
-    "paymentMethod": "Payment method","Метод оплаты",
-    "paymentMethodBank": "Bank account","Банковской картой"
-    "paymentMethodCash": "Cash","Наличные",
-    "paymentMethodSafeDeal": "Safe deal","Безопасная сделка",
-    "deadline": "Deadline","Дедлайн",
-    "fixedPrice": "Fixed price","Фиксированная цена",
-    "acceptTask": "ACCEPT TASK","Принять задачу",
-    "messages": "Messages","Сообщения",
-    "decline": "Decline","Отклонить",
-    "accept": "Accept","Принять",
-    "youDeclined": "You declined","Вы отказались",
-    "loadMore": "Load more","Загрузить больше",
-    "confirmPublish": "Do you want to publish task","Вы хотите опубликовать задачу",
-    "confirmUnPublish": "Do you want to unpublish task","Вы хотите отменить публикацию задачи",
-    "confirmDelete": "Do you want to delete task","Вы хотите удалить задачу",
-    "confirmCancel": "Are you sure that you want to cancel task","Вы уверены что хотите отменить задачу",
-    "confirmAccept": "Are you sure that you want to accept an offer","Вы уверены что хотите принять предложение",
-    "confirmDecline": "Are you sure that you want to reject an offer","Вы уверены что хотите отклонить предложение",
-    "masterList": "Master list","Список мастеров"
+    "readMore": "Прочитать больше",
+    "edit": "Изменить",
+    "delete": "Удалить",
+    "publish": "Опубликовать",
+    "unPublish": "Отменить публикацию",
+    "cancel": "Отменить задачу",
+    "markAsCompleted": "Отметить как завершенное",
+    "share": "Поделиться",
+    "save": "Сохранить",
+    "feedbackToClient": "Оставить отзыв",
+    "paymentMethod": "Метод оплаты",
+    "paymentMethodBank": "Банковской картой",
+    "paymentMethodCash": "Наличные",
+    "paymentMethodSafeDeal": "Безопасная сделка",
+    "deadline": "Дедлайн",
+    "fixedPrice": "Фиксированная цена",
+    "acceptTask": "Принять задачу",
+    "messages": "Сообщения",
+    "decline": "Отклонить",
+    "accept": "Принять",
+    "youDeclined": "Вы отказались",
+    "loadMore": "Загрузить больше",
+    "confirmPublish": "Вы хотите опубликовать задачу",
+    "confirmUnPublish": "Вы хотите отменить публикацию задачи",
+    "confirmDelete": "Вы хотите удалить задачу",
+    "confirmCancel": "Вы уверены что хотите отменить задачу",
+    "confirmAccept": "Вы уверены что хотите принять предложение",
+    "confirmDecline": "Вы уверены что хотите отклонить предложение",
+    "masterList": "Список мастеров"
   },
-  "lessThen": "less then","Менее чем",
-  "hourly": "Hourly","Почасовая",
-  "deadline": "Deadline","Дедлайн",
-  "loadMore": "Load more","Загрузить больше",
+  "lessThen": "Менее чем",
+  "hourly": "Почасовая",
+  "deadline": "Дедлайн",
+  "loadMore": "Загрузить больше",
   "sort": {
-    "title": "Sort by","Сортировать по",
-    "newFirst": "New First","Сначала новые",
-    "oldFirst": "Old First","Сначала старые"
+    "title": "Сортировать по",
+    "newFirst": "Сначала новые",
+    "oldFirst": "Сначала старые"
   },
   "taskResponse": {
-    "declined": "Declined","Отклоненный",
-    "decline": "Decline","Отклонить",
-    "messages": "Messages","Сообщения",
-    "accept": "Accept","Принять",
-    "confirmDecline": "Do you want to decline response from",Вы хотите отклонить ответ от",
-    "confirmAccept": "Do you want to accept response from",Вы хотите принять ответ от"
+    "declined": "Отклоненный",
+    "decline": "Отклонить",
+    "messages": "Сообщения",
+    "accept": "Принять",
+    "confirmDecline": "Вы хотите отклонить ответ от",
+    "confirmAccept": "Вы хотите принять ответ от"
+  },
+
+  "createTask": {
+    "stat": "View [{{count}}] suitable Masters",
+    "stepFillUpTaskRequest": "Fill up task request",
+    "stepGetOffers": "Get offers",
+    "stepChooseMaster": "Выберите мастера",
+    "fieldTitle": "Название задачи",
+    "fieldMainCategory": "Основная категория",
+    "fieldCategory": "Категория",
+    "fieldLocation": "Местоположение",
+    "fieldSubCategory": "Sub category",
+    "fieldMasterType": "Мастер или волонтер",
+    "fieldExecutionType": "Execution Type",
+    "fieldDeadline": "Deadline",
+    "fieldAddress": "Адрес",
+    "fieldDescription": "Описание задачи",
+    "buttonCreateTask": "СОЗДАТЬ",
+    "faq": "FAQ",
+    "successTitle": "Ваша задача создана",
+    "priceSelect": {
+      "or": "или",
+      "hourlyTaskTitle": "Hourly task",
+      "fixedPriceTaskTitle": "Fixed price",
+      "fieldRatePerHour": "Rate per hour",
+      "fieldEstimate": "Estimate",
+      "fieldBudget": "Budget"
+    }
+  },
+  "taskSearch": {
+    "tasks": "Задачи",
+    "showOnTheMap": "Показать на карте",
+    "filter": {
+      "fieldMainCategory": "Main category",
+      "fieldCategory": "Категория",
+      "fieldSubCategory": "Subcategory",
+      "fieldRadiusOfSearch": "Радиус поиска",
+      "fieldLocation": "Местоположение",
+      "fieldExecutionType": "Execution Type",
+      "fieldClientRating": "Client rating",
+      "fieldPrice": "Цена",
+      "fieldKeywords": "Ключевые слова",
+      "more": "More",
+      "less": "Less",
+      "showMoreOptions": "Показать больше опций",
+      "hideMoreOptions": "Скрыть"
+    },
+    "saveTheSearch": "Save the search",
+    "saveTheSearchConfirm": "Do you want to save current search?",
+    "exactLocationTab": "Exact location",
+    "approximateLocationTab": "Approximate location"
+  },
+  "profileSearch": {
+    "master": "Мастера",
+    "client": "клиенты",
+    "volunteer": "Волонтеры",
+    "showOnTheMap": "Показать на карте",
+
+    "filter": {
+      "fieldMainCategory": "Main category",
+      "fieldCategory": "Категория",
+      "fieldSubCategory": "Subcategory",
+      "fieldRadiusOfSearch": "Радиус поиска",
+      "fieldLocation": "Местоположение",
+      "fieldExecutionType": "Execution Type",
+      "fieldClientRating": "Client rating",
+      "fieldPrice": "Цена",
+      "fieldKeywords": "Ключевые слова",
+      "more": "More",
+      "less": "Less",
+      "showMoreOptions": "Показать больше опций",
+      "hideMoreOptions": "Скрыть"
+    },
+    "saveTheSearch": "Save the search",
+    "saveTheSearchConfirm": "Do you want to save current search?",
+    "exactLocationTab": "Exact location",
+    "approximateLocationTab": "Approximate location"
+  },
+  "createMasterProfile": {
+
+  },
+  "confirmModal": {
+    "title": "Вы уверены?",
+    "buttonConfirm": "Подтвердить",
+    "buttonCancel": "Отмена"
+  },
+  "contacts": {
+    "menu": {
+      "messages": "Сообщения",
+      "subscriptions": "News Subscriptions",
+      "saved": "Saved",
+      "recommendations": "Рекомендации"
+    }
+  },
+  "categories": {
+    "findSpecialist": "Найдите своего специалиста",
+    "allCategories": "Все категории"
   }
 }

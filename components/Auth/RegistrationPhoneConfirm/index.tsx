@@ -34,7 +34,7 @@ const RegistrationPhoneConfirm = (props: Props) => {
       <div className={styles.text}>
         {t('auth.phoneConfirm.description')}
       </div>
-      {code && <div className={styles.code}>Code: {code}</div>}
+      {code && <div className={styles.code}>{t('phoneConfirm.code')} {code}</div>}
       <SignUp onSubmit={handleSubmit}/>
     </Modal>
   )

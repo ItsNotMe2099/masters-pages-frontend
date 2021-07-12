@@ -46,10 +46,31 @@
     "selectSubCategory": "Add one or more sub categories"
   },
   "master": "Master",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "agenda": "Agenda",
+  "orderNumber": "Order number:",
   "volunteer": "Volunteer",
   "agreeWith": "I am agree with",
   "termsAndConditions": "terms and conditions",
   "back": "Back",
+  "status": "Status",
+  "client": "Client",
+  "eventNumber": "Event number",
+  "eventTitle": "Event title",
+  "orderTitle": "Order title",
+  "startTime": "Start time",
+  "endTime": "End time",
+  "newEvent": "New event",
+  "log": "Log",
+  "createEvent": "Create event",
+  "date": "Date",
+  "priceType": "Price type:",
+  "perHour": "Rate per hour",
+  "fixed": "Fixed",
+  "availableTasks": "Available tasks",
+  "privateTasks": "Private tasks",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {
@@ -73,7 +94,8 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat",
       "buttonConfirm": "CONFIRM",
       "sendAgain": "Send again",
-      "dontReceiveSms": "Dont receive sms?"
+      "dontReceiveSms": "Dont receive sms?",
+      "code": "Code:"
     },
     "registrationPage": {
       "title": "Registration complete",
@@ -135,7 +157,13 @@
       "registered": "Registered",
       "personalLink": "Personal link",
       "lookHowPeopleSeeYourAccount": "Look how people see your account",
-      "mobileOrders": "Orders"
+      "mobileOrders": "Orders",
+      "mobileBack": "Back",
+      "reviews": "Reviews",
+      "recommended": "recommended",
+      "sendMessage": "Send message",
+      "sendOffer": "Send Offer",
+      "subscribe": "Subscribe"
     },
     "menu": {
       "profile": "Personal information",
@@ -170,7 +198,8 @@
         "offers": "Offers",
         "declined": "Declined",
         "responses": "Responses",
-        "saved": "Saved"
+        "saved": "Saved",
+        "create": "Create new order"
       }
     },
     "tabFeedback": {
@@ -404,5 +433,9 @@
       "saved": "Saved",
       "recommendations": "Recommendations"
     }
+  },
+  "categories": {
+    "findSpecialist": "Найдите своего специалиста",
+    "allCategories": "All categories"
   }
 }
