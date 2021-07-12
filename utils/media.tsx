@@ -1,7 +1,7 @@
 import styles from "components/Chat/ChatMessageText/index.module.scss";
 
 export const getMediaPath = (path) => {
-  return `https://masters-pages.dev.glob-com.ru/api/s3/uploads/${path}`
+  return `https://masterspages.com/api/s3/uploads/${path}`
 }
 
 export const getMediaExt = (file) => {
