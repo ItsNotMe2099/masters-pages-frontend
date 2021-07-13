@@ -19,6 +19,7 @@ import {useEffect, useState} from 'react'
 import EventReviewForm
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventReviewForm'
 import {fetchProfileTabList} from 'components/ProfileTab/actions'
+import {useTranslation, withTranslation} from "react-i18next";
 
 let PostForm = (props) => {
   const {categoryId, subCategoryId, showInPortfolio} = props;
@@ -26,6 +27,7 @@ let PostForm = (props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
   const error = useSelector((state: IRootState) => state.profileGallery.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'gallery')
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     if(categoryId && subCategoryId) {
@@ -45,29 +47,29 @@ let PostForm = (props) => {
         component={AvatarInput}
         size={'small'}
         labelType="placeholder"
-        label={'Upload photo'}
+        label={t('follower.postForm.uploadPhoto')}
       />
       <Field
         name="showInPortfolio"
         component={Checkbox}
-        label={'Show in portfolio'}
+        label={t('follower.postForm.showInPortfolio')}
       />
       {(showInPortfolio) && <Field
         name="categoryId"
         component={InputCategory}
-        label="Category"
+        label={t('createTask.fieldCategory')}
         validate={required}
       />}
       {(showInPortfolio) && <Field
         name="subCategoryId"
         component={RadioListSubCategories}
-        label="Sub Category"
+        label={t('createTask.fieldSubCategory')}
         validate={required}
         categoryId={categoryId}
       />}
       {(showInPortfolio && profileTabs.length > 0) && <Field
         name="profileTabId"
-        label={'Tab'}
+        label={t('follower.postForm.tab')}
         component={SelectInput}
         size={'small'}
         options={profileTabs.map(item => ({label: item.title, value: item.id}))}
@@ -79,7 +81,7 @@ let PostForm = (props) => {
         name="title"
         component={Input}
         size={'small'}
-        label="Title"
+        label={t('follower.postForm.title')}
         labelType={'placeholder'}
       />
 
@@ -87,25 +89,25 @@ let PostForm = (props) => {
         name="description"
         component={TextArea}
         size={'small'}
-        label="Description"
+        label={t('follower.postForm.description')}
         labelType={'placeholder'}
       />
       <Field
         name="state"
         component={Checkbox}
-        label={'Published'}
+        label={t('follower.postForm.published')}
         format={(value) => value === 'published'}
         parse={(value) =>  value ? 'published' : 'draft'}/>
 
       <Field
         name="commentsAllowed"
         component={Checkbox}
-        label={<div>Comments allowed</div>}
+        label={<div>{t('follower.postForm.commentsAllowed')}</div>}
       />
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
       </div>
     </form>
   )

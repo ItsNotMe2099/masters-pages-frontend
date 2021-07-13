@@ -28,13 +28,13 @@ let LanguageForm = (props: Props) => {
         component={SelectInput}
         size={'small'}
         labelType="placeholder"
-        label={'Language'}
+        label={t('tabSettings.fieldLanguage')}
         options={Object.keys(LanguagesList).map(key => ({value: key, label: LanguagesList[key].name}))}
       />
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
       </div>
 
     </form>

@@ -35,7 +35,7 @@ const InfoTab = ({event}: Props) => {
         <div className={styles.value}>#{event.task.id}</div>
       </div>
       <div className={styles.infoItem}>
-        <div className={styles.label}>{t('eventNumber')}:</div>
+        <div className={styles.label}>{t('event.eventNumber')}:</div>
         <div className={styles.value}>#{event.id}</div>
       </div>
       <div className={styles.infoItem}>
@@ -43,7 +43,7 @@ const InfoTab = ({event}: Props) => {
         <div className={styles.value}>{event.task.title}</div>
       </div>
       <div className={styles.infoItem}>
-        <div className={styles.label}>{t('eventTitle')}:</div>
+        <div className={styles.label}>{t('event.eventTitle')}:</div>
         <div className={styles.value}>{event.title}</div>
       </div>
       <div className={styles.infoItem}>

@@ -37,7 +37,7 @@ export default function CalendarEventToolTip(props: Props) {
       <div className={styles.title}>{event.title}</div>
       <div className={styles.separator}/>
       <div className={styles.row}>
-        <div className={styles.label}>{t('eventNumber')}</div>
+        <div className={styles.label}>{t('event.eventNumber')}</div>
         <div className={styles.value}>#{event.id}</div>
       </div>
       <div className={styles.separator}/>

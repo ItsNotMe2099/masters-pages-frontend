@@ -2,6 +2,7 @@ import styles from './index.module.scss'
 import {IProfilePreferWorkIn, ProfileData} from 'types'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {LanguagesList} from 'data/languages'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   index: number
@@ -13,6 +14,7 @@ interface Props{
 }
 const LanguageListItem = (props: Props) => {
   const {  model, index, isEdit, onMoveUp, onMoveDown } = props;
+  const { t } = useTranslation('common');
   return (
     <div className={styles.root}>
       <img className={styles.icon} src={`/img/icons/flags/${model}.svg`} alt=''/>
@@ -20,7 +22,7 @@ const LanguageListItem = (props: Props) => {
       {isEdit && <div className={styles.actions}>
         {onMoveDown && <FormActionButton type={'moveDown'} title={'down'} onClick={() => onMoveDown(model, index)}/>}
         {onMoveUp && <FormActionButton type={'moveUp'} title={'up'} onClick={() => onMoveUp(model, index)}/>}
-        <FormActionButton type={'delete'} title={'Delete'} onClick={() => props.onDelete(model, index)}/>
+        <FormActionButton type={'delete'} title={t('task.delete')} onClick={() => props.onDelete(model, index)}/>
       </div>}
     </div>
   )

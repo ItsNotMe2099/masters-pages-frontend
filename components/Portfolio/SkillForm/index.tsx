@@ -20,11 +20,13 @@ import { maskBirthDate } from "utils/masks";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from 'components/Portfolio/SkillForm/index.module.scss'
 import { Field, reduxForm } from 'redux-form'
+import {useTranslation, Trans} from 'react-i18next'
 
 let SkillForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)
   const [categoryId, setCategoryId] = useState(null);
   const [priceType, setPriceType] = useState(props.initialValues?.priceType || 'fixed')
+  const {t} = useTranslation('common');
   console.log("Props Init", props.initialValues)
   useEffect(() => {
 
@@ -50,7 +52,7 @@ let SkillForm = (props) => {
         {!props.initialValues?.id && <Field
             name="categoryId"
             component={InputCategory}
-            label="Category"
+            label={t('createTask.filter.fieldCategory')}
             validate={required}
             onChange={(val) => setCategoryId(val)}
           />}
@@ -65,19 +67,19 @@ let SkillForm = (props) => {
           <Field
             name="description"
             component={TextArea}
-            label="Description*"
+            label={t('portfolio.skillForm.description')}
           />
 
           <Field
             name="photos"
             component={FileInput}
             addFileButton={<div >
-              <Button  type={'button'} grey={true} mediumFont={true} bold={true} size="8px 25px">  <img src="/img/icons/camera.svg" alt=''/> choose photo</Button>
+              <Button  type={'button'} grey={true} mediumFont={true} bold={true} size="8px 25px">  <img src="/img/icons/camera.svg" alt=''/> {t('portfolio.skillForm.choosePhoto')}</Button>
               <div className={styles.addFileButtonDesc}>
-                Upload your photo, Format allowed PNG and JPEG
+              {t('portfolio.skillForm.upload')}
               </div>
             </div>}
-            label="Photos"
+            label={t('photos')}
             multiple={true}
             onChange={(files) => {
               console.log("onChangeFiles", files);
@@ -93,11 +95,11 @@ let SkillForm = (props) => {
           <Field
             name="priceType"
             component={SelectInput}
-            label="Price type:"
+            label={t('priceType')}
             onChange={handlePriceTypeChange}
             options={[
-              {value: 'rate', label: 'Price per hour'},
-              {value: 'fixed', label: 'Fixed price'}
+              {value: 'rate', label: t('pricePerHour')},
+              {value: 'fixed', label: t('task.fixedPrice')}
             ]}
             labelType={'static'}
           />
@@ -106,14 +108,14 @@ let SkillForm = (props) => {
             {priceType === 'rate' && <Field
               name="ratePerHour"
               component={Input}
-              label="Rate per hour:"
+              label={`${t('perHour')}:`}
               labelType={'static'}
               parse={parserNumber}
             />}
             {priceType === 'fixed' && <Field
               name="price"
               component={Input}
-              label="Price:"
+              label={`${t('taskSearch.filter.fieldPrice')}:`}
               labelType={'static'}
               parse={parserNumber}
 
@@ -124,8 +126,8 @@ let SkillForm = (props) => {
       <div className={styles.container}>
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'}>Save</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('task.save')}</Button>
       </div>
       </div>
     </form>

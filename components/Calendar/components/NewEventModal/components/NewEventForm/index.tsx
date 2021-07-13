@@ -57,7 +57,7 @@ let NewEventForm = (props: Props) => {
           component={Input}
           labelType={'static'}
           size={'small'}
-          label={t('eventTitle')}
+          label={t('event.eventTitle')}
           validate={required}
         />
       <Field
@@ -83,7 +83,7 @@ let NewEventForm = (props: Props) => {
 
       {!formLoading && <div className={styles.buttons}>
         <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('createEvent')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('event.createEvent')}</Button>
       </div>}
       </>}
     </form>

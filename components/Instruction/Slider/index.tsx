@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import styles from './index.module.scss'
+import {useTranslation, withTranslation, Trans} from "react-i18next";
 
 export default class SimpleSlider extends Component {
   render() {
@@ -33,6 +34,7 @@ export default class SimpleSlider extends Component {
         }
       ]
     };
+    const { t } = useTranslation('common');
     return (
       <div className={styles.root}>
         <div className={styles.sliderContainer}>
@@ -41,37 +43,37 @@ export default class SimpleSlider extends Component {
               <div className={styles.slideIcon}>
               <img src='/img/icons/pay.svg'/>
               </div>
-              <div className={styles.slideTitle}>Удобная и<br/> безопасная оплата</div>
-              <div className={styles.slideDesc}>При орлате через <span>Сделку без риска YouDo</span><br/>вернет деньги,
+              <Trans i18nKey="instruction.slide.comfortable" className={styles.slideTitle}>Удобная и<br/> безопасная оплата</Trans>
+              <Trans i18nKey="instruction.slide.withoutRisk" className={styles.slideDesc}>При оплате через <span>Сделку без риска YouDo</span><br/>вернет деньги,
                 если что-то пойдет не так
-              </div>
+              </Trans>
             </div>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
                 <img src='/img/icons/man.svg' />
               </div>
-              <div className={styles.slideTitle}>Надежные<br/> исполнители</div>
-              <div className={styles.slideDesc}><span>Проверенные исполнители</span><br/>подтвердили свои документы на
+              <Trans i18nKey="instruction.slide.reliable" className={styles.slideTitle}>Надежные<br/> исполнители</Trans>
+              <Trans i18nKey="instruction.slide.trusted" className={styles.slideDesc}><span>Проверенные исполнители</span><br/>подтвердили свои документы на
                 YouDo
-              </div>
+              </Trans>
             </div>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
                 <img src='/img/icons/review.svg'/>
               </div>
-              <div className={styles.slideTitle}>Достоверные<br/> отзывы</div>
-              <div className={styles.slideDesc}>Более <span>1 000 000 отзывов от заказчиков</span><br/>помогут выбрать
+              <Trans i18nKey="instruction.slide.trustedReviews" className={styles.slideTitle}>Достоверные<br/> отзывы</Trans>
+              <Trans i18nKey="instruction.slide.help" className={styles.slideDesc}>Более <span>1 000 000 отзывов от заказчиков</span><br/>помогут выбрать
                 подходящего<br/>исполнителя
-              </div>
+              </Trans>
             </div>
             <div className={styles.slide}>
               <div className={styles.slideIcon}>
               <img src='/img/icons/smartphone.svg' />
               </div>
-              <div className={styles.slideTitle}>Wedo4you для<br/> бизнеса</div>
-              <div className={styles.slideDesc}>Безналичная оплата <span>бизнес-заданий</span><br/>с предоставлением
+              <Trans i18nKey="instruction.slide.business" className={styles.slideTitle}>Wedo4you для<br/> бизнеса</Trans>
+              <Trans i18nKey="instruction.slide.pay" className={styles.slideDesc}>Безналичная оплата <span>бизнес-заданий</span><br/>с предоставлением
                 закрывающих<br/>документов
-              </div>
+              </Trans>
             </div>
           </Slider>
         </div>

@@ -15,6 +15,7 @@ import {fetchSubCategory} from 'components/ui/Inputs/InputSubCategory/actions'
 import {getCategoryTranslation} from 'utils/translations'
 
 import {useThrottleFn} from '@react-cmpt/use-throttle'
+
 interface Props {
   onSortChange: (sortOrder) => void,
   sortOrder: string,
@@ -64,7 +65,7 @@ const ContactsToolbar = (props: Props) => {
 
       </div>
       <div className={`${styles.filter} ${styles.category}`}>
-        <div className={styles.label}>Category:</div>
+        <div className={styles.label}>{t('filter.fieldCategory')}:</div>
         <DropDown onChange={handleCategoryChange} value={category} options={[
         {value: null,  label: 'all'},
         ...categories.map(item => ({ value: item.id,
@@ -74,7 +75,7 @@ const ContactsToolbar = (props: Props) => {
         />
       </div>
       <div className={`${styles.filter} ${styles.subCategory}`}>
-        <div className={styles.label}>Sub category:</div>
+        <div className={styles.label}>{t('filter.fieldSubCategory')}:</div>
         <DropDown onChange={(val) => onSubCategoryChange(val?.value)} value={subCategory} options={[
           {value: null,  label: 'all'},
           ...subCategories.map(item => ({ value: item.id,
@@ -86,21 +87,21 @@ const ContactsToolbar = (props: Props) => {
       </div>
       <div className={styles.separator}/>
       <div className={`${styles.filter} ${styles.userType}`}>
-        <div className={styles.label}>User type:</div>
+        <div className={styles.label}>{t('contacts.toolbar.userType')}:</div>
         <DropDown onChange={(val) => onUserTypeChange(val.value)} value={userType} options={[
-          {value: 'all',  label: 'all'},
-          {value: 'client',  label: 'client'},
-          {value: 'master',  label: 'master'},
-          {value: 'volunteer',  label: 'volunteer'},
+          {value: 'all',  label: t('contacts.toolbar.all')},
+          {value: 'client',  label: t('contacts.toolbar.client')},
+          {value: 'master',  label: t('contacts.toolbar.master')},
+          {value: 'volunteer',  label: t('contacts.toolbar.volunteer')},
         ]}
                   item={(item) => <div>{item?.label}</div>}
         />
       </div>
       <div className={`${styles.filter} ${styles.sort}`}>
-        <div className={styles.label}>Sort by:</div>
+        <div className={styles.label}>{t('contacts.toolbar.sortType')}:</div>
         <DropDown onChange={(val) => onSortChange(val.value)} value={sortOrder} options={[
-          {value: 'asc',  label: 'a-z'},
-          {value: 'desc',  label: 'z-a'},
+          {value: 'asc',  label: t('contacts.toolbar.a-z')},
+          {value: 'desc',  label: t('contacts.toolbar.z-a')},
      ]}
                   item={(item) => <div>{item?.label}</div>}
         />

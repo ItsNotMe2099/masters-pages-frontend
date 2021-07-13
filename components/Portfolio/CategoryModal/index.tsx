@@ -18,6 +18,8 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/CategoryModal/index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, Trans} from 'react-i18next'
+
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -26,6 +28,7 @@ const CategoryModal = ({isOpen, onClose}: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.skill.formLoading)
   const dispatch = useDispatch();
+  const {t} = useTranslation('common');
   useEffect(() => {
     if(isOpen){
       dispatch(resetSkillForm())
@@ -42,7 +45,7 @@ const CategoryModal = ({isOpen, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/plus.svg`}/>
         </div>
-        <div className={styles.title}>Add Category</div>
+        <div className={styles.title}>{t('portfolio.addCategory')}</div>
       </div>
       <div className={styles.separator}></div>
       <CategoryForm onSubmit={handleSubmit} onCancel={() => dispatch(modalClose())}/>

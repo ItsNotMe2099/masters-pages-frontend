@@ -21,6 +21,8 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation, withTranslation} from "react-i18next";
+
 
 interface Props {
   message: IChatMessage,
@@ -36,6 +38,7 @@ interface Props {
 export default function ChatMessageTaskDetails({ message, task, showHire, showEdit, showReject, showFinish, showAccept, outDatedText }: Props) {
   console.log("taskNegotiation", message.taskNegotiation)
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   const handleReject = () => {
     if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer){
       dispatch(confirmOpen({
@@ -109,7 +112,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
       <div className={styles.details}>
         <div className={styles.detailsItem}>
           <div
-            className={styles.detailsLabel}>{message.taskNegotiation.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+            className={styles.detailsLabel}>{message.taskNegotiation.priceType === 'fixed' ? t('task.fixedPrice') : t('perHour')}</div>
           <div
             className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.ratePerHour}/h`}</div>
         </div>
@@ -122,18 +125,18 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
       <div className={styles.bottom}>
         {outDatedText && <div className={styles.outdated}>{outDatedText}</div>}
         {!outDatedText && <div className={styles.actions}>
-          {showReject && <Button className={`${styles.action}`} onClick={handleReject}>Reject</Button>}
-          {showEdit && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleEdit}>Edit</Button>}
+          {showReject && <Button className={`${styles.action}`} onClick={handleReject}>{t('reject')}</Button>}
+          {showEdit && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleEdit}>{t('edit')}</Button>}
           {showHire &&
-          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Hire Master</Button>}
+          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>{t('chat.hireMaster')}</Button>}
           {showAccept &&
-          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleAccept}>Accept</Button>}
+          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleAccept}>{t('task.accept')}</Button>}
           {showFinish &&
-          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>Finish Task</Button>}
+          <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>{t('chat.finishTask')}</Button>}
         </div>}
         {getStatus() === 'accepted' &&
-        <div className={`${styles.status} ${styles.statusGreen}`}>Accepted <MarkIcon color={'#27C60D'}/></div>}
-        {getStatus() === 'declined' && <div className={styles.status}>Declined <CloseIcon color={'#000000'}/></div>}
+        <div className={`${styles.status} ${styles.statusGreen}`}>{t('accepted')} <MarkIcon color={'#27C60D'}/></div>}
+        {getStatus() === 'declined' && <div className={styles.status}>{t('declined')} <CloseIcon color={'#000000'}/></div>}
       </div>
 
     </div>

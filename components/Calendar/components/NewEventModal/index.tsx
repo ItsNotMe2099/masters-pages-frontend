@@ -60,7 +60,7 @@ const NewEventModal = ({isOpen, onClose, range}: Props) => {
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
 
-        <div className={styles.title}>{t('newEvent')}</div>
+        <div className={styles.title}>{t('event.newEvent')}</div>
       </div>
       <div className={styles.body}>
         <NewEventForm initialValues={{...(range ? {timeRange: range} : {})}} onCancel={handleCancel} onSubmit={handleSubmitNewEvent}/>

@@ -46,6 +46,16 @@
     "selectSubCategory": "Add one or more sub categories"
   },
   "master": "Master",
+  "portfolioLabel": "Portfolio",
+  "type": "Type",
+  "online": "Online",
+  "offline": "Offline",
+  "down": "down",
+  "up": "up",
+  "doYouWantToDelete": "Do you want to delete",
+  "worksInCategories": "Works in the following categories",
+  "add": "Add",
+  "ready": "READY",
   "day": "Day",
   "week": "Week",
   "month": "Month",
@@ -57,20 +67,24 @@
   "back": "Back",
   "status": "Status",
   "client": "Client",
-  "eventNumber": "Event number",
-  "eventTitle": "Event title",
   "orderTitle": "Order title",
   "startTime": "Start time",
   "endTime": "End time",
-  "newEvent": "New event",
   "log": "Log",
-  "createEvent": "Create event",
   "date": "Date",
   "priceType": "Price type:",
-  "perHour": "Rate per hour",
+  "pricePerHour": "Price per hour",
+  "perHour": "Rate per hour:",
   "fixed": "Fixed",
   "availableTasks": "Available tasks",
   "privateTasks": "Private tasks",
+  "reject": "Reject",
+  "edit": "Edit",
+  "accepted": "Accepted",
+  "declined": "Declined",
+  "allPosts": "All posts",
+  "newOrder": "New order",
+  "photos": "Photos",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {
@@ -250,7 +264,8 @@
     },
     "fileInput": {
       "title": "choose photo",
-      "description": "Upload your photo, Format allowed PNG and JPEG"
+      "description": "Upload your photo, Format allowed PNG and JPEG",
+      "uploadFiles": "Upload files"
     },
     "radiusOfSearchInput": {
       "values": {
@@ -432,10 +447,167 @@
       "subscriptions": "News Subscriptions",
       "saved": "Saved",
       "recommendations": "Recommendations"
+    },
+    "toolbar": {
+      "userType": "User type",
+      "sortType": "Sort type",
+      "all": "all",
+      "clent": "client",
+      "volunteer": "volunteer",
+      "master": "master",
+      "a-z": "a-z",
+      "z-a": "z-a"
     }
   },
   "categories": {
-    "findSpecialist": "Найдите своего специалиста",
+    "findSpecialist": "Find your specialist",
     "allCategories": "All categories"
+  },
+  "event": {
+    "eventNumber": "Event number",
+    "eventTitle": "Event title",
+    "newEvent": "New event",
+    "createEvent": "Create event"
+  },
+  "chat": {
+    "areYouSure": "Are you sure that you want to reject mark task as done?",
+    "hireMaster": "Hire master",
+    "finishTask": "Finish task",
+    "markAsDone": "Mark as done",
+    "negotiateOffer": "Negotiate offer",
+    "taskAccepted": "Task accepted",
+    "taskCanceled": "Task canceled",
+    "taskFinished": "Task finished",
+    "message": {
+      "createdEvent": "{{profileText}} created event"
+    }
+  },
+  "feedBack": {
+    "pleaseRate": "Please rate",
+    "youOwn": "You own",
+    "ratePlatform": "Please rate Masters Pages platform",
+    "work": "work!",
+    "finishingTaskByMasterForm": {
+      "timeliness": "Timeliness and completeness of payment:",
+      "presence": "The presence of nagging and unfounded remarks:",
+      "respect": "Respect and courtesy:",
+      "accordance": "The accordance between the description and real work :",
+      "adequacy": "The adequacy of the requirements:",
+      "recommend": "Reccomend:",
+      "cancel": "CANCEL",
+      "send": "SEND",
+      "leaveFeedback": "Leave a feedback here (optional)"
+    },
+    "feedbackForm": {
+      "usability": "Usability :",
+      "searchSpeed": "Master search speed :",
+      "willUseAgain": "Will you use MS again :",
+      "willRecommend": "Will you recommend us :",
+      "done": "DONE",
+      "leaveFeedback": "Leave a feedback here"
+    },
+    "finishingTaskByClientForm": {
+      "workQuality": "Work quality :",
+      "politness": "Politness :",
+      "deadlines": "Deadlines :",
+      "extraExpenses": "Extra expenses :",
+      "notDone": "NOT DONE",
+      "jobIsDone": "JOB IS DONE"
+    }
+  },
+  "follower": {
+    "editPost": "Edit post",
+    "addPost": "Add post",
+    "postForm": {
+      "uploadPhoto": "Upload photo",
+      "showInPortfolio": "Show in portfolio",
+      "tab": "Tab",
+      "title": "Title",
+      "description": "Description",
+      "published": "Published",
+      "commentsAllowed": "Comments allowed"
+    }
+  },
+  "instruction": {
+    "howItWorks": "Как это работает?",
+    "fill": "Заполните <1/> критерии подбора",
+    "see": "Посмотрите анкеты <1/> подобранных специалистов",
+    "communicate": "Общайтесь в чате <1/> и выберите подходящего",
+    "slide": {
+      "comfortable": "Удобная и <1/> безопасная оплата",
+      "withoutRisk": "При оплате через <1>Сделку без риска YouDo</1> <3/> вернет деньги, если что-то пойдет не так",
+      "reliable": "Надежные <1/> исполнители",
+      "trusted": "<1>Проверенные исполнители</1> <3/> подтвердили свои документы на YouDo",
+      "trustedReviews": "Достоверные <1/> отзывы",
+      "help": "Более <1>1 000 000 отзывов от заказчиков</1> <3/> помогут выбрать подходящего <5/> исполнителя",
+      "business": "Wedo4you для <1/> бизнеса",
+      "pay": "Безналичная оплата <1>бизнес-заданий</1> <3/> с предоставлением закрывающих <5/> документов"
+    }
+  },
+  "footer": {
+    "allServices": "Все услуги",
+    "allReviews": "Все отзывы",
+    "serviceHistory": "История заказов",
+    "conditions": "Условия использования",
+    "mobile": "Мобильная версия",
+    "banner": {
+      "earn": "Заработайте на том, <1/> что делаете лучше всех",
+      "earnMobile": "Заработайте на том, что делаете лучше всех",
+      "executor": "Стать исполнителем"
+    }
+  },
+  "mainPage": {
+    "free": "Освободим вас от забот",
+    "find": "Найдите исполнителя под ваши задачи",
+    "example": "Example:",
+    "petDoctor": "Looking for a pet doctor",
+    "order": "Заказать",
+    "specialist": "Услуга или специалист"
+  },
+  "masterForm": {
+    "firstName": "First name*",
+    "lastName": "Last name*",
+    "avatar": "Avatar*",
+    "location": "Location*",
+    "categories": "Categories*",
+    "personalInformation": "Personal information",
+    "chooseCategories": "Choose categories",
+    "imortantInformation": "Important information",
+    "rules": "С <1>правилами сайта</1> ознакомился и согласен"
+  },
+  "portfolio":{
+    "addCategory": "Add category",
+    "editCategory": "Edit Category",
+    "skill": {
+      "firstImage": "Add your first image",
+      "emptyDescription": "Empty description",
+      "deleteCategory": "Delete category"
+    },
+    "skillForm": {
+      "description": "Description*",
+      "choosePhoto": "choose photo",
+      "uploadPhoto": "Upload your photo, Format allowed PNG and JPEG"
+    }
+  },
+  "post": {
+    "areYouSureToDelete": "Are you sure that you want to delete «{{model.title}}»?"
+  },
+  "cardGallery": {
+    "gallery": "Gallery",
+    "addPhoto": "Add photo"
+  },
+  "cardLanguages": {
+    "languages": "Languages"
+  },
+  "cardPortfolio": {
+    "addWork": "Add work",
+    "visitWebsite": "Visit website",
+    "attachedFiles": "Attached files"
+  },
+  "cardPost": {
+    "totalPosts": "Posts ({{total}})"
+  },
+  "cardPreferToWorkIn": {
+    "prefer": "Prefer to work in"
   }
 }

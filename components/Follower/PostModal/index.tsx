@@ -13,6 +13,7 @@ import styles from 'components/Portfolio/SkillModal/index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import PostForm from 'components/Post/PostModal/PostForm'
 import {createProfileGallery, resetProfileGalleryForm, updateProfileGallery} from 'components/ProfileGallery/actions'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean,
   currentEditPost?: IProfileGalleryItem
@@ -22,6 +23,7 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.skill.formLoading)
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   useEffect(() => {
     if(isOpen){
       dispatch(resetProfileGalleryForm())
@@ -45,7 +47,7 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/${ currentEditPost ? 'pencil' : 'plus'}.svg`}/>
         </div>
-        <div className={styles.title}>{currentEditPost ? 'Edit Post' : 'Add Post'}</div>
+        <div className={styles.title}>{currentEditPost ? t('follower.editPost') : t('follower.addPost')}</div>
       </div>
       <div className={styles.separator}></div>
       <PostForm onSubmit={handleSubmit} initialValues={currentEditPost} onCancel={() => dispatch(modalClose())}/>

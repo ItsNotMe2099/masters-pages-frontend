@@ -13,7 +13,7 @@ import FileInput from 'components/ui/Inputs/FilesUploadInput';
 import {useTranslation} from "react-i18next";
 
 let ProfileEmailChangeForm = props => {
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
 

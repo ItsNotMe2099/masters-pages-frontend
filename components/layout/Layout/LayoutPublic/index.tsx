@@ -14,6 +14,7 @@ import MainSectionButton from 'pages/NewMain/components/Button'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
 import Button from 'components/PublicProfile/components/Button'
 
+
 interface Props {
   children?: ReactElement[] | ReactElement
   title?: ReactElement | string
@@ -25,7 +26,7 @@ export default function LayoutPublic(props: Props) {
   const role = useSelector((state: IRootState) => state.profile.role)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const dispatch = useDispatch()
 
   return (
@@ -41,8 +42,8 @@ export default function LayoutPublic(props: Props) {
           <div className={styles.actions}>
             <LangSelect isAuth={false}/>
             <div className={styles.actionsButtons}>
-              <Button className={styles.actionButton} size={'small'}  onClick={() => dispatch(signInOpen())}>Sign in</Button>
-             <Button className={styles.actionButton} size={'small'} color={'red'} onClick={() => dispatch(signUpOpen())}>Sign up</Button>
+              <Button className={styles.actionButton} size={'small'}  onClick={() => dispatch(signInOpen())}>{t('menu.signIn')}</Button>
+             <Button className={styles.actionButton} size={'small'} color={'red'} onClick={() => dispatch(signUpOpen())}>{t('menu.signUp')}</Button>
             </div>
           </div>
 

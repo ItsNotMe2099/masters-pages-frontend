@@ -6,6 +6,7 @@ import Button from 'components/PublicProfile/components/Button'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {getMediaPath} from 'utils/media'
 import FileList from 'components/ui/FileList'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   model: IProfilePortfolio,
@@ -62,6 +63,7 @@ const PortfolioListItem = ({onEdit, onDelete, model, isEdit}: Props) => {
 
     }
   }
+  const {t} = useTranslation('common');
   return (
     <div className={styles.root}>
       <div className={styles.leftColumn}>
@@ -76,20 +78,20 @@ const PortfolioListItem = ({onEdit, onDelete, model, isEdit}: Props) => {
           </div>
           {isEdit && <div className={styles.editActions}>
 
-            <FormActionButton type={'edit'} title={'Edit'} onClick={ () => onEdit(model)}/>
-            <FormActionButton type={'delete'} title={'Delete'} onClick={ () => onDelete(model)}/>
+            <FormActionButton type={'edit'} title={t('edit')} onClick={ () => onEdit(model)}/>
+            <FormActionButton type={'delete'} title={t('task.delete')} onClick={ () => onDelete(model)}/>
           </div>}
         </div>
         <div className={styles.description}>
           {model.description}
         </div>
         <div className={styles.actions}>
-          {model.link && <Button href={model.link} size={'small'}>Visit website</Button>}
+          {model.link && <Button href={model.link} size={'small'}>{t('cardPortfolio.visitWebsite')}</Button>}
         </div>
       </div>
 
       {model.files.length > 0 && <div className={styles.rightColumn}>
-        <div className={styles.filesTitle}>Attached files</div>
+        <div className={styles.filesTitle}>{t('cardPortfolio.attachedFiles')}</div>
         <FileList files={model.files}/>
       </div>}
     </div>

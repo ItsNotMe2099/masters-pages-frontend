@@ -20,6 +20,7 @@ import {
 import styles from './index.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   message: IChatMessage
@@ -40,12 +41,13 @@ export default function ChatMessage({ message, chat, size }: Props) {
 
   const handleTaskMarkAsDoneReject = () => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to reject mark task as done?`,
+      description: t('chat.areYouSure'),
       onConfirm: () => {
         dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id));
       }
     }));
   }
+  const { t } = useTranslation('common');
   const renderMessage = (component, hasTime = false) => {
     return (<div className={`${styles.root} ${message.profileId === profile.id ? styles.rootAuthor : ''}`}>
       <div className={styles.message}>{component}</div>
@@ -59,7 +61,7 @@ export default function ChatMessage({ message, chat, size }: Props) {
           let profileText = message.profileId === profile.id ? `You` : `${profile.firstName} ${profile.lastName}`
           switch (message.eventLogRecordType){
             case IEventLogRecordType.Created:
-              text = `${profileText} created event`;
+              text = t('chat.message.createdEvent', { profileText })
               break;
             case IEventLogRecordType.StatusChanged:
               text = `${profileText} changed status to ${message.eventLogRecordData.newStatus}`;

@@ -11,10 +11,12 @@ import {birthdate, date, required} from 'utils/validations'
 import SelectInput from 'components/ui/Inputs/SelectInput'
 import FileInput from 'components/ui/Inputs/FilesUploadInput'
 import AvatarInput from 'components/ui/AvatarInput'
+import {useTranslation} from 'react-i18next'
 
 let PortfolioForm = (props) => {
   const error = useSelector((state: IRootState) => state.profilePortfolio.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'portfolio')
+  const {t} = useTranslation('common');
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
@@ -23,11 +25,11 @@ let PortfolioForm = (props) => {
         component={AvatarInput}
         size={'small'}
         labelType="placeholder"
-        label={'Upload photo'}
+        label={t('follower.postForm.uploadPhoto')}
       />
       {profileTabs.length > 0 && <Field
         name="profileTabId"
-        label={'Category'}
+        label={t('createTask.filter.fieldCategory')}
         component={SelectInput}
         size={'small'}
         options={profileTabs.map(item => ({label: item.title, value: item.id}))}
@@ -54,7 +56,7 @@ let PortfolioForm = (props) => {
         name="title"
         component={Input}
         size={'small'}
-        label="Title"
+        label={t('follower.postForm.title')}
         labelType={'placeholder'}
       />
       <Field
@@ -68,19 +70,19 @@ let PortfolioForm = (props) => {
         name="description"
         component={TextArea}
         size={'small'}
-        label="Description"
+        label={t('follower.postForm.description')}
         labelType={'placeholder'}
       />
       <Field
         name="files"
         component={FileInput}
         addFileButton={<div >
-          <Button  type={'button'} size="small">  <img src="/img/icons/camera.svg" alt=''/> Upload files</Button>
+          <Button  type={'button'} size="small">  <img src="/img/icons/camera.svg" alt=''/> {t('forms.fileInput.uploadFiles')}</Button>
           <div className={styles.addFileButtonDesc}>
-            Upload your photo, Format allowed PNG and JPEG
+            {t('forms.fileInput.description')}
           </div>
         </div>}
-        label="Photos"
+        label={t('photos')}
         multiple={true}
         onChange={(files) => {
           console.log("onChangeFiles", files);
@@ -90,8 +92,8 @@ let PortfolioForm = (props) => {
       />
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
       </div>
     </form>
   )
