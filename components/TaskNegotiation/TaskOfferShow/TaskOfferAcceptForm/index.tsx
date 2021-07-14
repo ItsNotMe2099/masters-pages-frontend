@@ -16,12 +16,14 @@ import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import {parserPrice} from 'utils/formatters'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation, Trans} from "react-i18next";
 interface Props{
   task: ITask
 }
 let TaskOfferAcceptForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  const {t} = useTranslation('common')
 
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
@@ -30,7 +32,7 @@ let TaskOfferAcceptForm = (props) => {
         <Field
           name="message"
           component={TextArea}
-          label="Cover Letter"
+          label={t('taskNegotiation.coverLetter')}
           labelType={'static'}
           validate={required}
         />
@@ -39,8 +41,8 @@ let TaskOfferAcceptForm = (props) => {
           component={RadioList}
           validate={required}
           options={[
-            {label: 'Agree with client payment offer', value: 'agree'},
-            {label: 'I want to propose different terms', value: 'custom'}
+            {label: t('taskNegotiation.agreeWithClient'), value: 'agree'},
+            {label: t('taskNegotiation.differentTerms'), value: 'custom'}
           ]}
         />
 
@@ -49,7 +51,7 @@ let TaskOfferAcceptForm = (props) => {
 
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
-            <div className={styles.taskPriceDetailsItemLabel}>{props.task.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+            <div className={styles.taskPriceDetailsItemLabel}>{props.task.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
             <div className={styles.taskPriceDetailsItemValue}>$ {props.task.priceType === 'fixed' ? props.task.budget : `${props.task.ratePerHour}/h`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
@@ -69,8 +71,8 @@ let TaskOfferAcceptForm = (props) => {
               size={'small'}
               validate={required}
               options={[
-                {label: 'Fixed price', value: 'fixed'},
-                {label: 'Rate per hour', value: 'rate'}
+                {label: t('fixedPrice'), value: 'fixed'},
+                {label: t('perHour'), value: 'rate'}
               ]}
             />
             {props.offerPriceType === 'fixed' && <Field
@@ -93,13 +95,13 @@ let TaskOfferAcceptForm = (props) => {
           </div>
         </div>
         <div className={styles.offerDetailsForRow}>
-          <div className={styles.offerDetailsForRowLabel}>Deadline:</div>
+          <div className={styles.offerDetailsForRowLabel}>{`${t('deadline')}:`}</div>
           <div className={styles.offerDetailsForRowFields}>
             <div className={styles.offerDetailsForRowFieldsWrapper}>
               <Field
                 name="deadline"
                 component={Input}
-                label="Deadline"
+                label={t('deadline')}
                 validate={required}
                 size={'small'}
                 labelType={'placeholder'}
@@ -114,8 +116,8 @@ let TaskOfferAcceptForm = (props) => {
       <div className={styles.containerButtons}>
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'}>Save</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('save')}</Button>
       </div>
       </div>
     </form>

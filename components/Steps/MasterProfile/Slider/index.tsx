@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import Step from "components/Steps";
 import styles from './index.module.scss'
+import {useTranslation, Trans} from "react-i18next";
 
 export default class SimpleSlider extends Component {
   render() {
@@ -38,6 +39,7 @@ export default class SimpleSlider extends Component {
         }
       ]
     };
+    const {t} = useTranslation('common')
     return (
       <div className={styles.root}>
         <img className={styles.waveLeft} src={'/img/icons/wave1.svg'} alt=''/>
@@ -47,19 +49,19 @@ export default class SimpleSlider extends Component {
           <div className={styles.slide}>
             <Step
             image='/img/icons/form1.svg'
-            text='01. Complete profile'
+            text={t('steps.completeProfile')}
             />
           </div>
           <div className={styles.slide}>
             <Step
             image='/img/icons/form3.svg'
-            text='02. Find a task'
+            text={t('steps.findATask')}
             />
           </div>
           <div className={styles.slide}>
             <Step
             image='/img/icons/file.svg'
-            text='03. Do task and earn money'
+            text={t('steps.doTask')}
             />
           </div>
           </Slider>

@@ -46,6 +46,62 @@
     "selectSubCategory": "Add one or more sub categories"
   },
   "master": "Master",
+  "tasks": "Tasks",
+  "editTask": "Edit task",
+  "requiredField": "required field",
+  "avatar": "Avatar",
+  "positiveReviews": "Positive reviews based on",
+  "personalInformation": "Personal information",
+  "notifications": "Notifications",
+  "defaultLanguage": "Default language",
+  "defaultTimezone": "Default timezone",
+  "changePassword": "Change password",
+  "deleteProfiles": "Delete profiles",
+  "deleteAccount": "Delete account",
+  "more": "More",
+  "hour": "hour",
+  "saved": "Saved",
+  "hide": "Hide",
+  "seeDetails": "See details",
+  "decline": "Decline",
+  "accept": "Accept",
+  "messages": "Messages",
+  "currency": "Currency",
+  "shareBySocialMedia": "Share by social media",
+  "goToHomePage": "GO TO HOME PAGE",
+  "taskTitle": "Task title",
+  "taskDescription": "Task description",
+  "location": "Location",
+  "estimate": "Estimate",
+  "masterOrVolunteer": "Master or volunteer",
+  "category": "Category",
+  "subCategory": "Sub category",
+  "executionType": "Execution Type",
+  "free": "Free",
+  "price": "Price",
+  "fixedPrice":"Fixed price",
+  "hAWeek": "h a week",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "subject": "Subject",
+  "cancelLarge": "CANCEL",
+  "saveLarge": "SAVE",
+  "address": "Address",
+  "review": "Review",
+  "reviews": "Reviews",
+  "title": "Title",
+  "clients": "Clients",
+  "masters": "Masters",
+  "orders": "Orders",
+  "all": "All",
+  "today": "Today", 
+  "addLink": "Add link",
+  "uploadPhoto":"Upload photo",
+  "uploadPhotoOrVideo":"Upload photo or video",
+  "formatAllowed": "Format allowed: PNG, JPEG, MP4",
+  "cancel": "Cancel",
+  "save": "Save",
   "portfolioLabel": "Portfolio",
   "type": "Type",
   "online": "Online",
@@ -59,6 +115,7 @@
   "day": "Day",
   "week": "Week",
   "month": "Month",
+  "year": "Year",
   "agenda": "Agenda",
   "orderNumber": "Order number:",
   "volunteer": "Volunteer",
@@ -80,6 +137,7 @@
   "privateTasks": "Private tasks",
   "reject": "Reject",
   "edit": "Edit",
+  "editSmall": "edit",
   "accepted": "Accepted",
   "declined": "Declined",
   "allPosts": "All posts",
@@ -464,6 +522,8 @@
     "allCategories": "All categories"
   },
   "event": {
+    "event": "Event",
+    "events": "Events",
     "eventNumber": "Event number",
     "eventTitle": "Event title",
     "newEvent": "New event",
@@ -513,6 +573,13 @@
       "extraExpenses": "Extra expenses :",
       "notDone": "NOT DONE",
       "jobIsDone": "JOB IS DONE"
+    },
+    "modals": {
+      "thankYou": "Thank you for your feedback!",
+      "yourOrder": "Congratulations! Your order is completed",
+      "pleaseDescribe": "Please describe your experiens working with our platform. It will help us to make it more useful for you in future.",
+      "noIDont": "NO I DON'T",
+      "yes": "YES I WILL DO IT"
     }
   },
   "follower": {
@@ -562,7 +629,33 @@
     "example": "Example:",
     "petDoctor": "Looking for a pet doctor",
     "order": "Заказать",
-    "specialist": "Услуга или специалист"
+    "specialist": "Услуга или специалист",
+    "modernBusiness": "Modern business management platform for self-employed professionals",
+    "organize": "Organize smooth flow of your business in the most efficient way in one place with MastersPages:",
+    "goLive": "We go live in May 2021",
+    "categories": {
+      "tutors": "Tutors",
+      "repairman": "Repairman",
+      "beautyMaster": "Beauty master",
+      "freelancers": "Freelancers",
+      "accountants": "Accountants",
+      "lawyers": "Lawyers",
+      "atleticCoaches": "Athletic coaches",
+      "artists": "Artists",
+      "homeStaff": "Home staff",
+      "veterinarians": "Veterinarians",
+      "drivingInstructors": "Driving instructors",
+      "doctors": "Doctors",
+      "various": "Various specilists"
+    },
+    "labels": {
+      "advertise": "Advertise",
+      "communicate": "Communicate",
+      "timeManage": "Time manage",
+      "note": "Note",
+      "organize": "Organize",
+      "wow": "Wow"
+    }
   },
   "masterForm": {
     "firstName": "First name*",
@@ -590,7 +683,9 @@
     }
   },
   "post": {
-    "areYouSureToDelete": "Are you sure that you want to delete «{{model.title}}»?"
+    "areYouSureToDelete": "Are you sure that you want to delete «{{model.title}}»?",
+    "createPost": "Create a post",
+    "postBy": "Post by"
   },
   "cardGallery": {
     "gallery": "Gallery",
@@ -609,5 +704,144 @@
   },
   "cardPreferToWorkIn": {
     "prefer": "Prefer to work in"
+  },
+  "cardProfile": {
+    "lastSeen": "last seen:",
+    "stat": {
+      "learnMore": "Learn more"
+    }
+  },
+  "cardRecommenadationShort": {
+    "seeAll": "See all",
+    "recommendationsTotal": "Recommendations ({{total}})",
+    "recommendations": "Recommendations"
+  },
+  "cardReviewsShort": {
+    "reviewsTotal": "Reviews ({{total}})",
+    "recommendations": "Reviews"
+  },
+  "cardSalesPitch": {
+    "salesPitch": "Sales Pitch",
+    "form": {
+      "fillUpSalePitch": "Fill up sale pitch. Max <1000 symbols"
+    }
+  },
+  "cardWorkExperience": {
+    "addWorkExperience": "Add work experience",
+    "qualification": "Proffesional qualifications and work experience",
+    "form": {
+      "jobPosition": "Job position",
+      "fromDate": "From date",
+      "toDate": "To date",
+      "companyOrInstitution": "Company or Institution name"
+    }
+  },
+  "galleryModal": {
+    "yourComment": "Your comment here"
+  },
+  "reportFilterForm": {
+    "overview": "Overview:",
+    "filterBy": "Filter by:",
+    "plannedTime": "Planned Time",
+    "actualTime": "Actual Time",
+    "plannedAmount": "Planned Amount",
+    "actualAmount": "Actual Amount",
+    "clientName": "Client Name",
+    "masterName": "Master Name",
+    "reviewMark": "Review Mark"
+  },
+  "saveProfileSearchModal": {
+    "saveThisFilter": "Save this filter?",
+    "form": {
+      "name": "Name:"
+    }
+  },
+  "personalLabel": {
+    "yourPersonalLabel": "Your personal label",
+    "useYourPersonal": "Use your personal MP label as email signature , letter head, business cards logo or place on your outdoor ads",
+    "downloadPDF": "Download PDF",
+    "downloadImage": "Download image",
+    "form": {
+      "verticalStyle": "Vertical style",
+      "horizontalStyle": "Horizontal style",
+      "lightTheme": "Light theme",
+      "darkTheme": "Dark theme",
+      "qrCode": "QR code",
+      "webAddress": "Web address"
+    }
+  },
+  "personalLink": {
+    "yourPersonalLink": "Your personal link",
+    "linkWas": "Link was copied to clipboard"
+  },
+  "shareByEmail": {
+    "inviteAnother": "Invite another",
+    "mailTo": "Mail to",
+    "invitesYou": "Invites you to join MastersPages",
+    "dear": "Dear",
+    "wouldLike": "would like to invite you see his/hers profile on MastersPages.",
+    "toSee": "To see",
+    "profile": "profile.",
+    "toLearn": "To learn more about",
+    "ifYouGot": "If you got this email in error report abuse",
+    "trulyYours": "Truly yours, MastersPages team",
+    "selfEmployed": "Self-employed business management platform.",
+    "invite": "Invite"
+  },
+  "split": {
+    "positive": "положительных <1/> отзывов",
+    "peopleOrdering": "People ordering right now"
+  },
+  "steps": {
+    "completeProfile": "01. Complete profile",
+    "findATask": "02. Find a task",
+    "doTask": "03. Do task and earn money"
+  },
+  "taskNegotiation": {
+    "negotiateOffer":"Negotiate offer",
+    "expireIn": "Expire in:",
+    "sendOffer": "Send Offer",
+    "hiringAMaster": "Hiring a master",
+    "hireMaster": "Hire master",
+    "finishingTask": "Finishing task",
+    "markAsDone": "Mark as done",
+    "acceptAndOffer": "Accept and offer",
+    "coverLetter": "Cover Letter",
+    "agreeWith": "Agree with client payment offer",
+    "iWant": "I want to propose different terms",
+    "availableTasks": "Available tasks",
+    "privateTask": "Private task",
+    "offerTask": "Offer task",
+    "physical": "Physical",
+    "virtual": "Virtual",
+    "combo": "Combo",
+    "iAmAgreeWith": "I am agree with",
+    "termsAndConditions": "terms and conditions",
+    "agreeWithClient": "Agree with client payment offer",
+    "differentTerms": "I want to propose different terms"
+  },
+  "fileInput": {
+    "fileHere": "Перенесите сюда файл или нажмите <1/> для выбора файла на компьютере",
+    "attachPhotos": "attach photos"
+  },
+  "modal": {
+    "markedJob": "marked job like a<1> done</1>",
+    "describeExperience": "Describe your experience"
+  },
+  "profileComponent": {
+    "viewProfile": "View profile",
+    "statistic": "Statistic:",
+    "tasksCompleted": "Tasks completed:",
+    "totalHours": "Total hours:",
+    "tasksEarned": "Tasks earned:",
+    "offerTask": "OFFER TASK",
+    "sendMessage": "SEND MESSAGE"
+  },
+  "emailConfirmation": {
+    "confirmed": "Email confirmed",
+    "notConfirmed": "Email not confirmed"
+  },
+  "report": {
+    "id": "ID"
   }
 }

@@ -5,6 +5,7 @@ import LangSelect from 'pages/NewMain/components/Header/components/LangSelect'
 import MainSectionButton from 'pages/NewMain/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
+import {useTranslation} from "react-i18next";
 interface Props{
 
 }
@@ -12,6 +13,7 @@ interface Props{
 const MainSectionHeader = (props: Props) => {
  const isProd = ['masterspages.ca', 'masterspages.com', 'masterspages.ru'].includes(typeof window !== 'undefined' ? window.location.hostname : '');
   const dispatch = useDispatch()
+  const {t} = useTranslation('common');
   return (
     <div  className={styles.root}>
       <div  className={styles.container}>
@@ -32,8 +34,8 @@ const MainSectionHeader = (props: Props) => {
         </div>
         <div className={styles.actions}>
           <div className={styles.actionsButtons}>
-            {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>Sign in</MainSectionButton>}
-            {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>Sign up</MainSectionButton>}
+            {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>}
+            {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>}
           </div>
         </div>
       </div>

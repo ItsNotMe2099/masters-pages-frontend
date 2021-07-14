@@ -13,12 +13,12 @@ import { useRouter } from "next/router";
 import Review from "components/Review";
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   t?: (string) => string,
 }
 const TabReviews = (props: Props) => {
-  const {t} = props;
   const options = [{label: 'New first', value: 'New first'}, {label: 'Old first', value: 'Old first'}]
   const feedbacks = useSelector((state: IRootState) => state.profileFeedback.list)
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
@@ -27,6 +27,7 @@ const TabReviews = (props: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const [load, setLoadMore] = useState(false)
   const dispatch = useDispatch()
+  const { t } = useTranslation('common');
   const limit = 10;
   const handleScrollNext = () => {
     console.log("HandleNext", page)
@@ -52,7 +53,7 @@ const TabReviews = (props: Props) => {
       <div className={styles.top}>
       <div>
         <div className={styles.percent}>95%</div>
-        <div className={styles.greenText}>Positive reviews based on {total}</div>
+        <div className={styles.greenText}>{t('positiveReviews')} {total}</div>
       </div>
       <div className={styles.simpleText}>Lorem ipsum dolor sit amet, consectetur adipiscing<br/> elit. Fermentum mattis sed quam enim.</div>
       <div className={styles.dropdown}>

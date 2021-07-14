@@ -6,6 +6,7 @@ import SaveTaskSearchForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {saveTaskSearch} from 'components/SavedSearches/actions'
+import {useTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
@@ -14,6 +15,7 @@ interface Props {
 export default function SaveTaskSearchModal(props: Props) {
   const dispatch = useDispatch();
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
+  const { t } = useTranslation('common');
 
   const formLoading = useSelector((state: IRootState) => state.profileFeedback.formLoading)
   const handleSubmit = (data) => {
@@ -30,7 +32,7 @@ export default function SaveTaskSearchModal(props: Props) {
     >
 
         <div className={styles.innards}>
-          <div className={styles.rate}>Save this filter?</div>
+          <div className={styles.rate}>{t('saveProfileSearchModal.saveThisFilter')}</div>
           <div className={styles.form}><SaveTaskSearchForm onSubmit={handleSubmit}/></div>
         </div>
     </Modal>

@@ -6,6 +6,7 @@ import React, {
 } from 'react'
 import Button from "../../../Button";
 import {modalClose} from "../../../../Modal/actions";
+import {useTranslation, Trans} from "react-i18next";
 export interface FileEntity {
   catalogId?: number
   key?: string
@@ -33,6 +34,8 @@ const FileWrapper = (props: Props) => {
     file,
     key,
   } = props
+
+  const {t} = useTranslation('common')
 
   const [confirmRemove, setConfirmRemove] = useState(false);
   const [isLoaded, setIsLoaded] = useState(!file.rawFile);
@@ -89,8 +92,8 @@ const FileWrapper = (props: Props) => {
     loading={!isLoaded}
     progress={progress}
     onRemove={handleConfirmRemove}/> : <div>
-    <Button white size="9px 16px" onClick={handleRemove} type="button">Удалить</Button>
-    <Button transparent onClick={handleCancelRemove}   type="button">Отменить</Button>
+    <Button white size="9px 16px" onClick={handleRemove} type="button">{t('delete')}</Button>
+    <Button transparent onClick={handleCancelRemove}   type="button">{t('cancel')}</Button>
   </div>
 }
 

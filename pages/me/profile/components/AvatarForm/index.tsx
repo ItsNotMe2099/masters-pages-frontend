@@ -16,7 +16,7 @@ let AvatarForm = (props) => {
       <Field
         name="photo"
         component={AvatarInput}
-        label="Avatar*"
+        label={`${t('avatar')}*`}
         loading={loading}
         error={error}
         validate={required}

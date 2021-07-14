@@ -13,7 +13,7 @@ import {IRootState} from 'types'
 const queryString = require('query-string')
 
 let PersonalLabelForm = props => {
-  const {t} = useTranslation()
+  const {t} = useTranslation('common')
   const { handleSubmit, onChangeForStat } = props
 
   return (
@@ -27,8 +27,8 @@ let PersonalLabelForm = props => {
             showEmpty={false}
             noMargin={false}
             options={[
-              {label: 'Vertical style', value: 'vertical'},
-              {label: 'Horizontal style', value: 'horizontal'}
+              {label: t('personalLabel.form.verticalStyle'), value: 'vertical'},
+              {label: t('personalLabel.form.horizontalStyle'), value: 'horizontal'}
             ]}
           />
           <Field
@@ -39,8 +39,8 @@ let PersonalLabelForm = props => {
             showEmpty={false}
             noMargin={false}
             options={[
-              {label: 'Light theme', value: 'light'},
-              {label: 'Dark theme', value: 'dark'}
+              {label: t('personalLabel.form.lightTheme'), value: 'light'},
+              {label: t('personalLabel.form.darkTheme'), value: 'dark'}
             ]}
           />
         </div>
@@ -62,10 +62,10 @@ let PersonalLabelForm = props => {
             ...(value?.webAddress ? ['webAddress'] : []),
           ])}
           options={[
-            {label: 'QR code', value: 'qrCode'},
-            {label: 'Web address', value: 'webAddress'},
-            {label: 'Name', value: 'name'},
-            {label: 'Phone', value: 'phone'},
+            {label: t('personalLabel.form.qrCode'), value: 'qrCode'},
+            {label: t('personalLabel.form.webAddress'), value: 'webAddress'},
+            {label: t('name'), value: 'name'},
+            {label: t('phone'), value: 'phone'},
           ]}
         />
       </div>

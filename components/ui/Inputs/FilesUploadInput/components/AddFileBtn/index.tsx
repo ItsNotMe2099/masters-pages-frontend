@@ -9,11 +9,11 @@ interface Props {
 }
 
 const AddFileButton = (props: Props) => {
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   return (
   <>
   {props.altView ?
-      <a className={styles.alt}> <img src="/img/icons/staple.svg" alt=''/> attach photos</a>
+      <a className={styles.alt}> <img src="/img/icons/staple.svg" alt=''/> {t('fileInput.attachPhotos')}</a>
     :
   <>
   <div className={styles.root}>

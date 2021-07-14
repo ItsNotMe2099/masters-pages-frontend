@@ -6,6 +6,7 @@ import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/ac
 import { useSelector, useDispatch } from 'react-redux'
 import ReviewShortListItem
   from 'components/PublicProfile/components/view/CardReviewsShort/components/ReviewShortListItem'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   profile: ProfileData,
@@ -17,15 +18,16 @@ const CardReviewsShort = (props: Props) => {
   const listLoading = useSelector((state: IRootState) => state.profileFeedback.isLoadingShort);
   const total = useSelector((state: IRootState) => state.profileFeedback.totalShort)
   const dispatch = useDispatch();
+  const {i18n, t} = useTranslation('common')
 
   useEffect(() => {
     dispatch(fetchFeedbacksToProfileShortRequest(profile.id, subCategory?.subCategoryId));
   }, [profile, subCategory])
   return (
-    <Card isHidden={total === 0} className={styles.root} title={total > 0 ?  `Reviews (${total})` : 'Reviews'}>
+    <Card isHidden={total === 0} className={styles.root} title={total > 0 ?  t('cardReviewsShort.reviewsTotal') : t('cardReviewsShort.reviews')}>
 
       {!listLoading && list.map(item => <ReviewShortListItem feedback={item}/>)}
-      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/Reviews${subCategory ? `?subCategoryId=${subCategory.subCategoryId}` : ''}`}>See all</a>}
+      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/Reviews${subCategory ? `?subCategoryId=${subCategory.subCategoryId}` : ''}`}>{t('cardRecommenadationShort.seeAll')}</a>}
     </Card>
   )
 }

@@ -16,6 +16,7 @@ import AvatarForm from 'pages/me/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
 import {useTranslation, withTranslation} from "react-i18next";
+
 interface Props{
   profile: ProfileData,
   isEdit: boolean
@@ -51,7 +52,7 @@ const CardProfile = (props: Props) => {
     dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
   }
   return (
-    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={'Edit'} onClick={handleEditClick}/>] : []}>
+    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={t('task.edit')} onClick={handleEditClick}/>] : []}>
 
         {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
         {(!showForm || !isEdit) &&  <a href={`/id${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
@@ -86,7 +87,7 @@ const CardProfile = (props: Props) => {
         <div className={styles.ratingValue}>({profile.rating || 0})</div>
       </div>
       <div className={styles.lastSeen}>
-        <div className={styles.lastSeenLabel}>last seen:</div>
+        <div className={styles.lastSeenLabel}>{t('cardProfile.lastSeen')}</div>
         <div className={styles.lastSeenValue}>3 min ago</div>
       </div>
       {!isEdit && <div className={styles.actions}>

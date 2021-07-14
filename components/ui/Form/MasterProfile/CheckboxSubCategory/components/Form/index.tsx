@@ -12,12 +12,15 @@ import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import InputCategory from 'components/ui/Inputs/InputCategory';
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
+import {useTranslation, Trans} from "react-i18next";
 const categoryRequired = (value) => {
   return  !value || !value.value ? 'required' : ''
 }
 const subCategoryRequired = (value) => {
   return  !value || value.length === 0 ? 'selectSubCategory' : ''
 }
+
+const {t} = useTranslation('common')
 
 let FormNewCategory = props => {
   const { handleSubmit } = props
@@ -35,7 +38,7 @@ let FormNewCategory = props => {
               <Field
                 name="category"
                 component={InputCategory}
-                label="Category"
+                label={t('category')}
                 validate={categoryRequired}
                 changeWithValue={true}
                 onChange={(val) => setCategoryId(val.value)}
@@ -50,7 +53,7 @@ let FormNewCategory = props => {
                 grid={2}
                 changeWithValue={true}
               />
-      <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>Add category</Button>
+      <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>{t('portfolio.addCategory')}</Button>
 
       </form>
   )

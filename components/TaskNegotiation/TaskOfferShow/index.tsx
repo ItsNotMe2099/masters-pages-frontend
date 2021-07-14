@@ -20,6 +20,7 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation, Trans} from "react-i18next";
 
 interface Props {
   isOpen: boolean,
@@ -32,6 +33,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
   const response = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
   const dispatch = useDispatch();
   const router = useRouter();
+  const {t} = useTranslation('common')
 
   const handleDecline = (e) => {
     dispatch(confirmOpen({
@@ -67,7 +69,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         <div className={styles.icon}>
           <img src={`/img/icons/message.svg`}/>
         </div>
-        <div className={styles.title}>Cover letter</div>
+        <div className={styles.title}>{t('taskNegotiation.coverLetter')}</div>
       </div>
       <div className={styles.task}>
         <div className={styles.taskHeader}>
@@ -82,19 +84,19 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         </div>
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
-            <div className={styles.taskPriceDetailsItemLabel}>{response.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+            <div className={styles.taskPriceDetailsItemLabel}>{response.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
             <div className={styles.taskPriceDetailsItemValue}>$ {response.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/h`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
-            <div className={styles.taskPriceDetailsItemLabel}>Dead line:</div>
+            <div className={styles.taskPriceDetailsItemLabel}>`${t('deadline')}:`</div>
             <div className={styles.taskPriceDetailsItemValue}>{response.deadline ? format(new Date(response.deadline), 'MM.dd.yyy') : 'N/A'} </div>
           </div>
         </div>
         <div className={styles.buttons}>
-          {!['accepted', 'decline'].includes(response.state) && <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleDecline}>Decline</Button>}
-          {!['accepted'].includes(response.state) && <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleAccept}>Accept</Button>}
-          {['accepted', 'decline'].includes(response.state)&& <Button className={`${styles.button} ${styles.buttonSubmit}`} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'submit'} onClick={onClose}>Cancel</Button>}
-          {['accepted', 'decline'].includes(response.state)&& <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleMessages}>Messages</Button>}
+          {!['accepted', 'decline'].includes(response.state) && <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleDecline}>{t('decline')}</Button>}
+          {!['accepted'].includes(response.state) && <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleAccept}>{t('accept')}</Button>}
+          {['accepted', 'decline'].includes(response.state)&& <Button className={`${styles.button} ${styles.buttonSubmit}`} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'submit'} onClick={onClose}>{t('cancel')}</Button>}
+          {['accepted', 'decline'].includes(response.state)&& <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleMessages}>{t('messages')}</Button>}
         </div>
       </div>
 

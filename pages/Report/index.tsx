@@ -24,8 +24,9 @@ import ReportFilterForm from 'components/Report/ReportFilterForm'
 import Button from 'components/PublicProfile/components/Button'
 import Loader from 'components/ui/Loader'
 
+
 const ReportPage = (props) => {
-  const {t} = useTranslation()
+  const {t} = useTranslation('common')
   const router = useRouter();
 
   const filter = useSelector((state: IRootState) => state.report.filter);
@@ -98,18 +99,18 @@ const ReportPage = (props) => {
         {listLoading && <Loader/>}
         {!listLoading && list.length > 0 && <div className={styles.report}>
           <div className={styles.reportHeader}>
-            {fields.includes('id') && <div className={`${styles.reportCell}`}>ID</div>}
-            {fields.includes('title') && <div className={`${styles.reportCell}`}>Title</div>}
-            {fields.includes('plannedTime') && <div className={`${styles.reportCell}`}>Planned time</div>}
-            {fields.includes('actualTime') && <div className={`${styles.reportCell}`}>Actual time</div>}
-            {fields.includes('plannedAmount') && <div className={`${styles.reportCell}`}>Planned amount</div>}
-            {fields.includes('actualAmount') && <div className={`${styles.reportCell}`}>Actual amount</div>}
-            {fields.includes('clientName') && <div className={`${styles.reportCell}`}>Client name</div>}
-            {fields.includes('masterName') && <div className={`${styles.reportCell}`}>Master name</div>}
-            {fields.includes('review') && <div className={`${styles.reportCell}`}>Review</div>}
-            {fields.includes('events') && <div className={`${styles.reportCell}`}>Events</div>}
-            {fields.includes('reviewMark') && <div className={`${styles.reportCell}`}>Review</div>}
-            {fields.includes('address') && <div className={`${styles.reportCell}`}>Address</div>}
+            {fields.includes('id') && <div className={`${styles.reportCell}`}>{t('report.id')}</div>}
+            {fields.includes('title') && <div className={`${styles.reportCell}`}>{t('title')}</div>}
+            {fields.includes('plannedTime') && <div className={`${styles.reportCell}`}>{t('reportFilterForm.plannedTime')}</div>}
+            {fields.includes('actualTime') && <div className={`${styles.reportCell}`}>{t('reportFilterForm.actualTime')}</div>}
+            {fields.includes('plannedAmount') && <div className={`${styles.reportCell}`}>{t('reportFilterForm.plannedAmount')}</div>}
+            {fields.includes('actualAmount') && <div className={`${styles.reportCell}`}>{t('reportFilterForm.actualAmount')}</div>}
+            {fields.includes('clientName') && <div className={`${styles.reportCell}`}>{t('reportFilterForm.clientName')}</div>}
+            {fields.includes('masterName') && <div className={`${styles.reportCell}`}>{t('reportFilterForm.masterName')}</div>}
+            {fields.includes('review') && <div className={`${styles.reportCell}`}>{t('review')}</div>}
+            {fields.includes('events') && <div className={`${styles.reportCell}`}>{t('events')}</div>}
+            {fields.includes('reviewMark') && <div className={`${styles.reportCell}`}>{t('review')}</div>}
+            {fields.includes('address') && <div className={`${styles.reportCell}`}>{t('address')}</div>}
           </div>
 
           {list.map((item) => <div className={styles.reportRow}>

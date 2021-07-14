@@ -120,7 +120,7 @@ const SearchTaskMapView = (props: Props) => {
             <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>
             <div className={styles.tasksWrapper} id={'task-search-map-list'}>
               <div className={styles.tasksTobBar}>
-                <div className={styles.tasksAmount}>Tasks: <span>{total}</span></div>
+                <div className={styles.tasksAmount}>{`${t('tasks')}:`} <span>{total}</span></div>
                 <div className={styles.tasksSort}>
                   <span>{t('sort.title')}:</span>
                   <DropDown onChange={handleSortChange} value={sortType} options={[

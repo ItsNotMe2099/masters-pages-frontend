@@ -7,6 +7,7 @@ import {addDays, addHours} from 'date-fns'
 import {getBegin, getBeginNext, getBeginPrevious, getEnd, getEndNext, getEndPrevious} from 'utils/dateFormatters'
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
+import {useTranslation} from 'react-i18next'
 
 const RangeSelector = ({onChange, isActive, label, id}) => {
     console.log("RangeSelector", isActive);
@@ -23,16 +24,17 @@ let ReportDateSelector = (props: Props) => {
   const { showAll, showToday} = props;
   const {value, onChange} = props.input;
   const [range, setRange ]= useState('day')
+  const {i18n, t} = useTranslation('common')
 
   useEffect(() => {
 
   }, [value])
   const ranges = [
-    ...(showAll ? [{key: 'all', label: 'All'}] : []),
-    {key: 'day', label: 'Today'},
-    {key: 'week', label: 'Week'},
-    {key: 'month', label: 'Month'},
-    {key: 'year', label: 'Year'},
+    ...(showAll ? [{key: 'all', label: t('all')}] : []),
+    {key: 'day', label: t('today')},
+    {key: 'week', label: t('week')},
+    {key: 'month', label: t('month')},
+    {key: 'year', label: t('year')},
   ];
   const handleDateChange = (val) => {
     console.log("HandleChange", val)

@@ -5,6 +5,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {saveProfileSearch, saveTaskSearch} from 'components/SavedSearches/actions'
 import SaveProfileSearchForm from 'components/SaveProfileSearchModal/Form'
+import {useTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
@@ -13,6 +14,7 @@ interface Props {
 export default function SaveProfileSearchModal(props: Props) {
   const dispatch = useDispatch();
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
+  const { t } = useTranslation('common');
 
   const formLoading = useSelector((state: IRootState) => state.profileFeedback.formLoading)
   const handleSubmit = (data) => {
@@ -29,7 +31,7 @@ export default function SaveProfileSearchModal(props: Props) {
     >
 
         <div className={styles.innards}>
-          <div className={styles.rate}>Save this filter1?</div>
+          <div className={styles.rate}>{t('saveProfileSearchModal.saveThisFilter')}</div>
           <div className={styles.form}><SaveProfileSearchForm onSubmit={handleSubmit}/></div>
         </div>
     </Modal>

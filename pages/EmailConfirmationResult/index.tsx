@@ -11,6 +11,7 @@ import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "react-i18next";
 import Backgrounds from 'components/Backgrounds'
+
 interface Props {
   user?: any
 }
@@ -30,7 +31,7 @@ const RegistrationPage = (props: Props) => {
     <div className={styles.root}>
 
       <Backgrounds/>
-        <div className={styles.result}>{router.query.result === 'true' ? 'Email confirmed' : 'Email not confirmed'}</div>
+        <div className={styles.result}>{router.query.result === 'true' ? t('emailConfirmation.confirmed') : t('emailConfirmation.notConfirmed')}</div>
     </div>
   )
 }
