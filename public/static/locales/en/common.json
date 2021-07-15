@@ -46,6 +46,11 @@
     "selectSubCategory": "Add one or more sub categories"
   },
   "master": "Master",
+  "reviewNotAvailable": "review not available yet",
+  "recommend": "Reccomend",
+  "share": "Share",
+  "readMore": "Read more",
+  "statistic": "Statistic",
   "tasks": "Tasks",
   "editTask": "Edit task",
   "requiredField": "required field",
@@ -62,6 +67,7 @@
   "hour": "hour",
   "saved": "Saved",
   "hide": "Hide",
+  "budget": "Budget",
   "seeDetails": "See details",
   "decline": "Decline",
   "accept": "Accept",
@@ -131,7 +137,7 @@
   "date": "Date",
   "priceType": "Price type:",
   "pricePerHour": "Price per hour",
-  "perHour": "Rate per hour:",
+  "perHour": "Rate per hour",
   "fixed": "Fixed",
   "availableTasks": "Available tasks",
   "privateTasks": "Private tasks",
@@ -357,6 +363,15 @@
     }
   },
   "task": {
+    "page": {
+      "planned": "Planned",
+      "completed": "Completed",
+      "time": "Time",
+      "charges": "Charges",
+      "expenses": "Expenses",
+      "courier": "Courier",
+      "smallDelivery": "Small delivery"
+    },
     "status": {
       "draft": "Draft",
       "published": "Published",
