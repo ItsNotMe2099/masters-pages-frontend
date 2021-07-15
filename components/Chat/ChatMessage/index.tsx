@@ -22,6 +22,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
 import {useTranslation, withTranslation} from "react-i18next";
 
+
 interface Props {
   message: IChatMessage
   chat: IChat,
@@ -64,19 +65,19 @@ export default function ChatMessage({ message, chat, size }: Props) {
               text = t('chat.message.createdEvent', { profileText })
               break;
             case IEventLogRecordType.StatusChanged:
-              text = `${profileText} changed status to ${message.eventLogRecordData.newStatus}`;
+              text = t('chat.message.changedStatus', { profileText, message })
               break;
             case IEventLogRecordType.DetailesChanged:
-              text = `${profileText} changed event details`;
+              text = t('chat.message.changedEvent', { profileText })
               break;
             case IEventLogRecordType.CommentAdded:
-              text = `${profileText} comment added`;
+              text = t('chat.message.commentAdded', { profileText })
               break;
             case IEventLogRecordType.FileUploaded:
-              text = `${profileText} attached file`;
+              text = t('chat.message.attachedFile', { profileText })
               break;
             case IEventLogRecordType.FeedbackAdded:
-              text = `${profileText} added feedback`;
+              text = t('chat.message.addedFeedback', { profileText })
               break;
 
           }
@@ -87,49 +88,49 @@ export default function ChatMessage({ message, chat, size }: Props) {
       case IChatMessageType.File:
         return [<ChatMessageText size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
       case IChatMessageType.TaskNegotiation:
-        const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? `Task outdated ${message.taskNegotiation.id} ${lastCondition.id}` : null
+        const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? t('chat.message.taskOutdated', { message, lastCondition }) : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {
           if (message.profileId === profile.id) {
             return [<ChatMessageTaskDetails message={message} task={chat.task} showReject={true} showEdit={true}
                                             showHire={true} outDatedText={outDatedText}/>,
-              <ChatMessageText message={'Negotiation started'} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={t('chat.message.negotiationStarted')} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else {
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showEdit={true}/>,
-              <ChatMessageText message={'Negotiation started'} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={t('chat.message.negotiationStarted')} suffixText={t('chat.message.systemMessage')} large={true}/>]
           }
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskOffer) {
           const showHire = false;
           const showEdit = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined)
           const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id;
           const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
-          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? 'accepted' : 'rejected';
+          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
 
-          const youTextStatus = `You ${statusText} an offer`;
-          const youTextNew = `You send task offer`;
-          const fromTextNew = profile.role === 'client' ? 'You send an offer' : 'You receive an offer'
-          const fromTextStatus = `Master ${statusText} your offer`;
+          const youTextStatus = t('chat.message.textStatus', statusText)
+          const youTextNew = t('chat.message.sendTaskOffer')
+          const fromTextNew = profile.role === 'client' ? t('chat.message.sendOffer') : t('chat.message.receiveOffer')
+          const fromTextStatus = t('chat.message.master', statusText)
 
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task offer
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={youTextStatus} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={youTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId !== profile.id && message.profileId !== profile.id) {
             // Somebody sent you task offer
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={fromTextNew} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={fromTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId === profile.id) {
             // You sent new task offer
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={youTextNew} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={youTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId !== profile.id) {
             // Somebody change status ok task offer
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={fromTextStatus} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={fromTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           }
 
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskNegotiation) {
@@ -138,66 +139,66 @@ export default function ChatMessage({ message, chat, size }: Props) {
           const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id;
           const showHire = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role === 'client' && message.taskNegotiation.authorId != profile.id;
           const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
-          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? 'accepted' : 'rejected';
-          const youTextStatus = `You ${statusText}`;
-          const youTextNew = `You send you task negotiation`;
-          const fromTextNew = profile.role === 'client' ? 'New task negotation from master' : 'New task negotation from client'
-          const fromTextStatus = profile.role === 'client' ? `Master ${statusText} your negotiation` : `Client ${statusText} your negotiation`
+          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
+          const youTextStatus = t('chat.message.youStatusText', statusText)
+          const youTextNew = t('chat.message.youSend')
+          const fromTextNew = profile.role === 'client' ? t('chat.message.negotiationFromMaster') : t('chat.message.negotiationFromClient')
+          const fromTextStatus = profile.role === 'client' ? t('chat.message.masterNegotiation', statusText) : t('chat.message.clientNegotiation', statusText)
 
           console.log("showAccept", message.taskNegotiation.id, showAccept, message.taskNegotiation)
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task neogotiation
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={youTextStatus} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={youTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId !== profile.id && message.profileId !== profile.id) {
             // Somebody sent you task negotiation
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={fromTextNew} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={fromTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId === profile.id) {
             // You sent new task negotiation
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={youTextNew} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={youTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId !== profile.id) {
             // Somebody change status ok task negotiation
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
-              <ChatMessageText message={fromTextStatus} suffixText={'System message'} large={true}/>]
+              <ChatMessageText message={fromTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           }
 
         } else if (message.taskNegotiation.type === ITaskNegotiationType.MasterAssigned) {
           return [
-            <ChatMessageText message={profile.role === 'client' ? 'Master assigned to this task' : 'You assigned to this task'} suffixText={'System message'} large={true}/>]
+            <ChatMessageText message={profile.role === 'client' ? t('chat.message.masterAssigned') : t('chat.message.youAssigned')} suffixText={t('chat.message.systemMessage')} large={true}/>]
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskCompleted) {
           return [
-            <ChatMessageText message={'Task completed'} suffixText={'System message'} large={true}/>]
+            <ChatMessageText message={'Task completed'} suffixText={t('chat.message.systemMessage')} large={true}/>]
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskCanceled) {
           return [
-            <ChatMessageText message={'Task canceled'} suffixText={'System message'} large={true}/>]
+            <ChatMessageText message={'Task canceled'} suffixText={t('chat.message.systemMessage')} large={true}/>]
         }else if (message.taskNegotiation.type === ITaskNegotiationType.MarkAsDone) {
-          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? 'accepted' : 'rejected';
+          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
 
-          const youTextStatus = `You ${statusText} mark job as done`;
-          const youTextNew = `You marked job as done`;
-          const fromTextNew = profile.role === 'client' ? 'Master marked task as completed' : 'Client marked task as completed'
-          const fromTextStatus = profile.role === 'client' ? `Master ${statusText} your request to mark as done` : `Client ${statusText} your request to mark as done`
+          const youTextStatus = t('chat.message.markJobAsDone', statusText)
+          const youTextNew = t('chat.message.markedJobAsDone')
+          const fromTextNew = profile.role === 'client' ? t('chat.message.masterMarkedTask') : t('chat.message.clientMarkedTask')
+          const fromTextStatus = profile.role === 'client' ? t('chat.message.masterRequestMark', statusText) : t('chat.message.clientRequestMark', statusText)
 
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task neogotiation
-            return [<ChatMessageText message={youTextStatus} suffixText={'System message'} large={true}/>]
+            return [<ChatMessageText message={youTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId !== profile.id && message.profileId !== profile.id) {
             // Somebody sent you task negotiation
             console.log("lastCondition.id !== message.taskNegotiation.id", lastCondition?.id, message.taskNegotiation.id)
-            return [...(chat.task.status === 'in_progress' && !(['accepted', 'declined'].includes(message.taskNegotiation.state)) ? [<ChatMessageAction message={'Master mark task as completed'} showReject={true} showConfirm={true} onReject={handleTaskMarkAsDoneReject} onConfirm={handleTaskMarkAsDoneConfirm}/>] : []),
-              <ChatMessageText message={fromTextNew} suffixText={'System message'} large={true}/>]
+            return [...(chat.task.status === 'in_progress' && !(['accepted', 'declined'].includes(message.taskNegotiation.state)) ? [<ChatMessageAction message={t('chat.message.masterMarkTask')} showReject={true} showConfirm={true} onReject={handleTaskMarkAsDoneReject} onConfirm={handleTaskMarkAsDoneConfirm}/>] : []),
+              <ChatMessageText message={fromTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId === profile.id) {
             // You sent new task negotiation
-            return [<ChatMessageText message={youTextNew} suffixText={'System message'} large={true}/>]
+            return [<ChatMessageText message={youTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId !== profile.id) {
             // Somebody change status ok task negotiation
-            return [<ChatMessageText message={fromTextStatus} suffixText={'System message'} large={true}/>]
+            return [<ChatMessageText message={fromTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           }
 
         }
