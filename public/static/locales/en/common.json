@@ -640,6 +640,7 @@
   },
   "mainPage": {
     "free": "Освободим вас от забот",
+    "howItWorks": "Here is how it works",
     "find": "Найдите исполнителя под ваши задачи",
     "example": "Example:",
     "petDoctor": "Looking for a pet doctor",
@@ -648,6 +649,73 @@
     "modernBusiness": "Modern business management platform for self-employed professionals",
     "organize": "Organize smooth flow of your business in the most efficient way in one place with MastersPages:",
     "goLive": "We go live in May 2021",
+    "effect": "effect!!!",
+    "helpImpress": "Let MastersPages help impress your customers with ease and delight of doing business with you, while you devote all efforts to unleashing your full creativity. Your vocation is one of the biggest games of your life. With MastersPages you will enjoy this game even more. MastersPages will make sure your successes are recognized and rewarded.",
+    "thrill": "TREAT YOUR BUSINESS WITH A NEW THRILL!",
+    "secondSection": {
+      "firstSlide": {
+        "title": "Advertise and tell the world about yourself – Yourname.MastersPages",
+        "description": "Every diamond shines best in its own ring – every person and every profession requires a tailored approach to make their creativity and skills glow.",
+        "icons": {
+          "text1": "Tell your story or pitch your services in text of video",
+          "text2": "Present your credentials – Education, Professional experiences",
+          "text3": "Brag your achievements – Post pictures, videos of things you made, or services your rendered",
+          "text4": "Let others speak for you - every job you do, every service you render makes someone happy.",
+          "text5": "Give your customers the pleasure of sharing their gratitude.",
+          "text6": "Underwriting – publish verified references and reviews of your works.",
+          "text7": "Set separate page for each of your talents"
+        }
+      },
+      "secondSlide": {
+        "title": "Communicate with your clients in one place – Messages.MastersPages",
+        "description": "Let MastersPages bring order and organization to your business communications with clients. Everything relating to your business is stored in one place. Nothing is omitted or forgotten, any information is one-click-away.",
+        "icons": {
+          "text1": "Use MastersPages to chat and negotiate with your clients in one place",
+          "text2": "Use effective deal closing format, which clearly fixes main features of your engagement and\n' + 'consent of both parties - no chance for ambiguity",
+          "text3": "Report your execution and get confirmations and acceptance",
+          "text4": "Automatically send updates to your faithful customer base",
+          "text5": "Collect your customers feedback and reviews"
+        }
+      },
+      "thirdSlide": {
+        "title": "“Time is money”",
+        "description": "It is impossible to beat this famous quote by Benjamin Franklin, who was known for his productivity and various talents. In his 84 years, he became not only a prominent politician and diplomat, but also an actor, musician, inventor, and satirist. Plan and co-ordinate your work, make time work for you and take full control of the 4th dimension with MastersPages integrated time-management system:",
+        "icons": {
+          "text1": "Co-ordinate your time with your customers",
+          "text2": "Get remainders and impress your customers with your timekeeping",
+          "text3": "Plan ahead of make the most of 24h"
+        }
+      },
+      "fourthSlide": {
+        "title": "Note your jobs – Tasks.MastersPages",
+        "description": "Every job you make changes the Word. It’s worthwhile taking notes of what you’ve done. MastersPages helps navigate in the universe of your tasks and recollect all details:",
+        "icons": {
+          "text1": "Attach files to your jobs – Photos, Videos, documents, budgets, calculations, external links"
+        }
+      },
+      "fifthSlide": {
+        "title": "Organize your records – Reports.MastersPages",
+        "description": "Creativity and Diligence lead to customers and orders. Keeping track or jobs and payments could become messy as success grows. MastersPages remembers every hour you spent, every job you made, every order you delivered. Use MastesPages reporting system to store, retrieve and report your statistics:",
+        "icons": {
+          "text1": "Customized fields",
+          "text2": "Sorted by clients, services, time",
+          "text3": "Retrievable is most popular formats",
+          "text4": "Reporting and statistics made easy"
+        }
+      }
+    },
+    "thirdSection": {
+      "features": {
+        "text1": "Create your account on MastersPages.com (Sign Up)",
+        "text2": "Fill in your Master’s profile / Share your profile link via your advertising efforts (Facebook, Instagram, banners, tap-link, etc)",
+        "text3": "Invite your customers to join your community on MastersPages",
+        "text4": "Plan your tasks or get service requests from your customers",
+        "text5": "Update your profile and Publish your works regularly",
+        "text6": "Collect reviews",
+        "text7": "Get new orders from new customers",
+        "text8": "Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle"
+      }
+    },
     "categories": {
       "tutors": "Tutors",
       "repairman": "Repairman",
