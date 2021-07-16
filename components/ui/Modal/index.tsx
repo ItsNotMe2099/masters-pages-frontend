@@ -38,7 +38,7 @@ export default function Modal(props: Props) {
       margin: 'auto',
       position: 'static',
       inset: '0',
-      overflow: 'scroll',
+      overflow: 'hidden',
       background: 'none'
 
     },
