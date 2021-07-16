@@ -3,6 +3,7 @@ import styles from './index.module.scss'
 import {IProfileGalleryItem, ProfileData} from 'types'
 import {getMediaPath} from 'utils/media'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
+import {useTranslation} from 'react-i18next'
 
 
 interface Props{
@@ -17,14 +18,15 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
   const handleClick = () => {
     onClick(model);
   }
+  const {t} = useTranslation('common');
   return (
     <div className={styles.root}>
       <div className={styles.image}>
         <img src={getMediaPath(model.photo)} onClick={handleClick}/>
         {isEdit && <div className={styles.editActions}>
 
-          <FormActionButton type={'edit'} title={'Edit'} onClick={ () => onEdit(model)}/>
-          <FormActionButton type={'delete'} title={'Delete'} onClick={ () => onDelete(model)}/>
+          <FormActionButton type={'edit'} title={t('edit')} onClick={ () => onEdit(model)}/>
+          <FormActionButton type={'delete'} title={t('delete')} onClick={ () => onDelete(model)}/>
         </div>}
       </div>
       <div className={styles.info}>

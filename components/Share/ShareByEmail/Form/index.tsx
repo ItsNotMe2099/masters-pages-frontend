@@ -11,6 +11,7 @@ import Logo from 'components/Logo'
 import FormError from 'components/ui/Form/FormError'
 import {resetShareByEmail} from 'components/Share/actions'
 const queryString = require('query-string')
+
 interface Props {
    customLink?: string
   subCategoryId?: number,
@@ -39,7 +40,7 @@ let ShareByEmailForm = (props: Props) => {
       <div className={styles.background}><img src={'/img/icons/envelope.svg'}/></div>
     <div className={styles.container}>
       {success && <div className={styles.success}>
-        <div className={styles.successText}>{profile.role === 'client' ? 'Master was invited' : 'Client was invited' }</div>
+        <div className={styles.successText}>{profile.role === 'client' ? t('shareByEmail.masterInvited') : t('shareByEmail.clientInvited') }</div>
         <div className={styles.btnContainer}>
           <Button type={'button'} red size="14px 65px" onClick={handleReset}>{t('shareByEmail.inviteAnother')} {profile.role === 'client' ? 'master' : 'client' }</Button>
         </div>

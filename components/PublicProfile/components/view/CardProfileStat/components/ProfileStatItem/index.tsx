@@ -10,6 +10,7 @@ import ProfileStatItemCard
 import {getCategoryTranslation} from 'utils/translations'
 import {useTranslation} from 'react-i18next'
 
+
 interface Props{
   model: SkillData,
   profile: ProfileData
@@ -26,11 +27,11 @@ const ProfileStatItem = ({model, profile}: Props) => {
         <Button size={'small'} target={''} href={`/sk${model.id}`}>{t('cardProfile.stat.learnMore')}</Button>
       </div>
       <div className={styles.cards}>
-        <ProfileStatItemCard value={model.tasksCount} label={'Works'} icon={'works'}/>
-        <ProfileStatItemCard value={model.likesCount} label={'Likes'} icon={'likes'}/>
-        <ProfileStatItemCard value={model.feedbacksCount} label={'Reviews'} icon={'star'}/>
-        <ProfileStatItemCard value={model.totalHours || 'N/A'} label={'Hours'} icon={'star'}/>
-        <ProfileStatItemCard value={model.rating || 'N/A'} label={'Works'} icon={'star'}/>
+        <ProfileStatItemCard value={model.tasksCount} label={t('works')} icon={'works'}/>
+        <ProfileStatItemCard value={model.likesCount} label={t('likes')} icon={'likes'}/>
+        <ProfileStatItemCard value={model.feedbacksCount} label={t('reviews')} icon={'star'}/>
+        <ProfileStatItemCard value={model.totalHours || 'N/A'} label={t('hours')} icon={'star'}/>
+        <ProfileStatItemCard value={model.rating || 'N/A'} label={t('works')} icon={'star'}/>
       </div>
     </div>
   )

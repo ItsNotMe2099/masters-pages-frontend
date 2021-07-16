@@ -15,6 +15,7 @@ import StateButton from 'components/Calendar/components/EditEventModal/component
 import TimePlaceChargeForm from 'components/Calendar/components/EditEventModal/components/TimePlaceChargeForm'
 import PricingForm from 'components/Calendar/components/EditEventModal/components/PricingForm'
 import EventExpenseForm from 'components/Calendar/components/EventExpenseModal/components/EventExpenseForm'
+import {useTranslation} from 'react-i18next'
 interface Props {
   isOpen: boolean,
   type: 'actual' | 'planned'
@@ -25,6 +26,7 @@ interface Props {
 const EventExpenseModal = ({event, isOpen, onClose, type, onSubmit}: Props) => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('tasks')
+  const {t} = useTranslation('common');
 
 
 
@@ -38,7 +40,7 @@ const EventExpenseModal = ({event, isOpen, onClose, type, onSubmit}: Props) => {
 
 
   return (
-    <Modal isOpen={isOpen} title={'Add new expense'} size={'medium'} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
+    <Modal isOpen={isOpen} title={t('event.addNewExpense')} size={'medium'} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
 
       <div className={styles.body}>
         <EventExpenseForm  onSubmit={handleSubmit} onCancel={handleCancel}/>

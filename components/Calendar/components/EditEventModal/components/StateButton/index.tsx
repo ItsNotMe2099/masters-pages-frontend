@@ -6,6 +6,7 @@ import MarkIcon from 'components/svg/MarkIcon'
 
 import {useSelector} from 'react-redux'
 import {getEventBgColor, getEventBorderColor, getEventColor} from 'utils/event'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   event: IEvent,
@@ -18,6 +19,7 @@ const StateButton = ({event, type}: Props) => {
   const showAuthor = type === currentProfile.role && event.isAuthor || type !== currentProfile.role && !event.isAuthor;
   const isOverdue = event.isOverdue && currentProfile.role !== 'client' && type === 'master'
   const router = useRouter();
+  const {t} = useTranslation('common');
   const handleClick = (e) => {
 
   }
@@ -56,46 +58,46 @@ const StateButton = ({event, type}: Props) => {
   const getTypeName = () => {
     switch (type){
       case 'client':
-        return 'Client'
+        return t('client')
       case 'master':
-        return 'Master';
+        return t('master')
     }
   }
   const getStatusName = () => {
       if(!showAuthor){
         if(event.status === EventStatus.Draft){
-          return 'Draft';
+          return t('draft');
         }
         if([EventStatus.Planned].includes(event.status)){
-          return 'Pending';
+          return t('pending');
         }
         if([EventStatus.Declined].includes(event.status)){
-          return 'Declined';
+          return t('declined');
         }
         if([EventStatus.Confirmed].includes(event.status)){
-           return 'Planned';
+           return t('task.page.planned')
         }
         if(isOverdue){
-          return 'Overdue'
+          return t('overdue')
         }
 
         if([EventStatus.Completed].includes(event.status)){
-          return 'Pending';
+          return t('pending')
         }
 
         if([EventStatus.Approved].includes(event.status)){
-          return 'Finished';
+          return t('finished')
         }
         if([EventStatus.Rejected].includes(event.status)){
-          return 'Rejected';
+          return t('rejected')
         }
         if([EventStatus.Deleted].includes(event.status)){
-          return 'Deleted';
+          return t('deleted')
         }
       }else{
 
         if(event.status === EventStatus.Draft){
-          return 'Draft';
+          return t('draft')
         }
         if([EventStatus.Planned].includes(event.status)){
           return 'Planned';
@@ -107,19 +109,19 @@ const StateButton = ({event, type}: Props) => {
             return 'Planned';
         }
         if(isOverdue){
-          return 'Overdue'
+          return t('overdue')
         }
         if([EventStatus.Completed].includes(event.status)){
-          return 'Completed';
+          return t('task.page.completed')
         }
         if([EventStatus.Approved].includes(event.status)){
-          return 'Finished';
+          return t('finished')
         }
         if([EventStatus.Rejected].includes(event.status)){
-          return 'Rejected';
+          return t('rejected')
         }
         if([EventStatus.Deleted].includes(event.status)){
-          return 'Pending';
+          return t('pending')
         }
       }
   }

@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
 import {useTranslation, Trans} from "react-i18next";
 
+
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -37,7 +38,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
 
   const handleDecline = (e) => {
     dispatch(confirmOpen({
-      description: `Do you want to decline response from ${response.profile?.firstName} ${response.profile?.lastName}?`,
+      description: `${t('takeOfferShow.decline')} ${response.profile?.firstName} ${response.profile?.lastName}?`,
       onConfirm: () => {
         dispatch(taskNegotiationDeclineTaskResponse(response.taskId, response.id))
       },
@@ -48,7 +49,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
   }
   const handleAccept = (e) => {
     dispatch(confirmOpen({
-      description: `Do you want to accept response from ${response.profile?.firstName} ${response.profile?.lastName}?`,
+      description: `${t('takeOfferShow.accept')} ${response.profile?.firstName} ${response.profile?.lastName}?`,
       onConfirm: () => {
         dispatch(taskNegotiationAcceptTaskResponse(response))
       },

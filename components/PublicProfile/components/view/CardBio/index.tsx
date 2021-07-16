@@ -7,6 +7,7 @@ import {useState} from 'react'
 import CardBioForm from 'components/PublicProfile/components/view/CardBio/Form'
 import {hideProfileForm, showProfileForm, updateProfile, updateProfileByForm} from 'components/Profile/actions'
 import Loader from 'components/ui/Loader'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   profile: ProfileData,
@@ -17,6 +18,7 @@ const CardBio = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'bio');
   const {profile,isEdit} = props;
+  const {t} = useTranslation('common');
   const handleEditClick = () => {
     dispatch(showProfileForm( 'bio'));
 
@@ -30,7 +32,7 @@ const CardBio = (props: Props) => {
   }
 
   return (
-    <Card isHidden={!isEdit && !profile.bio?.bio} className={styles.root} isLoading={showForm && formLoading} title={'BIO'} toolbar={isEdit ? [<FormActionButton type={profile.bio?.bio ? 'edit' : 'create'} title={profile.bio?.bio ? 'Edit' : 'Add'} onClick={handleEditClick}/>] : []}>
+    <Card isHidden={!isEdit && !profile.bio?.bio} className={styles.root} isLoading={showForm && formLoading} title={'BIO'} toolbar={isEdit ? [<FormActionButton type={profile.bio?.bio ? t('editSmall') : t('createSmall')} title={profile.bio?.bio ? t('edit') : t('add')} onClick={handleEditClick}/>] : []}>
       {!showForm ? profile.bio?.bio : <CardBioForm onCancel={handleCancel} onSubmit={handleSubmit} initialValues={profile.bio || {}}/>}
       {showForm && formLoading && <div className={styles.loader}><Loader/></div>}
     </Card>

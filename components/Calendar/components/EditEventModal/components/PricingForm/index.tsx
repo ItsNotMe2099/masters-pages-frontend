@@ -10,6 +10,7 @@ import {IEvent} from 'types'
 import {useState} from 'react'
 import {parserNumber, parserPrice} from 'utils/formatters'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   event?: IEvent,
@@ -39,21 +40,22 @@ let PricingForm = (props: Props) => {
       change('actualBudget', parserPrice(value));
     }
   }
+  const {t} = useTranslation('common');
   return (
      <div className={styles.root}>
       <div className={styles.tabs}>
-        <div className={`${styles.tab} ${priceType === 'rate' && styles.tab__active}`}>Hourly</div>
-        <div className={`${styles.tab} ${priceType === 'fixed' && styles.tab__active}`}>Fixed</div>
+        <div className={`${styles.tab} ${priceType === 'rate' && styles.tab__active}`}>{t('hourly')}</div>
+        <div className={`${styles.tab} ${priceType === 'fixed' && styles.tab__active}`}>{t('fixed')}</div>
       </div>
        <div className={styles.columns}>
        <div className={styles.planned}>
-         <div className={styles.header}>Planned</div>
+         <div className={styles.header}>{t('task.page.planned')}</div>
          {priceType === 'rate' && <Field
            name="price"
            component={TimeExpense}
            showIcon={false}
            currency={getCurrencySymbol(event.task?.currency)}
-           label="Start"
+           label={t('start')}
            onChange={handleChangedPricePlanned}
            parse={parseTimeExpense}
            disabled={isPlannedDisabled}
@@ -73,13 +75,13 @@ let PricingForm = (props: Props) => {
        </div>
          <div className={styles.spacer}></div>
        <div className={styles.completed}>
-         <div className={styles.header}>Completed</div>
+         <div className={styles.header}>{t('task.page.completed')}</div>
          {priceType === 'rate' &&<Field
            name="actualPrice"
            component={TimeExpense}
            showIcon={false}
            currency={getCurrencySymbol(event.task?.currency)}
-           label="Start"
+           label={t('start')}
            disabled={isCompletedDisabled}
            parse={parseTimeExpense}
            validate={required}

@@ -24,6 +24,7 @@ import {getCurrencySymbol} from 'data/currency'
 import {useTranslation, withTranslation} from "react-i18next";
 
 
+
 interface Props {
   message: IChatMessage,
   task: ITask,
@@ -42,14 +43,14 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
   const handleReject = () => {
     if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer){
       dispatch(confirmOpen({
-        description: `Are you sure that you want to reject an offer?`,
+        description: t('task.confirmDecline'),
         onConfirm: () => {
           dispatch(taskNegotiationDeclineTaskOffer(message.taskNegotiation));
         }
       }));
     }else{
       dispatch(confirmOpen({
-        description: `Are you sure that you want to reject conditions?`,
+        description: t('chat.rejectConditions'),
         onConfirm: () => {
           dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id));
         }
@@ -61,14 +62,14 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
   const handleAccept = () => {
     if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer) {
       dispatch(confirmOpen({
-        description: `Are you sure that you want to accept an offer?`,
+        description: t('chat.acceptOffer'),
         onConfirm: () => {
           dispatch(taskNegotiationAcceptTaskOffer(message.taskNegotiation));
         }
       }));
     }else{
       dispatch(confirmOpen({
-        description: `Are you sure that you want to accept conditions?`,
+        description: t('chat.acceptConditions'),
         onConfirm: () => {
           dispatch(taskNegotiationAcceptConditions(message.taskNegotiation.id, message.id));
         }
@@ -117,7 +118,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
             className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.ratePerHour}/h`}</div>
         </div>
         <div className={styles.detailsItem}>
-          <div className={styles.detailsLabel}>Dead line:</div>
+          <div className={styles.detailsLabel}>{`${t('deadline')}:`}</div>
           <div
             className={styles.detailsValue}>{message.taskNegotiation.deadline ? format(new Date(message.taskNegotiation.deadline), 'MM/dd/yyyy') : '-'}</div>
         </div>

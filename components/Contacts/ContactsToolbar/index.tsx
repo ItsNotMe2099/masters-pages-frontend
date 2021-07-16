@@ -65,7 +65,7 @@ const ContactsToolbar = (props: Props) => {
 
       </div>
       <div className={`${styles.filter} ${styles.category}`}>
-        <div className={styles.label}>{t('filter.fieldCategory')}:</div>
+        <div className={styles.label}>{t('taskSearch.filter.fieldCategory')}:</div>
         <DropDown onChange={handleCategoryChange} value={category} options={[
         {value: null,  label: 'all'},
         ...categories.map(item => ({ value: item.id,
@@ -75,7 +75,7 @@ const ContactsToolbar = (props: Props) => {
         />
       </div>
       <div className={`${styles.filter} ${styles.subCategory}`}>
-        <div className={styles.label}>{t('filter.fieldSubCategory')}:</div>
+        <div className={styles.label}>{t('taskSearch.filter.fieldSubCategory')}:</div>
         <DropDown onChange={(val) => onSubCategoryChange(val?.value)} value={subCategory} options={[
           {value: null,  label: 'all'},
           ...subCategories.map(item => ({ value: item.id,

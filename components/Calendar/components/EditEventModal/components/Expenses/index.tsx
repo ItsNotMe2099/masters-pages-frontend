@@ -7,6 +7,7 @@ import AddCircleIcon from 'components/svg/AddCircleIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import {eventExpenseActualOpen, eventExpensePlannedOpen} from 'components/Modal/actions'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation} from 'react-i18next'
 interface Props {
   event: IEvent,
   type: 'actual' | 'planned',
@@ -27,6 +28,7 @@ const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBud
   const router = useRouter();
   const currentEventExpenses = useSelector((state: IRootState) => state.event.currentEventExpenses)
   const currentEventActualExpenses = useSelector((state: IRootState) => state.event.currentEventActualExpenses)
+  const {t} = useTranslation('common');
 
   const handleAddExpense = () => {
     if(isDisabled){
@@ -49,7 +51,7 @@ const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBud
   return (
     <div className={`${styles.root}`}>
       <div className={styles.header}>
-        <div className={styles.title}>Expenses</div>
+        <div className={styles.title}>{t('task.page.expenses')}</div>
         <div className={styles.add} onClick={handleAddExpense}><AddCircleIcon/></div>
       </div>
       {items.length > 0 && <div className={styles.items}>
@@ -59,7 +61,7 @@ const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBud
         </div>)}
       </div>}
      <div className={styles.total}>
-        <div className={styles.label}>Total:</div>
+        <div className={styles.label}>{`${t('total')}:`}</div>
         <div className={styles.value}>{getTotalAmount()}{getCurrencySymbol(event.task?.currency)}</div>
       </div>
     </div>

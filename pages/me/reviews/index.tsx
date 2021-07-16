@@ -15,11 +15,13 @@ import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
 import {useTranslation} from 'react-i18next'
 
+
 interface Props {
   t?: (string) => string,
 }
 const TabReviews = (props: Props) => {
-  const options = [{label: 'New first', value: 'New first'}, {label: 'Old first', value: 'Old first'}]
+  const { t } = useTranslation('common');
+  const options = [{label: t('sort.newFirst'), value: 'New first'}, {label: t('sort.oldFirst'), value: 'Old first'}]
   const feedbacks = useSelector((state: IRootState) => state.profileFeedback.list)
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
   const total = useSelector((state: IRootState) => state.profileFeedback.total)
@@ -27,7 +29,6 @@ const TabReviews = (props: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const [load, setLoadMore] = useState(false)
   const dispatch = useDispatch()
-  const { t } = useTranslation('common');
   const limit = 10;
   const handleScrollNext = () => {
     console.log("HandleNext", page)

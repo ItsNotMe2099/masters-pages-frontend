@@ -13,6 +13,7 @@ import FileInput from 'components/ui/Inputs/FilesUploadInput'
 import AvatarInput from 'components/ui/AvatarInput'
 import {useTranslation} from 'react-i18next'
 
+
 let PortfolioForm = (props) => {
   const error = useSelector((state: IRootState) => state.profilePortfolio.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'portfolio')
@@ -43,11 +44,11 @@ let PortfolioForm = (props) => {
         component={SelectInput}
         size={'small'}
         options={[
-          {label: '1 month', value: '1 month'},
-          {label: '2 months', value: '2 months'},
-          {label: '3 months', value:  '3 month'},
-          {label: '4 months', value: '4 months'},
-          {label: '5 months', value: '5 months'},
+          {label: t('portfolio.1 month'), value: '1 month'},
+          {label: t('portfolio.2 month'), value: '2 months'},
+          {label: t('portfolio.3 month'), value:  '3 month'},
+          {label: t('portfolio.4 month'), value: '4 months'},
+          {label: t('portfolio.5 month'), value: '5 months'},
         ]}
         withIcon={false}
         showEmpty={true}

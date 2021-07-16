@@ -22,7 +22,7 @@ const TaskShareModal = ({isOpen}: Props) => {
   }
   return (
     <Modal isOpen={isOpen}  onRequestClose={() => dispatch(modalClose())}>
-      <div>Copy this link: {getHost()}</div>
+      <div>{`${t('copyLink')}:`} {getHost()}</div>
       <div className={styles.buttons}>
         <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={() => dispatch(modalClose())}>{t('cancel')}</Button>
       </div>

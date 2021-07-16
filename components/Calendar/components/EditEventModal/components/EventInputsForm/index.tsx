@@ -6,6 +6,7 @@ import { Field, reduxForm,formValueSelector } from 'redux-form'
 import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import DateTime from 'components/ui/Inputs/DateTime'
 import {differenceInHours, format} from 'date-fns'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   price?: {total: number, rate: number}
@@ -20,6 +21,7 @@ interface Props {
 }
 let EventInputsForm = (props: Props) => {
   const {change, price, actualPrice, end, start, actualEnd, actualStart, isPlannedDisabled, isCompletedDisabled} = props;
+  const {t} = useTranslation('common');
   const handleCurrentStartChange = (value) => {
 
     console.log("handleCurrentStartChange", value);
@@ -62,21 +64,21 @@ let EventInputsForm = (props: Props) => {
   }
   return (
     <>
-      <div className={styles.title}>Event inputs <div className={styles.separator}/>
+      <div className={styles.title}>{t('event.eventInputs')} <div className={styles.separator}/>
         <div className={styles.timezone}>{format(new Date(), 'zzzz')}</div>
       </div>
      <div className={styles.root}>
        <div className={styles.labels}>
-         <div className={styles.label}>Start:</div>
+         <div className={styles.label}>{`${t('start')}:`}</div>
          <div className={styles.verticalSpacer}/>
-         <div className={styles.label}>End:</div>
+         <div className={styles.label}>{`${t('end')}:`}</div>
        </div>
        <div className={styles.planned}>
-         <div className={styles.header}>Planned</div>
+         <div className={styles.header}>{t('task.page.planned')}</div>
          <Field
            name="start"
            component={DateTime}
-           label="Start"
+           label={t('start')}
            showIcon={false}
            disabled={isPlannedDisabled}
            onChange={handleCurrentStartChange}
@@ -89,21 +91,21 @@ let EventInputsForm = (props: Props) => {
            showIcon={false}
            disabled={isPlannedDisabled}
            onChange={handleCurrentEndChange}
-           label="End"
+           label={t('end')}
            validate={required}
          />
 
        </div>
        <div className={styles.spacer}/>
        <div className={styles.completed}>
-         <div className={styles.header}>Completed</div>
+         <div className={styles.header}>{t('task.page.completed')}</div>
          <Field
            name="actualStart"
            component={DateTime}
            showIcon={false}
            disabled={isCompletedDisabled}
            onChange={handleActualStartChange}
-           label="Start"
+           label={t('start')}
            validate={required}
          />
          <div className={styles.verticalSpacer}/>
@@ -113,7 +115,7 @@ let EventInputsForm = (props: Props) => {
            showIcon={false}
            disabled={isCompletedDisabled}
            onChange={handleActualEndChange}
-           label="End"
+           label={t('end')}
            validate={required}
          />
 

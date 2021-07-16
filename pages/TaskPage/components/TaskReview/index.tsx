@@ -50,7 +50,7 @@ let TaskReview = ({task}: Props) => {
         <div className={styles.feedback}><TaskFeedback feedback={otherReview} profile={otherSide}/></div>
       </>}
 
-      {myReview && <div className={styles.feedback}><TaskFeedback title={'Your review'} feedback={myReview} profile={currentProfile}/></div>}
+      {myReview && <div className={styles.feedback}><TaskFeedback title={t('yourReview')} feedback={myReview} profile={currentProfile}/></div>}
       {!myReview && <div className={styles.actions}>
         <Button red={true} size={'12px 40px'} onClick={handleFeedback}>{t('task.feedbackToClient')}</Button>
       </div>}

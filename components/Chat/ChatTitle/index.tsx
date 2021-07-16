@@ -19,6 +19,7 @@ import { IChat, IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskSt
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
+
 interface Props {
   chat: IChat
   onRequestClose?: () => void
@@ -51,7 +52,7 @@ export default function ChatTitle({chat}: Props) {
   }
   const handleCancel = () => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to cancel task?`,
+      description: t('chat.cancelTask'),
       onConfirm: () => {
         dispatch(taskCancel(chat.taskId));
       }

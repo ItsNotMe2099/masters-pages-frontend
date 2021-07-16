@@ -38,6 +38,40 @@
     "phone": "Неправильный формат телефона"
   },
   "master": "Мастер",
+  "yourReview": "Your review",
+  "news": "News",
+  "copyLink": "Copy this link",
+  "works": "Works",
+  "likes": "Likes",
+  "hours": "Hours",
+  "reviewsSmall": "reviews",
+  "addNew": "Add new",
+  "createSmall": "create",
+  "new": "new",
+  "expenseType": "Expense type",
+  "priceAmount": "Price amount",
+  "delete": "Удалить",
+  "saveAsDraft": "Save as Draft",
+  "editResults": "Edit results",
+  "declineAndDelete": "Decline & Delete",
+  "restore": "Restore",
+  "complete": "Complete",
+  "approve": "Approve",
+  "send": "Send",
+  "confirm": "Confirm",
+  "draft": "Draft",
+  "pending": "Pending",
+  "overdue": "Overdue",
+  "finished": "Finished",
+  "rejected": "Rejected",
+  "deleted": "Deleted",
+  "total": "Total",
+  "start": "Start",
+  "end": "End",
+  "lookingAt": "Hello guest you are looking at",
+  "reviewSmall": "review",
+  "profile": "profile",
+  "of": "of",
   "reviewNotAvailable": "review not available yet",
   "recommend": "Reccomend",
   "share": "Share",
@@ -92,6 +126,7 @@
   "orders": "Заказы",
   "all": "All",
   "today": "Today", 
+  "tomorrow": "Tomorrow",
   "addLink": "Add link",
   "uploadPhoto":"Загрузить фото",
   "uploadPhotoOrVideo":"Upload photo or video",
@@ -273,6 +308,24 @@
       }
     },
     "tabSettings": {
+      "change": "Change",
+      "deleteMyAccount": "Delete my profile",
+      "buttonSave": "Save changes",
+      "fieldLanguage": "Language",
+      "fieldPhone": "Phone",
+      "fieldEmail": "Profile email",
+      "fieldNotificationSettings": "Notification settings",
+      "push": "Push",
+      "email": "Email",
+      "deleteMyAccountConfirm": "Do you want to delete your profile?",
+      "notificationSettings": {
+        "messages": "Messages",
+        "newTaskOffer": "Task offer",
+        "newTaskResponse": "Task response",
+        "newFeedback": "New feedback",
+        "taskOfferDeclined": "Task offer declined",
+        "taskResponseDeclined": "Task response declined"
+      }
     }
   },
   "forms": {
@@ -366,9 +419,9 @@
     "confirmCancel": "Вы уверены что хотите отменить задачу",
     "confirmAccept": "Вы уверены что хотите принять предложение",
     "confirmDecline": "Вы уверены что хотите отклонить предложение",
-    "masterList": "Список мастеров"
+    "masterList": "Список мастеров",
+    "lessThen": "Менее чем"
   },
-  "lessThen": "Менее чем",
   "hourly": "Почасовая",
   "deadline": "Дедлайн",
   "loadMore": "Загрузить больше",
@@ -498,7 +551,18 @@
     "eventNumber": "Номер события",
     "eventTitle": "Название события",
     "newEvent": "Новое событие",
-    "createEvent": "Создать событие"
+    "createEvent": "Создать событие",
+    "timePlaceCharge": "Time Place Charge",
+    "chatReview": "Chat & Review",
+    "info": "info",
+    "preEvent": "Pre-event",
+    "postEvent": "Post-event",
+    "enterMessage": "Enter your message",
+    "reviewNotAvailable": "review not available yet",
+    "describeYourExperience": "Describe your work experience with",
+    "submitReview": "Submit review",
+    "eventInputs": "Event inputs",
+    "addNewExpense": "Add new expense"
   },
   "chat": {
     "areYouSure": "Are you sure that you want to reject mark task as done?",
@@ -509,6 +573,10 @@
     "taskAccepted": "Task accepted",
     "taskCanceled": "Task canceled",
     "taskFinished": "Task finished",
+    "rejectConditions": "Are you sure that you want to reject conditions?",
+    "acceptOffer": "Are you sure that you want to accept an offer?",
+    "acceptConditions": "Are you sure that you want to accept conditions?",
+    "cancelTask": "Are you sure that you want to cancel task?",
     "message": {
       "createdEvent": "{{profileText}} created event",
       "changedStatus": "{{profileText}} changed status to {{message.eventLogRecordData.newStatus}}",
@@ -626,6 +694,10 @@
   },
   "mainPage": {
     "free": "Освободим вас от забот",
+    "tasksDone": "+ tasks done",
+    "tasksRequested": "+ tasks requested",
+    "mastersOnWebsite": "+ masters on website",
+    "tasksPerMonth": "+ task done per month",
     "howItWorks": "Here is how it works",
     "find": "Найдите исполнителя под ваши задачи",
     "example": "Example:",
@@ -740,6 +812,11 @@
   "portfolio":{
     "addCategory": "Add category",
     "editCategory": "Edit Category",
+    "1 month": "1 month",
+    "2 month": "2 month",
+    "3 month": "3 month",
+    "4 month": "4 month",
+    "5 month": "5 month",
     "skill": {
       "firstImage": "Add your first image",
       "emptyDescription": "Empty description",
@@ -855,6 +932,8 @@
     "ifYouGot": "If you got this email in error report abuse",
     "trulyYours": "Truly yours, MastersPages team",
     "selfEmployed": "Self-employed business management platform.",
+    "masterInvited": "Master was invited",
+    "clientInvited": "Client was invited",
     "invite": "Invite"
   },
   "split": {
@@ -912,5 +991,38 @@
   },
   "report": {
     "id": "ID"
+  },
+  "meetingForm": {
+    "meetingLink": "Meeting link",
+    "type": "Type",
+    "clientAddress": "Client Address",
+    "masterAddress": "Master Address",
+    "address1": "Address 1",
+    "address2": "Address 2",
+    "city": "City",
+    "state": "State",
+    "zipCode": "Zip code"
+  },
+  "timePlaceChargeForm": {
+    "yourConsent": "You are confirming your consent with completion of event as recorded.  This action can not be undone. Do you want to proceed?",
+    "yourInvitation": "Your invitation will be send to your counterparty. Do you want to proceed?”",
+    "approvalIsFinal": "Approval is final and can not be undone. Do you want to proceed?",
+    "deletionIsFinal": "Deletion is final and can not be undone. Do you want to proceed?",
+    "confirmIsFinal": "Confirm is final and can not be undone. Do you want to proceed?",
+    "declineIsFinal": "Decline is final and can not be undone. Do you want to proceed?"
+  },
+  "savedSearch": {
+    "areYouSure": "Are you sure that you want to delete saved search",
+    "search": "Search"
+  },
+  "taskOfferShow": {
+    "decline": "Do you want to decline response from",
+    "accept": "Do you want to accept response from"
+  },
+  "sharePage": {
+    "shareByEmail": "Share by email",
+    "profileLink": "Profile link",
+    "shareBySocialMedia": "Share by Social media",
+    "personalLabel": "Personal label"
   }
 }

@@ -20,8 +20,8 @@ const LanguageListItem = (props: Props) => {
       <img className={styles.icon} src={`/img/icons/flags/${model}.svg`} alt=''/>
       <div className={styles.name}>{LanguagesList[model]?.name || model}</div>
       {isEdit && <div className={styles.actions}>
-        {onMoveDown && <FormActionButton type={'moveDown'} title={'down'} onClick={() => onMoveDown(model, index)}/>}
-        {onMoveUp && <FormActionButton type={'moveUp'} title={'up'} onClick={() => onMoveUp(model, index)}/>}
+        {onMoveDown && <FormActionButton type={'moveDown'} title={t('down')} onClick={() => onMoveDown(model, index)}/>}
+        {onMoveUp && <FormActionButton type={'moveUp'} title={t('up')} onClick={() => onMoveUp(model, index)}/>}
         <FormActionButton type={'delete'} title={t('task.delete')} onClick={() => props.onDelete(model, index)}/>
       </div>}
     </div>

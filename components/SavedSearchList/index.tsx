@@ -14,6 +14,7 @@ import {setFilterProfileSearch} from 'components/ProfileSearch/actions'
 import BookmarkSvg from 'components/svg/Bookmark'
 import {useTranslation} from 'react-i18next'
 
+
 interface Props {
   type: 'task' | 'profile',
   onChange: (item) => void
@@ -59,7 +60,7 @@ export default function SavedSearchList(props: Props) {
   }
   const handleDelete = (item) => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to delete saved search «${item.name || `Search #${item.id}`}»?`,
+      description: `${t('savedSearch.areYouSure')}«${item.name || `${t('savedSearch.search')} #${item.id}`}»?`,
       onConfirm: () => {
         if (type === 'task') {
           dispatch(deleteSavedTaskSearch(item.id));

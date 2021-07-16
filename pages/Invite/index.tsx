@@ -51,8 +51,8 @@ const InvitePage = (props) => {
 
       <div className={styles.container}>
         <div className={styles.skills}>
-          <Tab isActive={!customLink && !activeSkill} title={`All`} onClick={() => handleCustomLinkClick(null)}/>
-          <Tab isActive={customLink === 'news'} title={`News`} onClick={() => handleCustomLinkClick('news')}/>
+          <Tab isActive={!customLink && !activeSkill} title={t('all')} onClick={() => handleCustomLinkClick(null)}/>
+          <Tab isActive={customLink === 'news'} title={t('news')} onClick={() => handleCustomLinkClick('news')}/>
 
           {skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category, i18n.language).name}/${getCategoryTranslation(skill.subCategory, i18n.language).name}`} onClick={() => handleSkillClick(skill)}/> : null)}
         </div>
