@@ -168,7 +168,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           onFinishS3Put: onFinishFileUpload,
           onProgress: onFileProgress,
           onError: onFileUploadError,
-          signingUrl: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/s3/sign`,
+          signingUrl: `${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/sign`,
           s3path: 'masters-pages/files',
           ...uploadOptions,
         }

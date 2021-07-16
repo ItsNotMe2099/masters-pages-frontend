@@ -6,12 +6,15 @@ import request from "utils/request";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSubCategory } from "./actions";
+import queryString from 'query-string'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
 
 }
 
 export default function CheckboxListSubCategories(props) {
+  const {t, i18n} = useTranslation();
   const dispatch = useDispatch()
   const [options, setOptions] = useState([]);
   useEffect( () => {
@@ -20,8 +23,8 @@ export default function CheckboxListSubCategories(props) {
       setOptions([]);
       return;
     }
-     request({url: `/api/service-category/${props.categoryId}/subcategory?lang=ru`, method: 'GET'})
-       .then((response) => {
+     request({url: `/api/service-category?${queryString.stringify({categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
+      .then((response) => {
          const data = response.data;
          console.log("Response", data)
 

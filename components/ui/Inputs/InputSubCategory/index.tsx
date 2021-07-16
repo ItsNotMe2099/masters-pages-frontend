@@ -26,7 +26,8 @@ export default function InputSubCategory(props) {
   }, [i18n.language])
 
   const getSearchCategory = (search = '') => {
-    return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.input?.value})}`, method: 'GET'})
+    console.log("SearchVal", props.input.value);
+    return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
       .then((response) => {
         const data = response.data;
         console.log("Response", data)

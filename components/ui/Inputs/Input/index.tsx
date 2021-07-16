@@ -35,5 +35,5 @@ export default function Input({children, ...props}: Props) {
   )
 }
 Input.defaultProps = {
-  labelType: 'cross'
+  labelType: 'static'
 }

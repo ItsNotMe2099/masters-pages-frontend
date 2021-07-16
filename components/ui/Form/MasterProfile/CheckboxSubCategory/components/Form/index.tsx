@@ -12,6 +12,7 @@ import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import InputCategory from 'components/ui/Inputs/InputCategory';
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
+import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 const categoryRequired = (value) => {
   return  !value || !value.value ? 'required' : ''
 }
@@ -23,6 +24,8 @@ let FormNewCategory = props => {
   const { handleSubmit } = props
   const [categoryId, setCategoryId] = useState(null);
 
+  const [mainCategoryId, setMainCategoryId] = useState(null);
+
   useEffect(() => {
     const categoryId = props.initialValues?.category?.value
     if(categoryId){
@@ -32,15 +35,25 @@ let FormNewCategory = props => {
 
   return (
     <form className={styles.form} >
-              <Field
-                name="category"
-                component={InputCategory}
-                label="Category"
-                validate={categoryRequired}
-                changeWithValue={true}
-                onChange={(val) => setCategoryId(val.value)}
+      <Field
+        name="mainCategory"
+        component={InputSubCategory}
+        label="Main Category"
+        validate={categoryRequired}
+        changeWithValue={true}
+        onChange={(val) => setMainCategoryId(val.value)}
 
-              />
+      />
+      <Field
+        name="category"
+        component={InputSubCategory}
+        label="Category"
+        validate={categoryRequired}
+        categoryId={mainCategoryId}
+        changeWithValue={true}
+        onChange={(val) => setCategoryId(val.value)}
+
+      />
       <Field
                 name="subCategories"
                 component={CheckboxListSubCategories}

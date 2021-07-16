@@ -131,5 +131,5 @@ BaseInput.defaultProps = {
   withBorder: true,
   transparent: false,
   withPadding: true,
-  size: 'normal'
+  size: 'small'
 }

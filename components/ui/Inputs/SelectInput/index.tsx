@@ -160,7 +160,7 @@ const SelectInput = (props: Props) => {
 };
 
 SelectInput.defaultProps = {
-  labelType: 'placeholder',
+  labelType: 'static',
   onSearchChange: () => {},
   onOpenDropDown: () => {},
   restrictedValues: [],

@@ -56,7 +56,7 @@ export default function CheckboxSubCategory(props) {
   const renderListItem = (category, key) => {
     return  (
       <div className={styles.item}>
-        <div className={styles.title}>{key + 1}. {category.name}: {category.subCategories?.map((item, key) => `${item.name}`).join(', ')}
+        <div className={styles.title}>{key + 1}. {category.mainCategory ? `${category.mainCategory?.name}/` : ''}{category.name}: {category.subCategories?.map((item, key) => `${item.name}`).join(', ')}
         </div>
         <div className={styles.actions}>
           <div className={styles.action} onClick={() => handleEditClick(category,  category.key)}><img src="/img/icons/pencil.svg"/></div>
@@ -66,17 +66,20 @@ export default function CheckboxSubCategory(props) {
     )
   }
   const renderForm = (category, key) => {
+    console.log("renderFormMainCategory", category);
     return (
       <div className={styles.listItemForm}>
       <FormNewCategory form={`newCategory${category.key}`} initialValues={{
-      category: {value: category.id, label: category.name},
+        mainCategory: {value: category?.mainCategory?.id, label:category?. mainCategory?.name},
+
+        category: {value: category.id, label: category.name},
       subCategories: category.subCategories?.map((item) => {
         return {
           value: item.id,
           label: item.name
         }
       })}} onSubmit={(data) => {
-        return handleEdit({id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
+        return handleEdit({mainCategory: {id: data.mainCategory.value, name: data.mainCategory.name} , id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
           return {
             id: item.value,
             name: item.label
@@ -104,4 +107,5 @@ export default function CheckboxSubCategory(props) {
 
   )
 }
+
 

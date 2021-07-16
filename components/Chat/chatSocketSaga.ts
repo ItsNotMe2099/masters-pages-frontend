@@ -9,7 +9,7 @@ import { chatLogout, newChatMessage } from './actions'
 
 
 function connect() {
-  const socket = io(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}`, {
+  const socket = io(`${process.env.NEXT_PUBLIC_API_URL || ''}`, {
     path: '/api/chat-socket',
     reconnection: true,
     reconnectionDelay: 1000,
