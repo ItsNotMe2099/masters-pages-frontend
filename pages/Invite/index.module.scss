@@ -1,0 +1,33 @@
+@import "scss/index";
+
+.container{
+  max-width: 800px;
+  padding-top: 51px;
+  padding-bottom: 50px;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+  @media screen and (max-width: $sm-max){
+    padding: 17px 22px 0 22px;
+}
+
+  @include xll {
+    width: $container-xll
+  }
+}
+.content{
+display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+.skills{
+  margin-bottom: 36px;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

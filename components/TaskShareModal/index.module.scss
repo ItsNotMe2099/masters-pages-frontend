@@ -1,0 +1,67 @@
+.root{
+ padding: 0px 0px 28px 0px;
+}
+.header{
+  position: absolute;
+  top: 0px;
+  left: 33px;
+  display: flex;
+  height: 60px;
+  align-items: center;
+
+}
+.modalClose{
+  top: 20px
+}
+.icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: #F5F5F5;
+  border-radius: 38px;
+}
+.title{
+  margin-left: 12px;
+  font-size: 16px;
+  color: #000000;
+}
+.task{
+  background: #F9F9F9;
+  padding: 28px;
+  border-bottom: 1px solid #E5E5E5;
+  color: #6D718C;
+  margin-top: 60px;
+  text-align: left;
+}
+.taskHeader{
+  display: flex;
+  align-items: center;
+}
+.taskTitle{
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 700;
+  flex: 1;
+}
+.taskExpires{
+  display: flex;
+}
+.taskExpiresLabel{
+  font-size: 13px;
+  font-weight: 400;
+  color: #47495D;
+}
+.taskExpiresValue{
+  font-size: 12px;
+  font-weight: 400;
+  color: #3C4039;
+  margin-left: 12px;
+}
+.taskDescription{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  margin-top: 24px;
+}

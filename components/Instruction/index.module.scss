@@ -1,0 +1,128 @@
+@import "scss/index";
+.root{
+  margin-top: 110px;
+  @media screen and (max-width: $sm-max){
+
+    margin-top: 70px;
+  }
+}
+.title{
+    @include lg{
+        margin-bottom: 123px;
+        font-size: 48px;
+    }
+    font-weight: bold;
+    text-align: center;
+    @media screen and (max-width: $sm-max){
+        font-weight: bold;
+        font-size: 30px;
+        margin-bottom: 49px;
+    }
+}
+
+.images{
+    display: flex;
+    position: relative;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+  }
+}
+
+.texts{
+    display: flex;
+    margin-top: 109px;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+  }
+}
+
+.columnItem{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+        margin: auto;
+    }
+}
+
+.text{
+    color: #000000;
+    @include lg{
+        font-size: 24px;
+        line-height: 29px;
+        flex: 1;
+        margin-top: 109px;
+    }
+    @media screen and (max-width: $sm-max){
+        font-size: 18px;
+        line-height: 22px;
+    }
+    font-weight: bold;
+    text-align: center;
+    &__desc{
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        text-align: center;
+        color: #6D718C;
+        margin-top: 24px;
+        span{
+            color: #369FFF;
+        }
+    }
+}
+
+.icon{
+    margin: auto;
+    @media screen and (max-width: $sm-max){
+        width: 60px;
+        height: 60px;
+        margin: auto auto 19px auto !important;
+    }
+}
+
+.waveLeft {
+    position: absolute;
+    right: 56%;
+    bottom: 70%;
+    width: 20%;
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        margin: 19px 0;
+    }
+}
+
+.waveRight {
+    position: absolute;
+    left: 56%;
+    bottom: 75%;
+    width: 20%;
+    @media screen and (max-width: $sm-max){
+        display: none;
+    }
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        margin: 19px 0;
+    }
+}
+
+.wave {
+    &__mobile{
+        @include lg{
+            display: none;
+        }
+        margin: 19px auto;
+    }
+}
+
+.waveContainer{
+    display: flex;
+}

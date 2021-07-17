@@ -1,0 +1,93 @@
+@import "scss/index";
+.root{
+position: relative;
+}
+
+.dropDown {
+  position: absolute;
+  background: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  //transform: translateY(-20px);
+  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  padding: 16px 25px 16px 0px;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  a{
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+}
+.dropDownActive{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+
+.dropDownTrigger {
+  span{
+    margin: auto 0;
+  }
+  img{
+    width: 24px;
+    height: 24px;
+    margin: auto 0;
+  }
+  padding: 0 16px;
+  text-decoration: none;
+  justify-content: space-between;
+  display: flex;
+  font-size: 14px;
+  color: #000;
+  margin-right: 20px;
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  height: 51px;
+  border-radius: 11px;
+  margin: 0px;
+  font-size: 14px;
+  border: 1px solid #C4C4C4;
+}
+
+.isSelected{
+  position: relative;
+  padding-left: 6px;
+  &:before{
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #27AE60;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    margin-top: -2px;
+    left: 0px
+  }
+}
+
+
+.dropdownTriggerActive{
+  position: relative;
+  font-size: 14px;
+  color: #000000;
+  padding-bottom: 6px;
+}
+
+.isActive{
+  color: #27AE60;
+}
+
+.option{
+  display: flex;
+  flex-direction: column;
+}

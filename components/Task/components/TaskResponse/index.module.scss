@@ -1,0 +1,85 @@
+@import "scss/index";
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 9px 17px;
+  background: #F6F6F6;
+  align-items: center;
+  &:first-child{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  &:last-child{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  &:nth-child(even) {background: #F6F6F6}
+  &:nth-child(odd) {background: #fafafa}
+}
+.time{
+  color: #6D718C;
+  font-weight: 500;
+  font-size: 12px;
+
+}
+.profile{
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  margin-left: 21px;
+}
+.message{
+  margin-left: 15px;
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #C4C4C4;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  padding: 9px 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  img{
+    margin-right: 9px;
+  }
+  margin-right: 44px;
+
+
+}
+.priceDetails{
+  font-weight: 500;
+  font-size: 18px;
+}
+.actions{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.action{
+  background: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 36px;
+  text-align: center;
+  min-width: 120px;
+  border: 1px solid #BFBFBF;
+  border-radius: 10px;
+  color: #000000;
+  cursor: pointer;
+
+  &:first-child {
+    margin-left: 29px;
+    margin-right: 9px;
+  }
+}
+.declined{
+  margin-left: 29px;
+  margin-right: 9px;
+  color: #E4474E;
+  font-size: 14px;
+  font-weight: 500;
+}

@@ -1,0 +1,27 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 13px;
+  &:first-of-type{
+    margin-top: 0px;
+  }
+}
+.name{
+  margin-left: 10px;
+  padding-right: 12px;
+}
+.nameWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  padding-right: 12px;
+}
+.icon{
+  width: 31px;
+  height: 31px;
+  background: #6D718C;
+}
+

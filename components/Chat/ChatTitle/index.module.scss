@@ -1,0 +1,59 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  height: 72px;
+  padding: 0px 19px;
+  background: #f9f9f9;
+  z-index: 3;
+}
+.title{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #47495D;
+  text-decoration: underline;
+  margin-left: 12px;
+  flex: 1;
+}
+.action{
+  border: 2px solid #BABABA;
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 130px;
+  padding: 10px 15px;
+  background: white;
+  color: #BABABA;
+  margin-left: 10px;
+  text-transform: uppercase;
+  &:first-of-type{
+    margin-left: 0px;
+  }
+}
+.actionRed{
+  border-color: #FD5742;
+  color: #FD5742;
+}
+.actionGreen{
+  border-color: #27C60D;
+  color: #27C60D;
+}
+
+
+.status{
+  margin-left: 15px;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  svg{
+    width: 11px;
+    height: 11px;
+    margin-left: 5px;
+    margin-top: -1px;
+  }
+}
+.statusGreen{
+  color: #27C60D;
+}

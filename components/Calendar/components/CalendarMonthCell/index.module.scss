@@ -1,0 +1,19 @@
+@import "scss/index";
+.root{
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 4px;
+}
+.week{
+  font-weight: 700;
+  font-size: 11px;
+  color: #71717A;
+  text-transform: uppercase;
+}
+.day{
+  cursor: pointer;
+  margin-top: 4px;
+  font-weight: 500;
+  font-size: 24px;
+  color: rgba(0,0,0, 0.5);
+}

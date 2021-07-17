@@ -1,0 +1,39 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  margin-top: 28px;
+}
+.filter{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 40px;
+  .label{
+    font-weight: 500;
+    margin-right: 6px;
+  }
+  .value{
+    font-weight: 600;
+  }
+}
+.separator{
+  width: 1px;
+  height: 40px;
+  background: #C4C4C4;
+  margin-left: 40px;
+}
+.search{
+  flex: 1;
+  > div{
+    margin-bottom: 0;
+  }
+}
+.list{
+
+}
+

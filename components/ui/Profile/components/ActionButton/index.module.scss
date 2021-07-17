@@ -1,0 +1,27 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 40px;
+  color: #6D718C;
+  &:hover {
+    font-weight: bold;
+  }
+}
+.button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.title{
+
+}
+.icon{
+  display: flex;
+  margin-left: 8px;
+}

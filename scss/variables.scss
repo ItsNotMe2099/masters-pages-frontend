@@ -1,9 +1,25 @@
 // breakpoints
 $sm-max: 768px;
 $md-min: 769px;
+$md-mid: 1200px;
 $md-max: 1299px;
 $lg-min: 1300px;
 
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+$screen-xll-min: 1400px;
+
 // container
 $container-md: 760px;
-$container-lg: 1164px;
+$container-lg: 1250px;
+$container-xll: 1250px;

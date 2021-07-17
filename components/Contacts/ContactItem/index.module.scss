@@ -1,0 +1,57 @@
+@import "scss/index";
+
+.root{
+  display: table-row;
+  max-width: 100%;
+}
+.profile{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+.info{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+  .name{
+    font-size: 18px;
+    font-weight: 600;
+    color: #343434;
+  }
+}
+
+.rating{
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  .ratingValue{
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+
+  .separator{
+    width: 1px;
+    height: 30px;
+    background: #C4C4C4;
+    margin-left: 30px;
+    margin-right: 40px;
+
+}
+.cell{
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px 0px;
+}
+.actions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 40px;
+
+}
+.action{
+  margin-left: 10px;
+  white-space: nowrap;
+}

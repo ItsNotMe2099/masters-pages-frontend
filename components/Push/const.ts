@@ -1,0 +1,8 @@
+enum ActionTypes {
+  SET_PUSH_TOKEN = 'Push/SET_PUSH_TOKEN',
+  SET_PUSH_TOKEN_REQUEST = 'Push/SET_PUSH_TOKEN_REQUEST',
+  DELETE_DEVICE_REQUEST = 'Push/DELETE_DEVICE_REQUEST',
+
+}
+
+export default ActionTypes

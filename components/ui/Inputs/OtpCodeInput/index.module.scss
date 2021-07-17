@@ -1,0 +1,14 @@
+.root{
+  position: relative;
+  margin-bottom: 20px;
+
+}
+.inputs{
+  display: flex;
+  .input:first-child{
+    margin-left: 0px;
+  }
+}
+.input{
+  margin-left: 16px;
+}

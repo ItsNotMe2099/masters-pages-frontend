@@ -1,0 +1,68 @@
+.root{
+  list-style-type: none;
+  padding-left: 0px;
+  border: 0;
+  position: relative;
+
+}
+.item{
+  font-weight: 600;
+  font-size: 14px;
+  padding-top: 15px;
+  padding-bottom: 12px;
+  color: #050505;
+  display: flex;
+  border-bottom: 1px solid #c4c4c4;
+  .title{
+    flex: 1;
+    padding-right: 12px;
+  }
+}
+
+.actions{
+  display: flex;
+  .action{
+    cursor: pointer;
+    margin-right: 12px;
+    &:first-of-type{
+      margin-right: 22px;
+
+    }
+  }
+}
+
+.listContent{
+  display: flex;
+  a{
+    margin: auto;
+    cursor: pointer;
+    &:first-child{
+      margin-right: 23px;
+    }
+  }
+  div{
+    margin-left: auto;
+    margin-right: 10px;
+  }
+}
+
+.btn{
+  background-color: #F6F6F6;
+  border: 1px solid #ACACAC;
+  color: #000000;
+  font-size: 18px;
+  display: flex;
+  padding: 14px 50px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 55%;
+  justify-content: center;
+}
+.listItemForm{
+  margin-top: 40px;
+}
+.errors{
+  position: relative;
+  margin-top: 10px;
+}

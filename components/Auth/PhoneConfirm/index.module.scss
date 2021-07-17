@@ -1,0 +1,50 @@
+
+.image{
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+
+}
+.title{
+    text-align: center;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 93%;
+    margin-top: 19px;
+}
+
+.text{
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 15px;
+    margin-top: 10px;
+  margin-bottom: 26px;
+}
+
+
+
+.signUp{
+    font-size: 15px;
+    text-align: center;
+    div{
+        display: inline-block;
+        padding-right: 11px;
+        text-decoration: underline;
+        &:last-child{
+            padding: 0;
+        }
+    }
+    a{
+        color: #0091E6;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+.code{
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+

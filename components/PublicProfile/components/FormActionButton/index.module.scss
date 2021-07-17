@@ -1,0 +1,42 @@
+@import "scss/index";
+
+.root {
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  &:hover {
+    .title{
+      color: #000000;
+    }
+    .icon {
+
+        path {
+   //       stroke: #000000;
+        }
+
+    }
+  }
+}
+
+.icon{
+  margin-right: 8px;
+    path{
+    //  stroke: #6D718C;
+    }
+
+}
+.title{
+  margin-top: 0px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #6D718C;
+}

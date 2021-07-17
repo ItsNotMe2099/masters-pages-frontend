@@ -1,0 +1,67 @@
+.root{
+
+  position: relative;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: white;
+  border: 1px solid #DEDEDE;
+  border-radius: 4px;
+}
+.rootDisabled{
+  cursor: not-allowed;
+  background: #FAFAFA;
+  input, .inputText{
+    cursor: not-allowed;
+    opacity: .7;
+  }
+}
+.inputWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+}
+.spacer{
+  flex: 1;
+
+}
+.input{
+  height: 36px;
+  width: 16px;
+  display: inline-block;
+  border: none;
+  padding: 0px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+
+}
+
+.dateRange{
+  position: absolute;
+  z-index: 5;
+  top: 30px;
+  visibility: hidden;
+}
+.dateRangeOpen{
+
+  visibility: visible;
+}
+.timeRange{
+  width: 87px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.separator{
+  width: 1px;
+  background: #C4C4C4;
+  height: 26px;
+  margin: 0px 5px;
+}

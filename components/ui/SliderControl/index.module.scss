@@ -1,0 +1,49 @@
+.root{
+  display: flex;
+  border-radius: 30px;
+  background-color: #ededed;
+  width: 84px;
+  position: absolute;
+  right: 0px;
+  height: 84px;
+  cursor: pointer;
+  img{
+    margin: auto;
+  }
+  &::before{
+    display: none;
+  }
+  &:hover{
+    background-color: #ededed;
+  }
+}
+
+.rootTask{
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  &::before{
+    display: none;
+  }
+}
+
+.next{
+  margin-bottom: 30px;
+  top: 40px;
+  right: -12px;
+}
+.prev{
+  top: 155px;
+  left: auto;
+  right: -12px;
+}
+
+.nextTask{
+  bottom: 50%;
+  right: 0;
+}
+.prevTask{
+  bottom: 50%;
+  left: 0;
+}
+

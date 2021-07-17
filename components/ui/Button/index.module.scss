@@ -1,36 +1,109 @@
 .root{
-    border-radius: 10px;
-    border: 0;
-    cursor: pointer;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.disabled{
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .4;
+    z-index: 1;
+    background: white;
+  }
+}
+.bold{
+  font-weight: 700;
+}
+.smallFont{
+  font-size: 14px;
 }
 
-.largeHeader{
-    padding: 17px 21px 16px 21px;
-    background: #27C60D;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #fff;
+.blue{
+  background-color:  #0D99C6;
 }
 
-.smallHeader{
-    padding: 17px 16px 16px 16px;
+.red{
+  background-color: #FD5742;
 }
 
-.largeInput{
-    padding: 16px 40px 15px 40px;
-    background: #000000;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    color: #fff;
+.green{
+  background-color: #27C60D;
+}
+.black{
+  background-color: #000;
 }
 
-.categoryBtn{
-    padding: 16px 25px 15px 25px;
-    background: #000000;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #fff;
+.white{
+  background-color:  white;
+
+}
+
+.borderGrey{
+  border: 1px solid #7D7D7D;
+  color: #7D7D7D;
+}
+.borderC4{
+  border: 1px solid #c4c4c4;
+  color: #c4c4c4;
+}
+
+.borderLightGrey{
+  border: 1px solid #BFBFBF;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+}
+.borderRed{
+  border: 2px solid #FD5742;
+  color: #FD5742;
+}
+.grey{
+  background-color: #F6F6F6;
+  border: 1px solid #ACACAC;
+  color: #000000;
+}
+.fullWidth{
+  width: 100%;
+}
+.transparent{
+  background-color: transparent;
+}
+
+.lightGrey{
+  background-color: #c6c6c6;
+}
+
+.mediumFont{
+  font-size: 16px;
+}
+
+.largeFont{
+  font-size: 18px;
+}
+
+.closeBtn{
+  width: 18px;
+  height: 18px;
+  background: url('../../../public/img/icons/close.svg');
+}
+.whiteRed{
+  background-color: white;
+  border: 1.3px solid #FD5742;
+  color:#FD5742;
+  height: 55px;
+  padding: 0px 15px;
+  font-weight: 600;
+}
+.uppercase{
+  text-transform: uppercase;
 }

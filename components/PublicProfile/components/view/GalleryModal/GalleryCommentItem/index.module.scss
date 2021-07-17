@@ -1,0 +1,31 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 18px;
+}
+.info{
+flex: 1;
+  margin-left: 10px;
+}
+.infoHeader{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.title{
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+}
+.time{
+  font-weight: 600;
+  font-size: 14px;
+  color: #6D718C;
+  margin-left: 7px;
+}
+.comment{
+  margin-top: 4px;
+  font-size: 14px;
+  color: rgba(0,0,0,.5);
+}

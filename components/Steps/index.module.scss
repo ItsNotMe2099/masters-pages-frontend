@@ -1,0 +1,49 @@
+@import "scss/index";
+
+
+
+.root{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+        margin: auto;
+    }
+}
+
+.text{
+    @include lg{
+        font-size: 24px;
+
+    }
+    @media screen and (max-width: $sm-max){
+        font-size: 18px;
+
+    }
+    font-weight: bold;
+    text-align: center;
+    &__desc{
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        text-align: center;
+        color: #6D718C;
+        margin-top: 24px;
+        span{
+            color: #369FFF;
+        }
+    }
+}
+
+.icon{
+  max-width: 70px;
+    @include lg{
+        margin-bottom: 39px;
+    }
+    @media screen and (max-width: $sm-max){
+        width: 60px;
+        height: 60px;
+        margin: auto auto 19px auto !important;
+    }
+}

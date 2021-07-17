@@ -1,0 +1,19 @@
+@import "scss/index";
+.root{
+  position: relative;
+  background: rgba(215, 215, 215, 0.5);
+  border-radius: 3px;
+  color: #343434;
+  padding: 20px;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  &:hover{
+    background: rgba(215, 215, 215, 0.7);
+  }
+}
+.title{
+  margin-top: 8px;
+}

@@ -1,0 +1,129 @@
+@import "scss/index";
+.root{
+  position: relative;
+
+}
+.dropDown {
+
+  width: 320px;
+  background: #ffffff;
+  position: absolute;
+  top: 37px;
+  right: 0px;
+  opacity: 0;
+  visibility: hidden;
+  //transform: translateY(-20px);
+  //transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+  z-index: 5;
+  max-height: 316px;
+  overflow-y: auto;
+
+
+  border: 1px solid red;
+  border-radius: 3px !important;
+  padding: 0;
+  &.client{
+    background: #D3FFCC;
+    border-color: #27C60D;
+
+    .skill{
+      &:after{
+        background: #27C60D;
+      }
+    }
+  }
+  &.master{
+    background: #fecdc6;
+    border-color: #FF8E80;
+
+    .skill{
+      &:after{
+        background: #FF8E80;
+      }
+    }
+  }
+  &.volunteer{
+    background: #a7daeb;
+    border-color: #22A3CC;
+    .skill{
+      &:after{
+        background: #22A3CC;
+      }
+    }
+  }
+
+}
+.dropDownActive{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+
+}
+
+.dropDownTrigger {
+  background: rgba(253, 87, 66, 0.3);
+  padding: 8px 16px;
+  border: 1px solid #FF8E80;
+  border-radius: 3px;
+  color: #000000;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  &.dropDownTriggerActive{
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+  svg{
+    margin-left: 10px;
+   path {
+     fill: #FF0000;
+   }
+  }
+}
+.skill{
+
+
+
+}
+.skill{
+  display: block;
+  color: #000000;
+  font-size: 14px;
+
+
+  &:hover{
+    text-decoration: underline;
+  }
+  border-radius: 0px;
+  background: none !important;
+  position: relative;
+  padding: 16px;
+  &:after{
+    content: " ";
+    position: absolute;
+    bottom: 0px;
+    width: 80%;
+    left: 10%;
+
+    margin: 0 auto;
+    height: 1px;
+  }
+  &:last-of-type{
+    &:after{
+      display: none;
+    }
+  }
+}
+.arrowActive{
+  margin-left: 6px;
+}
+.arrow{
+  padding-left: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}

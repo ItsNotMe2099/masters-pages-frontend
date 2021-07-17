@@ -1,0 +1,20 @@
+@import "scss/index";
+
+.root {
+  position: relative;
+  width: 100%;
+  @include lg {
+    margin-top: 89px;
+  }
+  @media screen and (max-width: $sm-max) {
+    margin-top: 24px;
+  }
+}
+
+.sliderContainer {
+  width: 93.28%;
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+
+  }
+}

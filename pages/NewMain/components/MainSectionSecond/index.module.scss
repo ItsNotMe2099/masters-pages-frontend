@@ -1,0 +1,124 @@
+@import "scss/index";
+.root{
+  position: relative;
+  padding-bottom: 40px;
+  transition: background 0.5s linear;
+  background-position: center center;
+  background-size: cover;
+}
+.titleContainer{
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @media (max-width: 1400px) {
+    width: 1000px;
+  }
+  @media (max-width: 1280px) {
+    width: 900px;
+  }
+  @media (max-width: 1150px) {
+    width: 760px;
+  }
+  @include xll {
+    width: $container-xll
+  }
+}
+
+.title{
+  font-weight: 800;
+  font-size: 36px;
+  text-transform: uppercase;
+  position: absolute;
+  top: 69px;
+  text-align: center;
+  width: 100%;
+
+}
+.titleWrapper{
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition:left 0.35s linear;
+}
+.titleLast{
+  .titleWrapper {
+    left: 0;
+    transform: translateX(0%);
+  }
+}
+.titleHighlight{
+  color: #FD5742;
+}
+
+
+.dots{
+  margin: 0px 0px 0px 0px;
+  padding: 0;
+  text-align: center;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  list-style: none;
+  :global .slick-active{
+
+    button{
+      width: 16px !important;
+      height: 16px !important;
+      background: white !important;
+      border: 6px solid #FD5742;
+      &::before{
+        opacity: .75 !important;
+        color: black !important;
+      }
+    }
+  }
+  li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    margin: 0 3px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+
+    button{
+      width: 8px;
+      height: 8px;
+      background: #6D718C;
+      border-radius: 50%;
+      border: none;
+      color: transparent;
+      text-indent: -9999px;
+      margin: 0;
+      padding: 0;
+      transition: width 0.1s, height 0.1s;
+      font-size: 0;
+      line-height: 0;
+      display: block;
+      cursor: pointer;
+      outline: none;
+
+      &::before{
+        font-family: 'slick';
+        font-size: 6px;
+        line-height: 20px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        content: '•';
+        text-align: center;
+      }
+    }
+  }
+}

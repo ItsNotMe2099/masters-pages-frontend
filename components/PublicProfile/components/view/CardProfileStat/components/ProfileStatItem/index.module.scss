@@ -1,0 +1,41 @@
+@import "scss/index";
+.root{
+  margin-bottom: 40px;
+  &:last-of-type{
+    margin-bottom: 0px;
+  }
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 0px 30px 0px;
+  border-bottom: 1px solid #C4C4C4;
+}
+.headerLeft{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.category{
+  font-weight: 600;
+  font-size: 18px;
+  color: #343434;
+}
+.subCategory{
+  background: #EFEFEF;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: rgba(0,0,0, 0.7);
+  margin-left: 21px;
+  border-radius: 3px;
+}
+.cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 17px;
+  margin-top: 30px;
+}

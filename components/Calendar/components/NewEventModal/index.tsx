@@ -1,0 +1,71 @@
+import { fetchTaskUserListRequest, resetTaskUserList } from "components/TaskUser/actions";
+
+import Modal from "components/ui/Modal";
+import Tabs from "components/ui/Tabs";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import * as React from "react";
+import {IEvent, IRootState, ITask, SkillData, SkillListItem} from "types";
+import styles from './index.module.scss'
+
+import { useSelector, useDispatch } from 'react-redux'
+import NewEventForm from 'components/Calendar/components/NewEventModal/components/NewEventForm'
+import {createEvent} from 'components/Events/actions'
+interface Props {
+  isOpen: boolean,
+  range?: any,
+  onClose: () => void
+}
+const NewEventModal = ({isOpen, onClose, range}: Props) => {
+  const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState('tasks')
+
+  const formLoading = useSelector((state: IRootState) => state.event.formLoading)
+  const tabs = [
+    { name: 'Available tasks', key: 'tasks' },
+    { name: 'Private task', key: 'newTask' },
+  ];
+  const filter = {
+    status: 'in_progress'
+  }
+  useEffect(() => {
+    console.log("fetchTaskUserListRequest");
+    dispatch(fetchTaskUserListRequest({
+      ...filter,
+      limit: 100,
+      sort: 'createdAt',
+      sortOrder: 'DESC'
+    }));
+    return () => {
+      dispatch(resetTaskUserList());
+    }
+  }, [])
+  const handleChangeTab = (item) => {
+    setActiveTab(item.key);
+  }
+
+  const handleSubmitNewEvent = (data) => {
+    console.log('handleSubmitNewEvent', data)
+    dispatch(createEvent({...data, ...data.timeRange, timezone: format(new Date(), 'XXX')}));
+    // dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
+  }
+  const handleCancel = () => {
+
+  }
+
+
+  return (
+    <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
+      <div className={styles.header}>
+
+        <div className={styles.title}>New Event</div>
+      </div>
+      <div className={styles.body}>
+        <NewEventForm initialValues={{...(range ? {timeRange: range} : {})}} onCancel={handleCancel} onSubmit={handleSubmitNewEvent}/>
+      </div>
+
+    </Modal>
+  )
+}
+
+export default NewEventModal

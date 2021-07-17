@@ -1,0 +1,70 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.image{
+  position: relative;
+  img {
+    cursor: pointer;
+    aspect-ratio: 1;
+    /*
+      "contain" to see full original image with eventual empty space
+      "cover" to fill empty space with truncating
+      "fill" to stretch
+    */
+    object-fit: cover;
+    width: 100%;
+  }
+}
+.editActions{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+.info{
+
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 12px;
+  .details{
+    flex: 1;
+    padding-right: 12px;
+
+    .title{
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    .description{
+      margin-top: 4px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  .stat{
+    display: flex;
+    align-items: center;
+    .statItem{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      &:first-of-type{
+        margin-right: 15px;
+      }
+      img{
+        margin-right: 5px;
+      }
+    }
+  }
+}

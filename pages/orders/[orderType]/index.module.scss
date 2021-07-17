@@ -1,0 +1,33 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.actions{
+  display: flex;
+}
+.tasks{
+  padding: 12px;
+  border: 1px solid  #EDEDED;
+  @media screen and (max-width: $sm-max) {
+    border: 0;
+  }
+}
+
+.desktop{
+  margin-top: 26px;
+  @media screen and (max-width: $sm-max) {
+    display: none;
+  }
+}
+
+.mobile{
+  display: none;
+  @media screen and (max-width: $sm-max) {
+    display: block;
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,141 @@
+@import "scss/index";
+
+.root{
+  margin-top: 70px;
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+    padding: 0px 20px;
+  }
+
+}
+.footerBottom{
+  margin-top: 50px;
+    padding-bottom: 48px;
+    display: flex;
+    align-items: flex-start;
+    @media screen and (max-width: $sm-max){
+      display: block;
+      margin-top: 25px;
+    }
+
+    &__mobile{
+        display: flex;
+        flex-direction: column;
+        margin: auto auto 28px auto;
+        @include lg{
+            display: none;
+        }
+    }
+}
+.menu{
+  flex: 1;
+  display: flex;
+  padding-left: 60px;
+
+  @media screen and (max-width: $sm-max){
+    margin-top: 30px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 30px;
+
+    padding-left: 0px;
+  }
+}
+
+
+.logoContainer{
+  display: flex;
+  align-items: flex-start;
+}
+.logo{
+    display: flex;
+    flex-direction: column;
+    div{
+        margin-top: 13px;
+    }
+  @media screen and (max-width: $sm-max){
+    flex: 1;
+  }
+}
+
+.text{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.links{
+    margin: 0;
+    flex: 1;
+  padding: 0px 60px;
+    @media screen and (max-width: $sm-max){
+        padding: 0;
+    }
+      a{
+        font-size: 14px;
+        @media screen and (max-width: $sm-max){
+            font-size: 12px;
+        }
+        @include lg{
+            font-size: 14px;
+        }
+        font-weight: 500;
+        line-height: 24px;
+        color: #6D718C;
+    }
+}
+
+.social{
+    display: flex;
+
+    align-items: center;
+  a{
+    display: block;
+    flex: 1;
+    margin-left: 30px;
+    &:first-of-type{
+      margin-left: 0px;
+    }
+    svg{
+      fill: #B5B5B5;
+    }
+
+    .whatsapp{
+      &:hover{
+        fill: #28AD00
+      }
+
+    }
+    .telegram{
+      &:hover{
+        fill: #2FA3D6;
+      }
+    }
+    .facebook{
+      &:hover{
+        fill: #385694
+      }
+    }
+    .vk{
+      &:hover{
+        fill: #4F7DB3
+      }
+    }
+  }
+  }
+
+.socialDesktop{
+  display: block;
+  @media screen and (max-width: $sm-max) {
+    display: none;
+  }
+}
+.socialMobile{
+  display: none;
+  align-self: center;
+  @media screen and (max-width: $sm-max) {
+    display: block;
+  }
+}
+
+

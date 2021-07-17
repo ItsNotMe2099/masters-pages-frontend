@@ -1,0 +1,23 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 13px;
+  &:first-of-type{
+    margin-top: 0px;
+  }
+}
+.name{
+  margin-left: 10px;
+}
+.icon{
+  border-radius: 2px;
+  width: 31px;
+  height: 31px;
+  background: #6D718C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

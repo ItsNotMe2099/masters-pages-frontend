@@ -1,0 +1,62 @@
+@import "scss/index";
+
+.container{
+  width: 100%;
+  padding-top: 51px;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+  @media screen and (max-width: $sm-max){
+    padding: 17px 22px 0 22px;
+}
+
+  @include xll {
+    width: $container-xll
+  }
+}
+.stepsContainer{
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
+}
+.steps{
+  padding: 60px 0;
+  margin: -22px -22px 0px -22px;
+  background: #F7F7F7;
+  @media screen and (max-width: $sm-max){
+    padding: 55px 20px 23px;
+    margin: 0px;
+  }
+}
+
+.required{
+  color: #050505;
+  opacity: 0.5;
+  font-size: 14px;
+  margin-bottom: 20px;
+  @media screen and (max-width: $sm-max){
+    text-align: center;
+}
+}
+
+.footer{
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+
+.head{
+  @include lg{
+    display: none;
+  }
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}

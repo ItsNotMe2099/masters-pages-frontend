@@ -1,0 +1,141 @@
+@import "scss/index";
+.root{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+ justify-content: stretch;
+  color: #333333;
+  font-size: 12px;
+  border-radius: 4px;
+  height: 100%;
+ // overflow-y: hidden;
+  position: relative;
+  &__green{
+    background: #6FCF97;
+  }
+  &__red{
+    background: #FFBCBC;
+  }
+
+  &__blue{
+    background: #A8CDFF;
+  }
+  &__grey{
+    background: #BBBBBB;
+  }
+  &__yellow{
+    background: #F2C94C;
+  }
+  &__orange{
+    background: #F2994A;
+  }
+  :global .tooltip-container{
+    --tooltipBackground: rgba(255, 246, 187, 1);
+   padding: 0px;
+    border: none;
+
+  }
+  :global .tooltip-arrow{
+     &::before {
+      border-color: transparent !important;
+    }
+  }
+}
+
+.leftBorder{
+  width: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.border {
+  &__green {
+    background: #219653;
+  }
+
+  &__red {
+    background: #EB5757;
+  }
+
+  &__orange {
+    background: #F2994A;
+  }
+
+  &__yellow {
+    background: #F2C94C;
+  }
+
+  &__blue{
+    background: #2F80ED;
+  }
+
+  &__red {
+    background: #EB5757;
+  }
+
+  &__grey {
+    background: #828282;
+  }
+}
+.wrapper{
+  padding: 6px 4px;
+  overflow-y: hidden;
+}
+.time{
+    text-transform: uppercase;
+  font-weight: 500;
+}
+.title{
+  font-weight: 400;
+
+}
+.task{
+  font-weight: 600;
+  margin-top: 4px;
+
+}
+.author{
+  margin-top: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 26px;
+  padding: 0px 5px;
+  max-width: 100%;
+  overflow: hidden;
+  .avatar{
+    margin-right: 9px;
+
+    svg{
+      margin-top: 2px;
+      width: 12px;
+      height: 12px;
+      path{
+        fill: #FFFFFF;
+      }
+    }
+  }
+}
+.authorName{
+  flex: 1;
+  text-overflow: ellipsis;
+  line-height: 26px;
+  color: #FFFFFF;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.notification{
+  background: #EB5757;
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 11px;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 600;
+
+}

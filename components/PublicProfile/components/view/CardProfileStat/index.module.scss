@@ -1,0 +1,28 @@
+@import "scss/index";
+.root{
+  margin-top: 0px;
+}
+
+
+.panel{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 24px;
+  .tabs{
+    flex: 1;
+    padding-right: 12px;
+
+  }
+}
+.separator{
+  width: 100%;
+  height: 1px;
+  background: #C4C4C4;
+  position: absolute;
+  left: -0px;
+}
+.list{
+  margin-top: 34px;
+
+}

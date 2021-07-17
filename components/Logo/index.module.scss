@@ -1,0 +1,35 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+
+}
+
+.iconDesktop{
+  margin-right: 9px;
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+.iconMobile{
+  margin-right: 9px;
+  display: none;
+  @media screen and (max-width: $sm-max){
+    display: block;
+  }
+}
+
+.logoText{
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 15px;
+  max-width: 59px;
+
+  @media screen and (max-width: $sm-max){
+    font-size: 12px;
+    line-height: 13px;
+  }
+  span{
+    color: #FD5742;
+  }
+}

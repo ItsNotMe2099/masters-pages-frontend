@@ -1,0 +1,10 @@
+@import "scss/index";
+
+
+.list{
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1rem;
+}

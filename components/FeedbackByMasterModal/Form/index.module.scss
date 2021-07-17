@@ -1,0 +1,59 @@
+@import "scss/index";
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.section{
+    display: flex;
+  align-items: center;
+    margin-top: 11px;
+}
+
+.text{
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    flex: 1;
+  text-align: left;
+  padding-right: 15px;
+}
+
+.textArea{
+    margin-top: 26px;
+    div{
+        &:first-child{
+            margin: 0;
+        }
+    }
+    textarea{
+        border: 1px solid #909090;
+    }
+}
+
+.btnContainer{
+    display: flex;
+    margin-top: 24px;
+    justify-content: center;
+    button{
+        font-family: Roboto;
+        border-radius: 6px;
+        @media screen and (max-width: $sm-max){
+            font-size: 12px;
+          }
+        &:first-child{
+            margin-right: 14px;
+    }
+}
+}
+
+.upload{
+    margin-top: 12px;
+    display: flex;
+    div{
+        &:first-child{
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@import "scss/index";
+.root{
+  background: #E5E5E5;
+  color: white;
+}
+
+.container{
+  @include container();
+
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (max-width: $sm-max){
+    padding: 17px 22px 0 22px;
+  }
+
+}
+.leftColumn{
+  min-width: 445px;
+  max-width: 445px;
+}
+.rightColumn{
+  flex: 1;
+  padding-left: 29px;
+}
+.roleClient {
+  color: #27AE60;
+
+}
+.roleMaster{
+  color: #EB5757;
+}
+.roleVolunteer{
+  color: #199AC2;
+}

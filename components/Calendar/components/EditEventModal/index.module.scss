@@ -1,0 +1,37 @@
+.root{
+ padding: 50px 0px 28px 0px;
+}
+.header{
+  position: absolute;
+  top: 0px;
+  left: 33px;
+  display: flex;
+  height: 60px;
+  align-items: center;
+
+}
+.modalClose{
+  top: 20px
+}
+.mainTab{
+  flex: auto !important;
+  &:first-of-type{
+    flex: 1;
+  }
+}
+.nav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #F3F3F3;
+  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
+  padding: 12px;
+  .navTitle{
+    flex: 1;
+  }
+  .navArrow{
+    cursor: pointer;
+    padding: 0px 20px;
+  }
+}

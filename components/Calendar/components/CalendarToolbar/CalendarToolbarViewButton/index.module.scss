@@ -1,0 +1,22 @@
+@import "scss/index";
+.root{
+ font-weight: 500;
+  font-size: 14px;
+  line-height: 28px;
+
+  color: #71717A;
+  cursor: pointer;
+  padding: 0px 16px;
+  &:hover{
+    color: #4F4F4F;
+  }
+}
+.active{
+  background: #DC2626;
+  height: 28px;
+  border-radius: 8px;
+  color: white;
+  &:hover{
+    color: white;
+  }
+}

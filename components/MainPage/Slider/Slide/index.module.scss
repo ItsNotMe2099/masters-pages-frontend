@@ -1,0 +1,22 @@
+.root{
+  padding: 37px 30px 30px 30px;
+  background: #EDEDED;
+  border-radius: 30px;
+  position: relative;
+  height: 198px;
+  margin-right: 25px;
+  width: 278px;
+}
+
+
+.text{
+  float: left;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.image{
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+}

@@ -1,0 +1,139 @@
+@import "scss/index";
+
+.btnContainer {
+  @include lg {
+    margin: auto;
+    width: 257px;
+  }
+  @media screen and (max-width: $sm-max) {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  margin-bottom: 0px;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+  }
+}
+
+.taskData {
+  display: flex;
+  @media screen and (max-width: $sm-max) {
+    flex-direction: column;
+  }
+}
+
+.mainForm {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+  }
+
+  .title__top {
+    @media screen and (max-width: $sm-max) {
+      display: none;
+    }
+  }
+}
+
+.mainComponent {
+  display: flex;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+
+  &__top {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+}
+
+.terms {
+  font-size: 15px;
+  color: #373737;
+  text-align: center;
+
+  a {
+    color: #0091E6;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  input {
+    margin-right: 11px;
+  }
+}
+
+.right {
+  width: 35%;
+}
+
+.stat {
+  background: #FBF8EF;
+  border-radius: 20px;
+  padding: 30px;
+  a {
+    color: #6D718C;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.faq {
+  margin-top: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  align-self: flex-start;
+
+  .title__top {
+    margin-top: 32px;
+    margin-bottom: 15px;
+    margin-left: 30px;
+  }
+
+  @media screen and (max-width: $sm-max) {
+    width: 100%;
+    margin: 38px 0;
+    .title__top {
+      margin: 20px 0;
+      text-align: center;
+    }
+  }
+}
+
+.column {
+  margin-right: 30px;
+  flex: 1;
+  @media screen and (max-width: $sm-max) {
+    margin: 0;
+  }
+}
+
+.taskDesc {
+  margin-right: 30px;
+  @media screen and (max-width: $sm-max) {
+    margin: 0;
+  }
+}
+
+.address {
+  margin-right: 30px;
+  @media screen and (max-width: $sm-max) {
+    margin: 0;
+  }
+
+}

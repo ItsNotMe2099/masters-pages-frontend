@@ -1,0 +1,39 @@
+.root{
+  padding: 15px 20px 0px 20px;
+
+}
+
+.noReview{
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: black;
+  .author{
+    font-weight: 600;
+    margin-right: 8px;
+    text-decoration: underline;
+    &:hover{
+      text-transform: none;
+    }
+
+  }
+  margin-bottom: 20px;
+}
+.reviewTitle{
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: black;
+  .author{
+    font-weight: 600;
+    margin-right: 8px;
+    text-decoration: underline;
+    &:hover{
+      text-transform: none;
+    }
+
+  }
+}
+.yourReview{
+  margin-top: 12px;
+}

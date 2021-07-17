@@ -1,0 +1,10 @@
+@import "scss/index";
+.root{
+  margin-left: -12px;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+

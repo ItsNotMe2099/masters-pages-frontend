@@ -1,0 +1,46 @@
+@import 'scss/mixins.scss';
+
+.root{
+  position: relative;
+  margin-bottom: 20px;
+}
+.flexRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > div{
+    margin-left: 25px;
+    &:first-of-type{
+      margin-left: 0px;
+    }
+  }
+}
+.flexFloat{
+  display: block;
+  &::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+  > div{
+    float: left;
+    margin-right: 25px;
+    &:last-of-type{
+      margin-right: 0px;
+    }
+  }
+}
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+}
+.checkboxContainer{
+  cursor: pointer;
+}
+.checkboxLabel{
+  font-size: 14px;
+  margin-left: 8px;
+}
+.checkboxNoGrid{
+  margin-bottom: 18px;
+}

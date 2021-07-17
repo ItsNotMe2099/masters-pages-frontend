@@ -1,0 +1,41 @@
+import styles from './index.module.scss'
+import {useEffect} from "react";
+import {IRootState} from "../../../types";
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchFeedbacksMainPageRequest} from "../../ProfileFeedback/actions";
+import ReviewMainPage from "../../ReviewMainPage";
+interface Props {}
+
+export default function CommentsSection(props: Props) {
+  const dispatch = useDispatch()
+  const list = useSelector((state: IRootState) => state.profileFeedback.listLatest)
+
+  useEffect(() => {
+    dispatch( fetchFeedbacksMainPageRequest());
+  }, [])
+  return (
+    <div className={styles.root}>
+      <div className={styles.commentBg}></div>
+      <div className={styles.commentContainer}>
+
+        <div className={styles.head}>Reviews</div>
+      <div className={styles.floaters}>
+        <img className={styles.icon} src="/img/icons/posComments.svg" alt=''/>
+        <div className={styles.text}>
+          <div>
+            <div className={styles.percent}>95%</div>
+            <div className={styles.greenText}>положительных<br/>отзывов</div>
+          </div>
+          <div>
+            <div className={styles.normText}>374 189 отзывов оставили клиенты за последние 12 месяцев. Из них 354 608 - положительные</div>
+          </div>
+        </div>
+      </div>
+        {list.map(feedback =>  <ReviewMainPage feedback={feedback}/>)}
+      </div>
+      <div className={styles.orderingContainer}>
+
+      </div>
+    </div>
+  )
+}

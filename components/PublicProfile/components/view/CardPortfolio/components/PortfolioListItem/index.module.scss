@@ -1,0 +1,111 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  margin-top: 30px;
+  color: #6D718C;
+  &:first-of-type{
+    margin-top: 0px;
+  }
+}
+.leftColumn{
+  width: 159px;
+  img{
+    vertical-align: middle;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+.emptyImage{
+  width: 159px;
+  height: 159px;
+  background: #C4C4C4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.centerColumn{
+  flex: 1;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.rightColumn{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #F9F9F9;
+  border-radius: 3px;
+  padding: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  .filesTitle{
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+  }
+}
+
+.leftHeader{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.editActions{
+  display: flex;
+  flex-direction: row;
+}
+.files{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.file{
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6D718C;
+  &:first-of-type{
+    margin-left: 0px;
+  }
+  .fileName{
+    margin-top: 10px;
+  }
+}
+.header{
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .name{
+    margin-top: 2px;
+    font-size: 15px;
+    color: #000000;
+  }
+  .duration{
+    margin-left: 6px;
+    font-size: 14px;
+  }
+}
+.company{
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+}
+.description{
+  margin-top: 8px;
+  line-height: 24px;
+  font-size: 14px;
+}
+.actions{
+  display: flex;
+  margin-top: 8px;
+}
+

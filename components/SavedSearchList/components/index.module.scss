@@ -1,0 +1,37 @@
+@import "scss/index";
+
+.root{
+  float: left;
+   display: flex;
+  align-items: center;
+  background-color: rgba(255,255,255, 0.5);
+ color: rgba(0,0,0,0.7);
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+  margin-right: 16px;
+  padding: 8px;
+  border-radius: 10px;
+  &:hover{
+    background-color: rgba(255,255,255, 1);
+  }
+}
+.name{
+  flex: 1;
+  padding-right: 10px;
+}
+.icon{
+  cursor: pointer;
+  svg{
+    path{
+      stroke: #DA4C4C;
+    }
+  }
+  &:hover{
+    svg{
+      path{
+        stroke: #000000;
+      }
+    }
+  }
+}

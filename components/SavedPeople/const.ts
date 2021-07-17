@@ -1,0 +1,7 @@
+enum ActionTypes {
+  FETCH_SAVED_PEOPLE_REQUEST = 'SavedPeople/FETCH_SAVED_PEOPLE_REQUEST',
+  SAVE_PEOPLE_REQUEST = 'SavedPeople/SAVE_PEOPLE_REQUEST',
+  RESET_SAVED_PEOPLE_LIST = 'SavedPeople/RESET_SAVED_PEOPLE_LIST'
+}
+
+export default ActionTypes

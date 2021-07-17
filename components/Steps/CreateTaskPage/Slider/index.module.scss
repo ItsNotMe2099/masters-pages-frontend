@@ -1,0 +1,150 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+}
+.slides{
+  display: flex;
+  &__mobile{
+    display: none;
+    @media screen and (max-width: $sm-max){
+      display: block;
+    }
+  }
+  @media screen and (max-width: $sm-max){
+    display: none;
+  }
+}
+.slide{
+  flex: 1;
+    display: flex !important;
+    flex-direction: column;
+  align-items: center;
+  text-align: center;
+  img{
+
+  }
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+        margin: auto;
+    }
+}
+.slideTitle{
+  @include lg{
+    font-size: 24px;
+    line-height: 29px;
+  }
+  @media screen and (max-width: $sm-max){
+    font-size: 18px;
+    line-height: 22px;
+  }
+  font-weight: bold;
+  text-align: center;
+}
+.slideDesc{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  color: #6D718C;
+  margin-top: 24px;
+  span{
+    color: #369FFF;
+  }
+}
+.slideIcon{
+    display: flex;
+    align-items: center;
+  @include lg{
+        height: 200px;
+    }
+    @media screen and (max-width: $sm-max){
+        margin-bottom: 30px;
+    }
+}
+
+.waveLeft{
+  position: absolute;
+  right: 56%;
+  bottom: 60%;
+  width: 20%;
+  @media screen and (max-width: $sm-max){
+    display: none;
+}
+}
+
+.waveRight{
+  position: absolute;
+  left: 56%;
+  bottom: 70%;
+  width: 20%;
+  @media screen and (max-width: $sm-max){
+    display: none;
+}
+}
+
+.dots{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: 30px;
+  padding: 0;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  list-style: none;
+  :global .slick-active{
+
+    button{
+      width: 14px !important;
+      height: 14px !important;
+      background: #020202 !important;
+      border: 5px solid #FD5742;
+      &::before{
+        opacity: .75 !important;
+        color: black !important;
+      }
+    }
+  }
+  li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    margin: 0 3px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+
+    button{
+      width: 12px;
+      height: 12px;
+      background: #c4c4c4;
+      border-radius: 50%;
+      border: none;
+      color: transparent;
+      text-indent: -9999px;
+      margin: 0;
+      padding: 0;
+      transition: width 0.1s, height 0.1s;
+      font-size: 0;
+      line-height: 0;
+      display: block;
+      cursor: pointer;
+      outline: none;
+
+      &::before{
+        font-family: 'slick';
+        font-size: 6px;
+        line-height: 20px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        content: '•';
+        text-align: center;
+      }
+    }
+  }
+}

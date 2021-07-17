@@ -1,0 +1,77 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+  flex-direction: column;
+}
+
+.job {
+  display: flex;
+  border-bottom: 1px solid #E6E6E6;
+  padding: 12px 0 8px 17px;
+}
+
+.avatar{
+  border: 2px solid #27C60D;
+  border-radius: 50px;
+  margin-right: 12px;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  @media screen and (max-width: $sm-max){
+    margin-right: 6px;
+  }
+}
+
+.name{
+  font-weight: bold;
+  font-size: 16px;
+  color: #27C60D;
+  margin: auto 12px auto 0;
+  @media screen and (max-width: $sm-max){
+    width: 84px;
+  }
+}
+
+.text{
+  font-size: 16px;
+  color: #000;
+  margin: auto 0;
+  span{
+    font-weight: bold;
+  }
+}
+
+.logo{
+  margin-right: 21px;
+  div{
+    font-size: 11px;
+    color: #000;
+    svg{
+      width: 25px;
+    }
+  }
+}
+
+.top{
+  display: flex;
+  justify-content: space-between;
+  padding: 19px 22px 17px 28px;
+}
+
+.work{
+  font-weight: bold;
+  font-size: 14px;
+  color: #6D718C;
+  text-decoration-line: underline;
+}
+
+.details{
+  font-weight: 500;
+  font-size: 14px;
+  color: #2A2C39;
+  cursor: pointer;
+  span{
+      margin-right: 13px;
+  }
+}

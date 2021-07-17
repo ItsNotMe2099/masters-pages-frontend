@@ -1,14 +1,19 @@
-import styles from './index.module.scss'
-import Header from '../components/layout/Header'
-import BannerSection from '../components/MainPage/BannerSection'
-import Categories from '../components/Categories'
+import NewMain from 'pages/NewMain'
+import {getAuthServerSide} from 'utils/auth'
+import {wrapper} from 'store'
+import request from 'utils/request'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Header/>
-      <BannerSection/>
-      <Categories/>
-    </div>
+const Home = (props) => {
+  return (<NewMain {...props}/>
   )
 }
+export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+  const res = await getAuthServerSide()(ctx as any);
+  if((res as any).props.user){
+    ctx.res.writeHead(302, { Location: "/me" });
+    ctx.res.end();
+    return;
+  }
+
+});
+export default Home

@@ -1,0 +1,405 @@
+{
+  "menu": {
+    "home": "Home",
+    "createTask": "Create a task",
+    "findTask": "Find a task",
+    "masters": "Masters",
+    "volunteers": "Volunteers",
+    "faq": "FAQ",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "reviews": "Review",
+    "calendar": "Calendar",
+    "logout": "Logout",
+    "completeRegistration": "Complete registration",
+    "profile": "Profile",
+    "share": "Share",
+    "invite": "Invite",
+    "order": "Order",
+    "orders": "Orders",
+    "events": "Events",
+    "messages": "Messages",
+    "findOrders": "Find orders",
+    "findClients": "Find clients",
+    "findMaster": "Find Master",
+    "findVolunteer": "Find Volunteer",
+    "posts": "Posts",
+    "news": "News",
+    "subscriptions": "Subscriptions",
+    "account": "Account",
+    "settings": "Settings",
+    "reports": "Reports",
+    "contacts": "Contacts"
+  },
+  "validation": {
+    "email": "Wrong email format",
+    "passwordMatch": "Password does not match",
+    "required": "Field required",
+    "phone": "Wrong phone format",
+    "passwordMinLength8": "Must be 8 characters or more",
+    "birthdate": "Not valid birthdate",
+    "selectSomething": "Select one or more values",
+    "selectCategory": "Add one or more categories",
+    "selectSubCategory": "Add one or more sub categories"
+  },
+  "master": "Master",
+  "volunteer": "Volunteer",
+  "agreeWith": "I am agree with",
+  "termsAndConditions": "terms and conditions",
+  "back": "Back",
+  "auth": {
+    "titleQuick": "Quick Sign in",
+    "signIn": {
+      "title": "Sign in",
+      "fieldLogin": "Phone number",
+      "fieldPassword": "Password",
+      "buttonLogin": "LOG IN",
+      "forgotPassword": "Forgot password?",
+      "dontHaveAccount": "Don’t have an account yet?"
+    },
+    "signUpLink": "Sign Up",
+    "signInLink": "Sign In",
+    "signUp": {
+      "title": "Sign up",
+      "fieldPhone": "Phone",
+      "buttonRegistration": "REGISTRATION",
+      "alreadyHaveAccount": "Don’t have an account yet?"
+    },
+    "phoneConfirm": {
+      "title": "Phone number confirmation:",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat",
+      "buttonConfirm": "CONFIRM",
+      "sendAgain": "Send again",
+      "dontReceiveSms": "Dont receive sms?"
+    },
+    "registrationPage": {
+      "title": "Registration complete",
+      "buttonCompleteRegistration": "COMPLETE REGISTRATION",
+      "fieldFirstName": "First Name",
+      "fieldLastName": "Last Name",
+      "fieldEmail": "Email",
+      "fieldPhone": "Phone",
+      "fieldLocation": "Location*",
+      "fieldPassword": "Password",
+      "fieldPasswordConfirm": "Password again",
+      "logout": "Logout"
+    },
+    "registrationSuccess": {
+      "title": "THANK YOU FOR REGISTRATION",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.",
+      "buttonCreateTask": "CREATE A TASK",
+      "buttonBecomeMaster": "BECOME A MASTER",
+      "buttonBecomeVolunteer": "BECOME A VOLUNTEER",
+      "lookAtTaskList": "Look at task list"
+    },
+    "passwordRecovery": {
+      "title": "Password recovery",
+      "description": "Recover your password by your phone",
+      "fieldPhone": "Phone",
+      "buttonReset": "RESET PASSWORD",
+      "rememberPassword": "Remember password?"
+    },
+    "passwordReset": {
+      "title": "Success",
+      "description": "Enter you new password",
+      "fieldNewPassword": "New password",
+      "fieldNewPasswordConfirm": "Password confirm",
+      "buttonSetNewPassword": "SET NEW PASSWORD"
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "fieldOldPassword": "Old password",
+      "fieldNewPassword": "New password",
+      "fieldNewPasswordConfirm": "Password confirm",
+      "buttonChangePassword": "Change password"
+    },
+    "registrationPhone": {
+      "title": "Phone confirm",
+      "titleChange": "Phone change",
+      "fieldPhone": "Phone number",
+      "fieldPassword": "Your password",
+      "buttonConfirm": "CONFIRM PHONE"
+    }
+  },
+  "personalArea": {
+    "profile": {
+      "hello": "Hello",
+      "youAreIn": "You are in",
+      "modeClient": "Client mode",
+      "modeMaster": "Master mode",
+      "modeVolunteer": "Volunteer mode",
+      "location": "Location",
+      "registered": "Registered",
+      "personalLink": "Personal link",
+      "lookHowPeopleSeeYourAccount": "Look how people see your account",
+      "mobileOrders": "Orders"
+    },
+    "menu": {
+      "profile": "Personal information",
+      "reviews": "Reviews and rating",
+      "orders": "Orders",
+      "messages": "Messages",
+      "saved": "Saved",
+      "settings": "Settings",
+      "portfolio": "My Portfolio",
+      "calendar": "Calendar"
+    },
+    "tabProfile": {
+      "requiredField": "required field",
+      "buttonChangePassword": "Change Password",
+      "fieldFirstName": "First Name",
+      "fieldLastName": "Last Name",
+      "fieldBirthDate": "BOD* MM / DD / YYYY",
+      "fieldZip": "ZIP Code",
+      "fieldAddress": "Address",
+      "fieldAddress2": "Address 2",
+      "fieldCountry": "Country*",
+      "fieldLocation": "Location*",
+      "buttonSave": "Save changes"
+    },
+    "tabOrders": {
+      "menu": {
+        "draft": "Drafts",
+        "published": "Published",
+        "negotiation": "Negotiation",
+        "inProgress": "In Progress",
+        "closed": "Closed",
+        "offers": "Offers",
+        "declined": "Declined",
+        "responses": "Responses",
+        "saved": "Saved"
+      }
+    },
+    "tabFeedback": {
+    },
+    "tabSaved": {
+      "menu": {
+        "people": "People",
+        "search": "Search",
+        "tasks": "Tasks"
+      }
+    },
+    "tabSettings": {
+      "change": "Change",
+      "deleteMyAccount": "Delete my profile",
+      "buttonSave": "Save changes",
+      "fieldLanguage": "Language",
+      "fieldPhone": "Phone",
+      "fieldEmail": "Profile email",
+      "fieldNotificationSettings": "Notification settings",
+      "push": "Push",
+      "email": "Email",
+      "deleteMyAccountConfirm": "Do you want to delete your profile?",
+      "notificationSettings": {
+        "messages": "Messages",
+        "newTaskOffer": "Task offer",
+        "newTaskResponse": "Task response",
+        "newFeedback": "New feedback",
+        "taskOfferDeclined": "Task offer declined",
+        "taskResponseDeclined": "Task response declined"
+      }
+    },
+    "emailChange": {
+      "title": "Change email",
+      "titleSuccess": "Email changes",
+      "fieldEmail": "New Email",
+      "success": "Please check your email inbox for verification.",
+      "buttonConfirm": "CHANGE EMAIL"
+    }
+  },
+  "forms": {
+    "requiredFieldsTip": "required field",
+    "avatarInput": {
+      "uploadYourPhoto": "Upload your photo",
+      "formatAllowed": "Format allowed PNG and JPEG",
+      "minimalSize": "Minimal size",
+      "changePhoto": "Change Photo",
+      "deletePhoto": "Delete Photo"
+    },
+    "fileInput": {
+      "title": "choose photo",
+      "description": "Upload your photo, Format allowed PNG and JPEG"
+    },
+    "radiusOfSearchInput": {
+      "values": {
+        "km": "km",
+        "province": "Province",
+        "country": "Country",
+        "world": "World"
+      }
+    },
+    "executionTypeInput": {
+      "values": {
+        "physical": "Physical",
+        "virtual": "Virtual",
+        "combo": "Combo"
+      }
+    },
+    "priceFilterInput": {
+      "from": "From",
+      "under": "Under",
+      "min": "Min",
+      "max": "Max"
+    },
+    "priceTypeInput": {
+      "values": {
+        "fixed": "Fixed price",
+        "rate": "Rate per hour"
+      }
+    },
+    "selectInput": {
+      "emptyActionText": "Dont use"
+    }
+  },
+  "task": {
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "private": "Private",
+      "inProgress": "In progress",
+      "done": "Done",
+      "canceled": "Canceled"
+    },
+    "readMore": "Read more",
+    "edit": "Edit",
+    "delete": "Delete",
+    "publish": "Publish",
+    "unPublish": "Unpublish",
+    "cancel": "Cancel task",
+    "markAsCompleted": "Mark as completed",
+    "share": "Share",
+    "save": "Save",
+    "saved": "Saved",
+    "feedbackToClient": "Post feedback",
+    "paymentMethod": "Payment method",
+    "paymentMethodBank": "Bank account",
+    "paymentMethodCash": "Cash",
+    "paymentMethodSafeDeal": "Safe deal",
+    "deadline": "Deadline",
+    "fixedPrice": "Fixed price",
+    "acceptTask": "ACCEPT TASK",
+    "messages": "Messages",
+    "decline": "Decline",
+    "accept": "Accept",
+    "youDeclined": "You declined",
+    "loadMore": "Load more",
+    "confirmPublish": "Do you want to publish task",
+    "confirmUnPublish": "Do you want to unpublish task",
+    "confirmDelete": "Do you want to delete task",
+    "confirmCancel": "Are you sure that you want to cancel task",
+    "confirmAccept": "Are you sure that you want to accept an offer",
+    "confirmDecline": "Are you sure that you want to reject an offer",
+    "masterList": "Master list",
+    "lessThen": "less then"
+  },
+  "hourly": "Hourly",
+  "deadline": "Deadline",
+  "loadMore": "Load more",
+  "sort": {
+    "title": "Sort by",
+    "newFirst": "New First",
+    "oldFirst": "Old First",
+    "highestPrice": "Highest price",
+    "lowestPrice": "Lowest price"
+  },
+  "taskResponse": {
+    "declined": "Declined",
+    "decline": "Decline",
+    "messages": "Messages",
+    "accept": "Accept",
+    "confirmDecline": "Do you want to decline response from",
+    "confirmAccept": "Do you want to accept response from"
+  },
+  "createTask": {
+    "stat": "View [{{count}}] suitable Masters",
+    "stepFillUpTaskRequest": "Fill up task request",
+    "stepGetOffers": "Get offers",
+    "stepChooseMaster": "Choose a master",
+    "fieldTitle": "Task title",
+    "fieldMainCategory": "Main category",
+    "fieldCategory": "Category",
+    "fieldLocation": "Location",
+    "fieldSubCategory": "Sub category",
+    "fieldMasterType": "Master or volunteer",
+    "fieldExecutionType": "Execution Type",
+    "fieldDeadline": "Deadline",
+    "fieldAddress": "Address",
+    "fieldDescription": "Task description",
+    "buttonCreateTask": "CREATE TASK",
+    "faq": "FAQ",
+    "successTitle": "Your task created",
+    "priceSelect": {
+      "or": "or",
+      "hourlyTaskTitle": "Hourly task",
+      "fixedPriceTaskTitle": "Fixed price",
+      "fieldRatePerHour": "Rate per hour",
+      "fieldEstimate": "Estimate",
+      "fieldBudget": "Budget"
+    }
+  },
+  "taskSearch": {
+    "tasks": "Tasks",
+    "showOnTheMap": "Show on the map",
+    "filter": {
+      "fieldMainCategory": "Main category",
+      "fieldCategory": "Category",
+      "fieldSubCategory": "Subcategory",
+      "fieldRadiusOfSearch": "Radius of search",
+      "fieldLocation": "Location",
+      "fieldExecutionType": "Execution Type",
+      "fieldClientRating": "Client rating",
+      "fieldPrice": "Price",
+      "fieldKeywords": "Keywords",
+      "more": "More",
+      "less": "Less",
+      "showMoreOptions": "Show more options",
+      "hideMoreOptions": "Hide"
+    },
+    "saveTheSearch": "Save the search",
+    "saveTheSearchConfirm": "Do you want to save current search?",
+    "exactLocationTab": "Exact location",
+    "approximateLocationTab": "Approximate location"
+  },
+  "profileSearch": {
+    "master": "Masters",
+    "client": "clients",
+    "volunteer": "Volunteers",
+    "showOnTheMap": "Show on the map",
+
+    "filter": {
+      "fieldMainCategory": "Main category",
+      "fieldCategory": "Category",
+      "fieldSubCategory": "Subcategory",
+      "fieldRadiusOfSearch": "Radius of search",
+      "fieldLocation": "Location",
+      "fieldExecutionType": "Execution Type",
+      "fieldClientRating": "Client rating",
+      "fieldPrice": "Price",
+      "fieldKeywords": "Keywords",
+      "more": "More",
+      "less": "Less",
+      "showMoreOptions": "Show more options",
+      "hideMoreOptions": "Hide"
+    },
+    "saveTheSearch": "Save the search",
+    "saveTheSearchConfirm": "Do you want to save current search?",
+    "exactLocationTab": "Exact location",
+    "approximateLocationTab": "Approximate location"
+  },
+  "createMasterProfile": {
+
+  },
+  "confirmModal": {
+    "title": "Are you sure?",
+    "buttonConfirm": "Confirm",
+    "buttonCancel": "Cancel"
+  },
+  "contacts": {
+    "menu": {
+      "messages": "Messages",
+      "subscriptions": "News Subscriptions",
+      "saved": "Saved",
+      "recommendations": "Recommendations"
+    }
+  }
+}

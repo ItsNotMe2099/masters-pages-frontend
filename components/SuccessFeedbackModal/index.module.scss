@@ -1,0 +1,39 @@
+@import "scss/index";
+
+.root{
+    padding: 0;
+    @media screen and (max-width: $sm-max){
+        border-radius: 0;
+      }
+}
+
+.innards{
+    display: flex;
+    flex-direction: column;
+    padding-top: 26px;
+    padding-bottom: 34px;
+}
+
+.close{
+    top: 19px;
+    right: 22px;
+}
+
+.text{
+    margin-top: 26px;
+    font-size: 24px;
+    color: #000000;
+    opacity: 0.8;
+    font-family: Roboto;
+}
+
+.btnContainer{
+    display: flex;
+    margin-top: 14px;
+    justify-content: center;
+    button{
+        font-family: Roboto;
+        border-radius: 6px;
+        font-size: 12px;
+}
+}

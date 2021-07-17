@@ -1,0 +1,42 @@
+.root{
+
+}
+.title{
+  margin-bottom: 20px;
+}
+.form{
+  padding: 30px 30px 0px 30px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+}
+.button{
+  height: 38px;
+  text-transform: uppercase;
+  max-width: 200px;
+}
+
+.containerButtons{
+  padding: 20px 28px 0px;
+  text-align: center;
+}
+.title{
+  font-size: 16px;
+  color: #000000;
+
+  .profileName{
+    font-weight: 600;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+.mark{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

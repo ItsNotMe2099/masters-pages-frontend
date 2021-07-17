@@ -1,0 +1,34 @@
+@import "scss/index";
+
+.container{
+  max-width: 800px;
+  padding-top: 51px;
+  padding-bottom: 50px;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+  @media screen and (max-width: $sm-max){
+    padding: 17px 22px 0 22px;
+}
+
+  @include xll {
+    width: $container-xll
+  }
+}
+.content{
+  padding: 25px;
+  border-left: 1px solid rgba(217, 217, 217, 1);
+  border-right: 1px solid rgba(217, 217, 217, 1);
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.skills{
+  margin-bottom: 36px;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

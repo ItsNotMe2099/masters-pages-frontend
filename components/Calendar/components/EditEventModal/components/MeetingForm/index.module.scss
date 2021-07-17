@@ -1,0 +1,112 @@
+.root{
+display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  text-align: left;
+
+}
+.tabs{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  color: #333333;
+  font-weight: 600;
+
+
+}
+.tab{
+  padding: 8px 27px;
+  background: transparent;
+  cursor: pointer;
+
+  &__active {
+    position: relative;
+    background: #FAFAFA;
+    border-top: 1px solid #D6D6D6;
+    border-left: 1px solid #D6D6D6;
+    border-right: 1px solid #D6D6D6;
+    &:before{
+      content: ' ';
+      position: absolute;
+      bottom: -1px;
+      left: 0px;
+      right: 0px;
+      background: #FAFAFA;
+      z-index: 5;
+      height: 1px;
+    }
+  }
+}
+.body{
+  background: #FAFAFA;
+  border: 1px solid #D6D6D6;
+  padding: 20px 19px 23px 19px;
+  > div{
+    &:first-of-type {
+      margin-bottom: 0px;
+    }
+  }
+  textarea{
+    width: 100%;
+
+  }
+}
+
+.addresses{
+  display: flex;
+  flex-direction: row;
+  > div{
+    flex: 1;
+    margin-right: 15px;
+    &:last-of-type{
+      margin-right: 0px;
+    }
+  }
+}
+
+.orSection {
+  position: relative;
+  flex: 1;
+  display: flex;
+  padding-top: 16px;
+  margin-bottom: 16px !important;
+  justify-content: center;
+  width: 100%;
+
+}
+
+.orWrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  flex: 1;
+  &.inModal{
+    position: static;
+  }
+
+
+}
+
+.orText {
+  z-index: 2;
+  background: #FAFAFA;
+  padding: 8px 15px;
+
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(51,51,51, 0.6);
+
+}
+
+.orBorder {
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  margin-top: 2px;
+  background: #C4C4C4;
+  z-index: 1;
+
+
+}

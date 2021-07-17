@@ -1,30 +1,67 @@
+@import "scss/index";
+.root{
+  margin-top: 80px;
+  @media screen and (max-width: $sm-max){
+    margin-top: 42px;
+  }
+}
 .title{
-    margin-top: 80.17px;
-    margin-bottom: 87px;
     font-weight: bold;
-    font-size: 48px;
-    line-height: 58px;
     text-align: center;
+    @include lg{
+        font-size: 48px;
+        line-height: 58px;
+
+        margin-bottom: 87px;
+    }
+    @media screen and (max-width: $sm-max){
+        font-size: 30px;
+        line-height: 36px;
+        margin-bottom: 32px;
+    }
 }
 
-.column{
-    display: flex;
-    margin-bottom: 50px;
+.list{
+
+    @include lg{
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-gap: 2vw;
+    }
+    @media screen and (max-width: $sm-max){
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      > div{
+        margin-top: 10px;
+      }
+    }
+
 }
 
 .columnItem{
     display: flex;
-    width: 25%;
 }
 
 .text{
-    margin: auto 0 auto 30px;
+    margin: auto 70px auto 30px;
 }
 
 .btnContainer{
     display: flex;
-    margin-top: 62px;
-    button{
-        margin:auto
+
+    @include lg{
+        margin: 62px auto auto auto;
     }
+    @media screen and (max-width: $sm-max){
+        margin: 42px auto auto auto;
+    }
+    button{
+        margin: auto
+    }
+}
+
+.wrapper{
+  display: flex;
 }

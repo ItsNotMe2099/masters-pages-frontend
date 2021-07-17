@@ -1,0 +1,52 @@
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #FAFAFA;
+  border: 1px solid #D6D6D6;
+  padding: 10px 19px 23px 19px;
+}
+.title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  text-align: left;
+  margin-bottom: 12px;
+  .separator{
+    width: 1px;
+    height: 11px;
+    background: rgba(196, 196, 196, 1);
+    margin: 0px 14px;
+  }
+}
+.labels{
+  margin-top: 20px;
+  margin-right: 10px;
+  .label{
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 36px;
+  }
+}
+.header{
+  font-weight: 600;
+  font-size: 14px;
+  color: #333333;
+  margin-bottom: 7px;
+}
+.spacer{
+  flex: 1;
+}
+.verticalSpacer{
+  height: 13px;
+}
+.planned{
+
+}
+.completed{
+
+}

@@ -1,0 +1,166 @@
+@import "scss/index";
+
+.btnContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+    @include lg{
+        margin: auto;
+    }
+    @media screen and (max-width: $sm-max){
+        button{
+            width: 100%;
+        }
+    }
+}
+
+.inputContainer{
+    width: 70%;
+}
+
+.container{
+    display: flex;
+    margin-bottom: 63px;
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+  }
+
+}
+.footer{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  @media screen and (max-width: $sm-max){
+    width: 100%;
+  }
+}
+
+.form{
+    display: flex;
+    margin-bottom: 128px;
+    flex-direction: column;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+    }
+}
+
+.separator{
+    border: 1px solid #c4c4c4;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.taskData{
+    display: flex;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+    }
+}
+
+.mainForm{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    @media screen and (max-width: $sm-max){
+        width: 100%;
+    }
+    .title__top{
+        @media screen and (max-width: $sm-max){
+            display: none;
+        }
+}
+}
+
+.mainComponent{
+    display: flex;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+
+    &__top{
+        font-size: 18px;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 32px;
+    }
+}
+
+.terms{
+  display: flex;
+  justify-content: center;
+    margin-bottom: 30px;
+    a{
+        color: #0091E6;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+}
+
+.important{
+    width: 35%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    align-self: flex-start;
+    padding: 40px 30px;
+    background: #FBF8EF;
+    margin-left: 62px;
+    .title__top{
+        margin-top: 32px;
+        margin-bottom: 15px;
+        margin-left: 30px;
+    }
+    @media screen and (max-width: $sm-max){
+        width: 100%;
+        margin: 38px 0;
+        .title__top{
+            margin: 20px 0;
+            text-align: center;
+        }
+    }
+}
+
+.column{
+    margin-right: 22px;
+    flex: 1;
+    @media screen and (max-width: $sm-max){
+        margin: 0;
+    }
+}
+
+.taskDesc{
+    margin-right: 30px;
+    @media screen and (max-width: $sm-max){
+        margin: 0;
+    }
+}
+
+.address{
+    margin-right: 30px;
+    @media screen and (max-width: $sm-max){
+        margin: 0;
+    }
+
+}
+
+.head{
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.text{
+    font-size: 16px;
+    color: #6D718C;
+    margin-bottom: 30px;
+    &__bottom{
+        font-size: 16px;
+        color: #6D718C;
+    }
+}

@@ -1,0 +1,55 @@
+@import "scss/index";
+
+.root{
+    position: relative;
+    @include lg{
+        margin-top: 144px;
+    }
+    @media screen and (max-width: $sm-max){
+        margin-top: 120px;
+    }
+}
+
+.slide{
+    display: flex !important;
+    flex-direction: column;
+  align-items: center;
+  text-align: center;
+    @media screen and (max-width: $sm-max){
+        flex-direction: column;
+        margin: auto;
+    }
+}
+.slideTitle{
+  @include lg{
+    font-size: 24px;
+    line-height: 29px;
+  }
+  @media screen and (max-width: $sm-max){
+    font-size: 18px;
+    line-height: 22px;
+  }
+  font-weight: bold;
+  text-align: center;
+}
+.slideDesc{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  color: #6D718C;
+  margin-top: 24px;
+  span{
+    color: #369FFF;
+  }
+}
+.slideIcon{
+    display: flex;
+    align-items: center;
+  @include lg{
+        height: 200px;
+    }
+    @media screen and (max-width: $sm-max){
+        margin-bottom: 30px;
+    }
+}
