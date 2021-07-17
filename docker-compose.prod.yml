@@ -3,6 +3,8 @@ version: '3'
 networks:
   app:
     driver: bridge
+  nginx-proxy:
+    external: true
 services:
     app:
         build:
@@ -22,6 +24,7 @@ services:
         restart: always
         networks:
           - app
+          - nginx-proxy
         depends_on:
           - app
         environment:
