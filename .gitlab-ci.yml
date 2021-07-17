@@ -33,6 +33,7 @@ build_dev_image:
   only:
     - dev
 
+
 build_prod_image:
   stage: build-docker
   tags:
@@ -43,11 +44,12 @@ build_prod_image:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose -f docker-compose.prod.yml build app
     - docker-compose -f docker-compose.prod.yml push app
-    - docker-compose -f docker-compose.prod.yml build --pull nginx
+    - docker-compose -f docker-compose.prod.yml build  --pull nginx
     - docker-compose -f docker-compose.prod.yml push nginx
-#  when: manual
+  #  when: manual
   only:
     - master
+
 
 deploy_dev:
   stage: deploy
@@ -69,16 +71,12 @@ deploy_prod:
   tags:
     - docker
   script:
-      - apk update
-      - apk add openssh
-      - eval $(ssh-agent -s)
-      - echo "$SSH_PRIVATE_KEY" | ssh-add -
-      - mkdir -p ~/.ssh
-      - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-      - ansible-playbook deploy/deploy.yml -i deploy/production  -e CI_COMMIT_SHA="\"$CI_COMMIT_SHA\"" -e "CI_JOB_TOKEN=$CI_JOB_TOKEN" -e "CI_REGISTRY=$CI_REGISTRY" -e "APP_IMAGE=$IMAGE_TAG_APP" -e "NGINX_IMAGE=$IMAGE_TAG_NGINX" -e "branch=$CI_BUILD_REF_NAME"
-  environment:
-    name: prod
-    url: https://solahealth.ru/
-  when: manual
+    - apk update
+    - apk add openssh
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ansible-playbook deploy/deploy.yml -i deploy/production  -e CI_COMMIT_SHA="\"$CI_COMMIT_SHA\"" -e "CI_JOB_TOKEN=$CI_JOB_TOKEN" -e "CI_REGISTRY=$CI_REGISTRY" -e "APP_IMAGE=$IMAGE_TAG_APP" -e "NGINX_IMAGE=$IMAGE_TAG_NGINX" -e "branch=$CI_BUILD_REF_NAME"
   only:
     - master
