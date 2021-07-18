@@ -7,7 +7,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import {required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 let SaveProfileSearchForm = props => {
   const { handleSubmit } = props

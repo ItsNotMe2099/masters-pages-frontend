@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 import formatDistance from 'date-fns/formatDistance'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props {
   chat: IChat
   isActive?: boolean

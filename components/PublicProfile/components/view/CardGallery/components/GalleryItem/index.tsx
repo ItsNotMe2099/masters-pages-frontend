@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 import {IProfileGalleryItem, ProfileData} from 'types'
 import {getMediaPath} from 'utils/media'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 interface Props{

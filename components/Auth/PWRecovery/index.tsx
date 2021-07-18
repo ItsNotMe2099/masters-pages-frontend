@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import { signInOpen} from 'components/Modal/actions'
 import PWRecovery from "./Form";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   isOpen: boolean

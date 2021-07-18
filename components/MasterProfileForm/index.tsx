@@ -13,12 +13,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 
 let MasterForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
-  const {t} = useTranslation('common');
+  const {t} = useTranslation();
   return (
     <div>
     <form className={styles.form} onSubmit={handleSubmit}>

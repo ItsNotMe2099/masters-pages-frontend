@@ -8,7 +8,7 @@ import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {useWindowWidth} from "@react-hook/window-size";
 import {IRootState} from 'types'
 import {useEffect} from 'react'

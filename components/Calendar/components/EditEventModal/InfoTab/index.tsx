@@ -9,7 +9,7 @@ import {fetchChatEventDialog, fetchChatEventLogDialog} from 'components/Chat/act
 import {useDispatch, useSelector} from 'react-redux'
 import ArrowDown from 'components/svg/ArrowDown'
 import ArrowDownSmall from 'components/svg/ArrowDownSmall'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   event?: IEvent

@@ -6,7 +6,7 @@ import SelectInput from "components/ui/Inputs/SelectInput";
 import { useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 interface Props {
   input?: any,

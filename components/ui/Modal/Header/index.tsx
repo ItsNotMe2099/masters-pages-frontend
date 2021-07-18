@@ -1,7 +1,7 @@
 import Logo from 'components/Logo'
 import styles from './index.module.scss'
 import { useState } from "react";
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 interface Props {
  jobDone?: boolean

@@ -11,7 +11,7 @@ import { ITask, ITaskNegotiation } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import NotificationBadge from "../../../ui/NotificationBadge";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {getCurrencySymbol} from 'data/currency'
 interface Props {
   response: ITaskNegotiation,

@@ -9,7 +9,7 @@ import SalesPitchForm from 'components/PublicProfile/components/view/CardSalesPi
 import {updateSkill, updateSkillByForm} from 'components/Skill/actions'
 import ReactPlayer from 'react-player'
 import {getMediaPath, isMediaImage, isMediaVideo} from 'utils/media'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props{
   profile: ProfileData,
   skill: SkillData

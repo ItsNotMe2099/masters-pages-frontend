@@ -12,7 +12,7 @@ import { parserPrice } from "utils/formatters";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 let InputPriceFilterForm = (props) => {
   const {t} = useTranslation()

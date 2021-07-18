@@ -16,7 +16,7 @@ import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import {parserPrice} from 'utils/formatters'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 interface Props{
   task: ITask
 }

@@ -15,7 +15,7 @@ import StateButton from 'components/Calendar/components/EditEventModal/component
 import TimePlaceChargeForm from 'components/Calendar/components/EditEventModal/components/TimePlaceChargeForm'
 import PricingForm from 'components/Calendar/components/EditEventModal/components/PricingForm'
 import EventExpenseForm from 'components/Calendar/components/EventExpenseModal/components/EventExpenseForm'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props {
   isOpen: boolean,
   type: 'actual' | 'planned'

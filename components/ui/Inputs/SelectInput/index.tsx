@@ -1,13 +1,12 @@
 import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import Input from "components/ui/Inputs/Input";
 import BaseInput from "components/ui/Inputs/Input/components/BaseInput";
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import { I18nContext } from "next-i18next";
+
 import { useContext, useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
 import nextI18 from "i18n";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 interface Props {
   options: [{ value: string, label: string }],

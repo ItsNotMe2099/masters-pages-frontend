@@ -8,7 +8,7 @@ import { Field, reduxForm } from 'redux-form'
 import {profileEmailChangeOpen, registrationPhoneOpen} from "components/Modal/actions";
 import {useState} from "react";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import NotificationsForm from 'pages/me/settings/components/NotificationsForm'
 
 const TabEmailForm = (props) => {

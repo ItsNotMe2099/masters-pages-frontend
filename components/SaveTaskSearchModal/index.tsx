@@ -6,7 +6,7 @@ import SaveTaskSearchForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {saveTaskSearch} from 'components/SavedSearches/actions'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void

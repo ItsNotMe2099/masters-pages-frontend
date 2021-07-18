@@ -13,7 +13,7 @@ import styles from 'components/Portfolio/SkillModal/index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import PostForm from 'components/Post/PostModal/PostForm'
 import {createProfileGallery, resetProfileGalleryForm, updateProfileGallery} from 'components/ProfileGallery/actions'
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 interface Props {
   isOpen: boolean,
   currentEditPost?: IProfileGalleryItem

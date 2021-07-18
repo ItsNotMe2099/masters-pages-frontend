@@ -11,7 +11,7 @@ import {useState} from 'react'
 import TextArea from 'components/ui/Inputs/TextArea'
 import InputAddress from 'components/ui/Inputs/InputAddress'
 import {RadioList} from 'components/ui/Inputs/RadioList'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   event?: IEvent,

@@ -13,7 +13,7 @@ import FileInput from 'components/ui/Inputs/FilesUploadInput'
 import AvatarInput from 'components/ui/AvatarInput'
 import Checkbox from 'components/ui/Inputs/Checkbox'
 import Link from 'next/link'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 let GalleryForm = (props) => {
   const error = useSelector((state: IRootState) => state.profilePortfolio.formError)

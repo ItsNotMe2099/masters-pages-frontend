@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/actions'
 import CardRecommendationsShort from 'components/PublicProfile/components/view/CardRecommendationsShort'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 interface Props{

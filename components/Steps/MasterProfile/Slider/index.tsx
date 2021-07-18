@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import Step from "components/Steps";
 import styles from './index.module.scss'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 export default class SimpleSlider extends Component {
   render() {

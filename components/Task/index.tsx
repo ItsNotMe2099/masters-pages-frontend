@@ -34,7 +34,7 @@ import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskSt
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import StarRating from "../svg/StarRating";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import {getCurrencySymbol} from 'data/currency'
 import {saveTaskRequest} from 'components/SavedTasks/actions'
 

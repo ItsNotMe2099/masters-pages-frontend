@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 import {getCurrencySymbol} from 'data/currency'
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import {parserPrice} from 'utils/formatters'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 let PriceSelectFormMini = props => {
   const { handleSubmit } = props

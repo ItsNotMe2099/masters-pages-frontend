@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import SimpleSlider from './Slider'
-import {useTranslation, withTranslation, Trans} from "react-i18next";
+import {useTranslation, withTranslation, Trans} from "i18n";
 
 interface Props {}
 

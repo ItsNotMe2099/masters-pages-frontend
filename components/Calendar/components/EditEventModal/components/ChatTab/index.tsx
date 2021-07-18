@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {fetchChatEventDialog} from 'components/Chat/actions'
 import Loader from 'components/ui/Loader'
 import EventReview from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   event?: IEvent,

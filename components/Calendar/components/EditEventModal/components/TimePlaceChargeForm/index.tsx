@@ -23,7 +23,7 @@ import {confirmOpen, editEventOpen} from 'components/Modal/actions'
 import MeetingForm from 'components/Calendar/components/EditEventModal/components/MeetingForm'
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 import {getEventPlannedAllowed} from 'utils/event'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 enum ButtonType {

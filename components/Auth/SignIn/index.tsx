@@ -6,7 +6,7 @@ import styles from './index.module.scss'
 import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import {useEffect} from 'react'
 
 interface Props {

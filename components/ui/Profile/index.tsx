@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Slider from "react-slick";
 import { TabSelect } from "./components/TabSelect";
 import BookmarkSvg from 'components/svg/Bookmark'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 interface Props {
   profile: ProfileData,

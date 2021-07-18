@@ -4,7 +4,7 @@ import { required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
 import {IRootState} from 'types'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 import { useSelector, useDispatch, connect } from 'react-redux'
 let AvatarForm = (props) => {
   const { t } = useTranslation('common');

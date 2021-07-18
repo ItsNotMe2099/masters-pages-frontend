@@ -11,7 +11,7 @@ import { maskBirthDate } from "utils/masks";
 import {birthdate, date, required} from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import {useEffect} from 'react'
 
 let TabPersonalForm = (props) => {

@@ -8,7 +8,7 @@ import BannerFooter from './BannerFooter'
 import Logo from 'components/Logo'
 import styles from './index.module.scss'
 import format from 'date-fns/format'
-import {useTranslation, withTranslation, Trans} from "react-i18next";
+import {useTranslation, withTranslation, Trans} from "i18n";
 interface Props {
 }
 

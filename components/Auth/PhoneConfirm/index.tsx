@@ -4,7 +4,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import {useEffect} from 'react'
 
 interface Props {

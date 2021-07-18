@@ -14,7 +14,7 @@ import TaskOfferAcceptModal from "components/TaskNegotiation/TaskOfferAcceptModa
 import TaskOfferModal from "components/TaskNegotiation/TaskOfferModal";
 import TaskOfferShowModal from "components/TaskNegotiation/TaskOfferShow";
 import TaskShareModal from "components/TaskShareModal";
-import { withTranslation } from "react-i18next";
+import { withTranslation } from "i18n";
 import { default as React, useState } from 'react'
 import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'

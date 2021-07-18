@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 let TabOrderForm = props => {
   const { handleSubmit } = props

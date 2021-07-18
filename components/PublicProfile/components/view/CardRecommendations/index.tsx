@@ -12,7 +12,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchProfileRecommendationForProfileList, setPageProfileRecommendation} from 'components/ProfileRecommendations/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData

@@ -6,7 +6,7 @@ import { IRootState, SkillListItem } from "types";
 import { getMediaPath } from "utils/media";
 import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/SkillCategoryHeader/index.module.scss'
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {

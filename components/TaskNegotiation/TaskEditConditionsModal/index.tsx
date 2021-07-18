@@ -14,7 +14,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 interface Props {
   isOpen: boolean,
   onClose: () => void

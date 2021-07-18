@@ -2,7 +2,7 @@ import Button from "components/ui/Button";
 import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 import styles from './index.module.scss'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 interface Props {
   altView?: boolean

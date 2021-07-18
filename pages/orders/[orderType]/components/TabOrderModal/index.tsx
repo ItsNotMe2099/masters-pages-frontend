@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import TabOrderForm from 'pages/orders/[orderType]/components/TabOrderModal/TabOrderForm'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 interface Props {
   isOpen: boolean,
   task: ITask,

@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import {IProfilePreferWorkIn, ProfileData} from 'types'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {LanguagesList} from 'data/languages'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   index: number

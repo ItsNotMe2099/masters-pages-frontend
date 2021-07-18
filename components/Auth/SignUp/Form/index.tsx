@@ -9,7 +9,7 @@ import Link from 'next/link'
 import {phone, required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import * as React from "react";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import SignIn from "../../SignIn/Form";
 
 let SignUp = props => {

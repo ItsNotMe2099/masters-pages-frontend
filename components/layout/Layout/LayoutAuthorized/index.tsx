@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import MenuItem from 'components/layout/Layout/components/MenuItem'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 import {default as React, ReactElement, useEffect, useRef, useState} from 'react'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'

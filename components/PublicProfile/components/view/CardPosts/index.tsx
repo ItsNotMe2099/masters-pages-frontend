@@ -11,7 +11,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import PostList from 'components/Post/PostList'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData,

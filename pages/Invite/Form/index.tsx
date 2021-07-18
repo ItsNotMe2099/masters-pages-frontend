@@ -4,7 +4,7 @@ import { Field, reduxForm,formValueSelector } from 'redux-form'
 import { required } from "utils/validations";
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import Button from 'components/ui/Button'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'

@@ -4,7 +4,7 @@ import MainSectionButton from 'pages/NewMain/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 import {signUpOpen} from 'components/Modal/actions'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 const Label = ({label, index}: {label: string, index: number}) => {
 

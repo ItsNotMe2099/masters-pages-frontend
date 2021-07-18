@@ -9,7 +9,7 @@ import { IRootState, SkillData, SkillListItem } from "types";
 import { getMediaPath } from "utils/media";
 import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/SkillModal/index.module.scss'
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {

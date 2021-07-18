@@ -7,7 +7,7 @@ import { fetchSubCategory, resetSubCategory } from "./actions";
 import {getCategoryTranslation} from 'utils/translations'
 import request from 'utils/request'
 import queryString from  'query-string';
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props {
 
 }

@@ -10,7 +10,7 @@ import Loader from 'components/ui/Loader'
 import {useEffect} from 'react'
 import EventFeedback
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventFeedback'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props {
   event?: IEvent
 }

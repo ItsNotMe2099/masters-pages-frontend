@@ -6,7 +6,7 @@ import MarkIcon from 'components/svg/MarkIcon'
 
 import {useSelector} from 'react-redux'
 import {getEventBgColor, getEventBorderColor, getEventColor} from 'utils/event'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   event: IEvent,

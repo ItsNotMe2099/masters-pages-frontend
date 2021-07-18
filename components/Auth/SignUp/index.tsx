@@ -8,7 +8,7 @@ import Link from 'next/link'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInOpen} from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   isOpen?: boolean

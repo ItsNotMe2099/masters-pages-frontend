@@ -6,7 +6,7 @@ import Loader from 'components/ui/Loader'
 import { useSelector, useDispatch } from 'react-redux'
 import {createProfileTab} from 'components/ProfileTab/actions'
 import {showProfileForm} from 'components/Profile/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props{
   isAll?: boolean
   isNew?: boolean

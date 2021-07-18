@@ -16,7 +16,7 @@ import Loader from "components/ui/Loader";
 import {deleteProfile} from "components/Profile/actions";
 import RegistrationPhone from "components/Auth/RegistrationPhone";
 import RegistrationPhoneConfirm from "components/Auth/RegistrationPhoneConfirm";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
 import TabSettingsForm from 'pages/me/settings/components/TabSettingsForm'

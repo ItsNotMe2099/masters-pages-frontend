@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import SimpleSlider from 'components/Steps/MasterProfile/Slider'
 import MasterForm from 'components/MasterProfileForm'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()

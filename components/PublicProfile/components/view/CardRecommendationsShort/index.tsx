@@ -12,7 +12,7 @@ import ReviewShortListItem
 import RecommendationListItemShort
   from 'components/PublicProfile/components/view/CardRecommendationsShort/components/RecommendationListItemShort'
 import {fetchProfileRecommendationShortList} from 'components/ProfileRecommendations/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData,

@@ -16,7 +16,7 @@ import Cookies from 'js-cookie'
 import nextId from "react-id-generator";
 import { useDispatch} from 'react-redux'
 import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 const transformFile = file => {
   if (!(file instanceof File)) {

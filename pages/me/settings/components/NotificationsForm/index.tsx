@@ -2,7 +2,7 @@ import Input from "components/ui/Inputs/Input";
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 
 import styles from './index.module.scss'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import Checkbox from "components/ui/Inputs/Checkbox";
 import * as React from "react";
 

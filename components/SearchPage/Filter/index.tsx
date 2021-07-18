@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from "types";
 import styles from './index.module.scss'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import SavedSearchList from 'components/SavedSearchList'
 const queryString = require('query-string')
 interface Props {

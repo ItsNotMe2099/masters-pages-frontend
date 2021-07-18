@@ -10,7 +10,7 @@ import { IRootState } from "types";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from 'components/Portfolio/CategoryForm/index.module.scss'
 import { Field, reduxForm } from 'redux-form'
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 
 let CategoryForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)

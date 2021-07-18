@@ -17,7 +17,7 @@ import {
   setSearchStatFilter
 } from "../../components/ProfileSearch/actions";
 import {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 

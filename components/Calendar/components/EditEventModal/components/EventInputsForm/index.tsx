@@ -6,7 +6,7 @@ import { Field, reduxForm,formValueSelector } from 'redux-form'
 import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import DateTime from 'components/ui/Inputs/DateTime'
 import {differenceInHours, format} from 'date-fns'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   price?: {total: number, rate: number}

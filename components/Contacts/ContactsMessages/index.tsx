@@ -7,7 +7,7 @@ import {IRootState, ITask, ProfileData} from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from "components/TabSelect";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import ContactItem from 'components/Contacts/ContactItem'
 import { fetchSavedPeopleRequest, resetSavedPeopleList} from 'components/SavedPeople/actions'
 import ContactsToolbar from 'components/Contacts/ContactsToolbar'

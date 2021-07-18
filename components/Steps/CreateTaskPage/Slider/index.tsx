@@ -3,7 +3,7 @@ import SliderControl from "components/ui/SliderControl";
 import React, { Component } from "react";
 import Slider from "react-slick";
 import styles from './index.module.scss'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 const SimpleSlider = () => {
   const {t} = useTranslation();

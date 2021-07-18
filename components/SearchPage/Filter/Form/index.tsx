@@ -9,7 +9,7 @@ import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 import {useWindowWidth} from "@react-hook/window-size";
 import Input from "../../../ui/Inputs/Input";
 import * as React from "react";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {IRootState} from 'types'
 import {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'

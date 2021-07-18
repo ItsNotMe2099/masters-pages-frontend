@@ -5,7 +5,7 @@ import Modals from "components/layout/Modals";
 import MenuMobile from "components/svg/MenuMobile";
 import MenuMobileClose from "components/svg/MenuMobileClose";
 import Socials from "components/ui/Socials";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import styles from './index.module.scss'
 import Link from 'next/link'
 import { default as React, useState } from 'react'

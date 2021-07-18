@@ -12,7 +12,7 @@ import {confirmOpen, saveProfileSearchOpen, saveTaskSearchOpen} from 'components
 import {setFilterTaskSearch} from 'components/TaskSearch/actions'
 import {setFilterProfileSearch} from 'components/ProfileSearch/actions'
 import BookmarkSvg from 'components/svg/Bookmark'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 interface Props {

@@ -6,7 +6,7 @@ import {getEventColor, getEventPlannedAllowed, getEventStatusName} from 'utils/e
 import {useSelector} from 'react-redux'
 import Avatar from 'components/ui/Avatar'
 import AvatarSvg from 'components/svg/AvatarSvg'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   event: IEvent

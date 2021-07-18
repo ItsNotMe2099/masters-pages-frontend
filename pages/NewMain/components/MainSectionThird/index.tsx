@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {signUpOpen} from 'components/Modal/actions'
 import MainSliderControl from 'pages/NewMain/components/MainSliderControl'
 import {useState} from 'react'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 const ListItem = ({label, isActive}: {label: string, isActive: boolean}) => {
   return (<div className={`${styles.listItem} ${isActive && styles.listItemActive}`}>
     <img src={'/img/Main/icons/mark.svg'}/> {label}
