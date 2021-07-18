@@ -18,6 +18,7 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation, Trans} from "react-i18next";
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -29,6 +30,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
 
   const dispatch = useDispatch();
+  const {t} = useTranslation('common')
   useEffect(() => {
 
 
@@ -43,7 +45,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/dollar.svg`}/>
         </div>
-        <div className={styles.title}>Hiring a master</div>
+        <div className={styles.title}>{t('taskNegotiation.hiringAMaster')}</div>
       </div>
 
       <>
@@ -51,7 +53,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
         <div className={styles.taskHeader}>
         <div className={styles.taskTitle}>{task?.title}</div>
         <div className={styles.taskExpires}>
-          <div className={styles.taskExpiresLabel}>Expire in:</div>
+          <div className={styles.taskExpiresLabel}>{t('taskNegotiation.expireIn')}</div>
           <div className={styles.taskExpiresValue}>23:46:23</div>
         </div>
         </div>
@@ -60,19 +62,19 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
 
       <div className={styles.taskPriceDetails}>
         <div className={styles.taskPriceDetailsItem}>
-          <div className={styles.taskPriceDetailsItemLabel}>{taskNegotiation.priceType === 'fixed' ? 'Fixed price:' : 'Rate per hour:'}</div>
+          <div className={styles.taskPriceDetailsItemLabel}>{taskNegotiation.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
           <div className={styles.taskPriceDetailsItemValue}>$ {taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${taskNegotiation.ratePerHour}/h`}</div>
         </div>
         <div className={styles.taskPriceDetailsItem}>
-          <div className={styles.taskPriceDetailsItemLabel}>Dead line:</div>
+          <div className={styles.taskPriceDetailsItemLabel}>{`${t('deadline')}:`}</div>
           <div className={styles.taskPriceDetailsItemValue}>{taskNegotiation.deadline ? format(new Date(task.deadline), 'MM.dd.yyy') : 'N/A'} </div>
         </div>
       </div>
 
       <div className={styles.containerButtons}>
         <div className={styles.buttons}>
-          <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={onClose}>Cancel</Button>
-          <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>Hire master</Button>
+          <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={onClose}>{t('cancel')}</Button>
+          <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>{t('taskNegotiation.hireMaster')}</Button>
         </div>
       </div>
       </>

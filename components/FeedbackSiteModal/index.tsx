@@ -5,6 +5,7 @@ import styles from './index.module.scss'
 import FeedbackForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
@@ -16,13 +17,14 @@ export default function FeedbackSiteModal(props: Props) {
   const handleSubmit = (data) => {
     dispatch(createFeedBackSite(data))
   }
+  const { t } = useTranslation('common');
 
   return (
     <Modal{...props} loading={formLoading} className={styles.root} size="medium" closeClassName={styles.close}
     >
 
         <div className={styles.innards}>
-          <div className={styles.rate}>Please rate Masters Pages platform</div>
+          <div className={styles.rate}>{t('feedBack.ratePlatform')}</div>
           <div className={styles.form}><FeedbackForm onSubmit={handleSubmit}/></div>
         </div>
     </Modal>

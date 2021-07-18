@@ -36,10 +36,10 @@ const SharePage = (props) => {
   }, [])
   const tabs = [
 
-    { name: 'Share by email', key: 'shareByEmail' },
-    { name: 'Profile link', key: 'personalLink' },
-    { name: 'Share by Social media', key: 'shareBySocialMedia' },
-    { name: 'Personal label', key: 'personalLabel' },
+    { name: t('sharePage.shareByEmail'), key: 'shareByEmail' },
+    { name: t('sharePage.profileLink'), key: 'personalLink' },
+    { name: t('sharePage.shareBySocialMedia'), key: 'shareBySocialMedia' },
+    { name: t('sharePage.personalLabel'), key: 'personalLabel' },
   ]
   const [activeTab, setActiveTab] = useState(tabs[0].key);
 
@@ -70,8 +70,8 @@ const SharePage = (props) => {
 
       <div className={styles.container}>
         <div className={styles.skills}>
-          <Tab isActive={!customLink && !activeSkill} title={`All`} onClick={() => handleCustomLinkClick(null)}/>
-          <Tab isActive={customLink === 'news'} title={`News`} onClick={() => handleCustomLinkClick('news')}/>
+          <Tab isActive={!customLink && !activeSkill} title={t('all')} onClick={() => handleCustomLinkClick(null)}/>
+          <Tab isActive={customLink === 'news'} title={t('news')} onClick={() => handleCustomLinkClick('news')}/>
         {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category, i18n.language).name}/${getCategoryTranslation(skill.subCategory, i18n.language).name}`} onClick={() => handleSkillClick(skill)}/> : null))}
         </div>
         <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>

@@ -20,6 +20,7 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
+import {useTranslation, Trans} from "react-i18next";
 interface Props {
   onCancel: () => void
 }
@@ -32,6 +33,7 @@ const TaskOfferOrderList = (props: Props) => {
   const loading = useSelector((state: IRootState) => state.taskUser.listLoading)
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
   const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
+  const {t} = useTranslation('common')
 
   const filter = {
     status: 'published'
@@ -81,8 +83,8 @@ const TaskOfferOrderList = (props: Props) => {
      </InfiniteScroll>
      </div>}
       {!sendOfferLoading && <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`} disabled={!activeTask} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>Send offer</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} disabled={!activeTask} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>{t('taskNegotiation.sendOffer')}</Button>
       </div>}
     </div>
   )

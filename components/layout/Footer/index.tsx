@@ -8,11 +8,13 @@ import BannerFooter from './BannerFooter'
 import Logo from 'components/Logo'
 import styles from './index.module.scss'
 import format from 'date-fns/format'
+import {useTranslation, withTranslation, Trans} from "react-i18next";
 interface Props {
 }
 
 export default function Footer(props: Props) {
 
+  const { t } = useTranslation('common');
   const renderSocials = () => {
     return <div className={styles.social}>
         <a href="#" target="_blank"><WhatsApp className={styles.whatsapp}/></a>
@@ -36,28 +38,28 @@ export default function Footer(props: Props) {
         </div>
         <div className={styles.menu}>
           <ul className={styles.links}>
-            <li><Link href="/"><a>Новый заказ</a></Link></li>
-            <li><Link href="/"><a>Все услуги</a></Link></li>
-            <li><Link href="/"><a>Все отзывы</a></Link></li>
-            <li><Link href="/"><a>Истории заказов</a></Link></li>
-            <li><Link href="/"><a>Условия использования</a></Link></li>
-            <li><Link href="/"><a>Мобильная версия</a></Link></li>
+            <li><Link href="/"><a>{t('newOrder')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.allServices')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.allReviews')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.serviceHistory')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.conditions')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.mobile')}</a></Link></li>
           </ul>
           <ul className={styles.links}>
-            <li><Link href="/"><a>Новый заказ</a></Link></li>
-            <li><Link href="/"><a>Все услуги</a></Link></li>
-            <li><Link href="/"><a>Все отзывы</a></Link></li>
-            <li><Link href="/"><a>Истории заказов</a></Link></li>
-            <li><Link href="/"><a>Условия использования</a></Link></li>
-            <li><Link href="/"><a>Мобильная версия</a></Link></li>
+            <li><Link href="/"><a>{t('newOrder')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.allServices')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.allReviews')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.serviceHistory')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.conditions')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.mobile')}</a></Link></li>
           </ul>
           <ul className={styles.links}>
-            <li><Link href="/"><a>Новый заказ</a></Link></li>
-            <li><Link href="/"><a>Все услуги</a></Link></li>
-            <li><Link href="/"><a>Все отзывы</a></Link></li>
-            <li><Link href="/"><a>Истории заказов</a></Link></li>
-            <li><Link href="/"><a>Условия использования</a></Link></li>
-            <li><Link href="/"><a>Мобильная версия</a></Link></li>
+            <li><Link href="/"><a>{t('newOrder')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.allServices')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.allReviews')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.serviceHistory')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.conditions')}</a></Link></li>
+            <li><Link href="/"><a>{t('footer.mobile')}</a></Link></li>
           </ul>
         </div>
         <div className={styles.socialDesktop}>{renderSocials()}</div>

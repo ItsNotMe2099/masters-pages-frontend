@@ -3,6 +3,8 @@ import {IEvent} from 'types'
 import {format} from 'date-fns'
 import {Calendar, Views, momentLocalizer} from "react-big-calendar";
 import CalendarToolbarViewButton from 'components/Calendar/components/CalendarToolbar/CalendarToolbarViewButton'
+import {useTranslation, withTranslation} from "react-i18next";
+
 
 interface Props {
   onChange: (view) => void,
@@ -11,11 +13,12 @@ interface Props {
 
 export default function CalendarToolbarViews(props: Props) {
   const {currentView, onChange} = props;
+  const { t } = useTranslation('common');
   const options = [
-    {label: 'Day', value: Views.DAY},
-    {label: 'Week', value: Views.WEEK},
-    {label: 'Month', value: Views.MONTH},
-    {label: 'Agenda', value: Views.AGENDA},
+    {label: t('day'), value: Views.DAY},
+    {label: t('week'), value: Views.WEEK},
+    {label: t('month'), value: Views.MONTH},
+    {label: t('agenda'), value: Views.AGENDA},
   ]
   return (
     <div className={`${styles.root}`}>

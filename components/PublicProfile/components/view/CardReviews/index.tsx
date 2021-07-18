@@ -10,6 +10,7 @@ import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props{
   profile: ProfileData,
@@ -23,6 +24,7 @@ const CardReviews = (props: Props) => {
   const total = useSelector((state: IRootState) => state.profileFeedback.total)
   const page = useSelector((state: IRootState) => state.profileFeedback.page)
   const  limit = 30;
+  const { t } = useTranslation('common');
 
   console.log("CardReviewsShow")
   useEffect(() => {
@@ -36,6 +38,7 @@ const CardReviews = (props: Props) => {
   }, [skill])
 
 
+
   const handleScrollNext = () => {
     dispatch(setPageFeedback(page + 1))
     dispatch(fetchFeedbacksToProfileRequest({
@@ -47,7 +50,7 @@ const CardReviews = (props: Props) => {
   }
 
   return (
-    <Card className={styles.root} title={total > 0 ? `Reviews (${total})` : 'Reviews'}>
+    <Card className={styles.root} title={total > 0 ? `${t('personalArea.profile.reviews')} (${total})` : t('personalArea.profile.reviews')}>
       {(listLoading && total === 0) && <Loader/>}
       {total > 0 && <InfiniteScroll
         dataLength={list.length} //This is important field to render the next data

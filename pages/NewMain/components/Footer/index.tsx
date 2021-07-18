@@ -1,11 +1,13 @@
 import styles from './index.module.scss'
 import Facebook from 'components/svg/Facebook'
 import Instagram from 'components/svg/Instagram'
+import {useTranslation} from 'react-i18next'
 interface Props{
 
 }
 
 const MainSectionFooter = (props: Props) => {
+  const {t} = useTranslation();
   return (
     <div  className={styles.root}>
       <div  className={styles.container}>
@@ -14,7 +16,7 @@ const MainSectionFooter = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </div>
         <div className={styles.copyright}>
-          Master Pages all rights reserved
+          {t('footer.copyright')}
         </div>
         <div className={styles.socials}>
           <a className={styles.socialItem} href={'https://www.instagram.com/masterspages'}><img src={'/img/Main/icons/instagram.svg'}/></a>

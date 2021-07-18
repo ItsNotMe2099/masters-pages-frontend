@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isTaskChat?: boolean
@@ -22,6 +23,7 @@ export default function Chat(props: Props) {
   const chatListLoading = useSelector((state: IRootState) => state.chat.chatListLoading)
   const {isTaskChat} = props;
   const [activeTab, setActiveTab] = useState(isTaskChat ? 'tasks' : 'people')
+  const { t } = useTranslation('common');
 
   const handleSubmit = () => {
 
@@ -42,8 +44,8 @@ export default function Chat(props: Props) {
   }, [isTaskChat])
 
   const tabs = [
-    { name: 'People', key: 'people' },
-    { name: 'Tasks', key: 'tasks' },
+    { name: t('personalArea.tabSaved.menu.people'), key: 'people' },
+    { name: t('personalArea.tabSaved.menu.tasks'), key: 'tasks' },
   ];
   const handleChangeTab = (item) => {
     setActiveTab(item.key);

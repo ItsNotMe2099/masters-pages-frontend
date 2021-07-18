@@ -31,7 +31,7 @@ interface Props{
   profile?: ProfileData
 }
 const ProfilePostsPage = ({profile}: Props) => {
-  const {t} = useTranslation()
+  const {t} = useTranslation('common')
   const router = useRouter();
   const dispatch = useDispatch()
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
@@ -40,7 +40,7 @@ const ProfilePostsPage = ({profile}: Props) => {
   return (
     <Layout>
       <div className={styles.container}>
-        <div className={styles.title}>Posts by {profile.firstName} {profile.lastName}</div>
+        <div className={styles.title}>{t('post.postBy')} {profile.firstName} {profile.lastName}</div>
           <ProfileCard profile={profile}/>
         <PostList profileId={profile.id}/>
       </div>

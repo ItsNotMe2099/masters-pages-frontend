@@ -54,6 +54,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               {!isMobile && <Field
                 name="subCategoryId"
@@ -63,6 +64,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />}
               {!isMobile && <Field
 
@@ -72,6 +74,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />}
 
               {!isMobile && <Field
@@ -81,6 +84,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 formKey={`${props.form}`}
                 withIcon={false}
+                labelType={'placeholder'}
               />}
               </>
             :
@@ -92,6 +96,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="executionType"
@@ -105,6 +110,7 @@ let SearchProfileForm = (props) => {
                 withIcon={false}
                 noMargin={true}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="rating"
@@ -120,6 +126,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="categoryId"
@@ -129,6 +136,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="geonameid"
@@ -137,6 +145,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="price"
@@ -145,6 +154,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 formKey={`${props.form}`}
                 withIcon={false}
+                labelType={'placeholder'}
               />
               <Field
                 name="subCategoryId"
@@ -154,6 +164,7 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="radius"
@@ -170,6 +181,7 @@ let SearchProfileForm = (props) => {
 
                 withIcon={false}
                 noMargin={true}
+                labelType={'placeholder'}
               />
 
 
@@ -206,6 +218,7 @@ let SearchProfileForm = (props) => {
           noMargin={true}
           withIcon={false}
           showEmpty={true}
+          labelType={'placeholder'}
         />
         <Field
           name="radius"
@@ -222,6 +235,7 @@ let SearchProfileForm = (props) => {
 
           withIcon={false}
           noMargin={true}
+          labelType={'placeholder'}
         />
 
       </div>}

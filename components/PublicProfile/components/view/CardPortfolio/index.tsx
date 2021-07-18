@@ -57,7 +57,7 @@ const CardPortfolio = (props: Props) => {
   const currentTab = useSelector((state: IRootState) => state.profilePortfolio.currentProfileTab);
   const [currentEditModel, setCurrentEditModel] = useState(null);
 
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
   const limit = 10;
   useEffect(() => {
@@ -131,7 +131,7 @@ const CardPortfolio = (props: Props) => {
   }
   const handleDelete = (model: ProfileWorkExperience) => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to delete «${model.title}»?`,
+      description: t("post.areYouSureToDelete", { model }),
       onConfirm: () => {
         dispatch(deleteProfilePortfolio(model.id));
       }
@@ -150,8 +150,8 @@ const CardPortfolio = (props: Props) => {
   }
 
   return (
-    <Card  isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  isLoading={formLoading} className={styles.root} title={'Portfolio'}
-          toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>] : []}>
+    <Card  isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  isLoading={formLoading} className={styles.root} title={t('portfolioLabel')}
+          toolbar={isEdit ? [<FormActionButton type={'create'} title={t('add')} onClick={handleCreateClick}/>] : []}>
       {!showForm && <>
         <div className={styles.panel}>
           <div className={styles.tabs}>
@@ -181,7 +181,7 @@ const CardPortfolio = (props: Props) => {
       </>
       }
       {(!showForm && isEdit && list.length === 0 && !listLoading) &&
-      <CardAdd title={'Add Work'} icon={'add_work'} onClick={handleCreateClick}/>}
+      <CardAdd title={t('cardPortfolio.addWork')} icon={'add_work'} onClick={handleCreateClick}/>}
       {showForm && <PortfolioForm onSubmit={handleSubmit} onCancel={handleCancel}
                                   initialValues={currentEditModel ? currentEditModel : (currentTab ? {profileTabId: currentTab.id} : {})}/>}
 

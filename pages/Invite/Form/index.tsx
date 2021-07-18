@@ -20,7 +20,7 @@ interface Props {
   reset?
 }
 let InviteForm = (props: Props) => {
-  const {t} = useTranslation()
+  const {t} = useTranslation('common')
   const dispatch = useDispatch()
 
   const { handleSubmit, subCategoryId, reset, customLink } = props
@@ -39,9 +39,9 @@ let InviteForm = (props: Props) => {
       <div className={styles.background}><img src={'/img/icons/envelope.svg'}/></div>
     <div className={styles.container}>
       {success && <div className={styles.success}>
-        <div className={styles.successText}>{profile.role === 'client' ? 'Master was invited' : 'Client was invited' }</div>
+        <div className={styles.successText}>{profile.role === 'client' ? t('shareByEmail.masterInvited') : t('shareByEmail.clientInvited') }</div>
         <div className={styles.btnContainer}>
-          <Button type={'button'} red size="14px 65px" onClick={handleReset}>Invite another {profile.role === 'client' ? 'master' : 'client' }</Button>
+          <Button type={'button'} red size="14px 65px" onClick={handleReset}>{t('shareByEmail.inviteAnother')} {profile.role === 'client' ? 'master' : 'client' }</Button>
         </div>
       </div>}
       {!success && <div className={styles.form}>
@@ -49,27 +49,27 @@ let InviteForm = (props: Props) => {
 
       <div className={styles.fields}>
       <div className={styles.field}>
-        <div className={styles.fieldLabel}>Mail to</div>
+        <div className={styles.fieldLabel}>{t('shareByEmail.mailTo')}</div>
         <div className={styles.fieldValue}>
         <Field
           name="email"
           size={'small'}
           disabled={loading}
           noMargin={true}
-          placeholder={'Email'}
+          placeholder={t('email')}
           component={Input}
           validate={required}
         />
         </div>
       </div>
       <div className={styles.field}>
-        <div className={styles.fieldLabel}>Subject</div>
+        <div className={styles.fieldLabel}>{t('subject')}</div>
         <div className={styles.fieldValue}>
-          Invites you to join MastersPages
+        {t('shareByEmail.invitesYou')}
         </div>
       </div>
       <div className={styles.field}>
-        <div className={styles.fieldLabel}>Dear</div>
+        <div className={styles.fieldLabel}>{t('shareByEmail.dear')}</div>
         <div className={styles.fieldValue}>
 
         <Field
@@ -86,17 +86,17 @@ let InviteForm = (props: Props) => {
         </div>
       <div className={styles.message}>
         {profile.firstName} {profile.lastName} {profile.role === 'client' ? 'would like to invite you to join him/her on MastersPages and see you among his/hers valued clients.' : 'would like to invite you see his/hers profile on MastersPages.'}<br/>
-        •  To see <a href={inviteUrl} target={'_blank'}> {profile.firstName} {profile.lastName} </a>profile.<br/>
-        •  To learn more about <a href='masterspages.com' target={'_blank'}>MastersPages</a><br/>
-        •  If you got this email in error report abuse <a href={'mailto:abuse@masterspages.com'}>abuse@masterspages.com</a>.<br/>
+        •  {t('shareByEmail.toSee')} <a href={inviteUrl} target={'_blank'}> {profile.firstName} {profile.lastName} </a>{t('shareByEmail.profile')}<br/>
+        •  {t('shareByEmail.toLearn')} <a href='masterspages.com' target={'_blank'}>MastersPages</a><br/>
+        •  {t('shareByEmail.ifYouGot')} <a href={'mailto:abuse@masterspages.com'}>abuse@masterspages.com</a>.<br/>
         <br/>
-        Truly yours, MastersPages team<br/>
+        {t('shareByEmail.trulyYours')}<br/>
         <div className={styles.logo}><Logo/></div>
-        Self-employed business management platform.
+        {t('shareByEmail.selfEmployed')}
       </div>
           <FormError error={error}/>
         <div className={styles.btnContainer}>
-          <Button disabled={loading} red size="14px 65px">Invite {profile.role === 'client' ? 'master' : 'client' }</Button>
+          <Button disabled={loading} red size="14px 65px">{t('shareByEmail.invite')} {profile.role === 'client' ? 'master' : 'client' }</Button>
         </div>
 
       </div>

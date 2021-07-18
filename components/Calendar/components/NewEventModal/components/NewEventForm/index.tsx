@@ -26,6 +26,7 @@ import { connect } from 'react-redux'
 import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import FormError from 'components/ui/Form/FormError'
 import {RadioList} from 'components/ui/Inputs/RadioList'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
   onCancel: () => void
   initialValues?: any,
@@ -36,6 +37,7 @@ let NewEventForm = (props: Props) => {
   const error = useSelector((state: IRootState) => state.event.formError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const taskList = useSelector((state: IRootState) => state.taskUser.list)
+  const { t } = useTranslation('common');
 
   const dispatch = useDispatch();
 
@@ -47,7 +49,7 @@ let NewEventForm = (props: Props) => {
         <Field
           name="timeRange"
           component={DateTimeRange}
-          label="Date"
+          label={t('date')}
           validate={required}
         />
         <Field
@@ -55,7 +57,7 @@ let NewEventForm = (props: Props) => {
           component={Input}
           labelType={'static'}
           size={'small'}
-          label="Event title"
+          label={t('event.eventTitle')}
           validate={required}
         />
       <Field
@@ -72,16 +74,16 @@ let NewEventForm = (props: Props) => {
           grid={2}
           size={'small'}
           labelType="static"
-          label={'Price type:'}
+          label={t('priceType')}
           validate={required}
-          options={[ {label: 'Rate per hour', value: 'rate'}, {label: 'Fixed', value: 'fixed'}]}
+          options={[ {label: t('perHour'), value: 'rate'}, {label: t('fixed'), value: 'fixed'}]}
         />
         <FormError error={error}/>
     </div>
 
       {!formLoading && <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>Create event</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('event.createEvent')}</Button>
       </div>}
       </>}
     </form>

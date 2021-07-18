@@ -48,7 +48,7 @@ const PostsPage = (props: Props) => {
     <Layout>
       <div className={styles.container}>
         <div className={styles.header}>
-          <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>Create a post</Button>
+          <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>{t('post.createPost')}</Button>
         </div>
        <PostList onEdit={handleEdit}/>
       </div>

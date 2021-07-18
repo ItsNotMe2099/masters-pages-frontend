@@ -1,6 +1,7 @@
 import Logo from 'components/Logo'
 import styles from './index.module.scss'
 import { useState } from "react";
+import {useTranslation, Trans} from "react-i18next";
 
 interface Props {
  jobDone?: boolean
@@ -13,6 +14,7 @@ interface Props {
 export default function ModalHeader(props: Props) {
 
   const [show, setShowAll] = useState(false)
+  const {t} = useTranslation('common')
 
   return (
     <div className={styles.root}>
@@ -21,12 +23,12 @@ export default function ModalHeader(props: Props) {
         <>
           <div className={styles.avatar}><img src={props.img} alt=""/></div>
           <div className={styles.name}>{props.firstName} {props.lastName}</div>
-          <div className={styles.text}>marked job like a<span> done</span></div>
+          <Trans i18nKey="modal.markedJob" className={styles.text}>marked job like a<span> done</span></Trans>
         </>
         :
         <>
           <div className={styles.logo}><Logo/></div>
-          <div className={styles.text}>Describe your experience</div>
+          <div className={styles.text}>{t('modal.describeExperience')}</div>
         </>
       }
       </div>
@@ -34,7 +36,7 @@ export default function ModalHeader(props: Props) {
       <div className={styles.top}>
         <div className={styles.work}>{props.job}</div>
           <a className={styles.details} onClick={() => show ? setShowAll(false) : setShowAll(true)}>
-            {show ? <span>Hide</span> : <span>See details</span>}<img className={show ? styles.hide : null} src="/img/icons/arrowDetails.svg" alt=''/>
+            {show ? <span>{t('hide')}</span> : <span>{t('seeDetails')}</span>}<img className={show ? styles.hide : null} src="/img/icons/arrowDetails.svg" alt=''/>
           </a>
       </div>
       : null}

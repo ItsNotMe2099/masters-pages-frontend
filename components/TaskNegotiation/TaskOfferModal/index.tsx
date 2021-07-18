@@ -20,6 +20,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, Trans} from "react-i18next";
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -30,9 +31,10 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
 
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
+  const {t} = useTranslation('common')
   const tabs = [
-    { name: 'Available tasks', key: 'tasks' },
-    { name: 'Private task', key: 'newTask' },
+    { name: t('taskNegotiation.availableTasks'), key: 'tasks' },
+    { name: t('taskNegotiation.privateTasks'), key: 'newTask' },
   ];
   const handleChangeTab = (item) => {
     setActiveTab(item.key);
@@ -49,7 +51,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/dollar.svg`}/>
         </div>
-        <div className={styles.title}>Offer task</div>
+        <div className={styles.title}>{t('taskNegotiation.offerTask')}</div>
       </div>
       <div className={styles.body}>
         {!sendOfferLoading && <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>}

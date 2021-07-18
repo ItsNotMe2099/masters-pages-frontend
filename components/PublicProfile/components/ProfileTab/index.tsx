@@ -6,6 +6,7 @@ import Loader from 'components/ui/Loader'
 import { useSelector, useDispatch } from 'react-redux'
 import {createProfileTab} from 'components/ProfileTab/actions'
 import {showProfileForm} from 'components/Profile/actions'
+import {useTranslation} from 'react-i18next'
 interface Props{
   isAll?: boolean
   isNew?: boolean
@@ -21,6 +22,7 @@ const ProfileTab = (props: Props) => {
   const formNewKey = `profileTab_${props.type}New`;
   const formEditKey = `profileTab_${props.type}${props.profileTab?.id}`;
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key =>  props.isNew ? key === formNewKey : key === formEditKey);
+  const {t} = useTranslation('common');
 
   const [value, setValue] = useState(props.profileTab?.title || '');
   useEffect(() => {
@@ -51,7 +53,7 @@ const ProfileTab = (props: Props) => {
   }
   return (
     <div className={`${styles.root} ${props.isEdit && styles.rootEdit}  ${showForm && styles.rootForm} ${(props.isActive && !showForm) && styles.rootActive} ${props.isNew && styles.rootNew}`} onClick={props.isNew ? handleNewClick : props.onClick}>
-      {showForm && !props.isAll ? <form onSubmit={handleSubmit}><input className={styles.input} value={value} onClick={handleInputClick} onChange={handleInputChange}/></form> : props.isNew ? 'Add new' : (props.isAll ? 'All' : props.profileTab.title || '')}
+      {showForm && !props.isAll ? <form onSubmit={handleSubmit}><input className={styles.input} value={value} onClick={handleInputClick} onChange={handleInputChange}/></form> : props.isNew ? t('addNew') : (props.isAll ? t('all') : props.profileTab.title || '')}
       {(props.isEdit && !props.isNew && !showForm) && <div className={styles.editBtn}><FormActionIconButton type={'edit'} onClick={handleEditClick}/></div>}
       {(showForm) && <div className={styles.deleteBtn}><FormActionIconButton type={'delete'} onClick={handleDeleteClick}/></div>}
     </div>

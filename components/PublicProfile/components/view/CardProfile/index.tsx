@@ -15,6 +15,8 @@ import {showProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm
 import AvatarForm from 'pages/me/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
+import {useTranslation, withTranslation} from "react-i18next";
+
 interface Props{
   profile: ProfileData,
   isEdit: boolean
@@ -26,6 +28,7 @@ const CardProfile = (props: Props) => {
   const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading);
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
+  const { t } = useTranslation('common');
   const handleEditClick = () => {
     dispatch(showProfileForm( 'avatar'));
   }
@@ -49,7 +52,7 @@ const CardProfile = (props: Props) => {
     dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
   }
   return (
-    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={'Edit'} onClick={handleEditClick}/>] : []}>
+    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={t('task.edit')} onClick={handleEditClick}/>] : []}>
 
         {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
         {(!showForm || !isEdit) &&  <a href={`/id${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
@@ -84,18 +87,18 @@ const CardProfile = (props: Props) => {
         <div className={styles.ratingValue}>({profile.rating || 0})</div>
       </div>
       <div className={styles.lastSeen}>
-        <div className={styles.lastSeenLabel}>last seen:</div>
+        <div className={styles.lastSeenLabel}>{t('cardProfile.lastSeen')}</div>
         <div className={styles.lastSeenValue}>3 min ago</div>
       </div>
       {!isEdit && <div className={styles.actions}>
 
 
-        <Button className={styles.actionSendMessage} href={`/Chat/dialog/${profile.id}`}>Send message</Button>
-        {currentProfile?.role === 'client' && <Button className={styles.actionSendOffer} onClick={handleSendOffer}>Send Offer</Button>}
+        <Button className={styles.actionSendMessage} href={`/Chat/dialog/${profile.id}`}>{t('personalArea.profile.sendMessage')}</Button>
+        {currentProfile?.role === 'client' && <Button className={styles.actionSendOffer} onClick={handleSendOffer}>{t('personalArea.profile.sendOffer')}</Button>}
       </div>}
       <div className={styles.followers}>
-        <div className={styles.followersValue}><UserIcon/> {recommendationTotal} recommended </div>
-        {!isEdit && <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>Subscribe</Button>}
+        <div className={styles.followersValue}><UserIcon/> {recommendationTotal} {t('personalArea.profile.recommended')} </div>
+        {!isEdit && <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>{t('personalArea.profile.subscribe')}</Button>}
       </div>
     </Card>
   )

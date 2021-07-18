@@ -11,6 +11,7 @@ import {useState} from 'react'
 import TextArea from 'components/ui/Inputs/TextArea'
 import InputAddress from 'components/ui/Inputs/InputAddress'
 import {RadioList} from 'components/ui/Inputs/RadioList'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   event?: IEvent,
@@ -24,17 +25,18 @@ let MeetingForm = ({change, placeType}: Props) => {
   const handleOfflineClick = () => {
     change('placeType', 'ClientAddress')
   }
+  const {t} = useTranslation('common');
   return (
      <div className={styles.root}>
       <div className={styles.tabs}>
-        <div className={`${styles.tab} ${placeType === 'Online' && styles.tab__active}`} onClick={handleOnlineClick}>Online</div>
-        <div className={`${styles.tab} ${placeType !== 'Online' && styles.tab__active}`} onClick={handleOfflineClick}>Location</div>
+        <div className={`${styles.tab} ${placeType === 'Online' && styles.tab__active}`} onClick={handleOnlineClick}>{t('online')}</div>
+        <div className={`${styles.tab} ${placeType !== 'Online' && styles.tab__active}`} onClick={handleOfflineClick}>{t('location')}</div>
       </div>
         <div className={styles.body}>
           {placeType === 'Online' && <Field
             name="meetingLink"
             component={TextArea}
-            label="Meeting link"
+            label={t('meetingForm.meetingLink')}
             validate={required}
           />}
           {placeType !== 'Online' && <Field
@@ -43,8 +45,8 @@ let MeetingForm = ({change, placeType}: Props) => {
             grid={2}
             size={'small'}
             labelType="placeholder"
-            label={'Type'}
-            options={[ {label: 'Client Address', value: 'ClientAddress'}, {label: 'Master Address', value: 'MasterAddress'}]}
+            label={t('meetingForm.type')}
+            options={[ {label: t('meetingForm.clientAddress'), value: 'ClientAddress'}, {label: t('meetingForm.masterAddress'), value: 'MasterAddress'}]}
           />}
           {placeType !== 'Online' && <div className={styles.orSection}>
             <div className={styles.orWrapper}>
@@ -55,14 +57,14 @@ let MeetingForm = ({change, placeType}: Props) => {
           {placeType !== 'Online' && <Field
             name="address1"
             component={Input}
-            label="Address 1"
+            label={t('meetingForm.address1')}
             labelType={'static'}
             size={'small'}
           />}
           {placeType !== 'Online' && <Field
             name="address2"
             component={Input}
-            label="Address 2"
+            label={t('meetingForm.address2')}
             labelType={'static'}
             size={'small'}
           />}
@@ -71,21 +73,21 @@ let MeetingForm = ({change, placeType}: Props) => {
             <Field
               name="city"
               component={Input}
-              label="City"
+              label={t('meetingForm.city')}
               labelType={'static'}
               size={'small'}
             />
             <Field
               name="region"
               component={Input}
-              label="State"
+              label={t('meetingForm.state')}
               labelType={'static'}
               size={'small'}
             />
             <Field
               name="zipcode"
               component={Input}
-              label="Zip code"
+              label={t('meetingForm.zipCode')}
               labelType={'static'}
               size={'small'}
             />

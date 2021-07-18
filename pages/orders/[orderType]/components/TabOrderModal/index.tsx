@@ -9,6 +9,7 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import TabOrderForm from 'pages/orders/[orderType]/components/TabOrderModal/TabOrderForm'
+import {useTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean,
   task: ITask,
@@ -17,6 +18,7 @@ interface Props {
 const TabOrderModal = ({isOpen, task, onClose}: Props) => {
   const loading = useSelector((state: IRootState) => state.taskUser.formUpdateLoading)
   const dispatch = useDispatch();
+  const {t} = useTranslation('common');
   useEffect(() => {
     if(isOpen){
       dispatch(resetTaskUserUpdateForm())
@@ -34,7 +36,7 @@ const TabOrderModal = ({isOpen, task, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/pencil.svg`}/>
         </div>
-        <div className={styles.title}>Edit Task</div>
+        <div className={styles.title}>{t('editTask')}</div>
       </div>
       <div className={styles.separator}></div>
       <TabOrderForm onSubmit={handleSubmit} initialValues={{...task}} onCancel={() => dispatch(modalClose())}/>

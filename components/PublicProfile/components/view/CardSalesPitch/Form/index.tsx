@@ -27,7 +27,7 @@ let SalesPitchForm = (props: Props) => {
           name="description"
           component={TextArea}
           labelType="placeholder"
-          label={'Fill up sale pitch. Max <1000 symbols'}
+          label={t('cardSalesPitch.form.fillUpSalePitch')}
         />
         </div>
         <div className={styles.photo}>
@@ -37,17 +37,17 @@ let SalesPitchForm = (props: Props) => {
           accept={["image/jpeg", "image/png", "video/mp4"]}
           maxSize={5242880 * 10}
           labelType="placeholder"
-          label={'Upload photo'}
-          infoTitle={'Upload photo or video'}
-          infoFormatAllowed={'Format allowed: PNG, JPEG, MP4'}
+          label={t('uploadPhoto')}
+          infoTitle={t('uploadPhotoOrVideo')}
+          infoFormatAllowed={t('formatAllowed')}
         />
         </div>
       </div>
 
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('save')}</Button>
       </div>
 
     </form>

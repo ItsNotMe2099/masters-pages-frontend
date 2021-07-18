@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Slider from "react-slick";
 import { TabSelect } from "./components/TabSelect";
 import BookmarkSvg from 'components/svg/Bookmark'
+import {useTranslation, Trans} from "react-i18next";
 
 interface Props {
   profile: ProfileData,
@@ -50,6 +51,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
     dispatch(taskNegotiationSetCurrentProfile(profile));
     dispatch(taskOfferOpen());
   }
+  const {t} = useTranslation('common')
   const handleReadMore = () => {
 
   }
@@ -139,7 +141,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
               <img src="/img/iconsTck.svg" alt=''/>
             </div>
             <div className={styles.status}>
-              Online
+              {t('online')}
             </div>
           </div>
 
@@ -157,9 +159,9 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
               </div>
               <div className={styles.currentSubCategoryInfo}>
               <div className={styles.currentSubCategoryTitle}>{getCategoryTranslation(skill.subCategory).name}</div>
-              <div className={styles.currentSubCategoryLabel}>Price:</div>
-              <div className={styles.currentSubCategoryPrice}>{skill.price ? `$${skill.price}` : skill.ratePerHour ? `$${skill.ratePerHour}/hour`: 'N/A'}</div>
-              <div className={styles.currentSubCategoryMore}>More</div>
+              <div className={styles.currentSubCategoryLabel}>{`${t('price')}:`}</div>
+              <div className={styles.currentSubCategoryPrice}>{skill.price ? `$${skill.price}` : skill.ratePerHour ? `$${skill.ratePerHour}/${t('hour')}`: 'N/A'}</div>
+              <div className={styles.currentSubCategoryMore}>{t('more')}</div>
               </div>
             </div>))}
             <div className={styles.skillsList}>
@@ -171,7 +173,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
           </div>
           <div className={styles.bottom}>
            <ProfileActionButton href={`/id${profile.id}`} title={'View profile'} icon={<img className={styles.icon} src={`'arrow-right-small'`} alt=''/>} onClick={handleReadMore}/>
-            <ProfileActionButton isLoading={savingProfileId === profile.id} title={profile.isSavedByCurrentProfile ? 'Saved' : 'Save'} icon={<BookmarkSvg isSaved={profile.isSavedByCurrentProfile}/>} onClick={handleSave}/>
+            <ProfileActionButton isLoading={savingProfileId === profile.id} title={profile.isSavedByCurrentProfile ? t('saved') : t('save')} icon={<BookmarkSvg isSaved={profile.isSavedByCurrentProfile}/>} onClick={handleSave}/>
           </div>
         </div>
 
@@ -180,18 +182,18 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       <div className={`${styles.payment}`}>
         <div className={styles.paymentContent}>
         <div className={styles.titleLeft}>
-          Statistic:
+          {t('profileComponent.statistic')}
         </div>
           <div className={styles.statItem}>
-            <div className={styles.statItemLabel}>Tasks completed:</div>
+            <div className={styles.statItemLabel}>{t('profileComponent.tasksCompleted')}</div>
             <div className={styles.statItemValue}>{profile.tasksCount || 'N/A'}</div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statItemLabel}>Total hours:</div>
+            <div className={styles.statItemLabel}>{t('profileComponent.totalHours')}</div>
             <div className={styles.statItemValue}>{profile.totalHours || 'N/A'}</div>
           </div>
           <div className={styles.statItem}>
-            <div className={styles.statItemLabel}>Tasks earned:</div>
+            <div className={styles.statItemLabel}>{t('profileComponent.tasksEarned')}</div>
             <div className={styles.statItemValue}>{profile.totalAmount || 'N/A'}</div>
           </div>
 
@@ -200,8 +202,8 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
 
         </div>
         <div className={styles.btnContainer}>
-          {profile.role !== 'client' && <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>OFFER TASK</Button>}
-          {profile.role === 'client' && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>SEND MESSAGE</Button>}
+          {profile.role !== 'client' && <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>{t('profileComponent.offerTask')}</Button>}
+          {profile.role === 'client' && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>{t('profileComponent.sendMessage')}</Button>}
 
         </div>
       </div>

@@ -9,6 +9,7 @@ import { IRootState, SkillData, SkillListItem } from "types";
 import { getMediaPath } from "utils/media";
 import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/SkillModal/index.module.scss'
+import {useTranslation, Trans} from 'react-i18next'
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {
@@ -21,6 +22,7 @@ const SkillModal = ({isOpen, category, skill, onClose}: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.skill.formLoading)
   const dispatch = useDispatch();
+  const {t} = useTranslation('common');
   useEffect(() => {
     if(isOpen){
       dispatch(resetSkillForm())
@@ -41,7 +43,7 @@ const SkillModal = ({isOpen, category, skill, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/${ skill ? 'pencil' : 'plus'}.svg`}/>
         </div>
-        <div className={styles.title}>{skill ? 'Edit Category' : 'Add Category'}</div>
+        <div className={styles.title}>{skill ? t('portfolio.editCategory') : t('portfolio.addCategory')}</div>
       </div>
       <div className={styles.separator}></div>
       <SkillForm onSubmit={handleSubmit} initialValues={{priceType: 'fixed', categoryId: category?.id, ...skill}} skills={category?.skills} onCancel={() => dispatch(modalClose())}/>

@@ -13,12 +13,16 @@ import styles from './index.module.scss'
 import InputCategory from 'components/ui/Inputs/InputCategory';
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
+import {useTranslation, Trans} from "react-i18next";
+
 const categoryRequired = (value) => {
   return  !value || !value.value ? 'required' : ''
 }
 const subCategoryRequired = (value) => {
   return  !value || value.length === 0 ? 'selectSubCategory' : ''
 }
+
+const {t} = useTranslation('common')
 
 let FormNewCategory = props => {
   const { handleSubmit } = props
@@ -35,10 +39,11 @@ let FormNewCategory = props => {
 
   return (
     <form className={styles.form} >
+
       <Field
         name="mainCategory"
         component={InputSubCategory}
-        label="Main Category"
+        label={t('mainCategory')}
         validate={categoryRequired}
         changeWithValue={true}
         onChange={(val) => setMainCategoryId(val.value)}
@@ -47,7 +52,7 @@ let FormNewCategory = props => {
       <Field
         name="category"
         component={InputSubCategory}
-        label="Category"
+        label={t('category')}
         validate={categoryRequired}
         categoryId={mainCategoryId}
         changeWithValue={true}
@@ -57,13 +62,13 @@ let FormNewCategory = props => {
       <Field
                 name="subCategories"
                 component={CheckboxListSubCategories}
-                label="BOD* MM / DD / YYYY"
+                label={t('subCategories')}
                 validate={[subCategoryRequired]}
                 categoryId={categoryId}
                 grid={2}
                 changeWithValue={true}
               />
-      <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>Add category</Button>
+      <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>{t('portfolio.addCategory')}</Button>
 
       </form>
   )

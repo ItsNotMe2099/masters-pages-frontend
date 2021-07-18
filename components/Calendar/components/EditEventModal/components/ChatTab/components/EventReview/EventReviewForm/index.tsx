@@ -40,6 +40,7 @@ import MeetingForm from 'components/Calendar/components/EditEventModal/component
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 import Modal from 'components/ui/Modal'
 import Rating from 'components/ui/Inputs/Rating'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   onCancel?: () => void
@@ -53,20 +54,21 @@ let EventReviewForm = ({event, handleSubmit}: Props) => {
   const error = useSelector((state: IRootState) => state.event.formFeedbackError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const otherSide = event.isAuthor ? event.participant : event.author;
+  const {t} = useTranslation('common');
 
 
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
-      <div className={styles.title}>Describe your work experience with  <a href={`/id${otherSide.id}`} target={'_blank'} className={styles.profileName}>{otherSide.firstName} {otherSide.lastName}</a></div>
+      <div className={styles.title}>{t('event.describeYourExperience')} <a href={`/id${otherSide.id}`} target={'_blank'} className={styles.profileName}>{otherSide.firstName} {otherSide.lastName}</a></div>
       <Field
         name="title"
         component={Input}
-        label="Title"
+        label={t('title')}
       />
       <Field
         name="description"
         component={TextArea}
-        label="Description"
+        label={t('description')}
       />
       <div className={styles.mark}>
       <Field
@@ -80,7 +82,7 @@ let EventReviewForm = ({event, handleSubmit}: Props) => {
 
 
         <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'}
-                type={'submit'}>Submit review</Button>
+                type={'submit'}>{t('event.submitReview')}</Button>
 
       </div>}
     </form>

@@ -84,7 +84,7 @@ const MultiSelect = (props: Props) => {
         </div>
         <div ref={dropdownRef} className={`${cx(styles.dropDown, { [styles.dropDownActive]: isActive, [styles.dropDownWithLabelCross]: props.labelType === 'cross' })} ${getSizeClass(props.size)}`}>
           <div className={styles.dropdownItem} onClick={handleAll}>
-            <Checkbox className={styles.checkbox} meta={{}} input={{value: value.length === options.length, onChange: () => {}}} label={'All'} />
+            <Checkbox className={styles.checkbox} meta={{}} input={{value: value.length === options.length, onChange: () => {}}} label={t('all')} />
           </div>
 
           {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (

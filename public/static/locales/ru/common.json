@@ -1,223 +1,1057 @@
 {
   "menu": {
-    "home": ,"Главная страница",
-    "createTask": "Create a task","Создать задачу",
-    "findTask": "Find a task","Найти задачу",
-    "masters": "Masters","Мастера",
-    "volunteers": "Volunteers","Волонтеры",
-    "faq": "FAQ","Часто задаваемые вопросы",
-    "signIn": "Sign In","Войти",
-    "signUp": "Sign Up","Зарегистрироваться",
-    "profile": "Profile","Профиль",
-    "messages": "Messages","Сообщения",
-    "reviews": "Review","Рассмотрение",
-    "orders": "Orders","Заказы",
-    "settings": "Settings","Настройки",
-    "calendar": "Calendar","Календарь",
-    "logout": "Logout","Выйти",
-    "completeRegistration": "Complete registration","Завершить регистрацию"
+    "home": "Главная",
+    "createTask": "Создать Заказ",
+    "findTask": "Найти Заказ",
+    "masters": "Мастера",
+    "volunteers": "Волонтеры",
+    "faq": "ЧЗВ",
+    "signIn": "ВОЙТИ",
+    "signUp": "ЗАРЕГИСТРИРОВАТЬСЯ",
+
+    "reviews": "Отзыв",
+
+    "calendar": "Календарь",
+    "logout": "Выйти",
+    "completeRegistration": "Завершить регистрацию",
+
+    "profile": "Профиль",
+    "share": "Поделиться",
+    "invite": "Пригласить",
+    "order": "Заказ",
+    "orders": "Заказы",
+    "events": "События",
+    "messages": "Сообщения",
+    "findOrders": "Найти Заказы",
+    "findClients": "Найти Клиентов",
+    "findMaster": "Найти Мастера",
+    "findVolunteer": "Найти Волонтера",
+    "posts": "Публикации",
+    "news": "Новости",
+    "subscriptions": "Подписки",
+    "account": "Учетная запись",
+    "settings": "Настройки",
+    "reports": "Отчеты",
+    "contacts": "Контакты"
   },
   "validation": {
-    "email": "Wrong email format","Неправильный формат электронной почты",
-    "passwordMatch": "Wrong email format","Неправильный формат электронной почты",
-    "required": "Field required","Обязательное поле",
-    "phone": "Wrong phone format","Неправильный формат телефона"
+    "email": "Некорректный формат емейла",
+    "passwordMatch": "Пароли не совпадают",
+    "required": "Обязательное поле",
+    "phone": "Некорректный формат номера телефона",
+    "passwordMinLength8": "Должен быть 8 знаков или больше",
+    "birthdate": "Некорректная дата ДР",
+    "selectSomething": "Выберите одно или несколько значений",
+    "selectCategory": "Добавьте одну или несколько категорий",
+    "selectSubCategory": "Добавьте одну или несколько субкатегорий"
   },
-  "master": "MASTER","Мастер",
-  "volunteer": "VOLUNTEER","Волонтер",
-  "agreeWith": "I am agree with","Я согласен с",
-  "termsAndConditions": "terms and conditions","Срок и условия",
+
+  "master": "Мастер",
+  "yourReview": "Ваш отзыв",
+  "copyLink": "Копировать эту ссылку",
+  "news": "Новости",
+  "works": "Работы",
+  "likes": "Лайки",
+  "hours": "Часы",
+  "new": "новое",
+  "createSmall": "создать",
+  "expenseType": "Тип расходов",
+  "priceAmount": "Цена",
+  "reviewsSmall": "отзывы",
+  "addNew": "Добавить новое",
+  "delete": "Удалить",
+  "saveAsDraft": "Сохранить как черновик",
+  "editResults": "Редактировать результаты",
+  "declineAndDelete": "Отклонить и удалить",
+  "restore": "Восстановить",
+  "complete": "Завершить",
+  "approve": "Одобрить",
+  "send": "Отправить",
+  "confirm": "Подтвердить",
+  "draft": "Черновик",
+  "pending": "В ожидании",
+  "overdue": "Просрочено",
+  "finished": "Завершено",
+  "rejected": "Отклонено",
+  "deleted": "Удалено",
+  "total": "Всего",
+  "start": "Начало",
+  "end": "Конец",
+  "lookingAt": "Добрый день гость, Вы просматриваете на",
+  "reviewSmall": "отзыв",
+  "profile": "профиль",
+  "of": "of",
+  "reviewNotAvailable": "отзыв не еще доступен",
+  "recommend": "Рекомендовать",
+  "share": "Поделиться",
+  "readMore": "Читать больше",
+  "statistic": "Статистика",
+  "tasks": "Заказы",
+  "editTask": "Редактировать Заказ",
+  "requiredField": "обязательное поле",
+  "avatar": "Аватар",
+  "positiveReviews": "Положительные отзывы основанны на",
+  "personalInformation": "Персональная информация",
+  "notifications": "Уведомления",
+  "defaultLanguage": "Язык по умолчанию",
+  "defaultTimezone": "Часовой пояс по умолчанию",
+  "changePassword": "Изменить пароль",
+  "deleteProfiles": "Удалить профили",
+  "deleteAccount": "Удалить учетную запись",
+  "more": "Больше",
+  "hour": "час",
+  "saved": "Сохранено",
+  "hide": "Скрыть",
+  "budget": "Бюджет",
+  "seeDetails": "Смотреть детали",
+  "decline": "Отклонить",
+  "accept": "Принять",
+  "messages": "Сообщения",
+  "currency": "Валюта",
+  "shareBySocialMedia": "Поделиться в соц сетях",
+  "goToHomePage": "ПЕРЕЙТИ НА ГЛАВНУЮ СТРАНИЦУ",
+  "taskTitle": "Название Заказа",
+  "taskDescription": "Описание Заказа",
+  "location": "Расположение",
+  "estimate": "Оценка",
+  "masterOrVolunteer": "Мастер или Волонтер",
+  "mainCategory": "Главная категория",
+  "category": "Категория",
+  "subCategories": "Субкатегории",
+  "subCategory": "Субкатегория",
+  "executionType": "Тип исполнения",
+  "free": "Бесплатно",
+  "price": "Цена",
+  "fixedPrice":"Фиксированная цена",
+  "hAWeek": "ч в неделю",
+  "name": "Имя",
+  "phone": "Телефон",
+  "email": "Емейл",
+  "subject": "Предмет",
+  "cancelLarge": "ОТМЕНИТЬ",
+  "saveLarge": "СОХРАНИТЬ",
+  "address": "Адрес",
+  "review": "Отзыв",
+  "reviews": "Отзывы",
+  "title": "Название",
+  "clients": "Клиенты",
+  "masters": "Мастера",
+  "orders": "Заказы",
+  "all": "Все",
+  "today": "Сегодня",
+  "tomorrow": "Завтра",
+  "addLink": "Добавить ссылку",
+  "uploadPhoto":"Загрузить фотографию",
+  "uploadPhotoOrVideo":"Загрузить фотографию или видео",
+  "formatAllowed": "Допустимые форматы: PNG, JPEG, MP4",
+  "cancel": "Отменить",
+  "save": "Сохранить",
+  "portfolioLabel": "Портфолио",
+  "type": "Тип",
+  "online": "Онлайн",
+  "offline": "Оффлайн",
+  "down": "вниз",
+  "up": "наверх",
+  "doYouWantToDelete": "Вы хотите удалить",
+  "worksInCategories": "Работает в следующих категориях",
+  "add": "Добавить",
+  "ready": "ГОТОВО",
+  "day": "День",
+  "week": "Неделя",
+  "month": "Месяц",
+  "year": "Год",
+  "agenda": "Повестка дня",
+  "orderNumber": "Номер Заказа:",
+  "volunteer": "Волонтер",
+  "agreeWith": "Я соглашаюсь с",
+  "termsAndConditions": "условия",
+  "back": "Назад",
+  "status": "Статус",
+  "client": "Клиент",
+  "orderTitle": "Название Заказа",
+  "startTime": "Время начала",
+  "endTime": "Время окончания",
+  "log": "Журнал",
+  "date": "Дата",
+  "priceType": "Тип цены:",
+  "pricePerHour": "Цена за час",
+  "perHour": "Ставка за час",
+  "fixed": "Фиксированная",
+  "availableTasks": "Доступные заказы",
+  "privateTasks": "Приватные заказы",
+  "reject": "Отклонить",
+  "edit": "Редактировать",
+  "editSmall": "редактировать",
+  "accepted": "Принято",
+  "declined": "Отклонено",
+  "allPosts": "Все публикации",
+  "newOrder": "Новый Заказ",
+  "photos": "Фотографии",
   "auth": {
-    "titleQuick": "Quick Sign in","Быстрый вход",
+    "titleQuick": "Быстрый вход",
     "signIn": {
-      "title": "Sign in","Войти",
-      "fieldLogin": "Phone number or email","Телефонный номер или электронная почта",
-      "fieldPassword": "Password","Пароль",
-      "buttonLogin": "LOG IN","Авторизоваться",
-      "forgotPassword": "Forgot password?","Забыли пароль?",
-      "dontHaveAccount": "Don’t have an account yet?","У вас еще нет аккаунта?"
+      "title": "Вход",
+      "fieldLogin": "Номер телефона",
+      "fieldPassword": "Пароль",
+      "buttonLogin": "ВХОД",
+      "forgotPassword": "Забыли пароль?",
+      "dontHaveAccount": "У Вас еще нет учетной записи?"
     },
-    "signUpLink": "Sign Up","Зарегистрироваться",
-    "signInLink": "Sign In","Войти",
+    "signUpLink": "Войти",
+    "signInLink": "Зарегистрироваться",
     "signUp": {
-      "title": "Sign up","Зарегистрироваться",
-      "fieldPhone": "Phone","Телефон",
-      "buttonRegistration": "REGISTRATION","Регистрация",
-      "alreadyHaveAccount": "Don’t have an account yet?","У вас еще нет аккаунта?"
+      "title": "Зарегистрироваться",
+      "fieldPhone": "Телефон",
+      "buttonRegistration": "РЕГИСТРАЦИЯ",
+      "alreadyHaveAccount": "У Вас еще нет учетной записи?"
     },
     "phoneConfirm": {
-      "title": "Phone number confirmation:","Подтверждение номера телефона:",
+      "title": "Подтверждение номера телефона:",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat",
-      "buttonConfirm": "CONFIRM","Подтвердить"
-      "sendAgain": "Send again","Отправьте еще раз",
-      "dontReceiveSms": "Dont receive sms?","Не получили СМС?"
+      "buttonConfirm": "ПОДТВЕРДИТЬ",
+      "sendAgain": "Отправить заново",
+      "dontReceiveSms": "Не пришел смс?",
+      "code": "Код:"
     },
     "registrationPage": {
-      "title": "Registration complete","Регистрация завершена",
-      "buttonCompleteRegistration": "COMPLETE REGISTRATION","Завершить регистрацию",
-      "fieldFirstName": "First Name","Имя",
-      "fieldLastName": "Last Name","Фамилия",
-      "fieldEmail": "Email","Электронная почта",
-      "fieldPhone": "Phone","Телефон",
-      "fieldLocation": "Location*","Место расположения",
-      "fieldPassword": "Password","Пароль"
-      "fieldPasswordConfirm": "Password again","Еще раз пароль",
-      "logout": "Logout","Выйти"
+      "title": "Регистрация завершена",
+      "buttonCompleteRegistration": "ЗАВЕРШИТЬ РЕГИСТРАЦИЮ",
+      "fieldFirstName": "Имя",
+      "fieldLastName": "Фамилия",
+      "fieldEmail": "Емейл",
+      "fieldPhone": "Телефон",
+      "fieldLocation": "Расположение*",
+      "fieldPassword": "Пароль",
+      "fieldPasswordConfirm": "Пароль еще раз",
+      "logout": "Выход"
     },
     "registrationSuccess": {
-      "title": "THANK YOU FOR REGISTRATION","Спасибо за регистрацию",
+      "title": "СПАСИБО ЗА РЕГИСТРАЦИЮ",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.",
-      "buttonCreateTask": "CREATE A TASK","Создать задачу",
-      "buttonBecomeMaster": "BECOME A MASTER","Стать мастером",
-      "buttonBecomeVolunteer": "BECOME A VOLUNTEER","Стать волонтером",
-      "lookAtTaskList": "Look at task list","Посмотреть список задач"
+      "buttonCreateTask": "СОЗДАТЬ ЗАКАЗ",
+      "buttonBecomeMaster": "СТАТЬ МАСТЕРОМ",
+      "buttonBecomeVolunteer": "СТАТЬ ВОЛОНТЕРОМ",
+      "lookAtTaskList": "Посмотреть список Заказов"
     },
     "passwordRecovery": {
-      "title": "Password recovery","Восстановление пароля",
-      "description": "Recover your password by your phone","Восстановите пароль по номеру телефона",
-      "fieldPhone": "Phone","Телефон",
-      "buttonReset": "RESET PASSWORD","Сбросить пароль",
-      "rememberPassword": "Remember password?","Напомнить пароль?"
+      "title": "Восстановление пароля",
+      "description": "Восстановить пароль через телефон",
+      "fieldPhone": "Телефон",
+      "buttonReset": "ПЕРЕУСТАНОВИТЬ ПАРОЛЬ",
+      "rememberPassword": "Помните пароль?"
     },
     "passwordReset": {
-      "title": "Success","Успех",
-      "description": "Enter you new password","Введите ваш новый пароль",
-      "fieldNewPassword": "New password","Новый пароль"
-      "fieldNewPasswordConfirm": "Password confirm","Подтверждение пароля"
-      "buttonSetNewPassword": "SET NEW PASSWORD","Установить новый пароль"
+      "title": "Успех",
+      "description": "Введите новый пароль",
+      "fieldNewPassword": "Новый пароль",
+      "fieldNewPasswordConfirm": "Подтвердить пароль",
+      "buttonSetNewPassword": "УСТАНОВИТЬ НОВЫЙ ПАРОЛЬ"
     },
     "changePassword": {
-      "title": "Change Password","Сменить пароль",
-      "fieldOldPassword": "Old password","Старый пароль",
-      "fieldNewPassword": "New password","Новый пароль",
-      "fieldNewPasswordConfirm": "Password confirm","Подтверждение пароля"
-      "buttonChangePassword": "Change password","Сменить пароль"
+      "title": "Изменить пароль",
+      "fieldOldPassword": "Старый пароль",
+      "fieldNewPassword": "Новый пароль",
+      "fieldNewPasswordConfirm": "Подтвердить пароль",
+      "buttonChangePassword": "Изменить пароль"
+    },
+    "registrationPhone": {
+      "title": "Подтвердить номер телефона",
+      "titleChange": "Изменить номер телефона",
+      "fieldPhone": "Номер телефона",
+      "fieldPassword": "Ваш пароль",
+      "buttonConfirm": "ПОДТВЕРДИТЬ НОМЕР ТЕЛЕФОНА"
     }
   },
   "personalArea": {
     "profile": {
-      "hello": "Hello","Привет",
-      "youAreIn": "You are in","Ты в",
-      "modeClient": "Client mode","Клиент мод",
-      "modeMaster": "Master mode","Мастер мод",
-      "modeVolunteer": "Volunteer mode","Волонтер мод",
-      "location": "Location","Местоположение",
-      "registered": "Registered","Зарегистрирован",
-      "personalLink": "Personal link","Персональная ссылка",
-      "lookHowPeopleSeeYourAccount": "Look how people see your account","Посмотрите как люди видят ваш аккаунт",
-      "mobileOrders": "Orders","Заказы",
-      "mobileBack": "Back","Назад"
+      "hello": "Добрый день",
+      "youAreIn": "Вы находитесь в",
+      "modeClient": "режиме Клиента",
+      "modeMaster": "режиме Мастера",
+      "modeVolunteer": "режиме Волонтера",
+      "location": "Расположение",
+      "registered": "Зарегистрировано",
+      "personalLink": "Персональная ссылка",
+      "lookHowPeopleSeeYourAccount": "Посмотреть как выглядит ваш профиль",
+      "mobileOrders": "Заказы",
+      "mobileBack": "Назад",
+      "reviews": "Отзывы",
+      "recommended": "рекомендовать",
+      "sendMessage": "Отправить сообщение",
+      "sendOffer": "Отправить предложение",
+      "subscribe": "Подписаться"
     },
     "menu": {
-      "profile": "Personal information","Персональная информация",
-      "reviews": "Reviews and rating","Отзывы и рейтинг",
-      "orders": "Orders","Заказы",
-      "messages": "Messages","Сообщения",
-      "saved": "Saved","Сохраненное",
-      "settings": "Settings","Настройки",
-      "portfolio": "My Portfolio","Мое портфолио",
-      "calendar": "Calendar","Календарь",
+      "profile": "Персональная информация",
+      "reviews": "Отзывы и оценки",
+      "orders": "Заказы",
+      "messages": "Сообщения",
+      "saved": "Сохранено",
+      "settings": "Настройки",
+      "portfolio": "Мое Портфолио",
+      "calendar": "Календарь"
     },
     "tabProfile": {
-      "requiredField": "required field","Обязательное поле",
-      "buttonChangePassword": "Change Password","Сменить пароль",
-      "fieldFirstName": "First Name","Имя",
-      "fieldLastName": "Last Name","Фамилия",
-      "fieldBirthDate": "BOD* MM / DD / YYYY","день / месяц / год",
-      "fieldZip": "ZIP Code","Индекс",
-      "fieldAddress": "Address","Адрес 1",
-      "fieldAddress2": "Address 2","Адрес 2",
-      "fieldCountry": "Country*","Страна",
-      "fieldLocation": "Location*","Местоположение",
-      "buttonSave": "Save changes","Сохранить изменения"
+      "requiredField": "обязательное поле",
+      "buttonChangePassword": "Изменить пароль",
+      "fieldFirstName": "Имя",
+      "fieldLastName": "Фамилия",
+      "fieldBirthDate": "ДР* ММ / ДД / ГГГГ",
+      "fieldZip": "Почтовый индекс",
+      "fieldAddress": "Адрес",
+      "fieldAddress2": "Адрес 2",
+      "fieldCountry": "Страна*",
+      "fieldLocation": "Расположение*",
+      "buttonSave": "Сохранить изменения"
     },
     "tabOrders": {
       "menu": {
-        "draft": "Drafts","Черновики",
-        "published": "Published","Опубликовано",
-        "negotiation": "Negotiation","Переговоры",
-        "inProgress": "In Progress","В ходе выполнения",
-        "closed": "Closed","Закрыто",
-        "offers": "Offers","Предложения",
-        "declined": "Declined","Отклонено",
-        "responses": "Responses","Отзывы"
+        "draft": "Черновики",
+        "published": "Опубликовано",
+        "negotiation": "Обсуждение условий",
+        "inProgress": "На исполнении",
+        "closed": "Закрыто",
+        "offers": "Предложения",
+        "declined": "Отклонено",
+        "responses": "Ответы",
+        "saved": "Сохранено",
+        "create": "Создать новый Заказ"
       }
     },
     "tabFeedback": {
     },
     "tabSaved": {
       "menu": {
-        "people": "People","Люди",
-        "search": "Search","Поиск",
-        "tasks": "Tasks","Задачи"
+        "people": "Люди",
+        "search": "Поиск",
+        "tasks": "Заказ"
       }
     },
     "tabSettings": {
+      "change": "Изменить",
+      "deleteMyAccount": "Удалить мой профиль",
+      "buttonSave": "Сохранить изменения",
+      "fieldLanguage": "Язык",
+      "fieldPhone": "Телефон",
+      "fieldEmail": "Емейл профиля",
+      "fieldNotificationSettings": "Настройки уведомлений",
+      "push": "Пуш",
+      "email": "Емейл",
+      "deleteMyAccountConfirm": "Вы хотите удалить ваш профиль?",
+      "notificationSettings": {
+        "messages": "Сообщения",
+        "newTaskOffer": "Предложение Заказа",
+        "newTaskResponse": "Ответ на Заказ",
+        "newFeedback": "Новая обратная связь",
+        "taskOfferDeclined": "Предложение Заказа отклонено",
+        "taskResponseDeclined": "Ответ на Заказ отклонен"
+      }
+    },
+    "emailChange": {
+      "title": "Изменить емейл",
+      "titleSuccess": "Изменение емейла",
+      "fieldEmail": "Новый емейл",
+      "success": "Пожалуйста, проверьте папку Входящие вашего емейла для подтверждения.",
+      "buttonConfirm": "ИЗМЕНИТЬ ЕМЕЙЛ"
     }
   },
   "forms": {
+    "requiredFieldsTip": "обязательные поля",
     "avatarInput": {
-      "uploadYourPhoto": "Upload your photo","Загрузить ваше фото",
-      "formatAllowed": "Format allowed PNG and JPEG","Разрешенный формат PNG и JPEG",
-      "minimalSize": "Minimal size","Минимальный размер"
-      "changePhoto": "Change Photo","Сменить фото",
-      "deletePhoto": "Delete Photo","Удалить фото"
+      "uploadYourPhoto": "Загрузить вашу фотографию",
+      "formatAllowed": "Допустимые форматы PNG и JPEG",
+      "minimalSize": "Минимальный размер",
+      "changePhoto": "Изменить фотографию",
+      "deletePhoto": "Удалить фотографию"
+    },
+    "fileInput": {
+      "title": "выбрать фотографию",
+      "description": "Загрузить ваши фотографии, допустимые форматы PNG и JPEG",
+      "uploadFiles": "Загрузить файлы"
+    },
+    "radiusOfSearchInput": {
+      "values": {
+        "km": "км",
+        "province": "Регион",
+        "country": "Страна",
+        "world": "Мир"
+      }
+    },
+    "executionTypeInput": {
+      "values": {
+        "physical": "Физическое",
+        "virtual": "Виртуальное",
+        "combo": "Комбинация"
+      }
+    },
+    "priceFilterInput": {
+      "from": "От",
+      "under": "Под",
+      "min": "Мин",
+      "max": "Макс"
+    },
+    "priceTypeInput": {
+      "values": {
+        "fixed": "Фиксированная цена",
+        "rate": "Ставка за час"
+      }
+    },
+    "selectInput": {
+      "emptyActionText": "Не использовать"
     }
   },
   "task": {
-    "status": {
-      "draft": "Draft","Черновики",
-      "published": "Published","Опубликовано",
-      "private": "Private","Приватные",
-      "inProgress": "In progress","В ходе выполнения",
-      "done": "Done","Выполнено",
-      "canceled": "Canceled","Отменено"
+    "page": {
+      "planned": "Запланировано",
+      "completed": "Завершено",
+      "time": "Время",
+      "charges": "Начисления",
+      "expenses": "Затраты",
+      "courier": "Курьер",
+      "smallDelivery": "Небольшая доставка"
     },
-    "readMore": "Read more","Прочитать больше",
-    "edit": "Edit","Изменить",
-    "delete": "Delete","Удалить",
-    "publish": "Publish","Опубликовать"
-    "unPublish": "Unpublish","Отменить публикацию",
-    "cancel": "Cancel task","Отменить задачу",
-    "markAsCompleted": "Mark as completed","Отметить как завершенное"
-    "share": "Share","Поделиться"б
-    "save": "Save","Сохранить"б
-    "feedbackToClient": "Post feedback","Оставить отзыв",
-    "paymentMethod": "Payment method","Метод оплаты",
-    "paymentMethodBank": "Bank account","Банковской картой"
-    "paymentMethodCash": "Cash","Наличные",
-    "paymentMethodSafeDeal": "Safe deal","Безопасная сделка",
-    "deadline": "Deadline","Дедлайн",
-    "fixedPrice": "Fixed price","Фиксированная цена",
-    "acceptTask": "ACCEPT TASK","Принять задачу",
-    "messages": "Messages","Сообщения",
-    "decline": "Decline","Отклонить",
-    "accept": "Accept","Принять",
-    "youDeclined": "You declined","Вы отказались",
-    "loadMore": "Load more","Загрузить больше",
-    "confirmPublish": "Do you want to publish task","Вы хотите опубликовать задачу",
-    "confirmUnPublish": "Do you want to unpublish task","Вы хотите отменить публикацию задачи",
-    "confirmDelete": "Do you want to delete task","Вы хотите удалить задачу",
-    "confirmCancel": "Are you sure that you want to cancel task","Вы уверены что хотите отменить задачу",
-    "confirmAccept": "Are you sure that you want to accept an offer","Вы уверены что хотите принять предложение",
-    "confirmDecline": "Are you sure that you want to reject an offer","Вы уверены что хотите отклонить предложение",
-    "masterList": "Master list","Список мастеров"
+    "status": {
+      "draft": "Черновик",
+      "published": "Опубликовано",
+      "private": "Приватный",
+      "inProgress": "На исполнении",
+      "done": "Выполнено",
+      "canceled": "Отменено"
+    },
+    "readMore": "Читать больше",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "publish": "Опубликовать",
+    "unPublish": "Отменить публикацию",
+    "cancel": "Отменить Заказ",
+    "markAsCompleted": "Пометить как выполненное",
+    "share": "Поделиться",
+    "save": "Сохранить",
+    "saved": "Сохранено",
+    "feedbackToClient": "Опубликовать обратную связь",
+    "paymentMethod": "Тип платежа",
+    "paymentMethodBank": "Банковский счет",
+    "paymentMethodCash": "Наличные",
+    "paymentMethodSafeDeal": "Безопасная сделка",
+    "deadline": "Срок исполнения",
+    "fixedPrice": "Фиксированная цена",
+    "acceptTask": "ПРИНЯТЬ ЗАКАЗ",
+    "messages": "Сообщения",
+    "decline": "Отклонить",
+    "accept": "Принять",
+    "youDeclined": "Вы отклонили",
+    "loadMore": "Загрузить больше",
+    "confirmUnPublish": "Вы хотите отменить публикацию Заказа",
+    "confirmDelete": "Вы хотите удалить Заказ",
+    "confirmCancel": "Вы уверены что вы хотите отменить Заказ",
+    "confirmAccept": "Вы уверены что вы хотите принять предложение",
+    "confirmDecline": "Вы уверены что хотите отклонить предложение",
+    "masterList": "Список Мастеров",
+    "lessThen": "тогда меньше"
   },
-  "lessThen": "less then","Менее чем",
-  "hourly": "Hourly","Почасовая",
-  "deadline": "Deadline","Дедлайн",
-  "loadMore": "Load more","Загрузить больше",
+  "hourly": "Почасовой",
+  "deadline": "Отклонить",
+  "loadMore": "Узнать больше",
   "sort": {
-    "title": "Sort by","Сортировать по",
-    "newFirst": "New First","Сначала новые",
-    "oldFirst": "Old First","Сначала старые"
+    "title": "Сортировать по",
+    "newFirst": "Сначала новые",
+    "oldFirst": "Сначала старые",
+    "highestPrice": "Большая цена",
+    "lowestPrice": "Низшая цена"
   },
   "taskResponse": {
-    "declined": "Declined","Отклоненный",
-    "decline": "Decline","Отклонить",
-    "messages": "Messages","Сообщения",
-    "accept": "Accept","Принять",
-    "confirmDecline": "Do you want to decline response from",Вы хотите отклонить ответ от",
-    "confirmAccept": "Do you want to accept response from",Вы хотите принять ответ от"
+    "declined": "Отклонено",
+    "decline": "Отклонить",
+    "messages": "Сообщения",
+    "accept": "Принято",
+    "confirmDecline": "Вы хотите отклонить ответ от",
+    "confirmAccept": "Вы хотите принять ответ от"
+  },
+  "createTask": {
+    "stat": "Посмотреть [{{count}}] подходящих Мастеров",
+    "stepFillUpTaskRequest": "Заполните форму Заказа",
+    "stepGetOffers": "Получить предложения",
+    "stepChooseMaster": "Выбрать Мастера",
+    "fieldTitle": "Название Заказа",
+    "fieldMainCategory": "Главная категория",
+    "fieldCategory": "Категория",
+    "fieldLocation": "Расположение",
+    "fieldSubCategory": "Подкатегория",
+    "fieldMasterType": "Мастер или Волонтер",
+    "fieldExecutionType": "Тип выполнения",
+    "fieldDeadline": "Срок исполнения",
+    "fieldAddress": "Адрес",
+    "fieldDescription": "Описание Заказа",
+    "buttonCreateTask": "СОЗДАТЬ ЗАКАЗ",
+    "faq": "ЧЗВ",
+    "successTitle": "Ваш Заказ создан",
+    "priceSelect": {
+      "or": "или",
+      "hourlyTaskTitle": "Почасовая оплата",
+      "fixedPriceTaskTitle": "Фиксированная цена",
+      "fieldRatePerHour": "Ставка за час",
+      "fieldEstimate": "Оценка",
+      "fieldBudget": "Бюджет"
+    }
+  },
+  "taskSearch": {
+    "tasks": "Заказы",
+    "showOnTheMap": "Показать на карте",
+    "filter": {
+      "fieldMainCategory": "Главная категория",
+      "fieldCategory": "Категория",
+      "fieldSubCategory": "Подкатегория",
+      "fieldRadiusOfSearch": "Радиус поиска",
+      "fieldLocation": "Расположение",
+      "fieldExecutionType": "Тип выполнения",
+      "fieldClientRating": "Рейтинг Клиента",
+      "fieldPrice": "Цена",
+      "fieldKeywords": "Ключевые слова",
+      "more": "Больше",
+      "less": "Меньше",
+      "showMoreOptions": "оказать больше вариантов",
+      "hideMoreOptions": "Скрыть"
+    },
+    "saveTheSearch": "Сохранить поиск",
+    "saveTheSearchConfirm": "Вы хотите сохранить текущий поиск?",
+    "exactLocationTab": "Точное расположение",
+    "approximateLocationTab": "Примерное расположение"
+  },
+  "profileSearch": {
+    "master": "Мастера",
+    "client": "Клиенты",
+    "volunteer": "Волонтеры",
+    "showOnTheMap": "Показать на карте",
+
+    "filter": {
+      "fieldMainCategory": "Главная категория",
+      "fieldCategory": "Категория",
+      "fieldSubCategory": "Подкатегория",
+      "fieldRadiusOfSearch": "Радиус поиска",
+      "fieldLocation": "Расположение",
+      "fieldExecutionType": "Тип выполнения",
+      "fieldClientRating": "Рейтинг Клиента",
+      "fieldPrice": "Цена",
+      "fieldKeywords": "Ключевые слова",
+      "more": "Больше",
+      "less": "Меньше",
+      "showMoreOptions": "Показать больше вариантов",
+      "hideMoreOptions": "Скрыть"
+    },
+    "saveTheSearch": "Сохранить поиск",
+    "saveTheSearchConfirm": "Вы хотите сохранить текущий поиск?",
+    "exactLocationTab": "Точное расположение",
+    "approximateLocationTab": "Примерное расположение"
+  },
+  "createMasterProfile": {
+
+  },
+  "confirmModal": {
+    "title": "Вы уверены?",
+    "buttonConfirm": "Подтвердить",
+    "buttonCancel": "Отменить"
+  },
+  "contacts": {
+    "menu": {
+      "messages": "Сообщения",
+      "subscriptions": "Подписки на новости",
+      "saved": "Сохранено",
+      "recommendations": "Рекомендации"
+    },
+    "toolbar": {
+      "userType": "Сортировка по типу пользователю",
+      "sortType": "Сортировка по типу",
+      "all": "все",
+      "clent": "Клиент",
+      "volunteer": "Волонтер",
+      "master": "Мастер",
+      "a-z": "а-я",
+      "z-a": "я-а"
+    }
+  },
+  "categories": {
+    "findSpecialist": "Найти специалиста",
+    "allCategories": "Все категории"
+  },
+  "event": {
+    "event": "Событие",
+    "events": "События",
+    "eventNumber": "Номер События",
+    "eventTitle": "Название События",
+    "newEvent": "Новое Событие",
+    "createEvent": "Создать Событие",
+    "timePlaceCharge": "Время Место Начисления",
+    "chatReview": "Чат и Отзывы",
+    "info": "Инфо",
+    "preEvent": "До События",
+    "postEvent": "После События",
+    "enterMessage": "Введите ваше сообщение",
+    "reviewNotAvailable": "отзыв пока не доступен",
+    "describeYourExperience": "Опишите опыт вашей работы с",
+    "submitReview": "Отправить отзыв",
+    "eventInputs": "Вводные События",
+    "addNewExpense": "Добавить новый расход"
+  },
+  "chat": {
+    "areYouSure": "Вы уверены, что хотите отклонить отметку выполнения Заказа?",
+    "hireMaster": "Нанять Мастера",
+    "finishTask": "Завершить Заказ",
+    "markAsDone": "Отметить как выполненное",
+    "negotiateOffer": "Обсудить условия предложения",
+    "taskAccepted": "Заказ принят",
+    "taskCanceled": "Заказ отменен",
+    "taskFinished": "Заказ закончен",
+    "rejectConditions": "Вы уверены что хотите отклонить условия?",
+    "acceptOffer": "Вы уверены что хотите принять предложение?",
+    "acceptConditions": "Вы уверены что хотите принять условия?",
+    "cancelTask": "Вы уверены что хотите отменить Заказ?",
+    "message": {
+      "createdEvent": "{{profileText}} созданное Событие",
+      "changedStatus": "{{profileText}} изменен статус на {{message.eventLogRecordData.newStatus}}",
+      "changedEvent": "{{profileText}} изменены детали События",
+      "commentAdded": "{{profileText}} добавлен комментарий",
+      "attachedFile": "{{profileText}} прикреплен файл",
+      "addedFeedback": "{{profileText}} добавлена обратная связь",
+      "taskOutdated": "Заказ просрочен {{message.taskNegotiation.id}} {{lastCondition.id}}",
+      "negotiationStarted": "Обсуждение условий начато",
+      "systemMessage": "Системное сообщение",
+      "textStatus": "Вы {{statusText}} Заказ",
+      "sendTaskOffer": "Вы отослали предложение Заказа",
+      "sendOffer": "Вы отослали предложение",
+      "receiveOffer": "Вы получили предложение",
+      "master": "Мастер {{statusText}} ваше предложение",
+      "youStatusText": "Вы {{statusText}}",
+      "youSend": "You send you task negotiation",
+      "negotiationFromMaster": "Новое обсуждение условий Заказа от Мастера",
+      "negotiationFromClient": "Новое обсуждение условий Заказа от Клиента",
+      "masterNegotiation": "Мастер {{statusText}} ваше обсуждение условий",
+      "clientNegotiation": "Клиент {{statusText}} ваше обсуждение условий",
+      "accepted": "принято",
+      "rejected": "отклонено",
+      "masterAssigned": "Мастер назначен на этот Заказ",
+      "youAssigned": "Вы назначены на этот Заказ",
+      "markJobAsDone": "Вы {{statusText}} отметили работу как выполненную",
+      "markedJobAsDone": "Вы отметили работу как выполненную",
+      "masterMarkedTask": "Мастер отметил Заказ как завершенный",
+      "masterMarkTask": "Мастер отмечает Заказ как завершенный",
+      "clientMarkedTask": "Клиент отметил Заказ как завершенный",
+      "masterRequestMark": "Мастер {{statusText}} ваш запрос отметить как завершенное",
+      "clientRequestMark": "Клиент {{statusText}} ваш запрос отметить как завершенное"
+    }
+  },
+  "feedBack": {
+    "pleaseRate": "Пожалуйста оцените",
+    "youOwn": "Ваша собственная",
+    "ratePlatform": "Пожалуйста, оцените платформу MastersPages",
+    "work": "работа!",
+    "finishingTaskByMasterForm": {
+      "timeliness": "Своевременность и полнота оплаты:",
+      "presence": "Присутствие необоснованные придирок и замечаний:",
+      "respect": "Уважение и вежливость:",
+      "accordance": "Соответствие описания задания и реальных фактов :",
+      "adequacy": "Адекватность требований:",
+      "recommend": "Рекомендовать:",
+      "cancel": "ОТМЕНИТЬ",
+      "send": "ОТОСЛАТЬ",
+      "leaveFeedback": "Оставьте обратную связь здесь (по желанию)"
+    },
+    "feedbackForm": {
+      "usability": "Удобство :",
+      "searchSpeed": "Скорость поиска Мастеров :",
+      "willUseAgain": "Вы Воспользуйтесь MP в будущем :",
+      "willRecommend": "Вы рекомендуете нас :",
+      "done": "ВЫПОЛНЕНО",
+      "leaveFeedback": "Оставьте обратную связь здесь"
+    },
+    "finishingTaskByClientForm": {
+      "workQuality": "Качество :",
+      "politness": "Вежливость :",
+      "deadlines": "Сроки :",
+      "extraExpenses": "Дополнительные расходы :",
+      "notDone": "НЕ ВЫПОЛНЕНО",
+      "jobIsDone": "РАБОТА ВЫПОЛНЕНА"
+    },
+    "modals": {
+      "thankYou": "Спасибо за обратную связь!",
+      "yourOrder": "Поздравляем! Ваш Заказ выполнен",
+      "pleaseDescribe": "Пожалуйста, расскажите о впечатлениях от использования платформы. Ваши комментарии помогут сделать платформу еще более полезной.",
+      "noIDont": "НЕТ Я НЕ СОГЛАСЕН(А)",
+      "yes": "ДА Я ЭТО СДЕЛАЮ"
+    }
+  },
+  "follower": {
+    "editPost": "Редактировать публикацию",
+    "addPost": "Добавить публикацию",
+    "postForm": {
+      "uploadPhoto": "Загрузить фото",
+      "showInPortfolio": "Показать в портфолио",
+      "tab": "Закладка",
+      "title": "Название",
+      "description": "Описание",
+      "published": "Опубликовано",
+      "commentsAllowed": "Комментарии разрешены"
+    }
+  },
+  "instruction": {
+    "howItWorks": "Как это работает?",
+    "fill": "Заполните <1/> критерии подбора",
+    "see": "Посмотрите анкеты <1/> подобранных специалистов",
+    "communicate": "Общайтесь в чате <1/> и выберите подходящего",
+    "slide": {
+      "comfortable": "Удобная и <1/> безопасная оплата",
+      "withoutRisk": "При оплате через <1>Сделку без риска YouDo</1> <3/> вернет деньги, если что-то пойдет не так",
+      "reliable": "Надежные <1/> исполнители",
+      "trusted": "<1>Проверенные исполнители</1> <3/> подтвердили свои документы на YouDo",
+      "trustedReviews": "Достоверные <1/> отзывы",
+      "help": "Более <1>1 000 000 отзывов от заказчиков</1> <3/> помогут выбрать подходящего <5/> исполнителя",
+      "business": "Wedo4you для <1/> бизнеса",
+      "pay": "Безналичная оплата <1>бизнес-заданий</1> <3/> с предоставлением закрывающих <5/> документов"
+    }
+  },
+  "footer": {
+    "copyright": "Master Pages. Все права защищены",
+    "allServices": "Все услуги",
+    "allReviews": "Все отзывы",
+    "serviceHistory": "История Заказов",
+    "conditions": "Условия использования",
+    "mobile": "Мобильная версия",
+    "banner": {
+      "earn": "Заработайте на том, <1/> что делаете лучше всех",
+      "earnMobile": "Заработайте на том, что делаете лучше всех",
+      "executor": "Стать исполнителем"
+    }
+  },
+  "mainPage": {
+    "tasksDone": "+ Заказ выполнен",
+    "tasksRequested": "+ Заказ запрошен",
+    "mastersOnWebsite": "+ Мастера на вебсайте",
+    "tasksPerMonth": "+ заказы выполненные помесячно",
+    "free": "Освободим вас от забот",
+    "howItWorks": "Это работает так",
+    "find": "Найдите исполнителя под ваши задачи",
+    "example": "Пример:",
+    "petDoctor": "Ищем доктора для домашнего животного",
+    "order": "Заказать",
+    "specialist": "Услуга или специалист",
+    "modernBusiness": "Современная платформа управления бизнесом для самозанятых профессионалов",
+    "organize": "Организуйте плавное ведение вашего бизнеса самым эффективным образом на всеохватывающей платформе MastersPages:",
+    "goLive": "Мы запускаемся в июле 2021",
+    "effect": "эффективно!!!",
+    "helpImpress": "Позвольте MastersPages удивить ваших Клиентов лёгкостью и радостью от ведения бизнеса с вами, пока Вы сконцентрированы на раскрытии своей креативности. Ваше призвание - одна из самых больших игр вашей жизни. С MastersPages Вы получите больше радости от этой игры. MastersPages позаботится о том, чтобы ваши успехи были признаны и вознаграждены.",
+    "thrill": "ПРИДАЙТЕ ВАШЕМУ БИЗНЕСУ НОВОЕ ВООДУШЕВЛЕНИЕ!",
+    "secondSection": {
+      "firstSlide": {
+        "title": "Рекламируйте и расскажите миру о себе – Yourname.MastersPages",
+        "description": "Каждый бриллиант лучше всего блестит в собственном кольце - каждому человеку и каждой профессии требуется индивидуальный подход, чтобы их творческие способности и навыки засияли.",
+        "icons": {
+          "text1": "Расскажите текстом или с помощью видео ролика вашу историю и убедите что нужно выбрать именно Вас.",
+          "text2": "Представьте свои квалификации - образование, профессиональный опыт.",
+          "text3": "Хвастайтесь своими достижениями - публикуйте фотографии и видеоролики о работах, которые вы сделали или услугах, которые вы оказали.",
+          "text4": "Позвольте другим рассказать о вас - каждая ваша работа, каждая услуга, которую вы оказываете, делают кого-то счастливым.",
+          "text5": "Доставьте вашим Клиентам радость поделиться благодарностью вам.",
+          "text6": "Андеррайтинг - публикуйте подтвержденные отзывы и обратную связь по вашим работам.",
+          "text7": "Создайте отдельный профиль для каждого из ваших талантов."
+        }
+      },
+      "secondSlide": {
+        "title": "Общайтесь с вашими Клиентами централизованно – Messages.MastersPages",
+        "description": "Позвольте MastersPages внести порядок и организовать вашу деловую переписку с Клиентами. Вся информация по вашу бизнесу будет расположена в едином хранилище. Ничто не будет потеряно или забыто; все данные будет доступны по одному клику.",
+        "icons": {
+          "text1": "Используйте MastersPages для общения и переговоров с вашими Клиентами на единой платформе",
+          "text2": "Воспользуйтесь эффективным форматом заключения сделок, четко фиксирующим основные условия достигнутых договоренностей и\n' + 'согласие обеих сторон - без какой-либо двусмысленности",
+          "text3": "Отчитывайтесь об исполнении и получайте подтверждения и согласия от Клиента",
+          "text4": "Автоматически направляйте обновления вашим Клиентам",
+          "text5": "Собирайте оценки и отзывы ваших Клиентов"
+        }
+      },
+      "thirdSlide": {
+        "title": "“Время - деньги”",
+        "description": "Невозможно превзойти самое известное высказывание Бенджамина Франклина, который был известен своей эффективность в работе и разнообразием талантов. За свои 84 года, он стал не только выдающимся политиком и дипломатом, но еще был известен и как актер, музыкант, изобретатель и сатирик. Планируйте и координируйте свою работу и заставьте время работать на Вас, получив полный контроль за 4ым измерением с помощью интегрированной системы управления временем от MastersPages:",
+        "icons": {
+          "text1": "Координируйте ваш время с вашими Клиентами",
+          "text2": "Получайте напоминания и удивите ваших Клиентов своей пунктуальностью",
+          "text3": "Планируйте и извлеките максимум из 24 часов"
+        }
+      },
+      "fourthSlide": {
+        "title": "Сохраняйте ваши рабочие файлы – Tasks.MastersPages",
+        "description": "Каждая работа, которую Вы выполняете изменяет мир. Стоит записать что Вам удалось свершить. MastersPages помогает структурировать мир ваших заданий и работ и запомнить все нюансы:",
+        "icons": {
+          "text1": "Сохраняйте рабочие файлы прямо в Заказе – фото, видео, документы, бюджеты, расчеты, внешние ссылки"
+        }
+      },
+      "fifthSlide": {
+        "title": "Формируйте ваши отчеты – Reports.MastersPages",
+        "description": "Креативность и усердие приводят Клиентов и Заказы. Отслеживание работы и платежей может стать затруднительными по мере роста успешности бизнеса. MastersPages запоминает каждый час, который вы потратили, каждую сделанную вами работу, каждый выполненный вами Заказ. Используйте систему отчетов MastesPages для хранения, получения и создания отчетов и статистике:",
+        "icons": {
+          "text1": "Настраиваемые поля",
+          "text2": "Сортировка по Клиентам, услугам, датам",
+          "text3": "Выгрузка данных в самых популярных форматах",
+          "text4": "Отчетность и статистика формируются легко"
+        }
+      }
+    },
+    "thirdSection": {
+      "features": {
+        "text1": "Создайте личный кабинет на MastersPages.com (Регистрация)",
+        "text2": "Заполните ваш профиль Мастера и поделитесь ссылкой на профиль в вашей рекламе (Facebook, Instagram, баннеры, Тап-линк, и т.д.)",
+        "text3": "Пригласите ваших Клиентов зарегистрироваться в сообществе MastersPages",
+        "text4": "Планируйте ваши работы или получайте Заказы от своих Клиентов",
+        "text5": "Регулярно обновляйте ваш профиль и публикуйте ваши работы в разделе Новости",
+        "text6": "Собирайте отзывы",
+        "text7": "Получайте Заказы от новых Клиентов",
+        "text8": "Наслаждайтесь роскошью плавно идущей, организованной работы и сконцентрируйтесь на ваших навыках и креативности – MastersPages возьмет на себя всю суету"
+      }
+    },
+    "categories": {
+      "tutors": "Преподаватели",
+      "repairman": "Специалисты по ремонту",
+      "beautyMaster": "Мастера красоты",
+      "freelancers": "Фрилансеры",
+      "accountants": "Бухгалтеры",
+      "lawyers": "Юристы",
+      "atleticCoaches": "Спортивные тренеры",
+      "artists": "Артисты",
+      "homeStaff": "Домашний персонал",
+      "veterinarians": "Ветеринары",
+      "drivingInstructors": "Инструкторы по вождению",
+      "doctors": "Доктора",
+      "various": "Прочие специалисты"
+    },
+    "labels": {
+      "advertise": "Рекламировать",
+      "communicate": "Коммуницировать",
+      "timeManage": "Управлять временем",
+      "note": "Запоминать",
+      "organize": "Организовывать",
+      "wow": "ВАУ"
+    }
+  },
+  "masterForm": {
+    "firstName": "Имя*",
+    "lastName": "Фамилия*",
+    "avatar": "Аватар*",
+    "location": "Расположение*",
+    "categories": "Категории*",
+    "personalInformation": "Персональная информация",
+    "chooseCategories": "Выбрать Категории",
+    "imortantInformation": "Важная информация",
+    "rules": "С <1>правилами сайта</1> ознакомился и согласен"
+  },
+  "portfolio":{
+    "addCategory": "Добавить Категорию",
+    "editCategory": "Редактировать Категорию",
+    "1 month": "1 месяц",
+    "2 month": "2 месяца.",
+    "3 month": "3 месяца",
+    "4 month": "4 месяца",
+    "5 month": "5 месяцев",
+    "skill": {
+      "firstImage": "Добавить Ваш первый имидж",
+      "emptyDescription": "Описание не заполнено",
+      "deleteCategory": "Удалить категорию"
+    },
+    "skillForm": {
+      "description": "Описание*",
+      "choosePhoto": "выберите фото",
+      "uploadPhoto": "Загрузить Вашу фотографию, разрешенные форматы PNG и JPEG"
+    }
+  },
+  "post": {
+    "areYouSureToDelete": "Вы уверены что хотите удалить «{{model.title}}»?",
+    "createPost": "Создать публикацию",
+    "postBy": "Публикация"
+  },
+  "cardGallery": {
+    "gallery": "Галерея",
+    "addPhoto": "Добавить фото"
+  },
+  "cardLanguages": {
+    "languages": "Языки"
+  },
+  "cardPortfolio": {
+    "addWork": "Добавить работу",
+    "visitWebsite": "Посетить веб сайт",
+    "attachedFiles": "Прикрепленные файлы"
+  },
+  "cardPost": {
+    "totalPosts": "Публикации ({{total}})"
+  },
+  "cardPreferToWorkIn": {
+    "prefer": "Предпочитает работать в"
+  },
+  "cardProfile": {
+    "lastSeen": "Был(а) последний раз:",
+    "stat": {
+      "learnMore": "Узнать больше"
+    }
+  },
+  "cardRecommenadationShort": {
+    "seeAll": "Посмотреть все",
+    "recommendationsTotal": "Рекомендаций ({{total}})",
+    "recommendations": "Рекомендации"
+  },
+  "cardReviewsShort": {
+    "reviewsTotal": "Отзывы ({{total}})",
+    "recommendations": "Отзывы"
+  },
+  "cardSalesPitch": {
+    "salesPitch": "Почему именно Вы",
+    "form": {
+      "fillUpSalePitch": "Заполните поле почему Клиент должен выбрать именно Вас. Не более 1000 знаков"
+    }
+  },
+  "cardWorkExperience": {
+    "addWorkExperience": "Добавьте опыт работы",
+    "qualification": "Профессиональные квалификации и опыт работы",
+    "form": {
+      "jobPosition": "Должность",
+      "fromDate": "С даты",
+      "toDate": "По дату",
+      "companyOrInstitution": "Название Компании или Организации"
+    }
+  },
+  "galleryModal": {
+    "yourComment": "Оставьте Ваш комментарий здесь"
+  },
+  "reportFilterForm": {
+    "overview": "Обзор:",
+    "filterBy": "Фильтровать по:",
+    "plannedTime": "Запланированное время",
+    "actualTime": "Фактическое время",
+    "plannedAmount": "Забюджетированная сумма",
+    "actualAmount": "Фактическая сумма",
+    "clientName": "Имя Клиента",
+    "masterName": "Имя Мастера",
+    "reviewMark": "Оценка"
+  },
+  "saveProfileSearchModal": {
+    "saveThisFilter": "Сохранить этот фильтр?",
+    "form": {
+      "name": "Название:"
+    }
+  },
+  "personalLabel": {
+    "yourPersonalLabel": "Ваш персональный лейбл",
+    "useYourPersonal": "Используйте Ваш персональный лейбл MP в подписи емейла, шапке письма, как логотип на визитных карточках или разместите на Ваших рекламных материалах.",
+    "downloadPDF": "Загрузить PDF",
+    "downloadImage": "Загрузить имидж",
+    "form": {
+      "verticalStyle": "Вертикальный стиль",
+      "horizontalStyle": "Горизонтальный стиль",
+      "lightTheme": "Светлое оформление",
+      "darkTheme": "Темное оформление",
+      "qrCode": "QR код",
+      "webAddress": "Веб адрес"
+    }
+  },
+  "personalLink": {
+    "yourPersonalLink": "Ваша персональная ссылка",
+    "linkWas": "Ссылка скопирована в буфер обмена"
+  },
+  "shareByEmail": {
+    "inviteAnother": "Пригласить еще",
+    "mailTo": "Емейл кому",
+    "invitesYou": "Приглашает Вас присоединиться к MastersPages",
+    "dear": "Уважаемый(ая)",
+    "wouldLike": "хотел(а) бы пригласить Вас ознакомиться со своим профилем на MastersPages.",
+    "toSee": "Увидеть",
+    "profile": "профиль.",
+    "toLearn": "Узать больше о",
+    "ifYouGot": "Если Вы получили этот емейл по ошибке, сообщите о злоупотреблении.",
+    "trulyYours": "Искренне Ваши. Команда МастерзПейджез",
+    "selfEmployed": "Платформа управления бизнесом для самозанятых.",
+    "masterInvited": "Мастер приглашен",
+    "clientInvited": "Клиент приглашен",
+    "invite": "Пригласить"
+  },
+  "split": {
+    "positive": "положительных <1/> отзывов",
+    "peopleOrdering": "Заказывают прямо сейчас"
+  },
+  "steps": {
+    "completeProfile": "01. Заполнить профиль",
+    "findATask": "02. Найти Заказ",
+    "doTask": "03. Выполнить Заказ и заработать"
+  },
+  "taskNegotiation": {
+    "negotiateOffer":"Обсудить предложение",
+    "expireIn": "Истекает:",
+    "sendOffer": "Отправить предложение",
+    "hiringAMaster": "Нанимать Мастера",
+    "hireMaster": "Нанять Мастера",
+    "finishingTask": "Завершение Заказа",
+    "markAsDone": "Пометить как выполненное",
+    "acceptAndOffer": "Согласиться и предложить",
+    "coverLetter": "Сопроводительное письмо",
+    "agreeWith": "Согласиться с предложением Клиента по оплате",
+    "iWant": "Я хочу предложить другие условия",
+    "availableTasks": "Доступные Заказы",
+    "privateTask": "Приватный Заказ",
+    "offerTask": "Предложить Заказ",
+    "physical": "Физическое",
+    "virtual": "Онлайн",
+    "combo": "Комбинация",
+    "iAmAgreeWith": "Я согласен с",
+    "termsAndConditions": "условия",
+    "agreeWithClient": "Согласиться с предложением Клиента по оплате",
+    "differentTerms": "Я хочу предложить другие условия"
+  },
+  "fileInput": {
+    "fileHere": "Перенесите сюда файл или нажмите <1/> для выбора файла на компьютере",
+    "attachPhotos": "прикрепить фотографии"
+  },
+  "modal": {
+    "markedJob": "отметить работу a<1> как выполненную</1>",
+    "describeExperience": "Опишите Ваш опыт"
+  },
+  "profileComponent": {
+    "viewProfile": "Посмотреть профиль",
+    "statistic": "Статистика:",
+    "tasksCompleted": "Завершенные Заказы:",
+    "totalHours": "Итого часов:",
+    "tasksEarned": "Заработанные Заказы:",
+    "offerTask": "ПРЕДЛОЖИТЬ ЗАКАЗ",
+    "sendMessage": "ОТПРАВИТЬ СООБЩЕНИЕ"
+  },
+  "emailConfirmation": {
+    "confirmed": "Емейл подтвержден",
+    "notConfirmed": "Емайл не подтвержден"
+  },
+  "report": {
+    "id": "ID"
+  },
+  "meetingForm": {
+    "meetingLink": "Ссылка на собрание",
+    "type": "Тип",
+    "clientAddress": "Адрес Клиента",
+    "masterAddress": "Адрес Мастера",
+    "address1": "Адрес 1",
+    "address2": "Адрес 2",
+    "city": "Город",
+    "state": "Регион",
+    "zipCode": "Почтовый индекс"
+  },
+  "timePlaceChargeForm": {
+    "yourConsent": "Вы подтверждаете Ваше согласие с завершением События в задокументированном виде. Это действие не может быть отменено. Вы хотите продолжить?",
+    "yourInvitation": "Ваше приглашение будет отправлено Вашему контрагенту. Вы хотите продолжить?",
+    "approvalIsFinal": "Подтверждение окончательное и не может быть отменено. Вы хотите продолжить?",
+    "deletionIsFinal": "Удаление окончательное и не может быть отменено. Вы хотите продолжить?",
+    "confirmIsFinal": "Подтверждение окончательное и не может быть отменено. Вы хотите продолжить?",
+    "declineIsFinal": "Отказ окончательный и не может быть отменен. Вы хотите продолжить?"
+  },
+  "savedSearch": {
+    "areYouSure": "Вы уверены что хотите удалить сохраненный поиск?",
+    "search": "Поиск"
+  },
+  "taskOfferShow": {
+    "decline": "Вы хотите отклонить ответ от",
+    "accept": "Вы хотите принять ответ от"
+  },
+  "sharePage": {
+    "shareByEmail": "Поделиться по емейлу",
+    "profileLink": "Ссылка на профиль",
+    "shareBySocialMedia": "Поделиться в соц сетях",
+    "personalLabel": "Персональный лейбл"
   }
 }

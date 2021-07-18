@@ -10,7 +10,7 @@ import Loader from 'components/ui/Loader'
 import {useEffect} from 'react'
 import EventFeedback
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventFeedback'
-
+import {useTranslation} from 'react-i18next'
 interface Props {
   event?: IEvent
 }
@@ -23,6 +23,7 @@ let EventReview = ({event}: Props) => {
   const myReview = event.feedbacks.find(f => f.fromProfileId === currentProfile.id);
   const otherReview = event.feedbacks.find(f => f.fromProfileId !== currentProfile.id);
   const otherSide = event.isAuthor ? event.participant : event.author;
+  const {t} = useTranslation('common');
   useEffect(() => {
     return () => {
       dispatch(resetFeedbackEventForm());
@@ -40,12 +41,12 @@ let EventReview = ({event}: Props) => {
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
         <a href={`/id${otherSide.id}`}  target={'_blank'}
-           className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> review not available yet
+           className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> {t('event.reviewNotAvailable')}
       </div>}
       {otherReview && <>
         <div className={styles.reviewTitle}>
           <a href={`/id${otherSide.id}`}  target={'_blank'}
-             className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> review:
+             className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> {`${t('reviewSmall')}:`}
 
         </div>
         <EventFeedback feedback={otherReview}/>

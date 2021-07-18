@@ -43,10 +43,146 @@
     "selectSubCategory": "Add one or more sub categories"
   },
   "master": "Master",
+  "yourReview": "Your review",
+  "copyLink": "Copy this link",
+  "news": "News",
+  "works": "Works",
+  "likes": "Likes",
+  "hours": "Hours",
+  "new": "new",
+  "createSmall": "create",
+  "expenseType": "Expense type",
+  "priceAmount": "Price amount",
+  "reviewsSmall": "reviews",
+  "addNew": "Add new",
+  "delete": "Delete",
+  "saveAsDraft": "Save as Draft",
+  "editResults": "Edit results",
+  "declineAndDelete": "Decline & Delete",
+  "restore": "Restore",
+  "complete": "Complete",
+  "approve": "Approve",
+  "send": "Send",
+  "confirm": "Confirm",
+  "draft": "Draft",
+  "pending": "Pending",
+  "overdue": "Overdue",
+  "finished": "Finished",
+  "rejected": "Rejected",
+  "deleted": "Deleted",
+  "total": "Total",
+  "start": "Start",
+  "end": "End",
+  "lookingAt": "Hello guest you are looking at",
+  "reviewSmall": "review",
+  "profile": "profile",
+  "of": "of",
+  "reviewNotAvailable": "review not available yet",
+  "recommend": "Reccomend",
+  "share": "Share",
+  "readMore": "Read more",
+  "statistic": "Statistic",
+  "tasks": "Tasks",
+  "editTask": "Edit task",
+  "requiredField": "required field",
+  "avatar": "Avatar",
+  "positiveReviews": "Positive reviews based on",
+  "personalInformation": "Personal information",
+  "notifications": "Notifications",
+  "defaultLanguage": "Default language",
+  "defaultTimezone": "Default timezone",
+  "changePassword": "Change password",
+  "deleteProfiles": "Delete profiles",
+  "deleteAccount": "Delete account",
+  "more": "More",
+  "hour": "hour",
+  "saved": "Saved",
+  "hide": "Hide",
+  "budget": "Budget",
+  "seeDetails": "See details",
+  "decline": "Decline",
+  "accept": "Accept",
+  "messages": "Messages",
+  "currency": "Currency",
+  "shareBySocialMedia": "Share by social media",
+  "goToHomePage": "GO TO HOME PAGE",
+  "taskTitle": "Task title",
+  "taskDescription": "Task description",
+  "location": "Location",
+  "estimate": "Estimate",
+  "masterOrVolunteer": "Master or volunteer",
+  "mainCategory": "Main category",
+  "category": "Category",
+  "subCategories": "Sub categories",
+  "subCategory": "Sub category",
+  "executionType": "Execution Type",
+  "free": "Free",
+  "price": "Price",
+  "fixedPrice":"Fixed price",
+  "hAWeek": "h a week",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "subject": "Subject",
+  "cancelLarge": "CANCEL",
+  "saveLarge": "SAVE",
+  "address": "Address",
+  "review": "Review",
+  "reviews": "Reviews",
+  "title": "Title",
+  "clients": "Clients",
+  "masters": "Masters",
+  "orders": "Orders",
+  "all": "All",
+  "today": "Today",
+  "tomorrow": "Tomorrow",
+  "addLink": "Add link",
+  "uploadPhoto":"Upload photo",
+  "uploadPhotoOrVideo":"Upload photo or video",
+  "formatAllowed": "Format allowed: PNG, JPEG, MP4",
+  "cancel": "Cancel",
+  "save": "Save",
+  "portfolioLabel": "Portfolio",
+  "type": "Type",
+  "online": "Online",
+  "offline": "Offline",
+  "down": "down",
+  "up": "up",
+  "doYouWantToDelete": "Do you want to delete",
+  "worksInCategories": "Works in the following categories",
+  "add": "Add",
+  "ready": "READY",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "year": "Year",
+  "agenda": "Agenda",
+  "orderNumber": "Order number:",
   "volunteer": "Volunteer",
   "agreeWith": "I am agree with",
   "termsAndConditions": "terms and conditions",
   "back": "Back",
+  "status": "Status",
+  "client": "Client",
+  "orderTitle": "Order title",
+  "startTime": "Start time",
+  "endTime": "End time",
+  "log": "Log",
+  "date": "Date",
+  "priceType": "Price type:",
+  "pricePerHour": "Price per hour",
+  "perHour": "Rate per hour",
+  "fixed": "Fixed",
+  "availableTasks": "Available tasks",
+  "privateTasks": "Private tasks",
+  "reject": "Reject",
+  "edit": "Edit",
+  "editSmall": "edit",
+  "accepted": "Accepted",
+  "declined": "Declined",
+  "allPosts": "All posts",
+  "newOrder": "New order",
+  "photos": "Photos",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {
@@ -70,7 +206,8 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum volutpat",
       "buttonConfirm": "CONFIRM",
       "sendAgain": "Send again",
-      "dontReceiveSms": "Dont receive sms?"
+      "dontReceiveSms": "Dont receive sms?",
+      "code": "Code:"
     },
     "registrationPage": {
       "title": "Registration complete",
@@ -132,7 +269,13 @@
       "registered": "Registered",
       "personalLink": "Personal link",
       "lookHowPeopleSeeYourAccount": "Look how people see your account",
-      "mobileOrders": "Orders"
+      "mobileOrders": "Orders",
+      "mobileBack": "Back",
+      "reviews": "Reviews",
+      "recommended": "recommended",
+      "sendMessage": "Send message",
+      "sendOffer": "Send Offer",
+      "subscribe": "Subscribe"
     },
     "menu": {
       "profile": "Personal information",
@@ -167,7 +310,8 @@
         "offers": "Offers",
         "declined": "Declined",
         "responses": "Responses",
-        "saved": "Saved"
+        "saved": "Saved",
+        "create": "Create new order"
       }
     },
     "tabFeedback": {
@@ -218,7 +362,8 @@
     },
     "fileInput": {
       "title": "choose photo",
-      "description": "Upload your photo, Format allowed PNG and JPEG"
+      "description": "Upload your photo, Format allowed PNG and JPEG",
+      "uploadFiles": "Upload files"
     },
     "radiusOfSearchInput": {
       "values": {
@@ -252,6 +397,15 @@
     }
   },
   "task": {
+    "page": {
+      "planned": "Planned",
+      "completed": "Completed",
+      "time": "Time",
+      "charges": "Charges",
+      "expenses": "Expenses",
+      "courier": "Courier",
+      "smallDelivery": "Small delivery"
+    },
     "status": {
       "draft": "Draft",
       "published": "Published",
@@ -400,6 +554,501 @@
       "subscriptions": "News Subscriptions",
       "saved": "Saved",
       "recommendations": "Recommendations"
+    },
+    "toolbar": {
+      "userType": "User type",
+      "sortType": "Sort type",
+      "all": "all",
+      "clent": "client",
+      "volunteer": "volunteer",
+      "master": "master",
+      "a-z": "a-z",
+      "z-a": "z-a"
     }
+  },
+  "categories": {
+    "findSpecialist": "Find your specialist",
+    "allCategories": "All categories"
+  },
+  "event": {
+    "event": "Event",
+    "events": "Events",
+    "eventNumber": "Event number",
+    "eventTitle": "Event title",
+    "newEvent": "New event",
+    "createEvent": "Create event",
+    "timePlaceCharge": "Time Place Charge",
+    "chatReview": "Chat & Review",
+    "info": "info",
+    "preEvent": "Pre-event",
+    "postEvent": "Post-event",
+    "enterMessage": "Enter your message",
+    "reviewNotAvailable": "review not available yet",
+    "describeYourExperience": "Describe your work experience with",
+    "submitReview": "Submit review",
+    "eventInputs": "Event inputs",
+    "addNewExpense": "Add new expense"
+  },
+  "chat": {
+    "areYouSure": "Are you sure that you want to reject mark task as done?",
+    "hireMaster": "Hire master",
+    "finishTask": "Finish task",
+    "markAsDone": "Mark as done",
+    "negotiateOffer": "Negotiate offer",
+    "taskAccepted": "Task accepted",
+    "taskCanceled": "Task canceled",
+    "taskFinished": "Task finished",
+    "rejectConditions": "Are you sure that you want to reject conditions?",
+    "acceptOffer": "Are you sure that you want to accept an offer?",
+    "acceptConditions": "Are you sure that you want to accept conditions?",
+    "cancelTask": "Are you sure that you want to cancel task?",
+    "message": {
+      "createdEvent": "{{profileText}} created event",
+      "changedStatus": "{{profileText}} changed status to {{message.eventLogRecordData.newStatus}}",
+      "changedEvent": "{{profileText}} changed event details",
+      "commentAdded": "{{profileText}} comment added",
+      "attachedFile": "{{profileText}} attached file",
+      "addedFeedback": "{{profileText}} added feedback",
+      "taskOutdated": "Task outdated {{message.taskNegotiation.id}} {{lastCondition.id}}",
+      "negotiationStarted": "Negotiation started",
+      "systemMessage": "System message",
+      "textStatus": "You {{statusText}} an offer",
+      "sendTaskOffer": "You send task offer",
+      "sendOffer": "You send an offer",
+      "receiveOffer": "You receive an offer",
+      "master": "Master {{statusText}} your offer",
+      "youStatusText": "You {{statusText}}",
+      "youSend": "You send you task negotiation",
+      "negotiationFromMaster": "New task negotation from master",
+      "negotiationFromClient": "New task negotation from client",
+      "masterNegotiation": "Master {{statusText}} your negotiation",
+      "clientNegotiation": "Client {{statusText}} your negotiation",
+      "accepted": "accepted",
+      "rejected": "rejected",
+      "masterAssigned": "Master assigned to this task",
+      "youAssigned": "You assigned to this task",
+      "markJobAsDone": "You {{statusText}} mark job as done",
+      "markedJobAsDone": "You marked job as done",
+      "masterMarkedTask": "Master marked task as completed",
+      "masterMarkTask": "Master mark task as completed",
+      "clientMarkedTask": "Client marked task as completed",
+      "masterRequestMark": "Master {{statusText}} your request to mark as done",
+      "clientRequestMark": "Client {{statusText}} your request to mark as done"
+    }
+  },
+  "feedBack": {
+    "pleaseRate": "Please rate",
+    "youOwn": "You own",
+    "ratePlatform": "Please rate Masters Pages platform",
+    "work": "work!",
+    "finishingTaskByMasterForm": {
+      "timeliness": "Timeliness and completeness of payment:",
+      "presence": "The presence of nagging and unfounded remarks:",
+      "respect": "Respect and courtesy:",
+      "accordance": "The accordance between the description and real work :",
+      "adequacy": "The adequacy of the requirements:",
+      "recommend": "Reccomend:",
+      "cancel": "CANCEL",
+      "send": "SEND",
+      "leaveFeedback": "Leave a feedback here (optional)"
+    },
+    "feedbackForm": {
+      "usability": "Usability :",
+      "searchSpeed": "Master search speed :",
+      "willUseAgain": "Will you use MS again :",
+      "willRecommend": "Will you recommend us :",
+      "done": "DONE",
+      "leaveFeedback": "Leave a feedback here"
+    },
+    "finishingTaskByClientForm": {
+      "workQuality": "Work quality :",
+      "politness": "Politness :",
+      "deadlines": "Deadlines :",
+      "extraExpenses": "Extra expenses :",
+      "notDone": "NOT DONE",
+      "jobIsDone": "JOB IS DONE"
+    },
+    "modals": {
+      "thankYou": "Thank you for your feedback!",
+      "yourOrder": "Congratulations! Your order is completed",
+      "pleaseDescribe": "Please describe your experiens working with our platform. It will help us to make it more useful for you in future.",
+      "noIDont": "NO I DON'T",
+      "yes": "YES I WILL DO IT"
+    }
+  },
+  "follower": {
+    "editPost": "Edit post",
+    "addPost": "Add post",
+    "postForm": {
+      "uploadPhoto": "Upload photo",
+      "showInPortfolio": "Show in portfolio",
+      "tab": "Tab",
+      "title": "Title",
+      "description": "Description",
+      "published": "Published",
+      "commentsAllowed": "Comments allowed"
+    }
+  },
+  "instruction": {
+    "howItWorks": "Как это работает?",
+    "fill": "Заполните <1/> критерии подбора",
+    "see": "Посмотрите анкеты <1/> подобранных специалистов",
+    "communicate": "Общайтесь в чате <1/> и выберите подходящего",
+    "slide": {
+      "comfortable": "Удобная и <1/> безопасная оплата",
+      "withoutRisk": "При оплате через <1>Сделку без риска YouDo</1> <3/> вернет деньги, если что-то пойдет не так",
+      "reliable": "Надежные <1/> исполнители",
+      "trusted": "<1>Проверенные исполнители</1> <3/> подтвердили свои документы на YouDo",
+      "trustedReviews": "Достоверные <1/> отзывы",
+      "help": "Более <1>1 000 000 отзывов от заказчиков</1> <3/> помогут выбрать подходящего <5/> исполнителя",
+      "business": "Wedo4you для <1/> бизнеса",
+      "pay": "Безналичная оплата <1>бизнес-заданий</1> <3/> с предоставлением закрывающих <5/> документов"
+    }
+  },
+  "footer": {
+    "copyright": "Master Pages all rights reserved",
+    "allServices": "Все услуги",
+    "allReviews": "Все отзывы",
+    "serviceHistory": "История заказов",
+    "conditions": "Условия использования",
+    "mobile": "Мобильная версия",
+    "banner": {
+      "earn": "Заработайте на том, <1/> что делаете лучше всех",
+      "earnMobile": "Заработайте на том, что делаете лучше всех",
+      "executor": "Стать исполнителем"
+    }
+  },
+  "mainPage": {
+    "tasksDone": "+ tasks done",
+    "tasksRequested": "+ tasks requested",
+    "mastersOnWebsite": "+ masters on website",
+    "tasksPerMonth": "+ task done per month",
+    "free": "Освободим вас от забот",
+    "howItWorks": "Here is how it works",
+    "find": "Найдите исполнителя под ваши задачи",
+    "example": "Example:",
+    "petDoctor": "Looking for a pet doctor",
+    "order": "Заказать",
+    "specialist": "Услуга или специалист",
+    "modernBusiness": "Modern business management platform for self-employed professionals",
+    "organize": "Organize smooth flow of your business in the most efficient way in one place with MastersPages:",
+    "goLive": "We go live in May 2021",
+    "effect": "effect!!!",
+    "helpImpress": "Let MastersPages help impress your customers with ease and delight of doing business with you, while you devote all efforts to unleashing your full creativity. Your vocation is one of the biggest games of your life. With MastersPages you will enjoy this game even more. MastersPages will make sure your successes are recognized and rewarded.",
+    "thrill": "TREAT YOUR BUSINESS WITH A NEW THRILL!",
+    "secondSection": {
+      "firstSlide": {
+        "title": "Advertise and tell the world about yourself – Yourname.MastersPages",
+        "description": "Every diamond shines best in its own ring – every person and every profession requires a tailored approach to make their creativity and skills glow.",
+        "icons": {
+          "text1": "Tell your story or pitch your services in text of video",
+          "text2": "Present your credentials – Education, Professional experiences",
+          "text3": "Brag your achievements – Post pictures, videos of things you made, or services your rendered",
+          "text4": "Let others speak for you - every job you do, every service you render makes someone happy.",
+          "text5": "Give your customers the pleasure of sharing their gratitude.",
+          "text6": "Underwriting – publish verified references and reviews of your works.",
+          "text7": "Set separate page for each of your talents"
+        }
+      },
+      "secondSlide": {
+        "title": "Communicate with your clients in one place – Messages.MastersPages",
+        "description": "Let MastersPages bring order and organization to your business communications with clients. Everything relating to your business is stored in one place. Nothing is omitted or forgotten, any information is one-click-away.",
+        "icons": {
+          "text1": "Use MastersPages to chat and negotiate with your clients in one place",
+          "text2": "Use effective deal closing format, which clearly fixes main features of your engagement and\n' + 'consent of both parties - no chance for ambiguity",
+          "text3": "Report your execution and get confirmations and acceptance",
+          "text4": "Automatically send updates to your faithful customer base",
+          "text5": "Collect your customers feedback and reviews"
+        }
+      },
+      "thirdSlide": {
+        "title": "“Time is money”",
+        "description": "It is impossible to beat this famous quote by Benjamin Franklin, who was known for his productivity and various talents. In his 84 years, he became not only a prominent politician and diplomat, but also an actor, musician, inventor, and satirist. Plan and co-ordinate your work, make time work for you and take full control of the 4th dimension with MastersPages integrated time-management system:",
+        "icons": {
+          "text1": "Co-ordinate your time with your customers",
+          "text2": "Get remainders and impress your customers with your timekeeping",
+          "text3": "Plan ahead of make the most of 24h"
+        }
+      },
+      "fourthSlide": {
+        "title": "Note your jobs – Tasks.MastersPages",
+        "description": "Every job you make changes the Word. It’s worthwhile taking notes of what you’ve done. MastersPages helps navigate in the universe of your tasks and recollect all details:",
+        "icons": {
+          "text1": "Attach files to your jobs – Photos, Videos, documents, budgets, calculations, external links"
+        }
+      },
+      "fifthSlide": {
+        "title": "Organize your records – Reports.MastersPages",
+        "description": "Creativity and Diligence lead to customers and orders. Keeping track or jobs and payments could become messy as success grows. MastersPages remembers every hour you spent, every job you made, every order you delivered. Use MastesPages reporting system to store, retrieve and report your statistics:",
+        "icons": {
+          "text1": "Customized fields",
+          "text2": "Sorted by clients, services, time",
+          "text3": "Retrievable is most popular formats",
+          "text4": "Reporting and statistics made easy"
+        }
+      }
+    },
+    "thirdSection": {
+      "features": {
+        "text1": "Create your account on MastersPages.com (Sign Up)",
+        "text2": "Fill in your Master’s profile / Share your profile link via your advertising efforts (Facebook, Instagram, banners, tap-link, etc)",
+        "text3": "Invite your customers to join your community on MastersPages",
+        "text4": "Plan your tasks or get service requests from your customers",
+        "text5": "Update your profile and Publish your works regularly",
+        "text6": "Collect reviews",
+        "text7": "Get new orders from new customers",
+        "text8": "Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle"
+      }
+    },
+    "categories": {
+      "tutors": "Tutors",
+      "repairman": "Repairman",
+      "beautyMaster": "Beauty master",
+      "freelancers": "Freelancers",
+      "accountants": "Accountants",
+      "lawyers": "Lawyers",
+      "atleticCoaches": "Athletic coaches",
+      "artists": "Artists",
+      "homeStaff": "Home staff",
+      "veterinarians": "Veterinarians",
+      "drivingInstructors": "Driving instructors",
+      "doctors": "Doctors",
+      "various": "Various specilists"
+    },
+    "labels": {
+      "advertise": "Advertise",
+      "communicate": "Communicate",
+      "timeManage": "Time manage",
+      "note": "Note",
+      "organize": "Organize",
+      "wow": "Wow"
+    }
+  },
+  "masterForm": {
+    "firstName": "First name*",
+    "lastName": "Last name*",
+    "avatar": "Avatar*",
+    "location": "Location*",
+    "categories": "Categories*",
+    "personalInformation": "Personal information",
+    "chooseCategories": "Choose categories",
+    "imortantInformation": "Important information",
+    "rules": "С <1>правилами сайта</1> ознакомился и согласен"
+  },
+  "portfolio":{
+    "addCategory": "Add category",
+    "editCategory": "Edit Category",
+    "1 month": "1 month",
+    "2 month": "2 month",
+    "3 month": "3 month",
+    "4 month": "4 month",
+    "5 month": "5 month",
+    "skill": {
+      "firstImage": "Add your first image",
+      "emptyDescription": "Empty description",
+      "deleteCategory": "Delete category"
+    },
+    "skillForm": {
+      "description": "Description*",
+      "choosePhoto": "choose photo",
+      "uploadPhoto": "Upload your photo, Format allowed PNG and JPEG"
+    }
+  },
+  "post": {
+    "areYouSureToDelete": "Are you sure that you want to delete «{{model.title}}»?",
+    "createPost": "Create a post",
+    "postBy": "Post by"
+  },
+  "cardGallery": {
+    "gallery": "Gallery",
+    "addPhoto": "Add photo"
+  },
+  "cardLanguages": {
+    "languages": "Languages"
+  },
+  "cardPortfolio": {
+    "addWork": "Add work",
+    "visitWebsite": "Visit website",
+    "attachedFiles": "Attached files"
+  },
+  "cardPost": {
+    "totalPosts": "Posts ({{total}})"
+  },
+  "cardPreferToWorkIn": {
+    "prefer": "Prefer to work in"
+  },
+  "cardProfile": {
+    "lastSeen": "last seen:",
+    "stat": {
+      "learnMore": "Learn more"
+    }
+  },
+  "cardRecommenadationShort": {
+    "seeAll": "See all",
+    "recommendationsTotal": "Recommendations ({{total}})",
+    "recommendations": "Recommendations"
+  },
+  "cardReviewsShort": {
+    "reviewsTotal": "Reviews ({{total}})",
+    "recommendations": "Reviews"
+  },
+  "cardSalesPitch": {
+    "salesPitch": "Sales Pitch",
+    "form": {
+      "fillUpSalePitch": "Fill up sale pitch. Max <1000 symbols"
+    }
+  },
+  "cardWorkExperience": {
+    "addWorkExperience": "Add work experience",
+    "qualification": "Proffesional qualifications and work experience",
+    "form": {
+      "jobPosition": "Job position",
+      "fromDate": "From date",
+      "toDate": "To date",
+      "companyOrInstitution": "Company or Institution name"
+    }
+  },
+  "galleryModal": {
+    "yourComment": "Your comment here"
+  },
+  "reportFilterForm": {
+    "overview": "Overview:",
+    "filterBy": "Filter by:",
+    "plannedTime": "Planned Time",
+    "actualTime": "Actual Time",
+    "plannedAmount": "Planned Amount",
+    "actualAmount": "Actual Amount",
+    "clientName": "Client Name",
+    "masterName": "Master Name",
+    "reviewMark": "Review Mark"
+  },
+  "saveProfileSearchModal": {
+    "saveThisFilter": "Save this filter?",
+    "form": {
+      "name": "Name:"
+    }
+  },
+  "personalLabel": {
+    "yourPersonalLabel": "Your personal label",
+    "useYourPersonal": "Use your personal MP label as email signature , letter head, business cards logo or place on your outdoor ads",
+    "downloadPDF": "Download PDF",
+    "downloadImage": "Download image",
+    "form": {
+      "verticalStyle": "Vertical style",
+      "horizontalStyle": "Horizontal style",
+      "lightTheme": "Light theme",
+      "darkTheme": "Dark theme",
+      "qrCode": "QR code",
+      "webAddress": "Web address"
+    }
+  },
+  "personalLink": {
+    "yourPersonalLink": "Your personal link",
+    "linkWas": "Link was copied to clipboard"
+  },
+  "shareByEmail": {
+    "inviteAnother": "Invite another",
+    "mailTo": "Mail to",
+    "invitesYou": "Invites you to join MastersPages",
+    "dear": "Dear",
+    "wouldLike": "would like to invite you see his/hers profile on MastersPages.",
+    "toSee": "To see",
+    "profile": "profile.",
+    "toLearn": "To learn more about",
+    "ifYouGot": "If you got this email in error report abuse",
+    "trulyYours": "Truly yours, MastersPages team",
+    "selfEmployed": "Self-employed business management platform.",
+    "masterInvited": "Master was invited",
+    "clientInvited": "Client was invited",
+    "invite": "Invite"
+  },
+  "split": {
+    "positive": "положительных <1/> отзывов",
+    "peopleOrdering": "People ordering right now"
+  },
+  "steps": {
+    "completeProfile": "01. Complete profile",
+    "findATask": "02. Find a task",
+    "doTask": "03. Do task and earn money"
+  },
+  "taskNegotiation": {
+    "negotiateOffer":"Negotiate offer",
+    "expireIn": "Expire in:",
+    "sendOffer": "Send Offer",
+    "hiringAMaster": "Hiring a master",
+    "hireMaster": "Hire master",
+    "finishingTask": "Finishing task",
+    "markAsDone": "Mark as done",
+    "acceptAndOffer": "Accept and offer",
+    "coverLetter": "Cover Letter",
+    "agreeWith": "Agree with client payment offer",
+    "iWant": "I want to propose different terms",
+    "availableTasks": "Available tasks",
+    "privateTask": "Private task",
+    "offerTask": "Offer task",
+    "physical": "Physical",
+    "virtual": "Virtual",
+    "combo": "Combo",
+    "iAmAgreeWith": "I am agree with",
+    "termsAndConditions": "terms and conditions",
+    "agreeWithClient": "Agree with client payment offer",
+    "differentTerms": "I want to propose different terms"
+  },
+  "fileInput": {
+    "fileHere": "Перенесите сюда файл или нажмите <1/> для выбора файла на компьютере",
+    "attachPhotos": "attach photos"
+  },
+  "modal": {
+    "markedJob": "marked job like a<1> done</1>",
+    "describeExperience": "Describe your experience"
+  },
+  "profileComponent": {
+    "viewProfile": "View profile",
+    "statistic": "Statistic:",
+    "tasksCompleted": "Tasks completed:",
+    "totalHours": "Total hours:",
+    "tasksEarned": "Tasks earned:",
+    "offerTask": "OFFER TASK",
+    "sendMessage": "SEND MESSAGE"
+  },
+  "emailConfirmation": {
+    "confirmed": "Email confirmed",
+    "notConfirmed": "Email not confirmed"
+  },
+  "report": {
+    "id": "ID"
+  },
+  "meetingForm": {
+    "meetingLink": "Meeting link",
+    "type": "Type",
+    "clientAddress": "Client Address",
+    "masterAddress": "Master Address",
+    "address1": "Address 1",
+    "address2": "Address 2",
+    "city": "City",
+    "state": "State",
+    "zipCode": "Zip code"
+  },
+  "timePlaceChargeForm": {
+    "yourConsent": "You are confirming your consent with completion of event as recorded.  This action can not be undone. Do you want to proceed?",
+    "yourInvitation": "Your invitation will be send to your counterparty. Do you want to proceed?”",
+    "approvalIsFinal": "Approval is final and can not be undone. Do you want to proceed?",
+    "deletionIsFinal": "Deletion is final and can not be undone. Do you want to proceed?",
+    "confirmIsFinal": "Confirm is final and can not be undone. Do you want to proceed?",
+    "declineIsFinal": "Decline is final and can not be undone. Do you want to proceed?"
+  },
+  "savedSearch": {
+    "areYouSure": "Are you sure that you want to delete saved search",
+    "search": "Search"
+  },
+  "taskOfferShow": {
+    "decline": "Do you want to decline response from",
+    "accept": "Do you want to accept response from"
+  },
+  "sharePage": {
+    "shareByEmail": "Share by email",
+    "profileLink": "Profile link",
+    "shareBySocialMedia": "Share by Social media",
+    "personalLabel": "Personal label"
   }
 }

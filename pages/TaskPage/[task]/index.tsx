@@ -31,7 +31,7 @@ import FileList from 'components/ui/FileList'
 
 const TaskPage = (props) => {
   const router = useRouter()
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   //const { task } = router.query
   const dispatch = useDispatch()
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -152,37 +152,37 @@ const TaskPage = (props) => {
             </div>
             <div className={`${styles.headerValue} ${styles.deadline}`}>
               <div className={styles.value}>{format(new Date(task.deadline), 'dd.mm.yyyy')}</div>
-              <div className={styles.label}>Deadline</div>
+              <div className={styles.label}>{t('deadline')}</div>
             </div>
             <div className={styles.separator}/>
             <div className={`${styles.headerValue} ${styles.price}`}>
               <div className={styles.value}>{task.priceType === 'fixed' ? task.budget : task.rate}</div>
               <div
-                className={styles.label}>{task.estimate || (task.priceType === 'fixed' ? 'Budget' : 'Rate per hour')}</div>
+                className={styles.label}>{task.estimate || (task.priceType === 'fixed' ? t('budget') : t('perHour'))}</div>
             </div>
           </div>
 
 
           {task.description && <div className={styles.content}>{task.description}</div>}
           {stats && <div className={styles.stats}>
-            <div className={styles.statsTitle}>Statistic</div>
+            <div className={styles.statsTitle}>{t('statistic')}</div>
             <div className={styles.statsTable}>
             <div className={styles.statsHeader}>
               <div className={`${styles.statsCell} ${styles.statsLabel}`}></div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>Planned</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>Completed</div>
+              <div className={`${styles.statsCell} ${styles.statsValue}`}>{t('task.page.planned')}</div>
+              <div className={`${styles.statsCell} ${styles.statsValue}`}>{t('task.page.completed')}</div>
             </div>
-            <div className={styles.statsRow}><div className={`${styles.statsCell} ${styles.statsLabel}`}>Time</div>
+            <div className={styles.statsRow}><div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.time')}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedTime}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedTime}</div>
             </div>
             <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>Charges</div>
+              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.charges')}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedCharges}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedCharges}</div>
             </div>
             <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>Expenses</div>
+              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.expenses')}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedExpenses}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedExpenses}</div>
             </div>
@@ -192,19 +192,19 @@ const TaskPage = (props) => {
               <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
             </div>
             <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>Events</div>
+              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('event.events')}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>
                 {stats.eventsCompleted}
               </div>
               <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
             </div>
             <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>Planned</div>
+              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.planned')}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.eventsPlanned}</div>
               <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
             </div>
             <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>Reviews</div>
+              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('reviews')}</div>
               <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.reviews}</div>
               <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
             </div>
@@ -215,7 +215,7 @@ const TaskPage = (props) => {
         </div>
         <div className={styles.rightSide}>
           <div className={styles.actions}>
-            <Button red={true} size={'12px 40px'} onClick={handleRecommend}>Recommend</Button>
+            <Button red={true} size={'12px 40px'} onClick={handleRecommend}>{t('recommend')}</Button>
           </div>
           <div className={styles.separator}/>
           <div className={`${styles.status} ${getStatusColor()}`}>
@@ -226,12 +226,12 @@ const TaskPage = (props) => {
           <div className={styles.separator}/>
           <div className={styles.category}>
             <div className={styles.field}>
-              <div className={styles.label}>Category</div>
+              <div className={styles.label}>{t('category')}</div>
               <div className={styles.value}>{getCategoryTranslation(task.category)?.name}</div>
             </div>
 
             <div className={styles.field}>
-              <div className={styles.label}>Subcategory</div>
+              <div className={styles.label}>{t('subCategory')}</div>
               <div className={styles.value}>{getCategoryTranslation(task.subCategory)?.name}</div>
             </div>
 

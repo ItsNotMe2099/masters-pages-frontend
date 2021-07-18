@@ -22,6 +22,8 @@ import {getEventCompletedAllowed, getEventPlannedAllowed} from 'utils/event'
 import ArrowLeftSmall from 'components/svg/ArrowLeftSmall'
 import ArrowRightSmall from 'components/svg/ArrowRightSmall'
 import {setProfileGalleryCurrentItemIndex} from 'components/ProfileGallery/actions'
+import {useTranslation} from 'react-i18next'
+
 
 interface Props {
   isOpen: boolean,
@@ -32,6 +34,7 @@ interface Props {
 const EditEventModal = (props: Props) => {
   const {isOpen, onClose, range} = props;
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const {t} = useTranslation('common');
 
 
   useEffect(() => {
@@ -63,9 +66,9 @@ const EditEventModal = (props: Props) => {
   const newRangeActualEnd = getEventCompletedAllowed(event) ? range?.end : null;
 
   const tabs = [
-    {name: 'Time Place Charge', key: 'time'},
-    {name: 'Chat & Review', key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
-    {name: 'Info', key: 'info'},
+    {name: t('event.timePlaceCharge'), key: 'time'},
+    {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
+    {name: t('event.info'), key: 'info'},
   ];
 
   const handleChangeTab = (item) => {

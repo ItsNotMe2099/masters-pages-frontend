@@ -10,6 +10,7 @@ import {hideProfileForm, showProfileForm, updateProfile, updateProfileByForm} fr
 import PreferWorkInForm from 'components/PublicProfile/components/view/CardPreferWorkIn/components/Form'
 import Loader from 'components/ui/Loader'
 import {changeArrayOrder} from 'utils/array'
+import {useTranslation} from 'react-i18next'
 interface Props{
   profile: ProfileData,
   isEdit: boolean
@@ -19,6 +20,7 @@ const CardPreferWorkIn = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'preferWorkIn');
   const { profile, isEdit } = props;
+  const {t} = useTranslation('common');
 
   const handleEditClick = () => {
     dispatch(showProfileForm( 'preferWorkIn'));
@@ -44,7 +46,7 @@ const CardPreferWorkIn = (props: Props) => {
     dispatch(updateProfileByForm(profile.id, {preferToWorkIn: newArray}, 'preferWorkIn'));
   }
   return (
-    <Card isHidden={!isEdit && profile.preferToWorkIn.length === 0} className={styles.root} isLoading={showForm && formLoading} title={'Prefer to work in'} toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleEditClick}/>] : []}>
+    <Card isHidden={!isEdit && profile.preferToWorkIn.length === 0} className={styles.root} isLoading={showForm && formLoading} title={t('cardPreferToWorkIn.prefer')} toolbar={isEdit ? [<FormActionButton type={'create'} title={t('add')} onClick={handleEditClick}/>] : []}>
       {profile.preferToWorkIn.map((item, index) => <WorkInListItem isEdit={isEdit} index={index} model={item} onMoveUp={(index > 0  && profile.preferToWorkIn.length > 1) ? handleMoveUp : null} onMoveDown={(index == 0  && profile.preferToWorkIn.length > 1) ? handleMoveDown : null} onDelete={handleDelete}/>)}
       {(showForm) && <PreferWorkInForm onSubmit={handleSubmit} onCancel={handleCancel}/>}
 
