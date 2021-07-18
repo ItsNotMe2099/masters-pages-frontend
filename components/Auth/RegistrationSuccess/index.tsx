@@ -4,7 +4,7 @@ import Modal from "components/ui/Modal";
 import Router from "next/router";
 import styles from './index.module.scss'
 import Link from "next/link";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   isOpen: boolean

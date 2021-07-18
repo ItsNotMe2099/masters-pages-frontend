@@ -1,7 +1,6 @@
 import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
 import { changeRole } from "components/Profile/actions";
 import ArrowDropDown from "components/svg/ArrowDropDown";
-import { I18nContext } from "next-i18next";
 import { useContext, useEffect, useRef, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
@@ -9,7 +8,7 @@ import cx from 'classnames'
 import nextI18 from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
  const ModeSelect = () => {
    const { t } = useTranslation('common');

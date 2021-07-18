@@ -5,7 +5,9 @@ import LangSelect from 'pages/NewMain/components/Header/components/LangSelect'
 import MainSectionButton from 'pages/NewMain/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from 'i18n'
+
+
 interface Props{
 
 }
@@ -13,7 +15,8 @@ interface Props{
 const MainSectionHeader = (props: Props) => {
  const isProd =  false;
   const dispatch = useDispatch()
-  const {t} = useTranslation('common');
+  const trans = useTranslation('common');
+  const {t} = trans;
   return (
     <div  className={styles.root}>
       <div  className={styles.container}>

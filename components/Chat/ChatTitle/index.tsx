@@ -18,7 +18,7 @@ import Button from "components/ui/Button";
 import { IChat, IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   chat: IChat

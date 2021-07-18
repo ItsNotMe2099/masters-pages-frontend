@@ -13,7 +13,7 @@ import styles from './index.module.scss'
 import InputCategory from 'components/ui/Inputs/InputCategory';
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 const categoryRequired = (value) => {
   return  !value || !value.value ? 'required' : ''
@@ -22,9 +22,10 @@ const subCategoryRequired = (value) => {
   return  !value || value.length === 0 ? 'selectSubCategory' : ''
 }
 
-const {t} = useTranslation('common')
+
 
 let FormNewCategory = props => {
+  const {t} = useTranslation()
   const { handleSubmit } = props
   const [categoryId, setCategoryId] = useState(null);
 

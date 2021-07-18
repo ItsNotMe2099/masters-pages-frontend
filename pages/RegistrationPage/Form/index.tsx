@@ -12,7 +12,7 @@ import InputPhone from 'components/ui/Inputs/InputPhone'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import {required, email, passwordsMatch, passwordMinLength} from 'utils/validations'
 import { useDispatch, useSelector, connect } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {registrationPhoneOpen} from "components/Modal/actions";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
 import {logout} from "components/Auth/actions";

@@ -7,7 +7,7 @@ import AddCircleIcon from 'components/svg/AddCircleIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import {eventExpenseActualOpen, eventExpensePlannedOpen} from 'components/Modal/actions'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props {
   event: IEvent,
   type: 'actual' | 'planned',

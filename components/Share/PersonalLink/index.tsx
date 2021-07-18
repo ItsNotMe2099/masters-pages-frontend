@@ -4,7 +4,7 @@ import Input from 'components/ui/Inputs/Input'
 import * as React from 'react'
 import {IRootState} from 'types'
 import {useEffect, useState} from 'react'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 interface Props {
   customLink?: string

@@ -20,7 +20,7 @@ import { inBounds } from "utils/locaion";
 import styles from './index.module.scss'
 import useSupercluster from "use-supercluster";
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import Layout from 'components/layout/Layout'
 const queryString = require('query-string')
 

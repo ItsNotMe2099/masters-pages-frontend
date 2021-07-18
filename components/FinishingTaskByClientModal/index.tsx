@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 import FinishingTaskByClientForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 interface Props {
   isOpen: boolean
 }

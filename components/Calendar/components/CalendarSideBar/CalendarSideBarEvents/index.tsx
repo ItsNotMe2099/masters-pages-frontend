@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import {IEvent} from 'types'
 import CalendarSideBarEvent from 'components/Calendar/components/CalendarSideBarEvent'
 import {add, format, isSameDay} from 'date-fns'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 interface Props {

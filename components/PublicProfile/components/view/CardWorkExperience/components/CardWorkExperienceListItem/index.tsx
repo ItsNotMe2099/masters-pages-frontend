@@ -7,7 +7,7 @@ import FormActionButton from 'components/PublicProfile/components/FormActionButt
 import {format, formatDistanceStrict, formatDistanceToNowStrict, parse} from 'date-fns'
 import {formatDate, parseDate} from 'utils/formatters'
 import {getMediaPath} from 'utils/media'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   model: ProfileWorkExperience,

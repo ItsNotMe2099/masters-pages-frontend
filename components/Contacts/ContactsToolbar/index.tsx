@@ -6,7 +6,7 @@ import { IRootState, ITask } from "types";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from "components/TabSelect";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 import {DropDown} from 'components/ui/DropDown'
 import Input from 'components/ui/Inputs/Input'

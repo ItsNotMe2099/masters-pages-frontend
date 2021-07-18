@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import LanguageForm from 'components/PublicProfile/components/view/CardLanguages/components/Form'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData,

@@ -18,7 +18,7 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/CategoryModal/index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 
 interface Props {
   isOpen: boolean,

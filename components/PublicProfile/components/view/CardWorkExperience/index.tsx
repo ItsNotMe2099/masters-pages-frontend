@@ -19,7 +19,7 @@ import SalesPitchForm from 'components/PublicProfile/components/view/CardSalesPi
 import CardAdd from 'components/PublicProfile/components/CardAdd'
 import {confirmOpen} from 'components/Modal/actions'
 import {taskNegotiationDeclineConditions} from 'components/TaskNegotiation/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData,

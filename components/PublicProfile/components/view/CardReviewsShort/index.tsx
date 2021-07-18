@@ -6,7 +6,7 @@ import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/ac
 import { useSelector, useDispatch } from 'react-redux'
 import ReviewShortListItem
   from 'components/PublicProfile/components/view/CardReviewsShort/components/ReviewShortListItem'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData,

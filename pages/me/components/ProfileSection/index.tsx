@@ -9,7 +9,7 @@ import { getMediaPath } from "utils/media";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import formatDistance from "date-fns/formatDistance";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 const ProfileSection = (props) => {
   const {t} = useTranslation();

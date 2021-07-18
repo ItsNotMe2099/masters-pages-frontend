@@ -11,7 +11,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import NewEventForm from 'components/Calendar/components/NewEventModal/components/NewEventForm'
 import {createEvent} from 'components/Events/actions'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 interface Props {
   isOpen: boolean,
   range?: any,

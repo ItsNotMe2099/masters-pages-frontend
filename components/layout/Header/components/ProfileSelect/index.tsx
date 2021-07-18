@@ -9,7 +9,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import cx from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {logout} from "../../../../Auth/actions";
 
 const ProfileSelect = (props) => {

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import Rating from 'components/ui/Inputs/Rating';
 import TextArea from 'components/ui/Inputs/TextArea';
 import FileInput from 'components/ui/Inputs/FilesUploadInput';
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 let FinishingTaskByMasterForm = props => {
   const { handleSubmit, onCancel } = props

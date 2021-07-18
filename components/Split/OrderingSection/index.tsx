@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchTaskSearchListWithLimit } from './Task/actions'
 import { IRootState } from 'types'
 import Loader from 'components/ui/Loader'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 interface Props {}
 

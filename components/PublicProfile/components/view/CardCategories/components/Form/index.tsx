@@ -6,7 +6,7 @@ import { useSelector, useDispatch, connect } from 'react-redux'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import TextArea from 'components/ui/Inputs/TextArea'
 import Button from 'components/PublicProfile/components/Button'
 import {useEffect, useState} from 'react'

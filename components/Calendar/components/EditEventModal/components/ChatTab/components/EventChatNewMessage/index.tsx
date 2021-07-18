@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import EventChatAttachFile
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventChatNewMessage/components/ChatAttachFile'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props {
 
 }

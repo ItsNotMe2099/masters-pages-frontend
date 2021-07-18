@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Sticky from 'react-stickynode';
 import SearchTaskFilter from "../../../pages/SearchTaskPage/Filter";
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import {useWindowWidth} from "@react-hook/window-size";
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'

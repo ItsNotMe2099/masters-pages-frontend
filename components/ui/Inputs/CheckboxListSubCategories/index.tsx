@@ -7,7 +7,7 @@ import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSubCategory } from "./actions";
 import queryString from 'query-string'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
 

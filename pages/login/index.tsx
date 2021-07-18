@@ -10,7 +10,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import Backgrounds from 'components/Backgrounds'
 interface Props {
   user?: any

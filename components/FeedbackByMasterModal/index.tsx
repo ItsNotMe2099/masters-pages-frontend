@@ -7,7 +7,7 @@ import FinishingTaskByMasterForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {createFeedBackClient} from 'components/ProfileFeedback/actions'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   isOpen: boolean

@@ -6,7 +6,7 @@ import React, {
 } from 'react'
 import Button from "../../../Button";
 import {modalClose} from "../../../../Modal/actions";
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 export interface FileEntity {
   catalogId?: number
   key?: string

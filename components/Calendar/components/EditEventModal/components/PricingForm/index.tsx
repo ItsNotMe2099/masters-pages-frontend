@@ -10,7 +10,7 @@ import {IEvent} from 'types'
 import {useState} from 'react'
 import {parserNumber, parserPrice} from 'utils/formatters'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   event?: IEvent,

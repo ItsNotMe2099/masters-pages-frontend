@@ -7,7 +7,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import {passwordMinLength, passwordsMatch, required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 let ChangePasswordForm = props => {
   const { t } = useTranslation('common');

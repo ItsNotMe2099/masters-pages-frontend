@@ -13,7 +13,7 @@ import Button from 'components/ui/Button'
 import {taskNegotiationSetCurrentTask} from 'components/TaskNegotiation/actions'
 import {feedbackByMasterOpen} from 'components/Modal/actions'
 import TaskFeedback from 'components/ProfileFeedback/TaskFeedback'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   task?: ITask

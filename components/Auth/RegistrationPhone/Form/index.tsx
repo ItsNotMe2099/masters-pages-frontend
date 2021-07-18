@@ -7,7 +7,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 import {required} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import InputPhone from "../../../ui/Inputs/InputPhone";
 
 let SignIn = props => {

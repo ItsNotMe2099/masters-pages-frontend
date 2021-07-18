@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {saveProfileSearch, saveTaskSearch} from 'components/SavedSearches/actions'
 import SaveProfileSearchForm from 'components/SaveProfileSearchModal/Form'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void

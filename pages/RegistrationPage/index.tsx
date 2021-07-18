@@ -1,14 +1,13 @@
 import { modalClose } from "components/Modal/actions";
 import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
 import RegistrationSuccess from "components/Auth/RegistrationSuccess";
-import { withTranslation } from "next-i18next";
 import Router, {useRouter} from "next/router";
 import { IRootState } from "types";
 import {getAuthServerSide} from "utils/auth";
 import RegistrationForm from './Form'
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import RegistrationPhone from "../../components/Auth/RegistrationPhone";
 import RegistrationPhoneConfirm from "../../components/Auth/RegistrationPhoneConfirm";
 import Backgrounds from 'components/Backgrounds'

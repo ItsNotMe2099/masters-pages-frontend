@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import styles from './index.module.scss'
-import {useTranslation, withTranslation, Trans} from "react-i18next";
+import {useTranslation, withTranslation, Trans} from "i18n";
 
 export default class SimpleSlider extends Component {
   render() {

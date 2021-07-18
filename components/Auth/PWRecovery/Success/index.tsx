@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import PWRecoveryNewPW from "./Form";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props {
   isOpen: boolean

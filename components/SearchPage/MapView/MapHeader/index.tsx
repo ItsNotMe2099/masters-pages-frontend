@@ -8,7 +8,7 @@ import { IRootState } from "types";
 import styles from './index.module.scss'
 const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import Header from "../../../layout/Header";
 interface Props {
   searchRole?: 'master' | 'volunteer'

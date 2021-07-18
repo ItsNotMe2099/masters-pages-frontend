@@ -40,7 +40,7 @@ import MeetingForm from 'components/Calendar/components/EditEventModal/component
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 import Modal from 'components/ui/Modal'
 import Rating from 'components/ui/Inputs/Rating'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props {
   onCancel?: () => void

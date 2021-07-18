@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Tab from 'components/PublicProfile/components/Tab'
 import {DropDownCategory} from 'components/PublicProfile/components/DropDownCategory'
 import {useEffect, useState} from 'react'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props{
   profile: ProfileData,
   isEdit: boolean,

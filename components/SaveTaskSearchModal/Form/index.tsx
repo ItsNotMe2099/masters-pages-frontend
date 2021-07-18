@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Rating from 'components/ui/Inputs/Rating';
 import TextArea from 'components/ui/Inputs/TextArea';
 import FileInput from 'components/ui/Inputs/FilesUploadInput';
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 let SaveTaskSearchForm = props => {
   const { handleSubmit } = props

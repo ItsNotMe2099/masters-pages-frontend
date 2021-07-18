@@ -26,7 +26,7 @@ import { connect } from 'react-redux'
 import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import FormError from 'components/ui/Form/FormError'
 import {RadioList} from 'components/ui/Inputs/RadioList'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 interface Props {
   onCancel: () => void
   initialValues?: any,

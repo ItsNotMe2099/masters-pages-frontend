@@ -20,7 +20,7 @@ import {
 import styles from './index.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 
 interface Props {

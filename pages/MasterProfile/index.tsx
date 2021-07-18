@@ -1,25 +1,22 @@
 import { loaderOpen, modalClose } from "components/Modal/actions";
-import Header from 'components/layout/Header'
-import Footer from 'components/layout/Footer'
+
 import { createProfile } from "components/Profile/actions";
-import Steps from 'components/Steps'
 import { useEffect } from "react";
 import { IRootState } from "types";
 import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
-import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useDispatch, useSelector } from 'react-redux'
 
 import SimpleSlider from 'components/Steps/MasterProfile/Slider'
 import MasterForm from 'components/MasterProfileForm'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from 'i18n'
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const {t} = useTranslation('common')
+  const {t} = useTranslation()
 
 
   useEffect(() => {
@@ -63,5 +60,5 @@ const MasterProfile = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
 export default MasterProfile
+export const getServerSideProps = getAuthServerSide({redirect: true});

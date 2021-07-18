@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { ITask } from 'types'
 import * as React from "react";
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 interface Props {

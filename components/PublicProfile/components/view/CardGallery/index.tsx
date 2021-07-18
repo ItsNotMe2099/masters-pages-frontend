@@ -7,7 +7,7 @@ import CardAdd from 'components/PublicProfile/components/CardAdd'
 import Tabs from 'components/PublicProfile/components/Tabs'
 import {DropDown} from 'components/ui/DropDown'
 import {default as React, useEffect, useState} from 'react'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 import {
   createProfileGallery,
   deleteProfileGallery,

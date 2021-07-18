@@ -20,7 +20,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import {useEffect} from 'react'
 const queryString = require('query-string')

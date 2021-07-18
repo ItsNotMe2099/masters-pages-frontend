@@ -6,7 +6,7 @@ import React, {useState} from 'react'
 import SliderControl from 'components/ui/SliderControl'
 import MainSliderControl from 'pages/NewMain/components/MainSliderControl'
 import LastSlide from 'pages/NewMain/components/MainSectionSecond/components/LastSlide'
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 const Title = (props) => {
   const title = ['A', 'C', 'T', 'N', 'O', 'W' ]

@@ -15,7 +15,7 @@ import {createSkillCategory, deleteSkill, deleteSkillCategory} from 'components/
 import FormActionIconButton from 'components/PublicProfile/components/FormActionIconButton'
 import {confirmOpen} from 'components/Modal/actions'
 import {taskNegotiationDeclineTaskResponse} from 'components/TaskNegotiation/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props{
   profile: ProfileData,
   isEdit: boolean,

@@ -1,5 +1,4 @@
 import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import { I18nContext } from "next-i18next";
 import { ReactElement, useContext, useEffect, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'

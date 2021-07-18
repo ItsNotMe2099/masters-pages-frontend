@@ -22,7 +22,7 @@ import {getEventCompletedAllowed, getEventPlannedAllowed} from 'utils/event'
 import ArrowLeftSmall from 'components/svg/ArrowLeftSmall'
 import ArrowRightSmall from 'components/svg/ArrowRightSmall'
 import {setProfileGalleryCurrentItemIndex} from 'components/ProfileGallery/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 interface Props {

@@ -7,7 +7,7 @@ import InputPhone from 'components/ui/Inputs/InputPhone'
 import OtpCodeInput from 'components/ui/Inputs/OtpCodeInput'
 import { phone, required } from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 interface Props {
   handleSubmit?
   onSubmit

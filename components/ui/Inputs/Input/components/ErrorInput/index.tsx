@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import {withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import SignIn from "../../../../../Auth/SignIn/Form";
 
 interface Props {
@@ -7,11 +7,11 @@ interface Props {
     error: any,
     touched: boolean,
   },
-  t?: (string) => string,
 }
 
 const ErrorInput = (props: Props) => {
-  const {t} = props;
+
+  const {t} = useTranslation();
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   if(touched && error) {
     console.log("ShowError", error)
@@ -20,4 +20,4 @@ const ErrorInput = (props: Props) => {
     return (<></>)
   }
 }
-export default withTranslation('common')(ErrorInput)
+export default ErrorInput

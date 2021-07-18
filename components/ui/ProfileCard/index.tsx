@@ -1,7 +1,7 @@
 import * as React from "react";
 import {IRootState, ITask, ProfileData} from "types";
 import styles from './index.module.scss'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import {getAuthServerSide} from 'utils/auth'
 import Avatar from 'components/ui/Avatar'
 import StarRatings from 'react-star-ratings';

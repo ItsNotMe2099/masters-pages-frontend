@@ -13,7 +13,7 @@ import Loader from "components/ui/Loader";
 import { useRouter } from "next/router";
 import SearchTaskFilter from "pages/SearchTaskPage/Filter";
 import { default as React, useEffect, useState } from "react";
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import Header from 'components/layout/Header'

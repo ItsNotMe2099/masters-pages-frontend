@@ -3,7 +3,7 @@ import {IEvent} from 'types'
 import {format} from 'date-fns'
 import {Calendar, Views, momentLocalizer} from "react-big-calendar";
 import CalendarToolbarViewButton from 'components/Calendar/components/CalendarToolbar/CalendarToolbarViewButton'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 
 interface Props {

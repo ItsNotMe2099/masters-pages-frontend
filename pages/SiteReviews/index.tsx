@@ -1,4 +1,4 @@
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
 import Header from '../../components/layout/Header'

@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 let PhoneConfirmForm = props => {
   const { t } = useTranslation('common');

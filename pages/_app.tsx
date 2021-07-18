@@ -1,17 +1,18 @@
 import '../scss/app.scss'
 import 'normalize.css'
 import {useEffect} from "react";
-import nextI18 from "../i18n";
+
 import {wrapper} from 'store'
 import 'slick-carousel/slick/slick.css'
 import "slick-carousel/slick/slick-theme.css"
 import Head from 'next/head'
 import {firebaseCloudMessaging} from "../webPush";
-
+const path = require('path');
 import {useDispatch, useSelector} from 'react-redux'
 import 'firebase/messaging'
 import firebase from 'firebase/app'
 import {setPushToken} from "../components/Push/actions";
+import {appWithTranslation} from 'i18n'
 
 interface IPageProps {
   namespacesRequired: string[]
@@ -91,5 +92,24 @@ function MyApp({Component, pageProps}) {
   )
 }
 
+const domainLocaleMap = {
+  'masterspages.com': 'en',
+  'masterspages.ru': 'ru',
+  // other domains
+};
 
-export default nextI18.appWithTranslation(wrapper.withRedux(MyApp))
+
+const domainDetector = {
+  name: 'domainDetector',
+  lookup(req, res, options) {
+    console.log("domainDetector")
+    return 'en';
+    const hostname = (typeof window !== 'undefined')
+      ? window.location.hostname
+      : req.headers.host?.split(':')[0]
+
+    return domainLocaleMap[hostname]
+  }
+};
+
+export default appWithTranslation(wrapper.withRedux(MyApp) as any)

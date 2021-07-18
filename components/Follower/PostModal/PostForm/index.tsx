@@ -19,7 +19,7 @@ import {useEffect, useState} from 'react'
 import EventReviewForm
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventReviewForm'
 import {fetchProfileTabList} from 'components/ProfileTab/actions'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 let PostForm = (props) => {
   const {categoryId, subCategoryId, showInPortfolio} = props;

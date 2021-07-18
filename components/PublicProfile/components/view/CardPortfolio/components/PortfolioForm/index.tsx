@@ -11,7 +11,7 @@ import {birthdate, date, required} from 'utils/validations'
 import SelectInput from 'components/ui/Inputs/SelectInput'
 import FileInput from 'components/ui/Inputs/FilesUploadInput'
 import AvatarInput from 'components/ui/AvatarInput'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 
 let PortfolioForm = (props) => {

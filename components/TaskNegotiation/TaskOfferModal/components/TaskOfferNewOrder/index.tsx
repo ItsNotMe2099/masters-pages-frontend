@@ -27,7 +27,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 import { connect } from 'react-redux'
 interface Props {
   onCancel: () => void

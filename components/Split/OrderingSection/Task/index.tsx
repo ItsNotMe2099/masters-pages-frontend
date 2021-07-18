@@ -1,11 +1,11 @@
 import { format, formatDistance } from 'date-fns'
 import { ITask } from 'types'
 import styles from './index.module.scss'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 interface Props {
   task: ITask
-  taskImage: string   
+  taskImage: string
   color: string
 }
 
@@ -31,8 +31,8 @@ export default function Task(props: Props) {
         </div>
         <div className={styles.price}>
           <div className={styles.priceNum}>
-            {props.task.priceType === "fixed" && props.task.budget !== null ? `$${props.task.budget}` : 
-            props.task.priceType === "rate" && props.task.ratePerHour !== null ? `$${props.task.ratePerHour}/h` : 
+            {props.task.priceType === "fixed" && props.task.budget !== null ? `$${props.task.budget}` :
+            props.task.priceType === "rate" && props.task.ratePerHour !== null ? `$${props.task.ratePerHour}/h` :
             (props.task.priceType === "fixed" && props.task.budget === null) || (props.task.priceType === "rate" && props.task.ratePerHour === null) ? <>{t('free')}</> : <></>}
           </div>
           <div className={styles.priceType}>

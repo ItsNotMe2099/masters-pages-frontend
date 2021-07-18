@@ -16,7 +16,7 @@ import S3Upload from 'react-s3-uploader/s3upload'
 import styles from './index.module.scss'
 
 import Cookies from 'js-cookie'
-import {withTranslation} from "react-i18next";
+import {withTranslation} from "i18n";
 import FormError from 'components/ui/Form/FormError'
 
 

@@ -15,7 +15,7 @@ import {showProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm
 import AvatarForm from 'pages/me/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 
 interface Props{
   profile: ProfileData,

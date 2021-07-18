@@ -9,7 +9,7 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/Skill/index.module.scss'
 import Slider from "react-slick";
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from 'react-i18next'
+import {useTranslation, Trans} from 'i18n'
 interface Props {
   item: SkillData,
   onEdit: (SkillData) => void

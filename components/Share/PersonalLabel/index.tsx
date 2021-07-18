@@ -7,7 +7,7 @@ import * as React from 'react'
 import {IRootState, ISharePersonalLabel} from 'types'
 import {useRef, useState} from 'react'
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "i18n";
 
 interface Props {
   customLink?: string

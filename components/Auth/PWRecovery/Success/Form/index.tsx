@@ -6,7 +6,7 @@ import styles from './index.module.scss'
 import InputPassword from 'components/ui/Inputs/InputPassword'
 import {required, passwordsMatch, passwordMinLength} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "react-i18next";
+import {useTranslation, withTranslation} from "i18n";
 let PWRecoveryNewPW = (props) => {
   const { t } = useTranslation('common');
   const { handleSubmit } = props

@@ -7,7 +7,7 @@ import {addDays, addHours} from 'date-fns'
 import {getBegin, getBeginNext, getBeginPrevious, getEnd, getEndNext, getEndPrevious} from 'utils/dateFormatters'
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 const RangeSelector = ({onChange, isActive, label, id}) => {
     console.log("RangeSelector", isActive);

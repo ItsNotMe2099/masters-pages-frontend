@@ -4,7 +4,7 @@ import {IRootState} from "../../../types";
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchFeedbacksMainPageRequest} from "../../ProfileFeedback/actions";
 import ReviewMainPage from "../../ReviewMainPage";
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 interface Props {}
 
 export default function CommentsSection(props: Props) {

@@ -4,7 +4,7 @@ import {IProfilePreferWorkIn, ProfileData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import LocationIcon from 'components/svg/LocationIcon'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   index: number

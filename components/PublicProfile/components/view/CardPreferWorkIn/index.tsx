@@ -10,7 +10,7 @@ import {hideProfileForm, showProfileForm, updateProfile, updateProfileByForm} fr
 import PreferWorkInForm from 'components/PublicProfile/components/view/CardPreferWorkIn/components/Form'
 import Loader from 'components/ui/Loader'
 import {changeArrayOrder} from 'utils/array'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 interface Props{
   profile: ProfileData,
   isEdit: boolean

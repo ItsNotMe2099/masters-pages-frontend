@@ -11,7 +11,7 @@ import {birthdate, date, required} from 'utils/validations'
 import AvatarInput from 'components/ui/AvatarInput'
 import {format, parse} from 'date-fns'
 import {dateFormat} from 'utils/masks'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 let WorkExperienceForm = (props) => {
   const error = useSelector((state: IRootState) => state.profileWorkExperience.formError)

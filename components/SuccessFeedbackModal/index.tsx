@@ -3,7 +3,7 @@ import Button from "components/ui/Button";
 import Modal from "components/ui/Modal";
 import { useRouter } from "next/router";
 import styles from './index.module.scss'
-import {useTranslation, Trans} from "react-i18next";
+import {useTranslation, Trans} from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
 

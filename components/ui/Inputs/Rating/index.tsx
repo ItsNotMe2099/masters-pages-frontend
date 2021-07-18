@@ -7,6 +7,7 @@ import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 
 interface Props {
   input: any
+  meta?: any,
 }
 
 export default function Rating(props: Props) {

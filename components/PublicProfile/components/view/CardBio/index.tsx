@@ -7,7 +7,7 @@ import {useState} from 'react'
 import CardBioForm from 'components/PublicProfile/components/view/CardBio/Form'
 import {hideProfileForm, showProfileForm, updateProfile, updateProfileByForm} from 'components/Profile/actions'
 import Loader from 'components/ui/Loader'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 
 interface Props{
   profile: ProfileData,

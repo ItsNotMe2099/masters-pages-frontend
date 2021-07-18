@@ -25,7 +25,7 @@ import {fetchOneTaskUserRequest, fetchTaskStatsById} from 'components/TaskUser/a
 import {getEventColor, getEventPlannedAllowed} from 'utils/event'
 import Button from 'components/ui/Button'
 import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from 'i18n'
 import MarkIcon from 'components/svg/MarkIcon'
 import FileList from 'components/ui/FileList'
 
