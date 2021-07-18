@@ -54,6 +54,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               {!isMobile && <Field
                 name="subCategoryId"
@@ -63,6 +64,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />}
               {!isMobile && <Field
 
@@ -72,6 +74,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />}
 
               {!isMobile && <Field
@@ -81,6 +84,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 formKey={`${props.form}`}
                 withIcon={false}
+                labelType={'placeholder'}
               />}
           </>
             :
@@ -92,6 +96,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="executionType"
@@ -105,6 +110,7 @@ let SearchTaskForm = (props) => {
                 withIcon={false}
                 noMargin={true}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="rating"
@@ -120,6 +126,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="categoryId"
@@ -129,6 +136,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="geonameid"
@@ -137,6 +145,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
 
               <Field
@@ -146,6 +155,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 formKey={`${props.form}`}
                 withIcon={false}
+                labelType={'placeholder'}
               />
 
 
@@ -157,6 +167,7 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                labelType={'placeholder'}
               />
               <Field
                 name="radius"
@@ -173,6 +184,7 @@ let SearchTaskForm = (props) => {
 
                 withIcon={false}
                 noMargin={true}
+                labelType={'placeholder'}
               />
 
 

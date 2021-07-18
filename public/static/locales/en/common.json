@@ -111,7 +111,9 @@
   "location": "Location",
   "estimate": "Estimate",
   "masterOrVolunteer": "Master or volunteer",
+  "mainCategory": "Main category",
   "category": "Category",
+  "subCategories": "Sub categories",
   "subCategory": "Sub category",
   "executionType": "Execution Type",
   "free": "Free",
@@ -132,7 +134,7 @@
   "masters": "Masters",
   "orders": "Orders",
   "all": "All",
-  "today": "Today", 
+  "today": "Today",
   "tomorrow": "Tomorrow",
   "addLink": "Add link",
   "uploadPhoto":"Upload photo",
@@ -704,6 +706,7 @@
     }
   },
   "footer": {
+    "copyright": "Master Pages all rights reserved",
     "allServices": "Все услуги",
     "allReviews": "Все отзывы",
     "serviceHistory": "История заказов",
