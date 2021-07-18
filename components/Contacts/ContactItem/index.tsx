@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {SkillDropDown} from 'components/Contacts/ContactItem/SkillDropDown'
 import {getCategoryTranslation} from 'utils/translations'
 import ProfileCard from 'components/ui/ProfileCard'
+
 interface Props {
   profile: ProfileData,
   deleteActionName: string
@@ -51,9 +52,9 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
           </div>
             <div className={styles.cell}>
         <div className={styles.actions}>
-          <Button className={styles.action} href={`/id${profile.id}`} onClick={handleActionProfile}>Profile</Button>
-          <Button className={styles.action} href={`/id${profile.id}/news`}>All Posts</Button>
-          <Button className={styles.action} onClick={handleActionNewOrder}>New Order</Button>
+          <Button className={styles.action} href={`/id${profile.id}`} onClick={handleActionProfile}>{t('menu.profile')}</Button>
+          <Button className={styles.action} href={`/id${profile.id}/news`}>{t('allPosts')}</Button>
+          <Button className={styles.action} onClick={handleActionNewOrder}>{t('newOrder')}</Button>
           {onDelete && <Button  className={styles.action} onClick={handleActionUnsubscribe}>{deleteActionName}</Button>}
         </div>
             </div>

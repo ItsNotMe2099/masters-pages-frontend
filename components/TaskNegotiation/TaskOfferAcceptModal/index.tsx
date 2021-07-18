@@ -11,6 +11,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, Trans} from "react-i18next";
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -21,6 +22,7 @@ const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
 
   console.log("Tassss", task)
   const dispatch = useDispatch();
+  const {t} = useTranslation('common')
   useEffect(() => {
     if(isOpen){
       dispatch(resetSkillForm())
@@ -37,14 +39,14 @@ const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/dollar.svg`}/>
         </div>
-        <div className={styles.title}>Accept and offer</div>
+        <div className={styles.title}>{t('taskNegotiation.acceptAndOffer')}</div>
       </div>
 
       <div className={styles.task}>
         <div className={styles.taskHeader}>
         <div className={styles.taskTitle}>{task?.title}</div>
         <div className={styles.taskExpires}>
-          <div className={styles.taskExpiresLabel}>Expire in:</div>
+          <div className={styles.taskExpiresLabel}>{t('taskNegotiation.expireIn')}</div>
           <div className={styles.taskExpiresValue}>23:46:23</div>
         </div>
         </div>

@@ -27,6 +27,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Field, reduxForm,formValueSelector } from 'redux-form'
+import {useTranslation, Trans} from "react-i18next";
 import { connect } from 'react-redux'
 interface Props {
   onCancel: () => void
@@ -40,6 +41,7 @@ let TaskOfferNewOrder = (props: Props) => {
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
 
   const dispatch = useDispatch();
+  const {t} = useTranslation('common')
 
 
   return (
@@ -49,32 +51,32 @@ let TaskOfferNewOrder = (props: Props) => {
       <Field
         name="title"
         component={Input}
-        label="Task title*"
+        label={`${t('taskTitle')}*`}
         validate={required}
       />
       <Field
         name="geonameid"
         component={InputLocation}
-        label="Location*"
+        label={`${t('location')}*`}
         validate={required}
       />
       <Field
         name="masterRole"
         component={SelectInput}
-        label="Master or volunteer*"
+        label={`${t('masterOrVolunteer')}*`}
         options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
         validate={required}
       />
       <Field
         name="categoryId"
         component={InputCategory}
-        label="Category*"
+        label={`${t('category')}*`}
         validate={required}
       />
       <Field
         name="subCategoryId"
         component={InputSubCategory}
-        label="Sub category*"
+        label={`${t('subCategory')}*`}
         categoryId={props.categoryId}
         validate={required}
       />
@@ -82,8 +84,8 @@ let TaskOfferNewOrder = (props: Props) => {
       <Field
         name="executionType"
         component={SelectInput}
-        label="Execution Type*"
-        options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
+        label={`${t('executionType')}*`}
+        options={[{value: 'physical', label: t('physical')}, {value: 'virtual', label: t('virtual')}, {value: 'combo', label: t('combo')}]}
         validate={required}
         labelType={'cross'}
       />
@@ -92,21 +94,21 @@ let TaskOfferNewOrder = (props: Props) => {
       <Field
         name="address"
         component={InputAddress}
-        label="Address"
+        label={t('address')}
       />
       <Field
         name="description"
         component={TextArea}
-        label="Task description*"
+        label={`${t('taskDescription')}*`}
         validate={required}
       />
 
       <Field
         name="photos"
         component={FileInput}
-        label="Photos"
+        label={t('photos')}
         multiple={true}
-        title="Estimate"
+        title={t('estimate')}
         min="1"
         max="30"
       />
@@ -116,12 +118,12 @@ let TaskOfferNewOrder = (props: Props) => {
       <Field
         name="terms"
         component={Checkbox}
-        label={<div>I am agree with <Link href="/">terms and conditions</Link></div>}
+        label={<div>{t('taskNegotiation.iAmAgreeWith')} <Link href="/">{t('taskNegotiation.termsAndConditions')}</Link></div>}
       />
       </div>
       {!sendOfferLoading && <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>Send offer</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('taskNegotiation.sendOffer')}</Button>
       </div>}
       </>}
     </form>

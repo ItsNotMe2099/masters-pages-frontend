@@ -13,10 +13,12 @@ import FileInput from 'components/ui/Inputs/FilesUploadInput'
 import AvatarInput from 'components/ui/AvatarInput'
 import Checkbox from 'components/ui/Inputs/Checkbox'
 import Link from 'next/link'
+import {useTranslation, withTranslation} from "react-i18next";
 
 let GalleryForm = (props) => {
   const error = useSelector((state: IRootState) => state.profilePortfolio.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'gallery')
+  const { t } = useTranslation('common');
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
@@ -25,11 +27,11 @@ let GalleryForm = (props) => {
         component={AvatarInput}
         size={'small'}
         labelType="placeholder"
-        label={'Upload photo'}
+        label={t('follower.postForm.uploadPhoto')}
       />
       {profileTabs.length > 0 && <Field
         name="profileTabId"
-        label={'Category'}
+        label={t('createTask.filter.fieldCategory')}
         component={SelectInput}
         size={'small'}
         options={profileTabs.map(item => ({label: item.title, value: item.id}))}
@@ -41,7 +43,7 @@ let GalleryForm = (props) => {
         name="title"
         component={Input}
         size={'small'}
-        label="Title"
+        label={t('follower.postForm.title')}
         labelType={'placeholder'}
       />
 
@@ -49,18 +51,18 @@ let GalleryForm = (props) => {
         name="description"
         component={TextArea}
         size={'small'}
-        label="Description"
+        label={t('follower.postForm.description')}
         labelType={'placeholder'}
       />
       <Field
         name="commentsAllowed"
         component={Checkbox}
-        label={<div>Comments allowed</div>}
+        label={<div>{t('follower.postForm.commentsAllowed')}</div>}
       />
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
       </div>
     </form>
   )

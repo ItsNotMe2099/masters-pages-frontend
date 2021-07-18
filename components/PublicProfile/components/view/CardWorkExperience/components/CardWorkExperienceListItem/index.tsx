@@ -7,6 +7,7 @@ import FormActionButton from 'components/PublicProfile/components/FormActionButt
 import {format, formatDistanceStrict, formatDistanceToNowStrict, parse} from 'date-fns'
 import {formatDate, parseDate} from 'utils/formatters'
 import {getMediaPath} from 'utils/media'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   model: ProfileWorkExperience,
@@ -26,6 +27,7 @@ const CardWorkExperienceListItem = ({model, isEdit, onEdit, onDelete}: Props) =>
       return `until ${formatDate(model.toDate)}`;
     }
   }
+  const {i18n, t} = useTranslation('common')
   return (
     <div className={styles.root}>
       <div className={styles.leftColumn}>
@@ -39,14 +41,14 @@ const CardWorkExperienceListItem = ({model, isEdit, onEdit, onDelete}: Props) =>
           <div className={styles.dates}>{getDuration()}</div>
         </div>
           {isEdit && <div className={styles.editActions}>
-          <FormActionButton type={'edit'} title={'Edit'} onClick={ () => onEdit(model)}/>
-          <FormActionButton type={'delete'} title={'Delete'} onClick={ () => onDelete(model)}/>
+          <FormActionButton type={'edit'} title={t('edit')} onClick={ () => onEdit(model)}/>
+          <FormActionButton type={'delete'} title={t('task.delete')} onClick={ () => onDelete(model)}/>
         </div>}
         </div>
         <div className={styles.company}>{model.company}</div>
         <div className={styles.description}>{model.description}</div>
         <div className={styles.actions}>
-          {model.link && <Button href={model.link} size={'small'}>Visit website</Button>}
+          {model.link && <Button href={model.link} size={'small'}>{t('cardPortfolio.visitWebsite')}</Button>}
         </div>
       </div>
     </div>

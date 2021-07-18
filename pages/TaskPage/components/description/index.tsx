@@ -4,6 +4,7 @@ import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { ITask } from 'types'
 import * as React from "react";
+import {useTranslation} from 'react-i18next'
 
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 const Description = (props: Props) => {
 
   const dispatch = useDispatch();
+  const {t} = useTranslation('common');
   const handleReadMore = () => {
 
   }
@@ -40,18 +42,18 @@ const Description = (props: Props) => {
       <div className={styles.taskTitle}>
           <div className={styles.title}>{props.task.title}</div>
         </div>
-        <div className={styles.category}>Courier &rarr; Small delivery</div>
+        <div className={styles.category}>{t('task.page.courier')} &rarr; {t('task.page.smallDelivery')}</div>
         <div className={styles.desc}>
           {props.task.description}
         </div>
       </div>
     </div>
     <div className={styles.bottom}>
-      <TaskActionButton title={'Read more'} icon={'down'} onClick={handleReadMore}/>
+      <TaskActionButton title={t('readMore')} icon={'down'} onClick={handleReadMore}/>
       <div className={styles.separatorLine}/>
-      <TaskActionButton title={'Share'} icon={'share'} onClick={handleShare}/>
+      <TaskActionButton title={t('share')} icon={'share'} onClick={handleShare}/>
       <div className={styles.separatorLine}/>
-      <TaskActionButton title={'Save'} icon={'favorite'} onClick={handleFavorite}/>
+      <TaskActionButton title={t('save')} icon={'favorite'} onClick={handleFavorite}/>
     </div>
   </div>
   )

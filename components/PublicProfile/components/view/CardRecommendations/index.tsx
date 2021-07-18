@@ -12,6 +12,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchProfileRecommendationForProfileList, setPageProfileRecommendation} from 'components/ProfileRecommendations/actions'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   profile: ProfileData
@@ -24,6 +25,7 @@ const CardRecommendations = (props: Props) => {
   const total = useSelector((state: IRootState) => state.profileRecommendation.total)
   const page = useSelector((state: IRootState) => state.profileRecommendation.page)
   const  limit = 30;
+  const {i18n, t} = useTranslation('common')
 
   useEffect(() => {
     dispatch(resetFeedbackList());
@@ -43,7 +45,7 @@ const CardRecommendations = (props: Props) => {
   }
 
   return (
-    <Card className={styles.root} title={total > 0 ? `Recommended by (${total})` : 'Recommended by'}>
+    <Card className={styles.root} title={total > 0 ? t('cardRecommenadationShort.recommendationsTotal', total) : t('cardRecommenadationShort.recommendations')}>
       {(listLoading && total === 0) && <Loader/>}
       <div className={styles.list}>
       {total > 0 && <InfiniteScroll

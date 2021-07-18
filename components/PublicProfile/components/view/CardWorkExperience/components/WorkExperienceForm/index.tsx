@@ -11,9 +11,11 @@ import {birthdate, date, required} from 'utils/validations'
 import AvatarInput from 'components/ui/AvatarInput'
 import {format, parse} from 'date-fns'
 import {dateFormat} from 'utils/masks'
+import {useTranslation} from 'react-i18next'
 
 let WorkExperienceForm = (props) => {
   const error = useSelector((state: IRootState) => state.profileWorkExperience.formError)
+  const {i18n, t} = useTranslation('common')
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
@@ -21,13 +23,13 @@ let WorkExperienceForm = (props) => {
         name="photo"
         component={AvatarInput}
         labelType="placeholder"
-        label={'Upload photo'}
+        label={t('uploadPhoto')}
       />
       <Field
         name="title"
         component={Input}
         size={'small'}
-        label="Job position"
+        label={t('cardWorkExperience.form.jobPosition')}
         labelType={'placeholder'}
       />
       <div className={styles.dates}>
@@ -35,7 +37,7 @@ let WorkExperienceForm = (props) => {
           name="fromDate"
           component={Input}
           size={'small'}
-          label="From date"
+          label={t('cardWorkExperience.form.fromDate')}
           validate={[required, date]}
           {...dateFormat}
           mask={'99/99/9999'}
@@ -45,7 +47,7 @@ let WorkExperienceForm = (props) => {
           name="toDate"
           component={Input}
           size={'small'}
-          label="To date"
+          label={t('cardWorkExperience.form.toDate')}
           validate={[required, date]}
           {...dateFormat}
           mask={'99/99/9999'}
@@ -56,7 +58,7 @@ let WorkExperienceForm = (props) => {
         name="company"
         component={Input}
         size={'small'}
-        label="Company or Institution name"
+        label={t('cardWorkExperience.form.companyOrInstitution')}
         labelType={'placeholder'}
       />
 
@@ -64,14 +66,14 @@ let WorkExperienceForm = (props) => {
         name="description"
         component={TextArea}
         size={'small'}
-        label="Description"
+        label={t('follower.postForm.description')}
         labelType={'placeholder'}
       />
       <Field
         name="link"
         component={Input}
         size={'small'}
-        label="Add link"
+        label={t('addLink')}
 
         labelType={'placeholder'}
       />

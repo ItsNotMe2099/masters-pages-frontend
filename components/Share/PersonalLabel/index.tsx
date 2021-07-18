@@ -7,6 +7,7 @@ import * as React from 'react'
 import {IRootState, ISharePersonalLabel} from 'types'
 import {useRef, useState} from 'react'
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
+import {useTranslation} from "react-i18next";
 
 interface Props {
   customLink?: string
@@ -19,6 +20,7 @@ export default function SharePersonalLabel(props: Props) {
   const {phone, subCategoryId, customLink} = props;
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
   const labelRef = useRef(null);
+  const { t } = useTranslation('common');
   const [settings, setSettings] = useState<ISharePersonalLabel>({
     theme: 'light',
     style: 'horizontal',
@@ -51,13 +53,13 @@ export default function SharePersonalLabel(props: Props) {
   }
   return (
     <div className={styles.root} >
-      <div className={styles.title}>Your personal label</div>
-      <div className={styles.description}>Use your personal MP label as email signature , letter head, business cards logo or place on your outdoor ads</div>
+      <div className={styles.title}>{t('personalLabel.yourPersonalLabel')}</div>
+      <div className={styles.description}>{t('personalLabel.useYourPersonal')}</div>
       <PersonalLabelForm onChange={handleChange} initialValues={settings}/>
       <div className={styles.shareLabel}><ShareLabel ref={labelRef} link={shareUrl} settings={settings} name={`${profile.firstName} ${profile.lastName}`} phone={phone} id={subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}/></div>
       <div className={styles.btnContainer}>
-        <Button size={'small'} onClick={handleDownloadPdf}>Download PDF</Button>
-        <Button size={'small'} onClick={handleDownloadImage}>Download image</Button>
+        <Button size={'small'} onClick={handleDownloadPdf}>{t('personalLabel.downloadPDF')}</Button>
+        <Button size={'small'} onClick={handleDownloadImage}>{t('personalLabel.downloadImage')}</Button>
       </div>
     </div>
   )

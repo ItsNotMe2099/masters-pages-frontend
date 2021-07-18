@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import NewMessage from 'components/svg/NewMessage'
 import {createProfileGalleryComment} from 'components/ProfileGallery/actions'
 import {createNewsComment} from 'components/News/actions'
+import {useTranslation} from 'react-i18next'
 interface Props {
   isNews?: boolean
 }
@@ -20,6 +21,7 @@ export default function GalleryNewComment({isNews}: Props) {
   const { commentSentError, commentIsSending, commentSentSuccess} = useSelector((state: IRootState) => state.profileGallery)
   const galleryItem = useSelector((state: IRootState) =>  isNews ?  state.news.currentItem : state.profileGallery.currentItem)
   const [message, setMessage] = useState('');
+  const {i18n, t} = useTranslation('common')
 
   const handleSendMessage = () => {
     if(message && galleryItem) {
@@ -48,7 +50,7 @@ export default function GalleryNewComment({isNews}: Props) {
     <form className={styles.form} onSubmit={handleSendMessage}>
      <div className={styles.message}>
        <TextArea
-         label="Your comment here"
+         label={t('galleryModal.yourComment')}
          labelType={'placeholder'}
          meta={{}}
          input={{value: message, onChange: handleChange}}

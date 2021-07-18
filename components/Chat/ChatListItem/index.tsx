@@ -8,7 +8,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 import formatDistance from 'date-fns/formatDistance'
-
+import {useTranslation} from 'react-i18next'
 interface Props {
   chat: IChat
   isActive?: boolean
@@ -20,6 +20,7 @@ export default function ChatListItem({chat, isActive}: Props) {
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const router = useRouter();
   const dispatch = useDispatch()
+  const {t} = useTranslation('common');
   const handleClick = () => {
     let profileId;
     if(chat.taskId){
@@ -43,7 +44,7 @@ export default function ChatListItem({chat, isActive}: Props) {
         <div className={styles.title}>{`${profile.firstName} ${profile.lastName} ${chat.task ? `(${chat.task.title})` : ''}`}</div>
         <div className={styles.time}>{formatDistance(new Date(), new Date(chat.lastMessageAt))}</div>
       </div>
-     {chat.totalUnread > 0 && <div className={styles.notification}>{chat.totalUnread} new</div>}
+     {chat.totalUnread > 0 && <div className={styles.notification}>{chat.totalUnread} {t('new')}</div>}
    </div>
   )
 }

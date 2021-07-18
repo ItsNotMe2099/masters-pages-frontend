@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchTaskSearchListWithLimit } from './Task/actions'
 import { IRootState } from 'types'
 import Loader from 'components/ui/Loader'
+import {useTranslation, Trans} from "react-i18next";
 
 interface Props {}
 
@@ -14,6 +15,7 @@ export default function OrderingSection(props: Props) {
 
   const dispatch = useDispatch()
   const tasks = useSelector((state: IRootState) => state.taskSearchWithLimit.task)
+  const {t} = useTranslation('common')
   useEffect(() => {
     dispatch(fetchTaskSearchListWithLimit(4))
   }, [])
@@ -21,7 +23,7 @@ export default function OrderingSection(props: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.title}>
-        People ordering right now
+        {t('split.peopleOrdering')}
       </div>
       {!tasks ?
 

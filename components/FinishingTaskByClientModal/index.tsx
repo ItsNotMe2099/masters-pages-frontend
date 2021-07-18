@@ -7,6 +7,7 @@ import styles from './index.module.scss'
 import FinishingTaskByClientForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 interface Props {
   isOpen: boolean
 }
@@ -22,6 +23,7 @@ export default function FinishingTaskByClientModal(props: Props) {
   const handleClose = () => {
     dispatch(modalClose());
   }
+  const { t } = useTranslation('common');
 
 
   return (
@@ -34,7 +36,7 @@ export default function FinishingTaskByClientModal(props: Props) {
           {/*<div className={styles.money}>
             You own: <span> &nbsp;$ {props.money}</span>
           </div>*/}
-          <div className={styles.rate}>Please rate {task.master.firstName} work!</div>
+          <div className={styles.rate}>{t('feedBack.pleaseRate')} {task.master.firstName} {t('feedBack.work')}</div>
           <div className={styles.form}><FinishingTaskByClientForm onSubmit={handleSubmit} onClose={handleClose}/></div>
         </div>
     </Modal>

@@ -13,13 +13,15 @@ import { useRouter } from "next/router";
 import Review from "components/Review";
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
+import {useTranslation} from 'react-i18next'
+
 
 interface Props {
   t?: (string) => string,
 }
 const TabReviews = (props: Props) => {
-  const {t} = props;
-  const options = [{label: 'New first', value: 'New first'}, {label: 'Old first', value: 'Old first'}]
+  const { t } = useTranslation('common');
+  const options = [{label: t('sort.newFirst'), value: 'New first'}, {label: t('sort.oldFirst'), value: 'Old first'}]
   const feedbacks = useSelector((state: IRootState) => state.profileFeedback.list)
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
   const total = useSelector((state: IRootState) => state.profileFeedback.total)
@@ -52,7 +54,7 @@ const TabReviews = (props: Props) => {
       <div className={styles.top}>
       <div>
         <div className={styles.percent}>95%</div>
-        <div className={styles.greenText}>Positive reviews based on {total}</div>
+        <div className={styles.greenText}>{t('positiveReviews')} {total}</div>
       </div>
       <div className={styles.simpleText}>Lorem ipsum dolor sit amet, consectetur adipiscing<br/> elit. Fermentum mattis sed quam enim.</div>
       <div className={styles.dropdown}>

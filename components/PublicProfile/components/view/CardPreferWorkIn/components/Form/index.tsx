@@ -37,21 +37,21 @@ let PreferWorkInForm = (props: Props) => {
         onChange={handleTypeChange}
         size={'small'}
         labelType="placeholder"
-        label={'Type'}
-        options={[{label: 'Online', value: 'online'}, {label: 'Offline', value: 'offline'}]}
+        label={t('type')}
+        options={[{label: t('online'), value: 'online'}, {label: t('offline'), value: 'offline'}]}
       />
       {showAddress && <Field
         name="location"
         component={InputAddress}
         size={'small'}
         labelType="placeholder"
-        label={'Address'}
+        label={t('tabProfile.fieldAddress')}
       />}
 
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
       </div>
 
     </form>

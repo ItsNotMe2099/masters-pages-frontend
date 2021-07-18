@@ -44,7 +44,7 @@ const SiteReviews = (props) => {
     <>
     <Header {...props}/>
     <div className={styles.container}>
-      <h1>Reviews</h1>
+      <h1>{t('reviews')}</h1>
       {(loading && total === 0) && <Loader/>}
       {total > 0 && <InfiniteScroll
         dataLength={list.length} //This is important field to render the next data

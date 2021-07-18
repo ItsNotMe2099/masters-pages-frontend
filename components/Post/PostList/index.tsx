@@ -45,7 +45,7 @@ interface Props{
   onEdit?: (item) => void
 }
 const PostList = (props: Props) => {
-  const {t} = useTranslation()
+  const {t} = useTranslation('common')
   const router = useRouter();
   const dispatch = useDispatch()
   const profile = useSelector((state: IRootState) => state.profile.currentProfile);
@@ -88,7 +88,7 @@ const PostList = (props: Props) => {
 
   const handleDelete = (model: IProfileGalleryItem) => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to delete «${model.title}»?`,
+      description: t('post.areYouSureToDelete', { model }),
       onConfirm: () => {
         dispatch(deleteProfileGallery(model.id));
       }

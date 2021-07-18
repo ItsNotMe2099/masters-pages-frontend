@@ -23,6 +23,7 @@ import {confirmOpen, editEventOpen} from 'components/Modal/actions'
 import MeetingForm from 'components/Calendar/components/EditEventModal/components/MeetingForm'
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 import {getEventPlannedAllowed} from 'utils/event'
+import {useTranslation} from 'react-i18next'
 
 
 enum ButtonType {
@@ -60,6 +61,7 @@ let TimePlaceChargeForm = (props: Props) => {
   const [isTempEdit, setIsTempEdit] = useState(false);
   const isAuthor = isTempEdit || profile.id === event.authorId
   const dispatch = useDispatch();
+  const {t} = useTranslation('common');
 
   let isPlannedDisabled = !((isTempEdit || isCurrentEventEditMode) && getEventPlannedAllowed(event));
   if([EventStatus.Draft].includes(event.status)){
@@ -115,46 +117,46 @@ let TimePlaceChargeForm = (props: Props) => {
     switch (type){
       case ButtonType.Delete:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                type={'button'} onClick={handleDelete}>Delete</Button>;
+                type={'button'} onClick={handleDelete}>{t('delete')}</Button>;
       case ButtonType.Draft:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'submit'} onClick={handleDraft}>Save as Draft</Button>;
+                       type={'submit'} onClick={handleDraft}>{t('saveAsDraft')}</Button>;
 
       case ButtonType.Send:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleSend}>Send</Button>;
+                       type={'button'} onClick={handleSend}>{t('send')}</Button>;
       case ButtonType.Decline:
         return  <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                        type={'button'} onClick={handleDecline}>Decline</Button>;
+                        type={'button'} onClick={handleDecline}>{t('decline')}</Button>;
       case ButtonType.Confirm:
         return  <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                        type={'button'} onClick={handleConfirm}>Confirm</Button>
+                        type={'button'} onClick={handleConfirm}>{t('confirm')}</Button>
       case ButtonType.Edit:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleEdit}>Edit</Button>;
+                       type={'button'} onClick={handleEdit}>{t('edit')}</Button>;
       case ButtonType.EditResults:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleEdit}>Edit results</Button>;
+                       type={'button'} onClick={handleEdit}>{t('editResults')}</Button>;
       case ButtonType.Cancel:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleCancel}>Cancel</Button>;
+                       type={'button'} onClick={handleCancel}>{t('cancel')}</Button>;
       case ButtonType.DeclineDelete:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleDelete}>Decline & Delete</Button>;
+                       type={'button'} onClick={handleDelete}>{t('declinedAndDelete')}</Button>;
       case ButtonType.RestoreDelete:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleRestore}>Restore</Button>;
+                       type={'button'} onClick={handleRestore}>{t('restore')}</Button>;
       case ButtonType.Complete:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleComplete}>Complete</Button>;
+                       type={'button'} onClick={handleComplete}>{t('complete')}</Button>;
       case ButtonType.Approve:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleApprove}>Approve</Button>;
+                       type={'button'} onClick={handleApprove}>{t('approve')}</Button>;
     }
   }
 
   const handleSend = (e) => {
-    const confirmText = event.status === EventStatus.Completed ? 'You are confirming your consent with completion of event as recorded.  This action can not be undone. Do you want to proceed?' : 'Your invitation will be send to your counterparty. Do you want to proceed?”';
+    const confirmText = event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation');
 
     dispatch(confirmOpen({
       description: confirmText,
@@ -180,7 +182,7 @@ let TimePlaceChargeForm = (props: Props) => {
   }
   const handleComplete = (e) => {
     dispatch(confirmOpen({
-      description: `You are confirming your consent with completion of event as recorded.  This action can not be undone. Do you want to proceed?`,
+      description: t('timePlaceChargeForm.yourConsent'),
       onConfirm: () => {
         dispatch(editEventOpen());
         dispatch(setSubmitEvent('complete'));
@@ -201,7 +203,7 @@ let TimePlaceChargeForm = (props: Props) => {
   const handleApprove = () => {
 
     dispatch(confirmOpen({
-      description: `Approval is final and can not be undone. Do you want to proceed?`,
+      description: t('timePlaceChargeForm.approvalIsFinal'),
       onConfirm: () => {
         dispatch(editEventOpen());
         dispatch(approveEventRequest(event.id))
@@ -240,7 +242,7 @@ let TimePlaceChargeForm = (props: Props) => {
 
   const handleDelete = () => {
     dispatch(confirmOpen({
-      description: `Deletion is final and can not be undo. Do you want to proceed?`,
+      description: t('timePlaceChargeForm.deletionIsFinal'),
       onConfirm: () => {
         dispatch(deleteEvent(event.id));
       },
@@ -252,7 +254,7 @@ let TimePlaceChargeForm = (props: Props) => {
   }
   const handleConfirm = () => {
     dispatch(confirmOpen({
-      description: `Confirm is final and can not be undone. Do you want to proceed?`,
+      description: t('timePlaceChargeForm.confirmIsFinal'),
       onConfirm: () => {
         dispatch(confirmEventRequest(event.id))
       },
@@ -263,7 +265,7 @@ let TimePlaceChargeForm = (props: Props) => {
   }
   const handleDecline = () => {
     dispatch(confirmOpen({
-      description: `Decline is final and can not be undone. Do you want to proceed?`,
+      description: t('timePlaceChargeForm.declineIsFinal'),
       onConfirm: () => {
         dispatch(declineEventRequest(event.id))
       },

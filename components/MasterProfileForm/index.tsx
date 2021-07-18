@@ -13,22 +13,24 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
+import {useTranslation, Trans} from 'react-i18next'
 
 let MasterForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
+  const {t} = useTranslation('common');
   return (
     <div>
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.container}>
         <div className={styles.mainForm}>
-          <div className={styles.title__top}>1. Personal information</div>
+          <div className={styles.title__top}>1. {t('masterForm.personalInformation')}</div>
           <div className={styles.taskData}>
             <div className={styles.column}>
               <Field
                 name="firstName"
                 component={Input}
-                label="First name*"
+                label={t('masterForm.firstName')}
                 validate={required}
               />
               <Field
@@ -43,13 +45,13 @@ let MasterForm = props => {
               <Field
                 name="lastName"
                 component={Input}
-                label="Last name*"
+                label={t('masterForm.lastName')}
                 validate={required}
               />
               <Field
                 name="geonameid"
                 component={InputLocation}
-                label="Location*"
+                label={t('masterForm.location')}
                 validate={required}
               />
             </div>
@@ -57,9 +59,9 @@ let MasterForm = props => {
           <Field
             name="photo"
             component={AvatarInput}
-            label="Avatar*"
+            label={t('masterForm.avatar')}
           />
-          <div className={styles.title__top}>3. Choose categories</div>
+          <div className={styles.title__top}>3. {t('masterForm.chooseCategories')}</div>
           <div className={styles.taskData}>
             <div className={styles.column}>
               <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> Nunc dictum
@@ -69,7 +71,7 @@ let MasterForm = props => {
                 <Field
                   name="categories"
                   component={CheckboxSubCategory}
-                  label="Categories*"
+                  label={t('masterForm.categories')}
                   validate={[arrayNotEmpty('selectCategory')]}
                 />
               </div>
@@ -77,7 +79,7 @@ let MasterForm = props => {
           </div>
         </div>
         <div className={styles.important}>
-          <div className={styles.head}>Important information</div>
+          <div className={styles.head}>{t('masterForm.importantInformation')}</div>
           <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id quam at lacinia
             integer cursus venenatis fringilla arcu eget. Sed fames sed praesent cursus ornare fermentum. Fusce varius
             quisque
@@ -93,14 +95,14 @@ let MasterForm = props => {
           <Field
             name="terms"
             component={InputCheckbox}
-            label={<div>С <a href={''}>правилами сайта</a> ознакомился и согласен</div>}
+            label={<Trans i18nKey="masterForm.rules">С <a href={''}>правилами сайта</a> ознакомился и согласен</Trans>}
             validate={required}
           />
         </div>
 
         <div className={styles.btnContainer}>
           <FormError error={error}/>
-          <Button red size="14px 105px">ГОТОВО</Button>
+          <Button red size="14px 105px">{t('ready')}</Button>
         </div>
       </div>
     </form>

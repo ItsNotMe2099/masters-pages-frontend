@@ -14,6 +14,7 @@ import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, Trans} from "react-i18next";
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -24,6 +25,7 @@ const TaskEditConditionsModal = ({isOpen, onClose}: Props) => {
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   console.log("taskNegotiationEdit", taskNegotiation, { offerPriceType: taskNegotiation?.priceType, budget: taskNegotiation?.budget, ratePerHour: taskNegotiation?.ratePerHour, deadline: taskNegotiation.deadline ? format(new Date(taskNegotiation.deadline), 'MM/dd/yyy') : null});
   const dispatch = useDispatch();
+  const {t} = useTranslation('common')
   useEffect(() => {
 
   }, [isOpen])
@@ -37,14 +39,14 @@ const TaskEditConditionsModal = ({isOpen, onClose}: Props) => {
         <div className={styles.icon}>
           <img  src={`/img/icons/dollar.svg`}/>
         </div>
-        <div className={styles.title}>Negotiate offer</div>
+        <div className={styles.title}>{t('taskNegotiation.negotiateOffer')}</div>
       </div>
 
       <div className={styles.task}>
         <div className={styles.taskHeader}>
         <div className={styles.taskTitle}>{task?.title}</div>
         <div className={styles.taskExpires}>
-          <div className={styles.taskExpiresLabel}>Expire in:</div>
+          <div className={styles.taskExpiresLabel}>{t('taskNegotiation.expireIn')}</div>
           <div className={styles.taskExpiresValue}>23:46:23</div>
         </div>
         </div>

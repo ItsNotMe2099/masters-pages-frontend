@@ -13,6 +13,7 @@ import Button from 'components/ui/Button'
 import {taskNegotiationSetCurrentTask} from 'components/TaskNegotiation/actions'
 import {feedbackByMasterOpen} from 'components/Modal/actions'
 import TaskFeedback from 'components/ProfileFeedback/TaskFeedback'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   task?: ITask
@@ -26,6 +27,7 @@ let TaskReview = ({task}: Props) => {
   const myReview = task.feedbacks.find(f => f.fromProfileId === currentProfile.id);
   const otherReview = task.feedbacks.find(f => f.fromProfileId !== currentProfile.id);
   const otherSide = currentProfile.role === 'client' ? task.master : task.profile;
+  const {t} = useTranslation('common');
   useEffect(() => {
     return () => {
       dispatch(resetFeedbackEventForm());
@@ -42,15 +44,15 @@ let TaskReview = ({task}: Props) => {
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
         <a href={`/id${otherSide.id}`}  target={'_blank'}
-           className={styles.author}><Avatar size={'exSmall'} image={otherSide.photo}/>{otherSide.firstName} {otherSide.lastName}</a> review not available yet
+           className={styles.author}><Avatar size={'exSmall'} image={otherSide.photo}/>{otherSide.firstName} {otherSide.lastName}</a> {t('reviewNotAvailable')}
       </div>}
       {otherReview && <>
         <div className={styles.feedback}><TaskFeedback feedback={otherReview} profile={otherSide}/></div>
       </>}
 
-      {myReview && <div className={styles.feedback}><TaskFeedback title={'Your review'} feedback={myReview} profile={currentProfile}/></div>}
+      {myReview && <div className={styles.feedback}><TaskFeedback title={t('yourReview')} feedback={myReview} profile={currentProfile}/></div>}
       {!myReview && <div className={styles.actions}>
-        <Button red={true} size={'12px 40px'} onClick={handleFeedback}>Post feedback</Button>
+        <Button red={true} size={'12px 40px'} onClick={handleFeedback}>{t('task.feedbackToClient')}</Button>
       </div>}
     </div>
   )

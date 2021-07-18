@@ -105,7 +105,7 @@ const TabOrders = (props: Props) => {
     <div className={styles.root}>
       <div className={styles.actions}>
       <Button  red={true} bold={true} size={'12px 40px'}
-              type={'button'} onClick={() => router.push('/CreateTaskPage')}>Create new order</Button>
+              type={'button'} onClick={() => router.push('/CreateTaskPage')}>{t("personalArea.tabOrders.menu.create")}</Button>
       </div>
       <div className={styles.desktop}>
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {

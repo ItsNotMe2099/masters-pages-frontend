@@ -12,11 +12,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import SimpleSlider from 'components/Steps/MasterProfile/Slider'
 import MasterForm from 'components/MasterProfileForm'
 import Layout from 'components/layout/Layout'
+import {useTranslation} from "react-i18next";
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const {t} = useTranslation('common')
 
   useEffect(() => {
     if(formLoading){
@@ -45,7 +47,7 @@ const MasterProfile = (props) => {
       </div>
       <div className={styles.container}>
 
-        <div className={styles.required}>* required field</div>
+        <div className={styles.required}>* {t('requiredField')}</div>
         <MasterForm onSubmit={handleSubmit} initialValues={{
           firstName: profile?.firstName,
           lastName: profile?.lastName,

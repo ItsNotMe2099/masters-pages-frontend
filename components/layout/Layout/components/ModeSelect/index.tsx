@@ -10,6 +10,7 @@ import nextI18 from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {useTranslation, withTranslation} from "react-i18next";
+
  const ModeSelect = () => {
    const { t } = useTranslation('common');
   const role = useSelector((state: IRootState) => state.profile.role)
@@ -23,9 +24,9 @@ import {useTranslation, withTranslation} from "react-i18next";
   }
 
   const options = [
-    { value: 'client', label: 'Client Mode' },
-    { value: 'master', label: 'Master Mode' },
-    { value: 'volunteer', label: 'Volunteer Mode' },
+    { value: 'client', label: t('personalArea.profile.modeClient') },
+    { value: 'master', label: t('personalArea.profile.modeMaster') },
+    { value: 'volunteer', label: t('personalArea.profile.modeVolunteer') },
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 

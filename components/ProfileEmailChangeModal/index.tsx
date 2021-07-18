@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function ProfileEmailChangeModal(props: Props) {
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const dispatch = useDispatch();
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const formIsSuccess = useSelector((state: IRootState) => state.profile.formIsSuccess)

@@ -38,6 +38,7 @@ import {confirmOpen, editEventOpen} from 'components/Modal/actions'
 import {taskNegotiationDeclineConditions} from 'components/TaskNegotiation/actions'
 import MeetingForm from 'components/Calendar/components/EditEventModal/components/MeetingForm'
 import {parserPrice} from 'utils/formatters'
+import {useTranslation} from 'react-i18next'
 
 interface Props {
   onCancel?: () => void
@@ -51,6 +52,7 @@ let EventExpenseForm = ({event, handleSubmit}: Props) => {
   const error = useSelector((state: IRootState) => state.event.formError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const {t} = useTranslation('common');
 
   const handleEdit = () => {
    // dispatch(deleteEvent(event.id))
@@ -66,7 +68,7 @@ let EventExpenseForm = ({event, handleSubmit}: Props) => {
             name="type"
             component={Input}
             showIcon={false}
-            label="Expense type"
+            label={t('expenseType')}
             validate={required}
           />
 
@@ -74,7 +76,7 @@ let EventExpenseForm = ({event, handleSubmit}: Props) => {
             name="amount"
             component={Input}
             showIcon={false}
-            label="Price amount"
+            label={t('priceAmount')}
             parse={parserPrice}
             validate={required}
           />
@@ -82,7 +84,7 @@ let EventExpenseForm = ({event, handleSubmit}: Props) => {
 
         {!formLoading && <div className={styles.buttons}>
           <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'}
-                  type={'submit'} onClick={handleEdit}>Save</Button>
+                  type={'submit'} onClick={handleEdit}>{t('save')}</Button>
 
         </div>}
       </>}

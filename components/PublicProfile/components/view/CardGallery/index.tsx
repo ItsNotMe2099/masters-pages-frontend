@@ -52,7 +52,7 @@ const CardGallery = (props: Props) => {
   const currentTab = useSelector((state: IRootState) => state.profileGallery.currentProfileTab);
 
   const limit = 3;
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
 
   useEffect(() => {
@@ -110,7 +110,7 @@ const CardGallery = (props: Props) => {
   }
   const handleDelete = (model: ProfileWorkExperience) => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to delete «${model.title}»?`,
+      description: t("post.areYouSureToDelete", { model }),
       onConfirm: () => {
         dispatch(deleteProfileGallery(model.id));
       }
@@ -134,7 +134,7 @@ const CardGallery = (props: Props) => {
   }
 
   return (
-    <Card isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  className={styles.root} title={'Gallery'} toolbar={ isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>]: []}>
+    <Card isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  className={styles.root} title={t('cardGallery.gallery')} toolbar={ isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>]: []}>
       {!showForm && <><div className={styles.panel}>
         <div className={styles.tabs}>
           <ProfileTabs type={'gallery'} currentTab={currentTab} skill={skill} isEdit={isEdit} onChangeTab={handleChangeTab}/>
@@ -158,7 +158,7 @@ const CardGallery = (props: Props) => {
           {list.map((item, index) => <GalleryItem isEdit={isEdit} model={item} onClick={(model) => showGallery(model, index)}onEdit={handleEdit} onDelete={handleDelete}/>)}
         </InfiniteScroll>}
       </>}
-      {(!showForm && isEdit && list.length === 0 && !listLoading) && <CardAdd title={'Add photo'} icon={'add_photo'}  onClick={handleCreateClick} /> }
+      {(!showForm && isEdit && list.length === 0 && !listLoading) && <CardAdd title={t('cardGallery.addPhoto')} icon={'add_photo'}  onClick={handleCreateClick} /> }
 
       {showForm && <GalleryForm onSubmit={handleSubmit} onCancel={handleCancel} initialValues={currentEditModel ? currentEditModel : {...(currentTab ? {profileTabId: currentTab.id} : {})}}/>}
       {isGalleryOpen && <GalleryModal isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)}/>}

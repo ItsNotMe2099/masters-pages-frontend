@@ -11,6 +11,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import PostList from 'components/Post/PostList'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   profile: ProfileData,
@@ -20,9 +21,10 @@ const CardPosts = (props: Props) => {
   const { profile, skill} = props;
   const dispatch = useDispatch();
   const total = useSelector((state: IRootState) => state.profileGallery.total)
+  const {t} = useTranslation('common');
 
   return (
-    <Card className={styles.root} title={total > 0 ? `Posts (${total})` : 'Posts'}>
+    <Card className={styles.root} title={total > 0 ? t('cardPost.totalPosts', total) : t('menu.posts')}>
       <PostList profileId={profile.id}/>
     </Card>
   )

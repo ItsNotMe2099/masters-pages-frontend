@@ -9,6 +9,7 @@ import SalesPitchForm from 'components/PublicProfile/components/view/CardSalesPi
 import {updateSkill, updateSkillByForm} from 'components/Skill/actions'
 import ReactPlayer from 'react-player'
 import {getMediaPath, isMediaImage, isMediaVideo} from 'utils/media'
+import {useTranslation} from 'react-i18next'
 interface Props{
   profile: ProfileData,
   skill: SkillData
@@ -21,6 +22,7 @@ const CardSalesPitch = (props: Props) => {
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'salesPitch');
   const media = 'img.png'
   const file = skill.photos.length > 0 ? skill.photos[0] : null
+  const {i18n, t} = useTranslation('common')
   const handleEditClick = () => {
     dispatch(showProfileForm( 'salesPitch'));
 
@@ -33,7 +35,7 @@ const CardSalesPitch = (props: Props) => {
     dispatch(hideProfileForm( 'salesPitch'));
   }
   return (
-    <Card isHidden={!isEdit && !file && !skill?.description} title={'Sales Pitch'} isLoading={showForm && formLoading} toolbar={isEdit ? [<FormActionButton type={'edit'} title={'edit'} onClick={handleEditClick}/>] : []}>
+    <Card isHidden={!isEdit && !file && !skill?.description} title={t('cardSalesPitch.salesPitch')} isLoading={showForm && formLoading} toolbar={isEdit ? [<FormActionButton type={'edit'} title={t('editSmall')} onClick={handleEditClick}/>] : []}>
 
       {!showForm && <div className={styles.root}> <div className={styles.leftColumn}>
       <div className={styles.text}>{skill?.description}</div>

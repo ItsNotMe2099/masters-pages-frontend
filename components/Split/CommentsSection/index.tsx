@@ -4,11 +4,13 @@ import {IRootState} from "../../../types";
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchFeedbacksMainPageRequest} from "../../ProfileFeedback/actions";
 import ReviewMainPage from "../../ReviewMainPage";
+import {useTranslation, Trans} from "react-i18next";
 interface Props {}
 
 export default function CommentsSection(props: Props) {
   const dispatch = useDispatch()
   const list = useSelector((state: IRootState) => state.profileFeedback.listLatest)
+  const {t} = useTranslation('common')
 
   useEffect(() => {
     dispatch( fetchFeedbacksMainPageRequest());
@@ -18,13 +20,13 @@ export default function CommentsSection(props: Props) {
       <div className={styles.commentBg}></div>
       <div className={styles.commentContainer}>
 
-        <div className={styles.head}>Reviews</div>
+        <div className={styles.head}>{t('reviews')}</div>
       <div className={styles.floaters}>
         <img className={styles.icon} src="/img/icons/posComments.svg" alt=''/>
         <div className={styles.text}>
           <div>
             <div className={styles.percent}>95%</div>
-            <div className={styles.greenText}>положительных<br/>отзывов</div>
+            <Trans i18nKey="split.positive" className={styles.greenText}>положительных<br/>отзывов</Trans>
           </div>
           <div>
             <div className={styles.normText}>374 189 отзывов оставили клиенты за последние 12 месяцев. Из них 354 608 - положительные</div>

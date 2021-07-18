@@ -9,6 +9,7 @@ import { isMediaImage } from "utils/media";
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
 import { useSelector, useDispatch } from 'react-redux';
+import {useTranslation} from 'react-i18next'
 interface Props {
 
 }
@@ -18,6 +19,7 @@ export default function ChatNewMessage(props: Props) {
   const {chat, messageSentError, messageIsSending, messageSentSuccess} = useSelector((state: IRootState) => state.chat)
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState([]);
+  const {t} = useTranslation('common');
   const handleSendMessage = () => {
     if((message || files.length > 0) && chat) {
       dispatch(sendMessage({ message, chatId: chat.id, files: files.map(file => file.fileKey) }))
@@ -65,7 +67,7 @@ export default function ChatNewMessage(props: Props) {
     <form className={styles.form} onSubmit={handleSendMessage}>
      <div className={styles.message}>
        <TextArea
-         label="Enter your message"
+         label={t('event.enterMessage')}
          labelType={'placeholder'}
          meta={{}}
          input={{value: message, onChange: handleChange}}

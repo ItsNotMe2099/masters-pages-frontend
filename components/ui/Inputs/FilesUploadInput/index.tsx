@@ -16,6 +16,7 @@ import Cookies from 'js-cookie'
 import nextId from "react-id-generator";
 import { useDispatch} from 'react-redux'
 import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
+import {useTranslation, Trans} from "react-i18next";
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -182,7 +183,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
       >
         <div className={styles.emptyFiles}>
           <img src="/img/icons/attach_file.svg" alt=''/>
-          <span>Перенесите сюда файл или нажмите<br/> для выбора файла на компьютере</span>
+          <Trans i18nKey="fileInput.fileHere">Перенесите сюда файл или нажмите<br/> для выбора файла на компьютере</Trans>
         </div>
         <input
           {...getInputProps()}

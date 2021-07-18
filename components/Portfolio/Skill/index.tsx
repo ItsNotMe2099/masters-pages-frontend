@@ -9,6 +9,7 @@ import { getCategoryTranslation } from "utils/translations";
 import styles from 'components/Portfolio/Skill/index.module.scss'
 import Slider from "react-slick";
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, Trans} from 'react-i18next'
 interface Props {
   item: SkillData,
   onEdit: (SkillData) => void
@@ -48,6 +49,7 @@ const Skill = ({allowEdit, item, onEdit, onRemove}: Props) => {
       }
     ]
   };
+  const {t} = useTranslation('common');
   return (
     <div className={styles.root}>
       {allowEdit && <div className={styles.editButton} onClick={() => onEdit(item)}>
@@ -60,14 +62,14 @@ const Skill = ({allowEdit, item, onEdit, onRemove}: Props) => {
         {item.photos.length === 0 &&
         <img src={'/img/icons/no-image.svg'}/>}
         {item.photos.length === 0 &&
-        <span>Add your first image</span>}
+        <span>{t('portfolio.skill.firstImage')}</span>}
         {item.photos.length > 0 &&  <Slider {...settings}>
           {item.photos.map(photo => <div className={styles.slide}><img src={getMediaPath(photo)}/></div>)}
         </Slider>}
       </div>
       <div className={styles.title}> {getCategoryTranslation(item.subCategory)?.name}</div>
-      <div className={styles.description}> {item.description || 'Empty description'}</div>
-      <div className={styles.priceLabel}>Price:</div>
+      <div className={styles.description}> {item.description || t('portfolio.skill.emptyDescription')}</div>
+      <div className={styles.priceLabel}>{t('.taskSearch.filter.fieldPrice')}:</div>
       <div className={styles.price}>{item.price ? `$${item.price}` : item.ratePerHour ? `$${item.ratePerHour}/hour`: 'N/A'}</div>
     </div>
   )

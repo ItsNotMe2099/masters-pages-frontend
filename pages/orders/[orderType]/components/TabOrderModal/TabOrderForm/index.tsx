@@ -18,10 +18,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
+import {useTranslation} from "react-i18next";
 
 let TabOrderForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
+  const {t} = useTranslation('common');
 
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
@@ -30,20 +32,20 @@ let TabOrderForm = props => {
             <Field
               name="title"
               component={Input}
-              label="Task title*"
+              label={`${t('taskTitle')}*`}
               validate={required}
             />
             <Field
               name="geonameid"
               component={InputLocation}
-              label="Location*"
+              label={`${t('location')}*`}
               validate={required}
             />
             <Field
               name="masterRole"
               component={SelectInput}
-              label="Master or volunteer*"
-              options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
+              label={`${t('masterOrVolunteer')}*`}
+              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}
               validate={required}
             />
           </div>
@@ -51,13 +53,13 @@ let TabOrderForm = props => {
             <Field
               name="categoryId"
               component={InputCategory}
-              label="Category*"
+              label={`${t('category')}*`}
               validate={required}
             />
             <Field
               name="subCategoryId"
               component={InputSubCategory}
-              label="Sub category*"
+              label={`${t('subCategory')}*`}
               categoryId={props.categoryId}
               validate={required}
             />
@@ -67,31 +69,31 @@ let TabOrderForm = props => {
           <Field
             name="address"
             component={InputAddress}
-            label="Address"
+            label={t('address')}
           />
         </div>
         <div className={styles.taskDesc}>
           <Field
             name="description"
             component={TextArea}
-            label="Task description*"
+            label={`${t('taskDescription')}*`}
             validate={required}
           />
         </div>
         <Field
           name="photos"
           component={FileInput}
-          label="Photos"
+          label={t('photos')}
           multiple={true}
-          title="Estimate"
+          title={t('estimate')}
           min="1"
           max="30"
         />
         <PriceSelectForm {...props}/>
         <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>Cancel</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'}>Save</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('save')}</Button>
       </div>
 
     </form>

@@ -18,6 +18,7 @@ import { IChat, IChatMessage, ITask, ITaskNegotiationState } from "types";
 import { getCategoryTranslation } from "utils/translations";
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   message: string
@@ -39,14 +40,15 @@ export default function ChatMessageAction({ message, onConfirm, onReject, showRe
       onReject();
     }
   }
+  const { t } = useTranslation('common');
 
   return (
     <div className={styles.root}>
       <div className={styles.message}>{message}</div>
 
-      {showReject && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleReject}>Reject</Button>}
+      {showReject && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleReject}>{t('reject')}</Button>}
       {showConfirm &&
-      <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleConfirm}>Confirm</Button>}
+      <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleConfirm}>{t('confirmModal.buttonConfirm')}</Button>}
 
     </div>
   )

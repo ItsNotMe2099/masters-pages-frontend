@@ -4,6 +4,7 @@ import Modal from "components/ui/Modal";
 import * as React from "react";
 import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import styles from './index.module.scss'
+import {useTranslation, Trans} from "react-i18next";
 
 import { useSelector, useDispatch } from 'react-redux'
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 const TaskShareModal = ({isOpen}: Props) => {
   const dispatch = useDispatch();
   const task = useSelector((state: IRootState) => state.taskSearch.currentTask)
+  const {t} = useTranslation('common')
 
   const getHost = () => {
     if (process.browser) {
@@ -20,9 +22,9 @@ const TaskShareModal = ({isOpen}: Props) => {
   }
   return (
     <Modal isOpen={isOpen}  onRequestClose={() => dispatch(modalClose())}>
-      <div>Copy this link: {getHost()}</div>
+      <div>{`${t('copyLink')}:`} {getHost()}</div>
       <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={() => dispatch(modalClose())}>Cancel</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={() => dispatch(modalClose())}>{t('cancel')}</Button>
       </div>
     </Modal>
   )

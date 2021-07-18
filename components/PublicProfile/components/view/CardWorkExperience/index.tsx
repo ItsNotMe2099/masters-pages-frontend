@@ -19,6 +19,7 @@ import SalesPitchForm from 'components/PublicProfile/components/view/CardSalesPi
 import CardAdd from 'components/PublicProfile/components/CardAdd'
 import {confirmOpen} from 'components/Modal/actions'
 import {taskNegotiationDeclineConditions} from 'components/TaskNegotiation/actions'
+import {useTranslation} from 'react-i18next'
 
 interface Props{
   profile: ProfileData,
@@ -28,6 +29,7 @@ interface Props{
 const CardWorkExperience = (props: Props) => {
   const { profile, skill, isEdit } = props;
   const dispatch = useDispatch();
+  const {i18n, t} = useTranslation('common')
 
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'workExperience');
   const list = useSelector((state: IRootState) => state.profileWorkExperience.list);
@@ -72,7 +74,7 @@ const CardWorkExperience = (props: Props) => {
   }
   const handleDelete = (model: ProfileWorkExperience) => {
     dispatch(confirmOpen({
-      description: `Are you sure that you want to delete «${model.title}»?`,
+      description: t('post.areYouSureToDelete', { model }),
       onConfirm: () => {
         dispatch(deleteProfileWorkExperience(model.id));
       }
@@ -80,10 +82,10 @@ const CardWorkExperience = (props: Props) => {
 
   }
   return (
-    <Card isHidden={!isEdit && !listLoading && list.length === 0} isLoading={formLoading} className={styles.root} title={'Proffesional qualifications and work experience'}
-          toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>] : []}>
+    <Card isHidden={!isEdit && !listLoading && list.length === 0} isLoading={formLoading} className={styles.root} title={t('cardWorkExperience.qualification')}
+          toolbar={isEdit ? [<FormActionButton type={'create'} title={t('add')} onClick={handleCreateClick}/>] : []}>
       {!showForm && list.map(item => <CardWorkExperienceListItem isEdit={isEdit} model={item} onEdit={handleEdit} onDelete={handleDelete}/>)}
-      {(!showForm && isEdit && list.length === 0 && !listLoading) && <CardAdd title={'Add work experience'} icon={'add_work_experience'}  onClick={handleCreateClick} /> }
+      {(!showForm && isEdit && list.length === 0 && !listLoading) && <CardAdd title={t('cardWorkExperience.addWorkExperience')} icon={'add_work_experience'}  onClick={handleCreateClick} /> }
 
       {showForm && <WorkExperienceForm onSubmit={handleSubmit} onCancel={handleCancel} initialValues={currentEditModel}/>}
 

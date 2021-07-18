@@ -21,6 +21,7 @@ import CardRecommendationsShort from 'components/PublicProfile/components/view/C
 import Layout from 'components/layout/Layout'
 import {useTranslation} from 'react-i18next'
 
+
 interface Props{
   profile: ProfileData,
   isEdit: boolean,
@@ -32,7 +33,7 @@ const ProfilePageLayout = (props: Props) => {
   const {profile, isEdit, onCategoryChange, subCategory} = props;
   const isMaster = ['master', 'volunteer'].includes(profile.role);
   console.log("MainSubCateogory", subCategory);
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const getRoleClass = () => {
     switch (profile.role) {
       case 'master':
@@ -45,7 +46,7 @@ const ProfilePageLayout = (props: Props) => {
     }
   }
   return (
-    <Layout title={<>Hello guest you are looking at <span className={getRoleClass()}>{t(profile.role)} profile</span> of {profile.firstName} {profile.lastName}</>}>
+    <Layout title={<>{t('lookingAt')} <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>

@@ -31,7 +31,7 @@ interface Props {
   user?: any
 }
 const TabSettings= (props: Props) => {
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const dispatch = useDispatch();
 
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
@@ -61,7 +61,7 @@ const TabSettings= (props: Props) => {
     <div className={styles.root}>
       {loading && <Loader/>}
       {!loading && <div className={styles.form}>
-        <div className={styles.title}>1. Personal Information</div>
+        <div className={styles.title}>1. {t('personalInformation')}</div>
       <div className={styles.fieldset}>
        <TabPersonalForm onSubmit={handleSubmit} initialValues={{
           firstName: profile.firstName,
@@ -73,30 +73,30 @@ const TabSettings= (props: Props) => {
           geonameid: profile.geonameid,
           countryCode: profile.geoname?.country}}/>
       </div>
-        <div className={styles.title}>2. Phone</div>
+        <div className={styles.title}>2. {t('phone')}</div>
         <div className={styles.fieldset}>
         <TabPhoneForm profile={profile}/>
         </div>
-        <div className={styles.title}>3. Email</div>
+        <div className={styles.title}>3. {t('email')}</div>
           <div className={styles.fieldset}>
         <TabEmailForm profile={profile}/>
           </div>
-        <div className={styles.title}>4. Notifications</div>
+        <div className={styles.title}>4. {t('notifications')}</div>
             <div className={styles.fieldset}>
         <TabNotificationsForm onSubmit={handleSubmit} initialValues={settings}/>
             </div>
-        <div className={styles.title}>5. Default language</div>
+        <div className={styles.title}>5. {t('defaultLanguage')}</div>
               <div className={styles.fieldset}>
                 <TabLanguageForm/>
               </div>
-        <div className={styles.title}>6. Default timezone</div>
+        <div className={styles.title}>6. {t('defaultTimezone')}</div>
                 <div className={styles.fieldset}></div>
-        <div className={styles.title}>7. Change password</div>
+        <div className={styles.title}>7. {t('changePassword')}</div>
                   <div className={styles.fieldset}>
         <Button white={true} borderGrey={true} bold={true} size={'12px 23px'} onClick={() => dispatch(changePasswordOpen())} >{t('personalArea.tabProfile.buttonChangePassword')}</Button>
                   </div>
-        <div className={styles.title}>8. Delete profiles</div>
-        <div className={styles.title}>9. Delete account</div>
+        <div className={styles.title}>8. {t('deleteProfiles')}</div>
+        <div className={styles.title}>9. {t('deleteAccount')}</div>
                     <div className={styles.fieldset}>
         <Button className={styles.button} black={true}  size={'12px 30px'}  type={'button'} onClick={handleRemoveAccount}>{t('personalArea.tabSettings.deleteMyAccount')}</Button>
                     </div>

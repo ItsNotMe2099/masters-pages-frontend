@@ -7,6 +7,7 @@ import FinishingTaskByMasterForm from "./Form";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {createFeedBackClient} from 'components/ProfileFeedback/actions'
+import {useTranslation, withTranslation} from "react-i18next";
 
 interface Props {
   isOpen: boolean
@@ -20,6 +21,7 @@ export default function FeedbackByMasterModal(props: Props) {
   const  lastConditions = useSelector((state: IRootState) => state.taskOffer.lastCondition)
 
   const formLoading = useSelector((state: IRootState) => state.taskOffer.formLoading)
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     dispatch(taskNegotiationFetchLastConditions(task.id));
@@ -33,9 +35,9 @@ export default function FeedbackByMasterModal(props: Props) {
     >
 
         <div className={styles.innards}>
-          <div className={styles.rate}>Please rate {task.profile.firstName} !</div>
+          <div className={styles.rate}>{t('feedBack.pleaseRate')} {task.profile.firstName} !</div>
           <div className={styles.money}>
-            You own: <span> &nbsp;$ {lastConditions?.budget}</span>
+          {t('feedBack.youOwn')}: <span> &nbsp;$ {lastConditions?.budget}</span>
           </div>
 
           <div className={styles.form}>

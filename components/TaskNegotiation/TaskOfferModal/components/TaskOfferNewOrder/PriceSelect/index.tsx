@@ -9,6 +9,7 @@ import styles from './index.module.scss'
 import {getCurrencySymbol} from 'data/currency'
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import {parserPrice} from 'utils/formatters'
+import {useTranslation, Trans} from "react-i18next";
 
 let PriceSelectFormMini = props => {
   const { handleSubmit } = props
@@ -19,9 +20,10 @@ let PriceSelectFormMini = props => {
     props.change('ratePerHour', null);
     props.change('estimate', null);
   }
+  const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
-      <div className={styles.label}>Price:</div>
+      <div className={styles.label}>{`${t('price')}:`}</div>
       <div className={styles.price}>
         <Field
           name="offerPriceType"
@@ -30,8 +32,8 @@ let PriceSelectFormMini = props => {
           size={'small'}
           validate={required}
           options={[
-            { label: 'Fixed price', value: 'fixed' },
-            { label: 'Rate per hour', value: 'rate' }
+            { label: t('fixedPrice'), value: 'fixed' },
+            { label: t('perHour'), value: 'rate' }
           ]}
         />
         {props.offerPriceType === 'fixed' && <Field
@@ -56,14 +58,14 @@ let PriceSelectFormMini = props => {
         component={InputCurrency}
         withIcon={false}
         size={'small'}
-        label="Currency:"
+        label={`${t('currency')}:`}
         labelType={'static'}
         validate={required}
       />
       <Field
         name="deadline"
         component={Input}
-        label="Deadline:"
+        label={`${t('deadline')}:`}
         validate={required}
         size={'small'}
         labelType={'static'}
