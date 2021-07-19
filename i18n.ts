@@ -9,16 +9,16 @@ const path = require('path')
 const domainDetector = {
   name: 'domainDetector',
   lookup(req, res, options) {
-    console.log("DomainDetector1Ru")
+
     const hostname = (typeof window !== 'undefined')
       ? window.location.hostname
       : req.headers.host?.split(':')[0]
-
+    console.log("DomainDetector1Ru", hostname, domainLocaleMap[hostname])
     return domainLocaleMap[hostname]
   }
 };
 const options = {
-  browserLanguageDetection:false,
+  browserLanguageDetection:true,
   serverLanguageDetection:  true,
   strictMode: false,
   debug: true,
