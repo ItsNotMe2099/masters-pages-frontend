@@ -220,6 +220,7 @@
       "fieldLastName": "Фамилия",
       "fieldEmail": "Емейл",
       "fieldPhone": "Телефон",
+      "fieldCountry": "Страна",
       "fieldLocation": "Расположение*",
       "fieldPassword": "Пароль",
       "fieldPasswordConfirm": "Пароль еще раз",

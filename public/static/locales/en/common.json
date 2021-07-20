@@ -216,6 +216,7 @@
       "fieldLastName": "Last Name",
       "fieldEmail": "Email",
       "fieldPhone": "Phone",
+      "fieldCountry": "Country",
       "fieldLocation": "Location*",
       "fieldPassword": "Password",
       "fieldPasswordConfirm": "Password again",
