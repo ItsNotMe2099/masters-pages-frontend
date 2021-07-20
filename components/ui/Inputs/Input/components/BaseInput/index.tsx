@@ -5,6 +5,7 @@ import { WrappedFieldProps } from 'redux-form';
 import debounce from 'lodash.debounce';
 
 import InputMask from 'react-input-mask'
+import _uniqueId from 'lodash/uniqueId';
 type OnChange = (evt: React.ChangeEvent<HTMLInputElement>) => any;
 
 interface Indexed {
@@ -42,6 +43,8 @@ interface Props {
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   console.log("PropsForm", props)
+
+  const [name] = useState(_uniqueId('input-'));
   const {mask} = props;
   const getSizeClass = (size) => {
     switch (size) {
@@ -110,11 +113,12 @@ export default function BaseInput(props: Props) {
   const renderInput = (inputProps) => {
     console.log("InputProps", inputProps)
     return  ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
-                     autocomplete="off"
+                     autoComplete="sdssdsdsds"
                      type={props.type || 'text'}
                      ref={props.parentRef}
                      {...props}
                      {...inputProps}
+      name={name}
                      value={inputProps?.value}
                      {...(props.debounce > 0 ? {value: debounceFieldValue, onChange, onBlur, onKeyDown} :
 

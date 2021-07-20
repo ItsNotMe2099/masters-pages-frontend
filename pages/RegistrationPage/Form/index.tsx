@@ -30,12 +30,12 @@ let RegistrationForm = props => {
   }
   const handlePhoneClick = () => {
     dispatch(registrationPhoneSetCallback((phone) => {
-      props.change('phone', phone);
+     // props.change('phone', phone);
     }));
     dispatch(registrationPhoneOpen());
   }
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
       <Field
         name="firstName"
         component={Input}
@@ -51,17 +51,17 @@ let RegistrationForm = props => {
         labelType={'cross'}
       />
       <Field
-        name="email"
+        name="emailsd"
         component={Input}
         label={t('auth.registrationPage.fieldEmail')}
         validate={[required, email]}
         labelType={'cross'}
-        disabled={!!props.initialValues.email}
+        disabled={!!props.initialValues?.email}
       />
       <Field
         name="phone"
         component={InputPhone}
-        onClick={(!props.phone && !props.initialValues.phone) ? handlePhoneClick : null}
+        onClick={(!props.phone && !props.initialValues?.phone) ? handlePhoneClick : null}
         label={t('auth.registrationPage.fieldPhone')}
         validate={required}
         labelType={'cross'}
