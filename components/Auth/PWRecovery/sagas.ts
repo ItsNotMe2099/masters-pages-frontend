@@ -59,7 +59,7 @@ function* PWRecoverySaga() {
         } as IRequestData)
 
         if(!res.err){
-          cookie.set("token", res.data.accessToken, { expires: 1 });
+          cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
           yield put(PWRecoverySecondSuccess());
           yield put(PWRecoverySuccessOpen());
         }else{
@@ -84,7 +84,7 @@ function* PWRecoverySaga() {
           } as IRequestData)
           console.log("Res password", res)
           if(!res.err){
-            cookie.set("token", res.data.accessToken, { expires: 1 });
+            cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
             afterAuthRedirect();
           }else{
 
