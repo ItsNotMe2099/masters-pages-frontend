@@ -23,7 +23,7 @@ function* phoneConfirmSaga() {
       } as IRequestData)
       console.log("Res signup", res)
       if(!res.err) {
-        cookie.set("token", res.data.accessToken, { expires: 1 });
+        cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
           window.location.href = '/RegistrationPage';
 
       }else{

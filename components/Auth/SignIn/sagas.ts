@@ -19,7 +19,7 @@ function* signInSaga() {
       } as IRequestData)
       console.log("Res signup", res.data)
       if(!res.err){
-        cookie.set("token", res.data.accessToken, { expires: 1 });
+        cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
         afterAuthRedirect();
       }else{
         yield put(signInError(res.err?.errors));
