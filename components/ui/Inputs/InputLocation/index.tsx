@@ -56,6 +56,6 @@ export default function InputLocation(props: Props) {
   }, 400);
 
   return (
-    <SelectInput {...props} options={options} onSearchChange={(e) => handleOnSearchChange.callback(e)} />
+    <SelectInput {...props} options={options as [{value: string, label: string}]} onSearchChange={(e) => handleOnSearchChange.callback(e)} />
   )
 }
