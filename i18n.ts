@@ -25,7 +25,7 @@ const options = {
   defaultLanguage: 'en',
   otherLanguages: ['ru'],
   detection: {
-    order: ['domainDetector'],
+    order: ['domainDetector', 'cookie'],
    },
    customDetectors: [domainDetector],
   localePath: path.resolve('./public/static/locales'),
