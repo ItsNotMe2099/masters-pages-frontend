@@ -24,8 +24,11 @@ export default function InputCountry(props) {
     props.input.onChange(value);
   }
   useEffect(() => {
-    getSearchCountry();
-  }, [])
+    if(props.input.value){
+      getSearchCountry();
+    }
+
+  }, [i18n.language])
   const getSearchCountry = (search = '') => {
     console.log("SearchVal", props.input.value);
     return request({url: `/api/location/country?${queryString.stringify({search, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
@@ -48,9 +51,11 @@ export default function InputCountry(props) {
     }
     setValue(value)
     getSearchCountry(value)
-  }, 400);
-
+  }, 300);
+  const handleOnOpen = () => {
+    getSearchCountry(value);
+  }
   return (
-    <SelectInput {...props} options={options} onSearchChange={(e) => handleOnSearchChange.callback(e)} isLocation={true}/>
+    <SelectInput {...props} options={options} onOpenDropDown={handleOnOpen} onSearchChange={(e) => handleOnSearchChange.callback(e)} isLocation={true}/>
   )
 }
