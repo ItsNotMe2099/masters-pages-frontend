@@ -17,6 +17,7 @@ import {registrationPhoneOpen} from "components/Modal/actions";
 import {registrationPhoneSetCallback} from "components/Auth/RegistrationPhone/actions";
 import {logout} from "components/Auth/actions";
 import TaskEditConditionsForm from 'components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm'
+import InputCountry from 'components/ui/Inputs/InputCountry'
 let RegistrationForm = props => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
@@ -67,9 +68,20 @@ let RegistrationForm = props => {
         disabled={true}
       />
       <Field
+        name="countryCode"
+        component={InputCountry}
+        label={t('auth.registrationPage.fieldCountry')}
+        onChange={() =>  {
+          console.log("SetGeonameIdNull")
+          props.change('geonameid', null)}}
+        labelType={'cross'}
+        validate={required}
+      />
+      <Field
         name="geonameid"
         component={InputLocation}
         isRegistration={true}
+        countryCode={props.countryCode}
         label={t('auth.registrationPage.fieldLocation')}
         labelType={'cross'}
         validate={required}
@@ -112,8 +124,10 @@ RegistrationForm  = reduxForm({
 const selector = formValueSelector('registrationForm') // <-- same as form name
 RegistrationForm = connect(state => {
   const phone = selector(state, 'phone')
+  const countryCode = selector(state, 'countryCode')
   return {
-    phone
+    phone,
+    countryCode
   }
 })(RegistrationForm)
 

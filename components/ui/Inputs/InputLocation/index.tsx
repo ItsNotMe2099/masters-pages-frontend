@@ -5,6 +5,9 @@ import { IRootState } from "types";
 import { useDebouncedCallback } from "use-debounce";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import request from 'utils/request'
+import queryString from 'query-string'
+import {useTranslation} from 'i18n'
 
 interface Props {
   input?: {
@@ -18,27 +21,30 @@ interface Props {
 export default function InputLocation(props: Props) {
   const dispatch = useDispatch()
   const [value, setValue] = useState();
-  const cities = useSelector((state: IRootState) => state.locationInput.cities)
+  const {t, i18n} = useTranslation();
+  const [options, setOptions] = useState([]);
   const handleOnChange = (value) => {
     console.log("OnChangeLocValue", value)
     props.input.onChange(value);
   }
+  const getSearchCity = (search = '') => {
+    console.log("SearchVal", props.input.value);
+    return request({url: `/api/location/city?${queryString.stringify({search,  country: props.countryCode, id: search ? null : props.input.value, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
+      .then((response) => {
+        const data = response.data;
+        console.log("Response", data)
+        setOptions(data ? data.map(item => {
+          return {
+            value: item.geonameid,
+            label: item.name,
+          }
+        }) : [])
+      })
+  }
   useEffect(() => {
-    dispatch(fetchLocationCity({
-      page: 1,
-      id: props.input.value,
-      country: props.countryCode
-    }))
+    getSearchCity();
   }, [props.countryCode])
-  useEffect(() => {
-    if(props.input.value && !cities.find(item => item.id == props.input.value)) {
-      dispatch(fetchLocationCity({
-        page: 1,
-        id: props.input.value,
-        country: props.countryCode
-      }))
-    }
-  }, [props.input.value])
+
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
     console.log("search change", value)
@@ -46,14 +52,10 @@ export default function InputLocation(props: Props) {
       return;
     }
     setValue(value)
-    dispatch(fetchLocationCity({
-      search: value,
-      page: 1,
-      country: props.countryCode
-    }))
+    getSearchCity(value);
   }, 400);
 
   return (
-    <SelectInput {...props} options={cities} onSearchChange={(e) => handleOnSearchChange.callback(e)} />
+    <SelectInput {...props} options={options} onSearchChange={(e) => handleOnSearchChange.callback(e)} />
   )
 }
