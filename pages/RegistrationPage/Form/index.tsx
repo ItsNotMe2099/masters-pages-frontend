@@ -51,7 +51,7 @@ let RegistrationForm = props => {
         labelType={'cross'}
       />
       <Field
-        name="emailsd"
+        name="email"
         component={Input}
         label={t('auth.registrationPage.fieldEmail')}
         validate={[required, email]}
