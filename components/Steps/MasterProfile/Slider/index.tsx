@@ -5,8 +5,8 @@ import Step from "components/Steps";
 import styles from './index.module.scss'
 import {useTranslation, Trans} from "i18n";
 
-export default class SimpleSlider extends Component {
-  render() {
+export default function SimpleSlider(){
+
     var settings = {
       dots: false,
       infinite: true,
@@ -68,5 +68,5 @@ export default class SimpleSlider extends Component {
         </div>
       </div>
     )
-  }
+
 }

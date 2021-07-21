@@ -34,6 +34,8 @@ const getProfile = async (token, role) => {
 }
 
 export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrapper.getServerSideProps(async (ctx) => {
+
+
   const token = auth(ctx);
 
   //if (ctx.req && ['masterspages.ca', 'masterspages.com', 'masterspages.ru'].includes(ctx.req.headers.host) && (!ctx.req.url || ctx.req.url === '/')) {
@@ -41,6 +43,8 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
   //  ctx.res.end();
  //   return;
  // }
+
+  console.log("PerformUrl", ctx.req.url)
   console.log("token", token)
   const mode = nextCookie(ctx)?.mode || 'client';
   const user = token ? await getUser(token) : null
@@ -55,11 +59,13 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     return {props: {}};
   }
   if(user && !user.isRegistrationCompleted && (redirect) &&  !ctx.req.url.includes('RegistrationPage')){
+    console.log("Redirect To Registrationpage", user, redirect, ctx.req.url)
     ctx.res.writeHead(302, { Location: "/RegistrationPage" });
     ctx.res.end();
     return;
   }
-  if(user && user.isRegistrationCompleted && ctx.req.url.includes('RegistrationPage')){
+  if(user && user.isRegistrationCompleted && (ctx.req.url.includes('RegistrationPage') && !ctx.req.url.includes('RegistrationPage.json'))){
+    console.log("Redirect To Registrationpage11", user, redirect, ctx.req.url)
     ctx.res.writeHead(404, { Location: "/" });
     ctx.res.end();
     return;

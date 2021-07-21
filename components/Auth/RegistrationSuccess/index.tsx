@@ -1,7 +1,7 @@
 import { signInSubmit } from "components/Auth/SignIn/actions";
 import Button from 'components/ui/Button'
 import Modal from "components/ui/Modal";
-import Router from "next/router";
+import Router, {useRouter} from "next/router";
 import styles from './index.module.scss'
 import Link from "next/link";
 import {useTranslation, withTranslation} from "i18n";
@@ -14,6 +14,7 @@ interface Props {
 
 const RegistrationSuccess = (props: Props) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
   return (
     <div className={styles.root}>
         <img src={'/img/Modal/success.svg'}/>
@@ -24,16 +25,16 @@ const RegistrationSuccess = (props: Props) => {
           {t('auth.registrationSuccess.description')}
         </div>
         <Link href="/CreateTaskPage"><Button green size="16px 0" onClick={() => {
-          window.location.href = '/CreateTaskPage'
+          router.push('/CreateTaskPage');
         }}>CREATE A TASK</Button></Link>
         <div className={styles.btnContainer}>
           <Link href=""><Button size="16px 0" onClick={() => {
-            window.location.href = '/MasterProfile'
+            router.push('/MasterProfile');
           }}> {t('auth.registrationSuccess.buttonBecomeMaster')}</Button></Link>
         </div>
         <div className={styles.btnContainer}>
           <Link href=""><Button size="16px 0" onClick={() => {
-            window.location.href = '/VolunteerProfile'
+            router.push('/VolunteerProfile');
           }}> {t('auth.registrationSuccess.buttonBecomeVolunteer')}</Button></Link>
         </div>
         <Link href="/SearchTaskPage"><a className={styles.link}>{t('auth.registrationSuccess.lookAtTaskList')}</a></Link>
