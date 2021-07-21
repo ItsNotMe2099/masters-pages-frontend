@@ -14,7 +14,7 @@ const ProfilePage = (props) => {
 }
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   console.log("ctxQuery", ctx.query.profile)
-  const res = await getAuthServerSide()(ctx as any);
+
   const id = ctx.query.profile as string;
   let profile, skill = null;
   if(id.indexOf('id') === 0){
@@ -39,7 +39,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
       notFound: true
     }
   }
-
+  const res = await getAuthServerSide()(ctx as any);
   return {props: {...(res as any).props, profile, skill}};
 });
 

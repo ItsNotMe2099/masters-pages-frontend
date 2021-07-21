@@ -35,7 +35,6 @@ export const makeStore: MakeStore<IRootState> = (context: Context) => {
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      console.log('Replacing reducer');
       store.replaceReducer(require('./reducers').default);
     });
   }
