@@ -830,10 +830,11 @@
     "lastName": "Last name*",
     "avatar": "Avatar*",
     "location": "Location*",
+    "country": "Country*",
     "categories": "Categories*",
     "personalInformation": "Personal information",
     "chooseCategories": "Choose categories",
-    "imortantInformation": "Important information",
+    "importantInformation": "Important information",
     "rules": "С <1>правилами сайта</1> ознакомился и согласен"
   },
   "portfolio":{
