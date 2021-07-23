@@ -25,6 +25,7 @@ services:
             - APP_IMAGE=${APP_IMAGE}
         image: ${NGINX_IMAGE}
         restart: always
+        container_name: masters-pages-front-nginx
         networks:
           - app
           - nginx-proxy
