@@ -9,6 +9,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import {useTranslation, withTranslation} from "i18n";
 import TextArea from 'components/ui/Inputs/TextArea'
 import Button from 'components/PublicProfile/components/Button'
+import {bioMaxLength, maxLength} from 'utils/validations'
 interface Props{
   onCancel: () => void,
   handleSubmit?: () => void,
@@ -26,7 +27,7 @@ let CardBioForm = (props: Props) => {
         component={TextArea}
         labelType="placeholder"
         label={'BIO'}
-        maxlength={1000}
+        validate={[bioMaxLength]}
       />
 
       <FormError error={error}/>
