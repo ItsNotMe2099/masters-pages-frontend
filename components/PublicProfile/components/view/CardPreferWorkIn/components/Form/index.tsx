@@ -19,7 +19,7 @@ interface Props{
 }
 let PreferWorkInForm = (props: Props) => {
   const { t } = useTranslation('common');
-  const error = useSelector((state: IRootState) => state.profile.formError)
+  const error = useSelector((state: IRootState) => state.profile.formErrorByKey['preferWorkIn'])
   const [showAddress, setShowAddress] = useState(false);
   const handleTypeChange = (value) => {
    if(value === 'offline'){

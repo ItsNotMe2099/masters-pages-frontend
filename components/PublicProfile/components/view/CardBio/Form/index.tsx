@@ -17,7 +17,7 @@ interface Props{
 }
 let CardBioForm = (props: Props) => {
   const { t } = useTranslation('common');
-  const error = useSelector((state: IRootState) => state.profile.formError)
+  const error = useSelector((state: IRootState) => state.profile.formErrorByKey['bio'])
 
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>

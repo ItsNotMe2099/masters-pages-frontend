@@ -4,16 +4,18 @@ import FormError from "components/ui/Form/FormError";
 import Input from "components/ui/Inputs/Input";
 import InputCheckbox from "components/ui/Inputs/InputCheckbox";
 import * as React from "react";
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { createTextMask } from "redux-form-input-masks";
 import { IRootState } from "types";
 import { maskBirthDate } from "utils/masks";
 import {arrayNotEmpty, birthdate, date, required} from "utils/validations";
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector, connect } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
 import {useTranslation, Trans} from 'i18n'
+import InputCountry from 'components/ui/Inputs/InputCountry'
+import RegistrationForm from 'pages/RegistrationPage/Form'
 
 let MasterForm = props => {
   const { handleSubmit } = props
@@ -48,9 +50,24 @@ let MasterForm = props => {
                 label={t('masterForm.lastName')}
                 validate={required}
               />
+            </div>
+
+          </div>
+          <div className={styles.taskData}>
+            <div className={styles.column}>
               <Field
+                name="countryCode"
+                component={InputCountry}
+                label={t('masterForm.country')}
+                validate={required}
+              />
+            </div>
+            <div className={styles.column}>
+
+            <Field
                 name="geonameid"
                 component={InputLocation}
+                countryCode={props.countryCode}
                 label={t('masterForm.location')}
                 validate={required}
               />
@@ -112,6 +129,14 @@ let MasterForm = props => {
 
 MasterForm = reduxForm({
   form: 'masterForm',
+})(MasterForm)
+
+const selector = formValueSelector('masterForm') // <-- same as form name
+MasterForm = connect(state => {
+  const countryCode = selector(state, 'countryCode')
+  return {
+    countryCode
+  }
 })(MasterForm)
 
 export default MasterForm

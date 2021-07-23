@@ -28,7 +28,9 @@ const CardCategories = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.skill.formLoading)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
   const {profile, isEdit, onCategoryChange, subCategory} = props;
-  const skills = props.isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
+  const skillsCurrentProfile = useSelector((state: IRootState) => state.skill.list);
+  const skills = props.isEdit ? skillsCurrentProfile : formatSkillList(profile.skills);
+
   const handleEditClick = () => {
     dispatch(showProfileForm( 'categories'));
   }
@@ -61,7 +63,7 @@ const CardCategories = (props: Props) => {
   }
   return (
     <Card isHidden={!isEdit && skills.length === 0} className={styles.root} isLoading={showForm && formLoading} title={t('worksInCategories')} toolbar={isEdit ? [<FormActionButton type={'create'} title={t('add')} onClick={handleEditClick}/>] : []}>
-      {skills.map((category) => <Accordion title={<><div className={styles.accordionTitle}>{getCategoryTranslation(category.mainCategory, i18n.language)?.name}/{getCategoryTranslation(category.category, i18n.language)?.name}</div> {isEdit && <FormActionIconButton type={'delete'} onClick={ () => handleRemoveCategory(category)} />}</>} >
+      {skills.map((category) => <Accordion title={<><div className={styles.accordionTitle}>{getCategoryTranslation(category.mainCategory, i18n.language)?.name}/{getCategoryTranslation(category.category, i18n.language)?.name}</div> </>} >
         {category.skills.map(skill => skill.subCategory ? <Tab isActive={subCategory?.subCategory.id === skill.subCategory.id} onClick={() => onCategoryChange(category, skill)}><div className={styles.tabTitle}>{getCategoryTranslation(skill.subCategory, i18n.language)?.name}</div> {isEdit && <FormActionIconButton type={'delete'} onClick={() => handleRemoveSkill(skill)}/>}</Tab> : null)}
       </Accordion>)}
       {showForm && <CardCategoryForm onSubmit={handleSubmit} onCancel={handleCancel}/>}
