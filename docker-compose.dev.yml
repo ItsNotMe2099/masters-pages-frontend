@@ -17,6 +17,7 @@ services:
         restart: ${DK_RESTART}
         networks:
           - app
+
     nginx:
         build:
           context: .

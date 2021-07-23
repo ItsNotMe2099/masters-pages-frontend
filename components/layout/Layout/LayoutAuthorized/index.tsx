@@ -107,7 +107,7 @@ export default function LayoutAuthorized(props: Props) {
         {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
           isActive={item.link && currentRoute.indexOf(`${item.link}`) >= 0} title={item.title} icon={item.icon}
           link={item.link} badge={item.badge} mode={role}/></>)}
-        <MenuItem isActive={false} onClick={handleLogout} title={t('menu.logout')} icon={'logout'} link={'logout'}
+        <MenuItem isActive={false} onClick={handleLogout} title={t('menu.logout')} icon={'logout'}
                   mode={role}/>
       </div>
       <div className={styles.header}>
