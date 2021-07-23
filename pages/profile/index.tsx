@@ -18,7 +18,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   console.log("ctxQuery111", ctx.req.url)
   const parts = ctx.req.url.split('/')
   const lastPath = parts[parts.length - 1];
-  const profileProps = getProfilePageProps(ctx);
+  const profileProps = await getProfilePageProps(ctx);
+  console.log("profileProps", profileProps);
   if(!profileProps){
     return {
       notFound: true
@@ -31,13 +32,13 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
       showType = 'news'
       break;
     case 'Recommendations':
-      showType = 'Recommendations'
+      showType = 'recommendations'
       break;
     case 'Reviews':
-      showType = 'Reviews'
+      showType = 'reviews'
       break;
   }
-  console.log("showType", showType);
+  console.log("showType", showType, profileProps);
   const res = await getAuthServerSide()(ctx as any);
   return {props: {...(res as any).props, ...profileProps, showType}};
 });

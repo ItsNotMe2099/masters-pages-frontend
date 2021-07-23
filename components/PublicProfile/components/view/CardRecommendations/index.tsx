@@ -45,7 +45,7 @@ const CardRecommendations = (props: Props) => {
   }
 
   return (
-    <Card className={styles.root} title={total > 0 ? t('cardRecommenadationShort.recommendationsTotal', total) : t('cardRecommenadationShort.recommendations')}>
+    <Card className={styles.root} title={total > 0 ? t('cardRecommenadationShort.recommendationsTotal', {total}) : t('cardRecommenadationShort.recommendations')}>
       {(listLoading && total === 0) && <Loader/>}
       <div className={styles.list}>
       {total > 0 && <InfiniteScroll
