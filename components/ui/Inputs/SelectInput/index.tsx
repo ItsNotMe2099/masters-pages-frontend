@@ -28,13 +28,14 @@ interface Props {
 
 const SelectInput = (props: Props) => {
   const {t} = useTranslation()
-  const { meta: { error, touched },restrictedValues, input, options, onOpenDropDown, label, ...rest } = props;
+  const { meta: { error, touched },restrictedValues, input, onOpenDropDown, label, ...rest } = props;
   const dropdownRef = useRef(null);
   const searchInputRef = useRef(null);
   const valueInputRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [currentLabel, setCurrentLabel] = useState('');
-
+  const [filter, setFilter] = useState('');
+  const options = filter ? props.options.filter(option => option.label?.toLowerCase().indexOf(filter.toLowerCase()) === 0) : props.options;
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
@@ -105,6 +106,14 @@ const SelectInput = (props: Props) => {
     e.preventDefault();
     setIsActive(false);
   }
+  const handleSearchChange = (value) => {
+    if(    props.onSearchChange) {
+      props.onSearchChange(value)
+    }else{
+      console.log("SetFilter", value);
+      setFilter(value);
+    }
+  }
   console.log("CurrentLabel", currentLabel)
   return (
     <Input {...props} onClick={onClick}
@@ -120,7 +129,7 @@ const SelectInput = (props: Props) => {
               console.log("onChange", e.currentTarget.value)
               input.onChange(e.currentTarget.value)
               }
-              props.onSearchChange(e.currentTarget.value)
+            handleSearchChange(e.currentTarget.value)
             }}
             value={props.allowCustomInput ? input.value : null}
                      input={{
@@ -160,7 +169,6 @@ const SelectInput = (props: Props) => {
 
 SelectInput.defaultProps = {
   labelType: 'static',
-  onSearchChange: () => {},
   onOpenDropDown: () => {},
   restrictedValues: [],
   withIcon: true

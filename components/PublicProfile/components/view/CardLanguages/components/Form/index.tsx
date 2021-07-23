@@ -12,6 +12,7 @@ import Button from 'components/PublicProfile/components/Button'
 import InputAddress from 'components/ui/Inputs/InputAddress'
 import SelectInput from 'components/ui/Inputs/SelectInput'
 import {LanguagesList} from 'data/languages'
+import {required} from 'utils/validations'
 interface Props{
   onCancel: () => void,
   handleSubmit?: () => void,
@@ -19,7 +20,7 @@ interface Props{
 }
 let LanguageForm = (props: Props) => {
   const { t } = useTranslation('common');
-  const error = useSelector((state: IRootState) => state.profile.formError)
+  const error = useSelector((state: IRootState) => state.profile.formErrorByKey['language'])
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
@@ -29,6 +30,7 @@ let LanguageForm = (props: Props) => {
         size={'small'}
         labelType="placeholder"
         label={t('tabSettings.fieldLanguage')}
+        validate={[required]}
         options={Object.keys(LanguagesList).map(key => ({value: key, label: LanguagesList[key].name}))}
       />
       <FormError error={error}/>

@@ -17,7 +17,7 @@ const LanguageListItem = (props: Props) => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.root}>
-      <img className={styles.icon} src={`/img/icons/flags/${model}.svg`} alt=''/>
+      <img className={styles.icon} src={`/img/icons/flags/${LanguagesList[model].icon || model}.svg`} alt=''/>
       <div className={styles.name}>{LanguagesList[model]?.name || model}</div>
       {isEdit && <div className={styles.actions}>
         {onMoveDown && <FormActionButton type={'moveDown'} title={t('down')} onClick={() => onMoveDown(model, index)}/>}

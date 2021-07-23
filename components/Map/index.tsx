@@ -6,7 +6,7 @@ interface Props {
 
 export default function Map(props) {
 return ( <GoogleMapReact {...props}
-  bootstrapURLKeys={{ key: 'AIzaSyC98uupkCH0cN_ukvBSUmPv6Gv1S3J13-4' }}
+  bootstrapURLKeys={{ key: `${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}` }}
   defaultCenter={{lat: 43.907787, lng: -79.359741}}
   defaultZoom={4}
                          {...props}

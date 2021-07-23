@@ -22,7 +22,7 @@ interface Props{
 }
 let CardCategoryForm = (props: Props) => {
   const { t } = useTranslation('common');
-  const error = useSelector((state: IRootState) => state.profile.formError)
+  const error = useSelector((state: IRootState) => state.skill.formError)
   const [categoryId, setCategoryId] = useState(null);
   const [mainCategoryId, setMainCategoryId] = useState(null);
 
@@ -40,6 +40,7 @@ let CardCategoryForm = (props: Props) => {
         component={InputSubCategory}
         size={'small'}
         label={t('createTask.fieldMainCategory')}
+        validate={[required]}
         onChange={(val) =>{
 
           setMainCategoryId(val)}
@@ -50,7 +51,7 @@ let CardCategoryForm = (props: Props) => {
         component={InputSubCategory}
         size={'small'}
         label={t('createTask.fieldCategory')}
-
+        validate={[required]}
         categoryId={mainCategoryId}
         onChange={(val) =>{
           console.log("SetCateogry", val);
@@ -60,6 +61,7 @@ let CardCategoryForm = (props: Props) => {
       {categoryId && <Field
         name="subCategoryId"
         component={InputSubCategory}
+        validate={[required]}
         size={'small'}
         label={t('createTask.fieldSubCategory')}
         categoryId={categoryId}

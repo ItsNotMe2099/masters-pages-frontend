@@ -30,7 +30,7 @@ export default function InputAddress({
     input.onChange(value);
   }
 
-  const apiKey = 'AIzaSyC98uupkCH0cN_ukvBSUmPv6Gv1S3J13-4';
+  const apiKey = `${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`;
 
   const [placesService, setPlacesService] = useState<google.maps.places.AutocompleteService | undefined>(undefined);
   const [sessionToken, setSessionToken] = useState<google.maps.places.AutocompleteSessionToken | undefined>(undefined);

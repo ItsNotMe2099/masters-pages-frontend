@@ -9,18 +9,22 @@ export interface ProfileState {
   currentSkill: SkillData,
   formIsSuccess: boolean
   formError: string,
+  formErrorByKey: any,
   loading: boolean,
   formLoading: boolean,
   avatarLoading: boolean,
   avatarFormError: null,
   isCompleted: boolean,
   role: string,
-  showForms: string[]
+  showForms: string[],
+  lastFormKey: string
 }
 
 const initialState: ProfileState = {
   formIsSuccess: false,
   formError: '',
+  formErrorByKey: {},
+  lastFormKey: null,
   formLoading: false,
   loading: false,
   isCompleted: false,
@@ -62,6 +66,13 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
       state.formLoading = false;
       break
+    case ActionTypes.UPDATE_PROFILE_BY_FORM:
+      if(action.payload.key) {
+        state.formErrorByKey[action.payload.key] = null;
+      }
+
+      state.lastFormKey = action.payload.key;
+      break
     case ActionTypes.UPDATE_PROFILE:
       state.formError = ''
       state.isCompleted = false;
@@ -81,9 +92,16 @@ export default function ProfileReducer(state = {...initialState}, action) {
       console.log("StateCurrentProfile", action.payload);
       state.currentProfile = {...state.currentProfile, ...action.payload}
       state.avatarLoading = false;
+      if(state.lastFormKey) {
+        state.formErrorByKey[state.lastFormKey] = null;
+      }
+      state.lastFormKey = null;
       break
     case ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
+      if(state.lastFormKey) {
+        state.formErrorByKey[state.lastFormKey] =  state.formError;
+      }
       state.formLoading = false;
       state.avatarLoading = false;
       break
@@ -101,6 +119,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.currentSkill = action.payload.skill;
       console.log("setCurrentSkill", state.currentSkill );
       break
+
     case ActionTypes.FORM_RESET:
       state.formError = null;
       state.formIsSuccess = false;
