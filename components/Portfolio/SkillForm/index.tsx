@@ -52,7 +52,7 @@ let SkillForm = (props) => {
         {!props.initialValues?.id && <Field
             name="categoryId"
             component={InputCategory}
-            label={t('createTask.filter.fieldCategory')}
+            label={t('createTask.fieldCategory')}
             validate={required}
             onChange={(val) => setCategoryId(val)}
           />}

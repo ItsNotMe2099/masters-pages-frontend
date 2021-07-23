@@ -57,13 +57,13 @@ let PostForm = (props) => {
       {(showInPortfolio) && <Field
         name="categoryId"
         component={InputCategory}
-        label={t('createTask.filter.fieldCategory')}
+        label={t('createTask.fieldCategory')}
         validate={required}
       />}
       {(showInPortfolio) && <Field
         name="subCategoryId"
         component={RadioListSubCategories}
-        label={t('createTask.filter.fieldSubCategory')}
+        label={t('createTask.fieldSubCategory')}
         validate={required}
         categoryId={categoryId}
       />}

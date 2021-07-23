@@ -29,7 +29,7 @@ let LanguageForm = (props: Props) => {
         component={SelectInput}
         size={'small'}
         labelType="placeholder"
-        label={t('tabSettings.fieldLanguage')}
+        label={t('personalArea.tabSettings.fieldLanguage')}
         validate={[required]}
         options={Object.keys(LanguagesList).map(key => ({value: key, label: LanguagesList[key].name}))}
       />

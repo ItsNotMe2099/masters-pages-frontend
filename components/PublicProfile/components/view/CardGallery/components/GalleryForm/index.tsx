@@ -31,7 +31,7 @@ let GalleryForm = (props) => {
       />
       {profileTabs.length > 0 && <Field
         name="profileTabId"
-        label={t('createTask.filter.fieldCategory')}
+        label={t('createTask.fieldCategory')}
         component={SelectInput}
         size={'small'}
         options={profileTabs.map(item => ({label: item.title, value: item.id}))}
