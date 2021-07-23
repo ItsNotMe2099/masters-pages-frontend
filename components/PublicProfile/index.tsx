@@ -36,7 +36,9 @@ const PublicProfile = (props) => {
   const profile = isEdit ? currentProfile : props.profile;
   const [category, setCategory] = useState(null);
   const currentSkill = useSelector((state: IRootState) => state.profile.currentSkill) || props.skill
-  const categories = isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
+  const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list);
+
+  const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills);
   const router = useRouter();
   useEffect(() => {
     if(currentSkill && isEdit){

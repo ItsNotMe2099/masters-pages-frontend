@@ -1,4 +1,4 @@
-import { phoneConfirmOpen } from "components/Modal/actions";
+import {modalClose, phoneConfirmOpen} from "components/Modal/actions";
 import { signInError, signInSubmit } from "components/Auth/SignIn/actions";
 import { takeLatest, put, select, call } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
@@ -20,6 +20,7 @@ function* signInSaga() {
       console.log("Res signup", res.data)
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
+        yield put(modalClose());
         afterAuthRedirect();
       }else{
         yield put(signInError(res.err?.errors));
