@@ -53,7 +53,7 @@ const ProfilePostsPage = ({profile}: Props) => {
 export default ProfilePostsPage
 
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
-  console.log("ctxQuery", ctx.query.profile)
+  console.log("ctxQueryPost", ctx.query.profile)
   const res = await getAuthServerSide()(ctx as any);
   const id = ctx.query.id as string;
   const profile = (await request({ url: `/api/profile/${id}`, method: 'GET' }))?.data
