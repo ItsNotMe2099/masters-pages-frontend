@@ -371,15 +371,9 @@ const CardLanguages = (props: Props) => {
     newArray.splice(index, 1)
     dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'));
   }
-  Object.keys(LanguagesList).forEach((key, index) => {
-    if(!LanguageCode[key]){
-      console.log("NoLang", key, LanguageCode[key]);
-    }
-      });
+
   return (
     <Card isHidden={!isEdit && profile.languages?.length === 0} className={styles.root} isLoading={showForm && formLoading} title={t('cardLanguages.languages')} toolbar={isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleEditClick}/>] : []}>
-      {Object.keys(LanguagesList).map((key, index) => <LanguageListItem isEdit={isEdit} index={index} model={key} onMoveUp={(index > 0  && profile.preferToWorkIn.length > 1) ? handleMoveUp : null} onMoveDown={(index == 0  && profile.preferToWorkIn.length > 1) ? handleMoveDown : null} onDelete={handleDelete} />)}
-
       {profile.languages.map((item, index) => <LanguageListItem isEdit={isEdit} index={index} model={item} onMoveUp={(index > 0  && profile.preferToWorkIn.length > 1) ? handleMoveUp : null} onMoveDown={(index == 0  && profile.preferToWorkIn.length > 1) ? handleMoveDown : null} onDelete={handleDelete} />)}
       {showForm && <LanguageForm onSubmit={handleSubmit} onCancel={handleCancel}/>}
     </Card>
