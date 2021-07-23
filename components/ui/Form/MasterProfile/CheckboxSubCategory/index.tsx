@@ -54,6 +54,7 @@ export default function CheckboxSubCategory(props) {
   }, [inEditMode])
 
   const renderListItem = (category, key) => {
+    console.log("RenderListItem", category);
     return  (
       <div className={styles.item}>
         <div className={styles.title}>{key + 1}. {category.mainCategory ? `${category.mainCategory?.name}/` : ''}{category.name}: {category.subCategories?.map((item, key) => `${item.name}`).join(', ')}
@@ -79,7 +80,7 @@ export default function CheckboxSubCategory(props) {
           label: item.name
         }
       })}} onSubmit={(data) => {
-        return handleEdit({mainCategory: {id: data.mainCategory.value, name: data.mainCategory.name} , id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
+        return handleEdit({mainCategory: {id: data.mainCategory.value, name: data.mainCategory.label} , id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
           return {
             id: item.value,
             name: item.label

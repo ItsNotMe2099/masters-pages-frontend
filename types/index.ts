@@ -872,3 +872,8 @@ export enum NotificationType {
   EventRemind = 'event_remind',
   News = 'news',
 }
+
+export enum ProfilePageType {
+  Skill = 'skill',
+  Profile = 'profile'
+}
