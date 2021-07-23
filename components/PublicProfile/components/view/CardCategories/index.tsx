@@ -28,7 +28,9 @@ const CardCategories = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.skill.formLoading)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
   const {profile, isEdit, onCategoryChange, subCategory} = props;
-  const skills = props.isEdit ? useSelector((state: IRootState) => state.skill.list) : formatSkillList(profile.skills);
+  const skillsCurrentProfile = useSelector((state: IRootState) => state.skill.list);
+  const skills = props.isEdit ? skillsCurrentProfile : formatSkillList(profile.skills);
+
   const handleEditClick = () => {
     dispatch(showProfileForm( 'categories'));
   }
