@@ -42,4 +42,4 @@ export const makeStore: MakeStore<IRootState> = (context: Context) => {
   return store;
 };
 
-export const wrapper = createWrapper<IRootState>(makeStore, {debug: true});
+export const wrapper = createWrapper<IRootState>(makeStore, {debug: false});
