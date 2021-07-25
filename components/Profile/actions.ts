@@ -28,6 +28,7 @@ export const setCurrentSkill = (skill: SkillData) => action(ActionTypes.SET_CURR
 export const changeRole = (role: string) => action(ActionTypes.CHANGE_ROLE, {role})
 export const changeRoleNative = (role: string) => action(ActionTypes.CHANGE_ROLE_NATIVE, {role})
 export const changeRoleSuccess = (role: string) => action(ActionTypes.CHANGE_ROLE_SUCCESS, {role})
+export const changeRoleTemp = (role: string) => action(ActionTypes.CHANGE_ROLE_FOR_CREATE, {role})
 export const fetchProfileSuccess = (data) => action(ActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS, data)
 
 export const deleteProfile = (role: string) => action(ActionTypes.DELETE_PROFILE, {role})

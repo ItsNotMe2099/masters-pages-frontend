@@ -9,10 +9,15 @@ import nextI18 from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
 import {useTranslation, withTranslation} from "i18n";
+import {getProfileRoleByRoute} from 'utils/profile'
+import {useRouter} from 'next/router'
 
  const ModeSelect = () => {
    const { t } = useTranslation('common');
-  const role = useSelector((state: IRootState) => state.profile.role)
+   const {route: currentRoute} = useRouter();
+   const roleCurrent = useSelector((state: IRootState) => state.profile.role)
+   const roleTemp = useSelector((state: IRootState) => state.profile.roleTemp)
+   const role =  getProfileRoleByRoute(currentRoute) || roleTemp || roleCurrent;
   const dispatch = useDispatch()
 
   const dropdownRef = useRef(null);
