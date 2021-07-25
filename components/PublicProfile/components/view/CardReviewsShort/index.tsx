@@ -27,7 +27,7 @@ const CardReviewsShort = (props: Props) => {
     <Card isHidden={total === 0} className={styles.root} title={total > 0 ?  t('cardReviewsShort.reviewsTotal', {total}) : t('cardReviewsShort.reviews')}>
 
       {!listLoading && list.map(item => <ReviewShortListItem feedback={item}/>)}
-      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/Reviews${subCategory ? `?subCategoryId=${subCategory.subCategoryId}` : ''}`}>{t('cardRecommenadationShort.seeAll')}</a>}
+      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/reviews${subCategory ? `?subCategoryId=${subCategory.subCategoryId}` : ''}`}>{t('cardRecommenadationShort.seeAll')}</a>}
     </Card>
   )
 }
