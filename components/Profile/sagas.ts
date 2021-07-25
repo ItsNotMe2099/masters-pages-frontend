@@ -7,7 +7,7 @@ import ActionTypes from './const'
 import {
   changeProfileEmail,
   changeRole,
-  changeRoleSuccess,
+  changeRoleSuccess, changeRoleTemp,
   createProfile,
   deleteProfile,
   deleteProfileRequest, fetchProfile,
@@ -34,6 +34,7 @@ function* ProfileSaga() {
         cookie.set('mode', action.payload.role);
         meRedirect()
       } else {
+        yield put(changeRoleTemp(action.payload.role))
         switch (action.payload.role) {
           case 'client':
             Router.push("/RegistrationPage");

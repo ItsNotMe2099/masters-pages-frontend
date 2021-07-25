@@ -14,6 +14,7 @@ import {fetchProfile} from 'components/Profile/actions'
 import NotificationSelect from 'components/layout/Layout/components/NotificationSelect'
 import LogoSvg from 'components/svg/Logo'
 import cookie from "js-cookie";
+import {getProfileRoleByRoute} from 'utils/profile'
 
 interface Props {
   children?: ReactElement[] | ReactElement
@@ -22,7 +23,10 @@ interface Props {
 export default function LayoutAuthorized(props: Props) {
   const {children} = props;
   const {route: currentRoute} = useRouter();
-  const role = useSelector((state: IRootState) => state.profile.role)
+
+  const roleCurrent = useSelector((state: IRootState) => state.profile.role)
+  const roleTemp = useSelector((state: IRootState) => state.profile.roleTemp)
+  const role =  getProfileRoleByRoute(currentRoute) || roleTemp || roleCurrent;
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const intervalRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
