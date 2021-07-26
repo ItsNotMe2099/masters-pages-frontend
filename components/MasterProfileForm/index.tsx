@@ -21,6 +21,7 @@ let MasterForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
   const {t} = useTranslation();
+  console.log("RERENDER");
   return (
     <div>
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -89,7 +90,6 @@ let MasterForm = props => {
                   name="categories"
                   component={CheckboxSubCategory}
                   label={t('masterForm.categories')}
-                  validate={[arrayNotEmpty('selectCategory')]}
                 />
               </div>
             </div>
@@ -113,7 +113,6 @@ let MasterForm = props => {
             name="terms"
             component={InputCheckbox}
             label={<Trans i18nKey="masterForm.rules">С <a href={''}>правилами сайта</a> ознакомился и согласен</Trans>}
-            validate={required}
           />
         </div>
 
@@ -129,14 +128,12 @@ let MasterForm = props => {
 
 MasterForm = reduxForm({
   form: 'masterForm',
-})(MasterForm)
-
-const selector = formValueSelector('masterForm') // <-- same as form name
-MasterForm = connect(state => {
-  const countryCode = selector(state, 'countryCode')
-  return {
-    countryCode
+  validate: (values) => {
+    if(!values.categories || values.categories.length === 0){
+      return {categories: 'selectCategory'}
+    }
   }
 })(MasterForm)
+
 
 export default MasterForm

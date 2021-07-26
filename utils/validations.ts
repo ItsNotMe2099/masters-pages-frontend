@@ -36,6 +36,7 @@ export const arrayNotEmpty = (message?) => {
   }
 }
 
+
 export const date =  value => {
   if(!value){
     return;

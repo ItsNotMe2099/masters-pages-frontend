@@ -34,7 +34,7 @@ export default function LayoutAuthorized(props: Props) {
   const intervalRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
   useInterval(() => {
-    //dispatch(fetchProfile(profile.role));
+    dispatch(fetchProfile(profile.role));
   }, 10000)
 
   const {t} = useTranslation();
