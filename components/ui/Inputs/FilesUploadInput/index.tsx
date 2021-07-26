@@ -94,7 +94,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
     signingUrlQueryParams: { uploadType: 'avatar' },
     autoUpload: true,
     signingUrl: `${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/sign`,
-    s3path: 'masters-pages/files',
+    s3path: 'uploads',
 
     ...uploadOptions,
   }
