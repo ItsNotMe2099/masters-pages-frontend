@@ -28,6 +28,7 @@ let GalleryForm = (props) => {
         size={'small'}
         labelType="placeholder"
         label={t('follower.postForm.uploadPhoto')}
+        validate={required}
       />
       {profileTabs.length > 0 && <Field
         name="profileTabId"

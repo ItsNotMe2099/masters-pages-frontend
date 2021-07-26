@@ -54,8 +54,12 @@ const CardGallery = (props: Props) => {
   const limit = 3;
   const { t } = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
-
+  const [currentSkillId, setCurrentSkillId] = useState(null);
   useEffect(() => {
+    if(currentSkillId === skill?.id){
+      return
+    }
+    console.log("FetchGallery", 'fetch', skill )
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       profileId: profile.id,
@@ -65,6 +69,7 @@ const CardGallery = (props: Props) => {
       limit
     }));
     dispatch(setProfileGalleryTab(null));
+    setCurrentSkillId(skill.id)
 
   }, [skill]);
   const handleSortChange = (sort) => {
