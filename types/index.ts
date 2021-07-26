@@ -295,6 +295,7 @@ export interface IProfileGalleryItem {
   likesCount: string | number
   visible: boolean
   sort: number
+  isLiked: boolean
   createdAt: Date;
 }
 

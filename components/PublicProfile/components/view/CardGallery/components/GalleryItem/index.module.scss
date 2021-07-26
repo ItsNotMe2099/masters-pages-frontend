@@ -2,7 +2,7 @@
 .root{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
 }
 .image{
@@ -31,10 +31,19 @@
 .info{
 
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+
   padding: 12px 12px;
+  .infoWrapper{
+    display: flex;
+    flex-direction: row;
+  }
+  .description{
+    text-align: left;
+
+    margin-top: 6px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
   .details{
     flex: 1;
     padding-right: 12px;
@@ -47,10 +56,7 @@
         text-decoration: underline;
       }
     }
-    .description{
-      margin-top: 4px;
-      color: rgba(0, 0, 0, 0.5);
-    }
+
   }
   .stat{
     display: flex;

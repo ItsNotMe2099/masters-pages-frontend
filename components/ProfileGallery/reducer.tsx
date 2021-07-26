@@ -110,6 +110,7 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.listLoading = true;
       break
     case ActionTypes.FETCH_PROFILE_GALLERY_LIST + ApiActionTypes.SUCCESS:
+      console.log("FetchGalleryListSuccess")
       state.list = [...state.list, ...action.payload.data];
       state.total = action.payload.total
       state.listLoading = false;
@@ -147,6 +148,7 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.currentProfileTab = action.payload.tab;
       break
     case ActionTypes.RESET_PROFILE_GALLERY_LIST:
+      console.log("FetchGalleryReset")
       state.listLoading = false;
       state.total = 0;
       state.page = 1;

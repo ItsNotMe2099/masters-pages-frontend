@@ -15,28 +15,27 @@ import NotificationSelect from 'components/layout/Layout/components/Notification
 import LogoSvg from 'components/svg/Logo'
 import cookie from "js-cookie";
 import {getProfileRoleByRoute} from 'utils/profile'
+import {useInterval} from 'components/hooks/useInterval'
 
 interface Props {
-  children?: ReactElement[] | ReactElement
+  children?: ReactElement[] | ReactElement,
+  showLeftMenu?: boolean
 }
 
 export default function LayoutAuthorized(props: Props) {
-  const {children} = props;
+  const {children, showLeftMenu} = props;
   const {route: currentRoute} = useRouter();
 
   const roleCurrent = useSelector((state: IRootState) => state.profile.role)
-  const roleTemp = useSelector((state: IRootState) => state.profile.roleTemp)
-  const role =  getProfileRoleByRoute(currentRoute) || roleTemp || roleCurrent;
+  const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent;
+
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  console.log("CurProfile", profile);
   const intervalRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-     dispatch(fetchProfile(profile.role));
-    }, 10000)
-    setCollapsed(!!cookie.get("menu-collapsed"))
-    return () => clearInterval(intervalRef.current);
-  }, []);
+  useInterval(() => {
+    dispatch(fetchProfile(profile.role));
+  }, 10000)
 
   const {t} = useTranslation();
   const dispatch = useDispatch()
@@ -101,8 +100,8 @@ export default function LayoutAuthorized(props: Props) {
     setCollapsed(!collapsed);
   }
   return (
-    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed})}>
-      <div className={styles.leftMenu}>
+    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})}>
+      {showLeftMenu && <div className={styles.leftMenu}>
         <div className={styles.logo}>
           {collapsed && <LogoSvg className={styles.logoCollapsed} color={'white'}/>}
           {!collapsed && <Logo color={'white'}/>}
@@ -113,7 +112,7 @@ export default function LayoutAuthorized(props: Props) {
           link={item.link} badge={item.badge} mode={role}/></>)}
         <MenuItem isActive={false} onClick={handleLogout} title={t('menu.logout')} icon={'logout'}
                   mode={role}/>
-      </div>
+      </div>}
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div
@@ -124,9 +123,12 @@ export default function LayoutAuthorized(props: Props) {
         <NotificationSelect/>
         <LangSelect isAuth={false}/>
       </div>
-      <div className={styles.container}>
+      <div className={cx(styles.container)}>
         {children}
       </div>
     </div>
   )
+}
+LayoutAuthorized.defaultProps = {
+  showLeftMenu: true
 }

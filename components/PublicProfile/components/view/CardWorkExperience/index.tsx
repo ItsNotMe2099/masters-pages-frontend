@@ -36,15 +36,17 @@ const CardWorkExperience = (props: Props) => {
   const listLoading = useSelector((state: IRootState) => state.profileWorkExperience.listLoading);
   const formLoading = useSelector((state: IRootState) => state.profileWorkExperience.formLoading);
   const [currentEditModel, setCurrentEditModel] = useState(null);
+  const [currentSkillId, setCurrentSkillId] = useState(null);
   useEffect(() => {
-    if(!skill){
-      return;
+    if(!skill || (currentSkillId === skill?.id)){
+      return
     }
     dispatch(fetchProfileWorkExperienceList({
       profileId: profile.id,
       categoryId: skill.categoryId,
       subCategoryId: skill.subCategoryId
     }));
+    setCurrentSkillId(skill.id)
   }, [skill]);
 
   const handleCreateClick = () => {

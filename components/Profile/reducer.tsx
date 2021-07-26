@@ -111,9 +111,7 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.role = action.payload.role;
       state.roleTemp= action.payload.role;
       break
-    case ActionTypes.CHANGE_ROLE_FOR_CREATE:
-      state.roleTemp = action.payload.role;
-      break
+
     case ActionTypes.SHOW_FORM:
       state.showForms = state.showForms.find(key => key === action.payload.key) ? state.showForms : [...state.showForms, action.payload.key];
       break

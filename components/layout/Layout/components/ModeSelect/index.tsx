@@ -16,8 +16,7 @@ import {useRouter} from 'next/router'
    const { t } = useTranslation('common');
    const {route: currentRoute} = useRouter();
    const roleCurrent = useSelector((state: IRootState) => state.profile.role)
-   const roleTemp = useSelector((state: IRootState) => state.profile.roleTemp)
-   const role =  getProfileRoleByRoute(currentRoute) || roleTemp || roleCurrent;
+   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent;
   const dispatch = useDispatch()
 
   const dropdownRef = useRef(null);

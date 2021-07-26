@@ -44,9 +44,20 @@
     border-top: 1px solid #C4C4C4;
     border-bottom: 1px solid #C4C4C4;
     .statItem{
+
       display: flex;
       flex-direction: row;
       align-items: center;
+      &.isLiked{
+        color: black;
+        font-weight: bold;
+        .likeIcon{
+          cursor: inherit;
+        }
+        path{
+          fill: #000000;
+        }
+      }
       &:first-of-type{
         margin-right: 15px;
       }
