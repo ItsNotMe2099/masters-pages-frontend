@@ -34,7 +34,6 @@ function* ProfileSaga() {
         cookie.set('mode', action.payload.role);
         meRedirect()
       } else {
-        yield put(changeRoleTemp(action.payload.role))
         switch (action.payload.role) {
           case 'client':
             Router.push("/RegistrationPage");
