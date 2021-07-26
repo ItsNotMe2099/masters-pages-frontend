@@ -15,6 +15,7 @@ function request(requestData: IRequestData, ctx: any = null): Promise<IResponse>
     profileRole = ctx ? nextCookie(ctx).mode : Cookies.get('mode')
 
   }
+  console.log("FetchProfile", `${host || defaultHost}${url}`, token, profileRole);
   return (
     fetch(`${host || defaultHost}${url}`, {
       method: method || 'GET',
@@ -28,7 +29,7 @@ function request(requestData: IRequestData, ctx: any = null): Promise<IResponse>
       .then(res => {
         const contentType = res.headers.get('content-type')
         const isJson = contentType && contentType.indexOf('application/json') !== -1
-
+        console.log("FetchProfileRes", `${host || defaultHost}${url}`, token, profileRole ,res.status);
         if (res.status !== 200 && res.status !== 201) {
           console.log('Response status:', res.status)
           return (isJson ? res.json() : res.text()).then((resData: any) => {

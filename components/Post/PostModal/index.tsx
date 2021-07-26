@@ -32,7 +32,7 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
   const handleSubmit = (data) => {
     console.log("HandleSubmit", data);
     if(!currentEditPost) {
-      dispatch(createProfileGallery({ ...data, state: 'published'
+      dispatch(createProfileGallery({ ...data
       }));
     }else{
       dispatch(updateProfileGallery(currentEditPost.id, {...data

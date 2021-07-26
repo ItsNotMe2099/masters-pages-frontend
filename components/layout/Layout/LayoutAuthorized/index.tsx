@@ -15,6 +15,7 @@ import NotificationSelect from 'components/layout/Layout/components/Notification
 import LogoSvg from 'components/svg/Logo'
 import cookie from "js-cookie";
 import {getProfileRoleByRoute} from 'utils/profile'
+import {useInterval} from 'components/hooks/useInterval'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -29,15 +30,12 @@ export default function LayoutAuthorized(props: Props) {
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent;
 
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  console.log("CurProfile", profile);
   const intervalRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-     dispatch(fetchProfile(profile.role));
-    }, 10000)
-    setCollapsed(!!cookie.get("menu-collapsed"))
-    return () => clearInterval(intervalRef.current);
-  }, []);
+  useInterval(() => {
+    dispatch(fetchProfile(profile.role));
+  }, 10000)
 
   const {t} = useTranslation();
   const dispatch = useDispatch()

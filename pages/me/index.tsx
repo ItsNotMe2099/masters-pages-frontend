@@ -20,12 +20,14 @@ const PersonalAreaPageIndex = (props) => {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+  console.log("GETME")
   const res = await getAuthServerSide({redirect: true})(ctx as any);
+
   const profile = (res as any).props.profile;
-  
+  console.log("Redirect profile", profile);
   return {
     redirect: {
-      permanent: true,
+      permanent: false,
       destination:  `/id${profile.id}`
     }
   }
