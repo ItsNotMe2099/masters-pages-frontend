@@ -37,6 +37,7 @@ const MasterProfile = (props) => {
       }).flat(Infinity)
     }));
   }
+  console.log("ShowProfile", profile);
   console.log("initValues",profile?.geoname, {
     firstName: profile?.firstName,
     lastName: profile?.lastName,
