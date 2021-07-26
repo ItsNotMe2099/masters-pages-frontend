@@ -7,7 +7,7 @@ import ActionTypes from './const'
 import {
   changeProfileEmail,
   changeRole,
-  changeRoleSuccess, changeRoleTemp,
+  changeRoleSuccess,
   createProfile,
   deleteProfile,
   deleteProfileRequest, fetchProfile,
