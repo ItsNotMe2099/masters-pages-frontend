@@ -38,11 +38,6 @@ export default function CalendarEvent(props: Props) {
       isOtherSide: false
     });
 
-<<<<<<< HEAD
-    if(event.id === 13){
-    }
-=======
->>>>>>> 08e1e55ea6a05f2a505965edb594d1f05b4ac410
     switch (color){
       case 'grey':
         return styles.root__grey;
