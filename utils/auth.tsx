@@ -82,7 +82,7 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
   console.log("getProfile", profile, user);
   if(profile && profile.role !== mode){
     setCookie(ctx, 'mode', profile.role, {
-      maxAge: 30 * 24 * 60 * 60,
+      maxAge: 60*60*24*365,
       path: '/',
     })
   }

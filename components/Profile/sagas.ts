@@ -31,7 +31,7 @@ function* ProfileSaga() {
       } as IRequestData)
 
       if (!res.err && res.data && res.data.id) {
-        cookie.set('mode', action.payload.role);
+        cookie.set('mode', action.payload.role, 60 * 60* 24 * 365);
         meRedirect()
       } else {
         switch (action.payload.role) {
@@ -69,7 +69,7 @@ function* ProfileSaga() {
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.FAIL, payload: {error: res.err}});
       } else if (res.data && res.data.id) {
-        cookie.set('mode', action.payload.role);
+        cookie.set('mode', action.payload.role, 60 * 60* 24 * 365);
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.SUCCESS});
         yield put(changeRoleSuccess(action.payload.role));
