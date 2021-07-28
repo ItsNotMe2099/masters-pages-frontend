@@ -28,7 +28,6 @@ const MasterProfile = (props) => {
     }
   }, [formLoading])
   const handleSubmit = (data) => {
-  console.log("HandleSubmit", data)
     dispatch(createProfile('volunteer', {
       ...data,
       preferredCategories: data.categories.map((item) => item.id),
@@ -37,14 +36,6 @@ const MasterProfile = (props) => {
       }).flat(Infinity)
     }));
   }
-  console.log("initValues",profile?.geoname, {
-    firstName: profile?.firstName,
-    lastName: profile?.lastName,
-    countryCode: profile?.geoname?.countryCode,
-    geonameid: profile?.geonameid,
-    birthday: profile?.birthday,
-    photo: profile?.photo,
-  })
 
   return (
     <Layout>

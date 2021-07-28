@@ -14,7 +14,6 @@ const ErrorInput = (props: Props) => {
   const {t} = useTranslation();
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   if(touched && error) {
-    console.log("ShowError", error)
     return (<div className={styles.root}>{t(`validation.${error}`)}</div>)
   }else{
     return (<></>)

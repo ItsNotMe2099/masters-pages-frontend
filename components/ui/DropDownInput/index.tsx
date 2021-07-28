@@ -24,7 +24,6 @@ export const DropDownInput = (props: Props) => {
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
-    console.log("SetLang", item.value);
     setValue(item);
     if(props.onChange){
       props.onChange(item);

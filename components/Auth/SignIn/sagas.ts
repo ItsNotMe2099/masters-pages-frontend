@@ -17,7 +17,6 @@ function* signInSaga() {
         method: 'POST',
         data: action.payload,
       } as IRequestData)
-      console.log("Res signup", res.data)
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
         yield put(modalClose());

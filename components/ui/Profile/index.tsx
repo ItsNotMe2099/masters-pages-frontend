@@ -62,7 +62,6 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
   }
 
   const handleChangeTab = (tab) => {
-    console.log("onChangeTab", tab.key);
 
     setCurrentCategoryTab(tab.key);
     setCurrentSkill(profile.skills.find(skill => `${skill.id}` === tab.key))

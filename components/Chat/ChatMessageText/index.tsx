@@ -40,7 +40,6 @@ export default function ChatMessageText({message, files, size, isRight, suffixIc
 
   }
   const handleImageClick = () =>{
-    console.log("handleClick")
     setShowGallery(showGallery => !showGallery);
   }
 

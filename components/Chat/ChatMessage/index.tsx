@@ -144,8 +144,6 @@ export default function ChatMessage({ message, chat, size }: Props) {
           const youTextNew = t('chat.message.youSend')
           const fromTextNew = profile.role === 'client' ? t('chat.message.negotiationFromMaster') : t('chat.message.negotiationFromClient')
           const fromTextStatus = profile.role === 'client' ? t('chat.message.masterNegotiation', statusText) : t('chat.message.clientNegotiation', statusText)
-
-          console.log("showAccept", message.taskNegotiation.id, showAccept, message.taskNegotiation)
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task neogotiation
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
@@ -190,7 +188,6 @@ export default function ChatMessage({ message, chat, size }: Props) {
             return [<ChatMessageText message={youTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId !== profile.id && message.profileId !== profile.id) {
             // Somebody sent you task negotiation
-            console.log("lastCondition.id !== message.taskNegotiation.id", lastCondition?.id, message.taskNegotiation.id)
             return [...(chat.task.status === 'in_progress' && !(['accepted', 'declined'].includes(message.taskNegotiation.state)) ? [<ChatMessageAction message={t('chat.message.masterMarkTask')} showReject={true} showConfirm={true} onReject={handleTaskMarkAsDoneReject} onConfirm={handleTaskMarkAsDoneConfirm}/>] : []),
               <ChatMessageText message={fromTextNew} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else if (message.taskNegotiation.authorId === profile.id && message.profileId === profile.id) {

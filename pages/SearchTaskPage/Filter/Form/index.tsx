@@ -27,7 +27,6 @@ let SearchTaskForm = (props) => {
   const { t } = useTranslation();
   const width = useWindowWidth()
   const { handleSubmit, collapsed } = props
-  console.log("Collapse1d", collapsed)
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
 
   useEffect(() => {
@@ -39,7 +38,6 @@ let SearchTaskForm = (props) => {
     change('rating', filter.rating)
     change('radius', filter.radius)
     change('keywords', filter.keywords)
-    console.log("FilterChange", filter)
     change('price', filter.price)
   }, [filter])
   const isMobile = width < 700;

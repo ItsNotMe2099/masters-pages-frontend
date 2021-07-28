@@ -32,11 +32,9 @@ export default function ContactsReducer(state = {...initialState}, action) {
       state.listLoading = false;
       break
     case ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
-      console.log("Delete success1", action.payload);
       state.list = state.list.filter(item => item.contactProfileId !== action.payload.id)
       break
     case FollowerActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS:
-      console.log("Delete success2", action.payload);
       state.list = state.list.filter(item => item.contactProfileId !== action.payload.targetProfileId)
       break
     case ActionTypes.SET_PAGE_PROFILE_CONTACT_LIST:

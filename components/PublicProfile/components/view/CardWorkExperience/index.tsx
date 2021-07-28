@@ -53,7 +53,6 @@ const CardWorkExperience = (props: Props) => {
 
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     if(!currentEditModel) {
       dispatch(createProfileWorkExperience({
         profileId: profile.id,

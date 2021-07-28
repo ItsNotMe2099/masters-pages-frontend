@@ -36,7 +36,6 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
 
   }, [])
   const handleSubmit = () => {
-    console.log("HandleSubmit");
     dispatch(taskNegotiationHireMaster(task.id, taskNegotiation.profileId, taskNegotiation.id))
   }
   return (

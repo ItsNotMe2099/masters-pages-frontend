@@ -35,10 +35,8 @@ const CategoryModal = ({isOpen, onClose}: Props) => {
     }
   }, [isOpen])
   const handleSubmit = (data) => {
-    console.log("submit data", data)
     dispatch(createSkillCategory(data))
   }
-  console.log("")
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>

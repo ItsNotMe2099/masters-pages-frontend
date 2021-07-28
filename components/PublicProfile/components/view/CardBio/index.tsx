@@ -24,7 +24,6 @@ const CardBio = (props: Props) => {
 
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     dispatch(updateProfileByForm(profile.id, {bio: {...data, visible: true}}, 'bio'));
   }
   const handleCancel = () => {

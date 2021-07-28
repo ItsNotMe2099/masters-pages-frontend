@@ -24,7 +24,6 @@ const RegistrationPage = (props: Props) => {
   const handleSubmit = (data) => {
     dispatch(registrationCompleteSubmit(data));
   }
-  console.log("PropsUser", props.user)
   return (
     <div className={styles.root}>
       <div className={styles.container}>

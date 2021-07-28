@@ -37,7 +37,6 @@ const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
 
   }, [])
   const handleSubmit = () => {
-    console.log("HandleSubmit");
 
     dispatch(taskNegotiationMarkAsDone(task.id))
   }

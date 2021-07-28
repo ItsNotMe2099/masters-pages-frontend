@@ -24,15 +24,12 @@ export default function InputLocation(props: Props) {
   const {t, i18n} = useTranslation();
   const [options, setOptions] = useState([]);
   const handleOnChange = (value) => {
-    console.log("OnChangeLocValue", value)
     props.input.onChange(value);
   }
   const getSearchCity = (search = '') => {
-    console.log("SearchVal", props.input.value);
     return request({url: `/api/location/city?${queryString.stringify({search,  country: props.countryCode, id: search ? null : props.input.value, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
       .then((response) => {
         const data = response.data;
-        console.log("Response", data)
         setOptions(data ? data.map(item => {
           return {
             value: item.geonameid,
@@ -47,7 +44,6 @@ export default function InputLocation(props: Props) {
 
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
-    console.log("search change", value)
     if(!value){
       return;
     }

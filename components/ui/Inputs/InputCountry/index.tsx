@@ -18,9 +18,7 @@ export default function InputCountry(props) {
   const [value, setValue] = useState();
   const [options, setOptions] = useState([]);
   const {t, i18n} = useTranslation();
-  console.log("CountryValue", props.input.value);
   const handleOnChange = (value) => {
-    console.log("OnChangeLocValue", value)
     props.input.onChange(value);
   }
   useEffect(() => {
@@ -30,11 +28,9 @@ export default function InputCountry(props) {
 
   }, [i18n.language])
   const getSearchCountry = (search = '') => {
-    console.log("SearchVal", props.input.value);
     return request({url: `/api/location/country?${queryString.stringify({search, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
       .then((response) => {
         const data = response.data;
-        console.log("Response", data)
         setOptions(data ? data.map(item => {
           return {
             value: item.country_code,
@@ -45,7 +41,6 @@ export default function InputCountry(props) {
   }
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
-    console.log("search change", value)
     if(!value){
       return;
     }

@@ -41,7 +41,6 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   }
 
   const handleSubmitNewOrder = (data) => {
-    console.log('handleSubmitNewOrder', data)
     dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
   }
 

@@ -48,7 +48,6 @@ const CardProfile = (props: Props) => {
   }
 
   const handleDeleteAvatar = () => {
-    console.log("Handle delete Avatar")
     dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
   }
   return (

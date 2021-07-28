@@ -39,7 +39,6 @@ export default function CalendarEvent(props: Props) {
     });
 
     if(event.id === 13){
-      console.log("ColorEvent", color);
     }
     switch (color){
       case 'grey':

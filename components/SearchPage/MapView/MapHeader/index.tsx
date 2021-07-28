@@ -45,7 +45,6 @@ const MapHeader = (props: Props) => {
         return 'SearchClientPage'
     }
   }
-  console.log("get query Filter", getQueryFilter())
   const handleOnChangeFilter = (data) => {
     dispatch(setFilterProfileSearch(data));
     dispatch(resetProfileSearchList())

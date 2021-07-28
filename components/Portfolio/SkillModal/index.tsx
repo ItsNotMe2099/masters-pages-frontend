@@ -29,14 +29,12 @@ const SkillModal = ({isOpen, category, skill, onClose}: Props) => {
     }
   }, [isOpen])
   const handleSubmit = (data) => {
-    console.log("submit data", data)
     if(skill?.id){
       dispatch(updateSkill(skill.id, data))
     }else {
       dispatch(createSkill(data))
     }
   }
-  console.log("")
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>

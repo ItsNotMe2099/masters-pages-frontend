@@ -13,7 +13,6 @@ const ProfilePage = (props) => {
  return <PublicProfile {...props} showType={'profile'}/>
 }
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
-  console.log("ctxQuery", ctx.query.profile)
 
   const id = ctx.query.profile as string;
   let profile, skill = null;
@@ -26,7 +25,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
     }
 
   }else if(id.indexOf('sk') === 0){
-    console.log("getId", `/api/profile/skill${id.replace('sk', '')}`)
+
      skill = (await request({ url: `/api/profile/skill/${id.replace('sk', '')}`, method: 'GET' }))?.data
     if(!skill){
       return {

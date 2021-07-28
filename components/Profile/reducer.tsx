@@ -89,7 +89,6 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.formLoading = false;
       state.formError = ''
       state.formIsSuccess = true
-      console.log("StateCurrentProfile", action.payload);
       state.currentProfile = {...state.currentProfile, ...action.payload}
       state.avatarLoading = false;
       if(state.lastFormKey) {
@@ -117,7 +116,6 @@ export default function ProfileReducer(state = {...initialState}, action) {
     case ActionTypes.SET_CURRENT_SKILL:
 
       state.currentSkill = action.payload.skill;
-      console.log("setCurrentSkill", state.currentSkill );
       break
 
     case ActionTypes.FORM_RESET:

@@ -32,23 +32,18 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
 
   switch(action.type) {
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_TASK:
-      console.log("TASK_OFFER_SET_CURRENT_TASK", action.payload)
       state.currentTask = action.payload;
       break
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_PROFILE:
-      console.log("TASK_NEGOTIATION_SET_CURRENT_PROFILE", action.payload)
       state.currentProfile = action.payload;
       break
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_NEGOTIATION:
-      console.log("TASK_OFFER_SET_CURRENT_TASK", action.payload)
       state.currentTaskNegotiation = action.payload;
       break
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_MESSAGE:
-      console.log("TASK_NEGOTIATION_SET_CURRENT_MESSAGE", action.payload)
       state.currentMessage = action.payload;
       break;
     case ActionTypes.TASK_NEGOTIATION_SEND_OFFER_LOADING:
-      console.log("TASK_NEGOTIATION_SEND_OFFER_LOADING", action.payload)
       state.sendOfferLoading = action.payload;
       break;
     case ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE_REQUEST:
@@ -65,7 +60,6 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
       state.lastCondition = action.payload;
       break
     case ActionTypes.TASK_NEGOTIATION_FINISH:
-      console.log("TASK_NEGOTIATION_FINISH LOADING");
       state.formLoading = true;
       break
     case ActionTypes.TASK_NEGOTIATION_FINISH + ApiActionTypes.SUCCESS:

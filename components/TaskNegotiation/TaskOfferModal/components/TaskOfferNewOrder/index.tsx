@@ -138,7 +138,6 @@ const selector = formValueSelector('TaskOfferNewOrder')
 TaskOfferNewOrder = connect(state => {
   // can select values individually
   const categoryId = selector(state, 'categoryId')
-  console.log("getCategoryId", categoryId, state)
   const offerPriceType = selector(state, 'offerPriceType')
   const currency = selector(state, 'currency')
 

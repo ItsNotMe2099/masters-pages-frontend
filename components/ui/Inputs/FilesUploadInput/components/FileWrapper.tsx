@@ -42,7 +42,6 @@ const FileWrapper = (props: Props) => {
   const [progress, setProgress] = useState(0);
   const fileUpload = useRef(null);
   const onFinishFileUpload = useCallback((result) => {
-    console.log("onUpload", result);
     onUpload({ ...file, catalogId: result.catalogId, path: result.fileKey, mediaId: result.mediaId })
     setIsLoaded(true);
   }, [props.onUpload])
@@ -51,11 +50,9 @@ const FileWrapper = (props: Props) => {
     setIsLoaded(true);
   }
   const onProgress = (progress) => {
-    console.log("onProgress", progress)
     setProgress(progress)
   }
   useEffect(() => {
-    console.log("RawFile", uploadOptions);
     if (file.rawFile &&  !(file.rawFile as any)._uploading) {
       (file.rawFile as any)._uploading = true;
       const options = {
@@ -65,17 +62,13 @@ const FileWrapper = (props: Props) => {
         onProgress: onProgress,
         onError: onFileUploadError,
       }
-      console.log("Start Upload")
       fileUpload.current = new S3Upload(options);
 
     }
   },[])
   const handleRemove = () => {
     if(  fileUpload.current  && file.rawFile){
-      console.log("Cancel");
       fileUpload.current.cancel();
-    }else{
-      console.log("cantCancel", fileUpload.current, file.rawFile);
     }
     onRemove(file)
   }

@@ -39,7 +39,6 @@ const ContactsToolbar = (props: Props) => {
   const subCategories = useSelector((state: IRootState) => state.subCategoryInput.subCategories)
   const dispatch = useDispatch()
   const { callback: onChangeSearch, cancel, callPending } = useThrottleFn((val) => {
-      console.log("EventChange", val)
     props.onSearchChange(val)
   }, 300);
   useEffect(() => {
@@ -50,12 +49,10 @@ const ContactsToolbar = (props: Props) => {
     onCategoryChange(val.value);
     onSubCategoryChange(null);
   }
-  console.log("LLLLL", language)
   return (
     <div className={styles.root}>
       <div className={styles.search}>
       <Input placeholder={'Search'} size={'small'} input={{value: null, onChange: (e) => {
-        console.log("Change", e)
           onChangeSearch(e.currentTarget.value);
         } }}/>
       </div>

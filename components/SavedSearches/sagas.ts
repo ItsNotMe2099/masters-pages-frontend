@@ -23,7 +23,6 @@ function* SavedSearchesSaga() {
       yield put(deleteSavedTaskSearchRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_SAVED_TASK_SEARCHES_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SAVED_TASK_SEARCHES_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_SAVED_TASK_SEARCHES_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("DELETE SavedSearch SUCCESS")
         yield put(modalClose());
       }
     })
@@ -33,7 +32,6 @@ function* SavedSearchesSaga() {
       yield put(deleteSavedProfileSearchRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("DELETE SavedSearch SUCCESS")
         yield put(modalClose());
       }
     })
@@ -45,7 +43,6 @@ function* SavedSearchesSaga() {
       yield take([ActionTypes.SAVED_TASK_SEARCH_CREATE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.SAVED_TASK_SEARCH_CREATE_REQUEST + ApiActionTypes.FAIL])
       yield put(modalClose());
 
-      console.log("Call1");
       yield put(fetchSavedTaskSearchesRequest(1, 100));
 
     })
@@ -56,7 +53,6 @@ function* SavedSearchesSaga() {
       yield put(saveProfileSearchRequest(action.payload));
       yield take([ActionTypes.SAVED_PROFILE_SEARCH_CREATE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.SAVED_PROFILE_SEARCH_CREATE_REQUEST + ApiActionTypes.FAIL])
       yield put(modalClose());
-      console.log("Call2");
       yield put(fetchSavedProfileSearchesRequest(1, 100));
     })
 

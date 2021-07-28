@@ -28,11 +28,9 @@ const transformFile = file => {
     rawFile: file,
     preview: preview,
   }
-  console.log("transformedFile", transformedFile)
   return transformedFile
 }
 const formatValue = (value): FileEntity[]  => {
-  console.log("FormatValue", value)
   return value ? (Array.isArray(value) ? value.map((file) => { return {path: file?.path as string || file as string}}) : [{path: value?.path as string || value as string}]) : []
 }
 
@@ -119,7 +117,6 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
     return nextId("file-");
   }
   const onUpload = (file: FileEntity) => {
-    console.log("onUploadFiles", file)
 
     setFiles(oldFiles => oldFiles.map(item => {
       return {
@@ -129,9 +126,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
     }))
   }
   const onChangeFileData = (file: FileEntity, data) => {
-    console.log("onChangeFileData", file.path, data)
     setFiles(oldFiles => oldFiles.map(item => {
-      console.log("Map Exists",  (file.path && item.path === file.path) || (!file.path && item.rawFile?.name === file.rawFile.name) )
       return {
         ...item,
         ...( ( (file.path && item.path === file.path) || (!file.path && item.rawFile?.name === file.rawFile.name)) ? {data} : {})
@@ -150,7 +145,6 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
       newFiles.splice(index, 1);
       return newFiles
     });
-    console.log("FileRemove", file);
   },[files])
 
   const { getRootProps, getInputProps } = useDropzone({

@@ -34,12 +34,9 @@ export default function SharePersonalLabel(props: Props) {
   const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
 
   const handleChange = (data) => {
-    console.log("handleChange", data)
-
     setSettings((settings) => ({...settings, ...data}));
   }
   const handleDownloadImage = () => {
-    console.log("LabelRef", labelRef);
     exportComponentAsJPEG(labelRef);
   }
   const handleDownloadPdf= () => {

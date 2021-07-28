@@ -13,7 +13,6 @@ const domainDetector = {
     const hostname = (typeof window !== 'undefined')
       ? window.location.hostname
       : req.headers.host?.split(':')[0]
-    console.log("DomainDetector1Ru", hostname, domainLocaleMap[hostname])
     return domainLocaleMap[hostname]
   }
 };

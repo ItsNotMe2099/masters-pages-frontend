@@ -14,14 +14,11 @@ import {
 } from 'components/Follower/actions'
 
 function* FollowerSaga() {
-  console.log("FollowerSaga")
   yield takeLatest(ActionTypes.CREATE_FOLLOWER,
     function* (action: ActionType<typeof createFollower>) {
-      console.log("Create");
       yield put(createFollowerRequest(action.payload.data));
       const result = yield take([ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("CREATE FOLLOWER SUCCESS")
 
       }
     })
@@ -33,7 +30,6 @@ function* FollowerSaga() {
       yield put(deleteFollowerRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("DELETE SKILL SUCCESS")
         yield put(modalClose());
 
       }

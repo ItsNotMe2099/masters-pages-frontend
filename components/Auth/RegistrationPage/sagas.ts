@@ -19,7 +19,6 @@ function* registrationCompleteSaga() {
         method: 'POST',
         data: action.payload,
       } as IRequestData)
-      console.log("Res signup", res)
       yield put(fetchProfile('client'));
       yield take([ProfileActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS, ProfileActionTypes.FETCH_PROFILE + ApiActionTypes.FAIL])
 

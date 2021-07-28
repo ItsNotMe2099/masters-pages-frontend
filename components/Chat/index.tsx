@@ -35,7 +35,6 @@ export default function Chat(props: Props) {
   }, [chat])
 
   useEffect(() => {
-    console.log("isTaskChat", isTaskChat)
     if(isTaskChat){
       dispatch(fetchChatTasksList());
     }else{
@@ -59,7 +58,6 @@ export default function Chat(props: Props) {
   if(chatListLoading){
     return <div className={styles.rootLoading}><Loader/></div>
   }
-  console.log("chatList", chatList)
   return (
     <div className={styles.root}>
       <div className={styles.chatList}>

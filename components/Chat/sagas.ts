@@ -35,7 +35,6 @@ function* ChatSaga() {
         yield put(taskNegotiationFetchLastConditions(chat.taskId));
       }
       if(['master_assigned', 'task_completed'].includes(message.taskNegotiation.type)){
-        console.log("Chat update");
         yield put(fetchChat(chat.id));
       }
     }
@@ -43,7 +42,6 @@ function* ChatSaga() {
       yield put(newChatMessageAddToList(action.payload))
     }
 
-    console.log("aboutMe", profile)
   })
   yield takeLatest(ActionTypes.CHAT_SEND_MESSAGE, function* (action: ActionType<any>) {
     const res = yield requestGen({

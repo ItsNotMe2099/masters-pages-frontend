@@ -43,7 +43,6 @@ const TabSettings= (props: Props) => {
 
   }, [])
   const handleSubmit = (data) => {
-    console.log("Settings submit", data);
     dispatch(updateProfileSettingsRequest(data));
   }
 

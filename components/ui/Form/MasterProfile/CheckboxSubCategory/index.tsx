@@ -66,7 +66,6 @@ export default function CheckboxSubCategory(props) {
     )
   }
   const renderForm = (category, key) => {
-    console.log("renderFormMainCategory", category);
     return (
       <div className={styles.listItemForm}>
       <FormNewCategory form={`newCategory${category.key}`} initialValues={{

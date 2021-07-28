@@ -20,7 +20,6 @@ export default function authReducer(state = {...initialState}, action) {
 
       break
     case ActionTypes.FETCH_LOCATION_CITIES + ApiActionTypes.SUCCESS:
-      console.log("action.payload", action.payload)
       state.cities = action.payload.map(item => {
         return  {
           label: item.name,

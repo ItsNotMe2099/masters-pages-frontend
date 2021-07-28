@@ -85,9 +85,6 @@ let PortfolioForm = (props) => {
         </div>}
         label={t('photos')}
         multiple={true}
-        onChange={(files) => {
-          console.log("onChangeFiles", files);
-        }}
         min="1"
         max="30"
       />

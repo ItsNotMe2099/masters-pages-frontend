@@ -21,14 +21,11 @@ import requestGen from 'utils/requestGen'
 import {sendMessageFailed, sendMessageSuccess} from 'components/Chat/actions'
 
 function* PostSaga() {
-  console.log("PostSaga")
   yield takeLatest(ActionTypes.CREATE_POST,
     function* (action: ActionType<typeof createPost>) {
-      console.log("Create");
       yield put(createPostRequest(action.payload.data));
       const result = yield take([ActionTypes.CREATE_POST_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_POST_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.CREATE_POST_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("CREATE SKILL SUCCESS")
         if (action.payload.formKey) {
           yield put(hideProfileForm(action.payload.formKey));
         }
@@ -39,7 +36,6 @@ function* PostSaga() {
   yield takeLatest(ActionTypes.SET_POST_CURRENT_INDEX,
     function* (action: ActionType<typeof setPostCurrentItemIndex>) {
       const index = action.payload;
-      console.log("SET_POST_CURRENT_INDEX", index)
       const list = yield select((state: IRootState) => state.profileGallery.list)
       const currentSkill = yield select((state: IRootState) => state.profile.currentSkill)
 
@@ -80,7 +76,6 @@ function* PostSaga() {
       yield put(updatePostRequest(action.payload.id, action.payload.data));
       const result = yield take([ActionTypes.UPDATE_POST_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_POST_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.UPDATE_POST_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("UPDATE_POST SUCCESS")
         if (action.payload.formKey) {
           yield put(hideProfileForm(action.payload.formKey));
         }
@@ -94,7 +89,6 @@ function* PostSaga() {
       yield put(deletePostRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_POST_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_POST_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.DELETE_POST_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("DELETE SKILL SUCCESS")
         yield put(modalClose());
 
       }
@@ -111,7 +105,6 @@ function* PostSaga() {
     if (res.err) {
       yield put(createPostCommentFailed(res.err))
     } else {
-      console.log("CommentSuccess");
 
       yield put(createPostCommentSuccess(res.data))
       if(action.payload.onSuccess){

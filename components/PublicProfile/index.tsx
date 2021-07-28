@@ -74,7 +74,6 @@ const PublicProfile = (props) => {
     }
     const subCategoryId = currentSkill.subCategoryId;
 
-    console.log("Category updatedRoute1", currentSkill?.subCategoryId, router.query.subCategoryId);
 
     const categories = formatSkillList(profile.skills);
 
@@ -85,7 +84,6 @@ const PublicProfile = (props) => {
         const exists = category.skills.find(skill => skill.subCategoryId === subCategoryId);
 
         if (exists) {
-          console.log("SetCurrentSkill", exists);
           dispatch(setCurrentSkill(exists));
           setCategory(category);
 
@@ -103,7 +101,6 @@ const PublicProfile = (props) => {
     }
   }, [isEdit])
   const handleCategoryChange = (category, subCategory) => {
-    console.log("handleCategoryChange", category, subCategory)
     setCategory(category);
 
     if (subCategory?.subCategoryId) {
@@ -113,7 +110,6 @@ const PublicProfile = (props) => {
     }
 
   }
-  console.log("CurrentSkill", currentSkill);
   return (
     <ProfilePageLayout {...props} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
@@ -146,7 +142,6 @@ const PublicProfile = (props) => {
 export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const res = await getAuthServerSide()(ctx as any);
   const data = await request({url: `/api/profile/${ctx.query.id}`, method: 'GET'})
-  console.log("PublicProfile", data);
   return {props: {...(res as any).props, profile: data.data}};
 });
 

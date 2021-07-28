@@ -17,7 +17,6 @@ function* signInSaga() {
         method: 'POST',
         data: action.payload,
       } as IRequestData)
-      console.log("Res changePassword", res)
       if(!res.err){
         yield put(changePasswordSuccess());
         yield put(modalClose())

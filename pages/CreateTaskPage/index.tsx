@@ -36,11 +36,9 @@ const CreateTaskPage = (props) => {
     }
   }, [])
   const handleSubmit = (data) => {
-  console.log("HandleSubmit", data)
     dispatch(createTaskComplete(data));
   }
   const handleChangeForStat = (key, value) => {
-  console.log("handleChangeForStat", key, value);
     statFilter[key] = value;
     dispatch(setSearchStatFilter(statFilter));
     dispatch(fetchProfileSearchStatRequest({

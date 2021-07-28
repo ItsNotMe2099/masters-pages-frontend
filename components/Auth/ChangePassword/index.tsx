@@ -22,7 +22,6 @@ const ChangePassword = (props: Props) => {
     dispatch(changePasswordReset());
   }, [])
   const handleSubmit = (data) => {
-    console.log("handleSubmit", data)
     dispatch(changePassword(data));
   }
   return (

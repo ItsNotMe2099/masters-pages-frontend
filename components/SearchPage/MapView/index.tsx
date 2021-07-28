@@ -78,7 +78,6 @@ const SearchProfileMapView = (props: Props) => {
     }
   }, [])
   const getSearchPageLink = () => {
-    console.log("GetSearchRole", props.searchRole)
     switch (props.searchRole){
       case 'master':
         return 'SearchMasterPage'
@@ -89,7 +88,6 @@ const SearchProfileMapView = (props: Props) => {
     }
   }
   const handleSortChange = (item) => {
-    console.log("ChangeSort", item)
     dispatch(setSortProfileSearch(item.value));
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 100000}))

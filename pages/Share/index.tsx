@@ -56,7 +56,6 @@ const SharePage = (props) => {
     }
   }
 
-  console.log("skills", skills);
   const handleSkillClick = (skill) => {
     setActiveSkill(skill);
     setCustomLink(null);

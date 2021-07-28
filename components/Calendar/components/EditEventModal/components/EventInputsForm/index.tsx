@@ -24,7 +24,6 @@ let EventInputsForm = (props: Props) => {
   const {t} = useTranslation('common');
   const handleCurrentStartChange = (value) => {
 
-    console.log("handleCurrentStartChange", value);
     const newPrice = {
       ...price,
       total: differenceInHours(end, value)
@@ -50,7 +49,6 @@ let EventInputsForm = (props: Props) => {
   }
 
   const handleActualStartChange = (value) => {
-    console.log("handleCurrentStartChange", value);
     change('actualPrice', {
       ...actualPrice,
       total: differenceInHours(actualEnd, value)

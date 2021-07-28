@@ -22,7 +22,6 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_SAVED_TASK_SEARCHES_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
-      console.log("SetTaskSearch", action.payload);
       state.list = action.payload.data
       state.listTotal = action.payload.total
       break
@@ -35,7 +34,6 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
 
-      console.log("SetProfileSearch", action.payload, action);
       state.list = action.payload
       state.listTotal = action.payload.length;
       break

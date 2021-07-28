@@ -32,7 +32,6 @@ function* PWRecoverySaga() {
           phone: action.payload.phone,
         },
       } as IRequestData)
-      console.log("Res phone", res)
 
       if(!res.err){
         if(res.data.code){
@@ -82,7 +81,6 @@ function* PWRecoverySaga() {
               phone: phone,
             },
           } as IRequestData)
-          console.log("Res password", res)
           if(!res.err){
             cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
             afterAuthRedirect();

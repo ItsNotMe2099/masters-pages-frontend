@@ -39,7 +39,6 @@ const TaskOfferOrderList = (props: Props) => {
     status: 'published'
   }
   useEffect(() => {
-    console.log("fetchTaskUserListRequest");
     dispatch(fetchTaskUserListRequest({
       ...filter,
       page,
@@ -53,12 +52,10 @@ const TaskOfferOrderList = (props: Props) => {
     if(!activeTask){
       return;
     }
-    console.log("submit data", data)
     dispatch(taskNegotiationSendOffer(activeTask.id, currentProfile.id));
 
   }
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
     dispatch(setPageTaskUser(page + 1))
     dispatch(fetchTaskUserList())
   }

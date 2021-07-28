@@ -50,12 +50,10 @@ const TaskPage = (props) => {
   React.useEffect(() => {
     dispatch(fetchOneTaskUserRequest(parseInt(router.query.task as string, 10)))
     dispatch(fetchTaskStatsById(router.query.task))
-    console.log("FETCH!!!!!!!!!")
   }, [])
 
 
   const handleDateRangeChange = (value) => {
-    console.log("handleDateRangeChange", value);
     setDateRange(value);
     setPage(1);
     dispatch(fetchEventList({

@@ -32,9 +32,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
 
 
   }else if(id.indexOf('sk') === 0){
-    console.log("getId", `/api/profile/skill${id.replace('sk', '')}`)
     skill = (await request({ url: `/api/profile/skill/${id.replace('sk', '')}`, method: 'GET' }))?.data
-    console.log("SetSkill", skill);
     profile = skill?.profile
   }else{
     return {

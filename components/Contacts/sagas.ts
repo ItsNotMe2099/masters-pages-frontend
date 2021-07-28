@@ -14,7 +14,6 @@ function* ContactsSaga() {
       yield put(deleteSavedPeopleRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("DELETE SavedSearch SUCCESS")
         yield put(modalClose());
       }
     })

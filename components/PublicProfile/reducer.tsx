@@ -25,7 +25,6 @@ export default function ProfileReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_PROFILE_BY_ID + ApiActionTypes.SUCCESS:
       state.profile = {...action.payload}
       state.skills = formatSkillList(action.payload.skills)
-      console.log("skills",   state.skills);
       state.loading = false;
       break
     case ActionTypes.FETCH_PROFILE_BY_ID + ApiActionTypes.FAIL:

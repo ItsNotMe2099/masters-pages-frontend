@@ -75,7 +75,6 @@ const getEventDots = (events) => {
   return map;
 }
 export default function EventsReducer(state = {...initialState}, action) {
-  console.log("NEWACTION RED", action.type)
   switch(action.type) {
     case ActionTypes.RESET_EVENT_FORM:
       state.formError = ''

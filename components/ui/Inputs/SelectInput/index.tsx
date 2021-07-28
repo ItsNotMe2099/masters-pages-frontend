@@ -53,7 +53,6 @@ const SelectInput = (props: Props) => {
 
     if (!isActive) {
       setTimeout(() => {
-        console.log("SETFocus", searchInputRef.current)
         if (searchInputRef.current) {
           searchInputRef.current.focus();
         }
@@ -71,7 +70,6 @@ const SelectInput = (props: Props) => {
       input.onChange(item.value);
     }
     setIsActive(false);
-    console.log("setValue", item.value)
     if (searchInputRef && searchInputRef?.current) {
       searchInputRef.current.value = '';
     }
@@ -96,7 +94,6 @@ const SelectInput = (props: Props) => {
     }else {
       _setCurrentLabel = (options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
     }
-    console.log("_setCurrentLabel", _setCurrentLabel, input.value)
 
 
     setCurrentLabel(_setCurrentLabel || '');
@@ -110,11 +107,9 @@ const SelectInput = (props: Props) => {
     if(    props.onSearchChange) {
       props.onSearchChange(value)
     }else{
-      console.log("SetFilter", value);
       setFilter(value);
     }
   }
-  console.log("CurrentLabel", currentLabel)
   return (
     <Input {...props} onClick={onClick}
            input={{value: currentLabel, onChange: null, name: props.input.name}}
@@ -126,7 +121,6 @@ const SelectInput = (props: Props) => {
         <div className={styles.inputContainer}>
           <BaseInput onChange={(e) => {
             if(props.allowCustomInput){
-              console.log("onChange", e.currentTarget.value)
               input.onChange(e.currentTarget.value)
               }
             handleSearchChange(e.currentTarget.value)

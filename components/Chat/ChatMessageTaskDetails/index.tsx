@@ -37,7 +37,6 @@ interface Props {
 }
 
 export default function ChatMessageTaskDetails({ message, task, showHire, showEdit, showReject, showFinish, showAccept, outDatedText }: Props) {
-  console.log("taskNegotiation", message.taskNegotiation)
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const handleReject = () => {

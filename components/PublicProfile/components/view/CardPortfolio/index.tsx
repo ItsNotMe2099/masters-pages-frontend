@@ -75,7 +75,6 @@ const CardPortfolio = (props: Props) => {
     dispatch(setProfilePortfolioTab(null));
   }, [skill]);
   const handleSortChange = (sort) => {
-    console.log("SortChange", sort);
     setSortType(sort.value);
     dispatch(resetProfilePortfolioList());
     dispatch(fetchProfilePortfolioList({
@@ -110,7 +109,6 @@ const CardPortfolio = (props: Props) => {
 
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     if (!currentEditModel) {
       dispatch(createProfilePortfolio({
         categoryId: skill.categoryId,

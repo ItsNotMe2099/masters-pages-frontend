@@ -3,8 +3,6 @@ import nextCookie from 'next-cookies'
 import Cookies from 'js-cookie'
 function request(requestData: IRequestData, ctx: any = null): Promise<IResponse> {
   const { url, method, data, host } = requestData
-  console.log("REQ NEXT_BACKEND_URL", process.env.NEXT_API_URL);
-  console.log("REQ NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
   const defaultHost = `${process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_API_URL || ''}`
   let token = requestData.token
   let profileRole = requestData.profileRole;
@@ -30,7 +28,6 @@ function request(requestData: IRequestData, ctx: any = null): Promise<IResponse>
         const isJson = contentType && contentType.indexOf('application/json') !== -1
 
         if (res.status !== 200 && res.status !== 201) {
-          console.log('Response status:', res.status)
           return (isJson ? res.json() : res.text()).then((resData: any) => {
             throw {status: res.status, data: resData}
           })

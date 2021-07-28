@@ -55,7 +55,6 @@ export default function InputPriceFilter(props: Props) {
       return `${t('priceFilterInput.from')} $${data.min}`
     }
     if(!data.min && data.max){
-      console.log("FFF", data);
       return `${t('priceFilterInput.under')} $${data.max}`
     }
 

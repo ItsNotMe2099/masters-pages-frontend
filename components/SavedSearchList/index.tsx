@@ -30,7 +30,6 @@ export default function SavedSearchList(props: Props) {
     if (type === 'task') {
       dispatch(fetchSavedTaskSearchesRequest(1, 100));
     } else {
-      console.log("Dispatch profile Search", type)
       dispatch(fetchSavedProfileSearchesRequest(1, 100));
     }
   }, [])

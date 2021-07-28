@@ -30,7 +30,6 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
     }
   }, [isOpen])
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     if(!currentEditPost) {
       dispatch(createProfileGallery({ ...data
       }));
@@ -40,7 +39,6 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
     }
   }
 
-  console.log("")
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
