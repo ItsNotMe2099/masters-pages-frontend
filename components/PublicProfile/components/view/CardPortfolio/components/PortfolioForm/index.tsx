@@ -40,7 +40,7 @@ let PortfolioForm = (props) => {
       />}
       <Field
         name="length"
-        label={'Length'}
+        label={t('length')}
         component={SelectInput}
         size={'small'}
         options={[
