@@ -31,7 +31,6 @@ export default function CalendarSideBarCalendar(props: Props) {
   const locale = getUserLocale();
 
   useEffect(() => {
-    console.log("SetValueOutside", value);
     const beginOfMonth = new Date(value.getFullYear(), value.getMonth(), 1);
 
     setActiveStartDate(beginOfMonth);
@@ -44,7 +43,6 @@ export default function CalendarSideBarCalendar(props: Props) {
     setActiveStartDate(getBeginNext(view, activeStartDate))
   }
   const handleViewChange = ({view, activeStartDate, value}) => {
-    console.log("onViewChange", props);
     setView(view)
     setActiveStartDate(activeStartDate);
   }
@@ -85,7 +83,6 @@ export default function CalendarSideBarCalendar(props: Props) {
         <Calendar
           className={styles.calendar}
           onChange={onChange}
-          onActiveStartDateChange={(props) => console.log("onActiveStartDateChange", props)}
           value={value}
           activeStartDate={activeStartDate}
           defaultActiveStartDate={activeStartDate}

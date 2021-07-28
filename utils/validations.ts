@@ -14,7 +14,6 @@ export function phone(value: string) {
 }
 
 export function passwordsMatch(value: string, allValues: any) {
-  console.log("passwordsMatch", value, allValues)
   return value !== (allValues.password || allValues.newPassword) ? 'passwordMatch' : undefined
 }
 
@@ -31,7 +30,6 @@ export const maxLength = max => value => {
 export const bioMaxLength = value =>  maxLength(1000)(value);
 export const arrayNotEmpty = (message?) => {
   return (value) => {
-    console.log("Array notEmpty", value)
     return (!value || value.length === 0) ? (message || `selectSomething`) : undefined
   }
 }
@@ -42,16 +40,13 @@ export const date =  value => {
     return;
   }
   try {
-    console.log("Try parse")
     let date = parse(value, 'MM/dd/yyyy', new Date());
-    console.log("Date", date)
     if(!isValid(date)){
       date = parse(value, 'yyyy-mm-dd', new Date());
     }
     return  !isValid(date) ? 'date' : undefined;
   }catch (e){
     try {
-      console.log("validateDate", value);
       const date = parse(value, 'yyyy-mm-dd', new Date());
       return !isValid(date) ? 'date' : undefined;
     }catch (e){

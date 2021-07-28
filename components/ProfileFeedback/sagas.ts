@@ -25,14 +25,12 @@ function* ProfileFeedbackSaga() {
 
   yield takeLatest(ActionTypes.CREATE_FEEDBACK_SITE,
     function* (action: ActionType<typeof createFeedBackSite>) {
-      console.log("CREATE_FEEDBACK_SITE", action.payload.data);
       yield put(createFeedBackSiteRequest(action.payload.data));
       yield put(feedbackSuccessOpen());
     })
 
   yield takeLatest(ActionTypes.CREATE_FEEDBACK_CLIENT,
     function* (action: ActionType<typeof createFeedBackClient>) {
-      console.log("CREATE_FEEDBACK_CLIENT_REQUEST", action.payload.data);
       yield put(createFeedBackClientRequest(action.payload.data));
       const result = yield take([ActionTypes.CREATE_FEEDBACK_CLIENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_FEEDBACK_CLIENT_REQUEST + ApiActionTypes.FAIL])
 

@@ -41,7 +41,6 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
     case ActionTypes.RESET_PW_SET_CODE:
       state.codeSet = action.payload;
-      console.log("     state.codeSet",      state.codeSet)
       break;
     case ActionTypes.RESET_PW_SECOND_STEP_SUBMIT:
       state.code = action.payload.code

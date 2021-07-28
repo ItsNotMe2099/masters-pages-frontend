@@ -21,7 +21,6 @@ function connect() {
       resolve(socket)
     })
     socket.on('reconnect_failed', (err: any) => {
-      console.log("Err connect", err)
       reject(new Error('ws:reconnect_failed '))
     })
   }).then(
@@ -36,7 +35,6 @@ function subscribe(socket: SocketIOClient.Socket) {
     socket.on('message', (data: any) => {
     })
     socket.on('chat:message', (data: any) => {
-    console.log("NewChatMessage", data)
       emit(newChatMessage(data))
     })
 
@@ -82,7 +80,6 @@ function* flow({ chatId }: any) {
     while (true) {
       yield put(socketConnecting({ connecting: true }))
       const { socket, error } = yield call(connect)
-      console.log("socket connected")
       yield put(socketConnecting({ connecting: false }))
 
       if (error) {
@@ -93,7 +90,6 @@ function* flow({ chatId }: any) {
 
       if (socket) {
         const startTime = new Date()
-        console.log("Emit Chat Join", chatId);
         socket.emit('chat:join', {
           chatId,
         })
@@ -118,7 +114,6 @@ export default function* ChatSocketSaga() {
   let myFlow
   while (true) {
     const { payload } = yield take(`${ChatActionTypes.CHAT_LOGIN}`)
-    console.log("try login")
     if (myFlow) {
       yield cancel(myFlow)
     }

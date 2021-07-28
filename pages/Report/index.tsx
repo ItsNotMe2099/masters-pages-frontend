@@ -55,7 +55,6 @@ const ReportPage = (props) => {
       ...data.range as {start: Date, end: Date},
 
     };
-    console.log("NewFilter", filter);
     setFilterData(filter)
     dispatch(fetchReportList(filter));
   }

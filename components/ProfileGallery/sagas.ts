@@ -21,14 +21,11 @@ import requestGen from 'utils/requestGen'
 import {sendMessageFailed, sendMessageSuccess} from 'components/Chat/actions'
 
 function* ProfileGallerySaga() {
-  console.log("ProfileGallerySaga")
   yield takeLatest(ActionTypes.CREATE_PROFILE_GALLERY,
     function* (action: ActionType<typeof createProfileGallery>) {
-      console.log("Create");
       yield put(createProfileGalleryRequest(action.payload.data));
       const result = yield take([ActionTypes.CREATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.CREATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("CREATE SKILL SUCCESS")
         if (action.payload.formKey) {
           yield put(hideProfileForm(action.payload.formKey));
         }else{
@@ -39,7 +36,6 @@ function* ProfileGallerySaga() {
   yield takeLatest(ActionTypes.SET_PROFILE_GALLERY_CURRENT_INDEX,
     function* (action: ActionType<typeof setProfileGalleryCurrentItemIndex>) {
       const index = action.payload;
-      console.log("SET_PROFILE_GALLERY_CURRENT_INDEX", index)
       const list = yield select((state: IRootState) => state.profileGallery.list)
       const currentSkill = yield select((state: IRootState) => state.profile.currentSkill)
 
@@ -82,7 +78,6 @@ function* ProfileGallerySaga() {
       yield put(updateProfileGalleryRequest(action.payload.id, action.payload.data));
       const result = yield take([ActionTypes.UPDATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.UPDATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("UPDATE_PROFILE_GALLERY SUCCESS")
         if (action.payload.formKey) {
           yield put(hideProfileForm(action.payload.formKey));
         }else{
@@ -98,7 +93,6 @@ function* ProfileGallerySaga() {
       yield put(deleteProfileGalleryRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_PROFILE_GALLERY_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_PROFILE_GALLERY_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.DELETE_PROFILE_GALLERY_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("DELETE SKILL SUCCESS")
         yield put(modalClose());
 
       }
@@ -115,7 +109,7 @@ function* ProfileGallerySaga() {
     if (res.err) {
       yield put(createProfileGalleryCommentFailed(res.err))
     } else {
-      console.log("CommentSuccess");
+
 
       yield put(createProfileGalleryCommentSuccess(res.data))
       if(action.payload.onSuccess){

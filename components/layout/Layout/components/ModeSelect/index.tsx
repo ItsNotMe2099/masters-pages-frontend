@@ -33,7 +33,6 @@ import {useRouter} from 'next/router'
   ]
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
 
-  console.log("InitValue", value);
   useEffect(() => {
     setValue(options.find(item => role ? item.value === role : item.value === 'client'));
   }, [role]);

@@ -26,7 +26,6 @@ const CardReviews = (props: Props) => {
   const  limit = 30;
   const { t } = useTranslation('common');
 
-  console.log("CardReviewsShow")
   useEffect(() => {
     dispatch(resetFeedbackList());
     dispatch(fetchFeedbacksToProfileRequest({

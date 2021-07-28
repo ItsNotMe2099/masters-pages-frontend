@@ -10,7 +10,6 @@ import CalendarArrowRight from 'components/svg/CalendarArrowRight'
 import {useTranslation} from 'i18n'
 
 const RangeSelector = ({onChange, isActive, label, id}) => {
-    console.log("RangeSelector", isActive);
   return     <div className={`${isActive && styles.selectorActive} ${styles.selector}`} onClick={() => onChange(id)}>{label}</div>
 
 }
@@ -37,11 +36,9 @@ let ReportDateSelector = (props: Props) => {
     {key: 'year', label: t('year')},
   ];
   const handleDateChange = (val) => {
-    console.log("HandleChange", val)
     onChange(val);
   }
   const handleRangeChange = (range) => {
-    console.log("Range", range);
     if(range === 'all'){
       setRange('all');
       onChange(null);

@@ -32,7 +32,6 @@ interface Props{
 const ProfilePageLayout = (props: Props) => {
   const {profile, isEdit, onCategoryChange, subCategory} = props;
   const isMaster = ['master', 'volunteer'].includes(profile.role);
-  console.log("MainSubCateogory", subCategory);
   const {t} = useTranslation('common');
   const getRoleClass = () => {
     switch (profile.role) {

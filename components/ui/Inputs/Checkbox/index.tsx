@@ -18,7 +18,6 @@ export default function Checkbox(props: Props) {
   const { input } = props
 
   const [id] = useState(_uniqueId('prefix-'));
-  console.log("checkbox meta",props.input.name,  props.label ? styles.checkboxLabel : styles.checkboxLabelHidden)
   return (
     <div className={`${styles.root} ${props.className}`}>
     <div className={styles.wrapper}>

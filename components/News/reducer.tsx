@@ -119,21 +119,17 @@ export default function NewsReducer(state = {...initialState}, action) {
       break
 
     case ActionTypes.CREATE_NEWS_COMMENT:
-      console.log("Reset", "CREATE_NEWS_COMMENT");
       state.commentIsSending = true
       state.commentSentSuccess = false
       state.commentSentError = null
       break
 
     case ActionTypes.CREATE_NEWS_COMMENT_SUCCESS:
-      console.log("CREATE_NEWS_COMMENT_SUCCESS", action.payload);
       state.commentIsSending = false
       state.commentSentSuccess = true
       state.commentSentError = null
       state.currentItemCommentList = [action.payload, ...state.currentItemCommentList]
-      console.log("stateListNew", state.list)
       if(state.currentItem) {
-        console.log("sadasdasdsadsad",  state.currentItem)
         state.currentItem.commentsCount = parseInt(state.currentItem.commentsCount as string, 10)  + 1;
       }
       state.list = state.list.map(item =>{

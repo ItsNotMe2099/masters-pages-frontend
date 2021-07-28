@@ -35,7 +35,6 @@ export default function EventChatAttachFile(props: Props) {
       preview: preview,
     }
 
-    console.log('transformedFile', transformedFile)
 
 
     return transformedFile
@@ -45,10 +44,10 @@ export default function EventChatAttachFile(props: Props) {
   }
 
   const onFileUploadError = (error) => {
-    console.error('onFileUploadError', error)
+
   }
   const onFileProgress = (progress) => {
-    console.log("onProgress", progress)
+
 
   }
 
@@ -81,7 +80,7 @@ export default function EventChatAttachFile(props: Props) {
     }
   }
   const handleChange = (e) => {
-    console.log("HandleChange", e.currentTarget.value)
+
     setMessage(e.currentTarget.value);
   }
 

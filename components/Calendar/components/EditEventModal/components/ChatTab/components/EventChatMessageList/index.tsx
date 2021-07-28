@@ -83,7 +83,6 @@ export default function EventChatMessageList({chat, event, hasNewMessage}: Props
 
   }
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
     dispatch(fetchChatMessages({
       chatId: chat?.id,
       lastCreatedAt: messages.length > 0 ? messages[messages.length - 1].createdAt : null,
@@ -91,7 +90,6 @@ export default function EventChatMessageList({chat, event, hasNewMessage}: Props
   }
   useEffect(() => {
     if (lastMessageId && scrollableTarget?.current) {
-      console.log("scrollableTarget", scrollableTarget)
       scrollableTarget.current.scroll({ top: scrollableTarget?.current.scrollHeight, behavior: 'smooth' });
     }
   }, [lastMessageId])
@@ -99,7 +97,6 @@ export default function EventChatMessageList({chat, event, hasNewMessage}: Props
   if (total === 0 && messagesLoading) {
     return <Loader/>;
   }
-  console.log("messagesLength", messages);
 
   return (<div className={styles.root}>
       <div className={styles.messages} ref={scrollableTarget} id="chat-messages">

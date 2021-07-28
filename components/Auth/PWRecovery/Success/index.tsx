@@ -18,7 +18,6 @@ const PWRecoverySuccess = (props: Props) => {
 
   const handleSubmit = (data) => {
     dispatch(PWRecoveryFinalSubmit(data));
-    console.log(data)
   }
 
   return (

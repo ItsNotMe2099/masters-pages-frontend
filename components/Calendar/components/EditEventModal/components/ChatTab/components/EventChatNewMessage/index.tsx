@@ -32,7 +32,6 @@ export default function EventChatNewMessage(props: Props) {
     setFiles([file]);
   }
   const handleChange = (e) => {
-    console.log("HandleChange", e.currentTarget.value)
     setMessage(e.currentTarget.value);
   }
   useEffect(() => {

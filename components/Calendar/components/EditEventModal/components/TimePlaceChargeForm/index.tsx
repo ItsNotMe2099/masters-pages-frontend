@@ -68,9 +68,7 @@ let TimePlaceChargeForm = (props: Props) => {
     isPlannedDisabled = false;
   }
   const isCompletedDisabled =  !((!(isTempEdit || isCurrentEventEditMode) && [EventStatus.Confirmed].includes(event.status)) || (isTempEdit && [EventStatus.Completed].includes(event.status)));
-  console.log("isPlannedDisabled", event.status, isPlannedDisabled, isCurrentEventEditMode );
-  console.log("isCompletedDisabled", event.status, isCompletedDisabled );
-  console.log("InitialValues", props.initialValues);
+
   const getButtonKeys = () => {
     let keys = [];
     if(isTempEdit || isCurrentEventEditMode){

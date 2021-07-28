@@ -43,12 +43,10 @@ const CardProfile = (props: Props) => {
     dispatch(taskOfferOpen());
   }
   const handleSubmitAvatar =(data) => {
-    console.log("Handle Submit Avatar", data)
     dispatch(updateProfileAvatar(profile.id, {photo: data.photo}, 'avatar'));
   }
 
   const handleDeleteAvatar = () => {
-    console.log("Handle delete Avatar")
     dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
   }
   return (

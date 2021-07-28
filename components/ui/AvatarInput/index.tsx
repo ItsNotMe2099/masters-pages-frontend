@@ -103,14 +103,10 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           preview: preview,
         }
 
-        console.log('transformedFile', transformedFile)
-
-
         return transformedFile
       }
 
       const transformFiles = (files: any[]) => {
-        console.log("TransformFile", files)
         if (!files) {
           return multiple ? [] : null
         }
@@ -128,7 +124,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
       const [fileProgress, setFileProgress] = useState({})
       const onFileProgress = (percentage, status, rawFile) => {
-        console.log('onFile progress', percentage)
         const currentProgress = {}
         currentProgress[rawFile.path] = percentage
         setFileProgress({ ...fileProgress, ...currentProgress })
@@ -144,7 +139,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
       }
 
       const onDrop = (newFiles, rejectedFiles, event) => {
-        console.log('OnDrop', files)
         const updatedFiles = multiple ? [...files, ...newFiles] : [...newFiles]
 
         setError(null);
@@ -154,8 +148,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           onChange(transformFiles(updatedFiles[0]))
         }
         const token = Cookies.get('token')
-
-        console.log('OnDrop', files)
         const options = {
           files: newFiles,
           signingUrlMethod: 'GET',
@@ -212,7 +204,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
             const filteredFiles = files.filter(
                     stateFile => !shallowEqual(stateFile, file),
                 )
-            console.log('onFinishFileUpload', files, result.fileKey)
 
             newFileList = [...filteredFiles, newFile]
           } else {
@@ -230,7 +221,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
   const onDropRejected = (error) => {
     if(error.length > 0 && error[0].errors.length > 0){
-      console.log("onError", error[0].errors[0].message);
       setError(error[0].errors[0].message);
     }
 
@@ -248,7 +238,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         onDropRejected,
       }
 
-      console.log('Files', files)
       return (
         <>
       <div className={`${styles.root} ${!!(files.length > 0) && styles.hasBackDrop}`}>

@@ -19,7 +19,6 @@ function* signUpSaga() {
           phone: action.payload.phone,
         },
       } as IRequestData)
-      console.log("Res signup", res)
 
       if(!res.err){
         if(res.data.code){

@@ -26,9 +26,7 @@ export default function CalendarSideBar(props: Props) {
     tomorrow.setDate(tomorrow.getDate() + 1)
     return tomorrow;
   }
-  if(eventsSidebar.length > 0){
-    console.log("IsSameDay", isSameDay(getTomorrowDate(), eventsSidebar[0].start), getTomorrowDate(), eventsSidebar[0].start)
-  }
+
   return (
     <div className={`${styles.root}`}>
       <div className={styles.toolbar}>

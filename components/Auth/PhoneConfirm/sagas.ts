@@ -11,7 +11,6 @@ function* phoneConfirmSaga() {
 
   yield takeLatest(ActionTypes.PHONE_CONFIRM_SUBMIT,
     function* (action: ActionType<typeof phoneConfirmSubmit>) {
-      console.log("Data", action.payload)
       const phone = yield select((state: IRootState) => state.authSignUp.phone)
       const res = yield requestGen({
         url: `/api/auth/phoneConfirmation`,
@@ -21,7 +20,6 @@ function* phoneConfirmSaga() {
           phone: phone
         },
       } as IRequestData)
-      console.log("Res signup", res)
       if(!res.err) {
         cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
           window.location.href = '/RegistrationPage';

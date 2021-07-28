@@ -18,7 +18,6 @@ function* SkillSaga() {
       yield put(createSkillCategoryRequest(action.payload.data));
       const result = yield take([ActionTypes.CREATE_SKILL_CATEGORY_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_SKILL_CATEGORY_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.CREATE_SKILL_CATEGORY_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("CREATE SKILL SUCCESS")
         yield put(modalClose());
         yield put(hideProfileForm('categories'));
         yield put(fetchSkillList());
@@ -30,7 +29,6 @@ function* SkillSaga() {
       yield put(createSkillRequest(action.payload.data));
       const result = yield take([ActionTypes.CREATE_SKILL_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_SKILL_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.CREATE_SKILL_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("CREATE SKILL SUCCESS")
         yield put(modalClose());
         yield put(fetchSkillList());
       }
@@ -40,7 +38,6 @@ function* SkillSaga() {
       yield put(updateSkillRequest(action.payload.skillId, action.payload.data));
       const result = yield take([ActionTypes.UPDATE_SKILL_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_SKILL_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.UPDATE_SKILL_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("UPDATE SKILL SUCCESS")
         yield put(modalClose());
         yield put(fetchSkillList());
       }
@@ -59,7 +56,6 @@ function* SkillSaga() {
       yield put(deleteSkillRequest(action.payload.skillId));
       const result = yield take([ActionTypes.DELETE_SKILL_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SKILL_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_SKILL_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("DELETE SKILL SUCCESS")
         yield put(modalClose());
         yield put(fetchSkillList());
       }
@@ -70,7 +66,6 @@ function* SkillSaga() {
       yield put(deleteSkillCategoryRequest(action.payload.categoryId));
       const result = yield take([ActionTypes.DELETE_SKILL_CATEGORY_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SKILL_CATEGORY_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_SKILL_CATEGORY_REQUEST + ApiActionTypes.SUCCESS){
-        console.log("DELETE SKILL category SUCCESS")
         yield put(modalClose());
         yield put(fetchSkillList());
       }

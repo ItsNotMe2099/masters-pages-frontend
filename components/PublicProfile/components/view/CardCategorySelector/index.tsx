@@ -27,12 +27,9 @@ const CardCategorySelector = (props: Props) => {
   const {profile} = props;
   const categories = props.categories
 
- console.log("Categories", categories);
-
   const handleChangeCategory = (category) => {
 
-    const newCategory = categories.find(cat => cat.category.id === category.value);
-    console.log("ChangeCategory", newCategory.skills[0],categories);
+    const newCategory = categories.find(cat => cat.category.id === category.value);;
     props.onCategoryChange(newCategory, newCategory.skills[0]);
   }
   const handleChangeSubCategory = (subCategory) => {

@@ -49,7 +49,6 @@ const MultiSelect = (props: Props) => {
     if (!isActive && onOpenDropDown) {
       onOpenDropDown();
     }
-    console.log("OnClickCheckbox")
    setIsActive(!isActive);
   }
 
@@ -58,7 +57,6 @@ const MultiSelect = (props: Props) => {
     if((value as any[]).includes(item.value)){
       input.onChange((value as any[]).filter(val => val != item.value));
     }else{
-      console.log("ValueItem", [(value as any[]), item.value]);
       input.onChange([...(value as any[]), item.value]);
     }
   }

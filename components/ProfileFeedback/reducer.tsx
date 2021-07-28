@@ -29,12 +29,11 @@ const initialState: ProfileFeedbackState = {
 export default function TaskUserReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE:
-      console.log("FETCH_FEEDBACKS_TO_PROFILE")
+
       break
 
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST:
       state.isLoading = true;
-      console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST")
       break
 
     case ActionTypes.FEEDBACK_SET_PAGE:
@@ -45,7 +44,6 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       state.isLoading = false;
       state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
-      console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS", state.list)
       break
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.FAIL:
       state.isLoading = false;
@@ -55,7 +53,6 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       state.isLoadingShort = false;
       state.listShort = action.payload.data
       state.totalShort = action.payload.total
-      console.log("FETCH_FEEDBACKS_TO_PROFILE_REQUEST + ApiActionTypes.SUCCESS", state.list)
       break
     case ActionTypes.FETCH_FEEDBACKS_TO_PROFILE_SHORT_REQUEST + ApiActionTypes.FAIL:
       state.isLoadingShort = false;

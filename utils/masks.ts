@@ -20,9 +20,7 @@ export const dateFormat = {
     }
     return ''},
   parse: (value) => {
-    console.log("parseValue", value);
     try {
-      console.log("parseValueDate", format(parse(value, 'mm/dd/yyyy', new Date()), 'yyyy-mm-dd'));
       return value ? format(parse(value, 'mm/dd/yyyy', new Date()), 'yyyy-mm-dd') : null
     }catch (e){
 

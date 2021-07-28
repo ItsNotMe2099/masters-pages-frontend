@@ -45,7 +45,6 @@ const ProfileTab = (props: Props) => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("UpdateTabValue", value);
     props.onSubmit(value);
   }
   const handleInputChange = (e) => {

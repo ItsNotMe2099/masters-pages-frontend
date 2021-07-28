@@ -20,16 +20,11 @@ export const reducer = (state, action) => {
   return reducers(state, action);
 };
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__']?
-    window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__']({
-    }) : compose;
 
 export const makeStore: MakeStore<IRootState> = (context: Context) => {
   const store = createStore(
     reducer,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+    compose(applyMiddleware(sagaMiddleware))
   );
   sagaMiddleware.run(rootSaga);
 

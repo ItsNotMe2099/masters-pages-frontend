@@ -32,7 +32,6 @@ export default function ChatNewMessage(props: Props) {
     setFiles([file]);
   }
   const handleChange = (e) => {
-    console.log("HandleChange", e.currentTarget.value)
     setMessage(e.currentTarget.value);
   }
   useEffect(() => {
@@ -53,7 +52,7 @@ export default function ChatNewMessage(props: Props) {
   }
   const renderFilePreview = (file) => {
     //const ext = filename.split('.').pop();
-    console.log("File", file)
+
       return <div className={styles.preview}>
         <div className={styles.removeFile} onClick={handleDeleteFile}><CloseIcon color={'red'}/></div>
         {isMediaImage(file.rawFile?.name || file.fileKey) ? <img className={styles.previewImage} src={getImageSrc(file)}/> : <img className={styles.previewDocument} src={'/img/icons/file-document.svg'}/>}

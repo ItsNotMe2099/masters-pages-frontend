@@ -19,7 +19,6 @@ function* TaskSearchSaga() {
       const sort = yield select((state: IRootState) => state.taskSearch.sort)
       const sortOrder = yield select((state: IRootState) => state.taskSearch.sortOrder)
       const page = yield select((state: IRootState) => state.taskSearch.page)
-      console.log("FETCH_TASK_LIST", action.payload)
       yield put(fetchTaskSearchListRequest({
           ...filter,
           sort,

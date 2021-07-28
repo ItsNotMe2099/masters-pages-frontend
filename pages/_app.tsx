@@ -33,7 +33,6 @@ function MyApp({Component, pageProps}) {
           if (token.updated) {
             dispatch(setPushToken({pushToken: token.token}));
           }
-          console.log('FCMTOken', token)
           // not working
           getMessage()
         }
@@ -44,7 +43,6 @@ function MyApp({Component, pageProps}) {
   })
 
   function getMessage() {
-    console.log('message functions')
     const messaging = firebase.messaging()
     messaging.onMessage((message) => console.log('foreground', message))
   }
@@ -98,18 +96,5 @@ const domainLocaleMap = {
   // other domains
 };
 
-
-const domainDetector = {
-  name: 'domainDetector',
-  lookup(req, res, options) {
-    console.log("domainDetector")
-    return 'en';
-    const hostname = (typeof window !== 'undefined')
-      ? window.location.hostname
-      : req.headers.host?.split(':')[0]
-
-    return domainLocaleMap[hostname]
-  }
-};
 
 export default appWithTranslation(wrapper.withRedux(MyApp) as any)

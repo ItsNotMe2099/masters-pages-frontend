@@ -34,12 +34,10 @@ const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBud
     if(isDisabled){
       return;
     }
-    console.log("handleAddExpense");
     onAddExpense(type)
   }
   const getTotalAmount = () => {
     const itemsAmount = items.length > 0 ? items.map(item => item.amount).reduce( (accumulator, currentValue) => +accumulator + +currentValue) : 0;
-   console.log("getTotalAmount", priceType, type);
     if(type === 'actual'){
       return +itemsAmount  + +(priceType === 'rate' ? +actualPrice.total * +actualPrice.rate :  +actualBudget )
     }else{

@@ -45,9 +45,7 @@ function* registrationPhoneSaga() {
       const result = yield take([ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.SUCCESS) {
         const red = yield select((state: IRootState) => state.registrationPhone)
-        console.log("red", red)
         const cb = yield select((state: IRootState) => state.registrationPhone.cb)
-        console.log("CB", cb);
         cb(phone)
         yield put(modalClose());
 

@@ -16,12 +16,10 @@ import requestGen from 'utils/requestGen'
 
 
 function* NewsSaga() {
-  console.log("NewsSaga")
 
   yield takeLatest(ActionTypes.SET_NEWS_CURRENT_INDEX,
     function* (action: ActionType<typeof setNewsCurrentItemIndex>) {
       const index = action.payload;
-      console.log("SET_NEWS_CURRENT_INDEX", index)
       const list = yield select((state: IRootState) => state.news.list)
       const currentSkill = yield select((state: IRootState) => state.profile.currentSkill)
 
@@ -71,8 +69,6 @@ function* NewsSaga() {
     if (res.err) {
       yield put(createNewsCommentFailed(res.err))
     } else {
-      console.log("CommentSuccess");
-
       yield put(createNewsCommentSuccess(res.data))
       if(action.payload.onSuccess){
         action.payload.onSuccess();

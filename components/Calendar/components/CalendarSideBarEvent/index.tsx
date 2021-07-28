@@ -31,7 +31,6 @@ export default function CalendarSideBarEvent(props: Props) {
   });
 
   const getCircleClass = (color) => {
-    console.log("COLORBorder", color);
     switch (color){
       case 'grey':
         return styles.circleSide__grey;

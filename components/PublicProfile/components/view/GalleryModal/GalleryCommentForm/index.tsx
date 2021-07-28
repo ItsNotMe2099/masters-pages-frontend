@@ -34,11 +34,9 @@ export default function GalleryNewComment({isNews}: Props) {
   }
 
   const handleChange = (e) => {
-    console.log("HandleChange", e.currentTarget.value)
     setMessage(e.currentTarget.value);
   }
   useEffect(() => {
-    console.log("commentSentSuccess", commentSentSuccess);
     if(commentSentSuccess){
       setMessage('')
     }
