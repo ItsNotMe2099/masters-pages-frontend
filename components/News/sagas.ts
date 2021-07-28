@@ -69,7 +69,6 @@ function* NewsSaga() {
     if (res.err) {
       yield put(createNewsCommentFailed(res.err))
     } else {
-
       yield put(createNewsCommentSuccess(res.data))
       if(action.payload.onSuccess){
         action.payload.onSuccess();

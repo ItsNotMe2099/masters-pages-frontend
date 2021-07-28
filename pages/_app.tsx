@@ -86,17 +86,4 @@ const domainLocaleMap = {
 };
 
 
-const domainDetector = {
-  name: 'domainDetector',
-  lookup(req, res, options) {
-
-    return 'en';
-    const hostname = (typeof window !== 'undefined')
-      ? window.location.hostname
-      : req.headers.host?.split(':')[0]
-
-    return domainLocaleMap[hostname]
-  }
-};
-
 export default appWithTranslation(wrapper.withRedux(MyApp) as any)

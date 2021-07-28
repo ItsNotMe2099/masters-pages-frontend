@@ -44,7 +44,7 @@ export default function EventChatAttachFile(props: Props) {
   }
 
   const onFileUploadError = (error) => {
-    console.error('onFileUploadError', error)
+
   }
   const onFileProgress = (progress) => {
 
@@ -64,7 +64,7 @@ export default function EventChatAttachFile(props: Props) {
       onProgress: onFileProgress,
       onError: onFileUploadError,
       signingUrl: `${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/sign`,
-      s3path: 'masters-pages/files',
+      s3path: 'uploads',
       files: files,
       ...{}
     }

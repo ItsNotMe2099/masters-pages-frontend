@@ -29,10 +29,10 @@ const CardRecommendationsShort = (props: Props) => {
     dispatch(fetchProfileRecommendationShortList(profile.id));
   }, [profile])
   return (
-    <Card isHidden={total === 0} className={styles.root} title={total > 0 ? t('cardRecommenadationShort.recommendationsTotal', total) : t('cardRecommenadationShort.recommendations')}>
+    <Card isHidden={total === 0} className={styles.root} title={total > 0 ? t('cardRecommenadationShort.recommendationsTotal', {total}) : t('cardRecommenadationShort.recommendations')}>
       {/*list.map(item => <RecommendationListItem profile={item}/>)*/}
       {!listLoading && list.map(item => <RecommendationListItemShort model={item}/>)}
-      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/Recommendations`}>{t('cardRecommenadationShort.seeAll')}</a>}
+      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/recommendations`}>{t('cardRecommenadationShort.seeAll')}</a>}
     </Card>
   )
 }

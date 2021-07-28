@@ -103,8 +103,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           preview: preview,
         }
 
-
-
         return transformedFile
       }
 
@@ -150,7 +148,6 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           onChange(transformFiles(updatedFiles[0]))
         }
         const token = Cookies.get('token')
-
         const options = {
           files: newFiles,
           signingUrlMethod: 'GET',
@@ -164,7 +161,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           onProgress: onFileProgress,
           onError: onFileUploadError,
           signingUrl: `${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/sign`,
-          s3path: 'masters-pages/files',
+          s3path: 'uploads',
           ...uploadOptions,
         }
 

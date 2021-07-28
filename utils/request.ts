@@ -26,7 +26,6 @@ function request(requestData: IRequestData, ctx: any = null): Promise<IResponse>
       .then(res => {
         const contentType = res.headers.get('content-type')
         const isJson = contentType && contentType.indexOf('application/json') !== -1
-
         if (res.status !== 200 && res.status !== 201) {
           return (isJson ? res.json() : res.text()).then((resData: any) => {
             throw {status: res.status, data: resData}

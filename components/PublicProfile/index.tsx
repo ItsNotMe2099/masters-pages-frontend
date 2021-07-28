@@ -35,7 +35,8 @@ const PublicProfile = (props) => {
   const isEdit = currentProfile && currentProfile.id === props.profile.id;
   const profile = isEdit ? currentProfile : props.profile;
   const [category, setCategory] = useState(null);
-  const currentSkill = useSelector((state: IRootState) => state.profile.currentSkill) || props.skill
+  const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
+  const currentSkill = reduxSkill || props.skill
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list);
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills);
@@ -87,7 +88,7 @@ const PublicProfile = (props) => {
           dispatch(setCurrentSkill(exists));
           setCategory(category);
 
-          return;
+          break;
         }
 
       }
@@ -127,7 +128,7 @@ const PublicProfile = (props) => {
       {currentSkill  && <>
         <CardCategorySelector categories={categories} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
                               onCategoryChange={handleCategoryChange}/>
-        {props.showType === 'profile' && <><CardSalesPitch profile={profile} isEdit={isEdit} skill={currentSkill}/>
+        {props.showType === 'profile' && category && <><CardSalesPitch profile={profile} isEdit={isEdit} skill={currentSkill}/>
         <CardWorkExperience profile={profile} isEdit={isEdit} skill={currentSkill}/>
         <CardPortfolio profile={profile} isEdit={isEdit} skill={currentSkill}/>
         <CardGallery profile={profile} isEdit={isEdit} skill={currentSkill}/></>}

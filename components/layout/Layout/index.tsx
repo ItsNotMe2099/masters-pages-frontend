@@ -16,6 +16,7 @@ import LayoutPublic from 'components/layout/Layout/LayoutPublic'
 interface Props {
   children?: ReactElement[] | ReactElement,
   title?: ReactElement | string
+  showLeftMenu?: boolean
 }
 
 export default function Layout(props: Props) {

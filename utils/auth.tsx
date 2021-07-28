@@ -74,10 +74,9 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     return {props: {}};
   }
   const profile = token && user && user.isRegistrationCompleted ? await getProfile(token, user.profiles.find(profile => profile.role === mode) ? mode : user.profiles[0].role) : null;
-
   if(profile && profile.role !== mode){
     setCookie(ctx, 'mode', profile.role, {
-      maxAge: 30 * 24 * 60 * 60,
+      maxAge: 60*60*24*365,
       path: '/',
     })
   }

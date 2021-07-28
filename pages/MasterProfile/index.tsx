@@ -37,7 +37,7 @@ const MasterProfile = (props) => {
   }
 
   return (
-    <Layout>
+    <Layout showLeftMenu={false}>
       <div className={styles.steps}>
         <div className={styles.stepsContainer}>
         <SimpleSlider/>

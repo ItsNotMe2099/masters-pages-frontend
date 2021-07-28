@@ -22,12 +22,18 @@ const minLength = min => value =>
 
 export const passwordMinLength = value =>
   value && value.length < 6 ? `passwordMinLength8` : undefined
+export const maxLength = max => value => {
 
+ return  value && value.length > max ? `maxLength1000` : undefined
+}
+
+export const bioMaxLength = value =>  maxLength(1000)(value);
 export const arrayNotEmpty = (message?) => {
   return (value) => {
     return (!value || value.length === 0) ? (message || `selectSomething`) : undefined
   }
 }
+
 
 export const date =  value => {
   if(!value){

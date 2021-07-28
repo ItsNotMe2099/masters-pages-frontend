@@ -16,6 +16,7 @@ export interface ProfileState {
   avatarFormError: null,
   isCompleted: boolean,
   role: string,
+  roleTemp: string,
   showForms: string[],
   lastFormKey: string
 }
@@ -30,6 +31,7 @@ const initialState: ProfileState = {
   isCompleted: false,
   avatarLoading: false,
   role: null,
+  roleTemp: null,
   currentProfile: null,
   avatarFormError: null,
   showForms: [],
@@ -106,7 +108,9 @@ export default function ProfileReducer(state = {...initialState}, action) {
       break
     case ActionTypes.CHANGE_ROLE_SUCCESS:
       state.role = action.payload.role;
+      state.roleTemp= action.payload.role;
       break
+
     case ActionTypes.SHOW_FORM:
       state.showForms = state.showForms.find(key => key === action.payload.key) ? state.showForms : [...state.showForms, action.payload.key];
       break

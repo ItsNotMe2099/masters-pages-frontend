@@ -54,8 +54,11 @@ const CardGallery = (props: Props) => {
   const limit = 3;
   const { t } = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
-
+  const [currentSkillId, setCurrentSkillId] = useState(null);
   useEffect(() => {
+    if(currentSkillId === skill?.id){
+      return
+    }
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       profileId: profile.id,
@@ -65,6 +68,7 @@ const CardGallery = (props: Props) => {
       limit
     }));
     dispatch(setProfileGalleryTab(null));
+    setCurrentSkillId(skill.id)
 
   }, [skill]);
   const handleSortChange = (sort) => {
@@ -92,7 +96,8 @@ const CardGallery = (props: Props) => {
     if(!currentEditModel) {
       dispatch(createProfileGallery({
         categoryId: skill.categoryId,
-        subCategoryId: skill.subCategoryId, ...data
+        subCategoryId: skill.subCategoryId, ...data,
+        state: 'published'
       }, 'gallery'));
     }else{
       dispatch(updateProfileGallery(currentEditModel.id, {...data
@@ -137,12 +142,12 @@ const CardGallery = (props: Props) => {
         <div className={styles.tabs}>
           <ProfileTabs type={'gallery'} currentTab={currentTab} skill={skill} isEdit={isEdit} onChangeTab={handleChangeTab}/>
         </div>
-        <DropDown onChange={handleSortChange} value={sortType} options={[
+        {/*<DropDown onChange={handleSortChange} value={sortType} options={[
           {value: 'newFirst',  label: t('sort.newFirst')},
           {value: 'highPrice', label: t('sort.highestPrice')},
           {value: 'lowPrice', label: t('sort.lowestPrice')}]}
                   item={(item) => <div>{item?.label}</div>}
-        />
+        />*/}
       </div>
       <div className={styles.separator}/>
 

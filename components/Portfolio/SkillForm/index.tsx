@@ -80,6 +80,8 @@ let SkillForm = (props) => {
             </div>}
             label={t('photos')}
             multiple={true}
+            onChange={(files) => {
+            }}
             min="1"
             max="30"
           />

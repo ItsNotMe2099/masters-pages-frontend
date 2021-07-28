@@ -295,6 +295,7 @@ export interface IProfileGalleryItem {
   likesCount: string | number
   visible: boolean
   sort: number
+  isLiked: boolean
   createdAt: Date;
 }
 
@@ -871,4 +872,9 @@ export enum NotificationType {
   EventStatusChanged = 'event_status_changed',
   EventRemind = 'event_remind',
   News = 'news',
+}
+
+export enum ProfilePageType {
+  Skill = 'skill',
+  Profile = 'profile'
 }

@@ -83,7 +83,7 @@ export default function ChatMessageList({chat}: Props) {
   }
   useEffect(() => {
     if (lastMessageId && scrollableTarget?.current) {
-      scrollableTarget.current.scroll({ top: scrollableTarget?.current.scrollHeight, behavior: 'smooth' });
+       scrollableTarget.current.scroll({ top: scrollableTarget?.current.scrollHeight, behavior: 'smooth' });
     }
   }, [lastMessageId])
 

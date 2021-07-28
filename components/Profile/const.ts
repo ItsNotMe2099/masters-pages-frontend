@@ -10,7 +10,6 @@ enum ActionTypes {
   CHANGE_ROLE = 'Profile/CHANGE_ROLE',
   CHANGE_ROLE_NATIVE = 'Profile/CHANGE_ROLE_NATIVE',
   CHANGE_ROLE_SUCCESS = 'Profile/CHANGE_ROLE_SUCCESS',
-
   SHOW_FORM = 'Profile/SHOW_FORM',
   HIDE_FORM = 'Profile/HIDE_FORM',
 

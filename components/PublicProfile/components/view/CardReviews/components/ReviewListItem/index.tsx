@@ -22,7 +22,7 @@ const ReviewListItem = ({feedback}: Props) => {
        <Avatar size={'exSmall'} image={feedback.fromProfile.photo}/>
       <div className={styles.name}>{feedback.fromProfile.firstName} {feedback.fromProfile.lastName}</div>
       <StarRatings
-        rating={(feedback as any).rating || 0}
+        rating={(feedback as any).totalMark || 0}
         starRatedColor="#F2B705"
         starEmptyColor={'#616161'}
         numberOfStars={5}

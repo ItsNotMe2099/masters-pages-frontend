@@ -20,7 +20,7 @@ const options = {
   browserLanguageDetection:true,
   serverLanguageDetection:  true,
   strictMode: false,
-  debug: true,
+  debug: false,
   defaultLanguage: 'en',
   otherLanguages: ['ru'],
   detection: {

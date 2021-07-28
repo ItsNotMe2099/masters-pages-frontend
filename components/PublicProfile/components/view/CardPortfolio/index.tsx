@@ -59,8 +59,13 @@ const CardPortfolio = (props: Props) => {
 
   const {t} = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
+  const [currentSkillId, setCurrentSkillId] = useState(null);
   const limit = 10;
+
   useEffect(() => {
+    if(currentSkillId === skill?.id){
+      return
+    }
     dispatch(resetProfilePortfolioList());
     dispatch(fetchProfilePortfolioList({
       ...(currentTab ? {profileTabId: currentTab.id} : {}),
@@ -73,6 +78,7 @@ const CardPortfolio = (props: Props) => {
       limit
     }));
     dispatch(setProfilePortfolioTab(null));
+    setCurrentSkillId(skill.id)
   }, [skill]);
   const handleSortChange = (sort) => {
     setSortType(sort.value);

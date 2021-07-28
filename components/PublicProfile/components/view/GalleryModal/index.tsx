@@ -28,7 +28,7 @@ import {
   fetchNewsItemCommentList, setNewsCurrentItemIndex,
   setPageNewsCurrentItemCommentsPage
 } from 'components/News/actions'
-
+import cx from 'classnames'
 interface Props {
   isOpen: boolean,
   isNews?: boolean
@@ -70,6 +70,9 @@ export default function GalleryModal(props: Props) {
   }
 
   const handleLike = () => {
+    if(model.isLiked){
+      return;
+    }
     if(isNews) {
       dispatch(createNewsLikeRequest(model.id));
     }else{
@@ -131,7 +134,7 @@ export default function GalleryModal(props: Props) {
           </div>
           <div className={styles.footer}>
             <div className={styles.stat}>
-              <div className={styles.statItem}>{likeIsSending ? <div className={styles.likeLoader}><Loader/></div> : <><div onClick={handleLike}><LikeIcon className={styles.likeIcon}/></div>{model.likesCount}</>}</div>
+              <div className={cx(styles.statItem, {[styles.isLiked] : model.isLiked})}>{likeIsSending ? <div className={styles.likeLoader}><Loader/></div> : <><div onClick={handleLike}><LikeIcon className={styles.likeIcon}/></div>{model.likesCount}</>}</div>
               <div className={styles.statItem}><img src={'/img/icons/comments.svg'}/>{model.commentsCount}</div>
             </div>
             {model.commentsAllowed && <GalleryNewComment isNews={isNews}/>}

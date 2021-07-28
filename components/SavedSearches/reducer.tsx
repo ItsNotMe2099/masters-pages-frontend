@@ -33,7 +33,6 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.SUCCESS:
       state.isLoading = false;
-
       state.list = action.payload
       state.listTotal = action.payload.length;
       break

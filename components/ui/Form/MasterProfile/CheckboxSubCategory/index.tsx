@@ -78,7 +78,8 @@ export default function CheckboxSubCategory(props) {
           label: item.name
         }
       })}} onSubmit={(data) => {
-        return handleEdit({mainCategory: {id: data.mainCategory.value, name: data.mainCategory.name} , id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
+
+        return handleEdit({mainCategory: {id: data.mainCategory.value, name: data.mainCategory.label} , id: data.category.value, name: data.category.label, subCategories: data.subCategories.map(item => {
           return {
             id: item.value,
             name: item.label

@@ -74,6 +74,7 @@ import {getCategoryTranslation} from 'utils/translations'
 import {deleteSkill} from 'components/Skill/actions'
 import {fetchProfile} from 'components/Profile/actions'
 import {useRouter} from 'next/router'
+import {useInterval} from 'components/hooks/useInterval'
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
@@ -110,16 +111,14 @@ const CalendarPage = (props) => {
       dispatch(editEventOpen());
     }
   },  [router.query.eventId]);
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      dispatch(fetchEventList({
-        start: format(rangeStartDate, 'yyyy-MM-dd 00:00:00 XXX'),
-        end: format(rangeEndDate, 'yyyy-MM-dd 23:59:59 XXX'),
-        limit: 1000
-      }))
-    }, 10000)
-    return () => clearInterval(intervalRef.current);
-  }, []);
+  useInterval(() => {
+    dispatch(fetchEventList({
+      start: format(rangeStartDate, 'yyyy-MM-dd 00:00:00 XXX'),
+      end: format(rangeEndDate, 'yyyy-MM-dd 23:59:59 XXX'),
+      limit: 1000
+    }))
+  }, 10000)
+
   useEffect(() => {
     currentViewRef.current = currentView;
   })
