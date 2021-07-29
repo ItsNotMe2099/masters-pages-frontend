@@ -876,7 +876,7 @@ function getCurrencyByCode(code: string) : ICurrency {
 
 function getCurrencySymbol(code: string) : string {
   const currency = getCurrencyByCode(code);
-  return currency.symbol  ? currency.symbol as string : code;
+  return currency.symbol  ? currency.symbol as string : (code || null);
 }
 
 

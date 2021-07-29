@@ -29,8 +29,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import {useTranslation, Trans} from "i18n";
 import { connect } from 'react-redux'
+import InputCountry from 'components/ui/Inputs/InputCountry'
 interface Props {
+  change?: (name, val) => void
+  countryCode?: string
   onCancel: () => void
+  mainCategoryId?: number
   categoryId?: number
   offerPriceType?: string
   initialValues?: any,
@@ -54,32 +58,64 @@ let TaskOfferNewOrder = (props: Props) => {
         label={`${t('taskTitle')}*`}
         validate={required}
       />
-      <Field
-        name="geonameid"
-        component={InputLocation}
-        label={`${t('location')}*`}
-        validate={required}
-      />
-      <Field
-        name="masterRole"
-        component={SelectInput}
-        label={`${t('masterOrVolunteer')}*`}
-        options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
-        validate={required}
-      />
-      <Field
-        name="categoryId"
-        component={InputCategory}
-        label={`${t('category')}*`}
-        validate={required}
-      />
-      <Field
-        name="subCategoryId"
-        component={InputSubCategory}
-        label={`${t('subCategory')}*`}
-        categoryId={props.categoryId}
-        validate={required}
-      />
+        <Field
+          name="countryCode"
+          component={InputCountry}
+          label={t('createTask.fieldCountry')}
+          onChange={() =>  {
+            props.change('geonameid', null)}}
+          labelType={'static'}
+          validate={required}
+        />
+        {props.countryCode && <Field
+          name="geonameid"
+          component={InputLocation}
+          isRegistration={true}
+          countryCode={props.countryCode}
+          label={`${t('createTask.fieldLocation')}`}
+          size={'small'}
+          labelType={'static'}
+          validate={required}
+        />}
+        <Field
+          name="address"
+          component={InputAddress}
+          label={t('address')}
+        />
+        <Field
+          name="mainCategoryId"
+          component={InputSubCategory}
+          onChange={(value) => {
+            props.change('categoryId', null);
+            props.change('subCategoryId', null);
+          }}
+          label={`${t('createTask.fieldMainCategory')}`}
+          validate={required}
+          size={'small'}
+          labelType={'static'}
+        />
+        <Field
+          name="categoryId"
+          component={InputSubCategory}
+          onChange={(value) => {
+            props.change('categoryId', null);
+            props.change('subCategoryId', null)
+          }}
+          label={`${t('createTask.fieldCategory')}`}
+          validate={required}
+          categoryId={props.mainCategoryId}
+          size={'small'}
+          labelType={'static'}
+        />
+        <Field
+          name="subCategoryId"
+          component={InputSubCategory}
+          label={`${t('createTask.fieldSubCategory')}`}
+          categoryId={props.categoryId}
+          validate={required}
+          size={'small'}
+          labelType={'static'}
+        />
 
       <Field
         name="executionType"
@@ -87,15 +123,10 @@ let TaskOfferNewOrder = (props: Props) => {
         label={`${t('executionType')}*`}
         options={[{value: 'physical', label: t('physical')}, {value: 'virtual', label: t('virtual')}, {value: 'combo', label: t('combo')}]}
         validate={required}
-        labelType={'cross'}
+        labelType={'static'}
       />
 
 
-      <Field
-        name="address"
-        component={InputAddress}
-        label={t('address')}
-      />
       <Field
         name="description"
         component={TextArea}
@@ -140,10 +171,13 @@ TaskOfferNewOrder = connect(state => {
   const categoryId = selector(state, 'categoryId')
   const offerPriceType = selector(state, 'offerPriceType')
   const currency = selector(state, 'currency')
-
+  const countryCode = selector(state, 'countryCode')
+  const mainCategoryId = selector(state, 'mainCategoryId')
   return {
+    mainCategoryId,
     categoryId,
     currency,
+    countryCode,
     offerPriceType: !offerPriceType ? 'fixed' : offerPriceType,
   }
 })(TaskOfferNewOrder)
