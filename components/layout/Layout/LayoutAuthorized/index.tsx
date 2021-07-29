@@ -33,6 +33,9 @@ export default function LayoutAuthorized(props: Props) {
   console.log("CurProfile", profile);
   const intervalRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
+  useEffect(() => {
+    setCollapsed(!!cookie.get("menu-collapsed"));
+  }, [])
   useInterval(() => {
     dispatch(fetchProfile(profile.role));
   }, 10000)

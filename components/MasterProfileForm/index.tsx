@@ -112,6 +112,7 @@ let MasterForm = props => {
           <Field
             name="terms"
             component={InputCheckbox}
+            validate={required}
             label={<Trans i18nKey="masterForm.rules">С <a href={''}>правилами сайта</a> ознакомился и согласен</Trans>}
           />
         </div>
