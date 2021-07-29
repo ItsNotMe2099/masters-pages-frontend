@@ -23,7 +23,17 @@ let PriceSelectFormMini = props => {
   const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
+      <Field
+        name="currency"
+        component={InputCurrency}
+        withIcon={false}
+        size={'small'}
+        label={`${t('currency')}:`}
+        labelType={'static'}
+        validate={required}
+      />
       <div className={styles.label}>{`${t('price')}:`}</div>
+
       <div className={styles.price}>
         <Field
           name="offerPriceType"
@@ -53,15 +63,7 @@ let PriceSelectFormMini = props => {
           validate={required}
         />}
       </div>
-      <Field
-        name="currency"
-        component={InputCurrency}
-        withIcon={false}
-        size={'small'}
-        label={`${t('currency')}:`}
-        labelType={'static'}
-        validate={required}
-      />
+
       <Field
         name="deadline"
         component={Input}

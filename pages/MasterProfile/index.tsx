@@ -49,7 +49,7 @@ const MasterProfile = (props) => {
         <MasterForm onSubmit={handleSubmit} initialValues={{
           firstName: profile?.firstName,
           lastName: profile?.lastName,
-          countryCode: profile?.geoname?.countryCode,
+          countryCode: profile?.geoname?.country,
           geonameid: profile?.geonameid,
           birthday: profile?.birthday,
           photo: profile?.photo,

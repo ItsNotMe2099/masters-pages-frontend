@@ -36,7 +36,6 @@ const MasterProfile = (props) => {
       }).flat(Infinity)
     }));
   }
-
   return (
     <Layout>
       <div className={styles.steps}>

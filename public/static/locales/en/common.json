@@ -474,6 +474,7 @@
     "fieldTitle": "Task title",
     "fieldMainCategory": "Main category",
     "fieldCategory": "Category",
+    "fieldCountry": "Страна",
     "fieldLocation": "Location",
     "fieldSubCategory": "Sub category",
     "fieldMasterType": "Master or volunteer",

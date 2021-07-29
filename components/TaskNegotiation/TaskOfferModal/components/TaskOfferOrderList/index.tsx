@@ -35,19 +35,6 @@ const TaskOfferOrderList = (props: Props) => {
   const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
   const {t} = useTranslation('common')
 
-  const filter = {
-    status: 'published'
-  }
-  useEffect(() => {
-    dispatch(fetchTaskUserListRequest({
-      ...filter,
-      page,
-      limit: 10
-    }));
-      return () => {
-        dispatch(resetTaskUserList());
-      }
-  }, [])
   const handleSubmit = (data) => {
     if(!activeTask){
       return;
@@ -57,7 +44,13 @@ const TaskOfferOrderList = (props: Props) => {
   }
   const handleScrollNext = () => {
     dispatch(setPageTaskUser(page + 1))
-    dispatch(fetchTaskUserList())
+    dispatch(fetchTaskUserListRequest({
+      filter: {
+        status: 'published'
+      },
+      page: page + 1,
+      limit: 10
+    }));
   }
   const handleChange = (item) => {
     setActiveTask(item);

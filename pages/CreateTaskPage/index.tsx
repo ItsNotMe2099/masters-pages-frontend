@@ -28,7 +28,7 @@ const CreateTaskPage = (props) => {
   const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
   const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
   const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
-
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   useEffect(() => {
     dispatch(resetSearchStat());
     return () => {
@@ -46,7 +46,7 @@ const CreateTaskPage = (props) => {
       ...statFilter
     }));
   }
-
+  console.log("ProfileGeo", profile?.geoname);
   return (
     <Layout>
       <div className={styles.steps}>
@@ -57,7 +57,10 @@ const CreateTaskPage = (props) => {
       <div className={styles.container}>
 
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
-        <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat}/>
+        <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat} initialValues={{
+          countryCode: profile?.geoname?.country,
+          geonameid: profile?.geonameid,
+        }}/>
 
       </div>
 

@@ -477,6 +477,7 @@
     "fieldTitle": "Название Заказа",
     "fieldMainCategory": "Главная категория",
     "fieldCategory": "Категория",
+    "fieldLocation": "Страна",
     "fieldLocation": "Расположение",
     "fieldSubCategory": "Подкатегория",
     "fieldMasterType": "Мастер или Волонтер",

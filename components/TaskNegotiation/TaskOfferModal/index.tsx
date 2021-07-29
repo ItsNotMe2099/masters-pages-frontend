@@ -29,9 +29,27 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState('tasks')
   const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
+  const taskListTotal = useSelector((state: IRootState) => state.taskUser.total)
+  const taskListLoading = useSelector((state: IRootState) => state.taskUser.listLoading)
   const {t} = useTranslation('common')
+
+  useEffect(() => {
+    console.log("fetchTaskUserListRequest");
+    dispatch(fetchTaskUserListRequest({
+      filter: {
+        status: 'published'
+      },
+      page: 1,
+      limit: 10
+    }));
+    return () => {
+      dispatch(resetTaskUserList());
+    }
+  }, [])
+
   const tabs = [
     { name: t('taskNegotiation.availableTasks'), key: 'tasks' },
     { name: t('taskNegotiation.privateTask'), key: 'newTask' },
@@ -43,6 +61,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const handleSubmitNewOrder = (data) => {
     dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
   }
+  console.log("taskListTotal", taskListTotal);
 
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
@@ -53,9 +72,14 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
         <div className={styles.title}>{t('taskNegotiation.offerTask')}</div>
       </div>
       <div className={styles.body}>
-        {!sendOfferLoading && <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>}
-      {activeTab === 'tasks' && <TaskOfferOrderList onCancel={onClose}/>}
-      {activeTab === 'newTask' && <TaskOfferNewOrder onCancel={onClose} initialValues={{offerPriceType: 'fixed'}} onSubmit={handleSubmitNewOrder}/>}
+        {!sendOfferLoading && !taskListLoading && taskListTotal > 0 && <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>}
+      {activeTab === 'tasks' && taskListTotal > 0 && <TaskOfferOrderList onCancel={onClose}/>}
+      {(activeTab === 'newTask' || taskListTotal === 0) && <TaskOfferNewOrder onCancel={onClose} initialValues={{
+        offerPriceType: 'fixed',
+        masterRole: currentProfile.role,
+        countryCode: profile?.geoname?.country,
+        geonameid: profile?.geonameid,
+      }} onSubmit={handleSubmitNewOrder}/>}
       </div>
 
      </Modal>

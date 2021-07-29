@@ -26,6 +26,7 @@ import {useEffect} from 'react'
 const queryString = require('query-string')
 import {fetchProfileContacts} from 'components/Contacts/actions'
 import {RadioList} from 'components/ui/Inputs/RadioList'
+import InputCountry from 'components/ui/Inputs/InputCountry'
 
 let CreateTaskForm = props => {
   const {t} = useTranslation()
@@ -75,13 +76,25 @@ let CreateTaskForm = props => {
                 labelType={'static'}
               />}
               <Field
+                name="countryCode"
+                component={InputCountry}
+                label={t('createTask.fieldCountry')}
+                onChange={() =>  {
+                  props.change('geonameid', null)}}
+                labelType={'static'}
+                validate={required}
+              />
+              {props.countryCode && <Field
                 name="geonameid"
                 component={InputLocation}
+                isRegistration={true}
+                countryCode={props.countryCode}
                 label={`${t('createTask.fieldLocation')}`}
-                validate={required}
                 size={'small'}
                 labelType={'static'}
-              />
+                validate={required}
+              />}
+
               <Field
                 name="masterRole"
                 onChange={(value) => onChangeForStat('masterRole', value)}
@@ -234,10 +247,12 @@ CreateTaskForm = connect(state => {
   const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
   const visibilityType = selector(state, 'visibilityType')
+  const countryCode = selector(state, 'countryCode')
   return {
     mainCategoryId,
     categoryId,
-    visibilityType
+    visibilityType,
+    countryCode
   }
 })(CreateTaskForm)
 export default CreateTaskForm
