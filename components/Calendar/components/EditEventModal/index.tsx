@@ -103,14 +103,12 @@ const EditEventModal = (props: Props) => {
       address2: data.address2
 
     };
-    console.log("SubmitData", submitData);
     dispatch(submitEvent(event, submitData));
   }
 
   const handleAddExpense = (type) => {
     setCurrentEventEditExpenseType(type);
     setCurrentEventEditExpense(null);
-    console.log("handleAddExpense", type)
     if (type === 'actual') {
       dispatch(eventExpenseActualOpen());
     } else {
@@ -131,7 +129,6 @@ const EditEventModal = (props: Props) => {
       newExpenses[currentEventEditExpenseKey] = data;
       dispatch(updateEventExpenses(currentEventEditExpenseType, newExpenses));
     } else {
-      console.log("handleExpanseSubmit", data);
       const newExpenses = currentEventEditExpenseType === 'actual' ? [...currentEventActualExpenses] : [...currentEventExpenses];
       newExpenses.push(data);
       dispatch(updateEventExpenses(currentEventEditExpenseType, newExpenses));

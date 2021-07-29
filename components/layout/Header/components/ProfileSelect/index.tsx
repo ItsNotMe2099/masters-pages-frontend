@@ -43,7 +43,6 @@ const ProfileSelect = (props) => {
       dispatch(logout());
       return;
     }
-    console.log("SetLang", item.value);
     if (item.link) {
       router.push(item.link)
     }

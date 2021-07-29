@@ -20,7 +20,6 @@ const SearchVolunteerPage = (props) => {
   useEffect(() => {
     dispatch(resetProfileSearchList());
     if(router.query.filter) {
-      console.log("Set filter", JSON.parse((router.query as any).filter))
       dispatch(setFilterProfileSearch(JSON.parse((router.query as any).filter)));
     }
     if(router.query.sortType) {

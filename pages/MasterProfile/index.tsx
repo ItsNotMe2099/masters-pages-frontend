@@ -27,7 +27,6 @@ const MasterProfile = (props) => {
     }
   }, [formLoading])
   const handleSubmit = (data) => {
-  console.log("HandleSubmit", data)
     dispatch(createProfile('master', {
       ...data,
       preferredCategories: data.categories.map((item) => item.id),

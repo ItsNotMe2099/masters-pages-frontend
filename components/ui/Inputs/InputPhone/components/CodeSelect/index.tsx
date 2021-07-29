@@ -15,7 +15,6 @@ export const CodeSelect = (props) => {
   }
   const value = props.value;
   const code = value?.code;
-  console.log("SetValueFlag", value, code)
   const handleOptionClick = (e, item) => {
     e.preventDefault();
     setIsActive(false);

@@ -46,7 +46,6 @@ const SearchProfileListView = (props: Props) => {
   const [isShow, setIsShow] = useState(width > 700)
 
   const getSearchPageLink = () => {
-    console.log("GetSearchRole", props.searchRole)
     switch (props.searchRole){
       case 'master':
         return 'SearchMasterPage'
@@ -56,9 +55,7 @@ const SearchProfileListView = (props: Props) => {
         return 'SearchClientPage'
     }
   }
-  console.log("Tasks", tasks);
   useEffect(() => {
-    console.log('fetch search')
     dispatch(resetProfileSearchList())
     dispatch(setRoleProfileSearch(props.searchRole))
     dispatch(fetchProfileSearchList())
@@ -66,14 +63,12 @@ const SearchProfileListView = (props: Props) => {
 
 
   const handleSortChange = (item) => {
-    console.log("ChangeSort", item)
     dispatch(setSortProfileSearch(item.value));
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList())
     router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
     dispatch(setPageProfileSearch(page + 1))
     dispatch(fetchProfileSearchList())
   }

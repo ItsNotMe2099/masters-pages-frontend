@@ -24,7 +24,6 @@ import {meRedirect} from 'utils/auth'
 function* ProfileSaga() {
   yield takeLatest(ActionTypes.CHANGE_ROLE,
     function* (action: ActionType<typeof changeRole>) {
-      console.log("CHANGREROLECALL");
       const res: IResponse = yield requestGen({
         url: `/api/profile/role/${action.payload.role}`,
         method: 'GET',
@@ -56,7 +55,6 @@ function* ProfileSaga() {
 
   yield takeLatest(ActionTypes.CREATE_PROFILE,
     function* (action: ActionType<typeof createProfile>) {
-      console.log("CHANGREROLECALL");
       const res: IResponse = yield requestGen({
         url: `/api/profile/${action.payload.role}`,
         method: 'POST',
@@ -64,7 +62,6 @@ function* ProfileSaga() {
       } as IRequestData)
 
 
-      console.log("Res_err", res.data);
       if (res.err) {
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.FAIL, payload: {error: res.err}});

@@ -86,7 +86,6 @@ interface Props {
 const CalendarPage = (props) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log("RouterQuery", router.query)
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const modelKey = useSelector((state: IRootState) => state.modal.modalKey)
   let firstOfWeek = localizer.startOfWeek()
@@ -132,7 +131,6 @@ const CalendarPage = (props) => {
     }))
   }
   useEffect(() => {
-    console.log("Fetch", rangeStartDate, rangeEndDate)
     fetch();
   }, [rangeStartDate, rangeEndDate])
 
@@ -174,7 +172,6 @@ const CalendarPage = (props) => {
     if([EventStatus.Approved, EventStatus.Deleted].includes(event.status)) {
       return;
     }
-    console.log("moveEvent", start, end);
     dispatch(fetchEvent(event.id))
     if(![EventStatus.Draft, EventStatus.Confirmed].includes(event.status)) {
       dispatch(currentEventSetEditMode());
@@ -225,12 +222,10 @@ const CalendarPage = (props) => {
   }
   const handleToolbarNavigate = (action) => {
     if (toolbar.current) {
-      console.log(" toolbar.current", toolbar.current)
       toolbar.current.onNavigate(action);
     }
   }
   const handleRangeChange = (dates, view) => {
-    console.log("handleRangeChange", dates, view);
 
     if (dates.start && dates.end && currentViewRef.current !== Views.DAY) {
       setRangeStartDate(dates.start);
@@ -246,7 +241,6 @@ const CalendarPage = (props) => {
     }
   }
   const handleViewChange = (view) => {
-    console.log("handleViewChange", view);
     setCurrentView(view);
     currentViewRef.current = view;
   }
@@ -256,7 +250,6 @@ const CalendarPage = (props) => {
       setRangeStartDate(date);
       setRangeEndDate(date);
     }
-    console.log("handleNavigate", date, currentView, Views.DAY);
   }
   const handleSideBarDateChange = (date) => {
     setCurrentDate(date);
@@ -305,7 +298,6 @@ return (
           onRangeChange={handleRangeChange}
           onSelectEvent={handleClickEvent}
           onView={handleViewChange}
-          onDragStart={console.log}
           defaultView={currentView}
           defaultDate={new Date()}
           dragFromOutsideItem={draggedEvent}

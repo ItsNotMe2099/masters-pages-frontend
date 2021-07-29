@@ -133,7 +133,6 @@ TaskOfferAcceptForm = connect(state => {
   // can select values individually
   const offerPriceType = selector(state, 'offerPriceType')
   const offerAcceptType = selector(state, 'offerAcceptType')
-  console.log("offerPriceType", offerPriceType)
   return {
     offerPriceType: offerAcceptType === 'custom' && !offerPriceType ? 'fixed' : offerPriceType,
     offerAcceptType

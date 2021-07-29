@@ -20,7 +20,6 @@ const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
   const loading = useSelector((state: IRootState) => state.taskOffer.taskResponseLoading)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
 
-  console.log("Tassss", task)
   const dispatch = useDispatch();
   const {t} = useTranslation('common')
   useEffect(() => {
@@ -29,7 +28,6 @@ const TaskOfferAcceptModal = ({isOpen, onClose}: Props) => {
     }
   }, [isOpen])
   const handleSubmit = (data) => {
-    console.log("submit data", data)
 
       dispatch(taskNegotiationCreateTaskResponse(task.id, data))
   }

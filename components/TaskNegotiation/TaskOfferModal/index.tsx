@@ -34,14 +34,13 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const {t} = useTranslation('common')
   const tabs = [
     { name: t('taskNegotiation.availableTasks'), key: 'tasks' },
-    { name: t('taskNegotiation.privateTasks'), key: 'newTask' },
+    { name: t('taskNegotiation.privateTask'), key: 'newTask' },
   ];
   const handleChangeTab = (item) => {
     setActiveTab(item.key);
   }
 
   const handleSubmitNewOrder = (data) => {
-    console.log('handleSubmitNewOrder', data)
     dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
   }
 

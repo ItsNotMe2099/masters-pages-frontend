@@ -54,7 +54,6 @@ export default function CheckboxSubCategory(props) {
   }, [inEditMode])
 
   const renderListItem = (category, key) => {
-    console.log("RenderListItem", category);
     return  (
       <div className={styles.item}>
         <div className={styles.title}>{key + 1}. {category.mainCategory ? `${category.mainCategory?.name}/` : ''}{category.name}: {category.subCategories?.map((item, key) => `${item.name}`).join(', ')}
@@ -67,7 +66,6 @@ export default function CheckboxSubCategory(props) {
     )
   }
   const renderForm = (category, key) => {
-    console.log("renderFormMainCategory", category);
     return (
       <div className={styles.listItemForm}>
       <FormNewCategory form={`newCategory${category.key}`} initialValues={{

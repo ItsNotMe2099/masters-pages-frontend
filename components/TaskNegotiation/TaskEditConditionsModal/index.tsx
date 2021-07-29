@@ -23,14 +23,12 @@ const TaskEditConditionsModal = ({isOpen, onClose}: Props) => {
   const loading = useSelector((state: IRootState) => state.taskOffer.editConditionsLoading)
   const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
-  console.log("taskNegotiationEdit", taskNegotiation, { offerPriceType: taskNegotiation?.priceType, budget: taskNegotiation?.budget, ratePerHour: taskNegotiation?.ratePerHour, deadline: taskNegotiation.deadline ? format(new Date(taskNegotiation.deadline), 'MM/dd/yyy') : null});
   const dispatch = useDispatch();
   const {t} = useTranslation('common')
   useEffect(() => {
 
   }, [isOpen])
   const handleSubmit = (data) => {
-    console.log("submit data", data)
       dispatch(taskNegotiationEditConditions(taskNegotiation.id, data))
   }
   return (

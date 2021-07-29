@@ -18,7 +18,6 @@ let InputPriceFilterForm = (props) => {
   const {t} = useTranslation()
   const error = useSelector((state: IRootState) => state.profile.formError)
 
-  console.log("InputPriceFilterForm", props.form)
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
       <div>

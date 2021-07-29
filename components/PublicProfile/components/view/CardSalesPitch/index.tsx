@@ -28,7 +28,6 @@ const CardSalesPitch = (props: Props) => {
 
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     dispatch(updateSkillByForm(skill.id, {...data, ...(data.photo ? {photos: [data.photo]} : {photos: []})}, 'salesPitch'));
   }
   const handleCancel = () => {

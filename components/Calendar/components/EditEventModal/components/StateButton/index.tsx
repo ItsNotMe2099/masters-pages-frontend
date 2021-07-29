@@ -37,7 +37,6 @@ const StateButton = ({event, type}: Props) => {
       isOtherSide: type !== currentProfile.role,
       isOverdue
     });
-    console.log("getColorEventState", showAuthor,currentProfile.role, type, event.isAuthor,color)
     switch (color){
       case 'grey':
         return styles.root__grey;

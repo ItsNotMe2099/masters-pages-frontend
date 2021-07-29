@@ -26,11 +26,9 @@ export default function InputSubCategory(props) {
   }, [i18n.language])
 
   const getSearchCategory = (search = '') => {
-    console.log("SearchVal", props.input.value);
     return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
       .then((response) => {
         const data = response.data;
-        console.log("Response", data)
         setOptions(data ? data.map(item => {
           return {
             value: item.id,
@@ -48,7 +46,6 @@ export default function InputSubCategory(props) {
   }
 
   useEffect(() => {
-    console.log("change CategoryId", props.categoryId);
 
   }, [props.categoryId])
 

@@ -31,7 +31,6 @@ const NewEventModal = ({isOpen, onClose, range}: Props) => {
     status: 'in_progress'
   }
   useEffect(() => {
-    console.log("fetchTaskUserListRequest");
     dispatch(fetchTaskUserListRequest({
       ...filter,
       limit: 100,
@@ -47,7 +46,6 @@ const NewEventModal = ({isOpen, onClose, range}: Props) => {
   }
 
   const handleSubmitNewEvent = (data) => {
-    console.log('handleSubmitNewEvent', data)
     dispatch(createEvent({...data, ...data.timeRange, timezone: format(new Date(), 'XXX')}));
     // dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
   }

@@ -272,7 +272,6 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   }
 
   const handleSortChange = (sort) => {
-    console.log("SortType", sort);
     setSortType(sort.value);
     dispatch(fetchTaskUserResponseRequest(task.id, {
       page: 1,

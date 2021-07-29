@@ -17,7 +17,6 @@ export default function FinishingTaskByClientModal(props: Props) {
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   const formLoading = useSelector((state: IRootState) => state.taskOffer.formLoading)
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     dispatch(taskNegotiationFinish(task.id, {...data, taskId: task.id}));
   }
   const handleClose = () => {

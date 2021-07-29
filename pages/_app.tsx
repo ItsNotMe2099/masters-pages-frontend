@@ -22,9 +22,6 @@ function MyApp({Component, pageProps}) {
   const dispatch = useDispatch();
   useEffect(() => {
     setToken()
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', (event) => console.log('event for the service worker', event))
-    }
 
     async function setToken() {
       try {
@@ -33,21 +30,11 @@ function MyApp({Component, pageProps}) {
           if (token.updated) {
             dispatch(setPushToken({pushToken: token.token}));
           }
-          console.log('FCMTOken', token)
-          // not working
-          getMessage()
         }
       } catch (error) {
-        console.log(error)
       }
     }
   })
-
-  function getMessage() {
-    console.log('message functions')
-    const messaging = firebase.messaging()
-    messaging.onMessage((message) => console.log('foreground', message))
-  }
 
   return (
     <>
@@ -98,18 +85,5 @@ const domainLocaleMap = {
   // other domains
 };
 
-
-const domainDetector = {
-  name: 'domainDetector',
-  lookup(req, res, options) {
-    console.log("domainDetector")
-    return 'en';
-    const hostname = (typeof window !== 'undefined')
-      ? window.location.hostname
-      : req.headers.host?.split(':')[0]
-
-    return domainLocaleMap[hostname]
-  }
-};
 
 export default appWithTranslation(wrapper.withRedux(MyApp) as any)

@@ -85,7 +85,6 @@ export default function ProfileSearchReducer(state = { ...initialState }, action
       }
       break
     case ActionTypes.PROFILE_SEARCH_SET_USE_LOCATION_FILTER:
-      console.log("PROFILE_SEARCH_SET_USE_LOCATION_FILTER", action.payload)
       state.useLocationFilter = action.payload.useFilter;
       state.exactLocation = action.payload.exactLocation;
       break
@@ -107,14 +106,12 @@ export default function ProfileSearchReducer(state = { ...initialState }, action
       state.page = 1
       break
     case ActionTypes.PROFILE_SEARCH_SET_ROLE:
-      console.log("SetRole", action.payload)
         state.role = action.payload;
       break;
     case ActionTypes.SET_SEARCH_STAT_FILTER:
       state.searchStatFilter = action.payload;
       break;
     case ActionTypes.FETCH_PROFILE_SEARCH_STAT_REQUEST + ApiActionTypes.SUCCESS:
-      console.log("StatData", action.payload.total);
       state.searchStatCount = action.payload.total;
       break;
     case ActionTypes.RESET_SEARCH_STAT:

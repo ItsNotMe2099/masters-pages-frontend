@@ -22,9 +22,7 @@ const  getCoordinationByAddress = async (address) => {
 function* CreateTaskCompleteSaga() {
   yield takeLatest(ActionTypes.CREATE_TASK,
     function* (action: ActionType<typeof createTaskComplete>) {
-    console.log("try to geoconde")
       const location = yield getCoordinationByAddress(action.payload.address);
-    console.log("geocodeAddress", location);
 
       const res: IResponse = yield requestGen({
         url: `/api/tasks`,

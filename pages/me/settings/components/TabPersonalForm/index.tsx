@@ -17,7 +17,6 @@ import {useEffect} from 'react'
 let TabPersonalForm = (props) => {
   const { t } = useTranslation('common');
   const error = useSelector((state: IRootState) => state.profile.formError)
-  console.log("ProfileForm Init values", props.initialValues);
 
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
@@ -75,7 +74,6 @@ let TabPersonalForm = (props) => {
             name="countryCode"
             component={InputCountry}
             onChange={() =>  {
-              console.log("SetGeonameIdNull")
               props.change('geonameid', null)}}
             labelType="placeholder"
             label={t('personalArea.tabProfile.fieldCountry')}

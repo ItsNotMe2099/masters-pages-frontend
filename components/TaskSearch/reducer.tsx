@@ -64,7 +64,6 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
       }
       break
     case ActionTypes.TASK_LIST_SET_USE_LOCATION_FILTER:
-      console.log("TASK_LIST_SET_USE_LOCATION_FILTER", action.payload)
       state.useLocationFilter = action.payload.useFilter;
       state.exactLocation = action.payload.exactLocation;
       break
@@ -83,7 +82,6 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
     case ActionTypes.FETCH_TASK_LIST_ONE_REQUEST + ApiActionTypes.SUCCESS:
       state.list = state.list.map(item => {
         if (item.id === action.payload.id) {
-          console.log("replace task item")
           return action.payload;
         }
         return item;

@@ -48,7 +48,6 @@ const SearchTaskListView = (props: Props) => {
   const page = useSelector((state: IRootState) => state.taskSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
   const [isShow, setIsShow] = useState(width > 700)
-  console.log("WindowWidth", isShow )
   useEffect(() => {
     dispatch(resetTaskSearchList());
     if(router.query.filter) {

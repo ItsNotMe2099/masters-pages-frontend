@@ -10,7 +10,6 @@ let AvatarForm = (props) => {
   const { t } = useTranslation('common');
   const error = useSelector((state: IRootState) => state.profile.avatarFormError)
   const loading = useSelector((state: IRootState) => state.profile.avatarLoading)
-  console.log("AvatarFormError", error);
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>
       <Field

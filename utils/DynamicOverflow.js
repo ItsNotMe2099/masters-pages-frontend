@@ -89,7 +89,6 @@ class DynamicOverflow extends React.Component {
     if(!node){
       return;
     }
-    console.log("nodeRef", node, this.listNodes.length);
     const index = this.listNodes.findIndex(item => item.isEqualNode(node))
     if(index >= 0) {
       this.listNodes[index] = node;

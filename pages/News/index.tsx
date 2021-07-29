@@ -67,7 +67,6 @@ const NewsPage = (props) => {
     }));
 
   }, []);
-  console.log("LoadListTotal", total);
   const handleSortChange = (sort) => {
 
   }

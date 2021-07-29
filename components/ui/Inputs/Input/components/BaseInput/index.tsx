@@ -42,7 +42,6 @@ interface Props {
 
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
-  console.log("PropsForm", props)
 
   const [name] = useState(_uniqueId('input-'));
   const {mask} = props;
@@ -111,7 +110,6 @@ export default function BaseInput(props: Props) {
   }, [ call, setDebouncing, props.input?.onChange ]);
 
   const renderInput = (inputProps) => {
-    console.log("InputProps", inputProps)
     return  ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
                      autoComplete="sdssdsdsds"
                      type={props.type || 'text'}

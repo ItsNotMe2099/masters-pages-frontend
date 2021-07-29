@@ -36,12 +36,10 @@ export default function TimeExpense(props: Props) {
 
   const handleChangeRate = (e) => {
     const val = e.currentTarget.value;
-    console.log("HandleChangeVal", val);
     onChange({...value, rate: val})
   }
   const handleChangeTotal = (e) => {
     const val = e.currentTarget.value;
-    console.log("HandleChangeVal", val);
     onChange({...value, total: val})
   }
   const formatValueString = (val) => {
@@ -57,7 +55,6 @@ export default function TimeExpense(props: Props) {
   const handleInputDurationWrapperClick = () => {
     inputDurationRef.current.focus();
   }
-  console.log("isDateRangeOpen", isDateRangeOpen);
   return (
     <div className={`${styles.root} ${disabled && styles.rootDisabled}`}>
         <div className={styles.inputWrapper} onClick={handleInputRateWrapperClick}>

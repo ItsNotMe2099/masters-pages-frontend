@@ -96,7 +96,6 @@ import {useRouter} from 'next/router'
    }
    const notificationCount =  profile.notificationNewsCount + profile.notificationMessageCount + profile.notificationEventCount + profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount
 
-   console.log("CheckItemLength", items.length , total)
   return (
     <div className={styles.root}>
       <Bell className={styles.bell} onClick={onClick} />

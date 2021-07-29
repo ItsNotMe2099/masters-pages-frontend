@@ -23,14 +23,12 @@ export default function DateTime(props: Props) {
 
   const dateRangeRef = useRef(null);
   const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
-  console.log("DateTimeValue", value);
   useEffect(() => {
     if(!value){
     //  onChange(new Date());
     }
   }, [])
   const handleChange = (v) => {
-    console.log("HandleChange", v);
     onChange(v);
   }
   const getDateRange = () => {
@@ -44,8 +42,6 @@ export default function DateTime(props: Props) {
   const handleTime = (time) => {
     onChange(set(typeof value === 'string' ? new Date(value) : value, {hours: time.hour(), minutes: time.minute()}))
   }
-  console.log("isDateRangeOpen", isDateRangeOpen);
-  console.log("CalendarValue", value);
   return (
     <div className={`${styles.root} ${disabled && styles.rootDisabled}`} ref={dateRangeRef}>
       <div className={styles.inputWrapper}>

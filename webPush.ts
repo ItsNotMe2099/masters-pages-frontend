@@ -18,7 +18,6 @@ const firebaseCloudMessaging = {
       try {
         const messaging = firebase.messaging()
         const tokenInLocalForage = window.localStorage.getItem('push_token')
-        console.log("TokenInStorage", tokenInLocalForage)
         if (tokenInLocalForage !== null) {
           return {token: tokenInLocalForage}
         }
@@ -28,7 +27,6 @@ const firebaseCloudMessaging = {
             vapidKey: 'BG_JD4UHfDkDybN9Z9PMi0zVUrMoVySrc3LqEctLETFwdSCYGh7pvLz73r2DjTljQQcFV2I7VgC1H9SDIWOLsuM'
           })
           if (fcm_token) {
-            console.log('fcm token', fcm_token)
             return {token: fcm_token, updated: true}
           }
         }

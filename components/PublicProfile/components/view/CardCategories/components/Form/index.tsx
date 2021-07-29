@@ -54,7 +54,6 @@ let CardCategoryForm = (props: Props) => {
         validate={[required]}
         categoryId={mainCategoryId}
         onChange={(val) =>{
-          console.log("SetCateogry", val);
           setCategoryId(val)}
         }
       />}

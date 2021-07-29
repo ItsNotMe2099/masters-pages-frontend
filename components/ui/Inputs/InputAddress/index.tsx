@@ -26,7 +26,6 @@ export default function InputAddress({
   const [value, setValue] = useState();
   const [options, setOptions] = useState([]);
   const handleOnChange = (value) => {
-    console.log("OnChangeLocValue", value)
     input.onChange(value);
   }
 
@@ -42,7 +41,6 @@ export default function InputAddress({
         value,
         withSessionToken && sessionToken,
       ), (suggestions) => {
-        console.log("suggestions", suggestions);
         if (!suggestions) {
           return;
         }
@@ -58,7 +56,6 @@ export default function InputAddress({
     if (!value) {
       return;
     }
-    console.log("HandleOnChange", value, fetchSuggestions);
     setValue(value)
     fetchSuggestions.callback(value)
   }

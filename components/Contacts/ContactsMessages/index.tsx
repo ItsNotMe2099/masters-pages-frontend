@@ -81,7 +81,6 @@ const ContactsList = ({type}: Props) => {
   }
 
   const handleCategoryChange = (categoryId) => {
-    console.log("SetCategory", categoryId);
     setFilter(filter => ({...filter, categoryId: categoryId === 'all' ? null : categoryId}));
   }
   const handleSubCategoryChange = (subCategoryId) => {
@@ -93,7 +92,6 @@ const ContactsList = ({type}: Props) => {
 
   const handleRoleChange = (role) => {
     setFilter(filter => ({...filter, role: role === 'all' ? null : role }));
-  console.log("Filter", filter);
   }
 
 

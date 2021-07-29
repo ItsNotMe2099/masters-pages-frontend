@@ -65,7 +65,6 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       break
 
     case ActionTypes.TASK_USER_DELETE_REQUEST + ApiActionTypes.SUCCESS:
-      console.log("Delete success", action.payload);
       state.list = state.list.filter(item => item.id !== action.payload.id)
       break
 
@@ -85,12 +84,10 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       let removeItem = false;
       state.list = state.list.map(item => {
         if (item.id === action.payload.id) {
-          console.log("replace task item")
           return action.payload;
         }
         return item;
       }).filter(item => {
-        console.log("state.filter.status", state.filter.status, item.status)
         if (state.filter.status === 'in_progress' && item.id === action.payload.id && item.status !== 'in_progress') {
           removeItem = true;
           return false
@@ -117,10 +114,8 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
 
     case ActionTypes.FETCH_TASK_USER_RESPONSES_LIST_REQUEST + ApiActionTypes.SUCCESS:
       const taskId = action.payload?.data?.length > 0 ? action.payload?.data[0].taskId : null;
-      console.log("fetch Reponsed", taskId,)
       state.list = state.list.map((item) => {
         if (taskId && item.id === taskId) {
-          console.log("AddResponses to Task", taskId, action.payload)
           return { ...item, responses: action.payload };
         }
         return { ...item };
@@ -130,7 +125,6 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
     case ActionTypes.TASK_RESPONSE_FETCH_REQUEST + ApiActionTypes.SUCCESS:
       state.list = state.list.map((item) => {
         if (item.id === action.payload.taskId) {
-          console.log("sent_to_client", action.payload)
           return { ...item,
             responses: {
               ...item.responses,

@@ -25,11 +25,9 @@ const TabOrderModal = ({isOpen, task, onClose}: Props) => {
     }
   }, [isOpen])
   const handleSubmit = (data) => {
-    console.log("submit data", data)
     dispatch(updateTaskUser(task.id, data))
 
   }
-  console.log("Task", task);
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>

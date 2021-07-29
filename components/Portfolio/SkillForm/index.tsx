@@ -27,7 +27,6 @@ let SkillForm = (props) => {
   const [categoryId, setCategoryId] = useState(null);
   const [priceType, setPriceType] = useState(props.initialValues?.priceType || 'fixed')
   const {t} = useTranslation('common');
-  console.log("Props Init", props.initialValues)
   useEffect(() => {
 
     const categoryId = props.initialValues?.categoryId
@@ -82,7 +81,6 @@ let SkillForm = (props) => {
             label={t('photos')}
             multiple={true}
             onChange={(files) => {
-              console.log("onChangeFiles", files);
             }}
             min="1"
             max="30"

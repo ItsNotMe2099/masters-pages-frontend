@@ -33,7 +33,6 @@ const SearchTaskFilter = (props: Props) => {
         props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined});
     }else{
       dispatch(setFilterTaskSearch(data));
-      console.log("Filter, data", data)
       dispatch(resetTaskSearchList())
       dispatch(fetchTaskSearchList())
       router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })
@@ -41,7 +40,6 @@ const SearchTaskFilter = (props: Props) => {
     }
   }
 
-  console.log("props.collapsed", props.collapsed)
   return <div>
     <SearchTaskForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
     {!props.collapsed && <SavedSearchList type={'task'} onChange={handleFilterChange}/>}

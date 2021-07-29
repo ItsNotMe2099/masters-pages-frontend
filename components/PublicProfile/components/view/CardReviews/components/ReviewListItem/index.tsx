@@ -14,7 +14,6 @@ interface Props{
 }
 const ReviewListItem = ({feedback}: Props) => {
 
-  console.log("FeebackItem", feedback);
   return (
     <div className={styles.root}>
 

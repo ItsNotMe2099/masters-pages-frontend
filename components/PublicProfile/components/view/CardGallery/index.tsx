@@ -59,7 +59,6 @@ const CardGallery = (props: Props) => {
     if(currentSkillId === skill?.id){
       return
     }
-    console.log("FetchGallery", 'fetch', skill )
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       profileId: profile.id,
@@ -76,7 +75,6 @@ const CardGallery = (props: Props) => {
 
   }
   const handleChangeTab = (tab: IProfileTab) => {
-    console.log("SetTab", tab);
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       ...(tab ? {profileTabId: tab.id} : {}),
@@ -95,7 +93,6 @@ const CardGallery = (props: Props) => {
 
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     if(!currentEditModel) {
       dispatch(createProfileGallery({
         categoryId: skill.categoryId,

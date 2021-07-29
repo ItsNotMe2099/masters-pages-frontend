@@ -15,7 +15,6 @@ export default function authReducer(state = {...initialState}, action) {
 
       break
     case ActionTypes.FETCH_SUBCATEGORIES + ApiActionTypes.SUCCESS:
-      console.log("action.payload", action.payload)
       state.subCategories = action.payload.map(item => {
         return  {
           label: item.name,

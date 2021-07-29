@@ -19,7 +19,6 @@ export default function RadioListSubCategories(props) {
      request({url: `/api/service-category/${props.categoryId}/subcategory?lang=ru`, method: 'GET'})
        .then((response) => {
          const data = response.data;
-         console.log("Response", data)
 
          setOptions(data ? data.map(item => {
            return {

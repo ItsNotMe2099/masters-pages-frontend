@@ -14,11 +14,9 @@ export default function TimePicker(props: Props) {
   const { value, onChange } = props.input;
   const {disabledHours, disabledMinutes, disabled} = props
   const handleChange = (v) => {
-    console.log("HandleChange", v);
     onChange(v);
   }
 
-  console.log("DateTimeRangeValue", value);
   return (
     <RCTimePicker
       className={styles.input}

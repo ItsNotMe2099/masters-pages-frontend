@@ -26,7 +26,6 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       state.listLoading = false;
       state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
-      console.log('payload data!!!', action.payload.data)
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL:
       state.listLoading = false;

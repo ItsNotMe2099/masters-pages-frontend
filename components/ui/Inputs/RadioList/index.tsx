@@ -19,9 +19,7 @@ interface Props {
 export const RadioList = (props) => {
   const { meta: { error, touched },restrictedValues, input, options, label, type, ...rest } = props;
 
-  console.log("radio options", props.options);
   const handleCheckboxChanged = (value) => {
-    console.log("OnChange", value);
       input.onChange(value)
   }
 

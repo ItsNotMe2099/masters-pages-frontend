@@ -19,7 +19,6 @@ const CardWorkExperienceListItem = ({model, isEdit, onEdit, onDelete}: Props) =>
 
   const getDuration = () => {
     if(model.fromDate && model.toDate){
-      console.log("Duration format", model.fromDate, parseDate(model.fromDate), model.toDate,parseDate(model.toDate));
       return `from ${formatDate(model.fromDate)} - ${formatDate(model.toDate)} - ${formatDistanceStrict(parseDate(model.fromDate), parseDate(model.toDate))}`;
     }else if(model.fromDate){
       return `from ${formatDate(model.fromDate)} to now - ${formatDistanceToNowStrict(parseDate(model.fromDate))}`;

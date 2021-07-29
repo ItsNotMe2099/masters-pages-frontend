@@ -15,14 +15,12 @@ export default function InputCategory(props) {
   const [value, setValue] = useState();
   const [options, setOptions] = useState([]);
   const handleOnChange = (value) => {
-    console.log("OnChangeLocValue", value)
     props.input.onChange(value);
   }
   const getSearchCategory = ({id = '',search = ''}) => {
    return request({url: `/api/service-category?search=${search || ''}&id=${id || ''}&lang=ru`, method: 'GET'})
       .then((response) => {
         const data = response.data;
-        console.log("Response", data)
         setOptions(data ? data.map(item => {
           return {
             value: item.id,
@@ -32,7 +30,6 @@ export default function InputCategory(props) {
       })
   }
   useEffect(() => {
-    console.log("getInputValue", props.input.value)
     getSearchCategory({id: props.input.value?.value || props.input.value});
   }, [])
   const handleOnSearchChange = (value) => {

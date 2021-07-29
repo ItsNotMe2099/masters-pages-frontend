@@ -68,9 +68,7 @@ let TimePlaceChargeForm = (props: Props) => {
     isPlannedDisabled = false;
   }
   const isCompletedDisabled =  !((!(isTempEdit || isCurrentEventEditMode) && [EventStatus.Confirmed].includes(event.status)) || (isTempEdit && [EventStatus.Completed].includes(event.status)));
-  console.log("isPlannedDisabled", event.status, isPlannedDisabled, isCurrentEventEditMode );
-  console.log("isCompletedDisabled", event.status, isCompletedDisabled );
-  console.log("InitialValues", props.initialValues);
+
   const getButtonKeys = () => {
     let keys = [];
     if(isTempEdit || isCurrentEventEditMode){
@@ -109,7 +107,6 @@ let TimePlaceChargeForm = (props: Props) => {
         keys = [ButtonType.Cancel, ButtonType.RestoreDelete, ButtonType.Delete]
       }
     }
-    console.log("ButtoNkeys", keys, event.status)
     return keys;
 
   }
@@ -232,7 +229,6 @@ let TimePlaceChargeForm = (props: Props) => {
     handleSubmit(e);
   }
   const handleEdit = (e) => {
-    console.log("HandleEdit");
     setIsTempEdit(true);
     e.preventDefault();
     //dispatch(editEventRequest(event.id))

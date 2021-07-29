@@ -24,7 +24,6 @@ let RegistrationForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.registrationComplete.formError)
   const isLoading = useSelector((state: IRootState) => state.registrationComplete.loading)
-  console.log("initialValues", props.initialValues);
   const handleLogout = () => {
     dispatch(logout());
   }
@@ -72,7 +71,6 @@ let RegistrationForm = props => {
         component={InputCountry}
         label={t('auth.registrationPage.fieldCountry')}
         onChange={() =>  {
-          console.log("SetGeonameIdNull")
           props.change('geonameid', null)}}
         labelType={'cross'}
         validate={required}

@@ -27,7 +27,6 @@ export default function DateTimeRange(props: Props) {
   const dateRangeRef = useRef(null);
   const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
   useEffect(() => {
-      console.log("USeEffectValue", value);
     if(!value){
       onChange({
         start: new Date(),
@@ -36,14 +35,12 @@ export default function DateTimeRange(props: Props) {
     }
   }, [])
   const handleChange = (v) => {
-    console.log("HandleChange", v);
     onChange({start: v.selection.startDate, end: v.selection.endDate});
   }
   const getDateRange = () => {
     if(!value){
       return;
     }
-    console.log("GValue", value);
 
     if(!value.start || !value.end){
       return;
@@ -57,7 +54,6 @@ export default function DateTimeRange(props: Props) {
     return `${startDate} - ${endDate}`
   }
   const handleStartTime = (time) => {
-    console.log("StartTime", time.format('HH:mm'));
     const newValue = {...value, start: set(value.start, {hours: time.hour(), minutes: time.minute()})}
     if(compareAsc(newValue.start, newValue.end) === 1){
         newValue.end = addMinutes(newValue.start, 5);
@@ -69,8 +65,6 @@ export default function DateTimeRange(props: Props) {
     const newValue = {...value, end: set(value.start, {hours: time.hour(), minutes: time.minute()})}
     onChange(newValue)
   }
-  console.log("isDateRangeOpen", isDateRangeOpen);
-  console.log("CalendarValue", value);
   return (
     <div className={`${props.className} ${styles.root}`} ref={dateRangeRef}>
       <div className={styles.inputWrapper}>

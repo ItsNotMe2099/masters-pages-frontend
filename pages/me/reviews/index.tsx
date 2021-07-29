@@ -31,7 +31,6 @@ const TabReviews = (props: Props) => {
   const dispatch = useDispatch()
   const limit = 10;
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
 
     dispatch(fetchFeedbacksToProfile({
       profileId: profile.id,

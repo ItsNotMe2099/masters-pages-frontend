@@ -39,7 +39,6 @@ const TaskOfferOrderList = (props: Props) => {
     status: 'published'
   }
   useEffect(() => {
-    console.log("fetchTaskUserListRequest");
     dispatch(fetchTaskUserListRequest({
       ...filter,
       page,
@@ -53,12 +52,10 @@ const TaskOfferOrderList = (props: Props) => {
     if(!activeTask){
       return;
     }
-    console.log("submit data", data)
     dispatch(taskNegotiationSendOffer(activeTask.id, currentProfile.id));
 
   }
   const handleScrollNext = () => {
-    console.log("HandleNext", page)
     dispatch(setPageTaskUser(page + 1))
     dispatch(fetchTaskUserList())
   }
@@ -83,8 +80,8 @@ const TaskOfferOrderList = (props: Props) => {
      </InfiniteScroll>
      </div>}
       {!sendOfferLoading && <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`} disabled={!activeTask} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={handleSubmit}>{t('taskNegotiation.sendOffer')}</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 20px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`} disabled={!activeTask} red={true} bold={true} size={'12px 20px'} type={'submit'} onClick={handleSubmit}>{t('taskNegotiation.sendOffer')}</Button>
       </div>}
     </div>
   )

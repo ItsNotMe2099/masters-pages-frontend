@@ -19,7 +19,6 @@ function* ProfileSearchSaga() {
       const sort = yield select((state: IRootState) => state.profileSearch.sort)
       const sortOrder = yield select((state: IRootState) => state.profileSearch.sortOrder)
       const page = yield select((state: IRootState) => state.profileSearch.page)
-      console.log("FETCH_PROFILE_SEARCH", action.payload)
       yield put(fetchProfileSearchListRequest({
           ...filter,
           sort,

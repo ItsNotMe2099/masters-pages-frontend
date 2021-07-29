@@ -46,7 +46,6 @@ const ReportPage = (props) => {
 
 
   const handleChange = (data) => {
-    console.log("HandleChange", data);
     if(data.fields){
       setFields(data.fields);
     }
@@ -55,7 +54,6 @@ const ReportPage = (props) => {
       ...data.range as {start: Date, end: Date},
 
     };
-    console.log("NewFilter", filter);
     setFilterData(filter)
     dispatch(fetchReportList(filter));
   }

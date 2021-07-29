@@ -36,7 +36,6 @@ const ChatTab = ({event}: Props) => {
     dispatch(fetchChatEventDialog(event.id, event.participantId));
   }, []);
   const handleChangeTab = (item) => {
-    console.log("SetActiveTab", item.key)
     setActiveTab(item.key);
   }
   return (

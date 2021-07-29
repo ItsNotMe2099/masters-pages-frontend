@@ -35,7 +35,6 @@ const MainSectionThird = (props) => {
 
   ]
   const handleNextClick = () => {
-    console.log(" features.length",  features)
     setCurrentIndex(index => index === features.length - 1 ? 0 : index + 1);
   }
 

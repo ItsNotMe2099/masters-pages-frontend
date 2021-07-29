@@ -40,7 +40,7 @@ let PortfolioForm = (props) => {
       />}
       <Field
         name="length"
-        label={'Length'}
+        label={t('length')}
         component={SelectInput}
         size={'small'}
         options={[
@@ -86,7 +86,7 @@ let PortfolioForm = (props) => {
         label={t('photos')}
         multiple={true}
         onChange={(files) => {
-          console.log("onChangeFiles", files);
+
         }}
         min="1"
         max="30"

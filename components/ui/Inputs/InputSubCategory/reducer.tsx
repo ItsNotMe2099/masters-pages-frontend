@@ -14,7 +14,6 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_SUBCATEGORIES:
       break
     case ActionTypes.FETCH_SUBCATEGORIES + ApiActionTypes.SUCCESS:
-      console.log("action.payload", action.payload)
       state.subCategories = action.payload
       break
     case ActionTypes.RESET_SUBCATEGORIES:

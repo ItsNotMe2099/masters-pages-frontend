@@ -109,7 +109,6 @@ const TabOrders = (props: Props) => {
       </div>
       <div className={styles.desktop}>
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
-        console.log("Stat", stat)
         const statResult = stat.find(item => item.task_status === tab.key);
 
         return {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}

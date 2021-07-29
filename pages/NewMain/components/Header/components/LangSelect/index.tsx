@@ -24,7 +24,6 @@ interface Props {
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
-    console.log("SetLang", item.value);
     setValue(item);
     nextI18.i18n.changeLanguage(item.value)
     setIsActive(false);

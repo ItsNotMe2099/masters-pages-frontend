@@ -122,8 +122,8 @@ let TaskOfferNewOrder = (props: Props) => {
       />
       </div>
       {!sendOfferLoading && <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
-        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 40px'} type={'submit'}>{t('taskNegotiation.sendOffer')}</Button>
+        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 20px'} type={'button'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button className={`${styles.button} ${styles.buttonSubmit}`}  red={true} bold={true} size={'12px 20px'} type={'submit'}>{t('taskNegotiation.sendOffer')}</Button>
       </div>}
       </>}
     </form>
@@ -138,7 +138,6 @@ const selector = formValueSelector('TaskOfferNewOrder')
 TaskOfferNewOrder = connect(state => {
   // can select values individually
   const categoryId = selector(state, 'categoryId')
-  console.log("getCategoryId", categoryId, state)
   const offerPriceType = selector(state, 'offerPriceType')
   const currency = selector(state, 'currency')
 

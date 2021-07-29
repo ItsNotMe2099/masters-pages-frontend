@@ -48,12 +48,10 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE,
     function* (action: ActionType<typeof taskNegotiationCreateTaskResponse>) {
-      console.log("TASK_OFFER_CREATE")
       yield put(taskNegotiationCreateTaskResponseRequest(action.payload.taskId, action.payload.data));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("ACCEPT TASK OFFER SUCCESS")
         yield put(fetchTaskSearchOneRequest(action.payload.taskId));
         yield put(modalClose());
       }
@@ -61,13 +59,11 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_RESPONSE,
     function* (action: ActionType<typeof taskNegotiationAcceptTaskResponse>) {
-      console.log("TASK_OFFER_CREATE", action.payload)
       yield put(confirmChangeData({ loading: true }));
       yield put(taskNegotiationAcceptTaskResponseRequest(action.payload.response.id));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_RESPONSE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_RESPONSE_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_RESPONSE_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("ACCEPT TASK OFFER SUCCESS")
         yield put(fetchTaskResponseRequest(action.payload.response.taskId, action.payload.response.id));
         Router.push(`/Chat/task-dialog/${action.payload.response.taskId}/${action.payload.response.profileId}`)
         yield put(modalClose());
@@ -80,7 +76,6 @@ function* TaskOfferSaga() {
       const result = yield take([ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_RESPONSE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_RESPONSE_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_RESPONSE_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("DECLINE TASK OFFER SUCCESS")
         yield put(fetchTaskResponseRequest(action.payload.taskId, action.payload.id));
         yield put(modalClose());
       }
@@ -92,12 +87,10 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER,
     function* (action: ActionType<typeof taskNegotiationAcceptTaskOffer>) {
-      console.log("TASK_NEGOTIATION_ACCEPT_TASK_OFFER");
       yield put(confirmChangeData({ loading: true }));
       yield put(taskNegotiationAcceptTaskOfferRequest(action.payload.taskNegotiation.id));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_ACCEPT_TASK_OFFER SUCCESS")
         Router.push(`/Chat/task-dialog/${action.payload.taskNegotiation.taskId}/${action.payload.taskNegotiation.profileId}`)
         yield put(modalClose());
       }
@@ -105,13 +98,11 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER,
     function* (action: ActionType<typeof taskNegotiationDeclineTaskOffer>) {
-      console.log("TASK_NEGOTIATION_DECLINE_TASK_OFFER");
       yield put(confirmChangeData({ loading: true }));
       yield put(taskNegotiationDeclineTaskOfferRequest(action.payload.taskNegotiation.id));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_DECLINE_TASK_OFFER SUCCESS")
         yield put(modalClose());
         yield put(taskUserRemoveFromList(action.payload.taskNegotiation.taskId));
       }
@@ -123,12 +114,10 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS,
     function* (action: ActionType<typeof taskNegotiationAcceptConditions>) {
-      console.log("TASK_NEGOTIATION_ACCEPT_CONDITIONS");
       yield put(confirmChangeData({ loading: true }));
       yield put(taskNegotiationAcceptConditionsRequest(action.payload.taskNegotiationId));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_ACCEPT_CONDITIONS SUCCESS")
         yield put(fetchOneChatMessage(action.payload.messageId));
         yield put(modalClose());
       }
@@ -136,13 +125,11 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS,
     function* (action: ActionType<typeof taskNegotiationDeclineConditions>) {
-      console.log("TASK_NEGOTIATION_DECLINE_CONDITIONS");
       yield put(confirmChangeData({ loading: true }));
       yield put(taskNegotiationDeclineConditionsRequest(action.payload.taskNegotiationId));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_DECLINE_CONDITIONS SUCCESS")
         yield put(fetchOneChatMessage(action.payload.messageId));
         yield put(modalClose());
       }
@@ -150,14 +137,11 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_EDIT_CONDITIONS,
     function* (action: ActionType<typeof taskNegotiationEditConditions>) {
-      console.log("TASK_NEGOTIATION_EDIT_CONDITIONS");
       yield put(taskNegotiationEditConditionsRequest(action.payload.taskNegotiationId, action.payload.data));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_EDIT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_EDIT_CONDITIONS_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_EDIT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_EDIT_CONDITIONS SUCCESS")
         const currentMessage = yield select((state: IRootState) => state.taskOffer.currentMessage)
-        console.log("currentMessage", currentMessage);
         if (currentMessage) {
           yield put(fetchOneChatMessage(currentMessage.id));
         }
@@ -166,22 +150,18 @@ function* TaskOfferSaga() {
     })
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_HIRE_MASTER,
     function* (action: ActionType<typeof taskNegotiationHireMaster>) {
-      console.log("TASK_NEGOTIATION_HIRE_MASTER");
       yield put(taskNegotiationAcceptConditionsRequest(action.payload.taskNegotiationId));
 
       const resultAccept = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.FAIL])
 
       if (resultAccept.type === ActionTypes.TASK_NEGOTIATION_HIRE_MASTER_REQUEST + ApiActionTypes.FAIL) {
-        console.log("TaskErrorAccept");
         return;
       }
       yield put(taskNegotiationHireMasterRequest(action.payload.taskId, action.payload.profileId));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_HIRE_MASTER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_HIRE_MASTER_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_HIRE_MASTER_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_HIRE_MASTER SUCCESS")
         const currentMessage = yield select((state: IRootState) => state.taskOffer.currentMessage)
-        console.log("currentMessage", currentMessage);
         if (currentMessage) {
           yield put(fetchOneChatMessage(currentMessage.id));
         }
@@ -197,14 +177,11 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE,
     function* (action: ActionType<typeof taskNegotiationMarkAsDone>) {
-      console.log("TASK_NEGOTIATION_MARK_AS_DONE");
       yield put(taskNegotiationMarkAsDoneRequest(action.payload.taskId));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE_REQUEST + ApiActionTypes.FAIL])
 
       if (result.type === ActionTypes.TASK_NEGOTIATION_MARK_AS_DONE_REQUEST + ApiActionTypes.SUCCESS) {
-        console.log("TASK_NEGOTIATION_EDIT_CONDITIONS SUCCESS")
         const currentMessage = yield select((state: IRootState) => state.taskOffer.currentMessage)
-        console.log("currentMessage", currentMessage);
         if (currentMessage) {
           yield put(fetchOneChatMessage(currentMessage.id));
         }
@@ -214,7 +191,6 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_FINISH,
     function* (action: ActionType<typeof taskNegotiationFinish>) {
-      console.log("TASK_NEGOTIATION_FINISH111", action.payload)
 
       yield put(taskNegotiationAcceptAsCompleted(action.payload.taskId));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_AS_COMPLETED + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_AS_COMPLETED + ApiActionTypes.FAIL])
@@ -234,7 +210,6 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_SEND_OFFER,
     function* (action: ActionType<typeof taskNegotiationSendOffer>) {
-      console.log("TASK_NEGOTIATION_SEND_OFFER");
       yield put(taskNegotiationSendOfferSetLoading(true));
       yield put(taskNegotiationSendOfferRequest(action.payload.taskId, action.payload.profileId));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_SEND_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_SEND_OFFER_REQUEST + ApiActionTypes.FAIL])
@@ -247,7 +222,6 @@ function* TaskOfferSaga() {
 
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_SEND_OFFER_CREATE_TASK,
     function* (action: ActionType<typeof taskNegotiationSendOfferCreateTask>) {
-      console.log("TASK_NEGOTIATION_SEND_OFFER");
       yield put(taskNegotiationSendOfferSetLoading(true));
       yield put(createTaskComplete({...action.payload.task, status: ITaskStatus.PrivatelyPublished}));
 

@@ -17,7 +17,6 @@ interface Props {
 const Tab = ({name, link, style, onClick, isActive, className, badge}: Props) => {
   const router = useRouter();
   const handleClick = (e) => {
-    console.log("HandleClick", onClick)
     if(onClick){
       e.preventDefault();
       onClick()

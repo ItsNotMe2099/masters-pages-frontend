@@ -47,7 +47,6 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         chatPageLoading: false
       }
     case ActionTypes.FETCH_CHAT_LIST + ApiActionTypes.SUCCESS:
-      console.log("Fetch chatList");
       return {
         ...state,
         chatList: (action.payload as any).data.map(chat => ({
@@ -70,7 +69,6 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         messages: [],
       }
     case ActionTypes.FETCH_CHAT + ApiActionTypes.SUCCESS:
-      console.log("Fetch chat");
       return {
         ...state,
         chatLoading: false,
@@ -189,7 +187,6 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         chatLoading: false,
       }
     case ActionTypes.CHAT_MESSAGE_ADD_TO_LIST:
-      console.log("CHAT_MESSAGE_ADD_TO_LIST", action.payload)
       return {
         ...state,
         messageIsSending: false,
@@ -227,12 +224,10 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         }),
       }
     case ActionTypes.FETCH_CHAT_ONE_MESSAGE + ApiActionTypes.SUCCESS:
-      console.log("RED FETCH_CHAT_ONE_MESSAGE")
       return {
         ...state,
         messages: state.messages.map((message) => {
           if (message.id === action.payload.id) {
-            console.log("REPLACE MESSAGE, action payload", action.payload);
             return {...message, ...action.payload};
           }
           return message
