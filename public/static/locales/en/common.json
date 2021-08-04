@@ -160,7 +160,7 @@
   "agenda": "Agenda",
   "orderNumber": "Order number:",
   "volunteer": "Volunteer",
-  "agreeWith": "I am agree with",
+  "agreeWith": "I agree with",
   "termsAndConditions": "terms and conditions",
   "back": "Back",
   "status": "Status",
@@ -993,7 +993,7 @@
     "physical": "Physical",
     "virtual": "Virtual",
     "combo": "Combo",
-    "iAmAgreeWith": "I am agree with",
+    "iAmAgreeWith": "I agree with",
     "termsAndConditions": "terms and conditions",
     "agreeWithClient": "Agree with client payment offer",
     "differentTerms": "I want to propose different terms"
