@@ -59,7 +59,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   }
 
   const handleSubmitNewOrder = (data) => {
-    dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
+    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: currentProfile.id}, currentProfile.id));
   }
   console.log("taskListTotal", taskListTotal);
 

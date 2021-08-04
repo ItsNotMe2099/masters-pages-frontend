@@ -223,16 +223,11 @@ function* TaskOfferSaga() {
   yield takeLatest(ActionTypes.TASK_NEGOTIATION_SEND_OFFER_CREATE_TASK,
     function* (action: ActionType<typeof taskNegotiationSendOfferCreateTask>) {
       yield put(taskNegotiationSendOfferSetLoading(true));
-      yield put(createTaskComplete({...action.payload.task, status: ITaskStatus.PrivatelyPublished}));
+      yield put(createTaskComplete({...action.payload.task}));
 
       let result = yield take([CreateTaskActionTypes.CREATE_TASK_SUCCESS, CreateTaskActionTypes.CREATE_TASK_ERROR]);
       if (result.type === CreateTaskActionTypes.CREATE_TASK_SUCCESS) {
-        yield put(taskNegotiationSendOfferRequest(result.payload.id, action.payload.profileId));
-        result = yield take([ActionTypes.TASK_NEGOTIATION_SEND_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_SEND_OFFER_REQUEST + ApiActionTypes.FAIL])
-
-        if (result.type === ActionTypes.TASK_NEGOTIATION_SEND_OFFER_REQUEST + ApiActionTypes.SUCCESS) {
-          yield put(modalClose());
-        }
+        yield put(modalClose());
       }
 
 
