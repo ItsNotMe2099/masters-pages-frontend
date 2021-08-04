@@ -39,6 +39,9 @@ let TaskReview = ({task}: Props) => {
       dispatch(feedbackByMasterOpen());
     }
   }
+  if(!otherSide){
+    return null;
+  }
   return (
     <div className={styles.root}>
       {formLoading && <Loader/>}
