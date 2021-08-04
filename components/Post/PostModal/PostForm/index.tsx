@@ -20,6 +20,7 @@ import EventReviewForm
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventReviewForm'
 import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {useTranslation, Trans} from 'i18n'
+import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 
 let PostForm = (props) => {
   const {categoryId, subCategoryId, showInPortfolio} = props;
@@ -55,18 +56,41 @@ let PostForm = (props) => {
         label={t('follower.postForm.showInPortfolio')}
       />
       {(showInPortfolio) && <Field
-        name="categoryId"
-        component={InputCategory}
-        label={t('createTask.fieldCategory')}
+        name="mainCategoryId"
+        component={InputSubCategory}
+        onChange={(value) => {
+          props.change('categoryId', null);
+          props.change('subCategoryId', null);
+        }}
+        label={`${t('createTask.fieldMainCategory')}`}
         validate={required}
+        size={'small'}
+        labelType={'static'}
+      />}
+      {(showInPortfolio) && <Field
+        name="categoryId"
+        component={InputSubCategory}
+        onChange={(value) => {
+          props.change('categoryId', null);
+          props.change('subCategoryId', null);
+        }}
+        label={`${t('createTask.fieldCategory')}`}
+        validate={required}
+        categoryId={props.mainCategoryId}
+        size={'small'}
+        labelType={'static'}
       />}
       {(showInPortfolio) && <Field
         name="subCategoryId"
-        component={RadioListSubCategories}
-        label={t('createTask.fieldSubCategory')}
+        component={InputSubCategory}
+        label={`${t('createTask.fieldSubCategory')}`}
+        categoryId={props.categoryId}
         validate={required}
-        categoryId={categoryId}
+        size={'small'}
+        labelType={'static'}
       />}
+
+
       {(showInPortfolio && profileTabs.length > 0) && <Field
         name="profileTabId"
         label={t('follower.postForm.tab')}
@@ -121,10 +145,10 @@ PostForm  = reduxForm({
 const selector = formValueSelector('PostForm')
 PostForm = connect(state =>
   {
+    const mainCategoryId = selector(state, 'mainCategoryId')
     const categoryId = selector(state, 'categoryId')
-    const subCategoryId = selector(state, 'subCategoryId')
     const showInPortfolio = selector(state, 'showInPortfolio')
-    return {categoryId, subCategoryId, showInPortfolio}
+    return {categoryId, mainCategoryId, showInPortfolio}
   }
 )(PostForm)
 
