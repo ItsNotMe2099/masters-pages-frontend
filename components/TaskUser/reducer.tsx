@@ -88,7 +88,11 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
         }
         return item;
       }).filter(item => {
-        if (state.filter.status === 'in_progress' && item.id === action.payload.id && item.status !== 'in_progress') {
+        if (
+          (state.filter.status === 'draft' && item.id === action.payload.id && item.status !== 'draft')
+          ||
+          (state.filter.status === 'in_progress' && item.id === action.payload.id && item.status !== 'in_progress')
+        ) {
           removeItem = true;
           return false
         }
@@ -96,15 +100,6 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       });
       if (removeItem) {
         state.total -= 1;
-        state.stat = state.stat.map((i) => {
-          if (i.task_status === 'in_progress') {
-            i.count -= 1;
-          }
-          if (i.task_status === 'closed') {
-            i.count += 1;
-          }
-          return i;
-        })
       }
       break
     case ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL:
