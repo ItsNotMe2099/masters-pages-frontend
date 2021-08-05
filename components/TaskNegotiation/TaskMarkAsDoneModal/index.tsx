@@ -64,7 +64,7 @@ const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
       <div className={styles.taskPriceDetails}>
         <div className={styles.taskPriceDetailsItem}>
           <div className={styles.taskPriceDetailsItemLabel}>{taskNegotiation.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
-          <div className={styles.taskPriceDetailsItemValue}>$ {taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${taskNegotiation.ratePerHour}/h`}</div>
+          <div className={styles.taskPriceDetailsItemValue}>{taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${taskNegotiation.ratePerHour}/h`}</div>
         </div>
         <div className={styles.taskPriceDetailsItem}>
           <div className={styles.taskPriceDetailsItemLabel}>{`${t('deadline')}:`}</div>

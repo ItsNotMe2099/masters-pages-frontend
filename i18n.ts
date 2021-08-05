@@ -10,7 +10,6 @@ const domainDetector = {
   name: 'domainDetector',
   lookup(req, res, options) {
 
-    return 'ru'
     const hostname = (typeof window !== 'undefined')
       ? window.location.hostname
       : req.headers.host?.split(':')[0]

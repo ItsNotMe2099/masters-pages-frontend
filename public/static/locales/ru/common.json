@@ -438,6 +438,7 @@
     "paymentMethodSafeDeal": "Безопасная сделка",
     "deadline": "Срок исполнения",
     "fixedPrice": "Фиксированная цена",
+    "price": "Цена",
     "acceptTask": "ПРИНЯТЬ ЗАКАЗ",
     "messages": "Сообщения",
     "decline": "Отклонить",
