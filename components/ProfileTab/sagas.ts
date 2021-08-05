@@ -42,6 +42,9 @@ function* ProfileTabSaga() {
       yield put(deleteProfileTabRequest(action.payload.id));
       const result = yield take([ActionTypes.DELETE_PROFILE_TAB_REQUEST+ ApiActionTypes.SUCCESS, ActionTypes.DELETE_PROFILE_TAB_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_PROFILE_TAB_REQUEST + ApiActionTypes.SUCCESS){
+        if(action.payload.onDelete) {
+          action.payload.onDelete();
+        }
         yield put(modalClose());
         yield put(hideProfileForm(action.payload.formKey));
       //  yield put(fetchSkillList());

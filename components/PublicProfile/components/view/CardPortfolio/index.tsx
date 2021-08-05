@@ -158,7 +158,7 @@ const CardPortfolio = (props: Props) => {
       {!showForm && <>
         <div className={styles.panel}>
           <div className={styles.tabs}>
-            <ProfileTabs type={'portfolio'} currentTab={currentTab} skill={skill} isEdit={isEdit}
+            <ProfileTabs onDeleteTab={() => handleChangeTab(null)} type={'portfolio'} currentTab={currentTab} skill={skill} isEdit={isEdit}
                          onChangeTab={handleChangeTab}/>
           </div>
           <DropDown onChange={handleSortChange} value={sortType} options={[

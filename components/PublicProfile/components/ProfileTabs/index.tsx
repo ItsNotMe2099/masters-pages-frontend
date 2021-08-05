@@ -16,6 +16,7 @@ interface Props{
   isEdit: boolean,
   type: 'gallery' | 'portfolio',
   onChangeTab: (tab) => void,
+  onDeleteTab: (tab) => void
   currentTab: IProfileTab
 }
 const ProfileTabs = (props: Props) => {
@@ -46,7 +47,7 @@ const ProfileTabs = (props: Props) => {
     dispatch(confirmOpen({
       description: `Are you sure that you want to delete tab «${tab.title} and everything inside»?`,
       onConfirm: () => {
-        dispatch(deleteProfileTab(tab.id, `profileTab_${props.type}${tab.id}`));
+        dispatch(deleteProfileTab(tab.id, `profileTab_${props.type}${tab.id}`, () => props.onDeleteTab(tab)));
       }
     }));
   }
