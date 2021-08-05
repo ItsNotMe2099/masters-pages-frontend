@@ -17,7 +17,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   const id = ctx.query.profile as string;
   let profile, skill = null;
   if(id.indexOf('id') === 0){
-     profile = (await request({ url: `/api/profile/${id.replace('id', '')}`, method: 'GET' }))?.data
+     profile = (await request({ url: `/api/profile/${id.replace('id', '')}`, method: 'GET' }, ctx))?.data
+
     if(!profile){
       return {
         notFound: true
@@ -26,7 +27,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
 
   }else if(id.indexOf('sk') === 0){
 
-     skill = (await request({ url: `/api/profile/skill/${id.replace('sk', '')}`, method: 'GET' }))?.data
+     skill = (await request({ url: `/api/profile/skill/${id.replace('sk', '')}`, method: 'GET' }, ctx))?.data
     if(!skill){
       return {
         notFound: true

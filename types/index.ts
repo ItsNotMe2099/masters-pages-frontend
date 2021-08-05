@@ -157,7 +157,9 @@ export interface ProfileData {
   bio?: {
     bio: string,
     visible: false
-  }
+  },
+  isSubscribedByCurrentProfile: boolean
+  isRecommendedByCurrentProfile: boolean
 }
 
 export interface IProfileSettingsNotificationItem {

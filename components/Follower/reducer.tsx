@@ -4,17 +4,6 @@ import ActionTypes from "./const";
 export interface FollowerState {
   list: IProfileGalleryItem[],
   currentItem: IProfileGalleryItem
-  currentItemIndex: number
-  currentItemCommentList: any[],
-  currentItemCommentTotal: number,
-  currentItemCommentLoading: boolean,
-  currentItemCommentPage: number
-  commentIsSending: boolean,
-  commentSentSuccess: boolean,
-  commentSentError: any,
-
-  likeIsSending: boolean
-  likeSentError: any,
 
   page: number
   total: number
@@ -24,6 +13,7 @@ export interface FollowerState {
   listLoading: boolean,
   currentItemLoading: boolean
   formLoading: boolean,
+  isSubscribed: boolean
 }
 
 const initialState: FollowerState = {
@@ -35,19 +25,9 @@ const initialState: FollowerState = {
   formLoading: false,
   listLoading: false,
   currentItem: null,
-  currentItemIndex: 0,
   currentItemLoading: false,
-  currentItemCommentList: [],
-  currentItemCommentTotal: 0,
-  currentItemCommentPage: 1,
-  currentItemCommentLoading: false,
+  isSubscribed: false
 
-  commentIsSending: false,
-  commentSentSuccess: false,
-  commentSentError: null,
-
-  likeIsSending: false,
-  likeSentError: null
 }
 
 export default function FollowerReducer(state = {...initialState}, action) {
@@ -65,6 +45,7 @@ export default function FollowerReducer(state = {...initialState}, action) {
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
+      state.isSubscribed = true;
       state.list = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId ? [action.payload, ...state.list] : state.list;
       break
     case ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.FAIL:

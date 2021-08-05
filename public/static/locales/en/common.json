@@ -883,6 +883,7 @@
     "prefer": "Prefer to work in"
   },
   "cardProfile": {
+    "subscribed": "You are subscribed",
     "lastSeen": "last seen:",
     "stat": {
       "learnMore": "Learn more"
