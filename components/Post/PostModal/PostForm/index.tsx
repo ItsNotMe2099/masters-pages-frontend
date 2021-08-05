@@ -66,7 +66,16 @@ let PostForm = (props) => {
         size={'small'}
         labelType={'static'}
       />}
-
+      {(showInPortfolio && profileTabs.length > 0) && <Field
+        name="profileTabId"
+        label={t('follower.postForm.tab')}
+        component={SelectInput}
+        size={'small'}
+        options={profileTabs.map(item => ({label: item.title, value: item.id}))}
+        withIcon={false}
+        showEmpty={false}
+        validate={required}
+      />}
       <Field
         name="title"
         component={Input}
