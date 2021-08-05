@@ -8,17 +8,6 @@ import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 
 import {IProfileGalleryItem, IRootState} from 'types'
-import Loader from 'components/ui/Loader'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import {
-  deleteProfileGallery,
-  fetchProfileGalleryList,
-  resetProfileGalleryList,
-  setProfileGalleryCurrentItemIndex
-} from 'components/ProfileGallery/actions'
-import {setPageTaskUser} from 'components/TaskUser/actions'
-import PostItem from 'components/Post/PostItem'
-import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
 import PostModal from 'components/Post/PostModal'
 import {confirmOpen, modalClose, postEditOpen} from 'components/Modal/actions'
 import Button from 'components/ui/Button'

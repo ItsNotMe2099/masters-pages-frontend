@@ -7,6 +7,7 @@ interface IFollowerList{
   page?: number,
   sort?: string,
   sortOrder?: string
+
 }
 
 interface IFollowerItemCommentList{

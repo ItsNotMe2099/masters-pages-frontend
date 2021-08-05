@@ -312,7 +312,7 @@ AvatarInput.propTypes = {
 }
 AvatarInput.defaultProps = {
   maxSize: 5242880,
-  accept: ["image/jpeg", "image/png"]
+  accept: ["image/jpeg", "image/png", "image/jpg"]
 }
 
 export default withTranslation('common')(AvatarInput)

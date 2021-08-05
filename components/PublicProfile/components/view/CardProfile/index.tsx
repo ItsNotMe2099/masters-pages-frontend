@@ -26,9 +26,12 @@ const CardProfile = (props: Props) => {
   const dispatch = useDispatch();
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
   const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading);
+  const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed);
+  const isSubscribed = profile.isSubscribedByCurrentProfile || isTempSubscribed;
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
   const { t } = useTranslation('common');
+  console.log("Profile111", profile);
   const handleEditClick = () => {
     dispatch(showProfileForm( 'avatar'));
   }
@@ -96,7 +99,7 @@ const CardProfile = (props: Props) => {
       </div>}
       <div className={styles.followers}>
         <div className={styles.followersValue}><UserIcon/> {recommendationTotal} {t('personalArea.profile.recommended')} </div>
-        {!isEdit && <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>{t('personalArea.profile.subscribe')}</Button>}
+        {!isEdit && (isSubscribed ? <div className={styles.subscribed}>{t('cardProfile.subscribed')}</div> : <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>{t('personalArea.profile.subscribe')}</Button>)}
       </div>
     </Card>
   )

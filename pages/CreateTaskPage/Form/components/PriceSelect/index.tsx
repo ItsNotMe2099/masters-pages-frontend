@@ -4,6 +4,8 @@ import { Field, reduxForm,formValueSelector } from 'redux-form'
 import styles from './index.module.scss'
 import {useTranslation} from "i18n";
 import * as React from 'react'
+import {getCurrencySymbol} from 'data/currency'
+import {parserPrice} from 'utils/formatters'
 
 let PriceSelectForm = props => {
   const {t} = useTranslation();
@@ -31,7 +33,8 @@ let PriceSelectForm = props => {
               min="0.01"
               max="100.00"
               step="0.01"
-              parse={value => value ? parseFloat(value) : ''}
+              format={(value) => `${getCurrencySymbol(props.currency)}   ${value || ''}`}
+              parse={parserPrice}
               onChange={handleHourFieldChange}
             />
           </div>
@@ -70,10 +73,8 @@ let PriceSelectForm = props => {
               label={t('createTask.priceSelect.fieldBudget')}
               size={'small'}
               labelType={'static'}
-              min="1"
-              max="5000"
-              type={'number'}
-              parse={value => value ? parseFloat(value) : ''}
+              format={(value) => `${getCurrencySymbol(props.currency)}   ${value || ''}`}
+              parse={parserPrice}
               onChange={handleFixedFieldChange}
             />
           </div>

@@ -74,9 +74,12 @@
   width: 40%;
   margin-left: 13px;
 }
+.subscribed{
+  font-weight: bold;
+  color: black;
+}
 .followers{
   border-top: 1px solid #C4C4C4;
-
   display: flex;
   flex-direction: row;
   align-items: center;

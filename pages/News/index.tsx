@@ -15,32 +15,13 @@ const SharePersonalLabel = dynamic(() => import('components/Share/PersonalLabel'
   ssr: false
 })
 import {IProfileGalleryItem, IRootState} from 'types'
-import {formatSkillList} from 'utils/skills'
-import {setCurrentSkill} from 'components/Profile/actions'
-import {fetchProfileTabList} from 'components/ProfileTab/actions'
-import {fetchSkillList} from 'components/Skill/actions'
-import Tab from 'components/PublicProfile/components/Tab'
-import {getCategoryTranslation} from 'utils/translations'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
-import {
-  deleteProfileGallery,
-  fetchProfileGalleryList,
-  resetProfileGalleryList,
-  setProfileGalleryCurrentItemIndex,
-  setProfileGalleryTab
-} from 'components/ProfileGallery/actions'
 import {setPageTaskUser} from 'components/TaskUser/actions'
-import {fetchPostList, resetPostList} from 'components/Post/actions'
-import PostItem from 'components/Post/PostItem'
 import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
-import Card from 'components/PublicProfile/components/Card'
-import PostModal from 'components/Post/PostModal'
-import {confirmOpen, modalClose, postEditOpen} from 'components/Modal/actions'
-import Button from 'components/ui/Button'
 import Modals from 'components/layout/Modals'
 import {fetchNewsList, resetNewsList, setNewsCurrentItemIndex} from 'components/News/actions'
+import GalleryItem from 'components/GalleryItem'
 
 const NewsPage = (props) => {
   const {t} = useTranslation()
@@ -97,7 +78,7 @@ const NewsPage = (props) => {
           className={styles.list}
           hasMore={total > list.length}
           loader={listLoading ? <Loader/> : null}>
-          {list.map((item, index) => <PostItem isEdit={false} model={item} onClick={(model) => showGallery(model, index)} />)}
+          {list.map((item, index) => <GalleryItem isEdit={false} model={item} onClick={(model) => showGallery(model, index)} />)}
         </InfiniteScroll>}
         {isGalleryOpen && <GalleryModal isNews={true} isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)}/>}
 

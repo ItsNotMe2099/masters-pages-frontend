@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 
 import {IProfileTab, IRootState, ProfileData, ProfileWorkExperience, SkillData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import CardAdd from 'components/PublicProfile/components/CardAdd'
 import Tabs from 'components/PublicProfile/components/Tabs'
 import {DropDown} from 'components/ui/DropDown'
@@ -32,6 +31,7 @@ import Task from 'components/Task'
 import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
 import {confirmOpen} from 'components/Modal/actions'
 import {deleteProfilePortfolio} from 'components/ProfilePortfolio/actions'
+import GalleryItem from 'components/GalleryItem'
 
 interface Props{
   profile: ProfileData,
@@ -51,7 +51,7 @@ const CardGallery = (props: Props) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const currentTab = useSelector((state: IRootState) => state.profileGallery.currentProfileTab);
 
-  const limit = 3;
+  const limit = 20;
   const { t } = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
   const [currentSkillId, setCurrentSkillId] = useState(null);
@@ -140,7 +140,7 @@ const CardGallery = (props: Props) => {
     <Card isHidden={!isEdit && !listLoading && total === 0 && !currentTab}  className={styles.root} title={t('cardGallery.gallery')} toolbar={ isEdit ? [<FormActionButton type={'create'} title={'Add'} onClick={handleCreateClick}/>]: []}>
       {!showForm && <><div className={styles.panel}>
         <div className={styles.tabs}>
-          <ProfileTabs type={'gallery'} currentTab={currentTab} skill={skill} isEdit={isEdit} onChangeTab={handleChangeTab}/>
+          <ProfileTabs onDeleteTab={() => handleChangeTab(null)} type={'gallery'} currentTab={currentTab} skill={skill} isEdit={isEdit} onChangeTab={handleChangeTab}/>
         </div>
         {/*<DropDown onChange={handleSortChange} value={sortType} options={[
           {value: 'newFirst',  label: t('sort.newFirst')},

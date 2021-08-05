@@ -35,7 +35,6 @@ import {setPageTaskUser} from 'components/TaskUser/actions'
 import {fetchProfileGalleryList} from 'components/ProfileGallery/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import {confirmOpen} from 'components/Modal/actions'
 
 interface Props {
@@ -159,7 +158,7 @@ const CardPortfolio = (props: Props) => {
       {!showForm && <>
         <div className={styles.panel}>
           <div className={styles.tabs}>
-            <ProfileTabs type={'portfolio'} currentTab={currentTab} skill={skill} isEdit={isEdit}
+            <ProfileTabs onDeleteTab={() => handleChangeTab(null)} type={'portfolio'} currentTab={currentTab} skill={skill} isEdit={isEdit}
                          onChangeTab={handleChangeTab}/>
           </div>
           <DropDown onChange={handleSortChange} value={sortType} options={[

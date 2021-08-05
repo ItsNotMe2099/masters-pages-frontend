@@ -66,6 +66,7 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
+      console.log("CreateGallerySuccess", state.currentProfileTab, state.currentProfileTab?.id , action.payload.profileTabId)
       state.list = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId ? [action.payload, ...state.list] : state.list;
       break
     case ActionTypes.CREATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.FAIL:

@@ -1,6 +1,7 @@
 @import "scss/index";
 .root{
   padding: 33px 33px;
+  text-align: left;
 }
 .btnContainer{
   @include lg{

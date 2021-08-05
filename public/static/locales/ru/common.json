@@ -32,7 +32,8 @@
     "account": "Учетная запись",
     "settings": "Настройки",
     "reports": "Отчеты",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "currency": "Валюта"
   },
   "validation": {
     "email": "Некорректный формат емейла",
@@ -885,6 +886,8 @@
     "prefer": "Предпочитает работать в"
   },
   "cardProfile": {
+
+    "subscribed": "Вы подписаны",
     "lastSeen": "Был(а) последний раз:",
     "stat": {
       "learnMore": "Узнать больше"

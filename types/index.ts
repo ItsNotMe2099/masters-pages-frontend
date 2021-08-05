@@ -157,7 +157,9 @@ export interface ProfileData {
   bio?: {
     bio: string,
     visible: false
-  }
+  },
+  isSubscribedByCurrentProfile?: boolean
+  isRecommendedByCurrentProfile?: boolean
 }
 
 export interface IProfileSettingsNotificationItem {
@@ -382,6 +384,7 @@ export interface ITask {
   city: string
   address: string
   geonameid: number,
+  geoname: any
   location: ILocation,
   mainCategory: Category,
   category: Category,

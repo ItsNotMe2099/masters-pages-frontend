@@ -82,6 +82,7 @@ let CreateTaskForm = props => {
                 onChange={() =>  {
                   props.change('geonameid', null)}}
                 labelType={'static'}
+                size={'small'}
                 validate={required}
               />
               {props.countryCode && <Field
@@ -100,8 +101,7 @@ let CreateTaskForm = props => {
                 onChange={(value) => onChangeForStat('masterRole', value)}
                 component={SelectInput}
                 label={`${t('createTask.fieldMasterType')}`}
-                options={[{value: 'master', label: 'Master'}, {value: 'volunteer', label: 'Volunteer'}]}
-                validate={required}
+                options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
                 size={'small'}
                 labelType={'static'}
               />
@@ -177,7 +177,7 @@ let CreateTaskForm = props => {
               component={InputCurrency}
               withIcon={false}
 
-              label="Currency:"
+              label={`${t('currency')}`}
               size={'small'}
               labelType={'static'}
               validate={required}
@@ -248,11 +248,13 @@ CreateTaskForm = connect(state => {
   const categoryId = selector(state, 'categoryId')
   const visibilityType = selector(state, 'visibilityType')
   const countryCode = selector(state, 'countryCode')
+  const currency = selector(state, 'currency')
   return {
     mainCategoryId,
     categoryId,
     visibilityType,
-    countryCode
+    countryCode,
+    currency
   }
 })(CreateTaskForm)
 export default CreateTaskForm
