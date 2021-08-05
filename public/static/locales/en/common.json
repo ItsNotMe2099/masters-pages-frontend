@@ -29,7 +29,7 @@
     "account": "Account",
     "settings": "Settings",
     "reports": "Reports",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
   },
   "validation": {
     "email": "Wrong email format",
@@ -184,6 +184,7 @@
   "allPosts": "All posts",
   "newOrder": "New order",
   "photos": "Photos",
+
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {

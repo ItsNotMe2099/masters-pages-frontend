@@ -37,7 +37,9 @@ const TabOrderModal = ({isOpen, task, onClose}: Props) => {
         <div className={styles.title}>{t('editTask')}</div>
       </div>
       <div className={styles.separator}></div>
-      <TabOrderForm onSubmit={handleSubmit} initialValues={{...task}} onCancel={() => dispatch(modalClose())}/>
+      <TabOrderForm onSubmit={handleSubmit} initialValues={{...task,
+        countryCode: task?.geoname?.country,
+      }} onCancel={() => dispatch(modalClose())}/>
     </Modal>
   )
 }

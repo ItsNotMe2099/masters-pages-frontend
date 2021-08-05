@@ -19,6 +19,9 @@ import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
 import {useTranslation} from "i18n";
+import InputCurrency from 'components/ui/Inputs/InputCurrency'
+import * as React from 'react'
+import InputCountry from 'components/ui/Inputs/InputCountry'
 
 let TabOrderForm = props => {
   const { handleSubmit } = props
@@ -36,41 +39,99 @@ let TabOrderForm = props => {
               validate={required}
             />
             <Field
+              name="countryCode"
+              component={InputCountry}
+              label={t('createTask.fieldCountry')}
+              onChange={() =>  {
+                props.change('geonameid', null)}}
+              size={'small'}
+              labelType={'static'}
+              validate={required}
+            />
+
+            {props.countryCode && <Field
               name="geonameid"
               component={InputLocation}
-              label={`${t('location')}*`}
+              isRegistration={true}
+              countryCode={props.countryCode}
+              label={`${t('createTask.fieldLocation')}`}
+              size={'small'}
+              labelType={'static'}
               validate={required}
+            />}
+            <Field
+              name="address"
+              component={InputAddress}
+              size={'small'}
+              labelType={'static'}
+              label={`${t('createTask.fieldAddress')}`}
             />
             <Field
               name="masterRole"
               component={SelectInput}
-              label={`${t('masterOrVolunteer')}*`}
-              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}
+              label={`${t('createTask.fieldMasterType')}`}
+              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
+              size={'small'}
+              labelType={'static'}
+            />
+            <Field
+              name="executionType"
+              component={SelectInput}
+              label={`${t('createTask.fieldExecutionType')}`}
+              options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
               validate={required}
+              size={'small'}
+              labelType={'static'}
+            />
+            <Field
+              name="deadline"
+              component={Input}
+              label={`${t('createTask.fieldDeadline')}`}
+              validate={required}
+              size={'small'}
+              labelType={'static'}
+              mask={'99/99/9999'}
             />
           </div>
           <div className={styles.column}>
             <Field
-              name="categoryId"
-              component={InputCategory}
-              label={`${t('category')}*`}
+              name="mainCategoryId"
+              component={InputSubCategory}
+              onChange={(value) => {
+                props.change('categoryId', null);
+                props.change('subCategoryId', null);
+              }}
+              label={`${t('createTask.fieldMainCategory')}`}
               validate={required}
+              size={'small'}
+              labelType={'static'}
+            />
+            <Field
+              name="categoryId"
+              component={InputSubCategory}
+              onChange={(value) => {
+                props.change('categoryId', null);
+                props.change('subCategoryId', null);
+              }}
+              label={`${t('createTask.fieldCategory')}`}
+              validate={required}
+              categoryId={props.mainCategoryId}
+              size={'small'}
+              labelType={'static'}
             />
             <Field
               name="subCategoryId"
               component={InputSubCategory}
-              label={`${t('subCategory')}*`}
+              label={`${t('createTask.fieldSubCategory')}`}
               categoryId={props.categoryId}
               validate={required}
+              size={'small'}
+              labelType={'static'}
             />
           </div>
         </div>
         <div className={styles.address}>
-          <Field
-            name="address"
-            component={InputAddress}
-            label={t('address')}
-          />
+
         </div>
         <div className={styles.taskDesc}>
           <Field
@@ -80,6 +141,16 @@ let TabOrderForm = props => {
             validate={required}
           />
         </div>
+      <Field
+        name="currency"
+        component={InputCurrency}
+        withIcon={false}
+
+        label={`${t('currency')}`}
+        size={'small'}
+        labelType={'static'}
+        validate={required}
+      />
         <Field
           name="photos"
           component={FileInput}
@@ -106,9 +177,16 @@ TabOrderForm   = reduxForm ({
 
 const selector = formValueSelector('orderForm') // <-- same as form name
 TabOrderForm = connect(state => {
+  const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
+  const countryCode = selector(state, 'countryCode')
+  const currency = selector(state, 'currency')
+
   return {
-    categoryId
+    mainCategoryId,
+    categoryId,
+    countryCode,
+    currency
   }
 })(TabOrderForm)
 export default TabOrderForm

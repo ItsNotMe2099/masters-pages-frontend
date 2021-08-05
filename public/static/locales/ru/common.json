@@ -32,7 +32,8 @@
     "account": "Учетная запись",
     "settings": "Настройки",
     "reports": "Отчеты",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "currency": "Валюта"
   },
   "validation": {
     "email": "Некорректный формат емейла",
