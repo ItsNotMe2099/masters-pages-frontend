@@ -16,10 +16,8 @@ import {
   setProfileGalleryCurrentItemIndex
 } from 'components/ProfileGallery/actions'
 import GalleryNewComment from 'components/PublicProfile/components/view/GalleryModal/GalleryCommentForm'
-import {setPageTaskUser} from 'components/TaskUser/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import {default as React} from 'react'
 import GalleryCommentItem from 'components/PublicProfile/components/view/GalleryModal/GalleryCommentItem'
 import LikeIcon from 'components/svg/LikeIcon'

@@ -38,14 +38,17 @@ const ProfileTabs = (props: Props) => {
       dispatch(updateProfileTab(tab.id, {title}, `profileTab_${props.type}${tab.id}`));
 
     }else{
-      dispatch(confirmOpen({
-        description: `Are you sure that you want to delete tab «${tab.title} and everything inside»?`,
-        onConfirm: () => {
-          dispatch(deleteProfileTab(tab.id, `profileTab_${props.type}${tab.id}`));
-        }
-      }));
+      handleDelete(tab);
     }
 
+  }
+  const handleDelete = (tab) => {
+    dispatch(confirmOpen({
+      description: `Are you sure that you want to delete tab «${tab.title} and everything inside»?`,
+      onConfirm: () => {
+        dispatch(deleteProfileTab(tab.id, `profileTab_${props.type}${tab.id}`));
+      }
+    }));
   }
   const handleShowAdd = (tab, data) => {
 
@@ -56,7 +59,7 @@ const ProfileTabs = (props: Props) => {
   return (
     <div className={`${styles.root}`}>
       <ProfileTabComponent isActive={!currentTab} type={props.type} isAll={true} onClick={() => handleTabClick(null)}/>
-      {tabs.map(tab => <ProfileTabComponent isActive={tab.id === currentTab?.id}  isEdit={props.isEdit} type={props.type} profileTab={tab}  onSubmit={(title) => handleEditSubmit(tab, title)} onClick={() => handleTabClick(tab)} />)}
+      {tabs.map(tab => <ProfileTabComponent isActive={tab.id === currentTab?.id} onDelete={() => handleDelete(tab)} isEdit={props.isEdit} type={props.type} profileTab={tab}  onSubmit={(title) => handleEditSubmit(tab, title)} onClick={() => handleTabClick(tab)} />)}
       {props.isEdit && <ProfileTabComponent isEdit={props.isEdit} type={props.type}  isNew={true} onSubmit={handleNewSubmit}/>}
     </div>
   )

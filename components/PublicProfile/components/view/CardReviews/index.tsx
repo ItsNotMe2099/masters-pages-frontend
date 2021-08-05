@@ -4,11 +4,8 @@ import Card from 'components/PublicProfile/components/Card'
 import {default as React, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {fetchFeedbacksToProfileRequest, resetFeedbackList, setPageFeedback} from 'components/ProfileFeedback/actions'
-import {setPageTaskUser} from 'components/TaskUser/actions'
-import {fetchProfileGalleryList} from 'components/ProfileGallery/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import {useTranslation, withTranslation} from "i18n";
 

@@ -14,6 +14,7 @@ interface Props{
   isActive?: boolean
   type: string,
   onClick?: () => void
+  onDelete?: () => void
   onSubmit?: (value) => void,
   profileTab?: IProfileTab
 }
@@ -38,7 +39,9 @@ const ProfileTab = (props: Props) => {
     e.stopPropagation();
   }
   const handleDeleteClick = () => {
-
+      if(props.onDelete){
+        props.onDelete();
+      }
   }
   const handleNewClick = () => {
     dispatch(showProfileForm( formNewKey));

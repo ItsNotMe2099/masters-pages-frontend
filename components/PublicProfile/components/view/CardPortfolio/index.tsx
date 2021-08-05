@@ -35,7 +35,6 @@ import {setPageTaskUser} from 'components/TaskUser/actions'
 import {fetchProfileGalleryList} from 'components/ProfileGallery/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import {confirmOpen} from 'components/Modal/actions'
 
 interface Props {
