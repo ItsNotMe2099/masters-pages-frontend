@@ -48,7 +48,7 @@ export default function EventChatNewMessage(props: Props) {
     if(!srcValue){
       return;
     }
-    return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || 'https://masterspages.com'}/api/s3/${srcValue}`)}`
+    return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
   }
   const renderFilePreview = (file) => {
     //const ext = filename.split('.').pop();

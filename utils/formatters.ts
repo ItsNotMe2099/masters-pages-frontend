@@ -21,3 +21,19 @@ export const parseDate = (date, formatStr = 'yyyy-MM-dd') => {
 export const formatDate = (date, formatStr = 'dd.MM.yyyy') => {
   return format(parseDate(date), formatStr)
 }
+
+
+export const formatSeconds = (seconds) => {
+  const date = new Date(seconds * 1000)
+  const hh = date.getUTCHours()
+  const mm = date.getUTCMinutes()
+  const ss = pad(date.getUTCSeconds())
+  if (hh) {
+    return `${hh}:${pad(mm)}:${ss}`
+  }
+  return `${mm}:${ss}`
+}
+
+export const pad = (string) => {
+  return ('0' + string).slice(-2)
+}

@@ -274,7 +274,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           <div>{infoTitle || t('forms.avatarInput.uploadYourPhoto')}</div>
           <div>{infoFormatAllowed || t('forms.avatarInput.formatAllowed')}</div>
           <div>{infoRequirements || `${t('forms.avatarInput.minimalSize')}: 180×180 px.`}</div>
-          <ErrorInput />
+          <ErrorInput {...props} />
           {(error || props.error) && <FormError error={error || props.error}/>}
           <div className={styles.infoActions}>
             <div className={styles.infoActionItem} onClick={handleChangePhoto}>{t('forms.avatarInput.changePhoto')} <img src={'/img/icons/link-arrow-left.svg'} /></div>

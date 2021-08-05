@@ -102,6 +102,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   useEffect(() => {
     const filtered = files.filter((file => !!file.path))
     if(multiple) {
+      console.log("SetNewFiles", filtered.map(item => item.path));
       onChange(filtered.map(item => item.path))
 
     }else{
@@ -138,14 +139,16 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
     setFiles(updatedFiles.map(transformFile));
   }, [files])
 
-  const onRemove = useCallback((file: FileEntity) => {
+  const onRemove =(file: FileEntity) => {
+    console.log("ONRemoveFiles")
     setFiles(files => {
-      const index = files.findIndex( item => shallowEqual(item.rawFile, file.rawFile) || item.path === file.path)
+      const index = files.findIndex( item => (file.key && file.key === item.key) || (!file.key && item.path === file.path))
+        console.log("index", index);
       const newFiles = [...files];
       newFiles.splice(index, 1);
       return newFiles
     });
-  },[files])
+  }
 
   const { getRootProps, getInputProps } = useDropzone({
     ...options,
