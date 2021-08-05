@@ -9,8 +9,8 @@ import ShowMoreText from 'react-show-more-text';
 interface Props{
   model: IProfileGalleryItem,
   isEdit: boolean,
-  onEdit: (model) => void,
-  onDelete: (model) => void,
+  onEdit?: (model) => void,
+  onDelete?: (model) => void,
   onClick: (model) => void
 }
 const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
@@ -28,6 +28,10 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
           <FormActionButton type={'edit'} title={t('edit')} onClick={ () => onEdit(model)}/>
           <FormActionButton type={'delete'} title={t('delete')} onClick={ () => onDelete(model)}/>
         </div>}
+        <div className={styles.stat}>
+          <div className={styles.statItem}><img src={'/img/icons/likes_white.svg'}/>{model.likesCount}</div>
+          <div className={styles.statItem}><img src={'/img/icons/comments_white.svg'}/>{model.commentsCount}</div>
+        </div>
       </div>
       <div className={styles.info}>
         <div className={styles.infoWrapper}>
@@ -35,10 +39,7 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
           <div className={styles.title} onClick={handleClick}>{model.title}</div>
 
         </div>
-        <div className={styles.stat}>
-          <div className={styles.statItem}><img src={'/img/icons/likes.svg'}/>{model.likesCount}</div>
-          <div className={styles.statItem}><img src={'/img/icons/comments.svg'}/>{model.commentsCount}</div>
-        </div>
+
         </div>
         <div className={styles.description} onClick={handleClick}>
           <ShowMoreText

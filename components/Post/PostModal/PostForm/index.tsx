@@ -21,6 +21,7 @@ import EventReviewForm
 import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {useTranslation, Trans} from 'i18n'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
+import InputSkill from 'components/ui/Inputs/InputSkill'
 
 let PostForm = (props) => {
   const {categoryId, subCategoryId, showInPortfolio} = props;
@@ -55,52 +56,17 @@ let PostForm = (props) => {
         component={Checkbox}
         label={t('follower.postForm.showInPortfolio')}
       />
-      {(showInPortfolio) && <Field
-        name="mainCategoryId"
-        component={InputSubCategory}
-        onChange={(value) => {
-          props.change('categoryId', null);
-          props.change('subCategoryId', null);
-        }}
-        label={`${t('createTask.fieldMainCategory')}`}
-        validate={required}
-        size={'small'}
-        labelType={'static'}
-      />}
-      {(showInPortfolio) && <Field
-        name="categoryId"
-        component={InputSubCategory}
-        onChange={(value) => {
-          props.change('categoryId', null);
-          props.change('subCategoryId', null);
-        }}
-        label={`${t('createTask.fieldCategory')}`}
-        validate={required}
-        categoryId={props.mainCategoryId}
-        size={'small'}
-        labelType={'static'}
-      />}
+
       {(showInPortfolio) && <Field
         name="subCategoryId"
-        component={InputSubCategory}
-        label={`${t('createTask.fieldSubCategory')}`}
-        categoryId={props.categoryId}
+        component={InputSkill}
+        useSubCategoryId={true}
+        label={`${t('createTask.fieldCategory')}`}
         validate={required}
         size={'small'}
         labelType={'static'}
       />}
 
-
-      {(showInPortfolio && profileTabs.length > 0) && <Field
-        name="profileTabId"
-        label={t('follower.postForm.tab')}
-        component={SelectInput}
-        size={'small'}
-        options={profileTabs.map(item => ({label: item.title, value: item.id}))}
-        withIcon={false}
-        showEmpty={false}
-        validate={required}
-      />}
       <Field
         name="title"
         component={Input}

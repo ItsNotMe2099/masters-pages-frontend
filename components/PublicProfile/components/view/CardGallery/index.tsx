@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 
 import {IProfileTab, IRootState, ProfileData, ProfileWorkExperience, SkillData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
-import GalleryItem from 'components/PublicProfile/components/view/CardGallery/components/GalleryItem'
 import CardAdd from 'components/PublicProfile/components/CardAdd'
 import Tabs from 'components/PublicProfile/components/Tabs'
 import {DropDown} from 'components/ui/DropDown'
@@ -32,6 +31,7 @@ import Task from 'components/Task'
 import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
 import {confirmOpen} from 'components/Modal/actions'
 import {deleteProfilePortfolio} from 'components/ProfilePortfolio/actions'
+import GalleryItem from 'components/GalleryItem'
 
 interface Props{
   profile: ProfileData,

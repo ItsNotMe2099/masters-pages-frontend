@@ -3,16 +3,15 @@ import { useCallback, useEffect, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSubCategory, resetSubCategory } from "./actions";
-import {getCategoryTranslation} from 'utils/translations'
 import request from 'utils/request'
 import queryString from  'query-string';
 import {useTranslation} from 'i18n'
+import {getCategoryTranslation} from 'utils/translations'
 interface Props {
-
+  useSubCategoryId: boolean
 }
 
-export default function InputSubCategory(props) {
+export default function InputSkill(props) {
   const {t, i18n} = useTranslation();
   const dispatch = useDispatch()
   const [value, setValue] = useState();
@@ -26,13 +25,14 @@ export default function InputSubCategory(props) {
   }, [i18n.language])
 
   const getSearchCategory = (search = '') => {
-    return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
+    return request({url: `/api/profile/skill`, method: 'GET'})
       .then((response) => {
         const data = response.data;
-        setOptions(data ? data.map(item => {
+        setOptions(data ? data.filter(i => i.subCategoryId).map(item => {
+          console.log(" props.useSubCategoryId ",props.useSubCategoryId, item.subCategoryId, props.input.value)
           return {
-            value: item.id,
-            label: item.name,
+            value: props.useSubCategoryId ? item.subCategoryId : item.id,
+            label: `${getCategoryTranslation(item.mainCategory, i18n.language)?.name || ''}${getCategoryTranslation(item.category, i18n.language).name}/${getCategoryTranslation(item.subCategory, i18n.language)?.name}`,
           }
         }) : [])
       })
@@ -45,11 +45,8 @@ export default function InputSubCategory(props) {
     getSearchCategory(value);
   }
 
-  useEffect(() => {
-
-  }, [props.categoryId])
 
   return (
-    <SelectInput {...props} options={options} onSearchChange={handleOnSearchChange} onOpenDropDown={handleOnOpen} />
+    <SelectInput {...props} options={options}  onOpenDropDown={handleOnOpen} />
   )
 }

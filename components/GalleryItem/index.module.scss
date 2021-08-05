@@ -28,6 +28,27 @@
   align-items: center;
   padding: 4px;
 }
+.stat{
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  color: white;
+  .statItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:first-of-type{
+      margin-right: 15px;
+    }
+    img{
+      margin-right: 5px;
+    }
+  }
+}
 .info{
 
   width: 100%;
@@ -58,19 +79,5 @@
     }
 
   }
-  .stat{
-    display: flex;
-    align-items: center;
-    .statItem{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      &:first-of-type{
-        margin-right: 15px;
-      }
-      img{
-        margin-right: 5px;
-      }
-    }
-  }
+
 }
