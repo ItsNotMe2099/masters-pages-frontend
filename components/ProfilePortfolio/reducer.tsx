@@ -41,8 +41,13 @@ export default function ProfilePortfolioReducer(state = {...initialState}, actio
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
-      state.list = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId ? [action.payload, ...state.list] : state.list;
+      const shouldAdd = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId;
 
+      state.list = shouldAdd ? [action.payload, ...state.list] : state.list;
+
+      if(shouldAdd){
+        state.total++;
+      }
       break
     case ActionTypes.CREATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'

@@ -10,6 +10,7 @@ import {updateSkill, updateSkillByForm} from 'components/Skill/actions'
 import ReactPlayer from 'react-player'
 import {getMediaPath, isMediaImage, isMediaVideo} from 'utils/media'
 import {useTranslation} from 'i18n'
+import Player from 'components/ui/video/Player'
 interface Props{
   profile: ProfileData,
   skill: SkillData
@@ -43,8 +44,10 @@ const CardSalesPitch = (props: Props) => {
       </div>
       </div>
       <div className={styles.rightColumn}>
-        {(file && isMediaVideo(file)) && <div className={styles.video}><ReactPlayer width="100%" height={''}  url={getMediaPath(file)} controls={true}/></div>}
-        {(file && isMediaImage(file)) && <img className={styles.image} src={getMediaPath(file)} />}
+        {(file && isMediaVideo(file)) && <div className={styles.video}>
+          <Player
+            source={getMediaPath(file)}/></div>}
+          {(file && isMediaImage(file)) && <img className={styles.image} src={getMediaPath(file)} />}
 
       </div>
        </div>}

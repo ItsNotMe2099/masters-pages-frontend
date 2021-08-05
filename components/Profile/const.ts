@@ -17,7 +17,6 @@ enum ActionTypes {
 
   DELETE_PROFILE = 'Profile/DELETE_PROFILE',
   DELETE_PROFILE_REQUEST = 'Profile/DELETE_PROFILE_REQUEST',
-
   FORM_RESET = 'Profile/FORM_RESET',
 }
 

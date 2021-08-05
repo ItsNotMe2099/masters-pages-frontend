@@ -103,7 +103,7 @@ const PublicProfile = (props) => {
   }, [isEdit])
   const handleCategoryChange = (category, subCategory) => {
     setCategory(category);
-
+  console.log("handleCategoryChange");
     if (subCategory?.subCategoryId) {
       dispatch(setCurrentSkill(subCategory));
 

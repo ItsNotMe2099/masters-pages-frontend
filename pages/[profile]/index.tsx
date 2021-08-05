@@ -28,7 +28,9 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   }else if(id.indexOf('sk') === 0){
 
      skill = (await request({ url: `/api/profile/skill/${id.replace('sk', '')}`, method: 'GET' }, ctx))?.data
-    if(!skill){
+
+
+    if(!skill || !skill.profile){
       return {
         notFound: true
       }

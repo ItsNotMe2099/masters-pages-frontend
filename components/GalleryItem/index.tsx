@@ -25,8 +25,8 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
         <img src={getMediaPath(model.photo)} onClick={handleClick}/>
         {isEdit && <div className={styles.editActions}>
 
-          <FormActionButton type={'edit'} title={t('edit')} onClick={ () => onEdit(model)}/>
-          <FormActionButton type={'delete'} title={t('delete')} onClick={ () => onDelete(model)}/>
+          <FormActionButton type={'edit'} title={''} onClick={ () => onEdit(model)}/>
+          <FormActionButton type={'delete'} title={''} onClick={ () => onDelete(model)}/>
         </div>}
         <div className={styles.stat}>
           <div className={styles.statItem}><img src={'/img/icons/likes_white.svg'}/>{model.likesCount}</div>

@@ -67,7 +67,11 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.formIsSuccess = true;
       state.formLoading = false;
       console.log("CreateGallerySuccess", state.currentProfileTab, state.currentProfileTab?.id , action.payload.profileTabId)
-      state.list = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId ? [action.payload, ...state.list] : state.list;
+      const shouldAdd = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId;
+      state.list = shouldAdd ? [action.payload, ...state.list] : state.list;
+      if(shouldAdd){
+        state.total++;
+      }
       break
     case ActionTypes.CREATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
@@ -183,6 +187,7 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.commentSentSuccess = true
       state.commentSentError = null
       state.currentItemCommentList = [action.payload, ...state.currentItemCommentList]
+      state.currentItemCommentTotal++;
       if(state.currentItem) {
         state.currentItem.commentsCount = parseInt(state.currentItem.commentsCount as string, 10)  + 1;
       }
@@ -208,11 +213,13 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
     case ActionTypes.CREATE_PROFILE_GALLERY_COMMENT_LIKE_REQUEST + ApiActionTypes.SUCCESS:
       state.likeIsSending = false;
       if(state.currentItem) {
-        state.currentItem.likesCount =  parseInt(state.currentItem.likesCount as string, 10) + 1;
+        state.currentItem.likesCount =  state.currentItem.likesCount ? parseInt(state.currentItem.likesCount as string, 10) + 1 : 1;
+        state.currentItem.isLiked = true;
+
       }
       state.list = state.list.map(item =>{
         if(item.id === action.payload.profileGalleryId){
-          return {...item, likesCount: parseInt(item.likesCount as string, 10) + 1}
+          return {...item, isLiked: true, likesCount: parseInt(item.likesCount as string, 10) + 1}
         }
         return item;
       })

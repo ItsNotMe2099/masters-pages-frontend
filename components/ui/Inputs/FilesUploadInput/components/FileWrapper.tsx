@@ -67,6 +67,7 @@ const FileWrapper = (props: Props) => {
     }
   },[])
   const handleRemove = () => {
+    console.log("handleRemove")
     if(  fileUpload.current  && file.rawFile){
       fileUpload.current.cancel();
     }
@@ -84,7 +85,7 @@ const FileWrapper = (props: Props) => {
     file={file}
     loading={!isLoaded}
     progress={progress}
-    onRemove={handleConfirmRemove}/> : <div>
+    onRemove={handleRemove}/> : <div>
     <Button white size="9px 16px" onClick={handleRemove} type="button">{t('delete')}</Button>
     <Button transparent onClick={handleCancelRemove}   type="button">{t('cancel')}</Button>
   </div>

@@ -129,6 +129,7 @@ export default function NewsReducer(state = {...initialState}, action) {
       state.commentSentSuccess = true
       state.commentSentError = null
       state.currentItemCommentList = [action.payload, ...state.currentItemCommentList]
+      state.currentItemCommentTotal++;
       if(state.currentItem) {
         state.currentItem.commentsCount = parseInt(state.currentItem.commentsCount as string, 10)  + 1;
       }
@@ -154,11 +155,12 @@ export default function NewsReducer(state = {...initialState}, action) {
     case ActionTypes.CREATE_NEWS_COMMENT_LIKE_REQUEST + ApiActionTypes.SUCCESS:
       state.likeIsSending = false;
       if(state.currentItem) {
-        state.currentItem.likesCount =  parseInt(state.currentItem.likesCount as string, 10) + 1;
+        state.currentItem.likesCount = state.currentItem.likesCount ? parseInt(state.currentItem.likesCount as string, 10) + 1 : 1;
+        state.currentItem.isLiked = true;
       }
       state.list = state.list.map(item =>{
         if(item.id === action.payload.profileGalleryId){
-          return {...item, likesCount: parseInt(item.likesCount as string, 10) + 1}
+          return {...item,isLiked: true, likesCount: parseInt(item.likesCount as string, 10) + 1}
         }
         return item;
       })

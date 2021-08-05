@@ -9,6 +9,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form'
 import {useTranslation, withTranslation} from "i18n";
 import TextArea from 'components/ui/Inputs/TextArea'
 import Button from 'components/PublicProfile/components/Button'
+import {bioMaxLength} from 'utils/validations'
 interface Props{
   onCancel: () => void,
   handleSubmit?: () => void,
@@ -27,6 +28,7 @@ let SalesPitchForm = (props: Props) => {
           name="description"
           component={TextArea}
           labelType="placeholder"
+          validate={[bioMaxLength]}
           label={t('cardSalesPitch.form.fillUpSalePitch')}
         />
         </div>
