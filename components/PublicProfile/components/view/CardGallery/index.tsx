@@ -51,7 +51,7 @@ const CardGallery = (props: Props) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const currentTab = useSelector((state: IRootState) => state.profileGallery.currentProfileTab);
 
-  const limit = 3;
+  const limit = 20;
   const { t } = useTranslation('common');
   const [sortType, setSortType] = useState('newFirst');
   const [currentSkillId, setCurrentSkillId] = useState(null);
