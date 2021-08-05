@@ -362,45 +362,17 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
         </div>
         <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
 
-          <div className={styles.titleLeft}>
-            {t('task.paymentMethod')}
-          </div>
-          <div className={styles.methodWrapper}>
-            <div className={styles.method}>
-              <img src="/img/SearchTaskPage/icons/bank.svg" alt=''/>
-              <div className={styles.desc}>   {t('task.paymentMethodBank')}</div>
-            </div>
-            <div className={styles.method}>
-              <img src="/img/SearchTaskPage/icons/cash.svg" alt=''/>
-              <div className={styles.desc}>{t('task.paymentMethodCash')}</div>
-            </div>
-            <div className={styles.methodSafe}>
-              <img className={styles.last} src="/img/SearchTaskPage/icons/safe.svg" alt=''/>
-              <div className={styles.desc}>{t('task.paymentMethodSafeDeal')}</div>
-            </div>
 
-          </div>
-          {task.budget ?
             <div className={styles.priceWrapper}>
               <div className={styles.price}>
-                {t('task.fixedPrice')} :
+                {t('task.price')} :
               </div>
               <div className={styles.priceDetailsValue}>
-                {t('task.lessThen')} <span>{getCurrencySymbol(task.currency)}{task.budget}</span>
+                {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)}${task.budget}/h`:
+                  `${getCurrencySymbol(task.currency)}${task.ratePerHour}/h`}
               </div>
             </div>
-            :
 
-
-            task.ratePerHour && <div className={styles.priceWrapper}>
-              <div className={styles.price}>
-                {t('task.hourly')} :
-              </div>
-              <div className={styles.priceDetailsValue}>
-                <span>{getCurrencySymbol(task.currency)}{task.ratePerHour}/h</span>
-              </div>
-            </div>
-          }
           {task.deadline && <div className={styles.priceDetailsItem}>
             <div className={styles.priceDetailsLabel}>
               {t('task.deadline')} :

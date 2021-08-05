@@ -29,7 +29,7 @@
     "account": "Account",
     "settings": "Settings",
     "reports": "Reports",
-    "contacts": "Contacts",
+    "contacts": "Contacts"
   },
   "validation": {
     "email": "Wrong email format",
@@ -434,6 +434,7 @@
     "paymentMethodSafeDeal": "Safe deal",
     "deadline": "Deadline",
     "fixedPrice": "Fixed price",
+    "price": "Price",
     "acceptTask": "ACCEPT TASK",
     "messages": "Messages",
     "decline": "Decline",
