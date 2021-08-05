@@ -20,6 +20,7 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "i18n";
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
+import {modalClose} from 'components/Modal/actions'
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
@@ -70,6 +71,7 @@ const CreateTaskPage = (props) => {
         title={t('createTask.successTitle')}
         image={'/img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
+          dispatch(modalClose());
         router.push('/orders');
       }}>
 
