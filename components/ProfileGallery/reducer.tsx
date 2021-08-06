@@ -88,6 +88,9 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.formIsSuccess = true;
       state.formLoading = false;
       state.list = state.list.map(item => item.id === action.payload.id ? ({...item, ...action.payload}) : item);
+      if(state.currentProfileTab){
+        state.list = state.list.filter(i => i.profileTabId === state.currentProfileTab?.id);
+      }
       break
     case ActionTypes.UPDATE_PROFILE_GALLERY_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
