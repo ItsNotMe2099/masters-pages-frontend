@@ -279,7 +279,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }));
   }
   const canEdit = actionsType === 'client';
-  const taskLink = `/TaskPage/${task.id}`;
+  const taskLink = `/task/${task.id}`;
   const profileLink = `/id${task.profile.id}`;
   return (
     <div className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>

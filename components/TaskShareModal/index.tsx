@@ -7,6 +7,8 @@ import styles from './index.module.scss'
 import {useTranslation, Trans} from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
+import Input from 'components/ui/Inputs/Input'
+import {useState} from 'react'
 interface Props {
   isOpen: boolean,
 }
@@ -14,18 +16,24 @@ const TaskShareModal = ({isOpen}: Props) => {
   const dispatch = useDispatch();
   const task = useSelector((state: IRootState) => state.taskSearch.currentTask)
   const {t} = useTranslation('common')
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : ''}/task/${task?.id}`;
+  const [isCopied, setIsCopied] = useState(false);
 
-  const getHost = () => {
-    if (process.browser) {
-      return `${document?.location?.protocol}://${document?.location?.origin}/task/${task?.id}`
-    }
+  const handleCopy = () => {
+    setIsCopied(true);
+    const textField = document.createElement('textarea')
+    textField.innerText = shareUrl
+    document.body.appendChild(textField)
+    textField.select()
+    document.execCommand('copy')
+    textField.remove()
   }
   return (
     <Modal isOpen={isOpen}  onRequestClose={() => dispatch(modalClose())}>
-      <div>{`${t('copyLink')}:`} {getHost()}</div>
-      <div className={styles.buttons}>
-        <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={() => dispatch(modalClose())}>{t('cancel')}</Button>
-      </div>
+      <div>{task.title}</div>
+      <Input   icon={<img className={styles.copy} onClick={handleCopy} src={'/img/icons/copy.svg'}/>}  input={{value: shareUrl}} labelType={'static'} type={'text'}/>
+      {isCopied && <div className={styles.tip}>{t('personalLink.linkWas')}</div>}
+
     </Modal>
   )
 }
