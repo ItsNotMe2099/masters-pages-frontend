@@ -27,19 +27,16 @@ const queryString = require('query-string')
 import {fetchProfileContacts} from 'components/Contacts/actions'
 import {RadioList} from 'components/ui/Inputs/RadioList'
 import InputCountry from 'components/ui/Inputs/InputCountry'
+import InputProfileContact from 'components/ui/Inputs/InputProfileContact'
 
 let CreateTaskForm = props => {
   const {t} = useTranslation()
-  const dispatch = useDispatch()
   const { handleSubmit, onChangeForStat } = props
   const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
   const searchStatCount = useSelector((state: IRootState) => state.profileSearch.searchStatCount)
   const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
-  const contacts = useSelector((state: IRootState) => state.contacts.list);
 
-  useEffect(() => {
-    dispatch(fetchProfileContacts({page: 1, limit: 100}));
-  }, [])
+
   const getSearchStatFilterLink = () => {
      return `/${statFilter.masterRole === 'volunteer' ?'SearchVolunteerPage' : 'SearchMasterPage'}/?${queryString.stringify({filter: JSON.stringify(statFilter)}, {encode: true}).replace(/(")/g, '%22')}`
   }
@@ -68,9 +65,8 @@ let CreateTaskForm = props => {
               />
               {props.visibilityType === 'private' && <Field
                 name="profileId"
-                component={SelectInput}
+                component={InputProfileContact}
                 label={`Profile`}
-                options={contacts.map(item => ({label: `${item.contactProfile.firstName} ${item.contactProfile.lastName}`, value: item.contactProfile.id}))}
                 size={'small'}
                 validate={required}
                 labelType={'static'}
