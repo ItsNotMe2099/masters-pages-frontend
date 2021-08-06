@@ -372,8 +372,8 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 {t('task.price')} :
               </div>
               <div className={styles.priceDetailsValue}>
-                {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)}${task.budget}/h`:
-                  `${getCurrencySymbol(task.currency)}${task.ratePerHour}/h`}
+                {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget}`:
+                  `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
               </div>
             </div>
 

@@ -184,7 +184,7 @@
   "allPosts": "All posts",
   "newOrder": "New order",
   "photos": "Photos",
-
+  "priceRateSuffix": "h",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {

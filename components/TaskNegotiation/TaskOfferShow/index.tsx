@@ -86,7 +86,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>{response.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
-            <div className={styles.taskPriceDetailsItemValue}>$ {response.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/h`}</div>
+            <div className={styles.taskPriceDetailsItemValue}>$ {response.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/${t('priceRateSuffix')}`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>`${t('deadline')}:`</div>
