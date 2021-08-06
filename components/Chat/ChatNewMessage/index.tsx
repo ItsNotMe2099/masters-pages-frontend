@@ -58,6 +58,12 @@ export default function ChatNewMessage(props: Props) {
         </div>
 
   }
+  const onEnterPress = (e) => {
+    if(e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  }
 
   return (
    <div className={styles.root}>
@@ -70,6 +76,7 @@ export default function ChatNewMessage(props: Props) {
          meta={{}}
          input={{value: message, onChange: handleChange}}
          className={styles.messageField}
+         onKeyDown={onEnterPress}
        />
      </div>
      {!messageIsSending ?    <div className={styles.button} onClick={handleSendMessage}>
