@@ -56,7 +56,7 @@ const SearchProfileFilter = (props: Props) => {
   }
 
   return <div>
-    <SearchProfileForm form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
+    <SearchProfileForm type={props.searchRole}  form={props.form} collapsed={props.collapsed} onChange={handleFilterChange} initialValues={props.initialValues}/>
     {!props.collapsed && <SavedSearchList type={'profile'} onChange={handleFilterChange}/>}
 
   </div>

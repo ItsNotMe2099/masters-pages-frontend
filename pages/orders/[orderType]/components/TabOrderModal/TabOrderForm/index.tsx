@@ -110,7 +110,6 @@ let TabOrderForm = props => {
               name="categoryId"
               component={InputSubCategory}
               onChange={(value) => {
-                props.change('categoryId', null);
                 props.change('subCategoryId', null);
               }}
               label={`${t('createTask.fieldCategory')}`}

@@ -19,6 +19,7 @@ interface Props{
   handleSubmit?: () => void,
   onSubmit?: (data) => void,
   initialValues?: any
+  change?: (name, val) => void
 }
 let CardCategoryForm = (props: Props) => {
   const { t } = useTranslation('common');
@@ -42,7 +43,8 @@ let CardCategoryForm = (props: Props) => {
         label={t('createTask.fieldMainCategory')}
         validate={[required]}
         onChange={(val) =>{
-
+          props.change('categoryId', null);
+          props.change('subCategoryId', null);
           setMainCategoryId(val)}
         }
       />
@@ -54,6 +56,7 @@ let CardCategoryForm = (props: Props) => {
         validate={[required]}
         categoryId={mainCategoryId}
         onChange={(val) =>{
+          props.change('subCategoryId', null);
           setCategoryId(val)}
         }
       />}

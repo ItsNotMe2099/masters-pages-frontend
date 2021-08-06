@@ -47,7 +47,11 @@ let FormNewCategory = props => {
         label={t('mainCategory')}
         validate={categoryRequired}
         changeWithValue={true}
-        onChange={(val) => setMainCategoryId(val.value)}
+        onChange={(val) => {
+          props.change('categoryId', null);
+          props.change('subCategoryId', null);
+          setMainCategoryId(val.value)}
+        }
 
       />
       <Field
@@ -57,7 +61,10 @@ let FormNewCategory = props => {
         validate={categoryRequired}
         categoryId={mainCategoryId}
         changeWithValue={true}
-        onChange={(val) => setCategoryId(val.value)}
+        onChange={(val) => {
+          props.change('subCategoryId', null);
+          setCategoryId(val.value)
+        }}
 
       />
       <Field
