@@ -8,7 +8,7 @@ import CreateTaskForm from "pages/CreateTaskPage/Form";
 import { IRootState } from "types";
 import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
-import { createTaskComplete } from 'components/CreateTaskPage/actions';
+import {createTaskComplete, createTaskeReset} from 'components/CreateTaskPage/actions';
 import { useSelector, useDispatch } from 'react-redux'
 import SimpleSlider from 'components/Steps/CreateTaskPage/Slider';
 import {
@@ -33,6 +33,7 @@ const CreateTaskPage = (props) => {
   useEffect(() => {
     dispatch(resetSearchStat());
     return () => {
+      dispatch(createTaskeReset());
       dispatch(resetSearchStat());
     }
   }, [])
