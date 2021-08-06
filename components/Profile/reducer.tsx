@@ -122,7 +122,9 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.currentSkill = action.payload.skill;
       state.showForms = [];
       break
-
+    case ActionTypes.RESET_PUBLIC_PROFILE_FORMS:
+      state.showForms = [];
+      break;
 
     case ActionTypes.FORM_RESET:
       state.formError = null;

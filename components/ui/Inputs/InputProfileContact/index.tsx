@@ -18,7 +18,7 @@ interface Props {
   countryCode?: string,
 }
 
-export default function InputLocation(props: Props) {
+export default function InputProfileContact(props: Props) {
   const dispatch = useDispatch()
   const [value, setValue] = useState();
   const {t, i18n} = useTranslation();
@@ -26,21 +26,21 @@ export default function InputLocation(props: Props) {
   const handleOnChange = (value) => {
     props.input.onChange(value);
   }
-  const getSearchCity = (search = '') => {
-    return request({url: `/api/location/city?${queryString.stringify({search,  country: props.countryCode, id: search ? null : props.input.value, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
+  useEffect(() => {
+    getSearchProfile()
+  }, [])
+  const getSearchProfile = (search = '') => {
+    return request({url: `/api/profile-contacts?${queryString.stringify({search,  country: props.countryCode, id: search ? null : props.input.value, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
       .then((response) => {
         const data = response.data;
-        setOptions(data ? data.map(item => {
+        setOptions(data ? data?.data?.map(item => {
           return {
-            value: item.id,
-            label: item.name,
+            label: `${item.contactProfile.firstName} ${item.contactProfile.lastName}`,
+            value: item.contactProfile.id
           }
         }) : [])
       })
   }
-  useEffect(() => {
-    getSearchCity();
-  }, [props.countryCode])
 
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
@@ -48,7 +48,7 @@ export default function InputLocation(props: Props) {
       return;
     }
     setValue(value)
-    getSearchCity(value);
+    getSearchProfile(value);
   }, 400);
 
   return (

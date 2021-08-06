@@ -17,7 +17,7 @@ import {
   setProfileGalleryTab,
   updateProfileGallery
 } from 'components/ProfileGallery/actions'
-import {hideProfileForm, showProfileForm} from 'components/Profile/actions'
+import {hideProfileForm, resetPublicProfileForms, showProfileForm} from 'components/Profile/actions'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import ProfileTabs from 'components/PublicProfile/components/ProfileTabs'
 import { useSelector, useDispatch } from 'react-redux'
@@ -75,6 +75,7 @@ const CardGallery = (props: Props) => {
 
   }
   const handleChangeTab = (tab: IProfileTab) => {
+    dispatch(resetPublicProfileForms());
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       ...(tab ? {profileTabId: tab.id} : {}),
