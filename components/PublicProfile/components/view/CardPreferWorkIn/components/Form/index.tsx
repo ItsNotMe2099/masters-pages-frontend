@@ -12,6 +12,7 @@ import Button from 'components/PublicProfile/components/Button'
 import InputAddress from 'components/ui/Inputs/InputAddress'
 import {RadioList} from 'components/ui/Inputs/RadioList'
 import {useState} from 'react'
+import {required} from 'utils/validations'
 interface Props{
   onCancel: () => void,
   handleSubmit?: () => void,
@@ -39,6 +40,7 @@ let PreferWorkInForm = (props: Props) => {
         labelType="placeholder"
         label={t('type')}
         options={[{label: t('online'), value: 'online'}, {label: t('offline'), value: 'offline'}]}
+        validate={required}
       />
       {showAddress && <Field
         name="location"
@@ -46,6 +48,7 @@ let PreferWorkInForm = (props: Props) => {
         size={'small'}
         labelType="placeholder"
         label={t('tabProfile.fieldAddress')}
+        validate={required}
       />}
 
       <FormError error={error}/>

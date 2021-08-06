@@ -173,7 +173,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }
 
   }
-  const actions = ['readMore'];
+  const actions = [];
 
   if (actionsType === 'client') {
     if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status)) {
@@ -279,16 +279,19 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }));
   }
   const canEdit = actionsType === 'client';
+  const taskLink = `/TaskPage/${task.id}`;
+  const profileLink = `/id${task.profile.id}`;
   return (
     <div className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
 
       <div className={styles.wrapper}>
         {actionsType === 'public' && <div className={styles.profile}>
-          <Avatar image={task.profile?.avatar}/>
+          <Avatar href={profileLink} image={task.profile?.avatar}/>
           <div className={styles.mobileWrapper}>
             <div className={styles.name__mobile}>
-              <div
-                className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</div>
+              <Link href={profileLink}>
+              <a
+                className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</a></Link>
               <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
             </div>
             <div className={styles.icons}>
@@ -318,14 +321,15 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
           <div className={styles.mainInfo}>
             <div className={styles.top}>
               {['public', 'master'].includes(actionsType) && <div className={styles.name}>
-                <div
-                  className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</div>
+                <Link href={profileLink}>
+                <a
+                  className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</a></Link>
                 <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
               </div>}
               {(actionsType === 'client') && <div className={styles.taskTitle}>
-                <Link href={`/TaskPage/${task.id}`}><a className={styles.title}>{task.title}</a></Link>
+                <Link href={taskLink}><a className={styles.title}>{task.title}</a></Link>
               </div>}
-              <div className={styles.mobile}>{actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><a className={styles.title}>
+              <div className={styles.mobile}>{actionsType !== 'client' && <Link href={taskLink}><a className={styles.title}>
                 {task.title}
               </a></Link>}</div>
               {(actionsType !== 'public') && <div className={`${styles.status} ${getStatusClassName()}`}>
@@ -344,7 +348,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy hh:mm') : ''}</div>
               </div>
-              <div className={styles.desktop}>{actionsType !== 'client' && <Link href={`/TaskPage/${task.id}`}><div className={styles.title}>
+              <div className={styles.desktop}>{actionsType !== 'client' && <Link href={taskLink}><div className={styles.title}>
                 {task.title}
               </div></Link>}</div>
               {['public', 'master'].includes(actionsType) && renderCategory()}
