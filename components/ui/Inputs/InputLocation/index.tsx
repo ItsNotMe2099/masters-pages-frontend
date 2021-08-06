@@ -32,7 +32,7 @@ export default function InputLocation(props: Props) {
         const data = response.data;
         setOptions(data ? data.map(item => {
           return {
-            value: item.geonameid,
+            value: item.id,
             label: item.name,
           }
         }) : [])

@@ -23,7 +23,7 @@ import {
   setProfilePortfolioTab,
   updateProfilePortfolio
 } from 'components/ProfilePortfolio/actions'
-import {hideProfileForm, showProfileForm} from 'components/Profile/actions'
+import {hideProfileForm, resetPublicProfileForms, showProfileForm} from 'components/Profile/actions'
 import CardWorkExperienceListItem
   from 'components/PublicProfile/components/view/CardWorkExperience/components/CardWorkExperienceListItem'
 import WorkExperienceForm
@@ -94,6 +94,7 @@ const CardPortfolio = (props: Props) => {
     }));
   }
   const handleChangeTab = (tab: IProfileTab) => {
+    dispatch(resetPublicProfileForms());
     dispatch(resetProfilePortfolioList());
     dispatch(setProfilePortfolioTab(tab));
     dispatch(fetchProfilePortfolioList({

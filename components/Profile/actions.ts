@@ -37,6 +37,7 @@ export const deleteProfileRequest = (role: string) => action(ActionTypes.DELETE_
     method: 'DELETE',
   }
 })
+export const resetPublicProfileForms = () => action(ActionTypes.RESET_PUBLIC_PROFILE_FORMS)
 
 export const resetProfileForm = () => action(ActionTypes.FORM_RESET)
 

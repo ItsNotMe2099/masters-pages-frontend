@@ -28,7 +28,7 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
           <FormActionButton type={'edit'} title={''} onClick={ () => onEdit(model)}/>
           <FormActionButton type={'delete'} title={''} onClick={ () => onDelete(model)}/>
         </div>}
-        <div className={styles.stat}>
+        <div className={styles.stat} onClick={handleClick}>
           <div className={styles.statItem}><img src={'/img/icons/likes_white.svg'}/>{model.likesCount}</div>
           <div className={styles.statItem}><img src={'/img/icons/comments_white.svg'}/>{model.commentsCount}</div>
         </div>
