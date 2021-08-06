@@ -114,7 +114,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
           <div
             className={styles.detailsLabel}>{message.taskNegotiation.priceType === 'fixed' ? t('task.fixedPrice') : t('perHour')}</div>
           <div
-            className={styles.detailsValue}>${message.taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.ratePerHour}/h`}</div>
+            className={styles.detailsValue}>{message.taskNegotiation.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.budget}` : `${getCurrencySymbol(task.currency)} ${message.taskNegotiation.ratePerHour}/${t('priceRateSuffix')}`}</div>
         </div>
         <div className={styles.detailsItem}>
           <div className={styles.detailsLabel}>{`${t('deadline')}:`}</div>

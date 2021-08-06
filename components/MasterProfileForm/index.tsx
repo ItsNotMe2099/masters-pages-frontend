@@ -16,6 +16,7 @@ import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCat
 import {useTranslation, Trans} from 'i18n'
 import InputCountry from 'components/ui/Inputs/InputCountry'
 import RegistrationForm from 'pages/RegistrationPage/Form'
+import CreateTaskForm from 'pages/CreateTaskPage/Form'
 
 let MasterForm = props => {
   const { handleSubmit } = props
@@ -127,6 +128,7 @@ let MasterForm = props => {
   )
 }
 
+
 MasterForm = reduxForm({
   form: 'masterForm',
   validate: (values) => {
@@ -135,6 +137,11 @@ MasterForm = reduxForm({
     }
   }
 })(MasterForm)
-
-
+const selector = formValueSelector('masterForm')
+MasterForm = connect(state => {
+  const countryCode = selector(state, 'countryCode')
+  return {
+    countryCode,
+  }
+})(MasterForm)
 export default MasterForm

@@ -17,6 +17,7 @@ interface Props {
   children?: ReactElement[] | ReactElement,
   title?: ReactElement | string
   showLeftMenu?: boolean
+  isCurrentProfileOpened?: boolean
 }
 
 export default function Layout(props: Props) {

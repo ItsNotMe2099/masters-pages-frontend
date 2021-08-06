@@ -2,6 +2,7 @@ import { setSortTaskSearch } from "components/TaskSearch/actions";
 import ApiActionTypes from "constants/api";
 import { ITask, SkillData, SkillListItem } from "types";
 import ActionTypes from "./const";
+import SavedTasksActionTypes from "components/SavedTasks/const";
 
 export interface TaskSearchState {
   list: ITask[],
@@ -87,6 +88,14 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
         return item;
       })
       break
+    case SavedTasksActionTypes.SAVE_TASK_REQUEST + ApiActionTypes.SUCCESS:
+      state.list = state.list.map(item => {
+        if (item.id === action.payload.taskId) {
+          return {...item, isSavedByCurrentProfile: true};
+        }
+        return item;
+      })
+      break;
     case ActionTypes.RESET_TASK_LIST:
       state.listLoading = false;
       state.list = []

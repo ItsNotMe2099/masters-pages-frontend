@@ -132,6 +132,9 @@
   font-weight: bold;
   font-size: 20px;
   color: #000;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .time {

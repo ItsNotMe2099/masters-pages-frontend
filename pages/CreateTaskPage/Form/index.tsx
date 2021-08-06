@@ -119,7 +119,6 @@ let CreateTaskForm = props => {
                 name="categoryId"
                 component={InputSubCategory}
                 onChange={(value) => {
-                  props.change('categoryId', null);
                   props.change('subCategoryId', null);
                   onChangeForStat('categoryId', value)}}
                 label={`${t('createTask.fieldCategory')}`}

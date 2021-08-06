@@ -88,7 +88,7 @@ export default function CalendarSideBarCalendar(props: Props) {
           defaultActiveStartDate={activeStartDate}
           showNavigation={false}
           onViewChange={handleViewChange}
-          view={view}
+          view={view as any}
           tileContent={({activeStartDate, date, view}) => view === 'month' ? (
             <CalendarSideBarCalendarCell date={date}/>) : null}
         />

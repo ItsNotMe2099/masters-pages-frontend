@@ -53,6 +53,9 @@ let SearchProfileForm = (props) => {
                 withIcon={false}
                 showEmpty={true}
                 labelType={'placeholder'}
+                onChange={() => {
+                  props.change('subCategoryId', null);
+                }}
               />
               {!isMobile && <Field
                 name="subCategoryId"
@@ -95,6 +98,10 @@ let SearchProfileForm = (props) => {
                 withIcon={false}
                 showEmpty={true}
                 labelType={'placeholder'}
+                onChange={() => {
+                  props.change('categoryId', null);
+                  props.change('subCategoryId', null);
+                }}
               />
               <Field
                 name="executionType"
@@ -134,6 +141,9 @@ let SearchProfileForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                onChange={() => {
+                    props.change('subCategoryId', null);
+                }}
                 labelType={'placeholder'}
               />
               <Field
@@ -251,6 +261,7 @@ SearchProfileForm = connect(state => {
   const categoryId = selector(state, 'categoryId')
   return {
     categoryId,
+    mainCategoryId,
   }
 })(SearchProfileForm)
 

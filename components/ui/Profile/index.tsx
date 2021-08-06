@@ -25,7 +25,7 @@ import Slider from "react-slick";
 import { TabSelect } from "./components/TabSelect";
 import BookmarkSvg from 'components/svg/Bookmark'
 import {useTranslation, Trans} from "i18n";
-
+import Link from 'next/link'
 interface Props {
   profile: ProfileData,
   actionsType: 'public' | 'client' | 'master'
@@ -98,14 +98,15 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       }
     ]
   };
-
+const profileLink = `/id${profile.id}`;
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.profile}>
-        <Avatar image={profile.photo}/>
+        <Avatar image={profile.photo} href={profileLink}/>
         <div className={styles.mobileWrapper}>
-        <div className={styles.name__mobile} onClick={() => router.push(`/id${profile.id}`)}>
-              <div className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
+        <div className={styles.name__mobile} >
+          <Link href={profileLink}>
+          <a className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</a></Link>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>
         <div className={styles.icons}>
@@ -135,8 +136,9 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
         <div className={styles.mainInfo}>
           <div className={styles.top}>
             <div className={styles.name}>
-              <div onClick={() => router.push(`/id${profile.id}`)}
-                className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</div>
+              <Link href={profileLink}>
+              <a
+                 className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</a></Link>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>
             <div className={styles.status}>

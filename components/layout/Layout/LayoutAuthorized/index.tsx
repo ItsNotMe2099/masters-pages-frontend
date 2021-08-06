@@ -20,12 +20,13 @@ import {useInterval} from 'components/hooks/useInterval'
 interface Props {
   children?: ReactElement[] | ReactElement,
   showLeftMenu?: boolean
+  isCurrentProfileOpened?: boolean
 }
 
 export default function LayoutAuthorized(props: Props) {
-  const {children, showLeftMenu} = props;
+  const {children, showLeftMenu, isCurrentProfileOpened} = props;
   const {route: currentRoute} = useRouter();
-
+  console.log("isCurrentProfileOpened", isCurrentProfileOpened);
   const roleCurrent = useSelector((state: IRootState) => state.profile.role)
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent;
 
@@ -64,9 +65,9 @@ export default function LayoutAuthorized(props: Props) {
         return t('personalArea.profile.modeVolunteer')
     }
   }
-
+  const profileLink = `/id${profile?.id}`;
   const items = [
-    {title: t('menu.profile'), icon: 'profile', link: `/id${profile?.id}`},
+    {title: t('menu.profile'), icon: 'profile', link: profileLink},
     {title: t('menu.share'), icon: 'share', link: '/Share'},
     {title: t('menu.invite'), icon: 'invite', link: '/Invite'},
     ...(profile.role !== 'client' ? [
@@ -111,7 +112,7 @@ export default function LayoutAuthorized(props: Props) {
           <div className={styles.collapseMenu} onClick={handleCollapse}/>
         </div>
         {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
-          isActive={item.link && currentRoute.indexOf(`${item.link}`) >= 0} title={item.title} icon={item.icon}
+          isActive={(isCurrentProfileOpened && item.link === profileLink ) || (item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
           link={item.link} badge={item.badge} mode={role}/></>)}
         <MenuItem isActive={false} onClick={handleLogout} title={t('menu.logout')} icon={'logout'}
                   mode={role}/>

@@ -27,10 +27,11 @@ interface Props{
   isEdit: boolean,
   children?: any,
   subCategory: any,
+  isCurrentProfileOpened?: boolean
   onCategoryChange: (categoryId, subCategoryId) => void
 }
 const ProfilePageLayout = (props: Props) => {
-  const {profile, isEdit, onCategoryChange, subCategory} = props;
+  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened} = props;
   const isMaster = ['master', 'volunteer'].includes(profile.role);
   const {t} = useTranslation('common');
   const getRoleClass = () => {
@@ -44,8 +45,9 @@ const ProfilePageLayout = (props: Props) => {
         return styles.roleClient;
     }
   }
+  console.log("isCurrentProfileOpened1", isCurrentProfileOpened);
   return (
-    <Layout title={<>{t('lookingAt')} <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
+    <Layout isCurrentProfileOpened={isCurrentProfileOpened}  title={<>{t('lookingAt')}  <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>

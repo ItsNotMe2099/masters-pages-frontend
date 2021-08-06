@@ -2,6 +2,7 @@ import { setSortProfileSearch } from "components/ProfileSearch/actions";
 import ApiActionTypes from "constants/api";
 import { ITask, ProfileData, SkillData, SkillListItem } from "types";
 import ActionTypes from "./const";
+import SavedProfilesActionTypes from 'components/SavedPeople/const'
 
 const formatSkillList = (data) => {
   const categoryMap = {};
@@ -113,6 +114,15 @@ export default function ProfileSearchReducer(state = { ...initialState }, action
       break;
     case ActionTypes.FETCH_PROFILE_SEARCH_STAT_REQUEST + ApiActionTypes.SUCCESS:
       state.searchStatCount = action.payload.total;
+      break;
+    case SavedProfilesActionTypes.SAVE_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
+
+      state.list = state.list.map(item => {
+        if (item.id === action.payload.profileId) {
+          return {...item, isSavedByCurrentProfile: true};
+        }
+        return item;
+      })
       break;
     case ActionTypes.RESET_SEARCH_STAT:
       state.searchStatFilter = {};

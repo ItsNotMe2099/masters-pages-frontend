@@ -145,6 +145,9 @@
   font-weight: bold;
   font-size: 20px;
   color: #000;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .time {
@@ -191,6 +194,9 @@
   font-size: 18px;
   padding-top: 20px;
   cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
   @media screen and (max-width: $sm-max){
     text-align: center;
     padding: 0;

@@ -52,7 +52,7 @@ let TaskOfferAcceptForm = (props) => {
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>{props.task.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
-            <div className={styles.taskPriceDetailsItemValue}>$ {props.task.priceType === 'fixed' ? props.task.budget : `${props.task.ratePerHour}/h`}</div>
+            <div className={styles.taskPriceDetailsItemValue}>$ {props.task.priceType === 'fixed' ? props.task.budget : `${props.task.ratePerHour}/${t('priceRateSuffix')}`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>Dead line:</div>

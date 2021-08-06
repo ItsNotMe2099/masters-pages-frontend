@@ -30,7 +30,7 @@ let TaskEditConditionsForm = (props) => {
         <div className={styles.taskPriceDetails}>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>{props.taskNegotiation.priceType === 'fixed' ? `${t('fixedPrice')}:` : `${t('perHour')}:`}</div>
-            <div className={styles.taskPriceDetailsItemValue}>$ {props.taskNegotiation.priceType === 'fixed' ? props.taskNegotiation.budget : `${props.taskNegotiation.ratePerHour}/h`}</div>
+            <div className={styles.taskPriceDetailsItemValue}>$ {props.taskNegotiation.priceType === 'fixed' ? props.taskNegotiation.budget : `${props.taskNegotiation.ratePerHour}/${t('priceRateSuffix')}`}</div>
           </div>
           <div className={styles.taskPriceDetailsItem}>
             <div className={styles.taskPriceDetailsItemLabel}>{`${t('deadline')}:`}</div>

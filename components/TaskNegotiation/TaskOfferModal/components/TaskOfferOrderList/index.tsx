@@ -68,7 +68,7 @@ const TaskOfferOrderList = (props: Props) => {
        loader={<Loader/>}>
        {list.map(item => <Radio className={styles.radioItem} value={item} isActive={activeTask && activeTask.id === item.id}  onChange={handleChange}>
          <div className={styles.radioItemTitle}>{item.title}</div>
-         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${getCurrencySymbol(item.currency)}  ${item.budget}` : `free`) : `${getCurrencySymbol(item.currency)} ${item.ratePerHour}/h`}</div>
+         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${getCurrencySymbol(item.currency)}  ${item.budget}` : `free`) : `${getCurrencySymbol(item.currency)} ${item.ratePerHour}/${t('priceRateSuffix')}`}</div>
        </Radio>)}
      </InfiniteScroll>
      </div>}

@@ -189,6 +189,7 @@
   "allPosts": "Все публикации",
   "newOrder": "Новый Заказ",
   "photos": "Фотографии",
+  "priceRateSuffix": "час",
   "auth": {
     "titleQuick": "Быстрый вход",
     "signIn": {

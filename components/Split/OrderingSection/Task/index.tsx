@@ -32,7 +32,7 @@ export default function Task(props: Props) {
         <div className={styles.price}>
           <div className={styles.priceNum}>
             {props.task.priceType === "fixed" && props.task.budget !== null ? `$${props.task.budget}` :
-            props.task.priceType === "rate" && props.task.ratePerHour !== null ? `$${props.task.ratePerHour}/h` :
+            props.task.priceType === "rate" && props.task.ratePerHour !== null ? `$${props.task.ratePerHour}/${t('priceRateSuffix')}` :
             (props.task.priceType === "fixed" && props.task.budget === null) || (props.task.priceType === "rate" && props.task.ratePerHour === null) ? <>{t('free')}</> : <></>}
           </div>
           <div className={styles.priceType}>

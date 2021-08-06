@@ -57,7 +57,7 @@ const Payment = (props: Props) => {
           {`${t('hourly')}:`}
           </div>
           <div className={styles.title}>
-            <span>${props.task.ratePerHour}/h</span>
+            <span>${props.task.ratePerHour}/${t('priceRateSuffix')}</span>
           </div>
           </div>
           }
