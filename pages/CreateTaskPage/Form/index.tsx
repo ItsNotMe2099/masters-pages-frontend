@@ -28,6 +28,7 @@ import {fetchProfileContacts} from 'components/Contacts/actions'
 import {RadioList} from 'components/ui/Inputs/RadioList'
 import InputCountry from 'components/ui/Inputs/InputCountry'
 import InputProfileContact from 'components/ui/Inputs/InputProfileContact'
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let CreateTaskForm = props => {
   const {t} = useTranslation()
@@ -151,7 +152,7 @@ let CreateTaskForm = props => {
             />
             <Field
               name="deadline"
-              component={Input}
+              component={InputDate}
               label={`${t('createTask.fieldDeadline')}`}
               validate={required}
               size={'small'}
