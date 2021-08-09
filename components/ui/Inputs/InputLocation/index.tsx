@@ -1,6 +1,6 @@
 import { fetchLocationCity } from "components/ui/Inputs/InputLocation/actions";
 import SelectInput from "components/ui/Inputs/SelectInput";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { IRootState } from "types";
 import { useDebouncedCallback } from "use-debounce";
 import styles from './index.module.scss'
@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import request from 'utils/request'
 import queryString from 'query-string'
 import {useTranslation} from 'i18n'
+import { I18nContext } from "next-i18next";
+
 
 interface Props {
   input?: {
@@ -23,6 +25,7 @@ export default function InputLocation(props: Props) {
   const [value, setValue] = useState();
   const {t, i18n} = useTranslation();
   const [options, setOptions] = useState([]);
+  const { i18n: { language } } = useContext(I18nContext)
   const handleOnChange = (value) => {
     props.input.onChange(value);
   }
@@ -40,7 +43,7 @@ export default function InputLocation(props: Props) {
   }
   useEffect(() => {
     getSearchCity();
-  }, [props.countryCode])
+  }, [props.countryCode, language])
 
   const handleOnSearchChange = useDebouncedCallback((value) => {
 
