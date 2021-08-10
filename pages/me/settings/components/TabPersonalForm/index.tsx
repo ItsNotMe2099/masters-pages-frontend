@@ -13,6 +13,7 @@ import styles from './index.module.scss'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import {useTranslation, withTranslation} from "i18n";
 import {useEffect} from 'react'
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let TabPersonalForm = (props) => {
   const { t } = useTranslation('common');
@@ -31,8 +32,7 @@ let TabPersonalForm = (props) => {
           />
           <Field
             name="birthday"
-            component={Input}
-            mask={'99/99/9999'}
+            component={InputDate}
             labelType="placeholder"
             label={t('personalArea.tabProfile.fieldBirthDate')}
             validate={[date, birthdate]}

@@ -17,6 +17,7 @@ import {useTranslation, Trans} from 'i18n'
 import InputCountry from 'components/ui/Inputs/InputCountry'
 import RegistrationForm from 'pages/RegistrationPage/Form'
 import CreateTaskForm from 'pages/CreateTaskPage/Form'
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let MasterForm = props => {
   const { handleSubmit } = props
@@ -39,10 +40,9 @@ let MasterForm = props => {
               />
               <Field
                 name="birthday"
-                component={Input}
+                component={InputDate}
                 label="BOD* MM / DD / YYYY"
                 validate={[required, date, birthdate]}
-                mask={'99/99/9999'}
               />
             </div>
             <div className={styles.column}>

@@ -13,6 +13,7 @@ import 'firebase/messaging'
 import firebase from 'firebase/app'
 import {setPushToken} from "../components/Push/actions";
 import {appWithTranslation} from 'i18n'
+import 'react-date-picker/dist/DatePicker.css'
 
 interface IPageProps {
   namespacesRequired: string[]

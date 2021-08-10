@@ -17,6 +17,7 @@ import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import {getCurrencySymbol} from 'data/currency'
 import {useTranslation, Trans} from "i18n";
+import InputDate from 'components/ui/Inputs/InputDate'
 interface Props{
   taskNegotiation: ITaskNegotiation
 }
@@ -78,12 +79,11 @@ let TaskEditConditionsForm = (props) => {
             <div className={styles.offerDetailsForRowFieldsWrapper}>
               <Field
                 name="deadline"
-                component={Input}
+                component={InputDate}
                 label={t('deadline')}
                 validate={required}
                 size={'small'}
                 labelType={'placeholder'}
-                mask={'99/99/9999'}
               />
             </div>
 

@@ -22,6 +22,7 @@ import {useTranslation} from "i18n";
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import * as React from 'react'
 import InputCountry from 'components/ui/Inputs/InputCountry'
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let TabOrderForm = props => {
   const { handleSubmit } = props
@@ -85,12 +86,11 @@ let TabOrderForm = props => {
             />
             <Field
               name="deadline"
-              component={Input}
+              component={InputDate}
               label={`${t('createTask.fieldDeadline')}`}
               validate={required}
               size={'small'}
               labelType={'static'}
-              mask={'99/99/9999'}
             />
           </div>
           <div className={styles.column}>
