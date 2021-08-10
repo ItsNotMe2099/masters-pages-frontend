@@ -281,7 +281,8 @@
       "recommended": "recommended",
       "sendMessage": "Send message",
       "sendOffer": "Send Offer",
-      "subscribe": "Subscribe"
+      "subscribe": "Subscribe",
+      "bio": "BIO"
     },
     "menu": {
       "profile": "Personal information",

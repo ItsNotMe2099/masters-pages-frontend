@@ -26,7 +26,7 @@ let CardBioForm = (props: Props) => {
         name="bio"
         component={TextArea}
         labelType="placeholder"
-        label={'BIO'}
+        label={t('personalArea.profile.bio')}
         validate={[bioMaxLength]}
       />
 
