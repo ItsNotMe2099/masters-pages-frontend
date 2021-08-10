@@ -102,7 +102,6 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   useEffect(() => {
     const filtered = files.filter((file => !!file.path))
     if(multiple) {
-      console.log("SetNewFiles", filtered.map(item => item.path));
       onChange(filtered.map(item => item.path))
 
     }else{
@@ -140,10 +139,8 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   }, [files])
 
   const onRemove =(file: FileEntity) => {
-    console.log("ONRemoveFiles")
     setFiles(files => {
       const index = files.findIndex( item => (file.key && file.key === item.key) || (!file.key && item.path === file.path))
-        console.log("index", index);
       const newFiles = [...files];
       newFiles.splice(index, 1);
       return newFiles

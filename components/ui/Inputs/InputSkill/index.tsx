@@ -29,7 +29,6 @@ export default function InputSkill(props) {
       .then((response) => {
         const data = response.data;
         setOptions(data ? data.filter(i => i.subCategoryId).map(item => {
-          console.log(" props.useSubCategoryId ",props.useSubCategoryId, item.subCategoryId, props.input.value)
           return {
             value: props.useSubCategoryId ? item.subCategoryId : item.id,
             label: `${getCategoryTranslation(item.mainCategory, i18n.language)?.name || ''}${getCategoryTranslation(item.category, i18n.language).name}/${getCategoryTranslation(item.subCategory, i18n.language)?.name}`,

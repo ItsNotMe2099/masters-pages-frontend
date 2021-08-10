@@ -26,12 +26,10 @@ interface Props {
 export default function LayoutAuthorized(props: Props) {
   const {children, showLeftMenu, isCurrentProfileOpened} = props;
   const {route: currentRoute} = useRouter();
-  console.log("isCurrentProfileOpened", isCurrentProfileOpened);
   const roleCurrent = useSelector((state: IRootState) => state.profile.role)
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent;
 
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  console.log("CurProfile", profile);
   const intervalRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {

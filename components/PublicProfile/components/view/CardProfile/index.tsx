@@ -31,7 +31,6 @@ const CardProfile = (props: Props) => {
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
   const { t } = useTranslation('common');
-  console.log("Profile111", profile);
   const handleEditClick = () => {
     dispatch(showProfileForm( 'avatar'));
   }

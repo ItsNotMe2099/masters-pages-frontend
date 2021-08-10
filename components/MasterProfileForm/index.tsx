@@ -23,7 +23,6 @@ let MasterForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
   const {t} = useTranslation();
-  console.log("RERENDER");
   return (
     <div>
     <form className={styles.form} onSubmit={handleSubmit}>

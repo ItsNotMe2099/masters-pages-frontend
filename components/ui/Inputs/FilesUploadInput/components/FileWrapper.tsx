@@ -67,7 +67,6 @@ const FileWrapper = (props: Props) => {
     }
   },[])
   const handleRemove = () => {
-    console.log("handleRemove")
     if(  fileUpload.current  && file.rawFile){
       fileUpload.current.cancel();
     }

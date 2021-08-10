@@ -48,7 +48,6 @@ const CreateTaskPage = (props) => {
       ...statFilter
     }));
   }
-  console.log("ProfileGeo", profile?.geoname);
   return (
     <Layout>
       <div className={styles.steps}>

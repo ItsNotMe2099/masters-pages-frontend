@@ -9,7 +9,6 @@ interface Props {
 export default function VolumeControl(props: Props) {
 
     const handleChange = (val) => {
-        console.log("HandleChange", val)
         if(isNaN(val)){
             return;
         }
@@ -18,7 +17,6 @@ export default function VolumeControl(props: Props) {
     const handleIconClick = (val) => {
         props.onChange(props.value === 0 ? 50 : 0);
     }
-    console.log("PropsVolume", props.value);
   return (
       <div className={styles.root}>
           <div className={styles.icon} onClick={handleIconClick}>{props.value === 0 ? <img src={'/img/icons/mute.svg'}/> : <img src={'/img/icons/volume.svg'}/> }</div>

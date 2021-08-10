@@ -66,7 +66,6 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       state.formError = ''
       state.formIsSuccess = true;
       state.formLoading = false;
-      console.log("CreateGallerySuccess", state.currentProfileTab, state.currentProfileTab?.id , action.payload.profileTabId)
       const shouldAdd = !state.currentProfileTab || state.currentProfileTab?.id === action.payload.profileTabId;
       state.list = shouldAdd ? [action.payload, ...state.list] : state.list;
       if(shouldAdd){
