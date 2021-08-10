@@ -33,7 +33,7 @@ const ReportPage = (props) => {
   const list = useSelector((state: IRootState) => state.report.list);
   const listLoading = useSelector((state: IRootState) => state.report.listLoading);
   const dispatch = useDispatch()
-  const [fields, setFields] = useState();
+  const [fields, setFields] = useState([]);
   const [filterData, setFilterData] = useState({
     range: {
       start: new Date(),
