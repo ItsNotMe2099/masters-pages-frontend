@@ -500,7 +500,8 @@
       "fixedPriceTaskTitle": "Фиксированная цена",
       "fieldRatePerHour": "Ставка за час",
       "fieldEstimate": "Оценка",
-      "fieldBudget": "Бюджет"
+      "fieldBudget": "Бюджет",
+      "maxDays": "макс. 30 дней"
     }
   },
   "taskSearch": {

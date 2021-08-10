@@ -78,7 +78,7 @@ let TabOrderForm = props => {
               name="executionType"
               component={SelectInput}
               label={`${t('createTask.fieldExecutionType')}`}
-              options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
+              options={[{value: 'physical', label: t('forms.executionTypeInput.values.physical')}, {value: 'virtual', label: t('forms.executionTypeInput.values.virtual')}, {value: 'combo', label: t('forms.executionTypeInput.values.combo')}]}
               validate={required}
               size={'small'}
               labelType={'static'}

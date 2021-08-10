@@ -42,7 +42,7 @@ let PriceSelectForm = props => {
             <Field
               name="estimate"
               component={Input}
-              placeholder="max 30 days"
+              placeholder={t('createTask.priceSelect.maxDays')}
               label={t('createTask.priceSelect.fieldEstimate')}
               size={'small'}
               labelType={'static'}

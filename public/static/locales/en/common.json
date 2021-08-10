@@ -496,7 +496,8 @@
       "fixedPriceTaskTitle": "Fixed price",
       "fieldRatePerHour": "Rate per hour",
       "fieldEstimate": "Estimate",
-      "fieldBudget": "Budget"
+      "fieldBudget": "Budget",
+      "maxDays": "max 30 days"
     }
   },
   "taskSearch": {
