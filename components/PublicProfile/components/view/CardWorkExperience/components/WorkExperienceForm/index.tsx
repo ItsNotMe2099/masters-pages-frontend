@@ -79,8 +79,8 @@ let WorkExperienceForm = (props) => {
       />
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('save')}</Button>
       </div>
     </form>
   )

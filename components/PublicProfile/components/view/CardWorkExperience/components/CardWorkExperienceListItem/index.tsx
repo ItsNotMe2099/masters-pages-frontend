@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-
 import {ProfileData, ProfileWorkExperience} from 'types'
 import UserIcon from 'components/svg/UserIcon'
 import Button from 'components/PublicProfile/components/Button'
@@ -8,6 +7,9 @@ import {format, formatDistanceStrict, formatDistanceToNowStrict, parse} from 'da
 import {formatDate, parseDate} from 'utils/formatters'
 import {getMediaPath} from 'utils/media'
 import {useTranslation} from 'i18n'
+import { ru } from 'date-fns/locale'
+import { I18nContext } from "next-i18next";
+import { useContext } from 'react'
 
 interface Props{
   model: ProfileWorkExperience,
@@ -17,13 +19,14 @@ interface Props{
 }
 const CardWorkExperienceListItem = ({model, isEdit, onEdit, onDelete}: Props) => {
 
+  const { i18n: { language } } = useContext(I18nContext)
   const getDuration = () => {
     if(model.fromDate && model.toDate){
-      return `from ${formatDate(model.fromDate)} - ${formatDate(model.toDate)} - ${formatDistanceStrict(parseDate(model.fromDate), parseDate(model.toDate))}`;
+      return `${t('from')} ${formatDate(model.fromDate)} - ${formatDate(model.toDate)} - ${formatDistanceStrict(parseDate(model.fromDate), parseDate(model.toDate), { locale: language === 'ru' && ru })}`;
     }else if(model.fromDate){
-      return `from ${formatDate(model.fromDate)} to now - ${formatDistanceToNowStrict(parseDate(model.fromDate))}`;
+      return `${t('from')} ${formatDate(model.fromDate)} ${t('to now')} - ${formatDistanceToNowStrict(parseDate(model.fromDate), { locale: language === 'ru' && ru })}`;
     }else if(model.toDate){
-      return `until ${formatDate(model.toDate)}`;
+      return `${t('until')} ${formatDate(model.toDate), { locale: language === 'ru' && ru }}`;
     }
   }
   const {i18n, t} = useTranslation('common')

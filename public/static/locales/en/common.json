@@ -43,6 +43,9 @@
     "selectSubCategory": "Add one or more sub categories"
   },
   "master": "Master",
+  "from": "from",
+  "toNow": "to now",
+  "until": "until",
   "length": "Length",
   "yourReview": "Your review",
   "copyLink": "Copy this link",
