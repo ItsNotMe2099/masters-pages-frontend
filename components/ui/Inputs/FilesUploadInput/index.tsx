@@ -179,7 +179,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
         {...getRootProps()}
       >
         <div className={styles.emptyFiles}>
-          <img src="/img/icons/attach_file.svg" alt=''/>
+          {/*<img src="/img/icons/attach_file.svg" alt=''/>*/}
           <Trans i18nKey="fileInput.fileHere">Перенесите сюда файл или нажмите<br/> для выбора файла на компьютере</Trans>
         </div>
         <input

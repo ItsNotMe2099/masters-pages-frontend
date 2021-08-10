@@ -1002,7 +1002,7 @@
     "differentTerms": "I want to propose different terms"
   },
   "fileInput": {
-    "fileHere": "Перенесите сюда файл или нажмите <1/> для выбора файла на компьютере",
+    "fileHere": "Drag the file here or click <1/> to select a file on your computer",
     "attachPhotos": "attach photos"
   },
   "modal": {
