@@ -32,7 +32,7 @@ export default function SaveProfileSearchModal(props: Props) {
 
         <div className={styles.innards}>
           <div className={styles.rate}>{t('saveProfileSearchModal.saveThisFilter')}</div>
-          <div className={styles.form}><SaveProfileSearchForm onSubmit={handleSubmit}/></div>
+          <div className={styles.form}><SaveProfileSearchForm onClose={props.onRequestClose} onSubmit={handleSubmit}/></div>
         </div>
     </Modal>
   )

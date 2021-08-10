@@ -48,9 +48,11 @@ let FormNewCategory = props => {
         validate={categoryRequired}
         changeWithValue={true}
         onChange={(val) => {
-          props.change('categoryId', null);
-          props.change('subCategoryId', null);
-          setMainCategoryId(val.value)}
+          props.change('category', null);
+          props.change('subCategories', []);
+          setMainCategoryId(val.value)
+          setCategoryId(null);
+        }
         }
 
       />
@@ -62,7 +64,7 @@ let FormNewCategory = props => {
         categoryId={mainCategoryId}
         changeWithValue={true}
         onChange={(val) => {
-          props.change('subCategoryId', null);
+          props.change('subCategories', []);
           setCategoryId(val.value)
         }}
 

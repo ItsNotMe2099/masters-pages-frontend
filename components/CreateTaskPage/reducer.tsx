@@ -38,6 +38,7 @@ export default function CreateTaskReducer(state = {...initialState}, action) {
       state.formIsSuccess = false
       state.formError = ''
       state.loading = false;
+      state.isCompleted = false;
       break
   }
 

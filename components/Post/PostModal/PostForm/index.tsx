@@ -51,11 +51,11 @@ let PostForm = (props) => {
         labelType="placeholder"
         label={t('follower.postForm.uploadPhoto')}
       />
-      <Field
+      {profile.role !== 'client' && <Field
         name="showInPortfolio"
         component={Checkbox}
         label={t('follower.postForm.showInPortfolio')}
-      />
+      />}
 
       {(showInPortfolio) && <Field
         name="subCategoryId"

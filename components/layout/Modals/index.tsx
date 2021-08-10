@@ -83,8 +83,8 @@ const Modals = (props: Props) => {
       {key === 'feedbackSuccessModal' && <SuccessFeedbackModal isOpen={key === 'feedbackSuccessModal'}/>}
       {key === 'taskOfferShow' && <TaskOfferShowModal isOpen={key === 'taskOfferShow'} onClose={() => dispatch(modalClose())}/>}
       {key === 'emailChangeModal' && <ProfileEmailChangeModal isOpen={true}/>}
-      {key === 'saveTaskSearchModal' && <SaveTaskSearchModal isOpen={true}/>}
-      {key === 'saveProfileSearchModal' && <SaveProfileSearchModal isOpen={true}/>}
+      {key === 'saveTaskSearchModal' && <SaveTaskSearchModal isOpen={true} onRequestClose={() => dispatch(modalClose())}/>}
+      {key === 'saveProfileSearchModal' && <SaveProfileSearchModal isOpen={true} onRequestClose={() => dispatch(modalClose())}/>}
 
       {key === 'taskOfferModal' && <TaskOfferModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
     </>
