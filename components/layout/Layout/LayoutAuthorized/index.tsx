@@ -37,9 +37,9 @@ export default function LayoutAuthorized(props: Props) {
   useEffect(() => {
     setCollapsed(!!cookie.get("menu-collapsed"));
   }, [])
-  useInterval(() => {
+ /* useInterval(() => {
     dispatch(fetchProfile(profile.role));
-  }, 10000)
+  }, 10000)*/
 
   const {t} = useTranslation();
   const dispatch = useDispatch()
