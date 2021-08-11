@@ -17,12 +17,12 @@
 }
 .stepsContainer{
   @include lg{
-    width: $container-lg;
+    max-width: $container-lg;
     margin: auto;
   }
 
   @include xll {
-    width: $container-xll
+    max-width: $container-xll
   }
 }
 .steps{
