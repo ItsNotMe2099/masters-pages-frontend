@@ -6,6 +6,9 @@
   }
   .datePicker{
     display: flex;
+    :global .react-date-picker__calendar{
+      z-index: 3;
+    }
     :global .react-date-picker__wrapper{
       border: 1px solid #C4C4C4;
       width: 100%;
