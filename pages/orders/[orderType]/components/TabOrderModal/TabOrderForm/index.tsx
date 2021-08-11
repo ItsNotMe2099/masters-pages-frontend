@@ -71,9 +71,11 @@ let TabOrderForm = props => {
               name="masterRole"
               component={SelectInput}
               label={`${t('createTask.fieldMasterType')}`}
-              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
+              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}
+              validate={required}
               size={'small'}
               labelType={'static'}
+
             />
             <Field
               name="executionType"
@@ -88,7 +90,6 @@ let TabOrderForm = props => {
               name="deadline"
               component={InputDate}
               label={`${t('createTask.fieldDeadline')}`}
-              validate={required}
               size={'small'}
               labelType={'static'}
             />

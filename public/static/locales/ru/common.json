@@ -193,6 +193,7 @@
   "newOrder": "Новый Заказ",
   "photos": "Фотографии",
   "priceRateSuffix": "час",
+  "daysSuffix": "д",
   "auth": {
     "titleQuick": "Быстрый вход",
     "signIn": {

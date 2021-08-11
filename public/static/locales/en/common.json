@@ -188,6 +188,7 @@
   "newOrder": "New order",
   "photos": "Photos",
   "priceRateSuffix": "h",
+  "daysSuffix": "d",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {

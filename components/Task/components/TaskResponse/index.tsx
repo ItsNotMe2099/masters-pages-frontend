@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import NotificationBadge from "../../../ui/NotificationBadge";
 import {useTranslation} from "i18n";
 import {getCurrencySymbol} from 'data/currency'
+import Link from 'next/link'
 interface Props {
   response: ITaskNegotiation,
   task: ITask,
@@ -49,8 +50,10 @@ const TaskResponse = ({ response, task }: Props) => {
   return ( <div className={styles.root}>
     {!response.isRead && <NotificationBadge/> }
     <div className={styles.time}>{format(new Date(response.createdAt), 'MM.dd.yyy hh:mm')}</div>
-    <div className={styles.profile}>{response.profile?.firstName} {response.profile?.lastName}</div>
-    <div className={styles.rating}></div>
+    <Link href={`/id${response.profile?.id}`}>
+    <a className={styles.profile}>{response.profile?.firstName} {response.profile?.lastName}</a>
+    </Link>
+      <div className={styles.rating}></div>
     <div className={styles.message} onClick={handleShowOffer}><img src={'/img/icons/chat_small.svg'} />{response.message}</div>
     <div className={styles.priceDetails}>{response.budget ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/${t('priceRateSuffix')}`}</div>
     <div className={styles.priceDetails}></div>
