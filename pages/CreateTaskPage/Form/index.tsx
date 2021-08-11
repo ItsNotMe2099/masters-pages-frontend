@@ -53,13 +53,13 @@ let CreateTaskForm = props => {
                 size={'small'}
                 labelType={'static'}
                 component={Input}
-                label={`${t('createTask.fieldTitle')}`}
+                label={`${t('createTask.fieldTitle')}*`}
                 validate={required}
               />
               <Field
                 name="visibilityType"
                 component={RadioList}
-                label={`Type`}
+                label={`Type*`}
                 options={[{label: 'Public', value: 'public'}, {label: 'Private', value: 'private'}]}
                 size={'small'}
                 labelType={'static'}
@@ -67,7 +67,7 @@ let CreateTaskForm = props => {
               {props.visibilityType === 'private' && <Field
                 name="profileId"
                 component={InputProfileContact}
-                label={`Profile`}
+                label={`Profile*`}
                 size={'small'}
                 validate={required}
                 labelType={'static'}
@@ -75,7 +75,7 @@ let CreateTaskForm = props => {
               <Field
                 name="countryCode"
                 component={InputCountry}
-                label={t('createTask.fieldCountry')}
+                label={`${t('createTask.fieldCountry')}*`}
                 onChange={() =>  {
                   props.change('geonameid', null)}}
                 labelType={'static'}
@@ -87,7 +87,7 @@ let CreateTaskForm = props => {
                 component={InputLocation}
                 isRegistration={true}
                 countryCode={props.countryCode}
-                label={`${t('createTask.fieldLocation')}`}
+                label={`${t('createTask.fieldLocation')}*`}
                 size={'small'}
                 labelType={'static'}
                 validate={required}
@@ -97,7 +97,7 @@ let CreateTaskForm = props => {
                 name="masterRole"
                 onChange={(value) => onChangeForStat('masterRole', value)}
                 component={SelectInput}
-                label={`${t('createTask.fieldMasterType')}`}
+                label={`${t('createTask.fieldMasterType')}*`}
                 options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
                 size={'small'}
                 labelType={'static'}
@@ -111,7 +111,7 @@ let CreateTaskForm = props => {
                   props.change('categoryId', null);
                   props.change('subCategoryId', null);
                   onChangeForStat('mainCategoryId', value)}}
-                label={`${t('createTask.fieldMainCategory')}`}
+                label={`${t('createTask.fieldMainCategory')}*`}
                 validate={required}
                 size={'small'}
                 labelType={'static'}
@@ -122,7 +122,7 @@ let CreateTaskForm = props => {
                 onChange={(value) => {
                   props.change('subCategoryId', null);
                   onChangeForStat('categoryId', value)}}
-                label={`${t('createTask.fieldCategory')}`}
+                label={`${t('createTask.fieldCategory')}*`}
                 validate={required}
                 categoryId={props.mainCategoryId}
                 size={'small'}
@@ -132,7 +132,7 @@ let CreateTaskForm = props => {
                 name="subCategoryId"
                 component={InputSubCategory}
                 onChange={(value) => onChangeForStat('subCategoryId', value)}
-                label={`${t('createTask.fieldSubCategory')}`}
+                label={`${t('createTask.fieldSubCategory')}*`}
                 categoryId={props.categoryId}
                 validate={required}
                 size={'small'}
@@ -144,7 +144,7 @@ let CreateTaskForm = props => {
             <Field
               name="executionType"
               component={SelectInput}
-              label={`${t('createTask.fieldExecutionType')}`}
+              label={`${t('createTask.fieldExecutionType')}*`}
               options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
               validate={required}
               size={'small'}
@@ -154,7 +154,6 @@ let CreateTaskForm = props => {
               name="deadline"
               component={InputDate}
               label={`${t('createTask.fieldDeadline')}`}
-              validate={required}
               size={'small'}
               labelType={'static'}
               mask={'99/99/9999'}
@@ -172,8 +171,7 @@ let CreateTaskForm = props => {
               name="currency"
               component={InputCurrency}
               withIcon={false}
-
-              label={`${t('currency')}`}
+              label={`${t('currency')}*`}
               size={'small'}
               labelType={'static'}
               validate={required}
@@ -184,7 +182,7 @@ let CreateTaskForm = props => {
             <Field
               name="description"
               component={TextArea}
-              label={`${t('createTask.fieldDescription')}`}
+              label={`${t('createTask.fieldDescription')}*`}
               validate={required}
               size={'small'}
               labelType={'static'}
@@ -206,6 +204,7 @@ let CreateTaskForm = props => {
             name="terms"
             component={Checkbox}
             label={<div>{t('agreeWith')} <Link href="/">{t('termsAndConditions')}</Link></div>}
+            validate={required}
           />
         </div>
           <FormError error={error}/>

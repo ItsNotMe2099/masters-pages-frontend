@@ -61,6 +61,7 @@ const CreateTaskPage = (props) => {
         <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat} initialValues={{
           countryCode: profile?.geoname?.country,
           geonameid: profile?.geonameid,
+          visibilityType: 'public'
         }}/>
 
       </div>
