@@ -64,7 +64,7 @@ let NewEventForm = (props: Props) => {
         name="taskId"
         component={SelectInput}
         options={taskList.map(item => ({label: item.title, value: item.id}))}
-
+        label={t('event.task')}
         size={'small'}
         validate={required}
       />

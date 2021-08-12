@@ -10,15 +10,18 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Cookies from 'js-cookie'
 import { useDropzone, DropzoneOptions } from 'react-dropzone'
+import {useTranslation} from 'i18n'
 interface Props {
   onFileUploaded: (file) => void
   onFileDrop: (file) => void
+  onProgress: (progress) => void
 }
 
 export default function ChatAttachFile(props: Props) {
   const dispatch = useDispatch()
   const {chat, messageSentError, messageIsSending, messageSentSuccess} = useSelector((state: IRootState) => state.chat)
 
+  const role = useSelector((state: IRootState) => state.profile.role)
 
 
   const [message, setMessage] = useState('');
@@ -46,7 +49,7 @@ export default function ChatAttachFile(props: Props) {
     console.error('onFileUploadError', error)
   }
   const onFileProgress = (progress) => {
-
+    props.onProgress(progress)
   }
 
   const onDrop = (files, rejectedFiles, event) => {
@@ -55,7 +58,7 @@ export default function ChatAttachFile(props: Props) {
       signingUrlMethod: 'GET',
       accept: '*/*',
       uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
-      signingUrlHeaders: { 'Authorization': `Bearer ${token}`},
+      signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role},
       signingUrlWithCredentials: false,
       signingUrlQueryParams: { uploadType: 'avatar' },
       autoUpload: true,

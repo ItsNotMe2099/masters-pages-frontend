@@ -598,7 +598,8 @@
     "describeYourExperience": "Describe your work experience with",
     "submitReview": "Submit review",
     "eventInputs": "Event inputs",
-    "addNewExpense": "Add new expense"
+    "addNewExpense": "Add new expense",
+    "task": "Заказ"
   },
   "chat": {
     "areYouSure": "Are you sure that you want to reject mark task as done?",
@@ -645,7 +646,8 @@
       "clientMarkedTask": "Client marked task as completed",
       "masterRequestMark": "Master {{statusText}} your request to mark as done",
       "clientRequestMark": "Client {{statusText}} your request to mark as done"
-    }
+    },
+    "newMessageFileError": "Дождитесь окончания загрузки файла"
   },
   "feedBack": {
     "pleaseRate": "Please rate",

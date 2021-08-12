@@ -37,7 +37,6 @@ let MeetingForm = ({change, placeType}: Props) => {
             name="meetingLink"
             component={TextArea}
             label={t('meetingForm.meetingLink')}
-            validate={required}
           />}
           {placeType !== 'Online' && <Field
             name="placeType"

@@ -35,11 +35,13 @@ let PricingForm = (props: Props) => {
       change('actualPrice', parseTimeExpense(value));
     }
   }
-  const handleChangedBudgetPlanned = (value) => {
+  const handleChangedBudgetPlanned = (e) => {
     if(isCompletedDisabled) {
-      change('actualBudget', parserPrice(value));
+      console.log('handleChangedBudgetPlanned', e.currentTarget.value)
+      change('actualBudget', parserPrice(e.currentTarget.value));
     }
   }
+  console.log("priceType", priceType);
   const {t} = useTranslation('common');
   return (
      <div className={styles.root}>
@@ -68,6 +70,7 @@ let PricingForm = (props: Props) => {
            label=""
            onChange={handleChangedBudgetPlanned}
            disabled={isPlannedDisabled}
+           format={(value) => `${getCurrencySymbol(event.task?.currency)}   ${value || ''}`}
            parse={parserPrice}
            validate={required}
          />}
@@ -92,6 +95,7 @@ let PricingForm = (props: Props) => {
            size={'small'}
            label=""
            disabled={isCompletedDisabled}
+           format={(value) => `${getCurrencySymbol(event.task?.currency)}   ${value || ''}`}
            parse={parserPrice}
            validate={required}
          />}

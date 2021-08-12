@@ -602,7 +602,8 @@
     "describeYourExperience": "Опишите опыт вашей работы с",
     "submitReview": "Отправить отзыв",
     "eventInputs": "Вводные События",
-    "addNewExpense": "Добавить новый расход"
+    "addNewExpense": "Добавить новый расход",
+    "task": "Заказ"
   },
   "chat": {
     "areYouSure": "Вы уверены, что хотите отклонить отметку выполнения Заказа?",
@@ -649,7 +650,8 @@
       "clientMarkedTask": "Клиент отметил Заказ как завершенный",
       "masterRequestMark": "Мастер {{statusText}} ваш запрос отметить как завершенное",
       "clientRequestMark": "Клиент {{statusText}} ваш запрос отметить как завершенное"
-    }
+    },
+    "newMessageFileError": "Wait for file uploading"
   },
   "feedBack": {
     "pleaseRate": "Пожалуйста оцените",

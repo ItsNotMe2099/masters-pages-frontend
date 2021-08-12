@@ -14,9 +14,10 @@ import { useDropzone, DropzoneOptions } from 'react-dropzone'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 import nextId from "react-id-generator";
-import { useDispatch} from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
 import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
 import {useTranslation, Trans} from "i18n";
+import {IRootState} from 'types'
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -83,11 +84,13 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   } = props
   const dispatch = useDispatch()
   const token = Cookies.get('token')
+  const role = useSelector((state: IRootState) => state.profile.role)
+
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
     accept: '*/*',
     uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
-    signingUrlHeaders: { 'Authorization': `Bearer ${token}` },
+    signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role},
     signingUrlWithCredentials: false,
     signingUrlQueryParams: { uploadType: 'avatar' },
     autoUpload: true,
