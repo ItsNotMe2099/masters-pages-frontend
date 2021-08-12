@@ -74,7 +74,7 @@ const CreateTaskPage = (props) => {
         isOpen={isCompleted} onRequestClose={() => {
         dispatch(createTaskeReset());
           dispatch(modalClose());
-        router.push('/orders');
+        router.push('/orders/draft');
       }}>
 
       </Modal>

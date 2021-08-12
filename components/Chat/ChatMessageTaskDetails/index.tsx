@@ -39,6 +39,7 @@ interface Props {
 export default function ChatMessageTaskDetails({ message, task, showHire, showEdit, showReject, showFinish, showAccept, outDatedText }: Props) {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
+  const isActionsDisabled = [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToMaster].includes(message.taskNegotiation.state);
   const handleReject = () => {
     if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer){
       dispatch(confirmOpen({
