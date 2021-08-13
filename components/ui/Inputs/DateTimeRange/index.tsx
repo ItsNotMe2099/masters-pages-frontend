@@ -18,7 +18,11 @@ interface Props {
   disabled?: boolean,
   showTime?: boolean,
   className?: string,
-  inputClassName?: string
+  inputClassName?: string,
+  meta?: {
+    error: any,
+    touched: boolean,
+  },
 }
 
 export default function DateTimeRange(props: Props) {
@@ -131,7 +135,7 @@ export default function DateTimeRange(props: Props) {
         direction="horizontal"
       />
       </div>
-      <ErrorInput {...props}/>
+      <ErrorInput meta={props.meta} />
     </div>
   );
 }
