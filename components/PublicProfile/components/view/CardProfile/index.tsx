@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import {IRootState, ProfileData} from 'types'
+import {IRootState, ProfileData, UserActivityStatus} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import Avatar from 'components/ui/Avatar'
 import StarRatings from 'react-star-ratings';
@@ -22,6 +22,7 @@ import AvatarForm from 'pages/me/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
 import {useTranslation, withTranslation} from "i18n";
+import ProfileStatus from 'components/ui/ProfileStatus'
 
 interface Props{
   profile: ProfileData,
@@ -61,6 +62,7 @@ const CardProfile = (props: Props) => {
   const handleDeleteAvatar = () => {
     dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
   }
+
   return (
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
@@ -97,8 +99,7 @@ const CardProfile = (props: Props) => {
         <div className={styles.ratingValue}>({profile.rating || 0})</div>
       </div>
       <div className={styles.lastSeen}>
-        <div className={styles.lastSeenLabel}>{t('cardProfile.lastSeen')}</div>
-        <div className={styles.lastSeenValue}>3 min ago</div>
+        <ProfileStatus activityStatus={profile.activityStatus}/>
       </div>
       {!isEdit && <div className={styles.actions}>
 
