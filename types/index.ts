@@ -115,6 +115,10 @@ export interface ContactData {
   contactProfile: ProfileData,
   contactProfileId: number
 }
+export enum UserActivityStatus {
+  Offline = "offline",
+  Online = "online",
+}
 export interface ProfileData {
   id?: number
   avatar?: string
@@ -160,6 +164,7 @@ export interface ProfileData {
   },
   isSubscribedByCurrentProfile?: boolean
   isRecommendedByCurrentProfile?: boolean
+  activityStatus?: UserActivityStatus
 }
 
 export interface IProfileSettingsNotificationItem {

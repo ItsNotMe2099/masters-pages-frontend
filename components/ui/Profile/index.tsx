@@ -1,31 +1,26 @@
-import { confirmOpen, taskOfferAcceptOpen, taskOfferOpen, taskShareOpen } from "components/Modal/actions";
-import { saveProfileRequest } from "components/SavedPeople/actions";
-import { deleteSkill } from "components/Skill/actions";
+import {taskOfferOpen} from "components/Modal/actions";
+import {saveProfileRequest} from "components/SavedPeople/actions";
 import ArrowRight from "components/svg/ArrowRight";
 
 import StarRatings from 'react-star-ratings';
-import {
-  taskNegotiationSendOfferSetLoading,
-  taskNegotiationSetCurrentProfile
-} from "components/TaskNegotiation/actions";
+import {taskNegotiationSetCurrentProfile} from "components/TaskNegotiation/actions";
 import Avatar from "components/ui/Avatar";
 import Button from 'components/ui/Button'
 import ProfileActionButton from "components/ui/Profile/components/ActionButton";
 import SliderControl from "components/ui/SliderControl";
 import Tabs from "components/ui/Tabs";
-import { format } from "date-fns";
-import { useRouter } from "next/router";
-import { default as React, useState } from "react";
-import { IRootState, ITask, ProfileData } from "types";
-import { getMediaPath } from "utils/media";
-import { getCategoryTranslation } from "utils/translations";
+import {useRouter} from "next/router";
+import {default as React, useState} from "react";
+import {IRootState, ITask, ProfileData, UserActivityStatus} from "types";
+import {getMediaPath} from "utils/media";
+import {getCategoryTranslation} from "utils/translations";
 import styles from './index.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import Slider from "react-slick";
-import { TabSelect } from "./components/TabSelect";
+import {useDispatch, useSelector} from 'react-redux'
 import BookmarkSvg from 'components/svg/Bookmark'
-import {useTranslation, Trans} from "i18n";
+import {useTranslation} from "i18n";
 import Link from 'next/link'
+import cx from 'classnames';
+import ProfileStatus from 'components/ui/ProfileStatus'
 interface Props {
   profile: ProfileData,
   actionsType: 'public' | 'client' | 'master'
@@ -98,6 +93,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       }
     ]
   };
+
 const profileLink = `/id${profile.id}`;
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
@@ -141,9 +137,7 @@ const profileLink = `/id${profile.id}`;
                  className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</a></Link>
               <img src="/img/iconsTck.svg" alt=''/>
             </div>
-            <div className={styles.status}>
-              {t('online')}
-            </div>
+            <ProfileStatus activityStatus={profile.activityStatus}/>
           </div>
 
           <div className={styles.desc}>

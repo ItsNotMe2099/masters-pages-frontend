@@ -37,3 +37,4 @@ export const formatSeconds = (seconds) => {
 export const pad = (string) => {
   return ('0' + string).slice(-2)
 }
+

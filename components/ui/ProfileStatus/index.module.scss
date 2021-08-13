@@ -1,0 +1,29 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.online{
+    color: #27C60D;
+    .circle{
+      background: #27C60D;
+    }
+  }
+  &.offline{
+    color: #6D718C;
+    .circle{
+      background: #6D718C;
+    }
+  }
+}
+.circle{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  margin-right: 8px;
+
+}
+.lastSeen{
+
+}
