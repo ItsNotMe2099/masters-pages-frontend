@@ -12,7 +12,7 @@ import React, {
 import PropTypes from 'prop-types'
 import { shallowEqual } from 'recompose'
 import Dropzone, {DropzoneOptions} from 'react-dropzone';
-import S3Upload from 'react-s3-uploader/s3upload'
+import S3Upload from 'utils/s3upload'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux';

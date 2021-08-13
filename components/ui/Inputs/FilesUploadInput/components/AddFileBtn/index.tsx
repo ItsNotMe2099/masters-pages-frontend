@@ -1,6 +1,5 @@
 import Button from "components/ui/Button";
 import React from 'react'
-import ReactS3Uploader from 'react-s3-uploader'
 import styles from './index.module.scss'
 import {useTranslation} from "i18n";
 

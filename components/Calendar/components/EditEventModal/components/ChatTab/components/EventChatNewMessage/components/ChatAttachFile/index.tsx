@@ -2,7 +2,7 @@ import { attachPhoto, fetchChat, sendMessage } from "components/Chat/actions";
 import TextArea from "components/ui/Inputs/TextArea";
 import Loader from "components/ui/Loader";
 import { useEffect, useState } from "react";
-import S3Upload from "react-s3-uploader/s3upload";
+import S3Upload from 'utils/s3upload'
 import { IChat, IChatMessage, IChatMessageType, IRootState } from "types";
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
