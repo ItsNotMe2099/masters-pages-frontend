@@ -6,18 +6,16 @@ export function required(value: string | number, allValues) {
 
 
 export function eventMinDuration(range) {
-  console.log("dsd",  differenceInMinutes(range.end, range.start));
   if(range.start && range.end && differenceInMinutes(range.end, range.start) < 1) {
     console.log("dsdError")
-    return 'eventMinDuration'
+    return 'rangeError'
   }
   return undefined;
 }
 export function eventRange(range) {
-  console.log("dsd",  differenceInMinutes(range.end, range.start));
   if(range.start && range.end && differenceInMinutes(range.end, range.start) < 0) {
     console.log("dsdError")
-    return 'eventMinDuration'
+    return 'rangeError'
   }
   return undefined;
 }

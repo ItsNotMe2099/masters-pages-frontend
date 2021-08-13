@@ -40,7 +40,8 @@
     "birthdate": "Not valid birthdate",
     "selectSomething": "Select one or more values",
     "selectCategory": "Add one or more categories",
-    "selectSubCategory": "Add one or more sub categories"
+    "selectSubCategory": "Add one or more sub categories",
+    "rangeError": "Invalid Range"
   },
   "master": "Master",
   "from": "from",

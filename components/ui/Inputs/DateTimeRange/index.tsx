@@ -97,6 +97,10 @@ export default function DateTimeRange(props: Props) {
             onChange: handleEndTime
           }}
                       disabledHours={() => {
+                        if(!isSameDay(value.start, value.end)){
+                          return [];
+                        }
+
                         const hour = moment(value.start).hour();
                         if(hour === 0){
                           return [];
@@ -106,6 +110,9 @@ export default function DateTimeRange(props: Props) {
                       }}
                       disabledMinutes={() => {
                         if(moment(value.start).hour() < moment(value.end).hour()){
+                          return [];
+                        }
+                        if(!isSameDay(value.start, value.end)){
                           return [];
                         }
                         const min = moment(value.start).minute();
