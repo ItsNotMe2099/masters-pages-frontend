@@ -100,6 +100,7 @@ const EditEventModal = (props: Props) => {
       estimate: data.price.total,
       ratePerHour: data.price.rate,
       budget: data.budget,
+      placeType: data.placeType,
       meetingLink: data.meetingLink,
       country: data.country,
       city: data.city,

@@ -1043,6 +1043,7 @@
     "type": "Тип",
     "clientAddress": "Адрес Клиента",
     "masterAddress": "Адрес Мастера",
+    "otherAddress": "Другой адрес",
     "address1": "Адрес 1",
     "address2": "Адрес 2",
     "city": "Город",

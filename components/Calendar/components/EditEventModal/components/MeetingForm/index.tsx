@@ -45,22 +45,26 @@ let MeetingForm = ({change, placeType}: Props) => {
             size={'small'}
             labelType="placeholder"
             label={t('meetingForm.type')}
-            options={[ {label: t('meetingForm.clientAddress'), value: 'ClientAddress'}, {label: t('meetingForm.masterAddress'), value: 'MasterAddress'}]}
+            options={[
+              {label: t('meetingForm.clientAddress'), value: 'ClientAddress'},
+              {label: t('meetingForm.masterAddress'), value: 'MasterAddress'},
+              {label: t('meetingForm.otherAddress'), value: 'OtherAddress'}
+            ]}
           />}
-          {placeType !== 'Online' && <div className={styles.orSection}>
+          {placeType === 'OtherAddress' && <div className={styles.orSection}>
             <div className={styles.orWrapper}>
               <div className={styles.orText}>or</div>
               <div className={styles.orBorder}></div>
             </div>
           </div>}
-          {placeType !== 'Online' && <Field
+          {placeType === 'OtherAddress' && <Field
             name="address1"
             component={Input}
             label={t('meetingForm.address1')}
             labelType={'static'}
             size={'small'}
           />}
-          {placeType !== 'Online' && <Field
+          {placeType === 'OtherAddress' && <Field
             name="address2"
             component={Input}
             label={t('meetingForm.address2')}
@@ -68,7 +72,7 @@ let MeetingForm = ({change, placeType}: Props) => {
             size={'small'}
           />}
 
-          {placeType !== 'Online' && <div className={styles.addresses}>
+          {placeType === 'OtherAddress' && <div className={styles.addresses}>
             <Field
               name="city"
               component={Input}

@@ -1,7 +1,25 @@
 import parsePhoneNumber, {isPossiblePhoneNumber} from 'libphonenumber-js'
-import {isFuture, isValid, parse} from 'date-fns'
+import {differenceInMinutes, isFuture, isValid, parse} from 'date-fns'
 export function required(value: string | number, allValues) {
   return value || typeof value === 'number' ? undefined : 'required'
+}
+
+
+export function eventMinDuration(range) {
+  console.log("dsd",  differenceInMinutes(range.end, range.start));
+  if(range.start && range.end && differenceInMinutes(range.end, range.start) < 1) {
+    console.log("dsdError")
+    return 'eventMinDuration'
+  }
+  return undefined;
+}
+export function eventRange(range) {
+  console.log("dsd",  differenceInMinutes(range.end, range.start));
+  if(range.start && range.end && differenceInMinutes(range.end, range.start) < 0) {
+    console.log("dsdError")
+    return 'eventMinDuration'
+  }
+  return undefined;
 }
 
 export function email(value: string) {

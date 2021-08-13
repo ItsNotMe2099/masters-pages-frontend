@@ -16,7 +16,7 @@ import Loader from "components/ui/Loader";
 import * as React from "react";
 import { IRootState, ITask, SkillData, SkillListItem } from "types";
 import { maskBirthDate } from "utils/masks";
-import { required } from "utils/validations";
+import {eventMinDuration, required} from "utils/validations";
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -49,8 +49,9 @@ let NewEventForm = (props: Props) => {
         <Field
           name="timeRange"
           component={DateTimeRange}
+
           label={t('date')}
-          validate={required}
+          validate={[required, eventMinDuration]}
         />
         <Field
           name="title"
