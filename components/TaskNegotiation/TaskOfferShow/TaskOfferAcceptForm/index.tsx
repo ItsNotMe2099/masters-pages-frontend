@@ -10,13 +10,13 @@ import * as React from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState, ITask } from "types";
 import { connect,  } from 'react-redux'
-import { maskBirthDate } from "utils/masks";
 import { arrayNotEmpty, required } from "utils/validations";
 import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import {parserPrice} from 'utils/formatters'
 import {getCurrencySymbol} from 'data/currency'
 import {useTranslation, Trans} from "i18n";
+import InputDate from 'components/ui/Inputs/InputDate'
 interface Props{
   task: ITask
 }
@@ -100,12 +100,11 @@ let TaskOfferAcceptForm = (props) => {
             <div className={styles.offerDetailsForRowFieldsWrapper}>
               <Field
                 name="deadline"
-                component={Input}
+                component={InputDate}
                 label={t('deadline')}
                 validate={required}
                 size={'small'}
                 labelType={'placeholder'}
-                mask={'99/99/9999'}
               />
             </div>
 

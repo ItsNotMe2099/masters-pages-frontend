@@ -20,7 +20,9 @@ text-align: center;
   max-height: 236px;
 }
 .video{
-
+  > div{
+    max-height: 236px;
+  }
   max-height: 236px;
   video{
     border-radius: 3px;

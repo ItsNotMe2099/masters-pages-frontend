@@ -14,16 +14,13 @@ export const getProfilePageType = (url): {type: ProfilePageType, id: string | nu
   }
 }
 export const getProfilePageProps = (mode) => async (ctx) => {
-  console.log("PerformUrl", ctx.query);
   const profilePageType = mode === 'profile' ? {type: ProfilePageType.Profile, id: ctx.query.profile } : {type: ProfilePageType.Skill, id: ctx.query.profile };
   let profile, skill = null;
-  console.log("profilePageType", profilePageType);
   if(profilePageType?.type === ProfilePageType.Skill){
     skill = (await request({ url: `/api/profile/skill/${profilePageType.id}`, method: 'GET' }))?.data
     profile = skill?.profile;
   }else if(profilePageType?.type === ProfilePageType.Profile){
     profile = (await request({ url: `/api/profile/${profilePageType.id}`, method: 'GET' }))?.data
-    console.log("GetProfile", profile);
   }else{
     return {
       notFound: true
@@ -56,7 +53,6 @@ export const getProfilePageShowTypeProps =  (ctx) => {
       showType = 'reviews'
       break;
   }
-  console.log("ShowType", showType)
   return {showType};
 }
 

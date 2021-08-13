@@ -21,7 +21,9 @@ export default function EventChatNewMessage(props: Props) {
   const [files, setFiles] = useState([]);
   const {t} = useTranslation('common');
   const handleSendMessage = () => {
+    console.log("handleSendMessage");
     if((message || files.length > 0) && chat) {
+      console.log("Files send", files);
       dispatch(sendMessage({ message, chatId: chat.id, files: files.map(file => file.fileKey) }))
     }
   }

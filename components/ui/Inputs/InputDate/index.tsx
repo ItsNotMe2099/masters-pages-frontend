@@ -14,9 +14,13 @@ export default function InputDate(props: Props) {
 
   return (
     <div className={styles.root}>
+  <label className={styles.label}>{props.label}</label>
+
       <DatePicker
+        className={styles.datePicker}
         onChange={onChange}
-        value={value}
+        format={'dd.MM.y'}
+        value={value ? new Date(value) : value}
       />
       <ErrorInput {...props} />
     </div>

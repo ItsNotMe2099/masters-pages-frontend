@@ -12,6 +12,7 @@ import AvatarInput from 'components/ui/AvatarInput'
 import {format, parse} from 'date-fns'
 import {dateFormat} from 'utils/masks'
 import {useTranslation} from 'i18n'
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let WorkExperienceForm = (props) => {
   const error = useSelector((state: IRootState) => state.profileWorkExperience.formError)
@@ -35,22 +36,18 @@ let WorkExperienceForm = (props) => {
       <div className={styles.dates}>
         <Field
           name="fromDate"
-          component={Input}
+          component={InputDate}
           size={'small'}
           label={t('cardWorkExperience.form.fromDate')}
           validate={[required, date]}
-          {...dateFormat}
-          mask={'99/99/9999'}
           labelType={'placeholder'}
         />
         <Field
           name="toDate"
-          component={Input}
+          component={InputDate}
           size={'small'}
           label={t('cardWorkExperience.form.toDate')}
           validate={[required, date]}
-          {...dateFormat}
-          mask={'99/99/9999'}
           labelType={'placeholder'}
         />
       </div>
@@ -79,8 +76,8 @@ let WorkExperienceForm = (props) => {
       />
       <FormError error={error}/>
       <div className={styles.buttons}>
-        <Button size={'small'} onClick={props.onCancel}>Cancel</Button>
-        <Button size={'small'} type={'submit'}>Save</Button>
+        <Button size={'small'} onClick={props.onCancel}>{t('cancel')}</Button>
+        <Button size={'small'} type={'submit'}>{t('save')}</Button>
       </div>
     </form>
   )

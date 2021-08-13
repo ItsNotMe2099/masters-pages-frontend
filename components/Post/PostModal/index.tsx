@@ -39,7 +39,6 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
     }
   }
 
-  console.log("currentEditPost", currentEditPost)
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>

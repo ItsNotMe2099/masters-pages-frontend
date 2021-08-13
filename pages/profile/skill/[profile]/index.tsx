@@ -8,7 +8,6 @@ interface Props {
 }
 
 const ProfilePage = (props) => {
-  console.log("PropsSkill")
  return <PublicProfile {...props}/>
 }
 export const getServerSideProps = getProfilePageProps('skill')

@@ -11,19 +11,19 @@ import { DropDown } from "components/ui/DropDown";
 import Input from "components/ui/Inputs/Input";
 import Loader from "components/ui/Loader";
 import { useRouter } from "next/router";
-import SearchTaskFilter from "pages/SearchTaskPage/Filter";
 import { default as React, useEffect, useState } from "react";
 import {useTranslation, withTranslation} from "i18n";
 import { IRootState } from "types";
 import styles from './index.module.scss'
-import Header from 'components/layout/Header'
-import Footer from 'components/layout/Footer'
 import Task from "components/Task";
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Sticky from 'react-stickynode';
 import ArrowDown from "components/svg/ArrowDown";
 const queryString = require('query-string')
+const SearchTaskFilter = dynamic(() => import(  "pages/SearchTaskPage/Filter"), {
+  ssr: false
+})
 import {
   useWindowSize,
   useWindowWidth,
@@ -31,6 +31,7 @@ import {
 } from '@react-hook/window-size'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
+import dynamic from 'next/dynamic'
 interface Props {
   onShowMap: () => void
 }

@@ -1,7 +1,23 @@
 import parsePhoneNumber, {isPossiblePhoneNumber} from 'libphonenumber-js'
-import {isFuture, isValid, parse} from 'date-fns'
+import {differenceInMinutes, isFuture, isValid, parse} from 'date-fns'
 export function required(value: string | number, allValues) {
   return value || typeof value === 'number' ? undefined : 'required'
+}
+
+
+export function eventMinDuration(range) {
+  if(range.start && range.end && differenceInMinutes(range.end, range.start) < 1) {
+    console.log("dsdError")
+    return 'rangeError'
+  }
+  return undefined;
+}
+export function eventRange(range) {
+  if(range.start && range.end && differenceInMinutes(range.end, range.start) < 0) {
+    console.log("dsdError")
+    return 'rangeError'
+  }
+  return undefined;
 }
 
 export function email(value: string) {
@@ -39,8 +55,9 @@ export const date =  value => {
   if(!value){
     return;
   }
+  console.log("Validate", value);
   try {
-    let date = parse(value, 'MM/dd/yyyy', new Date());
+    let date = new Date(value)
     if(!isValid(date)){
       date = parse(value, 'yyyy-mm-dd', new Date());
     }
@@ -63,7 +80,11 @@ export const birthdate =  value => {
     return;
   }
   try {
-    const date = parse(value, 'MM/dd/yyyy', new Date());
+    let date = new Date(value)
+    if(!isValid(date)){
+      date = parse(value, 'yyyy-mm-dd', new Date());
+    }
+
     return !isValid(date) ||  isFuture(date) ? 'birthdate' : undefined;
   }catch (e){
     return 'birthdate'

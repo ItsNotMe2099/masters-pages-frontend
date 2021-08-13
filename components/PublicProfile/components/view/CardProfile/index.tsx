@@ -11,7 +11,13 @@ import {createProfileRecommendation} from 'components/ProfileRecommendations/act
 import Link from 'next/link'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {taskOfferOpen} from 'components/Modal/actions'
-import {showProfileForm, updateProfile, updateProfileAvatar, updateProfileByForm} from 'components/Profile/actions'
+import {
+  hideProfileForm,
+  showProfileForm,
+  updateProfile,
+  updateProfileAvatar,
+  updateProfileByForm
+} from 'components/Profile/actions'
 import AvatarForm from 'pages/me/profile/components/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
@@ -31,9 +37,12 @@ const CardProfile = (props: Props) => {
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
   const { t } = useTranslation('common');
-  console.log("Profile111", profile);
   const handleEditClick = () => {
-    dispatch(showProfileForm( 'avatar'));
+    if(showForm){
+      dispatch(hideProfileForm( 'avatar'));
+    }else {
+      dispatch(showProfileForm('avatar'));
+    }
   }
   const handleRecommend = () => {
     dispatch(createProfileRecommendation(profile.id));
@@ -53,7 +62,7 @@ const CardProfile = (props: Props) => {
     dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
   }
   return (
-    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={t('task.edit')} onClick={handleEditClick}/>] : []}>
+    <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
         {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
         {(!showForm || !isEdit) &&  <a href={`/id${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}

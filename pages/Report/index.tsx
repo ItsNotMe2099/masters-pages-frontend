@@ -41,6 +41,18 @@ const ReportPage = (props) => {
     },
     start: new Date(),
     end: new Date(),
+    fields: ['id',
+      'title',
+      'plannedTime',
+      'actualTime',
+      'plannedAmount',
+      'actualAmount',
+      'clientName',
+      'masterName',
+      'review',
+      'events',
+      'reviewMark',
+      'address', ]
   });
 
 
@@ -54,6 +66,8 @@ const ReportPage = (props) => {
       ...data.range as {start: Date, end: Date},
 
     };
+
+
     setFilterData(filter)
     dispatch(fetchReportList(filter));
   }

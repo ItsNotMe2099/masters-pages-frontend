@@ -115,7 +115,6 @@ const CardPortfolio = (props: Props) => {
 
   }
   const handleSubmit = (data) => {
-    console.log("HandleSubmit", data);
     if (!currentEditModel) {
       dispatch(createProfilePortfolio({
         categoryId: skill.categoryId,

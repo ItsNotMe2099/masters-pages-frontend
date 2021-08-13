@@ -40,9 +40,13 @@
     "birthdate": "Not valid birthdate",
     "selectSomething": "Select one or more values",
     "selectCategory": "Add one or more categories",
-    "selectSubCategory": "Add one or more sub categories"
+    "selectSubCategory": "Add one or more sub categories",
+    "rangeError": "Invalid Range"
   },
   "master": "Master",
+  "from": "from",
+  "toNow": "to now",
+  "until": "until",
   "length": "Length",
   "yourReview": "Your review",
   "copyLink": "Copy this link",
@@ -185,6 +189,7 @@
   "newOrder": "New order",
   "photos": "Photos",
   "priceRateSuffix": "h",
+  "daysSuffix": "d",
   "auth": {
     "titleQuick": "Quick Sign in",
     "signIn": {
@@ -278,7 +283,8 @@
       "recommended": "recommended",
       "sendMessage": "Send message",
       "sendOffer": "Send Offer",
-      "subscribe": "Subscribe"
+      "subscribe": "Subscribe",
+      "bio": "BIO"
     },
     "menu": {
       "profile": "Personal information",
@@ -493,7 +499,8 @@
       "fixedPriceTaskTitle": "Fixed price",
       "fieldRatePerHour": "Rate per hour",
       "fieldEstimate": "Estimate",
-      "fieldBudget": "Budget"
+      "fieldBudget": "Budget",
+      "maxDays": "max 30 days"
     }
   },
   "taskSearch": {
@@ -592,7 +599,8 @@
     "describeYourExperience": "Describe your work experience with",
     "submitReview": "Submit review",
     "eventInputs": "Event inputs",
-    "addNewExpense": "Add new expense"
+    "addNewExpense": "Add new expense",
+    "task": "Заказ"
   },
   "chat": {
     "areYouSure": "Are you sure that you want to reject mark task as done?",
@@ -639,7 +647,8 @@
       "clientMarkedTask": "Client marked task as completed",
       "masterRequestMark": "Master {{statusText}} your request to mark as done",
       "clientRequestMark": "Client {{statusText}} your request to mark as done"
-    }
+    },
+    "newMessageFileError": "Дождитесь окончания загрузки файла"
   },
   "feedBack": {
     "pleaseRate": "Please rate",
@@ -1002,7 +1011,7 @@
     "differentTerms": "I want to propose different terms"
   },
   "fileInput": {
-    "fileHere": "Перенесите сюда файл или нажмите <1/> для выбора файла на компьютере",
+    "fileHere": "Drag the file here or click <1/> to select a file on your computer",
     "attachPhotos": "attach photos"
   },
   "modal": {
@@ -1030,6 +1039,7 @@
     "type": "Type",
     "clientAddress": "Client Address",
     "masterAddress": "Master Address",
+    "otherAddress": "Other Address",
     "address1": "Address 1",
     "address2": "Address 2",
     "city": "City",

@@ -1,4 +1,4 @@
-import S3Upload from 'react-s3-uploader/s3upload'
+import S3Upload from 'utils/s3upload'
 
 import FileInputPreview from "components/ui/Inputs/FilesUploadInput/components/FileInputPreview";
 import React, {
@@ -67,7 +67,6 @@ const FileWrapper = (props: Props) => {
     }
   },[])
   const handleRemove = () => {
-    console.log("handleRemove")
     if(  fileUpload.current  && file.rawFile){
       fileUpload.current.cancel();
     }

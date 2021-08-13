@@ -1,6 +1,6 @@
 import Modal from "components/ui/Modal";
 import Tabs from "components/ui/Tabs";
-import {differenceInHours} from "date-fns";
+import {differenceInHours, differenceInMinutes} from "date-fns";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {EventStatus, IEvent, IRootState} from "types";
@@ -30,7 +30,13 @@ interface Props {
   range?: { start?: Date, end?: Date },
   onClose: () => void
 }
-
+const differenceInHoursCeil = (end, start) => {
+  const diff = differenceInHours(end, start);
+  if(differenceInMinutes(end, start) % 60 !== 0){
+    return diff + 1;
+  }
+  return diff;
+}
 const EditEventModal = (props: Props) => {
   const {isOpen, onClose, range} = props;
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -62,8 +68,8 @@ const EditEventModal = (props: Props) => {
 
   const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null;
   const newRangeEnd = getEventPlannedAllowed(event) ? range?.end : null;
-  const newRangeActualStart = getEventCompletedAllowed(event) ? range?.start : null;
-  const newRangeActualEnd = getEventCompletedAllowed(event) ? range?.end : null;
+  const newRangeActualStart = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.start : null;
+  const newRangeActualEnd = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.end : null;
 
   const tabs = [
     {name: t('event.timePlaceCharge'), key: 'time'},
@@ -94,6 +100,7 @@ const EditEventModal = (props: Props) => {
       estimate: data.price.total,
       ratePerHour: data.price.rate,
       budget: data.budget,
+      placeType: data.placeType,
       meetingLink: data.meetingLink,
       country: data.country,
       city: data.city,
@@ -145,6 +152,7 @@ const EditEventModal = (props: Props) => {
 
   const actualStart = event ? event.actualStart || event.start : 0;
   const actualEnd = event ? event.actualEnd || event.end : 0;
+  console.log("newRangeStart", newRangeStart, newRangeEnd, differenceInHours(new Date(newRangeEnd), new Date(newRangeStart)))
   return (
     <div>
       <Modal isOpen={isOpen} size={'medium'} className={styles.root} loading={false} closeClassName={styles.modalClose}
@@ -170,11 +178,11 @@ const EditEventModal = (props: Props) => {
                                                           actualEnd: newRangeActualEnd || new Date(actualEnd),
                                                           price: {
                                                             rate: event.ratePerHour || event.task.ratePerHour,
-                                                            total: event.estimate || (differenceInHours(new Date(event.end), new Date(event.start)) > 0 ? differenceInHours(new Date(event.end), new Date(event.start)) : 1)
+                                                            total: newRangeStart && newRangeEnd ? differenceInHoursCeil(new Date(newRangeEnd), new Date(newRangeStart)) : event.estimate || (differenceInHoursCeil(new Date(event.end), new Date(event.start)) > 0 ? differenceInHoursCeil(new Date(event.end), new Date(event.start)) : 1)
                                                           },
                                                           actualPrice: {
                                                             rate: event.actualRatePerHour || event.task.ratePerHour,
-                                                            total: event.actualHours || (differenceInHours(new Date(actualEnd), new Date(actualStart)) > 0 ? differenceInHours(new Date(actualEnd), new Date(actualStart)) : 1)
+                                                            total: newRangeActualStart && newRangeActualEnd ? differenceInHoursCeil(new Date(newRangeActualEnd), new Date(newRangeActualStart)) : event.actualHours || (differenceInHoursCeil(new Date(actualEnd), new Date(actualStart)) > 0 ? differenceInHoursCeil(new Date(actualEnd), new Date(actualStart)) : 1)
                                                           }
                                                         }} onSubmit={handleSubmit}/>}
           {activeTab === 'chat' && <ChatTab event={event}/>}

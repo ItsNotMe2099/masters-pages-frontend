@@ -12,12 +12,14 @@ import React, {
 import PropTypes from 'prop-types'
 import { shallowEqual } from 'recompose'
 import Dropzone, {DropzoneOptions} from 'react-dropzone';
-import S3Upload from 'react-s3-uploader/s3upload'
+import S3Upload from 'utils/s3upload'
 import styles from './index.module.scss'
 
+import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie'
 import {withTranslation} from "i18n";
 import FormError from 'components/ui/Form/FormError'
+import {IRootState} from 'types'
 
 
 export interface AvatarInputProps {
@@ -75,6 +77,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
     } = props
   const [error, setError] = useState(null);
   const dropZoneRef = useRef(null);
+  const role = useSelector((state: IRootState) => state.profile.role)
 
   const handleChangePhoto = () => {
     if (dropZoneRef.current) {
@@ -153,7 +156,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           signingUrlMethod: 'GET',
           accept: '*/*',
           uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
-          signingUrlHeaders: {'Authorization': `Bearer ${token}`},
+          signingUrlHeaders: {'Authorization': `Bearer ${token}`, 'profile-role': role},
           signingUrlWithCredentials: false,
           signingUrlQueryParams: { uploadType: 'avatar' },
           autoUpload: true,

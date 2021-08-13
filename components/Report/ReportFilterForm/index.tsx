@@ -61,6 +61,7 @@ let ReportFilterForm = props => {
               label={t('clients')}
             />}
 
+
             {filter?.mastersFilter?.data.length > 0 && <Field
               name="mastersIds"
               component={MultiSelect}
@@ -71,7 +72,7 @@ let ReportFilterForm = props => {
             {filter?.tasksFilter?.data.length > 0 && <Field
               name="ordersIds"
               component={MultiSelect}
-              options={filter?.tasksFilter?.data.map(item => ({label: item.name, value: item.id}))}
+              options={filter?.tasksFilter?.data.map(item => ({label: item.title, value: item.id}))}
               label={t('orders')}
             />}
 

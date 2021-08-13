@@ -120,7 +120,7 @@ let TaskOfferNewOrder = (props: Props) => {
         name="executionType"
         component={SelectInput}
         label={`${t('executionType')}*`}
-        options={[{value: 'physical', label: t('physical')}, {value: 'virtual', label: t('virtual')}, {value: 'combo', label: t('combo')}]}
+        options={[{value: 'physical', label: t('forms.executionTypeInput.values.physical')}, {value: 'virtual', label: t('forms.executionTypeInput.values.virtual')}, {value: 'combo', label: t('forms.executionTypeInput.values.combo')}]}
         validate={required}
         labelType={'static'}
       />

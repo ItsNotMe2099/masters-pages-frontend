@@ -52,7 +52,6 @@ const PostList = (props: Props) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [currentEditPost, setCurrentEditPost] = useState(null);
-  console.log("IsEdit", isEdit, props.profileId);
 
   const limit = 30;
   useEffect(() => {

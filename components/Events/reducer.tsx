@@ -254,6 +254,8 @@ export default function EventsReducer(state = {...initialState}, action) {
       break
     case ActionTypes.FETCH_EVENT_ONE_REQUEST + ApiActionTypes.SUCCESS:
       state.currentEvent = action.payload
+      state.currentEventActualExpenses =  state.currentEvent.actualExpenses;
+      state.currentEventExpenses =  state.currentEvent.expenses;
       state.currentLoading = false;
       break
     case ActionTypes.FETCH_EVENT_ONE_REQUEST + ApiActionTypes.FAIL:

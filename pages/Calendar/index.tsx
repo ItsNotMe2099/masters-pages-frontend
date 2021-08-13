@@ -328,7 +328,10 @@ return (
       {modelKey === 'eventCreateModal' &&
       <NewEventModal range={newEventRange} isOpen={true} onClose={() => dispatch(modalClose())}/>}
       {(['confirm','eventEditModal', 'eventExpensePlannedModal', 'eventExpenseActualModal'].includes(modelKey) && (currentEvent || currentLoading)) &&
-      <EditEventModal range={currentEditEventRange} isOpen={true} onClose={() => dispatch(modalClose())}/>}
+      <EditEventModal range={currentEditEventRange} isOpen={true} onClose={() => {
+        router.push(`/Calendar`, null, {shallow: true});
+
+        dispatch(modalClose())}}/>}
         </div>
   </Layout>
 );

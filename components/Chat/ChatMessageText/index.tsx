@@ -43,7 +43,7 @@ export default function ChatMessageText({message, files, size, isRight, suffixIc
     setShowGallery(showGallery => !showGallery);
   }
 
-  const renderFile = (file) => {
+  const renderFile = (file, name) => {
 
     if(isMediaImage(file)){
       return <div className={styles.image} onClick={handleImageClick}><img src={getMediaPath(file)}/></div>
@@ -59,14 +59,14 @@ export default function ChatMessageText({message, files, size, isRight, suffixIc
         />
       </div>
     }
-    return  <div className={styles.file}><img src={'/img/icons/file-document.svg'}/><a href={getMediaPath(file)} target={'blank'}>{file.split('/').pop()}</a></div>
+    return  <div className={styles.file}><img src={'/img/icons/file-document.svg'}/><a href={getMediaPath(file)} target={'blank'}>{name || file.split('/').pop()}</a></div>
   }
 
   const mediaFiles = files ? files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)) : [];
   return (
    <div className={`${styles.root}  ${size === 'small' && styles.rootSmall} ${large && styles.rootLarge} ${isRight && styles.rootRight}`}>
      <div className={styles.messageWrapper}>
-     {files && files.length > 0 && <div className={styles.files}>{files.map(file => renderFile(file.urlS3))}</div>}
+     {files && files.length > 0 && <div className={styles.files}>{files.map(file => renderFile(file.urlS3, file.name))}</div>}
      {files && files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)).length > 0 &&
      <FsLightbox
        toggler={ showGallery }

@@ -10,6 +10,7 @@ import {getCurrencySymbol} from 'data/currency'
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import {parserPrice} from 'utils/formatters'
 import {useTranslation, Trans} from "i18n";
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let PriceSelectFormMini = props => {
   const { handleSubmit } = props
@@ -66,12 +67,11 @@ let PriceSelectFormMini = props => {
 
       <Field
         name="deadline"
-        component={Input}
+        component={InputDate}
         label={`${t('deadline')}:`}
         validate={required}
         size={'small'}
         labelType={'static'}
-        mask={'99/99/9999'}
       />
 
     </div>

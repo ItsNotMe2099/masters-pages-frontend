@@ -14,9 +14,10 @@ import { useDropzone, DropzoneOptions } from 'react-dropzone'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 import nextId from "react-id-generator";
-import { useDispatch} from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
 import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
 import {useTranslation, Trans} from "i18n";
+import {IRootState} from 'types'
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -83,11 +84,13 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   } = props
   const dispatch = useDispatch()
   const token = Cookies.get('token')
+  const role = useSelector((state: IRootState) => state.profile.role)
+
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
     accept: '*/*',
     uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
-    signingUrlHeaders: { 'Authorization': `Bearer ${token}` },
+    signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role},
     signingUrlWithCredentials: false,
     signingUrlQueryParams: { uploadType: 'avatar' },
     autoUpload: true,
@@ -102,7 +105,6 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   useEffect(() => {
     const filtered = files.filter((file => !!file.path))
     if(multiple) {
-      console.log("SetNewFiles", filtered.map(item => item.path));
       onChange(filtered.map(item => item.path))
 
     }else{
@@ -140,10 +142,8 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   }, [files])
 
   const onRemove =(file: FileEntity) => {
-    console.log("ONRemoveFiles")
     setFiles(files => {
       const index = files.findIndex( item => (file.key && file.key === item.key) || (!file.key && item.path === file.path))
-        console.log("index", index);
       const newFiles = [...files];
       newFiles.splice(index, 1);
       return newFiles
@@ -179,7 +179,7 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
         {...getRootProps()}
       >
         <div className={styles.emptyFiles}>
-          <img src="/img/icons/attach_file.svg" alt=''/>
+          {/*<img src="/img/icons/attach_file.svg" alt=''/>*/}
           <Trans i18nKey="fileInput.fileHere">Перенесите сюда файл или нажмите<br/> для выбора файла на компьютере</Trans>
         </div>
         <input

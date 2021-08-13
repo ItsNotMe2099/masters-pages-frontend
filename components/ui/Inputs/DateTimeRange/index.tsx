@@ -10,6 +10,7 @@ import {useDetectOutsideClick} from 'components/hooks/useDetectOutsideClick' // 
 import moment from "moment";
 import {range} from 'utils/array'
 import * as React from 'react'
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 
 interface Props {
   input: any,
@@ -17,7 +18,11 @@ interface Props {
   disabled?: boolean,
   showTime?: boolean,
   className?: string,
-  inputClassName?: string
+  inputClassName?: string,
+  meta?: {
+    error: any,
+    touched: boolean,
+  },
 }
 
 export default function DateTimeRange(props: Props) {
@@ -35,7 +40,15 @@ export default function DateTimeRange(props: Props) {
     }
   }, [])
   const handleChange = (v) => {
-    onChange({start: v.selection.startDate, end: v.selection.endDate});
+    const startDate = v.selection.startDate;
+    const endDate = v.selection.endDate;
+    console.log("HandleChange", v.selection.startDate.getDate(), v.selection.startDate.getFullYear(), v.selection.startDate.getMonth());
+    const newValue = {...value,
+      start: set(value.start, {date: startDate.getDate(), month: startDate.getMonth(), year: startDate.getFullYear()}),
+        end: set(value.end, {date: endDate.getDate(), month: endDate.getMonth(), year: endDate.getFullYear()})
+      }
+
+    onChange(newValue);
   }
   const getDateRange = () => {
     if(!value){
@@ -62,7 +75,8 @@ export default function DateTimeRange(props: Props) {
   }
 
   const handleEndTime = (time) => {
-    const newValue = {...value, end: set(value.start, {hours: time.hour(), minutes: time.minute()})}
+    const newValue = {...value, end: set(value.end, {hours: time.hour(), minutes: time.minute()})}
+    console.log("NewValue1", newValue, value);
     onChange(newValue)
   }
   return (
@@ -83,6 +97,10 @@ export default function DateTimeRange(props: Props) {
             onChange: handleEndTime
           }}
                       disabledHours={() => {
+                        if(!isSameDay(value.start, value.end)){
+                          return [];
+                        }
+
                         const hour = moment(value.start).hour();
                         if(hour === 0){
                           return [];
@@ -92,6 +110,9 @@ export default function DateTimeRange(props: Props) {
                       }}
                       disabledMinutes={() => {
                         if(moment(value.start).hour() < moment(value.end).hour()){
+                          return [];
+                        }
+                        if(!isSameDay(value.start, value.end)){
                           return [];
                         }
                         const min = moment(value.start).minute();
@@ -121,6 +142,7 @@ export default function DateTimeRange(props: Props) {
         direction="horizontal"
       />
       </div>
+      <ErrorInput meta={props.meta} />
     </div>
   );
 }

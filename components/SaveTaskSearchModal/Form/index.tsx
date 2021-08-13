@@ -30,7 +30,7 @@ let SaveTaskSearchForm = props => {
 
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button type="button" transparent bold smallFont size="10px 32px" borderC4>{t('cancelLarge')}</Button>
+        <Button onClick={props.onClose} type="button" transparent bold smallFont size="10px 32px" borderC4>{t('cancelLarge')}</Button>
         <Button red bold smallFont size="10px 85px">{t('saveLarge')}</Button>
       </div>
     </form>

@@ -48,7 +48,6 @@ const CreateTaskPage = (props) => {
       ...statFilter
     }));
   }
-  console.log("ProfileGeo", profile?.geoname);
   return (
     <Layout>
       <div className={styles.steps}>
@@ -62,6 +61,7 @@ const CreateTaskPage = (props) => {
         <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat} initialValues={{
           countryCode: profile?.geoname?.country,
           geonameid: profile?.geonameid,
+          visibilityType: 'public'
         }}/>
 
       </div>
@@ -72,8 +72,9 @@ const CreateTaskPage = (props) => {
         title={t('createTask.successTitle')}
         image={'/img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
+        dispatch(createTaskeReset());
           dispatch(modalClose());
-        router.push('/orders');
+        router.push('/orders/draft');
       }}>
 
       </Modal>

@@ -47,7 +47,7 @@ let PreferWorkInForm = (props: Props) => {
         component={InputAddress}
         size={'small'}
         labelType="placeholder"
-        label={t('tabProfile.fieldAddress')}
+        label={t('personalArea.tabProfile.fieldAddress')}
         validate={required}
       />}
 

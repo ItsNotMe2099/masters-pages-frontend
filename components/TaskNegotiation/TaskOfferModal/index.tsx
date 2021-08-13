@@ -37,7 +37,6 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const {t} = useTranslation('common')
 
   useEffect(() => {
-    console.log("fetchTaskUserListRequest");
     dispatch(fetchTaskUserListRequest({
       filter: {
         status: 'published'
@@ -61,7 +60,6 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const handleSubmitNewOrder = (data) => {
     dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: currentProfile.id}, currentProfile.id));
   }
-  console.log("taskListTotal", taskListTotal);
 
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>

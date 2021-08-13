@@ -7,6 +7,13 @@
   border-radius: 8px;
   border: 1px solid #CCCCCC
 }
+.error{
+  position: absolute;
+  top: -24px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+}
 .actions{
 
 }
@@ -50,6 +57,34 @@
   width: 65px;
   justify-content: center;
 }
+
+
+.loaderFile{
+  position: absolute;
+
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: rgba(0,0,0, 0.4);
+}
+.loaderFileProgress{
+  position: absolute;
+  z-index: 3;
+  bottom: 20%;
+  left: 6px;
+  right: 6px;
+  height: 4px;
+  background: #fff;
+  border-radius: 4px;
+}
+.loaderFileFill{
+  background: #FD5742;
+  height: 4px;
+  border-radius: 4px;
+}
+
+
 .loader{
   display: flex;
   align-items: center;

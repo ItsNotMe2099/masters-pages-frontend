@@ -50,7 +50,7 @@ const NewEventModal = ({isOpen, onClose, range}: Props) => {
     // dispatch(taskNegotiationSendOfferCreateTask(data, currentProfile.id));
   }
   const handleCancel = () => {
-
+    onClose();
   }
 
 

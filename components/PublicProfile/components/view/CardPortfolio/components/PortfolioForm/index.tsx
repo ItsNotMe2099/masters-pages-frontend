@@ -64,7 +64,7 @@ let PortfolioForm = (props) => {
         name="link"
         component={Input}
         size={'small'}
-        label="Add link"
+        label={t('addLink')}
         labelType={'placeholder'}
       />
       <Field

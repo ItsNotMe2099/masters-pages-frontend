@@ -89,7 +89,6 @@ export default function VideoJs(props: Props) {
         props.onError(e)
     }
     const handlePlay = () => {
-        console.log("HandlePlay", seekOnPlay.current)
 
         if (isPlayingRef.current) {
             return;
@@ -105,7 +104,6 @@ export default function VideoJs(props: Props) {
         clearTimeout(durationCheckTimeout)
 
         const duration = getDuration()
-        console.log("onDurationCalled", duration, isReadyRef.current);
         if (duration) {
             if (!onDurationCalled) {
 
@@ -124,7 +122,6 @@ export default function VideoJs(props: Props) {
         const duration = getDuration()
         const playedSeconds = getCurrentTime() || 0
         const loadedSeconds = getSecondsLoaded() * duration
-        console.log("Buffered Present", loadedSeconds);
 
         if (duration) {
             const progress = {
@@ -148,9 +145,7 @@ export default function VideoJs(props: Props) {
 
     }
     const handleReady = () => {
-        console.log("setReady", isReadyRef.current, seekOnPlay.current);
         if (isReadyRef.current) {
-            console.log("BlockIsReady")
             if (isPlayingRef.current && seekOnPlay.current) {
                 //       (playerRef?.current as any).currentTime(seekOnPlay.current)
 
@@ -196,7 +191,6 @@ export default function VideoJs(props: Props) {
     }, [props.playing])
 
     useEffect(() => {
-        console.log("SetVolume0", props.volume);
         (volumeRef as any).current = props.volume;
         if (!(playerRef as any)?.current) {
             return;
@@ -209,14 +203,12 @@ export default function VideoJs(props: Props) {
         if (!(playerRef as any)?.current) {
             return;
         }
-        console.log("SetVolume0", props.volume);
         (playerRef as any)?.current?.playbackRate(props.playbackRate);
         (playbackRateRef as any).current = props.playbackRate;
 
     }, [props.playbackRate])
 
     const handleVideoJsEvent = (event, value) => {
-        console.log("event", event, props.source, (playerRef as any).current?.currentSrc())
         switch (event) {
             case 'canplay':
                 handleReady();
@@ -297,13 +289,10 @@ export default function VideoJs(props: Props) {
             props.onCreateRef(playerRef.current);
         } else {
 
-
-            console.log("Source change", isPlayingRef.current, prevPlayed);
             setIsLoading(true);
             setOnDurationCalled(false);
 
             if (isPlayingRef.current) {
-                console.log("prevPlayed", prevPlayed)
                 seekOnPlay.current = prevPlayed.current;
             }
             isReadyRef.current = false;
@@ -319,7 +308,6 @@ export default function VideoJs(props: Props) {
             if (!(playerRef as any)?.current) {
                 return;
             }
-            console.log("off Envets")
             for (let i = 0; i < events.length; i += 1) {
                 (event => {
                     (playerRef as any)?.current.off(event);

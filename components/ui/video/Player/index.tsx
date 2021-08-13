@@ -75,12 +75,11 @@ export default function Player(props) {
     }
 
     const handlePlay = () => {
-        console.log('onPlay')
         setPlaying(true);
     }
 
     const handleEnablePIP = () => {
-        console.log('onEnablePIP')
+
         setPip(true);
     }
 
@@ -90,20 +89,18 @@ export default function Player(props) {
     }
 
     const handlePause = () => {
-        console.log('handlePause')
+
         setPlaying(false);
     }
 
 
     const handleSeekChange = value => {
-        console.log("SeekChange", value, loaded);
         setPlayed(value / duration);
         (player?.current as any).currentTime(value);
     }
 
 
     const handleProgress = state => {
-        console.log("handleProgress", state)
         setPlayed(state.played);
         setLoaded(state.loaded);
     }
@@ -138,10 +135,8 @@ export default function Player(props) {
 
     }
     const handleChangeCurrentTime = (value) => {
-        console.log("handleChangeCurrentTime", value);
     }
     const handleSourceChange = (item) => {
-        console.log("setSource", item.value)
 
         setLoaded(0);
         setPip(false);

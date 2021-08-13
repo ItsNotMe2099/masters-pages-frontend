@@ -22,6 +22,7 @@ import {useTranslation} from "i18n";
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import * as React from 'react'
 import InputCountry from 'components/ui/Inputs/InputCountry'
+import InputDate from 'components/ui/Inputs/InputDate'
 
 let TabOrderForm = props => {
   const { handleSubmit } = props
@@ -70,27 +71,27 @@ let TabOrderForm = props => {
               name="masterRole"
               component={SelectInput}
               label={`${t('createTask.fieldMasterType')}`}
-              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
+              options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}
+              validate={required}
               size={'small'}
               labelType={'static'}
+
             />
             <Field
               name="executionType"
               component={SelectInput}
               label={`${t('createTask.fieldExecutionType')}`}
-              options={[{value: 'physical', label: 'Physical'}, {value: 'virtual', label: 'Virtual'}, {value: 'combo', label: 'Combo'}]}
+              options={[{value: 'physical', label: t('forms.executionTypeInput.values.physical')}, {value: 'virtual', label: t('forms.executionTypeInput.values.virtual')}, {value: 'combo', label: t('forms.executionTypeInput.values.combo')}]}
               validate={required}
               size={'small'}
               labelType={'static'}
             />
             <Field
               name="deadline"
-              component={Input}
+              component={InputDate}
               label={`${t('createTask.fieldDeadline')}`}
-              validate={required}
               size={'small'}
               labelType={'static'}
-              mask={'99/99/9999'}
             />
           </div>
           <div className={styles.column}>

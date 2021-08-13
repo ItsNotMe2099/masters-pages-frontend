@@ -286,7 +286,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
 
       <div className={styles.wrapper}>
         {actionsType === 'public' && <div className={styles.profile}>
-          <Avatar href={profileLink} image={task.profile?.avatar}/>
+          <Avatar href={profileLink} image={task.profile?.photo}/>
           <div className={styles.mobileWrapper}>
             <div className={styles.name__mobile}>
               <Link href={profileLink}>
@@ -367,15 +367,24 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
         <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
 
 
-            <div className={styles.priceWrapper}>
-              <div className={styles.price}>
-                {t('task.price')} :
-              </div>
-              <div className={styles.priceDetailsValue}>
-                {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget}`:
-                  `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
-              </div>
+          <div className={styles.priceWrapper}>
+            <div className={styles.price}>
+              {t('task.price')} :
             </div>
+            <div className={styles.priceDetailsValue}>
+              {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}`:
+                `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
+            </div>
+          </div>
+
+          {task.priceType !== 'fixed' && task.estimate && <div className={styles.priceWrapper}>
+            <div className={styles.price}>
+              {t('estimate')} :
+            </div>
+            <div className={styles.priceDetailsValue}>
+              {task.estimate} {t('daysSuffix')}
+            </div>
+          </div>}
 
           {task.deadline && <div className={styles.priceDetailsItem}>
             <div className={styles.priceDetailsLabel}>

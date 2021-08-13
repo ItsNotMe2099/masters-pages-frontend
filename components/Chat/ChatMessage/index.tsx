@@ -90,13 +90,17 @@ export default function ChatMessage({ message, chat, size }: Props) {
       case IChatMessageType.TaskNegotiation:
         const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? t('chat.message.taskOutdated', { message, lastCondition }) : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {
+          const showReject = chat.task.status === 'published';
+          const showHire = chat.task.status === 'published';
+          const showEdit = chat.task.status === 'published';
+
           if (message.profileId === profile.id) {
-            return [<ChatMessageTaskDetails message={message} task={chat.task} showReject={true} showEdit={true}
-                                            showHire={true} outDatedText={outDatedText}/>,
+            return [<ChatMessageTaskDetails message={message} task={chat.task} showReject={showReject} showEdit={showEdit}
+                                            showHire={showHire} outDatedText={outDatedText}/>,
               <ChatMessageText message={t('chat.message.negotiationStarted')} suffixText={t('chat.message.systemMessage')} large={true}/>]
           } else {
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
-                                            showEdit={true}/>,
+                                            showEdit={showEdit}/>,
               <ChatMessageText message={t('chat.message.negotiationStarted')} suffixText={t('chat.message.systemMessage')} large={true}/>]
           }
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskOffer) {

@@ -30,6 +30,9 @@
   font-size: 14px;
   color: #000;
   margin-left: 21px;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 .message{
   margin-left: 15px;

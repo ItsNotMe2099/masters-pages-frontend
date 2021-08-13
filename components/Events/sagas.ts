@@ -1,5 +1,6 @@
 import {confirmChangeData, modalClose} from "components/Modal/actions";
 
+import Router from "next/router";
 import ApiActionTypes from "constants/api";
 import {takeLatest, put, take, select} from 'redux-saga/effects'
 import {IRootState} from "types";
@@ -30,7 +31,12 @@ import {
   fetchProfileGalleryList, setProfileGalleryCurrentItem,
   setProfileGalleryCurrentItemIndex
 } from 'components/ProfileGallery/actions'
-
+const changeRoute = () => {
+  if(Router.router.query?.eventId){
+    Router.push(`/Calendar`, null, {shallow: true});
+  }
+  console.log("RouteChange", Router);
+}
 function* EventSaga() {
   yield takeLatest(ActionTypes.CREATE_EVENT,
     function* (action: ActionType<typeof createEvent>) {
@@ -38,6 +44,7 @@ function* EventSaga() {
       const result = yield take([ActionTypes.CREATE_EVENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_EVENT_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.CREATE_EVENT_REQUEST + ApiActionTypes.SUCCESS) {
         yield put(modalClose());
+
 
       }
     })
@@ -106,6 +113,7 @@ function* EventSaga() {
 
         if (!submitEvent || ['draftWithEdit'].includes(submitEvent)) {
           yield put(modalClose());
+          changeRoute();
         }
       } else {
         yield put(updateEventCancel(action.payload.event));
@@ -119,33 +127,39 @@ function* EventSaga() {
       const result = yield take([ActionTypes.DELETE_EVENT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_EVENT_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.DELETE_EVENT_REQUEST + ApiActionTypes.SUCCESS) {
         yield put(modalClose());
-
+        changeRoute();
       }
     })
   yield takeLatest(ActionTypes.DELETE_EVENT_REQUEST + ApiActionTypes.SUCCESS,
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
+      changeRoute();
     });
 
   yield takeLatest(ActionTypes.SEND_EVENT_REQUEST + ApiActionTypes.SUCCESS,
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
+      changeRoute();
     });
   yield takeLatest(ActionTypes.DRAFT_EVENT_REQUEST + ApiActionTypes.SUCCESS,
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
+      changeRoute();
     });
   yield takeLatest(ActionTypes.COMPLETE_EVENT_REQUEST + ApiActionTypes.SUCCESS,
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
+      changeRoute();
     });
   yield takeLatest(ActionTypes.CONFIRM_EVENT_REQUEST + ApiActionTypes.SUCCESS,
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
+      changeRoute();
     });
   yield takeLatest(ActionTypes.DECLINE_EVENT_REQUEST + ApiActionTypes.SUCCESS,
     function* (action: ActionType<typeof deleteEvent>) {
       yield put(modalClose());
+      changeRoute();
     });
 
   yield takeLatest(ActionTypes.SET_CURRENT_EVENT_NEXT,

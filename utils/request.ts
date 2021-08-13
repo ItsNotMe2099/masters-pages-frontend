@@ -13,7 +13,6 @@ function request(requestData: IRequestData, ctx: any = null): Promise<IResponse>
     profileRole = ctx ? nextCookie(ctx).mode : Cookies.get('mode')
 
   }
-  console.log("URL", profileRole);
   return (
     fetch(`${host || defaultHost}${url}`, {
       method: method || 'GET',

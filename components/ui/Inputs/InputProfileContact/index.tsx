@@ -30,7 +30,7 @@ export default function InputProfileContact(props: Props) {
     getSearchProfile()
   }, [])
   const getSearchProfile = (search = '') => {
-    return request({url: `/api/profile-contacts?${queryString.stringify({search,  country: props.countryCode, id: search ? null : props.input.value, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
+    return request({url: `/api/profile-contacts/all?${queryString.stringify({search,  country: props.countryCode, id: search ? null : props.input.value, limit: 1000, page: 1, lang: i18n.language})}`, method: 'GET'})
       .then((response) => {
         const data = response.data;
         setOptions(data ? data?.data?.map(item => {

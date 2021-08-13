@@ -26,13 +26,10 @@ let PriceSelectForm = props => {
             <Field
               name="ratePerHour"
               component={Input}
-              placeholder="0.01 - 100"
               label={t('createTask.priceSelect.fieldRatePerHour')}
               size={'small'}
               labelType={'static'}
-              min="0.01"
-              max="100.00"
-              step="0.01"
+
               format={(value) => `${getCurrencySymbol(props.currency)}   ${value || ''}`}
               parse={parserPrice}
               onChange={handleHourFieldChange}
@@ -42,7 +39,7 @@ let PriceSelectForm = props => {
             <Field
               name="estimate"
               component={Input}
-              placeholder="max 30 days"
+              placeholder={t('createTask.priceSelect.maxDays')}
               label={t('createTask.priceSelect.fieldEstimate')}
               size={'small'}
               labelType={'static'}
