@@ -68,8 +68,8 @@ const EditEventModal = (props: Props) => {
 
   const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null;
   const newRangeEnd = getEventPlannedAllowed(event) ? range?.end : null;
-  const newRangeActualStart = getEventCompletedAllowed(event) ? range?.start : null;
-  const newRangeActualEnd = getEventCompletedAllowed(event) ? range?.end : null;
+  const newRangeActualStart = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.start : null;
+  const newRangeActualEnd = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.end : null;
 
   const tabs = [
     {name: t('event.timePlaceCharge'), key: 'time'},
