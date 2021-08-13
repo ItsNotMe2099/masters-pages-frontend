@@ -55,8 +55,9 @@ export const date =  value => {
   if(!value){
     return;
   }
+  console.log("Validate", value);
   try {
-    let date = parse(value, 'MM/dd/yyyy', new Date());
+    let date = new Date(value)
     if(!isValid(date)){
       date = parse(value, 'yyyy-mm-dd', new Date());
     }
@@ -79,7 +80,11 @@ export const birthdate =  value => {
     return;
   }
   try {
-    const date = parse(value, 'MM/dd/yyyy', new Date());
+    let date = new Date(value)
+    if(!isValid(date)){
+      date = parse(value, 'yyyy-mm-dd', new Date());
+    }
+
     return !isValid(date) ||  isFuture(date) ? 'birthdate' : undefined;
   }catch (e){
     return 'birthdate'

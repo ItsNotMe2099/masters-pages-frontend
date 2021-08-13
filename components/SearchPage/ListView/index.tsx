@@ -5,7 +5,6 @@ import {
   setFilterProfileSearch, setPageProfileSearch, setRoleProfileSearch,
   setSortProfileSearch
 } from "components/ProfileSearch/actions";
-import SearchProfileFilter from "components/SearchPage/Filter";
 import TaskShareModal from "components/TaskShareModal";
 import Button from "components/ui/Button";
 import { DropDown } from "components/ui/DropDown";
@@ -26,7 +25,12 @@ import {useTranslation} from "i18n";
 import {useWindowWidth} from "@react-hook/window-size";
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
+import dynamic from 'next/dynamic'
 const queryString = require('query-string')
+const SearchProfileFilter = dynamic(() => import( "components/SearchPage/Filter"), {
+  ssr: false
+})
+
 interface Props {
   searchRole: 'master' | 'volunteer',
   onShowMap: () => void

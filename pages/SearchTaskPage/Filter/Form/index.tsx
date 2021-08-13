@@ -53,6 +53,9 @@ let SearchTaskForm = (props) => {
                 withIcon={false}
                 showEmpty={true}
                 labelType={'placeholder'}
+                onChange={() => {
+                  props.change('subCategoryId', null);
+                }}
               />
               {!isMobile && <Field
                 name="subCategoryId"
@@ -94,6 +97,10 @@ let SearchTaskForm = (props) => {
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
+                onChange={() => {
+                  props.change('categoryId', null);
+                  props.change('subCategoryId', null);
+                }}
                 labelType={'placeholder'}
               />
               <Field
@@ -135,6 +142,9 @@ let SearchTaskForm = (props) => {
                 withIcon={false}
                 showEmpty={true}
                 labelType={'placeholder'}
+                onChange={() => {
+                  props.change('subCategoryId', null);
+                }}
               />
               <Field
                 name="geonameid"

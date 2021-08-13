@@ -131,10 +131,7 @@ const SelectInput = (props: Props) => {
                      }}
             withBorder={false}
             parentRef={searchInputRef}/>
-          <div className={styles.dropDownTrigger}>
-            <img src={`/img/field/${props.size === 'small' ? 'arrowDownRed' : 'arrowDown'}.svg`} alt=''/>
-          </div>
-        </div>
+           </div>
 
         <ul className={styles.dropDownList}>
           {props.showEmpty && <li className={styles.dropdownItem}>
