@@ -44,6 +44,8 @@
     "rangeError": "Invalid Range"
   },
   "master": "Master",
+  "public": "Public",
+  "private": "Private",
   "from": "from",
   "toNow": "to now",
   "until": "until",

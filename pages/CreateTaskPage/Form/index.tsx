@@ -31,7 +31,7 @@ import InputProfileContact from 'components/ui/Inputs/InputProfileContact'
 import InputDate from 'components/ui/Inputs/InputDate'
 
 let CreateTaskForm = props => {
-  const {t} = useTranslation()
+  const {t} = useTranslation('common')
   const { handleSubmit, onChangeForStat } = props
   const error = useSelector((state: IRootState) => state.createTaskComplete.formError)
   const searchStatCount = useSelector((state: IRootState) => state.profileSearch.searchStatCount)
@@ -59,8 +59,8 @@ let CreateTaskForm = props => {
               <Field
                 name="visibilityType"
                 component={RadioList}
-                label={`Type*`}
-                options={[{label: 'Public', value: 'public'}, {label: 'Private', value: 'private'}]}
+                label={`${t('type')}*`}
+                options={[{label: t('public'), value: 'public'}, {label: t('private'), value: 'private'}]}
                 size={'small'}
                 labelType={'static'}
               />
