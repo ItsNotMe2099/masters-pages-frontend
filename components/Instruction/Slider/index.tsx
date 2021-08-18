@@ -3,9 +3,9 @@ import Slider from "react-slick";
 import styles from './index.module.scss'
 import {useTranslation, withTranslation, Trans} from "i18n";
 
-export default class SimpleSlider extends Component {
-  render() {
-    var settings = {
+export default function SimpleSlider() {
+
+    const settings = {
       dots: true,
       infinite: true,
       speed: 500,
@@ -80,4 +80,3 @@ export default class SimpleSlider extends Component {
       </div>
     )
   }
-}
