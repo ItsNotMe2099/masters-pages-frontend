@@ -139,7 +139,7 @@ let TimePlaceChargeForm = (props: Props) => {
                        type={'button'} onClick={handleCancel}>{t('cancel')}</Button>;
       case ButtonType.DeclineDelete:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-                       type={'button'} onClick={handleDelete}>{t('declinedAndDelete')}</Button>;
+                       type={'button'} onClick={handleDelete}>{t('declineAndDelete')}</Button>;
       case ButtonType.RestoreDelete:
         return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
                        type={'button'} onClick={handleRestore}>{t('restore')}</Button>;

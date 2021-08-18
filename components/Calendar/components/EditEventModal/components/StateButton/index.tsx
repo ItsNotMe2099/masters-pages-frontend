@@ -99,13 +99,13 @@ const StateButton = ({event, type}: Props) => {
           return t('draft')
         }
         if([EventStatus.Planned].includes(event.status)){
-          return 'Planned';
+          return t('task.page.planned')
         }
         if([EventStatus.Declined].includes(event.status)){
-          return 'Planned';
+          return t('task.page.planned')
         }
         if([EventStatus.Confirmed].includes(event.status)){
-            return 'Planned';
+            return t('task.page.planned')
         }
         if(isOverdue){
           return t('overdue')
