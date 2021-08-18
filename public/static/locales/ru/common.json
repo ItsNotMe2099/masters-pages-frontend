@@ -652,7 +652,7 @@
       "masterRequestMark": "Мастер {{statusText}} ваш запрос отметить как завершенное",
       "clientRequestMark": "Клиент {{statusText}} ваш запрос отметить как завершенное"
     },
-    "newMessageFileError": "Wait for file uploading"
+    "newMessageFileError": "Дождитесь окончания загрузки файла"
   },
   "feedBack": {
     "pleaseRate": "Пожалуйста оцените",

@@ -648,7 +648,7 @@
       "masterRequestMark": "Master {{statusText}} your request to mark as done",
       "clientRequestMark": "Client {{statusText}} your request to mark as done"
     },
-    "newMessageFileError": "Дождитесь окончания загрузки файла"
+    "newMessageFileError": "Wait for file uploading"
   },
   "feedBack": {
     "pleaseRate": "Please rate",
