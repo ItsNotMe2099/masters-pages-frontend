@@ -13,7 +13,7 @@ import {
 } from "components/ProfileSettings/actions";
 import {IRootState} from "types";
 import Loader from "components/ui/Loader";
-import {deleteProfile} from "components/Profile/actions";
+import {deleteProfile, updateProfile} from "components/Profile/actions";
 import RegistrationPhone from "components/Auth/RegistrationPhone";
 import RegistrationPhoneConfirm from "components/Auth/RegistrationPhoneConfirm";
 import {useTranslation} from "i18n";
@@ -43,6 +43,9 @@ const TabSettings= (props: Props) => {
 
   }, [])
   const handleSubmit = (data) => {
+    dispatch(updateProfile(profile.id, data));
+  }
+  const handleSubmitSettings = (data) => {
     dispatch(updateProfileSettingsRequest(data));
   }
 
@@ -82,11 +85,11 @@ const TabSettings= (props: Props) => {
           </div>
         <div className={styles.title}>4. {t('notifications')}</div>
             <div className={styles.fieldset}>
-        <TabNotificationsForm onSubmit={handleSubmit} initialValues={settings}/>
+        <TabNotificationsForm onSubmit={handleSubmitSettings} initialValues={settings}/>
             </div>
         <div className={styles.title}>5. {t('defaultLanguage')}</div>
               <div className={styles.fieldset}>
-                <TabLanguageForm/>
+                <TabLanguageForm onSubmit={handleSubmitSettings}/>
               </div>
         <div className={styles.title}>6. {t('defaultTimezone')}</div>
                 <div className={styles.fieldset}></div>
