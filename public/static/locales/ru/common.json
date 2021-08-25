@@ -903,7 +903,8 @@
     "subscribed": "Вы подписаны",
     "lastSeen": "Был(а) последний раз:",
     "stat": {
-      "learnMore": "Узнать больше"
+      "learnMore": "Узнать больше",
+      "rating": "Рейтинг"
     }
   },
   "cardRecommenadationShort": {
@@ -916,7 +917,7 @@
     "recommendations": "Отзывы"
   },
   "cardSalesPitch": {
-    "salesPitch": "Почему именно Вы",
+    "salesPitch": "Описание",
     "form": {
       "fillUpSalePitch": "Заполните поле почему Клиент должен выбрать именно Вас. Не более 1000 знаков"
     }
