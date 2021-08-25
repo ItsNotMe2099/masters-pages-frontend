@@ -1,6 +1,7 @@
 import styles from "./index.module.scss";
 import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
+import {format} from 'date-fns'
 interface Props {
   label: string
   meta: any
@@ -18,7 +19,10 @@ export default function InputDate(props: Props) {
 
       <DatePicker
         className={styles.datePicker}
-        onChange={onChange}
+        onChange={(value) => {
+          console.log("HandleDateChange", format(value, 'y-MM-dd'));
+          onChange(format(value, 'y-MM-dd'));
+        }}
         format={'dd.MM.y'}
         value={value ? new Date(value) : value}
       />
