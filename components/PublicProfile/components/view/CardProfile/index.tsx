@@ -10,7 +10,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
 import Link from 'next/link'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
-import {taskOfferOpen} from 'components/Modal/actions'
+import {signInOpen, taskOfferOpen} from 'components/Modal/actions'
 import {
   hideProfileForm,
   showProfileForm,
@@ -49,9 +49,17 @@ const CardProfile = (props: Props) => {
     dispatch(createProfileRecommendation(profile.id));
   }
   const handleSubscribe = () => {
+    if(!currentProfile){
+      dispatch(signInOpen());
+      return;
+    }
     dispatch(createFollower({profileId: profile.id}));
   }
   const handleSendOffer = () => {
+    if(!currentProfile){
+      dispatch(signInOpen());
+      return;
+    }
     dispatch(taskNegotiationSetCurrentProfile(profile));
     dispatch(taskOfferOpen());
   }
