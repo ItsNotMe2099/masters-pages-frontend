@@ -31,7 +31,7 @@ const ProfileStatItem = ({model, profile}: Props) => {
         <ProfileStatItemCard value={model.likesCount} label={t('likes')} icon={'likes'}/>
         <ProfileStatItemCard value={model.feedbacksCount} label={t('reviews')} icon={'star'}/>
         <ProfileStatItemCard value={model.totalHours || 'N/A'} label={t('hours')} icon={'star'}/>
-        <ProfileStatItemCard value={model.rating || 'N/A'} label={t('works')} icon={'star'}/>
+        <ProfileStatItemCard value={model.rating || 'N/A'} label={t('cardProfile.stat.rating')} icon={'star'}/>
       </div>
     </div>
   )

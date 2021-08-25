@@ -898,7 +898,8 @@
     "subscribed": "You are subscribed",
     "lastSeen": "last seen:",
     "stat": {
-      "learnMore": "Learn more"
+      "learnMore": "Learn more",
+      "rating": "Rating"
     }
   },
   "cardRecommenadationShort": {
@@ -911,7 +912,7 @@
     "recommendations": "Reviews"
   },
   "cardSalesPitch": {
-    "salesPitch": "Sales Pitch",
+    "salesPitch": "Description",
     "form": {
       "fillUpSalePitch": "Fill up sale pitch. Max <1000 symbols"
     }
