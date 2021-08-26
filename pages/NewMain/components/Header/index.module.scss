@@ -3,6 +3,13 @@
   background: white;
 }
 
+.findMaster{
+  padding: 0px 35px;
+  height: 47px;
+  line-height: 47px;
+  font-size: 18px;
+  font-weight: 700;
+}
 
 
 .container{
@@ -28,7 +35,7 @@
 
 
   @include xll {
-    width: $container-xll
+    width: 80%;
   }
 }
 
@@ -90,4 +97,8 @@
       }
     }
   }
+}
+
+.firstBtn{
+  margin-right: 5%;
 }

@@ -63,7 +63,7 @@ const MainSectionFirst = (props) => {
         <div className={styles.description}>
         {t('mainPage.organize')}
         </div>
-        <MainSectionButton>{t('mainPage.goLive')}</MainSectionButton>
+        {/*<MainSectionButton>{t('mainPage.goLive')}</MainSectionButton>*/}
         </div>
         <div className={styles.rightSide}>
           <Label label={t('mainPage.labels.advertise')} index={0}/>
