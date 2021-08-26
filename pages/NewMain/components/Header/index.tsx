@@ -35,10 +35,10 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.menuItem}>
             <Link href={'menu'}>Contact us</Link>
           </div>*/}
-          <div className={styles.firstBtn}>
+          {/*<div className={styles.firstBtn}>
           <Button href='/SearchMasterPage' target='_self' red className={styles.findMaster}>{t('findMaster')}</Button>
-          </div>
-          <Button href='/SearchVolunteerPage' target='_self' blue className={styles.findMaster}>{t('findVolunteer')}</Button>
+        </div>
+          <Button href='/SearchVolunteerPage' target='_self' blue className={styles.findMaster}>{t('findVolunteer')}</Button>*/}
         </div>
         <div className={styles.actions}>
           <div className={styles.actionsButtons}>
