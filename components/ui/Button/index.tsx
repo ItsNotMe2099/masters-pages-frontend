@@ -28,6 +28,7 @@ interface Props {
   children?: any
   className?: string
   fullWidth?: boolean
+  target?: string
   onClick?: (e: React.MouseEvent) => void
 }
 
@@ -59,7 +60,7 @@ export default function Button(props: Props) {
     }, props.className);
   }
   return (props.href ? <Link href={props.href}>
-        <a href={props.href} className={getClasses()}
+        <a href={props.href} target={props.target} className={getClasses()}
            style={{padding: props.size}}>{props.children}</a>
       </Link> :
       <button
@@ -74,5 +75,6 @@ export default function Button(props: Props) {
   )
 }
 Button.defaultProps = {
-  type: 'submit'
+  type: 'submit',
+  target: '_blank',
 }

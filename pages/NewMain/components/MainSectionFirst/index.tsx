@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 import {signUpOpen} from 'components/Modal/actions'
 import {useTranslation} from "i18n";
+import Button from "components/ui/Button";
 
 const Label = ({label, index}: {label: string, index: number}) => {
 
@@ -63,7 +64,13 @@ const MainSectionFirst = (props) => {
         <div className={styles.description}>
         {t('mainPage.organize')}
         </div>
-        <MainSectionButton>{t('mainPage.goLive')}</MainSectionButton>
+        {/*<MainSectionButton>{t('mainPage.goLive')}</MainSectionButton>*/}
+        <div className={styles.btns}>
+        <div className={styles.firstBtn}>
+          <Button href='/SearchMasterPage' target='_self' red className={styles.findMaster}>{t('findMaster')}</Button>
+        </div>
+          <Button href='/SearchVolunteerPage' target='_self' blue className={styles.findMaster}>{t('findVolunteer')}</Button>
+        </div>
         </div>
         <div className={styles.rightSide}>
           <Label label={t('mainPage.labels.advertise')} index={0}/>

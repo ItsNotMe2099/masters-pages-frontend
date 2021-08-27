@@ -44,6 +44,8 @@
     "rangeError": "Invalid Range"
   },
   "master": "Master",
+  "findMaster": "Find your Master",
+  "findVolunteer": "Find your Volunteer",
   "public": "Public",
   "private": "Private",
   "from": "from",
