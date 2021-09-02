@@ -47,6 +47,7 @@ const TaskPage = (props) => {
   const modelKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [dateRange, setDateRange] = useState(null);
   const [page, setPage] = useState(1);
+  const [loadIsRecommended, setIsRecommended] = useState(false);
   React.useEffect(() => {
     dispatch(fetchOneTaskUserRequest(parseInt(router.query.task as string, 10)))
     dispatch(fetchTaskStatsById(router.query.task))
@@ -89,20 +90,25 @@ const TaskPage = (props) => {
     ));
   }
 
-  const handleEventClick = (event) =>{
+  const handleEventClick = (event) => {
     dispatch(fetchEvent(event.id))
     dispatch(editEventOpen());
   }
   const handleRecommend = () => {
     dispatch(createProfileRecommendation(currentProfile.role === 'client' ? task.masterId : task.profileId));
+    setIsRecommended(true);
   }
 
   const isMarkVisible = () => {
     return [ITaskStatus.Done].includes(task.status);
   }
+  const isRecommendVisible = () => {
+    return [task.profileId, task.masterId].includes(currentProfile.id);
+  }
+  const isRecommended = loadIsRecommended || currentProfile.role === 'client' ? task?.master?.isRecommendedByCurrentProfile : task?.profile?.isRecommendedByCurrentProfile;
 
   const getStatusColor = () => {
-    switch (task.status){
+    switch (task.status) {
 
       case ITaskStatus.Canceled:
       case ITaskStatus.Paused:
@@ -138,7 +144,6 @@ const TaskPage = (props) => {
   }
 
 
-
   return (
     <Layout>
       {task && <div className={styles.columns}>
@@ -165,57 +170,62 @@ const TaskPage = (props) => {
           {stats && <div className={styles.stats}>
             <div className={styles.statsTitle}>{t('statistic')}</div>
             <div className={styles.statsTable}>
-            <div className={styles.statsHeader}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}></div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{t('task.page.planned')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{t('task.page.completed')}</div>
-            </div>
-            <div className={styles.statsRow}><div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.time')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedTime}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedTime}</div>
-            </div>
-            <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.charges')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedCharges}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedCharges}</div>
-            </div>
-            <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.expenses')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedExpenses}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedExpenses}</div>
-            </div>
-            <div className={styles.statsSeparator}>
-              <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
-              <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
-              <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
-            </div>
-            <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('event.events')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>
-                {stats.eventsCompleted}
+              <div className={styles.statsHeader}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}></div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{t('task.page.planned')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{t('task.page.completed')}</div>
               </div>
-              <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
-            </div>
-            <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.planned')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.eventsPlanned}</div>
-              <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
-            </div>
-            <div className={styles.statsRow}>
-              <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('reviews')}</div>
-              <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.reviews}</div>
-              <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
-            </div>
+              <div className={styles.statsRow}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.time')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedTime}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedTime}</div>
+              </div>
+              <div className={styles.statsRow}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.charges')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedCharges}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedCharges}</div>
+              </div>
+              <div className={styles.statsRow}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.expenses')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.plannedExpenses}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.completedExpenses}</div>
+              </div>
+              <div className={styles.statsSeparator}>
+                <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
+                <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
+                <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
+              </div>
+              <div className={styles.statsRow}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('event.events')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>
+                  {stats.eventsCompleted}
+                </div>
+                <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
+              </div>
+              <div className={styles.statsRow}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('task.page.planned')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.eventsPlanned}</div>
+                <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
+              </div>
+              <div className={styles.statsRow}>
+                <div className={`${styles.statsCell} ${styles.statsLabel}`}>{t('reviews')}</div>
+                <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.reviews}</div>
+                <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
+              </div>
             </div>
           </div>}
 
           <TaskReview task={task}/>
         </div>
         <div className={styles.rightSide}>
+          {isRecommendVisible() && <>
           <div className={styles.actions}>
-            <Button red={true} size={'12px 40px'} onClick={handleRecommend}>{t('recommend')}</Button>
+            {isRecommended ? <div className={styles.youRecommended}>{t('youRecommended')}</div> :
+              <Button red={true} size={'12px 40px'} onClick={handleRecommend}>{t('recommend')}</Button>}
           </div>
           <div className={styles.separator}/>
+          </>}
+
           <div className={`${styles.status} ${getStatusColor()}`}>
             <div className={styles.type}>Status</div>
             {isMarkVisible() && <MarkIcon className={styles.icon} color={'#ffffff'}/>}
@@ -234,35 +244,36 @@ const TaskPage = (props) => {
             </div>
 
           </div>
-          {task.photos.length > 0 &&<>
+          {task.photos.length > 0 && <>
             <div className={styles.separator}/>
-          <FileList files={task.photos}/>
+            <FileList files={task.photos}/>
           </>}
-        </div>
-      </div>}
-      <div className={styles.eventsWrapper}>
-      <ReportDateSelector showAll={true} input={{value: dateRange, onChange: handleDateRangeChange}}/>
-      {(eventsLoading && eventsTotal === 0) && <Loader/>}
-      {eventsTotal > 0 && <InfiniteScroll
-        dataLength={events.length} //This is important field to render the next data
-        next={handleScrollNext}
-        style={{overflow: 'inherit'}}
-        className={styles.events}
-        hasMore={eventsTotal > events.length}
-        loader={eventsLoading ? <Loader/> : null}>
-        {events.map((item, index) => <div className={styles.event}>
-          <CalendarEvent onClick={() => handleEventClick(item)} event={item}/>
-          <div className={styles.eventDate}>{format(getEventPlannedAllowed(item) ? item.start : item.actualStart, 'dd/MM/yyyy')}</div>
-        </div>)}
-      </InfiniteScroll>}
-      </div>
-      {modelKey === 'eventCreateModal' &&
-      <NewEventModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
-      {(['confirm','eventEditModal', 'eventExpensePlannedModal', 'eventExpenseActualModal'].includes(modelKey) && (currentEvent || currentLoading)) &&
-      <EditEventModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
-      <Modals/>
-    </Layout>
-  )
-}
-export const getServerSideProps = getAuthServerSide({redirect: true});
-export default TaskPage
+          </div>
+          </div>}
+          <div className={styles.eventsWrapper}>
+            <ReportDateSelector showAll={true} input={{value: dateRange, onChange: handleDateRangeChange}}/>
+            {(eventsLoading && eventsTotal === 0) && <Loader/>}
+            {eventsTotal > 0 && <InfiniteScroll
+              dataLength={events.length} //This is important field to render the next data
+              next={handleScrollNext}
+              style={{overflow: 'inherit'}}
+              className={styles.events}
+              hasMore={eventsTotal > events.length}
+              loader={eventsLoading ? <Loader/> : null}>
+              {events.map((item, index) => <div className={styles.event}>
+                <CalendarEvent onClick={() => handleEventClick(item)} event={item}/>
+                <div
+                  className={styles.eventDate}>{format(getEventPlannedAllowed(item) ? item.start : item.actualStart, 'dd/MM/yyyy')}</div>
+              </div>)}
+            </InfiniteScroll>}
+          </div>
+          {modelKey === 'eventCreateModal' &&
+          <NewEventModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
+          {(['confirm', 'eventEditModal', 'eventExpensePlannedModal', 'eventExpenseActualModal'].includes(modelKey) && (currentEvent || currentLoading)) &&
+          <EditEventModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
+          <Modals/>
+        </Layout>
+        )
+        }
+        export const getServerSideProps = getAuthServerSide({redirect: true});
+        export default TaskPage
