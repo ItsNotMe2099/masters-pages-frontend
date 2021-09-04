@@ -33,6 +33,8 @@ export const fetchProfileWorkExperienceList = (data: IProfileWorkExperienceList)
   }
 })
 
+export const resetProfileWorkExperienceList = () => action(ActionTypes.RESET_PROFILE_WORK_EXPERIENCE_LIST)
+
 export const fetchProfileWorkExperience = (id: number) => action(ActionTypes.FETCH_PROFILE_WORK_EXPERIENCE, {
   api: {
     url: `/api/profile-work-experience/${id}`,

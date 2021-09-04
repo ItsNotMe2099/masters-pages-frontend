@@ -9,7 +9,7 @@ import WorkExperienceForm
 import {default as React, useEffect, useState} from 'react'
 import {
   createProfileWorkExperience, deleteProfileWorkExperience,
-  fetchProfileWorkExperienceList,
+  fetchProfileWorkExperienceList, resetProfileWorkExperienceList,
   updateProfileWorkExperience
 } from 'components/ProfileWorkExpirience/actions'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
@@ -41,6 +41,7 @@ const CardWorkExperience = (props: Props) => {
     if(!skill || (currentSkillId === skill?.id)){
       return
     }
+    dispatch(resetProfileWorkExperienceList());
     dispatch(fetchProfileWorkExperienceList({
       profileId: profile.id,
       categoryId: skill.categoryId,

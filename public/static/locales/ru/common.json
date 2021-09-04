@@ -639,6 +639,7 @@
       "sendOffer": "Вы отослали предложение",
       "receiveOffer": "Вы получили предложение",
       "master": "Мастер {{statusText}} ваше предложение",
+      "clientOffer": "Клиент {{statusText}} ваше предложение",
       "youStatusText": "Вы {{statusText}}",
       "youSend": "You send you task negotiation",
       "negotiationFromMaster": "Новое обсуждение условий Заказа от Мастера",

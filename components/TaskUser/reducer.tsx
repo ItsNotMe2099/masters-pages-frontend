@@ -84,7 +84,7 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       let removeItem = false;
       state.list = state.list.map(item => {
         if (item.id === action.payload.id) {
-          return action.payload;
+          return {...item ,...action.payload};
         }
         return item;
       }).filter(item => {

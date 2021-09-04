@@ -110,13 +110,14 @@ export default function ChatMessage({ message, chat, size }: Props) {
           const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
           const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
 
-          const youTextStatus = t('chat.message.textStatus', statusText)
+          const youTextStatus = t('chat.message.textStatus', {statusText})
           const youTextNew = t('chat.message.sendTaskOffer')
           const fromTextNew = profile.role === 'client' ? t('chat.message.sendOffer') : t('chat.message.receiveOffer')
-          const fromTextStatus = t('chat.message.master', statusText)
-
+          const fromTextStatus = message.taskNegotiation.authorId === profile.id && profile.role === 'client' ? t('chat.message.master', {statusText}) : t('chat.message.clientOffer', {statusText})
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task offer
+            console.log("message.taskNegotiation", message.taskNegotiation, message.profileId, profile.id);
+
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
               <ChatMessageText message={youTextStatus} suffixText={t('chat.message.systemMessage')} large={true}/>]
@@ -144,10 +145,10 @@ export default function ChatMessage({ message, chat, size }: Props) {
           const showHire = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role === 'client' && message.taskNegotiation.authorId != profile.id;
           const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
           const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
-          const youTextStatus = t('chat.message.youStatusText', statusText)
+          const youTextStatus = t('chat.message.youStatusText', {statusText})
           const youTextNew = t('chat.message.youSend')
           const fromTextNew = profile.role === 'client' ? t('chat.message.negotiationFromMaster') : t('chat.message.negotiationFromClient')
-          const fromTextStatus = profile.role === 'client' ? t('chat.message.masterNegotiation', statusText) : t('chat.message.clientNegotiation', statusText)
+          const fromTextStatus = profile.role === 'client' ? t('chat.message.masterNegotiation', {statusText}) : t('chat.message.clientNegotiation', {statusText})
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task neogotiation
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
@@ -182,10 +183,10 @@ export default function ChatMessage({ message, chat, size }: Props) {
         }else if (message.taskNegotiation.type === ITaskNegotiationType.MarkAsDone) {
           const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
 
-          const youTextStatus = t('chat.message.markJobAsDone', statusText)
+          const youTextStatus = t('chat.message.markJobAsDone', {statusText})
           const youTextNew = t('chat.message.markedJobAsDone')
           const fromTextNew = profile.role === 'client' ? t('chat.message.masterMarkedTask') : t('chat.message.clientMarkedTask')
-          const fromTextStatus = profile.role === 'client' ? t('chat.message.masterRequestMark', statusText) : t('chat.message.clientRequestMark', statusText)
+          const fromTextStatus = profile.role === 'client' ? t('chat.message.masterRequestMark', {statusText}) : t('chat.message.clientRequestMark', {statusText})
 
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task neogotiation
