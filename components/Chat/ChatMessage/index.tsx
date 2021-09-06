@@ -90,9 +90,9 @@ export default function ChatMessage({ message, chat, size }: Props) {
       case IChatMessageType.TaskNegotiation:
         const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? t('chat.message.taskOutdated', { message, lastCondition }) : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {
-          const showReject = chat.task.status === 'published';
-          const showHire = chat.task.status === 'published';
-          const showEdit = chat.task.status === 'published';
+          const showReject = ['privately_published', 'published'].includes(chat.task.status );
+          const showHire =  ['privately_published', 'published'].includes(chat.task.status );
+          const showEdit =  ['privately_published', 'published'].includes(chat.task.status );
 
           if (message.profileId === profile.id) {
             return [<ChatMessageTaskDetails message={message} task={chat.task} showReject={showReject} showEdit={showEdit}
@@ -105,7 +105,7 @@ export default function ChatMessage({ message, chat, size }: Props) {
           }
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskOffer) {
           const showHire = false;
-          const showEdit = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined)
+          const showEdit = ['privately_published', 'published'].includes(chat.task.status );
           const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id;
           const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
           const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
