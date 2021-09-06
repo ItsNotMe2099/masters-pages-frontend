@@ -37,13 +37,13 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const {t} = useTranslation('common')
 
   useEffect(() => {
-    dispatch(fetchTaskUserListRequest({
-      filter: {
-        status: 'published'
-      },
-      page: 1,
-      limit: 10
-    }));
+    if(currentProfile.role === 'client') {
+      dispatch(fetchTaskUserListRequest({
+        status: 'published',
+        page: 1,
+        limit: 10
+      }));
+    }
     return () => {
       dispatch(resetTaskUserList());
     }
