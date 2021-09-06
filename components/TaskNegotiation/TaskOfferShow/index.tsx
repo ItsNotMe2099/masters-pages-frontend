@@ -78,7 +78,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         </div>
         <div className={styles.response}>
           <div className={styles.profile}>
-            <AvatarRound image={response.profile.avatar} name={response.profile.firstName}/>
+            <AvatarRound image={response.profile.photo} name={response.profile.firstName}/>
             <div className={styles.profileName}>{response.profile.firstName} {response.profile.lastName}</div>
           </div>
           <div className={styles.message}>{response?.message}</div>

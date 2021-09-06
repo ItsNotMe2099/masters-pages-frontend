@@ -91,7 +91,14 @@ function* TaskOfferSaga() {
       yield put(taskNegotiationAcceptTaskOfferRequest(action.payload.taskNegotiation.id));
       const result = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS) {
-        Router.push(`/Chat/task-dialog/${action.payload.taskNegotiation.taskId}/${action.payload.taskNegotiation.profileId}`)
+        const profile = yield select((state: IRootState) => state.profile.currentProfile)
+        if(profile.role === 'client'){
+          Router.push(`/Chat/task-dialog/${action.payload.taskNegotiation.taskId}/${action.payload.taskNegotiation.authorId}`)
+
+        }else{
+          Router.push(`/Chat/task-dialog/${action.payload.taskNegotiation.taskId}/${action.payload.taskNegotiation.profileId}`)
+
+        }
         yield put(modalClose());
       }
     })

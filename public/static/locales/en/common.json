@@ -635,6 +635,7 @@
       "sendOffer": "You send an offer",
       "receiveOffer": "You receive an offer",
       "master": "Master {{statusText}} your offer",
+      "clientOffer": "Client {{statusText}} your offer",
       "youStatusText": "You {{statusText}}",
       "youSend": "You send you task negotiation",
       "negotiationFromMaster": "New task negotation from master",

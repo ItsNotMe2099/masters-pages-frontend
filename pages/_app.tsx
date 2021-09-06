@@ -41,7 +41,7 @@ function MyApp({Component, pageProps}) {
     <>
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
-        <meta name="yandex-verification" content="9fe3d44c10bbf04a" />
+        <meta name="yandex-verification" content="54be86d1320b5a82" />
         <meta name="viewport" content="width=1020, user-scalable=yes"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>

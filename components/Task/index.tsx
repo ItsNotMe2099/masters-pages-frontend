@@ -176,7 +176,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const actions = [];
 
   if (actionsType === 'client') {
-    if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status)) {
+    if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && profile.id === task.profileId) {
       actions.push('edit')
     }
     if (['draft'].includes(task.status)) {
@@ -184,7 +184,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       actions.push('publish')
     }
 
-    if ([ITaskStatus.Published, ITaskStatus.PrivatelyPublished, ITaskStatus.Negotiation].includes(task.status)) {
+    if ([ITaskStatus.Published, ITaskStatus.PrivatelyPublished, ITaskStatus.Negotiation].includes(task.status) && profile.id === task.profileId) {
       if(task.status !== ITaskStatus.PrivatelyPublished) {
         actions.push('unPublish')
       }
@@ -201,6 +201,15 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }
     if (['done'].includes(task.status) && !task.feedbacks.find(f => f.target === 'client')) {
       actions.push('feedbackToClient');
+    }
+    if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && profile.id === task.profileId) {
+      actions.push('edit')
+    }
+    if ([ITaskStatus.Published, ITaskStatus.PrivatelyPublished, ITaskStatus.Negotiation].includes(task.status) && profile.id === task.profileId) {
+      if(task.status !== ITaskStatus.PrivatelyPublished) {
+        actions.push('unPublish')
+      }
+      actions.push('cancel')
     }
   } else if (actionsType === 'public') {
     actions.push('share');
@@ -281,6 +290,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const canEdit = actionsType === 'client';
   const taskLink = `/task/${task.id}`;
   const profileLink = `/id${task.profile.id}`;
+  const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id) || (actionsType === 'client' && task.profileId !== profile.id)) && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster)
   return (
     <div className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
 
@@ -399,9 +409,9 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>    {t('task.acceptTask')} </Button>}
             {((actionsType !== 'public' && ![ITaskStatus.Draft].includes(task.status) && ((actionsType === 'master' && task.negotiations?.length > 0 && [ITaskNegotiationState.Accepted].includes(task.negotiations[0].state)) || (actionsType === 'client' && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status)) || (actionsType === 'master' &&  task.masterId === profile.id && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status))))) &&
             <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
-            {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster) &&
+            {hasOfferActions &&
             <Button bold smallFont transparent size='16px 0' onClick={handleDecline}> {t('task.decline')} </Button>}
-            {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster) &&
+            {hasOfferActions &&
             <Button bold smallFont transparent size='16px 0' onClick={handleAccept}> {t('task.accept')} </Button>}
             {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.Declined) &&
             <div className={styles.actionStatus}> {t('task.youDeclined')} </div>}

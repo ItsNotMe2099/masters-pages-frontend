@@ -12,7 +12,7 @@ interface Props {
 export default function InputDate(props: Props) {
   const {input: {value, onChange}} = props;
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
-
+  console.log("ValueNew", value)
   return (
     <div className={styles.root}>
   <label className={styles.label}>{props.label}</label>
@@ -20,8 +20,21 @@ export default function InputDate(props: Props) {
       <DatePicker
         className={styles.datePicker}
         onChange={(value) => {
-          console.log("HandleDateChange", format(value, 'y-MM-dd'));
-          onChange(format(value, 'y-MM-dd'));
+          if(!value){
+            onChange(null);
+            return;
+          }
+          try {
+            console.log("ValueTime", value.getFullYear());
+            if (isNaN(value.getTime()) || value.getFullYear() < 1000) {
+              return;
+            }
+            console.log("ValueDate", value);
+            console.log("HandleDateChange", format(value, 'y-MM-dd'));
+            onChange(format(value, 'y-MM-dd'));
+          }catch (e){
+
+          }
         }}
         format={'dd.MM.y'}
         value={value ? new Date(value) : value}

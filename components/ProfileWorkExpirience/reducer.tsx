@@ -101,6 +101,11 @@ export default function ProfileWorkExperienceReducer(state = {...initialState}, 
     case ActionTypes.FETCH_PROFILE_WORK_EXPERIENCE + ApiActionTypes.FAIL:
       state.currentLoading = false;
       break
+    case ActionTypes.RESET_PROFILE_WORK_EXPERIENCE_LIST:
+      state.listLoading = false;
+      state.list = [];
+      state.listTotal = 0;
+      break;
   }
 
   return state

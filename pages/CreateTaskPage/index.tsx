@@ -30,6 +30,7 @@ const CreateTaskPage = (props) => {
   const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
   const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const isMaster = profile.role !== 'client';
   useEffect(() => {
     dispatch(resetSearchStat());
     return () => {
@@ -58,10 +59,11 @@ const CreateTaskPage = (props) => {
       <div className={styles.container}>
 
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
-        <CreateTaskForm onSubmit={handleSubmit} onChangeForStat={handleChangeForStat} initialValues={{
+        <CreateTaskForm onSubmit={handleSubmit}    isMaster={isMaster} onChangeForStat={handleChangeForStat} initialValues={{
           countryCode: profile?.geoname?.country,
           geonameid: profile?.geonameid,
-          visibilityType: 'public'
+          visibilityType: isMaster ? 'private' : 'public',
+          masterRole: isMaster ? profile.role : null,
         }}/>
 
       </div>

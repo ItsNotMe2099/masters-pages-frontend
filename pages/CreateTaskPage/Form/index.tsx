@@ -56,17 +56,18 @@ let CreateTaskForm = props => {
                 label={`${t('createTask.fieldTitle')}*`}
                 validate={required}
               />
-              <Field
+              {!props.isMaster && <Field
                 name="visibilityType"
                 component={RadioList}
                 label={`${t('type')}*`}
                 options={[{label: t('public'), value: 'public'}, {label: t('private'), value: 'private'}]}
                 size={'small'}
                 labelType={'static'}
-              />
+              />}
               {props.visibilityType === 'private' && <Field
                 name="profileId"
                 component={InputProfileContact}
+                role={props.isMaster ? 'client' : null}
                 label={`${t('menu.profile')}*`}
                 size={'small'}
                 validate={required}
@@ -93,7 +94,7 @@ let CreateTaskForm = props => {
                 validate={required}
               />}
 
-              <Field
+              {!props.isMaster && <Field
                 name="masterRole"
                 onChange={(value) => onChangeForStat('masterRole', value)}
                 component={SelectInput}
@@ -101,7 +102,7 @@ let CreateTaskForm = props => {
                 options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
                 size={'small'}
                 labelType={'static'}
-              />
+              />}
             </div>
             <div className={styles.column}>
               <Field
@@ -214,7 +215,7 @@ let CreateTaskForm = props => {
           </div>
         </div>
       <div className={styles.right}>
-      {searchStatCount && <div className={styles.stat}>
+      {(searchStatCount && !props.isMaster) && <div className={styles.stat}>
         <Link href={getSearchStatFilterLink()}>
           <a>{t('createTask.stat', {count: searchStatCount})}</a>
         </Link>
