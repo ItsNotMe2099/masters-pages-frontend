@@ -37,7 +37,7 @@ let PriceSelectFormMini = props => {
 
       <div className={styles.price}>
         <Field
-          name="offerPriceType"
+          name="priceType"
           component={SelectInput}
           withIcon={false}
           size={'small'}
@@ -47,14 +47,14 @@ let PriceSelectFormMini = props => {
             { label: t('perHour'), value: 'rate' }
           ]}
         />
-        {props.offerPriceType === 'fixed' && <Field
+        {props.priceType === 'fixed' && <Field
           name="budget"
           size={'small'}
           component={Input}
           validate={required}
           format={(value) => `${getCurrencySymbol(props.currency)}   ${value || ''}`}
           parse={parserPrice}/>}
-        {props.offerPriceType === 'rate' && <Field
+        {props.priceType === 'rate' && <Field
           name="ratePerHour"
           component={Input}
           size={'small'}
@@ -69,7 +69,6 @@ let PriceSelectFormMini = props => {
         name="deadline"
         component={InputDate}
         label={`${t('deadline')}:`}
-        validate={required}
         size={'small'}
         labelType={'static'}
       />

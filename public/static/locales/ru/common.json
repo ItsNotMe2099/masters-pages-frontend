@@ -631,7 +631,7 @@
       "commentAdded": "{{profileText}} добавлен комментарий",
       "attachedFile": "{{profileText}} прикреплен файл",
       "addedFeedback": "{{profileText}} добавлена обратная связь",
-      "taskOutdated": "Заказ просрочен {{message.taskNegotiation.id}} {{lastCondition.id}}",
+      "taskOutdated": "Предложение просрочено",
       "negotiationStarted": "Обсуждение условий начато",
       "systemMessage": "Системное сообщение",
       "textStatus": "Вы {{statusText}} Заказ",

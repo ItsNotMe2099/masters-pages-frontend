@@ -627,7 +627,7 @@
       "commentAdded": "{{profileText}} comment added",
       "attachedFile": "{{profileText}} attached file",
       "addedFeedback": "{{profileText}} added feedback",
-      "taskOutdated": "Task outdated {{message.taskNegotiation.id}} {{lastCondition.id}}",
+      "taskOutdated": "Offer outdated",
       "negotiationStarted": "Negotiation started",
       "systemMessage": "System message",
       "textStatus": "You {{statusText}} an offer",

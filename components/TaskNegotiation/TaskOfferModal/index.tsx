@@ -73,8 +73,8 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
         {!sendOfferLoading && !taskListLoading && taskListTotal > 0 && <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>}
       {activeTab === 'tasks' && taskListTotal > 0 && <TaskOfferOrderList onCancel={onClose}/>}
       {(activeTab === 'newTask' || taskListTotal === 0) && <TaskOfferNewOrder onCancel={onClose} initialValues={{
-        offerPriceType: 'fixed',
-        masterRole: currentProfile.role,
+        priceType: 'fixed',
+        masterRole: currentProfile.role === 'client' ? profile.role : currentProfile.role,
         countryCode: profile?.geoname?.country,
         geonameid: profile?.geonameid,
       }} onSubmit={handleSubmitNewOrder}/>}
