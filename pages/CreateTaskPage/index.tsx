@@ -51,11 +51,11 @@ const CreateTaskPage = (props) => {
   }
   return (
     <Layout>
-      <div className={styles.steps}>
+      {/*<div className={styles.steps}>
         <div className={styles.stepsContainer}>
         <SimpleSlider/>
         </div>
-      </div>
+      </div>*/}
       <div className={styles.container}>
 
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>

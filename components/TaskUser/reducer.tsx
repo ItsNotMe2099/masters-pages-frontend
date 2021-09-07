@@ -82,6 +82,7 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       state.current = action.payload;
       state.formUpdateLoading = false;
       let removeItem = false;
+
       state.list = state.list.map(item => {
         if (item.id === action.payload.id) {
           return {...item ,...action.payload};
@@ -101,6 +102,7 @@ export default function TaskUserReducer(state = { ...initialState }, action) {
       if (removeItem) {
         state.total -= 1;
       }
+      console.log("TASK_USER_FETCH_ONE_REQUEST", action.payload, state.list);
       break
     case ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL:
       state.formUpdateLoading = false;

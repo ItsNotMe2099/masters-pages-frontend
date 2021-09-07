@@ -57,6 +57,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const [sortType, setSortType] = useState('newFirst');
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 
+  console.log("TaskUpdate", task.id, task);
   const router = useRouter();
   useEffect(() => {
     if(actionsType === 'client') {
@@ -274,7 +275,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }
   }
 
-  const renderCategory = () => {
+  const renderCategory = (task) => {
     return <div className={styles.category}>
       <div>{getCategoryTranslation(task.mainCategory, i18n.language)?.name}/{getCategoryTranslation(task.category, i18n.language)?.name}/{getCategoryTranslation(task.subCategory, i18n.language)?.name}</div>
     </div>
@@ -352,7 +353,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               </div>
             </div>
             <div>
-              {actionsType === 'client' && renderCategory()}
+              {actionsType === 'client' && renderCategory(task)}
               <div className={styles.timeMobile}>
                 <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
                 <div
@@ -361,7 +362,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               <div className={styles.desktop}>{actionsType !== 'client' && <Link href={taskLink}><div className={styles.title}>
                 {task.title}
               </div></Link>}</div>
-              {['public', 'master'].includes(actionsType) && renderCategory()}
+              {['public', 'master'].includes(actionsType) && renderCategory(task)}
               <div className={styles.desc}>
                 {task.description}
               </div>

@@ -480,6 +480,7 @@
     "confirmAccept": "Do you want to accept response from"
   },
   "createTask": {
+    "client": "Client",
     "stat": "View [{{count}}] suitable Masters",
     "stepFillUpTaskRequest": "Fill up task request",
     "stepGetOffers": "Get offers",

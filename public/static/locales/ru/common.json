@@ -484,6 +484,7 @@
     "confirmAccept": "Вы хотите принять ответ от"
   },
   "createTask": {
+    "client": "Клиент",
     "stat": "Посмотреть [{{count}}] подходящих Мастеров",
     "stepFillUpTaskRequest": "Заполните форму Заказа",
     "stepGetOffers": "Получить предложения",
