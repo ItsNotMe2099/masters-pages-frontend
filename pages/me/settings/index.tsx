@@ -103,6 +103,12 @@ const TabSettings= (props: Props) => {
         <Button className={styles.button} black={true}  size={'12px 30px'}  type={'button'} onClick={handleRemoveAccount}>{t('personalArea.tabSettings.deleteMyAccount')}</Button>
                     </div>
       </div>}
+      <div className={styles.contacts}>
+        {t('footer.contacts')}:
+        <div className={styles.email}>
+          <a href='mailto:admin@masterspages.com'>admin@masterspages.com</a>
+        </div>
+      </div>
 
 
 

@@ -5,6 +5,7 @@
   flex-direction: row;
   align-items: flex-start;
   position: relative;
+  justify-content: space-between;
   @media screen and (max-width: $sm-max){
     display: flex;
     flex-direction: column;
@@ -41,5 +42,27 @@
 }
 .fieldset{
   margin-top: 18px;
+}
+
+.contacts{
+  padding: 30px;
+  border-radius: 30px;
+  background: #EDEDED;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.email{
+  a{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+  }
 }
 
