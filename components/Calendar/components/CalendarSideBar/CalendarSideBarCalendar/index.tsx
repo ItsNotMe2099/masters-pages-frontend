@@ -6,6 +6,7 @@ import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
 import {useEffect, useState} from 'react'
 import { getUserLocale } from 'get-user-locale';
+import cookie from 'js-cookie'
 import {
 
   getMonthStart,
@@ -28,7 +29,7 @@ export default function CalendarSideBarCalendar(props: Props) {
   const {value, onChange} = props;
   const [activeStartDate, setActiveStartDate] = useState(getMonthStart(new Date()));
   const [view, setView] = useState('month');
-  const locale = getUserLocale();
+  const locale = cookie.get('next-i18next')//getUserLocale();
 
   useEffect(() => {
     const beginOfMonth = new Date(value.getFullYear(), value.getMonth(), 1);
@@ -84,6 +85,7 @@ export default function CalendarSideBarCalendar(props: Props) {
           className={styles.calendar}
           onChange={onChange}
           value={value}
+          locale={locale}
           activeStartDate={activeStartDate}
           defaultActiveStartDate={activeStartDate}
           showNavigation={false}

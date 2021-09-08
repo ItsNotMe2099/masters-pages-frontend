@@ -167,7 +167,7 @@ const profileLink = `/id${profile.id}`;
             </div>
           </div>
           <div className={styles.bottom}>
-           <ProfileActionButton href={`/id${profile.id}`} title={'View profile'} icon={<img className={styles.icon} src={`'arrow-right-small'`} alt=''/>} onClick={handleReadMore}/>
+           <ProfileActionButton href={`/id${profile.id}`} title={t('profileComponent.viewProfile')} icon={<img className={styles.icon} src='/img/icons/arrow-right-small.svg' alt=''/>} onClick={handleReadMore}/>
             <ProfileActionButton isLoading={savingProfileId === profile.id} title={profile.isSavedByCurrentProfile ? t('saved') : t('save')} icon={<BookmarkSvg isSaved={profile.isSavedByCurrentProfile}/>} onClick={handleSave}/>
           </div>
         </div>
@@ -197,7 +197,7 @@ const profileLink = `/id${profile.id}`;
 
         </div>
         <div className={styles.btnContainer}>
-          {profile.role !== 'client' && <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>{t('profileComponent.offerTask')}</Button>}
+           <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>{t('profileComponent.offerTask')}</Button>
           {profile.role === 'client' && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>{t('profileComponent.sendMessage')}</Button>}
 
         </div>

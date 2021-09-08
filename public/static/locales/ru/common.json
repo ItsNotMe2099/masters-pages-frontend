@@ -484,6 +484,7 @@
     "confirmAccept": "Вы хотите принять ответ от"
   },
   "createTask": {
+    "client": "Клиент",
     "stat": "Посмотреть [{{count}}] подходящих Мастеров",
     "stepFillUpTaskRequest": "Заполните форму Заказа",
     "stepGetOffers": "Получить предложения",
@@ -631,7 +632,7 @@
       "commentAdded": "{{profileText}} добавлен комментарий",
       "attachedFile": "{{profileText}} прикреплен файл",
       "addedFeedback": "{{profileText}} добавлена обратная связь",
-      "taskOutdated": "Заказ просрочен {{message.taskNegotiation.id}} {{lastCondition.id}}",
+      "taskOutdated": "Предложение просрочено",
       "negotiationStarted": "Обсуждение условий начато",
       "systemMessage": "Системное сообщение",
       "textStatus": "Вы {{statusText}} Заказ",
@@ -736,6 +737,7 @@
     "serviceHistory": "История Заказов",
     "conditions": "Условия использования",
     "mobile": "Мобильная версия",
+    "contacts": "Для контактов",
     "banner": {
       "earn": "Заработайте на том, <1/> что делаете лучше всех",
       "earnMobile": "Заработайте на том, что делаете лучше всех",
@@ -1067,7 +1069,7 @@
     "declineIsFinal": "Отказ окончательный и не может быть отменен. Вы хотите продолжить?"
   },
   "savedSearch": {
-    "areYouSure": "Вы уверены что хотите удалить сохраненный поиск?",
+    "areYouSure": "Вы уверены что хотите удалить сохраненный поиск",
     "search": "Поиск"
   },
   "taskOfferShow": {

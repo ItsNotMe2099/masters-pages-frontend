@@ -51,11 +51,11 @@ const CreateTaskPage = (props) => {
   }
   return (
     <Layout>
-      <div className={styles.steps}>
+      {/*<div className={styles.steps}>
         <div className={styles.stepsContainer}>
         <SimpleSlider/>
         </div>
-      </div>
+      </div>*/}
       <div className={styles.container}>
 
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
@@ -76,7 +76,11 @@ const CreateTaskPage = (props) => {
         isOpen={isCompleted} onRequestClose={() => {
         dispatch(createTaskeReset());
           dispatch(modalClose());
-        router.push('/orders/draft');
+          if(profile.role === 'client') {
+            router.push('/orders/draft');
+          }else{
+            router.push('/orders/offers');
+          }
       }}>
 
       </Modal>

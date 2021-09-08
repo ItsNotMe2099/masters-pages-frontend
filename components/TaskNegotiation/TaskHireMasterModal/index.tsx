@@ -28,6 +28,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
   const taskNegotiationLoading = useSelector((state: IRootState) => state.taskOffer.lastConditionLoading)
   const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
 
   const dispatch = useDispatch();
   const {t} = useTranslation('common')
@@ -36,7 +37,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
 
   }, [])
   const handleSubmit = () => {
-    dispatch(taskNegotiationHireMaster(task.id, taskNegotiation.profileId, taskNegotiation.id))
+    dispatch(taskNegotiationHireMaster(task.id, taskNegotiation.profileId == currentProfile.id ? taskNegotiation.authorId : taskNegotiation.profileId, taskNegotiation.id))
   }
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>

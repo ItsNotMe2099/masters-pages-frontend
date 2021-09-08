@@ -48,6 +48,15 @@ let CreateTaskForm = props => {
           <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
           <div className={styles.taskData}>
             <div className={styles.column}>
+              {props.isMaster && props.visibilityType === 'private' && <Field
+                name="profileId"
+                component={InputProfileContact}
+                role={props.isMaster ? 'client' : null}
+                label={`${t('createTask.client')}*`}
+                size={'small'}
+                validate={required}
+                labelType={'static'}
+              />}
               <Field
                 name="title"
                 size={'small'}
@@ -64,7 +73,7 @@ let CreateTaskForm = props => {
                 size={'small'}
                 labelType={'static'}
               />}
-              {props.visibilityType === 'private' && <Field
+              {!props.isMaster && props.visibilityType === 'private' && <Field
                 name="profileId"
                 component={InputProfileContact}
                 role={props.isMaster ? 'client' : null}

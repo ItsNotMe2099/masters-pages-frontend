@@ -36,7 +36,7 @@ interface Props {
   onCancel: () => void
   mainCategoryId?: number
   categoryId?: number
-  offerPriceType?: string
+  priceType?: string
   initialValues?: any,
   handleSubmit?: (e) => void
   onSubmit: (data) => void
@@ -143,7 +143,7 @@ let TaskOfferNewOrder = (props: Props) => {
         max="30"
       />
     </div>
-      <PriceSelectFormMini {...props} inModal={true} offerPriceType={props.offerPriceType}/>
+      <PriceSelectFormMini {...props} inModal={true} priceType={props.priceType}/>
       <div className={styles.acceptTerms}>
       <Field
         name="terms"
@@ -168,7 +168,7 @@ const selector = formValueSelector('TaskOfferNewOrder')
 TaskOfferNewOrder = connect(state => {
   // can select values individually
   const categoryId = selector(state, 'categoryId')
-  const offerPriceType = selector(state, 'offerPriceType')
+  const priceType = selector(state, 'priceType')
   const currency = selector(state, 'currency')
   const countryCode = selector(state, 'countryCode')
   const mainCategoryId = selector(state, 'mainCategoryId')
@@ -177,7 +177,7 @@ TaskOfferNewOrder = connect(state => {
     categoryId,
     currency,
     countryCode,
-    offerPriceType: !offerPriceType ? 'fixed' : offerPriceType,
+    priceType: !priceType ? 'fixed' : priceType,
   }
 })(TaskOfferNewOrder)
 export default TaskOfferNewOrder

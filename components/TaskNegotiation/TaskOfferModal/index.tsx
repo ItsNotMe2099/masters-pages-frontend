@@ -37,13 +37,13 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const {t} = useTranslation('common')
 
   useEffect(() => {
-    dispatch(fetchTaskUserListRequest({
-      filter: {
-        status: 'published'
-      },
-      page: 1,
-      limit: 10
-    }));
+    if(currentProfile.role === 'client') {
+      dispatch(fetchTaskUserListRequest({
+        status: 'published',
+        page: 1,
+        limit: 10
+      }));
+    }
     return () => {
       dispatch(resetTaskUserList());
     }
@@ -73,8 +73,8 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
         {!sendOfferLoading && !taskListLoading && taskListTotal > 0 && <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>}
       {activeTab === 'tasks' && taskListTotal > 0 && <TaskOfferOrderList onCancel={onClose}/>}
       {(activeTab === 'newTask' || taskListTotal === 0) && <TaskOfferNewOrder onCancel={onClose} initialValues={{
-        offerPriceType: 'fixed',
-        masterRole: currentProfile.role,
+        priceType: 'fixed',
+        masterRole: currentProfile.role === 'client' ? profile.role : currentProfile.role,
         countryCode: profile?.geoname?.country,
         geonameid: profile?.geonameid,
       }} onSubmit={handleSubmitNewOrder}/>}

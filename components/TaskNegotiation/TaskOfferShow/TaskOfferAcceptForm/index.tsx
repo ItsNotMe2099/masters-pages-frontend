@@ -65,7 +65,7 @@ let TaskOfferAcceptForm = (props) => {
           <div className={styles.offerDetailsForRowFields}>
             <div className={styles.offerDetailsForRowFieldsWrapper}>
             <Field
-              name="offerPriceType"
+              name="priceType"
               component={SelectInput}
               withIcon={false}
               size={'small'}
@@ -75,14 +75,14 @@ let TaskOfferAcceptForm = (props) => {
                 {label: t('perHour'), value: 'rate'}
               ]}
             />
-            {props.offerPriceType === 'fixed' && <Field
+            {props.priceType === 'fixed' && <Field
               name="budget"
               size={'small'}
               component={Input}
               validate={required}
               format={(value) => `${getCurrencySymbol(task.currency)} ${value || ''}`}
               parse={parserPrice}     />}
-            {props.offerPriceType === 'rate' && <Field
+            {props.priceType === 'rate' && <Field
               name="ratePerHour"
               component={Input}
               size={'small'}
@@ -132,10 +132,10 @@ TaskOfferAcceptForm  = reduxForm({
 const selector = formValueSelector('taskOfferAccept') // <-- same as form name
 TaskOfferAcceptForm = connect(state => {
   // can select values individually
-  const offerPriceType = selector(state, 'offerPriceType')
+  const priceType = selector(state, 'priceType')
   const offerAcceptType = selector(state, 'offerAcceptType')
   return {
-    offerPriceType: offerAcceptType === 'custom' && !offerPriceType ? 'fixed' : offerPriceType,
+    priceType: offerAcceptType === 'custom' && !priceType ? 'fixed' : priceType,
     offerAcceptType
   }
 })(TaskOfferAcceptForm)

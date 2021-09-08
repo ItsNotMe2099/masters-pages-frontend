@@ -71,7 +71,13 @@ export default function ChatTitle({chat}: Props) {
      { chat.task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>{t('confirmModal.buttonCancel')}</Button>}
      { chat.task && isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleMarkAsDone}>{t('chat.markAsDone')}</Button>}
      { chat.task && isInProgress && profile.role === 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleFinish}>{t('chat.finishTask')}</Button>}
-     { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && profile.role === 'client' && ((lastNegotiation.authorId === profile.id && lastNegotiation.state === ITaskNegotiationState.Accepted) || (lastNegotiation.authorId !== profile.id && ![ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state)) || (lastNegotiation.authorId === profile.id && lastNegotiation.type === ITaskNegotiationType.TaskOffer && [ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state))) && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHireMaster}>{t('chat.hireMaster')}</Button>}
+     { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && profile.role === 'client' &&
+     (
+         (lastNegotiation.authorId === profile.id && lastNegotiation.state === ITaskNegotiationState.Accepted)
+       || (lastNegotiation.authorId !== profile.id && ![ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state))
+       || ( lastNegotiation.type === ITaskNegotiationType.TaskOffer && [ITaskNegotiationState.Accepted].includes(lastNegotiation.state))
+     )
+     && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHireMaster}>{t('chat.hireMaster')}</Button>}
      { chat.task && !isInProgress && !isFinished && chat.task.status == ITaskStatus.Published && <Button className={styles.action} onClick={handleEditConditions}>{t('chat.negotiateOffer')}</Button>}
      { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && lastNegotiation.authorId == profile.id && !(lastNegotiation.state === ITaskNegotiationState.Declined || lastNegotiation.state === ITaskNegotiationState.Accepted) && <div className={styles.status}>Waiting for negotiation response</div>}
      { chat.task && isInProgress && <div className={`${styles.status} ${styles.statusGreen}`}>{t('chat.taskAccepted')} <MarkIcon color={'#27C60D'}/></div>}

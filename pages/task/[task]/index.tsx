@@ -154,14 +154,14 @@ const TaskPage = (props) => {
               <div className={styles.label}>#{task.id}</div>
             </div>
             <div className={`${styles.headerValue} ${styles.deadline}`}>
-              <div className={styles.value}>{format(new Date(task.deadline), 'dd.mm.yyyy')}</div>
+              <div className={styles.value}>{format(new Date(task.deadline), 'dd.MM.yyyy')}</div>
               <div className={styles.label}>{t('deadline')}</div>
             </div>
             <div className={styles.separator}/>
             <div className={`${styles.headerValue} ${styles.price}`}>
               <div className={styles.value}>{task.priceType === 'fixed' ? task.budget : task.rate}</div>
               <div
-                className={styles.label}>{task.estimate || (task.priceType === 'fixed' ? t('budget') : t('perHour'))}</div>
+                className={styles.label}>{(task.priceType === 'fixed' ? t('budget') : t('perHour'))}</div>
             </div>
           </div>
 
