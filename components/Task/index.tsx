@@ -290,8 +290,10 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   }
   const canEdit = actionsType === 'client';
   const taskLink = `/task/${task.id}`;
-  const taskProfile = profile.role === '';
-  const profileLink = `/id${task.profile.id}`;
+  const taskProfile = actionsType === 'master' && task.profileId === profile.id && task.negotiations.length > 0 ? task.negotiations[0].profile : task.profile;
+  console.log("TaskProfile", taskProfile, profile);
+
+  const profileLink = `/id${taskProfile.id}`;
   const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id) || (actionsType === 'client' && task.profileId !== profile.id)) && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster)
 
   return (
@@ -304,18 +306,18 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             <div className={styles.name__mobile}>
               <Link href={profileLink}>
               <a
-                className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</a></Link>
+                className={styles.nameText}>{`${taskProfile.firstName}${taskProfile.lastName ? ` ${taskProfile.lastName}` : ''}`}</a></Link>
               <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
             </div>
             <div className={styles.icons}>
               <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
-              <div>{task.profile.tasksCount || 0}</div>
+              <div>{taskProfile.tasksCount || 0}</div>
               <img src="/img/SearchTaskPage/icons/like.svg" alt=''/>
-              <div>{task.profile.feedbacksCount || 0}</div>
+              <div>{taskProfile.feedbacksCount || 0}</div>
             </div>
             <div className={styles.stars}>
               <StarRatings
-                rating={task.profile.rating || 0}
+                rating={taskProfile.rating || 0}
                 starRatedColor="#F2B705"
                 starEmptyColor={'#616161'}
                 numberOfStars={5}
@@ -326,7 +328,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 starSpacing={'1px'}
 
               />
-              <div className={styles.comments}>({task.profile.rating || 0})</div>
+              <div className={styles.comments}>({taskProfile.rating || 0})</div>
             </div>
           </div>
         </div>}
@@ -336,7 +338,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               {['public', 'master'].includes(actionsType) && <div className={styles.name}>
                 <Link href={profileLink}>
                 <a
-                  className={styles.nameText}>{`${task.profile.firstName}${task.profile.lastName ? ` ${task.profile.lastName}` : ''}`}</a></Link>
+                  className={styles.nameText}>{`${taskProfile.firstName}${taskProfile.lastName ? ` ${taskProfile.lastName}` : ''}`}</a></Link>
                 <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
               </div>}
               {(actionsType === 'client') && <div className={styles.taskTitle}>
