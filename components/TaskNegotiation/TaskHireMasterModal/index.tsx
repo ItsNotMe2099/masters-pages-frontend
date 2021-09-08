@@ -3,7 +3,7 @@ import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "compon
 import {
   taskNegotiationCreateTaskResponse,
   taskNegotiationFetchLastConditions,
-  taskNegotiationHireMaster
+  taskNegotiationHireMaster, taskNegotiationReset
 } from "components/TaskNegotiation/actions";
 
 import Button from "components/ui/Button";
@@ -33,8 +33,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
   const dispatch = useDispatch();
   const {t} = useTranslation('common')
   useEffect(() => {
-
-
+    return () => dispatch(taskNegotiationReset());
   }, [])
   const handleSubmit = () => {
     dispatch(taskNegotiationHireMaster(task.id, taskNegotiation.profileId == currentProfile.id ? taskNegotiation.authorId : taskNegotiation.profileId, taskNegotiation.id))
