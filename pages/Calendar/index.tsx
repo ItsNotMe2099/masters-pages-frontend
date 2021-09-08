@@ -7,6 +7,7 @@ import * as dates from 'date-arithmetic'
 import {EventStatus, IRootState, ProfileData} from 'types'
 import Header from 'components/layout/Header'
 import {Calendar, Views, momentLocalizer} from "react-big-calendar";
+import 'moment/locale/ru';
 import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import {useSelector, useDispatch} from 'react-redux'
@@ -20,6 +21,7 @@ import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
 import CalendarMonthHeaderCell from 'components/Calendar/components/CalendarMonthHeaderCell'
 import CalendarToolbar from 'components/Calendar/components/CalendarToolbar'
 import CalendarSideBar from 'components/Calendar/components/CalendarSideBar'
+import { ru } from 'date-fns/locale'
 import {
   getYear,
   getMonth as getMonthIndex,
@@ -75,6 +77,7 @@ import {deleteSkill} from 'components/Skill/actions'
 import {fetchProfile} from 'components/Profile/actions'
 import {useRouter} from 'next/router'
 import {useInterval} from 'components/hooks/useInterval'
+import cookie from 'js-cookie'
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
@@ -105,6 +108,7 @@ const CalendarPage = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [draggedEvent, setDraggedEvent] = useState(null);
   const intervalRef = useRef(null);
+  const lang = cookie.get('next-i18next')
   useEffect(() => {
     if( router.query.eventId){
       dispatch(fetchEvent(parseInt(router.query.eventId as string, 10) ))
@@ -264,13 +268,13 @@ const CalendarPage = (props) => {
       if (currentView === Views.MONTH) {
         const centerDate = add(rangeStartDate, {days: 15});
         if (centerDate)
-          return `${format(centerDate, 'MMMM yyyy')}`
+          return `${format(centerDate, 'MMMM yyyy', {locale: lang === 'ru' && ru})}`
       } else {
-        return `${format(rangeStartDate, 'MMMM dd')} - ${format(rangeEndDate, 'MMMM dd')}`
+        return `${format(rangeStartDate, 'MMMM dd', {locale: lang === 'ru' && ru})} - ${format(rangeEndDate, 'MMMM dd', {locale: lang === 'ru' && ru})}`
       }
 
     } else if (isSameDay(rangeStartDate, rangeEndDate)) {
-      return `${format(rangeStartDate, 'MMMM dd EEEE')}`
+      return `${format(rangeStartDate, 'MMMM dd EEEE', {locale: lang === 'ru' && ru})}`
     }
   }
   const handleCreate = () => {
@@ -290,6 +294,7 @@ return (
         <DnDCalendar
           selectable
           localizer={localizer}
+          culture={lang}
           events={events}
           onEventDrop={moveEvent}
           resizable
