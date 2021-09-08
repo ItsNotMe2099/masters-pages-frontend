@@ -95,8 +95,9 @@ const TaskPage = (props) => {
     dispatch(editEventOpen());
   }
   const handleRecommend = () => {
-    dispatch(createProfileRecommendation(currentProfile.role === 'client' ? task.masterId : task.profileId));
     setIsRecommended(true);
+    dispatch(createProfileRecommendation(currentProfile.role === 'client' ? task.masterId : task.profileId));
+
   }
 
   const isMarkVisible = () => {
@@ -105,7 +106,7 @@ const TaskPage = (props) => {
   const isRecommendVisible = () => {
     return [task.profileId, task.masterId].includes(currentProfile.id);
   }
-  const isRecommended = loadIsRecommended || currentProfile.role === 'client' ? task?.master?.isRecommendedByCurrentProfile : task?.profile?.isRecommendedByCurrentProfile;
+  const isRecommended = loadIsRecommended || (currentProfile.role === 'client' ? task?.master?.isRecommendedByCurrentProfile : task?.profile?.isRecommendedByCurrentProfile);
 
   const getStatusColor = () => {
     switch (task.status) {
