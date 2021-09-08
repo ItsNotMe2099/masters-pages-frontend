@@ -290,8 +290,10 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   }
   const canEdit = actionsType === 'client';
   const taskLink = `/task/${task.id}`;
+  const taskProfile = profile.role === '';
   const profileLink = `/id${task.profile.id}`;
   const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id) || (actionsType === 'client' && task.profileId !== profile.id)) && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster)
+
   return (
     <div className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
 
