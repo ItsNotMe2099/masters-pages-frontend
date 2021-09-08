@@ -111,6 +111,9 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_NEGOTIATION_FETCH_LAST_CONDITIONS + ApiActionTypes.FAIL:
       state.lastConditionLoading = false;
       break
+    case ActionTypes.TASK_NEGOTIATION_RESET:
+      state.actionLoading = false;
+      break
 
 
 

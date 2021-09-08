@@ -133,3 +133,5 @@ export const taskNegotiationSendOfferRequest = (taskId: number, profileId: numbe
     }
   }
 })
+export const taskNegotiationReset = () => action(ActionTypes.TASK_NEGOTIATION_RESET)
+
