@@ -103,7 +103,6 @@ const profileLink = `/id${profile.id}`;
         <div className={styles.name__mobile} >
           <Link href={profileLink}>
           <a className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</a></Link>
-              <img src="/img/iconsTck.svg" alt=''/>
             </div>
         <div className={styles.icons}>
           <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
@@ -135,7 +134,6 @@ const profileLink = `/id${profile.id}`;
               <Link href={profileLink}>
               <a
                  className={styles.nameText}>{`${profile.firstName}${profile.lastName ? ` ${profile.lastName}` : ''}`}</a></Link>
-              <img src="/img/iconsTck.svg" alt=''/>
             </div>
             <ProfileStatus activityStatus={profile.activityStatus}/>
           </div>
