@@ -11,7 +11,11 @@ import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchProfileRecommendationForProfileList, setPageProfileRecommendation} from 'components/ProfileRecommendations/actions'
+import {
+  fetchProfileRecommendationForProfileList,
+  resetProfileRecommendationList,
+  setPageProfileRecommendation
+} from 'components/ProfileRecommendations/actions'
 import {useTranslation} from 'i18n'
 
 interface Props{
@@ -28,7 +32,7 @@ const CardRecommendations = (props: Props) => {
   const {i18n, t} = useTranslation('common')
 
   useEffect(() => {
-    dispatch(resetFeedbackList());
+    dispatch(resetProfileRecommendationList());
     dispatch(fetchProfileRecommendationForProfileList(profile.id, {
       page: 1,
       limit

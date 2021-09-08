@@ -11,7 +11,7 @@ const RecommendationListItemShort = ({model}: Props) => {
   return (
     <div className={styles.root}>
       <UserIcon  />
-      <div className={styles.name}>{model.recommendedProfile.firstName} {model.recommendedProfile.lastName}</div>
+      <div className={styles.name}>{model.profileThatRecommends.firstName} {model.profileThatRecommends.lastName}</div>
     </div>
   )
 }
