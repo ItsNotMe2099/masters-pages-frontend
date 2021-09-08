@@ -747,7 +747,7 @@ export interface IProfileRecommendation{
   id: number,
   profileId: number,
   profileThatRecommendsId: number
-  recommendedProfile: ProfileData,
+  profileThatRecommends: ProfileData,
   createdAt: string
 }
 export enum EventStatus {
