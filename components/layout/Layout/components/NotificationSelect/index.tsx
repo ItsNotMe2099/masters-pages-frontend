@@ -14,7 +14,13 @@ import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ChatMessage from 'components/Chat/ChatMessage'
 import {useRouter} from 'next/router'
- const NotificationSelect = () => {
+
+interface Props {
+  color?: string
+}
+
+
+ const NotificationSelect = (props: Props) => {
    const { t } = useTranslation('common');
    const router = useRouter();
 
@@ -98,7 +104,7 @@ import {useRouter} from 'next/router'
 
   return (
     <div className={styles.root}>
-      <Bell className={styles.bell} onClick={onClick} />
+      <Bell className={styles.bell} onClick={onClick} color={props.color}/>
       {notificationCount > 0 && <div className={styles.badge}/>}
       <div ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        <div className={styles.items} id={'notifications-dropdown'}>

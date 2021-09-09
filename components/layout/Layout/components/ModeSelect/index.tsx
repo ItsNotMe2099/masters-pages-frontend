@@ -59,10 +59,23 @@ import {useRouter} from 'next/router'
      }
    }
 
+   const getTextColor = () => {
+    switch (value?.value) {
+      case 'master':
+        return styles.modeMasterText;
+      case 'volunteer':
+        return styles.modeVolunteerText;
+      case 'client':
+      default:
+        return styles.modeClientText;
+    }
+  }
+
   return (
+    <>
     <div className={`${styles.root} ${getModeClass()}`}>
-      <a onClick={onClick} className={styles.dropDownTrigger}>
-        <div className={styles.dropdownItemLabel}>{value.label}</div>
+      <a onClick={onClick} className={`${styles.dropDownTrigger} ${getTextColor()}`}>
+        <div className={`${styles.dropdownItemLabel} ${getTextColor()}`}>{value.label}</div>
         <ArrowDropDown/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
@@ -79,6 +92,8 @@ import {useRouter} from 'next/router'
         </ul>
       </nav>
     </div>
+    <div className={styles.menuSeparator}></div>
+    </>
   );
 };
 export default ModeSelect

@@ -61,6 +61,9 @@
   font-weight: 700;
   font-size: 14px;
   flex: 1;
+  @media screen and (max-width: 800px){
+    font-size: 18px;
+  }
 }
 .badge{
   padding: 5px;

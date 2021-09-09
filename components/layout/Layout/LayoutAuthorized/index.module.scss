@@ -50,6 +50,9 @@
     flex-direction: row;
     align-items: center;
   }
+  @media screen and (max-width: 800px){
+    display: none;
+  }
 }
 .leftMenu{
   position: fixed;
@@ -62,6 +65,9 @@
   height: 100%;
   overflow: hidden;
   z-index: 1;
+  @media screen and (max-width: 800px){
+    display: none;
+  }
 }
 .menuSeparator{
   height: 1px;
@@ -147,4 +153,13 @@
   padding-right: 22px;
   padding-bottom: 60px;
   min-height: 100%;
+  @media screen and (max-width: 800px){
+    margin-left: 0;
+  }
+}
+
+.mobile{
+  @media screen and (min-width: 801px){
+    display: none;
+  }
 }

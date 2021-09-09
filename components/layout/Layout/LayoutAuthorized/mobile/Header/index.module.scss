@@ -1,0 +1,74 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  margin-top: -60px;
+  justify-content: space-between;
+  @media screen and (min-width: 801px){
+    display: none;
+  }
+}
+
+.modeClient {
+  background: #1A9F52;
+}
+
+.modeMaster{
+  background: #DA4C4C;
+}
+
+.modeVolunteer{
+  background: #128FB7;
+}
+
+.right{
+  display: flex;
+  align-items: center;
+}
+
+.search{
+  margin-right: 20px;
+}
+
+.open{
+  cursor: pointer;
+}
+
+.dropdownMobile{
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  top: 60px;
+  z-index: 4;
+  border-top: 1px solid #000;
+}
+
+.modeClientMenu {
+  background: #27AE60;
+}
+
+.modeMasterMenu{
+  background: #EB5757;
+}
+
+.modeVolunteerMenu{
+  background: #199AC2;
+}
+
+.menuSeparator{
+  height: 1px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.hello{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  color: #FFFFFF;
+  margin-top: 18px;
+  text-align: center;
+}

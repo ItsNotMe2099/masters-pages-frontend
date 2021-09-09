@@ -1,19 +1,15 @@
 import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import { changeRole } from "components/Profile/actions";
 import ArrowDropDown from "components/svg/ArrowDropDown";
-import { useContext, useEffect, useRef, useState } from "react";
-import { IRootState } from "types";
+import { I18nContext } from "next-i18next";
+import { useContext, useRef, useState } from "react";
 import styles from './index.module.scss'
 import cx from 'classnames'
 import nextI18 from "i18n";
-
-import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
- const ModeSelect = () => {
-  const { t } = useTranslation('common');
-  const role = useSelector((state: IRootState) => state.profile.role)
-  const dispatch = useDispatch()
-
+interface Props {
+  isAuth: boolean
+}
+export const LangSelect = (props: Props) => {
+  const { i18n: { language } } = useContext(I18nContext)
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = (e) => {
@@ -21,19 +17,15 @@ import {useTranslation, withTranslation} from "i18n";
     setIsActive(!isActive);
   }
   const options = [
-    { value: 'client', label: t('client') },
-    { value: 'master', label: t('master') },
-    { value: 'volunteer', label: t('volunteer') },
+    { value: 'ru', label: 'RU' },
+    { value: 'en', label: 'EN' },
   ]
-  const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'));
+  const [value, setValue] = useState(options.find(item => item.value === language));
 
-  useEffect(() => {
-    setValue(options.find(item => role ? item.value === role : item.value === 'client'));
-  }, [role]);
   const handleOptionClick = (e, item) => {
     e.preventDefault()
     setValue(item);
-    dispatch(changeRole(item.value))
+    nextI18.i18n.changeLanguage(item.value)
     setIsActive(false);
   }
   const handleActiveOptionClick = (e) => {
@@ -41,16 +33,18 @@ import {useTranslation, withTranslation} from "i18n";
     setIsActive(false);
   }
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${props.isAuth && styles.rootAuth}`}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
-        <span className={styles.dropdownItemLabel}>{value.label}</span>
+        <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
+        <span className={cx(styles.dropdownItemLabel, {[styles.black]: isActive})}>{value.label}</span>
         <ArrowDropDown/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <ul>
           {value &&
           <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
-            <span className={styles.dropdownItemLabel}>{value.label}</span>
+            <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
+            <span className={cx(styles.dropdownItemLabel, {[styles.black]: isActive})}>{value.label}</span>
             <img className={styles.arrowActive}
                  src={`/img/icons/arrow_active.svg`}
                  alt=''/></a></li>
@@ -59,7 +53,8 @@ import {useTranslation, withTranslation} from "i18n";
             <li className={styles.dropdownItem}
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
-                <span className={styles.dropdownItemLabel}>{item.label}</span>
+                <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${item.value}.svg`} alt=''/>
+                <span className={cx(styles.dropdownItemLabel, {[styles.black]: isActive})}>{item.label}</span>
               </a>
             </li>
           ))}
@@ -69,4 +64,3 @@ import {useTranslation, withTranslation} from "i18n";
     </div>
   );
 };
-export default ModeSelect

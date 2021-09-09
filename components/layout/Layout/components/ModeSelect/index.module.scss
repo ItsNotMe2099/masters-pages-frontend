@@ -1,6 +1,11 @@
 @import "scss/index";
 .root{
   position: relative;
+  @media screen and (max-width: 800px){
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 13px;
+  }
   &.modeMaster{
     .dropDownTrigger{
       background: #EB5757;
@@ -15,6 +20,11 @@
   &.modeVolunteer{
     .dropDownTrigger {
       background: #199AC2;
+    }
+  }
+  @media screen and (max-width: 800px){
+    .dropDownTrigger {
+      background: #fff !important;
     }
   }
 }
@@ -48,7 +58,12 @@
   text-decoration: none;
   padding: 0px 9px;
   height: 32px;
+  @media screen and (max-width: 800px){
+    height: 50px;
+  }
+  @media screen and (min-width: 801px){
   color: white;
+  }
   border-radius: 3px;
 
   display: flex;
@@ -57,22 +72,6 @@
   &:hover{
     .dropdownItemLabel {
       font-weight: 700;
-    }
-  }
-  svg{
-    width: 10px;
-    height: 7px;
-    path {
-      fill: white;
-    }
-  }
-  @media screen and (max-width: $sm-max){
-    svg{
-      width: 5px;
-      height: 4px;
-      path {
-        fill: white;
-      }
     }
   }
 }
@@ -102,8 +101,51 @@
   margin-right: 10px;
   vertical-align: middle;
   text-transform: uppercase;
-  @media screen and (max-width: $sm-max){
+}
 
+.modeMasterText{
+  @media screen and (max-width: 800px){
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #EB5757;
+  svg{
+    width: 10px;
+    height: 7px;
+    path {
+      fill: #EB5757;
+    }
+  }
+  }
+}
+.modeVolunteerText{
+  @media screen and (max-width: 800px){
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #199AC2;
+  svg{
+    width: 10px;
+    height: 7px;
+    path {
+      fill: #199AC2;
+    }
+  }
+  }
+}
+.modeClientText{
+  @media screen and (max-width: 800px){
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #27AE60;
+  svg{
+    width: 10px;
+    height: 7px;
+    path {
+      fill: #27AE60;
+    }
+  }
   }
 }
 
@@ -114,4 +156,16 @@
   padding-left: 6px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.menuSeparator{
+  @media screen and (max-width: 800px){
+  height: 1px;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 21px;
+  }
+  @media screen and (min-width: 801px){
+    display: none;
+  }
 }
