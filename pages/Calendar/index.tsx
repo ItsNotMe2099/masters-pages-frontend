@@ -5,7 +5,7 @@ import {wrapper} from 'store'
 import request from 'utils/request'
 import * as dates from 'date-arithmetic'
 import {EventStatus, IRootState, ProfileData} from 'types'
-import Header from 'components/layout/Header'
+
 import {Calendar, Views, momentLocalizer} from "react-big-calendar";
 import 'moment/locale/ru';
 import moment from "moment";
