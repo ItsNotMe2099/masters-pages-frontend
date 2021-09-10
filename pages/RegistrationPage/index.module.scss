@@ -2,6 +2,10 @@
 
 .root {
   position: relative;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 
@@ -10,9 +14,7 @@
   flex-direction: column;
   position: relative;
   z-index: 2;
-  @include lg {
-    margin: 200px auto;
-  }
+  margin: 200px auto;
   @media screen and (max-width: $sm-max) {
     margin: 39px 19px 43px 19px;
   }
@@ -21,9 +23,7 @@
 .head {
   margin: auto auto 54px auto;
   font-weight: 500;
-  @include lg {
-    font-size: 36px;
-  }
+  font-size: 36px;
   @media screen and (max-width: $sm-max) {
     font-size: 28px;
     text-align: center;
