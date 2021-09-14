@@ -230,15 +230,6 @@ let CreateTaskForm = props => {
         </Link>
       </div>}
 
-      <div className={styles.faq}>
-          <div className={styles.title__top}>{t('createTask.faq')}</div>
-          <Accordion title="Question #1" content="Answer"/>
-          <Accordion title="Question #2" content="Answer"/>
-          <Accordion title="Question #3" content="Answer"/>
-          <Accordion title="Question #4" content="Answer"/>
-          <Accordion title="Question #5" content="Answer"/>
-          <Accordion title="Question #6" content="Answer"/>
-        </div>
       </div>
       </form>
   )
