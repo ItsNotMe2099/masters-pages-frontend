@@ -38,10 +38,10 @@ const ProfilePostsPage = ({profile}: Props) => {
 
 export default ProfilePostsPage
 
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any);
   const id = ctx.query.id as string;
   const profile = (await request({ url: `/api/profile/${id}`, method: 'GET' }))?.data
 
   return {props: {...(res as any).props, profile}};
-});
+}

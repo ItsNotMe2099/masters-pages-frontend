@@ -139,10 +139,4 @@ const PublicProfile = (props) => {
     </ProfilePageLayout>
   )
 }
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
-  const res = await getAuthServerSide()(ctx as any);
-  const data = await request({url: `/api/profile/${ctx.query.id}`, method: 'GET'})
-  return {props: {...(res as any).props, profile: data.data}};
-});
-
 export default PublicProfile

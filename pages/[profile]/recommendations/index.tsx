@@ -12,7 +12,7 @@ interface Props{
 const ProfileRecommendations = (props) => {
   return <PublicProfile {...props} showType={'recommendations'}/>
 }
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any);
   const id = ctx.query.profile as string;
   let profile, skill = null;
@@ -30,6 +30,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   }
 
   return {props: {...(res as any).props, profile, skill}};
-});
+}
 
 export default ProfileRecommendations

@@ -33,7 +33,7 @@ const getProfile = async (token, role) => {
   }
 }
 
-export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrapper.getServerSideProps(async (ctx) => {
+export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => (async (ctx) => {
 
 
   const token = auth(ctx);
@@ -81,11 +81,11 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => wrap
     })
   }
   if (ctx.req && profile) {
-    ctx.store.dispatch(changeRoleNative(mode));
-    ctx.store.dispatch(fetchProfileSuccess(profile));
+  //  ctx.store.dispatch(changeRoleNative(mode));
+ //   ctx.store.dispatch(fetchProfileSuccess(profile));
   }
 
-  return {props: { token, user, ...(profile ? {profile} : {})}};
+  return {props: { token, user, mode, ...(profile ? {profile} : {})}};
 })
 
 
