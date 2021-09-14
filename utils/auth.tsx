@@ -2,7 +2,6 @@ import {changeRole, changeRoleNative, fetchProfileSuccess} from "components/Prof
 import nextCookie from "next-cookies";
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
 import request from "utils/request";
-import {wrapper} from 'store';
 import Router from "next/router";
 export const auth = ctx => {
     const { token } = nextCookie(ctx);

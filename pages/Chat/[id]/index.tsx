@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { IRootState } from "types";
 import {getAuthServerSide} from 'utils/auth'
 
-import { useSelector, useDispatch } from 'react-redux'
-import {wrapper} from 'store'
 import request from 'utils/request'
 import queryString from 'query-string'
 const PersonalAreaPageIndex = (props) => {

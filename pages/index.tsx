@@ -1,7 +1,5 @@
 import NewMain from 'pages/NewMain'
 import {getAuthServerSide} from 'utils/auth'
-import {wrapper} from 'store'
-import request from 'utils/request'
 
 const Home = (props) => {
   return (<NewMain {...props}/>

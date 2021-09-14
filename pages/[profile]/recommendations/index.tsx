@@ -3,7 +3,6 @@ import {getAuthServerSide} from "utils/auth";
 import request from 'utils/request'
 import {IRootState, ProfileData, SkillData} from 'types'
 
-import {wrapper} from 'store'
 import PublicProfile from 'components/PublicProfile'
 interface Props{
   profile: ProfileData,

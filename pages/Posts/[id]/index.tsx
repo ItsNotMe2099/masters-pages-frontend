@@ -10,7 +10,6 @@ import Layout from 'components/layout/Layout'
 import {IProfileGalleryItem, IRootState, ProfileData} from 'types'
 import Modals from 'components/layout/Modals'
 import PostList from 'components/Post/PostList'
-import {wrapper} from 'store'
 import request from 'utils/request'
 import ProfileCard from 'components/ui/ProfileCard'
 interface Props{

@@ -1,5 +1,5 @@
 import {getAuthServerSide} from "utils/auth";
-import {wrapper} from 'store'
+
 import request from 'utils/request'
 import {IRootState, ProfileData, SkillData} from 'types'
 

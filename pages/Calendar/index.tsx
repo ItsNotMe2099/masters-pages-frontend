@@ -1,8 +1,6 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Modals from 'components/layout/Modals'
-import {wrapper} from 'store'
-import request from 'utils/request'
+
 import * as dates from 'date-arithmetic'
 import {EventStatus, IRootState, ProfileData} from 'types'
 import Header from 'components/layout/Header'

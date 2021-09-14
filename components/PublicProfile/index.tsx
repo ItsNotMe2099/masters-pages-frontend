@@ -1,12 +1,8 @@
-import {getAuthServerSide} from "utils/auth";
-import {wrapper} from 'store'
-import request from 'utils/request'
 import {IRootState, ProfileData, SkillData} from 'types'
 import CardSalesPitch from 'components/PublicProfile/components/view/CardSalesPitch'
 import CardWorkExperience from 'components/PublicProfile/components/view/CardWorkExperience'
 import CardPortfolio from 'components/PublicProfile/components/view/CardPortfolio'
 import CardGallery from 'components/PublicProfile/components/view/CardGallery'
-import Header from 'components/layout/Header'
 import {useSelector, useDispatch} from 'react-redux'
 import {useEffect, useState} from 'react'
 import {fetchSkillList} from 'components/Skill/actions'
