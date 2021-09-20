@@ -3,7 +3,6 @@ import {getAuthServerSide} from "utils/auth";
 import request from 'utils/request'
 import {IRootState, ProfileData, SkillData} from 'types'
 
-import {wrapper} from 'store'
 import PublicProfile from 'components/PublicProfile'
 interface Props{
   profile: ProfileData,
@@ -12,7 +11,7 @@ interface Props{
 const ProfileRecommendations = (props) => {
   return <PublicProfile {...props} showType={'recommendations'}/>
 }
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any);
   const id = ctx.query.profile as string;
   let profile, skill = null;
@@ -30,6 +29,6 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   }
 
   return {props: {...(res as any).props, profile, skill}};
-});
+}
 
 export default ProfileRecommendations

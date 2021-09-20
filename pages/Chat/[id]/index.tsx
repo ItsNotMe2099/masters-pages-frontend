@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { IRootState } from "types";
 import {getAuthServerSide} from 'utils/auth'
 
-import { useSelector, useDispatch } from 'react-redux'
-import {wrapper} from 'store'
 import request from 'utils/request'
 import queryString from 'query-string'
 const PersonalAreaPageIndex = (props) => {
@@ -20,7 +18,7 @@ const PersonalAreaPageIndex = (props) => {
   )
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const authRes = await getAuthServerSide({redirect: true})(ctx as any);
   const profile = (authRes as any).props.profile;
   const res = await request({url: `/api/chat/${ctx.query.id}`, method: 'GET'}, ctx);
@@ -43,5 +41,5 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
   }
   ctx.res.end();
 
-});
+}
 export default PersonalAreaPageIndex

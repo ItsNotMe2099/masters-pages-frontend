@@ -1,8 +1,6 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Modals from 'components/layout/Modals'
-import {wrapper} from 'store'
-import request from 'utils/request'
+
 import * as dates from 'date-arithmetic'
 import {EventStatus, IRootState, ProfileData} from 'types'
 import Header from 'components/layout/Header'
@@ -22,6 +20,7 @@ import CalendarMonthHeaderCell from 'components/Calendar/components/CalendarMont
 import CalendarToolbar from 'components/Calendar/components/CalendarToolbar'
 import CalendarSideBar from 'components/Calendar/components/CalendarSideBar'
 import { ru } from 'date-fns/locale'
+import {useTranslation} from "i18n";
 import {
   getYear,
   getMonth as getMonthIndex,
@@ -61,7 +60,7 @@ import {
 import CalendarEventMonth from 'components/Calendar/components/CalendarEventMonth'
 import Layout from 'components/layout/Layout'
 import NewEventModal from 'components/Calendar/components/NewEventModal'
-import {confirmOpen, createEventOpen, editEventOpen, modalClose} from 'components/Modal/actions'
+import {confirmOpen, createEventOpen, editEventOpen, modalClose, taskOfferAcceptOpen} from 'components/Modal/actions'
 import {
   currentEventSetEditMode, fetchEvent,
   fetchEventCalendarList,
@@ -109,6 +108,7 @@ const CalendarPage = (props) => {
   const [draggedEvent, setDraggedEvent] = useState(null);
   const intervalRef = useRef(null);
   const lang = cookie.get('next-i18next')
+  const {t} = useTranslation('common')
   useEffect(() => {
     if( router.query.eventId){
       dispatch(fetchEvent(parseInt(router.query.eventId as string, 10) ))
@@ -310,6 +310,7 @@ return (
           popup={true}
           startAccessor="actualStart"
           endAccessor="actualEnd"
+          messages={{noEventsInRange: t('event.noEvents')}}
           components={{
             event: CalendarEvent,
             toolbar: getToolBar,

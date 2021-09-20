@@ -5,7 +5,6 @@ import { IRootState } from "types";
 import {getAuthServerSide} from 'utils/auth'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {wrapper} from 'store'
 import request from 'utils/request'
 const PersonalAreaPageIndex = (props) => {
   const router = useRouter()
@@ -19,7 +18,7 @@ const PersonalAreaPageIndex = (props) => {
   )
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide({redirect: true})(ctx as any);
 
   const profile = (res as any).props.profile;
@@ -29,5 +28,5 @@ export const getServerSideProps = wrapper.getServerSideProps(async (ctx) => {
       destination:  `/id${profile.id}`
     }
   }
-});
+};
 export default PersonalAreaPageIndex

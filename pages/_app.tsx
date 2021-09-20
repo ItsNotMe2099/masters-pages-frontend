@@ -1,8 +1,8 @@
 import '../scss/app.scss'
 import 'normalize.css'
 import {useEffect} from "react";
-
-import {wrapper} from 'store'
+import { Provider } from 'react-redux'
+import {initializeStore, useStore} from 'store'
 import 'slick-carousel/slick/slick.css'
 import "slick-carousel/slick/slick-theme.css"
 import Head from 'next/head'
@@ -14,14 +14,20 @@ import firebase from 'firebase/app'
 import {setPushToken} from "../components/Push/actions";
 import {appWithTranslation} from 'i18n'
 import 'react-date-picker/dist/DatePicker.css'
+import {changeRoleNative, fetchProfileSuccess} from 'components/Profile/actions'
 
 interface IPageProps {
   namespacesRequired: string[]
 }
 
-function MyApp({Component, pageProps}) {
+function Wrapper(props){
   const dispatch = useDispatch();
+
   useEffect(() => {
+    if((window as any)._inited){
+      return;
+    }
+
     setToken()
 
     async function setToken() {
@@ -35,8 +41,31 @@ function MyApp({Component, pageProps}) {
       } catch (error) {
       }
     }
-  })
+  }, [])
 
+  return  (   <props.Component {...props} />);
+}
+function MyApp({Component, pageProps}) {
+
+  const store = initializeStore({
+    profile: {
+        currentProfile: pageProps.profile,
+      role: pageProps.mode,
+      roleTemp: pageProps.mode,
+      formIsSuccess: false,
+      formError: '',
+      formErrorByKey: {},
+      lastFormKey: null,
+      formLoading: false,
+      loading: false,
+      isCompleted: false,
+      avatarLoading: false,
+      avatarFormError: null,
+      showForms: [],
+      currentSkill: null
+    }
+  })
+  console.log("SetStore", pageProps.mode);
   return (
     <>
       <Head>
@@ -75,7 +104,9 @@ function MyApp({Component, pageProps}) {
           __html: `<div><img src="https://mc.yandex.ru/watch/75081823" style="position:absolute; left:-9999px;" alt="" /></div>`
         }}/>
       </Head>
-      <Component {...pageProps} />
+      <Provider store={store}>
+     <Wrapper Component={Component} {...pageProps}/>
+      </Provider>
     </>
   )
 }
@@ -87,4 +118,4 @@ const domainLocaleMap = {
 };
 
 
-export default appWithTranslation(wrapper.withRedux(MyApp) as any)
+export default appWithTranslation(MyApp)
