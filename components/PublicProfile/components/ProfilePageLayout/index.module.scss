@@ -9,6 +9,9 @@
 
   display: flex;
   flex-direction: row;
+  @media screen and (max-width: 900px){
+    flex-direction: column;
+  }
 
   @media screen and (max-width: $sm-max){
     padding: 17px 22px 0 22px;
@@ -18,10 +21,18 @@
 .leftColumn{
   min-width: 445px;
   max-width: 445px;
+  @media screen and (max-width: 900px){
+    max-width: 100%;
+    min-width: 100%;
+  }
 }
 .rightColumn{
   flex: 1;
   padding-left: 29px;
+  @media screen and (max-width: 900px){
+    padding-left: 0;
+    margin-top: 16px;
+  }
 }
 .roleClient {
   color: #27AE60;

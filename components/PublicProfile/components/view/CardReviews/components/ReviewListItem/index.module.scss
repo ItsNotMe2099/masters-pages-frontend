@@ -9,12 +9,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media (max-width: 1070px){
+    flex-direction: column;
+  }
 }
 .nameWrapper{
   flex: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media (max-width: 980px){
+    flex-direction: column;
+  }
 }
 .name{
   margin-left: 12px;
@@ -42,4 +48,3 @@
   font-size: 14px;
 
 }
-
