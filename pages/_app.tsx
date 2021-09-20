@@ -2,7 +2,7 @@ import '../scss/app.scss'
 import 'normalize.css'
 import {useEffect} from "react";
 import { Provider } from 'react-redux'
-import {useStore} from 'store'
+import {initializeStore, useStore} from 'store'
 import 'slick-carousel/slick/slick.css'
 import "slick-carousel/slick/slick-theme.css"
 import Head from 'next/head'
@@ -46,7 +46,8 @@ function Wrapper(props){
   return  (   <props.Component {...props} />);
 }
 function MyApp({Component, pageProps}) {
-  const store = useStore({
+
+  const store = initializeStore({
     profile: {
         currentProfile: pageProps.profile,
       role: pageProps.mode,
@@ -64,6 +65,7 @@ function MyApp({Component, pageProps}) {
       currentSkill: null
     }
   })
+  console.log("SetStore", pageProps.mode);
   return (
     <>
       <Head>

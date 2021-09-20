@@ -50,6 +50,7 @@ const SearchTaskListView = (props: Props) => {
   const role = useSelector((state: IRootState) => state.profile.role)
   const [isShow, setIsShow] = useState(width > 700)
   useEffect(() => {
+    console.log("Fetch111");
     dispatch(resetTaskSearchList());
     if(router.query.filter) {
       dispatch(setFilterTaskSearch(JSON.parse((router.query as any).filter)));
