@@ -1,11 +1,10 @@
 @import "scss/index";
 
 .container{
-  max-width: 800px;
   padding-top: 51px;
   padding-bottom: 50px;
   @include lg{
-    width: $container-lg;
+    width: 80%;
     margin: auto;
   }
   @media screen and (max-width: $sm-max){
@@ -13,7 +12,7 @@
 }
 
   @include xll {
-    width: $container-xll
+    width: 80%;
   }
 }
 .content{
@@ -23,6 +22,9 @@
   border-bottom: 1px solid rgba(217, 217, 217, 1);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  @media screen and (max-width: 420px){
+    border: 1px solid rgba(217, 217, 217, 1);
+}
 }
 .skills{
   margin-bottom: 36px;
@@ -31,4 +33,18 @@
     display: table;
     clear: both;
   }
+}
+
+.desktop{
+  @media screen and (max-width: 420px){
+    display: none;
+}
+}
+
+.mobile{
+  display: none;
+  @media screen and (max-width: 420px){
+    display: block;
+    margin-bottom: 20px;
+}
 }

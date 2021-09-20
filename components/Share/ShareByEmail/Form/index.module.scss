@@ -11,7 +11,12 @@
   color: #000000;
 }
 .background{
-
+  @media screen and (max-width: 660px){
+    display: none;
+}
+  img{
+    width: 100%;
+  }
 }
 .container{
   position: absolute;
@@ -19,6 +24,9 @@
   top: 0px;
   right: 0px;
   bottom: 0px;
+  @media screen and (max-width: 660px){
+    position: static;
+}
 }
 .input{
   margin-bottom: 0px;
@@ -36,6 +44,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 660px){
+    padding-left: 0;
+    padding-top: 0;
+}
 }
 .formWrapper{
   display: flex;
