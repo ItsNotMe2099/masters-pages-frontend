@@ -5,18 +5,31 @@
     margin-bottom: 0px;
   }
 }
+
+.btn{
+  @media screen and (max-width: 960px){
+    margin-top: 15px;
+  }
+}
+
 .header{
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 8px 0px 30px 0px;
   border-bottom: 1px solid #C4C4C4;
+  @media screen and (max-width: 960px){
+    flex-direction: column;
+  }
 }
 .headerLeft{
   flex: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: 400px){
+    flex-direction: column;
+  }
 }
 
 .category{
@@ -30,7 +43,13 @@
   font-size: 14px;
   color: rgba(0,0,0, 0.7);
   margin-left: 21px;
+  margin-right: 21px;
   border-radius: 3px;
+  @media screen and (max-width: 400px){
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+  }
 }
 .cards{
   display: grid;
@@ -38,4 +57,14 @@
   grid-template-rows: 1fr;
   gap: 0px 17px;
   margin-top: 30px;
+  @media screen and (max-width: 600px){
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 17px;
+  }
+  @media screen and (max-width: 420px){
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 17px;
+  }
 }

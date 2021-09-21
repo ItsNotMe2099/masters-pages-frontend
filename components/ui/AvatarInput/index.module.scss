@@ -52,6 +52,7 @@
   &__mobile{
     display: flex;
     margin-bottom: 41px;
+    margin-top: 60px;
     @media screen and (min-width: $md-min){
       display: none;
    }
