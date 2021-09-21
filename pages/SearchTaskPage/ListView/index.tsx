@@ -49,6 +49,7 @@ const SearchTaskListView = (props: Props) => {
   const page = useSelector((state: IRootState) => state.taskSearch.page)
   const role = useSelector((state: IRootState) => state.profile.role)
   const [isShow, setIsShow] = useState(width > 700)
+  console.log("Fetch1112");
   useEffect(() => {
     console.log("Fetch111");
     dispatch(resetTaskSearchList());
