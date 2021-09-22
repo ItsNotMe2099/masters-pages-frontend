@@ -24,18 +24,19 @@ const RegistrationSuccess = (props: Props) => {
         <div className={styles.text}>
           {t('auth.registrationSuccess.description')}
         </div>
-        <Link href="/CreateTaskPage"><Button green size="16px 0" onClick={() => {
-          router.push('/CreateTaskPage');
-        }}>CREATE A TASK</Button></Link>
+        <Button green size="16px 0" onClick={() => {
+          window.location.href = '/CreateTaskPage';
+        }}>CREATE A TASK</Button>
         <div className={styles.btnContainer}>
-          <Link href=""><Button size="16px 0" onClick={() => {
-            router.push('/MasterProfile');
-          }}> {t('auth.registrationSuccess.buttonBecomeMaster')}</Button></Link>
+       <Button size="16px 0" onClick={() => {
+            window.location.href = '/MasterProfile';
+          }}> {t('auth.registrationSuccess.buttonBecomeMaster')}</Button>
         </div>
         <div className={styles.btnContainer}>
-          <Link href=""><Button size="16px 0" onClick={() => {
-            router.push('/VolunteerProfile');
-          }}> {t('auth.registrationSuccess.buttonBecomeVolunteer')}</Button></Link>
+    <Button size="16px 0" onClick={() => {
+
+      window.location.href = '/VolunteerProfile';
+          }}> {t('auth.registrationSuccess.buttonBecomeVolunteer')}</Button>
         </div>
         <Link href="/SearchTaskPage"><a className={styles.link}>{t('auth.registrationSuccess.lookAtTaskList')}</a></Link>
     </div>

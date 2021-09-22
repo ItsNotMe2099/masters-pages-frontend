@@ -98,5 +98,5 @@ export const afterAuthRedirect = () => {
 
 }
 export const meRedirect = () => {
-  Router.push("/me");
+  window.location.href = '/me'
 }
