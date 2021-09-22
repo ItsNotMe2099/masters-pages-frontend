@@ -84,7 +84,7 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => (asy
  //   ctx.store.dispatch(fetchProfileSuccess(profile));
   }
 
-  return {props: { token, user, mode, ...(profile ? {profile} : {})}};
+  return {props: { token, user, mode, ...(profile ? {currentProfile: profile} : {})}};
 })
 
 
