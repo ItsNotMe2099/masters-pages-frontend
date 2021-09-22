@@ -31,7 +31,7 @@ export const getProfilePageProps = (mode) => async (ctx) => {
       notFound: true
     }
   }
-  getAuthServerSide()(ctx as any)
+
   const res = await getAuthServerSide()(ctx as any);
   return {props: {...(res as any).props, profile, skill, ...getProfilePageShowTypeProps(ctx)}}
 

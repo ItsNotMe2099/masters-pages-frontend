@@ -21,7 +21,7 @@ const PersonalAreaPageIndex = (props) => {
 export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide({redirect: true})(ctx as any);
 
-  const profile = (res as any).props.profile;
+  const profile = (res as any).props.currentProfile;
   return {
     redirect: {
       permanent: false,

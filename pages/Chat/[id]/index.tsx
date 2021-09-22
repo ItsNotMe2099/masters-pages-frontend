@@ -20,7 +20,7 @@ const PersonalAreaPageIndex = (props) => {
 
 export const getServerSideProps = async (ctx) => {
   const authRes = await getAuthServerSide({redirect: true})(ctx as any);
-  const profile = (authRes as any).props.profile;
+  const profile = (authRes as any).props.currentProfile;
   const res = await request({url: `/api/chat/${ctx.query.id}`, method: 'GET'}, ctx);
 
 
