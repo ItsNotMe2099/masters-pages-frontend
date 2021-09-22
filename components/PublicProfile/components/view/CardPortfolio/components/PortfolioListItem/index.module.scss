@@ -9,6 +9,9 @@
   &:first-of-type{
     margin-top: 0px;
   }
+  @media screen and (max-width: 580px){
+    flex-direction: column;
+  }
 }
 .leftColumn{
   width: 159px;
@@ -16,6 +19,9 @@
     vertical-align: middle;
     max-width: 100%;
     object-fit: contain;
+  }
+  @media screen and (max-width: 580px){
+    align-self: center;
   }
 }
 .emptyImage{
@@ -92,6 +98,10 @@
     margin-left: 6px;
     font-size: 14px;
   }
+  @media screen and (max-width: 580px){
+    flex-direction: column-reverse;
+    margin-top: 10px;
+  }
 }
 .company{
   margin-top: 8px;
@@ -103,9 +113,16 @@
   margin-top: 8px;
   line-height: 24px;
   font-size: 14px;
+  @media screen and (max-width: 580px){
+    text-align: center;
+    overflow-wrap: break-word;
+  }
 }
 .actions{
   display: flex;
   margin-top: 8px;
+  @media screen and (max-width: 580px){
+    align-self: center;
+  }
 }
 
