@@ -49,7 +49,7 @@ function MyApp({Component, pageProps}) {
 
   const store = initializeStore({
     profile: {
-        currentProfile: pageProps.profile,
+        currentProfile: pageProps.currentProfile,
       role: pageProps.mode,
       roleTemp: pageProps.mode,
       formIsSuccess: false,

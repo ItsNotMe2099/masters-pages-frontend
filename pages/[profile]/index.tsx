@@ -18,7 +18,6 @@ export const getServerSideProps = async (ctx) => {
   let profile, skill = null;
   if(id.indexOf('id') === 0){
      profile = (await request({ url: `/api/profile/${id.replace('id', '')}`, method: 'GET' }, ctx))?.data
-
     if(!profile){
       return {
         notFound: true
