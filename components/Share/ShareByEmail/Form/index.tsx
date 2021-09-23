@@ -100,7 +100,6 @@ let ShareByEmailForm = (props: Props) => {
         <div className={styles.btnContainer}>
           <Button disabled={loading} red size="14px 65px">{t('shareByEmail.invite')} {profile.role === 'client' ? 'master' : 'client' }</Button>
         </div>
-        <div className={styles.fake}></div>
       </div>
       </div>}
     </div>

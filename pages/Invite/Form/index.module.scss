@@ -11,11 +11,19 @@
   color: #000000;
 }
 .background{
-  @media screen and (max-width: 630px){
+  @media screen and (max-width: 592px){
     display: none;
-  }
+}
+}
+
+.backgroundMobile{
+  display: block;
+  width: 100%;
   img{
     width: 100%;
+  }
+  @media screen and (min-width: 593px){
+    display: none;
   }
 }
 .container{
@@ -33,25 +41,32 @@
   padding-top: 166px ;
   text-align: center;
 }
-.form{
-  padding-top: 166px ;
-  padding-left: 50px;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 630px){
-    padding-left: 0;
-    padding-top: 0;
+  .form{
+    padding-top: 166px ;
+    padding-left: 50px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 660px){
+      padding-top: 100px;
+      padding-left: 0;
   }
-}
+  @media screen and (max-width: 375px){
+    padding-top: 50px;
+  }
+  }
 .formWrapper{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-
+  @media screen and (max-width: 592px){
+    padding: 0 18px;
+    background: #FBF1A4;
+    padding-bottom: 30px;
+}
 }
 .btnContainer{
   display: flex;
