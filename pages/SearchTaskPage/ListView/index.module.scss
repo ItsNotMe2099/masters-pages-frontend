@@ -124,6 +124,12 @@
     flex-direction: column;
     padding: 0;
   }
+  @media screen and (max-width: $sm-max) {
+    margin-top: 20px;
+    .showOnTheMap{
+      max-width: 100%;
+    }
+  }
 }
 .tasksTobBar{
   display: flex;
