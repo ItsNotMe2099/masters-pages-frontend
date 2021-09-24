@@ -9,7 +9,7 @@
     margin: auto;
   }
   @media screen and (max-width: $sm-max){
-    padding: 17px 22px 0 22px;
+    padding: 17px 0 0 0;
 }
 
   @include xll {
@@ -23,4 +23,10 @@
   grid-template-columns: repeat(3, 2fr);
   grid-template-rows: 1fr 1fr 1fr;
   gap: 1rem;
+  @media screen and (max-width: 1420px){
+    grid-template-columns: repeat(2, 2fr);
+  }
+  @media screen and (max-width: 1000px){
+    grid-template-columns: 1fr;
+  }
 }
