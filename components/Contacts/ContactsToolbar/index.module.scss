@@ -7,12 +7,21 @@
   position: relative;
   font-size: 14px;
   margin-top: 28px;
+  @media screen and (max-width: 1200px){
+    flex-direction: column;
+  }
+  @media screen and (max-width: 1000px){
+    margin-top: 0;
+  }
 }
 .filter{
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-left: 40px;
+  @media screen and (max-width: 500px){
+    margin-bottom: 10px;
+  }
   .label{
     font-weight: 500;
     margin-right: 6px;
@@ -26,14 +35,50 @@
   height: 40px;
   background: #C4C4C4;
   margin-left: 40px;
+  @media screen and (max-width: 730px){
+    display: none;
+  }
 }
 .search{
   flex: 1;
   > div{
     margin-bottom: 0;
   }
+  @media screen and (max-width: 1200px){
+    width: 100%;
+  }
 }
 .list{
 
+}
+
+.right{
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 1200px){
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 730px){
+    flex-direction: column;
+  }
+}
+
+.rightFilters{
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 730px){
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+  }
+}
+
+.leftFilters{
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+  }
 }
 

@@ -56,6 +56,8 @@ const ContactsToolbar = (props: Props) => {
           onChangeSearch(e.currentTarget.value);
         } }}/>
       </div>
+      <div className={styles.right}>
+        <div className={styles.leftFilters}>
       <div className={`${styles.filter} ${styles.sort}`}>
         <div className={styles.label}>{totalName}:</div>
         <div className={styles.value}>{total}</div>
@@ -82,7 +84,9 @@ const ContactsToolbar = (props: Props) => {
                   item={(item) => <div>{item?.label}</div>}
         />
       </div>
+        </div>
       <div className={styles.separator}/>
+      <div className={styles.rightFilters}>
       <div className={`${styles.filter} ${styles.userType}`}>
         <div className={styles.label}>{t('contacts.toolbar.userType')}:</div>
         <DropDown onChange={(val) => onUserTypeChange(val.value)} value={userType} options={[
@@ -103,7 +107,8 @@ const ContactsToolbar = (props: Props) => {
                   item={(item) => <div>{item?.label}</div>}
         />
       </div>
-
+      </div>
+     </div>
     </div>
   )
 }
