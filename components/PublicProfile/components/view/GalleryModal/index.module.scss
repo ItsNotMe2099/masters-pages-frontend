@@ -3,14 +3,49 @@
 .root{
   display: flex;
   align-items: stretch;
+  @media screen and (max-width: 970px){
+    flex-direction: column;
+  }
 }
 .photo{
   width: 578px;
   height: 578px;
+  @media screen and (max-width: 970px){
+    width: 509px;
+    height: 509px;
+  }
+  @media screen and (max-width: 600px){
+    width: 300px;
+    height: 300px;
+  }
+  @media screen and (max-width: 350px){
+    width: 280px;
+    height: 280px;
+  }
+  @media screen and (max-width: 330px){
+    width: 250px;
+    height: 250px;
+  }
   img {
     width: 578px;
     height: 578px;
     object-fit: cover;
+    @media screen and (max-width: 970px){
+      width: 509px;
+      height: 509px;
+    }
+    @media screen and (max-width: 600px){
+      width: 300px;
+      height: 300px;
+    }
+    @media screen and (max-width: 350px){
+      width: 280px;
+      height: 280px;
+    }
+    @media screen and (max-width: 330px){
+      width: 250px;
+      height: 250px;
+    }
   }
 }
 .details{
@@ -35,6 +70,10 @@
       font-size: 14px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.5);
+    overflow-wrap: break-word;
+    max-width: 500px;
+    max-height: 100px;
+    overflow-y: scroll;
   }
   .stat{
     display: flex;
@@ -96,6 +135,18 @@
   width: 939px;
   padding: 0px;
   border-radius: 0px;
+  @media screen and (max-width: 970px){
+    width: 509px !important;
+  }
+  @media screen and (max-width: 600px){
+    width: 300px !important;
+  }
+  @media screen and (max-width: 350px){
+    width: 280px !important;
+  }
+  @media screen and (max-width: 330px){
+    width: 250px !important;
+  }
 }
 .arrowLeft,
 .arrowRight{
@@ -114,6 +165,9 @@
         stroke: red;
       }
     }
+  }
+  @media screen and (max-width: 600px){
+    padding: 0 35px;
   }
 }
 .arrowLeft{
