@@ -170,6 +170,7 @@ const TaskPage = (props) => {
           {task.description && <div className={styles.content}>{task.description}</div>}
           {stats && <div className={styles.stats}>
             <div className={styles.statsTitle}>{t('statistic')}</div>
+            <div className={styles.tableWrapper}>
             <div className={styles.statsTable}>
               <div className={styles.statsHeader}>
                 <div className={`${styles.statsCell} ${styles.statsLabel}`}></div>
@@ -213,6 +214,7 @@ const TaskPage = (props) => {
                 <div className={`${styles.statsCell} ${styles.statsValue}`}>{stats.reviews}</div>
                 <div className={`${styles.statsCell} ${styles.statsEmpty}`}/>
               </div>
+            </div>
             </div>
           </div>}
 
