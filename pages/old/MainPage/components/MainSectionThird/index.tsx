@@ -1,9 +1,7 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import MainSectionButton from 'pages/NewMain/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
-import {signUpOpen} from 'components/Modal/actions'
-import MainSliderControl from 'pages/NewMain/components/MainSliderControl'
+import MainSliderControl from 'pages/old//MainPage/components/MainSliderControl'
 import {useState} from 'react'
 import {useTranslation} from "i18n";
 const ListItem = ({label, isActive}: {label: string, isActive: boolean}) => {

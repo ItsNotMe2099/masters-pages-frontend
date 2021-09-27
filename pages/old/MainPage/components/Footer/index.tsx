@@ -1,6 +1,4 @@
 import styles from './index.module.scss'
-import Facebook from 'components/svg/Facebook'
-import Instagram from 'components/svg/Instagram'
 import {useTranslation} from 'i18n'
 interface Props{
 

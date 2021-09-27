@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
-import MainSliderArrowLeft from 'pages/NewMain/components/MainSliderArrowLeft'
-import MainSliderArrowRight from 'pages/NewMain/components/MainSliderArrowRight'
+import MainSliderArrowLeft from 'pages/old//MainPage/components/MainSliderArrowLeft'
+import MainSliderArrowRight from 'pages/old//MainPage/components/MainSliderArrowRight'
 
 interface Props {
   direction: 'next' | 'prev'

@@ -1,11 +1,11 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
 import Slider from "react-slick";
-import SlideWithCards from 'pages/NewMain/components/MainSectionSecond/components/SlideWithCards'
+import SlideWithCards from 'pages/old//MainPage/components/MainSectionSecond/components/SlideWithCards'
 import React, {useState} from 'react'
 import SliderControl from 'components/ui/SliderControl'
 import MainSliderControl from 'pages/NewMain/components/MainSliderControl'
-import LastSlide from 'pages/NewMain/components/MainSectionSecond/components/LastSlide'
+import LastSlide from 'pages/old//MainPage/components/MainSectionSecond/components/LastSlide'
 import {useTranslation} from "i18n";
 
 const Title = (props) => {

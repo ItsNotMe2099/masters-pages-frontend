@@ -1,7 +1,5 @@
 import styles from './index.module.scss'
-import MainSectionButton from 'pages/NewMain/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
-import {signUpOpen} from 'components/Modal/actions'
 import {useTranslation} from "i18n";
 interface Props{
 

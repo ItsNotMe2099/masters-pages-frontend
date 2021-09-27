@@ -1,6 +1,5 @@
-import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Slider from "react-slick";
+
 const Card = ({icon, text}: {icon: string, text: string}) => {
   return (<div className={styles.card}>
     <div className={styles.cardWrapper}>

@@ -1,6 +1,5 @@
-import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Link from 'next/link'
+
 interface Props{
   children?: any
   size?: 'normal' | 'small',

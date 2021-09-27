@@ -1,12 +1,8 @@
-import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Link from 'next/link'
-import LangSelect from 'pages/NewMain/components/Header/components/LangSelect'
-import MainSectionButton from 'pages/NewMain/components/Button'
+import MainSectionButton from 'pages/old//MainPage/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
 import {useTranslation} from 'i18n'
-import Button from "components/ui/Button";
 
 
 interface Props{
