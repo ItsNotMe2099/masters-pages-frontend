@@ -15,8 +15,10 @@ interface Props{
 const Card = (props: Props) => {
   return (
     <div className={`${styles.root} ${props.className} ${props.isHidden && styles.hidden}`}>
-      {props.title && <CardTitle>{props.title}</CardTitle>}
-      <div className={styles.toolbar}>{props.toolbar}</div>
+      <div className={styles.title}>
+        {props.title && <CardTitle>{props.title}</CardTitle>}
+        <div className={styles.toolbar}>{props.toolbar}</div>
+      </div>
       {props.children}
       {props.isLoading && <div className={styles.loader}><Loader/></div>}
     </div>

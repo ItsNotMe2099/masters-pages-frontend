@@ -1,5 +1,4 @@
 import Chat from "components/Chat";
-import Header from "components/layout/Header";
 import Loader from "components/ui/Loader";
 import {IRootState} from "types";
 import Link from 'next/link'

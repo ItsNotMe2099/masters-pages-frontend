@@ -1,6 +1,10 @@
 @import "scss/index";
 .root{
   position: relative;
+  cursor: pointer;
+  @media screen and (max-width: 800px){
+    margin-right: 30px;
+  }
 }
 .rootAuth{
 .dropDownTrigger{
@@ -42,6 +46,14 @@
   font-weight: 600;
   display: flex;
   align-items: center;
+  svg{
+    fill: #000;
+    @media screen and (max-width: 800px){
+      fill: #fff;
+      width: 10px;
+      height: 7px;
+    }
+  }
 
   &:hover{
     .dropdownItemLabel {
@@ -79,9 +91,14 @@
   line-height: 17px;
   padding-right: 6px;
   vertical-align: middle;
-  @media screen and (max-width: $sm-max){
-
+  @media screen and (max-width: 800px){
+    color: #fff;
+    font-size: 18px;
   }
+}
+
+.black{
+  color: #000 !important;
 }
 
 .arrowActive{

@@ -24,7 +24,7 @@ const ProfileStatItem = ({model, profile}: Props) => {
         <div className={styles.category}>{getCategoryTranslation(model.mainCategory, i18n.language)?.name}/{getCategoryTranslation(model.category, i18n.language)?.name}</div>
         <div className={styles.subCategory}>{getCategoryTranslation(model.subCategory, i18n.language)?.name}</div>
         </div>
-        <Button size={'small'} target={''} href={`/sk${model.id}`}>{t('cardProfile.stat.learnMore')}</Button>
+        <Button className={styles.btn} size={'small'} target={''} href={`/sk${model.id}`}>{t('cardProfile.stat.learnMore')}</Button>
       </div>
       <div className={styles.cards}>
         <ProfileStatItemCard value={model.tasksCount} label={t('works')} icon={'works'}/>

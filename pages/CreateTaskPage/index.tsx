@@ -1,4 +1,4 @@
-import Header from 'components/layout/Header'
+
 import Footer from 'components/layout/Footer'
 import Steps from 'components/Steps'
 import Button from "components/ui/Button";

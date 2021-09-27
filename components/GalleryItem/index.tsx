@@ -22,7 +22,7 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img src={getMediaPath(model.photo)} onClick={handleClick}/>
+        <img className={styles.cover} src={getMediaPath(model.photo)} onClick={handleClick}/>
         {isEdit && <div className={styles.editActions}>
 
           <FormActionButton type={'edit'} title={''} onClick={ () => onEdit(model)}/>

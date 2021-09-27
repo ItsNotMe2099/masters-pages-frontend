@@ -15,7 +15,6 @@ import { useRouter } from "next/router";
 import { default as React, useEffect, useState } from "react";
 import { IRootState } from "types";
 import styles from './index.module.scss'
-import Header from 'components/layout/Header'
 import Footer from 'components/layout/Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component';

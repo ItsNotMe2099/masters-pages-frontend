@@ -10,7 +10,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  @media screen and (max-width: 670px){
+    flex-direction: column;
+  }
 }
 .rootSmall{
   padding: 10px 13px;
@@ -43,9 +45,21 @@
 }
 .rootLarge{
   min-width: 554px;
+  @media screen and (max-width: 670px){
+    min-width: 100%;
+  }
+  
 }
 .messageWrapper{
   flex: 1;
+  overflow-wrap: break-word;
+  max-width: 554px;
+  @media screen and (max-width: 610px){
+    max-width: 300px;
+  }
+  @media screen and (max-width: 350px){
+    max-width: 250px;
+  }
 }
 .message{
 

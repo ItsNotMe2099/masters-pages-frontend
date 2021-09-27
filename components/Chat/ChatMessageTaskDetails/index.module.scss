@@ -3,6 +3,9 @@
   border: 1px solid #dadada;
   border-radius: 5px;
   min-width: 554px;
+  @media screen and (max-width: 670px){
+    min-width: 100%;
+  }
 }
 .header{
   height: 48px;
@@ -38,6 +41,9 @@
   border-top: 1px solid #dadada;
   border-bottom: 1px solid #dadada;
   padding: 0px 20px;
+  @media screen and (max-width: 670px){
+    flex-direction: column;
+  }
 }
 .detailsItem{
   display: flex;

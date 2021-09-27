@@ -3,7 +3,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  width: 375px;
+  justify-self: center;
+  @media screen and (max-width: 470px){
+    width: 250px;
+  }
 }
 .image{
   position: relative;
@@ -17,6 +21,14 @@
     */
     object-fit: cover;
     width: 100%;
+  }
+}
+.cover{
+  width: 375px !important;
+  height: 375px;
+  @media screen and (max-width: 470px){
+    width: 250px !important;
+    height: 250px;
   }
 }
 .editActions{
@@ -52,7 +64,7 @@
 .info{
 
   width: 100%;
-
+  max-width: 300px;
   padding: 12px 12px;
   .infoWrapper{
     display: flex;

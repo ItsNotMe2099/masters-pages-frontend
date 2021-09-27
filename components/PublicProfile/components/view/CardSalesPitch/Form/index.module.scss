@@ -9,6 +9,9 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  @media screen and (max-width: $sm-max){
+    flex-direction: column;
+  }
 }
 .description{
   flex: 1;

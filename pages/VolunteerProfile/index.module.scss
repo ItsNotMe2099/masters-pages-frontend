@@ -1,28 +1,15 @@
 @import "scss/index";
 .container{
-  width: 100%;
+  width: 90%;
   padding-top: 51px;
-  @include lg{
-    width: $container-lg;
-    margin: auto;
-  }
+  margin: auto;
   @media screen and (max-width: $sm-max){
     padding: 17px 22px 0 22px;
   }
-
-  @include xll {
-    width: $container-xll
-  }
 }
 .stepsContainer{
-  @include lg{
-    width: $container-lg;
-    margin: auto;
-  }
-
-  @include xll {
-    width: $container-xll
-  }
+  width: 90%;
+  margin: auto;
 }
 .steps{
   padding: 60px 0px;

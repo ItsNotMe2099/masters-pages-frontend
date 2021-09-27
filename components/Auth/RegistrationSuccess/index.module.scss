@@ -9,6 +9,9 @@
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  @media screen and (max-width: 460px){
+    width: 100%;
+  }
 }
 .headText{
     font-weight: bold;

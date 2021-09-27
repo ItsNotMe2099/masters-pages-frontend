@@ -28,3 +28,11 @@ text-align: center;
     border-radius: 3px;
   }
 }
+
+.text{
+  overflow-wrap: break-word;
+  @media screen and (max-width: 420px){
+    max-width: 260px;
+    overflow-wrap: break-word;
+  }
+}

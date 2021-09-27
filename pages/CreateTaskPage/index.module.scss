@@ -3,17 +3,9 @@
 .container{
   width: 100%;
   padding-top: 51px;
-  @include lg{
-    width: $container-lg;
-    margin: auto;
-  }
   @media screen and (max-width: $sm-max){
     padding: 17px 22px 0 22px;
 }
-
-  @include xll {
-    width: $container-xll
-  }
 }
 .stepsContainer{
   @include lg{

@@ -9,6 +9,12 @@
   > div:last-of-type{
     margin-left: 15px;
   }
+  @media screen and (max-width: 470px){
+    flex-direction: column;
+    > div:last-of-type{
+      margin-left: 0;
+    }
+  }
 }
 .buttons{
   display: flex;

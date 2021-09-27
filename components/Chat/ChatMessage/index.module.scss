@@ -3,6 +3,15 @@
   display: flex;
   align-items: center;
   padding: 4px 29px;
+  @media screen and (max-width: 850px){
+    flex-direction: column;
+    .time{
+      order: 1;
+    }
+    .message{
+      order: 2;
+    }
+  }
 }
 .rootAuthor{
   .time{

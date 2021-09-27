@@ -6,6 +6,9 @@
 .dropDown {
 
   width: 320px;
+  @media screen and (max-width: 350px){
+    width: 280px;
+  }
   background: #ffffff;
   position: absolute;
   top: 37px;

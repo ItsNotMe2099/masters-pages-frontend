@@ -109,7 +109,7 @@ const ReportPage = (props) => {
           <ReportFilterForm onSubmit={() => {}} onChange={handleChange} initialValues={{...filterData}}/>
         </div>
         {listLoading && <Loader/>}
-        {!listLoading && list.length > 0 && <div className={styles.report}>
+        {!listLoading && list.length > 0 && <div className={styles.tablewrapper}><div className={styles.report}>
           <div className={styles.reportHeader}>
             {fields.includes('id') && <div className={`${styles.reportCell}`}>{t('report.id')}</div>}
             {fields.includes('title') && <div className={`${styles.reportCell}`}>{t('title')}</div>}
@@ -139,7 +139,7 @@ const ReportPage = (props) => {
             {fields.includes('reviewMark') && <div className={`${styles.reportCell}`}>{item.review_mark}</div>}
             {fields.includes('address') && <div className={`${styles.reportCell}`}>{item.address}</div>}
           </div>)}
-        </div>}
+        </div></div>}
         {(!listLoading && list.length > 0 && filterData.start && filterData.end) &&<div className={styles.actions}>
           <Button onClick={handleDownload} size={'small'}>Download XLS</Button>
         </div>}

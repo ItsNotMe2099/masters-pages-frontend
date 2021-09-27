@@ -11,7 +11,20 @@
   color: #000000;
 }
 .background{
+  @media screen and (max-width: 592px){
+    display: none;
+}
+}
 
+.backgroundMobile{
+  display: block;
+  width: 100%;
+  img{
+    width: 100%;
+  }
+  @media screen and (min-width: 593px){
+    display: none;
+  }
 }
 .container{
   position: absolute;
@@ -36,13 +49,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 660px){
+    padding-top: 100px;
+    padding-left: 0;
+}
+@media screen and (max-width: 375px){
+  padding-top: 50px;
+}
 }
 .formWrapper{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-
+  @media screen and (max-width: 592px){
+    padding: 0 18px;
+    background: #FBF1A4;
+    padding-bottom: 30px;
+}
 }
 .btnContainer{
   display: flex;
@@ -56,6 +80,10 @@
 }
 .field{
   display: table-row;
+  @media screen and (max-width: 660px){
+    display: flex;
+    align-items: center;
+}
 }
 .fieldLabel,.fieldValue{
   display: table-cell;

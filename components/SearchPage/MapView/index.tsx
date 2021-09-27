@@ -87,6 +87,10 @@ const SearchProfileMapView = (props: Props) => {
         return 'SearchClientPage'
     }
   }
+  const handleScrollNext = () => {
+    dispatch(setPageProfileSearch(page + 1))
+    dispatch(fetchProfileSearchList())
+  }
   const handleSortChange = (item) => {
     dispatch(setSortProfileSearch(item.value));
     dispatch(resetProfileSearchList())
@@ -133,28 +137,7 @@ const SearchProfileMapView = (props: Props) => {
           <div className={styles.tasks}>
             <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>
 
-            <div className={styles.tasksWrapper} id={'task-search-map-list'}>
-              <div className={styles.tasksTobBar}>
-                <div className={styles.tasksAmount}>{props.searchRole === 'master' ? 'Masters' : 'Volunteers'}: <span>{total}</span></div>
-                <div className={styles.tasksSort}>
-                  <span>{t('sort.title')}:</span>
-                  <DropDown onChange={handleSortChange} value={sortType} options={[
-                    {value: 'newFirst',  label: t('sort.newFirst')},
-                    {value: 'highPrice', label: t('sort.highestPrice')},
-                    {value: 'lowPrice', label: t('sort.lowestPrice')}]}
-                            item={(item) => <div>{item?.label}</div>}
-                  />
-                </div>
-              </div>
-
-              {(loading && total > 0) && <Loader/>}
-              {(!loading && total > 0) && tasks.filter(item =>  bounds ? inBounds(item.location, bounds) : true).map(task => <Profile profile={task} isActive={task.id === activeId} onClick={handleTaskListClick}/>)}
-
-
-
-            </div>
-          </div>
-          <div className={styles.map}>
+            <div className={styles.map}>
             <Button className={styles.backButton} whiteRed uppercase onClick={props.onShowList}>{t('back')}</Button>
             <Map center={center} onGoogleApiLoaded={({ map }) => {
               mapRef.current = map;
@@ -217,6 +200,31 @@ const SearchProfileMapView = (props: Props) => {
                 );
               })}
             </Map>
+          </div>
+            <div className={styles.tasksWrapper} id={'task-search-map-list'}>
+              <div className={styles.tasksTobBar}>
+                <div className={styles.tasksAmount}>{props.searchRole === 'master' ? 'Masters' : 'Volunteers'}: <span>{total}</span></div>
+                <div className={styles.tasksSort}>
+                  <span>{t('sort.title')}:</span>
+                  <DropDown onChange={handleSortChange} value={sortType} options={[
+                    {value: 'newFirst',  label: t('sort.newFirst')},
+                    {value: 'highPrice', label: t('sort.highestPrice')},
+                    {value: 'lowPrice', label: t('sort.lowestPrice')}]}
+                            item={(item) => <div>{item?.label}</div>}
+                  />
+                </div>
+              </div>
+
+              {(loading && total > 0) && <Loader/>}
+        {(!loading && total > 0) && <InfiniteScroll
+          dataLength={tasks.length} //This is important field to render the next data
+          next={handleScrollNext}
+          hasMore={total > tasks.length}
+          loader={<Loader/>}>
+          {tasks.filter(item =>  bounds ? inBounds(item.location, bounds) : true).map(task => <Profile profile={task} isActive={task.id === activeId} onClick={handleTaskListClick}/>)}
+        </InfiniteScroll>}
+
+            </div>
           </div>
         </div>
       </div>

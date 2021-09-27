@@ -8,6 +8,9 @@
   &:first-of-type{
     margin-top: 0px;
   }
+  @media screen and (max-width: 930px){
+    flex-direction: column;
+  }
 }
 .leftColumn{
   img{
@@ -34,17 +37,32 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: 930px){
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 580px){
+    flex-direction: column-reverse;
+  }
 }
 .editActions{
   display: flex;
   flex-direction: row;
 }
 .experience{
+  @media screen and (max-width: 930px){
+    margin-right: 5px;
+  }
+  @media screen and (max-width: 580px){
+    flex-direction: column;
+  }
   flex: 1;
   font-weight: 600;
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: 580px){
+    align-items: baseline;
+  }
   .position{
     margin-top: 2px;
     font-size: 15px;
@@ -53,6 +71,9 @@
   .dates{
     margin-left: 6px;
     font-size: 14px;
+    @media screen and (max-width: 580px){
+      margin-left: 0;
+    }
   }
 }
 .company{

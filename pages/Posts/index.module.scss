@@ -9,7 +9,7 @@
     margin: auto;
   }
   @media screen and (max-width: $sm-max){
-    padding: 17px 22px 0 22px;
+    padding: 17px 0 0 0;
 }
 
   @include xll {
