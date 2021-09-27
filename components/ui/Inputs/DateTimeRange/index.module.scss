@@ -6,6 +6,9 @@
 }
 .calendarIcon{
 margin-right: 12px;
+@media (max-width: 1100px){
+  margin-right: 0;
+}
 }
 .inputWrapper{
   display: flex;
@@ -31,11 +34,26 @@ margin-right: 12px;
 
 }
 
+.inputDate{
+  @media (max-width: 1100px){
+    display: none;
+  }
+}
+
 .dateRange{
   position: absolute;
   z-index: 5;
   top: 30px;
   visibility: hidden;
+  @media (max-width: 1540px){
+    right: 100%;
+  }
+  @media (max-width: 390px){
+    right: 0;
+  }
+  @media (max-width: 340px){
+    right: -25%;
+  }
 }
 .dateRangeOpen{
 

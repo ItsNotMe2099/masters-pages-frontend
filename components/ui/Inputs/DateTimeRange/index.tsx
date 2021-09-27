@@ -83,7 +83,7 @@ export default function DateTimeRange(props: Props) {
     <div className={`${props.className} ${styles.root}`} ref={dateRangeRef}>
       <div className={styles.inputWrapper}>
         <div className={`${inputClassName} ${styles.input}`}>
-          {props.showIcon && <CalendarIcon className={styles.calendarIcon}/>}
+          {props.showIcon && <CalendarIcon className={styles.calendarIcon} onClick={() => setDateRangeOpen(true)}/>}
         <div className={styles.inputDate} onClick={() => setDateRangeOpen(true)}>{getDateRange()}</div>
           {props.showTime && <div className={styles.separator}/>}
           {props.showTime && <div className={styles.timeRange}>
@@ -139,7 +139,7 @@ export default function DateTimeRange(props: Props) {
           endDate: new Date(),
           key: 'selection'
         }]}
-        direction="horizontal"
+        direction="vertical"
       />
       </div>
       <ErrorInput meta={props.meta} />

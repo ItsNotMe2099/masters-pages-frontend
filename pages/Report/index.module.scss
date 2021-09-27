@@ -25,10 +25,16 @@
   grid-template-rows: 1fr 1fr 1fr;
   gap: 1rem;
 }
+.tablewrapper{
+  overflow: auto;
+}
 .report{
   padding: 0px 50px;
   display: table;
   text-align: center;
+  @media (max-width: 1100px){
+    padding: 0;
+  }
   .reportHeader{
     display: table-row;
     .reportCell{
@@ -67,4 +73,10 @@
   flex-direction: row;
   align-items: center;
   padding: 0px 50px;
+  @media (max-width: 560px){
+    padding: 0px 18px;
+    button{
+      width: 100%;
+    }
+  }
 }
