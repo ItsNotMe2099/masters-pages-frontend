@@ -1,13 +1,13 @@
 @import "scss/index";
 .root{
-  border-radius: 7px;
+  border-radius: 10px;
   border: 0;
   cursor: pointer;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #EB5757;
+  background-color: #FD5742;
   text-transform: uppercase;
   &:hover{
     color: #373948;
@@ -31,10 +31,10 @@
 .outline{
   color: #373948;
   background: transparent;
-  border: 2px solid #EB5757;
+  border: 2px solid #FD5742;
   &:hover{
     color: white;
-    background-color: #EB5757;
+    background: #FD5742;
   }
 }
 

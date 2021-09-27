@@ -1,17 +1,34 @@
 @import "scss/index";
 .root{
   position: relative;
-  background-color: #fff;
-  overflow-x: hidden;
+  background-position: center;
+  overflow: hidden;
 }
 .container{
   padding: 56px 0px;
   position: relative;
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  margin: 0 auto;
+  align-items: flex-end;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @media (max-width: 1400px) {
+    width: 1200px;
+  }
+  @media (max-width: 1280px) {
+    width: 1100px;
+  }
+  @media (max-width: 1150px) {
+    width: 1000px;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
 }
 .leftSide{
   width: 60%;
@@ -34,10 +51,14 @@
 }
 .title{
   font-size: 41px;
-  font-weight: bold;
-  color: #373948;
+  font-weight: 700;
 }
-
+.description{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  line-height: 26px;
+}
 .label{
   &:first-of-type{
     margin-top: 0;
@@ -54,8 +75,8 @@
 }
 .labelFirst{
   font-size: 68px;
-  color: #27AE60;
-  font-weight: bold;
+  color: #FD5742;
+  font-weight: 700;
   margin-right: 5px;
   text-transform: uppercase;
   @media (max-width: 1280px) {
@@ -65,9 +86,6 @@
     font-size: 50px;
   }
 }
-.letters{
-  color: #373948;
-}
 .labelSeparator{
   height: 85px
 }
@@ -76,7 +94,7 @@
   flex-direction: row;
   align-items: flex-start;
   margin-top: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   padding-left: 12px;
 }
 .categoriesColumn{
@@ -94,15 +112,13 @@
   font-size: 14px;
     margin-top: 15px;
   font-weight: 500;
-  color: #373948;
   img{
     margin-right: 6px;
   }
 }
 .bgRect{
   position: absolute;
-  background: #27AE60;
-  opacity: 0.05;
+  background: rgba(255,255,255, 0.1);
   top: 0px;
   bottom: 0px;
   right: -200px;
@@ -120,4 +136,9 @@
   line-height: 47px;
   font-size: 18px;
   font-weight: 700;
+}
+
+.btns{
+  display: flex;
+  justify-content: space-evenly;
 }

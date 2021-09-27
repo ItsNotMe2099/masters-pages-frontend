@@ -9,9 +9,9 @@ import Button from "components/ui/Button";
 
 const Label = ({label, index}: {label: string, index: number}) => {
 
-  return (<div className={styles.label} style={{marginLeft:(index >= 3 ? 60 : 30) +  index * 18}}>
+  return (<div className={styles.label} style={{marginLeft:(index >= 3 ? 30 : 0) +  index * 18}}>
     <span className={styles.labelFirst}>{label[0]}</span>
-    <span className={styles.letters}>{label.slice(1)}</span>
+    <span>{label.slice(1)}</span>
   </div>)
 }
 const Category = ({label}: {label: string}) => {
@@ -29,7 +29,7 @@ const MainSectionFirst = (props) => {
     </div>)
   }
   return (
-    <div className={styles.root}>
+    <div className={styles.root}  style={{backgroundImage: `url(/img/Main/bg/first_${Math.floor(Math.random() * 6) + 1 }.png)`}}>
       <div className={styles.container}>
         <div className={styles.leftSide}>
         <div className={styles.title}>{t('mainPage.modernBusiness')}</div>
@@ -61,7 +61,16 @@ const MainSectionFirst = (props) => {
             </div>
 
             </div>
-        <MainSectionButton onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+        <div className={styles.description}>
+        {t('mainPage.organize')}
+        </div>
+        {/*<MainSectionButton>{t('mainPage.goLive')}</MainSectionButton>*/}
+        <div className={styles.btns}>
+        <div className={styles.firstBtn}>
+          <Button href='/SearchMasterPage' target='_self' red className={styles.findMaster}>{t('findMaster')}</Button>
+        </div>
+          <Button href='/SearchVolunteerPage' target='_self' blue className={styles.findMaster}>{t('findVolunteer')}</Button>
+        </div>
         </div>
         <div className={styles.rightSide}>
           <Label label={t('mainPage.labels.advertise')} index={0}/>
