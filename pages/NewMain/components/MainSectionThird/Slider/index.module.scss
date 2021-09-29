@@ -1,0 +1,73 @@
+@import "scss/index";
+.root{
+  position: relative;
+  display: flex;
+  z-index: 2;
+}
+
+.slider{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.list{
+  width: 35%;
+  margin-right: 38px;
+}
+
+.item{
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  svg{
+    fill: #666;
+    margin-right: 18px;
+  }
+  .label{
+    color: #666;
+  }
+}
+
+.active{
+  background: #F4F4F4;
+  border: 2px solid #8E8E8E;
+  svg{
+    fill: #000;
+  }
+  .label{
+    color: #000;
+  }
+}
+
+.label{
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 110%;
+  letter-spacing: 0.03em;
+}
+
+.slide{
+  padding: 0 75px;
+}
+
+.tools{
+  font-weight: bold;
+  font-size: 41px;
+  line-height: 110%;  
+  letter-spacing: 0.03em;
+  color: #373948; 
+  margin-bottom: 42px;
+}
+
+.otherTools{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 110%;
+  letter-spacing: 0.03em;
+  color: #373948;
+  margin-top: 28px;
+}

@@ -19,15 +19,10 @@ const Category = ({label}: {label: string}) => {
     <img src={'/img/Main/icons/mark.svg'}/> {label}
   </div>)
 }
-const MainSectionFirst = (props) => {
+const MainSectionSecond = (props) => {
   const dispatch = useDispatch()
   const {t} = useTranslation('common')
-  const renderLabel = (label, index) => {
-    return (<div className={styles.label}>
-      <span className={styles.labelFirst}>{label[0]}</span>
-      <span>{label.slice(1)}</span>
-    </div>)
-  }
+  
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -78,4 +73,4 @@ const MainSectionFirst = (props) => {
   )
 }
 export const getServerSideProps = getAuthServerSide();
-export default MainSectionFirst
+export default MainSectionSecond

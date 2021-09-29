@@ -820,7 +820,17 @@
         "text5": "Update your profile and Publish your works regularly",
         "text6": "Collect reviews",
         "text7": "Get new orders from new customers",
-        "text8": "Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle"
+        "text8": "Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle",
+        "profile": "Profile",
+        "orders": "Orders",
+        "calendar": "Calendar",
+        "news": "News",
+        "messages": "Messages",
+        "reports": "Reports"
+      },
+      "slider": {
+        "tools": "MastersPages’ tools:",
+        "otherTools": "and other tools..."
       }
     },
     "categories": {
