@@ -44,8 +44,8 @@
     "rangeError": "Invalid Range"
   },
   "master": "Master",
-  "findMaster": "Find your Master",
-  "findVolunteer": "Find your Volunteer",
+  "findMaster": "VIEW MORE MASTERS",
+  "findVolunteer": "VIEW MORE VOLUNTEERS",
   "public": "Public",
   "private": "Private",
   "from": "from",
@@ -832,6 +832,10 @@
         "tools": "MastersPages’ tools:",
         "otherTools": "and other tools..."
       }
+    },
+    "fourthSection": {
+      "discoverMore": "Discover more",
+      "sampleProfiles": "Sample master profiles"
     },
     "categories": {
       "tutors": "Tutors",

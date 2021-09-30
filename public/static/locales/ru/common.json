@@ -837,6 +837,10 @@
         "otherTools": "and other tools..."
       }
     },
+    "fourthSection": {
+      "discoverMore": "Discover more",
+      "sampleProfiles": "Sample master profiles"
+    },
     "categories": {
       "tutors": "Преподаватели",
       "repairman": "Специалисты по ремонту",
