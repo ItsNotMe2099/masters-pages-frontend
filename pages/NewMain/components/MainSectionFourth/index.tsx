@@ -20,16 +20,16 @@ const MainSectionFourth = (props) => {
   {url: 'https://www.youtube.com/watch?v=COHQ-10xnvc', title: 'Calendar'},
   {url: 'https://www.youtube.com/watch?v=COHQ-10xnvc', title: 'Calendar'}]
 
-  const samples = [{image: '/img/Main/sample1.png', category: 'Manicurist profiles', 
+  const samples = [{image: '/img/Main/sample1.png', imageLarge: '/img/Main/sample1L.png', category: 'Manicurist profiles', 
   subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
   {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]},
-  {image: '/img/Main/sample2.png', category: 'Manicurist profiles', 
+  {image: '/img/Main/sample2.png', imageLarge: '/img/Main/sample2L.png', category: 'Manicurist profiles', 
   subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
   {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]},
-  {image: '/img/Main/sample3.png', category: 'Manicurist profiles', 
+  {image: '/img/Main/sample3.png', imageLarge: '/img/Main/sample3L.png', category: 'Manicurist profiles', 
   subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
   {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]},
-  {image: '/img/Main/sample4.png', category: 'Manicurist profiles', 
+  {image: '/img/Main/sample4.png', imageLarge: '/img/Main/sample4L.png', category: 'Manicurist profiles', 
   subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
   {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]}]
 
@@ -49,16 +49,16 @@ const MainSectionFourth = (props) => {
       <div className={styles.profiles}>
         <div className={styles.title}>{t('mainPage.fourthSection.sampleProfiles')}</div>
         {samples.map(item => 
-          <SampleProfile image={item.image} category={item.category} subcategories={item.subcategories}/>
+          <SampleProfile image={item.image} category={item.category} subcategories={item.subcategories} imageLarge={item.imageLarge}/>
         )}
+        <div className={styles.btns}>
+          <div className={styles.firstBtn}>
+            <Button href='/SearchMasterPage' target='_self' outlineRed className={styles.findMaster}>{t('findMaster')}</Button>
+          </div>
+            <Button href='/SearchVolunteerPage' target='_self' outlineBlue className={styles.findMaster}>{t('findVolunteer')}</Button>
+        </div>
       </div>
       </div>
-      <div className={styles.btns}>
-      <div className={styles.firstBtn}>
-        <Button href='/SearchMasterPage' target='_self' outlineRed className={styles.findMaster}>{t('findMaster')}</Button>
-      </div>
-        <Button href='/SearchVolunteerPage' target='_self' outlineBlue className={styles.findMaster}>{t('findVolunteer')}</Button>
-    </div>
     </div>
   )
 }

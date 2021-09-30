@@ -11,6 +11,7 @@ import Button from "components/ui/Button";
 
 interface Props{
   image: string
+  imageLarge: string
   category: string
   subcategories: any[]
 }
@@ -24,7 +25,8 @@ const SampleProfile = (props: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img src={props.image} alt=''/>
+        <img className={styles.small} src={props.image} alt=''/>
+        <img className={styles.large} src={props.imageLarge} alt=''/>
       </div>
       <div className={styles.info}>
         <div className={styles.category}>
