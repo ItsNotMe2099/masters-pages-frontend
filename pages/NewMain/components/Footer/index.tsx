@@ -15,6 +15,7 @@ const MainSectionFooter = (props: Props) => {
           <img src={'/img/Main/logo_white.svg'}/>
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </div>
+        <div className={styles.right}>
         <div className={styles.copyright}>
           {t('footer.copyright')}
         </div>
@@ -22,6 +23,7 @@ const MainSectionFooter = (props: Props) => {
           <a className={styles.socialItem} href={'https://www.instagram.com/masterspages'}><img src={'/img/Main/icons/instagram.svg'}/></a>
           <a className={styles.socialItem} href={'https://www.facebook.com/masterspages'}><img src={'/img/Main/icons/facebook.svg'}/></a>
 
+        </div>
         </div>
       </div>
     </div>

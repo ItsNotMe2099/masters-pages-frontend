@@ -12,23 +12,62 @@
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
+  @media (max-width: 900px) {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
 }
 .leftSide{
   width: 60%;
-
-  @media (max-width: 1280px) {
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 1500px) {
     width: 75%;
   }
-  @media (max-width: 1150px) {
-
+  @media (max-width: 900px) {
+    padding: 60px 16px;
+    width: 100%;
   }
 
 }
+.free{
+  @media (max-width: 900px) {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.btn{
+  div{
+    @media (max-width: 900px) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+}
 .rightSide{
   padding-left: 5%;
-  @media (max-width: 1280px) {
+  @media (max-width: 1500px) {
     width: 25%;
     padding-left: 2%;
+  }
+  @media (max-width: 1200px) {
+    padding-left: 10%;
+  }
+  @media (max-width: 900px) {
+    padding-left: 0;
+    width: 100%;
+    background: #f4fbf7;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .label{
+      margin-left: 40% !important;
+      @media (max-width: 400px) {
+        margin-left: 39px !important;
+      }
+    }
   }
 
 }
@@ -36,6 +75,15 @@
   font-size: 41px;
   font-weight: bold;
   color: #373948;
+  margin-top: 29px;
+  @media (max-width: 900px) {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 110%;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #373948;
+  }
 }
 
 .label{
@@ -69,15 +117,27 @@
   color: #373948;
 }
 .labelSeparator{
-  height: 85px
+  height: 85px;
+  @media (max-width: 900px) {
+    height: 40px;
+  }
 }
 .categories{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0 5px;
   margin-top: 30px;
   margin-bottom: 40px;
   padding-left: 12px;
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media (max-width: 900px) {
+    padding: 0;
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .categoriesColumn{
   display: flex;
@@ -95,6 +155,8 @@
     margin-top: 15px;
   font-weight: 500;
   color: #373948;
+  display: flex;
+  align-items: center;
   img{
     margin-right: 6px;
   }
@@ -111,6 +173,9 @@
 
   @media (max-width: 1280px) {
     width: 45%;
+  }
+  @media (max-width: 900px) {
+    display: none;
   }
 }
 

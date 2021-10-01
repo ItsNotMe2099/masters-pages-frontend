@@ -16,7 +16,7 @@ const Label = ({label, index}: {label: string, index: number}) => {
 }
 const Category = ({label}: {label: string}) => {
   return (<div className={styles.category}>
-    <img src={'/img/Main/icons/mark.svg'}/> {label}
+    <div><img src={'/img/Main/icons/mark.svg'}/></div> {label}
   </div>)
 }
 const MainSectionSecond = (props) => {
@@ -27,36 +27,26 @@ const MainSectionSecond = (props) => {
     <div className={styles.root}>
       <div className={styles.container}>
         <div className={styles.leftSide}>
+        <div className={styles.free}><img src='/img/Main/icons/free.svg' alt=''/></div>
         <div className={styles.title}>{t('mainPage.modernBusiness')}</div>
           <div className={styles.categories}>
-            <div className={styles.categoriesColumn}>
               <Category label={t('mainPage.categories.tutors')}/>
               <Category label={t('mainPage.categories.repairman')}/>
               <Category label={t('mainPage.categories.beautyMaster')}/>
-            </div>
-            <div className={styles.categoriesColumn}>
               <Category label={t('mainPage.categories.freelancers')}/>
               <Category label={t('mainPage.categories.accountants')}/>
               <Category label={t('mainPage.categories.lawyers')}/>
-
-            </div>
-            <div className={styles.categoriesColumn}>
               <Category label={t('mainPage.categories.atleticCoaches')}/>
               <Category label={t('mainPage.categories.artists')}/>
               <Category label={t('mainPage.categories.homeStaff')}/>
-            </div>
-            <div className={styles.categoriesColumn}>
               <Category label={t('mainPage.categories.veterinarians')}/>
               <Category label={t('mainPage.categories.drivingInstructors')}/>
               <Category label={t('mainPage.categories.doctors')}/>
-            </div>
-            <div className={styles.categoriesColumn}>
               <Category label={t('mainPage.categories.various')}/>
-
             </div>
-
-            </div>
+        <div className={styles.btn}>
         <MainSectionButton onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+        </div>
         </div>
         <div className={styles.rightSide}>
           <Label label={t('mainPage.labels.advertise')} index={0}/>
