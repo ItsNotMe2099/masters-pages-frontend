@@ -32,6 +32,7 @@ interface Props {
   onClick?: (e: React.MouseEvent) => void
   outlineRed?: boolean
   outlineBlue?: boolean
+  outlineBlack?: boolean
 }
 
 export default function Button(props: Props) {
@@ -59,7 +60,8 @@ export default function Button(props: Props) {
       [styles.mediumFont]: props.mediumFont,
       [styles.largeFont]: props.largeFont,
       [styles.outlineRed]: props.outlineRed,
-      [styles.outlineBlue]: props.outlineBlue
+      [styles.outlineBlue]: props.outlineBlue,
+      [styles.outlineBlack]: props.outlineBlack
 
     }, props.className);
   }

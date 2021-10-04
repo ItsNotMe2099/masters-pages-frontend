@@ -44,6 +44,7 @@
     "rangeError": "Invalid Range"
   },
   "master": "Master",
+  "aboutSite": "ABOUT MASTERS PAGES",
   "findMaster": "VIEW MORE MASTERS",
   "findVolunteer": "VIEW MORE VOLUNTEERS",
   "public": "Public",
@@ -197,6 +198,7 @@
   "daysSuffix": "d",
   "auth": {
     "titleQuick": "Quick Sign in",
+    "titleQuickUp": "Quick Sign up",
     "signIn": {
       "title": "Sign in",
       "fieldLogin": "Phone number",
@@ -211,7 +213,7 @@
       "title": "Sign up",
       "fieldPhone": "Phone",
       "buttonRegistration": "REGISTRATION",
-      "alreadyHaveAccount": "Don’t have an account yet?"
+      "alreadyHaveAccount": "Already have an account?"
     },
     "phoneConfirm": {
       "title": "Phone number confirmation:",

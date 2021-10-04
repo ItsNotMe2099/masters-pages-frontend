@@ -9,6 +9,7 @@ import {required, phone} from 'utils/validations'
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation, withTranslation} from "i18n";
 import InputPhone from "../../../ui/Inputs/InputPhone";
+import MainSectionButton from 'pages/NewMain/components/Button';
 
 let SignIn = props => {
   const { t } = useTranslation('common');
@@ -33,7 +34,7 @@ let SignIn = props => {
       />
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green largeFont size="16px 0">{t('auth.signIn.buttonLogin')}</Button>
+      <MainSectionButton onClick={handleSubmit} size={'small'}>{t('auth.signIn.title')}</MainSectionButton>
       </div>
     </form>
   )

@@ -49,6 +49,7 @@
   },
 
   "master": "Мастер",
+  "aboutSite": "О MASTERS PAGES",
   "findMaster": "Найдите Мастера",
   "findVolunteer": "Найдите волонтера",
   "public": "Публичный",
@@ -202,6 +203,7 @@
   "daysSuffix": "д",
   "auth": {
     "titleQuick": "Быстрый вход",
+    "titleQuickUp": "Быстрая регистрация",
     "signIn": {
       "title": "Вход",
       "fieldLogin": "Номер телефона",

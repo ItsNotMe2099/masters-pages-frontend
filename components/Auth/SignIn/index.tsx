@@ -27,6 +27,13 @@ const SignInComponent = (props: Props) => {
   }
   return (
     <Modal{...props} loading={isLoading}>
+    
+        <div className={styles.logo}>
+          <img src='/img/icons/logo.svg' alt=''/>
+        </div>
+        <div className={styles.label}>
+          Masters <span>Pages</span>
+        </div>
 
         <div className={styles.headText}>
           {t('auth.titleQuick')}
@@ -36,9 +43,10 @@ const SignInComponent = (props: Props) => {
           <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/auth/facebook/login`}><img src="/img/icons/facebook.svg" alt=''/></a>
 
         </div>
-        <div className={styles.headText}>
-          {t('auth.signIn.title')}
-        </div>
+          <div className={styles.or}>
+            <span>{t('createTask.priceSelect.or')}</span>
+            <div className={styles.separator}></div>
+          </div>
          <SignIn onSubmit={handleSubmit}/>
         <div className={styles.forgot}>
           <div><a onClick={() => dispatch(PWRecoveryOpen())}> {t('auth.signIn.forgotPassword')}</a></div>
@@ -47,6 +55,7 @@ const SignInComponent = (props: Props) => {
           <div>{t('auth.signIn.dontHaveAccount')}</div>
           <div><a onClick={() => dispatch(signUpOpen())}>{t('auth.signUpLink')}</a></div>
         </div>
+        <Button href='#' target='_self' outlineBlack className={styles.findMaster}>{t('aboutSite')}</Button>
 
     </Modal>
   )

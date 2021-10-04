@@ -23,6 +23,7 @@
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
+  padding: 10px 0;
   @media (max-width: 670px) {
     justify-content: space-between;
     svg{

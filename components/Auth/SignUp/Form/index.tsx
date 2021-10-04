@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as React from "react";
 import {useTranslation, withTranslation} from "i18n";
 import SignIn from "../../SignIn/Form";
+import MainSectionButton from 'pages/NewMain/components/Button';
 
 let SignUp = props => {
   const { t } = useTranslation('common');
@@ -26,7 +27,7 @@ let SignUp = props => {
       />
       <FormError error={error}/>
       <div className={styles.btnContainer}>
-        <Button green largeFont size="16px 0">{t('auth.signUp.buttonRegistration')}</Button>
+        <MainSectionButton onClick={handleSubmit} size={'small'}>{t('auth.signUp.title')}</MainSectionButton>
       </div>
       <div className={styles.terms}>
           <Field
