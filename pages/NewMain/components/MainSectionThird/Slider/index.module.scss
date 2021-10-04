@@ -88,15 +88,16 @@
 
 .slide{
   padding: 0 75px;
+  display: flex !important;
+  flex-direction: column;
+  .mainImg{
+    border: 20px solid #F4F4F4;
+    border-bottom: 0;
+  }
   @media (max-width: 1899px) {
     display: flex !important;
     justify-content: center;
     padding: 0;
-  }
-  @media (max-width: 1400px) {
-    img{
-      width: 70%;
-    }
   }
 }
 
@@ -149,6 +150,14 @@
   img{
     margin-right: 13px;
   }
+  &__2{
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+    img{
+      margin-right: 13px;
+    }
+  }
 }
 
 .listLabel{
@@ -157,4 +166,12 @@
   line-height: 110%;
   letter-spacing: 0.03em;
   color: #373948;
+}
+
+.listItem{
+  display: flex;
+  padding: 0 50px 35px 50px;
+  background-color: #f4f4f4;
+  margin-top: -5%;
+  border-top: 35px solid #f4f4f4;
 }

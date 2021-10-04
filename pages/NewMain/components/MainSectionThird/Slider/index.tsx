@@ -26,16 +26,21 @@ const MainSlider = (props: Props) => {
   const [active, setIsActive] = useState('profile')
 
   const features = [
-    {label: t('mainPage.thirdSection.features.profile'), svg: <Profile/>, name: 'profile', image: '/img/Main/Slider/profileM.png'},
-    {label: t('mainPage.thirdSection.features.orders'), svg: <Orders/>, name: 'orders',  image: '/img/Main/Slider/profileM.png'},
-    {label: t('mainPage.thirdSection.features.calendar'), svg: <Calendar/>, name: 'calendar',  image: '/img/Main/Slider/profileM.png'},
-    {label: t('mainPage.thirdSection.features.news'), svg: <News/>, name: 'news',  image: '/img/Main/Slider/profileM.png'},
-    {label: t('mainPage.thirdSection.features.messages'), svg: <Messages/>, name: 'messages',  image: '/img/Main/Slider/profileM.png'},
-    {label: t('mainPage.thirdSection.features.reports'), svg: <Reports/>, name: 'reports',  image: '/img/Main/Slider/profileM.png'}
+    {label: t('mainPage.thirdSection.features.profile'), svg: <Profile/>, name: 'profile', image: '/img/Main/Slider/profile.png',
+    list: [{label: 'BIO'}, {label: 'Pitch'}, {label: 'Languages'}, {label: 'Education'}, {label: 'Locations'},
+    {label: 'Experience'}, {label: 'Reviews'}, {label: 'Portfolio'}]},
+    {label: t('mainPage.thirdSection.features.orders'), svg: <Orders/>, name: 'orders',  image: '/img/Main/Slider/orders.png',
+    list: [{label: 'Find'}, {label: 'Negotiation'}, {label: 'Document'}]},
+    {label: t('mainPage.thirdSection.features.calendar'), svg: <Calendar/>, name: 'calendar',  image: '/img/Main/Slider/calendar.png',
+    list: [{label: 'Schedule'}, {label: 'Confirm'}, {label: 'Attach files'}, {label: 'Get reminders'}]},
+    {label: t('mainPage.thirdSection.features.news'), svg: <News/>, name: 'news',  image: '/img/Main/Slider/news.png',
+    list: [{label: 'Post photos'}, {label: 'Post videos'}, {label: 'Follow clients'}, {label: 'Collect comments and likes'}]},
+    {label: t('mainPage.thirdSection.features.messages'), svg: <Messages/>, name: 'messages',  image: '/img/Main/Slider/messages.png',
+    list: [{label: 'By Clients'}, {label: 'by Orders'}, {label: 'Send text and files'}]},
+    {label: t('mainPage.thirdSection.features.reports'), svg: <Reports/>, name: 'reports',  image: '/img/Main/Slider/reports.png',
+    list: [{label: 'by Orders'}, {label: 'by Clients'}, {label: 'by Profiles'}]},
   ]
 
-  const list = [{label: 'BIO'}, {label: 'Pitch'}, {label: 'Languages'}, {label: 'Education'}, {label: 'Locations'},
-  {label: 'Experience'}, {label: 'Reviews'}, {label: 'Portfolio'}]
 
   const settings = {
     infinite: true,
@@ -48,22 +53,29 @@ const MainSlider = (props: Props) => {
   };
   const slides = [
     {
-      image: '/img/Main/Slider/profile.png'
+      image: '/img/Main/Slider/profile.png',
+      list: [{label: 'BIO'}, {label: 'Pitch'}, {label: 'Languages'}, {label: 'Education'}, {label: 'Locations'},
+    {label: 'Experience'}, {label: 'Reviews'}, {label: 'Portfolio'}]
     },
     {
-      image: '/img/Main/Slider/profile.png'
+      image: '/img/Main/Slider/orders.png',
+      list: [{label: 'Find'}, {label: 'Negotiation'}, {label: 'Document'}]
     },
     {
-      image: '/img/Main/Slider/profile.png'
+      image: '/img/Main/Slider/calendar.png',
+      list: [{label: 'Schedule'}, {label: 'Confirm'}, {label: 'Attach files'}, {label: 'Get reminders'}]
     },
     {
-      image: '/img/Main/Slider/profile.png'
+      image: '/img/Main/Slider/news.png',
+      list: [{label: 'Post photos'}, {label: 'Post videos'}, {label: 'Follow clients'}, {label: 'Collect comments and likes'}]
     },
     {
-      image: '/img/Main/Slider/profile.png'
+      image: '/img/Main/Slider/messages.png',
+      list: [{label: 'By Clients'}, {label: 'by Orders'}, {label: 'Send text and files'}]
     },
     {
-      image: '/img/Main/Slider/profile.png'
+      image: '/img/Main/Slider/reports.png',
+      list: [{label: 'by Orders'}, {label: 'by Clients'}, {label: 'by Profiles'}]
     }
   ]
 
@@ -87,7 +99,7 @@ const MainSlider = (props: Props) => {
           <div className={feature.name === active ? styles.bottom : styles.none} style={{backgroundImage: `url(${feature.image})`}}>    
           </div>
           <div className={feature.name === active ? styles.list2 : styles.none}>
-            {list.map(item => 
+            {feature.list.map(item => 
               <div className={styles.itemList}>
                 <div>
                   <img src='/img/Main/icons/mark.svg' alt=''/>
@@ -103,7 +115,16 @@ const MainSlider = (props: Props) => {
       </div>
       <div className={styles.slider}>
       <Slider {...settings}>
-        {slides.map((slide, index) => <div className={styles.slide}><img src={slide.image} alt=''/></div>)}
+        {slides.map((slide, index) => <div className={styles.slide}><img className={styles.mainImg} src={slide.image} alt=''/>
+        <div className={styles.listItem}>{slide.list.map(item => 
+        <div className={styles.itemList__2}>
+        <div>
+          <img src='/img/Main/icons/mark.svg' alt=''/>
+        </div>
+        <div className={styles.listLabel}>{item.label}</div>
+      </div>)}
+        </div>
+        </div>)}
       </Slider>
       </div>
     </div>
