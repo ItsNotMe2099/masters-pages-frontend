@@ -9,18 +9,17 @@ import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInOpen} from 'components/Modal/actions'
 import {useTranslation, withTranslation} from "i18n";
-import { useRouter } from "next/router";
 
 interface Props {
   isOpen?: boolean
   onRequestClose?: () => void,
+  showAbout?: boolean
 }
 
 const SignUpComponent = (props: Props) =>  {
   const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.authSignUp.loading)
-  const router = useRouter()
   const handleSubmit = (data) => {
     dispatch(signUpSubmit(data));
   }
@@ -53,7 +52,7 @@ const SignUpComponent = (props: Props) =>  {
           <div>{t('auth.signUp.alreadyHaveAccount')}</div>
           <div><a onClick={() => dispatch(signInOpen())}>{t('auth.signInLink')}</a></div>
         </div>
-        {router.pathname !== '/' && <Button href='/' target='_self' outlineBlack className={styles.findMaster}>{t('aboutSite')}</Button>}
+        {props.showAbout && <Button href='/' target='_self' outlineBlack className={styles.findMaster}>{t('aboutSite')}</Button>}
     </Modal>
   )
 }
