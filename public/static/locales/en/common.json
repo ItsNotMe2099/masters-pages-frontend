@@ -196,9 +196,6 @@
   "photos": "Photos",
   "priceRateSuffix": "h",
   "daysSuffix": "d",
-  "newMainPage": {
-    "personalPortal": "Your personal business portal"
-  },
   "auth": {
     "titleQuick": "Quick Sign in",
     "titleQuickUp": "Quick Sign up",
