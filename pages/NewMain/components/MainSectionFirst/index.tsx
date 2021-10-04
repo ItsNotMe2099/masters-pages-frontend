@@ -21,7 +21,7 @@ const MainSectionFirst = (props: Props) => {
       <div className={styles.container}>
         <div className={styles.portal}>
           <div className={styles.text}>
-            Your personal business portal
+            {t('mainPage.personalPortal')}
           </div>
           <MainSectionButton onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
         </div>

@@ -749,6 +749,7 @@
   },
   "mainPage": {
     "tasksDone": "+ Заказ выполнен",
+    "personalPortal": "Ваш личный бизнес портал",
     "tasksRequested": "+ Заказ запрошен",
     "mastersOnWebsite": "+ Мастера на вебсайте",
     "tasksPerMonth": "+ заказы выполненные помесячно",
@@ -835,13 +836,13 @@
         "reports": "Отчеты"
       },
       "slider": {
-        "tools": "MastersPages’ tools:",
-        "otherTools": "and other tools..."
+        "tools": "Инструменты:",
+        "otherTools": "и другое..."
       }
     },
     "fourthSection": {
-      "discoverMore": "Discover more",
-      "sampleProfiles": "Sample master profiles"
+      "discoverMore": "Узнайте больше",
+      "sampleProfiles": "Примеры профилей мастеров"
     },
     "categories": {
       "tutors": "Преподаватели",

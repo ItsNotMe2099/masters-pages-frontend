@@ -196,6 +196,9 @@
   "photos": "Photos",
   "priceRateSuffix": "h",
   "daysSuffix": "d",
+  "newMainPage": {
+    "personalPortal": "Your personal business portal"
+  },
   "auth": {
     "titleQuick": "Quick Sign in",
     "titleQuickUp": "Quick Sign up",
@@ -745,6 +748,7 @@
   },
   "mainPage": {
     "tasksDone": "+ tasks done",
+    "personalPortal": "Your personal business portal",
     "tasksRequested": "+ tasks requested",
     "mastersOnWebsite": "+ masters on website",
     "tasksPerMonth": "+ task done per month",
