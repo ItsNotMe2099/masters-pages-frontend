@@ -49,7 +49,9 @@ const MainSectionHeader = (props: Props) => {
           <img src={'/img/Main/logo_red.svg'}/>
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </div>
-        {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
+        <div className={styles.menuMobile}>
+          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
+        </div>
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
           <div className={styles.actionsButtons}>
