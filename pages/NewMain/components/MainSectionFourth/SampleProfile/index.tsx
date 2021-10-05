@@ -48,7 +48,7 @@ const SampleProfile = ({item}: Props) => {
         </div>
       </div>
       <div className={styles.view}>
-        <Link href={`/sk${item.id}`}>
+        <Link href={`/id${item.id}`}>
         <a className={styles.viewProfile}>
           <img src='/img/icons/viewProfile.svg' alt=''/>
           <div>{t('profileComponent.viewProfile')}</div>
