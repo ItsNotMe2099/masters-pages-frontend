@@ -9,7 +9,7 @@
   @media screen and (max-width: $sm-max){
     width: 100% !important;
   }
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: 600px){
     border-radius: 0;
   }
 }
@@ -78,7 +78,7 @@
   padding-top: 50px;
   padding-bottom: 50px;
   z-index: 3;
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: 600px){
     padding: 0;
   }
 }
