@@ -23,28 +23,18 @@
 }
 
 .small{
-  position: absolute;
-    top: -7px;
-    @media (max-width: 1760px) {
-      position: static;
-      object-fit: none;
+  width: 130px;
+  height: 160px;
+    @media (max-width: 660px) {
+      width: 230px;
+      height: 300px;
     }
-  @media (max-width: 660px) {
-    display: none;
-  }
-}
-
-.large{
-  position: absolute;
-    top: -40px;
-  @media (min-width: 661px) {
-    display: none;
-  }
 }
 
 .info{
   padding: 16px 0 13px 16px;
   border-right: 1px solid #D1D1D1;
+  flex: 1;
   @media (max-width: 660px) {
     border-right: 0;
     border-bottom: 1px solid #D1D1D1;

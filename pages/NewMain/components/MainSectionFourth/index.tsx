@@ -1,15 +1,11 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
 import {useTranslation} from "i18n";
-import { useState } from "react";
-import cx from 'classnames'
 import React from 'react'
-import ReactPlayer from 'react-player'
-import PlayIcon from "components/svg/PlayIcon";
 import Video from "./Video";
 import SampleProfile from "./SampleProfile";
 import Button from "components/ui/Button";
+import useSWR from "swr";
 
 
 const MainSectionFourth = (props) => {
@@ -20,19 +16,8 @@ const MainSectionFourth = (props) => {
   {url: 'https://www.youtube.com/watch?v=COHQ-10xnvc', title: 'Calendar'},
   {url: 'https://www.youtube.com/watch?v=COHQ-10xnvc', title: 'Calendar'}]
 
-  const samples = [{image: '/img/Main/sample1.png', imageLarge: '/img/Main/sample1L.png', category: 'Manicurist profiles', 
-  subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
-  {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]},
-  {image: '/img/Main/sample2.png', imageLarge: '/img/Main/sample2L.png', category: 'Manicurist profiles', 
-  subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
-  {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]},
-  {image: '/img/Main/sample3.png', imageLarge: '/img/Main/sample3L.png', category: 'Manicurist profiles', 
-  subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
-  {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]},
-  {image: '/img/Main/sample4.png', imageLarge: '/img/Main/sample4L.png', category: 'Manicurist profiles', 
-  subcategories: [{name: 'Airbrush on nails'}, {name: 'Children’s manicure'}, {name: 'Classic manicure'}, {name: 'European manicure'},
-  {name: 'Combo manicure'}, {name: 'Correction on gel Polish'}, {name: 'French manicure'}]}]
-
+  const url = '/api/profile/for-main-page'
+  const { data: data } = useSWR(url)
 
   return (
     <div className={styles.root}>
@@ -48,8 +33,8 @@ const MainSectionFourth = (props) => {
       <div className={styles.separator}></div>
       <div className={styles.profiles}>
         <div className={styles.title}>{t('mainPage.fourthSection.sampleProfiles')}</div>
-        {samples.map(item => 
-          <SampleProfile image={item.image} category={item.category} subcategories={item.subcategories} imageLarge={item.imageLarge}/>
+        {data && data.map(item => 
+          <SampleProfile item={item}/>
         )}
         <div className={styles.btns}>
           <div className={styles.firstBtn}>
