@@ -30,14 +30,12 @@ const NewMain = (props) => {
   return (
     <>
     <div className={styles.root}>
-    <div className={styles.mobile}>
       <SignUpComponent
         isOpen={isOpen}
         showAbout
         onClick={handleAbout}
         aboutNotALink
       />
-    </div>
       <MainSectionHeader/>
       <MainSectionFirst/>
       <MainSectionSecond/>
