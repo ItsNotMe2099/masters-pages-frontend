@@ -14,6 +14,8 @@ interface Props {
   isOpen?: boolean
   onRequestClose?: () => void,
   showAbout?: boolean
+  onClick?: () => void
+  aboutNotALink?: boolean
 }
 
 const SignUpComponent = (props: Props) =>  {
@@ -52,7 +54,7 @@ const SignUpComponent = (props: Props) =>  {
           <div>{t('auth.signUp.alreadyHaveAccount')}</div>
           <div><a onClick={() => dispatch(signInOpen())}>{t('auth.signInLink')}</a></div>
         </div>
-        {props.showAbout && <Button href='/' target='_self' outlineBlack className={styles.findMaster}>{t('aboutSite')}</Button>}
+        {props.showAbout && <Button transparent onClick={props.onClick} href={props.aboutNotALink ? null : '/'} outlineBlack className={styles.findMaster}>{t('aboutSite')}</Button>}
     </Modal>
   )
 }

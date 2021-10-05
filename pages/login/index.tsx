@@ -1,4 +1,4 @@
-import { modalClose, signInOpen } from "components/Modal/actions";
+import { modalClose, signUpOpen } from "components/Modal/actions";
 import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
 import PWRecoveryComponent from "components/Auth/PWRecovery";
 import PWRecoverySucces from "components/Auth/PWRecovery/Success";
@@ -21,7 +21,7 @@ const RegistrationPage = (props: Props) => {
   const dispatch = useDispatch();
   const key = useSelector((state: IRootState) => state.modal.modalKey)
   useEffect(() => {
-    dispatch(signInOpen());
+    dispatch(signUpOpen());
   }, [])
   return (
     <div className={styles.root}>

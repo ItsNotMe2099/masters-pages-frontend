@@ -9,6 +9,9 @@
   @media screen and (max-width: $sm-max){
     width: 100% !important;
   }
+  @media screen and (max-width: 375px){
+    border-radius: 0;
+  }
 }
 .rootNormal{
   width: 441px;
@@ -75,6 +78,9 @@
   padding-top: 50px;
   padding-bottom: 50px;
   z-index: 3;
+  @media screen and (max-width: 375px){
+    padding: 0;
+  }
 }
 .overlay{
   position: absolute;

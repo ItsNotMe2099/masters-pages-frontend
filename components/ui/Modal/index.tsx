@@ -20,6 +20,7 @@ interface Props {
   className?: string,
   closeClassName?: string,
   header?: ReactElement
+  noRadius?: boolean
 }
 
 export default function Modal(props: Props) {
