@@ -19,7 +19,7 @@ const NewMain = (props) => {
   const [isOpen, setIsOpen] = useState(true)
   const signUpCookie = cookie.get('signUpMobile')
   useEffect(() => {
-    setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 375) ? false : true)
+    setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 600) ? false : true)
   }, [])
 
   const handleAbout = () => {
