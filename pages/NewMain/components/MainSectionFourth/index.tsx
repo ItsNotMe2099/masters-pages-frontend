@@ -12,9 +12,8 @@ const MainSectionFourth = (props) => {
   
   const { t } = useTranslation('common')
 
-  const videos = [{url: 'https://www.youtube.com/watch?v=ysz5S6PUM-U', title: 'What is master profile'},
-  {url: 'https://www.youtube.com/watch?v=COHQ-10xnvc', title: 'Calendar'},
-  {url: 'https://www.youtube.com/watch?v=COHQ-10xnvc', title: 'Calendar'}]
+  const videos = [{url: 'https://youtu.be/bFahL1qBliU', title: 'What is master profile'},
+  {url: 'https://youtu.be/6uzJXmxIJ8U', title: 'Calendar'},]
 
   const url = '/api/profile/for-main-page'
   const { data: data } = useSWR(url)
