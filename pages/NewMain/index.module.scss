@@ -3,3 +3,12 @@
   background: black;
   color: white;
 }
+
+.mobile{
+  @media (min-width: 376px) {
+    display: none;
+ }
+ @media (min-width: 375px) {
+  display: block;
+}
+}
