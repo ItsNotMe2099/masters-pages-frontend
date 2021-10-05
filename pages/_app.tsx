@@ -15,6 +15,8 @@ import {setPushToken} from "../components/Push/actions";
 import {appWithTranslation} from 'i18n'
 import 'react-date-picker/dist/DatePicker.css'
 import {changeRoleNative, fetchProfileSuccess} from 'components/Profile/actions'
+import { SWRConfig } from 'swr';
+import swrRequest from 'utils/swrRequest';
 
 interface IPageProps {
   namespacesRequired: string[]
@@ -67,11 +69,15 @@ function MyApp({Component, pageProps}) {
   })
   console.log("SetStore", pageProps.mode);
   return (
-    <>
+    <SWRConfig
+      value={{
+        fetcher: (url) => swrRequest({ url }),
+      }}
+    >
       <Head>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
         <meta name="yandex-verification" content="54be86d1320b5a82" />
-        <meta name="viewport" content="width=1020, user-scalable=yes"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
@@ -107,7 +113,7 @@ function MyApp({Component, pageProps}) {
       <Provider store={store}>
      <Wrapper Component={Component} {...pageProps}/>
       </Provider>
-    </>
+    </SWRConfig>
   )
 }
 

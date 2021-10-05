@@ -34,7 +34,13 @@ export default function SimpleSlider(){
           breakpoint: 667,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            arrows: true,
+            variableWidth: false,
+            nextArrow: <SliderControl taskPage direction='next'/>,
+            prevArrow: <SliderControl taskPage direction='prev' />,
+            dots: true,
+            dotsClass: `${styles.dots}`
           }
         }
       ]

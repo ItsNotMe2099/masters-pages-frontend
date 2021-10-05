@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'
 import {useTranslation} from "i18n";
-import Header from "../../../layout/Header";
+import Header from "../../../layout/Layout/LayoutAuthorized/mobile/Header";
 interface Props {
   searchRole?: 'master' | 'volunteer'
 }
@@ -54,7 +54,7 @@ const MapHeader = (props: Props) => {
   return (
     <>
       <div className={styles.headerMobile}>
-        <Header {...props}/>
+        <Header/>
       </div>
       <div  className={`${styles.root} ${expanded && styles.opened}`}>
         <div className={`${styles.container}`}>

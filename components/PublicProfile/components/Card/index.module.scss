@@ -8,16 +8,15 @@
   margin-top: 16px;
   font-size: 14px;
   font-weight: 500;
-
+  @media screen and (max-width: 375px){
+    padding: 29px 17px;
+  }
 }
 .hidden{
   display: none;
 }
 .toolbar{
-  position: absolute;
   cursor: pointer;
-  right: 34px;
-  top: 28px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,4 +33,11 @@
   > div{
     justify-content: center;
   }
+}
+
+.title{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }

@@ -5,7 +5,6 @@ import {useTranslation} from 'i18n'
 import {default as React, ReactElement} from 'react'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'
-import {LangSelect} from 'components/layout/Header/components/LangSelect'
 
 import {useRouter} from 'next/router'
 import {logout} from 'components/Auth/actions'

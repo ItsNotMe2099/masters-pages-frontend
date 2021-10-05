@@ -14,6 +14,9 @@
     padding-right: 12px;
 
   }
+  @media screen and (max-width: 400px){
+    flex-direction: column;
+  }
 }
 .separator{
   width: 100%;

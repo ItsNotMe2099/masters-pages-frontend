@@ -1,0 +1,144 @@
+@import "scss/index";
+.root{
+  position: relative;
+  background-position: center;
+  overflow: hidden;
+}
+.container{
+  padding: 56px 0px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  @include lg{
+    width: $container-lg;
+    margin: auto;
+  }
+
+  @media (max-width: 1400px) {
+    width: 1200px;
+  }
+  @media (max-width: 1280px) {
+    width: 1100px;
+  }
+  @media (max-width: 1150px) {
+    width: 1000px;
+  }
+
+  @include xll {
+    width: $container-xll
+  }
+}
+.leftSide{
+  width: 60%;
+
+  @media (max-width: 1280px) {
+    width: 75%;
+  }
+  @media (max-width: 1150px) {
+
+  }
+
+}
+.rightSide{
+  padding-left: 5%;
+  @media (max-width: 1280px) {
+    width: 25%;
+    padding-left: 2%;
+  }
+
+}
+.title{
+  font-size: 41px;
+  font-weight: 700;
+}
+.description{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  line-height: 26px;
+}
+.label{
+  &:first-of-type{
+    margin-top: 0;
+  }
+  margin-top: 10px;
+  font-size: 38px;
+  font-weight: 700;
+  @media (max-width: 1280px) {
+    font-size: 28px;
+  }
+  @media (max-width: 1150px) {
+    font-size: 24px;
+  }
+}
+.labelFirst{
+  font-size: 68px;
+  color: #FD5742;
+  font-weight: 700;
+  margin-right: 5px;
+  text-transform: uppercase;
+  @media (max-width: 1280px) {
+    font-size: 60px;
+  }
+  @media (max-width: 1150px) {
+    font-size: 50px;
+  }
+}
+.labelSeparator{
+  height: 85px
+}
+.categories{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  padding-left: 12px;
+}
+.categoriesColumn{
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+    .category{
+      &:first-child{
+        margin-top: 0px;
+      }
+
+  }
+}
+.category{
+  font-size: 14px;
+    margin-top: 15px;
+  font-weight: 500;
+  img{
+    margin-right: 6px;
+  }
+}
+.bgRect{
+  position: absolute;
+  background: rgba(255,255,255, 0.1);
+  top: 0px;
+  bottom: 0px;
+  right: -200px;
+  width: 50%;
+  transform: skewX(15deg);
+
+  @media (max-width: 1280px) {
+    width: 45%;
+  }
+}
+
+.findMaster{
+  padding: 0px 35px;
+  height: 47px;
+  line-height: 47px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btns{
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -8,6 +8,11 @@
   left: 0px;
   bottom: 0;
   background: #F3F3F3;
+  @media screen and (max-width: 1160px){
+    position: static;
+    align-self: center;
+  }
+
 }
 .toolbar{
   display: flex;

@@ -42,7 +42,7 @@ const PWRecoveryComponent = (props: Props) => {
         <div className={styles.text}>
           {t('auth.passwordRecovery.description')}
         </div>
-      {(firstStepIsComplete && code) && <div className={styles.code}>{t('phoneConfirm.code')} {code}</div>}
+      {(firstStepIsComplete && code) && <div className={styles.code}>{t('auth.phoneConfirm.code')} {code}</div>}
 
       <div className={styles.fakeMargin}></div>
           {firstStepIsComplete ?

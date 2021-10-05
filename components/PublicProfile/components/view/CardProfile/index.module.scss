@@ -117,6 +117,9 @@
   display: flex;
   margin-top: 20px;
   width: 100%;
+  @media (max-width: 420px){
+    flex-direction: column;
+  }
 }
 
 .left{

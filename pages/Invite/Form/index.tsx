@@ -37,6 +37,7 @@ let InviteForm = (props: Props) => {
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
       <div className={styles.background}><img src={'/img/icons/envelope.svg'}/></div>
+      <div className={styles.backgroundMobile}><img src={'/img/icons/envelopeMobile.svg'}/></div>
     <div className={styles.container}>
       {success && <div className={styles.success}>
         <div className={styles.successText}>{profile.role === 'client' ? t('shareByEmail.masterInvited') : t('shareByEmail.clientInvited') }</div>

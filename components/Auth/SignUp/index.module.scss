@@ -12,11 +12,48 @@
       }
 }
 
+.separator{
+    height: 1px;
+    background: #C4C4C4;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+}
+
+.or{
+    position: relative;
+    font-size: 21.14px;
+    line-height: 92.8%;
+    color: #7B7B7B;
+    margin-bottom: 40px;
+    span{
+        z-index: 1;
+        position: relative;
+        padding: 9px;
+        background-color: #fff;
+    }
+}
+
 .headText{
     text-align: center;
     font-weight: 600;
     font-size: 21px;
     line-height: 93%;
+    margin-bottom: 16px;
+    margin-top: 63px;
+    color: #000;
+}
+
+.label{
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 24px;
+    text-align: center;
+    color: #000000;
+    margin-top: 12px;
+    span{
+        color: #E4474E;
+    }
 }
 
 .signUpText{
@@ -28,8 +65,7 @@
 }
 
 .social{
-    margin-top: 27px;
-    margin-bottom: 76px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
     a{
@@ -41,20 +77,34 @@
 }
 
 .signUp{
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #6D718C;
     text-align: center;
+    margin-bottom: 54px;
     div{
         display: inline-block;
         padding-right: 11px;
-        text-decoration: underline;
         &:last-child{
             padding: 0;
         }
     }
     a{
-        color: #0091E6;
+        color: #393a42;
+        font-weight: bold;
+        font-size: 18px;
         text-decoration: underline;
         cursor: pointer;
+        text-transform: uppercase;
     }
 }
+
+.findMaster{
+    padding: 0px 35px;
+    height: 47px;
+    line-height: 47px;
+    font-size: 14px;
+    font-weight: 700;
+  }
 

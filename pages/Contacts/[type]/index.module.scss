@@ -11,3 +11,17 @@
   grid-template-rows: 1fr 1fr 1fr;
   gap: 1rem;
 }
+
+.desktop{
+  @media screen and (max-width: 1000px){
+    display: none;
+}
+}
+
+.mobile{
+  display: none;
+  @media screen and (max-width: 1000px){
+    display: block;
+    margin-bottom: 20px;
+}
+}

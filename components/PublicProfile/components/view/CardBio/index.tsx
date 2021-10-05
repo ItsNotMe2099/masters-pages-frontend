@@ -32,7 +32,7 @@ const CardBio = (props: Props) => {
 
   return (
     <Card isHidden={!isEdit && !profile.bio?.bio} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.bio')} toolbar={isEdit ? [<FormActionButton type={profile.bio?.bio ? 'edit' : 'create'} title={profile.bio?.bio ? t('edit') : t('add')} onClick={handleEditClick}/>] : []}>
-      {!showForm ? profile.bio?.bio : <CardBioForm onCancel={handleCancel} onSubmit={handleSubmit} initialValues={profile.bio || {}}/>}
+      {!showForm ? <div className={styles.bioText}>{profile.bio?.bio}</div> : <CardBioForm onCancel={handleCancel} onSubmit={handleSubmit} initialValues={profile.bio || {}}/>}
       {showForm && formLoading && <div className={styles.loader}><Loader/></div>}
     </Card>
   )

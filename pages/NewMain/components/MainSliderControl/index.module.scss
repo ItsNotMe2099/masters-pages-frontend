@@ -1,7 +1,7 @@
 .root{
   display: flex;
   border-radius: 100%;
-  background-color: rgba(255,255,255, 0.3);
+  background-color: #ededed;
   border: 1px solid rgba(255,255,255, 0.3);
   width: 64px;
   height: 64px;
@@ -11,8 +11,10 @@
   align-items: center;
   justify-content: center;
   svg{
-
+    path {
+      stroke: black;
     }
+  }
   &::before{
     display: none;
   }
@@ -37,13 +39,13 @@
 
 
 .next{
-  right: 4%;
+  right: 0;
 }
 .prev{
   svg{
     margin-left: -2px;
   }
-  left: 4%;
+  left: 0;
 }
 
 

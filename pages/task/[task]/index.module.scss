@@ -1,10 +1,20 @@
 @import "scss/index";
+
+.tableWrapper{
+  overflow: auto;
+}
 .columns{
   display: flex;
   flex-direction: row;
+  @media (max-width: 660px){
+    flex-direction: column-reverse;
+  }
   .leftSide{
     flex: 1;
     padding-right: 30px;
+    @media (max-width: 400px){
+      padding-right: 0;
+    }
 
     .header{
       padding-bottom: 12px;
@@ -12,8 +22,15 @@
       display: flex;
       align-items: center;
       flex-direction: row;
+      @media (max-width: 400px){
+        flex-direction: column;
+      }
       .title{
         flex: 1;
+        @media (max-width: 400px){
+          text-align: center;
+          margin-bottom: 10px;
+        }
         .value {
           font-size: 18px;
           color: #000000;
@@ -27,6 +44,9 @@
       }
 
       .separator{
+        @media (max-width: 400px){
+          display: none;
+        }
         width: 1px;
         height: 24px;
         background: #C4C4C4;
@@ -37,6 +57,9 @@
         color: #000000;
         font-weight: 700;
         text-align: center;
+        @media (max-width: 400px){
+          margin-bottom: 10px;
+        }
         .label{
           color: #858585;
           font-weight: 500;
@@ -57,6 +80,10 @@
     background: #FAFAFA;
     border: 1px solid #E0E0E0;
     border-radius: 4px;
+    @media (max-width: 660px){
+      width: 100%;
+      margin-bottom: 10px;
+    }
     .actions{
       width: 100%;
       display: flex;

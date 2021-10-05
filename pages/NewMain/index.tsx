@@ -7,6 +7,7 @@ import MainSectionHeader from 'pages/NewMain/components/Header'
 import MainSectionFooter from 'pages/NewMain/components/Footer'
 import Modals from 'components/layout/Modals'
 import Head from 'next/head'
+import MainSectionFourth from "./components/MainSectionFourth";
 const NewMain = (props) => {
   return (
     <>
@@ -15,6 +16,7 @@ const NewMain = (props) => {
       <MainSectionFirst/>
       <MainSectionSecond/>
       <MainSectionThird/>
+      <MainSectionFourth/>
       <MainSectionFooter/>
     </div>
       <Modals/>

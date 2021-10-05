@@ -5,7 +5,6 @@ import {useTranslation} from 'i18n'
 import {default as React, ReactElement, useEffect, useRef, useState} from 'react'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'
-import {LangSelect} from 'components/layout/Header/components/LangSelect'
 import cx from 'classnames';
 import {useRouter} from 'next/router'
 import {logout} from 'components/Auth/actions'
@@ -16,6 +15,8 @@ import LogoSvg from 'components/svg/Logo'
 import cookie from "js-cookie";
 import {getProfileRoleByRoute} from 'utils/profile'
 import {useInterval} from 'components/hooks/useInterval'
+import Header from '../LayoutAuthorized/mobile/Header'
+import { LangSelect } from './mobile/Header/components/LangSelect'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -39,7 +40,7 @@ export default function LayoutAuthorized(props: Props) {
     dispatch(fetchProfile(profile.role));
   }, 10000)*/
 
-  const {t} = useTranslation();
+  const {t} = useTranslation('common');
   const dispatch = useDispatch()
 
   const getModeClass = () => {
@@ -122,9 +123,10 @@ export default function LayoutAuthorized(props: Props) {
           </div>
           <ModeSelect/>
         </div>
-        <NotificationSelect/>
+        <NotificationSelect color='black'/>
         <LangSelect isAuth={false}/>
       </div>
+      <Header isCurrentProfileOpened={isCurrentProfileOpened}/>
       <div className={cx(styles.container)}>
         {children}
       </div>

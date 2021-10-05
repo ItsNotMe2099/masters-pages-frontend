@@ -223,14 +223,13 @@ let CreateTaskForm = props => {
             <Button red size="14px 65px">{t('createTask.buttonCreateTask')}</Button>
           </div>
         </div>
-      <div className={styles.right}>
+      {/*<div className={styles.right}>
       {(searchStatCount && !props.isMaster) && <div className={styles.stat}>
         <Link href={getSearchStatFilterLink()}>
           <a>{t('createTask.stat', {count: searchStatCount})}</a>
         </Link>
       </div>}
-
-      </div>
+                </div>*/}
       </form>
   )
 }

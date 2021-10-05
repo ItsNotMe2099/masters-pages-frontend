@@ -13,3 +13,10 @@
     justify-content: center;
   }
 }
+
+.bioText{
+  @media screen and (max-width: 420px){
+    max-width: 260px;
+    overflow-wrap: break-word;
+  }
+}

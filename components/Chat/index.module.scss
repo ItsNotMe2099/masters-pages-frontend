@@ -5,6 +5,9 @@
   flex-direction: row;
   width: 100%;
   align-items: stretch;
+  @media screen and (max-width: 1280px){
+    flex-direction: column;
+  }
 }
 .rootLoading{
   display: flex;
@@ -14,6 +17,9 @@
 .chatList{
   width: 427px;
   border-right: 1px solid #DDDDE5;
+  @media screen and (max-width: 1280px){
+    width: 100%;
+  }
 }
 .chatMessages{
   display: flex;
@@ -30,3 +36,4 @@
   border-bottom: none;
   background: #eeeef2;
 }
+

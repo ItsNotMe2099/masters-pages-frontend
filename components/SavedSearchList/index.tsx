@@ -81,7 +81,7 @@ export default function SavedSearchList(props: Props) {
 
   return (
     <div className={styles.root}>
-     <div className={styles.list} style={{display: list.length === 0 ? 'none' : 'flex'}}>
+     <div className={styles.list} style={{display: list.length === 0 ? 'none' : 'block'}}>
       {list.map(item => <SavedSearchListItem key={item.id} item={item}  onClick={handleClick} onDelete={handleDelete}/>)}
      </div>
       <div className={styles.saveSearchWrapper}>

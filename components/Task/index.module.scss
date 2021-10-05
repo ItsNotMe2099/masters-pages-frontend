@@ -22,7 +22,7 @@
    border: 1px solid #FD5742
 }
 .profile{
-  padding: 20px 0px 20px 20px;
+  padding: 20px;
   @media screen and (max-width: $sm-max){
     display: flex;
     border-bottom: 1px solid #cccccc;
@@ -336,6 +336,9 @@
         margin: 0;
       }
     }
+  }
+  @media screen and (max-width: 350px){
+    flex-direction: column;
   }
 }
 

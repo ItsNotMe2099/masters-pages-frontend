@@ -44,8 +44,9 @@
     "rangeError": "Invalid Range"
   },
   "master": "Master",
-  "findMaster": "Find your Master",
-  "findVolunteer": "Find your Volunteer",
+  "aboutSite": "ABOUT MASTERS PAGES",
+  "findMaster": "VIEW MORE MASTERS",
+  "findVolunteer": "VIEW MORE VOLUNTEERS",
   "public": "Public",
   "private": "Private",
   "from": "from",
@@ -197,6 +198,7 @@
   "daysSuffix": "d",
   "auth": {
     "titleQuick": "Quick Sign in",
+    "titleQuickUp": "Quick Sign up",
     "signIn": {
       "title": "Sign in",
       "fieldLogin": "Phone number",
@@ -211,7 +213,7 @@
       "title": "Sign up",
       "fieldPhone": "Phone",
       "buttonRegistration": "REGISTRATION",
-      "alreadyHaveAccount": "Don’t have an account yet?"
+      "alreadyHaveAccount": "Already have an account?"
     },
     "phoneConfirm": {
       "title": "Phone number confirmation:",
@@ -577,7 +579,7 @@
       "userType": "User type",
       "sortType": "Sort type",
       "all": "all",
-      "clent": "client",
+      "client": "client",
       "volunteer": "volunteer",
       "master": "master",
       "a-z": "a-z",
@@ -743,6 +745,7 @@
   },
   "mainPage": {
     "tasksDone": "+ tasks done",
+    "personalPortal": "Your personal business portal",
     "tasksRequested": "+ tasks requested",
     "mastersOnWebsite": "+ masters on website",
     "tasksPerMonth": "+ task done per month",
@@ -820,8 +823,22 @@
         "text5": "Update your profile and Publish your works regularly",
         "text6": "Collect reviews",
         "text7": "Get new orders from new customers",
-        "text8": "Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle"
+        "text8": "Enjoy the luxury of smooth, organized work flow and concentrate on your skills and creativity – MastersPages takes care of the hustle",
+        "profile": "Profile",
+        "orders": "Orders",
+        "calendar": "Calendar",
+        "news": "News",
+        "messages": "Messages",
+        "reports": "Reports"
+      },
+      "slider": {
+        "tools": "MastersPages’ tools:",
+        "otherTools": "and other tools..."
       }
+    },
+    "fourthSection": {
+      "discoverMore": "Discover more",
+      "sampleProfiles": "Sample master profiles"
     },
     "categories": {
       "tutors": "Tutors",

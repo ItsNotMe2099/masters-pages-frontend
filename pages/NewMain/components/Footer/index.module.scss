@@ -1,35 +1,32 @@
 @import "scss/index";
 .root{
   color: #F2F2F2;
-  background: #B3504B;
+  background: #EB5757;
   padding: 43px 0px;
+  @media (max-width: 680px) {
+    padding: 47px 0;
+  }
 }
 
-
+.right{
+  display: flex;
+  flex: 1;
+  @media (max-width: 680px) {
+    flex-direction: column-reverse;
+  }
+}
 
 .container{
   position: relative;
-  width: 100%;
+  width: 90%;
   height: 65px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  @include lg{
-    width: $container-lg;
-    margin: auto;
-  }
-
-  @media (max-width: 1400px) {
-    width: 1200px;
-  }
-  @media (max-width: 1280px) {
-    width: 1100px;
-  }
-  @media (max-width: 1150px) {
-    width: 1000px;
-  }
-  @include xll {
-    width: $container-xll
+  margin: 0 auto;
+  @media (max-width: 680px) {
+    flex-direction: column;
+    height: 100%;
   }
 }
 
@@ -38,6 +35,9 @@
   font-size: 18px;
   font-weight: 500;
   text-align: center;
+  @media (max-width: 680px) {
+    margin-top: 56px;
+  }
 }
 .logo{
   display: flex;
@@ -59,6 +59,10 @@
       margin-left: 0px;
     }
     margin-left: 45px;
+  }
+  @media (max-width: 680px) {
+    justify-content: center;
+    margin-top: 68px;
   }
 }
 

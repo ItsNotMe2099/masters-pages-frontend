@@ -1,121 +1,64 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Slider from "react-slick";
-import SlideWithCards from 'pages/NewMain/components/MainSectionSecond/components/SlideWithCards'
-import React, {useState} from 'react'
-import SliderControl from 'components/ui/SliderControl'
-import MainSliderControl from 'pages/NewMain/components/MainSliderControl'
-import LastSlide from 'pages/NewMain/components/MainSectionSecond/components/LastSlide'
+import MainSectionButton from 'pages/NewMain/components/Button'
+import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import {signUpOpen} from 'components/Modal/actions'
 import {useTranslation} from "i18n";
+import Button from "components/ui/Button";
 
-const Title = (props) => {
-  const title = ['A', 'C', 'T', 'N', 'O', 'W' ]
-  return (
-    <div className={`${styles.title} ${props.isLast && styles.titleLast}`}>
+const Label = ({label, index}: {label: string, index: number}) => {
 
-      <div className={styles.titleContainer}>      <div className={styles.titleWrapper}>{title.map((char, i) =>{
-    return  <>{i === 3 ? <>&nbsp;&nbsp;&nbsp;</> : ''}{i == props.index ? <span className={styles.titleHighlight}>{char}</span> : <>{char}</>}</>
-
-      })}</div></div></div>
-  )
+  return (<div className={styles.label} style={{marginLeft:(index >= 3 ? 60 : 30) +  index * 18}}>
+    <span className={styles.labelFirst}>{label[0]}</span>
+    <span className={styles.letters}>{label.slice(1)}</span>
+  </div>)
 }
-
+const Category = ({label}: {label: string}) => {
+  return (<div className={styles.category}>
+    <div><img src={'/img/Main/icons/mark.svg'}/></div> {label}
+  </div>)
+}
 const MainSectionSecond = (props) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const { t } = useTranslation('common')
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    dotsClass: `${styles.dots}`,
-    nextArrow: <MainSliderControl direction='next'/>,
-    prevArrow: <MainSliderControl direction='prev' />,
-    beforeChange: (oldIndex, newIndex) => setCurrentIndex(newIndex)
-  };
-  const slides = [
-    {
-      title: t('mainPage.secondSection.firstSlide.title'),
-      description: t('mainPage.secondSection.firstSlide.description'),
-      icons: [
-        {icon: 'story.svg', text: t('mainPage.secondSection.firstSlide.icons.text1')},
-        {icon: 'education.svg', text: t('mainPage.secondSection.firstSlide.icons.text2')},
-        {
-          icon: 'post.svg',
-          text: t('mainPage.secondSection.firstSlide.icons.text3')
-        },
-        {
-          icon: 'speaker.svg',
-          text: t('mainPage.secondSection.firstSlide.icons.text4')
-        },
-        {icon: 'emotions.svg', text: t('mainPage.secondSection.firstSlide.icons.text5')},
-        {icon: 'underwriting.svg', text: t('mainPage.secondSection.firstSlide.icons.text6')},
-        {icon: 'pages.svg', text: t('mainPage.secondSection.firstSlide.icons.text7')},
-
-      ]
-    },
-    {
-      title: t('mainPage.secondSection.secondSlide.title'),
-      description: t('mainPage.secondSection.secondSlide.description'),
-      icons: [
-        {icon: 'chat.svg', text: t('mainPage.secondSection.secondSlide.icons.text1')},
-        {icon: 'partnership.svg', text: t('mainPage.secondSection.secondSlide.icons.text2')},
-        {
-          icon: 'report.svg',
-          text: t('mainPage.secondSection.secondSlide.icons.text3')
-        },
-        {
-          icon: 'send.svg',
-          text: t('mainPage.secondSection.secondSlide.icons.text4')
-        },
-        {icon: 'reviews.svg', text: t('mainPage.secondSection.secondSlide.icons.text5')},
-
-      ]
-    },
-    {
-      title: t('mainPage.secondSection.thirdSlide.title'),
-      description: t('mainPage.secondSection.thirdSlide.description'),
-
-      icons: [
-        {icon: 'time.svg', text: t('mainPage.secondSection.thirdSlide.icons.text1')},
-        {icon: 'reminders.svg', text: t('mainPage.secondSection.thirdSlide.icons.text2')},
-        {
-          icon: 'plan.svg',
-          text: t('mainPage.secondSection.thirdSlide.icons.text3')
-        },
-
-      ]
-    },
-
-    {
-      title: t('mainPage.secondSection.fourthSlide.title'),
-      description: t('mainPage.secondSection.fourthSlide.description'),
-      icons: [
-        {icon: 'files.svg', text: t('mainPage.secondSection.fourthSlide.icons.text1')},
-
-      ]
-    },
-    {
-      title: t('mainPage.secondSection.fifthSlide.title'),
-      description: t('mainPage.secondSection.fifthSlide.description'),
-      icons: [
-        {icon: 'fields.svg', text: t('mainPage.secondSection.fifthSlide.icons.text1')},
-        {icon: 'sort.svg', text: t('mainPage.secondSection.fifthSlide.icons.text2')},
-        {icon: 'star.svg', text: t('mainPage.secondSection.fifthSlide.icons.text3')},
-        {icon: 'report.svg', text: t('mainPage.secondSection.fifthSlide.icons.text4')},
-
-      ]
-    },
-  ]
-
+  const dispatch = useDispatch()
+  const {t} = useTranslation('common')
+  
   return (
-    <div className={styles.root}  style={{backgroundImage: `url(/img/Main/bg/second_${currentIndex === 0 ? 1 : currentIndex}_${Math.floor(Math.random() * 4) + 1 }.png)`}}>
-      <Title index={currentIndex} isLast={currentIndex === 5}/>
-      <Slider {...settings}>
-        {slides.map((slide, index) => <SlideWithCards index={index} title={slide.title} description={slide.description} icons={slide.icons}/>)}
-        <LastSlide/>
-      </Slider>
+    <div className={styles.root}>
+      <div className={styles.container}>
+        <div className={styles.leftSide}>
+        <div className={styles.free}><img src='/img/Main/icons/free.svg' alt=''/></div>
+        <div className={styles.title}>{t('mainPage.modernBusiness')}</div>
+          <div className={styles.categories}>
+              <Category label={t('mainPage.categories.tutors')}/>
+              <Category label={t('mainPage.categories.repairman')}/>
+              <Category label={t('mainPage.categories.beautyMaster')}/>
+              <Category label={t('mainPage.categories.freelancers')}/>
+              <Category label={t('mainPage.categories.accountants')}/>
+              <Category label={t('mainPage.categories.lawyers')}/>
+              <Category label={t('mainPage.categories.atleticCoaches')}/>
+              <Category label={t('mainPage.categories.artists')}/>
+              <Category label={t('mainPage.categories.homeStaff')}/>
+              <Category label={t('mainPage.categories.veterinarians')}/>
+              <Category label={t('mainPage.categories.drivingInstructors')}/>
+              <Category label={t('mainPage.categories.doctors')}/>
+              <Category label={t('mainPage.categories.various')}/>
+            </div>
+        <div className={styles.btn}>
+        <MainSectionButton onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+        </div>
+        </div>
+        <div className={styles.rightSide}>
+          <Label label={t('mainPage.labels.advertise')} index={0}/>
+          <Label label={t('mainPage.labels.communicate')} index={1}/>
+          <Label label={t('mainPage.labels.timeManage')} index={2}/>
+          <div className={styles.labelSeparator}/>
+          <Label label={t('mainPage.labels.note')} index={3}/>
+          <Label label={t('mainPage.labels.organize')} index={4}/>
+          <Label label={t('mainPage.labels.wow')} index={5}/>
+        </div>
+      </div>
+      <div className={styles.bgRect}></div>
     </div>
   )
 }

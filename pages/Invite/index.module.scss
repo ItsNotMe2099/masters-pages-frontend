@@ -1,19 +1,21 @@
 @import "scss/index";
 
 .container{
-  max-width: 800px;
   padding-top: 51px;
   padding-bottom: 50px;
   @include lg{
-    width: $container-lg;
+    width: 80%;
     margin: auto;
   }
   @media screen and (max-width: $sm-max){
     padding: 17px 22px 0 22px;
-}
+  }
+  @media screen and (max-width: 592px){
+    padding: 17px 0 0 0;
+  }
 
   @include xll {
-    width: $container-xll
+    width: 80%;
   }
 }
 .content{
@@ -21,7 +23,9 @@ display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
+  @media screen and (max-width: 592px){
+    margin: 0 -22px;
+  }
 }
 .skills{
   margin-bottom: 36px;

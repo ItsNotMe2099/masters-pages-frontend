@@ -3,6 +3,9 @@
   text-align: left;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 1500px){
+    margin-bottom: 15px;
+  }
 }
 .arrow{
   cursor: pointer;

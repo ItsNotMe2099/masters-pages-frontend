@@ -27,10 +27,11 @@ const RegistrationPage = (props: Props) => {
     <div className={styles.root}>
       <SignInComponent
         isOpen={key === 'signIn'}
-
+        showAbout
       />
       <SignUpComponent
         isOpen={key === 'signUp'}
+        showAbout
       />
       <PhoneConfirmComponent
         isOpen={key === 'phoneConfirm'}

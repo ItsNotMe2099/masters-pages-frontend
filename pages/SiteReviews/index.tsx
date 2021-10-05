@@ -1,7 +1,7 @@
 import {useTranslation, withTranslation} from "i18n";
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
-import Header from '../../components/layout/Header'
+import Header from '../../components/layout/Layout/LayoutAuthorized/mobile/Header'
 import {useEffect} from "react";
 
 import { useDispatch, useSelector } from 'react-redux'

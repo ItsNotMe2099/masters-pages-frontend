@@ -21,6 +21,7 @@ import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {fetchSkillList} from 'components/Skill/actions'
 import Tab from 'components/PublicProfile/components/Tab'
 import {getCategoryTranslation} from 'utils/translations'
+import { TabSelect } from 'components/TabSelect';
 
 const SharePage = (props) => {
   const {t, i18n} = useTranslation('common');
@@ -73,7 +74,16 @@ const SharePage = (props) => {
           <Tab isActive={customLink === 'news'} title={t('news')} onClick={() => handleCustomLinkClick('news')}/>
         {skills.map((category) => category.skills.map(skill => skill.subCategory ? <Tab isActive={activeSkill?.id === skill.id} title={`${getCategoryTranslation(skill.category, i18n.language).name}/${getCategoryTranslation(skill.subCategory, i18n.language).name}`} onClick={() => handleSkillClick(skill)}/> : null))}
         </div>
-        <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>
+        <div className={styles.desktop}>
+          <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>
+        </div>
+        <div className={styles.mobile}>
+          <TabSelect 
+            tabs={tabs}
+            activeTab={activeTab}
+            onChange={(tab) => setActiveTab(tab.key)}
+          />
+        </div>
         <div className={styles.content}>{getTabContent(activeTab)}</div>
       </div>
 

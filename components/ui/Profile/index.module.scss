@@ -29,6 +29,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow-x: hidden;
 }
 
 .payment {
@@ -171,6 +172,12 @@
   font-weight: 500;
   font-size: 14px;
   padding-top: 5px;
+  overflow-x: auto;
+  div{
+    a{
+      flex-shrink: 0;
+    }
+  }
 }
 
 .titleLeft {

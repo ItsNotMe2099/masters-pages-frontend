@@ -8,7 +8,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  @media screen and (max-width: 475px){
+    flex-direction: column;
+    align-items: baseline;
+  }
   > div{
+    @media screen and (max-width: 475px){
+      margin-left: 0;
+    }
     margin-left: 25px;
     &:first-of-type{
       margin-left: 0px;

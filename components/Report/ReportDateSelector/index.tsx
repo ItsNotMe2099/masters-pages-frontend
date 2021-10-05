@@ -8,6 +8,7 @@ import {getBegin, getBeginNext, getBeginPrevious, getEnd, getEndNext, getEndPrev
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
 import {useTranslation} from 'i18n'
+import { TabSelect } from "components/TabSelect";
 
 const RangeSelector = ({onChange, isActive, label, id}) => {
   return     <div className={`${isActive && styles.selectorActive} ${styles.selector}`} onClick={() => onChange(id)}>{label}</div>
@@ -35,6 +36,7 @@ let ReportDateSelector = (props: Props) => {
     {key: 'month', label: t('month')},
     {key: 'year', label: t('year')},
   ];
+
   const handleDateChange = (val) => {
     onChange(val);
   }
@@ -69,13 +71,21 @@ let ReportDateSelector = (props: Props) => {
   }
   return (
      <div className={styles.root} >
+       <div className={styles.mobile}>
+          <TabSelect
+            activeTab={range}
+            tabs={ranges}
+            reports
+            onChange={handleRangeChange}
+          />
+        </div>
        <div className={styles.selectors}>
          {ranges.map(item => <RangeSelector isActive={item.key === range} label={item.label} id={item.key} onChange={handleRangeChange}/>)}
        </div>
-       {range !== 'all' && <><div className={`${styles.arrow} ${styles.arrow__left}`} onClick={handleNavigatePrevious}><CalendarArrowLeft/></div>
+       {range !== 'all' && <div className={styles.calendar}><div className={`${styles.arrow} ${styles.arrow__left}`} onClick={handleNavigatePrevious}><CalendarArrowLeft/></div>
        <DateTimeRange inputClassName={styles.inputClassName} className={styles.dateRange} input={{value, onChange: handleDateChange}} showTime={false}/>
        <div className={`${styles.arrow} ${styles.arrow__right}`} onClick={handleNavigateNext}><CalendarArrowRight/></div>
-</>}
+</div>}
      </div>
   )
 }

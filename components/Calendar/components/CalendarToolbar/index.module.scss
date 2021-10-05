@@ -3,6 +3,9 @@
   display: flex;
   align-items: center;
   padding: 16px;
+  @media screen and (max-width: 1500px){
+    flex-direction: column;
+  }
 }
 .center{
   flex: 1;
@@ -10,6 +13,10 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  @media screen and (max-width: 1500px){
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
 
 }
 .label{
@@ -29,6 +36,9 @@
 .right{
   display: flex;
   align-items: center;
+  svg{
+    fill: #000;
+  }
 }
 .bell{
   cursor: pointer;

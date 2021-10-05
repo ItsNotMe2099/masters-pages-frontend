@@ -7,11 +7,20 @@
   flex-direction: row;
   align-items: center;
   margin-top: 20px;
+  @media screen and (max-width: 440px){
+    flex-direction: column;
+  }
   > div{
     margin-bottom: 0px;
     max-width: 150px;
     &:first-of-type{
       margin-right: 16px;
+      @media screen and (max-width: 440px){
+        margin-right: 0;
+      }
+    }
+    @media screen and (max-width: 440px){
+      max-width: 100%;
     }
   }
 }

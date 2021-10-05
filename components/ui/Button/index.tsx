@@ -30,6 +30,9 @@ interface Props {
   fullWidth?: boolean
   target?: string
   onClick?: (e: React.MouseEvent) => void
+  outlineRed?: boolean
+  outlineBlue?: boolean
+  outlineBlack?: boolean
 }
 
 export default function Button(props: Props) {
@@ -56,6 +59,9 @@ export default function Button(props: Props) {
       [styles.smallFont]: props.smallFont,
       [styles.mediumFont]: props.mediumFont,
       [styles.largeFont]: props.largeFont,
+      [styles.outlineRed]: props.outlineRed,
+      [styles.outlineBlue]: props.outlineBlue,
+      [styles.outlineBlack]: props.outlineBlack
 
     }, props.className);
   }

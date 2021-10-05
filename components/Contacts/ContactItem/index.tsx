@@ -43,7 +43,7 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
         <div className={styles.cell}>
         <div className={styles.separator}/>
         </div>
-          <div className={styles.cell}>
+          <div className={styles.cellSkill}>
             {profile.role !== 'client' && <SkillDropDown role={profile.role}
                            items={profile.skills.filter(item => item.subCategory).map((item, index)  => ({
                              label: `${getCategoryTranslation(item.mainCategory, i18n.language)?.name || ''}${getCategoryTranslation(item.category, i18n.language).name}/${getCategoryTranslation(item.subCategory, i18n.language).name}`,
