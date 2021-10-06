@@ -25,8 +25,6 @@ const SampleProfile = ({item}: Props) => {
 
   const categories = formatSkillList(item.skills)
 
-  console.log(categories)
-
   return (
     <div className={styles.root}>
       <div className={styles.image}>

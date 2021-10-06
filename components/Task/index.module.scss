@@ -100,6 +100,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+  }
 }
 
 .mobileWrapper{
@@ -337,7 +340,7 @@
       }
     }
   }
-  @media screen and (max-width: 350px){
+  @media screen and (max-width: 500px){
     flex-direction: column;
   }
 }
@@ -366,6 +369,9 @@
 .status{
   font-size: 14px;
   color: #909090;
+  @media screen and (max-width: 500px){
+    margin-top: 10px;
+  }
 }
 .statusRed{
   color: #E4474E;
