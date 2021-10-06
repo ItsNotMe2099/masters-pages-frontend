@@ -20,7 +20,7 @@ interface Props{
 
 
 const SampleProfile = ({item}: Props) => {
-  
+
   const { t, i18n } = useTranslation('common')
 
   const categories = formatSkillList(item.skills)
@@ -31,13 +31,13 @@ const SampleProfile = ({item}: Props) => {
         <img className={styles.small} src={getMediaPath(item.photoObject.urlS3)} alt=''/>
       </div>
       <div className={styles.info}>
-        {categories.map(category => 
+        {categories.map(category =>
           <div className={styles.category}>
             {`${getCategoryTranslation(category.mainCategory, i18n.language)?.name || ''}/${getCategoryTranslation(category.category, i18n.language).name}`}
           </div>)}
         <div className={styles.subcategories}>
           {categories.map(item =>
-            item.skills.map(skill => 
+            item.skills.map(skill =>
               <div className={styles.item}>
                 {getCategoryTranslation(skill.subCategory, i18n.language).name}
               </div>
@@ -46,7 +46,7 @@ const SampleProfile = ({item}: Props) => {
         </div>
       </div>
       <div className={styles.view}>
-        <Link href={`/id${item.id}`}>
+        <Link href={`${item.profileLink || `/id${item.id}`}`}>
         <a className={styles.viewProfile}>
           <img src='/img/icons/viewProfile.svg' alt=''/>
           <div>{t('profileComponent.viewProfile')}</div>
