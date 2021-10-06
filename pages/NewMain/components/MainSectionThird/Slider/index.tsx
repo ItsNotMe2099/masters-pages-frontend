@@ -79,13 +79,6 @@ class MainSlider extends React.Component<{t?: any, slider?: any}> {
     }
   ]
 
-  const handleClick = (index) => {
-    this.setState({currentIndex: index})
-    slider.slickGoTo(this.state.currentIndex)
-  }
-
-  console.log(this.state.currentIndex)
-
   return (
     <div className={styles.root}>
       <div className={styles.list}>
@@ -93,7 +86,7 @@ class MainSlider extends React.Component<{t?: any, slider?: any}> {
         {t('mainPage.thirdSection.slider.tools')}
       </div>
         {[...features].map((feature, index) => 
-        <div onClick={() => handleClick(index)} 
+        <div onClick={() => slider.slickGoTo(index)} 
         className={cx(styles.item, {[styles.active]: index === this.state.currentIndex})}>
           {feature.svg}
           <div className={styles.label}>{feature.label}</div>
