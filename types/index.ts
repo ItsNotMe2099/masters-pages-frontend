@@ -886,3 +886,9 @@ export enum ProfilePageType {
   Skill = 'skill',
   Profile = 'profile'
 }
+
+export const CONTACTS = {
+  email: 'admin@masterspages.com',
+  instagram: 'https://www.instagram.com/masterspages',
+  facebook: 'https://www.facebook.com/masterspages'
+}
