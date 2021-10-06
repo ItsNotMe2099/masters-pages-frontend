@@ -9,6 +9,7 @@ import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
 import {fetchProfile} from 'components/Profile/actions'
 import ApiActionTypes from 'constants/api'
+import {reachGoal} from 'utils/ymetrika'
 function* registrationCompleteSaga() {
 
 
@@ -25,6 +26,7 @@ function* registrationCompleteSaga() {
       if(!res.err){
         yield put(registrationCompleteSuccess())
         yield put(registrationSuccessOpen());
+        reachGoal('auth:signup:completed')
       }else{
         yield put(registrationCompleteError(res.err?.errors));
       }

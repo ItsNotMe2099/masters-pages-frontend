@@ -20,6 +20,7 @@ import {setPushTokenRequest} from "../Push/actions";
 import {confirmChangeData, modalClose} from "../Modal/actions";
 import {logout} from "../Auth/actions";
 import {meRedirect} from 'utils/auth'
+import {reachGoal} from 'utils/ymetrika'
 
 function* ProfileSaga() {
   yield takeLatest(ActionTypes.CHANGE_ROLE,
@@ -70,6 +71,7 @@ function* ProfileSaga() {
 
         yield put({type: ActionTypes.CREATE_PROFILE + ApiActionTypes.SUCCESS});
         yield put(changeRoleSuccess(action.payload.role));
+        reachGoal('profile:create', {role: action.payload.role})
         Router.push('/me')
       }
 

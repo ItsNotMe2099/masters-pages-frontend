@@ -7,6 +7,7 @@ import ActionTypes from './const'
 import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
 import {afterAuthRedirect} from 'utils/auth'
+import {reachGoal} from 'utils/ymetrika'
 function* signInSaga() {
 
 
@@ -19,6 +20,7 @@ function* signInSaga() {
       } as IRequestData)
       if(!res.err){
         cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
+        reachGoal('auth:login:login')
         yield put(modalClose());
         afterAuthRedirect();
       }else{
