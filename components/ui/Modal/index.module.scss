@@ -8,6 +8,7 @@
   margin:  auto;
   @media screen and (max-width: $sm-max){
     width: 100% !important;
+    height: 100%;
   }
   @media screen and (max-width: 600px){
     border-radius: 0;

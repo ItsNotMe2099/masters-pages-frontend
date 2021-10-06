@@ -14,16 +14,26 @@ import Calendar from 'components/svg/Calendar'
 import News from 'components/svg/News'
 import Messages from "components/svg/Messages";
 import Reports from "components/svg/Reports";
+import { withTranslation } from 'react-i18next';
 
-interface Props {
-  onClick?: () => void
-}
+class MainSlider extends React.Component<{t?: any, slider?: any}> {
 
-const MainSlider = (props: Props) => {
+  state = {
+    currentIndex: 0,
+    active: 'profile'
+  };
 
-  const { t } = useTranslation('common')
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [active, setIsActive] = useState('profile')
+  render(){
+  let { t, slider } = this.props;
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <MainSliderControl direction='next'/>,
+    prevArrow: <MainSliderControl direction='prev'/>,
+    beforeChange: (current, next) => this.setState({ currentIndex: next })
+  };
 
   const features = [
     {label: t('mainPage.thirdSection.features.profile'), svg: <Profile/>, name: 'profile', image: '/img/Main/Slider/profile.png',
@@ -41,16 +51,6 @@ const MainSlider = (props: Props) => {
     list: [{label: 'by Orders'}, {label: 'by Clients'}, {label: 'by Profiles'}]},
   ]
 
-
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <MainSliderControl direction='next'/>,
-    prevArrow: <MainSliderControl direction='prev'/>,
-    beforeChange: (oldIndex, newIndex) => setCurrentIndex(newIndex),
-  };
   const slides = [
     {
       image: '/img/Main/Slider/profile.png',
@@ -79,6 +79,13 @@ const MainSlider = (props: Props) => {
     }
   ]
 
+  const handleClick = (index) => {
+    this.setState({currentIndex: index})
+    slider.slickGoTo(this.state.currentIndex)
+  }
+
+  console.log(this.state.currentIndex)
+
   return (
     <div className={styles.root}>
       <div className={styles.list}>
@@ -86,19 +93,20 @@ const MainSlider = (props: Props) => {
         {t('mainPage.thirdSection.slider.tools')}
       </div>
         {[...features].map((feature, index) => 
-        <div className={cx(styles.item, {[styles.active]: index === currentIndex})}>
+        <div onClick={() => handleClick(index)} 
+        className={cx(styles.item, {[styles.active]: index === this.state.currentIndex})}>
           {feature.svg}
           <div className={styles.label}>{feature.label}</div>
         </div>)}
         {[...features].map((feature, index) => 
-        <div className={cx(styles.itemMobile, {[styles.active]: feature.name === active})} onClick={() => setIsActive(feature.name)}>
+        <div className={cx(styles.itemMobile, {[styles.active]: feature.name === this.state.active})} onClick={() => this.setState({active: feature.name})}>
           <div className={styles.top}>
           {feature.svg}
           <div className={styles.label}>{feature.label}</div>
           </div>
-          <div className={feature.name === active ? styles.bottom : styles.none} style={{backgroundImage: `url(${feature.image})`}}>    
+          <div className={feature.name === this.state.active ? styles.bottom : styles.none} style={{backgroundImage: `url(${feature.image})`}}>    
           </div>
-          <div className={feature.name === active ? styles.list2 : styles.none}>
+          <div className={feature.name === this.state.active ? styles.list2 : styles.none}>
             {feature.list.map(item => 
               <div className={styles.itemList}>
                 <div>
@@ -114,7 +122,7 @@ const MainSlider = (props: Props) => {
       </div>
       </div>
       <div className={styles.slider}>
-      <Slider {...settings}>
+      <Slider {...settings} ref={slider1 => (slider = slider1)}>
         {slides.map((slide, index) => <div className={styles.slide}><img className={styles.mainImg} src={slide.image} alt=''/>
         <div className={styles.listItem}>{slide.list.map(item => 
         <div className={styles.itemList__2}>
@@ -131,4 +139,6 @@ const MainSlider = (props: Props) => {
   )
 }
 
-export default MainSlider
+}
+
+export default withTranslation('common')(MainSlider)

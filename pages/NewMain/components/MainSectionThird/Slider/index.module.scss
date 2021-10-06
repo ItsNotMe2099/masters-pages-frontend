@@ -3,15 +3,13 @@
   position: relative;
   display: flex;
   z-index: 2;
-  @media (max-width: 1899px) {
-    flex-direction: column-reverse;
-  }
 }
 
 .slider{
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: 100%;
   @media (max-width: 900px) {
     display: none;
   }
@@ -20,7 +18,10 @@
 .list{
   width: 35%;
   margin-right: 38px;
-  @media (max-width: 1899px) {
+  @media (max-width: 1550px) {
+    width: auto;
+  }
+  @media (max-width: 900px) {
     width: 100%;
   }
 }
@@ -32,6 +33,7 @@
   margin-bottom: 10px;
   display: flex;
   align-items: baseline;
+  cursor: pointer;
   svg{
     fill: #666;
     margin-right: 18px;
@@ -152,8 +154,10 @@
   }
   &__2{
     display: flex;
+    float: left;
     align-items: center;
     margin-right: 24px;
+    margin-top: 10px;
     img{
       margin-right: 13px;
     }
@@ -169,9 +173,8 @@
 }
 
 .listItem{
-  display: flex;
   padding: 0 50px 35px 50px;
   background-color: #f4f4f4;
   margin-top: -5%;
-  border-top: 35px solid #f4f4f4;
+  border-top: 25px solid #f4f4f4;
 }
