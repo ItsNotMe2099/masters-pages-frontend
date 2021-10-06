@@ -6,6 +6,7 @@ import ActionTypes from './const'
 import { signUpError, signUpSubmit, signUpSuccess } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
 import {phoneConfirmSetCode} from "../PhoneConfirm/actions";
+import {reachGoal} from 'utils/ymetrika'
 
 function* signUpSaga() {
 
@@ -24,6 +25,7 @@ function* signUpSaga() {
         if(res.data.code){
           yield put(phoneConfirmSetCode(res.data.code));
         }
+        reachGoal('auth:signup:phone')
         yield put(signUpSuccess());
         yield put(phoneConfirmOpen());
       }else{

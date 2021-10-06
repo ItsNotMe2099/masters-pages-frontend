@@ -16,15 +16,19 @@ import Messages from "components/svg/Messages";
 import Reports from "components/svg/Reports";
 import { withTranslation } from 'react-i18next';
 
-class MainSlider extends React.Component<{t?: any, slider?: any}> {
+interface Props {
+  slider?: any
+}
 
-  state = {
-    currentIndex: 0,
-    active: 'profile'
-  };
+export default function MainSlider(props: Props) {
 
-  render(){
-  let { t, slider } = this.props;
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [active, setIsActive] = useState('profile')
+
+  const {t} = useTranslation('common')
+
+  let { slider } = props;
   const settings = {
     infinite: true,
     speed: 500,
@@ -32,7 +36,7 @@ class MainSlider extends React.Component<{t?: any, slider?: any}> {
     slidesToScroll: 1,
     nextArrow: <MainSliderControl direction='next'/>,
     prevArrow: <MainSliderControl direction='prev'/>,
-    beforeChange: (current, next) => this.setState({ currentIndex: next })
+    beforeChange: (current, next) => setCurrentIndex(next)
   };
 
   const features = [
@@ -87,19 +91,19 @@ class MainSlider extends React.Component<{t?: any, slider?: any}> {
       </div>
         {[...features].map((feature, index) => 
         <div onClick={() => slider.slickGoTo(index)} 
-        className={cx(styles.item, {[styles.active]: index === this.state.currentIndex})}>
+        className={cx(styles.item, {[styles.active]: index === currentIndex})}>
           {feature.svg}
           <div className={styles.label}>{feature.label}</div>
         </div>)}
         {[...features].map((feature, index) => 
-        <div className={cx(styles.itemMobile, {[styles.active]: feature.name === this.state.active})} onClick={() => this.setState({active: feature.name})}>
+        <div className={cx(styles.itemMobile, {[styles.active]: feature.name === active})} onClick={() => setIsActive(feature.name)}>
           <div className={styles.top}>
           {feature.svg}
           <div className={styles.label}>{feature.label}</div>
           </div>
-          <div className={feature.name === this.state.active ? styles.bottom : styles.none} style={{backgroundImage: `url(${feature.image})`}}>    
+          <div className={feature.name === active ? styles.bottom : styles.none} style={{backgroundImage: `url(${feature.image})`}}>    
           </div>
-          <div className={feature.name === this.state.active ? styles.list2 : styles.none}>
+          <div className={feature.name === active ? styles.list2 : styles.none}>
             {feature.list.map(item => 
               <div className={styles.itemList}>
                 <div>
@@ -130,8 +134,5 @@ class MainSlider extends React.Component<{t?: any, slider?: any}> {
       </div>
     </div>
   )
-}
 
 }
-
-export default withTranslation('common')(MainSlider)

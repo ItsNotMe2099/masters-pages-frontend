@@ -6,6 +6,7 @@ import requestGen from "utils/requestGen";
 import ActionTypes from './const'
 import { IRequestData, IResponse, IRootState } from 'types'
 import cookie from "js-cookie";
+import {reachGoal} from 'utils/ymetrika'
 function* phoneConfirmSaga() {
 
 
@@ -21,6 +22,7 @@ function* phoneConfirmSaga() {
         },
       } as IRequestData)
       if(!res.err) {
+        reachGoal('auth:phone:confirmed')
         cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
           window.location.href = '/RegistrationPage';
 

@@ -21,6 +21,7 @@ import {useTranslation} from "i18n";
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 import {modalClose} from 'components/Modal/actions'
+import {reachGoal} from 'utils/ymetrika'
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
@@ -40,6 +41,7 @@ const CreateTaskPage = (props) => {
   }, [])
   const handleSubmit = (data) => {
     dispatch(createTaskComplete(data));
+    reachGoal('order:create', {role: profile?.role});
   }
   const handleChangeForStat = (key, value) => {
     statFilter[key] = value;
