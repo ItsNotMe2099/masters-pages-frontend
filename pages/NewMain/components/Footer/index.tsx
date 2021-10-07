@@ -26,10 +26,8 @@ const MainSectionFooter = (props: Props) => {
           <a className={styles.socialItem} href={CONTACTS.instagram}><img src={'/img/Main/icons/instagram.svg'}/></a>
           <a className={styles.socialItem} href={CONTACTS.facebook}><img src={'/img/Main/icons/facebook.svg'}/></a>
           </div>
-          <div>
-        <a href={`mailto:${CONTACTS.email}`}
-          className={styles.mail}>{CONTACTS.email} 
-        </a>
+          <div className={styles.mail}>
+        <a href={`mailto:${CONTACTS.email}`}>{CONTACTS.email} </a>
         </div>
         </div>
         </div>
