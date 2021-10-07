@@ -32,7 +32,7 @@ interface Props{
 const ProfilePageLayout = (props: Props) => {
   const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened} = props;
   const isMaster = ['master', 'volunteer'].includes(profile.role);
-  //const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const {t} = useTranslation('common');
   const getRoleClass = () => {
     switch (profile.role) {
@@ -59,6 +59,21 @@ const ProfilePageLayout = (props: Props) => {
           {isMaster && <CardRecommendationsShort profile={profile}/>}
           <CardReviewsShort profile={profile} subCategory={subCategory}/>
           {/*<CardRewards profile={profile}/>*/}
+          </div>
+          <div className={styles.mobile}>
+          <div className={styles.additionalInfo} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
+            {t('personalArea.profile.additionalInfo')}
+            <img className={isOpen && styles.reverse} src='/img/icons/arrowDown.svg' alt=''/>
+          </div>
+          {isOpen &&
+          <div className={styles.cards}>
+          <CardPreferWorkIn profile={profile} isEdit={isEdit}/>
+          {isMaster && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
+          <CardLanguages profile={profile} isEdit={isEdit}/>
+          {isMaster && <CardBio profile={profile} isEdit={isEdit}/>}
+          {isMaster && <CardRecommendationsShort profile={profile}/>}
+          <CardReviewsShort profile={profile} subCategory={subCategory}/>
+          {/*<CardRewards profile={profile}/>*/}</div>}
           </div>
         </div>
         <div className={styles.rightColumn}>
