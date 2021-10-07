@@ -291,7 +291,8 @@
       "sendMessage": "Send message",
       "sendOffer": "Send Offer",
       "subscribe": "Subscribe",
-      "bio": "BIO"
+      "bio": "BIO",
+      "additionalInfo": "Additional information"
     },
     "menu": {
       "profile": "Personal information",
