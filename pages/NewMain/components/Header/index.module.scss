@@ -20,8 +20,8 @@
   align-items: center;
   margin: 0 auto;
   padding: 10px 0;
+  justify-content: space-between;
   @media (max-width: 670px) {
-    justify-content: space-between;
     svg{
       cursor: pointer;
   }
@@ -44,9 +44,6 @@
   display: flex;
   align-items: center;
   color: black;
-  @media (min-width: 671px) {
-    flex: 1;
-  }
   img{
     margin-right: 16px;
     @media (max-width: 450px) {

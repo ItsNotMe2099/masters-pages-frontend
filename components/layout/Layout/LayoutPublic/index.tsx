@@ -16,6 +16,7 @@ import Button from 'components/PublicProfile/components/Button'
 import LangSelect from 'pages/NewMain/components/Header/components/LangSelect'
 import MenuMobile from 'components/svg/MenuMobile'
 import MenuMobileClose from 'components/svg/MenuMobileClose'
+import Link from 'next/link'
 
 
 interface Props {
@@ -51,10 +52,12 @@ export default function LayoutPublic(props: Props) {
   return (
     <div className={`${styles.root}`}>
       <div  className={styles.header}>
-          <div className={styles.logo}>
+        <Link href='/'>
+          <a className={styles.logo}>
             <img src={'/img/Main/logo_red.svg'}/>
             <div className={styles.logoTitle}>Masters<span> Pages</span></div>
-          </div>
+          </a>
+          </Link>
           <div className={styles.title}>
             {title}
           </div>
