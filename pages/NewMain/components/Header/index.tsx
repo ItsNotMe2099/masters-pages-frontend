@@ -37,11 +37,6 @@ const MainSectionHeader = (props: Props) => {
     setMenuMobileOpen(false)
   }
 
-  const handleClearBodyClass = () => {
-    if (process.browser) {
-      document.body.classList.remove('modal-open')
-    }
-  }
   return (
     <div  className={styles.root}>
       <div  className={styles.container}>
@@ -50,7 +45,8 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </div>
         <div className={styles.menuMobile}>
-          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
+          <LangSelect isAuth={false}/>
+          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu} className={styles.menuMobileBtn}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
         </div>
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
@@ -63,7 +59,6 @@ const MainSectionHeader = (props: Props) => {
       {isMenuMobileOpen && 
       <div className={styles.dropdownMobile}>
           <div className={styles.actionsMobile}>
-          <LangSelect isAuth={false}/>
           <div className={styles.actionsButtons}>
             {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>}
             {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>}

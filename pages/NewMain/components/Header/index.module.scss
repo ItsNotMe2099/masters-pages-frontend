@@ -20,15 +20,21 @@
   align-items: center;
   margin: 0 auto;
   padding: 10px 0;
+  justify-content: space-between;
   @media (max-width: 670px) {
-    justify-content: space-between;
     svg{
       cursor: pointer;
   }
 }
 }
 
+.menuMobileBtn{
+  margin-left: 10px;
+}
+
 .menuMobile{
+  display: flex;
+  align-items: center;
   @media (min-width: 671px) {
     display: none;
   }
@@ -38,11 +44,12 @@
   display: flex;
   align-items: center;
   color: black;
-  @media (min-width: 671px) {
-    flex: 1;
-  }
   img{
     margin-right: 16px;
+    @media (max-width: 450px) {
+        width: 30px;
+        margin-right: 12px;
+    }
   }
 
   .logoTitle{
@@ -50,6 +57,9 @@
     font-size: 20px;
     span{
       color: #FD5742;
+    }
+    @media (max-width: 450px) {
+      font-size: 15px;
     }
   }
 }
@@ -79,6 +89,7 @@
   margin-top: 30px;
   .actionsButtons{
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     margin-top: 30px;
@@ -110,5 +121,8 @@
   border-top: 1px solid #DBDBDB;
   @media screen and (min-width: 1024px){
     display: none;
+  }
+  @media (max-width: 450px) {
+    top: 56px;
   }
 }
