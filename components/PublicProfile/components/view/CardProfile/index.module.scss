@@ -90,6 +90,9 @@
   button, a{
     padding: 5px 14px;
   }
+  @media (max-width: 420px){
+    margin-top: 10px;
+  }
 }
 .followersValue{
   width: 100%;
