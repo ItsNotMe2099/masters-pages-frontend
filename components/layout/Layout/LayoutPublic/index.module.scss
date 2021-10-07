@@ -7,6 +7,124 @@
   background: #F8F6F9;
 }
 
+.menuMobile{
+  display: flex;
+  align-items: center;
+  @media (min-width: 901px) {
+    display: none;
+  }
+}
+
+.menuMobileBtn{
+  margin-left: 10px;
+}
+
+.title{
+  @media (max-width: 850px) {
+    display: none;
+  }
+}
+
+.titleMobile{
+  @media (min-width: 851px) {
+    display: none;
+  }
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+}
+
+.actionsMobile{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+  .actionsButtons{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    > button{
+      width: 100%;
+      text-transform: uppercase;
+      &:first-of-type{
+        margin-bottom: 20px;
+      }
+    }
+  }
+  @media (min-width: 901px) {
+    display: none;
+  }
+}
+
+.firstBtn{
+  margin-right: 5%;
+}
+
+.dropdownMobile{
+  background: #fff;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  top: 72px;
+  z-index: 4;
+  padding: 0 16px;
+  border-top: 1px solid #DBDBDB;
+  @media screen and (min-width: 901px){
+    display: none;
+  }
+  @media (max-width: 450px) {
+    top: 56px;
+  }
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+  color: black;
+  @media (max-width: 850px) {
+    flex: 1;
+  }
+  img{
+    margin-right: 16px;
+    @media (max-width: 450px) {
+        width: 30px;
+        margin-right: 12px;
+    }
+  }
+
+  .logoTitle{
+    font-weight: 700;
+    font-size: 20px;
+    span{
+      color: #FD5742;
+    }
+    @media (max-width: 450px) {
+      font-size: 15px;
+    }
+  }
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  .actionsButtons{
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    > button{
+      text-transform: uppercase;
+      &:first-of-type{
+        margin-right: 12px;
+      }
+    }
+  }
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
 
 
 .header{
@@ -14,11 +132,10 @@
   display: flex;
   align-items: center;
   position: fixed;
-  padding: 0px 20px;
+  padding: 10px 20px;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
   z-index: 3;
   font-weight: 700;
   color: #000000;
@@ -26,38 +143,6 @@
     flex: 1;
     padding-left: 34px;
 
-  }
-  .logo{
-    display: flex;
-    align-items: center;
-    color: black;
-    img{
-      margin-right: 16px;
-    }
-
-    .logoTitle{
-      font-weight: 700;
-      font-size: 20px;
-      span{
-        color: #FD5742;
-      }
-    }
-  }
-  .actions{
-    display: flex;
-    align-items: center;
-    .actionsButtons{
-      display: flex;
-      align-items: center;
-      margin-left: 30px;
-      > .actionButton{
-        width: 140px;
-        text-transform: uppercase;
-        &:first-of-type{
-          margin-right: 12px;
-        }
-      }
-    }
   }
 
 
