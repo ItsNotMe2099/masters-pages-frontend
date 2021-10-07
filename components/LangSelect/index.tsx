@@ -7,6 +7,7 @@ import cx from 'classnames'
 import nextI18 from "i18n";
 interface Props {
   isAuth: boolean
+  
 }
  const LangSelect = (props: Props) => {
   const { i18n: { language } } = useContext(I18nContext)
@@ -36,7 +37,7 @@ interface Props {
     <div className={`${styles.root} ${props.isAuth && styles.rootAuth}`}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
         <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
-        <span className={styles.dropdownItemLabel}>{value.label}</span>
+        <span className={props.isAuth ? styles.dropdownItemLabelAuth : styles.dropdownItemLabel}>{value.label}</span>
         <ArrowDropDown/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
@@ -54,7 +55,7 @@ interface Props {
             >
               <a href="" onClick={(e) => handleOptionClick(e, item)}>
                 <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${item.value}.svg`} alt=''/>
-                <span className={styles.dropdownItemLabel}>{item.label}</span>
+                <span className={cx(styles.dropdownItemLabel, {[styles.black]: isActive})}>{item.label}</span>
               </a>
             </li>
           ))}

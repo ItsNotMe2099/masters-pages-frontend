@@ -10,13 +10,12 @@
 .menuMobile{
   display: flex;
   align-items: center;
+  svg{
+    cursor: pointer;
+  }
   @media (min-width: 901px) {
     display: none;
   }
-}
-
-.menuMobileBtn{
-  margin-left: 10px;
 }
 
 .title{

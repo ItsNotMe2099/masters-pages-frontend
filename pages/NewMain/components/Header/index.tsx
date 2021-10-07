@@ -1,7 +1,7 @@
 import {getAuthServerSide} from "utils/auth";
 import styles from './index.module.scss'
 import Link from 'next/link'
-import LangSelect from 'pages/NewMain/components/Header/components/LangSelect'
+import LangSelect from 'components/LangSelect'
 import MainSectionButton from 'pages/NewMain/components/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
@@ -46,7 +46,7 @@ const MainSectionHeader = (props: Props) => {
         </div>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
-          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu} className={styles.menuMobileBtn}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
+          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
         </div>
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>

@@ -16,7 +16,7 @@ import cookie from "js-cookie";
 import {getProfileRoleByRoute} from 'utils/profile'
 import {useInterval} from 'components/hooks/useInterval'
 import Header from '../LayoutAuthorized/mobile/Header'
-import { LangSelect } from './mobile/Header/components/LangSelect'
+import LangSelect  from 'components/LangSelect'
 
 interface Props {
   children?: ReactElement[] | ReactElement,

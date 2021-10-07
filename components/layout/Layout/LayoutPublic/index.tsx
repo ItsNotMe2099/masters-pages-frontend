@@ -13,7 +13,7 @@ import ModeSelect from 'components/layout/Layout/components/ModeSelect'
 import MainSectionButton from 'pages/NewMain/components/Button'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
 import Button from 'components/PublicProfile/components/Button'
-import LangSelect from 'pages/NewMain/components/Header/components/LangSelect'
+import LangSelect from 'components/LangSelect'
 import MenuMobile from 'components/svg/MenuMobile'
 import MenuMobileClose from 'components/svg/MenuMobileClose'
 import Link from 'next/link'
@@ -63,7 +63,7 @@ export default function LayoutPublic(props: Props) {
           </div>
           <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
-          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu} className={styles.menuMobileBtn}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
+          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
         </div>
           <div className={styles.actions}>
             <LangSelect isAuth={false}/>

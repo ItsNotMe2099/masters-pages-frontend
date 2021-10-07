@@ -10,7 +10,7 @@ import NotificationSelect from 'components/layout/Layout/components/Notification
 import Button from 'components/ui/Button';
 import SearchMobile from 'components/svg/SearchMobile';
 import { useState } from 'react';
-import { LangSelect } from './components/LangSelect';
+import LangSelect  from 'components/LangSelect';
 import MenuMobileClose from 'components/svg/MenuMobileClose';
 import {useTranslation} from 'i18n'
 import MenuItem from 'components/layout/Layout/components/MenuItem';
@@ -116,7 +116,7 @@ const Header = (props: Props) => {
         <MenuMobile onClick={handleOpenMobileMenu} className={styles.open}/></>}
         {isMenuMobileOpen &&
           <>
-          <LangSelect isAuth={false}/>
+          <LangSelect isAuth/>
           <MenuMobileClose className={styles.open} onClick={handleCloseMobileMenu}/>
           </>
         }
