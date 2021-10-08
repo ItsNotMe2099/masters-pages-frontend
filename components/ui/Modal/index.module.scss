@@ -29,10 +29,8 @@
   top: 30px;
   right: 24px;
   z-index: 2;
-  &::after {
-    content: "";
+  button{
     display: block;
-    clear: both;
   }
 }
 
