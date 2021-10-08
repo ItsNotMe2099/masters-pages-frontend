@@ -126,8 +126,10 @@ const StateButton = ({event, type}: Props) => {
   }
   return (
     <div className={`${styles.root} ${getClass()}`}>
+      <div className={styles.wrapper}>
       <div className={styles.type}>{getTypeName()}</div>
       {isMarkVisible() && <MarkIcon className={styles.icon} color={'#ffffff'}/>}
+      </div>
       <div className={styles.status}>{getStatusName()}</div>
     </div>
   )
