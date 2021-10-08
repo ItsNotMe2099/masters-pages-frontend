@@ -5,6 +5,9 @@
   background: #FAFAFA;
   border: 1px solid #D6D6D6;
   padding: 10px 19px 23px 19px;
+  @media screen and (max-width: 520px){
+    flex-direction: column;
+  }
 }
 .title{
   display: flex;
@@ -31,12 +34,27 @@
     color: #333333;
     line-height: 36px;
   }
+  @media screen and (max-width: 520px){
+    display: none;
+  }
+}
+.labelMobile{
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 36px;
+  @media screen and (min-width: 521px){
+    display: none;
+  }
 }
 .header{
   font-weight: 600;
   font-size: 14px;
   color: #333333;
   margin-bottom: 7px;
+  @media screen and (max-width: 520px){
+    margin-top: 7px;
+  }
 }
 .spacer{
   flex: 1;

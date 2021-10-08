@@ -73,6 +73,7 @@ let EventInputsForm = (props: Props) => {
        </div>
        <div className={styles.planned}>
          <div className={styles.header}>{t('task.page.planned')}</div>
+         <div className={styles.labelMobile}>{`${t('start')}:`}</div>
          <Field
            name="start"
            component={DateTime}
@@ -83,6 +84,7 @@ let EventInputsForm = (props: Props) => {
            validate={required}
          />
          <div className={styles.verticalSpacer}/>
+         <div className={styles.labelMobile}>{`${t('end')}:`}</div>
          <Field
            name="end"
            component={DateTime}
@@ -97,6 +99,7 @@ let EventInputsForm = (props: Props) => {
        <div className={styles.spacer}/>
        <div className={styles.completed}>
          <div className={styles.header}>{t('task.page.completed')}</div>
+         <div className={styles.labelMobile}>{`${t('start')}:`}</div>
          <Field
            name="actualStart"
            component={DateTime}
@@ -107,6 +110,7 @@ let EventInputsForm = (props: Props) => {
            validate={required}
          />
          <div className={styles.verticalSpacer}/>
+         <div className={styles.labelMobile}>{`${t('end')}:`}</div>
          <Field
            name="actualEnd"
            component={DateTime}

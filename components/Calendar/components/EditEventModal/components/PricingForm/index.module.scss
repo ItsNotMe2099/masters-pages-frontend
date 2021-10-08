@@ -43,6 +43,9 @@ display: flex;
   background: #FAFAFA;
   border: 1px solid #D6D6D6;
   padding: 10px 19px 23px 19px;
+  @media screen and (max-width: 520px){
+    flex-direction: column;
+  }
 }
 .labels{
   margin-top: 20px;
