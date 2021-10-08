@@ -82,6 +82,7 @@ let EventInputsForm = (props: Props) => {
            disabled={isPlannedDisabled}
            onChange={handleCurrentStartChange}
            validate={required}
+           modal
          />
          <div className={styles.verticalSpacer}/>
          <div className={styles.labelMobile}>{`${t('end')}:`}</div>
@@ -93,6 +94,7 @@ let EventInputsForm = (props: Props) => {
            onChange={handleCurrentEndChange}
            label={t('end')}
            validate={required}
+           modal
          />
 
        </div>
@@ -108,6 +110,7 @@ let EventInputsForm = (props: Props) => {
            onChange={handleActualStartChange}
            label={t('start')}
            validate={required}
+           modal
          />
          <div className={styles.verticalSpacer}/>
          <div className={styles.labelMobile}>{`${t('end')}:`}</div>
@@ -119,6 +122,7 @@ let EventInputsForm = (props: Props) => {
            onChange={handleActualEndChange}
            label={t('end')}
            validate={required}
+           modal
          />
 
        </div>

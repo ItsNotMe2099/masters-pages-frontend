@@ -38,6 +38,18 @@ margin-right: 12px;
 
 }
 
+.dateRangeModal{
+  position: absolute;
+  z-index: 5;
+  top: 30px;
+  visibility: hidden;
+  right: 50%;
+  @media screen and (max-width: 520px){
+    right: 0;
+    left: -70%;
+  }
+}
+
 .dateRange{
   position: absolute;
   z-index: 5;
