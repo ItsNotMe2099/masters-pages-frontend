@@ -18,6 +18,9 @@ display: flex;
   padding: 8px 27px;
   background: transparent;
   cursor: pointer;
+  @media screen and (max-width: 350px){
+    padding: 8px 17px;
+  }
 
   &__active {
     position: relative;
