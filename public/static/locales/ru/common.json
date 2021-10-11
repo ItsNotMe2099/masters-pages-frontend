@@ -638,6 +638,7 @@
     "acceptOffer": "Вы уверены что хотите принять предложение?",
     "acceptConditions": "Вы уверены что хотите принять условия?",
     "cancelTask": "Вы уверены что хотите отменить Заказ?",
+    "title": "Ожидает согласования",
     "message": {
       "createdEvent": "{{profileText}} созданное Событие",
       "changedStatus": "{{profileText}} изменен статус на {{message.eventLogRecordData.newStatus}}",
@@ -655,7 +656,7 @@
       "master": "Мастер {{statusText}} ваше предложение",
       "clientOffer": "Клиент {{statusText}} ваше предложение",
       "youStatusText": "Вы {{statusText}}",
-      "youSend": "You send you task negotiation",
+      "youSend": "Вы отправили задачу на согласование", 
       "negotiationFromMaster": "Новое обсуждение условий Заказа от Мастера",
       "negotiationFromClient": "Новое обсуждение условий Заказа от Клиента",
       "masterNegotiation": "Мастер {{statusText}} ваше обсуждение условий",

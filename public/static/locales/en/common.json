@@ -634,6 +634,7 @@
     "acceptOffer": "Are you sure that you want to accept an offer?",
     "acceptConditions": "Are you sure that you want to accept conditions?",
     "cancelTask": "Are you sure that you want to cancel task?",
+    "title": "Waiting for negotiation response",
     "message": {
       "createdEvent": "{{profileText}} created event",
       "changedStatus": "{{profileText}} changed status to {{message.eventLogRecordData.newStatus}}",
@@ -651,7 +652,7 @@
       "master": "Master {{statusText}} your offer",
       "clientOffer": "Client {{statusText}} your offer",
       "youStatusText": "You {{statusText}}",
-      "youSend": "You send you task negotiation",
+      "youSend": "You send your task negotiation", 
       "negotiationFromMaster": "New task negotation from master",
       "negotiationFromClient": "New task negotation from client",
       "masterNegotiation": "Master {{statusText}} your negotiation",

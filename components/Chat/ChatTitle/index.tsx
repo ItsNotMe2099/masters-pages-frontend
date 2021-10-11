@@ -79,7 +79,7 @@ export default function ChatTitle({chat}: Props) {
      )
      && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHireMaster}>{t('chat.hireMaster')}</Button>}
      { chat.task && !isInProgress && !isFinished && chat.task.status == ITaskStatus.Published && <Button className={styles.action} onClick={handleEditConditions}>{t('chat.negotiateOffer')}</Button>}
-     { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && lastNegotiation.authorId == profile.id && !(lastNegotiation.state === ITaskNegotiationState.Declined || lastNegotiation.state === ITaskNegotiationState.Accepted) && <div className={styles.status}>Waiting for negotiation response</div>}
+     { chat.task && !isInProgress && !isFinished && lastNegotiation !== null && lastNegotiation.authorId == profile.id && !(lastNegotiation.state === ITaskNegotiationState.Declined || lastNegotiation.state === ITaskNegotiationState.Accepted) && <div className={styles.status}>{t('chat.title')}</div>}
      { chat.task && isInProgress && <div className={`${styles.status} ${styles.statusGreen}`}>{t('chat.taskAccepted')} <MarkIcon color={'#27C60D'}/></div>}
      { chat.task && isFinished && <div className={`${styles.status} ${styles.statusGreen}`}>{t('chat.taskFinished')} <MarkIcon color={'#27C60D'}/></div>}
      { chat.task && isCanceled && <div className={`${styles.status}`}>{t('chat.taskCanceled')} <CloseIcon /></div>}
