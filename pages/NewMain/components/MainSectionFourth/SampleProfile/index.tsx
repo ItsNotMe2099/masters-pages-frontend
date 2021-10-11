@@ -24,7 +24,6 @@ const SampleProfile = ({item}: Props) => {
   const { t, i18n } = useTranslation('common')
 
   const categories = formatSkillList(item.skills)
-  const profileLink = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : ''}${item.profileLink || `/id${item.id}`}`;
 
   return (
     <div className={styles.root}>
@@ -47,7 +46,7 @@ const SampleProfile = ({item}: Props) => {
         </div>
       </div>
       <div className={styles.view}>
-        <Link href={profileLink}>
+        <Link href={`${item.profileLink || `/id${item.id}`}`}>
         <a className={styles.viewProfile}>
           <img src='/img/icons/viewProfile.svg' alt=''/>
           <div>{t('profileComponent.viewProfile')}</div>

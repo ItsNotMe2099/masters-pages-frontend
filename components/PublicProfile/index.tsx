@@ -32,7 +32,7 @@ const PublicProfile = (props) => {
   const profile = isEdit ? currentProfile : props.profile;
   const [category, setCategory] = useState(null);
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
-  const currentSkill = isEdit ? reduxSkill : props.skill;
+  const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill;
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list);
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills);
