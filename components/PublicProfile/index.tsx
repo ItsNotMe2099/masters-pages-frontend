@@ -32,7 +32,7 @@ const PublicProfile = (props) => {
   const profile = isEdit ? currentProfile : props.profile;
   const [category, setCategory] = useState(null);
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
-  const currentSkill = reduxSkill || props.skill
+  const currentSkill = isEdit ? reduxSkill : props.skill;
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list);
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills);
@@ -73,7 +73,7 @@ const PublicProfile = (props) => {
 
 
     const categories = formatSkillList(profile.skills);
-
+    console.log("UseEffect1",subCategoryId, currentSkill, categories.length);
     if (currentSkill && categories.length > 0) {
 
 
@@ -81,11 +81,13 @@ const PublicProfile = (props) => {
         const exists = category.skills.find(skill => skill.subCategoryId === subCategoryId);
 
         if (exists) {
+          console.log("UseEffect2", exists);
           dispatch(setCurrentSkill(exists));
           setCategory(category);
 
           break;
         }
+        console.log("UseEffect3",subCategoryId, category);
 
       }
     }
