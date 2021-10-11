@@ -69,6 +69,7 @@ let FormNewCategory = props => {
         }}
 
       />
+      {categoryId &&
       <Field
                 name="subCategories"
                 component={CheckboxListSubCategories}
@@ -77,7 +78,7 @@ let FormNewCategory = props => {
                 categoryId={categoryId}
                 grid={2}
                 changeWithValue={true}
-              />
+              />}
       <Button type={'button'} className={styles.button} onClick={handleSubmit} grey={true} bold={true} size={'16px 30px'}>{t('portfolio.addCategory')}</Button>
 
       </form>

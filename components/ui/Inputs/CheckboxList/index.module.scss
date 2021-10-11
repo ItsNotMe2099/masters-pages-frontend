@@ -4,6 +4,15 @@
   position: relative;
   margin-bottom: 20px;
 }
+
+.error{
+  position: absolute;
+  bottom: -32px;
+  width: 100%;
+  div{
+    bottom: 0;
+  }
+}
 .flexRow{
   display: flex;
   flex-direction: row;
