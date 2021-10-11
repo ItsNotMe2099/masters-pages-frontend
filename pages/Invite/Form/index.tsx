@@ -86,7 +86,7 @@ let InviteForm = (props: Props) => {
       </div>
         </div>
       <div className={styles.message}>
-        {profile.firstName} {profile.lastName} {profile.role === 'client' ? 'would like to invite you to join him/her on MastersPages and see you among his/hers valued clients.' : 'would like to invite you see his/hers profile on MastersPages.'}<br/>
+        {profile.firstName} {profile.lastName} {profile.role === 'client' ? t('invitePage.clientInvite') : t('invitePage.masterInvite')}<br/>
         •  {t('shareByEmail.toSee')} <a href={inviteUrl} target={'_blank'}> {profile.firstName} {profile.lastName} </a>{t('shareByEmail.profile')}<br/>
         •  {t('shareByEmail.toLearn')} <a href='masterspages.com' target={'_blank'}>MastersPages</a><br/>
         •  {t('shareByEmail.ifYouGot')} <a href={'mailto:abuse@masterspages.com'}>abuse@masterspages.com</a>.<br/>
@@ -97,7 +97,7 @@ let InviteForm = (props: Props) => {
       </div>
           <FormError error={error}/>
         <div className={styles.btnContainer}>
-          <Button disabled={loading} red size="14px 65px">{t('shareByEmail.invite')} {profile.role === 'client' ? 'master' : 'client' }</Button>
+          <Button disabled={loading} red size="14px 65px">{t('shareByEmail.invite')} {profile.role === 'client' ? t('master2') : t('client2') }</Button>
         </div>
 
       </div>

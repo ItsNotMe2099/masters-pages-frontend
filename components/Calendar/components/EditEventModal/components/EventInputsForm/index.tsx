@@ -73,6 +73,7 @@ let EventInputsForm = (props: Props) => {
        </div>
        <div className={styles.planned}>
          <div className={styles.header}>{t('task.page.planned')}</div>
+         <div className={styles.labelMobile}>{`${t('start')}:`}</div>
          <Field
            name="start"
            component={DateTime}
@@ -81,8 +82,10 @@ let EventInputsForm = (props: Props) => {
            disabled={isPlannedDisabled}
            onChange={handleCurrentStartChange}
            validate={required}
+           modal
          />
          <div className={styles.verticalSpacer}/>
+         <div className={styles.labelMobile}>{`${t('end')}:`}</div>
          <Field
            name="end"
            component={DateTime}
@@ -91,12 +94,14 @@ let EventInputsForm = (props: Props) => {
            onChange={handleCurrentEndChange}
            label={t('end')}
            validate={required}
+           modal
          />
 
        </div>
        <div className={styles.spacer}/>
        <div className={styles.completed}>
          <div className={styles.header}>{t('task.page.completed')}</div>
+         <div className={styles.labelMobile}>{`${t('start')}:`}</div>
          <Field
            name="actualStart"
            component={DateTime}
@@ -105,8 +110,10 @@ let EventInputsForm = (props: Props) => {
            onChange={handleActualStartChange}
            label={t('start')}
            validate={required}
+           modal
          />
          <div className={styles.verticalSpacer}/>
+         <div className={styles.labelMobile}>{`${t('end')}:`}</div>
          <Field
            name="actualEnd"
            component={DateTime}
@@ -115,6 +122,7 @@ let EventInputsForm = (props: Props) => {
            onChange={handleActualEndChange}
            label={t('end')}
            validate={required}
+           modal
          />
 
        </div>

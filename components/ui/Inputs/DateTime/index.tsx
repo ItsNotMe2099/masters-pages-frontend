@@ -15,6 +15,7 @@ interface Props {
   input: any,
   showIcon?: boolean
   disabled?: boolean
+  modal?: boolean
 }
 
 export default function DateTime(props: Props) {
@@ -60,7 +61,7 @@ export default function DateTime(props: Props) {
         </div>
         <div className={styles.spacer}></div>
       </div>
-      <div className={`${styles.dateRange} ${isDateRangeOpen && styles.dateRangeOpen}`}>
+      <div className={`${props.modal ? styles.dateRangeModal : styles.dateRange} ${isDateRangeOpen && styles.dateRangeOpen}`}>
       <Calendar
         onChange={handleChange}
         showSelectionPreview={true}

@@ -5,9 +5,8 @@
   padding: 25px;
   min-width: 300px;
   z-index: 10000;
-  @media screen and (max-width: 350px){
-    min-width: 250px;
-    max-width: 250px;
+  @media screen and (max-width: 600px){
+    display: none;
   }
 }
 .circle{

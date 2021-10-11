@@ -59,7 +59,7 @@ export default function ChatMessage({ message, chat, size }: Props) {
     switch (message.type) {
       case IChatMessageType.EventLogRecord:
           let text = '';
-          let profileText = message.profileId === profile.id ? `You` : `${profile.firstName} ${profile.lastName}`
+          let profileText = message.profileId === profile.id ? t('you') : `${profile.firstName} ${profile.lastName}`
           switch (message.eventLogRecordType){
             case IEventLogRecordType.Created:
               text = t('chat.message.createdEvent', { profileText })

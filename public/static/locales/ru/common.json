@@ -35,6 +35,12 @@
     "contacts": "Контакты",
     "currency": "Валюта"
   },
+
+  "invitePage" : {
+    "masterInvite": "хочет пригласить вас присоединиться к нему/ней на MastersPages и увидеть вас среди его/её ценных клиентов.",
+    "clientInvite": "хочет пригласить вас посмотреть его/её профиль на MastersPages."
+  },
+
   "validation": {
     "email": "Некорректный формат емейла",
     "passwordMatch": "Пароли не совпадают",
@@ -49,6 +55,9 @@
   },
 
   "master": "Мастер",
+  "master2": "мастера",
+  "client2": "клиента",
+  "you": "Вы",
   "aboutSite": "О MASTERS PAGES",
   "findMaster": "Найдите Мастера",
   "findVolunteer": "Найдите волонтера",

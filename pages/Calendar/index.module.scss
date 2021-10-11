@@ -63,6 +63,9 @@ $borderColor: #dcdbdc;
   :global .rbc-header{
     border-bottom: 1px solid $borderColor;
   }
+  :global .rbc-events-container{
+    margin-right: 0 !important;
+  }
   :global .rbc-time-header.rbc-overflowing{
 
   }

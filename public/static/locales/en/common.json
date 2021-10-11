@@ -31,6 +31,12 @@
     "reports": "Reports",
     "contacts": "Contacts"
   },
+
+  "invitePage" : {
+    "masterInvite": "would like to invite you to join him/her on MastersPages and see you among his/hers valued clients.",
+    "clientInvite": "would like to invite you see his/hers profile on MastersPages."
+  },
+
   "validation": {
     "email": "Wrong email format",
     "passwordMatch": "Password does not match",
@@ -44,6 +50,9 @@
     "rangeError": "Invalid Range"
   },
   "master": "Master",
+  "master2": "master",
+  "client2": "client",
+  "you": "You",
   "aboutSite": "ABOUT MASTERS PAGES",
   "findMaster": "VIEW MORE MASTERS",
   "findVolunteer": "VIEW MORE VOLUNTEERS",

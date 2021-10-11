@@ -63,6 +63,9 @@ display: flex;
       margin-right: 0px;
     }
   }
+  @media screen and (max-width: 490px){
+    flex-direction: column;
+  }
 }
 
 .orSection {
