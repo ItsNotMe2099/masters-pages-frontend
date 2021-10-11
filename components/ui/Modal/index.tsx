@@ -7,6 +7,7 @@ import styles from './index.module.scss'
 import ReactModal from 'react-modal'
 import { useDispatch } from 'react-redux'
 import ModalHeader from "./Header";
+import CloseIcon from 'components/svg/CloseIcon'
 
 
 interface Props {
@@ -75,8 +76,8 @@ export default function Modal(props: Props) {
       <div className={styles.frame} >
         <div className={styles.overlay} onClick={props.onRequestClose}/>
       <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
-        {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`}>
-          <Button closeBtn onClick={props.onRequestClose}></Button>
+        {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`} onClick={props.onRequestClose}>
+          <CloseIcon/>
         </div>}
        <div className={styles.center} ref={bodyRef}>
         {(props.image && !props.loading) && <div className={styles.image}>
