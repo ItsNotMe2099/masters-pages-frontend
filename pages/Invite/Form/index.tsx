@@ -78,7 +78,7 @@ let InviteForm = (props: Props) => {
           size={'small'}
           disabled={loading}
           noMargin={true}
-          placeholder={'Name'}
+          placeholder={t('name')}
           component={Input}
           validate={required}
         />

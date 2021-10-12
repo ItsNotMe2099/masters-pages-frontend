@@ -1,4 +1,3 @@
-import {getAuthServerSide} from "utils/auth";
 import styles from 'pages/NewMain/index.module.scss'
 import MainSectionFirst from 'pages/NewMain/components/MainSectionFirst'
 import MainSectionSecond from 'pages/NewMain/components/MainSectionSecond'
@@ -6,11 +5,8 @@ import MainSectionThird from 'pages/NewMain/components/MainSectionThird'
 import MainSectionHeader from 'pages/NewMain/components/Header'
 import MainSectionFooter from 'pages/NewMain/components/Footer'
 import Modals from 'components/layout/Modals'
-import Head from 'next/head'
 import MainSectionFourth from "./components/MainSectionFourth";
 import SignUpComponent from "components/Auth/SignUp";
-import { useDispatch, useSelector } from 'react-redux'
-import { IRootState } from "types";
 import { useEffect, useState } from "react";
 import cookie from 'js-cookie'
 
@@ -35,7 +31,6 @@ const NewMain = (props) => {
         showAbout
         onRequestClose={() => setIsOpen(false)}
         onClick={handleAbout}
-        aboutNotALink
       />
       <MainSectionHeader/>
       <MainSectionFirst/>

@@ -37,14 +37,6 @@ export default function MainSlider(props: Props) {
     nextArrow: <MainSliderControl direction='next'/>,
     prevArrow: <MainSliderControl direction='prev'/>,
     beforeChange: (current, next) => setCurrentIndex(next),
-    responsive: [
-      {
-        breakpoint: 1899,
-        settings: {
-          arrows: false
-        }
-      }
-    ]
   };
 
   const features = [

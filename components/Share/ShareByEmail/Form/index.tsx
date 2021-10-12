@@ -98,7 +98,7 @@ let ShareByEmailForm = (props: Props) => {
       </div>
           <FormError error={error}/>
         <div className={styles.btnContainer}>
-          <Button disabled={loading} red size="14px 65px">{t('shareByEmail.invite')} {profile.role === 'client' ? 'master' : 'client' }</Button>
+          <Button disabled={loading} red size="14px 65px">{t('shareByEmail.invite')} {profile.role === 'client' ? t('master2') : t('client2') }</Button>
         </div>
       </div>
       </div>}

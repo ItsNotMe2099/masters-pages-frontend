@@ -50,7 +50,7 @@ export const CheckboxList = (props) => {
           />
         </div>
       ))}
-      <ErrorInput {...props}/>
+      <div className={styles.error}><ErrorInput {...props}/></div>
       </div>
 
   );
