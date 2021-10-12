@@ -1,2 +1,2 @@
 [web]
-dev ansible_host=148.251.89.178 ansible_user=glm-ci ansible_port=2022
+dev ansible_host=masterspages.com ansible_user=glm-ci ansible_port=2022
