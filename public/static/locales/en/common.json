@@ -636,8 +636,19 @@
     "cancelTask": "Are you sure that you want to cancel task?",
     "title": "Waiting for negotiation response",
     "message": {
+      "statuses": {
+        "draft": "draft",
+        "planned": "planned",
+        "confirmed": "confirmed",
+        "declined": "declined",
+        "completed": "completed",
+        "approved": "approved",
+        "rejected": "rejected",
+        "overdue": "overdue",
+        "deleted": "deleted"
+      },
       "createdEvent": "{{profileText}} created event",
-      "changedStatus": "{{profileText}} changed status to {{message.eventLogRecordData.newStatus}}",
+      "changedStatus": "{{profileText}} changed status to {{status}}",
       "changedEvent": "{{profileText}} changed event details",
       "commentAdded": "{{profileText}} comment added",
       "attachedFile": "{{profileText}} attached file",

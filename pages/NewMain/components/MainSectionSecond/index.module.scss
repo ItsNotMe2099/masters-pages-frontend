@@ -7,12 +7,15 @@
 .container{
   padding: 56px 0px;
   position: relative;
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
+    width: 95%;
+  }
+  @media (max-width: 1024px) {
     flex-direction: column-reverse;
     width: 100%;
   }
@@ -22,16 +25,19 @@
   display: flex;
   flex-direction: column;
   @media (max-width: 1500px) {
-    width: 75%;
+    width: 65%;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
+    width: 70%;
+  }
+  @media (max-width: 1024px) {
     padding: 60px 16px;
     width: 100%;
   }
 
 }
 .free{
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     display: flex;
     justify-content: center;
   }
@@ -39,7 +45,7 @@
 
 .btn{
   div{
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       width: 100%;
       max-width: 100%;
     }
@@ -47,14 +53,10 @@
 }
 .rightSide{
   padding-left: 5%;
-  @media (max-width: 1500px) {
-    width: 25%;
-    padding-left: 2%;
-  }
   @media (max-width: 1200px) {
-    padding-left: 10%;
+    padding-left: 0;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     padding-left: 0;
     width: 100%;
     background: #f4fbf7;
@@ -76,7 +78,7 @@
   font-weight: bold;
   color: #373948;
   margin-top: 29px;
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     font-weight: bold;
     font-size: 24px;
     line-height: 110%;
@@ -87,6 +89,7 @@
 }
 
 .label{
+  width: 100%;
   &:first-of-type{
     margin-top: 0;
   }
@@ -106,8 +109,8 @@
   font-weight: bold;
   margin-right: 5px;
   text-transform: uppercase;
-  @media (max-width: 1280px) {
-    font-size: 60px;
+  @media (max-width: 1562px) {
+    font-size: 50px;
   }
   @media (max-width: 1150px) {
     font-size: 50px;
@@ -115,10 +118,13 @@
 }
 .letters{
   color: #373948;
+  @media (max-width: 1562px) {
+    font-size: 20px;
+  }
 }
 .labelSeparator{
   height: 85px;
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     height: 40px;
   }
 }
@@ -132,7 +138,7 @@
   @media (max-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     padding: 0;
   }
   @media (max-width: 480px) {
@@ -174,7 +180,7 @@
   @media (max-width: 1280px) {
     width: 45%;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 }
