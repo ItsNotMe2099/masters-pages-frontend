@@ -13,13 +13,13 @@ interface Props {
   isOpen?: boolean
   onRequestClose?: () => void,
   showAbout?: boolean
+  onClick?: () => void
 }
 
 const SignInComponent = (props: Props) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.authSignIn.loading)
-
 
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const SignInComponent = (props: Props) => {
           <div>{t('auth.signIn.dontHaveAccount')}</div>
           <div><a onClick={() => dispatch(signUpOpen())}>{t('auth.signUpLink')}</a></div>
         </div>
-        {props.showAbout && <Button href='/' target='_self' outlineBlack className={styles.findMaster}>{t('aboutSite')}</Button>}
+        {props.showAbout && <Button outlineBlack className={styles.findMaster} onClick={props.onClick}>{t('aboutSite')}</Button>}
 
     </Modal>
   )
