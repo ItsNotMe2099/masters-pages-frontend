@@ -849,7 +849,11 @@
     },
     "fourthSection": {
       "discoverMore": "Discover more",
-      "sampleProfiles": "Sample master profiles"
+      "sampleProfiles": "Sample master profiles",
+      "videos": {
+        "firstVideo": "What is master profile",
+        "secondVideo": "Calendar"
+      }
     },
     "categories": {
       "tutors": "Tutors",

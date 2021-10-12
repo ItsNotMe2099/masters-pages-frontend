@@ -853,7 +853,11 @@
     },
     "fourthSection": {
       "discoverMore": "Узнайте больше",
-      "sampleProfiles": "Примеры профилей мастеров"
+      "sampleProfiles": "Примеры профилей мастеров",
+      "videos": {
+        "firstVideo": "Что такое профиль мастера",
+        "secondVideo": "Календарь"
+      }
     },
     "categories": {
       "tutors": "Преподаватели",
