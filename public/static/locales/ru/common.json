@@ -640,9 +640,20 @@
     "cancelTask": "Вы уверены что хотите отменить Заказ?",
     "title": "Ожидает согласования",
     "message": {
+      "statuses": {
+        "draft": "draft",
+        "planned": "запланировано",
+        "confirmed": "подтверждено",
+        "declined": "отклонено",
+        "completed": "завершено",
+        "approved": "одобрено",
+        "rejected": "не принято",
+        "overdue": "просрочено",
+        "deleted": "удалено"
+      },
       "createdEvent": "{{profileText}} созданное Событие",
-      "changedStatus": "{{profileText}} изменен статус на {{message.eventLogRecordData.newStatus}}",
-      "changedEvent": "{{profileText}} изменены детали События",
+      "changedStatus": "{{profileText}} изменили статус на {{status}}",
+      "changedEvent": "{{profileText}} измененили детали События",
       "commentAdded": "{{profileText}} добавлен комментарий",
       "attachedFile": "{{profileText}} прикреплен файл",
       "addedFeedback": "{{profileText}} добавлена обратная связь",

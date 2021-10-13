@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import React from 'react'
 import {signUpOpen} from 'components/Modal/actions'
 import {useTranslation} from "i18n";
-import Button from "components/ui/Button";
 
 const Label = ({label, index}: {label: string, index: number}) => {
 
-  return (<div className={styles.label} style={{marginLeft:(index >= 3 ? 60 : 30) +  index * 18}}>
+  return (<div className={styles.label} style=
+  {{marginLeft:(index >= 3 ? 60 : 30) +  index * 18}}>
     <span className={styles.labelFirst}>{label[0]}</span>
     <span className={styles.letters}>{label.slice(1)}</span>
   </div>)

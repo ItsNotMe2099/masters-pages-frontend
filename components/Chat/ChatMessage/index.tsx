@@ -9,6 +9,7 @@ import {
 } from "components/TaskNegotiation/actions";
 import {format} from "date-fns";
 import {
+  EventStatus,
   IChat,
   IChatMessage,
   IChatMessageType,
@@ -55,17 +56,40 @@ export default function ChatMessage({ message, chat, size }: Props) {
       <div className={styles.time}> {hasTime && format(new Date(message.createdAt), 'MM.dd.yyy hh:mm')}</div>
     </div>);
   }
+  const messageStatus = () => {
+    switch (message.eventLogRecordData.newStatus){
+      case EventStatus.Approved:
+        return t('chat.message.statuses.approved')
+      case EventStatus.Completed:
+        return t('chat.message.statuses.completed')
+      case EventStatus.Confirmed:
+        return t('chat.message.statuses.confirmed')
+      case EventStatus.Declined:
+        return t('chat.message.statuses.declined')
+      case EventStatus.Deleted:
+        return t('chat.message.statuses.deleted')
+      case EventStatus.Draft:
+        return t('chat.message.statuses.draft')
+      case EventStatus.Overdue:
+        return t('chat.message.statuses.overdue')
+      case EventStatus.Planned:
+        return t('chat.message.statuses.planned')
+      case EventStatus.Rejected:
+        return t('chat.message.statuses.rejected')
+    }
+  }
   const renderMessages = (): ReactElement[] => {
     switch (message.type) {
       case IChatMessageType.EventLogRecord:
           let text = '';
           let profileText = message.profileId === profile.id ? t('you') : `${profile.firstName} ${profile.lastName}`
+          let status = messageStatus()
           switch (message.eventLogRecordType){
             case IEventLogRecordType.Created:
               text = t('chat.message.createdEvent', { profileText })
               break;
             case IEventLogRecordType.StatusChanged:
-              text = t('chat.message.changedStatus', { profileText, message })
+              text = t('chat.message.changedStatus', { profileText, status })
               break;
             case IEventLogRecordType.DetailesChanged:
               text = t('chat.message.changedEvent', { profileText })
