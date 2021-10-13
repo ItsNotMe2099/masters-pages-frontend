@@ -17,6 +17,8 @@
 .chatList{
   width: 427px;
   border-right: 1px solid #DDDDE5;
+  overflow-y: auto;
+  min-height: 50%;
   @media screen and (max-width: 1280px){
     width: 100%;
   }
@@ -26,6 +28,7 @@
   flex: 1;
   align-items: stretch;
   width: 100%;
+  min-height: 50%;
 }
 .tab{
   font-weight: 500;

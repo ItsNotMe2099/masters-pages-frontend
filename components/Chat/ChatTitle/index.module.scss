@@ -6,6 +6,47 @@
   padding: 0px 19px;
   background: #f9f9f9;
   z-index: 3;
+  position: relative;
+  justify-content: space-between;
+  @media screen and (max-width: 1280px){
+    flex-direction: column;
+    height: 100%;
+    padding: 19px;
+  }
+}
+.btns{
+  display: flex;
+  @media screen and (max-width: 1280px){
+    margin-top: 10px;
+  }
+  @media screen and (max-width: 520px){
+    flex-direction: column;
+  }
+}
+
+.arrow{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  @media screen and (min-width: 1281px){
+    display: none;
+  }
+}
+
+.open{
+  transform: rotate(180deg);
+}
+
+.none{
+  @media screen and (max-width: 1280px){
+    display: none;
+  }
+}
+
+.left{
+  display: flex;
+  align-items: center;
 }
 .title{
   font-size: 16px;
@@ -28,6 +69,10 @@
   text-transform: uppercase;
   &:first-of-type{
     margin-left: 0px;
+  }
+  @media screen and (max-width: 520px){
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 }
 .actionRed{

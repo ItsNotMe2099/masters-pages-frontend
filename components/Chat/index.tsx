@@ -66,9 +66,10 @@ export default function Chat(props: Props) {
         {chatList.map(chatItem => <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
         </div>
       </div>
+      {chat &&
       <div className={styles.chatMessages}>
-        {chat && <ChatMessageList chat={chat}/>}
-      </div>
+         <ChatMessageList chat={chat}/>
+      </div>}
     </div>
   )
 }

@@ -58,7 +58,7 @@ const SignInComponent = (props: Props) => {
           <div>{t('auth.signIn.dontHaveAccount')}</div>
           <div><a onClick={() => dispatch(signUpOpen())}>{t('auth.signUpLink')}</a></div>
         </div>
-        {props.showAbout && <Button outlineBlack className={styles.findMaster} onClick={props.onClick}>{t('aboutSite')}</Button>}
+        {props.showAbout && <Button transparent outlineBlack className={styles.findMaster} onClick={props.onClick}>{t('aboutSite')}</Button>}
 
     </Modal>
   )
