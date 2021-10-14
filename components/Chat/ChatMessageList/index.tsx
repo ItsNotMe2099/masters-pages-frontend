@@ -21,9 +21,10 @@ import { useSelector, useDispatch } from 'react-redux'
 interface Props {
   chat: IChat
   onRequestClose?: () => void
+  onClick?: () => void
 }
 
-export default function ChatMessageList({chat}: Props) {
+export default function ChatMessageList({chat, onClick}: Props) {
   const dispatch = useDispatch()
 
   const messages = useSelector((state: IRootState) => state.chat.messages)
@@ -93,7 +94,7 @@ export default function ChatMessageList({chat}: Props) {
 
   return (<div className={styles.root}>
       <div className={styles.title}>
-        <ChatTitle chat={chat}/>
+        <ChatTitle chat={chat} onClick={onClick}/>
       </div>
       <div className={styles.messages} ref={scrollableTarget} id="chat-messages">
         {(messagesLoading && total === 0) && <Loader/>}
