@@ -19,7 +19,10 @@
   bottom: 0px;
   overflow: auto;
   display: flex;
-  flexDirection: column-reverse;
+  flex-direction: column-reverse;
+  @media screen and (max-width: 1280px){
+    top: 81px;
+  }
   > div{
     width: 100%;
   }
