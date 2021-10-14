@@ -71,17 +71,15 @@ export default function ChatTitle({chat, onClick}: Props) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-   <div className={cx(styles.root, {[styles.unset]: isOpen})}>
+   <div className={styles.root}>
      <div className={styles.controls}>
-      <div className={cx(styles.arrow, {[styles.open]: isOpen})} style={{cursor: 'pointer'}} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
-        <ArrowDown/>
-      </div>
       <CloseIcon onClick={onClick}/>
     </div>
      <div className={styles.left}>
      <AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/>
      {<div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>}
      </div>
+     <div style={{cursor: 'pointer'}} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>{isOpen ? t('taskSearch.filter.less') : t('taskSearch.filter.more')}</div>
      <div className={cx(styles.btns, {[styles.none]: !isOpen})}>
      { chat.task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>{t('confirmModal.buttonCancel')}</Button>}
      { chat.task && isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleMarkAsDone}>{t('chat.markAsDone')}</Button>}

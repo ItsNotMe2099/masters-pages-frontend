@@ -2,7 +2,7 @@
 .root{
   display: flex;
   align-items: center;
-  height: 72px;
+  height: 71px;
   padding: 0px 19px;
   background: #f9f9f9;
   z-index: 3;
@@ -10,9 +10,8 @@
   justify-content: space-between;
   @media screen and (max-width: 1280px){
     flex-direction: column;
-    height: 78px;
     padding: 19px;
-    overflow: hidden;
+    height: 100%;
   }
 }
 
@@ -24,10 +23,6 @@
   margin-bottom: 5px;
 }
 
-.unset{
-  overflow: unset;
-  height: 100%;
-}
 .btns{
   display: flex;
   @media screen and (max-width: 1280px){
@@ -36,20 +31,6 @@
   @media screen and (max-width: 520px){
     flex-direction: column;
   }
-}
-
-.arrow{
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  margin-left: 5px;
-  @media screen and (min-width: 1281px){
-    display: none;
-  }
-}
-
-.open{
-  transform: rotate(180deg);
 }
 
 .none{
@@ -69,9 +50,11 @@
   }
   display: flex;
   width: 100%;
-  cursor: pointer;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 5px;
+  svg{
+    cursor: pointer;
+  }
 }
 .title{
   font-size: 16px;
