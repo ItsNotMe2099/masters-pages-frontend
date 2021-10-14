@@ -25,6 +25,18 @@
   }
 }
 .message{
+  @media screen and (max-width: 600px){
+    max-width: 500px;
+  }
+  @media screen and (max-width: 550px){
+    max-width: 400px;
+  }
+  @media screen and (max-width: 450px){
+    max-width: 300px;
+  }
+  @media screen and (max-width: 350px){
+    max-width: 280px;
+  }
 }
 .time{
   color: #3C4039;

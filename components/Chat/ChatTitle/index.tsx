@@ -26,9 +26,10 @@ import ArrowDown from "components/svg/ArrowDown";
 interface Props {
   chat: IChat
   onRequestClose?: () => void
+  onClick?: () => void
 }
 
-export default function ChatTitle({chat}: Props) {
+export default function ChatTitle({chat, onClick}: Props) {
   const dispatch = useDispatch();
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const lastNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
@@ -70,12 +71,16 @@ export default function ChatTitle({chat}: Props) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-   <div className={styles.root}>
-
+   <div className={cx(styles.root, {[styles.unset]: isOpen})}>
+     <div className={styles.controls}>
+      <div className={cx(styles.arrow, {[styles.open]: isOpen})} style={{cursor: 'pointer'}} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
+        <ArrowDown/>
+      </div>
+      <CloseIcon onClick={onClick}/>
+    </div>
      <div className={styles.left}>
      <AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/>
      {<div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>}
-     <div className={cx(styles.arrow, {[styles.open]: isOpen})} style={{cursor: 'pointer'}} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}><ArrowDown/></div>
      </div>
      <div className={cx(styles.btns, {[styles.none]: !isOpen})}>
      { chat.task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>{t('confirmModal.buttonCancel')}</Button>}

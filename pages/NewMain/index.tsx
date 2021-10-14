@@ -29,7 +29,6 @@ const NewMain = (props) => {
       <SignUpComponent
         isOpen={isOpen}
         showAbout
-        onRequestClose={() => setIsOpen(false)}
         onClick={handleAbout}
       />
       <MainSectionHeader/>

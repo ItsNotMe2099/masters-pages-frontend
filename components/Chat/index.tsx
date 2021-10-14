@@ -1,4 +1,4 @@
-import { fetchChatTasksList, fetchChatWithUsersList } from "components/Chat/actions";
+import { fetchChatTasksList, fetchChatWithUsersList, resetChatList } from "components/Chat/actions";
 import ChatListItem from "components/Chat/ChatListItem";
 import ChatMessageList from "components/Chat/ChatMessageList";
 import { taskNegotiationFetchLastConditions } from "components/TaskNegotiation/actions";
@@ -55,6 +55,10 @@ export default function Chat(props: Props) {
       }
   }
 
+  const handleClose = () => {
+    dispatch(resetChatList())
+  }
+
   if(chatListLoading){
     return <div className={styles.rootLoading}><Loader/></div>
   }
@@ -66,9 +70,9 @@ export default function Chat(props: Props) {
         {chatList.map(chatItem => <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
         </div>
       </div>
-      {chat &&
+      {chat && 
       <div className={styles.chatMessages}>
-         <ChatMessageList chat={chat}/>
+        <ChatMessageList chat={chat} onClick={handleClose}/>
       </div>}
     </div>
   )

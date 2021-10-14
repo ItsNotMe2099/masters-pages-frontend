@@ -45,6 +45,7 @@ export const updateChatMessagesState = ({ids, read}) => action(ActionTypes.UPDAT
   },
 })
 export const resetChatMessagesList = () => action(ActionTypes.CHAT_MESSAGES_RESET, {})
+export const resetChatList = () => action(ActionTypes.CHAT_LIST_RESET, {})
 export const newChatMessage = (params = {}) => action(ActionTypes.CHAT_MESSAGE_NEW, params)
 export const newChatMessageAddToList = (params = {}) => action(ActionTypes.CHAT_MESSAGE_ADD_TO_LIST, params)
 export const chatLogout = (params = {}) => action(ActionTypes.CHAT_LOGOUT, params)

@@ -239,6 +239,11 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         messages: [],
         totalMessages: 0,
       }
+    case ActionTypes.CHAT_LIST_RESET:
+      return {
+        ...state,
+        chat: null,
+      }
     default:
       return state
   }

@@ -8,7 +8,6 @@
   }
 }
 .header{
-  height: 48px;
   display: flex;
   align-items: center;
   padding: 0px 20px;
@@ -21,7 +20,6 @@
 .title{
   font-weight: 500;
   font-size: 16px;
-  height: 48px;
   margin-left: 8px;
   display: flex;
   align-items: center;
@@ -68,13 +66,21 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0px 20px;
+  @media screen and (max-width: 550px){
+    justify-content: center;
+    padding-top: 10px;
+  }
 }
 .actions{
   padding: 0px 20px;
   height: 68px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;;
+  justify-content: flex-end;
+  @media screen and (max-width: 550px){
+    flex-direction: column;
+    height: auto;
+  }
 }
 .outdated{
 
@@ -94,6 +100,10 @@
   color: #BABABA;
   margin-left: 10px;
   text-transform: uppercase;
+  @media screen and (max-width: 550px){
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
   &:first-of-type{
     margin-left: 0px;
   }
