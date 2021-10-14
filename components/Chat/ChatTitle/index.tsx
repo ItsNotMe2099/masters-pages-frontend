@@ -79,7 +79,9 @@ export default function ChatTitle({chat, onClick}: Props) {
      <AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/>
      {<div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>}
      </div>
-     <div style={{cursor: 'pointer'}} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>{isOpen ? t('taskSearch.filter.less') : t('taskSearch.filter.more')}</div>
+     <div className={styles.more} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
+       {isOpen ? t('taskSearch.filter.less') : t('taskSearch.filter.more')}
+      </div>
      <div className={cx(styles.btns, {[styles.none]: !isOpen})}>
      { chat.task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>{t('confirmModal.buttonCancel')}</Button>}
      { chat.task && isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleMarkAsDone}>{t('chat.markAsDone')}</Button>}

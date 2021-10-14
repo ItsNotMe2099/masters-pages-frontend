@@ -15,12 +15,12 @@
   }
 }
 
-.back{
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.more{
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  @media screen and (min-width: 1281px){
+    display: none;
+  }
 }
 
 .btns{
