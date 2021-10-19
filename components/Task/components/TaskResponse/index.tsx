@@ -49,12 +49,15 @@ const TaskResponse = ({ response, task }: Props) => {
   }
   return ( <div className={styles.root}>
     {!response.isRead && <NotificationBadge/> }
+    <div className={styles.left}>
     <div className={styles.time}>{format(new Date(response.createdAt), 'MM.dd.yyy hh:mm')}</div>
     <Link href={`/id${response.profile?.id}`}>
     <a className={styles.profile}>{response.profile?.firstName} {response.profile?.lastName}</a>
     </Link>
       <div className={styles.rating}></div>
     <div className={styles.message} onClick={handleShowOffer}><img src={'/img/icons/chat_small.svg'} />{response.message}</div>
+    </div>
+    <div className={styles.right}>
     <div className={styles.priceDetails}>{response.budget ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/${t('priceRateSuffix')}`}</div>
     <div className={styles.priceDetails}></div>
     {response.state === 'declined' && <div className={styles.declined}>{t('taskResponse.declined')}</div>}
@@ -63,6 +66,7 @@ const TaskResponse = ({ response, task }: Props) => {
       {response.state === 'accepted' && <div className={styles.action} onClick={handleMessages}>{t('taskResponse.messages')}</div>}
       {response.state !== 'accepted' && <div className={styles.action} onClick={handleAccept}>{t('taskResponse.accept')}</div>}
     </div>}
+    </div>
   </div>);
 }
 export default TaskResponse
