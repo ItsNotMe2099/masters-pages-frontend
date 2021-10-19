@@ -3,6 +3,9 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  @media screen and (max-width: 420px){
+    flex-direction: column-reverse;
+  }
 }
 .button{
   height: 38px;
@@ -11,6 +14,10 @@
 .buttonSubmit{
   flex: 1;
   margin-left: 15px;
+  @media screen and (max-width: 420px){
+    margin-left: 0;
+    margin-bottom: 15px;
+  }
 }
 
 .title{
