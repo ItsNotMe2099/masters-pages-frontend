@@ -12,7 +12,11 @@ import {useTranslation, withTranslation} from "i18n";
 import {getProfileRoleByRoute} from 'utils/profile'
 import {useRouter} from 'next/router'
 
- const ModeSelect = () => {
+interface Props {
+  onClick?: () => void
+}
+
+ const ModeSelect = (props: Props) => {
    const { t } = useTranslation('common');
    const {route: currentRoute} = useRouter();
    const roleCurrent = useSelector((state: IRootState) => state.profile.role)
@@ -41,6 +45,7 @@ import {useRouter} from 'next/router'
     setValue(item);
     dispatch(changeRole(item.value))
     setIsActive(false);
+    props.onClick()
   }
   const handleActiveOptionClick = (e) => {
     e.preventDefault();

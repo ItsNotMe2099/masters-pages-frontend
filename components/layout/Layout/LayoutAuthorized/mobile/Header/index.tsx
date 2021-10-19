@@ -125,7 +125,7 @@ const Header = (props: Props) => {
           <div
             className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {t('personalArea.profile.youAreIn')}
           </div>
-          <ModeSelect/>
+          <ModeSelect onClick={handleCloseMobileMenu}/>
           {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<div onClick={handleCloseMobileMenu}><MenuItem
           isActive={(props.isCurrentProfileOpened && item.link === profileLink ) || (item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
           link={item.link} badge={item.badge} mode={role}/></div></>)}
