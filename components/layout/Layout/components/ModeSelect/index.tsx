@@ -45,7 +45,9 @@ interface Props {
     setValue(item);
     dispatch(changeRole(item.value))
     setIsActive(false);
+    if(props.onClick) {
     props.onClick()
+    }
   }
   const handleActiveOptionClick = (e) => {
     e.preventDefault();
