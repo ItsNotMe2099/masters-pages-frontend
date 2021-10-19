@@ -1,6 +1,7 @@
 image: gitlab.glob-com.ru:4567/glob-com/ci/docker-ansible:latest
 
 before_script:
+  - cat /etc/hosts
   - git submodule sync --recursive
   - git submodule update --init --recursive
 
