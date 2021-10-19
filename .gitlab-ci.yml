@@ -1,8 +1,6 @@
+image: gitlab.glob-com.ru:4567/glob-com/ci/docker-ansible:latest
+
 before_script:
-  - apk update && apk add curl && apk add bind-tools
-  - host gitlab.glob-com.ru
-  - curl https://gitlab.glob-com.ru
-  - cat /etc/hosts
   - git submodule sync --recursive
   - git submodule update --init --recursive
 
