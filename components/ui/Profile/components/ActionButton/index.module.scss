@@ -12,6 +12,9 @@
   &:hover {
     font-weight: bold;
   }
+  @media screen and (max-width: 400px){
+    margin-bottom: 20px;
+  }
 }
 .button{
   display: flex;

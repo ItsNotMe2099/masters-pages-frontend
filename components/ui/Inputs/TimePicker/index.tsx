@@ -25,7 +25,7 @@ export default function TimePicker(props: Props) {
       minuteStep={5}
       disabled={disabled}
       onChange={handleChange}
-    value={value}
+      value={value}
       disabledHours={disabledHours}
       disabledMinutes={disabledMinutes}
     />
