@@ -641,7 +641,7 @@
     "title": "Ожидает согласования",
     "message": {
       "statuses": {
-        "draft": "draft",
+        "draft": "черновик",
         "planned": "запланировано",
         "confirmed": "подтверждено",
         "declined": "отклонено",
@@ -653,7 +653,7 @@
       },
       "createdEvent": "{{profileText}} созданное Событие",
       "changedStatus": "{{profileText}} изменили статус на {{status}}",
-      "changedEvent": "{{profileText}} измененили детали События",
+      "changedEvent": "{{profileText}} изменили детали События",
       "commentAdded": "{{profileText}} добавлен комментарий",
       "attachedFile": "{{profileText}} прикреплен файл",
       "addedFeedback": "{{profileText}} добавлена обратная связь",
