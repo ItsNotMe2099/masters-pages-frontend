@@ -15,7 +15,7 @@ import MainSectionButton from 'pages/NewMain/components/Button';
 
 let SignUp = props => {
   const { t } = useTranslation('common');
-  const { handleSubmit } = props
+  const { handleSubmit, onClick } = props
   const error = useSelector((state: IRootState) => state.authSignUp.formError)
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -34,7 +34,7 @@ let SignUp = props => {
             name="terms"
             component={Checkbox}
             validate={required}
-            label={<div>{t('agreeWith')} <Link href="/">{t('termsAndConditions')}</Link></div>}
+            label={<div>{t('agreeWith')} <Link href="/Terms"><a onClick={onClick}>{t('termsAndConditions')}</a></Link></div>}
           />
       </div>
     </form>

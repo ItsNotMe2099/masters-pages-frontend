@@ -40,10 +40,12 @@ const MainSectionHeader = (props: Props) => {
   return (
     <div  className={styles.root}>
       <div  className={styles.container}>
-        <div className={styles.logo}>
+      <Link href='/'>
+        <a className={styles.logo}>
           <img src={'/img/Main/logo_red.svg'}/>
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
-        </div>
+        </a>
+      </Link>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
           {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}

@@ -48,7 +48,7 @@ const SignUpComponent = (props: Props) =>  {
             <span>{t('createTask.priceSelect.or')}</span>
             <div className={styles.separator}></div>
           </div>
-          <SignUp onSubmit={handleSubmit}/>
+          <SignUp onSubmit={handleSubmit} onClick={props.onRequestClose}/>
         <div className={styles.signUp}>
           <div>{t('auth.signUp.alreadyHaveAccount')}</div>
           <div><a onClick={() => dispatch(signInOpen())}>{t('auth.signInLink')}</a></div>
