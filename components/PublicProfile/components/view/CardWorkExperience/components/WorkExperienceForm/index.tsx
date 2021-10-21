@@ -47,7 +47,7 @@ let WorkExperienceForm = (props) => {
           component={InputDate}
           size={'small'}
           label={t('cardWorkExperience.form.toDate')}
-          validate={[required, date]}
+          validate={[date]}
           labelType={'placeholder'}
         />
       </div>

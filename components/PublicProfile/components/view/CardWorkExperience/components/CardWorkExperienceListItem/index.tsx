@@ -24,7 +24,7 @@ const CardWorkExperienceListItem = ({model, isEdit, onEdit, onDelete}: Props) =>
     if(model.fromDate && model.toDate){
       return `${t('from')} ${formatDate(model.fromDate)} - ${formatDate(model.toDate)} - ${formatDistanceStrict(parseDate(model.fromDate), parseDate(model.toDate), { locale: language === 'ru' && ru })}`;
     }else if(model.fromDate){
-      return `${t('from')} ${formatDate(model.fromDate)} ${t('to now')} - ${formatDistanceToNowStrict(parseDate(model.fromDate), { locale: language === 'ru' && ru })}`;
+      return `${t('from')} ${formatDate(model.fromDate)} ${t('to now')} - ${formatDistanceStrict(parseDate(model.fromDate),  new Date(),{ locale: language === 'ru' && ru })}`;
     }else if(model.toDate){
       return `${t('until')} ${formatDate(model.toDate), { locale: language === 'ru' && ru }}`;
     }
