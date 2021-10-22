@@ -276,7 +276,7 @@
   "formatAllowed": "Format allowed: PNG, JPEG, MP4",
   "cancel": "Cancel",
   "save": "Save",
-  "portfolioLabel": "Portfolio",
+  "portfolioLabel": "Projects",
   "type": "Type",
   "online": "Online",
   "offline": "Offline",
@@ -777,7 +777,7 @@
       "master": "Master {{statusText}} your offer",
       "clientOffer": "Client {{statusText}} your offer",
       "youStatusText": "You {{statusText}}",
-      "youSend": "You send your task negotiation", 
+      "youSend": "You send your task negotiation",
       "negotiationFromMaster": "New task negotation from master",
       "negotiationFromClient": "New task negotation from client",
       "masterNegotiation": "Master {{statusText}} your negotiation",
@@ -1041,7 +1041,7 @@
     "postBy": "Post by"
   },
   "cardGallery": {
-    "gallery": "Gallery",
+    "gallery": "Gallery of works",
     "addPhoto": "Add photo"
   },
   "cardLanguages": {
@@ -1083,7 +1083,7 @@
   },
   "cardWorkExperience": {
     "addWorkExperience": "Add work experience",
-    "qualification": "Proffesional qualifications and work experience",
+    "qualification": "Education, qualification, work experience",
     "form": {
       "jobPosition": "Job position",
       "fromDate": "From date",

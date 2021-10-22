@@ -281,7 +281,7 @@
   "formatAllowed": "Допустимые форматы: PNG, JPEG, MP4",
   "cancel": "Отменить",
   "save": "Сохранить",
-  "portfolioLabel": "Портфолио",
+  "portfolioLabel": "Проекты",
   "type": "Тип",
   "online": "Онлайн",
   "offline": "Оффлайн",
@@ -781,7 +781,7 @@
       "master": "Мастер {{statusText}} ваше предложение",
       "clientOffer": "Клиент {{statusText}} ваше предложение",
       "youStatusText": "Вы {{statusText}}",
-      "youSend": "Вы отправили задачу на согласование", 
+      "youSend": "Вы отправили задачу на согласование",
       "negotiationFromMaster": "Новое обсуждение условий Заказа от Мастера",
       "negotiationFromClient": "Новое обсуждение условий Заказа от Клиента",
       "masterNegotiation": "Мастер {{statusText}} ваше обсуждение условий",
@@ -1045,7 +1045,7 @@
     "postBy": "Публикация"
   },
   "cardGallery": {
-    "gallery": "Галерея",
+    "gallery": "Галерея Работ",
     "addPhoto": "Добавить фото"
   },
   "cardLanguages": {
@@ -1088,7 +1088,7 @@
   },
   "cardWorkExperience": {
     "addWorkExperience": "Добавьте опыт работы",
-    "qualification": "Профессиональные квалификации и опыт работы",
+    "qualification": "Образование, квалификации, опыт работы",
     "form": {
       "jobPosition": "Должность",
       "fromDate": "С даты",
