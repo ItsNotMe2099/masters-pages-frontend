@@ -127,13 +127,13 @@ function MyApp({Component, pageProps}) {
             ');
             fbq('track', 'PageView');`}}
           />
-
+        <noscript dangerouslySetInnerHTML={{
+          __html: `<img height="1" width="1" style="display:none"
+                           src="https://www.facebook.com/tr?id=1285136815270257&ev=PageView&noscript=1"
+            />`
+        }}/>
       </Head>
-      <noscript
-        dangerouslySetInnerHTML={{
-          __html:
-            `<img height="1" width="1" src="https://www.facebook.com/tr?id=1285136815270257&ev=PageView&noscript=1"/>`}}
-      />
+
       <Provider store={store}>
      <Wrapper Component={Component} {...pageProps}/>
       </Provider>
