@@ -111,9 +111,9 @@ export const  taskNegotiationHireMasterRequest = (taskId: number, profileId: num
 })
 
 
-export const taskNegotiationFetchLastConditions = (taskId: number) => action(ActionTypes.TASK_NEGOTIATION_FETCH_LAST_CONDITIONS, {
+export const taskNegotiationFetchLastConditions = (taskId: number, profileId: number = null) => action(ActionTypes.TASK_NEGOTIATION_FETCH_LAST_CONDITIONS, {
   api: {
-    url: `/api/task-negotiation/${taskId}/last-conditions`,
+    url: `/api/task-negotiation/${taskId}/last-conditions?profileId=${profileId}`,
     method: 'GET',
   }
 })

@@ -22,6 +22,8 @@ export default function Chat(props: Props) {
   const chatList = useSelector((state: IRootState) => state.chat.chatList)
   const chatListLoading = useSelector((state: IRootState) => state.chat.chatListLoading)
   const {isTaskChat} = props;
+
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
   const [activeTab, setActiveTab] = useState(isTaskChat ? 'tasks' : 'people')
   const { t } = useTranslation('common');
 
@@ -30,7 +32,7 @@ export default function Chat(props: Props) {
   }
   useEffect(() => {
     if(chat?.id && chat.task?.id){
-      dispatch(taskNegotiationFetchLastConditions(chat.task?.id));
+      dispatch(taskNegotiationFetchLastConditions(chat.task?.id, currentProfile.role === 'client' ? chat.profileId != currentProfile.id ? chat.profileId : chat.participantId : null));
     }
   }, [chat])
 
@@ -70,7 +72,7 @@ export default function Chat(props: Props) {
         {chatList.map(chatItem => <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
         </div>
       </div>
-      {chat && 
+      {chat &&
       <div className={styles.chatMessages}>
         <ChatMessageList chat={chat} onClick={handleClose}/>
       </div>}
