@@ -43,7 +43,7 @@ const CardCategories = (props: Props) => {
 
   const handleRemoveCategory = (item: SkillListItem) => {
     dispatch(confirmOpen({
-      description: `${t('doYouWantToDelete')} «${getCategoryTranslation(item).name}»?`,
+      description: `${t('doYouWantToDelete')} «${getCategoryTranslation(item, i18n.language).name}»?`,
 
       onConfirm: () => {
         dispatch(deleteSkillCategory(item.id))

@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import {getAuthServerSide} from "utils/auth";
 import { useDispatch, useSelector } from 'react-redux'
+import {removeObjectEmpty} from 'utils/array'
 const queryString = require('query-string')
 const SearchMasterPage = (props) => {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const SearchMasterPage = (props) => {
   useEffect(() => {
     dispatch(resetProfileSearchList());
     if(router.query.filter) {
-      dispatch(setFilterProfileSearch(JSON.parse((router.query as any).filter)));
+      dispatch(setFilterProfileSearch(removeObjectEmpty(JSON.parse((router.query as any).filter))));
     }
     if(router.query.sortType) {
       dispatch(setSortProfileSearch((router.query as any).sortType));

@@ -46,16 +46,17 @@ let SearchTaskForm = (props) => {
     <form onSubmit={handleSubmit} className={styles.root}>
           {collapsed ? <>
               <Field
-                name="categoryId"
-                component={InputCategory}
-                label={t('taskSearch.filter.fieldCategory')}
+                name="mainCategoryId"
+                component={InputSubCategory}
+                label={t('taskSearch.filter.fieldMainCategory')}
                 noMargin={true}
                 withIcon={false}
                 showEmpty={true}
-                labelType={'placeholder'}
                 onChange={() => {
+                  props.change('categoryId', null);
                   props.change('subCategoryId', null);
                 }}
+                labelType={'placeholder'}
               />
               {!isMobile && <Field
                 name="subCategoryId"

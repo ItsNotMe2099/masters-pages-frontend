@@ -35,7 +35,7 @@ export const getServerSideProps = async (ctx) => {
     ctx.res.writeHead(302, { Location: `/Calendar?eventId=${chat.eventId}` });
 
   }else if(chat.taskId){
-    ctx.res.writeHead(302, { Location: `/Chat/task-dialog/${otherProfileId}` });
+    ctx.res.writeHead(302, { Location: `/Chat/task-dialog/${chat.taskId}/${otherProfileId}` });
   }else{
      ctx.res.writeHead(302, { Location: `/Chat/dialog/${otherProfileId}` });
   }

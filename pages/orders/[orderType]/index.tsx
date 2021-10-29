@@ -119,7 +119,7 @@ const TabOrders = (props: Props) => {
         <TabSelect tabs={tabs.map((tab => {
         const statResult = stat.find(item => item.task_status === tab.key);
 
-        return {...tab, name: `${tab.name} (${statResult ? statResult.count : 0})`}
+        return  {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={orderType as string}/>
 
         </div>

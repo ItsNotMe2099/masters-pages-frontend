@@ -25,6 +25,7 @@ export default function SavedSearchList(props: Props) {
   const dispatch = useDispatch();
   const list = useSelector((state: IRootState) => state.savedSearch.list)
   const {t} = useTranslation();
+
   useEffect(() => {
     dispatch(resetSavedSearchesList());
     if (type === 'task') {
@@ -37,6 +38,7 @@ export default function SavedSearchList(props: Props) {
   const handleClick = (item) => {
     const data: any = {
       keywords: item.keywords,
+      mainCategoryId: item.mainCategoryId,
       categoryId: item.categoryId,
       subCategoryId: item.subCategoryId,
       geonameid: item.geonameid,

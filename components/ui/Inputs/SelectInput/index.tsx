@@ -88,6 +88,7 @@ const SelectInput = (props: Props) => {
     if(!input){
       return;
     }
+    console.log("MainCateogryFormChange", input.value);
     let _setCurrentLabel = null;
     if(props.allowCustomInput){
       _setCurrentLabel = (props.changeWithValue ? input.value.label :  input.value )

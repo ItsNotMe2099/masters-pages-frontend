@@ -31,7 +31,7 @@ import FileList from 'components/ui/FileList'
 
 const TaskPage = (props) => {
   const router = useRouter()
-  const {t} = useTranslation('common');
+  const {t, i18n} = useTranslation('common');
   //const { task } = router.query
   const dispatch = useDispatch()
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -238,12 +238,12 @@ const TaskPage = (props) => {
           <div className={styles.category}>
             <div className={styles.field}>
               <div className={styles.label}>{t('category')}</div>
-              <div className={styles.value}>{getCategoryTranslation(task.category)?.name}</div>
+              <div className={styles.value}>{getCategoryTranslation(task.category, i18n.language)?.name}</div>
             </div>
 
             <div className={styles.field}>
               <div className={styles.label}>{t('subCategory')}</div>
-              <div className={styles.value}>{getCategoryTranslation(task.subCategory)?.name}</div>
+              <div className={styles.value}>{getCategoryTranslation(task.subCategory, i18n.language)?.name}</div>
             </div>
 
           </div>

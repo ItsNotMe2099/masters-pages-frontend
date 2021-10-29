@@ -69,14 +69,14 @@ export default function LayoutAuthorized(props: Props) {
     {title: t('menu.profile'), icon: 'profile', link: profileLink},
     {title: t('menu.share'), icon: 'share', link: '/Share'},
     {title: t('menu.invite'), icon: 'invite', link: '/Invite'},
-    ...(profile.role !== 'client' ? [
+    ...(role !== 'client' ? [
     {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage', isSeparator: true}
     ] : []),
     {title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount},
     {title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
     {title: t('menu.reports'), icon: 'reports', link: '/Report'},
 
-    ...(profile.role === 'client' ? [
+    ...(role === 'client' ? [
       {title: t('menu.findMaster'), icon: 'find-clients', link: '/SearchMasterPage', isSeparator: true},
       {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage'},
     ] : [
