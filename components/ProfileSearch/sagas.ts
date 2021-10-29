@@ -7,6 +7,7 @@ import { takeLatest, put, take, select } from 'redux-saga/effects'
 import { IRootState } from "types";
 import { ActionType } from 'typesafe-actions'
 import ActionTypes from './const'
+import {removeObjectEmpty} from 'utils/array'
 
 
 function* ProfileSearchSaga() {
@@ -19,8 +20,9 @@ function* ProfileSearchSaga() {
       const sort = yield select((state: IRootState) => state.profileSearch.sort)
       const sortOrder = yield select((state: IRootState) => state.profileSearch.sortOrder)
       const page = yield select((state: IRootState) => state.profileSearch.page)
+      console.log("FilterDataFetch", filter);
       yield put(fetchProfileSearchListRequest({
-          ...filter,
+          ...removeObjectEmpty(filter),
           sort,
         sortOrder,
           page,

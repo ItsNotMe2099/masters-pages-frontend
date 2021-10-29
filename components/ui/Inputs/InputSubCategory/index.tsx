@@ -19,11 +19,14 @@ export default function InputSubCategory(props) {
 
   const [options, setOptions] = useState([]);
   useEffect(() => {
+    getSearchCategory();
     if(props.input.value){
-      getSearchCategory();
+
     }
 
   }, [i18n.language])
+
+
 
   const getSearchCategory = (search = '') => {
     return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
@@ -46,7 +49,9 @@ export default function InputSubCategory(props) {
   }
 
   useEffect(() => {
-
+    if(props.categoryId) {
+      getSearchCategory();
+    }
   }, [props.categoryId])
 
   return (

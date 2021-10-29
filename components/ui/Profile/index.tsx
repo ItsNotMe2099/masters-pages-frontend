@@ -46,7 +46,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
     dispatch(taskNegotiationSetCurrentProfile(profile));
     dispatch(taskOfferOpen());
   }
-  const {t} = useTranslation('common')
+  const {t, i18n} = useTranslation('common')
   const handleReadMore = () => {
 
   }
@@ -139,7 +139,7 @@ const profileLink = `/id${profile.id}`;
           </div>
 
           <div className={styles.desc}>
-            <Tabs style={'roundSmall'} onChange={handleChangeTab} activeTab={currentCategoryTab} tabs={profile.skills.map(skill => ({key: `${skill.id}`, name: getCategoryTranslation(skill)?.name, }))}/>
+            <Tabs style={'roundSmall'} onChange={handleChangeTab} activeTab={currentCategoryTab} tabs={profile.skills.map(skill => ({key: `${skill.id}`, name: getCategoryTranslation(skill, i18n.language)?.name, }))}/>
           </div>
 
           <div className={styles.skillsContainer}>
@@ -151,14 +151,14 @@ const profileLink = `/id${profile.id}`;
 
               </div>
               <div className={styles.currentSubCategoryInfo}>
-              <div className={styles.currentSubCategoryTitle}>{getCategoryTranslation(skill.subCategory).name}</div>
+              <div className={styles.currentSubCategoryTitle}>{getCategoryTranslation(skill.subCategory, i18n.language).name}</div>
               <div className={styles.currentSubCategoryLabel}>{`${t('price')}:`}</div>
               <div className={styles.currentSubCategoryPrice}>{skill.price ? `$${skill.price}` : skill.ratePerHour ? `$${skill.ratePerHour}/${t('hour')}`: 'N/A'}</div>
               <div className={styles.currentSubCategoryMore}>{t('more')}</div>
               </div>
             </div>))}
             <div className={styles.skillsList}>
-            {currentSkill?.skills.filter(skill => !selectedSubCategoryId || selectedSubCategoryId === skill.subCategoryId).map(skill => <div className={styles.skillItem}>{getCategoryTranslation(skill.subCategory).name}</div>)}
+            {currentSkill?.skills.filter(skill => !selectedSubCategoryId || selectedSubCategoryId === skill.subCategoryId).map(skill => <div className={styles.skillItem}>{getCategoryTranslation(skill.subCategory, i18n.language).name}</div>)}
             </div>
             <div className={styles.nextButton}>
               <ArrowRight/>

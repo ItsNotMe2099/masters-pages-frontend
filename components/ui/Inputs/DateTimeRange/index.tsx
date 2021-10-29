@@ -11,7 +11,8 @@ import moment from "moment";
 import {range} from 'utils/array'
 import * as React from 'react'
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
-
+import {useTranslation} from 'i18n'
+import * as dLocales from 'date-fns/locale'
 interface Props {
   input: any,
   showIcon?: boolean
@@ -28,7 +29,7 @@ interface Props {
 export default function DateTimeRange(props: Props) {
   const {disabled, inputClassName} = props;
   const { value, onChange } = props.input;
-
+  const {t, i18n} = useTranslation();
   const dateRangeRef = useRef(null);
   const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
   useEffect(() => {
@@ -128,6 +129,7 @@ export default function DateTimeRange(props: Props) {
       </div>
       <div className={`${styles.dateRange} ${isDateRangeOpen && styles.dateRangeOpen}`}>
       <DateRange
+        locale={i18n.language === 'ru' ? dLocales.ru : dLocales.enGB }
         onChange={handleChange}
         showSelectionPreview={true}
         moveRangeOnFirstSelection={false}

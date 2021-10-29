@@ -10,7 +10,8 @@ import {useDetectOutsideClick} from 'components/hooks/useDetectOutsideClick' // 
 import moment from "moment";
 import {range} from 'utils/array'
 import * as React from 'react'
-
+import * as rdrLocales from 'react-date-range/dist/locale';
+import {useTranslation} from 'i18n'
 interface Props {
   input: any,
   showIcon?: boolean
@@ -21,7 +22,7 @@ interface Props {
 export default function DateTime(props: Props) {
   const { disabled } = props;
   const { value, onChange } = props.input;
-
+  const {t, i18n} = useTranslation();
   const dateRangeRef = useRef(null);
   const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function DateTime(props: Props) {
       </div>
       <div className={`${props.modal ? styles.dateRangeModal : styles.dateRange} ${isDateRangeOpen && styles.dateRangeOpen}`}>
       <Calendar
+        locale={i18n.language === 'ru' ? rdrLocales.ru : rdrLocales.en}
         onChange={handleChange}
         showSelectionPreview={true}
         moveRangeOnFirstSelection={false}

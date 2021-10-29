@@ -2,6 +2,7 @@ import styles from "./index.module.scss";
 import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import {format} from 'date-fns'
+import {useTranslation} from 'i18n'
 interface Props {
   label: string
   meta: any
@@ -13,12 +14,14 @@ export default function InputDate(props: Props) {
   const {input: {value, onChange}} = props;
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   console.log("ValueNew", value)
+  const {t, i18n} = useTranslation();
   return (
     <div className={styles.root}>
   <label className={styles.label}>{props.label}</label>
 
       <DatePicker
         className={styles.datePicker}
+        locale={i18n.language}
         onChange={(value) => {
           if(!value){
             onChange(null);

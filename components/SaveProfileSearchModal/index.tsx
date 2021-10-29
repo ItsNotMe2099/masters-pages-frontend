@@ -13,7 +13,7 @@ interface Props {
 
 export default function SaveProfileSearchModal(props: Props) {
   const dispatch = useDispatch();
-  const filter = useSelector((state: IRootState) => state.taskSearch.filter)
+  const filter = useSelector((state: IRootState) => state.profileSearch.filter)
   const { t } = useTranslation('common');
 
   const formLoading = useSelector((state: IRootState) => state.profileFeedback.formLoading)

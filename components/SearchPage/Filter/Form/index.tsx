@@ -259,6 +259,7 @@ const selector = formValueSelector('searchTaskForm') // <-- same as form name
 SearchProfileForm = connect(state => {
   const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
+  console.log("MainCateogryForm", mainCategoryId);
   return {
     categoryId,
     mainCategoryId,
