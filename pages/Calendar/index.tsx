@@ -107,8 +107,8 @@ const CalendarPage = (props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [draggedEvent, setDraggedEvent] = useState(null);
   const intervalRef = useRef(null);
-  const lang = cookie.get('next-i18next')
-  const {t} = useTranslation('common')
+  const {t, i18n} = useTranslation('common');
+
   useEffect(() => {
     if( router.query.eventId){
       dispatch(fetchEvent(parseInt(router.query.eventId as string, 10) ))
@@ -268,13 +268,13 @@ const CalendarPage = (props) => {
       if (currentView === Views.MONTH) {
         const centerDate = add(rangeStartDate, {days: 15});
         if (centerDate)
-          return `${format(centerDate, 'MMMM yyyy', {locale: lang === 'ru' && ru})}`
+          return `${format(centerDate, 'MMMM yyyy', {locale: i18n.language === 'ru' && ru})}`
       } else {
-        return `${format(rangeStartDate, 'MMMM dd', {locale: lang === 'ru' && ru})} - ${format(rangeEndDate, 'MMMM dd', {locale: lang === 'ru' && ru})}`
+        return `${format(rangeStartDate, 'MMMM dd', {locale: i18n.language === 'ru' && ru})} - ${format(rangeEndDate, 'MMMM dd', {locale: i18n.language === 'ru' && ru})}`
       }
 
     } else if (isSameDay(rangeStartDate, rangeEndDate)) {
-      return `${format(rangeStartDate, 'MMMM dd EEEE', {locale: lang === 'ru' && ru})}`
+      return `${format(rangeStartDate, 'MMMM dd EEEE', {locale: i18n.language === 'ru' && ru})}`
     }
   }
   const handleCreate = () => {
@@ -294,7 +294,7 @@ return (
         <DnDCalendar
           selectable
           localizer={localizer}
-          culture={lang}
+          culture={i18n.language}
           events={events}
           onEventDrop={moveEvent}
           resizable

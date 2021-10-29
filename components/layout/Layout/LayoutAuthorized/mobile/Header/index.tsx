@@ -34,10 +34,10 @@ const Header = (props: Props) => {
     if (process.browser) {
       document.body.classList.add('modal-open')
     }
-  
+
     setMenuMobileOpen(true)
   }
-  
+
   const handleCloseMobileMenu = () => {
     if (process.browser) {
       document.body.classList.remove('modal-open')
@@ -83,14 +83,14 @@ const Header = (props: Props) => {
     {title: t('menu.profile'), icon: 'profile', link: profileLink},
     {title: t('menu.share'), icon: 'share', link: '/Share'},
     {title: t('menu.invite'), icon: 'invite', link: '/Invite'},
-    ...(profile.role !== 'client' ? [
+    ...(role !== 'client' ? [
     {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage', isSeparator: true}
     ] : []),
     {title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount},
     {title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
     {title: t('menu.reports'), icon: 'reports', link: '/Report'},
 
-    ...(profile.role === 'client' ? [
+    ...(role === 'client' ? [
       {title: t('menu.findMaster'), icon: 'find-clients', link: '/SearchMasterPage', isSeparator: true},
       {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage'},
     ] : [
@@ -104,7 +104,7 @@ const Header = (props: Props) => {
 
     {title: t('menu.settings'), icon: 'settings', link: '/me/settings', isSeparator: true},
   ]
-  
+
   return (
     <div className={cx(styles.root, getModeClass())}>
       <Logo color='white'/>

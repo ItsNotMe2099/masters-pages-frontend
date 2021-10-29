@@ -47,7 +47,6 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
             lines={2}
             more=''
             less='<-'
-
             onClick={handleClick}
             expanded={false}
 

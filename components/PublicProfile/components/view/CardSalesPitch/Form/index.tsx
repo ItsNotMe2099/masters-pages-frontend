@@ -36,7 +36,7 @@ let SalesPitchForm = (props: Props) => {
         <Field
           name="photo"
           component={AvatarInput}
-          accept={["image/jpeg", "image/png", "video/mp4"]}
+          accept={["image/jpeg", "image/png", "video/mp4", "video/quicktime"]}
           maxSize={5242880 * 10}
           labelType="placeholder"
           label={t('uploadPhoto')}

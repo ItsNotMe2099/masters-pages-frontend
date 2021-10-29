@@ -21,7 +21,7 @@ const InfoTab = ({event}: Props) => {
   const chat = useSelector((state: IRootState) => state.chat.chat)
   const dispatch = useDispatch();
   const [eventLogIsShow, setEventLogIsShow] = useState(false);
-  const { t } = useTranslation('common');
+  const {t, i18n} = useTranslation('common');
   useEffect(() => {
     dispatch(fetchChatEventLogDialog(event.id, event.participantId));
   }, []);
@@ -56,11 +56,11 @@ const InfoTab = ({event}: Props) => {
       </div>
       <div className={styles.infoItem}>
         <div className={styles.label}>{t('createTask.fieldCategory')}:</div>
-        <div className={styles.value}>{getCategoryTranslation(event.task.category)?.name}</div>
+        <div className={styles.value}>{getCategoryTranslation(event.task.category, i18n.language)?.name}</div>
       </div>
       <div className={styles.infoItem}>
         <div className={styles.label}>{t('createTask.fieldSubCategory')}:</div>
-        <div className={styles.value}>{getCategoryTranslation(event.task.subCategory)?.name}</div>
+        <div className={styles.value}>{getCategoryTranslation(event.task.subCategory, i18n.language)?.name}</div>
       </div>
       <div className={styles.eventLog}>
         <div className={styles.eventLogToolbar} onClick={handleEventLogToolbarClick}>

@@ -16,7 +16,7 @@ interface Props {
   allowEdit?: boolean
 }
 const SkillCategoryHeader = ({allowEdit, item, onAdd, onRemove}: Props) => {
-  const {t} = useTranslation('common');
+  const {t, i18n} = useTranslation('common');
   return (
     <div className={styles.root}>
       {item.icon && <div className={styles.icon}> <img src={getMediaPath(item.icon)}/></div>}

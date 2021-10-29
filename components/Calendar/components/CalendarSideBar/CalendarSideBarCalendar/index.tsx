@@ -17,6 +17,7 @@ import {
   getBeginNext,
   getBeginPrevious, getCenturyLabel, getDecadeLabel
 } from 'utils/dateFormatters'
+import {useTranslation} from 'i18n'
 
 
 interface Props {
@@ -29,7 +30,7 @@ export default function CalendarSideBarCalendar(props: Props) {
   const {value, onChange} = props;
   const [activeStartDate, setActiveStartDate] = useState(getMonthStart(new Date()));
   const [view, setView] = useState('month');
-  const locale = cookie.get('next-i18next')//getUserLocale();
+  const {t, i18n} = useTranslation('common');
 
   useEffect(() => {
     const beginOfMonth = new Date(value.getFullYear(), value.getMonth(), 1);
@@ -60,13 +61,13 @@ export default function CalendarSideBarCalendar(props: Props) {
   const renderLabel = (date) => {
       switch (view) {
         case 'century':
-          return getCenturyLabel(locale, formatYear, date);
+          return getCenturyLabel(i18n.language, formatYear, date);
         case 'decade':
-          return getDecadeLabel(locale, formatYear, date);
+          return getDecadeLabel(i18n.language, formatYear, date);
         case 'year':
-          return formatYear(locale, date);
+          return formatYear(i18n.language, date);
         case 'month':
-          const parts = formatMonthYear(locale, date).split(' ');
+          const parts = formatMonthYear(i18n.language, date).split(' ');
           return (<>{parts[0]} <span className={styles.year}>{parts[1]}</span></>)
         default:
           throw new Error(`Invalid view: ${view}.`);
@@ -85,7 +86,7 @@ export default function CalendarSideBarCalendar(props: Props) {
           className={styles.calendar}
           onChange={onChange}
           value={value}
-          locale={locale}
+          locale={i18n.language}
           activeStartDate={activeStartDate}
           defaultActiveStartDate={activeStartDate}
           showNavigation={false}
