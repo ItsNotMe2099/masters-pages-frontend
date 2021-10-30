@@ -22,11 +22,13 @@ export const getProfilePageProps = (mode) => async (ctx) => {
   }else if(profilePageType?.type === ProfilePageType.Profile){
     profile = (await request({ url: `/api/profile/${profilePageType.id}`, method: 'GET' }))?.data
   }else{
+    console.log("Profile not found0 ", ctx.query)
     return {
       notFound: true
     }
   }
   if(!profile){
+    console.log("Profile not found1 ", ctx.query)
     return {
       notFound: true
     }
