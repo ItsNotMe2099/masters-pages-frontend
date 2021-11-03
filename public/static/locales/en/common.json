@@ -1083,7 +1083,7 @@
   },
   "cardWorkExperience": {
     "addWorkExperience": "Add work experience",
-    "qualification": "Education, qualification, work experience",
+    "qualification": "Education, qualifications, work experience",
     "form": {
       "jobPosition": "Job position",
       "fromDate": "From date",

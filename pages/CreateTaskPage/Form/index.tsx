@@ -210,14 +210,6 @@ let CreateTaskForm = props => {
           />
            <PriceSelectForm {...props}/>
 
-        <div className={styles.terms}>
-          <Field
-            name="terms"
-            component={Checkbox}
-            label={<div>{t('agreeWith')} <Link href="/">{t('termsAndConditions')}</Link></div>}
-            validate={required}
-          />
-        </div>
           <FormError error={error}/>
         <div className={styles.btnContainer}>
             <Button red size="14px 65px">{t('createTask.buttonCreateTask')}</Button>
