@@ -42,6 +42,9 @@ let TaskReview = ({task}: Props) => {
   if(!otherSide){
     return null;
   }
+  const isCanPostReviewVisible = () => {
+    return [task.profileId, task.masterId].includes(currentProfile.id);
+  }
   return (
     <div className={styles.root}>
       {formLoading && <Loader/>}
@@ -54,7 +57,7 @@ let TaskReview = ({task}: Props) => {
       </>}
 
       {myReview && <div className={styles.feedback}><TaskFeedback title={t('yourReview')} feedback={myReview} profile={currentProfile}/></div>}
-      {!myReview && <div className={styles.actions}>
+      {(!myReview && isCanPostReviewVisible()) && <div className={styles.actions}>
         <Button red={true} size={'12px 40px'} onClick={handleFeedback}>{t('task.feedbackToClient')}</Button>
       </div>}
     </div>
