@@ -100,11 +100,12 @@ const PublicProfile = (props) => {
     }
   }, [isEdit])
   const handleCategoryChange = (category, subCategory) => {
+    console.log("handleCategoryChange", category, subCategory)
     setCategory(category);
     if (subCategory?.subCategoryId) {
       dispatch(setCurrentSkill(subCategory));
 
-      router.replace(`/sk${subCategory.id}`, undefined, {shallow: true})
+      router.replace(`/sk${subCategory.id}`, undefined, {shallow: false})
     }
 
   }
