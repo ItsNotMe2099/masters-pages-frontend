@@ -1,0 +1,61 @@
+@import "scss/index";
+
+.root{
+  padding: 50px;
+  background: #F9F9F9;
+  box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198), 0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035), 0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+  border-radius: 30px;
+  margin-top: 89px;
+  width: 40%;
+}
+
+.title{
+    font-weight: 900;
+    font-size: 24px;
+    color: #000;
+}
+
+.interest{
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #333334;
+    padding-top: 28px;
+}
+
+.list{
+    padding: 25px;
+    background: #FFEEBB;
+    border-radius: 15px;
+    margin-top: 28px;
+}
+
+.listTitle{
+    font-weight: 800;
+    font-size: 16px;
+    color: #000;
+}
+
+.item{
+    display: flex;
+    align-items: center;
+    padding-top: 28px;
+}
+
+.icon{
+    margin-right: 19px;
+}
+
+.text{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #6D718C;
+}
+
+.bottom{
+    font-size: 14px;
+    line-height: 16px;
+    color: #6D718C;
+    padding-top: 28px;
+}

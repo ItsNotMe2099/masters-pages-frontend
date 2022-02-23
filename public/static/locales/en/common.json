@@ -1234,5 +1234,14 @@
     "profileLink": "Profile link",
     "shareBySocialMedia": "Share by Social media",
     "personalLabel": "Personal label"
+  },
+
+  "corporateAccount": {
+    "representative": "Representative",
+    "organization": "Organization",
+    "jobTitle": "Job title *",
+    "email": "Email*",
+    "phoneNumber": "Phone number*",
+    "organizationName": "Organization name *"
   }
 }

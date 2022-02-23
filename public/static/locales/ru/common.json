@@ -1239,5 +1239,14 @@
     "profileLink": "Ссылка на профиль",
     "shareBySocialMedia": "Поделиться в соц сетях",
     "personalLabel": "Персональный лейбл"
+  },
+
+  "corporateAccount": {
+    "representative": "Representative",
+    "organization": "Organization",
+    "jobTitle": "Job title *",
+    "email": "Email*",
+    "phoneNumber": "Phone number*",
+    "organizationName": "Organization name *"
   }
 }
