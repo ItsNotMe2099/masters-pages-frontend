@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 import {FieldConfig, useField} from 'formik'
 import cx from 'classnames';
 import BaseInput from 'components/ui/Formik/BaseInput'
-import Label from 'components/ui/Formik/Label'
 import {ReactElement} from 'react'
 import ErrorInput from 'components/ui/Formik/components/ErrorInput'
 
