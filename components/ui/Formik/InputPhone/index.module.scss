@@ -11,6 +11,7 @@
   padding: 0 16px 0 16px;
   display: flex;
   align-items: center;
+  background-color: #fff;
   input{
     border: 0;
     height: 100%;
@@ -55,4 +56,19 @@
   color: #FF1066;
   font-size: 12px;
   margin-bottom: 10px;
+}
+
+.labelCross{
+  position: absolute;
+  padding: 0 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #828282;
+  top: -7px;
+  left: 15px;
+}
+.labelStatic{
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 7px;
 }

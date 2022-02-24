@@ -7,6 +7,12 @@
   border-radius: 30px;
   margin-top: 89px;
   width: 40%;
+  @media screen and (max-width: 1200px){
+    padding: 20px;
+  }
+  @media screen and (max-width: 1000px){
+    width: 100%;
+  }
 }
 
 .title{

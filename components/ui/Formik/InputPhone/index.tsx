@@ -18,7 +18,7 @@ interface Props {
   label?: string
   placeholder?: string
   disabled?: boolean
-  labelType?
+  labelType: 'placeholder' | 'cross' | 'static' 
 }
 
 const codeDoubles = {
@@ -147,6 +147,7 @@ export default function InputPhone(props: Props & FieldConfig) {
 
   return (
       <div className={styles.root}>
+        {props.labelType === 'static' && <label className={styles.labelStatic}>{props.label}</label>}
         <div className={`${styles.inputContainer} ${(meta.error && meta.touched) && styles.inputError}`}>
         <div className={styles.country}>
           <CodeSelect disabled={props.disabled} value={code} onChange={handleCodeChange} options={codesOptions}
@@ -159,6 +160,7 @@ export default function InputPhone(props: Props & FieldConfig) {
              maskChar={''}
              mask={maskBuilder(value)}
  hasError={hasError}/>
+ {props.labelType === 'cross' && <label className={styles.labelCross}>{props.label}</label>}
   <ErrorInput {...meta}/>
   </div>
   </div>

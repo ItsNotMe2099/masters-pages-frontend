@@ -1,10 +1,27 @@
 @import "scss/index";
 
 .form{
-  display: flex;
   margin-top: 139px;
+  margin-right: 189px;
+  flex: 1;
+  @media screen and (max-width: 1500px){
+    margin-right: 100px;
+}
+@media screen and (max-width: 1200px){
+  margin-right: 50px;
+}
+@media screen and (max-width: 650px){
+  margin-right: 0;
+}
+}
+
+.container{
+  display: flex;
   flex: 1;
   justify-content: space-between;
+  @media screen and (max-width: 650px){
+    flex-direction: column;
+  }
 }
 
 .title{
@@ -13,4 +30,50 @@
     line-height: 36px;
     color: #000;
     margin-bottom: 31px;
+}
+
+.representative{
+  margin-right: 189px;
+  flex: 1;
+  @media screen and (max-width: 1500px){
+    margin-right: 100px;
+}
+@media screen and (max-width: 1200px){
+  margin-right: 50px;
+}
+@media screen and (max-width: 650px){
+  margin-right: 0;
+}
+}
+
+.organization{
+  flex: 1;
+}
+
+.checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 57px;
+}
+
+.terms{
+  margin-left: 13px;
+  font-weight: 900;
+  font-size: 15px;
+  color: #373737;
+  a{
+    text-decoration: underline;
+    color: #0091e6;
+  }
+}
+
+.btn{
+  margin-top: 27px;
+  display: flex;
+  justify-content: center;
+  button{
+    font-weight: 900;
+    font-size: 18px;
+  }
 }

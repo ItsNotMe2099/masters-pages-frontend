@@ -18,7 +18,7 @@ export const CodeSelect = (props) => {
   const handleOptionClick = (e, item) => {
     e.preventDefault();
     setIsActive(false);
-
+    props.onChange(item)
   }
   const handleActiveOptionClick = (e) => {
     e.preventDefault();
@@ -28,6 +28,7 @@ export const CodeSelect = (props) => {
     <div className={styles.root}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
         <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${code?.toLowerCase()}.svg`} alt=''/>
+        <span className={styles.dropdownItemLabel}>{value.label}</span>
         <img className={styles.arrow} src={`/img/icons/arrow.svg`} alt=''/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>

@@ -1,0 +1,36 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.textarea{
+  width: 100%;
+  border-radius: 5px;
+  padding: 18px 30px;
+  @media screen and (max-width: $sm-min) {
+    padding: 15px  15px;
+  }
+  background-color: white;
+  border: 1px solid var(--comment-border);
+  resize: none;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  min-height: 200px;
+  font-size: 18px;
+
+  box-shadow: none !important;
+  &::placeholder{
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &.error{
+    border-color: var(--error);
+    color:  var(--error);
+  }
+
+}

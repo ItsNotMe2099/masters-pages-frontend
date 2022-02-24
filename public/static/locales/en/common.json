@@ -1242,6 +1242,12 @@
     "jobTitle": "Job title *",
     "email": "Email*",
     "phoneNumber": "Phone number*",
-    "organizationName": "Organization name *"
+    "organizationName": "Organization name *",
+    "city": "City *",
+    "postalCode": "Postal code *",
+    "streetAndNumber": "Street and number *",
+    "office": "Office",
+    "site": "Web site link",
+    "submit": "SEND APPLICATION"
   }
 }

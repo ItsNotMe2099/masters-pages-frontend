@@ -1,0 +1,119 @@
+@import "scss/index";
+
+.root{
+  margin-bottom: 20px;
+  color: $real-black;
+
+
+  &.hasError{
+    .label {
+      color: var(--error);
+    }
+    .dropDown{
+      border-color: var(--error);
+    }
+    .dropDownTrigger{
+      border-color: var(--error);
+  }
+  }
+}
+
+.label{
+  font-size: 14px;
+
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+
+}
+
+.input{
+  position: relative;
+}
+.dropDown {
+  position: absolute;
+  background: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  filter: drop-shadow(0px 18px 10px rgba(0, 0, 0, 0.25));
+
+    max-height: 200px;
+  overflow-y: auto;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: -4px;
+  border-bottom: 1px solid $border-input;
+  border-left: 1px solid $border-input;
+  border-right: 1px solid $border-input;
+
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  left: 0;
+  right: 0;
+}
+.dropDownActive{
+    opacity: 1;
+    visibility: visible;
+
+}
+
+.dropDownTrigger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid $border-input;
+    background-color: white;
+    width: 100%;
+    padding: 23px 29px;
+    @media screen and (max-width: $sm-min) {
+      padding: 15px 15px;
+    }
+    color: $real-black;
+
+
+    &.withShadow {
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      border: 0;
+
+    }
+    &.error{
+      border-color: var(--error);
+      color:  var(--error);
+    }
+
+
+  position: relative;
+
+  .placeholder{
+    flex: 1;
+    padding-right: 10px;
+  }
+
+  img{
+    width: 10px;
+    height: 7px;
+    margin: auto 0;
+  }
+  display: flex;
+}
+
+.option{
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 12px 29px;
+
+  &.optionActive{
+    font-weight: 600;
+  }
+  &:hover{
+    background-color: var(--header-btns-hover);
+  }
+}

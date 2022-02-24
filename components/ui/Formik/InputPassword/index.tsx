@@ -31,7 +31,7 @@ export default function InputPassword(props: Props & FieldConfig) {
 
   return (
     <div className={cx(styles.root, className, {[styles.hasError]: !!meta.error && meta.touched})}>
-      <Input label={label} labelType={labelType} {...field} type={isShown ? 'text' :'password'} icon={
+      <Input size='normal' label={label} labelType={labelType} {...field} type={isShown ? 'text' :'password'} icon={
       isShown ?
         (<a onClick={() => setIsShown(false)}><img src='/img/field/show.svg' alt=''/></a>)
         :
