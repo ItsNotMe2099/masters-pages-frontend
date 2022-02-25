@@ -1253,5 +1253,25 @@
     "office": "Office",
     "site": "Web site link",
     "submit": "SEND APPLICATION"
+  },
+
+  "newMainVolunteer": {
+    "guestAccess": "Guest Access",
+    "forIndividuals": "FOR INDIVIDUALS",
+    "forCompanies": "FOR COMPANIES",
+    "portal": "Volunteer management Portal",
+    "individualAssignments": "Individual assignments",
+    "projects": "Multi-participant projects",
+    "freeSignUp": "FREE SIGN UP",
+    "corporatePlatform": "Corporate platform for <1/> projects with volunteers",
+    "corporateProfile": "Corporate profile",
+    "volunteerAds": "Volunteer projects ads",
+    "collection": "Application collection & selection and volunteer managment",
+    "chats": "Group and individual chats",
+    "reports": "Statistics and Reports",
+    "news": "Corporate News",
+    "sampleProfiles": "Sample corporate profiles",
+    "spotOn": "Spot on",
+    "customerReviews": "Customer reviews"
   }
 }
