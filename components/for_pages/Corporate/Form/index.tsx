@@ -9,6 +9,7 @@ import InputPhone from 'components/ui/Formik/InputPhone'
 import InputPassword from 'components/ui/Formik/InputPassword'
 import { CheckBox } from 'components/ui/Formik/CheckBox'
 import Link from 'next/link'
+import {Select} from 'components/ui/Formik/Select'
 
 
 interface Props {
@@ -20,7 +21,7 @@ export default function CorporateAccountForm(props: Props) {
   const { t } = useTranslation('common')
 
   const initialValues = {
-    firstName: '', 
+    firstName: '',
     lastName: '',
     jobTitle: '',
     email: '',
@@ -39,7 +40,7 @@ export default function CorporateAccountForm(props: Props) {
   }
 
   const handleSubmit = async () => {
-    
+
   }
 
   return (
@@ -51,10 +52,10 @@ export default function CorporateAccountForm(props: Props) {
             <div className={styles.title}>
               {t('corporateAccount.representative')}
             </div>
-            <Input name={'firstName'} className={styles.input} validate={Validator.required} labelType='cross' label={t('masterForm.firstName')} size='normal'/>
-            <Input name={'lastName'} className={styles.input} validate={Validator.required} labelType='cross' label={t('masterForm.lastName')} size='normal'/>
-            <Input name={'jobTitle'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.jobTitle')} size='normal'/>
-            <Input name={'email'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.email')} size='normal'/>
+            <Input name={'firstName'}  validate={Validator.required} labelType='cross' label={t('masterForm.firstName')} size='normal'/>
+            <Input name={'lastName'}  validate={Validator.required} labelType='cross' label={t('masterForm.lastName')} size='normal'/>
+            <Input name={'jobTitle'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.jobTitle')} size='normal'/>
+            <Input name={'email'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.email')} size='normal'/>
             <InputPhone name={'phoneNumber'} labelType='cross' label={t('corporateAccount.phoneNumber')}/>
             <InputPassword name={'password'} labelType='cross' label={t('auth.registrationPage.fieldPassword')} validate={Validator.required}/>
             <InputPassword name={'passwordConfirm'} labelType='cross' label={t('auth.registrationPage.fieldPasswordConfirm')} validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(values)])}/>
@@ -63,14 +64,16 @@ export default function CorporateAccountForm(props: Props) {
             <div className={styles.title}>
               {t('corporateAccount.organization')}
             </div>
-            <Input name={'organizationName'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.organizationName')} size='normal'/>
-            <Input name={'country'} className={styles.input} validate={Validator.required} labelType='cross' label={t('masterForm.country')} size='normal'/>
-            <Input name={'city'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.city')} size='normal'/>
-            <Input name={'postalCode'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.postalCode')} size='normal'/>
-            <Input name={'street'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.streetAndNumber')} size='normal'/>
-            <Input name={'office'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.office')} size='normal'/>
-            <InputPhone name={'organizationPhone'} labelType='cross' label={t('corporateAccount.phoneNumber')}/>
-            <Input name={'site'} className={styles.input} validate={Validator.required} labelType='cross' label={t('corporateAccount.site')} size='normal'/>
+            <Input name={'organization.name'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.organizationName')} size='normal'/>
+            <Select name={'country'}
+                    options={[{label: 'Russia', value: 'russia'}]}
+                    validate={Validator.required} labelType='cross' label={t('masterForm.country')} size='normal'/>
+            <Input name={'city'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.city')} size='normal'/>
+            <Input name={'organization.zipcode'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.postalCode')} size='normal'/>
+            <Input name={'organization.address'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.streetAndNumber')} size='normal'/>
+            <Input name={'organization.office'}  validate={Validator.required} labelType='cross' label={t('corporateAccount.office')} size='normal'/>
+            <InputPhone name={'organization.phone'} labelType='cross' label={t('corporateAccount.phoneNumber')}/>
+            <Input name={'organization.site'} validate={Validator.required} labelType='cross' label={t('corporateAccount.site')} size='normal'/>
           </div>
         </div>
         <div className={styles.checkbox}>

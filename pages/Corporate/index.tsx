@@ -6,13 +6,13 @@ import CorporateAccountForm from 'components/for_pages/Corporate/Form';
 
 
 interface Props {
-  
+
 }
 
 const Corporate = (props: Props) => {
 
 return (
-  <body className={styles.body}>
+  <div className={styles.body}>
     <div className={styles.root}>
       <div className={styles.title}>
         Corporate account application
@@ -22,7 +22,7 @@ return (
         <Welcome/>
       </div>
     </div>
-  </body>
+  </div>
   )
 }
 
