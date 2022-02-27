@@ -1,12 +1,12 @@
-import {signInReset, signInSubmit} from "components/Auth/SignIn/actions";
+import {signInReset, signInSubmit} from 'components/Auth/SignIn/actions'
 import Button from 'components/ui/Button'
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import {useEffect} from 'react'
 
 interface Props {
@@ -17,20 +17,20 @@ interface Props {
 }
 
 const SignInComponent = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.authSignIn.loading)
 
 
   useEffect(() => {
-    dispatch(signInReset());
+    dispatch(signInReset())
   }, [])
   const handleSubmit = (data) => {
-    dispatch(signInSubmit(data));
+    dispatch(signInSubmit(data))
   }
   return (
     <Modal{...props} loading={isLoading}>
-    
+
         <div className={styles.logo}>
           <img src='/img/icons/logo.svg' alt=''/>
         </div>
@@ -63,4 +63,4 @@ const SignInComponent = (props: Props) => {
     </Modal>
   )
 }
-export default SignInComponent;
+export default SignInComponent

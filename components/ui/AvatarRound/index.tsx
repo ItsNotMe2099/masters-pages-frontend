@@ -1,7 +1,5 @@
-import Modal from "components/ui/Modal";
-import { IChat } from "types";
 import styles from './index.module.scss'
-import {getMediaPath} from "../../../utils/media";
+import {getMediaPath} from '../../../utils/media'
 
 interface Props {
   image?: string

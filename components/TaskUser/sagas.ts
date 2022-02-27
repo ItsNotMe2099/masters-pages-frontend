@@ -1,6 +1,6 @@
 
-import { fetchChat } from "components/Chat/actions";
-import { confirmChangeData, modalClose } from "components/Modal/actions";
+import { fetchChat } from 'components/Chat/actions'
+import { confirmChangeData, modalClose } from 'components/Modal/actions'
 import {
   deleteTaskUser,
   deleteTaskUserRequest,
@@ -9,10 +9,10 @@ import {
   fetchTaskUserListRequest, fetchTaskUserStatRequest,
   setPublishedTaskUser,
   setPublishedTaskUserRequest, taskCancel, taskCancelRequest, updateTaskUser, updateTaskUserRequest
-} from "components/TaskUser/actions";
-import ApiActionTypes from "constants/api";
+} from 'components/TaskUser/actions'
+import ApiActionTypes from 'constants/api'
 import { takeLatest, put, take, select } from 'redux-saga/effects'
-import { IRootState } from "types";
+import { IRootState } from 'types'
 import { ActionType } from 'typesafe-actions'
 import ActionTypes from './const'
 function* TaskUserSaga() {
@@ -28,63 +28,63 @@ function* TaskUserSaga() {
         sort,
         sortOrder,
           limit: 10
-        }));
+        }))
 
     })
 
   yield takeLatest(ActionTypes.TASK_USER_DELETE,
     function* (action: ActionType<typeof deleteTaskUser>) {
-      yield put(confirmChangeData({loading: true}));
-      yield put(deleteTaskUserRequest(action.payload.taskId));
+      yield put(confirmChangeData({loading: true}))
+      yield put(deleteTaskUserRequest(action.payload.taskId))
       const result = yield take([ActionTypes.TASK_USER_DELETE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_DELETE_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.TASK_USER_DELETE_REQUEST + ApiActionTypes.SUCCESS){
-        yield put(fetchTaskUserStatRequest());
-        yield put(modalClose());
+        yield put(fetchTaskUserStatRequest())
+        yield put(modalClose())
       }
     })
 
   yield takeLatest(ActionTypes.TASK_USER_SET_PUBLISHED,
     function* (action: ActionType<typeof setPublishedTaskUser>) {
-      yield put(confirmChangeData({loading: true}));
-      yield put(setPublishedTaskUserRequest(action.payload.taskId, action.payload.published));
+      yield put(confirmChangeData({loading: true}))
+      yield put(setPublishedTaskUserRequest(action.payload.taskId, action.payload.published))
       const result = yield take([ActionTypes.TASK_USER_SET_PUBLISHED_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_SET_PUBLISHED_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.TASK_USER_SET_PUBLISHED_REQUEST + ApiActionTypes.SUCCESS){
-        yield put(fetchOneTaskUserRequest(action.payload.taskId));
-        yield put(fetchTaskUserStatRequest());
+        yield put(fetchOneTaskUserRequest(action.payload.taskId))
+        yield put(fetchTaskUserStatRequest())
         yield take([ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL])
 
-        yield put(modalClose());
+        yield put(modalClose())
       }
     })
 
   yield takeLatest(ActionTypes.TASK_USER_UPDATE,
     function* (action: ActionType<typeof updateTaskUser>) {
-      yield put(updateTaskUserRequest(action.payload.taskId, action.payload.data));
+      yield put(updateTaskUserRequest(action.payload.taskId, action.payload.data))
       const result = yield take([ActionTypes.TASK_USER_UPDATE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_UPDATE_REQUEST + ApiActionTypes.FAIL])
 
       if(result.type === ActionTypes.TASK_USER_UPDATE_REQUEST + ApiActionTypes.SUCCESS){
-        yield put(fetchOneTaskUserRequest(action.payload.taskId));
+        yield put(fetchOneTaskUserRequest(action.payload.taskId))
         yield take([ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL])
-        yield put(modalClose());
+        yield put(modalClose())
       }
-    });
+    })
 
   yield takeLatest(ActionTypes.TASK_CANCEL,
     function* (action: ActionType<typeof taskCancel>) {
-      yield put(confirmChangeData({loading: true}));
-      yield put(taskCancelRequest(action.payload.taskId));
+      yield put(confirmChangeData({loading: true}))
+      yield put(taskCancelRequest(action.payload.taskId))
       const result = yield take([ActionTypes.TASK_CANCEL_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_UPDATE_REQUEST + ApiActionTypes.FAIL])
 
       if(result.type === ActionTypes.TASK_CANCEL_REQUEST + ApiActionTypes.SUCCESS){
-        yield put(fetchOneTaskUserRequest(action.payload.taskId));
+        yield put(fetchOneTaskUserRequest(action.payload.taskId))
         yield take([ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_USER_FETCH_ONE_REQUEST + ApiActionTypes.FAIL])
-        const chat = yield select((state: IRootState) => state.chat.chat);
+        const chat = yield select((state: IRootState) => state.chat.chat)
 
         if (chat) {
-          yield put(fetchChat(chat.id));
+          yield put(fetchChat(chat.id))
         }
 
-        yield put(modalClose());
+        yield put(modalClose())
 
       }
     })

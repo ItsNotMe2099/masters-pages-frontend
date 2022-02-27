@@ -4,7 +4,7 @@ import Input from 'components/ui/Inputs/Input'
 import * as React from 'react'
 import {IRootState} from 'types'
 import {useEffect, useState} from 'react'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   customLink?: string
@@ -12,16 +12,16 @@ interface Props {
 }
 
 export default function SharePersonalLink({subCategoryId, customLink}: Props) {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile);
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const dispatch = useDispatch()
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
-  const [isCopied, setIsCopied] = useState(false);
-  const { t } = useTranslation('common');
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
+  const [isCopied, setIsCopied] = useState(false)
+  const { t } = useTranslation('common')
   useEffect(() => {
 
   })
   const handleCopy = () => {
-    setIsCopied(true);
+    setIsCopied(true)
     const textField = document.createElement('textarea')
     textField.innerText = shareUrl
     document.body.appendChild(textField)

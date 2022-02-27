@@ -1,10 +1,10 @@
-import {phoneConfirmReset, phoneConfirmSubmit} from "components/Auth/PhoneConfirm/actions";
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import {phoneConfirmReset, phoneConfirmSubmit} from 'components/Auth/PhoneConfirm/actions'
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import {useEffect} from 'react'
 
 interface Props {
@@ -13,16 +13,16 @@ interface Props {
 }
 
 const PhoneConfirmComponent = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.phoneConfirmReducer.loading)
   const code = useSelector((state: IRootState) => state.phoneConfirmReducer.code)
 
   useEffect(() => {
-    dispatch(phoneConfirmReset());
+    dispatch(phoneConfirmReset())
   }, [])
   const handleSubmit = (data) => {
-    dispatch(phoneConfirmSubmit(data));
+    dispatch(phoneConfirmSubmit(data))
   }
   return (
     <Modal
@@ -44,4 +44,4 @@ const PhoneConfirmComponent = (props: Props) => {
     </Modal>
   )
 }
-export default PhoneConfirmComponent;
+export default PhoneConfirmComponent

@@ -1,24 +1,19 @@
-import { modalClose } from "components/Modal/actions";
-import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
 import {
-  taskNegotiationCreateTaskResponse,
-  taskNegotiationFetchLastConditions,
   taskNegotiationHireMaster, taskNegotiationReset
-} from "components/TaskNegotiation/actions";
+} from 'components/TaskNegotiation/actions'
 
-import Button from "components/ui/Button";
-import Loader from "components/ui/Loader";
+import Button from 'components/ui/Button'
 
-import Modal from "components/ui/Modal";
-import { format } from "date-fns";
-import { useEffect } from "react";
-import * as React from "react";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import Modal from 'components/ui/Modal'
+import { format } from 'date-fns'
+import { useEffect } from 'react'
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -30,10 +25,12 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const {t} = useTranslation('common')
   useEffect(() => {
-    return () => dispatch(taskNegotiationReset());
+    return () => {
+      dispatch(taskNegotiationReset())
+    }
   }, [])
   const handleSubmit = () => {
     dispatch(taskNegotiationHireMaster(task.id, taskNegotiation.profileId == currentProfile.id ? taskNegotiation.authorId : taskNegotiation.profileId, taskNegotiation.id))
@@ -42,7 +39,7 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
         <div className={styles.icon}>
-          <img  src={`/img/icons/dollar.svg`}/>
+          <img  src={'/img/icons/dollar.svg'}/>
         </div>
         <div className={styles.title}>{t('taskNegotiation.hiringAMaster')}</div>
       </div>

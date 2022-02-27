@@ -1,18 +1,16 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import {default as React, useContext, useEffect, useRef, useState} from "react";
-import {IRootState, NotificationType} from "types";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import {default as React, useRef, useState} from 'react'
+import {IRootState, NotificationType} from 'types'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import Bell from 'components/svg/Bell'
 import request from 'utils/request'
 import queryString from 'query-string'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import ChatMessage from 'components/Chat/ChatMessage'
 import {useRouter} from 'next/router'
 
 interface Props {
@@ -21,84 +19,84 @@ interface Props {
 
 
  const NotificationSelect = (props: Props) => {
-   const { t } = useTranslation('common');
-   const router = useRouter();
+   const { t } = useTranslation('common')
+   const router = useRouter()
 
    const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const role = useSelector((state: IRootState) => state.profile.role)
   const dispatch = useDispatch()
-   const [items, setItems] = useState([]);
-   const [total, setTotal] = useState(0);
-   const [loading, setLoading] = useState(false);
-   const [page, setPage] = useState(1);
+   const [items, setItems] = useState([])
+   const [total, setTotal] = useState(0)
+   const [loading, setLoading] = useState(false)
+   const [page, setPage] = useState(1)
 
-   const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+   const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
 
   const onClick = () => {
-    setIsActive(!isActive);
-    setPage(1);
-    loadItems(1);
+    setIsActive(!isActive)
+    setPage(1)
+    loadItems(1)
   }
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
   }
   const handleActiveOptionClick = (e) => {
-    e.preventDefault();
-    setIsActive(false);
+    e.preventDefault()
+    setIsActive(false)
   }
   const loadItems = async  (page) => {
-    setLoading(true);
-    const res = await request({url: `/api/notification?${queryString.stringify({page})}`, method: 'GET'});
+    setLoading(true)
+    const res = await request({url: `/api/notification?${queryString.stringify({page})}`, method: 'GET'})
 
-    setItems(items => [...items, ...res.data.data]);
-    setTotal(res.data.total);
-    setLoading(false);
+    setItems(items => [...items, ...res.data.data])
+    setTotal(res.data.total)
+    setLoading(false)
   }
   const handleScrollNext = () => {
-    setPage(page + 1);
-    loadItems(page + 1);
+    setPage(page + 1)
+    loadItems(page + 1)
   }
   const handleEventClick = (item) => {
       switch (item.type){
         case NotificationType.Messages:
           router.push(`/Chat/${item.chatId}`)
-          break;
+          break
         case NotificationType.TaskOffer:
-          router.push(`/orders/offers`)
-          break;
+          router.push('/orders/offers')
+          break
         case NotificationType.TaskResponse:
-          router.push(`/orders/published`)
-          break;
+          router.push('/orders/published')
+          break
         case NotificationType.TaskOfferDeclined:
-          router.push(`/orders/published`)
-          break;
+          router.push('/orders/published')
+          break
         case NotificationType.TaskResponseDeclined:
-          router.push(`/orders/declined_responses`)
-          break;
+          router.push('/orders/declined_responses')
+          break
         case NotificationType.Feedback:
-          router.push(`/orders/closed`)
-          break;
+          router.push('/orders/closed')
+          break
         case NotificationType.RegistrationCompleted:
-          break;
+          break
         case NotificationType.EmailVerification:
-          break;
+          break
         case NotificationType.EventPlanned:
           router.push(`/Calendar?eventId=${item.eventId}`)
 
-          break;
+          break
         case NotificationType.EventStatusChanged:
           router.push(`/Calendar?eventId=${item.eventId}`)
-          break;
+          break
         case NotificationType.EventRemind:
           router.push(`/Calendar?eventId=${item.eventId}`)
-          break;
+          break
         case NotificationType.News:
-          router.push(`/News`)
-          break;
+          router.push('/News')
+          break
       }
-    setIsActive(false);
+    setIsActive(false)
    }
    const notificationCount =  profile.notificationNewsCount + profile.notificationMessageCount + profile.notificationEventCount + profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount
 
@@ -112,7 +110,7 @@ interface Props {
         {items.length > 0 && <InfiniteScroll
           dataLength={items.length} //This is important field to render the next data
           next={handleScrollNext}
-          scrollableTarget={"notifications-dropdown"}
+          scrollableTarget={'notifications-dropdown'}
           hasMore={total > items.length}
          loader={ null}
         >
@@ -121,6 +119,6 @@ interface Props {
        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 export default NotificationSelect

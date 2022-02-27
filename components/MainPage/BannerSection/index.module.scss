@@ -3,7 +3,7 @@
 .root {
   position: relative;
   margin-top: 30px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     margin: 25px 25px 0px;
   }
 
@@ -14,7 +14,7 @@
   border-radius: 30px;
   position: relative;
   display: flex;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     padding: 31px 10px 75px;
     flex-direction: column;
   }
@@ -37,7 +37,7 @@
   @include lg {
     font-size: 48px;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     font-size: 24px;
     text-align: center;
   }
@@ -49,7 +49,7 @@
   @include lg {
     font-size: 22px;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     font-size: 14px;
     margin-top: 14px;
     text-align: center;
@@ -62,7 +62,7 @@
   button{
     width: 30%;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: flex;
     flex-direction: column;
     margin-top: 0px;
@@ -89,7 +89,7 @@
       padding: 0px 158px 0px 19px;
       flex-direction: row;
     }
-    @media screen and (max-width: $sm-max) {
+    @media screen and (max-width: $xs-max) {
       line-height: 50px;
       padding: 0px 25px;
     }
@@ -101,7 +101,7 @@
       right: 6px;
       top: 6px;
     }
-    @media screen and (max-width: $sm-max) {
+    @media screen and (max-width: $xs-max) {
       margin-top: 12px;
     }
   }
@@ -116,7 +116,7 @@
   @include lg {
     font-size: 12px;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     font-size: 12px;
     text-align: center;
   }
@@ -129,7 +129,7 @@
 
 .peopleMobile {
   display: none;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: block;
     padding: 0px 28px;
     margin-top: 8px;

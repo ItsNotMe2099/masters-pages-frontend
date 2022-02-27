@@ -12,7 +12,7 @@ interface changePhoneSubmitData{
 export const registrationPhoneSubmit = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_SUBMIT, data)
 export const registrationPhoneSubmitRequest = (data: registrationPhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST, {
   api: {
-    url: `/api/auth/register`,
+    url: '/api/auth/register',
     method: 'POST',
     data
   },
@@ -21,7 +21,7 @@ export const registrationPhoneSubmitRequest = (data: registrationPhoneSubmitData
 export const registrationPhoneChange = (data: changePhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE, data)
 export const registrationPhoneChangeRequest = (data: changePhoneSubmitData) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST, {
   api: {
-    url: `/api/auth/phoneChange`,
+    url: '/api/auth/phoneChange',
     method: 'POST',
     data
   },
@@ -33,7 +33,7 @@ export const registrationPhoneReset = () => action(ActionTypes.REGISTRATION_PHON
 export const registrationPhoneConfirm = ({code}) => action(ActionTypes.REGISTRATION_PHONE_CONFIRM, {code})
 export const registrationPhoneChangeConfirmRequest = ({phone, code}) => action(ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST, {
   api: {
-    url: `/api/auth/phoneChangeConfirmation`,
+    url: '/api/auth/phoneChangeConfirmation',
     method: 'POST',
     data: {
       phone,

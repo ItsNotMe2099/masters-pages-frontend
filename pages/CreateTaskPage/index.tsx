@@ -1,23 +1,19 @@
 
-import Footer from 'components/layout/Footer'
-import Steps from 'components/Steps'
-import Button from "components/ui/Button";
-import Loader from "components/ui/Loader";
-import Modal from "components/ui/Modal";
-import CreateTaskForm from "pages/CreateTaskPage/Form";
-import { IRootState } from "types";
+import Loader from 'components/ui/Loader'
+import Modal from 'components/ui/Modal'
+import CreateTaskForm from 'components/for_pages/CreateTaskPage/Form'
+import { IRootState } from 'types'
 import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
-import {createTaskComplete, createTaskeReset} from 'components/CreateTaskPage/actions';
+import {createTaskComplete, createTaskeReset} from 'components/CreateTaskPage/actions'
 import { useSelector, useDispatch } from 'react-redux'
-import SimpleSlider from 'components/Steps/CreateTaskPage/Slider';
 import {
   fetchProfileSearchStatRequest,
   resetSearchStat,
   setSearchStatFilter
-} from "../../components/ProfileSearch/actions";
-import {useEffect, useState} from "react";
-import {useTranslation} from "i18n";
+} from '../../components/ProfileSearch/actions'
+import {useEffect} from 'react'
+import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 import {modalClose} from 'components/Modal/actions'
@@ -25,31 +21,31 @@ import {reachGoal} from 'utils/ymetrika'
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
-  const router = useRouter();
+  const router = useRouter()
   const dispatch = useDispatch()
   const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
   const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
-  const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter);
+  const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const isMaster = profile.role !== 'client';
+  const isMaster = profile.role !== 'client'
   useEffect(() => {
-    dispatch(resetSearchStat());
+    dispatch(resetSearchStat())
     return () => {
-      dispatch(createTaskeReset());
-      dispatch(resetSearchStat());
+      dispatch(createTaskeReset())
+      dispatch(resetSearchStat())
     }
   }, [])
   const handleSubmit = (data) => {
-    dispatch(createTaskComplete(data));
-    reachGoal('order:create', {role: profile?.role});
+    dispatch(createTaskComplete(data))
+    reachGoal('order:create', {role: profile?.role})
   }
   const handleChangeForStat = (key, value) => {
-    statFilter[key] = value;
-    dispatch(setSearchStatFilter(statFilter));
+    statFilter[key] = value
+    dispatch(setSearchStatFilter(statFilter))
     dispatch(fetchProfileSearchStatRequest({
       limit: 1,
       ...statFilter
-    }));
+    }))
   }
   return (
     <Layout>
@@ -76,12 +72,12 @@ const CreateTaskPage = (props) => {
         title={t('createTask.successTitle')}
         image={'/img/icons/congratulations.svg'}
         isOpen={isCompleted} onRequestClose={() => {
-        dispatch(createTaskeReset());
-          dispatch(modalClose());
+        dispatch(createTaskeReset())
+          dispatch(modalClose())
           if(profile.role === 'client') {
-            router.push('/orders/draft');
+            router.push('/orders/draft')
           }else{
-            router.push('/orders/offers');
+            router.push('/orders/offers')
           }
       }}>
 
@@ -97,5 +93,5 @@ const CreateTaskPage = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default CreateTaskPage

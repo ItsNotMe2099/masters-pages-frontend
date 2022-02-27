@@ -1,20 +1,19 @@
-import Button from "components/ui/Button";
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import { RadioList } from "components/ui/Inputs/RadioList";
-import SelectInput from "components/ui/Inputs/SelectInput";
-import TextArea from "components/ui/Inputs/TextArea";
-import { format } from "date-fns";
-import * as React from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { IRootState, ITask } from "types";
+import Button from 'components/ui/Button'
+import FormError from 'components/ui/Form/FormError'
+import Input from 'components/ui/Inputs/Input'
+import { RadioList } from 'components/ui/Inputs/RadioList'
+import SelectInput from 'components/ui/Inputs/SelectInput'
+import TextArea from 'components/ui/Inputs/TextArea'
+import { format } from 'date-fns'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { IRootState, ITask } from 'types'
 import { connect,  } from 'react-redux'
-import { maskBirthDate } from "utils/masks";
-import { arrayNotEmpty, required } from "utils/validations";
+import { required } from 'utils/validations'
 import styles from './index.module.scss'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 import InputDate from 'components/ui/Inputs/InputDate'
 interface Props{
   task: ITask

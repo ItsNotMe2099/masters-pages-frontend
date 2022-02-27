@@ -1,13 +1,13 @@
 import Button from 'components/ui/Button'
-import FormError from "components/ui/Form/FormError";
+import FormError from 'components/ui/Form/FormError'
 import { Field, reduxForm } from 'redux-form'
-import { IRootState } from "types";
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import InputPhone from 'components/ui/Inputs/InputPhone'
 import OtpCodeInput from 'components/ui/Inputs/OtpCodeInput'
 import { phone, required } from 'utils/validations'
-import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'next-i18next'
 interface Props {
   handleSubmit?
   onSubmit
@@ -15,7 +15,7 @@ interface Props {
 }
 
 let PWRecovery = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.PWRecovery.formError)
   return (

@@ -1,31 +1,25 @@
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
-import { required } from "utils/validations";
+import Input from 'components/ui/Inputs/Input'
+import * as React from 'react'
 import styles from './index.module.scss'
-import { Field, reduxForm,formValueSelector } from 'redux-form'
-import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
-import TimeExpense from 'components/ui/Inputs/TimeExpense'
-import Expenses from 'components/Calendar/components/EditEventModal/components/Expenses'
+import { Field } from 'redux-form'
 import {IEvent} from 'types'
-import {useState} from 'react'
 import TextArea from 'components/ui/Inputs/TextArea'
-import InputAddress from 'components/ui/Inputs/InputAddress'
 import {RadioList} from 'components/ui/Inputs/RadioList'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   event?: IEvent,
   change?: (key, value) => void
   placeType?: string
 }
-let MeetingForm = ({change, placeType}: Props) => {
+const MeetingForm = ({change, placeType}: Props) => {
   const handleOnlineClick = () => {
     change('placeType', 'Online')
   }
   const handleOfflineClick = () => {
     change('placeType', 'ClientAddress')
   }
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   return (
      <div className={styles.root}>
       <div className={styles.tabs}>

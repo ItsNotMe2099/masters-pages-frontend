@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
-import { useDetectOutsideClick } from "./useDetectOutsideClick";
+import { useRef } from 'react'
+import { useDetectOutsideClick } from './useDetectOutsideClick'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import Tab from "components/ui/Tabs/Tab";
-import { isTemplateExpression } from "typescript";
+import Tab from 'components/ui/Tabs/Tab'
 import * as React from 'react'
 
 interface TabOption {
@@ -21,11 +20,11 @@ interface Props {
 }
 
 export const TabSelect = ({tabs, activeTab, onChange, reports}: Props) => {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
 
   return (
@@ -38,5 +37,5 @@ export const TabSelect = ({tabs, activeTab, onChange, reports}: Props) => {
        <div className={styles.option} onClick={() => setIsActive(false)}>{tabs.map((item, index) => <Tab isFirst={index === 0}  isLast={tabs.length - 1 == index} name={item.name} label={item.label} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(reports ? item.key : item) : null}/>)}</div>
        </nav>
     </div>
-  );
-};
+  )
+}

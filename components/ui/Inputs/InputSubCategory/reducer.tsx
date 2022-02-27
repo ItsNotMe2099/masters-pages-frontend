@@ -1,8 +1,8 @@
-import ApiActionTypes from "constants/api";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 
 export interface SubCategoryInputState {
-  subCategories: string[],
+  subCategories: any[],
 }
 
 const initialState: SubCategoryInputState = {
@@ -17,8 +17,8 @@ export default function authReducer(state = {...initialState}, action) {
       state.subCategories = action.payload
       break
     case ActionTypes.RESET_SUBCATEGORIES:
-      state.subCategories = [];
-      break;
+      state.subCategories = []
+      break
   }
   return state
 }

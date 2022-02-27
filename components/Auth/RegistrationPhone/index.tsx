@@ -1,14 +1,11 @@
-import { signInSubmit } from "components/Auth/SignIn/actions";
-import Button from 'components/ui/Button'
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
-import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "i18n";
-import {registrationPhoneChange, registrationPhoneReset, registrationPhoneSubmit} from "./actions";
-import {useEffect} from "react";
+import { useTranslation } from 'next-i18next'
+import {registrationPhoneChange, registrationPhoneReset, registrationPhoneSubmit} from './actions'
+import {useEffect} from 'react'
 
 interface Props {
   isOpen?: boolean
@@ -18,18 +15,18 @@ interface Props {
 }
 
 const RegistrationPhone = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.registrationPhone.loading)
 
   useEffect(() => {
-    dispatch(registrationPhoneReset());
+    dispatch(registrationPhoneReset())
   }, [])
   const handleSubmit = (data) => {
     if(props.userPhoneChange){
-      dispatch(registrationPhoneChange(data));
+      dispatch(registrationPhoneChange(data))
     }else {
-      dispatch(registrationPhoneSubmit(data));
+      dispatch(registrationPhoneSubmit(data))
     }
   }
   return (
@@ -42,4 +39,4 @@ const RegistrationPhone = (props: Props) => {
     </Modal>
   )
 }
-export default RegistrationPhone;
+export default RegistrationPhone

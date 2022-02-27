@@ -1,5 +1,5 @@
-import ApiActionTypes from "constants/api";
-import {ContactData, IProfileGalleryItem, IProfileTab, ProfileData, SkillData, SkillListItem} from "types";
+import ApiActionTypes from 'constants/api'
+import {ContactData} from 'types'
 import ActionTypes from './const'
 import FollowerActionTypes from 'components/Follower/const'
 
@@ -21,15 +21,15 @@ export default function ContactsReducer(state = {...initialState}, action) {
   switch(action.type) {
 
     case ActionTypes.FETCH_PROFILE_CONTACT_LIST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_PROFILE_CONTACT_LIST + ApiActionTypes.SUCCESS:
-      state.list = [...state.list, ...action.payload.data];
+      state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.FETCH_PROFILE_CONTACT_LIST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.DELETE_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
       state.list = state.list.filter(item => item.contactProfileId !== action.payload.id)
@@ -38,14 +38,14 @@ export default function ContactsReducer(state = {...initialState}, action) {
       state.list = state.list.filter(item => item.contactProfileId !== action.payload.targetProfileId)
       break
     case ActionTypes.SET_PAGE_PROFILE_CONTACT_LIST:
-      state.page = action.payload;
+      state.page = action.payload
       break
 
     case ActionTypes.RESET_PROFILE_CONTACT_LIST:
-      state.listLoading = false;
-      state.total = 0;
-      state.list = [];
-      state.page = 1;
+      state.listLoading = false
+      state.total = 0
+      state.list = []
+      state.page = 1
       break
 
   }

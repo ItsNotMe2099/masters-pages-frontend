@@ -1,4 +1,3 @@
-import {IProfilePortfolio, IProfileTab, SkillData} from "types";
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')

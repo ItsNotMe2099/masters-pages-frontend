@@ -1,25 +1,24 @@
-import Input from "components/ui/Inputs/Input";
-import SelectInput from "components/ui/Inputs/SelectInput";
-import * as React from "react";
-import { Field, reduxForm, formValueSelector } from 'redux-form'
-import { maskBirthDate } from "utils/masks";
-import { required } from "utils/validations";
+import Input from 'components/ui/Inputs/Input'
+import SelectInput from 'components/ui/Inputs/SelectInput'
+import * as React from 'react'
+import { Field } from 'redux-form'
+import { required } from 'utils/validations'
 
 import styles from './index.module.scss'
 import {getCurrencySymbol} from 'data/currency'
 import InputCurrency from 'components/ui/Inputs/InputCurrency'
 import {parserPrice} from 'utils/formatters'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 import InputDate from 'components/ui/Inputs/InputDate'
 
-let PriceSelectFormMini = props => {
+const PriceSelectFormMini = props => {
   const { handleSubmit } = props
   const handleHourFieldChange = () => {
-    props.change('budget', null);
+    props.change('budget', null)
   }
   const handleFixedFieldChange = () => {
-    props.change('ratePerHour', null);
-    props.change('estimate', null);
+    props.change('ratePerHour', null)
+    props.change('estimate', null)
   }
   const {t} = useTranslation('common')
   return (

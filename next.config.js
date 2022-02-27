@@ -1,12 +1,15 @@
-
+const { i18n } = require('./next-i18next.config')
 const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
+  reactStrictMode: false,
+ swcMinify: true,
   eslint: {
     // Warning: Dangerously allow production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  i18n,
   async rewrites() {
     return {
       fallback: [

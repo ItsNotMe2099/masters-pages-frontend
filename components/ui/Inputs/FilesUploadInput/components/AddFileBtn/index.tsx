@@ -1,14 +1,14 @@
-import Button from "components/ui/Button";
+import Button from 'components/ui/Button'
 import React from 'react'
 import styles from './index.module.scss'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   altView?: boolean
 }
 
 const AddFileButton = (props: Props) => {
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   return (
   <>
   {props.altView ?

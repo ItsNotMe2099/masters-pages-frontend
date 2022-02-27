@@ -3,7 +3,7 @@
 .root{
   display: flex;
   align-items: center;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
   &__mobile{

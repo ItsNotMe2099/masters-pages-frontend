@@ -1,8 +1,4 @@
 import styles from './index.module.scss'
-import {IEvent} from 'types'
-import {format} from 'date-fns'
-import {Calendar, Views, momentLocalizer} from "react-big-calendar";
-import CalendarToolbarViewButton from 'components/Calendar/components/CalendarToolbar/CalendarToolbarViewButton'
 import CalendarToolbarViews from 'components/Calendar/components/CalendarToolbar/CalendarToolbarViews'
 import CalendarToolbarNav from 'components/Calendar/components/CalendarToolbar/CalendarToolbarNav'
 import CalendarToolbarSearch from 'components/Calendar/components/CalendarToolbar/CalendarToolbarSearch'
@@ -16,7 +12,7 @@ interface Props {
 }
 
 export default function CalendarToolbar(props: Props) {
-  const {currentView, onChangeView, onNavigate, label} = props;
+  const {currentView, onChangeView, onNavigate, label} = props
   const handleBellClick = () => {
 
   }

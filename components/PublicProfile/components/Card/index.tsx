@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import CardTitle from 'components/PublicProfile/components/CardTitle'
-import AddCircleIcon from 'components/svg/AddCircleIcon'
 import Loader from 'components/ui/Loader'
 
 interface Props{

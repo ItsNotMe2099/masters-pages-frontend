@@ -1,5 +1,5 @@
-import ApiActionTypes from "constants/api";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 
 export interface SubCategoryInputState {
   subCategories: string[],
@@ -20,7 +20,7 @@ export default function authReducer(state = {...initialState}, action) {
           label: item.name,
           value: item.id
         }
-      });
+      })
       break
   }
   return state

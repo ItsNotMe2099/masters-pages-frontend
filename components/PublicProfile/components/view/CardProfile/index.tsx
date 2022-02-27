@@ -1,74 +1,73 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import {IRootState, ProfileData, UserActivityStatus} from 'types'
+import {IRootState} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import Avatar from 'components/ui/Avatar'
-import StarRatings from 'react-star-ratings';
+import StarRatings from 'react-star-ratings'
 import Button from 'components/PublicProfile/components/Button'
 import UserIcon from 'components/svg/UserIcon'
 import {useSelector, useDispatch} from 'react-redux'
 import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
-import Link from 'next/link'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {signInOpen, taskOfferOpen} from 'components/Modal/actions'
 import {
   hideProfileForm,
   showProfileForm,
-  updateProfile,
   updateProfileAvatar,
   updateProfileByForm
 } from 'components/Profile/actions'
-import AvatarForm from 'pages/me/profile/components/AvatarForm'
+import AvatarForm from 'components/for_pages/Invite/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean
 }
 const CardProfile = (props: Props) => {
-  const {profile, isEdit} = props;
-  const dispatch = useDispatch();
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading);
-  const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed);
-  const isSubscribed = profile.isSubscribedByCurrentProfile || isTempSubscribed;
+  const {profile, isEdit} = props
+  const dispatch = useDispatch()
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading)
+  const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed)
+  const isSubscribed = profile.isSubscribedByCurrentProfile || isTempSubscribed
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar');
-  const { t } = useTranslation('common');
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar')
+  const { t } = useTranslation('common')
   const handleEditClick = () => {
     if(showForm){
-      dispatch(hideProfileForm( 'avatar'));
+      dispatch(hideProfileForm( 'avatar'))
     }else {
-      dispatch(showProfileForm('avatar'));
+      dispatch(showProfileForm('avatar'))
     }
   }
   const handleRecommend = () => {
-    dispatch(createProfileRecommendation(profile.id));
+    dispatch(createProfileRecommendation(profile.id))
   }
   const handleSubscribe = () => {
     if(!currentProfile){
-      dispatch(signInOpen());
-      return;
+      dispatch(signInOpen())
+      return
     }
-    dispatch(createFollower({profileId: profile.id}));
+    dispatch(createFollower({profileId: profile.id}))
   }
   const handleSendOffer = () => {
     if(!currentProfile){
-      dispatch(signInOpen());
-      return;
+      dispatch(signInOpen())
+      return
     }
-    dispatch(taskNegotiationSetCurrentProfile(profile));
-    dispatch(taskOfferOpen());
+    dispatch(taskNegotiationSetCurrentProfile(profile))
+    dispatch(taskOfferOpen())
   }
   const handleSubmitAvatar =(data) => {
-    dispatch(updateProfileAvatar(profile.id, {photo: data.photo}, 'avatar'));
+    dispatch(updateProfileAvatar(profile.id, {photo: data.photo}, 'avatar'))
   }
 
   const handleDeleteAvatar = () => {
-    dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'));
+    dispatch(updateProfileByForm(profile.id, {photo: null}, 'avatar'))
   }
 
   return (

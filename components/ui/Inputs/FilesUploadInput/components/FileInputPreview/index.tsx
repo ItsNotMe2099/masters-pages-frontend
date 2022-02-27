@@ -1,7 +1,6 @@
-import React, { useEffect, ReactNode, FunctionComponent } from 'react'
+import React, { useEffect, FunctionComponent } from 'react'
 import PropTypes from 'prop-types'
 import styles from './index.module.scss'
-import { Line, Circle } from 'rc-progress';
 interface Props {
   className?: string
   progress?: number,
@@ -33,9 +32,9 @@ const FileInputPreview: FunctionComponent<Props> = props => {
 
   const getImageSrc = (file) => {
 
-    const srcValue = file?.path || file.preview;
+    const srcValue = file?.path || file.preview
     if(!srcValue){
-      return;
+      return
     }
     return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
   }

@@ -9,7 +9,7 @@
 
 .top{
   display: flex;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     flex-direction: column;
     padding: 0 20px;
   }
@@ -34,7 +34,7 @@
   @media screen and (min-width: $md-min) {
     margin-right: 63px;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     margin-bottom: 13px;
   }
 }
@@ -43,7 +43,7 @@
   font-size: 16px;
   color: #000000;
   line-height: 30px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: none;
   }
 }
@@ -69,7 +69,7 @@
     font-weight: 600;
     font-size: 16px;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     width: 100%;
     padding: 0 20px;
     button{
@@ -84,7 +84,7 @@
   border-radius: 10px;
   width: 25%;
   margin: 10px auto auto 70px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     margin: 0;
     width: 100%;
   }

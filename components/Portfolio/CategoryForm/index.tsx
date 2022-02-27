@@ -1,26 +1,26 @@
-import Button from "components/ui/Button";
-import FormError from "components/ui/Form/FormError";
-import CheckboxListSubCategories from "components/ui/Inputs/CheckboxListSubCategories";
-import InputCategory from "components/ui/Inputs/InputCategory";
+import Button from 'components/ui/Button'
+import FormError from 'components/ui/Form/FormError'
+import CheckboxListSubCategories from 'components/ui/Inputs/CheckboxListSubCategories'
+import InputCategory from 'components/ui/Inputs/InputCategory'
 
-import { useEffect, useState } from "react";
-import * as React from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { IRootState } from "types";
-import { arrayNotEmpty, required } from "utils/validations";
+import { useEffect, useState } from 'react'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { IRootState } from 'types'
+import { arrayNotEmpty, required } from 'utils/validations'
 import styles from 'components/Portfolio/CategoryForm/index.module.scss'
 import { Field, reduxForm } from 'redux-form'
-import {useTranslation, Trans} from 'i18n'
+import {useTranslation} from 'next-i18next'
 
 let CategoryForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)
-  const [categoryId, setCategoryId] = useState(null);
-  const {t} = useTranslation('common');
+  const [categoryId, setCategoryId] = useState(null)
+  const {t} = useTranslation('common')
 
   useEffect(() => {
     const categoryId = props.initialValues?.categoryId
     if(categoryId){
-      setCategoryId(categoryId);
+      setCategoryId(categoryId)
     }
   }, [])
 

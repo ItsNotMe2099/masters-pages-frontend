@@ -1,28 +1,22 @@
 import styles from './index.module.scss'
-import CardTitle from 'components/PublicProfile/components/CardTitle'
-import AddCircleIcon from 'components/svg/AddCircleIcon'
-import Loader from 'components/ui/Loader'
 import CardProfile from 'components/PublicProfile/components/view/CardProfile'
 import CardPreferWorkIn from 'components/PublicProfile/components/view/CardPreferWorkIn'
 import CardCategories from 'components/PublicProfile/components/view/CardCategories'
 import CardLanguages from 'components/PublicProfile/components/view/CardLanguages'
 import CardBio from 'components/PublicProfile/components/view/CardBio'
-import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
 import CardReviewsShort from 'components/PublicProfile/components/view/CardReviewsShort'
-import CardRewards from 'components/PublicProfile/components/view/CardRewards'
 
 import Modals from 'components/layout/Modals'
-import {ProfileData} from 'types'
-import {default as React, ReactElement, useEffect, useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/actions'
+
+import {default as React, useState} from 'react'
 import CardRecommendationsShort from 'components/PublicProfile/components/view/CardRecommendationsShort'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean,
   children?: any,
   subCategory: any,
@@ -30,19 +24,19 @@ interface Props{
   onCategoryChange: (categoryId, subCategoryId) => void
 }
 const ProfilePageLayout = (props: Props) => {
-  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened} = props;
-  const isMaster = ['master', 'volunteer'].includes(profile.role);
+  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened} = props
+  const isMaster = ['master', 'volunteer'].includes(profile.role)
   const [isOpen, setIsOpen] = useState(false)
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   const getRoleClass = () => {
     switch (profile.role) {
       case 'master':
-        return styles.roleMaster;
+        return styles.roleMaster
       case 'volunteer':
-        return styles.roleVolunteer;
+        return styles.roleVolunteer
       case 'client':
       default:
-        return styles.roleClient;
+        return styles.roleClient
     }
   }
   return (

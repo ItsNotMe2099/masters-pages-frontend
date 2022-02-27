@@ -1,4 +1,3 @@
-import ActionTypes from "./const";
 
 export interface State {
   modalKey: string,

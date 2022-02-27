@@ -1,4 +1,4 @@
-import {ProfileWorkExperience, SkillData} from "types";
+import {ProfileWorkExperience} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -12,7 +12,7 @@ export const resetProfileWorkExperienceForm = () => action(ActionTypes.RESET_WOR
 export const createProfileWorkExperience = (data: ProfileWorkExperience, formKey: string) => action(ActionTypes.CREATE_WORK_EXPERIENCE, { data, formKey})
 export const createProfileWorkExperienceRequest = (data: ProfileWorkExperience) => action(ActionTypes.CREATE_WORK_EXPERIENCE_REQUEST, {
   api: {
-    url: `/api/profile-work-experience`,
+    url: '/api/profile-work-experience',
     method: 'POST',
     data: {...data},
   }

@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
 import FormEditIcon from 'components/svg/FormEditIcon'
 import AddCircleIcon from 'components/svg/AddCircleIcon'
 import FormArrowDownIcon from 'components/svg/FormArrowDownIcon'

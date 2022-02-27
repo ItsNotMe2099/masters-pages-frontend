@@ -1,8 +1,8 @@
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import { ReactElement, useState } from "react";
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import { ReactElement, useState } from 'react'
 import styles from './index.module.scss'
-import _uniqueId from 'lodash/uniqueId';
-import ReactCheckbox from "react-custom-checkbox";
+import _uniqueId from 'lodash/uniqueId'
+import ReactCheckbox from 'react-custom-checkbox'
 interface Props {
   meta?: any
   input: any
@@ -17,7 +17,7 @@ export default function Checkbox(props: Props) {
   const { error, touched } = props.meta
   const { input } = props
 
-  const [id] = useState(_uniqueId('prefix-'));
+  const [id] = useState(_uniqueId('prefix-'))
   return (
     <div className={`${styles.root} ${props.className}`}>
     <div className={styles.wrapper}>

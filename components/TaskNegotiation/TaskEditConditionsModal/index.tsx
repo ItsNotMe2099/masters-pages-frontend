@@ -1,20 +1,17 @@
-import { modalClose } from "components/Modal/actions";
-import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
-import {
-  taskNegotiationCreateTaskResponse, taskNegotiationEditConditions,
-  taskNegotiationEditConditionsRequest
-} from "components/TaskNegotiation/actions";
-import TaskEditConditionsForm from "components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm";
+import { modalClose } from 'components/Modal/actions'
+import { taskNegotiationEditConditions
+} from 'components/TaskNegotiation/actions'
+import TaskEditConditionsForm from 'components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm'
 
-import Modal from "components/ui/Modal";
-import { format } from "date-fns";
-import { useEffect } from "react";
-import * as React from "react";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import Modal from 'components/ui/Modal'
+import { format } from 'date-fns'
+import { useEffect } from 'react'
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -23,7 +20,7 @@ const TaskEditConditionsModal = ({isOpen, onClose}: Props) => {
   const loading = useSelector((state: IRootState) => state.taskOffer.editConditionsLoading)
   const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const {t} = useTranslation('common')
   useEffect(() => {
 
@@ -35,7 +32,7 @@ const TaskEditConditionsModal = ({isOpen, onClose}: Props) => {
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
         <div className={styles.icon}>
-          <img  src={`/img/icons/dollar.svg`}/>
+          <img  src={'/img/icons/dollar.svg'}/>
         </div>
         <div className={styles.title}>{t('taskNegotiation.negotiateOffer')}</div>
       </div>

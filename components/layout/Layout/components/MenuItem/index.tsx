@@ -1,9 +1,7 @@
-import Chat from "components/Chat";
-import Loader from "components/ui/Loader";
-import {IRootState} from "types";
 import Link from 'next/link'
 import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
+import { useDispatch} from 'react-redux'
+import {ProfileRole} from 'data/intefaces/IProfile'
 
 interface Props {
   isActive: boolean
@@ -22,19 +20,21 @@ export default function MenuItem(props: Props) {
 
   const getModeClass = () => {
     switch (mode) {
-      case 'master':
-        return styles.modeMaster;
-      case 'volunteer':
-        return styles.modeVolunteer;
-      case 'client':
+      case ProfileRole.Master:
+        return styles.modeMaster
+      case ProfileRole.Volunteer:
+        return styles.modeVolunteer
+      case ProfileRole.Corporate:
+        return styles.modeCorporate
+      case ProfileRole.Client:
       default:
-        return styles.modeClient;
+        return styles.modeClient
     }
   }
   const handleClick = (e) => {
    if(onClick) {
-     e.stopPropagation();
-    onClick();
+     e.stopPropagation()
+    onClick()
    }
   }
   const renderButton = () => {
@@ -62,6 +62,6 @@ export default function MenuItem(props: Props) {
   }else{
     return (  <div className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()}`} onClick={handleClick}>
       {renderButton()}
-    </div>);
+    </div>)
   }
 }

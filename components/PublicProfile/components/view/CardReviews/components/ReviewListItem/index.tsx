@@ -1,12 +1,9 @@
 import styles from './index.module.scss'
 
-import {IFeedbacksToProfile, ProfileData} from 'types'
-import Card from 'components/PublicProfile/components/Card'
-import LocationIcon from 'components/svg/LocationIcon'
-import UserIcon from 'components/svg/UserIcon'
+import {IFeedbacksToProfile} from 'types'
 import * as React from 'react'
 
-import StarRatings from 'react-star-ratings';
+import StarRatings from 'react-star-ratings'
 import {format} from 'date-fns'
 import Avatar from 'components/ui/Avatar'
 interface Props{

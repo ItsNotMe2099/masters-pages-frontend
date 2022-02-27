@@ -1,13 +1,12 @@
-import { modalClose } from "components/Modal/actions";
-import Button from "components/ui/Button";
-import Loader from "components/ui/Loader";
-import Modal from "components/ui/Modal";
-import * as React from "react";
-import { IRootState } from "types";
+import { modalClose } from 'components/Modal/actions'
+import Button from 'components/ui/Button'
+import Modal from 'components/ui/Modal'
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   isOpen: boolean
   onRequestClose: () => void,
@@ -15,15 +14,15 @@ interface Props {
 }
 
 export default function ModalConfirm(props: Props) {
-  const {t} = useTranslation();
-  const dispatch = useDispatch();
+  const {t} = useTranslation()
+  const dispatch = useDispatch()
   const data = useSelector((state: IRootState) => state.modal.confirmData)
 
   const handleCancel = () => {
     if(data.onCancel){
       data.onCancel()
     }else{
-      dispatch(modalClose());
+      dispatch(modalClose())
     }
   }
   return (

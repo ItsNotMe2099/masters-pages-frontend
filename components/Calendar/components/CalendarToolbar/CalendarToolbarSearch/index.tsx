@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Bell from 'components/svg/Bell'
 import Search from 'components/svg/Search'
 
 interface Props {
@@ -7,7 +6,7 @@ interface Props {
 }
 
 export default function CalendarToolbarSearch(props: Props) {
-  const { onSearch} = props;
+  const { onSearch} = props
 
   return (
     <div className={styles.root}>

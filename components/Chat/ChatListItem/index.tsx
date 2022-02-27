@@ -1,14 +1,12 @@
-import { fetchChat } from "components/Chat/actions";
-import Avatar from "components/ui/Avatar";
-import AvatarRound from "components/ui/AvatarRound";
-import Modal from "components/ui/Modal";
-import { useRouter } from "next/router";
-import { IChat, IRootState } from "types";
+import { fetchChat } from 'components/Chat/actions'
+import AvatarRound from 'components/ui/AvatarRound'
+import { useRouter } from 'next/router'
+import { IChat, IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
 import formatDistance from 'date-fns/formatDistance'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 interface Props {
   chat: IChat
   isActive?: boolean
@@ -18,25 +16,25 @@ interface Props {
 export default function ChatListItem({chat, isActive}: Props) {
 
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const router = useRouter();
+  const router = useRouter()
   const dispatch = useDispatch()
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   const handleClick = () => {
-    let profileId;
+    let profileId
     if(chat.taskId){
       if(currentProfile.role === 'client'){
-        profileId = currentProfile.id !== chat.profileId ? chat.profileId : chat.participantId;
+        profileId = currentProfile.id !== chat.profileId ? chat.profileId : chat.participantId
       }else{
-        profileId = currentProfile.id === chat.profileId ? chat.profileId : chat.participantId;
+        profileId = currentProfile.id === chat.profileId ? chat.profileId : chat.participantId
       }
     }else{
-      profileId = currentProfile.id !== chat.profileId ? chat.profileId : chat.participantId;
+      profileId = currentProfile.id !== chat.profileId ? chat.profileId : chat.participantId
     }
-    const url = chat.taskId ? `/Chat/task-dialog/${chat.taskId}/${profileId}` : `/Chat/dialog/${profileId}`;
+    const url = chat.taskId ? `/Chat/task-dialog/${chat.taskId}/${profileId}` : `/Chat/dialog/${profileId}`
    // router.replace(url, url, { shallow: true })
-    dispatch(fetchChat(chat.id));
+    dispatch(fetchChat(chat.id))
   }
-  const profile = chat.participantId === currentProfile.id ? chat.profile : chat.participant;
+  const profile = chat.participantId === currentProfile.id ? chat.profile : chat.participant
   return (
    <div className={`${styles.root} ${isActive && styles.rootActive}`} onClick={handleClick}>
       <AvatarRound image={profile.photo} name={profile.firstName}/>

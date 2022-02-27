@@ -1,10 +1,9 @@
-import { modalClose } from "components/Modal/actions";
-import Button from "components/ui/Button";
-import Modal from "components/ui/Modal";
-import * as React from "react";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import { modalClose } from 'components/Modal/actions'
+import Modal from 'components/ui/Modal'
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 import { useSelector, useDispatch } from 'react-redux'
 import Input from 'components/ui/Inputs/Input'
@@ -13,14 +12,14 @@ interface Props {
   isOpen: boolean,
 }
 const TaskShareModal = ({isOpen}: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const task = useSelector((state: IRootState) => state.taskSearch.currentTask)
   const {t} = useTranslation('common')
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : ''}/task/${task?.id}`;
-  const [isCopied, setIsCopied] = useState(false);
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : ''}/task/${task?.id}`
+  const [isCopied, setIsCopied] = useState(false)
 
   const handleCopy = () => {
-    setIsCopied(true);
+    setIsCopied(true)
     const textField = document.createElement('textarea')
     textField.innerText = shareUrl
     document.body.appendChild(textField)

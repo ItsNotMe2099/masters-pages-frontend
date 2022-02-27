@@ -1,6 +1,6 @@
-import ApiActionTypes from "constants/api";
-import {IProfileGalleryItem, IProfileTab, IReportFilter, SkillData, SkillListItem} from "types";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import { IReportFilter} from 'types'
+import ActionTypes from './const'
 export interface ReportState {
   list: any[],
   total: number,
@@ -21,32 +21,32 @@ export default function ReportReducer(state = {...initialState}, action) {
   switch(action.type) {
 
     case ActionTypes.FETCH_REPORT:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_REPORT + ApiActionTypes.SUCCESS:
-      state.list = action.payload.data;
+      state.list = action.payload.data
       state.total = action.payload.total
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.FETCH_REPORT + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.FETCH_REPORT_FILTERS:
-      state.filterLoading = true;
+      state.filterLoading = true
       break
     case ActionTypes.FETCH_REPORT_FILTERS + ApiActionTypes.SUCCESS:
-      state.filter = action.payload;
-      state.listLoading = false;
+      state.filter = action.payload
+      state.listLoading = false
       break
     case ActionTypes.FETCH_REPORT_FILTERS + ApiActionTypes.FAIL:
-      state.filterLoading = false;
+      state.filterLoading = false
       break
 
     case ActionTypes.RESET_REPORT:
-      state.listLoading = false;
-      state.filterLoading = false;
-      state.list = [];
-      state.filter = null;
+      state.listLoading = false
+      state.filterLoading = false
+      state.list = []
+      state.filter = null
       break
   }
 

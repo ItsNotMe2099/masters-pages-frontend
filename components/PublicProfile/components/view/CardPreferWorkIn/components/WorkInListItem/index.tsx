@@ -1,10 +1,9 @@
 import styles from './index.module.scss'
 
-import {IProfilePreferWorkIn, ProfileData} from 'types'
-import Card from 'components/PublicProfile/components/Card'
+import {IProfilePreferWorkIn} from 'types'
 import LocationIcon from 'components/svg/LocationIcon'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props{
   index: number
@@ -15,8 +14,8 @@ interface Props{
   isEdit: boolean
 }
 const WorkInListItem = (props: Props) => {
-  const {  model, index, onMoveUp, onMoveDown, isEdit } = props;
-  const {t} = useTranslation('common');
+  const {  model, index, onMoveUp, onMoveDown, isEdit } = props
+  const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
       <LocationIcon className={model.type === 'online' ? styles.iconOnline : styles.icon} />

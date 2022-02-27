@@ -1,14 +1,13 @@
-import { signUpReset, signUpSubmit } from "components/Auth/SignUp/actions";
+import { signUpReset, signUpSubmit } from 'components/Auth/SignUp/actions'
 import Button from 'components/ui/Button'
-import Modal from "components/ui/Modal";
-import { useEffect } from "react";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { useEffect } from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import Link from 'next/link'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInOpen} from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   isOpen?: boolean
@@ -18,14 +17,14 @@ interface Props {
 }
 
 const SignUpComponent = (props: Props) =>  {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.authSignUp.loading)
   const handleSubmit = (data) => {
-    dispatch(signUpSubmit(data));
+    dispatch(signUpSubmit(data))
   }
   useEffect(() => {
-    dispatch(signUpReset());
+    dispatch(signUpReset())
   })
   return (
     <Modal {...props} loading={isLoading}>

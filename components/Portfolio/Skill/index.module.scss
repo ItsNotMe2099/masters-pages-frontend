@@ -7,7 +7,7 @@
   flex-direction: column;
   margin-right: 20px;
   margin-top: 20px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     margin-right: 0;
     width: 100%;
   }
@@ -42,7 +42,7 @@
   height: 210px;
   border-radius: 12px;
   position: relative;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     width: 100%;
   }
 }

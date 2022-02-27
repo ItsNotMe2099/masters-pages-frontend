@@ -1,32 +1,33 @@
 import Logo from 'components/Logo'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
-import { IRootState } from 'types';
-import {getProfileRoleByRoute} from 'utils/profile'
-import cx from 'classnames';
-import MenuMobile from 'components/svg/MenuMobile';
-import NotificationSelect from 'components/layout/Layout/components/NotificationSelect';
-import Button from 'components/ui/Button';
-import SearchMobile from 'components/svg/SearchMobile';
-import { useState } from 'react';
-import LangSelect  from 'components/LangSelect';
-import MenuMobileClose from 'components/svg/MenuMobileClose';
-import {useTranslation} from 'i18n'
-import MenuItem from 'components/layout/Layout/components/MenuItem';
-import { logout } from 'components/Auth/actions';
-import ModeSelect from 'components/layout/Layout/components/ModeSelect';
+import { IRootState } from 'types'
+import {getProfileRoleByRoute} from 'utils/profileRole'
+import cx from 'classnames'
+import MenuMobile from 'components/svg/MenuMobile'
+import NotificationSelect from 'components/layout/Layout/components/NotificationSelect'
+import SearchMobile from 'components/svg/SearchMobile'
+import { useState } from 'react'
+import LangSelect  from 'components/LangSelect'
+import MenuMobileClose from 'components/svg/MenuMobileClose'
+import { useTranslation } from 'next-i18next'
+import MenuItem from 'components/layout/Layout/components/MenuItem'
+import { logout } from 'components/Auth/actions'
+import ModeSelect from 'components/layout/Layout/components/ModeSelect'
+import {IUser} from 'data/intefaces/IUser'
 
 
 interface Props {
   isCurrentProfileOpened?: boolean
+  user?: IUser
 }
 
 const Header = (props: Props) => {
 
-  const {route: currentRoute} = useRouter();
+  const {route: currentRoute} = useRouter()
   const roleCurrent = useSelector((state: IRootState) => state.profile.role)
-  const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent;
+  const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false)
 
@@ -48,36 +49,36 @@ const Header = (props: Props) => {
   const getModeClass = () => {
     switch (role) {
       case 'master':
-        return styles.modeMaster;
+        return styles.modeMaster
       case 'volunteer':
-        return styles.modeVolunteer;
+        return styles.modeVolunteer
       case 'client':
       default:
-        return styles.modeClient;
+        return styles.modeClient
     }
   }
 
   const getModeClassMenu = () => {
     switch (role) {
       case 'master':
-        return styles.modeMasterMenu;
+        return styles.modeMasterMenu
       case 'volunteer':
-        return styles.modeVolunteerMenu;
+        return styles.modeVolunteerMenu
       case 'client':
       default:
-        return styles.modeClientMenu;
+        return styles.modeClientMenu
     }
   }
 
   const dispatch = useDispatch()
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logout())
   }
 
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
 
-  const profileLink = `/id${profile?.id}`;
+  const profileLink = `/id${profile?.id}`
 
   const items = [
     {title: t('menu.profile'), icon: 'profile', link: profileLink},
@@ -125,7 +126,7 @@ const Header = (props: Props) => {
           <div
             className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {t('personalArea.profile.youAreIn')}
           </div>
-          <ModeSelect onClick={handleCloseMobileMenu}/>
+          <ModeSelect onClick={handleCloseMobileMenu} user={props.user}/>
           {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<div onClick={handleCloseMobileMenu}><MenuItem
           isActive={(props.isCurrentProfileOpened && item.link === profileLink ) || (item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
           link={item.link} badge={item.badge} mode={role}/></div></>)}

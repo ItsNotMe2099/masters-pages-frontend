@@ -1,10 +1,10 @@
 import {
   fetchProfileSearchList,
   fetchProfileSearchListRequest
-} from "components/ProfileSearch/actions";
+} from 'components/ProfileSearch/actions'
 
-import { takeLatest, put, take, select } from 'redux-saga/effects'
-import { IRootState } from "types";
+import { takeLatest, put, select } from 'redux-saga/effects'
+import { IRootState } from 'types'
 import { ActionType } from 'typesafe-actions'
 import ActionTypes from './const'
 import {removeObjectEmpty} from 'utils/array'
@@ -20,7 +20,7 @@ function* ProfileSearchSaga() {
       const sort = yield select((state: IRootState) => state.profileSearch.sort)
       const sortOrder = yield select((state: IRootState) => state.profileSearch.sortOrder)
       const page = yield select((state: IRootState) => state.profileSearch.page)
-      console.log("FilterDataFetch", filter);
+      console.log('FilterDataFetch', filter)
       yield put(fetchProfileSearchListRequest({
           ...removeObjectEmpty(filter),
           sort,
@@ -30,7 +30,7 @@ function* ProfileSearchSaga() {
           limit: 10,
         ...action.payload,
         masterRole
-        }));
+        }))
 
     })
 

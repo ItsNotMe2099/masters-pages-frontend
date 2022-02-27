@@ -1,4 +1,4 @@
-import { getMediaPath } from "utils/media";
+import { getMediaPath } from 'utils/media'
 import styles from './index.module.scss'
 
 interface Props {
@@ -9,55 +9,55 @@ export default function FileList({files}: Props) {
 
 
   const getFileIcon = (fileName) => {
-    const ext = fileName.split('.').pop();
+    const ext = fileName.split('.').pop()
 
     switch (ext){
       case 'psd':
-        return 'psd';
+        return 'psd'
       case 'eps':
-        return 'eps';
+        return 'eps'
       case 'pdf':
-        return 'pdf';
+        return 'pdf'
       case 'txt':
-        return 'txt';
+        return 'txt'
       case 'doc':
-        return 'doc';
+        return 'doc'
       case 'docx':
-        return 'docx';
+        return 'docx'
       case 'png':
-        return 'png';
+        return 'png'
       case 'ppt':
-        return 'ppt';
+        return 'ppt'
       case 'pptx':
-        return 'pptx';
+        return 'pptx'
       case 'ai':
-        return 'ai';
+        return 'ai'
       case 'tif':
-        return 'tif';
+        return 'tif'
       case 'tiff':
-        return 'tiff';
+        return 'tiff'
       case 'jpg':
-        return 'jpg';
+        return 'jpg'
       case 'jpeg':
-        return 'jpg';
+        return 'jpg'
       case 'gif':
-        return 'gif';
+        return 'gif'
       case 'zip':
-        return 'zip';
+        return 'zip'
       case 'svg':
-        return 'svg';
+        return 'svg'
       case 'avi':
-        return 'avi';
+        return 'avi'
       case 'mov':
-        return 'mov';
+        return 'mov'
       default:
-        return 'unknowm';
+        return 'unknowm'
 
     }
   }
   return (
     <div className={styles.files}>
-      {files.map((file =>  <a href={getMediaPath(file)} target={'_blank'} className={styles.file}><img src={`/img/icons/file_types/${getFileIcon(file)}.svg`}/></a>))}
+      {files.map((file =>  <a href={getMediaPath(file)} target={'_blank'} className={styles.file} rel="noreferrer"><img src={`/img/icons/file_types/${getFileIcon(file)}.svg`}/></a>))}
 
     </div>
   )

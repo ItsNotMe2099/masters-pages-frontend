@@ -1,44 +1,20 @@
-import PriceSelectFormMini from "components/TaskNegotiation/TaskOfferModal/components/TaskOfferNewOrder/PriceSelect";
-import {fetchTaskUserListRequest, resetTaskUserList} from "components/TaskUser/actions";
-import Button from "components/ui/Button";
-import Checkbox from "components/ui/Inputs/Checkbox";
-import Input from "components/ui/Inputs/Input";
-import InputAddress from "components/ui/Inputs/InputAddress";
-import InputCategory from "components/ui/Inputs/InputCategory";
-import InputLocation from "components/ui/Inputs/InputLocation";
-import InputSubCategory from "components/ui/Inputs/InputSubCategory";
-import FileInput from "components/ui/Inputs/FilesUploadInput";
-import SelectInput from "components/ui/Inputs/SelectInput";
-import TextArea from "components/ui/Inputs/TextArea";
-import Loader from "components/ui/Loader";
+import Button from 'components/ui/Button'
+import Input from 'components/ui/Inputs/Input'
+import Loader from 'components/ui/Loader'
 
-import * as React from "react";
-import {IEvent, IRootState, ITask, SkillData, SkillListItem} from "types";
-import {maskBirthDate} from "utils/masks";
-import {required} from "utils/validations";
+import * as React from 'react'
+import {IEvent, IRootState} from 'types'
+import {required} from 'utils/validations'
 import styles from './index.module.scss'
 
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 import {Field, reduxForm, formValueSelector} from 'redux-form'
 import {connect} from 'react-redux'
-import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
-import FormError from 'components/ui/Form/FormError'
-import EventInputsForm from 'components/Calendar/components/EditEventModal/components/EventInputsForm'
-import PricingForm from 'components/Calendar/components/EditEventModal/components/PricingForm'
-import Expenses from 'components/Calendar/components/EditEventModal/components/Expenses'
-import {
-  confirmEventRequest,
-  declineEventRequest,
-  deleteEvent,
-  draftEventRequest,
-  sendEventRequest
-} from 'components/Events/actions'
-import {confirmOpen, editEventOpen} from 'components/Modal/actions'
-import {taskNegotiationDeclineConditions} from 'components/TaskNegotiation/actions'
-import MeetingForm from 'components/Calendar/components/EditEventModal/components/MeetingForm'
+
+
 import {parserPrice} from 'utils/formatters'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   onCancel?: () => void
@@ -52,7 +28,7 @@ let EventExpenseForm = ({event, handleSubmit}: Props) => {
   const error = useSelector((state: IRootState) => state.event.formError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
 
   const handleEdit = () => {
    // dispatch(deleteEvent(event.id))

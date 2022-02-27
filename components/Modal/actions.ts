@@ -14,6 +14,7 @@ export const skillCategoryModalOpen = () => action(ActionTypes.SKILL_CATEGORY_MO
 export const confirmOpen = (data: any) => action(ActionTypes.CONFIRM_MODAL_OPEN, data)
 export const confirmChangeData = (data: any) => action(ActionTypes.CHANGE_CONFIRM_DATA, data)
 export const taskUpdateOpen = () => action(ActionTypes.TASK_UPDATE_MODAL_OPEN)
+export const projectOpen = () => action(ActionTypes.PROJECT_MODAL_OPEN)
 export const taskOfferAcceptOpen = () => action(ActionTypes.TASK_OFFER_CREATE_OPEN)
 export const taskShareOpen = () => action(ActionTypes.TASK_SHARE_OPEN)
 export const taskShowOffer = () => action(ActionTypes.TASK_OFFER_SHOW_OPEN)

@@ -1,4 +1,4 @@
-import {IRootState, ProfileData, SkillData} from 'types'
+import {IRootState, SkillData} from 'types'
 import CardSalesPitch from 'components/PublicProfile/components/view/CardSalesPitch'
 import CardWorkExperience from 'components/PublicProfile/components/view/CardWorkExperience'
 import CardPortfolio from 'components/PublicProfile/components/view/CardPortfolio'
@@ -12,43 +12,42 @@ import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {setCurrentSkill} from 'components/Profile/actions'
 import {useRouter} from 'next/router'
 import CardProfileStat from 'components/PublicProfile/components/view/CardProfileStat'
-import CardReviewsShort from 'components/PublicProfile/components/view/CardReviewsShort'
 import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLayout'
 import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
-import PostList from 'components/Post/PostList'
 import CardPosts from 'components/PublicProfile/components/view/CardPosts'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props {
-  profile: ProfileData,
+  profile: IProfile,
   skill: SkillData,
   showType: 'reviews' | 'recommendations' | 'profile' | 'news'
 }
 
 const PublicProfile = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const isEdit = currentProfile && currentProfile.id === props.profile.id;
-  const profile = isEdit ? currentProfile : props.profile;
-  const [category, setCategory] = useState(null);
+  const isEdit = currentProfile && currentProfile.id === props.profile.id
+  const profile = isEdit ? currentProfile : props.profile
+  const [category, setCategory] = useState(null)
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
-  const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill;
-  const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list);
+  const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill
+  const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list)
 
-  const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills);
-  const router = useRouter();
+  const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills)
+  const router = useRouter()
   useEffect(() => {
     if(currentSkill && isEdit){
 
       for (const category of categories) {
-        const exists = category.skills.find(skill => skill.id === currentSkill.id);
+        const exists = category.skills.find(skill => skill.id === currentSkill.id)
         if (exists) {
           setTimeout(() => {
-            dispatch(setCurrentSkill(exists));
-            setCategory(category);
+            dispatch(setCurrentSkill(exists))
+            setCategory(category)
           }, 100)
 
-          return;
+          return
         }
 
       }
@@ -56,38 +55,38 @@ const PublicProfile = (props) => {
   }, [categories])
   useEffect(() => {
     if (!currentSkill) {
-      return;
+      return
     }
     dispatch(fetchProfileTabList({
       profileId: profile.id,
       categoryId: currentSkill.categoryId,
       subCategoryId: currentSkill.subCategoryId
-    }));
-  }, [currentSkill]);
+    }))
+  }, [currentSkill])
 
   useEffect(() => {
     if(!currentSkill){
-      return;
+      return
     }
-    const subCategoryId = currentSkill.subCategoryId;
+    const subCategoryId = currentSkill.subCategoryId
 
 
-    const categories = formatSkillList(profile.skills);
-    console.log("UseEffect1",subCategoryId, currentSkill, categories.length);
+    const categories = formatSkillList(profile.skills)
+    console.log('UseEffect1',subCategoryId, currentSkill, categories.length)
     if (currentSkill && categories.length > 0) {
 
 
       for (const category of categories) {
-        const exists = category.skills.find(skill => skill.subCategoryId === subCategoryId);
+        const exists = category.skills.find(skill => skill.subCategoryId === subCategoryId)
 
         if (exists) {
-          console.log("UseEffect2", exists);
-          dispatch(setCurrentSkill(exists));
-          setCategory(category);
+          console.log('UseEffect2', exists)
+          dispatch(setCurrentSkill(exists))
+          setCategory(category)
 
-          break;
+          break
         }
-        console.log("UseEffect3",subCategoryId, category);
+        console.log('UseEffect3',subCategoryId, category)
 
       }
     }
@@ -96,14 +95,14 @@ const PublicProfile = (props) => {
 
   useEffect(() => {
     if (isEdit) {
-      dispatch(fetchSkillList());
+      dispatch(fetchSkillList())
     }
   }, [isEdit])
   const handleCategoryChange = (category, subCategory) => {
-    console.log("handleCategoryChange", category, subCategory)
-    setCategory(category);
+    console.log('handleCategoryChange', category, subCategory)
+    setCategory(category)
     if (subCategory?.subCategoryId) {
-      dispatch(setCurrentSkill(subCategory));
+      dispatch(setCurrentSkill(subCategory))
 
       router.replace(`/sk${subCategory.id}`, undefined, {shallow: false})
     }

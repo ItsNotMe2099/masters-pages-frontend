@@ -11,7 +11,7 @@ display: flex;
 
     width: 120px;
     height: 150px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       width: 75px;
       height: 94px;
   }

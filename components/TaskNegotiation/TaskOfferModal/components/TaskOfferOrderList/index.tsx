@@ -1,32 +1,28 @@
 
-import ChatMessage from "components/Chat/ChatMessage";
-import { taskNegotiationSendOffer } from "components/TaskNegotiation/actions";
+import { taskNegotiationSendOffer } from 'components/TaskNegotiation/actions'
 import {
-  fetchTaskUserList,
   fetchTaskUserListRequest,
-  resetTaskUserList,
   setPageTaskUser
-} from "components/TaskUser/actions";
-import Button from "components/ui/Button";
-import Radio from "components/ui/Inputs/RadioList/Radio";
-import Loader from "components/ui/Loader";
+} from 'components/TaskUser/actions'
+import Button from 'components/ui/Button'
+import Radio from 'components/ui/Inputs/RadioList/Radio'
+import Loader from 'components/ui/Loader'
 
-import Modal from "components/ui/Modal";
-import { useEffect, useState } from "react";
-import * as React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import { useState } from 'react'
+import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   onCancel: () => void
 }
 const TaskOfferOrderList = (props: Props) => {
-  const dispatch = useDispatch();
-  const [activeTask, setActiveTask] = useState(null);
+  const dispatch = useDispatch()
+  const [activeTask, setActiveTask] = useState(null)
   const total = useSelector((state: IRootState) => state.taskUser.total)
   const page = useSelector((state: IRootState) => state.taskUser.page)
   const list = useSelector((state: IRootState) => state.taskUser.list)
@@ -37,9 +33,9 @@ const TaskOfferOrderList = (props: Props) => {
 
   const handleSubmit = (data) => {
     if(!activeTask){
-      return;
+      return
     }
-    dispatch(taskNegotiationSendOffer(activeTask.id, currentProfile.id));
+    dispatch(taskNegotiationSendOffer(activeTask.id, currentProfile.id))
 
   }
   const handleScrollNext = () => {
@@ -50,10 +46,10 @@ const TaskOfferOrderList = (props: Props) => {
       },
       page: page + 1,
       limit: 10
-    }));
+    }))
   }
   const handleChange = (item) => {
-    setActiveTask(item);
+    setActiveTask(item)
   }
 
   return (
@@ -63,12 +59,12 @@ const TaskOfferOrderList = (props: Props) => {
        <InfiniteScroll
        dataLength={list.length} //This is important field to render the next data
        next={handleScrollNext}
-       scrollableTarget={"task-offer-orders"}
+       scrollableTarget={'task-offer-orders'}
        hasMore={total > list.length}
        loader={<Loader/>}>
-       {list.map(item => <Radio className={styles.radioItem} value={item} isActive={activeTask && activeTask.id === item.id}  onChange={handleChange}>
+       {list.map(item => <Radio className={styles.radioItem} value={item.id} isActive={activeTask && activeTask.id === item.id}  onChange={handleChange}>
          <div className={styles.radioItemTitle}>{item.title}</div>
-         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${getCurrencySymbol(item.currency)}  ${item.budget}` : `free`) : `${getCurrencySymbol(item.currency)} ${item.ratePerHour}/${t('priceRateSuffix')}`}</div>
+         <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${getCurrencySymbol(item.currency)}  ${item.budget}` : 'free') : `${getCurrencySymbol(item.currency)} ${item.ratePerHour}/${t('priceRateSuffix')}`}</div>
        </Radio>)}
      </InfiniteScroll>
      </div>}

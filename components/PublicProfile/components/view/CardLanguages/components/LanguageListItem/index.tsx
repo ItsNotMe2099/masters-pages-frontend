@@ -1,8 +1,7 @@
 import styles from './index.module.scss'
-import {IProfilePreferWorkIn, ProfileData} from 'types'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {LanguagesList} from 'data/languages'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props{
   index: number
@@ -13,8 +12,8 @@ interface Props{
   isEdit: boolean,
 }
 const LanguageListItem = (props: Props) => {
-  const {  model, index, isEdit, onMoveUp, onMoveDown } = props;
-  const { t } = useTranslation('common');
+  const {  model, index, isEdit, onMoveUp, onMoveDown } = props
+  const { t } = useTranslation('common')
 
   return (
     <div className={styles.root}>

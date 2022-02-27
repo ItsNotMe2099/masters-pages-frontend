@@ -1,8 +1,8 @@
-import FormNewCategory from "components/ui/Form/MasterProfile/CheckboxSubCategory/components/Form";
-import { useCallback, useState } from "react";
+import FormNewCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory/components/Form'
+import { useCallback, useState } from 'react'
 import styles from './index.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import nextId from "react-id-generator";
+import { useDispatch } from 'react-redux'
+import nextId from 'react-id-generator'
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 interface Props {
 
@@ -26,31 +26,31 @@ interface Props {
 export default function CheckboxSubCategory(props) {
   const dispatch = useDispatch()
   const generateKey = () => {
-    return nextId("category-id-");
+    return nextId('category-id-')
 
   }
   const [categories, setCategories] = useState<CategoryItem[]>([{key: generateKey()}])
-  const [inEditMode, setInEditMode] = useState([]);
+  const [inEditMode, setInEditMode] = useState([])
 
   const handleEdit = useCallback((category, keyEl) => {
-    let newCategories = [...categories];
-    const key = categories.findIndex((item => item.key === keyEl));
-    newCategories[key] = {...category, key: keyEl};
-    newCategories = [...newCategories, ...(key === categories.length - 1 ? [{key: generateKey()}] : [])];
-    setCategories(newCategories);
-    props.input.onChange(newCategories.filter(data => data.id));
-    setInEditMode([]);
+    let newCategories = [...categories]
+    const key = categories.findIndex((item => item.key === keyEl))
+    newCategories[key] = {...category, key: keyEl}
+    newCategories = [...newCategories, ...(key === categories.length - 1 ? [{key: generateKey()}] : [])]
+    setCategories(newCategories)
+    props.input.onChange(newCategories.filter(data => data.id))
+    setInEditMode([])
     }, [categories])
 
   const handleRemove = useCallback((category, key) => {
 
-    const newCategories = categories.filter((item) => (item as any).id !== category.id);
-    setCategories(newCategories);
-    props.input.onChange(newCategories.filter(data => data.id));
+    const newCategories = categories.filter((item) => (item as any).id !== category.id)
+    setCategories(newCategories)
+    props.input.onChange(newCategories.filter(data => data.id))
   }, [categories])
 
   const handleEditClick = useCallback((category, key) => {
-    setInEditMode([ category.id]);
+    setInEditMode([ category.id])
   }, [inEditMode])
 
   const renderListItem = (category, key) => {
@@ -69,7 +69,7 @@ export default function CheckboxSubCategory(props) {
     return (
       <div className={styles.listItemForm}>
       <FormNewCategory form={`newCategory${category.key}`} initialValues={{
-        mainCategory: {value: category?.mainCategory?.id, label:category?. mainCategory?.name},
+        mainCategory: {value: category?.mainCategory?.id, label: category?. mainCategory?.name},
 
         category: {value: category.id, label: category.name},
       subCategories: category.subCategories?.map((item) => {

@@ -1,24 +1,22 @@
-import {useTranslation, withTranslation} from "i18n";
-import {getAuthServerSide} from "utils/auth";
+import { useTranslation } from 'next-i18next'
+import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import Header from '../../components/layout/Layout/LayoutAuthorized/mobile/Header'
-import {useEffect} from "react";
+import {useEffect} from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  createFeedBackSiteRequest, fetchFeedbacksSiteRequest,
-  fetchFeedbacksToProfile,
+import { fetchFeedbacksSiteRequest,
   resetFeedbackList,
   setPageFeedback
-} from "../../components/ProfileFeedback/actions";
-import Loader from "../../components/ui/Loader";
-import InfiniteScroll from "react-infinite-scroll-component";
+} from '../../components/ProfileFeedback/actions'
+import Loader from '../../components/ui/Loader'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
-import * as React from "react";
-import {IRootState} from "../../types";
-import ReviewMainPage from "../../components/ReviewMainPage";
+import * as React from 'react'
+import {IRootState} from '../../types'
+import ReviewMainPage from '../../components/ReviewMainPage'
 const SiteReviews = (props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
   const list = useSelector((state: IRootState) => state.profileFeedback.list)
@@ -26,15 +24,15 @@ const SiteReviews = (props) => {
   const page = useSelector((state: IRootState) => state.profileFeedback.page)
 
   useEffect(() => {
-    dispatch(resetFeedbackList());
-    dispatch(setPageFeedback(1));
-    dispatch(fetchFeedbacksSiteRequest({page: 1, limit: 30}));
+    dispatch(resetFeedbackList())
+    dispatch(setPageFeedback(1))
+    dispatch(fetchFeedbacksSiteRequest({page: 1, limit: 30}))
   }, [])
   useEffect(() => {
     return () => {
-      dispatch(resetFeedbackList());
+      dispatch(resetFeedbackList())
     }
-  }, []);
+  }, [])
 
   const handleScrollNext = () => {
     dispatch(setPageFeedback(page + 1))
@@ -58,5 +56,5 @@ const SiteReviews = (props) => {
   )
 }
 
-export const getServerSideProps = getAuthServerSide();
+export const getServerSideProps = getAuthServerSide()
 export default SiteReviews

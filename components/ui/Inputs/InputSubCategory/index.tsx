@@ -1,25 +1,21 @@
-import SelectInput from "components/ui/Inputs/SelectInput";
-import { useCallback, useEffect, useState } from "react";
-import { IRootState } from "types";
-import styles from './index.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSubCategory, resetSubCategory } from "./actions";
-import {getCategoryTranslation} from 'utils/translations'
+import SelectInput from 'components/ui/Inputs/SelectInput'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import request from 'utils/request'
-import queryString from  'query-string';
-import {useTranslation} from 'i18n'
+import queryString from  'query-string'
+import { useTranslation } from 'next-i18next'
 interface Props {
 
 }
 
 export default function InputSubCategory(props) {
-  const {t, i18n} = useTranslation();
+  const {t, i18n} = useTranslation()
   const dispatch = useDispatch()
-  const [value, setValue] = useState();
+  const [value, setValue] = useState()
 
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([])
   useEffect(() => {
-    getSearchCategory();
+    getSearchCategory()
     if(props.input.value){
 
     }
@@ -31,7 +27,7 @@ export default function InputSubCategory(props) {
   const getSearchCategory = (search = '') => {
     return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
       .then((response) => {
-        const data = response.data;
+        const data = response.data
         setOptions(data ? data.map(item => {
           return {
             value: item.id,
@@ -41,16 +37,16 @@ export default function InputSubCategory(props) {
       })
   }
   const handleOnOpen = () => {
-    getSearchCategory(value);
+    getSearchCategory(value)
   }
   const handleOnSearchChange = (value) => {
     setValue(value)
-    getSearchCategory(value);
+    getSearchCategory(value)
   }
 
   useEffect(() => {
     if(props.categoryId) {
-      getSearchCategory();
+      getSearchCategory()
     }
   }, [props.categoryId])
 

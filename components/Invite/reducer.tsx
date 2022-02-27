@@ -1,7 +1,6 @@
-import ApiActionTypes from "constants/api";
+import ApiActionTypes from 'constants/api'
 
-import ActionTypes from "./const";
-import {format} from 'date-fns'
+import ActionTypes from './const'
 
 export interface InviteState {
   formIsSuccess: boolean
@@ -20,24 +19,24 @@ export default function InviteReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.INVITE_RESET:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
 
       break
     case ActionTypes.INVITE_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.INVITE_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
+      state.formIsSuccess = true
+      state.formLoading = false
       break
     case ActionTypes.INVITE_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
   }
 

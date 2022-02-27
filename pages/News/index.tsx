@@ -2,19 +2,15 @@ import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import dynamic from 'next/dynamic'
-import {default as React, useEffect, useState} from "react";
-import {useTranslation} from "i18n";
+import {default as React, useEffect, useState} from 'react'
+import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
-import Tabs from 'components/ui/Tabs'
-import SharePersonalLink from 'components/Share/PersonalLink'
-import ShareByEmail from 'components/Share/ShareByEmail'
-import ShareBySocialMedia from 'components/Share/ShareBySocialMedia'
 
 const SharePersonalLabel = dynamic(() => import('components/Share/PersonalLabel'), {
   ssr: false
 })
-import {IProfileGalleryItem, IRootState} from 'types'
+import { IRootState} from 'types'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {setPageTaskUser} from 'components/TaskUser/actions'
@@ -25,29 +21,29 @@ import GalleryItem from 'components/GalleryItem'
 
 const NewsPage = (props) => {
   const {t} = useTranslation()
-  const router = useRouter();
+  const router = useRouter()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const listLoading = useSelector((state: IRootState) => state.news.listLoading);
+  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const listLoading = useSelector((state: IRootState) => state.news.listLoading)
   const total = useSelector((state: IRootState) => state.news.total)
   const page = useSelector((state: IRootState) => state.news.page)
   const list = useSelector((state: IRootState) => state.news.list)
 
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [currentEditPost, setCurrentEditPost] = useState(null);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const [isEditOpen, setIsEditOpen] = useState(false)
+  const [currentEditPost, setCurrentEditPost] = useState(null)
 
-  const limit = 30;
+  const limit = 30
   useEffect(() => {
     dispatch(resetNewsList())
     dispatch(fetchNewsList({
       profileId: profile.id,
       page: 1,
       limit
-    }));
+    }))
 
-  }, []);
+  }, [])
   const handleSortChange = (sort) => {
 
   }
@@ -57,7 +53,7 @@ const NewsPage = (props) => {
       profileId: profile.id,
       page: page + 1,
       limit
-    }));
+    }))
   }
   const showGallery = (model, index) => {
     dispatch(setNewsCurrentItemIndex(index))
@@ -87,5 +83,5 @@ const NewsPage = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default NewsPage

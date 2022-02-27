@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { useRef, useState } from 'react';
+import { useRef } from 'react'
 import cx from 'classnames'
 import {useDetectOutsideClick} from 'components/hooks/useDetectOutsideClick'
 
@@ -13,12 +13,12 @@ interface Props {
 }
 
 export default function QualitySelect(props: Props) {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
 
     const onClick = (e) => {
         e.preventDefault()
-        setIsActive(!isActive);
+        setIsActive(!isActive)
     }
     const handleChange = (value) => {
       props.onChange(value)

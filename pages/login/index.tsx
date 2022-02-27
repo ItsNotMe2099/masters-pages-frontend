@@ -1,16 +1,16 @@
-import { signUpOpen } from "components/Modal/actions";
-import PhoneConfirmComponent from "components/Auth/PhoneConfirm";
-import PWRecoveryComponent from "components/Auth/PWRecovery";
-import PWRecoverySucces from "components/Auth/PWRecovery/Success";
-import SignInComponent from "components/Auth/SignIn";
-import SignUpComponent from "components/Auth/SignUp";
+import { signUpOpen } from 'components/Modal/actions'
+import PhoneConfirmComponent from 'components/Auth/PhoneConfirm'
+import PWRecoveryComponent from 'components/Auth/PWRecovery'
+import PWRecoverySucces from 'components/Auth/PWRecovery/Success'
+import SignInComponent from 'components/Auth/SignIn'
+import SignUpComponent from 'components/Auth/SignUp'
 
-import { useEffect } from "react";
-import { IRootState } from "types";
+import { useEffect } from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import Backgrounds from 'components/Backgrounds'
 import cookie from 'js-cookie'
 interface Props {
@@ -18,11 +18,11 @@ interface Props {
 }
 
 const RegistrationPage = (props: Props) => {
-  const { t } = useTranslation('common');
-  const dispatch = useDispatch();
+  const { t } = useTranslation('common')
+  const dispatch = useDispatch()
   const key = useSelector((state: IRootState) => state.modal.modalKey)
   useEffect(() => {
-    dispatch(signUpOpen());
+    dispatch(signUpOpen())
   }, [])
 
   const handleAbout = () => {

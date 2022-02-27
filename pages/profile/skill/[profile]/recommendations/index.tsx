@@ -1,8 +1,9 @@
-import {ProfileData, SkillData} from 'types'
+import { SkillData} from 'types'
 import PublicProfile from 'components/PublicProfile'
 import {getProfilePageProps} from 'utils/profile'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props {
-  profile: ProfileData,
+  profile: IProfile,
   skill: SkillData
   showType?: string
 }

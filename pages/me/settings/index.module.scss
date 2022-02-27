@@ -6,7 +6,7 @@
   align-items: flex-start;
   position: relative;
   justify-content: space-between;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,14 +18,14 @@
 }
 .buttons{
   width: 25%;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 100%;
   }
  }
 .form{
   flex: 1;
   max-width: 600px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     flex: auto;
     width: 100%;
     margin-bottom: 30px;

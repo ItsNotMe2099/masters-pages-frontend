@@ -1,7 +1,6 @@
-import React, { useEffect, ReactNode, FunctionComponent } from 'react'
+import React, { useEffect, FunctionComponent } from 'react'
 import PropTypes from 'prop-types'
 import styles from './index.module.scss'
-import { Line, Circle } from 'rc-progress';
 interface Props {
   className?: string
   progress?: number,
@@ -31,9 +30,9 @@ const AvatarInputPreview: FunctionComponent<Props> = props => {
   }, [file])
 
   const getImageSrc = (file) => {
-    const srcValue = file?.preview ? file.preview : file;
+    const srcValue = file?.preview ? file.preview : file
     if(!srcValue){
-      return;
+      return
     }
     return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
   }

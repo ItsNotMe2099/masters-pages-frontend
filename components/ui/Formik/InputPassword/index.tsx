@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import {FieldConfig, useField} from 'formik'
-import cx from 'classnames';
+import cx from 'classnames'
 import {ReactElement, useState} from 'react'
 import ErrorInput from 'components/ui/Formik/components/ErrorInput'
 import Input from 'components/ui/Formik/Input'
@@ -19,14 +19,14 @@ interface Props {
 }
 
 export default function InputPassword(props: Props & FieldConfig) {
-  const {label, placeholder, className, inputClassName, hasAutoComplete, icon, variant, labelType} = props;
+  const {label, placeholder, className, inputClassName, hasAutoComplete, icon, variant, labelType} = props
   const [field, meta] = useField(props)
-  const hasError = !!meta.error && meta.touched;
+  const hasError = !!meta.error && meta.touched
   const [showRaw, setShowRaw] = useState(false)
   const [isShown, setIsShown] = useState(false)
   const handleShowClick = (e) => {
     e.preventDefault()
-    setShowRaw(i => !i);
+    setShowRaw(i => !i)
   }
 
   return (

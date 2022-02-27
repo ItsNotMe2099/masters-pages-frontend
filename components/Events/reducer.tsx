@@ -1,9 +1,8 @@
-import ApiActionTypes from "constants/api";
-import {IEvent, IEventExpense, IProfileTab, SkillData, SkillListItem} from "types";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import {IEvent, IEventExpense, IProfileTab} from 'types'
+import ActionTypes from './const'
 import {format} from 'date-fns'
-import cookie from "js-cookie";
-import {getEventBorderColor, getEventColor} from 'utils/event'
+import { getEventColor} from 'utils/event'
 export interface EventsState {
   list: IEvent[],
   listCalendar: IEvent[],
@@ -62,97 +61,97 @@ const formatEvent = (event) => {
   }
 }
 const getEventDots = (events) => {
-  const map = {};
+  const map = {}
   for(const event of events) {
-    const key = format(event.start, 'yyyyMMdd');
+    const key = format(event.start, 'yyyyMMdd')
     if (!map[key]) {
       map[key] = []
     }
 
-    map[key].push({id: event.id, color: getEventColor(event, {isOtherSide: true})});
+    map[key].push({id: event.id, color: getEventColor(event, {isOtherSide: true})})
   }
 
-  return map;
+  return map
 }
 export default function EventsReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.RESET_EVENT_FORM:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = false;
-      state.currentEventExpenses = [];
-      state.currentEventActualExpenses = [];
-      state.submitEvent = null;
-      state.isCurrentEventEditMode = false;
+      state.formIsSuccess = false
+      state.formLoading = false
+      state.currentEventExpenses = []
+      state.currentEventActualExpenses = []
+      state.submitEvent = null
+      state.isCurrentEventEditMode = false
       break
     case ActionTypes.RESET_FEEDBACK_EVENT_FORM:
       state.formFeedbackError = ''
       break
     case ActionTypes.EMPTY_EVENT_UNREAD:
-      const mapEvent = i => i.id === action.payload.event.id ? ({...i, unreadTextMessagesCount: 0, unreadMediaMessagesCount: 0}) : i;
-      state.list = state.list.map(mapEvent);
-      state.listSideBar = state.listSideBar.map(mapEvent);
-      state.listCalendar = state.listCalendar.map(mapEvent);
-      break;
+      const mapEvent = i => i.id === action.payload.event.id ? ({...i, unreadTextMessagesCount: 0, unreadMediaMessagesCount: 0}) : i
+      state.list = state.list.map(mapEvent)
+      state.listSideBar = state.listSideBar.map(mapEvent)
+      state.listCalendar = state.listCalendar.map(mapEvent)
+      break
     case ActionTypes.CURRENT_EVENT_SET_EDIT_MODE:
-      state.isCurrentEventEditMode = true;
-      break;
+      state.isCurrentEventEditMode = true
+      break
     case ActionTypes.SET_SUBMIT_EVENT:
-      state.submitEvent = action.payload.submitEvent;
+      state.submitEvent = action.payload.submitEvent
       break
     case ActionTypes.CREATE_EVENT_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.CREATE_EVENT_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
+      state.formIsSuccess = true
+      state.formLoading = false
       state.list = [...state.list, formatEvent(action.payload)]
       state.listSideBar = [...state.listSideBar, formatEvent(action.payload)]
       state.listCalendar = [...state.listCalendar, formatEvent(action.payload)]
-      state.mapCalendarColorStatus = getEventDots(state.listCalendar);
+      state.mapCalendarColorStatus = getEventDots(state.listCalendar)
       break
     case ActionTypes.CREATE_EVENT_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
     case ActionTypes.UPDATE_EVENT:
-      state.list = state.list.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.data} : item));
-      state.listSideBar = state.listSideBar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.data} : item));
-      state.listCalendar = state.listCalendar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.data} : item));
-      state.mapCalendarColorStatus = getEventDots(state.listCalendar);
+      state.list = state.list.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.data} : item))
+      state.listSideBar = state.listSideBar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.data} : item))
+      state.listCalendar = state.listCalendar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.data} : item))
+      state.mapCalendarColorStatus = getEventDots(state.listCalendar)
       break
     case ActionTypes.UPDATE_EVENT_CANCEL:
-      state.list = state.list.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.event} : item));
-      state.listSideBar = state.listSideBar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.event} : item));
-      state.listCalendar = state.listCalendar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.event} : item));
-      state.mapCalendarColorStatus = getEventDots(state.listCalendar);
+      state.list = state.list.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.event} : item))
+      state.listSideBar = state.listSideBar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.event} : item))
+      state.listCalendar = state.listCalendar.map(item => (item.id === action.payload.event.id ? {...item, ...action.payload.event} : item))
+      state.mapCalendarColorStatus = getEventDots(state.listCalendar)
       break
     case ActionTypes.UPDATE_EVENT_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST:
     case ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST:
       state.formFeedbackError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.SUCCESS:
     case ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.SUCCESS:
       state.formFeedbackError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
+      state.formIsSuccess = true
+      state.formLoading = false
       break
     case ActionTypes.CREATE_FEEDBACK_EVENT_MASTER_REQUEST + ApiActionTypes.FAIL:
     case ActionTypes.CREATE_FEEDBACK_EVENT_CLIENT_REQUEST + ApiActionTypes.FAIL:
       state.formFeedbackError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
     case ActionTypes.UPDATE_EVENT_REQUEST + ApiActionTypes.SUCCESS:
     case ActionTypes.SEND_EVENT_REQUEST + ApiActionTypes.SUCCESS:
@@ -164,14 +163,14 @@ export default function EventsReducer(state = {...initialState}, action) {
     case ActionTypes.COMPLETE_EVENT_REQUEST + ApiActionTypes.SUCCESS:
     case ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
+      state.formIsSuccess = true
+      state.formLoading = false
       state.currentEvent = {...state.currentEvent, ...action.payload}
-      state.listSideBar = !state.listSideBar.find(item => item.id === action.payload.id) ?  [... state.listSideBar, formatEvent(action.payload)] : state.listSideBar;
-      state.list = state.list.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item);
-      state.listSideBar = state.listSideBar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item);
-      state.listCalendar = state.listCalendar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item);
-      state.mapCalendarColorStatus = getEventDots(state.listCalendar);
+      state.listSideBar = !state.listSideBar.find(item => item.id === action.payload.id) ?  [... state.listSideBar, formatEvent(action.payload)] : state.listSideBar
+      state.list = state.list.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item)
+      state.listSideBar = state.listSideBar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item)
+      state.listCalendar = state.listCalendar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item)
+      state.mapCalendarColorStatus = getEventDots(state.listCalendar)
       break
     case ActionTypes.UPDATE_EVENT_REQUEST + ApiActionTypes.FAIL:
     case ActionTypes.SEND_EVENT_REQUEST + ApiActionTypes.FAIL:
@@ -183,98 +182,98 @@ export default function EventsReducer(state = {...initialState}, action) {
     case ActionTypes.COMPLETE_EVENT_REQUEST + ApiActionTypes.FAIL:
     case ActionTypes.EDIT_EVENT_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
     case ActionTypes.DELETE_EVENT_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.DELETE_EVENT_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
+      state.formIsSuccess = true
+      state.formLoading = false
       if(action.payload.isDeleted){
-        state.list = state.list.filter(item => item.id !== action.payload.id);
-        state.listSideBar = state.listSideBar.filter(item => item.id !== action.payload.id);
-        state.listCalendar = state.listCalendar.filter(item => item.id !== action.payload.id);
+        state.list = state.list.filter(item => item.id !== action.payload.id)
+        state.listSideBar = state.listSideBar.filter(item => item.id !== action.payload.id)
+        state.listCalendar = state.listCalendar.filter(item => item.id !== action.payload.id)
       }else{
         state.currentEvent = {...state.currentEvent, ...action.payload}
-        state.listSideBar = !state.listSideBar.find(item => item.id === action.payload.id) ?  [... state.listSideBar, formatEvent(action.payload)] : state.listSideBar;
-        state.list = state.list.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item);
-        state.listSideBar = state.listSideBar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item);
-        state.listCalendar = state.listCalendar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item);
-        state.mapCalendarColorStatus = getEventDots(state.listCalendar);
+        state.listSideBar = !state.listSideBar.find(item => item.id === action.payload.id) ?  [... state.listSideBar, formatEvent(action.payload)] : state.listSideBar
+        state.list = state.list.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item)
+        state.listSideBar = state.listSideBar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item)
+        state.listCalendar = state.listCalendar.map(item => item.id === action.payload.id ? (formatEvent({...item, ...action.payload})) : item)
+        state.mapCalendarColorStatus = getEventDots(state.listCalendar)
       }
       break
     case ActionTypes.DELETE_EVENT_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
 
     case ActionTypes.FETCH_EVENT_LIST_REQUEST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_EVENT_LIST_REQUEST + ApiActionTypes.SUCCESS:
-      state.list = action.payload.data.map(item => formatEvent(item));
+      state.list = action.payload.data.map(item => formatEvent(item))
       state.total = action.payload.total
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.FETCH_EVENT_LIST_REQUEST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
 
     case ActionTypes.FETCH_EVENT_CALENDAR_LIST_REQUEST:
-      state.listCalendarLoading = true;
+      state.listCalendarLoading = true
       break
     case ActionTypes.FETCH_EVENT_CALENDAR_LIST_REQUEST + ApiActionTypes.SUCCESS:
-      state.listCalendar = action.payload.data.map(item => formatEvent(item));
-      state.mapCalendarColorStatus = getEventDots(state.listCalendar);
-      state.listCalendarLoading = false;
+      state.listCalendar = action.payload.data.map(item => formatEvent(item))
+      state.mapCalendarColorStatus = getEventDots(state.listCalendar)
+      state.listCalendarLoading = false
       break
     case ActionTypes.FETCH_EVENT_CALENDAR_LIST_REQUEST + ApiActionTypes.FAIL:
-      state.listCalendarLoading = false;
+      state.listCalendarLoading = false
       break
 
     case ActionTypes.FETCH_EVENT_SIDEBAR_LIST_REQUEST:
-      state.listSidebarLoading = true;
+      state.listSidebarLoading = true
       break
     case ActionTypes.FETCH_EVENT_SIDEBAR_LIST_REQUEST + ApiActionTypes.SUCCESS:
-      state.listSideBar = action.payload.data.map(item => formatEvent(item));
-      state.listSidebarLoading = false;
+      state.listSideBar = action.payload.data.map(item => formatEvent(item))
+      state.listSidebarLoading = false
       break
     case ActionTypes.FETCH_EVENT_SIDEBAR_LIST_REQUEST + ApiActionTypes.FAIL:
-      state.listSidebarLoading = false;
+      state.listSidebarLoading = false
       break
 
     case ActionTypes.FETCH_EVENT_ONE_REQUEST:
-      state.currentLoading = true;
+      state.currentLoading = true
       break
     case ActionTypes.FETCH_EVENT_ONE_REQUEST + ApiActionTypes.SUCCESS:
       state.currentEvent = action.payload
-      state.currentEventActualExpenses =  state.currentEvent.actualExpenses;
-      state.currentEventExpenses =  state.currentEvent.expenses;
-      state.currentLoading = false;
+      state.currentEventActualExpenses =  state.currentEvent.actualExpenses
+      state.currentEventExpenses =  state.currentEvent.expenses
+      state.currentLoading = false
       break
     case ActionTypes.FETCH_EVENT_ONE_REQUEST + ApiActionTypes.FAIL:
-      state.currentLoading = false;
+      state.currentLoading = false
       break
 
     case ActionTypes.RESET_EVENT_LIST:
-      state.listLoading = false;
-      state.total = 0;
-      state.page = 1;
-      state.list = [];
+      state.listLoading = false
+      state.total = 0
+      state.page = 1
+      state.list = []
       break
     case ActionTypes.UPDATE_EVENT_EXPENSES:
       if(action.payload.type === 'actual'){
-        state.currentEventActualExpenses = action.payload.data;
+        state.currentEventActualExpenses = action.payload.data
       }else{
-        state.currentEventExpenses = action.payload.data;
+        state.currentEventExpenses = action.payload.data
       }
-      break;
+      break
 
   }
 

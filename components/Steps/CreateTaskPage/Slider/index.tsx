@@ -1,12 +1,12 @@
-import Step from "components/Steps";
-import SliderControl from "components/ui/SliderControl";
-import React, { Component } from "react";
-import Slider from "react-slick";
+import Step from 'components/Steps'
+import SliderControl from 'components/ui/SliderControl'
+import React from 'react'
+import Slider from 'react-slick'
 import styles from './index.module.scss'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 const SimpleSlider = () => {
-  const {t} = useTranslation();
+  const {t} = useTranslation()
   const settings = {
     dots: false,
     infinite: true,
@@ -38,7 +38,7 @@ const SimpleSlider = () => {
         }
       }
     ]
-  };
+  }
     return (
       <div className={styles.root}>
         <img className={styles.waveLeft} src={'/img/icons/waveArrow.svg'} alt=''/>
@@ -88,4 +88,4 @@ const SimpleSlider = () => {
       </div>
     )
 }
-export default SimpleSlider;
+export default SimpleSlider

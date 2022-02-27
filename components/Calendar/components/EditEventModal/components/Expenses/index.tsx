@@ -1,13 +1,11 @@
-import { useRouter } from "next/router";
-import * as React from "react";
+import { useRouter } from 'next/router'
+import * as React from 'react'
 import styles from './index.module.scss'
-import {EventStatus, IEvent, IRootState} from 'types'
-import MarkIcon from 'components/svg/MarkIcon'
+import { IEvent, IRootState} from 'types'
 import AddCircleIcon from 'components/svg/AddCircleIcon'
 import { useSelector, useDispatch } from 'react-redux'
-import {eventExpenseActualOpen, eventExpensePlannedOpen} from 'components/Modal/actions'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 interface Props {
   event: IEvent,
   type: 'actual' | 'planned',
@@ -24,20 +22,20 @@ interface Props {
 
 }
 const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBudget, onAddExpense, onEditExpense, isDisabled}: Props) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
   const currentEventExpenses = useSelector((state: IRootState) => state.event.currentEventExpenses)
   const currentEventActualExpenses = useSelector((state: IRootState) => state.event.currentEventActualExpenses)
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
 
   const handleAddExpense = () => {
     if(isDisabled){
-      return;
+      return
     }
     onAddExpense(type)
   }
   const getTotalAmount = () => {
-    const itemsAmount = items.length > 0 ? items.map(item => item.amount).reduce( (accumulator, currentValue) => +accumulator + +currentValue) : 0;
+    const itemsAmount = items.length > 0 ? items.map(item => item.amount).reduce( (accumulator, currentValue) => +accumulator + +currentValue) : 0
     if(type === 'actual'){
       return +itemsAmount  + +(priceType === 'rate' ? +actualPrice.total * +actualPrice.rate :  +actualBudget )
     }else{
@@ -45,7 +43,7 @@ const Expenses = ({event, type, priceType, budget, price, actualPrice, actualBud
 
     }
   }
- const items = type === 'actual' ? currentEventActualExpenses : currentEventExpenses;
+ const items = type === 'actual' ? currentEventActualExpenses : currentEventExpenses
   return (
     <div className={`${styles.root}`}>
       <div className={styles.header}>

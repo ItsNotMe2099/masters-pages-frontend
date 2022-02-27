@@ -1,32 +1,24 @@
-import { put } from "@redux-saga/core/effects";
-import { modalClose } from "components/Modal/actions";
-import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
-import {
-  taskNegotiationCreateTaskResponse, taskNegotiationEditConditions,
-  taskNegotiationEditConditionsRequest, taskNegotiationSendOfferCreateTask
-} from "components/TaskNegotiation/actions";
-import TaskEditConditionsForm from "components/TaskNegotiation/TaskEditConditionsModal/TaskEditConditionsForm";
-import TaskOfferNewOrder from "components/TaskNegotiation/TaskOfferModal/components/TaskOfferNewOrder";
-import TaskOfferOrderList from "components/TaskNegotiation/TaskOfferModal/components/TaskOfferOrderList";
-import { fetchTaskSearchList, resetTaskSearchList, setUseLocationFilter } from "components/TaskSearch/actions";
-import { fetchTaskUserListRequest, resetTaskUserList } from "components/TaskUser/actions";
+import { taskNegotiationSendOfferCreateTask
+} from 'components/TaskNegotiation/actions'
+import TaskOfferNewOrder from 'components/TaskNegotiation/TaskOfferModal/components/TaskOfferNewOrder'
+import TaskOfferOrderList from 'components/TaskNegotiation/TaskOfferModal/components/TaskOfferOrderList'
+import { fetchTaskUserListRequest, resetTaskUserList } from 'components/TaskUser/actions'
 
-import Modal from "components/ui/Modal";
-import Tabs from "components/ui/Tabs";
-import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import * as React from "react";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import Modal from 'components/ui/Modal'
+import Tabs from 'components/ui/Tabs'
+import { useEffect, useState } from 'react'
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   isOpen: boolean,
   onClose: () => void
 }
 const TaskOfferModal = ({isOpen, onClose}: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('tasks')
   const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -42,30 +34,30 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
         status: 'published',
         page: 1,
         limit: 10
-      }));
+      }))
     }
     return () => {
-      dispatch(resetTaskUserList());
+      dispatch(resetTaskUserList())
     }
   }, [])
 
   const tabs = [
     { name: t('taskNegotiation.availableTasks'), key: 'tasks' },
     { name: t('taskNegotiation.privateTask'), key: 'newTask' },
-  ];
+  ]
   const handleChangeTab = (item) => {
-    setActiveTab(item.key);
+    setActiveTab(item.key)
   }
 
   const handleSubmitNewOrder = (data) => {
-    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: currentProfile.id}, currentProfile.id));
+    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: currentProfile.id}, currentProfile.id))
   }
 
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
         <div className={styles.icon}>
-          <img  src={`/img/icons/dollar.svg`}/>
+          <img  src={'/img/icons/dollar.svg'}/>
         </div>
         <div className={styles.title}>{t('taskNegotiation.offerTask')}</div>
       </div>

@@ -1,18 +1,16 @@
 import Button from 'components/ui/Button'
-import FormError from "components/ui/Form/FormError";
+import FormError from 'components/ui/Form/FormError'
 import { Field, reduxForm } from 'redux-form'
 import Input from 'components/ui/Inputs/Input'
-import InputPassword from 'components/ui/Inputs/InputPassword'
-import { IRootState } from "types";
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import {required} from 'utils/validations'
-import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "i18n";
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'next-i18next'
 
 let SaveProfileSearchForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profileFeedback.formError)
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

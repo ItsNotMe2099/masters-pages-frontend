@@ -1,12 +1,8 @@
-import { signInSubmit } from "components/Auth/SignIn/actions";
-import Button from 'components/ui/Button'
-import Loader from "components/ui/Loader";
-import { createRef, ReactElement, useEffect, useRef } from "react";
+import Loader from 'components/ui/Loader'
+import { ReactElement, useEffect, useRef } from 'react'
 import styles from './index.module.scss'
 
 import ReactModal from 'react-modal'
-import { useDispatch } from 'react-redux'
-import ModalHeader from "./Header";
 import CloseIcon from 'components/svg/CloseIcon'
 
 
@@ -25,14 +21,14 @@ interface Props {
 }
 
 export default function Modal(props: Props) {
-  const bodyRef = useRef(null);
+  const bodyRef = useRef(null)
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       display: 'flex',
       zIndex: '4',
     },
-    content : {
+    content: {
       width: '100%',
       borderRadius: '21px',
       padding: '0',
@@ -48,29 +44,36 @@ export default function Modal(props: Props) {
   useEffect(() => {
 
     if(!  bodyRef.current){
-      return;
+      return
     }
+
     if(props.loading){
       bodyRef.current.style.visibility = 'hidden'
     }else{
       bodyRef.current.style.visibility = 'inherit'
     }
   }, [props.loading])
+  useEffect(() => {
+    if(props.isOpen){
+      ReactModal.setAppElement('body')
+    }
+  }, [props.isOpen])
   const getSizeClass = (size) => {
     switch (size) {
       case 'large':
-        return styles.rootLarge;
+        return styles.rootLarge
       case 'medium':
-        return styles.rootMedium;
+        return styles.rootMedium
       case 'normal':
       default:
-        return styles.rootNormal;
+        return styles.rootNormal
     }
   }
   return (
     <ReactModal
     style={customStyles}
     isOpen={props.isOpen}
+    ariaHideApp={false}
     onRequestClose={props.onRequestClose}
     >
       <div className={styles.frame} >

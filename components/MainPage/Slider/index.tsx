@@ -1,23 +1,23 @@
-import React, {Component, useEffect} from "react";
-import Slider from "react-slick";
+import React, { useEffect} from 'react'
+import Slider from 'react-slick'
 import SliderControl from 'components/ui/SliderControl'
-import Slide from "./Slide";
+import Slide from './Slide'
 import styles from './index.module.scss'
-import {IRootState} from "../../../types";
+import {IRootState} from '../../../types'
 import { useSelector, useDispatch } from 'react-redux'
-import {fetchStatRequest} from "../../Stat/actions";
-import {useTranslation} from 'i18n'
+import {fetchStatRequest} from '../../Stat/actions'
+import { useTranslation } from 'next-i18next'
 interface Props{
 
 }
 export default function SimpleSlider(props: Props) {
   const dispatch = useDispatch()
   const stat = useSelector((state: IRootState) => state.stat.stat)
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   useEffect(() => {
-    dispatch(fetchStatRequest());
+    dispatch(fetchStatRequest())
   }, [])
-    var settings = {
+    const settings = {
       dots: false,
       infinite: true,
       speed: 500,
@@ -48,7 +48,7 @@ export default function SimpleSlider(props: Props) {
           }
         }
       ]
-    };
+    }
     return (
       <div className={styles.root}>
         <div className={styles.sliderContainer}>
@@ -61,6 +61,6 @@ export default function SimpleSlider(props: Props) {
         </Slider>
         </div>
       </div>
-    );
+    )
 
 }

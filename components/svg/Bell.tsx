@@ -1,4 +1,3 @@
-import ProfilePostsPage from 'pages/Posts/[id]'
 import React from 'react'
 
 interface Props {

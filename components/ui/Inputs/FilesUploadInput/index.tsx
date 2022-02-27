@@ -1,22 +1,17 @@
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 
-import FileWrapper, { FileEntity } from "components/ui/Inputs/FilesUploadInput/components/FileWrapper";
+import FileWrapper, { FileEntity } from 'components/ui/Inputs/FilesUploadInput/components/FileWrapper'
 import React, {
-  FunctionComponent,
-  Children,
-  cloneElement,
-  isValidElement,
   ReactElement, useState, useCallback, useEffect,
 } from 'react'
 import PropTypes from 'prop-types'
-import { shallowEqual } from 'recompose'
 import { useDropzone, DropzoneOptions } from 'react-dropzone'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
-import nextId from "react-id-generator";
+import nextId from 'react-id-generator'
 import { useSelector, useDispatch} from 'react-redux'
 import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
-import {useTranslation, Trans} from "i18n";
+import { Trans } from 'next-i18next'
 import {IRootState} from 'types'
 
 const transformFile = file => {
@@ -25,7 +20,7 @@ const transformFile = file => {
   }
   const preview = URL.createObjectURL(file)
   const transformedFile = {
-    key:  nextId('file'),
+    key: nextId('file'),
     rawFile: file,
     preview: preview,
   }
@@ -113,11 +108,11 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   }, [files])
   useEffect(() => {
     if(props.filesFromDropZone && props.filesFromDropZone.length > 0){
-      onDrop(props.filesFromDropZone);
+      onDrop(props.filesFromDropZone)
     }
   }, [props.filesFromDropZone])
   const generateKey = () => {
-    return nextId("file-");
+    return nextId('file-')
   }
   const onUpload = (file: FileEntity) => {
 
@@ -138,16 +133,16 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   }
   const onDrop = useCallback((newFiles) => {
     const updatedFiles = multiple ? [...files, ...newFiles] : [...newFiles]
-    setFiles(updatedFiles.map(transformFile));
+    setFiles(updatedFiles.map(transformFile))
   }, [files])
 
   const onRemove =(file: FileEntity) => {
     setFiles(files => {
       const index = files.findIndex( item => (file.key && file.key === item.key) || (!file.key && item.path === file.path))
-      const newFiles = [...files];
-      newFiles.splice(index, 1);
+      const newFiles = [...files]
+      newFiles.splice(index, 1)
       return newFiles
-    });
+    })
   }
 
   const { getRootProps, getInputProps } = useDropzone({

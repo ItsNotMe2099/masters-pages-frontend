@@ -4,24 +4,22 @@ import {
   taskEditConditionsOpen,
   taskHireMasterOpen,
   taskMarkAsDoneOpen
-} from "components/Modal/actions";
-import CloseIcon from "components/svg/CloseIcon";
-import MarkIcon from "components/svg/MarkIcon";
+} from 'components/Modal/actions'
+import CloseIcon from 'components/svg/CloseIcon'
+import MarkIcon from 'components/svg/MarkIcon'
 import {
-  taskNegotiationAcceptTaskOffer,
   taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
-} from "components/TaskNegotiation/actions";
-import { taskCancel } from "components/TaskUser/actions";
-import AvatarRound from "components/ui/AvatarRound";
-import Button from "components/ui/Button";
-import { IChat, IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from "types";
+} from 'components/TaskNegotiation/actions'
+import { taskCancel } from 'components/TaskUser/actions'
+import AvatarRound from 'components/ui/AvatarRound'
+import Button from 'components/ui/Button'
+import { IChat, IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
-import { useState } from "react";
+import { useTranslation } from 'next-i18next'
+import { useState } from 'react'
 import cx from 'classnames'
-import ArrowDown from "components/svg/ArrowDown";
 
 interface Props {
   chat: IChat
@@ -30,43 +28,43 @@ interface Props {
 }
 
 export default function ChatTitle({chat, onClick}: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const lastNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
   const handleHireMaster = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskHireMasterOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskHireMasterOpen())
 
   }
   const handleEditConditions = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation));
-    dispatch(taskEditConditionsOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(taskEditConditionsOpen())
 
   }
   const handleMarkAsDone = () => {
 
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskMarkAsDoneOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskMarkAsDoneOpen())
   }
   const handleFinish = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation));
-    dispatch(finishTaskAsClientOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(finishTaskAsClientOpen())
   }
   const handleCancel = () => {
     dispatch(confirmOpen({
       description: t('chat.cancelTask'),
       onConfirm: () => {
-        dispatch(taskCancel(chat.taskId));
+        dispatch(taskCancel(chat.taskId))
       }
-    }));
+    }))
   }
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
-  const isInProgress = chat.task &&  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
-  const isFinished =  chat.task &&  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
-  const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled;
+  const isInProgress = chat.task &&  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId)
+  const isFinished =  chat.task &&  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId)
+  const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled
 
   const [isOpen, setIsOpen] = useState(false)
 

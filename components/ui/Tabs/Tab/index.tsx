@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import * as React from "react";
+import { useRouter } from 'next/router'
+import * as React from 'react'
 import styles from './index.module.scss'
-import Link from "next/link"
-import NotificationBadge from "../../NotificationBadge";
+import Link from 'next/link'
+import NotificationBadge from '../../NotificationBadge'
 interface Props {
   name?: string,
   label?: string,
@@ -17,12 +17,12 @@ interface Props {
 
 }
 const Tab = ({name, label, link, style, onClick, isActive, className, badge, isFirst, isLast}: Props) => {
-  const router = useRouter();
+  const router = useRouter()
   const handleClick = (e) => {
     if(onClick){
-      e.preventDefault();
+      e.preventDefault()
       onClick()
-      return false;
+      return false
     }
   }
 

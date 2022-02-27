@@ -9,14 +9,14 @@ interface Props {
 
 export default function Accordion(props: Props) {
 
-  const [setActive, setActiveState] = useState("")
-  const [setHeight, setHeightState] = useState("0px")
+  const [setActive, setActiveState] = useState('')
+  const [setHeight, setHeightState] = useState('0px')
 
   const content = useRef(null)
 
   const toggleAccordion = () => {
-    setActiveState(setActive === "" ? "active" : "")
-    setHeightState(setActive === "active" ? "0px" : `${content.current.scrollHeight}px`)
+    setActiveState(setActive === '' ? 'active' : '')
+    setHeightState(setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`)
   }
 
   return(

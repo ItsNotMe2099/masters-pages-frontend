@@ -3,7 +3,7 @@
 .root{
  display: flex;
   margin-top: 122px;
- @media screen and (max-width: $sm-max){
+ @media screen and (max-width: $xs-max){
     display: none;
    margin-top: 64px;
 }

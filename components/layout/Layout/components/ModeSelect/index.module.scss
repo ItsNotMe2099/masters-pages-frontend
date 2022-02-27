@@ -22,6 +22,11 @@
       background: #199AC2;
     }
   }
+  &.modeCorporate{
+    .dropDownTrigger {
+      background: #F2B705;
+    }
+  }
   @media screen and (max-width: 800px){
     .dropDownTrigger {
       background: #fff !important;
@@ -140,17 +145,34 @@
 }
 .modeClientText{
   @media screen and (max-width: 800px){
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  color: #27AE60;
-  svg{
-    width: 10px;
-    height: 7px;
-    path {
-      fill: #27AE60;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #27AE60;
+    svg{
+      width: 10px;
+      height: 7px;
+      path {
+        fill: #27AE60;
+      }
     }
   }
+}
+
+
+.modeCorporateText{
+  @media screen and (max-width: 800px){
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #F2B705;
+    svg{
+      width: 10px;
+      height: 7px;
+      path {
+        fill: #F2B705;
+      }
+    }
   }
 }
 

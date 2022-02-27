@@ -1,16 +1,14 @@
-import { fetchChatTasksList, fetchChatWithUsersList, resetChatList } from "components/Chat/actions";
-import ChatListItem from "components/Chat/ChatListItem";
-import ChatMessageList from "components/Chat/ChatMessageList";
-import { taskNegotiationFetchLastConditions } from "components/TaskNegotiation/actions";
-import { fetchTaskSearchList, resetTaskSearchList, setUseLocationFilter } from "components/TaskSearch/actions";
-import Loader from "components/ui/Loader";
-import Modal from "components/ui/Modal";
-import Tabs from "components/ui/Tabs";
-import { useEffect, useState } from "react";
-import { IRootState } from "types";
+import { fetchChatTasksList, fetchChatWithUsersList, resetChatList } from 'components/Chat/actions'
+import ChatListItem from 'components/Chat/ChatListItem'
+import ChatMessageList from 'components/Chat/ChatMessageList'
+import { taskNegotiationFetchLastConditions } from 'components/TaskNegotiation/actions'
+import Loader from 'components/ui/Loader'
+import Tabs from 'components/ui/Tabs'
+import { useEffect, useState } from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   isTaskChat?: boolean
@@ -21,39 +19,39 @@ export default function Chat(props: Props) {
   const chat = useSelector((state: IRootState) => state.chat.chat)
   const chatList = useSelector((state: IRootState) => state.chat.chatList)
   const chatListLoading = useSelector((state: IRootState) => state.chat.chatListLoading)
-  const {isTaskChat} = props;
+  const {isTaskChat} = props
 
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const [activeTab, setActiveTab] = useState(isTaskChat ? 'tasks' : 'people')
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
   const handleSubmit = () => {
 
   }
   useEffect(() => {
     if(chat?.id && chat.task?.id){
-      dispatch(taskNegotiationFetchLastConditions(chat.task?.id, currentProfile.role === 'client' ? chat.profileId != currentProfile.id ? chat.profileId : chat.participantId : null));
+      dispatch(taskNegotiationFetchLastConditions(chat.task?.id, currentProfile.role === 'client' ? chat.profileId != currentProfile.id ? chat.profileId : chat.participantId : null))
     }
   }, [chat])
 
   useEffect(() => {
     if(isTaskChat){
-      dispatch(fetchChatTasksList());
+      dispatch(fetchChatTasksList())
     }else{
-      dispatch(fetchChatWithUsersList());
+      dispatch(fetchChatWithUsersList())
     }
   }, [isTaskChat])
 
   const tabs = [
     { name: t('personalArea.tabSaved.menu.people'), key: 'people' },
     { name: t('personalArea.tabSaved.menu.tasks'), key: 'tasks' },
-  ];
+  ]
   const handleChangeTab = (item) => {
-    setActiveTab(item.key);
+    setActiveTab(item.key)
       if(item.key === 'people'){
-        dispatch(fetchChatWithUsersList());
+        dispatch(fetchChatWithUsersList())
       }else if(item.key === 'tasks'){
-        dispatch(fetchChatTasksList());
+        dispatch(fetchChatTasksList())
       }
   }
 

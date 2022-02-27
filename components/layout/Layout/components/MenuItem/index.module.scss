@@ -27,6 +27,11 @@
     background: #22A3CC;
   }
 }
+.modeCorporate{
+  &:hover{
+    background: #E2AB05;
+  }
+}
 .imageWrapper{
   min-width: 33px;
 }
@@ -45,6 +50,9 @@
   }
   &.modeVolunteer{
     background: #01516A;
+  }
+  &.modeCorporate{
+    background: #E2AB05;
   }
 }
 

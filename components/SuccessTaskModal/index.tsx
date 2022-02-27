@@ -1,23 +1,23 @@
-import { feedbackSiteOpen, modalClose } from "components/Modal/actions";
-import Button from "components/ui/Button";
-import Modal from "components/ui/Modal";
+import { feedbackSiteOpen, modalClose } from 'components/Modal/actions'
+import Button from 'components/ui/Button'
+import Modal from 'components/ui/Modal'
 import styles from './index.module.scss'
 
-import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from "i18n";
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   isOpen: boolean
 }
 
 export default function SuccessTaskModal(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleClose = () => {
-    dispatch(modalClose());
+    dispatch(modalClose())
   }
 
   const handleWillDoIt = () => {
-    dispatch(feedbackSiteOpen());
+    dispatch(feedbackSiteOpen())
   }
   const {t} = useTranslation('common')
   return (

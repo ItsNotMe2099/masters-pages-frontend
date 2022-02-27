@@ -6,7 +6,7 @@
     padding-left: 31px;
     width: 50%;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     padding: 0px 20px;
   }
 
@@ -18,7 +18,7 @@
         padding-bottom: 53px;
         font-size: 24px;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-size: 30px;
         padding-bottom: 34px;
         padding-right: 64px;

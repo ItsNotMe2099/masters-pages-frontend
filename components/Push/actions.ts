@@ -8,7 +8,7 @@ interface SetPushTokenData{
 export const setPushToken = ({pushToken}) => action(ActionTypes.SET_PUSH_TOKEN, {pushToken})
 export const setPushTokenRequest = (data: SetPushTokenData) => action(ActionTypes.SET_PUSH_TOKEN_REQUEST, {
   api: {
-    url: `/api/auth/device`,
+    url: '/api/auth/device',
     method: 'POST',
     data
   },

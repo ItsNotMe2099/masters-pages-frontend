@@ -1,10 +1,7 @@
-import SelectInput from "components/ui/Inputs/SelectInput";
-import { useCallback, useEffect, useState } from "react";
-import { IRootState } from "types";
-import request from "utils/request";
-import styles from './index.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategory } from "./actions";
+import SelectInput from 'components/ui/Inputs/SelectInput'
+import { useEffect, useState } from 'react'
+import request from 'utils/request'
+import { useDispatch } from 'react-redux'
 
 interface Props {
 
@@ -12,15 +9,15 @@ interface Props {
 
 export default function InputCategory(props) {
   const dispatch = useDispatch()
-  const [value, setValue] = useState();
-  const [options, setOptions] = useState([]);
+  const [value, setValue] = useState()
+  const [options, setOptions] = useState([])
   const handleOnChange = (value) => {
-    props.input.onChange(value);
+    props.input.onChange(value)
   }
   const getSearchCategory = ({id = '',search = ''}) => {
    return request({url: `/api/service-category?search=${search || ''}&id=${id || ''}&lang=ru`, method: 'GET'})
       .then((response) => {
-        const data = response.data;
+        const data = response.data
         setOptions(data ? data.map(item => {
           return {
             value: item.id,
@@ -30,11 +27,11 @@ export default function InputCategory(props) {
       })
   }
   useEffect(() => {
-    getSearchCategory({id: props.input.value?.value || props.input.value});
+    getSearchCategory({id: props.input.value?.value || props.input.value})
   }, [])
   const handleOnSearchChange = (value) => {
     if(!value){
-      return;
+      return
     }
     setValue(value)
     getSearchCategory({search: value})

@@ -1,11 +1,10 @@
-import ApiActionTypes from "constants/api";
-import {ProfileData, SkillData} from "types";
-import ActionTypes from "./const";
-import cookie from "js-cookie";
+import ApiActionTypes from 'constants/api'
+import { SkillData} from 'types'
+import ActionTypes from './const'
 import {parse, format} from 'date-fns'
-import {act} from 'react-dom/test-utils'
+import {IProfile} from 'data/intefaces/IProfile'
 export interface ProfileState {
-  currentProfile: ProfileData
+  currentProfile: IProfile
   currentSkill: SkillData,
   formIsSuccess: boolean
   formError: string,
@@ -42,95 +41,95 @@ export default function ProfileReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.FETCH_PROFILE:
       state.formError = ''
-      state.isCompleted = false;
-      state.loading = true;
+      state.isCompleted = false
+      state.loading = true
       break
     case ActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS:
-      state.loading = false;
+      state.loading = false
       state.currentProfile = {...action.payload, birthday: action.payload.birthday ? format(parse(action.payload.birthday, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy') : null }
       break
     case ActionTypes.FETCH_PROFILE + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.loading = false;
+      state.loading = false
       break
     case ActionTypes.CREATE_PROFILE:
       state.formError = ''
-      state.isCompleted = false;
-      state.formLoading = true;
+      state.isCompleted = false
+      state.formLoading = true
       break
     case ActionTypes.CREATE_PROFILE + ApiActionTypes.SUCCESS:
-      state.loading = false;
+      state.loading = false
       state.formError = ''
       state.formIsSuccess = true
       state.formLoading = false
       break
     case ActionTypes.CREATE_PROFILE + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formLoading = false;
+      state.formLoading = false
       break
     case ActionTypes.UPDATE_PROFILE_BY_FORM:
       if(action.payload.key) {
-        state.formErrorByKey[action.payload.key] = null;
+        state.formErrorByKey[action.payload.key] = null
       }
 
-      state.lastFormKey = action.payload.key;
+      state.lastFormKey = action.payload.key
       break
     case ActionTypes.UPDATE_PROFILE:
       state.formError = ''
-      state.isCompleted = false;
-      state.formLoading = true;
+      state.isCompleted = false
+      state.formLoading = true
       break
     case ActionTypes.UPDATE_PROFILE_AVATAR:
-      state.avatarLoading = true;
-      break;
+      state.avatarLoading = true
+      break
     case ActionTypes.UPDATE_PROFILE_AVATAR + ApiActionTypes.FAIL:
-      state.avatarLoading = false;
+      state.avatarLoading = false
       state.avatarFormError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      break;
+      break
     case ActionTypes.UPDATE_PROFILE + ApiActionTypes.SUCCESS:
-      state.formLoading = false;
+      state.formLoading = false
       state.formError = ''
       state.formIsSuccess = true
       state.currentProfile = {...state.currentProfile, ...action.payload}
-      state.avatarLoading = false;
+      state.avatarLoading = false
       if(state.lastFormKey) {
-        state.formErrorByKey[state.lastFormKey] = null;
+        state.formErrorByKey[state.lastFormKey] = null
       }
-      state.lastFormKey = null;
+      state.lastFormKey = null
       break
     case ActionTypes.UPDATE_PROFILE + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
       if(state.lastFormKey) {
-        state.formErrorByKey[state.lastFormKey] =  state.formError;
+        state.formErrorByKey[state.lastFormKey] =  state.formError
       }
-      state.formLoading = false;
-      state.avatarLoading = false;
+      state.formLoading = false
+      state.avatarLoading = false
       break
     case ActionTypes.CHANGE_ROLE_SUCCESS:
-      state.role = action.payload.role;
-      state.roleTemp= action.payload.role;
+      state.role = action.payload.role
+      state.roleTemp= action.payload.role
       break
 
     case ActionTypes.SHOW_FORM:
-      state.showForms = state.showForms.find(key => key === action.payload.key) ? state.showForms : [...state.showForms, action.payload.key];
+      state.showForms = state.showForms.find(key => key === action.payload.key) ? state.showForms : [...state.showForms, action.payload.key]
       break
     case ActionTypes.HIDE_FORM:
-      state.showForms = state.showForms.filter(key => key !== action.payload.key);
+      state.showForms = state.showForms.filter(key => key !== action.payload.key)
       break
     case ActionTypes.SET_CURRENT_SKILL:
 
-      state.currentSkill = action.payload.skill;
-      state.showForms = [];
+      state.currentSkill = action.payload.skill
+      state.showForms = []
       break
     case ActionTypes.RESET_PUBLIC_PROFILE_FORMS:
-      state.showForms = [];
-      break;
+      state.showForms = []
+      break
 
     case ActionTypes.FORM_RESET:
-      state.formError = null;
-      state.formIsSuccess = false;
-      state.formLoading = false;
-      state.avatarLoading = false;
+      state.formError = null
+      state.formIsSuccess = false
+      state.formLoading = false
+      state.avatarLoading = false
       break
   }
 

@@ -1,5 +1,5 @@
-import * as React from "react";
-import {IEvent, IRootState, ITask, SkillData, SkillListItem} from "types";
+import * as React from 'react'
+import {IEvent, IRootState} from 'types'
 import styles from './index.module.scss'
 
 import {useSelector, useDispatch} from 'react-redux'
@@ -10,23 +10,23 @@ import Loader from 'components/ui/Loader'
 import {useEffect} from 'react'
 import EventFeedback
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventFeedback'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 interface Props {
   event?: IEvent
 }
 
-let EventReview = ({event}: Props) => {
-  const dispatch = useDispatch();
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
+const EventReview = ({event}: Props) => {
+  const dispatch = useDispatch()
+  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
 
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
-  const myReview = event.feedbacks.find(f => f.fromProfileId === currentProfile.id);
-  const otherReview = event.feedbacks.find(f => f.fromProfileId !== currentProfile.id);
-  const otherSide = event.isAuthor ? event.participant : event.author;
-  const {t} = useTranslation('common');
+  const myReview = event.feedbacks.find(f => f.fromProfileId === currentProfile.id)
+  const otherReview = event.feedbacks.find(f => f.fromProfileId !== currentProfile.id)
+  const otherSide = event.isAuthor ? event.participant : event.author
+  const {t} = useTranslation('common')
   useEffect(() => {
     return () => {
-      dispatch(resetFeedbackEventForm());
+      dispatch(resetFeedbackEventForm())
     }
   })
   const handleSubmit = (data) => {
@@ -41,12 +41,12 @@ let EventReview = ({event}: Props) => {
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
         <a href={`/id${otherSide.id}`}  target={'_blank'}
-           className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> {t('event.reviewNotAvailable')}
+           className={styles.author} rel="noreferrer">{otherSide.firstName} {otherSide.lastName}</a> {t('event.reviewNotAvailable')}
       </div>}
       {otherReview && <>
         <div className={styles.reviewTitle}>
           <a href={`/id${otherSide.id}`}  target={'_blank'}
-             className={styles.author}>{otherSide.firstName} {otherSide.lastName}</a> {`${t('reviewSmall')}:`}
+             className={styles.author} rel="noreferrer">{otherSide.firstName} {otherSide.lastName}</a> {`${t('reviewSmall')}:`}
 
         </div>
         <EventFeedback feedback={otherReview}/>

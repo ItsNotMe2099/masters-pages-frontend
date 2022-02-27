@@ -1,26 +1,26 @@
-import { modalClose } from "components/Modal/actions";
-import Button from "components/ui/Button";
-import Modal from "components/ui/Modal";
-import { useRouter } from "next/router";
+import { modalClose } from 'components/Modal/actions'
+import Button from 'components/ui/Button'
+import Modal from 'components/ui/Modal'
+import { useRouter } from 'next/router'
 import styles from './index.module.scss'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 interface Props {
   isOpen: boolean
 }
 
 export default function SuccessFeedbackModal(props: Props) {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
   const handleClose = () => {
-    dispatch(modalClose());
+    dispatch(modalClose())
   }
 
   const handleGoHome = () => {
-    router.push('/');
-    dispatch(modalClose());
+    router.push('/')
+    dispatch(modalClose())
   }
   const {t} = useTranslation('common')
 

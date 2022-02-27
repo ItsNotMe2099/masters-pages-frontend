@@ -1,18 +1,15 @@
 import styles from './index.module.scss'
 
-import {IProfileTab, IRootState, ProfileData, ProfileWorkExperience, SkillData} from 'types'
+import {IProfileTab, IRootState, ProfileWorkExperience, SkillData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import CardAdd from 'components/PublicProfile/components/CardAdd'
-import Tabs from 'components/PublicProfile/components/Tabs'
-import {DropDown} from 'components/ui/DropDown'
 import {default as React, useEffect, useState} from 'react'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 import {
   createProfileGallery,
   deleteProfileGallery,
   fetchProfileGalleryList,
   resetProfileGalleryList,
-  setProfileGalleryCurrentItem,
   setProfileGalleryCurrentItemIndex,
   setProfileGalleryTab,
   updateProfileGallery
@@ -21,40 +18,37 @@ import {hideProfileForm, resetPublicProfileForms, showProfileForm} from 'compone
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import ProfileTabs from 'components/PublicProfile/components/ProfileTabs'
 import { useSelector, useDispatch } from 'react-redux'
-import PortfolioForm from 'components/PublicProfile/components/view/CardPortfolio/components/PortfolioForm'
 import GalleryForm from 'components/PublicProfile/components/view/CardGallery/components/GalleryForm'
-import PortfolioListItem from 'components/PublicProfile/components/view/CardPortfolio/components/PortfolioListItem'
-import {fetchTaskUserList, resetTaskUserList, setPageTaskUser} from 'components/TaskUser/actions'
+import { setPageTaskUser} from 'components/TaskUser/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Task from 'components/Task'
 import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
 import {confirmOpen} from 'components/Modal/actions'
-import {deleteProfilePortfolio} from 'components/ProfilePortfolio/actions'
 import GalleryItem from 'components/GalleryItem'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean,
   skill: SkillData
 }
 const CardGallery = (props: Props) => {
-  const { profile, skill, isEdit } = props;
-  const dispatch = useDispatch();
+  const { profile, skill, isEdit } = props
+  const dispatch = useDispatch()
 
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'gallery');
-  const list = useSelector((state: IRootState) => state.profileGallery.list);
-  const listLoading = useSelector((state: IRootState) => state.profileGallery.listLoading);
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'gallery')
+  const list = useSelector((state: IRootState) => state.profileGallery.list)
+  const listLoading = useSelector((state: IRootState) => state.profileGallery.listLoading)
   const total = useSelector((state: IRootState) => state.profileGallery.total)
   const page = useSelector((state: IRootState) => state.profileGallery.page)
-  const [currentEditModel, setCurrentEditModel] = useState(null);
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const currentTab = useSelector((state: IRootState) => state.profileGallery.currentProfileTab);
+  const [currentEditModel, setCurrentEditModel] = useState(null)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const currentTab = useSelector((state: IRootState) => state.profileGallery.currentProfileTab)
 
-  const limit = 20;
-  const { t } = useTranslation('common');
-  const [sortType, setSortType] = useState('newFirst');
-  const [currentSkillId, setCurrentSkillId] = useState(null);
+  const limit = 20
+  const { t } = useTranslation('common')
+  const [sortType, setSortType] = useState('newFirst')
+  const [currentSkillId, setCurrentSkillId] = useState(null)
   useEffect(() => {
     if(currentSkillId === skill?.id){
       return
@@ -66,16 +60,16 @@ const CardGallery = (props: Props) => {
       subCategoryId: skill.subCategoryId,
       page: 1,
       limit
-    }));
-    dispatch(setProfileGalleryTab(null));
+    }))
+    dispatch(setProfileGalleryTab(null))
     setCurrentSkillId(skill.id)
 
-  }, [skill]);
+  }, [skill])
   const handleSortChange = (sort) => {
 
   }
   const handleChangeTab = (tab: IProfileTab) => {
-    dispatch(resetPublicProfileForms());
+    dispatch(resetPublicProfileForms())
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       ...(tab ? {profileTabId: tab.id} : {}),
@@ -84,13 +78,13 @@ const CardGallery = (props: Props) => {
       subCategoryId: skill.subCategoryId,
       page: 1,
       limit
-    }));
-    dispatch(setProfileGalleryTab(tab));
+    }))
+    dispatch(setProfileGalleryTab(tab))
   }
 
   const handleCreateClick = () => {
-    setCurrentEditModel(null);
-    dispatch(showProfileForm( 'gallery'));
+    setCurrentEditModel(null)
+    dispatch(showProfileForm( 'gallery'))
 
   }
   const handleSubmit = (data) => {
@@ -99,26 +93,26 @@ const CardGallery = (props: Props) => {
         categoryId: skill.categoryId,
         subCategoryId: skill.subCategoryId, ...data,
         state: 'published'
-      }, 'gallery'));
+      }, 'gallery'))
     }else{
       dispatch(updateProfileGallery(currentEditModel.id, {...data
-      }, 'gallery'));
+      }, 'gallery'))
     }
   }
   const handleCancel = () => {
-    dispatch(hideProfileForm( 'gallery'));
+    dispatch(hideProfileForm( 'gallery'))
   }
   const handleEdit = (model: ProfileWorkExperience) => {
-    setCurrentEditModel(model);
-    dispatch(showProfileForm( 'gallery'));
+    setCurrentEditModel(model)
+    dispatch(showProfileForm( 'gallery'))
   }
   const handleDelete = (model: ProfileWorkExperience) => {
     dispatch(confirmOpen({
-      description: t("post.areYouSureToDelete", { model }),
+      description: t('post.areYouSureToDelete', { model }),
       onConfirm: () => {
-        dispatch(deleteProfileGallery(model.id));
+        dispatch(deleteProfileGallery(model.id))
       }
-    }));
+    }))
   }
 
   const handleScrollNext = () => {
@@ -130,7 +124,7 @@ const CardGallery = (props: Props) => {
       subCategoryId: skill.subCategoryId,
       page: page + 1,
       limit
-    }));
+    }))
   }
   const showGallery = (model, index) => {
     dispatch(setProfileGalleryCurrentItemIndex(index))

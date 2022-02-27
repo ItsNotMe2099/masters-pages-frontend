@@ -1,32 +1,31 @@
-import Modals from "components/layout/Modals";
-import Map from "components/Map";
-import MapHeader from "components/SearchPage/MapView/MapHeader";
-import MapTaskMarker from "components/svg/MapTaskMarker";
-import Task from "components/Task";
+import Modals from 'components/layout/Modals'
+import Map from 'components/Map'
+import MapHeader from 'components/SearchPage/MapView/MapHeader'
+import MapTaskMarker from 'components/svg/MapTaskMarker'
 import {
   fetchProfileSearchList,
   resetProfileSearchList,
   setPageProfileSearch, setRoleProfileSearch,
   setSortProfileSearch, setUseLocationFilter
-} from "components/ProfileSearch/actions";
-import Button from "components/ui/Button";
-import { DropDown } from "components/ui/DropDown";
-import Loader from "components/ui/Loader";
-import Profile from "components/ui/Profile";
-import Tabs from "components/ui/Tabs";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { IRootState, ITask } from "types";
-import { inBounds } from "utils/locaion";
+} from 'components/ProfileSearch/actions'
+import Button from 'components/ui/Button'
+import { DropDown } from 'components/ui/DropDown'
+import Loader from 'components/ui/Loader'
+import Profile from 'components/ui/Profile'
+import Tabs from 'components/ui/Tabs'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { IRootState, ITask } from 'types'
+import { inBounds } from 'utils/locaion'
 import styles from './index.module.scss'
-import useSupercluster from "use-supercluster";
+import useSupercluster from 'use-supercluster'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import Layout from 'components/layout/Layout'
 const queryString = require('query-string')
 
-const Marker = ({ children, lat, lng }) => children;
+const Marker = ({ children, lat, lng }) => children
 
 interface Props {
   searchRole: 'master' | 'volunteer',
@@ -34,8 +33,8 @@ interface Props {
 }
 
 const SearchProfileMapView = (props: Props) => {
-  const { t } = useTranslation();
-  const router = useRouter();
+  const { t } = useTranslation()
+  const router = useRouter()
   const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('exactLocation')
   const loading = useSelector((state: IRootState) => state.profileSearch.listLoading)
@@ -44,37 +43,37 @@ const SearchProfileMapView = (props: Props) => {
   const page = useSelector((state: IRootState) => state.profileSearch.page)
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
   const filter = useSelector((state: IRootState) => state.profileSearch.filter)
-  const mapRef = useRef();
-  const [bounds, setBounds] = useState(null);
-  const [center, setCenter] = useState(null);
-  const [zoom, setZoom] = useState(10);
-  const [activeId, setActiveId] = useState(null);
+  const mapRef = useRef()
+  const [bounds, setBounds] = useState(null)
+  const [center, setCenter] = useState(null)
+  const [zoom, setZoom] = useState(10)
+  const [activeId, setActiveId] = useState(null)
   const points = tasks.filter(item => !!item.location).map(crime => ({
-    type: "Feature",
+    type: 'Feature',
     properties: { cluster: false, id: crime.id },
     geometry: {
-      type: "Point",
+      type: 'Point',
       coordinates: [
-        parseFloat(crime.location.lng),
-        parseFloat(crime.location.lat)
+        crime.location.lng,
+        crime.location.lat
       ]
     }
-  }));
+  }))
 
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds: bounds ? [ bounds.nw.lng, bounds.se.lat, bounds.se.lng, bounds.nw.lat] : null,
     zoom,
     options: { radius: 75, maxZoom: 20 }
-  });
+  })
 
   useEffect(() => {
     dispatch(setRoleProfileSearch(props.searchRole))
-    dispatch(setUseLocationFilter(true, true));
+    dispatch(setUseLocationFilter(true, true))
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 100000}))
     return () => {
-      dispatch(setUseLocationFilter(false, false));
+      dispatch(setUseLocationFilter(false, false))
     }
   }, [])
   const getSearchPageLink = () => {
@@ -92,7 +91,7 @@ const SearchProfileMapView = (props: Props) => {
     dispatch(fetchProfileSearchList())
   }
   const handleSortChange = (item) => {
-    dispatch(setSortProfileSearch(item.value));
+    dispatch(setSortProfileSearch(item.value))
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 100000}))
     router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
@@ -100,25 +99,25 @@ const SearchProfileMapView = (props: Props) => {
 
 
   const handleMarkerClick = (itemId) => {
-    setActiveId(itemId);
+    setActiveId(itemId)
   }
   const handleTaskListClick = (task: ITask) => {
-    setActiveId(task.id);
+    setActiveId(task.id)
     if (task.location) {
-      setCenter(task.location);
+      setCenter(task.location)
     }
   }
 
   const tabs = [
     { name: t('profileSearch.exactLocationTab'), key: 'exactLocation' },
     { name: t('profileSearch.approximateLocationTab'), key: 'approximateLocation' },
-  ];
+  ]
   const handleChangeTab = (item) => {
-    setActiveTab(item.key);
+    setActiveTab(item.key)
     if (item.key === 'exactLocation') {
-      dispatch(setUseLocationFilter(true, true));
+      dispatch(setUseLocationFilter(true, true))
     } else {
-      dispatch(setUseLocationFilter(true, false));
+      dispatch(setUseLocationFilter(true, false))
     }
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 100000}))
@@ -140,19 +139,19 @@ const SearchProfileMapView = (props: Props) => {
             <div className={styles.map}>
             <Button className={styles.backButton} whiteRed uppercase onClick={props.onShowList}>{t('back')}</Button>
             <Map center={center} onGoogleApiLoaded={({ map }) => {
-              mapRef.current = map;
+              mapRef.current = map
             }}
                  onChange={({ zoom, bounds }) => {
-                   setZoom(zoom);
-                   setBounds(bounds);
+                   setZoom(zoom)
+                   setBounds(bounds)
                  }}
             >
               {clusters.map(cluster => {
-                const [longitude, latitude] = cluster.geometry.coordinates;
+                const [longitude, latitude] = cluster.geometry.coordinates
                 const {
                   cluster: isCluster,
                   point_count: pointCount
-                } = cluster.properties;
+                } = cluster.properties
                 if (isCluster) {
                   return (
                     <Marker
@@ -170,19 +169,19 @@ const SearchProfileMapView = (props: Props) => {
                           const expansionZoom = Math.min(
                             supercluster.getClusterExpansionZoom(cluster.id),
                             20
-                          );
+                          )
                           if (mapRef) {
                             // @ts-ignore
-                            mapRef.current.setZoom(expansionZoom);
+                            mapRef.current.setZoom(expansionZoom)
                             // @ts-ignore
-                            mapRef.current.panTo({ lat: latitude, lng: longitude });
+                            mapRef.current.panTo({ lat: latitude, lng: longitude })
                           }
                         }}
                       >
                         {pointCount}
                       </div>
                     </Marker>
-                  );
+                  )
                 }
 
                 return (
@@ -197,7 +196,7 @@ const SearchProfileMapView = (props: Props) => {
                       <MapTaskMarker/>
                     </div>
                   </Marker>
-                );
+                )
               })}
             </Map>
           </div>

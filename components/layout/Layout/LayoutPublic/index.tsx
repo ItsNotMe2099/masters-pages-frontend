@@ -1,16 +1,11 @@
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
-import MenuItem from 'components/layout/Layout/components/MenuItem'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 import {default as React, ReactElement, useState} from 'react'
 import {IRootState} from 'types'
-import Logo from 'components/Logo'
 
 
 import {useRouter} from 'next/router'
-import {logout} from 'components/Auth/actions'
-import ModeSelect from 'components/layout/Layout/components/ModeSelect'
-import MainSectionButton from 'pages/NewMain/components/Button'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
 import Button from 'components/PublicProfile/components/Button'
 import LangSelect from 'components/LangSelect'
@@ -25,12 +20,12 @@ interface Props {
 }
 
 export default function LayoutPublic(props: Props) {
-  const {children, title} = props;
-  const {route: currentRoute} = useRouter();
+  const {children, title} = props
+  const {route: currentRoute} = useRouter()
   const role = useSelector((state: IRootState) => state.profile.role)
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   const dispatch = useDispatch()
 
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false)
@@ -74,7 +69,7 @@ export default function LayoutPublic(props: Props) {
           </div>
 
       </div>
-      {isMenuMobileOpen && 
+      {isMenuMobileOpen &&
       <div className={styles.dropdownMobile}>
           <div className={styles.actionsMobile}>
           <div className={styles.titleMobile}>

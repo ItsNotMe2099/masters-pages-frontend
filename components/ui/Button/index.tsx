@@ -1,9 +1,9 @@
 import styles from './index.module.scss'
 import cx from 'classnames'
-import Link from 'next/link';
+import Link from 'next/link'
 
 interface Props {
-  type?: "submit" | "button" | "reset"
+  type?: 'submit' | 'button' | 'reset'
   disabled?: boolean
   blue?: boolean
   red?: boolean
@@ -63,7 +63,7 @@ export default function Button(props: Props) {
       [styles.outlineBlue]: props.outlineBlue,
       [styles.outlineBlack]: props.outlineBlack
 
-    }, props.className);
+    }, props.className)
   }
   return (props.href ? <Link href={props.href}>
         <a href={props.href} target={props.target} className={getClasses()}

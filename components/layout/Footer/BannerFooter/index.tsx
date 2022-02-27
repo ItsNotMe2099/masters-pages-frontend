@@ -1,11 +1,11 @@
 import Button from 'components/ui/Button'
 import styles from './index.module.scss'
-import {useTranslation, withTranslation, Trans} from "i18n";
+import { useTranslation, Trans } from 'next-i18next'
 
 interface Props {}
 
 export default function BannerFooter(props: Props) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   return (
     <div className={styles.root}>
       <Trans i18nKey="footer.banner.earn" className={styles.text}>Заработайте на том,<br/>что делаете лучше всех</Trans>

@@ -1,34 +1,32 @@
-import { modalClose, taskUpdateOpen } from "components/Modal/actions";
-import Task from "components/Task";
-import { fetchTaskSearchList, setPageTaskSearch } from "components/TaskSearch/actions";
-import TaskShareModal from "components/TaskShareModal";
+import { modalClose, taskUpdateOpen } from 'components/Modal/actions'
+import Task from 'components/Task'
 import {
   fetchTaskUserList,
   fetchTaskUserStatRequest, resetTaskUserList,
   setFilterTaskUser,
   setPageTaskUser, setSortOrderTaskUser, setSortTaskUser
-} from "components/TaskUser/actions";
-import Loader from "components/ui/Loader";
-import Tabs from "components/ui/Tabs";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import * as React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { IRootState, ITask } from "types";
+} from 'components/TaskUser/actions'
+import Loader from 'components/ui/Loader'
+import Tabs from 'components/ui/Tabs'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { IRootState, ITask } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { TabSelect } from "components/TabSelect";
-import {useTranslation, withTranslation} from "i18n";
+import { TabSelect } from 'components/TabSelect'
+import { useTranslation } from 'next-i18next'
 import Layout from 'components/layout/Layout'
 import {getAuthServerSide} from 'utils/auth'
-import TabOrderModal from 'pages/orders/[orderType]/components/TabOrderModal'
+import TabOrderModal from 'components/for_pages/Orders/TabOrderModal'
 import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
-import {fetchSavedTasks, fetchSavedTasksRequest, resetSavedTasksList} from 'components/SavedTasks/actions'
+import { fetchSavedTasksRequest, resetSavedTasksList} from 'components/SavedTasks/actions'
 interface Props {
 }
 const TabOrders = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -41,9 +39,9 @@ const TabOrders = (props: Props) => {
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
   const role = useSelector((state: IRootState) => state.profile.role)
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const [currentTaskEdit, setCurrentTaskEdit] = useState(null);
+  const [currentTaskEdit, setCurrentTaskEdit] = useState(null)
 
-  console.log("profileEweqe", profile)
+  console.log('profileEweqe', profile)
   const tabs = [
     ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: 'draft'}, {name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount}] : []),
     ...(role !== 'client' ? [{name: t('personalArea.tabOrders.menu.responses'), key: 'responses'}, {name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount},] : []),
@@ -59,34 +57,34 @@ const TabOrders = (props: Props) => {
     }})
   useEffect(() => {
     if(orderType === 'saved'){
-      dispatch(resetSavedTasksList());
+      dispatch(resetSavedTasksList())
       dispatch(resetTaskUserList())
       dispatch(fetchSavedTasksRequest(1, 10))
-      dispatch(fetchTaskUserStatRequest());
-      return;
+      dispatch(fetchTaskUserStatRequest())
+      return
     }
     dispatch(setFilterTaskUser({status: orderType}))
     if(['published', 'in_progress'].includes(orderType as string)){
-      dispatch(setSortTaskUser('deadline'));
-      dispatch(setSortOrderTaskUser('DESC'));
+      dispatch(setSortTaskUser('deadline'))
+      dispatch(setSortOrderTaskUser('DESC'))
     }else{
-      dispatch(setSortTaskUser('createdAt'));
-      dispatch(setSortOrderTaskUser('DESC'));
+      dispatch(setSortTaskUser('createdAt'))
+      dispatch(setSortOrderTaskUser('DESC'))
     }
 
     dispatch(resetTaskUserList())
     dispatch(fetchTaskUserList())
-    dispatch(fetchTaskUserStatRequest());
+    dispatch(fetchTaskUserStatRequest())
   }, [orderType])
   useEffect(() => {
     return () => {
       if(orderType === 'saved') {
-        dispatch(resetSavedTasksList());
+        dispatch(resetSavedTasksList())
       }
-        dispatch(resetTaskUserList());
+        dispatch(resetTaskUserList())
 
     }
-  }, []);
+  }, [])
   const handleScrollNext = () => {
     if(orderType === 'saved'){
       dispatch(setPageTaskUser(page + 1))
@@ -97,8 +95,8 @@ const TabOrders = (props: Props) => {
     }
   }
   const handleTaskEdit = (task: ITask) => {
-    setCurrentTaskEdit(task);
-    dispatch(taskUpdateOpen());
+    setCurrentTaskEdit(task)
+    dispatch(taskUpdateOpen())
   }
 
   return (
@@ -106,18 +104,18 @@ const TabOrders = (props: Props) => {
     <div className={styles.root}>
       <div className={styles.actions}>
       <Button  red={true} bold={true} size={'12px 40px'}
-              type={'button'} onClick={() => router.push('/CreateTaskPage')}>{t("personalArea.tabOrders.menu.create")}</Button>
+              type={'button'} onClick={() => router.push('/CreateTaskPage')}>{t('personalArea.tabOrders.menu.create')}</Button>
       </div>
       <div className={styles.desktop}>
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
-        const statResult = stat.find(item => item.task_status === tab.key);
+        const statResult = stat.find(item => item.task_status === tab.key)
 
         return {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={orderType as string}/>
       </div>
       <div className={styles.mobile}>
         <TabSelect tabs={tabs.map((tab => {
-        const statResult = stat.find(item => item.task_status === tab.key);
+        const statResult = stat.find(item => item.task_status === tab.key)
 
         return  {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})`}
       }))} activeTab={orderType as string}/>
@@ -141,4 +139,4 @@ const TabOrders = (props: Props) => {
   )
 }
 export default TabOrders
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})

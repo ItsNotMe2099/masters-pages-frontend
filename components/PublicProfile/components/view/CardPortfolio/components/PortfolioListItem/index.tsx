@@ -1,12 +1,11 @@
 import styles from './index.module.scss'
 
-import {IProfilePortfolio, ProfileData} from 'types'
-import UserIcon from 'components/svg/UserIcon'
+import {IProfilePortfolio} from 'types'
 import Button from 'components/PublicProfile/components/Button'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {getMediaPath} from 'utils/media'
 import FileList from 'components/ui/FileList'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props{
   model: IProfilePortfolio,
@@ -17,53 +16,53 @@ interface Props{
 const PortfolioListItem = ({onEdit, onDelete, model, isEdit}: Props) => {
 
   const getFileIcon = (fileName) => {
-    const ext = fileName.split('.').pop();
+    const ext = fileName.split('.').pop()
 
     switch (ext){
       case 'psd':
-        return 'psd';
+        return 'psd'
       case 'eps':
-        return 'eps';
+        return 'eps'
       case 'pdf':
-        return 'pdf';
+        return 'pdf'
       case 'txt':
-        return 'txt';
+        return 'txt'
       case 'doc':
-        return 'doc';
+        return 'doc'
       case 'docx':
-        return 'docx';
+        return 'docx'
       case 'png':
-        return 'png';
+        return 'png'
       case 'ppt':
-        return 'ppt';
+        return 'ppt'
       case 'pptx':
-        return 'pptx';
+        return 'pptx'
       case 'ai':
-        return 'ai';
+        return 'ai'
       case 'tif':
-        return 'tif';
+        return 'tif'
       case 'tiff':
-        return 'tiff';
+        return 'tiff'
       case 'jpg':
-        return 'jpg';
+        return 'jpg'
       case 'jpeg':
-        return 'jpg';
+        return 'jpg'
       case 'gif':
-        return 'gif';
+        return 'gif'
       case 'zip':
-        return 'zip';
+        return 'zip'
       case 'svg':
-        return 'svg';
+        return 'svg'
       case 'avi':
-        return 'avi';
+        return 'avi'
       case 'mov':
-        return 'mov';
+        return 'mov'
       default:
-        return 'unknowm';
+        return 'unknowm'
 
     }
   }
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
       <div className={styles.leftColumn}>

@@ -1,16 +1,14 @@
-import { fetchChat, sendMessage } from "components/Chat/actions";
-import ChatAttachFile from "components/Chat/ChatNewMessage/components/ChatAttachFile";
-import CloseIcon from "components/svg/CloseIcon";
-import TextArea from "components/ui/Inputs/TextArea";
-import Loader from "components/ui/Loader";
-import { default as React, useEffect, useState } from "react";
-import { IChat, IChatMessage, IChatMessageType, IRootState } from "types";
-import { isMediaImage } from "utils/media";
+import { sendMessage } from 'components/Chat/actions'
+import ChatAttachFile from 'components/Chat/ChatNewMessage/components/ChatAttachFile'
+import CloseIcon from 'components/svg/CloseIcon'
+import TextArea from 'components/ui/Inputs/TextArea'
+import Loader from 'components/ui/Loader'
+import { default as React, useEffect, useState } from 'react'
+import { IRootState } from 'types'
+import { isMediaImage } from 'utils/media'
 import styles from './index.module.scss'
-import { Field, reduxForm } from 'redux-form'
-import { useSelector, useDispatch } from 'react-redux';
-import {useTranslation} from 'i18n'
-import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'next-i18next'
 import FormError from 'components/ui/Form/FormError'
 interface Props {
 
@@ -19,56 +17,56 @@ interface Props {
 export default function ChatNewMessage(props: Props) {
   const dispatch = useDispatch()
   const {chat, messageSentError, messageIsSending, messageSentSuccess} = useSelector((state: IRootState) => state.chat)
-  const [message, setMessage] = useState('');
-  const [files, setFiles] = useState([]);
-  const [error, setError] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const {t} = useTranslation('common');
+  const [message, setMessage] = useState('')
+  const [files, setFiles] = useState([])
+  const [error, setError] = useState(null)
+  const [progress, setProgress] = useState(0)
+  const {t} = useTranslation('common')
   const handleSendMessage = () => {
     if(files.length > 0 && isFileLoading(files[0])){
-      setError(t('chat.newMessageFileError'));
-      return;
+      setError(t('chat.newMessageFileError'))
+      return
     }
     if((message || files.length > 0) && chat) {
-      setError(null);
-      console.log("FilesSend", files);
+      setError(null)
+      console.log('FilesSend', files)
       dispatch(sendMessage({ message, chatId: chat.id, files: files.map(file => file.fileKey) }))
     }
   }
   const handleFileUploaded = (result) => {
-    setFiles([result]);
-    setError(null);
+    setFiles([result])
+    setError(null)
   }
   const handleFileDrop = (file) => {
-    setFiles([file]);
+    setFiles([file])
   }
   const handleChange = (e) => {
-    setMessage(e.currentTarget.value);
+    setMessage(e.currentTarget.value)
   }
   useEffect(() => {
     if(messageSentSuccess){
       setMessage('')
-      setFiles([]);
+      setFiles([])
     }
   }, [messageSentSuccess])
   const handleDeleteFile = () => {
-    setFiles([]);
+    setFiles([])
   }
   const isFileLoading = (file) => {
-    const srcValue = file?.preview ? file.preview : file.fileKey;
+    const srcValue = file?.preview ? file.preview : file.fileKey
     if(!srcValue){
-      return;
+      return
     }
-    return srcValue.indexOf('blob:') === 0;
+    return srcValue.indexOf('blob:') === 0
   }
   const handleFileProgress = (progress) => {
-    console.log("HandlePRogress", progress);
+    console.log('HandlePRogress', progress)
     setProgress(progress)
   }
   const getImageSrc = (file) => {
-    const srcValue = file?.preview ? file.preview : file.fileKey;
+    const srcValue = file?.preview ? file.preview : file.fileKey
     if(!srcValue){
-      return;
+      return
     }
     return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
   }
@@ -86,8 +84,8 @@ export default function ChatNewMessage(props: Props) {
   }
   const onEnterPress = (e) => {
     if(e.keyCode == 13 && e.shiftKey == false) {
-      e.preventDefault();
-      handleSendMessage();
+      e.preventDefault()
+      handleSendMessage()
     }
   }
 

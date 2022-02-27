@@ -1,14 +1,15 @@
-import ApiActionTypes from "constants/api";
-import {ProfileData, SkillData} from "types";
+import ApiActionTypes from 'constants/api'
+import {SkillData} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
+import {IProfile} from 'data/intefaces/IProfile'
 
 
 export const changeProfileEmail = (id: number, email: string) => action(ActionTypes.CHANGE_EMAIL, {id, email})
-export const updateProfileAvatar = (id: number, data: ProfileData, formKey?: string) => action(ActionTypes.UPDATE_PROFILE_AVATAR, {id, data, formKey})
+export const updateProfileAvatar = (id: number, data: any, formKey?: string) => action(ActionTypes.UPDATE_PROFILE_AVATAR, {id, data, formKey})
 
-export const createProfile = (role: string, data: ProfileData) => action(ActionTypes.CREATE_PROFILE, {role, data})
-export const updateProfile = (id: number, data: ProfileData) => action(ActionTypes.UPDATE_PROFILE, {
+export const createProfile = (role: string, data: any) => action(ActionTypes.CREATE_PROFILE, {role, data})
+export const updateProfile = (id: number, data: any) => action(ActionTypes.UPDATE_PROFILE, {
   api: {
     url: `/api/profile/${id}`,
     method: 'PUT',
@@ -44,4 +45,4 @@ export const resetProfileForm = () => action(ActionTypes.FORM_RESET)
 
 export const showProfileForm = (key: string) => action(ActionTypes.SHOW_FORM, {key})
 export const hideProfileForm = (key: string) => action(ActionTypes.HIDE_FORM, {key})
-export const updateProfileByForm = (id: number, data: ProfileData, key: string) => action(ActionTypes.UPDATE_PROFILE_BY_FORM, {id, data, key})
+export const updateProfileByForm = (id: number, data: any, key: string) => action(ActionTypes.UPDATE_PROFILE_BY_FORM, {id, data, key})

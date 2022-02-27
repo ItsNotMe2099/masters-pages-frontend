@@ -1,6 +1,5 @@
-import ApiActionTypes from "constants/api";
-import {bool} from "prop-types";
-import {IChat, IChatMessage} from "types";
+import ApiActionTypes from 'constants/api'
+import {IChat, IChatMessage} from 'types'
 import {ActionType} from 'typesafe-actions'
 import ActionTypes from './const'
 import * as appActions from './actions'
@@ -12,6 +11,7 @@ export interface ChatState {
   chatListLoading: boolean,
   chatLoading: boolean
   messageIsSending: boolean
+  messageSentSuccess: boolean
   messageSentError: any | null
   chat: IChat | null
   messages: IChatMessage[]
@@ -21,6 +21,7 @@ export interface ChatState {
 
 const initialState: ChatState = {
   chatPageLoading: false,
+  messageSentSuccess: false,
   chatList: [],
   chatListTotal: 0,
   chatListLoading: false,
@@ -228,7 +229,7 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         ...state,
         messages: state.messages.map((message) => {
           if (message.id === action.payload.id) {
-            return {...message, ...action.payload};
+            return {...message, ...action.payload}
           }
           return message
         })

@@ -1,37 +1,41 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import ArrowDropDown from "components/svg/ArrowDropDown";
-import { I18nContext } from "next-i18next";
-import { useContext, useRef, useState } from "react";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import ArrowDropDown from 'components/svg/ArrowDropDown'
+import { useTranslation} from 'next-i18next'
+import { useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
+import { setCookie } from 'nookies'
 interface Props {
   isAuth: boolean
-  
+
 }
  const LangSelect = (props: Props) => {
-  const { i18n: { language } } = useContext(I18nContext)
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const { i18n } = useTranslation()
+   const { language } = i18n
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const onClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
   const options = [
     { value: 'ru', label: 'RU' },
     { value: 'en', label: 'EN' },
   ]
-  const [value, setValue] = useState(options.find(item => item.value === language));
+   console.log('Language', i18n.language)
+  const [value, setValue] = useState(options.find(item => item.value === language))
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
-    setValue(item);
-    nextI18.i18n.changeLanguage(item.value)
-    setIsActive(false);
+    setValue(item)
+    console.log('ItemValue', item.value)
+    setCookie(null,'next-i18next', item.value)
+    i18n.changeLanguage(item.value)
+    setIsActive(false)
   }
   const handleActiveOptionClick = (e) => {
-    e.preventDefault();
-    setIsActive(false);
+    e.preventDefault()
+    setIsActive(false)
   }
   return (
     <div className={`${styles.root} ${props.isAuth && styles.rootAuth}`}>
@@ -47,7 +51,7 @@ interface Props {
             <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
             <span className={styles.dropdownItemLabel}>{value.label}</span>
             <img className={styles.arrowActive}
-                 src={`/img/icons/arrow_active.svg`}
+                 src={'/img/icons/arrow_active.svg'}
                  alt=''/></a></li>
           }
           {options.filter(item => !value || item.value != value.value).map(item => (
@@ -63,7 +67,7 @@ interface Props {
         </ul>
       </nav>
     </div>
-  );
-};
+  )
+}
 
 export default LangSelect

@@ -1,14 +1,7 @@
-import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
-import MenuItem from 'components/layout/Layout/components/MenuItem'
-import {useTranslation} from 'i18n'
+import {useSelector} from 'react-redux'
 import {default as React, ReactElement} from 'react'
 import {IRootState} from 'types'
-import Logo from 'components/Logo'
 
-import {useRouter} from 'next/router'
-import {logout} from 'components/Auth/actions'
-import ModeSelect from 'components/layout/Layout/components/ModeSelect'
 import LayoutAuthorized from 'components/layout/Layout/LayoutAuthorized'
 import LayoutPublic from 'components/layout/Layout/LayoutPublic'
 

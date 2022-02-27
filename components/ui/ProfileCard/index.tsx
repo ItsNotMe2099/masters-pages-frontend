@@ -1,24 +1,17 @@
-import * as React from "react";
-import {IRootState, ITask, ProfileData} from "types";
+import * as React from 'react'
 import styles from './index.module.scss'
-import {useTranslation, withTranslation} from "i18n";
-import {getAuthServerSide} from 'utils/auth'
+import { useTranslation } from 'next-i18next'
 import Avatar from 'components/ui/Avatar'
-import StarRatings from 'react-star-ratings';
-import Button from 'components/PublicProfile/components/Button'
-import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
-import {taskOfferOpen} from 'components/Modal/actions'
-
-import { useDispatch, useSelector } from 'react-redux'
-import {SkillDropDown} from 'components/Contacts/ContactItem/SkillDropDown'
-import {getCategoryTranslation} from 'utils/translations'
+import StarRatings from 'react-star-ratings'
+import { useDispatch } from 'react-redux'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props {
-  profile: ProfileData
+  profile: IProfile
 }
 
 const ProfileCard = ({profile}: Props) => {
-  const {t} = useTranslation('common');
-  const dispatch = useDispatch();
+  const {t} = useTranslation('common')
+  const dispatch = useDispatch()
 
   return (
    <div className={styles.root}>

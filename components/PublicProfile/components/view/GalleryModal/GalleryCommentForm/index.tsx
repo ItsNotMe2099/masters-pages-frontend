@@ -1,17 +1,13 @@
-import { fetchChat, sendMessage } from "components/Chat/actions";
-import CloseIcon from "components/svg/CloseIcon";
-import TextArea from "components/ui/Inputs/TextArea";
-import Loader from "components/ui/Loader";
-import { default as React, useEffect, useState } from "react";
-import { IChat, IChatMessage, IChatMessageType, IRootState } from "types";
-import { isMediaImage } from "utils/media";
+import TextArea from 'components/ui/Inputs/TextArea'
+import Loader from 'components/ui/Loader'
+import { default as React, useEffect, useState } from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import { Field, reduxForm } from 'redux-form'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 import NewMessage from 'components/svg/NewMessage'
 import {createProfileGalleryComment} from 'components/ProfileGallery/actions'
 import {createNewsComment} from 'components/News/actions'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 interface Props {
   isNews?: boolean
 }
@@ -20,7 +16,7 @@ export default function GalleryNewComment({isNews}: Props) {
   const dispatch = useDispatch()
   const { commentSentError, commentIsSending, commentSentSuccess} = useSelector((state: IRootState) => state.profileGallery)
   const galleryItem = useSelector((state: IRootState) =>  isNews ?  state.news.currentItem : state.profileGallery.currentItem)
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('')
   const {i18n, t} = useTranslation('common')
 
   const handleSendMessage = () => {
@@ -34,7 +30,7 @@ export default function GalleryNewComment({isNews}: Props) {
   }
 
   const handleChange = (e) => {
-    setMessage(e.currentTarget.value);
+    setMessage(e.currentTarget.value)
   }
   useEffect(() => {
     if(commentSentSuccess){

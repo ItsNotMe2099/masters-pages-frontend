@@ -1,4 +1,4 @@
-import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab, SkillData} from "types";
+import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -33,7 +33,7 @@ export const fetchNewsItemCommentList = (data: INewsItemCommentList) => action(A
 
 export const createNewsLikeRequest = (profileGalleryId: number) => action(ActionTypes.CREATE_NEWS_COMMENT_LIKE_REQUEST, {
   api: {
-    url: `/api/like`,
+    url: '/api/like',
     method: 'NEWS',
     data: {
       profileGalleryId

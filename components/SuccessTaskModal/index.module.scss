@@ -2,7 +2,7 @@
 
 .root{
     padding: 0;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         border-radius: 0;
       }
 }

@@ -1,23 +1,17 @@
-import AvatarAddFileBtn from "components/ui/AvatarInput/components/AvatarAddFileBtn";
-import AvatarInputPreview from "components/ui/AvatarInput/components/AvatarInputPreview";
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import AddFileButton from "components/ui/Inputs/FilesUploadInput/components/AddFileBtn";
-import React, {
-  FunctionComponent,
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactElement, useState, useCallback, useRef,
+import AvatarAddFileBtn from 'components/ui/AvatarInput/components/AvatarAddFileBtn'
+import AvatarInputPreview from 'components/ui/AvatarInput/components/AvatarInputPreview'
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import React, { useState, useCallback, useRef,
 } from 'react'
 import PropTypes from 'prop-types'
 import { shallowEqual } from 'recompose'
-import Dropzone, {DropzoneOptions} from 'react-dropzone';
+import Dropzone, {DropzoneOptions} from 'react-dropzone'
 import S3Upload from 'utils/s3upload'
 import styles from './index.module.scss'
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
-import {withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import FormError from 'components/ui/Form/FormError'
 import {IRootState} from 'types'
 
@@ -71,14 +65,15 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         resource,
         source,
         validate,
-        t,
+
         input: {value, onChange},
         ...rest
     } = props
-  const [error, setError] = useState(null);
-  const dropZoneRef = useRef(null);
-  const role = useSelector((state: IRootState) => state.profile.role)
 
+  const [error, setError] = useState(null)
+  const dropZoneRef = useRef(null)
+  const role = useSelector((state: IRootState) => state.profile.role)
+  const {t} = useTranslation('common')
   const handleChangePhoto = () => {
     if (dropZoneRef.current) {
       dropZoneRef.current.open()
@@ -88,7 +83,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
   const handleDeletePhoto = useCallback(() => {
         onChange(null)
     if(props.handleDeletePhoto){
-      props.handleDeletePhoto();
+      props.handleDeletePhoto()
     }
 
   }, [value, onChange])
@@ -115,7 +110,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         }
 
         if (Array.isArray(files)) {
-          return files.map(transformFile);
+          return files.map(transformFile)
         }
 
         return transformFile(files)
@@ -144,7 +139,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
       const onDrop = (newFiles, rejectedFiles, event) => {
         const updatedFiles = multiple ? [...files, ...newFiles] : [...newFiles]
 
-        setError(null);
+        setError(null)
         if (multiple) {
           onChange(transformFiles(updatedFiles))
         } else {
@@ -181,7 +176,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
       const onFileUploadError = (error) => {
         console.error('onFileUploadError', error)
-          setError(error);
+          setError(error)
       }
       const onRemove = file => () => {
         if (multiple) {
@@ -196,7 +191,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         if (options.onRemove) {
           options.onRemove(file)
         }
-        setError(null);
+        setError(null)
       }
       const onFinishFileUpload = useCallback(
         (result, file) => {
@@ -216,7 +211,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
           onChange(multiple ? newFileList : newFile)
 
           if(props.handleChangePhoto){
-            props.handleChangePhoto(multiple ? newFileList : newFile);
+            props.handleChangePhoto(multiple ? newFileList : newFile)
           }
         },
         [value, onChange, files],
@@ -224,7 +219,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
   const onDropRejected = (error) => {
     if(error.length > 0 && error[0].errors.length > 0){
-      setError(error[0].errors[0].message);
+      setError(error[0].errors[0].message)
     }
 
   }
@@ -315,7 +310,7 @@ AvatarInput.propTypes = {
 }
 AvatarInput.defaultProps = {
   maxSize: 5242880,
-  accept: ["image/jpeg", "image/png", "image/jpg"]
+  accept: ['image/jpeg', 'image/png', 'image/jpg']
 }
 
-export default withTranslation('common')(AvatarInput)
+export default AvatarInput

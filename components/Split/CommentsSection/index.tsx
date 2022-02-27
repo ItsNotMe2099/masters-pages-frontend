@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
-import {useEffect} from "react";
-import {IRootState} from "../../../types";
+import {useEffect} from 'react'
+import {IRootState} from '../../../types'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchFeedbacksMainPageRequest} from "../../ProfileFeedback/actions";
-import ReviewMainPage from "../../ReviewMainPage";
-import {useTranslation, Trans} from "i18n";
+import { fetchFeedbacksMainPageRequest} from '../../ProfileFeedback/actions'
+import ReviewMainPage from '../../ReviewMainPage'
+import { useTranslation, Trans } from 'next-i18next'
 interface Props {}
 
 export default function CommentsSection(props: Props) {
@@ -13,7 +13,7 @@ export default function CommentsSection(props: Props) {
   const {t} = useTranslation('common')
 
   useEffect(() => {
-    dispatch( fetchFeedbacksMainPageRequest());
+    dispatch( fetchFeedbacksMainPageRequest())
   }, [])
   return (
     <div className={styles.root}>

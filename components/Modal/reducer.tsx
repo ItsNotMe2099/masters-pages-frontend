@@ -1,5 +1,5 @@
-import { ConfirmDataModal } from "types";
-import ActionTypes from "./const";
+import { ConfirmDataModal } from 'types'
+import ActionTypes from './const'
 
 export interface ModalState {
   modalKey: string,
@@ -18,12 +18,13 @@ export default function authReducer(state = {...initialState}, action) {
 
     case ActionTypes.LOADER_OPEN:
       state.modalKey = 'loader'
-      break;
+      break
     case ActionTypes.SIGN_IN_OPEN:
       state.modalKey = 'signIn'
       break
 
     case ActionTypes.MODAL_CLOSE:
+      console.log('resetModal')
       state.modalKey = ''
       break
 
@@ -35,6 +36,7 @@ export default function authReducer(state = {...initialState}, action) {
       state.modalKey = 'phoneConfirm'
       break
     case ActionTypes.REGISTRATION_PHONE_OPEN:
+      console.log('ModalKeyReg')
       state.modalKey = 'registrationPhone'
       break
     case ActionTypes.REGISTRATION_PHONE_CONFIRM_OPEN:
@@ -61,6 +63,9 @@ export default function authReducer(state = {...initialState}, action) {
       break
     case ActionTypes.TASK_UPDATE_MODAL_OPEN:
       state.modalKey = 'tabOrderEditModal'
+      break
+    case ActionTypes.PROJECT_MODAL_OPEN:
+      state.modalKey = 'projectModal'
       break
     case ActionTypes.TASK_OFFER_CREATE_OPEN:
       state.modalKey = 'taskOfferCreateModal'

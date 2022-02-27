@@ -1,32 +1,31 @@
-import { setSortProfileSearch } from "components/ProfileSearch/actions";
-import ApiActionTypes from "constants/api";
-import { ITask, ProfileData, SkillData, SkillListItem } from "types";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 import SavedProfilesActionTypes from 'components/SavedPeople/const'
+import {IProfile} from 'data/intefaces/IProfile'
 
 const formatSkillList = (data) => {
-  const categoryMap = {};
+  const categoryMap = {}
   for(const item of data){
     if(!categoryMap[item.categoryId]){
       categoryMap[item.categoryId] = {...item.category, skills: []}
     }
-    categoryMap[item.categoryId].skills.push(item);
+    categoryMap[item.categoryId].skills.push(item)
   }
   const list = []
   for (const [key, value] of Object.entries(categoryMap)) {
-    list.push(value);
+    list.push(value)
   }
-  return list;
+  return list
 }
 
 
 export interface ProfileSearchState {
   searchStatCount?: number,
   searchStatFilter: any
-  list: ProfileData[],
+  list: IProfile[],
   listLoading: boolean,
   role: 'master' | 'volunteer'
-  currentTask?: ProfileData,
+  currentTask?: IProfile,
   total: number,
   page: number,
   filter: any,
@@ -55,7 +54,7 @@ const initialState: ProfileSearchState = {
 export default function ProfileSearchReducer(state = { ...initialState }, action) {
   switch (action.type) {
     case ActionTypes.PROFILE_SEARCH_SET_CURRENT_TASK:
-      state.currentTask = action.payload;
+      state.currentTask = action.payload
       break
     case ActionTypes.FETCH_PROFILE_SEARCH:
 
@@ -64,70 +63,70 @@ export default function ProfileSearchReducer(state = { ...initialState }, action
       state.page = action.payload
       break
     case ActionTypes.PROFILE_SEARCH_SET_FILTER:
-      state.filter = action.payload;
+      state.filter = action.payload
       break
     case ActionTypes.PROFILE_SEARCH_SET_SORT:
-      state.sortType = action.payload;
+      state.sortType = action.payload
       switch (action.payload) {
         case 'newFirst':
           state.sort = 'id'
           state.sortOrder = 'DESC'
 
-          break;
+          break
         case 'highPrice':
           state.sort = 'budget'
           state.sortOrder = 'DESC'
 
-          break;
+          break
         case 'lowPrice':
           state.sort = 'budget'
           state.sortOrder = 'ASC'
-          break;
+          break
       }
       break
     case ActionTypes.PROFILE_SEARCH_SET_USE_LOCATION_FILTER:
-      state.useLocationFilter = action.payload.useFilter;
-      state.exactLocation = action.payload.exactLocation;
+      state.useLocationFilter = action.payload.useFilter
+      state.exactLocation = action.payload.exactLocation
       break
     case ActionTypes.FETCH_PROFILE_SEARCH_REQUEST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_PROFILE_SEARCH_REQUEST + ApiActionTypes.SUCCESS:
-      state.listLoading = false;
+      state.listLoading = false
       state.list = [...state.list, ...action.payload.data.map((profile) => ({...profile, skills: formatSkillList(profile.skills)}))]
       state.total = action.payload.total
       break
     case ActionTypes.FETCH_PROFILE_SEARCH_REQUEST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.RESET_PROFILE_SEARCH:
-      state.listLoading = false;
+      state.listLoading = false
       state.list = []
       state.total = 0
       state.page = 1
       break
     case ActionTypes.PROFILE_SEARCH_SET_ROLE:
-        state.role = action.payload;
-      break;
+        state.role = action.payload
+      break
     case ActionTypes.SET_SEARCH_STAT_FILTER:
-      state.searchStatFilter = action.payload;
-      break;
+      state.searchStatFilter = action.payload
+      break
     case ActionTypes.FETCH_PROFILE_SEARCH_STAT_REQUEST + ApiActionTypes.SUCCESS:
-      state.searchStatCount = action.payload.total;
-      break;
+      state.searchStatCount = action.payload.total
+      break
     case SavedProfilesActionTypes.SAVE_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
 
       state.list = state.list.map(item => {
         if (item.id === action.payload.profileId) {
-          return {...item, isSavedByCurrentProfile: true};
+          return {...item, isSavedByCurrentProfile: true}
         }
-        return item;
+        return item
       })
-      break;
+      break
     case ActionTypes.RESET_SEARCH_STAT:
-      state.searchStatFilter = {};
-      state.searchStatCount = null;
-      break;
+      state.searchStatFilter = {}
+      state.searchStatCount = null
+      break
   }
 
   return state

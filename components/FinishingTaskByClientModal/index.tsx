@@ -1,28 +1,27 @@
-import Logo from "components/Logo";
-import { modalClose } from "components/Modal/actions";
-import { taskNegotiationFinish } from "components/TaskNegotiation/actions";
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import { modalClose } from 'components/Modal/actions'
+import { taskNegotiationFinish } from 'components/TaskNegotiation/actions'
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import FinishingTaskByClientForm from "./Form";
+import FinishingTaskByClientForm from './Form'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   isOpen: boolean
 }
 
 export default function FinishingTaskByClientModal(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   const formLoading = useSelector((state: IRootState) => state.taskOffer.formLoading)
   const handleSubmit = (data) => {
-    dispatch(taskNegotiationFinish(task.id, {...data, taskId: task.id}));
+    dispatch(taskNegotiationFinish(task.id, {...data, taskId: task.id}))
   }
   const handleClose = () => {
-    dispatch(modalClose());
+    dispatch(modalClose())
   }
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
 
   return (

@@ -9,8 +9,8 @@ interface Props {
 
 export const CheckBox = (props: Props & FieldConfig) => {
   const [field, meta] = useField(props)
-  const { setFieldValue, setFieldTouched, validateField } = useFormikContext();
-  const hasError = !!meta.error && meta.touched;
+  const { setFieldValue, setFieldTouched, validateField } = useFormikContext()
+  const hasError = !!meta.error && meta.touched
 
   return (
     <div className={styles.root}>

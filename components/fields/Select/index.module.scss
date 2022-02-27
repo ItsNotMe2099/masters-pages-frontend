@@ -1,0 +1,156 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+
+}
+
+.input{
+  outline: none;
+  :global{
+    .ma-select__menu{
+      z-index: 2;
+      margin-top: -8px;
+      box-shadow: none;
+      border-radius: 0px 0px 10px 10px;
+      border-bottom: 1px solid $grey;
+      border-left: 1px solid $grey;
+      border-right: 1px solid $grey;
+ //     @include boxShadowCard;
+   //   border: 1px solid $lightGrey;
+    }
+    .ma-select__control{
+      box-shadow: none;
+      min-height: 51px;
+      border-radius: 10px;
+    }
+    .ma-select__single-value{
+      font-size: 14px;
+      font-weight: 600;
+      color: $black;
+      margin: 0;
+    }
+    .ma-select__indicator-separator{
+      display: none;
+    }
+    .ma-select__option{
+      font-size: 14px;
+      font-weight: 500;
+      color: $black;
+      padding: 5px 10px;
+    }
+    .ma-select__option--is-focused{
+     // background: $lightGrey;
+    }
+    .ma-select__option--is-selected{
+      //background: $lightGrey;
+    }
+  }
+  &.default{
+    :global{
+      .ma-select__value-container{
+        padding: 20px 15px 0 15px;
+        height: $fieldHeightDefault;
+      }
+      .ma-select__control{
+        transition: background 0.2s;
+        border: 1px solid $grey;
+        border-radius: 10px;
+        background: $white;
+      }
+      .ma-select__placeholder{
+        font-size: 16px;
+        color: $grey;
+        margin: 0;
+      }
+    }
+    &.hover{
+      :global{
+        .ma-select__control{
+        //  background: $lightGrey;
+        }
+      }
+    }
+  }
+  &.bottomBorder{
+    font-weight: 600;
+    :global{
+      .ma-select__value-container{
+        padding: 0;
+        height: $fieldHeightBottomBorder;
+      }
+      .ma-select__control{
+        transition: background 0.2s;
+        border: none;
+        border-bottom: 1px solid $black;
+        border-radius: 0;
+        background: transparent;
+      }
+      .ma-select__placeholder{
+        color: $black;
+        margin: 0;
+      }
+    }
+  }
+  &.error{
+    :global{
+      .ma-select__control{
+        border-color: $red;
+      }
+      .ma-select__placeholder{
+        color: $red;
+      }
+    }
+  }
+  &.withIcon{
+    :global{
+      .ma-select__control{
+        padding-left: 50px;
+      }
+      .ma-select__value-container{
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.indicator{
+  &.indicatorInverse{
+    transform: rotate(180deg);
+  }
+}
+
+.label{
+  z-index: 1;
+  @include inputLabel;
+}
+
+.icon{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  &.default{
+    left: 17px;
+  }
+}
+.option{
+  font-weight: 600;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+}
+.circle{
+  width: 21px;
+  height: 21px;
+  border-radius: 50px;
+  border: 1px solid #E5E5E5;
+  margin-right: 8px;
+  &.active{
+    width: 21px;
+    height: 21px;
+    border-radius: 50px;
+    border: 7px solid #27C60D;
+    margin-right: 11px;
+  }
+}

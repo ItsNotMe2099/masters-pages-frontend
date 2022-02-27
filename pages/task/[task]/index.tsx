@@ -1,14 +1,11 @@
-import {changeRole, fetchProfile} from "components/Profile/actions";
-import Tabs from "components/ui/Tabs";
-import {useEffect, useState} from "react";
-import * as React from "react";
-import {Router, useRouter} from "next/router";
+import { useState} from 'react'
+import * as React from 'react'
+import { useRouter} from 'next/router'
 import styles from './index.module.scss'
-import {TabSelect} from "components/TabSelect";
 import {useSelector, useDispatch} from 'react-redux'
-import {IRootState, ITaskStatus} from "types";
-import {getAuthServerSide} from "utils/auth";
-import Loader from "components/ui/Loader";
+import {IRootState, ITaskStatus} from 'types'
+import {getAuthServerSide} from 'utils/auth'
+import Loader from 'components/ui/Loader'
 import Layout from 'components/layout/Layout'
 import {getCategoryTranslation} from 'utils/translations'
 import {format} from 'date-fns'
@@ -20,18 +17,18 @@ import NewEventModal from 'components/Calendar/components/NewEventModal'
 import {editEventOpen, modalClose} from 'components/Modal/actions'
 import EditEventModal from 'components/Calendar/components/EditEventModal'
 import Modals from 'components/layout/Modals'
-import TaskReview from 'pages/task/components/TaskReview'
+import TaskReview from 'components/for_pages/Task/TaskReview'
 import {fetchOneTaskUserRequest, fetchTaskStatsById} from 'components/TaskUser/actions'
-import {getEventColor, getEventPlannedAllowed} from 'utils/event'
+import { getEventPlannedAllowed} from 'utils/event'
 import Button from 'components/ui/Button'
 import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 import MarkIcon from 'components/svg/MarkIcon'
 import FileList from 'components/ui/FileList'
 
 const TaskPage = (props) => {
   const router = useRouter()
-  const {t, i18n} = useTranslation('common');
+  const {t, i18n} = useTranslation('common')
   //const { task } = router.query
   const dispatch = useDispatch()
   const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
@@ -45,9 +42,9 @@ const TaskPage = (props) => {
   const stats = useSelector((state: IRootState) => state.taskUser.stats)
   const loading = useSelector((state: IRootState) => state.taskUser.currentLoading)
   const modelKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const [dateRange, setDateRange] = useState(null);
-  const [page, setPage] = useState(1);
-  const [loadIsRecommended, setIsRecommended] = useState(false);
+  const [dateRange, setDateRange] = useState(null)
+  const [page, setPage] = useState(1)
+  const [loadIsRecommended, setIsRecommended] = useState(false)
   React.useEffect(() => {
     dispatch(fetchOneTaskUserRequest(parseInt(router.query.task as string, 10)))
     dispatch(fetchTaskStatsById(router.query.task))
@@ -55,8 +52,8 @@ const TaskPage = (props) => {
 
 
   const handleDateRangeChange = (value) => {
-    setDateRange(value);
-    setPage(1);
+    setDateRange(value)
+    setPage(1)
     dispatch(fetchEventList({
         ...(value ?
           {
@@ -70,10 +67,10 @@ const TaskPage = (props) => {
         page: 1,
         taskId: parseInt(router.query.task as string, 10)
       }
-    ));
+    ))
   }
   const handleScrollNext = () => {
-    setPage(page + 1);
+    setPage(page + 1)
     dispatch(fetchEventList({
         ...(dateRange ?
           {
@@ -87,60 +84,60 @@ const TaskPage = (props) => {
         page: page + 1,
         taskId: parseInt(router.query.task as string, 10)
       }
-    ));
+    ))
   }
 
   const handleEventClick = (event) => {
     dispatch(fetchEvent(event.id))
-    dispatch(editEventOpen());
+    dispatch(editEventOpen())
   }
   const handleRecommend = () => {
-    setIsRecommended(true);
-    dispatch(createProfileRecommendation(currentProfile.role === 'client' ? task.masterId : task.profileId));
+    setIsRecommended(true)
+    dispatch(createProfileRecommendation(currentProfile.role === 'client' ? task.masterId : task.profileId))
 
   }
 
   const isMarkVisible = () => {
-    return [ITaskStatus.Done].includes(task.status);
+    return [ITaskStatus.Done].includes(task.status)
   }
   const isRecommendVisible = () => {
-    return [task.profileId, task.masterId].includes(currentProfile.id);
+    return [task.profileId, task.masterId].includes(currentProfile.id)
   }
-  const isRecommended = loadIsRecommended || (currentProfile.role === 'client' ? task?.master?.isRecommendedByCurrentProfile : task?.profile?.isRecommendedByCurrentProfile);
+  const isRecommended = loadIsRecommended || (currentProfile.role === 'client' ? task?.master?.isRecommendedByCurrentProfile : task?.profile?.isRecommendedByCurrentProfile)
 
   const getStatusColor = () => {
     switch (task.status) {
 
       case ITaskStatus.Canceled:
       case ITaskStatus.Paused:
-        return styles.status__red;
+        return styles.status__red
       case ITaskStatus.Draft:
-        return styles.status__grey;
+        return styles.status__grey
       case ITaskStatus.Negotiation:
       case ITaskStatus.Published:
       case ITaskStatus.PrivatelyPublished:
-        return styles.status__blue;
+        return styles.status__blue
       case ITaskStatus.InProgress:
-        return styles.status__orange;
+        return styles.status__orange
       case ITaskStatus.Done:
-        return styles.status__green;
+        return styles.status__green
 
     }
   }
   const getStatusText = () => {
     switch (task.status) {
       case ITaskStatus.Draft:
-        return t('task.status.draft');
+        return t('task.status.draft')
       case ITaskStatus.Published:
-        return t('task.status.published');
+        return t('task.status.published')
       case ITaskStatus.PrivatelyPublished:
-        return t('task.status.private');
+        return t('task.status.private')
       case ITaskStatus.InProgress:
-        return t('task.status.inProgress');
+        return t('task.status.inProgress')
       case ITaskStatus.Done:
-        return t('task.status.done');
+        return t('task.status.done')
       case ITaskStatus.Canceled:
-        return t('task.status.canceled');
+        return t('task.status.canceled')
     }
   }
 
@@ -160,7 +157,7 @@ const TaskPage = (props) => {
             </div>
             <div className={styles.separator}/>
             <div className={`${styles.headerValue} ${styles.price}`}>
-              <div className={styles.value}>{task.priceType === 'fixed' ? task.budget : task.rate}</div>
+              <div className={styles.value}>{task.priceType === 'fixed' ? task.budget : task.ratePerHour}</div>
               <div
                 className={styles.label}>{(task.priceType === 'fixed' ? t('budget') : t('perHour'))}</div>
             </div>
@@ -278,5 +275,5 @@ const TaskPage = (props) => {
         </Layout>
         )
         }
-        export const getServerSideProps = getAuthServerSide({redirect: true});
+        export const getServerSideProps = getAuthServerSide({redirect: true})
         export default TaskPage

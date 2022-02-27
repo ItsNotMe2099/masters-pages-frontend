@@ -1,12 +1,12 @@
-import * as React from "react";
-import {IEvent, IFeedbacksToProfile, IRootState, ITask, SkillData, SkillListItem} from "types";
+import * as React from 'react'
+import { IFeedbacksToProfile} from 'types'
 import styles from './index.module.scss'
-import StarRatings from 'react-star-ratings';
+import StarRatings from 'react-star-ratings'
 interface Props {
   feedback: IFeedbacksToProfile
 }
 
-let EventFeedback = ({feedback}: Props) => {
+const EventFeedback = ({feedback}: Props) => {
   return (
    <div className={styles.root}>
     <div className={styles.header}>

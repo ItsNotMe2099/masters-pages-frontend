@@ -1,12 +1,11 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import Input from "components/ui/Inputs/Input";
-import BaseInput from "components/ui/Inputs/Input/components/BaseInput";
-import InputPriceFilterForm from "components/ui/Inputs/InputPriceFilter/components/InputPriceFilterForm";
-import SelectInput from "components/ui/Inputs/SelectInput";
-import { useEffect, useRef, useState } from "react";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import Input from 'components/ui/Inputs/Input'
+import BaseInput from 'components/ui/Inputs/Input/components/BaseInput'
+import InputPriceFilterForm from 'components/ui/Inputs/InputPriceFilter/components/InputPriceFilterForm'
+import { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   input?: any,
@@ -25,31 +24,31 @@ export default function InputPriceFilter(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
   const { input } = props
-  const searchInputRef = useRef(null);
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const [val, setVal] = useState(null);
+  const searchInputRef = useRef(null)
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
+  const [val, setVal] = useState(null)
   useEffect(() => {
-    setVal(input.value);
+    setVal(input.value)
   }, [input.value])
   useEffect(() => {
     if(!isActive && val){
-      input.onChange(val);
+      input.onChange(val)
     }
   }, [isActive])
   const onClick = (e) => {
     e?.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
   const handleOnChange = (data) => {
     setVal(data)
   }
   const formatVal = (data) => {
     if(!data){
-      return '';
+      return ''
     }
     if(!data.min && !data.max){
-      return '';
+      return ''
     }
     if(!data.max){
       return `${t('priceFilterInput.from')} $${data.min}`

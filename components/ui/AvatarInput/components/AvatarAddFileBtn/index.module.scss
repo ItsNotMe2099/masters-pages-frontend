@@ -20,7 +20,7 @@
 .hasImage{
   img{
     fill: white;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       width: 42px;
       height: 30px;
   }

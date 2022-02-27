@@ -1,26 +1,24 @@
-import Button from "components/ui/Button";
 
-import * as React from "react";
+import * as React from 'react'
 import styles from './index.module.scss'
-import { DropDownInput } from "components/ui/DropDownInput";
-import { useEffect, useState } from "react";
+import { DropDownInput } from 'components/ui/DropDownInput'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchFeedbacksToProfile, setPageFeedback } from "components/ProfileFeedback/actions";
-import { IFeedbacksToProfile, IRootState } from "types";
-import Loader from "components/ui/Loader";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useRouter } from "next/router";
-import Review from "components/Review";
+import { fetchFeedbacksToProfile, setPageFeedback } from 'components/ProfileFeedback/actions'
+import { IRootState } from 'types'
+import Loader from 'components/ui/Loader'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import Review from 'components/Review'
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
   t?: (string) => string,
 }
 const TabReviews = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const options = [{label: t('sort.newFirst'), value: 'New first'}, {label: t('sort.oldFirst'), value: 'Old first'}]
   const feedbacks = useSelector((state: IRootState) => state.profileFeedback.list)
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
@@ -29,7 +27,7 @@ const TabReviews = (props: Props) => {
   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const [load, setLoadMore] = useState(false)
   const dispatch = useDispatch()
-  const limit = 10;
+  const limit = 10
   const handleScrollNext = () => {
 
     dispatch(fetchFeedbacksToProfile({
@@ -76,4 +74,4 @@ const TabReviews = (props: Props) => {
 }
 
 export default TabReviews
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})

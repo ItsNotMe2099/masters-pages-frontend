@@ -1,5 +1,5 @@
 // breakpoints
-$sm-max: 768px;
+$xs-max: 768px;
 $sm-min: 769px;
 $md-min: 769px;
 $md-mid: 1200px;
@@ -9,8 +9,7 @@ $lg-min: 1300px;
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 576px;
 
-// Small tablets (portrait view)
-$screen-md-min: 768px;
+
 
 // Tablets and small desktops
 $screen-lg-min: 992px;
@@ -24,3 +23,14 @@ $screen-xll-min: 1400px;
 $container-md: 760px;
 $container-lg: 1250px;
 $container-xll: 1250px;
+
+
+//colors
+$white: #fff;
+$black: #000;
+$red: #C51212;
+$grey: #C4C4C4;
+//ui
+$fieldHeightDefault: 66px;
+
+$fieldHeightBottomBorder: 46px;

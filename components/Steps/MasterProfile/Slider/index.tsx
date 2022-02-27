@@ -1,13 +1,13 @@
-import SliderControl from "components/ui/SliderControl";
-import React, { Component } from "react";
-import Slider from "react-slick";
-import Step from "components/Steps";
+import SliderControl from 'components/ui/SliderControl'
+import React from 'react'
+import Slider from 'react-slick'
+import Step from 'components/Steps'
 import styles from './index.module.scss'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 export default function SimpleSlider(){
 
-    var settings = {
+    const settings = {
       dots: false,
       infinite: true,
       speed: 500,
@@ -44,7 +44,7 @@ export default function SimpleSlider(){
           }
         }
       ]
-    };
+    }
     const {t} = useTranslation('common')
     return (
       <div className={styles.root}>

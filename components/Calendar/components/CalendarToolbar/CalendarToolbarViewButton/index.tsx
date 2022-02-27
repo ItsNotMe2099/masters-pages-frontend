@@ -9,7 +9,7 @@ interface Props {
 
 export default function CalendarToolbarViewButton(props: Props) {
 
-  const {label, value,onClick, isActive } = props;
+  const {label, value,onClick, isActive } = props
 
   return (
     <div className={`${styles.root} ${isActive && styles.active}`} onClick={onClick}>

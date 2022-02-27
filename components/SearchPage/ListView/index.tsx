@@ -1,32 +1,25 @@
-import Map from "components/Map";
+import Map from 'components/Map'
 import {
-  fetchProfileSearchList,
-  fetchProfileSearchListRequest, resetProfileSearchList,
-  setFilterProfileSearch, setPageProfileSearch, setRoleProfileSearch,
+  fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, setRoleProfileSearch,
   setSortProfileSearch
-} from "components/ProfileSearch/actions";
-import TaskShareModal from "components/TaskShareModal";
-import Button from "components/ui/Button";
-import { DropDown } from "components/ui/DropDown";
-import Input from "components/ui/Inputs/Input";
-import Loader from "components/ui/Loader";
-import Profile from "components/ui/Profile";
-import { useRouter } from "next/router";
-import { default as React, useEffect, useState } from "react";
-import { IRootState } from "types";
+} from 'components/ProfileSearch/actions'
+import Button from 'components/ui/Button'
+import Loader from 'components/ui/Loader'
+import Profile from 'components/ui/Profile'
+import { useRouter } from 'next/router'
+import { default as React, useEffect, useState } from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import Footer from 'components/layout/Footer'
 import { useDispatch, useSelector } from 'react-redux'
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Sticky from 'react-stickynode';
-import SearchTaskFilter from "../../../pages/SearchTaskPage/Filter";
-import {useTranslation} from "i18n";
-import {useWindowWidth} from "@react-hook/window-size";
+import InfiniteScroll from 'react-infinite-scroll-component'
+import Sticky from 'react-stickynode'
+import { useTranslation } from 'next-i18next'
+import {useWindowWidth} from '@react-hook/window-size'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
 import dynamic from 'next/dynamic'
 const queryString = require('query-string')
-const SearchProfileFilter = dynamic(() => import( "components/SearchPage/Filter"), {
+const SearchProfileFilter = dynamic(() => import( 'components/SearchPage/Filter'), {
   ssr: false
 })
 
@@ -36,8 +29,8 @@ interface Props {
 }
 const SearchProfileListView = (props: Props) => {
   const dispatch = useDispatch()
-  const router = useRouter();
-  const { t } = useTranslation('common');
+  const router = useRouter()
+  const { t } = useTranslation('common')
   const width = useWindowWidth()
   const loading = useSelector((state: IRootState) => state.profileSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
@@ -66,7 +59,7 @@ const SearchProfileListView = (props: Props) => {
 
 
   const handleSortChange = (item) => {
-    dispatch(setSortProfileSearch(item.value));
+    dispatch(setSortProfileSearch(item.value))
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList())
     router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
@@ -81,7 +74,7 @@ const SearchProfileListView = (props: Props) => {
   const getQueryFilter = () => {
     try {
       if((router.query as any).filter) {
-        return JSON.parse((router.query as any).filter);
+        return JSON.parse((router.query as any).filter)
       }
     }catch (e) {
 

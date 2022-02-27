@@ -3,7 +3,7 @@ import { action } from 'typesafe-actions'
 
 export const inviteRequest = (data) => action(ActionTypes.INVITE_REQUEST, {
   api: {
-    url: `/api/invite`,
+    url: '/api/invite',
     method: 'POST',
     data: {...data},
   }

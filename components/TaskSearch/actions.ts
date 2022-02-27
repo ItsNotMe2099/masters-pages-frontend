@@ -1,4 +1,4 @@
-import { ITask } from "types";
+import { ITask } from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')

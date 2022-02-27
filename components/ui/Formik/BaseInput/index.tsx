@@ -1,11 +1,10 @@
-import { ChangeEvent, ComponentType, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ChangeEvent, ComponentType, useState } from 'react'
 import styles from './index.module.scss'
 
-import { WrappedFieldProps } from 'redux-form';
-import debounce from 'lodash.debounce';
+import { WrappedFieldProps } from 'redux-form'
 
 import InputMask from 'react-input-mask'
-import _uniqueId from 'lodash/uniqueId';
+import _uniqueId from 'lodash/uniqueId'
 type OnChange = (evt: React.ChangeEvent<HTMLInputElement>) => any;
 
 interface Indexed {
@@ -45,27 +44,27 @@ interface Props {
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
-  const [name] = useState(_uniqueId('input-'));
-  const {mask} = props;
+  const [name] = useState(_uniqueId('input-'))
+  const {mask} = props
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
-        return styles.inputSmall;
+        return styles.inputSmall
       case 'normal':
       default:
-        return styles.inputNormal;
+        return styles.inputNormal
     }
   }
 
   const renderInput = (inputProps) => {
-    return  ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
-                     type={props.type || 'text'}/>)
+    return  ( <input {...inputProps} className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
+                     type={props.type || 'text'} disabled={props.disabled}/>)
   }
   return mask ? (
     <InputMask mask={mask}  disabled={props.disabled}   value={props.value} onChange={props.onChange}   maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
       {(inputProps) => renderInput(inputProps)}
     </InputMask>
-  ) : renderInput(props.input);
+  ) : renderInput(props)
 
 }
 BaseInput.defaultProps = {

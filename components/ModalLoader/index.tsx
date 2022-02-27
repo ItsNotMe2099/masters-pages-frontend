@@ -1,5 +1,5 @@
-import Loader from "components/ui/Loader";
-import Modal from "components/ui/Modal";
+import Loader from 'components/ui/Loader'
+import Modal from 'components/ui/Modal'
 
 interface Props {
   isOpen: boolean

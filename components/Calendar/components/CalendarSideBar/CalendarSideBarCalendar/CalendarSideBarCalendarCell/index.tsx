@@ -1,8 +1,7 @@
 import styles from './index.module.scss'
-import Calendar from 'react-calendar';
-import {IEvent, IRootState} from 'types'
+import { IRootState} from 'types'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {format} from 'date-fns'
 interface Props {
   date: Date
@@ -11,17 +10,17 @@ const Dot = ({color}: {color?: string}) => {
   const getClassName = () => {
     switch (color){
       case 'grey':
-        return styles.dot__grey;
+        return styles.dot__grey
       case 'green':
-        return styles.dot__green;
+        return styles.dot__green
       case 'red':
-        return styles.dot__red;
+        return styles.dot__red
       case 'blue':
-        return styles.dot__blue;
+        return styles.dot__blue
       case 'orange':
-        return styles.dot__orange;
+        return styles.dot__orange
       case 'yellow':
-        return styles.dot__yellow;
+        return styles.dot__yellow
     }
   }
   return    <div className={`${styles.dot} ${getClassName()}`}/>

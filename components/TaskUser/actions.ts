@@ -7,7 +7,7 @@ export const fetchTaskUserList = () => action(ActionTypes.FETCH_TASK_USER_LIST)
 
 export const fetchTaskUserStatRequest = () => action(ActionTypes.FETCH_TASK_USER_STAT, {
   api: {
-    url: `/api/tasks/count`,
+    url: '/api/tasks/count',
     method: 'GET',
   }
 })

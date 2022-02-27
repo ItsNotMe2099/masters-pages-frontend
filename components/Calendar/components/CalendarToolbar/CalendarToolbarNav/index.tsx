@@ -1,11 +1,8 @@
 import styles from './index.module.scss'
-import {IEvent} from 'types'
-import {format} from 'date-fns'
-import {Calendar, Navigate, momentLocalizer} from "react-big-calendar";
-import CalendarToolbarViewButton from 'components/Calendar/components/CalendarToolbar/CalendarToolbarViewButton'
+import { Navigate} from 'react-big-calendar'
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -13,8 +10,8 @@ interface Props {
 }
 
 export default function CalendarToolbarNav(props: Props) {
-  const { onNavigate} = props;
-  const {t} = useTranslation('common');
+  const { onNavigate} = props
+  const {t} = useTranslation('common')
 
   return (
     <div className={`${styles.root}`}>

@@ -1,16 +1,14 @@
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
-import { required } from "utils/validations";
+import Input from 'components/ui/Inputs/Input'
+import * as React from 'react'
+import { required } from 'utils/validations'
 import styles from './index.module.scss'
-import { Field, reduxForm,formValueSelector } from 'redux-form'
-import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
+import { Field } from 'redux-form'
 import TimeExpense from 'components/ui/Inputs/TimeExpense'
 import Expenses from 'components/Calendar/components/EditEventModal/components/Expenses'
 import {IEvent} from 'types'
-import {useState} from 'react'
 import {parserNumber, parserPrice} from 'utils/formatters'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   event?: IEvent,
@@ -21,8 +19,8 @@ interface Props {
   isPlannedDisabled?: boolean,
   isCompletedDisabled?: boolean
 }
-let PricingForm = (props: Props) => {
-  const {priceType, change, isPlannedDisabled, isCompletedDisabled, event} = props;
+const PricingForm = (props: Props) => {
+  const {priceType, change, isPlannedDisabled, isCompletedDisabled, event} = props
 
   const parseTimeExpense = (val) => {
     return {
@@ -32,17 +30,17 @@ let PricingForm = (props: Props) => {
   }
   const handleChangedPricePlanned = (value) => {
     if(isCompletedDisabled) {
-      change('actualPrice', parseTimeExpense(value));
+      change('actualPrice', parseTimeExpense(value))
     }
   }
   const handleChangedBudgetPlanned = (e) => {
     if(isCompletedDisabled) {
       console.log('handleChangedBudgetPlanned', e.currentTarget.value)
-      change('actualBudget', parserPrice(e.currentTarget.value));
+      change('actualBudget', parserPrice(e.currentTarget.value))
     }
   }
-  console.log("priceType", priceType);
-  const {t} = useTranslation('common');
+  console.log('priceType', priceType)
+  const {t} = useTranslation('common')
   return (
      <div className={styles.root}>
       <div className={styles.tabs}>

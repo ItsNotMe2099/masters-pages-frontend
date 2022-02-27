@@ -1,9 +1,9 @@
 import styles from './index.module.scss'
-import Modal from "components/ui/Modal";
-import {useTranslation, withTranslation} from "i18n";
-import MainSectionFooter from 'pages/NewMain/components/Footer';
-import MainSectionHeader from 'pages/NewMain/components/Header';
-import Modals from 'components/layout/Modals';
+import { useTranslation } from 'next-i18next'
+import MainSectionFooter from 'components/for_pages/MainUserPage/Footer'
+import MainSectionHeader from 'components/for_pages/MainUserPage/Header'
+import Modals from 'components/layout/Modals'
+import {getAuthServerSide} from 'utils/auth'
 
 interface Props {
   isOpen?: boolean
@@ -12,8 +12,8 @@ interface Props {
 
 const Terms = (props: Props) =>  {
 
-  const { t } = useTranslation('common');
-  
+  const { t } = useTranslation('common')
+
   return (
     <>
     <MainSectionHeader/>
@@ -141,4 +141,5 @@ const Terms = (props: Props) =>  {
     </>
   )
 }
+export const getServerSideProps = getAuthServerSide()
 export default Terms

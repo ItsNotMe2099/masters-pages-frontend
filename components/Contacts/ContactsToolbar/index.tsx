@@ -1,12 +1,10 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import * as React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { IRootState, ITask } from "types";
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { TabSelect } from "components/TabSelect";
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 import {DropDown} from 'components/ui/DropDown'
 import Input from 'components/ui/Inputs/Input'
@@ -32,28 +30,28 @@ interface Props {
   totalName: string
 }
 const ContactsToolbar = (props: Props) => {
-  const {onSortChange, sortOrder, total, totalName, subCategory, category, userType, onCategoryChange, onSubCategoryChange, onUserTypeChange} = props;
-  const [ t , {language}] = useTranslation('common');
+  const {onSortChange, sortOrder, total, totalName, subCategory, category, userType, onCategoryChange, onSubCategoryChange, onUserTypeChange} = props
+  const [ t , {language}] = useTranslation('common')
   const router = useRouter()
   const categories = useSelector((state: IRootState) => state.categoryInput.categories)
   const subCategories = useSelector((state: IRootState) => state.subCategoryInput.subCategories)
   const dispatch = useDispatch()
   const { callback: onChangeSearch, cancel, callPending } = useThrottleFn((val) => {
     props.onSearchChange(val)
-  }, 300);
+  }, 300)
   useEffect(() => {
-    dispatch(fetchCategory());
+    dispatch(fetchCategory())
   }, [])
   const handleCategoryChange = (val) => {
-    dispatch(fetchSubCategory(val.value));
-    onCategoryChange(val.value);
-    onSubCategoryChange(null);
+    dispatch(fetchSubCategory(val.value))
+    onCategoryChange(val.value)
+    onSubCategoryChange(null)
   }
   return (
     <div className={styles.root}>
       <div className={styles.search}>
       <Input placeholder={'Search'} size={'small'} input={{value: null, onChange: (e) => {
-          onChangeSearch(e.currentTarget.value);
+          onChangeSearch(e.currentTarget.value)
         } }}/>
       </div>
       <div className={styles.right}>

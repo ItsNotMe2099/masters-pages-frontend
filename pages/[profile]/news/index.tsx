@@ -1,20 +1,21 @@
-import {getAuthServerSide} from "utils/auth";
+import {getAuthServerSide} from 'utils/auth'
 
 import request from 'utils/request'
-import {IRootState, ProfileData, SkillData} from 'types'
+import { SkillData} from 'types'
 
 import PublicProfile from 'components/PublicProfile'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   skill: SkillData
 }
 const ProfileNews = (props) => {
   return <PublicProfile {...props} showType={'news'}/>
 }
 export const getServerSideProps = async (ctx) => {
-  const res = await getAuthServerSide()(ctx as any);
-  const id = ctx.query.profile as string;
-  let profile, skill = null;
+  const res = await getAuthServerSide()(ctx as any)
+  const id = ctx.query.profile as string
+  let profile, skill = null
   if(id.indexOf('id') === 0){
     profile = (await request({ url: `/api/profile/${id.replace('id', '')}`, method: 'GET' }, ctx))?.data
 
@@ -28,7 +29,7 @@ export const getServerSideProps = async (ctx) => {
     }
   }
 
-  return {props: {...(res as any).props, profile, skill}};
+  return {props: {...(res as any).props, profile, skill}}
 }
 
 export default ProfileNews

@@ -1,19 +1,10 @@
-import AvatarInput from "components/ui/AvatarInput";
 import Button from 'components/ui/Button'
-import FormError from "components/ui/Form/FormError";
-import Checkbox from 'components/ui/Inputs/Checkbox'
-import { CheckboxList } from "components/ui/Inputs/CheckboxList";
-import CheckboxListSubCategories from "components/ui/Inputs/CheckboxListSubCategories";
-import Input from "components/ui/Inputs/Input";
-import { useEffect, useState } from "react";
+import CheckboxListSubCategories from 'components/ui/Inputs/CheckboxListSubCategories'
+import { useEffect, useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { arrayNotEmpty, required } from "utils/validations";
-import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
-import InputCategory from 'components/ui/Inputs/InputCategory';
-import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 const categoryRequired = (value) => {
   return  !value || !value.value ? 'required' : ''
@@ -27,14 +18,14 @@ const subCategoryRequired = (value) => {
 let FormNewCategory = props => {
   const {t} = useTranslation()
   const { handleSubmit } = props
-  const [categoryId, setCategoryId] = useState(null);
+  const [categoryId, setCategoryId] = useState(null)
 
-  const [mainCategoryId, setMainCategoryId] = useState(null);
+  const [mainCategoryId, setMainCategoryId] = useState(null)
 
   useEffect(() => {
     const categoryId = props.initialValues?.category?.value
     if(categoryId){
-      setCategoryId(categoryId);
+      setCategoryId(categoryId)
     }
   }, [])
 
@@ -48,10 +39,10 @@ let FormNewCategory = props => {
         validate={categoryRequired}
         changeWithValue={true}
         onChange={(val) => {
-          props.change('category', null);
-          props.change('subCategories', []);
+          props.change('category', null)
+          props.change('subCategories', [])
           setMainCategoryId(val.value)
-          setCategoryId(null);
+          setCategoryId(null)
         }
         }
 
@@ -64,7 +55,7 @@ let FormNewCategory = props => {
         categoryId={mainCategoryId}
         changeWithValue={true}
         onChange={(val) => {
-          props.change('subCategories', []);
+          props.change('subCategories', [])
           setCategoryId(val.value)
         }}
 

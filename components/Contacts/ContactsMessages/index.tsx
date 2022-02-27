@@ -1,15 +1,13 @@
-import Loader from "components/ui/Loader";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import * as React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import {IRootState, ITask, ProfileData} from "types";
+import Loader from 'components/ui/Loader'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import {IRootState} from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { TabSelect } from "components/TabSelect";
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import ContactItem from 'components/Contacts/ContactItem'
-import { fetchSavedPeopleRequest, resetSavedPeopleList} from 'components/SavedPeople/actions'
 import ContactsToolbar from 'components/Contacts/ContactsToolbar'
 import {
   deleteSavedPeople,
@@ -22,17 +20,17 @@ interface Props {
 type: string
 }
 const ContactsList = ({type}: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const router = useRouter()
   const dispatch = useDispatch()
   const loading = useSelector((state: IRootState) => state.contacts.listLoading)
   const list = useSelector((state: IRootState) => state.contacts.list)
   const total = useSelector((state: IRootState) => state.contacts.total)
   const page = useSelector((state: IRootState) => state.contacts.page)
-  const initialFilter = {sortOrder: 'ASC', search: null, categoryId: null, subCategoryId: null, role: null};
-  const [filter, setFilter] = useState(initialFilter);
+  const initialFilter = {sortOrder: 'ASC', search: null, categoryId: null, subCategoryId: null, role: null}
+  const [filter, setFilter] = useState(initialFilter)
   useEffect(() => {
-      setFilter(initialFilter);
+      setFilter(initialFilter)
 
   }, [type])
   useEffect(() => {
@@ -43,9 +41,9 @@ const ContactsList = ({type}: Props) => {
       limit: 10,
       type,
       ...filter
-    }));
+    }))
     return () => {
-      dispatch(resetProfileContactsList());
+      dispatch(resetProfileContactsList())
     }
   }, [filter])
 
@@ -56,7 +54,7 @@ const ContactsList = ({type}: Props) => {
       limit: 10,
       type,
       ...filter
-    }));
+    }))
   }
 
   const handleDelete = (item) => {
@@ -64,34 +62,34 @@ const ContactsList = ({type}: Props) => {
       dispatch(confirmOpen({
         description: `Do you want to delete saved profile «${item.firstName} ${item.lastName}»?`,
         onConfirm: () => {
-          dispatch(deleteSavedPeople(item.id));
+          dispatch(deleteSavedPeople(item.id))
         }
-      }));
+      }))
     }else if(type === 'subscriptions'){
       dispatch(confirmOpen({
         description: `Do you want to delete your subscription for «${item.firstName} ${item.lastName}»?`,
         onConfirm: () => {
-          dispatch(deleteFollower(item.id));
+          dispatch(deleteFollower(item.id))
         }
-      }));
+      }))
     }
   }
   const handleSortChange = (sortOrder) => {
-    setFilter(filter => ({...filter, sortOrder}));
+    setFilter(filter => ({...filter, sortOrder}))
   }
 
   const handleCategoryChange = (categoryId) => {
-    setFilter(filter => ({...filter, categoryId: categoryId === 'all' ? null : categoryId}));
+    setFilter(filter => ({...filter, categoryId: categoryId === 'all' ? null : categoryId}))
   }
   const handleSubCategoryChange = (subCategoryId) => {
-    setFilter(filter => ({...filter, subCategoryId: subCategoryId === 'all' ? null : subCategoryId }));
+    setFilter(filter => ({...filter, subCategoryId: subCategoryId === 'all' ? null : subCategoryId }))
   }
   const handleSearchChange = (search) => {
-    setFilter(filter => ({...filter, search}));
+    setFilter(filter => ({...filter, search}))
   }
 
   const handleRoleChange = (role) => {
-    setFilter(filter => ({...filter, role: role === 'all' ? null : role }));
+    setFilter(filter => ({...filter, role: role === 'all' ? null : role }))
   }
 
 

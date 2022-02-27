@@ -1,18 +1,15 @@
-import { loaderOpen, modalClose } from "components/Modal/actions";
+import { loaderOpen, modalClose } from 'components/Modal/actions'
 
-import Footer from 'components/layout/Footer'
-import { createProfile } from "components/Profile/actions";
-import Steps from 'components/Steps'
-import { useEffect } from "react";
-import { IRootState } from "types";
+import { createProfile } from 'components/Profile/actions'
+import { useEffect } from 'react'
+import { IRootState } from 'types'
 import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
-import { createTaskComplete } from 'components/CreateTaskPage/actions';
 import { useDispatch, useSelector } from 'react-redux'
 import SimpleSlider from 'components/Steps/MasterProfile/Slider'
 import MasterForm from 'components/MasterProfileForm'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()
@@ -22,9 +19,9 @@ const MasterProfile = (props) => {
 
   useEffect(() => {
     if(formLoading){
-      dispatch(loaderOpen());
+      dispatch(loaderOpen())
     }else{
-      dispatch(modalClose());
+      dispatch(modalClose())
     }
   }, [formLoading])
   const handleSubmit = (data) => {
@@ -34,7 +31,7 @@ const MasterProfile = (props) => {
       preferredSubCategories: data.categories.map((item) => {
         return item.subCategories.map(item => item.id)
       }).flat(Infinity)
-    }));
+    }))
   }
   return (
     <Layout showLeftMenu={false}>
@@ -59,5 +56,5 @@ const MasterProfile = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default MasterProfile

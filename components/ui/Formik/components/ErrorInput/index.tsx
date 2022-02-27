@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default function ErrorInput(props: Props) {
-  const { error, touched } = props;
+  const { error, touched } = props
   if(touched && error) {
     return (<div className={styles.root}>{error}</div>)
   }else{
