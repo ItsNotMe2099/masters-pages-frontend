@@ -18,5 +18,5 @@ export default function authReducer(state = {...initialState}, action) {
       state.categories = action.payload
       break
   }
-  return state
+   return {...state}
 }

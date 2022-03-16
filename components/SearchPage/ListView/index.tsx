@@ -18,6 +18,7 @@ import {useWindowWidth} from '@react-hook/window-size'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
 import dynamic from 'next/dynamic'
+import {useAppContext} from 'context/state'
 const queryString = require('query-string')
 const SearchProfileFilter = dynamic(() => import( 'components/SearchPage/Filter'), {
   ssr: false
@@ -38,7 +39,8 @@ const SearchProfileListView = (props: Props) => {
   const tasks = useSelector((state: IRootState) => state.profileSearch.list)
   const total = useSelector((state: IRootState) => state.profileSearch.total)
   const page = useSelector((state: IRootState) => state.profileSearch.page)
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
 
   const getSearchPageLink = () => {

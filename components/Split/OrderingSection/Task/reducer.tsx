@@ -25,5 +25,5 @@ export default function ProfileReducer(state = {...initialState}, action) {
       state.loading = false
       break
 }
-return state
+ return {...state}
 }

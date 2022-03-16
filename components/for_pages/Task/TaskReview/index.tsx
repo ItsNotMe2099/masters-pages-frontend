@@ -13,6 +13,7 @@ import {taskNegotiationSetCurrentTask} from 'components/TaskNegotiation/actions'
 import {feedbackByMasterOpen} from 'components/Modal/actions'
 import TaskFeedback from 'components/ProfileFeedback/TaskFeedback'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   task?: ITask
@@ -20,8 +21,8 @@ interface Props {
 
 const TaskReview = ({task}: Props) => {
   const dispatch = useDispatch()
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
-
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const myReview = task.feedbacks.find(f => f.fromProfileId === currentProfile.id)
   const otherReview = task.feedbacks.find(f => f.fromProfileId !== currentProfile.id)

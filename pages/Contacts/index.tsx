@@ -11,7 +11,6 @@ interface Props {
 }
 const ContactsPage = (props: Props) => {
   const router = useRouter()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   useEffect(() => {
     router.replace( 'Contacts/chat')
   }, [])

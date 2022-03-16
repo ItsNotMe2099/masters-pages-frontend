@@ -14,6 +14,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -23,7 +24,8 @@ const TaskHireMasterModal = ({ isOpen, onClose}: Props) => {
   const taskNegotiationLoading = useSelector((state: IRootState) => state.taskOffer.lastConditionLoading)
   const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
 
   const dispatch = useDispatch()
   const {t} = useTranslation('common')

@@ -38,7 +38,6 @@ const differenceInHoursCeil = (end, start) => {
 }
 const EditEventModal = (props: Props) => {
   const {isOpen, onClose, range} = props
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const {t} = useTranslation('common')
 
 

@@ -11,13 +11,15 @@ import {useEffect} from 'react'
 import EventFeedback
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventFeedback'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 interface Props {
   event?: IEvent
 }
 
 const EventReview = ({event}: Props) => {
   const dispatch = useDispatch()
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
 
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
   const myReview = event.feedbacks.find(f => f.fromProfileId === currentProfile.id)

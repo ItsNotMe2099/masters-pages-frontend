@@ -10,11 +10,14 @@ import { useSelector } from 'react-redux'
 import * as React from 'react'
 import { useTranslation } from 'next-i18next'
 import MainSectionButton from 'components/for_pages/MainUserPage/Button'
+import {useAuthContext} from 'context/auth_state'
 
 let SignUp = props => {
   const { t } = useTranslation('common')
   const { handleSubmit, onClick } = props
-  const error = useSelector((state: IRootState) => state.authSignUp.formError)
+  const authContext = useAuthContext();
+  const error = authContext.error
+  console.log("ShowError", error);
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field

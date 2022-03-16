@@ -4,6 +4,7 @@ import {IRootState} from 'types'
 
 import LayoutAuthorized from 'components/layout/Layout/LayoutAuthorized'
 import LayoutPublic from 'components/layout/Layout/LayoutPublic'
+import {useAppContext} from 'context/state'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -13,7 +14,8 @@ interface Props {
 }
 
 export default function Layout(props: Props) {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-
+  const appContext = useAppContext()
+  const profile = appContext.profile
+  console.log('CurrentProfile', appContext);
   return profile ? <LayoutAuthorized {...props}/> : <LayoutPublic {...props}/>
 }

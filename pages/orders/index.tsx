@@ -6,11 +6,13 @@ import {useRouter} from 'next/router'
 import {useEffect} from 'react'
 import {IRootState} from 'types'
 import { useSelector } from 'react-redux'
+import {useAppContext} from 'context/state'
 interface Props {
 }
 const TabOrders = (props: Props) => {
   const router = useRouter()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   useEffect(() => {
   router.replace( profile.role === 'client' ? '/orders/published' : '/orders/negotiation')
   }, [])

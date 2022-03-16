@@ -35,5 +35,5 @@ export default function changePasswordSubmitReducer(state = {...initialState}, a
       break
   }
 
-  return state
+   return {...state}
 }

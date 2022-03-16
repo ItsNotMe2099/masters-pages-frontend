@@ -9,11 +9,13 @@ import styles from 'components/for_pages/Invite/ProfileSection/index.module.scss
 import { useSelector } from 'react-redux'
 import formatDistance from 'date-fns/formatDistance'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 const ProfileSection = (props) => {
   const {t} = useTranslation()
   const router = useRouter()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
 
   return (
     <div className={styles.root}>

@@ -18,6 +18,7 @@ import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 import {modalClose} from 'components/Modal/actions'
 import {reachGoal} from 'utils/ymetrika'
+import {useAppContext} from 'context/state'
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
@@ -26,7 +27,8 @@ const CreateTaskPage = (props) => {
   const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
   const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
   const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const isMaster = profile.role !== 'client'
   useEffect(() => {
     dispatch(resetSearchStat())

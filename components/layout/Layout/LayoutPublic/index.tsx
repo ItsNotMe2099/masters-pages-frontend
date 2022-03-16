@@ -22,8 +22,6 @@ interface Props {
 export default function LayoutPublic(props: Props) {
   const {children, title} = props
   const {route: currentRoute} = useRouter()
-  const role = useSelector((state: IRootState) => state.profile.role)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
 
   const {t} = useTranslation('common')
   const dispatch = useDispatch()

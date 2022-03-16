@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux'
 import Avatar from 'components/ui/Avatar'
 import AvatarSvg from 'components/svg/AvatarSvg'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   event: IEvent
@@ -14,7 +15,8 @@ interface Props {
 
 export default function CalendarEventToolTip(props: Props) {
   const {event} = props
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const { t } = useTranslation('common')
   const getValueClass = (color) => {
     switch (color){

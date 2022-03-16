@@ -50,5 +50,5 @@ export default function ContactsReducer(state = {...initialState}, action) {
 
   }
 
-  return state
+   return {...state}
 }

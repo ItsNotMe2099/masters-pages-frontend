@@ -1,15 +1,16 @@
 import {FieldConfig, useField, useFormikContext} from 'formik'
 
-  
+
 import {useEffect, useState} from 'react'
 import styles from './index.module.scss'
 import parsePhoneNumber from 'libphonenumber-js'
 import {Metadata} from 'libphonenumber-js/core'
 // @ts-ignore
 import minMetadata from 'libphonenumber-js/metadata.min'
-import BaseInput from 'components/ui/Formik/BaseInput'
+import BaseInput from 'components/fields/BaseTextField'
 import ErrorInput from 'components/ui/Formik/components/ErrorInput'
 import {CodeSelect} from './components/CodeSelect'
+import FieldError from 'components/ui/FieldError'
 // @ts-ignore
 const metadata = new Metadata(minMetadata)
 
@@ -161,7 +162,7 @@ export default function PhoneField(props: Props & FieldConfig) {
                    mask={maskBuilder(value)}
                    hasError={hasError}/>
         {props.labelType === 'cross' && <label className={styles.labelCross}>{props.label}</label>}
-        <ErrorInput {...meta}/>
+        <FieldError showError={hasError}>{meta.error}</FieldError>
       </div>
     </div>
 

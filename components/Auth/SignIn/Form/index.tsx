@@ -8,12 +8,13 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import InputPhone from '../../../ui/Inputs/InputPhone'
 import MainSectionButton from 'components/for_pages/MainUserPage/Button'
+import {useAuthContext} from 'context/auth_state'
 
 let SignIn = props => {
   const { t } = useTranslation('common')
   const { handleSubmit} = props
-  const error = useSelector((state: IRootState) => state.authSignIn.formError)
-
+  const authContext = useAuthContext();
+  const error = authContext.error;
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field

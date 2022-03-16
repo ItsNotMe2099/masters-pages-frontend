@@ -22,6 +22,7 @@ import {createFollower} from 'components/Follower/actions'
 import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
 import {IProfile} from 'data/intefaces/IProfile'
+import {useAppContext} from 'context/state'
 
 interface Props{
   profile: IProfile,
@@ -30,7 +31,8 @@ interface Props{
 const CardProfile = (props: Props) => {
   const {profile, isEdit} = props
   const dispatch = useDispatch()
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading)
   const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed)
   const isSubscribed = profile.isSubscribedByCurrentProfile || isTempSubscribed

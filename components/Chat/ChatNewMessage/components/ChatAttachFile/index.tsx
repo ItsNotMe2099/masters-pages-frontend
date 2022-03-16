@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import Cookies from 'js-cookie'
 import { useDropzone } from 'react-dropzone'
+import {useAppContext} from 'context/state'
 interface Props {
   onFileUploaded: (file) => void
   onFileDrop: (file) => void
@@ -16,8 +17,8 @@ interface Props {
 export default function ChatAttachFile(props: Props) {
   const dispatch = useDispatch()
   const {chat, messageSentError, messageIsSending, messageSentSuccess} = useSelector((state: IRootState) => state.chat)
-
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const role = appContext.role
 
 
   const [message, setMessage] = useState('')

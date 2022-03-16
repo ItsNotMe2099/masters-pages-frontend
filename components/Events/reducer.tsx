@@ -277,5 +277,5 @@ export default function EventsReducer(state = {...initialState}, action) {
 
   }
 
-  return state
+   return {...state}
 }

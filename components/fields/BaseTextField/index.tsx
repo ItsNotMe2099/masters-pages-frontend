@@ -1,10 +1,11 @@
 import { ChangeEvent, ComponentType, useState } from 'react'
-import styles from './index.module.scss'
+import styles from 'components/fields/BaseTextField/index.module.scss'
 
 import { WrappedFieldProps } from 'redux-form'
 
 import InputMask from 'react-input-mask'
 import _uniqueId from 'lodash/uniqueId'
+import classNames from 'classnames'
 type OnChange = (evt: React.ChangeEvent<HTMLInputElement>) => any;
 
 interface Indexed {
@@ -41,11 +42,13 @@ interface Props {
   //onChange: (e: React.FormEvent<HTMLInputElement>) => void
 }
 
-export default function BaseInput(props: Props) {
+export default function BaseTextField(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
   const [name] = useState(_uniqueId('input-'))
   const {mask} = props
+  const hasError = !!error && touched
+
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
@@ -57,8 +60,14 @@ export default function BaseInput(props: Props) {
   }
 
   const renderInput = (inputProps) => {
-    return  ( <input {...inputProps} className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
-                     type={props.type || 'text'} disabled={props.disabled}/>)
+    return  ( <input {...inputProps} className={
+      classNames({
+        [styles.input]: true,
+        [styles.inputSmall]: props.size === 'small',
+        [styles.inputNormal]: props.size === 'small',
+        [styles.withIcon]: props.withIcon,
+        [styles.inputError]: hasError
+      })} type={props.type || 'text'} disabled={props.disabled}/>)
   }
   return mask ? (
     <InputMask mask={mask}  disabled={props.disabled}   value={props.value} onChange={props.onChange}   maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
@@ -67,7 +76,7 @@ export default function BaseInput(props: Props) {
   ) : renderInput(props)
 
 }
-BaseInput.defaultProps = {
+BaseTextField.defaultProps = {
   withBorder: true,
   transparent: false,
   withPadding: true,

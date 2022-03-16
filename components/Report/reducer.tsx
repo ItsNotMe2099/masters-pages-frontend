@@ -50,5 +50,5 @@ export default function ReportReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

@@ -6,7 +6,6 @@ export const afterAuthRedirect = () => {
   }else{
     meRedirect();
   }
-
 }
 export const meRedirect = () => {
   window.location.href = '/me'

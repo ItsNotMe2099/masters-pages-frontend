@@ -133,5 +133,5 @@ export default function ProfileReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

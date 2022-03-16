@@ -21,6 +21,7 @@ import {setPageTaskUser} from 'components/TaskUser/actions'
 import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
 import {confirmOpen} from 'components/Modal/actions'
 import GalleryItem from 'components/GalleryItem'
+import {useAppContext} from 'context/state'
 interface Props{
   profileId?: number
   onEdit?: (item) => void
@@ -29,13 +30,13 @@ const PostList = (props: Props) => {
   const {t} = useTranslation('common')
   const router = useRouter()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const listLoading = useSelector((state: IRootState) => state.profileGallery.listLoading)
   const total = useSelector((state: IRootState) => state.profileGallery.total)
   const page = useSelector((state: IRootState) => state.profileGallery.page)
   const list = useSelector((state: IRootState) => state.profileGallery.list)
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const isEdit = currentProfile && (currentProfile.id === props.profileId || !props.profileId)
+  const appContext = useAppContext();
+  const profile = appContext.profile
+  const isEdit = profile && (profile.id === props.profileId || !props.profileId)
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [isEditOpen, setIsEditOpen] = useState(false)

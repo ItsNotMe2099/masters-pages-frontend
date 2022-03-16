@@ -16,11 +16,13 @@ import {useEffect} from 'react'
 import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {useTranslation} from 'next-i18next'
 import InputSkill from 'components/ui/Inputs/InputSkill'
+import {useAppContext} from 'context/state'
 
 let PostForm = (props) => {
   const {categoryId, subCategoryId, showInPortfolio} = props
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const error = useSelector((state: IRootState) => state.profileGallery.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'gallery')
   const {t} = useTranslation('common')

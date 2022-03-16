@@ -23,6 +23,7 @@ import TabPhoneForm from 'components/for_pages/Settings/TabPhoneForm'
 import TabNotificationsForm from 'components/for_pages/Settings/TabNotificationsForm'
 import Modals from 'components/layout/Modals'
 import TabLanguageForm from 'components/for_pages/Settings/TabLanguageForm'
+import {useAppContext} from 'context/state'
 interface Props {
   t?: (string) => string,
   user?: any
@@ -32,7 +33,8 @@ const TabSettings= (props: Props) => {
   const dispatch = useDispatch()
 
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const loading = useSelector((state: IRootState) => state.profileSettings.loading)
   const settings = useSelector((state: IRootState) => state.profileSettings.settings)
   useEffect(() => {

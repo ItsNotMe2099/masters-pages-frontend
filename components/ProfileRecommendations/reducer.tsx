@@ -82,5 +82,5 @@ export default function ProfileRecommendationReducer(state = {...initialState}, 
       break
   }
 
-  return state
+   return {...state}
 }

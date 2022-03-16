@@ -1,9 +1,10 @@
 import styles from './index.module.scss'
 import ReactCheckbox from 'react-custom-checkbox'
 import classNames from 'classnames'
+import {ReactElement} from 'react'
 
 interface Props {
-  label: string
+  label: string | ReactElement
   checked?: boolean
   disabled?: boolean
   onChange: (val) => void

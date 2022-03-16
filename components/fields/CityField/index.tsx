@@ -16,23 +16,23 @@ export default function CityField(props: Props<number>) {
   const [options, setOptions] = useState<IOption<number>[]>([])
   const { t, i18n } = useTranslation('common')
   useEffect(() => {
-      fetchData()
   }, [props.countryCode, i18n.language])
   const fetchData = async (search = '') => {
-    const data = await LocationRepository.fetchCities({countryCode: props.countryCode, search, lang: i18n.language})
+    const data = await LocationRepository.fetchCities({countryCode: props.countryCode, id: !search ? field.value : null, search, lang: i18n.language})
     console.log('FetchData', data)
-    setOptions(data?.map(item => ({
+    return data?.map(item => ({
         value: item.id,
         label: item.name,
-    })) || [])
+    })) || [];
   }
   const handleMenuOpen = async () => {
     await fetchData()
   }
-  const handleInputChange = async (newValue: string, actionMeta: InputActionMeta) => {
-    await fetchData(newValue)
+  const handleLoadOptions =  async (initialValue) => {
+   const res = await fetchData(initialValue)
+    return res;
   }
   return (
-    <SelectField options={options} label={props.label} name={props.name} onMenuOpen={handleMenuOpen} onInputChange={handleInputChange}/>
+    <SelectField options={options} label={props.label} name={props.name} onMenuOpen={handleMenuOpen} loadOptions={handleLoadOptions}/>
   )
 }

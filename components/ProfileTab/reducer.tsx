@@ -101,5 +101,5 @@ export default function ProfileTabReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

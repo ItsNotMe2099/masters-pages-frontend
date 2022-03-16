@@ -40,6 +40,7 @@ import ModalConfirm from 'components/Modal/ModalConfirm'
 import {useRouter} from 'next/router'
 import {useInterval} from 'components/hooks/useInterval'
 import {IProfile} from 'data/intefaces/IProfile'
+import {useAppContext} from 'context/state'
 
 const localizer = momentLocalizer(moment)
 const DnDCalendar = withDragAndDrop(Calendar)
@@ -51,7 +52,8 @@ interface Props {
 const CalendarPage = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const modelKey = useSelector((state: IRootState) => state.modal.modalKey)
   const firstOfWeek = localizer.startOfWeek()
   const startWeek = dates.startOf(new Date(), 'week', firstOfWeek)

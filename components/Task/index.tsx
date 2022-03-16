@@ -36,6 +36,7 @@ import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
 import {getCurrencySymbol} from 'data/currency'
 import {saveTaskRequest} from 'components/SavedTasks/actions'
+import {useAppContext} from 'context/state'
 
 interface Props {
   task: ITask,
@@ -54,7 +55,8 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const { t, i18n } = useTranslation('common')
   const dispatch = useDispatch()
   const [sortType, setSortType] = useState('newFirst')
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
 
   console.log('TaskUpdate', task.id, task)
   const router = useRouter()

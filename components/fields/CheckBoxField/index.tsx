@@ -1,13 +1,15 @@
 import {FieldConfig, useField, useFormikContext} from 'formik'
-import styles from './index.module.scss'
+import styles from 'components/fields/CheckBoxField/index.module.scss'
 import ErrorInput from 'components/ui/Formik/components/ErrorInput'
 import {CustomCheckbox} from 'components/ui/CustomCheckbox'
+import FieldError from 'components/ui/FieldError'
+import {ReactElement} from 'react'
 interface Props {
-  label?: string
+  label?: string | ReactElement
   disabled?: boolean
 }
 
-export const CheckBox = (props: Props & FieldConfig) => {
+const CheckBoxField = (props: Props & FieldConfig) => {
   const [field, meta] = useField(props)
   const { setFieldValue, setFieldTouched, validateField } = useFormikContext()
   const hasError = !!meta.error && meta.touched
@@ -20,7 +22,8 @@ export const CheckBox = (props: Props & FieldConfig) => {
         label={props.label}
         onChange={(val) => setFieldValue(props.name, val)}
       />
-      <ErrorInput {...meta}/>
+      <FieldError showError={hasError}>{meta.error}</FieldError>
     </div>
   )
 }
+export default CheckBoxField

@@ -27,5 +27,5 @@ export default function ProfileStatReducer(state = {...initialState}, action) {
 
   }
 
-  return state
+   return {...state}
 }

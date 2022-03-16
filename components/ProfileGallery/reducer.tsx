@@ -232,5 +232,5 @@ export default function ProfileGalleryReducer(state = {...initialState}, action)
       break
   }
 
-  return state
+   return {...state}
 }

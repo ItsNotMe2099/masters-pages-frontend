@@ -13,6 +13,7 @@ import { useSelector, useDispatch} from 'react-redux'
 import AddFileButton from 'components/ui/Inputs/FilesUploadInput/components/AddFileBtn'
 import { Trans } from 'next-i18next'
 import {IRootState} from 'types'
+import {useAppContext} from 'context/state'
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -79,7 +80,8 @@ const FilesUploadInput = (props: any & FileInputProps & FileInputOptions) => {
   } = props
   const dispatch = useDispatch()
   const token = Cookies.get('token')
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const role = appContext.role
 
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',

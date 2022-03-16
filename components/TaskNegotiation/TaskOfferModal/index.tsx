@@ -13,6 +13,7 @@ import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -20,16 +21,16 @@ interface Props {
 const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('tasks')
-  const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+
 
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
   const taskListTotal = useSelector((state: IRootState) => state.taskUser.total)
   const taskListLoading = useSelector((state: IRootState) => state.taskUser.listLoading)
   const {t} = useTranslation('common')
-
+  const appContext = useAppContext();
+  const profile = appContext.profile
   useEffect(() => {
-    if(currentProfile.role === 'client') {
+    if(profile.role === 'client') {
       dispatch(fetchTaskUserListRequest({
         status: 'published',
         page: 1,
@@ -50,7 +51,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   }
 
   const handleSubmitNewOrder = (data) => {
-    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: currentProfile.id}, currentProfile.id))
+    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: profile.id}, profile.id))
   }
 
   return (
@@ -66,7 +67,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
       {activeTab === 'tasks' && taskListTotal > 0 && <TaskOfferOrderList onCancel={onClose}/>}
       {(activeTab === 'newTask' || taskListTotal === 0) && <TaskOfferNewOrder onCancel={onClose} initialValues={{
         priceType: 'fixed',
-        masterRole: currentProfile.role === 'client' ? profile.role : currentProfile.role,
+        masterRole: profile.role === 'client' ? profile.role : profile.role,
         countryCode: profile?.geoname?.country,
         geonameid: profile?.geonameid,
       }} onSubmit={handleSubmitNewOrder}/>}

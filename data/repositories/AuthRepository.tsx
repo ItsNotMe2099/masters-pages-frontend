@@ -1,16 +1,14 @@
 import request from 'utils/request'
+import {
+  AuthLoginFormData,
+  AuthPhoneConfirmFormData,
+  AuthRegisterFormData,
+  IAuthResponse, IPhoneConfirmResponse
+} from 'data/intefaces/IAuth'
 
-import {IPagination} from 'types/types'
-import {ICity, ICountry} from 'data/intefaces/ILocation'
-export interface IDataQueryList{
-  page?: number,
-  limit?: number,
-  search?: string,
-  lang?: string
-}
-export default class LocationRepository {
-  static async completeRegistration(data): Promise<ICountry[] | null> {
 
+export default class AuthRepository {
+  static async completeRegistration(data): Promise<boolean | null> {
     const res = await request({
       url: '/api/auth/completeRegistration',
       method: 'POST',
@@ -18,26 +16,61 @@ export default class LocationRepository {
     })
     console.log("Res111", res);
     if (res.err) {
-      return null
+      throw res.err
     }
-    return res.data
+    return !!res.data
   }
-  static async fetchCities({id = null, page = 1, limit = 10, search, lang = 'en', countryCode}: IDataQueryList & {id?: number, countryCode?: string}): Promise<ICity[] | null> {
+
+  static async login(data: AuthLoginFormData): Promise<IAuthResponse | null> {
     const res = await request({
-      url: '/api/location/city',
-      method: 'GET',
-      data: {
-        ...(id ? {id} : {}),
-        search,
-        page,
-        limit,
-        lang,
-        country: countryCode
-      }
+      url: '/api/auth/login',
+      method: 'POST',
+      data,
     })
+    console.log("Res111245", res);
     if (res.err) {
-      return null
+      throw res.err
     }
     return res.data
   }
+
+  static async register({phone}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+    const res = await request({
+      url: '/api/auth/register',
+      method: 'POST',
+      data: {phone},
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
+  static async phoneConfirmation({phone, code}: AuthPhoneConfirmFormData): Promise<IAuthResponse | null> {
+    const res = await request({
+      url: '/api/auth/phoneConfirmation',
+      method: 'POST',
+      data: {phone, code},
+    })
+    console.log("Res112", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
+  static async passwordForgot({phone}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+    const res = await request({
+      url: '/api/auth/forgot',
+      method: 'POST',
+      data: {phone},
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
 }

@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import cx from 'classnames'
+import {useAppContext} from 'context/state'
 
 interface Props {
   chat: IChat
@@ -29,7 +30,8 @@ interface Props {
 
 export default function ChatTitle({chat, onClick}: Props) {
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const lastNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
   const handleHireMaster = () => {
     dispatch(taskNegotiationSetCurrentTask(chat.task))

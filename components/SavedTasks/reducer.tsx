@@ -17,7 +17,7 @@ export default function TaskUserReducer(state = {...initialState}, action) {
     case ActionTypes.FETCH_SAVED_TASKS:
 
       break
-    
+
     case ActionTypes.FETCH_SAVED_TASKS_REQUEST:
       state.isLoading = true
       break
@@ -37,5 +37,5 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

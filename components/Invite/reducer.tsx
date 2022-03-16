@@ -40,5 +40,5 @@ export default function InviteReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

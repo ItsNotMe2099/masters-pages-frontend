@@ -25,5 +25,5 @@ export default function authReducer(state = {...initialState}, action) {
       break
 
   }
-  return state
+   return {...state}
 }

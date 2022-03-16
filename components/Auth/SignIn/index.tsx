@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
 import { useTranslation } from 'next-i18next'
 import {useEffect} from 'react'
+import AuthRepository from 'data/repositories/AuthRepository'
+import {useAppContext} from 'context/state'
+import {useAuthContext} from 'context/auth_state'
 
 interface Props {
   isOpen?: boolean
@@ -18,15 +21,16 @@ interface Props {
 
 const SignInComponent = (props: Props) => {
   const { t } = useTranslation('common')
+  const authContext = useAuthContext();
   const dispatch = useDispatch()
-  const isLoading = useSelector((state: IRootState) => state.authSignIn.loading)
+  const isLoading = authContext.loginSpinner
 
 
   useEffect(() => {
-    dispatch(signInReset())
+    authContext.clear();
   }, [])
-  const handleSubmit = (data) => {
-    dispatch(signInSubmit(data))
+  const handleSubmit = async (data) => {
+    authContext.login(data);
   }
   return (
     <Modal{...props} loading={isLoading}>

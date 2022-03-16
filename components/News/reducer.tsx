@@ -171,5 +171,5 @@ export default function NewsReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

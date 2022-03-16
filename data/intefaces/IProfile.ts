@@ -17,7 +17,7 @@ export interface IProfile{
   lastName?: string
   phone?: string
   email?: string
-  role?: string
+  role?: ProfileRole
   geonameid?: string
   birthday?: string
   country?: string

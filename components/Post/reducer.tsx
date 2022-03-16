@@ -222,5 +222,5 @@ export default function PostReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

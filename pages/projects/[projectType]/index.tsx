@@ -18,6 +18,7 @@ import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
+import {useAppContext} from 'context/state'
 interface Props {
 }
 const TabOrders = (props: Props) => {
@@ -26,13 +27,14 @@ const TabOrders = (props: Props) => {
   const dispatch = useDispatch()
 
   const { projectType } = router.query
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const loading = false
   const tasks = []
   const total = 0
   const page =1
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentProjectEdit, setCurrentTaskEdit] = useState(null)
 

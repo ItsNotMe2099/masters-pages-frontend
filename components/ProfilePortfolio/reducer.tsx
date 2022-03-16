@@ -127,5 +127,5 @@ export default function ProfilePortfolioReducer(state = {...initialState}, actio
       break
   }
 
-  return state
+   return {...state}
 }

@@ -25,13 +25,15 @@ import {createProfileRecommendation} from 'components/ProfileRecommendations/act
 import { useTranslation } from 'next-i18next'
 import MarkIcon from 'components/svg/MarkIcon'
 import FileList from 'components/ui/FileList'
+import {useAppContext} from 'context/state'
 
 const TaskPage = (props) => {
   const router = useRouter()
   const {t, i18n} = useTranslation('common')
   //const { task } = router.query
   const dispatch = useDispatch()
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const events = useSelector((state: IRootState) => state.event.list)
   const eventsLoading = useSelector((state: IRootState) => state.event.listLoading)
   const eventsTotal = useSelector((state: IRootState) => state.event.total)

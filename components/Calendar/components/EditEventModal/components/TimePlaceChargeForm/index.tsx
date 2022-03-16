@@ -24,6 +24,7 @@ import MeetingForm from 'components/Calendar/components/EditEventModal/component
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 import {getEventPlannedAllowed} from 'utils/event'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 
 enum ButtonType {
@@ -55,7 +56,8 @@ let TimePlaceChargeForm = (props: Props) => {
   const {event, handleSubmit, onAddExpense, onEditExpense, onCancel} = props
   const error = useSelector((state: IRootState) => state.event.formError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const taskList = useSelector((state: IRootState) => state.taskUser.list)
   const isCurrentEventEditMode = useSelector((state: IRootState) => state.event.isCurrentEventEditMode)
   const [isTempEdit, setIsTempEdit] = useState(false)

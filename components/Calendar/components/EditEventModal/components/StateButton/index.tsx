@@ -7,6 +7,7 @@ import MarkIcon from 'components/svg/MarkIcon'
 import {useSelector} from 'react-redux'
 import { getEventColor} from 'utils/event'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   event: IEvent,
@@ -14,7 +15,8 @@ interface Props {
 
 }
 const StateButton = ({event, type}: Props) => {
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const isOtherSide =  (currentProfile.role !== type)
   const showAuthor = type === currentProfile.role && event.isAuthor || type !== currentProfile.role && !event.isAuthor
   const isOverdue = event.isOverdue && currentProfile.role !== 'client' && type === 'master'

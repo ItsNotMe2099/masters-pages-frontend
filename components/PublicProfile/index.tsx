@@ -17,6 +17,7 @@ import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
 import CardPosts from 'components/PublicProfile/components/view/CardPosts'
 import {IProfile} from 'data/intefaces/IProfile'
+import {useAppContext} from 'context/state'
 
 interface Props {
   profile: IProfile,
@@ -26,7 +27,8 @@ interface Props {
 
 const PublicProfile = (props) => {
   const dispatch = useDispatch()
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const isEdit = currentProfile && currentProfile.id === props.profile.id
   const profile = isEdit ? currentProfile : props.profile
   const [category, setCategory] = useState(null)

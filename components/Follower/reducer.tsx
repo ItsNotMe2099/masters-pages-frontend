@@ -104,5 +104,5 @@ export default function FollowerReducer(state = {...initialState}, action) {
 
   }
 
-  return state
+   return {...state}
 }

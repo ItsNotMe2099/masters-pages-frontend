@@ -14,7 +14,6 @@ import NotificationsForm from 'components/for_pages/Settings/NotificationsForm'
 let TabNotificationsForm = (props) => {
   const {t} = useTranslation()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const error = useSelector((state: IRootState) => state.profileSettings.formError)
   const loading = useSelector((state: IRootState) => state.profileSettings.formLoading)
   const [newPhone, setNewPhone] = useState()

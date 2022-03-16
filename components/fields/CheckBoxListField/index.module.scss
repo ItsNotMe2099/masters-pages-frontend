@@ -1,0 +1,22 @@
+@import "scss/index";
+
+.root{
+  margin-bottom: 20px;
+  &.hasError{
+    .label {
+      color: #F15151;
+    }
+    .option{
+      border-color: #F15151;
+      color: #F15151;
+    }
+
+  }
+}
+
+.sizes{
+
+}
+.checkbox{
+  margin-bottom: 10px;
+}

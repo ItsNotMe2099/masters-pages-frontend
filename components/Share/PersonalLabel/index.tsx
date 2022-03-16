@@ -8,6 +8,7 @@ import {IRootState, ISharePersonalLabel} from 'types'
 import {useRef, useState} from 'react'
 import { exportComponentAsJPEG, exportComponentAsPDF } from 'react-component-export-image'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   customLink?: string
@@ -18,7 +19,8 @@ interface Props {
 export default function SharePersonalLabel(props: Props) {
   const dispatch = useDispatch()
   const {phone, subCategoryId, customLink} = props
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const labelRef = useRef(null)
   const { t } = useTranslation('common')
   const [settings, setSettings] = useState<ISharePersonalLabel>({

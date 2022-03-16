@@ -12,6 +12,7 @@ import queryString from 'query-string'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {useRouter} from 'next/router'
+import {useAppContext} from 'context/state'
 
 interface Props {
   color?: string
@@ -21,10 +22,8 @@ interface Props {
  const NotificationSelect = (props: Props) => {
    const { t } = useTranslation('common')
    const router = useRouter()
-
-   const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const role = useSelector((state: IRootState) => state.profile.role)
-  const dispatch = useDispatch()
+   const appContext = useAppContext();
+   const profile = appContext.profile
    const [items, setItems] = useState([])
    const [total, setTotal] = useState(0)
    const [loading, setLoading] = useState(false)

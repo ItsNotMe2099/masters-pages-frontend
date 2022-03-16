@@ -12,6 +12,7 @@ import Review from 'components/Review'
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 
 interface Props {
@@ -24,7 +25,8 @@ const TabReviews = (props: Props) => {
   const loading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
   const total = useSelector((state: IRootState) => state.profileFeedback.total)
   const page = useSelector((state: IRootState) => state.profileFeedback.page)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const [load, setLoadMore] = useState(false)
   const dispatch = useDispatch()
   const limit = 10

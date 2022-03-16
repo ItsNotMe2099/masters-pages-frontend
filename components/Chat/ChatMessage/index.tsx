@@ -22,6 +22,7 @@ import styles from './index.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 
 interface Props {
@@ -32,7 +33,8 @@ interface Props {
 
 export default function ChatMessage({ message, chat, size }: Props) {
   const dispatch =  useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const lastCondition = useSelector((state: IRootState) => state.taskOffer.lastCondition)
 
   const handleTaskMarkAsDoneConfirm = () => {

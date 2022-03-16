@@ -20,5 +20,5 @@ export default function authReducer(state = {...initialState}, action) {
       state.subCategories = []
       break
   }
-  return state
+   return {...state}
 }

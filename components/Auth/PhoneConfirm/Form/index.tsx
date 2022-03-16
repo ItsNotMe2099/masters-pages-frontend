@@ -6,12 +6,13 @@ import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+import {useAuthContext} from 'context/auth_state'
 
 let PhoneConfirmForm = props => {
   const { t } = useTranslation('common')
   const { handleSubmit } = props
-  const error = useSelector((state: IRootState) => state.phoneConfirmReducer.formError)
-
+  const authContext = useAuthContext();
+  const error = authContext.error;
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field

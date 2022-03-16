@@ -16,6 +16,8 @@ import MenuItem from 'components/layout/Layout/components/MenuItem'
 import { logout } from 'components/Auth/actions'
 import ModeSelect from 'components/layout/Layout/components/ModeSelect'
 import {IUser} from 'data/intefaces/IUser'
+import {useAppContext} from 'context/state'
+import {useAuthContext} from 'context/auth_state'
 
 
 interface Props {
@@ -26,9 +28,11 @@ interface Props {
 const Header = (props: Props) => {
 
   const {route: currentRoute} = useRouter()
-  const roleCurrent = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const authContext = useAuthContext()
+  const roleCurrent = appContext.role
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const profile = appContext.profile
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false)
 
   const handleOpenMobileMenu = () => {
@@ -73,7 +77,7 @@ const Header = (props: Props) => {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
-    dispatch(logout())
+    authContext.logOut();
   }
 
   const {t} = useTranslation('common')

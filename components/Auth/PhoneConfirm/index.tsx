@@ -6,6 +6,7 @@ import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import {useEffect} from 'react'
+import {useAuthContext} from 'context/auth_state'
 
 interface Props {
   isOpen: boolean
@@ -15,14 +16,16 @@ interface Props {
 const PhoneConfirmComponent = (props: Props) => {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  const isLoading = useSelector((state: IRootState) => state.phoneConfirmReducer.loading)
-  const code = useSelector((state: IRootState) => state.phoneConfirmReducer.code)
+
+  const authContext = useAuthContext();
+  const isLoading = authContext.confirmSpinner;
+  const code = authContext.codeRes?.code
 
   useEffect(() => {
     dispatch(phoneConfirmReset())
   }, [])
   const handleSubmit = (data) => {
-    dispatch(phoneConfirmSubmit(data))
+    authContext.confirmCode(data.code);
   }
   return (
     <Modal

@@ -16,14 +16,16 @@ import {registrationPhoneOpen} from 'components/Modal/actions'
 import {registrationPhoneSetCallback} from 'components/Auth/RegistrationPhone/actions'
 import {logout} from 'components/Auth/actions'
 import InputCountry from 'components/ui/Inputs/InputCountry'
+import {useAuthContext} from 'context/auth_state'
 let RegistrationForm = props => {
   const dispatch = useDispatch()
+  const authContext = useAuthContext();
   const { t } = useTranslation('common')
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.registrationComplete.formError)
   const isLoading = useSelector((state: IRootState) => state.registrationComplete.loading)
   const handleLogout = () => {
-    dispatch(logout())
+   authContext.logOut();
   }
   const handlePhoneClick = () => {
     dispatch(registrationPhoneSetCallback((phone) => {

@@ -103,5 +103,5 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
       break
   }
 
-  return state
+   return {...state}
 }

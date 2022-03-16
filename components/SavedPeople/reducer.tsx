@@ -49,5 +49,5 @@ export default function TaskUserReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

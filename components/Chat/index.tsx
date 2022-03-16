@@ -9,6 +9,7 @@ import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   isTaskChat?: boolean
@@ -21,7 +22,8 @@ export default function Chat(props: Props) {
   const chatListLoading = useSelector((state: IRootState) => state.chat.chatListLoading)
   const {isTaskChat} = props
 
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const [activeTab, setActiveTab] = useState(isTaskChat ? 'tasks' : 'people')
   const { t } = useTranslation('common')
 

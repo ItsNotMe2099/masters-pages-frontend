@@ -24,5 +24,5 @@ export default function StatReducer(state = {...initialState}, action) {
       state.loading = false
       break
 }
-return state
+ return {...state}
 }

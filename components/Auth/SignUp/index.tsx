@@ -8,6 +8,7 @@ import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInOpen} from 'components/Modal/actions'
 import { useTranslation } from 'next-i18next'
+import {useAuthContext} from 'context/auth_state'
 
 interface Props {
   isOpen?: boolean
@@ -19,13 +20,18 @@ interface Props {
 const SignUpComponent = (props: Props) =>  {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  const isLoading = useSelector((state: IRootState) => state.authSignUp.loading)
-  const handleSubmit = (data) => {
-    dispatch(signUpSubmit(data))
+  const authContext = useAuthContext();
+  const isLoading = authContext.signUpSpinner;
+  const handleSubmit = async (data) => {
+    authContext.signUp(data);
   }
   useEffect(() => {
-    dispatch(signUpReset())
-  })
+    return () => {
+      if (authContext.error) {
+        authContext.clear();
+      }
+    }
+  }, [])
   return (
     <Modal {...props} loading={isLoading}>
 

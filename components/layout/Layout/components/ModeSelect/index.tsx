@@ -12,6 +12,7 @@ import {getProfileRoleByRoute} from 'utils/profileRole'
 import {useRouter} from 'next/router'
 import {IUser} from 'data/intefaces/IUser'
 import {ProfileRole} from 'data/intefaces/IProfile'
+import {useAppContext} from 'context/state'
 
 interface Props {
   onClick?: () => void
@@ -22,7 +23,8 @@ interface Props {
   const {user} = props
    const { t } = useTranslation('common')
    const {route: currentRoute} = useRouter()
-   const roleCurrent = useSelector((state: IRootState) => state.profile.role)
+   const appContext = useAppContext()
+   const roleCurrent = appContext.role
    const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
   const dispatch = useDispatch()
 
@@ -48,7 +50,7 @@ interface Props {
   const handleOptionClick = (e, item) => {
     e.preventDefault()
     setValue(item)
-    dispatch(changeRole(item.value))
+    appContext.updateRole(item.value);
     setIsActive(false)
     if(props.onClick) {
     props.onClick()

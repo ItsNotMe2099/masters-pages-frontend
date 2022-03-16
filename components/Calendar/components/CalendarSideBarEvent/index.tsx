@@ -6,13 +6,15 @@ import { useSelector } from 'react-redux'
 import {useState} from 'react'
 import {usePopperTooltip} from 'react-popper-tooltip'
 import CalendarEventToolTip from 'components/Calendar/components/CalendarEventToolTip'
+import {useAppContext} from 'context/state'
 interface Props {
   event: IEvent,
   onClick: (event) => void
 }
 
 export default function CalendarSideBarEvent(props: Props) {
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
 
   const {event, onClick} = props
   const [isToolTipVisible, setIsToolTipVisible] = useState(false)

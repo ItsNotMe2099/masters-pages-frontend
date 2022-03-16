@@ -27,7 +27,6 @@ interface Props {
 let EventExpenseForm = ({event, handleSubmit}: Props) => {
   const error = useSelector((state: IRootState) => state.event.formError)
   const formLoading = useSelector((state: IRootState) => state.event.formLoading)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const {t} = useTranslation('common')
 
   const handleEdit = () => {

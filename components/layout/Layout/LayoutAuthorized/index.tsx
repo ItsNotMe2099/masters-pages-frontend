@@ -17,6 +17,8 @@ import Header from '../LayoutAuthorized/mobile/Header'
 import LangSelect  from 'components/LangSelect'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
+import {useAppContext} from 'context/state'
+import {useAuthContext} from 'context/auth_state'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -28,10 +30,11 @@ interface Props {
 export default function LayoutAuthorized(props: Props) {
   const {children, showLeftMenu, isCurrentProfileOpened} = props
   const {route: currentRoute} = useRouter()
-  const roleCurrent = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const authContext = useAuthContext();
+  const roleCurrent = appContext.role
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
-
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const profile = appContext.profile
   const intervalRef = useRef(null)
   const [collapsed, setCollapsed] = useState(false)
   useEffect(() => {
@@ -98,7 +101,7 @@ export default function LayoutAuthorized(props: Props) {
     {title: t('menu.settings'), icon: 'settings', link: '/me/settings', isSeparator: true},
   ]
   const handleLogout = () => {
-    dispatch(logout())
+    authContext.logOut();
   }
   const handleCollapse = () => {
     if(!collapsed) {

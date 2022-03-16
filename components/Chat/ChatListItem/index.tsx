@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import formatDistance from 'date-fns/formatDistance'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 interface Props {
   chat: IChat
   isActive?: boolean
@@ -15,7 +16,8 @@ interface Props {
 
 export default function ChatListItem({chat, isActive}: Props) {
 
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const router = useRouter()
   const dispatch = useDispatch()
   const {t} = useTranslation('common')

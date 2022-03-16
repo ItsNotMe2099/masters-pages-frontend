@@ -121,5 +121,5 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
 
   }
 
-  return state
+   return {...state}
 }

@@ -18,7 +18,6 @@ interface Props {
   onClose: () => void
 }
 const CategoryModal = ({isOpen, onClose}: Props) => {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.skill.formLoading)
   const dispatch = useDispatch()
   const {t} = useTranslation('common')

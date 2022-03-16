@@ -14,6 +14,7 @@ import Cookies from 'js-cookie'
 import { useTranslation } from 'next-i18next'
 import FormError from 'components/ui/Form/FormError'
 import {IRootState} from 'types'
+import {useAppContext} from 'context/state'
 
 
 export interface AvatarInputProps {
@@ -72,7 +73,8 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
   const [error, setError] = useState(null)
   const dropZoneRef = useRef(null)
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const role = appContext.role
   const {t} = useTranslation('common')
   const handleChangePhoto = () => {
     if (dropZoneRef.current) {

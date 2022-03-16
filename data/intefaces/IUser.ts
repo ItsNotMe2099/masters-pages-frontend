@@ -22,6 +22,7 @@ export interface IUser{
   isRegistrationCompleted?: boolean
   location: ILocation
   profiles: IProfile[]
+  birthday: Date
 }
 export interface ICity{
   id: number

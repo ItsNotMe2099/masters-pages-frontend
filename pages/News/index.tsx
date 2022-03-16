@@ -18,12 +18,14 @@ import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
 import Modals from 'components/layout/Modals'
 import {fetchNewsList, resetNewsList, setNewsCurrentItemIndex} from 'components/News/actions'
 import GalleryItem from 'components/GalleryItem'
+import {useAppContext} from 'context/state'
 
 const NewsPage = (props) => {
   const {t} = useTranslation()
   const router = useRouter()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const listLoading = useSelector((state: IRootState) => state.news.listLoading)
   const total = useSelector((state: IRootState) => state.news.total)
   const page = useSelector((state: IRootState) => state.news.page)

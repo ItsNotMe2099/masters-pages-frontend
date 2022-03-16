@@ -246,7 +246,7 @@ function ChatReducer(state = {...initialState}, action: ActionType<typeof appAct
         chat: null,
       }
     default:
-      return state
+       return {...state}
   }
 }
 

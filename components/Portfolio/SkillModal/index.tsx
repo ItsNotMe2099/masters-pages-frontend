@@ -16,7 +16,6 @@ interface Props {
   onClose: () => void
 }
 const SkillModal = ({isOpen, category, skill, onClose}: Props) => {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.skill.formLoading)
   const dispatch = useDispatch()
   const {t} = useTranslation('common')

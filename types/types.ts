@@ -1,6 +1,7 @@
 import { HTMLInputTypeAttribute, MouseEventHandler } from 'react'
 import { FieldConfig } from 'formik'
 import {UrlObject} from 'url'
+import {SnackbarType} from 'types/enums'
 
 export interface IPagination<T>{
   data: T[]
@@ -30,3 +31,12 @@ export interface IOption<T> {
   value: T
 }
 export type InputStyleType = 'default' | 'bottomBorder'
+export enum LabelStyleType {
+  Placeholder = 'placeholder',
+  Static = 'static',
+  Cross = 'cross'
+}
+export interface SnackbarData {
+  text: string
+  type: SnackbarType
+}

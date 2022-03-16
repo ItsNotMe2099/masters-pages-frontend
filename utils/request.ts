@@ -52,16 +52,17 @@ async function request(options: string | Options, ctx: any = null): Promise<IRes
       body: file ? mulipartFormData : (method !== 'GET' && data) ? JSON.stringify(data) : null,
     })
 
-    if (res.status === 401 && !ctx) {
+    /*if (res.status === 401 && !ctx) {
       destroyCookie(ctx, CookiesType.accessToken)
       window.location.replace('/')
       return {
         data: null,
         err: res.statusText ?? 'Unauthorized',
       }
-    }
-
+    }*/
     const jsonData = await res.json()
+    console.log("Res11122", res.status, jsonData, jsonData.errors);
+
     if (res.status === 200 || res.status === 201) {
       return {
         data: jsonData,

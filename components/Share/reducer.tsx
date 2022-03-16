@@ -40,5 +40,5 @@ export default function ShareReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

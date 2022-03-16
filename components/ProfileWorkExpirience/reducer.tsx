@@ -107,5 +107,5 @@ export default function ProfileWorkExperienceReducer(state = {...initialState}, 
       break
   }
 
-  return state
+   return {...state}
 }

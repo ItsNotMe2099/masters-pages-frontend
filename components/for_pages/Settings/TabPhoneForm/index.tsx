@@ -5,11 +5,13 @@ import styles from 'components/for_pages/Settings/TabPhoneForm/index.module.scss
 import {useState} from 'react'
 import {registrationPhoneSetCallback} from 'components/Auth/RegistrationPhone/actions'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 const TabPhoneForm = (props) => {
   const {t} = useTranslation()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const [newPhone, setNewPhone] = useState()
 
   const handlePhoneChange = () => {

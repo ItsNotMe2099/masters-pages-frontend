@@ -26,6 +26,7 @@ import {
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
 import dynamic from 'next/dynamic'
+import {useAppContext} from 'context/state'
 interface Props {
   onShowMap: () => void
 }
@@ -34,14 +35,14 @@ const SearchTaskListView = (props: Props) => {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const router = useRouter()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const loading = useSelector((state: IRootState) => state.taskSearch.listLoading)
   const sortType = useSelector((state: IRootState) => state.taskSearch.sortType)
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
   const tasks = useSelector((state: IRootState) => state.taskSearch.list)
   const total = useSelector((state: IRootState) => state.taskSearch.total)
   const page = useSelector((state: IRootState) => state.taskSearch.page)
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const appContext = useAppContext()
+  const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
   console.log('Fetch1112')
   useEffect(() => {

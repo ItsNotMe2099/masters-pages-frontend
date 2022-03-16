@@ -42,5 +42,5 @@ export default function CreateTaskReducer(state = {...initialState}, action) {
       break
   }
 
-  return state
+   return {...state}
 }

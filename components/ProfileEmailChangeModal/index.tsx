@@ -8,6 +8,7 @@ import {changeProfileEmail, resetProfileForm} from '../Profile/actions'
 import {useEffect} from 'react'
 import {modalClose} from '../Modal/actions'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
@@ -18,7 +19,8 @@ export default function ProfileEmailChangeModal(props: Props) {
   const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const formIsSuccess = useSelector((state: IRootState) => state.profile.formIsSuccess)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   useEffect(() => {
     return () => {
       dispatch(resetProfileForm())

@@ -1,0 +1,63 @@
+@import "scss/index";
+
+.root{
+  border: 1px solid #C4C4C4;
+  padding: 25px;
+
+}
+.projectFormTitle{
+  font-weight: 600;
+  font-size: 36px;
+  color: #000000;
+}
+.projectId{
+  color: #9A9A9A;
+  font-size: 12px;
+}
+.formHeader{
+  font-weight: 600;
+  font-size: 24px;
+  border-bottom: 1px solid #C4C4C4;
+  padding-bottom: 15px;
+  color: #000000;
+  margin-bottom: 25px;
+}
+
+
+.dates{
+  border: 1px solid #C4C4C4;
+  padding: 25px 25px 5px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0px 30px;
+  grid-template-rows: 1fr 1fr;
+  margin-bottom: 20px;
+}
+.columns{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  .colLeft{
+    width: 60%;
+    padding-right: 40px;
+  }
+  .colRight{
+    width: 40%;
+    .fieldset {
+      &:last-of-type {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+.fieldset{
+  padding: 25px;
+  border: 1px solid #C4C4C4;
+  margin-bottom: 24px;
+  .fieldsetTitle{
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 24px;
+  }
+}

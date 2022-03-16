@@ -5,6 +5,7 @@ import * as React from 'react'
 import {IRootState} from 'types'
 import {useEffect, useState} from 'react'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   customLink?: string
@@ -12,7 +13,8 @@ interface Props {
 }
 
 export default function SharePersonalLink({subCategoryId, customLink}: Props) {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const dispatch = useDispatch()
   const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
   const [isCopied, setIsCopied] = useState(false)

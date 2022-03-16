@@ -83,5 +83,5 @@ export default function registrationPhoneReducer(state = {...initialState}, acti
       break
   }
 
-  return state
+   return {...state}
 }

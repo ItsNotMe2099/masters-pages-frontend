@@ -28,13 +28,13 @@ export default function CountryField(props: Props<string>) {
         label: item.name,
     })) || [])
   }
-  const handleMenuOpen = async () => {
-    await fetchData()
+  const handleMenuOpen =  () => {
+    if(options.length === 0) {
+       fetchData()
+    }
   }
-  const handleInputChange = async (newValue: string, actionMeta: InputActionMeta) => {
-    await fetchData(newValue)
-  }
+
   return (
-    <SelectField options={options} label={props.label} name={props.name} onMenuOpen={handleMenuOpen} onInputChange={handleInputChange}/>
+    <SelectField options={options} label={props.label} name={props.name} onMenuOpen={handleMenuOpen} />
   )
 }

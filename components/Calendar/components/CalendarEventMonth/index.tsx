@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default function CalendarEventMonth(props: Props) {
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
   const ref = useRef(null)
   const {event} = props
   const [isToolTipVisible, setIsToolTipVisible] = useState(false)

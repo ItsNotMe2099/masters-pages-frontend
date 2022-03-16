@@ -15,7 +15,6 @@ import { useTranslation } from 'next-i18next'
 let TabLanguageForm = (props) => {
   const {t} = useTranslation()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
   const error = useSelector((state: IRootState) => state.profileSettings.formError)
   const loading = useSelector((state: IRootState) => state.profileSettings.formLoading)
   const [newPhone, setNewPhone] = useState()

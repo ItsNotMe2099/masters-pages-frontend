@@ -10,11 +10,13 @@ import SimpleSlider from 'components/Steps/MasterProfile/Slider'
 import MasterForm from 'components/MasterProfileForm'
 import Layout from 'components/layout/Layout'
 import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 const MasterProfile = (props) => {
   const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const {t} = useTranslation('common')
 
   useEffect(() => {

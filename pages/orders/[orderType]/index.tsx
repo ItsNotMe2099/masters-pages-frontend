@@ -23,6 +23,7 @@ import TabOrderModal from 'components/for_pages/Orders/TabOrderModal'
 import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
 import { fetchSavedTasksRequest, resetSavedTasksList} from 'components/SavedTasks/actions'
+import {useAppContext} from 'context/state'
 interface Props {
 }
 const TabOrders = (props: Props) => {
@@ -31,13 +32,14 @@ const TabOrders = (props: Props) => {
   const dispatch = useDispatch()
 
   const { orderType } = router.query
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const loading = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.isLoading) : useSelector((state: IRootState) => state.taskUser.listLoading)
   const tasks = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.list) :  useSelector((state: IRootState) => state.taskUser.list)
   const total = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.listTotal) : useSelector((state: IRootState) => state.taskUser.total)
   const page = useSelector((state: IRootState) => state.taskUser.page)
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
-  const role = useSelector((state: IRootState) => state.profile.role)
+  const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentTaskEdit, setCurrentTaskEdit] = useState(null)
 
