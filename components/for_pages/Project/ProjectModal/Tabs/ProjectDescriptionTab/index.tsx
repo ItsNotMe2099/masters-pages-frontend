@@ -10,16 +10,17 @@ import SelectField from 'components/fields/SelectField'
 import {useTranslation} from 'next-i18next'
 import TextAreaField from 'components/fields/TextAreaField'
 import {DateField} from 'components/fields/DateField'
-import AuthRepository from 'data/repositories/AuthRepository'
 import {reachGoal} from 'utils/ymetrika'
-import {ProfileRole} from 'data/intefaces/IProfile'
-import {registrationSuccessOpen} from 'components/Modal/actions'
 import {Form, FormikProvider, useFormik} from 'formik'
 import {useAppContext} from 'context/state'
 import {useState} from 'react'
 import CheckBoxListField from 'components/fields/CheckBoxListField'
 import ServiceCategoryFormField from 'components/fields/ServiceCategoryFormField'
 import LanguageFormField from 'components/fields/LanguageFormField'
+import AvatarField from 'components/fields/AvatarField'
+import FileField from 'components/fields/FileField'
+import Button from 'components/PublicProfile/components/Button'
+import LocationFormField from 'components/fields/LocationFormField'
 interface Props {
   project: IProject | null
 }
@@ -65,19 +66,26 @@ const ProjectDescriptionTab = ({project}: Props) => {
           <TextAreaField name={'benefits'} validate={Validator.required}  label={'Project benefits'} />
         </div>
         <div className={styles.colRight}>
-          <CheckBoxListField name={'replyOptions'} label={'Reply Options'} options={[
+          <div className={styles.fieldset}>
+            <div className={styles.fieldsetTitle}>Reply Options</div>
+          <CheckBoxListField name={'replyOptions'} options={[
             {value: 'volunteerProfile', label: 'Masterspages Volunter Profile'},
             {value: 'resume', label: 'Resume'},
             {value: 'coverLetter', label: 'Cover Letter'},
             {value: 'profileLink', label: 'Profile link'},
           ]}/>
+          </div>
+          <div className={styles.fieldset}>
+            <div className={styles.fieldsetTitle}>Project Locations</div>
+          <LocationFormField name={'locations'}/>
+          </div>
         </div>
       </div>
       <div className={styles.formHeader}>Optional fields</div>
       <div className={styles.columns}>
         <div className={styles.colLeft}>
+          <AvatarField name={'photo'} validate={Validator.required}  label={'Upload Photo or Video'}/>
           <TextAreaField name={'benefits'} validate={Validator.required}  label={'Project benefits'}/>
-
           <div className={styles.dates}>
             <DateField name={'startDate'} validate={Validator.required}  label={'Expected Project Start Date'}/>
             <DateField name={'endDate'} validate={Validator.required}  label={'Expected Project End Date'}/>
@@ -96,6 +104,17 @@ const ProjectDescriptionTab = ({project}: Props) => {
           </div>
 
           <div className={styles.fieldset}>
+            <div className={styles.fieldsetTitle}>Files</div>
+            <FileField name={'attachmentsInput'}
+                       addFileButton={<div >
+                         <Button  type={'button'} size="small">  <img src="/img/icons/camera.svg" alt=''/> {t('forms.fileInput.uploadFiles')}</Button>
+                         <div className={styles.addFileButtonDesc}>
+                           {t('forms.fileInput.description')}
+                         </div>
+                       </div>}
+                       validate={Validator.required} />
+          </div>
+          <div className={styles.fieldset}>
             <div className={styles.fieldsetTitle}>Relevant For The Following Categories</div>
           <ServiceCategoryFormField name={'skills'}/>
           </div>
@@ -105,7 +124,7 @@ const ProjectDescriptionTab = ({project}: Props) => {
       <div className={styles.formHeader}>Applicant requirements (Optional)</div>
         <div className={styles.columns}>
           <div className={styles.colLeft}>
-      <TextAreaField name={'requirements'} validate={Validator.required}  label={'Project Requirements'} />
+          <TextAreaField name={'requirements'} validate={Validator.required}  label={'Project Requirements'} />
           </div>
           <div className={styles.colRight}>
 
@@ -117,6 +136,7 @@ const ProjectDescriptionTab = ({project}: Props) => {
 
             </div>
             <div className={styles.fieldset}>
+              <div className={styles.fieldsetTitle}>Languages</div>
               <LanguageFormField name={'languages'} label={'Languages'}/>
             </div>
 

@@ -1,0 +1,37 @@
+@import "scss/index";
+
+.root{
+display: flex;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image{
+
+    width: 120px;
+    height: 150px;
+    @media screen and (max-width: $xs-max){
+      width: 75px;
+      height: 94px;
+  }
+
+}
+.loader{
+  position: absolute;
+  z-index: 2;
+  bottom: 50%;
+  margin-bottom: -3px;
+  left: 6px;
+  right: 6px;
+  height: 4px;
+  background: #fff;
+  border-radius: 4px;
+
+
+}
+.loaderFill{
+  background: #FD5742;
+  height: 4px;
+  border-radius: 4px;
+}

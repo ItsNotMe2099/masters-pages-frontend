@@ -23,7 +23,7 @@ function* phoneConfirmSaga() {
       if(!res.err) {
         reachGoal('auth:phone:confirmed')
         cookie.set('token', res.data.accessToken, { expires: 365 * 3 })
-          window.location.href = '/registration/user'
+          window.location.href = '/registration'
 
       }else{
         yield put(phoneConfirmError(res.err?.errors))

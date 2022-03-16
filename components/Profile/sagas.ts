@@ -35,7 +35,7 @@ function* ProfileSaga() {
       } else {
         switch (action.payload.role) {
           case 'client':
-            Router.push('/registration/user')
+            Router.push('/registration')
             break
           case 'master':
             Router.push('/MasterProfile')

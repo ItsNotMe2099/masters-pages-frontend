@@ -9,23 +9,23 @@ import * as React from 'react'
 import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import Validator from 'utils/validator'
 import CountryField from 'components/fields/CountryField'
+import TextField from 'components/fields/TextField'
 
 interface Props<T> {
   onSubmit: (data) => void,
   onCancel: () => void
 }
 
-export default function ServiceCategoryForm(props: Props<any[]>) {
+export default function LocationForm(props: Props<any[]>) {
   const { t, i18n } = useTranslation('common')
-
+  const [showAddress, setShowAddress] = useState(false)
   const handleSubmit =   (data) => {
     console.log("Submit", data);
     props.onSubmit(data);
   }
   const initialValues = {
-    mainCategory: null,
-    category:  null,
-    subCategory: null
+    type: null,
+    location:  null
   };
   const formik = useFormik({
     initialValues,
@@ -33,20 +33,13 @@ export default function ServiceCategoryForm(props: Props<any[]>) {
   })
   const {values, setFieldValue} = formik;
   useEffect(() => {
-    console.log("changeVal", values);
-   setFieldValue('category', null);
-    setFieldValue('subCategory', null);
-  }, [values.mainCategory])
-  useEffect(() => {
-    setFieldValue('subCategory', null);
-  }, [values.category])
-
+    setShowAddress(values.type === 'offline')
+  }, [values.type])
 
   return (<FormikProvider value={formik}>
   <Form>
-    <ServiceCategoryField name={'mainCategory'} valueAsObject validate={Validator.required} label={t('createTask.fieldMainCategory')}/>
-    {values.mainCategory && <ServiceCategoryField name={'category'} valueAsObject categoryId={values.mainCategory?.id}  validate={Validator.required} label={t('createTask.fieldCategory')}/>}
-    {values.category && <ServiceCategoryField name={'subCategory'} valueAsObject categoryId={values.category?.id} validate={Validator.required} label={t('createTask.fieldSubCategory')}/>}
+    <SelectField name={'type'} options={[{label: t('online'), value: 'online'}, {label: t('offline'), value: 'offline'}]} validate={Validator.required} label={t('type')}/>
+    {showAddress && <TextField name={'address'} label={'Address'} />}
     <div className={styles.buttons}>
       <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
       <Button size={'small'} type={'submit'} onClick={(e) => formik.handleSubmit(e)}>{t('task.save')}</Button>
