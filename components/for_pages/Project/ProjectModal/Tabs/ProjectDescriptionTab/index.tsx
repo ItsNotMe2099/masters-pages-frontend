@@ -40,8 +40,8 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
   }
   return (
   <div className={styles.root}>
-    {isEdit && <TabDescriptionForm project={project} onSave={handleSave}/>}
-    {!isEdit && <ProjectPage project={project} onSave={props.onSave} controls={ showType === 'client' ? [
+    {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave}/>}
+    {(!isEdit && project) && <ProjectPage project={project} onSave={props.onSave} controls={ showType === 'client' ? [
       <Button color={'white'} className={styles.delete}><BaskerOutlineIcon/></Button>,
       <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : []}/>}

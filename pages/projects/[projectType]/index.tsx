@@ -42,6 +42,7 @@ const ProjectsPage = (props: Props) => {
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentProjectEdit, setCurrentProjectEdit] = useState(null)
+  console.log("Profile", profile);
   const tabs = useMemo(
     () => (profile.role === ProfileRole.Corporate ? [
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
@@ -93,6 +94,7 @@ const ProjectsPage = (props: Props) => {
     dispatch(projectOpen())
   }
   const handleCreateProject = () => {
+    setCurrentProjectEdit(null)
     dispatch(projectOpen())
   }
 

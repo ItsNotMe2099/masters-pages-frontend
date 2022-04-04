@@ -1,8 +1,7 @@
 import * as React from 'react'
 import styles from 'components/for_pages/Project/ProjectModal/ProjectDescriptionHeader/index.module.scss'
-import ProjectTabItem from 'components/for_pages/Project/ProjectModal/ProjectTabs/Tab'
 import cx from 'classnames'
-import {IProject} from 'data/intefaces/IProject'
+import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {format} from 'date-fns'
 import {useTranslation} from 'next-i18next'
 import ProjectStatusLabel from 'components/for_pages/Project/ProjectModal/ProjectStatusLabel'
@@ -17,7 +16,7 @@ const ProjectDescriptionHeader = ({project, title}: Props) => {
     <div className={cx(styles.root)}>
       <div className={styles.top}>
         <div className={styles.left}>
-          <ProjectStatusLabel status={project.status}/>
+          <ProjectStatusLabel status={project?.status ?? ProjectStatus.Draft}/>
           <div className={styles.title}>{project?.title || '[Project title]'}</div>
           <div className={styles.projectId}>Project id#: {project?.id}</div>
         </div>
@@ -28,12 +27,12 @@ const ProjectDescriptionHeader = ({project, title}: Props) => {
         </div>}
       </div>
 
-      <div className={styles.dates}>
+      {project && <div className={styles.dates}>
         <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.applicationsClothingDate), 'MM.dd.yyy')}</div>
         <div className={styles.separator}/>
         <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.endDate), 'MM.dd.yyy')}</div>
 
-      </div>
+      </div>}
 
      </div>
   )

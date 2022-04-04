@@ -112,6 +112,7 @@ export function AppWrapper(props: Props) {
 
   /** update profile data from the server or just set them if passed to parameter */
   const updateRole = async (role: ProfileRole) => {
+    console.log("updateRole", role);
     setRole(role);
     Cookies.set(CookiesType.profileRole, role, {expires: 365})
 

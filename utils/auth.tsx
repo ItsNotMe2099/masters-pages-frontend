@@ -2,6 +2,7 @@ import nextCookie from "next-cookies";
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
 import request from "utils/request";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
+import {CookiesType} from 'types/enums'
  const auth = ctx => {
     const { token } = nextCookie(ctx);
     return token;
@@ -21,6 +22,7 @@ const getUser = async (token) => {
 }
 const getProfile = async (token, role) => {
   try {
+    console.log("GetProfileRole", role);
     const res = await request({ url: `/api/profile/role/${role}`, token , method: 'GET' })
     if(res.err){
       return;
@@ -69,12 +71,12 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => (asy
 
   if(user.profiles.length === 0 && user.isRegistrationCompleted){
     //Недостежимый кейс но может случиться
-    destroyCookie(ctx, 'mode');
-    destroyCookie(ctx, 'token');
+    destroyCookie(ctx, CookiesType.profileRole);
+    destroyCookie(ctx, CookiesType.accessToken);
     return {props: {...translationProps}};
   }
   const profile = token && user && user.isRegistrationCompleted ? await getProfile(token, user.profiles.find(profile => profile.role === mode) ? mode : user.profiles[0].role) : null;
- console.log("profile1111", profile);
+ console.log("profile1111", profile?.role, mode, user.profiles);
   if(profile && profile.role !== mode){
     setCookie(ctx, 'mode', profile.role, {
       maxAge: 60*60*24*365,
