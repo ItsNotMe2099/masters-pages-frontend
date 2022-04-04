@@ -4,12 +4,12 @@ import {LanguagesList} from 'data/languages'
 import { useTranslation } from 'next-i18next'
 
 interface Props{
-  index: number
+  index?: number
   model: string,
-  onMoveUp: (model, index) => void,
-  onMoveDown: (model, index) => void,
-  onDelete: (model, index) => void,
-  isEdit: boolean,
+  onMoveUp?: (model, index) => void,
+  onMoveDown?: (model, index) => void,
+  onDelete?: (model, index) => void,
+  isEdit?: boolean,
 }
 const LanguageListItem = (props: Props) => {
   const {  model, index, isEdit, onMoveUp, onMoveDown } = props

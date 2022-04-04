@@ -2,10 +2,12 @@ import {LanguageCode} from 'components/PublicProfile/components/view/CardLanguag
 import {IProfile} from 'data/intefaces/IProfile'
 import {IServiceCategory} from 'data/intefaces/IServiceCategory'
 import {IUserFile} from 'types'
+import { ISkill} from 'data/intefaces/ISkill'
 
 export enum ProjectExecutionType {
   Online = 'online',
   Offline = 'offline',
+  Combo = 'combo',
 }
 
 export enum ProjectReplyType {
@@ -36,6 +38,11 @@ export class ProjectSkill {
   createdAt: string;
 
 }
+export interface IProjectLocation{
+  id: number
+  type: 'online' | 'offline',
+  location: string
+}
 
 export interface IProject {
   id: number;
@@ -45,25 +52,26 @@ export interface IProject {
   executionType: ProjectExecutionType;
   description: string;
   replyOptions: ProjectReplyType[];
-  locations: Location[];
+  locations: IProjectLocation[];
+  skills: ISkill[]
   photoObject: IUserFile;
   photo: string;
   benefits: string;
-  startDate: Date;
-  endDate: Date;
-  applicationsClothingDate: Date;
+  startDate: string;
+  endDate: string;
+  applicationsClothingDate: string;
   webLink: string;
   inquiries: string;
   applicationsLimits: number;
   vacanciesLimits: number;
   attachments: string[];
   attachmentsObjects: IUserFile[];
-  skills: ProjectSkill[];
   requirements: string;
   education: string;
-  languages: LanguageCode;
+  languages: LanguageCode[];
   minAge: number;
   maxAge: number;
   status: ProjectStatus;
+  profile: IProfile
   createdAt: Date;
 }

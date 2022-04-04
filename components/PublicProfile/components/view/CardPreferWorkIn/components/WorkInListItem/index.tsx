@@ -6,12 +6,12 @@ import FormActionButton from 'components/PublicProfile/components/FormActionButt
 import { useTranslation } from 'next-i18next'
 
 interface Props{
-  index: number
+  index?: number
   model: IProfilePreferWorkIn,
-  onMoveUp: (model, index) => void,
-  onMoveDown: (model, index) => void,
-  onDelete: (model, index) => void
-  isEdit: boolean
+  onMoveUp?: (model, index) => void,
+  onMoveDown?: (model, index) => void,
+  onDelete?: (model, index) => void
+  isEdit?: boolean
 }
 const LocationItem = (props: Props) => {
   const {  model, index, onMoveUp, onMoveDown, isEdit } = props

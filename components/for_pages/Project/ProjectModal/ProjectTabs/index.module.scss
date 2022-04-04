@@ -2,7 +2,8 @@
 
 .root{
 
-  width: 209px;
+  min-width: 209px;
+  max-width: 209px;
   display: flex;
   flex-direction: column;
   position: relative;

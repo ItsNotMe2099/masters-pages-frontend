@@ -21,4 +21,14 @@ export default class ProfileRepository {
     return data ? {...data, birthday: data.birthday ? format(parse(data.birthday, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy') : null} : null
 
   }
+  static async fetchById(id: number): Promise<IProfile | null> {
+    const res = await request({
+      url: `/api/profile/${id}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }

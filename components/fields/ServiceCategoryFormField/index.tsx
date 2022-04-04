@@ -65,7 +65,7 @@ export default function ServiceCategoryFormField(props: Props<any[]>) {
           </Accordion>
         )}
       </div>
-      {!showForm &&  <FormActionButton type={'create'} title={t('add')} onClick={() => setShowForm(true)}/>}
+      {!showForm && <Button size={'small'} color={'grey'} type={'submit'} onClick={() => setShowForm(true)}>{t('add')}</Button>}
       {showForm && <ServiceCategoryForm onSubmit={handleSubmit} onCancel={() => setShowForm(false)}/>}
     </div>
     )

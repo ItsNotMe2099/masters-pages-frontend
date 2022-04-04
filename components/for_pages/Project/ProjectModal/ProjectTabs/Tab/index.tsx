@@ -14,9 +14,10 @@ interface Props {
   className?: string
   isFirst: boolean
   isLast: boolean
+  icon: string
 
 }
-const ProjectTabItem = ({name, label, link, style, onClick, isActive, className, badge, isFirst, isLast}: Props) => {
+const ProjectTabItem = ({name, label, link, icon, style, onClick, isActive, className, badge, isFirst, isLast}: Props) => {
   const router = useRouter()
   const handleClick = (e) => {
     if(onClick){
@@ -28,7 +29,8 @@ const ProjectTabItem = ({name, label, link, style, onClick, isActive, className,
 
   return (
     <Link href={`${link}`}>
-      <a className={`${styles.root} ${isFirst && styles.isFirst} ${isLast && styles.isLast} ${style === 'fullwidth' && styles.fullWidth} ${style === 'fullWidthRound' && styles.fullWidthRound} ${style === 'round' && styles.round} ${style === 'roundSmall' && styles.roundSmall} ${style === 'outline' && styles.outline} ${isActive && styles.active} ${className}`} onClick={handleClick}>{name}{label}
+      <a className={`${styles.root} ${isFirst && styles.isFirst} ${isLast && styles.isLast} ${style === 'fullwidth' && styles.fullWidth} ${style === 'fullWidthRound' && styles.fullWidthRound} ${style === 'round' && styles.round} ${style === 'roundSmall' && styles.roundSmall} ${style === 'outline' && styles.outline} ${isActive && styles.active} ${className}`} onClick={handleClick}>
+        <img className={styles.icon} src={`/img/Project/menu/${icon}.svg`}/>{name}{label}
         {badge > 0 && <NotificationBadge right={style === 'round' ? '18px' : '4px'} top={style === 'round' ? '10px' : '6px'} border={style === 'round'} amount={badge}/>}
       </a>
     </Link>

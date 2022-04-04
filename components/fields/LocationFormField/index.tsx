@@ -8,6 +8,7 @@ import * as React from 'react'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import LocationForm from 'components/fields/LocationFormField/Form'
 import LocationItem from 'components/fields/LocationFormField/LocationItem'
+import Button from 'components/PublicProfile/components/Button'
 
 interface Props<T> extends IField<T> {
   styleType?: InputStyleType
@@ -36,7 +37,7 @@ export default function LocationFormField(props: Props<any[]>) {
       <div className={styles.items}>
         {(field.value || []).map((item, index) => <LocationItem isEdit={true} index={index} model={item} onDelete={handleDelete} />)}
       </div>
-      {!showForm &&  <FormActionButton type={'create'} title={t('add')} onClick={() => setShowForm(true)}/>}
+      {!showForm && <Button size={'small'} color={'grey'} type={'submit'} onClick={() => setShowForm(true)}>{t('add')}</Button>}
       {showForm && <LocationForm onSubmit={handleSubmit} onCancel={() => setShowForm(false)}/>}
     </div>
     )

@@ -4,31 +4,60 @@ import styles from './index.module.scss'
 import { useDispatch } from 'react-redux'
 import {IProject} from 'data/intefaces/IProject'
 import ProjectTabs from 'components/for_pages/Project/ProjectModal/ProjectTabs'
-import {useState} from 'react'
-import ProjectDescriptionTab from 'components/for_pages/Project/ProjectModal/Tabs/ProjectDescriptionTab'
+import {useEffect, useState} from 'react'
+import ProjectRepository from 'data/repositories/ProjectRepository'
+import TabApplication from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication'
+import TabProjectDescription from 'components/for_pages/Project/ProjectModal/Tabs/ProjectDescriptionTab'
 
 interface Props {
+  showType: 'client' | 'public'
   isOpen: boolean,
-  project?: IProject,
+  projectId?: number,
   onClose: () => void
 }
-const ProjectModal = ({isOpen, project, onClose}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
   const dispatch = useDispatch()
   const [tab, setTab] = useState('description');
-  const tabs = [
-    {name: 'Description', key: 'description', icon: ''},
-    {name: 'Volunteers', key: 'volunteers', icon: ''},
-    {name: 'Messages', key: 'messages', icon: ''},
-    {name: 'Auto replies', key: 'autoReplies', icon: ''},
-    {name: 'Events', key: 'events', icon: ''},
-    {name: 'Reports', key: 'reports', icon: ''},
+  const [project, setProject] = useState<IProject>(null);
+  useEffect(() => {
+    if(showType === 'public'){
+      ProjectRepository.findPublicById(projectId).then(i => setProject(i));
+    }else{
+      ProjectRepository.findById(projectId).then(i => setProject(i));
+    }
+
+  }, [projectId])
+
+  const tabs = showType === 'client' ? [
+    {name: 'Description', key: 'description', icon: 'description'},
+    {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
+    {name: 'Messages', key: 'messages', icon: 'messages'},
+    {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
+    {name: 'Events', key: 'events', icon: 'events'},
+    {name: 'Reports', key: 'reports', icon: 'reports'},
+  ] : [
+    {name: 'Description', key: 'description', icon: 'description'},
+    {name: 'Application', key: 'application', icon: 'application'},
   ];
+  const handleSaveProject = async (data) => {
+    if(projectId){
+     await ProjectRepository.update(projectId ,data);
+    }else{
+      await ProjectRepository.create(data);
+    }
+      await ProjectRepository.findById(projectId).then(i => setProject(i));
+  }
+  console.log("ModalProject", project);
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
     <div className={styles.root}>
-    <ProjectTabs tabs={tabs} activeTab={tab}/>
+    <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
     <div className={styles.content}>
-      <ProjectDescriptionTab project={project} />
+
+      {((projectId && project) || !projectId) && <>
+      {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType}/>}
+      {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
+      </>}
     </div>
     </div>
     </Modal>

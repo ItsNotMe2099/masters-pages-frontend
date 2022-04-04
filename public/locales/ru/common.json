@@ -418,6 +418,7 @@
       "mobileBack": "Назад",
       "reviews": "Отзывы",
       "recommended": "рекомендовать",
+      "followers": "подписчики",
       "sendMessage": "Отправить сообщение",
       "sendOffer": "Отправить предложение",
       "subscribe": "Подписаться",
@@ -524,7 +525,9 @@
       "values": {
         "physical": "Физическое",
         "virtual": "Виртуальное",
-        "combo": "Комбинация"
+        "combo": "Комбинация",
+        "online": "Онлайн",
+        "offline": "Оффлайн"
       }
     },
     "priceFilterInput": {
@@ -1275,5 +1278,27 @@
     "sampleProfiles": "Sample corporate profiles",
     "spotOn": "Spot on",
     "customerReviews": "Customer reviews"
+  },
+  "project": {
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "execution": "Execution",
+      "paused": "Paused",
+      "canceled": "Canceled",
+      "completed": "Completed"
+    }
+  },
+  "application": {
+    "status": {
+      "Draft": "Draft",
+      "Applied": "Applied",
+      "Shortlist": "Shortlist",
+      "Invited": "Invited",
+      "Execution": "Execution",
+      "Completed": "Completed",
+      "RejectedByCompany": "Rejected",
+      "RejectedByVolunteer": "Rejected"
+    }
   }
 }

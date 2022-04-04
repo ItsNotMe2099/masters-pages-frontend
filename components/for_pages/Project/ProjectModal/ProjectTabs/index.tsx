@@ -23,7 +23,7 @@ const ProjectTabs = ({tabs, activeTab, onChange, tabClassName}: Props) => {
   }
   return (
     <div className={cx(styles.root)}>
-      {tabs.map((item, index) => <ProjectTabItem isFirst={index === 0}  isLast={tabs.length - 1 == index} name={item.name} badge={item.badge} isActive={activeTab === item.key} onClick={() => handleChange(item)} className={tabClassName}/>)}
+      {tabs.map((item, index) => <ProjectTabItem isFirst={index === 0}  isLast={tabs.length - 1 == index} name={item.name} badge={item.badge}  icon={item.icon} isActive={activeTab === item.key} onClick={() => handleChange(item)} className={tabClassName}/>)}
     </div>
   )
 }

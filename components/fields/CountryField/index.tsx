@@ -35,6 +35,6 @@ export default function CountryField(props: Props<string>) {
   }
 
   return (
-    <SelectField options={options} label={props.label} name={props.name} onMenuOpen={handleMenuOpen} />
+    <SelectField options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} />
   )
 }

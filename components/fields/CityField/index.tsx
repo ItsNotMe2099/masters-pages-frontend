@@ -33,6 +33,6 @@ export default function CityField(props: Props<number>) {
     return res;
   }
   return (
-    <SelectField options={options} label={props.label} name={props.name} onMenuOpen={handleMenuOpen} loadOptions={handleLoadOptions}/>
+    <SelectField options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} loadOptions={handleLoadOptions}/>
   )
 }

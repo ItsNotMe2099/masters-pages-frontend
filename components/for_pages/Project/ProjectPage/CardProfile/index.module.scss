@@ -1,0 +1,112 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  border: 1px solid #C4C4C4;
+}
+
+.name{
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+}
+
+.stat{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .statItem{
+    margin-left: 12px;
+    &:first-of-type{
+      margin-left: 0px;
+    }
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    img{
+      margin-right: 6px;
+    }
+  }
+}
+
+.rating{
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: center;
+  .ratingValue{
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+.lastSeen{
+  display: flex;
+  margin-top: 8px;
+  flex-direction: column;
+  align-items: center;
+}
+.actions{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 18px;
+  border-top: 1px solid rgba(196, 196, 196, 1);
+  grid-gap: 15px 0px;
+    padding-top: 15px;
+  align-items: center;
+  justify-content: center;
+
+}
+.actionSendMessage{
+
+}
+
+.subscribed{
+  font-weight: bold;
+  color: black;
+}
+.followers{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  width: 100%;
+  justify-content: center;
+  flex: 1;
+
+  @media (max-width: 420px){
+    margin-top: 10px;
+  }
+}
+.followersValue{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  color:#000000;
+  margin-bottom: 8px;
+  svg{
+    margin-right: 9px;
+  }
+}
+.actionFollow{
+  padding: 5px 14px;
+  display: inline-flex;
+}
+
+
+
+.allStats{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+

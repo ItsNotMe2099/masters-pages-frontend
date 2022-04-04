@@ -98,6 +98,7 @@
     "tslint-react": "^5.0.0",
     "typesafe-actions": "^5.1.0",
     "use-debounce": "^7.0.1",
+    "use-deep-compare-effect": "^1.8.1",
     "use-interval": "^1.4.0",
     "use-supercluster": "^0.4.0",
     "video.js": "^7.17.0"

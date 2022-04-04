@@ -413,6 +413,7 @@
       "mobileBack": "Back",
       "reviews": "Reviews",
       "recommended": "recommended",
+      "followers": "followers",
       "sendMessage": "Send message",
       "sendOffer": "Send Offer",
       "subscribe": "Subscribe",
@@ -534,7 +535,9 @@
       "values": {
         "physical": "Physical",
         "virtual": "Virtual",
-        "combo": "Combo"
+        "combo": "Combo",
+        "online": "Online",
+        "offline": "Offline"
       }
     },
     "priceFilterInput": {
@@ -1286,5 +1289,28 @@
     "sampleProfiles": "Sample corporate profiles",
     "spotOn": "Spot on",
     "customerReviews": "Customer reviews"
+    },
+  "project": {
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "execution": "Execution",
+      "paused": "Paused",
+      "canceled": "Canceled",
+      "completed": "Completed"
     }
+  },
+  "application": {
+    "status": {
+      "Draft": "Draft",
+      "Applied": "Applied",
+      "Shortlist": "Shortlist",
+      "Invited": "Invited",
+      "Execution": "Execution",
+      "Completed": "Completed",
+      "RejectedByCompany": "Rejected",
+      "RejectedByVolunteer": "Rejected"
+    }
+  }
+
 }

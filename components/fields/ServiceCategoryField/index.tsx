@@ -34,6 +34,6 @@ export default function ServiceCategoryField(props: Props<number | IServiceCateg
      return res;
   }
   return (
-    <SelectField key={`${props.categoryId}`} label={props.label} name={props.name} loadOptions={handleLoadOptions}/>
+    <SelectField key={`${props.categoryId}`} label={props.label} placeholder={props.placeholder} name={props.name} loadOptions={handleLoadOptions}/>
   )
 }

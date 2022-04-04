@@ -22,7 +22,7 @@ interface Props {
   noMargin?: boolean
   hidden?: boolean
   size?: 'normal'
-  type?: 'text' | 'password'
+  type?: 'text' | 'password' | 'number'
 }
 
 export default function TextField(props: Props & FieldConfig) {

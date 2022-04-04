@@ -9,6 +9,7 @@ import {changeArrayOrder} from 'utils/array'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
 
 import LanguageForm from 'components/fields/LanguageFormField/Form'
+import Button from 'components/PublicProfile/components/Button'
 
 interface Props<T> extends IField<T> {
   styleType?: InputStyleType
@@ -46,7 +47,7 @@ export default function LanguageFormField(props: Props<any[]>) {
       <div className={styles.items}>
         {(field.value || []).map((item, index) => <LanguageListItem isEdit={true} index={index} model={item} onMoveUp={(index > 0  && field.value?.length > 1) ? handleMoveUp : null} onMoveDown={(index == 0  && field.value?.length > 1) ? handleMoveDown : null} onDelete={handleDelete} />)}
       </div>
-      {!showForm &&  <FormActionButton type={'create'} title={t('add')} onClick={() => setShowForm(true)}/>}
+      {!showForm && <Button size={'small'} color={'grey'} type={'submit'} onClick={() => setShowForm(true)}>{t('add')}</Button>}
       {showForm && <LanguageForm onSubmit={handleSubmit} onCancel={() => setShowForm(false)}/>}
     </div>
     )
