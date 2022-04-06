@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import cx from 'classnames'
 import Link from 'next/link'
 interface Props {
-  size?: 'small' | 'normal' | 'large' | 'exSmall' | 'exExSmall' | 'square' | 'exSquare',
+  size?: 'small' | 'normal' | 'large' | 'exSmall' | 'exExSmall' | 'square' | 'exSquare' | 'largeSquare'
   image?: string
   href?: string
 }
@@ -19,6 +19,7 @@ export default function Avatar({size, image, href}: Props) {
     [styles.small]: size === 'small',
     [styles.normal]: size === 'normal',
     [styles.large]: size === 'large',
+    [styles.largeSquare]: size === 'largeSquare'
   })
   const renderImage = () => {
     return  image ? <img src={getMediaPath(image)}/> : <AvatarSvg/>

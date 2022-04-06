@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import TabApplication from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication'
 import TabProjectDescription from 'components/for_pages/Project/ProjectModal/Tabs/ProjectDescriptionTab'
+import TabVolunteers from './Tabs/TabVolunteers'
 
 interface Props {
   showType: 'client' | 'public'
@@ -28,14 +29,19 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
 
   }, [projectId])
 
-  const tabs = showType === 'client' ? [
+  const tabs = (showType === 'client' && projectId) ? [
     {name: 'Description', key: 'description', icon: 'description'},
     {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
     {name: 'Messages', key: 'messages', icon: 'messages'},
     {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
     {name: 'Events', key: 'events', icon: 'events'},
     {name: 'Reports', key: 'reports', icon: 'reports'},
-  ] : [
+  ] : 
+  (showType === 'client' && !projectId) ?
+  [
+    {name: 'Description', key: 'description', icon: 'description'},
+  ] :
+  [
     {name: 'Description', key: 'description', icon: 'description'},
     {name: 'Application', key: 'application', icon: 'application'},
   ];
@@ -59,6 +65,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
       {((projectId && project) || !projectId) && <>
       {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType}/>}
       {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
+      {tab === 'volunteers' && <TabVolunteers project={project}/>}
       </>}
     </div>
     </div>

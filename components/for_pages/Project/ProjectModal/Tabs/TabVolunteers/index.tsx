@@ -1,0 +1,200 @@
+import styles from './index.module.scss'
+import {IProject} from 'data/intefaces/IProject'
+import classNames from 'classnames'
+import ProjectStatusLabel from '../../ProjectStatusLabel'
+import {format} from 'date-fns'
+import { useEffect, useMemo, useState } from 'react'
+import { IApplicationCounts } from 'data/intefaces/IApplicationCounts'
+import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import Tabs from './Tabs'
+import { IProfile } from 'data/intefaces/IProfile'
+import Avatar from 'components/ui/Avatar'
+import Button from 'components/ui/Button'
+import Marker from 'components/svg/Marker'
+import CalendarIcon from 'components/svg/CalendarIcon'
+import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
+
+
+interface Props {
+  project: IProject
+}
+
+interface ProfileProps {
+  profile: IProfile
+  application: IApplication
+}
+
+const TabVolunteers = ({project, ...props}: Props) => {
+  
+  const [counts, setCounts] = useState<IApplicationCounts>({})
+  const tabs = useMemo(
+    () => ( [
+      {name: 'Applications', key: ApplicationStatus.Applied},
+      {name: 'Shortlist', key: ApplicationStatus.Shortlist},
+      {name: 'Invited', key: ApplicationStatus.Invited},
+      {name: 'Execution', key: ApplicationStatus.Execution},
+      {name: 'Completed', key: ApplicationStatus.Completed},
+      {name: 'Rejected', key: ApplicationStatus.RejectedByVolunteer},
+    ]).map(item => {
+      return{
+        ...item,
+        link: `/projects/${item.key}`
+      }}),
+    [counts]
+  )
+
+  const [currentTab, setCurrentTab] = useState(tabs[0].key)
+
+  const [applications, setApplications] = useState<IApplication[]>([])
+
+  useEffect(() => {
+    ApplicationRepository.fetchCountsByProjectId(project.id).then(data => setCounts(data ?? {}))
+    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id).then(data => setApplications(data.data))
+  }, [currentTab])
+
+
+  const handleChange = (item) => {
+    setCurrentTab(item.key)
+  }
+
+  const Profile = (props: ProfileProps) => {
+    return (
+      <div className={styles.profile}>
+        <div className={styles.left}>
+          <div className={styles.avatar}>
+            <Avatar image={props.profile.photo} size='largeSquare'/>
+            <Button type='button' className={styles.details}><img src='/img/projects/account-details.svg' alt=''/></Button>
+          </div>
+        </div>
+        <div className={styles.middle}>
+          <div className={styles.top}>
+            <div className={styles.left}>
+              <div className={styles.name}>
+                {props.profile.firstName} {props.profile.lastName}
+              </div>
+              <div className={styles.online}>
+                <Marker color={props.profile.activityStatus === 'offline' && '#DC2626'}/>
+                <div className={classNames(styles.text, {[styles.textOff]: props.profile.activityStatus === 'offline'})}>
+                  {props.profile.activityStatus === 'online' ? <>Online</> : <>Offline</>}
+                </div>
+              </div>
+            </div>
+            <div className={styles.right}>
+              <div className={styles.applied}>
+                Applied on: <CalendarIcon/> {format(new Date(props.application.appliedAt), 'dd.MM.yy')}
+              </div>
+              <div className={styles.applied}>
+                Application No:
+              </div>
+            </div>
+          </div>
+          <div className={styles.requirements}>
+            Main Requirements
+          </div>
+          <div className={styles.bottom}>
+          <div className={styles.age}>
+            <div>Age</div>
+            <div className={styles.value}>
+              {props.application.age}
+            </div>
+          </div>
+          <div className={styles.age}>
+            <div>Education</div>
+            <div className={styles.value}>
+              {props.application.education}
+            </div>
+          </div>
+          {props.application.languages.length > 0 && <div>
+         <div className={styles.sectionHeader}>Languages:</div>
+         <div className={classNames(styles.sectionContent, styles.languages)}>
+           {props.application.languages.map(i => <LanguageListItem className={styles.lang} model={i}/>)}
+         </div>
+       </div>}
+        </div>
+        </div>
+        <div className={styles.statistic}>
+          <div className={styles.withUs}>
+            Statistic with us:
+          </div>
+          <div className={styles.option}>
+            <div className={styles.text}>
+              Applications:
+            </div>
+            0
+          </div>
+          <div className={styles.option}>
+            <div className={styles.text}>
+              Projects:
+            </div>
+            0
+          </div>
+          <div className={styles.option}>
+            <div className={styles.text}>
+              Orders:
+            </div>
+            0
+          </div>
+          <div className={styles.option}>
+            <div className={styles.text}>
+              Hours:
+            </div>
+            0h
+          </div>
+          <div className={styles.option}>
+            <div className={styles.text}>
+              Reviews:
+            </div>
+            0
+          </div>
+          <div className={styles.option}>
+            <div className={styles.text}>
+              Recommendation:
+            </div>
+            Yes
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+   <div className={styles.root}>
+     <div className={classNames(styles.section, styles.info)}>
+           <div className={styles.top}>
+             <div className={styles.left}>
+               <ProjectStatusLabel status={project.status}/>
+               <div className={styles.title}>{project?.title || '[Project title]'}</div>
+               <div className={styles.projectId}>Project id#: {project?.id}</div>
+             </div>
+             {project && <div className={styles.right}>
+               <div className={styles.line}>Application Limit: 0/{project.applicationsLimits}</div>
+               <div className={styles.line}>Vacancies: 0/{project.vacanciesLimits}</div>
+             </div>}
+           </div>
+
+           <div className={styles.dates}>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.applicationsClothingDate), 'MM.dd.yyy')}</div>
+             <div className={styles.separator}/>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.endDate), 'MM.dd.yyy')}</div>
+
+           </div>
+
+       </div>
+       <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
+        const statResult = counts[tab.key];
+        console.log("TabRender", tab);
+        return {...tab, name: `${tab.name} (${statResult ? statResult : 0})`}
+      }))} onChange={(item) => handleChange(item)}
+      activeTab={currentTab}
+      />
+      <div className={styles.list}>
+        {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
+          <Profile profile={item.profile} application={item} key={index}/>
+        )}
+      </div>
+   </div>
+  )
+}
+
+export default TabVolunteers

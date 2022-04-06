@@ -127,7 +127,7 @@ const ProjectsPage = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={loading ? <Loader/> : null}>
-          {projects.map(project => <ProjectCard key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : 'public'}/>)}
+          {projects.map(project => <ProjectCard  key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
       <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>

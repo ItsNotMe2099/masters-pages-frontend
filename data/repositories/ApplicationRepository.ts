@@ -1,10 +1,9 @@
 import request from 'utils/request'
-
 import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {IPagination} from 'types/types'
-import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import {IApplicationCounts} from 'data/intefaces/IApplicationCounts'
+
 export interface IProjectSearchRequest{
   keywords?: string,
   mainCategoryId?: number
@@ -82,6 +81,17 @@ export default class ApplicationRepository {
     }
     return res.data
   }
+  static async fetchByProjectIdByStatus(projectId: number, status: ProjectStatus, page: number = 1, limit: number = 100): Promise<IPagination<IApplication> | null> {
+    const res = await request({
+      url: `/api/application`,
+      method: 'GET',
+      data: {s: JSON.stringify({status, projectId})}
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
   static async fetchCountsByProfile(): Promise<IApplicationCounts> {
     const res = await request({
       url: `/api/application/countByProfile`,
@@ -106,5 +116,41 @@ export default class ApplicationRepository {
       map[status] = item?.count ? parseInt(item?.count, 10) : 0;
     })
     return map;
+  }
+  static async fetchCountsByProjectId(projectId: number): Promise<IApplicationCounts> {
+    const res = await request({
+      url: `/api/application/countByProject/${projectId}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    const statuses = [
+      ApplicationStatus.Draft,
+      ApplicationStatus.Applied,
+      ApplicationStatus.Shortlist ,
+      ApplicationStatus.Invited,
+      ApplicationStatus.Execution,
+      ApplicationStatus.Completed,
+      ApplicationStatus.RejectedByCompany,
+      ApplicationStatus.RejectedByVolunteer,
+    ];
+    const map = {}
+    statuses.forEach(status => {
+      const item = res.data.find(i => i.application_status === status);
+      map[status] = item?.count ? parseInt(item?.count, 10) : 0;
+    })
+    return map;
+  }
+
+  static async fetchApplicationsByCorporateForProject(projectId: number): Promise<IPagination<IApplication>> {
+    const res = await request({
+      url: `/api/application?s={"projectId" : ${projectId}}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
   }
 }

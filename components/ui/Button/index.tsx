@@ -38,7 +38,7 @@ interface Props {
 export default function Button(props: Props) {
 
   const getClasses = () => {
-    return cx(styles.root, {
+    return cx(styles.root, props.className, {
       [styles.disabled]: props.disabled,
       [styles.bold]: props.bold,
       [styles.blue]: props.blue,
