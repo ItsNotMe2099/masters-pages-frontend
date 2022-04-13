@@ -33,6 +33,7 @@ interface Props {
   outlineRed?: boolean
   outlineBlue?: boolean
   outlineBlack?: boolean
+  projectBtn?: 'default' | 'red' | 'recycleBin'
 }
 
 export default function Button(props: Props) {
@@ -61,8 +62,10 @@ export default function Button(props: Props) {
       [styles.largeFont]: props.largeFont,
       [styles.outlineRed]: props.outlineRed,
       [styles.outlineBlue]: props.outlineBlue,
-      [styles.outlineBlack]: props.outlineBlack
-
+      [styles.outlineBlack]: props.outlineBlack,
+      [styles.deafaultProject]: props.projectBtn === 'default',
+      [styles.redProject]: props.projectBtn === 'red',
+      [styles.recycleBin]: props.projectBtn === 'recycleBin'
     }, props.className)
   }
   return (props.href ? <Link href={props.href}>

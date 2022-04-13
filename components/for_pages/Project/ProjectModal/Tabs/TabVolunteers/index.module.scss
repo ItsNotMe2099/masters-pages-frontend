@@ -141,7 +141,7 @@
       margin-bottom: 20px;
       .left{
         .name{
-          font-weight: 600;
+          font-weight: 700;
           font-size: 24px;
           color: #000;
         }
@@ -153,7 +153,7 @@
             margin-right: 7px;
           }
           .text{
-            font-weight: 400;
+            font-weight: 600;
             font-size: 14px;
             color: #27C60D;
           }
@@ -166,10 +166,10 @@
         grid-gap: 0;
         .applied{
           display: flex;
-          font-weight: 400;
+          font-weight: 600;
           font-size: 14px;
           align-items: center;
-          svg{
+          img{
             margin-left: 32px;
             margin-right: 6px;
           }
@@ -183,7 +183,7 @@
     padding-bottom: 8px;
     border-top: 1px solid #C4C4C4;
     border-bottom: 1px solid #C4C4C4;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     color: #000;
   }
@@ -202,7 +202,7 @@
   }
 
   .value{
-    font-weight: 400;
+    font-weight: 600;
     font-size: 18px;
     color: #000;
     text-align: center;
@@ -229,7 +229,7 @@
   }
 
   .withUs{
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     color: #000;
     padding-bottom: 15px;
@@ -253,4 +253,20 @@
 
   .sectionContent{
     margin-top: 7px;
+  }
+
+  .btns{
+    display: flex;
+    margin-top: 23px;
+    button{
+      margin-right: 16px;
+    }
+  }
+
+  .btnsCompleted{
+    display: flex;
+    margin-top: 23px;
+    button{
+      margin-right: 4px;
+    }
   }

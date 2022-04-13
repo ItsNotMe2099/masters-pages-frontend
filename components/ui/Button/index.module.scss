@@ -7,6 +7,38 @@
   align-items: center;
   justify-content: center;
 }
+
+.deafaultProject{
+  border-radius: 8px;
+  border: 1px solid #ACACAC;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.redProject{
+  border-radius: 8px;
+  border: 1px solid #DC2626;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 0;
+  width: 100%;
+  background: #DC2626;
+  color: #fff;
+}
+
+.recycleBin{
+  border-radius: 8px;
+  border: 1px solid #ACACAC;
+  padding: 9px 10px;
+  background-color: #fff;
+}
+
 .disabled{
   position: relative;
   &:before {

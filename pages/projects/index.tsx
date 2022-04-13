@@ -20,3 +20,4 @@ const TabProjects = (props: Props) => {
 }
 export default TabProjects
 export const getServerSideProps = getAuthServerSide({redirect: true})
+ 
