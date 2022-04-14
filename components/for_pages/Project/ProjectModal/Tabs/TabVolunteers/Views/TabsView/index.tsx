@@ -37,7 +37,7 @@ const TabsView = ({project, application, ...props}: Props) => {
       {name: 'Invited', key: ApplicationStatus.Invited},
       {name: 'Execution', key: ApplicationStatus.Execution},
       {name: 'Completed', key: ApplicationStatus.Completed},
-      {name: 'Rejected', key: ApplicationStatus.RejectedByVolunteer},
+      {name: 'Rejected', key: ApplicationStatus.RejectedByCompany},
     ]).map(item => {
       return{
         ...item,
@@ -72,6 +72,10 @@ const TabsView = ({project, application, ...props}: Props) => {
     setCurrentApplication(application)
   }
 
+  const appStatus = (status: string) => {
+    return {status: status}
+  }
+
   const Buttons = (props: ProfileProps) => {
 
     switch(currentTab){
@@ -79,37 +83,46 @@ const TabsView = ({project, application, ...props}: Props) => {
         return (
           <div className={styles.btns}>
             <Button onClick={props.onViewClick}  type='button' projectBtn='default'>VIEW</Button>
-            <Button type='button' projectBtn='default'>
+            <Button onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.Shortlist), 'corporate')} type='button' projectBtn='default'>
               SHORTLIST
             </Button>
-            <Button type='button' projectBtn='red'>REJECT</Button>
+            <Button 
+            onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.RejectedByCompany), 'corporate')} 
+            type='button' projectBtn='red'>REJECT</Button>
           </div>
         )
       case ApplicationStatus.Shortlist:
         return (
           <div className={styles.btns}>
             <Button type='button' projectBtn='default'>VIEW</Button>
-            <Button type='button' projectBtn='default'>
+            <Button onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.Invited), 'corporate')} type='button' projectBtn='default'>
               INVITE
             </Button>
-            <Button type='button' projectBtn='red'>REJECT</Button>
+            <Button 
+            onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.RejectedByCompany), 'corporate')} 
+            type='button' projectBtn='red'>REJECT</Button>
           </div>
         )
       case ApplicationStatus.Invited:
         return (
           <div className={styles.btns}>
             <Button type='button' projectBtn='default'>VIEW</Button>
-            <Button type='button' projectBtn='red'>CANCEL INVITATION</Button>
+            <Button 
+            onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.Shortlist), 'corporate')} 
+            type='button' projectBtn='red'>CANCEL INVITATION</Button>
           </div>
         )
       case ApplicationStatus.Execution:
         return (
           <div className={styles.btns}>
             <Button type='button' projectBtn='default'>VIEW</Button>
-            <Button type='button' projectBtn='default'>
+            <Button onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.Completed), 'corporate')} 
+            type='button' projectBtn='default'>
               COMPLETE
             </Button>
-            <Button type='button' projectBtn='red'>REJECT</Button>
+            <Button 
+            onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.RejectedByCompany), 'corporate')} 
+            type='button' projectBtn='red'>REJECT</Button>
           </div>
           )
         case ApplicationStatus.Completed:
@@ -123,11 +136,13 @@ const TabsView = ({project, application, ...props}: Props) => {
               <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
-        case ApplicationStatus.RejectedByVolunteer:
+        case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
               <Button type='button' projectBtn='default'>VIEW</Button>
-              <Button type='button' projectBtn='default'>
+              <Button 
+              onClick={() => ApplicationRepository.changeApplicationStatus(props.application.id, appStatus(ApplicationStatus.Shortlist), 'corporate')} 
+              type='button' projectBtn='default'>
                 RESTORE
               </Button>
               <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
@@ -191,7 +206,7 @@ const TabsView = ({project, application, ...props}: Props) => {
          </div>
        </div>}
         </div>
-        <Buttons onViewClick={() => handleView(props.project, props.application)}/>
+        <Buttons onViewClick={() => handleView(props.project, props.application)} application={props.application}/>
         </div>
         <div className={styles.statistic}>
           <div className={styles.withUs}>
