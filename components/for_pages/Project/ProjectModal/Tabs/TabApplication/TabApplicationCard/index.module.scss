@@ -1,0 +1,272 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.section{
+    padding: 20px;
+    border: 1px solid rgba(196, 196, 196, 1);
+    border-radius: 3px;
+    .sectionHeader{
+      font-size: 14px;
+      color: black;
+      font-weight: 500;
+    }
+    .sectionContent{
+      margin-top: 25px;
+      color: rgba(109, 113, 140, 1);
+      font-size: 14px;
+  
+  
+    }
+  }
+  
+  
+  
+  .info {
+
+    color: #6D718C;
+      font-size: 14px;
+    .left{
+      flex: 1;
+    }
+    .top {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+  
+    }
+  
+    .status {
+      font-size: 14px;
+      font-weight: 700;
+      color: #27C60D;
+    }
+  
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000000;
+    }
+  
+    .header {
+      font-weight: 700;
+      font-size: 36px;
+      color: #000000;
+    }
+  
+    .projectId {
+      color: #9A9A9A;
+    }
+  
+    .dates {
+      color: #6D718C;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 14px;
+  
+      .dateItem {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+  
+        .dateItemLabel {
+          margin-right: 8px;
+        }
+  
+        img {
+          margin-right: 4px;
+        }
+      }
+  
+      .separator {
+        width: 1px;
+        height: 15px;
+        background: rgba(196, 196, 196, 1);
+        margin: 0px 16px;
+      }
+  
+    }
+  }
+
+  .right{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 24px 0px;
+    .sectionContent{
+      margin-top: 15px;
+    }
+    .header{
+      text-transform: uppercase;
+      font-size: 24px;
+      font-weight: 700;
+      color: black;
+      text-align: center;
+    }
+  }
+
+  .list{
+    padding: 25px;
+    border-radius: 3px;
+    border: 1px solid #C4C4C4;
+  }
+
+  .profile{
+    padding: 25px;
+    border-radius: 3px;
+    border: 1px solid #C4C4C4;
+    display: flex;
+  }
+
+  .avatar{
+    position: relative;
+  }
+
+  .details{
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    padding: 0;
+  }
+
+  .middle{
+    flex: 1;
+    padding: 0 24px;
+    .top{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .left{
+        .name{
+          font-weight: 700;
+          font-size: 24px;
+          color: #000;
+        }
+        .online{
+          display: flex;
+          align-items: center;
+          margin-left: 6px;
+          svg{
+            margin-right: 7px;
+          }
+          .text{
+            font-weight: 600;
+            font-size: 14px;
+            color: #27C60D;
+          }
+          .textOff{
+            color: #DC2626;
+          }
+        }
+      }
+      .right{
+        grid-gap: 0;
+        .applied{
+          display: flex;
+          font-weight: 600;
+          font-size: 14px;
+          align-items: center;
+          img{
+            margin-left: 32px;
+            margin-right: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .requirements{
+    padding-top: 18px;
+    padding-bottom: 8px;
+    border-top: 1px solid #C4C4C4;
+    border-bottom: 1px solid #C4C4C4;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .bottom{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    align-items: center;
+  }
+
+  .age{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .value{
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .sectionHeader{
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    line-height: 16px;
+  }
+
+  .lang{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .statistic{
+    border: 1px solid #C4C4C4;
+    border-radius: 3px;
+    padding: 15px;
+  }
+
+  .withUs{
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #C4C4C4;
+  }
+
+  .option{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    .text{
+      color: #000;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration-line: underline;
+      margin-right: 6px;
+    }
+  }
+
+  .sectionContent{
+    margin-top: 7px;
+  }
+
+  .btns{
+    display: flex;
+    margin-top: 23px;
+    button{
+      margin-right: 16px;
+    }
+  }
+
+  .btnsCompleted{
+    display: flex;
+    margin-top: 23px;
+    button{
+      margin-right: 4px;
+    }
+  }
