@@ -7,6 +7,8 @@ import Avatar from 'components/ui/Avatar'
 import Button from 'components/ui/Button'
 import Marker from 'components/svg/Marker'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import { useDispatch } from 'react-redux'
 
 
 interface Props {
@@ -24,6 +26,35 @@ interface ButtonsProps {
 
 const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}: Props) => {
 
+  const dispatch = useDispatch()
+
+  const handleConfirm = (status: ApplicationStatus) => {
+    onStatusChange(status)
+    dispatch(confirmModalClose())
+  }
+
+  const description = (newStatus: ApplicationStatus, button?: string) => {
+    switch(newStatus){
+      case ApplicationStatus.Completed:
+        return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+      case ApplicationStatus.Invited:
+        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
+      case ApplicationStatus.Shortlist:
+        if(button === 'CANCEL INVITATION'){
+          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
+        }
+        else{
+          return 'The application will be “shortlisted”. Do you want to proceed?'
+        }
+      case ApplicationStatus.RejectedByCompany:
+        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
+    }
+  }
+
+  const confirmData = (status: ApplicationStatus, button?: string) => {
+    return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
+  }
+
   const Buttons = (props: ButtonsProps) => {
 
     switch(currentTab){
@@ -31,7 +62,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
         return (
           <div className={styles.btns}>
             <Button onClick={props.onViewClick}  type='button' projectBtn='default'>VIEW</Button>
-            <Button onClick={() => onStatusChange(ApplicationStatus.Shortlist)} type='button' projectBtn='default'>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist)))} type='button' projectBtn='default'>
               SHORTLIST
             </Button>
             <Button 
@@ -43,11 +74,11 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
         return (
           <div className={styles.btns}>
             <Button type='button' projectBtn='default'>VIEW</Button>
-            <Button onClick={() => onStatusChange(ApplicationStatus.Invited)} type='button' projectBtn='default'>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
               INVITE
             </Button>
             <Button 
-            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)} 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
         )
@@ -56,7 +87,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
           <div className={styles.btns}>
             <Button type='button' projectBtn='default'>VIEW</Button>
             <Button 
-            onClick={() => onStatusChange(ApplicationStatus.Shortlist)} 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
             type='button' projectBtn='red'>CANCEL INVITATION</Button>
           </div>
         )
@@ -64,12 +95,12 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
         return (
           <div className={styles.btns}>
             <Button type='button' projectBtn='default'>VIEW</Button>
-            <Button onClick={() => onStatusChange(ApplicationStatus.Completed)}
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
             type='button' projectBtn='default'>
               COMPLETE
             </Button>
             <Button 
-            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)} 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
           )
@@ -89,7 +120,6 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
             <div className={styles.btns}>
               <Button type='button' projectBtn='default'>VIEW</Button>
               <Button 
-              onClick={() => onStatusChange(ApplicationStatus.Shortlist)} 
               type='button' projectBtn='default'>
                 RESTORE
               </Button>

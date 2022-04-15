@@ -28,7 +28,7 @@ import {
 import CalendarEventMonth from 'components/Calendar/components/CalendarEventMonth'
 import Layout from 'components/layout/Layout'
 import NewEventModal from 'components/Calendar/components/NewEventModal'
-import { createEventOpen, editEventOpen, modalClose} from 'components/Modal/actions'
+import { confirmModalClose, createEventOpen, editEventOpen, modalClose} from 'components/Modal/actions'
 import {
   currentEventSetEditMode, fetchEvent,
   fetchEventCalendarList,
@@ -55,6 +55,7 @@ const CalendarPage = (props) => {
   const appContext = useAppContext();
   const currentProfile = appContext.profile
   const modelKey = useSelector((state: IRootState) => state.modal.modalKey)
+  const confirmModalKey = useSelector((state: IRootState) => state.modal.confirmModalKey)
   const firstOfWeek = localizer.startOfWeek()
   const startWeek = dates.startOf(new Date(), 'week', firstOfWeek)
   const endWeek = dates.endOf(new Date, 'week', firstOfWeek)
@@ -294,7 +295,7 @@ return (
           dayPropGetter={getDayColor}
         />
       </div>
-      {modelKey === 'confirm' && <ModalConfirm isOpen={true} onRequestClose={() => dispatch(modalClose())}/>}
+      {confirmModalKey === 'confirm' && <ModalConfirm isOpen={true} onRequestClose={() => dispatch(confirmModalClose())}/>}
 
       {modelKey === 'eventCreateModal' &&
       <NewEventModal range={newEventRange} isOpen={true} onClose={() => dispatch(modalClose())}/>}

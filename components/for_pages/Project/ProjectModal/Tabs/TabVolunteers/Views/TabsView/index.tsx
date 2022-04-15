@@ -14,6 +14,8 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import Tabs from '../../Tabs'
 import ApplicationPage from 'components/for_pages/Project/ApplicationPage'
 import TabApplicationCard from '../../../TabApplication/TabApplicationCard'
+import { useDispatch } from 'react-redux'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 
 
 interface Props {

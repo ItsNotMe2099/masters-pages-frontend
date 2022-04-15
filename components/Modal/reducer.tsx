@@ -3,10 +3,12 @@ import ActionTypes from './const'
 
 export interface ModalState {
   modalKey: string,
+  confirmModalKey: string
   confirmData: ConfirmDataModal
 }
 const initialState: ModalState = {
   modalKey: '',
+  confirmModalKey: '',
   confirmData: {
 
   }
@@ -26,6 +28,10 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.MODAL_CLOSE:
       console.log('resetModal')
       state.modalKey = ''
+      break
+
+    case ActionTypes.CONFIRM_MODAL_CLOSE:
+      state.confirmModalKey = ''
       break
 
     case ActionTypes.SIGN_UP_OPEN:
@@ -128,7 +134,7 @@ export default function authReducer(state = {...initialState}, action) {
       state.modalKey = 'postEditOpen'
       break
     case ActionTypes.CONFIRM_MODAL_OPEN:
-      state.modalKey = 'confirm'
+      state.confirmModalKey = 'confirm'
       state.confirmData = action.payload
       break
     case ActionTypes.CHANGE_CONFIRM_DATA:

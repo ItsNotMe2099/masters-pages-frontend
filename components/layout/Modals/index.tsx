@@ -19,6 +19,7 @@ import SignInComponent from 'components/Auth/SignIn'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import {
+  confirmModalClose,
   modalClose,
 } from 'components/Modal/actions'
 import SignUpComponent from 'components/Auth/SignUp'
@@ -36,6 +37,7 @@ interface Props {
 const Modals = (props: Props) => {
   const dispatch = useDispatch()
   const key = useSelector((state: IRootState) => state.modal.modalKey)
+  const confirmKey = useSelector((state: IRootState) => state.modal.confirmModalKey)
   console.log('key', key)
   return (
     <>
@@ -62,9 +64,9 @@ const Modals = (props: Props) => {
                       onRequestClose={() => dispatch(modalClose())}/>}
       {key === 'taskOfferCreateModal' &&  <TaskOfferAcceptModal isOpen={true} onClose={() => dispatch(modalClose())}/>}
       {key === 'taskShareModal' && <TaskShareModal isOpen={true}/>}
-      {key === 'confirm' && <ModalConfirm isOpen={true} onRequestClose={() => {
+      {confirmKey === 'confirm' && <ModalConfirm isOpen={true} onRequestClose={() => {
         console.log('CloseConfigm')
-        dispatch(modalClose())
+        dispatch(confirmModalClose())
       }
       }/>}
 

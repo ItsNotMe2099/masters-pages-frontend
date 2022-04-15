@@ -1,4 +1,4 @@
-import { modalClose } from 'components/Modal/actions'
+import { confirmModalClose } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import Modal from 'components/ui/Modal'
 import * as React from 'react'
@@ -22,7 +22,7 @@ export default function ModalConfirm(props: Props) {
     if(data.onCancel){
       data.onCancel()
     }else{
-      dispatch(modalClose())
+      dispatch(confirmModalClose())
     }
   }
   return (
