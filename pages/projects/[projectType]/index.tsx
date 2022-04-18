@@ -22,6 +22,9 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
+import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import { getItem } from 'localforage'
 
 interface Props {
 }
@@ -53,11 +56,11 @@ const ProjectsPage = (props: Props) => {
       {name: t('personalArea.tabProjects.menu.cancelled'), key: ProjectStatus.Canceled},
     ] : [
       {name: t('personalArea.tabProjects.menu.saved'), key: 'saved'},
-      {name: t('personalArea.tabProjects.menu.applied'), key: 'applied'},
-      {name: t('personalArea.tabProjects.menu.invited'), key: 'invited'},
-      {name: t('personalArea.tabProjects.menu.execution'), key: 'execution'},
-      {name: t('personalArea.tabProjects.menu.completed'), key: 'closed'},
-      {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected'},
+      {name: t('personalArea.tabProjects.menu.applied'), key: ApplicationStatus.Applied},
+      {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited},
+      {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution},
+      {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed},
+      {name: t('personalArea.tabProjects.menu.rejected'), key: ApplicationStatus.RejectedByCompany},
     ]).map(item => {
       return{
         ...item,
@@ -66,13 +69,26 @@ const ProjectsPage = (props: Props) => {
     [profile.role, counts]
   )
   useEffect(() => {
-    ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}));
+    if(profile.role === ProfileRole.Corporate){
+    ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
     ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
       if(data) {
-        setProjects(data.data);
+        setProjects(data.data)
         setTotal(data.total)
       }
-    })
+    }
+    )}
+    else if(profile.role === ProfileRole.Volunteer){
+      ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
+      ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
+        if(data) {
+          const projects = []
+          data.data.filter(item => item.status === projectType).map(item => projects.push(item.project))
+          setProjects(projects)
+          setTotal(projects.length)
+        }
+      })
+    }
 
   }, [projectType])
   useEffect(() => {
@@ -101,10 +117,11 @@ const ProjectsPage = (props: Props) => {
   return (
     <Layout>
     <div className={styles.root}>
+      {profile.role === ProfileRole.Corporate &&
       <div className={styles.actions}>
       <Button  red={true} bold={true} size={'12px 40px'}
               type={'button'} onClick={handleCreateProject}>{t('personalArea.tabProjects.menu.create')}</Button>
-      </div>
+      </div>}
       <div className={styles.desktop}>
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
         const statResult = counts[tab.key];
@@ -127,7 +144,7 @@ const ProjectsPage = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={loading ? <Loader/> : null}>
-          {projects.map(project => <ProjectCard  key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : 'public'}/>)}
+          {projects.map(project => <ProjectCard  key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
       <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>

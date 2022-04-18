@@ -154,6 +154,17 @@ export default class ApplicationRepository {
     return res.data
   }
 
+  static async fetchApplicationsByVolunteer(): Promise<IPagination<IApplication>> {
+    const res = await request({
+      url: `/api/application`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
   static async changeApplicationStatus(id: number, data: any, profileRole: string): Promise<IApplication | null> {
     const res = await request({
       url: `/api/application/${id}`,

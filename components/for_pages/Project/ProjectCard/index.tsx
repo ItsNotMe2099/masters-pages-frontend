@@ -22,7 +22,7 @@ import Button from 'components/PublicProfile/components/Button'
 
 interface Props {
   project: IProject
-  actionsType: 'client' | 'public'
+  actionsType: 'client' | 'public' | 'volunteer'
   onViewOpen: (project: IProject) => void
   onApplyClick?: (project: IProject) => void
   onDelete?: (project: IProject) => void
@@ -145,6 +145,9 @@ const ProjectCard = (props: Props) => {
         actions.push('save')
         actions.push('apply')
       }
+      else if (actionsType === 'volunteer') {
+        
+      }
       return actions;
     },
     [actionsType, project.status, profile.id]
@@ -171,13 +174,14 @@ console.log("actionsType", actionsType);
           <div className={classNames(styles.section, styles.sectionLocations)}>
             <div className={styles.sectionHeader}>Locations</div>
             <div className={styles.locations}>
-            {project.locations.map(i => <WorkInListItem model={{type: i.type, location: i.location}}/>)}
+            {project.locations?.map(i => <WorkInListItem model={{type: i.type, location: i.location}}/>)}
             </div>
           </div>
           <div className={classNames(styles.section, styles.sectionCategories)}>
             <div className={styles.sectionHeader}>Relevant for categories:</div>
             <div className={styles.skills}>
-              <ProjectCategories skills={project.skills}/>
+              {project.skills &&
+              <ProjectCategories skills={project.skills}/>}
             </div>
 
           </div>

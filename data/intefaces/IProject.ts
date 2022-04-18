@@ -52,8 +52,8 @@ export interface IProject {
   executionType: ProjectExecutionType;
   description: string;
   replyOptions: ProjectReplyType[];
-  locations: IProjectLocation[];
-  skills: ISkill[]
+  locations?: IProjectLocation[];
+  skills?: ISkill[]
   photoObject: IUserFile;
   photo: string;
   benefits: string;
