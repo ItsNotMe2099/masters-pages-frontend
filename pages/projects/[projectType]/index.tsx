@@ -38,6 +38,7 @@ const ProjectsPage = (props: Props) => {
   const profile = appContext.profile
   const loading = false
   const [projects, setProjects] = useState<IProject[]>([])
+  const [application, setApplication] = useState<IApplication>()
   const [total, setTotal] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [counts, setCounts] = useState<IProjectCounts>({})
@@ -114,6 +115,23 @@ const ProjectsPage = (props: Props) => {
     dispatch(projectOpen())
   }
 
+  const appStatus = (status: string) => {
+    return {status: status}
+  }
+
+  const changeApplicationStatus = (projectId: number, newStatus: ApplicationStatus) => {
+    ApplicationRepository.fetchOneByProject(projectId).then(data => setApplication(data))
+    ApplicationRepository.changeApplicationStatus(application.id, appStatus(newStatus), 'volunteer')
+  }
+
+  async function handleChangeStatus(newStatus: ApplicationStatus, projectId: number) {
+    await changeApplicationStatus(projectId, newStatus)
+    if(newStatus !== projectType){
+      setProjects(projects => projects.filter(item => application.project === item && application.status === projectType))
+      ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
+    }
+  }
+
   return (
     <Layout>
     <div className={styles.root}>
@@ -144,7 +162,9 @@ const ProjectsPage = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={loading ? <Loader/> : null}>
-          {projects.map(project => <ProjectCard  key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
+          {projects.map(project => <ProjectCard
+            onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
+           status={projectType} key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
       <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>

@@ -16,6 +16,7 @@ interface Props {
   color?: 'white' | 'transparent' | 'green' | 'red' | 'grey'
   size?: 'normal' | 'small'
   like?: boolean
+  projectBtn?: 'default' | 'red' | 'recycleBin' | 'green'
 }
 
 export default function Button(props: Props) {
@@ -29,7 +30,11 @@ export default function Button(props: Props) {
         [styles.green]: props.color === 'green',
         [styles.red]: props.color === 'red',
         [styles.transparent]: props.color === 'transparent',
-        [styles.grey]: props.color === 'grey'
+        [styles.grey]: props.color === 'grey',
+        [styles.deafaultProject]: props.projectBtn === 'default',
+        [styles.redProject]: props.projectBtn === 'red',
+        [styles.greenProject]: props.projectBtn === 'green',
+        [styles.recycleBin]: props.projectBtn === 'recycleBin'
   }, props.className
     )
 

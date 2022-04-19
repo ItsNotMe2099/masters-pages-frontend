@@ -53,3 +53,47 @@
   border-radius: 5px;
   padding: 8px 16px;
 }
+
+.deafaultProject{
+  border-radius: 8px;
+  border: 1px solid #ACACAC;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 24px;
+  background: #F6F6F6;
+  &:hover{
+    background-color: #d0d0d7;
+  }
+}
+
+.redProject{
+  border-radius: 8px;
+  border: 1px solid #DC2626;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 24px;
+  background: #DC2626;
+  color: #fff;
+}
+
+.greenProject{
+  border-radius: 8px;
+  border: 1px solid #27C60D;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 24px;
+  background: #27C60D;
+}
+
+.recycleBin{
+  border-radius: 8px;
+  border: 1px solid #ACACAC;
+  padding: 9px 10px;
+  background-color: #fff;
+}

@@ -23,13 +23,6 @@ interface Props {
   application?: IApplication
 }
 
-interface ProfileProps {
-  profile?: IProfile
-  application?: IApplication
-  onViewClick?: () => void
-  project?: IProject
-}
-
 const TabsView = ({project, application, ...props}: Props) => {
   
   const [counts, setCounts] = useState<IApplicationCounts>({})
