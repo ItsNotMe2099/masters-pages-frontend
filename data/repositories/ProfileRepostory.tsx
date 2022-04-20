@@ -1,6 +1,8 @@
 import request from 'utils/request'
 import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {format, parse} from 'date-fns'
+import { IProject } from 'data/intefaces/IProject'
+import { IPagination } from 'types/types'
 export interface IDataQueryList{
   page?: number,
   limit?: number,
@@ -24,6 +26,41 @@ export default class ProfileRepository {
   static async fetchById(id: number): Promise<IProfile | null> {
     const res = await request({
       url: `/api/profile/${id}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async addToSavedProjects(data: any): Promise<IProject | null> {
+    const res = await request({
+      url: `/api/profile/saved-projects`,
+      method: 'POST',
+      data
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async deleteFromSavedProjects(data: any): Promise<IProfile | null> {
+    const res = await request({
+      url: `/api/profile/saved-projects/1`,
+      method: 'DELETE',
+      data
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchSavedProjects(page: number = 1, limit: number = 100): Promise<IPagination<IProject> | null>  {
+    const res = await request({
+      url: `/api/profile/saved-projects?page=${page}&limit=${limit}`,
       method: 'GET',
     })
     if (res.err) {

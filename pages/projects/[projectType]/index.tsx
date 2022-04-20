@@ -24,7 +24,7 @@ import ProjectRepository from 'data/repositories/ProjectRepository'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
-import { getItem } from 'localforage'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props {
 }
@@ -40,6 +40,7 @@ const ProjectsPage = (props: Props) => {
   const [projects, setProjects] = useState<IProject[]>([])
   const [application, setApplication] = useState<IApplication>()
   const [total, setTotal] = useState<number>(0)
+  const [saved, setSaved] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [counts, setCounts] = useState<IProjectCounts>({})
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
@@ -61,7 +62,7 @@ const ProjectsPage = (props: Props) => {
       {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited},
       {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution},
       {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed},
-      {name: t('personalArea.tabProjects.menu.rejected'), key: ApplicationStatus.RejectedByCompany},
+      {name: t('personalArea.tabProjects.menu.rejected'), key: ApplicationStatus.RejectedByVolunteer},
     ]).map(item => {
       return{
         ...item,
@@ -81,6 +82,18 @@ const ProjectsPage = (props: Props) => {
     )}
     else if(profile.role === ProfileRole.Volunteer){
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
+      ProfileRepository.fetchSavedProjects().then((data) => {
+        if(data){
+            const projects = []
+            data.data.map(item => projects.push(item))
+            if(projectType === 'saved'){
+              setProjects(projects)
+            }
+          setSaved(data.total)
+          setTotal(data.total)
+        }
+      })
+      if(projectType !== 'saved'){
       ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
         if(data) {
           const projects = []
@@ -88,10 +101,13 @@ const ProjectsPage = (props: Props) => {
           setProjects(projects)
           setTotal(projects.length)
         }
-      })
+      })}
     }
 
   }, [projectType])
+
+  
+
   useEffect(() => {
     return () => {
 
@@ -132,6 +148,14 @@ const ProjectsPage = (props: Props) => {
     }
   }
 
+  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
+  const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+
+  const handleProjectApplyOpen = (project: IProject) => {
+    setInitialProjectTab('application')
+    setCurrentProject(project);
+  }
+
   return (
     <Layout>
     <div className={styles.root}>
@@ -144,7 +168,7 @@ const ProjectsPage = (props: Props) => {
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
         const statResult = counts[tab.key];
         console.log("TabRender", tab);
-        return {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult : 0})`}
+        return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
       </div>
       <div className={styles.mobile}>
@@ -164,11 +188,10 @@ const ProjectsPage = (props: Props) => {
           loader={loading ? <Loader/> : null}>
           {projects.map(project => <ProjectCard
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
-           status={projectType} key={project.id}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved'? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
+           status={projectType} key={project.id} onApplyClick={() => handleProjectApplyOpen(project)}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
-      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>
-
+      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
     </div>
       <Modals/>
     </Layout>

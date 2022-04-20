@@ -14,13 +14,14 @@ import {useTranslation} from 'next-i18next'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import {ITaskStatus} from 'types'
 import {useMemo} from 'react'
-import {ProfileRole} from 'data/intefaces/IProfile'
+import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
 import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
 import ProjectCategories from 'components/for_pages/Project/ProjectCategories'
 import Button from 'components/PublicProfile/components/Button'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props {
   project: IProject
@@ -95,6 +96,10 @@ const ProjectCard = (props: Props) => {
     props.onApplyClick(project)
   }
 
+  const savedData = (projectId: number) => {
+    return {projectId: projectId}
+  }
+
   const renderActionButton = (action) => {
     switch (action) {
       case 'view':
@@ -107,16 +112,18 @@ const ProjectCard = (props: Props) => {
         return <Button color={'grey'} onClick={handleUnPublish}>UnPublish</Button>
       case 'apply':
         return <Button color={'grey'} onClick={handleApply}>Apply</Button>
+      case 'save':
+        return <Button onClick={() => ProfileRepository.addToSavedProjects(savedData(project.id))} color={'grey'}>Save</Button>
       case 'open':
         return <Button type='button' projectBtn='default'>OPEN</Button>
-      case 'apply':
-        return <Button onClick={() => props.onStatusChange(ApplicationStatus.Applied)} type='button' projectBtn='default'>APPLY</Button>
+      case 'applyAlt':
+        return <Button onClick={handleApply} type='button' projectBtn='default'>APPLY</Button>
       case 'recall':
         return <Button type='button' projectBtn='red'>RECALL</Button>
       case 'accept':
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.Execution)} type='button' projectBtn='green'>ACCEPT</Button>
       case 'reject':
-        return <Button type='button' projectBtn='red'>REJECT</Button>
+        return <Button onClick={() => props.onStatusChange(ApplicationStatus.RejectedByVolunteer)} type='button' projectBtn='red'>REJECT</Button>
       case 'complete':
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.Completed)} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
@@ -166,7 +173,7 @@ const ProjectCard = (props: Props) => {
       else if (actionsType === 'volunteer') {
         actions.push('open')
         if(props.status === 'saved'){
-          actions.push('apply')
+          actions.push('applyAlt')
         }
         if(props.status === 'invited'){
           actions.push('accept')
@@ -179,7 +186,7 @@ const ProjectCard = (props: Props) => {
         if(props.status === 'applied'){
           actions.push('recall')
         }
-        if(props.status === 'completed' || props.status === 'rejectedByCompany' || props.status === 'saved'){
+        if(props.status === 'completed' || props.status === 'rejectedByVolunteer' || props.status === 'saved'){
           actions.push('recycleBin')
         }
       }
