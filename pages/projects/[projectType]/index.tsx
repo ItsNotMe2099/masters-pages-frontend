@@ -191,6 +191,7 @@ const ProjectsPage = (props: Props) => {
            status={projectType} key={project.id} onApplyClick={() => handleProjectApplyOpen(project)}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
+      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>
       {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
     </div>
       <Modals/>
