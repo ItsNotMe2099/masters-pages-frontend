@@ -1,26 +1,19 @@
-import Modal from 'components/ui/Modal'
 import * as React from 'react'
 import styles from './index.module.scss'
 import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import classNames from 'classnames'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
-import TaskActionButton from 'components/Task/components/ActionButton'
-import BookmarkSvg from 'components/svg/Bookmark'
 import {confirmOpen} from 'components/Modal/actions'
-import {deleteTaskUser, setPublishedTaskUser} from 'components/TaskUser/actions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import {useTranslation} from 'next-i18next'
 import ProjectRepository from 'data/repositories/ProjectRepository'
-import {ITaskStatus} from 'types'
 import {useMemo} from 'react'
-import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
 import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
 import ProjectCategories from 'components/for_pages/Project/ProjectCategories'
 import Button from 'components/PublicProfile/components/Button'
-import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
-import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import { ApplicationStatus } from 'data/intefaces/IApplication'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props {
@@ -101,9 +94,6 @@ const ProjectCard = (props: Props) => {
     props.onApplyClick(project)
   }
 
-  const savedData = (projectId: number) => {
-    return {projectId: projectId}
-  }
 
   const renderActionButton = (action) => {
     switch (action) {
@@ -118,9 +108,9 @@ const ProjectCard = (props: Props) => {
       case 'apply':
         return <Button color={'grey'} onClick={handleApply}>Apply</Button>
       case 'save':
-        return <Button onClick={() => ProfileRepository.addToSavedProjects(savedData(project.id))} color={'grey'}>Save</Button>
+        return <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'grey'}>Save</Button>
       case 'open':
-        return <Button type='button' projectBtn='default'>OPEN</Button>
+        return <Button onClick={handleApply} type='button' projectBtn='default'>OPEN</Button>
       case 'applyAlt':
         return <Button onClick={handleApply} type='button' projectBtn='default'>APPLY</Button>
       case 'recall':

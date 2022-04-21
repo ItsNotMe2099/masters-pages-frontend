@@ -70,6 +70,7 @@ const ProjectsPage = (props: Props) => {
       }}),
     [profile.role, counts]
   )
+
   useEffect(() => {
     if(profile.role === ProfileRole.Corporate){
     ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
@@ -162,14 +163,14 @@ const ProjectsPage = (props: Props) => {
     ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     ProfileRepository.fetchSavedProjects().then((data) => {
       if(data){
+        if(projectType === 'saved'){
           const projects = []
           data.data.map(item => projects.push(item))
-          if(projectType === 'saved'){
-            setProjects(projects)
-          }
+          setProjects(projects)
+          setTotal(data.total)
+        }
         setSaved(data.total)
-        setTotal(data.total)
-      }
+    }
 
     })
     dispatch(confirmModalClose())
