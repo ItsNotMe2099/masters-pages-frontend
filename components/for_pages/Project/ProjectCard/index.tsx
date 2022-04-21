@@ -87,7 +87,12 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
-        await ProjectRepository.delete(project.id);
+        if(actionsType === 'volunteer'){
+          await ProjectRepository.delete(project.id);
+        }
+        else{
+          await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, project.id)
+        }
         props.onDelete(project);
       }
     }))
@@ -127,7 +132,9 @@ const ProjectCard = (props: Props) => {
       case 'complete':
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.Completed)} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
-        return <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+        return <Button
+        onClick={props.status === 'saved' && handleDelete}
+        projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
         /*
       case 'cancel':
         return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel}/>

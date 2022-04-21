@@ -1,4 +1,4 @@
-import {modalClose, projectOpen} from 'components/Modal/actions'
+import {confirmModalClose, modalClose, projectOpen} from 'components/Modal/actions'
 
 import Loader from 'components/ui/Loader'
 import Tabs from 'components/ui/Tabs'
@@ -34,7 +34,7 @@ const ProjectsPage = (props: Props) => {
   const dispatch = useDispatch()
 
   const { projectType } = router.query
-  const appContext = useAppContext();
+  const appContext = useAppContext()
   const profile = appContext.profile
   const loading = false
   const [projects, setProjects] = useState<IProject[]>([])
@@ -172,6 +172,7 @@ const ProjectsPage = (props: Props) => {
       }
 
     })
+    dispatch(confirmModalClose())
   }
 
   return (
@@ -205,6 +206,7 @@ const ProjectsPage = (props: Props) => {
           hasMore={total > projects.length}
           loader={loading ? <Loader/> : null}>
           {projects.map(project => <ProjectCard
+            onDelete={handleModalClose}
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
            status={projectType} key={project.id} onApplyClick={() => handleProjectApplyOpen(project, profile)}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}

@@ -19,3 +19,12 @@
   }
 }
 
+.volunteer{
+  &:hover{
+    background: #01516A;
+  }
+  &.active{
+    background: #01516A;
+  }
+}
+
