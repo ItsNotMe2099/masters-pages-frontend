@@ -61,7 +61,7 @@ const ProjectsPage = (props: Props) => {
       {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited},
       {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution},
       {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed},
-      {name: t('personalArea.tabProjects.menu.rejected'), key: ApplicationStatus.RejectedByVolunteer},
+      {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected'},
     ]).map(item => {
       return{
         ...item,
@@ -98,7 +98,7 @@ const ProjectsPage = (props: Props) => {
       ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
         if(data) {
           const projects = []
-          data.data.filter(item => item.status === projectType).map(item => projects.push(item.project))
+          data.data.filter(item => projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
           setProjects(projects)
           setTotal(projects.length)
         }
@@ -138,9 +138,9 @@ const ProjectsPage = (props: Props) => {
 
   const handleChangeStatus = async (newStatus: ApplicationStatus, projectId: number) => {
     const app = await ApplicationRepository.fetchOneByProject(projectId)
-    ApplicationRepository.changeApplicationStatus(app.id, appStatus(newStatus), 'volunteer')
-    if(newStatus !== projectType){
-      setProjects(projects => projects.filter(item => app.project === item && app.status === projectType))
+    const changedApp = await ApplicationRepository.changeApplicationStatus(app.id, appStatus(newStatus), 'volunteer')
+    if(changedApp.status !== projectType){
+      setProjects(projects => projects.filter(item => item.status === projectType))
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     }
   }

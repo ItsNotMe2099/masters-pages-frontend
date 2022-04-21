@@ -183,7 +183,7 @@ const ProjectCard = (props: Props) => {
         if(props.status === 'applied'){
           actions.push('recall')
         }
-        if(props.status === 'completed' || props.status === 'rejectedByVolunteer' || props.status === 'saved'){
+        if(props.status === 'completed' || props.status === 'rejected' || props.status === 'saved'){
           actions.push('recycleBin')
         }
       }
