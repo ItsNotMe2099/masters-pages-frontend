@@ -15,7 +15,7 @@ import Layout from 'components/layout/Layout'
 import {getAuthServerSide} from 'utils/auth'
 import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
-import {ProfileRole} from 'data/intefaces/IProfile'
+import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import {useAppContext} from 'context/state'
 import {IProject, ProjectStatus} from 'data/intefaces/IProject'
@@ -92,6 +92,7 @@ const ProjectsPage = (props: Props) => {
           setSaved(data.total)
           setTotal(data.total)
         }
+
       })
       if(projectType !== 'saved'){
       ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
@@ -151,9 +152,26 @@ const ProjectsPage = (props: Props) => {
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
-  const handleProjectApplyOpen = (project: IProject) => {
+  const handleProjectApplyOpen = (project: IProject, profile: IProfile) => {
     setInitialProjectTab('application')
     setCurrentProject(project);
+  }
+
+  const handleModalClose = () => {
+    setCurrentProject(null)
+    ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
+    ProfileRepository.fetchSavedProjects().then((data) => {
+      if(data){
+          const projects = []
+          data.data.map(item => projects.push(item))
+          if(projectType === 'saved'){
+            setProjects(projects)
+          }
+        setSaved(data.total)
+        setTotal(data.total)
+      }
+
+    })
   }
 
   return (
@@ -188,11 +206,11 @@ const ProjectsPage = (props: Props) => {
           loader={loading ? <Loader/> : null}>
           {projects.map(project => <ProjectCard
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
-           status={projectType} key={project.id} onApplyClick={() => handleProjectApplyOpen(project)}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
+           status={projectType} key={project.id} onApplyClick={() => handleProjectApplyOpen(project, profile)}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
       <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>
-      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
       <Modals/>
     </Layout>

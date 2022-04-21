@@ -21,6 +21,7 @@ import AvatarField from 'components/fields/AvatarField'
 import Button from 'components/PublicProfile/components/Button'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props {
   application: IApplication | null
@@ -31,6 +32,7 @@ interface Props {
 const TabApplicationForm = ({application, projectId, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
+  const profile = appContext.profile
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const handleSubmit = async (data) => {
@@ -61,6 +63,7 @@ const TabApplicationForm = ({application, projectId, ...props}: Props) => {
   const handleSubmitPublish = async () => {
     console.log("handleSubmitPublish")
     await formik.setFieldValue('status', ApplicationStatus.Applied)
+    await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
     await formik.submitForm();
   }
   const handleSubmitDraft = async () => {

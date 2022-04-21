@@ -46,9 +46,9 @@ export default class ProfileRepository {
     return res.data
   }
 
-  static async deleteFromSavedProjects(data: any): Promise<IProfile | null> {
+  static async deleteFromSavedProjects(data: any, projectId: number): Promise<IProfile | null> {
     const res = await request({
-      url: `/api/profile/saved-projects/1`,
+      url: `/api/profile/saved-projects/${projectId}`,
       method: 'DELETE',
       data
     })
