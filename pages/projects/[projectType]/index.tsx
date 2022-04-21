@@ -84,13 +84,13 @@ const ProjectsPage = (props: Props) => {
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
       ProfileRepository.fetchSavedProjects().then((data) => {
         if(data){
-            const projects = []
-            data.data.map(item => projects.push(item))
             if(projectType === 'saved'){
+              const projects = []
+              data.data.map(item => projects.push(item))
               setProjects(projects)
+              setTotal(data.total)
             }
-          setSaved(data.total)
-          setTotal(data.total)
+            setSaved(data.total)
         }
 
       })
