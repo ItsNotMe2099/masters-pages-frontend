@@ -22,7 +22,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
-import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
+import { ApplicationStatus } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 
@@ -38,7 +38,6 @@ const ProjectsPage = (props: Props) => {
   const profile = appContext.profile
   const loading = false
   const [projects, setProjects] = useState<IProject[]>([])
-  const [application, setApplication] = useState<IApplication>()
   const [total, setTotal] = useState<number>(0)
   const [saved, setSaved] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
@@ -137,15 +136,11 @@ const ProjectsPage = (props: Props) => {
     return {status: status}
   }
 
-  const changeApplicationStatus = (projectId: number, newStatus: ApplicationStatus) => {
-    ApplicationRepository.fetchOneByProject(projectId).then(data => setApplication(data))
-    ApplicationRepository.changeApplicationStatus(application.id, appStatus(newStatus), 'volunteer')
-  }
-
-  async function handleChangeStatus(newStatus: ApplicationStatus, projectId: number) {
-    await changeApplicationStatus(projectId, newStatus)
+  const handleChangeStatus = async (newStatus: ApplicationStatus, projectId: number) => {
+    const app = await ApplicationRepository.fetchOneByProject(projectId)
+    ApplicationRepository.changeApplicationStatus(app.id, appStatus(newStatus), 'volunteer')
     if(newStatus !== projectType){
-      setProjects(projects => projects.filter(item => application.project === item && application.status === projectType))
+      setProjects(projects => projects.filter(item => app.project === item && app.status === projectType))
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     }
   }

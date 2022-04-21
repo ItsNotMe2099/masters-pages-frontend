@@ -55,9 +55,15 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
     }
 
   }
+
+  const handleClose = () => {
+    setTab('description')
+    onClose()
+  }
+
   console.log("ModalProject", project);
   return (
-    <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
+    <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={handleClose}>
     <div className={styles.root}>
     <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
     <div className={styles.content}>

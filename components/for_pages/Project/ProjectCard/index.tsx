@@ -189,7 +189,7 @@ const ProjectCard = (props: Props) => {
       }
       return actions;
     },
-    [actionsType, project.status, profile.id]
+    [actionsType, project.status, profile.id, props.status]
   )
 console.log("actionsType", actionsType);
   return (
