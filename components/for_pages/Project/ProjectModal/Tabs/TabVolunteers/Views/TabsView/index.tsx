@@ -50,6 +50,8 @@ const TabsView = ({project, application, ...props}: Props) => {
 
   const [currentApplication, setCurrentApplication] = useState<IApplication>(application)
 
+  const [currentIndex, setCurrentIndex] = useState(0)
+
   const [view, setView] = useState('tabs')
 
   useEffect(() => {
@@ -61,10 +63,11 @@ const TabsView = ({project, application, ...props}: Props) => {
     setCurrentTab(item.key)
   }
 
-  const handleView = (project: IProject, application: IApplication) => {
+  const handleView = (project: IProject, application: IApplication, index: number) => {
     setView('profile')
     setCurrentProject(project)
     setCurrentApplication(application)
+    setCurrentIndex(index)
   }
 
   const appStatus = (status: string) => {
@@ -78,6 +81,22 @@ const TabsView = ({project, application, ...props}: Props) => {
       ApplicationRepository.fetchCountsByProjectId(project.id).then(data => setCounts(data ?? {}))
     }
   }
+
+  const handleNext = (index: number, apps: IApplication[]) => {
+    if(index + 1 < apps.length){
+      setCurrentIndex(currentIndex + 1)
+      setCurrentApplication(apps[currentIndex + 1])
+    }
+  }
+
+  const handlePrev = (index: number, apps: IApplication[]) => {
+    if(index > 0){
+      setCurrentIndex(currentIndex - 1)
+      setCurrentApplication(apps[currentIndex - 1])
+    }
+  }
+
+  console.log(applications, currentIndex, currentApplication)
 
   return (
   <>
@@ -93,13 +112,28 @@ const TabsView = ({project, application, ...props}: Props) => {
       <div className={styles.list}>
         {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
           <TabApplicationCard profile={item.profile} application={item} key={index} currentTab={currentTab} 
-          onStatusChange={(newStatus) => handleChangeStatus(newStatus, item)}/>
+          onStatusChange={(newStatus) => handleChangeStatus(newStatus, item)} onViewClick={() => handleView(project, item, index)}/>
         )}
       </div>
    </div>
    :
    <div>
-     <ApplicationPage project={currentProject} application={currentApplication}/>
+    {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
+    index === currentIndex &&
+    <>
+    <div className={styles.controls}>
+      <div className={styles.prev} onClick={() => handlePrev(currentIndex, applications)}>
+        <img src='/img/icons/back.svg' alt=''/>
+        <div className={styles.text}>PREVIOUS VOLUNTEER</div>
+      </div>
+      <div className={styles.next} onClick={() => handleNext(currentIndex, applications)}>
+        <div className={styles.text}>NEXT VOLUNTEER</div>
+        <img src='/img/icons/back.svg' alt=''/>
+      </div>
+    </div>
+     <ApplicationPage project={currentProject} application={currentApplication} index={currentIndex}/>
+     </>
+    )}
    </div>
   }
   </>

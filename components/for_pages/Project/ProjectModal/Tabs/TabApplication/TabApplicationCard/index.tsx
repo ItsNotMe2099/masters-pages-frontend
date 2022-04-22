@@ -73,7 +73,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
       case ApplicationStatus.Shortlist:
         return (
           <div className={styles.btns}>
-            <Button type='button' projectBtn='default'>VIEW</Button>
+            <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
               INVITE
             </Button>
@@ -85,7 +85,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
       case ApplicationStatus.Invited:
         return (
           <div className={styles.btns}>
-            <Button type='button' projectBtn='default'>VIEW</Button>
+            <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
             type='button' projectBtn='red'>CANCEL INVITATION</Button>
@@ -94,7 +94,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
       case ApplicationStatus.Execution:
         return (
           <div className={styles.btns}>
-            <Button type='button' projectBtn='default'>VIEW</Button>
+            <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
             type='button' projectBtn='default'>
               COMPLETE
@@ -107,7 +107,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
         case ApplicationStatus.Completed:
           return (
             <div className={styles.btnsCompleted}>
-              <Button type='button' projectBtn='default'>VIEW</Button>
+              <Button  onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
               <Button type='button' projectBtn='default'>
                 REVIEW
               </Button>
@@ -118,7 +118,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
         case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
-              <Button type='button' projectBtn='default'>VIEW</Button>
+              <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
               <Button 
               type='button' projectBtn='default'>
                 RESTORE

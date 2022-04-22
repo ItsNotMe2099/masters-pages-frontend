@@ -1,5 +1,4 @@
 import {confirmModalClose, modalClose, projectOpen} from 'components/Modal/actions'
-
 import Loader from 'components/ui/Loader'
 import Tabs from 'components/ui/Tabs'
 import {useRouter} from 'next/router'
@@ -190,7 +189,7 @@ const ProjectsPage = (props: Props) => {
         <TabSelect tabs={tabs.map((tab => {
           const statResult = counts[tab.key];
 
-          return {...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult : 0})`}
+          return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
 
         </div>
