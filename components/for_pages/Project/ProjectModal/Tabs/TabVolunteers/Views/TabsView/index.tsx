@@ -1,29 +1,21 @@
 import styles from './index.module.scss'
 import {IProject} from 'data/intefaces/IProject'
-import classNames from 'classnames'
-import {format} from 'date-fns'
 import { useEffect, useMemo, useState } from 'react'
 import { IApplicationCounts } from 'data/intefaces/IApplicationCounts'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
-import { IProfile } from 'data/intefaces/IProfile'
-import Avatar from 'components/ui/Avatar'
-import Button from 'components/ui/Button'
-import Marker from 'components/svg/Marker'
-import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
 import Tabs from '../../Tabs'
 import ApplicationPage from 'components/for_pages/Project/ApplicationPage'
 import TabApplicationCard from '../../../TabApplication/TabApplicationCard'
-import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
-
 
 interface Props {
   project: IProject
   application?: IApplication
+  view?: string
+  onChangeView?: () => void
 }
 
-const TabsView = ({project, application, ...props}: Props) => {
+const TabsView = ({project, application, view, onChangeView, ...props}: Props) => {
   
   const [counts, setCounts] = useState<IApplicationCounts>({})
   const tabs = useMemo(
@@ -52,7 +44,7 @@ const TabsView = ({project, application, ...props}: Props) => {
 
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const [view, setView] = useState('tabs')
+
 
   useEffect(() => {
     ApplicationRepository.fetchCountsByProjectId(project.id).then(data => setCounts(data ?? {}))
@@ -64,7 +56,7 @@ const TabsView = ({project, application, ...props}: Props) => {
   }
 
   const handleView = (project: IProject, application: IApplication, index: number) => {
-    setView('profile')
+    onChangeView()
     setCurrentProject(project)
     setCurrentApplication(application)
     setCurrentIndex(index)
@@ -95,8 +87,6 @@ const TabsView = ({project, application, ...props}: Props) => {
       setCurrentApplication(apps[currentIndex - 1])
     }
   }
-
-  console.log(applications, currentIndex, currentApplication)
 
   return (
   <>

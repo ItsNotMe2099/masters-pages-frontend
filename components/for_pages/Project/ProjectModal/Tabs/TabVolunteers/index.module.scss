@@ -270,3 +270,19 @@
       margin-right: 4px;
     }
   }
+
+  .header{
+    display: flex;
+    margin-bottom: 36px;
+  }
+
+  .back{
+    display: flex;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+    img{
+      margin-right: 12px;
+    }
+  }

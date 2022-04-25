@@ -9,6 +9,7 @@ import Marker from 'components/svg/Marker'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
 import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 import { useDispatch } from 'react-redux'
+import VolunteerStats from '../VolunteerStats'
 
 
 interface Props {
@@ -184,47 +185,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
         </div>
         <Buttons onViewClick={props.onViewClick} application={application}/>
         </div>
-        <div className={styles.statistic}>
-          <div className={styles.withUs}>
-            Statistic with us:
-          </div>
-          <div className={styles.option}>
-            <div className={styles.text}>
-              Applications:
-            </div>
-            0
-          </div>
-          <div className={styles.option}>
-            <div className={styles.text}>
-              Projects:
-            </div>
-            0
-          </div>
-          <div className={styles.option}>
-            <div className={styles.text}>
-              Orders:
-            </div>
-            0
-          </div>
-          <div className={styles.option}>
-            <div className={styles.text}>
-              Hours:
-            </div>
-            0h
-          </div>
-          <div className={styles.option}>
-            <div className={styles.text}>
-              Reviews:
-            </div>
-            0
-          </div>
-          <div className={styles.option}>
-            <div className={styles.text}>
-              Recommendation:
-            </div>
-            No
-          </div>
-        </div>
+        <VolunteerStats/>
       </div>
     )
   }

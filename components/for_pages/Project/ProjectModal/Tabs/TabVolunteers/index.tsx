@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import ProjectStatusLabel from '../../ProjectStatusLabel'
 import {format} from 'date-fns'
 import TabsView from './Views/TabsView'
+import { useState } from 'react'
 
 
 interface Props {
@@ -12,8 +13,17 @@ interface Props {
 
 const TabVolunteers = ({project, ...props}: Props) => {
 
+  const [view, setView] = useState('tabs')
+
   return (
    <div className={styles.root}>
+     {view === 'profile' &&
+     <div className={styles.header}>
+      <div className={styles.back} onClick={() => setView('tabs')}>
+        <img src='/img/icons/back.svg' alt=''/>
+        <div>Back</div>
+      </div>
+    </div>}
      <div className={classNames(styles.section, styles.info)}>
            <div className={styles.top}>
              <div className={styles.left}>
@@ -35,7 +45,7 @@ const TabVolunteers = ({project, ...props}: Props) => {
            </div>
 
        </div>
-       <TabsView project={project}/>
+       <TabsView project={project} view={view} onChangeView={() => view === 'tabs' ? setView('profile') : setView('tabs')}/>
    </div>
   )
 }
