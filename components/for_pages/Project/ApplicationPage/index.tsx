@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import styles from './index.module.scss'
 import {IProject} from 'data/intefaces/IProject'
 import StarRatings from 'react-star-ratings'
@@ -9,23 +9,33 @@ import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import classNames from 'classnames'
 import Avatar from 'components/ui/Avatar'
 import ProfileStatus from 'components/ui/ProfileStatus'
-import {getMaxAge} from 'next/dist/server/image-optimizer'
 import {getAge} from 'utils/date'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
 import {format} from 'date-fns'
+import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
+import { useDispatch } from 'react-redux'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import Button from 'components/ui/Button'
 
 interface Props {
   project: IProject
   application: IApplication
   index?: number
   total?: number
+  modal?: boolean
+  onStatusChange?: (newStatus: ApplicationStatus) => void
+  currentTab?: ApplicationStatus
+}
+interface ButtonsProps {
+  application?: IApplication
+  onViewClick?: () => void
 }
 const RequirementStatus = (props: {name: string, success: boolean}) => {
   return <div className={classNames(styles.requirementStatus, {[styles.success]: props.success, [styles.failed]: !props.success})}>
     {props.name} <img src={`/img/Project/requirements_${props.success ? 'success' : 'failed'}.svg`}/>
   </div>
 }
-const ApplicationPage = ({application, index, total, project, ...props}: Props) => {
+const ApplicationPage = ({application, index, total, project, modal, onStatusChange, currentTab, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +62,104 @@ const ApplicationPage = ({application, index, total, project, ...props}: Props) 
     return false;
   }
   const profileLink = `/id${application.profile.id}`
+
+  const dispatch = useDispatch()
+
+  const handleConfirm = (status: ApplicationStatus) => {
+    onStatusChange(status)
+    dispatch(confirmModalClose())
+  }
+
+  const description = (newStatus: ApplicationStatus, button?: string) => {
+    switch(newStatus){
+      case ApplicationStatus.Completed:
+        return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+      case ApplicationStatus.Invited:
+        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
+      case ApplicationStatus.Shortlist:
+        if(button === 'CANCEL INVITATION'){
+          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
+        }
+        else{
+          return 'The application will be “shortlisted”. Do you want to proceed?'
+        }
+      case ApplicationStatus.RejectedByCompany:
+        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
+    }
+  }
+
+  const confirmData = (status: ApplicationStatus, button?: string) => {
+    return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
+  }
+
+  const Buttons = (props: ButtonsProps) => {
+
+    switch(currentTab){
+      case ApplicationStatus.Applied:
+        return (
+          <div className={styles.btns}>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist)))} type='button' projectBtn='default'>
+              SHORTLIST
+            </Button>
+            <Button 
+            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)} 
+            type='button' projectBtn='red'>REJECT</Button>
+          </div>
+        )
+      case ApplicationStatus.Shortlist:
+        return (
+          <div className={styles.btns}>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
+              INVITE
+            </Button>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            type='button' projectBtn='red'>REJECT</Button>
+          </div>
+        )
+      case ApplicationStatus.Invited:
+        return (
+          <div className={styles.btns}>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
+            type='button' projectBtn='red'>CANCEL INVITATION</Button>
+          </div>
+        )
+      case ApplicationStatus.Execution:
+        return (
+          <div className={styles.btns}>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            type='button' projectBtn='default'>
+              COMPLETE
+            </Button>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            type='button' projectBtn='red'>REJECT</Button>
+          </div>
+          )
+        case ApplicationStatus.Completed:
+          return (
+            <div className={styles.btnsCompleted}>
+              <Button type='button' projectBtn='default'>
+                REVIEW
+              </Button>
+              <Button type='button' projectBtn='default'>RECOMMEND</Button>
+              <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+            </div>
+          )
+        case ApplicationStatus.RejectedByCompany:
+          return (
+            <div className={styles.btns}>
+              <Button 
+              type='button' projectBtn='default'>
+                RESTORE
+              </Button>
+              <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+            </div>
+          )
+    }
+  }
+
   return (
    <div className={styles.root}>
      <div className={styles.leftSide}>
@@ -99,6 +207,9 @@ const ApplicationPage = ({application, index, total, project, ...props}: Props) 
             <div className={styles.statusBlock}>
             <div className={styles.status}><img src={'/img/Project/folder.svg'}/> {application.status}</div>
             </div>
+            {modal && 
+              <Buttons application={application}/>
+            }
             <div className={styles.actions}></div>
           </div>
         </div>
@@ -113,6 +224,9 @@ const ApplicationPage = ({application, index, total, project, ...props}: Props) 
      </div>
      </div>
      <div className={styles.rightSide}>
+       {modal &&
+        <VolunteerStats/>
+        }
        <div className={styles.requirements}>
          <div className={styles.header}>Requirements Check</div>
          <div className={styles.columns}>

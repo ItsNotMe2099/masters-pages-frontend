@@ -192,3 +192,11 @@
     justify-content: space-between;
   }
 }
+
+.btns{
+  display: flex;
+  margin-top: 23px;
+  button{
+    margin-right: 16px;
+  }
+}
