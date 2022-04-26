@@ -121,7 +121,7 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
         <img src='/img/icons/back.svg' alt=''/>
       </div>
     </div>
-     <ApplicationPage project={currentProject} application={currentApplication} index={currentIndex} modal currentTab={currentTab}/>
+     <ApplicationPage onStatusChange={(newStatus) => handleChangeStatus(newStatus, item)} project={currentProject} application={currentApplication} index={currentIndex} modal currentTab={currentTab}/>
      </>
     )}
    </div>
