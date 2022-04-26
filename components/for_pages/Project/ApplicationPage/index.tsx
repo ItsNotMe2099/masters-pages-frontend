@@ -225,7 +225,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
      </div>
      <div className={styles.rightSide}>
        {modal &&
-        <VolunteerStats/>
+        <VolunteerStats view/>
         }
        <div className={styles.requirements}>
          <div className={styles.header}>Requirements Check</div>
