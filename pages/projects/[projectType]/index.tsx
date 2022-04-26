@@ -170,9 +170,12 @@ const ProjectsPage = (props: Props) => {
     dispatch(confirmModalClose())
   }
 
+  const applied = counts['applied'] + counts['shortlist']
+  const rejected = counts['rejectedByCompany'] + counts['rejectedByVolunteer']
+
   return (
     <Layout>
-    <div className={styles.root}>
+    <div className={styles.root}> 
       {profile.role === ProfileRole.Corporate &&
       <div className={styles.actions}>
       <Button  red={true} bold={true} size={'12px 40px'}
@@ -182,14 +185,14 @@ const ProjectsPage = (props: Props) => {
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
         const statResult = counts[tab.key];
         console.log("TabRender", tab);
-        return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : `${tab.name} (${statResult ? statResult : 0})`}
+        return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
       </div>
       <div className={styles.mobile}>
         <TabSelect tabs={tabs.map((tab => {
           const statResult = counts[tab.key];
-
-          return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : `${tab.name} (${statResult ? statResult : 0})`}
+          console.log('APPLIED',applied)
+          return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
 
         </div>
