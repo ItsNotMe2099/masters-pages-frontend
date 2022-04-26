@@ -144,7 +144,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
                 REVIEW
               </Button>
               <Button type='button' projectBtn='default'>RECOMMEND</Button>
-              <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
         case ApplicationStatus.RejectedByCompany:
@@ -154,7 +154,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
               type='button' projectBtn='default'>
                 RESTORE
               </Button>
-              <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
     }
