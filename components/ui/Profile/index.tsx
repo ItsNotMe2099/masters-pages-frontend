@@ -196,7 +196,7 @@ const profileLink = `/id${profile.id}`
         </div>
         <div className={styles.btnContainer}>
            <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>{t('profileComponent.offerTask')}</Button>
-          {profile.role === 'client' && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>{t('profileComponent.sendMessage')}</Button>}
+          {(profile.role === 'client' || profile.role === 'volunteer') && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>{t('profileComponent.sendMessage')}</Button>}
 
         </div>
       </div>
