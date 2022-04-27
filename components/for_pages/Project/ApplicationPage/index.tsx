@@ -14,8 +14,9 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import {format} from 'date-fns'
 import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
 
 interface Props {
   project: IProject
@@ -24,6 +25,7 @@ interface Props {
   total?: number
   modal?: boolean
   onStatusChange?: (newStatus: ApplicationStatus) => void
+  onEdit?: () => void
   currentTab?: ApplicationStatus
 }
 interface ButtonsProps {
@@ -35,10 +37,13 @@ const RequirementStatus = (props: {name: string, success: boolean}) => {
     {props.name} <img src={`/img/Project/requirements_${props.success ? 'success' : 'failed'}.svg`}/>
   </div>
 }
-const ApplicationPage = ({application, index, total, project, modal, onStatusChange, currentTab, ...props}: Props) => {
+const ApplicationPage = ({application, index, total, project, modal, onStatusChange, onEdit, currentTab, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
+  const profile = appContext.profile
+
+  const [applicationEdit, setApplicationEdit] = useState<IApplication | null>(null);
 
   const formatProjectAge = () => {
     if(project.minAge && project.maxAge){
@@ -92,18 +97,35 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
     return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
   }
 
+  const handleEdit = () => {
+    onEdit()
+  }
+
   const Buttons = (props: ButtonsProps) => {
 
     switch(currentTab){
       case ApplicationStatus.Applied:
         return (
           <div className={styles.btns}>
+            {profile.role === 'volunteer' ?
+            <>
+            <Button type='button' projectBtn='default' onClick={handleEdit}>
+              EDIT
+            </Button>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            type='button' projectBtn='red'>REJECT</Button>
+            </>
+            :
+            <>
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist)))} type='button' projectBtn='default'>
               SHORTLIST
             </Button>
             <Button 
-            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)} 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
+            </>
+            }
           </div>
         )
       case ApplicationStatus.Shortlist:
@@ -158,6 +180,12 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             </div>
           )
     }
+  }
+
+  const handleSave = async () => {
+    ApplicationRepository.fetchOneByProject(project.id).then((data) => {
+      setApplicationEdit(data)
+    })
   }
 
   return (

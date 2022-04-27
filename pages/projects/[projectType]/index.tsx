@@ -167,6 +167,14 @@ const ProjectsPage = (props: Props) => {
     }
 
     })
+    ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
+      if(data) {
+        const projects = []
+        data.data.filter(item => projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
+        setProjects(projects)
+        setTotal(projects.length)
+      }
+    })
     dispatch(confirmModalClose())
   }
 

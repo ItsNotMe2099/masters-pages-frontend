@@ -4,7 +4,6 @@ import styles from './index.module.scss'
 import {IProject} from 'data/intefaces/IProject'
 import ProjectDescriptionHeader from 'components/for_pages/Project/ProjectModal/ProjectDescriptionHeader'
 import {useTranslation} from 'next-i18next'
-import {Form, FormikProvider} from 'formik'
 import {useAppContext} from 'context/state'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import TabApplicationView from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationView'
@@ -17,26 +16,36 @@ interface Props {
 }
 
 const TabApplication = ({project, ...props}: Props) => {
-  const {t} = useTranslation();
-  const appContext = useAppContext();
-  const [isLoading, setIsLoading] = useState(true);
-  const [application, setApplication] = useState<IApplication | null>(null);
+  const {t} = useTranslation()
+  const appContext = useAppContext()
+  const [isLoading, setIsLoading] = useState(true)
+  const [application, setApplication] = useState<IApplication | null>(null)
+  const [isEdit, setIsEdit] = useState(false)
   useEffect(() => {
     ApplicationRepository.fetchOneByProject(project.id).then((data) => {
       setApplication(data);
       setIsLoading(false);
     })
   }, [])
+
   const handleSave = async () => {
     ApplicationRepository.fetchOneByProject(project.id).then((data) => {
-      setApplication(data);
+      setApplication(data)
     })
+    setIsEdit(false)
+  }
+
+  const handleEdit =() => {
+    setIsEdit(true)
   }
 
   return (
    <div className={styles.root}>
-        <ProjectDescriptionHeader project={project} title={'Application'}/>
-        {application && application.status !== ApplicationStatus.Draft ? <TabApplicationView application={application} project={project}/> : <TabApplicationForm projectId={project.id} application={application} onSave={handleSave}/>}
+      <ProjectDescriptionHeader project={project} title={'Application'}/>
+      {(application && application.status !== ApplicationStatus.Draft && !isEdit) ? 
+      <TabApplicationView onEdit={handleEdit} application={application} project={project}/> 
+      : 
+      <TabApplicationForm edit={isEdit} projectId={project.id} application={application} onSave={handleSave}/>}
    </div>
   )
 }

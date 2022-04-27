@@ -1,21 +1,14 @@
 import * as React from 'react'
 import styles from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationForm/index.module.scss'
-import ProjectTabItem from 'components/for_pages/Project/ProjectModal/ProjectTabs/Tab'
-import cx from 'classnames'
-import {IProject, ProjectStatus} from 'data/intefaces/IProject'
-import ProjectDescriptionHeader from 'components/for_pages/Project/ProjectModal/ProjectDescriptionHeader'
+import {ProjectStatus} from 'data/intefaces/IProject'
 import TextField from 'components/fields/TextField'
 import Validator from 'utils/validator'
 import SelectField from 'components/fields/SelectField'
 import {useTranslation} from 'next-i18next'
 import TextAreaField from 'components/fields/TextAreaField'
-import {DateField} from 'components/fields/DateField'
-import {reachGoal} from 'utils/ymetrika'
 import {Form, FormikProvider, useFormik} from 'formik'
 import {useAppContext} from 'context/state'
 import {useState} from 'react'
-import CheckBoxListField from 'components/fields/CheckBoxListField'
-import ServiceCategoryFormField from 'components/fields/ServiceCategoryFormField'
 import LanguageFormField from 'components/fields/LanguageFormField'
 import AvatarField from 'components/fields/AvatarField'
 import Button from 'components/PublicProfile/components/Button'
@@ -27,9 +20,10 @@ interface Props {
   application: IApplication | null
   projectId: number
   onSave: () => any;
+  edit?: boolean
 }
 
-const TabApplicationForm = ({application, projectId, ...props}: Props) => {
+const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
   const profile = appContext.profile
@@ -64,12 +58,17 @@ const TabApplicationForm = ({application, projectId, ...props}: Props) => {
     console.log("handleSubmitPublish")
     await formik.setFieldValue('status', ApplicationStatus.Applied)
     await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
-    await formik.submitForm();
+    await formik.submitForm()
   }
   const handleSubmitDraft = async () => {
     console.log("handleSubmitDraft")
     await formik.setFieldValue('status', ProjectStatus.Draft);
-    await formik.submitForm();
+    await formik.submitForm()
+  }
+  const handleSubmitSave = async () => {
+    console.log("handleSubmitSave")
+    await formik.submitForm()
+    props.onSave()
   }
   return (
     <FormikProvider value={formik}>
@@ -98,8 +97,10 @@ const TabApplicationForm = ({application, projectId, ...props}: Props) => {
         <div className={styles.bottomBar}>
           {(!application || application.status === ApplicationStatus.Draft) &&
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>}
-          {(!application || application.status === ApplicationStatus.Draft) &&
+          {(!application || application.status === ApplicationStatus.Draft ) &&
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Apply</Button>}
+          {edit &&
+          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitSave}>Save</Button>}
         </div>
       </Form>
     </FormikProvider>
