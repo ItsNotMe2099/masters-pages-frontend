@@ -14,7 +14,7 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import {format} from 'date-fns'
 import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 
@@ -42,8 +42,6 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
   const profile = appContext.profile
-
-  const [applicationEdit, setApplicationEdit] = useState<IApplication | null>(null);
 
   const formatProjectAge = () => {
     if(project.minAge && project.maxAge){
@@ -78,7 +76,12 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
   const description = (newStatus: ApplicationStatus, button?: string) => {
     switch(newStatus){
       case ApplicationStatus.Completed:
-        return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
       case ApplicationStatus.Invited:
         return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
       case ApplicationStatus.Shortlist:
@@ -88,8 +91,12 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
         else{
           return 'The application will be “shortlisted”. Do you want to proceed?'
         }
+      case ApplicationStatus.Execution:
+        return 'Accept invitation?'
       case ApplicationStatus.RejectedByCompany:
         return 'Volunteer involvement will be cancelled. Do you want to proceed?'
+      case ApplicationStatus.RejectedByVolunteer:
+        return 'Your participation in the project will be ended. Do you want to proceed?'
     }
   }
 
@@ -131,25 +138,56 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
       case ApplicationStatus.Shortlist:
         return (
           <div className={styles.btns}>
+            {profile.role === 'volunteer' ?
+            <>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            type='button' projectBtn='red'>REJECT</Button>
+            </>
+            :
+            <>
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
               INVITE
             </Button>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
+            </>}
           </div>
         )
       case ApplicationStatus.Invited:
         return (
           <div className={styles.btns}>
+            {profile.role === 'volunteer' ?
+            <>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Execution)))} type='button' projectBtn='default'>ACCEPT</Button>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            type='button' projectBtn='red'>REJECT</Button>
+            </>
+            :
+            <>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
             type='button' projectBtn='red'>CANCEL INVITATION</Button>
+            </>}
           </div>
         )
       case ApplicationStatus.Execution:
         return (
           <div className={styles.btns}>
+            {profile.role === 'volunteer' ?
+            <>
+            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            type='button' projectBtn='default'>
+              COMPLETE
+            </Button>
+            <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            type='button' projectBtn='red'>REJECT</Button>
+            </>
+            :
+            <>
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
             type='button' projectBtn='default'>
               COMPLETE
@@ -157,35 +195,67 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
+            </>
+            }
           </div>
           )
         case ApplicationStatus.Completed:
           return (
             <div className={styles.btnsCompleted}>
+              {profile.role === 'volunteer' ?
+              <>
+              <Button type='button' projectBtn='default'>
+                REQUEST REVIEW
+              </Button>
+              <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
+              </>
+              :
+              <>
               <Button type='button' projectBtn='default'>
                 REVIEW
               </Button>
               <Button type='button' projectBtn='default'>RECOMMEND</Button>
               <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              </>}
             </div>
           )
         case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
+              {profile.role ?
+              <>
+              <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
+              </>
+              :
+              <>
               <Button 
               type='button' projectBtn='default'>
                 RESTORE
               </Button>
               <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              </>}
             </div>
           )
+          case ApplicationStatus.RejectedByVolunteer:
+            return (
+              <div className={styles.btns}>
+                {profile.role ?
+                <>
+                <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+                <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
+                </>
+                :
+                <>
+                <Button 
+                type='button' projectBtn='default'>
+                  RESTORE
+                </Button>
+                <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+                </>}
+              </div>
+            )
     }
-  }
-
-  const handleSave = async () => {
-    ApplicationRepository.fetchOneByProject(project.id).then((data) => {
-      setApplicationEdit(data)
-    })
   }
 
   return (
