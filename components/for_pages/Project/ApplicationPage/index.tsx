@@ -14,9 +14,8 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import {format} from 'date-fns'
 import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
-import ApplicationRepository from 'data/repositories/ApplicationRepository'
 
 interface Props {
   project: IProject
@@ -55,11 +54,12 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
   }
   const checkAge = () => {
     const profileAge = application.age ?? getAge(application.profile.birthday);
+    console.log(project.minAge)
     if(project.minAge && project.maxAge && (profileAge <= project.maxAge && profileAge >= project.minAge)){
-      return true;
+      return true
     }else if(project.minAge && profileAge >= project.minAge){
-      return true;
-    }else if(project.maxAge && profileAge <= project.maxAge ){
+      return true
+    }else if(project.maxAge && !project.minAge && profileAge <= project.maxAge ){
       return true
     }
     return false;
