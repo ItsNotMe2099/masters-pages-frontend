@@ -97,7 +97,7 @@ const ProjectsPage = (props: Props) => {
       ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
         if(data) {
           const projects = []
-          data.data.filter(item => projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
+          data.data.filter(item => projectType === 'completed' ? (item.status === ApplicationStatus.CompleteRequest || item.status === ApplicationStatus.Completed) : projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
           setProjects(projects)
           setTotal(projects.length)
         }
@@ -170,7 +170,7 @@ const ProjectsPage = (props: Props) => {
     ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
       if(data) {
         const projects = []
-        data.data.filter(item => projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
+        data.data.filter(item => projectType === 'completed' ? (item.status === ApplicationStatus.CompleteRequest || item.status === ApplicationStatus.Completed) : projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
         setProjects(projects)
         setTotal(projects.length)
       }
@@ -180,6 +180,7 @@ const ProjectsPage = (props: Props) => {
 
   const applied = counts['applied'] + counts['shortlist']
   const rejected = counts['rejectedByCompany'] + counts['rejectedByVolunteer']
+  const completed = counts['completed'] + counts['completeRequest']
 
   return (
     <Layout>
@@ -191,16 +192,15 @@ const ProjectsPage = (props: Props) => {
       </div>}
       <div className={styles.desktop}>
         <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
-        const statResult = counts[tab.key];
+        const statResult = counts[tab.key]
         console.log("TabRender", tab);
-        return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
+        return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Completed ? `${tab.name} (${completed ? completed : 0})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
       </div>
       <div className={styles.mobile}>
         <TabSelect tabs={tabs.map((tab => {
-          const statResult = counts[tab.key];
-          console.log('APPLIED',applied)
-          return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
+          const statResult = counts[tab.key]
+          return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Completed ? `${tab.name} (${completed ? completed : 0})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
 
         </div>

@@ -11,6 +11,7 @@ export enum ApplicationStatus {
   Invited = 'invited',
   Execution = 'execution',
   Completed = 'completed',
+  CompleteRequest = 'completeRequest',
   RejectedByCompany = 'rejectedByCompany',
   RejectedByVolunteer = 'rejectedByVolunteer',
 }

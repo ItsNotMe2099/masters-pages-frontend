@@ -24,6 +24,7 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
       {name: 'Shortlist', key: ApplicationStatus.Shortlist},
       {name: 'Invited', key: ApplicationStatus.Invited},
       {name: 'Execution', key: ApplicationStatus.Execution},
+      {name: 'Confirm completion', key: ApplicationStatus.CompleteRequest},
       {name: 'Completed', key: ApplicationStatus.Completed},
       {name: 'Rejected', key: ApplicationStatus.RejectedByCompany},
     ]).map(item => {

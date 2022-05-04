@@ -120,7 +120,7 @@ const ProjectCard = (props: Props) => {
       case 'reject':
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.RejectedByVolunteer)} type='button' projectBtn='red'>REJECT</Button>
       case 'complete':
-        return <Button onClick={() => props.onStatusChange(ApplicationStatus.Completed)} type='button' projectBtn='green'>COMPLETE</Button>
+        return <Button onClick={() => props.onStatusChange(ApplicationStatus.CompleteRequest)} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
         return <Button
         onClick={props.status === 'saved' && handleDelete}

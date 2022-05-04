@@ -106,6 +106,19 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
             type='button' projectBtn='red'>REJECT</Button>
           </div>
           )
+          case ApplicationStatus.CompleteRequest:
+            return (
+              <div className={styles.btnsCompleted}>
+                <Button  onClick={props.onViewClick} type='button' projectBtn='default'>OPEN</Button>
+                <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+                <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))} type='button' projectBtn='default'>
+                  CONFIRM COMPLETION
+                </Button>
+                <Button 
+            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Execution)))}
+            type='button' projectBtn='red'>REJECT COMPLETION</Button>
+              </div>
+            )
         case ApplicationStatus.Completed:
           return (
             <div className={styles.btnsCompleted}>
