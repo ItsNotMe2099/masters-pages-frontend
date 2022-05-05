@@ -1312,6 +1312,14 @@
       "RejectedByCompany": "Rejected",
       "RejectedByVolunteer": "Rejected"
     }
+  },
+  "educations": {
+    "student": "School student",
+    "graduate": "School graduate",
+    "undergraduate": "Undergraduate student",
+    "bachelor": "Bachelor",
+    "master": "Master",
+    "phd": "Phd"
   }
 
 }

@@ -21,6 +21,7 @@ import AvatarField from 'components/fields/AvatarField'
 import FileField from 'components/fields/FileField'
 import Button from 'components/PublicProfile/components/Button'
 import LocationFormField from 'components/fields/LocationFormField'
+import { Educations } from 'data/educations'
 
 interface Props {
   project: IProject | null
@@ -176,13 +177,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
           </div>
           <div className={styles.colRight}>
 
-            <SelectField name={'education'} options={[{
-              value: 'physical',
-              label: t('forms.executionTypeInput.values.physical')
-            }, {value: 'virtual', label: t('forms.executionTypeInput.values.virtual')}, {
-              value: 'combo',
-              label: t('forms.executionTypeInput.values.combo')
-            }]} label={'Education Level'} size='normal'/>
+            <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal'/>
             <div className={styles.fieldset}>
               <div className={styles.fieldsetTitle}>Age:</div>
               <TextField name={'minAge'} type={'number'} label={'Min Age'}/>

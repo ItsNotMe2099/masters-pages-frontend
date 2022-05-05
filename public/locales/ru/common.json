@@ -1301,5 +1301,13 @@
       "RejectedByCompany": "Rejected",
       "RejectedByVolunteer": "Rejected"
     }
+  },
+  "educations": {
+    "student": "Школьник",
+    "graduate": "Выпускник школы",
+    "undergraduate": "Студент",
+    "bachelor": "Бакалавр",
+    "master": "Магистр",
+    "phd": "Научная степень"
   }
 }

@@ -15,6 +15,7 @@ import Button from 'components/PublicProfile/components/Button'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import { Educations } from 'data/educations'
 
 interface Props {
   application: IApplication | null
@@ -81,13 +82,7 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
             <AvatarField name={'resumeFile'} label={'Upload Photo or Video'}/>
           </div>
           <div className={styles.colRight}>
-            <SelectField name={'education'} options={[{
-              value: 'physical',
-              label: t('forms.executionTypeInput.values.physical')
-            }, {value: 'virtual', label: t('forms.executionTypeInput.values.virtual')}, {
-              value: 'combo',
-              label: t('forms.executionTypeInput.values.combo')
-            }]} label={'Education Level'} size='normal'/>
+            <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal'/>
             <TextField name={'age'} type={'number'} label={'Age'}/>
             <LanguageFormField name={'languages'} label={'Languages'}/>
           </div>
