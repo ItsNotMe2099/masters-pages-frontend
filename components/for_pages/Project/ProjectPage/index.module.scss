@@ -188,3 +188,9 @@
   flex-direction: row;
   grid-gap: 0px 24px;
 }
+
+.photo{
+  img{
+    max-height: 230px;
+  }
+}
