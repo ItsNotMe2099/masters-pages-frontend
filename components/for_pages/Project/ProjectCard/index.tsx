@@ -80,12 +80,7 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
-        if(actionsType === 'volunteer'){
-          await ProjectRepository.delete(project.id);
-        }
-        else{
-          await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, project.id)
-        }
+        await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, project.id)
         props.onDelete(project);
       }
     }))

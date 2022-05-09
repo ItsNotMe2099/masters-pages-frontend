@@ -41,7 +41,7 @@ export default class ApplicationRepository {
   }
   static async delete(id: number): Promise<IApplication | null> {
     const res = await request({
-      url: `/api/project/${id}`,
+      url: `/api/application/${id}`,
       method: 'DELETE',
     })
     if (res.err) {

@@ -75,6 +75,12 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
     }
   }
 
+  async function handleDelete(application: IApplication) {
+    await ApplicationRepository.delete(application.id)
+    setApplications(applications => applications.filter(item => item.id !== application.id))
+    ApplicationRepository.fetchCountsByProjectId(project.id).then(data => setCounts(data ?? {}))
+  }
+
   const handleNext = (index: number, apps: IApplication[]) => {
     if(index + 1 < apps.length){
       setCurrentIndex(currentIndex + 1)
@@ -102,7 +108,7 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
       />
       <div className={styles.list}>
         {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
-          <TabApplicationCard profile={item.profile} application={item} key={index} currentTab={currentTab} 
+          <TabApplicationCard profile={item.profile} application={item} key={index} currentTab={currentTab} onDelete={(item) => handleDelete(item)}
           onStatusChange={(newStatus) => handleChangeStatus(newStatus, item)} onViewClick={() => handleView(project, item, index)}/>
         )}
       </div>

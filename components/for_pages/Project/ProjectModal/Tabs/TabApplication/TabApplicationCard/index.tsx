@@ -11,6 +11,7 @@ import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/act
 import { useDispatch } from 'react-redux'
 import VolunteerStats from '../VolunteerStats'
 import StarRatings from 'react-star-ratings'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
 
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
   currentTab: ApplicationStatus
   profile?: IProfile
   onStatusChange?: (newStatus: ApplicationStatus) => void
+  onDelete?: (application: IApplication) => void
 }
 
 interface ButtonsProps {
@@ -26,12 +28,17 @@ interface ButtonsProps {
   onViewClick?: () => void
 }
 
-const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}: Props) => {
+const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, ...props}: Props) => {
 
   const dispatch = useDispatch()
 
   const handleConfirm = (status: ApplicationStatus) => {
     onStatusChange(status)
+    dispatch(confirmModalClose())
+  }
+
+  const handleDelete = (application: IApplication) => {
+    onDelete(application)
     dispatch(confirmModalClose())
   }
 
@@ -56,6 +63,12 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
   const confirmData = (status: ApplicationStatus, button?: string) => {
     return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
   }
+
+  const confirmDelete = (application: IApplication) => {
+    return {title: ' ', description: 'Do you want to proceed?', onConfirm: () => {handleDelete(application)}, onCancel: () => {dispatch(confirmModalClose())}}
+  }
+
+
 
   const Buttons = (props: ButtonsProps) => {
 
@@ -127,7 +140,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
                 REVIEW
               </Button>
               <Button type='button' projectBtn='default'>RECOMMEND</Button>
-              <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              <Button onClick={() => dispatch(confirmOpen(confirmDelete(application)))} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
         case ApplicationStatus.RejectedByCompany:
@@ -138,7 +151,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, ...props}:
               type='button' projectBtn='default'>
                 RESTORE
               </Button>
-              <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              <Button onClick={() => dispatch(confirmOpen(confirmDelete(application)))} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
     }

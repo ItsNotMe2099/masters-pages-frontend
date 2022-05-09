@@ -256,6 +256,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
               </div>
             )
     }
+    return null
   }
 
   return (
