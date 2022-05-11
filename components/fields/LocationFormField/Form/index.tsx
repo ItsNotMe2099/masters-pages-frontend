@@ -36,9 +36,10 @@ export default function LocationForm(props: Props<any[]>) {
     setShowAddress(values.type === 'offline')
   }, [values.type])
 
+
   return (<FormikProvider value={formik}>
   <Form>
-    <SelectField name={'type'} options={[{label: t('online'), value: 'online'}, {label: t('offline'), value: 'offline'}]} validate={Validator.required} label={t('type')}/>
+    <SelectField name={'type'} options={[{label: t('forms.executionTypeInput.values.online'), value: 'online'}, {label: t('forms.executionTypeInput.values.offline'), value: 'offline'}]} validate={Validator.required} label={t('type')}/>
     {showAddress && <TextField name={'address'} label={'Address'} />}
     <div className={styles.buttons}>
       <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>

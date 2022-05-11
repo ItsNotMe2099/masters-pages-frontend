@@ -419,6 +419,7 @@
       "sendOffer": "Send Offer",
       "subscribe": "Subscribe",
       "bio": "BIO",
+      "about": "About",
       "additionalInfo": "Additional information"
     },
     "menu": {
@@ -538,7 +539,7 @@
         "virtual": "Virtual",
         "combo": "Combo",
         "online": "Online",
-        "offline": "Offline"
+        "offline": "In person"
       }
     },
     "priceFilterInput": {
