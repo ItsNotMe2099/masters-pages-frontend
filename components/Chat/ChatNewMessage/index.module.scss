@@ -56,6 +56,9 @@
   align-items: center;
   width: 65px;
   justify-content: center;
+  &:active{
+    background-color: #CCCCCC;
+  }
 }
 
 

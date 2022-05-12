@@ -26,12 +26,18 @@
   box-sizing: border-box;
   color: #343434;
   background: white;
+  &:active{
+    background-color: #B7B7B7;
+  }
 }
 .grey {
   border: 2px solid rgba(172, 172, 172, 1);
   box-sizing: border-box;
   color: #343434;
   background: rgba(246, 246, 246, 1);
+  &:active{
+    background-color: rgba(172, 172, 172, 1);
+  }
 
 }
 .green {
@@ -43,6 +49,9 @@
   background: #EB5757;
   border: 2px solid #EB5757;
   color: white;
+  &:active{
+    background-color: #DC2626;
+  }
 }
 .sizeNormal{
   border-radius: 5px;
@@ -78,6 +87,10 @@
   padding: 12px 24px;
   background: #DC2626;
   color: #fff;
+  &:active{
+    background-color: #EB5757;
+    border: 1px solid #EB5757;
+  }
 }
 
 .greenProject{
@@ -89,6 +102,10 @@
   display: flex;
   padding: 12px 24px;
   background: #27C60D;
+  &:active{
+    background-color: #58ad4b;
+    border: 1px solid #58ad4b;
+  }
 }
 
 .recycleBin{
@@ -96,4 +113,7 @@
   border: 1px solid #ACACAC;
   padding: 9px 10px;
   background-color: #fff;
+  &:active{
+    background-color: #ACACAC;
+  }
 }
