@@ -123,7 +123,6 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
             return (
               <div className={styles.btnsCompleted}>
                 <Button  onClick={props.onViewClick} type='button' projectBtn='default'>OPEN</Button>
-                <Button projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
                 <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))} type='button' projectBtn='default'>
                   CONFIRM COMPLETION
                 </Button>

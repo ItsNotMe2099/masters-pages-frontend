@@ -59,7 +59,7 @@ const ProjectsPage = (props: Props) => {
       {name: t('personalArea.tabProjects.menu.applied'), key: ApplicationStatus.Applied},
       {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited},
       {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution},
-      {name: 'Confirm completion', key: ApplicationStatus.CompleteRequest},
+      {name: 'C-request', key: ApplicationStatus.CompleteRequest},
       {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed},
       {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected'},
     ]).map(item => {
