@@ -69,7 +69,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
     <div className={styles.content}>
 
       {((projectId && project) || !projectId) && <>
-      {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType}/>}
+      {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')}/>}
       {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
       {tab === 'volunteers' && <TabVolunteers project={project}/>}
       </>}
