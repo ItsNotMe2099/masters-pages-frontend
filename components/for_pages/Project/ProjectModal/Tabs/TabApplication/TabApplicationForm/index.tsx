@@ -16,6 +16,7 @@ import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { Educations } from 'data/educations'
+import DocField from 'components/fields/DocField'
 
 interface Props {
   application: IApplication | null
@@ -77,9 +78,27 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
         <div className={styles.columns}>
           <div className={styles.colLeft}>
             <TextAreaField name={'coverLetter'} label={'Cover Letter'} validate={Validator.required}/>
-            <AvatarField name={'coverLetterFile'} label={'Upload Photo or Video'}/>
+            <DocField name={'coverLetterFile'}
+                         addFileButton={<div>
+                           <Button type={'button'} size="small"> <img src="/img/icons/camera.svg"
+                                                                      alt=''/> {t('forms.fileInput.uploadFiles')}
+                           </Button>
+                           <div className={styles.addFileButtonDesc}>
+                             {t('forms.fileInput.description')}
+                           </div>
+                         </div>}
+              />
             <TextAreaField name={'resume'} label={'Resume'}/>
-            <AvatarField name={'resumeFile'} label={'Upload Photo or Video'}/>
+            <DocField name={'resumeFile'}
+                         addFileButton={<div>
+                           <Button type={'button'} size="small"> <img src="/img/icons/camera.svg"
+                                                                      alt=''/> {t('forms.fileInput.uploadFiles')}
+                           </Button>
+                           <div className={styles.addFileButtonDesc}>
+                             {t('forms.fileInput.description')}
+                           </div>
+                         </div>}
+              />
           </div>
           <div className={styles.colRight}>
             <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal'/>
