@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import {IRootState} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import CardAboutForm from 'components/PublicProfile/components/view/CardAbout/Form'
+import CardLinksForm from 'components/PublicProfile/components/view/CardLinks/Form'
 import Loader from 'components/ui/Loader'
 import { useTranslation } from 'next-i18next'
 import { IOrganization } from 'data/intefaces/IOrganization'
@@ -14,7 +14,12 @@ interface Props{
   isEdit: boolean
   organization: IOrganization
 }
-const CardAbout = (props: Props) => {
+
+interface PropsLink{
+  type: string
+  link: string
+}
+const CardLinks = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const [showForm, setShowForm] = useState(false)
   const {isEdit} = props
@@ -38,12 +43,26 @@ const CardAbout = (props: Props) => {
     })
   }
 
+  const SocialLink = (props: PropsLink) => {
+    const imgSource = `/img/CardLinks/icons/${props.type}.svg`
+    return(
+      <div className={styles.link}>
+        <img src={imgSource} alt=''/>
+        <a href={props.link}>{props.type}</a>
+      </div>
+    )
+  }
+
   return (
-    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.about')} toolbar={<FormActionButton type={organization.about.about ? 'edit' : 'create'} title={organization.about.about ? t('edit') : t('add')} onClick={handleEditClick}/>}>
-      {!showForm ? <div className={styles.bioText}>{organization.about.about && organization.about.about}</div> : <CardAboutForm organization={organization} handleSubmit={handleSubmit} onCancel={handleCancel}/>}
+    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.visitUs')} toolbar={<FormActionButton type={organization.about.about ? 'edit' : 'create'} title={organization.about.about ? t('edit') : t('add')} onClick={handleEditClick}/>}>
+      {!showForm ? <div className={styles.links}>
+        {organization.socialLinks.map(item =>
+          item.link && <SocialLink type={item.type} link={item.link}/>
+        )}</div>
+         : <CardLinksForm organization={organization} handleSubmit={handleSubmit} onCancel={handleCancel}/>}
       {showForm && formLoading && <div className={styles.loader}><Loader/></div>}
     </Card>
   )
 }
 
-export default CardAbout
+export default CardLinks

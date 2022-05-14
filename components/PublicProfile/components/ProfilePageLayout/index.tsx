@@ -17,6 +17,7 @@ import cookie from 'js-cookie'
 import CardAbout from '../view/CardAbout'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import CardOrganization from '../view/CardOrganization'
+import CardLinks from '../view/CardLinks'
 
 
 interface Props{
@@ -58,6 +59,7 @@ const ProfilePageLayout = (props: Props) => {
           {isMaster && profile.role !== 'corporate' && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
           {profile.role !== 'corporate' && <CardLanguages profile={profile} isEdit={isEdit}/>}
           {isMaster && <CardBio profile={profile} isEdit={isEdit}/>}
+          {profile.role === 'corporate' && organization && <CardLinks organization={organization} isEdit={isEdit}/>}
           {profile.role === 'corporate' && organization && <CardAbout organization={organization} isEdit={isEdit}/>}
           {isMaster && <CardRecommendationsShort profile={profile}/>}
           <CardReviewsShort profile={profile} subCategory={subCategory}/>

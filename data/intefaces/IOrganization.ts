@@ -12,12 +12,18 @@ export interface IAbout{
   visible: boolean
 }
 
+export interface ISocialLink{
+  link: string
+  type: string
+}
+
 export interface IOrganization{
   id: number
   status: OrganizationStatus;
   isPublished: boolean
   corporateProfile: IProfile
   photoObject: IUserFile
+  socialLinks: ISocialLink[]
   name: string
   phone: string
   site: string
