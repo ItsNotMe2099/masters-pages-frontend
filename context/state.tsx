@@ -8,6 +8,8 @@ import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import UserRepository from 'data/repositories/UserRepostory'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
 
 interface IState {
   isMobile: boolean
@@ -20,6 +22,7 @@ interface IState {
   snackbar: SnackbarData | null
   user: IUser | null
   profile: IProfile | null,
+  organization: IOrganization | null
   role: ProfileRole | null,
   showModal: (type: ModalType, args?: any) => void
   hideModal: () => void
@@ -42,6 +45,7 @@ const defaultValue: IState = {
   snackbar: null,
   user: null,
   profile: null,
+  organization: null,
   role: null,
   loginState$: loginState$,
   showModal: (type) => null,
@@ -51,7 +55,6 @@ const defaultValue: IState = {
   updateUser: () => null,
   updateProfile: () => null,
   updateRole: () => null,
-  
 }
 
 const AppContext = createContext<IState>(defaultValue)
@@ -62,6 +65,7 @@ interface Props {
   token?: string
   user?: IUser,
   profile?: IProfile,
+  organization?: IOrganization
   role?: ProfileRole
 }
 
@@ -72,6 +76,7 @@ export function AppWrapper(props: Props) {
   const [token, setToken] = useState<string | null>(props.token ?? null)
   const [user, setUser] = useState<IUser | null>(props.user)
   const [profile, setProfile] = useState<IProfile | null>(props.profile)
+  const [organization, setOrganization] = useState<IOrganization | null>(props.organization)
   const [role, setRole] = useState<ProfileRole | null>(props.role )
   useEffect(() => {
     setToken(props.token ?? null)
@@ -82,6 +87,11 @@ export function AppWrapper(props: Props) {
     if (!props.token && user) {
       setUser(null)
     }
+    OrganizationRepository.fetchCurrentOrganization().then((data) => {
+      if(data){
+        setOrganization(data)
+      }
+    })
   }, [props.token])
 
   /** update user data from the server or just set them if passed to parameter */
@@ -110,6 +120,7 @@ export function AppWrapper(props: Props) {
     }
   }
 
+
   /** update profile data from the server or just set them if passed to parameter */
   const updateRole = async (role: ProfileRole) => {
     console.log("updateRole", role);
@@ -130,6 +141,7 @@ export function AppWrapper(props: Props) {
     snackbar,
     user,
     profile,
+    organization,
     role,
     showModal: (type, args?: any) => {
       ReactModal.setAppElement('body')
