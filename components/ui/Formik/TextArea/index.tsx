@@ -7,10 +7,11 @@ interface Props {
   label?: string
   placeholder?: string
   disabled?: boolean
+  classTextarea?: string
 }
 
 export default function TextAreaInput(props: Props & FieldConfig) {
-  const { label, placeholder } = props
+  const { label, placeholder, classTextarea } = props
   const [field, meta] = useField(props)
   const hasError = !!meta.error && meta.touched
   return (
@@ -19,7 +20,7 @@ export default function TextAreaInput(props: Props & FieldConfig) {
         {...field}
         disabled={props.disabled}
         placeholder={placeholder}
-        className={cx(styles.textarea, { [styles.error]: hasError })}
+        className={cx(styles.textarea, { [styles.error]: hasError }, classTextarea)}
       />
       <ErrorInput  {...meta} />
     </div>

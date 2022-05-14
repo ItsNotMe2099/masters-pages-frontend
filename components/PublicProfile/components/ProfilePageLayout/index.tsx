@@ -13,10 +13,15 @@ import CardRecommendationsShort from 'components/PublicProfile/components/view/C
 import Layout from 'components/layout/Layout'
 import { useTranslation } from 'next-i18next'
 import {IProfile} from 'data/intefaces/IProfile'
+import cookie from 'js-cookie'
+import CardAbout from '../view/CardAbout'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import CardOrganization from '../view/CardOrganization'
 
 
 interface Props{
   profile: IProfile,
+  organization?: IOrganization
   isEdit: boolean,
   children?: any,
   subCategory: any,
@@ -24,10 +29,11 @@ interface Props{
   onCategoryChange: (categoryId, subCategoryId) => void
 }
 const ProfilePageLayout = (props: Props) => {
-  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened} = props
+  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened, organization} = props
   const isMaster = ['master', 'volunteer'].includes(profile.role)
   const [isOpen, setIsOpen] = useState(false)
   const {t} = useTranslation('common')
+  const mode = cookie.get('mode')
   const getRoleClass = () => {
     switch (profile.role) {
       case 'master':
@@ -39,17 +45,20 @@ const ProfilePageLayout = (props: Props) => {
         return styles.roleClient
     }
   }
+
+  console.log("LAYOUTORGANIZATION", organization)
   return (
     <Layout isCurrentProfileOpened={isCurrentProfileOpened}  title={<>{t('lookingAt')}  <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>
-          <CardProfile profile={profile} isEdit={isEdit}/>
+          {profile.role === 'corporate' && organization ? <CardOrganization organization={organization} isEdit={isEdit}/> : <CardProfile profile={profile} isEdit={isEdit}/>}
           <div className={styles.desktop}>
-          <CardPreferWorkIn profile={profile} isEdit={isEdit}/>
-          {isMaster && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
-          <CardLanguages profile={profile} isEdit={isEdit}/>
+          {profile.role !== 'corporate' && <CardPreferWorkIn profile={profile} isEdit={isEdit}/>}
+          {isMaster && profile.role !== 'corporate' && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
+          {profile.role !== 'corporate' && <CardLanguages profile={profile} isEdit={isEdit}/>}
           {isMaster && <CardBio profile={profile} isEdit={isEdit}/>}
+          {profile.role === 'corporate' && organization && <CardAbout organization={organization} isEdit={isEdit}/>}
           {isMaster && <CardRecommendationsShort profile={profile}/>}
           <CardReviewsShort profile={profile} subCategory={subCategory}/>
           {/*<CardRewards profile={profile}/>*/}

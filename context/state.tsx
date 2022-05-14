@@ -51,7 +51,7 @@ const defaultValue: IState = {
   updateUser: () => null,
   updateProfile: () => null,
   updateRole: () => null,
-
+  
 }
 
 const AppContext = createContext<IState>(defaultValue)

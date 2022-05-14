@@ -1,0 +1,134 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #6D718C;
+  padding-top: 60px;
+  margin-top: 0px !important;
+}
+
+.name{
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+}
+
+.stat{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .statItem{
+    margin-left: 12px;
+    &:first-of-type{
+      margin-left: 0px;
+    }
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    img{
+      margin-right: 6px;
+    }
+  }
+}
+
+.rating{
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  justify-content: center;
+  .ratingValue{
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+.lastSeen{
+  display: flex;
+  margin-top: 8px;
+  flex-direction: column;
+  .lastSeenLabel{
+    line-height: 18px;
+  }
+  .lastSeenValue{
+    margin-top: 2px;
+    margin-left: 4px;
+    color: #393A42;
+    font-weight: 700;
+  }
+}
+.actions{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 18px;
+  align-items: center;
+  justify-content: center;
+  button, a{
+    width: 100%;
+  }
+}
+.actionSendMessage{
+  width: 60%;
+}
+.actionSendOffer{
+  width: 40%;
+}
+.subscribed{
+  font-weight: bold;
+  color: black;
+}
+.followers{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: center;
+  flex: 1;
+  button, a{
+    padding: 5px 14px;
+  }
+  @media (max-width: 420px){
+    margin-top: 10px;
+  }
+}
+.followersValue{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  color:#000000;
+  margin-bottom: 8px;
+  svg{
+    margin-right: 9px;
+  }
+}
+.actionFollow{
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.actionFollowLast{
+  width: 100%;
+}
+
+.allStats{
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  @media (max-width: 420px){
+    flex-direction: column;
+  }
+}
+
+.left{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}

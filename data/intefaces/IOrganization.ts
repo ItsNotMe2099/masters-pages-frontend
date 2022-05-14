@@ -7,6 +7,11 @@ export enum OrganizationStatus {
   Rejected = 'rejected',
 }
 
+export interface IAbout{
+  about: string
+  visible: boolean
+}
+
 export interface IOrganization{
   id: number
   status: OrganizationStatus;
@@ -17,6 +22,8 @@ export interface IOrganization{
   phone: string
   site: string
   email: string
+  about: IAbout
+  description: string
  // locations
   photo: string
 }

@@ -18,6 +18,8 @@ import CardRecommendations from 'components/PublicProfile/components/view/CardRe
 import CardPosts from 'components/PublicProfile/components/view/CardPosts'
 import {IProfile} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { IOrganization } from 'data/intefaces/IOrganization'
 
 interface Props {
   profile: IProfile,
@@ -32,6 +34,7 @@ const PublicProfile = (props) => {
   const isEdit = currentProfile && currentProfile.id === props.profile.id
   const profile = isEdit ? currentProfile : props.profile
   const [category, setCategory] = useState(null)
+  const [organization, setOrganization] = useState<IOrganization | null>(null)
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
   const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list)
@@ -96,10 +99,17 @@ const PublicProfile = (props) => {
 
 
   useEffect(() => {
+    OrganizationRepository.fetchCurrentOrganization().then((data) => {
+      if(data){
+        setOrganization(data)
+      }
+      
+    })
     if (isEdit) {
       dispatch(fetchSkillList())
     }
   }, [isEdit])
+
   const handleCategoryChange = (category, subCategory) => {
     console.log('handleCategoryChange', category, subCategory)
     setCategory(category)
@@ -108,10 +118,12 @@ const PublicProfile = (props) => {
 
       router.replace(`/sk${subCategory.id}`, undefined, {shallow: false})
     }
-
   }
+
+  console.log("ORGANIZATION", organization)
+
   return (
-    <ProfilePageLayout {...props} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
+    <ProfilePageLayout {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
       {props.showType ==='news' ? <CardPosts profile={profile}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
 
@@ -119,7 +131,7 @@ const PublicProfile = (props) => {
           </>
 
         : <>
-      {!currentSkill && props.showType ==='profile' && <CardProfileStat profile={profile}/>}
+      {!currentSkill && props.showType ==='profile' && currentProfile.role !== 'corporate' && <CardProfileStat profile={profile}/>}
           {props.showType === 'recommendations' && <>
             <CardRecommendations profile={profile}/>
 
