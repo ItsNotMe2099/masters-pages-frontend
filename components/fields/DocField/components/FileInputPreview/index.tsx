@@ -36,7 +36,16 @@ const FileInputPreview: FunctionComponent<Props> = props => {
     if(!srcValue){
       return
     }
-    return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
+    const extension = srcValue.split('.').pop().toUpperCase()
+    //return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
+    switch(extension){
+      case 'TXT':
+        return '/img/DocField/doc.svg'
+      case 'DOC':
+        return '/img/DocField/doc.svg'
+      case 'PDF':
+        return '/img/DocField/pdf.svg'
+    }
   }
   return (
         <div className={`${styles.root} ${props.isLast && styles.isLast}`}>
