@@ -12,6 +12,11 @@ export interface IAbout{
   visible: boolean
 }
 
+export interface IDescription {
+  description: string
+  visible: boolean
+}
+
 export interface ISocialLink{
   link: string
   type: string
@@ -29,7 +34,7 @@ export interface IOrganization{
   site: string
   email: string
   about: IAbout
-  description: string
+  description: IDescription
  // locations
   photo: string
 }

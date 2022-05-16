@@ -12,6 +12,7 @@ import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {setCurrentSkill} from 'components/Profile/actions'
 import {useRouter} from 'next/router'
 import CardProfileStat from 'components/PublicProfile/components/view/CardProfileStat'
+import CardDescription from 'components/PublicProfile/components/view/CardDescription'
 import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLayout'
 import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
@@ -120,8 +121,6 @@ const PublicProfile = (props) => {
     }
   }
 
-  console.log("ORGANIZATION", organization)
-
   return (
     <ProfilePageLayout {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
@@ -129,8 +128,9 @@ const PublicProfile = (props) => {
 
           <CardReviews profile={profile} />
           </>
-
-        : <>
+        :
+        <>
+        {currentProfile.role === 'corporate' && <CardDescription isEdit={isEdit} organization={organization}/>}
       {!currentSkill && props.showType ==='profile' && currentProfile.role !== 'corporate' && <CardProfileStat profile={profile}/>}
           {props.showType === 'recommendations' && <>
             <CardRecommendations profile={profile}/>
