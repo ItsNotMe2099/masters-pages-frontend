@@ -37,4 +37,5 @@ export interface IOrganization{
   description: IDescription
  // locations
   photo: string
+  attachments: string[]
 }

@@ -18,7 +18,7 @@ import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props {
   project: IProject
-  actionsType: 'client' | 'public' | 'volunteer'
+  actionsType: 'client' | 'public' | 'volunteer' | 'corporate'
   onViewOpen: (project: IProject) => void
   onApplyClick?: (project: IProject) => void
   onDelete?: (project: IProject) => void
@@ -93,7 +93,7 @@ const ProjectCard = (props: Props) => {
   const renderActionButton = (action) => {
     switch (action) {
       case 'view':
-        return <Button color={'grey'}  onClick={() => props.onViewOpen ? props.onViewOpen(project) : null}>View</Button>
+        return <Button color={'grey'}  onClick={() => props.onViewOpen ? props.onViewOpen(project) : null}>VIEW</Button>
       case 'delete':
         return <Button color={'grey'}>Delete</Button>
       case 'publish':
@@ -103,7 +103,7 @@ const ProjectCard = (props: Props) => {
       case 'apply':
         return <Button color={'grey'} onClick={handleApply}>Apply</Button>
       case 'save':
-        return <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'grey'}>Save</Button>
+        return <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'grey'}>SAVE</Button>
       case 'open':
         return <Button onClick={handleApply} type='button' projectBtn='default'>OPEN</Button>
       case 'applyAlt':
@@ -181,6 +181,9 @@ const ProjectCard = (props: Props) => {
         if(props.status === 'completed' || props.status === 'rejected' || props.status === 'saved'){
           actions.push('recycleBin')
         }
+      }
+      else if(actionsType === 'corporate'){
+        actions.push('save')
       }
       return actions;
     },

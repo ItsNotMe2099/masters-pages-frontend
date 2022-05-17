@@ -85,7 +85,7 @@ export default class ProjectRepository {
     const res = await request({
       url: `/api/project`,
       method: 'GET',
-      data: {s: JSON.stringify({status})}
+      data: {s: JSON.stringify({status}), page, limit}
     })
     if (res.err) {
       return null

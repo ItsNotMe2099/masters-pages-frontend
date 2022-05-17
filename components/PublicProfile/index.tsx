@@ -21,6 +21,12 @@ import {IProfile} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { IOrganization } from 'data/intefaces/IOrganization'
+import ProjectRepository, { IProjectSearchRequest } from 'data/repositories/ProjectRepository'
+import { IProject, ProjectStatus } from 'data/intefaces/IProject'
+import Loader from 'components/ui/Loader'
+import ProjectCard from 'components/for_pages/Project/ProjectCard'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import styles from './index.module.scss'
 
 interface Props {
   profile: IProfile,
@@ -39,6 +45,12 @@ const PublicProfile = (props) => {
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
   const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [projects, setProjects] = useState<IProject[]>([])
+  const [total, setTotal] = useState<number>(0)
+  const [page, setPage] = useState<number>(1)
+  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
+  const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills)
   const router = useRouter()
@@ -121,6 +133,46 @@ const PublicProfile = (props) => {
     }
   }
 
+  const fetchProjects = (page?: number, limit?: number) => {
+    ProjectRepository.fetchByStatus(ProjectStatus.Published, page, limit).then(data => {
+      if(data){
+        setProjects(data.data);
+        setTotal(data.total);
+      }
+    })
+  }
+  useEffect(() => {
+    fetchProjects(page, 10)
+    setLoading(false);
+  }, [])
+
+  const handleScrollNext = () => {
+    setPage(page + 1);
+    fetchProjects(page + 1, 10);
+  }
+  const handleRefresh = () => {
+
+  }
+  const getQueryFilter = () => {
+    try {
+      if((router.query as any).filter) {
+        return JSON.parse((router.query as any).filter)
+      }
+    }catch (e) {
+
+    }
+    return {}
+  }
+  const handleProjectViewOpen = (project: IProject) => {
+    setInitialProjectTab('description')
+    setCurrentProject(project);
+  }
+  const handleProjectApplyOpen = (project: IProject) => {
+    setInitialProjectTab('application')
+    setCurrentProject(project);
+
+  }
+
   return (
     <ProfilePageLayout {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
@@ -130,7 +182,20 @@ const PublicProfile = (props) => {
           </>
         :
         <>
-        {currentProfile.role === 'corporate' && <CardDescription isEdit={isEdit} organization={organization}/>}
+        {currentProfile.role === 'corporate' && organization && <CardDescription isEdit={isEdit} organization={organization}/>}
+        {currentProfile.role === 'corporate' && organization && 
+          <>
+          {loading && total === 0 && <Loader/>}
+          {total > 0 && <InfiniteScroll
+            dataLength={projects.length} //This is important field to render the next data
+            hasMore={projects.length < total}
+            next={handleScrollNext}
+            loader={<Loader/>}
+          >
+            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={handleProjectApplyOpen} onViewOpen={handleProjectViewOpen}/></div>)}
+          </InfiniteScroll>}
+          </>
+        }
       {!currentSkill && props.showType ==='profile' && currentProfile.role !== 'corporate' && <CardProfileStat profile={profile}/>}
           {props.showType === 'recommendations' && <>
             <CardRecommendations profile={profile}/>

@@ -9,6 +9,8 @@ import { useTranslation } from 'next-i18next'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { useState } from 'react'
+import Button from '../../Button'
+import { getMediaPath } from 'utils/media'
 
 interface Props{
   isEdit: boolean
@@ -39,12 +41,26 @@ const CardDescription = (props: Props) => {
     })
   }
 
+  const webSiteLink = organization.socialLinks.filter(item => item.type === 'web')
+  const instLink = organization.socialLinks.filter(item => item.type === 'instagram')
+
   return (
     <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.visitUs')} toolbar={<FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/>}>
       {!showForm ? 
         <div className={styles.desc}>
-          <div className={styles.left}></div>
+          <div className={styles.left}>
             <div className={styles.text}>{organization.description.description}</div>
+            <div className={styles.attachments}>
+              {organization.attachments.map(item => 
+                <div></div>
+              )}
+            </div>
+            <div className={styles.btns}>
+              <Button projectBtn='default' href={webSiteLink[0].link}>VISIT WEBSITE</Button>
+              <Button projectBtn='default' href={instLink[0].link}>INSTAGRAM</Button>
+            </div>
+            </div>
+            <div className={styles.right}><img src={getMediaPath(organization.photo)} alt=''/></div>
           </div>
          : <CardDescriptionForm organization={organization} handleSubmit={handleSubmit} onCancel={handleCancel}/>}
       {showForm && formLoading && <div className={styles.loader}><Loader/></div>}
