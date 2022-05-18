@@ -11,11 +11,11 @@ import {createProfileRecommendation} from 'components/ProfileRecommendations/act
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {signInOpen, taskOfferOpen} from 'components/Modal/actions'
 import {
-  hideProfileForm,
-  showProfileForm,
-  updateProfileAvatar,
-  updateProfileByForm
-} from 'components/Profile/actions'
+  hideOrganizationForm,
+  showOrganizationForm,
+  updateOrganizationAvatar,
+  updateOrganizationByForm
+} from 'components/Organization/actions'
 import AvatarForm from 'components/for_pages/Invite/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
@@ -23,6 +23,7 @@ import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
 import {useAppContext} from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
+import { hideProfileForm, showProfileForm } from 'components/Profile/actions'
 
 interface Props{
   organization: IOrganization,
@@ -46,9 +47,6 @@ const CardOrganization = (props: Props) => {
       dispatch(showProfileForm('avatar'))
     }
   }
-  const handleRecommend = () => {
-    dispatch(createProfileRecommendation(organization.corporateProfile.id))
-  }
   const handleSubscribe = () => {
     if(!currentOrganization){
       dispatch(signInOpen())
@@ -56,20 +54,13 @@ const CardOrganization = (props: Props) => {
     }
     dispatch(createFollower({organizationId: organization.corporateProfile.id}))
   }
-  const handleSendOffer = () => {
-    if(!currentOrganization){
-      dispatch(signInOpen())
-      return
-    }
-    dispatch(taskNegotiationSetCurrentProfile(organization.corporateProfile))
-    dispatch(taskOfferOpen())
-  }
+
   const handleSubmitAvatar =(data) => {
-    dispatch(updateProfileAvatar(organization.id, {photo: data.photo}, 'avatar'))
+    dispatch(updateOrganizationAvatar(organization.id, {photo: data.photo}, 'avatar'))
   }
 
   const handleDeleteAvatar = () => {
-    dispatch(updateProfileByForm(organization.id, {photo: null}, 'avatar'))
+    dispatch(updateOrganizationByForm(organization.id, {photo: null}, 'avatar'))
   }
 
   return (
