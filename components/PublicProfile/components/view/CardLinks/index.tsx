@@ -48,7 +48,7 @@ const CardLinks = (props: Props) => {
     return(
       <div className={styles.link}>
         <img src={imgSource} alt=''/>
-        <a href={props.link}>{props.type}</a>
+        <a href={`http://${props.link}`}>{props.type}</a>
       </div>
     )
   }
