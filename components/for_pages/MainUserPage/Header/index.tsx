@@ -1,7 +1,7 @@
 import styles from 'components/for_pages/MainUserPage/Header/index.module.scss'
 import Link from 'next/link'
 import LangSelect from 'components/LangSelect'
-import MainSectionButton from 'components/for_pages/MainUserPage/Button'
+import MainSectionButton from 'components/for_pages/Corporate/Button'
 import { useDispatch } from 'react-redux'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
 import { useTranslation } from 'next-i18next'
@@ -38,12 +38,15 @@ const MainSectionHeader = (props: Props) => {
   return (
     <div  className={styles.root}>
       <div  className={styles.container}>
+      <div className={styles.left}>
       <Link href='/'>
         <a className={styles.logo}>
           <img src={'/img/Main/logo_red.svg'}/>
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </a>
       </Link>
+      <MainSectionButton size={'small'} color='outlineGreen' href='/corporate'>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
+      </div>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
           {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}

@@ -47,7 +47,7 @@ const MainSectionHeader = (props: Props) => {
         </a>
       </Link>
       <div className={styles.btns}>
-        <MainSectionButton size={'small'} color='outlineGreen' onClick={() => dispatch(signInOpen())}>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
+        <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
         <MainSectionButton triangle size={'small'} color='yellow' onClick={() => dispatch(signInOpen())}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
       </div>
       </div>
