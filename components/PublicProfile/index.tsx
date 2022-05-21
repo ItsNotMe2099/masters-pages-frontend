@@ -27,6 +27,7 @@ import Loader from 'components/ui/Loader'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './index.module.scss'
+import ProjectModal from 'components/for_pages/Project/ProjectModal'
 
 interface Props {
   profile: IProfile,
@@ -194,6 +195,7 @@ const PublicProfile = (props) => {
           >
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={handleProjectApplyOpen} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
+          {currentProject && <ProjectModal showType={'client'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile.role !== 'corporate' && <CardProfileStat profile={profile}/>}

@@ -7,12 +7,8 @@ import StarRatings from 'react-star-ratings'
 import Button from 'components/PublicProfile/components/Button'
 import UserIcon from 'components/svg/UserIcon'
 import {useSelector, useDispatch} from 'react-redux'
-import {createProfileRecommendation} from 'components/ProfileRecommendations/actions'
-import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
-import {signInOpen, taskOfferOpen} from 'components/Modal/actions'
+import {signInOpen} from 'components/Modal/actions'
 import {
-  hideOrganizationForm,
-  showOrganizationForm,
   updateOrganizationAvatar,
   updateOrganizationByForm
 } from 'components/Organization/actions'
