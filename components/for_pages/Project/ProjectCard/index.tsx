@@ -25,6 +25,7 @@ interface Props {
   onUpdateStatus?: (status: ProjectStatus, project: IProject) => void
   status?: string | string[]
   onStatusChange?: (newStatus: ApplicationStatus) => void
+  onProjectStatusChange?: (newStatus: ProjectStatus) => void
 }
 const DurationDates = ({name, startDate, endDate}: {name: string, startDate?: string, endDate?: string}) => {
   return <div className={styles.durationDate}>
@@ -105,7 +106,11 @@ const ProjectCard = (props: Props) => {
       case 'save':
         return <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'grey'}>SAVE</Button>
       case 'open':
-        return <Button onClick={handleApply} type='button' projectBtn='default'>OPEN</Button>
+        return <Button onClick={() => props.onViewOpen ? props.onViewOpen(project) : null} type='button' projectBtn='default'>OPEN</Button>
+      case 'pause':
+        return <Button type='button' onClick={() => props.onProjectStatusChange(ProjectStatus.Paused)} projectBtn='default'>PAUSE</Button>
+      case 'launch':
+        return <Button type='button' projectBtn='default'>LAUNCH</Button>
       case 'applyAlt':
         return <Button onClick={handleApply} type='button' projectBtn='default'>APPLY</Button>
       case 'recall':
@@ -149,8 +154,10 @@ const ProjectCard = (props: Props) => {
         }
 
         if (([ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile.id === project.corporateProfileId) {
-          actions.push('unPublish')
-          actions.push('cancel')
+          actions.pop()
+          actions.push('open')
+          actions.push('pause')
+          actions.push('launch')
         }
         if (([ProjectStatus.Execution] as ProjectStatus[]).includes(project.status)) {
           actions.push('cancel')
