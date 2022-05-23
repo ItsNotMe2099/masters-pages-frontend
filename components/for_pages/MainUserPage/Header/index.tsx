@@ -45,7 +45,7 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </a>
       </Link>
-      <MainSectionButton size={'small'} color='outlineGreen' href='/corporate'>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
+      <MainSectionButton size={'small'} color='yellow' href='/corporate'>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
       </div>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
