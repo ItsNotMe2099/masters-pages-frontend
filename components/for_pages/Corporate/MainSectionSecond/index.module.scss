@@ -46,7 +46,7 @@
 .btns{
   display: flex;
   margin-top: 35px;
-  div:first-child{
+  a:first-child{
     margin-right: 10px;
   }
   @media (max-width: 1024px) {

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import styles from './index.module.scss'
 import { useDispatch} from 'react-redux'
 import {ProfileRole} from 'data/intefaces/IProfile'
+import classNames from 'classnames'
 
 interface Props {
   isActive: boolean
@@ -10,6 +11,7 @@ interface Props {
   icon?: string
   mode?: string
   badge?: number
+  className?: string
 
   onClick?: () => void
 }
@@ -27,8 +29,9 @@ export default function MenuItem(props: Props) {
       case ProfileRole.Corporate:
         return styles.modeCorporate
       case ProfileRole.Client:
-      default:
         return styles.modeClient
+      default:
+        return styles.modeGuest
     }
   }
   const handleClick = (e) => {
@@ -54,13 +57,13 @@ export default function MenuItem(props: Props) {
   if(link) {
     return (
       <Link href={link}>
-        <a className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()}`} onClick={handleClick}>
+        <a className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()} ${props.className}`} onClick={handleClick}>
           {renderButton()}
         </a>
       </Link>
     )
   }else{
-    return (  <div className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()}`} onClick={handleClick}>
+    return (  <div className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()} ${props.className}`} onClick={handleClick}>
       {renderButton()}
     </div>)
   }

@@ -3,7 +3,7 @@ import {default as React, ReactElement} from 'react'
 import {IRootState} from 'types'
 
 import LayoutAuthorized from 'components/layout/Layout/LayoutAuthorized'
-import LayoutPublic from 'components/layout/Layout/LayoutPublic'
+import LayoutGuest from 'components/layout/Layout/LayoutGuest'
 import {useAppContext} from 'context/state'
 
 interface Props {
@@ -17,5 +17,5 @@ export default function Layout(props: Props) {
   const appContext = useAppContext()
   const profile = appContext.profile
   console.log('CurrentProfile', appContext);
-  return profile ? <LayoutAuthorized {...props}/> : <LayoutPublic {...props}/>
+  return profile ? <LayoutAuthorized {...props}/> : <LayoutGuest {...props}/>
 }

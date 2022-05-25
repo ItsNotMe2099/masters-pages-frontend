@@ -33,7 +33,7 @@ const MainSectionFirst = (props: Props) => {
             <Category label={t('newMainVolunteer.projects')}/>
           </div>
           <div className={styles.btns}>
-            <MainSectionButton size="normal" color="outlineYellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton size="normal" color="outlineYellow" href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size="normal" color="yellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</MainSectionButton>
           </div>
         </div>

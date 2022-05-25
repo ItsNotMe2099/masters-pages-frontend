@@ -26,7 +26,7 @@ const MainSectionSecond = (props) => {
         <div className={styles.free}><img src='/img/MainVolunteer/icons/free.svg' alt=''/></div>
         <div className={styles.title}><Trans i18nKey="newMainVolunteer.corporatePlatform" className={styles.text}>"Corporate platform for <br/> projects with volunteers"</Trans></div>
         <div className={styles.btns}>
-          <MainSectionButton size="normal" color="outlineYellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+          <MainSectionButton size="normal" color="outlineYellow" href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
           <MainSectionButton size="normal" color="yellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</MainSectionButton>
         </div>
         </div>

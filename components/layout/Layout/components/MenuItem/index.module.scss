@@ -12,6 +12,12 @@
   padding: 0px 13px 0px 12px;
 
 }
+.modeGuest{
+  color: #383838;
+  &:hover{
+    background: #a39e9e;
+  }
+  }
 .modeClient{
 &:hover{
   background: #3AC073;

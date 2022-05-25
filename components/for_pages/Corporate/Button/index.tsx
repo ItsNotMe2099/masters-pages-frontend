@@ -10,6 +10,7 @@ interface Props{
   color?: 'green' | 'red' | 'outlineRed' | 'outlineGreen' | 'yellow' | 'outlineYellow'
   triangle?: boolean
   href?: string
+  className?: string
 }
 
 const MainSectionButton = (props: Props) => {
@@ -28,6 +29,7 @@ const MainSectionButton = (props: Props) => {
       ${props.color === 'outlineGreen' && styles.outlineGreen}
       ${props.color === 'outlineRed' && styles.outlineRed}
       ${props.color === 'outlineYellow' && styles.outlineYellow}
+      ${props.className}
       `
       }>
         {props.triangle && <div className={styles.triangle}></div>}
@@ -47,6 +49,7 @@ const MainSectionButton = (props: Props) => {
       ${props.color === 'outlineGreen' && styles.outlineGreen}
       ${props.color === 'outlineRed' && styles.outlineRed}
       ${props.color === 'outlineYellow' && styles.outlineYellow}
+      ${props.className}
       `
       }>
         {props.triangle && <div className={styles.triangle}></div>}

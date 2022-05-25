@@ -57,7 +57,7 @@ const MainSectionHeader = (props: Props) => {
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
           <div className={styles.actionsButtons}>
-            <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
