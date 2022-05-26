@@ -73,12 +73,13 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
   }
 
   const [files, setFiles] = useState<FileEntity[]>(formatValue(value))
-
+  console.log("Filtes111", value, files)
   useEffect(() => {
     const filtered = files.filter((file => !!file.path))
     if(multiple) {
       helpers.setValue(filtered.map(item => item.path))
     }else{
+      console.log("SetFilesValue", filtered[0]?.path || null)
       helpers.setValue(filtered[0]?.path || null)
     }
   }, [files])

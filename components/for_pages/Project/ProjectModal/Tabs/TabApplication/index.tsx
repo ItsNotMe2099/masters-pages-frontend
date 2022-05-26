@@ -9,6 +9,7 @@ import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import TabApplicationView from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationView'
 import TabApplicationForm from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationForm'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import Loader from 'components/ui/Loader'
 
 interface Props {
   project: IProject
@@ -42,10 +43,11 @@ const TabApplication = ({project, ...props}: Props) => {
   return (
    <div className={styles.root}>
       <ProjectDescriptionHeader project={project} title={'Application'}/>
-      {(application && application.status !== ApplicationStatus.Draft && !isEdit) ? 
-      <TabApplicationView onEdit={handleEdit} application={application} project={project}/> 
-      : 
-      <TabApplicationForm edit={isEdit} projectId={project.id} application={application} onSave={handleSave}/>}
+     {isLoading && <Loader/>}
+      {!isLoading && (application && application.status !== ApplicationStatus.Draft && !isEdit) ?
+      <TabApplicationView onEdit={handleEdit} application={application} project={project}/>
+      :
+        !isLoading ? <TabApplicationForm edit={isEdit} projectId={project.id} application={application} onSave={handleSave}/> : null}
    </div>
   )
 }

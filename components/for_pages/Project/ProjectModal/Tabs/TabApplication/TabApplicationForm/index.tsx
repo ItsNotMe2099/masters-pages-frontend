@@ -32,6 +32,7 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const handleSubmit = async (data) => {
+    console.log("HandleSubmit", data)
     if(application){
       const res = await ApplicationRepository.update(application.id, data);
     }else{
