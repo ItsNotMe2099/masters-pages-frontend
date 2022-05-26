@@ -504,6 +504,7 @@ export enum IChatMessageType {
 export interface IUserFile {
   id: number
   urlS3: string
+  name: string
 }
 
 export interface IChatMessageProfile {

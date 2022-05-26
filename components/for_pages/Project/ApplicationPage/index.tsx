@@ -16,6 +16,7 @@ import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
 import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
+import { getMediaPath } from 'utils/media'
 
 interface Props {
   project: IProject
@@ -259,6 +260,29 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
     return null
   }
 
+  const fileName = (file: string) => {
+    const name = file.split('.').splice(0, 1)
+    return name
+  }
+
+  const getImageSrc = (file: string) => {
+
+    const srcValue = file
+    if(!srcValue){
+      return
+    }
+    const extension = srcValue.split('.').pop().toUpperCase()
+    //return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
+    switch(extension){
+      case 'TXT':
+        return '/img/DocField/doc.svg'
+      case 'DOC':
+        return '/img/DocField/doc.svg'
+      case 'PDF':
+        return '/img/DocField/pdf.svg'
+    }
+  }
+
   return (
    <div className={styles.root}>
      <div className={styles.leftSide}>
@@ -313,12 +337,18 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           </div>
         </div>
      <div className={classNames(styles.section, styles.coverLetter)}>
-       <div className={styles.sectionHeader}>Cover Letter</div>
+       <div className={styles.sectionHeader}>
+         <div>Cover Letter</div>
+         <a href={getMediaPath(application.coverLetterFileObject.urlS3)} download={fileName(application.coverLetterFileObject.name)}><img src={getImageSrc(application.coverLetterFile)} alt=''/></a>
+        </div>
        <div className={styles.sectionContent}>{application.coverLetter}</div>
      </div>
 
      <div className={classNames(styles.section, styles.resume)}>
-       <div className={styles.sectionHeader}>Resume</div>
+       <div className={styles.sectionHeader}>
+         <div>Resume</div>
+         <a href={getMediaPath(application.resumeFileObject.urlS3)} download={fileName(application.resumeFileObject.name)}><img src={getImageSrc(application.resumeFile)} alt=''/></a>
+        </div>
        <div className={styles.sectionContent}>{application.resume}</div>
      </div>
      </div>
