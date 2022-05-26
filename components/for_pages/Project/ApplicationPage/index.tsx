@@ -339,16 +339,20 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
      <div className={classNames(styles.section, styles.coverLetter)}>
        <div className={styles.sectionHeader}>
          <div>Cover Letter</div>
+         {application.coverLetterFileObject &&
          <a href={getMediaPath(application.coverLetterFileObject.urlS3)} download={fileName(application.coverLetterFileObject.name)}><img src={getImageSrc(application.coverLetterFile)} alt=''/></a>
-        </div>
+         }
+         </div>
        <div className={styles.sectionContent}>{application.coverLetter}</div>
      </div>
 
      <div className={classNames(styles.section, styles.resume)}>
        <div className={styles.sectionHeader}>
          <div>Resume</div>
+         {application.resumeFileObject &&
          <a href={getMediaPath(application.resumeFileObject.urlS3)} download={fileName(application.resumeFileObject.name)}><img src={getImageSrc(application.resumeFile)} alt=''/></a>
-        </div>
+         }
+         </div>
        <div className={styles.sectionContent}>{application.resume}</div>
      </div>
      </div>
