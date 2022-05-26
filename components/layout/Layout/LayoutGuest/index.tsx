@@ -33,18 +33,12 @@ export default function LayoutGuest(props: Props) {
   const {children, showLeftMenu} = props
   const {route: currentRoute} = useRouter()
   const appContext = useAppContext()
-  const authContext = useAuthContext();
   const roleCurrent = appContext.role
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
-  const profile = appContext.profile
-  const intervalRef = useRef(null)
   const [collapsed, setCollapsed] = useState(false)
   useEffect(() => {
     setCollapsed(!!cookie.get('menu-collapsed'))
   }, [])
- /* useInterval(() => {
-    dispatch(fetchProfile(profile.role));
-  }, 10000)*/
 
   const {t} = useTranslation('common')
   const dispatch = useDispatch()
@@ -64,21 +58,21 @@ export default function LayoutGuest(props: Props) {
   }
 
   const item = [
-    {title: 'Find companies', icon: 'find-clients-black', link: '/SearchVolunteerPage', isSeparator: true},
+    {title: 'Find companies', icon: 'find-clients-black', link: '/FindCompaniesGuest', isSeparator: true},
   ]
 
   const itemsVolunteer = [
-    {title: t('menu.findVolunteer'), icon: 'find-clients-blue', link: '/SearchVolunteerPageGuest'},
-    {title: t('menu.orders'), icon: 'orders-blue', link: '/orders',},
+    {title: t('menu.findProjects'), icon: 'find-clients-blue', link: '/project-search'},
+    {title: t('menu.findOrders'), icon: 'orders-blue', link: '/SearchTaskPage',},
   ]
 
   const itemsMaster = [
-    {title: t('menu.findVolunteer'), icon: 'find-clients-red', link: '/SearchVolunteerPage'},
-    {title: t('menu.orders'), icon: 'orders-red', link: '/orders',},
+    {title: t('menu.findProjects'), icon: 'find-clients-red', link: '/project-search'},
+    {title: t('menu.findOrders'), icon: 'orders-red', link: '/SearchTaskPage',},
   ]
   const itemsCompanies = [
     {title: t('menu.findVolunteer'), icon: 'find-clients-yellow', link: '/SearchVolunteerPage'},
-    {title: t('menu.findCompanies'), icon: 'find-clients-yellow', link: '/orders',},
+    {title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '',},
   ]
   const handleCollapse = () => {
     if(!collapsed) {

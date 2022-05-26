@@ -4,7 +4,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import classNames from 'classnames'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
-import {confirmOpen} from 'components/Modal/actions'
+import {confirmOpen, signUpOpen} from 'components/Modal/actions'
 import { useDispatch} from 'react-redux'
 import {useTranslation} from 'next-i18next'
 import ProjectRepository from 'data/repositories/ProjectRepository'
@@ -81,7 +81,7 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
-        await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, project.id)
+        await ProfileRepository.deleteFromSavedProjects({profileId: profile?.id}, project.id)
         props.onDelete(project);
       }
     }))
@@ -146,14 +146,14 @@ const ProjectCard = (props: Props) => {
       const actions = []
       {actionsType !== 'volunteer' && actions.push('view')}
       if (actionsType === 'client') {
-        if (([ProjectStatus.Draft, ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile.id === project.corporateProfileId) {
+        if (([ProjectStatus.Draft, ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
         }
         if (([ProjectStatus.Draft] as ProjectStatus[]).includes(project.status)) {
           actions.push('delete')
           actions.push('publish')
         }
 
-        if (([ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile.id === project.corporateProfileId) {
+        if (([ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
           actions.pop()
           actions.push('open')
           actions.push('pause')
@@ -194,7 +194,7 @@ const ProjectCard = (props: Props) => {
       }
       return actions;
     },
-    [actionsType, project.status, profile.id, props.status]
+    [actionsType, project.status, profile?.id, props.status]
   )
 console.log("actionsType", actionsType);
   return (

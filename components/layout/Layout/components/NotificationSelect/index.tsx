@@ -97,7 +97,7 @@ interface Props {
       }
     setIsActive(false)
    }
-   const notificationCount =  profile.notificationNewsCount + profile.notificationMessageCount + profile.notificationEventCount + profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount
+   const notificationCount =  profile?.notificationNewsCount + profile?.notificationMessageCount + profile?.notificationEventCount + profile?.notificationTaskResponseDeclinedCount + profile?.notificationTaskOfferDeclinedCount + profile?.notificationTaskResponseCount + profile?.notificationTaskOfferCount
 
   return (
     <div className={styles.root}>

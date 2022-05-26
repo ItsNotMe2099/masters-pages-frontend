@@ -23,5 +23,5 @@ const SearchTaskPage = (props) => {
   </>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true})
+export const getServerSideProps = getAuthServerSide({redirect: false})
 export default SearchTaskPage

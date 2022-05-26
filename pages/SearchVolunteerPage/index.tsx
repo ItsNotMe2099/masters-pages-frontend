@@ -35,5 +35,5 @@ const SearchVolunteerPage = (props) => {
   </>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true})
+export const getServerSideProps = getAuthServerSide({redirect: false})
 export default SearchVolunteerPage
