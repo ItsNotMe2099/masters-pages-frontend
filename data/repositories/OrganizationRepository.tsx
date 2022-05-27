@@ -1,7 +1,6 @@
 import request from 'utils/request'
-
-import {IUser} from 'data/intefaces/IUser'
 import { IOrganization } from 'data/intefaces/IOrganization';
+
 export interface IDataQueryList{
   page?: number,
   limit?: number,
@@ -9,6 +8,30 @@ export interface IDataQueryList{
   lang?: string
 }
 export default class OrganizationRepository {
+
+  static async fetchOrganization(id: number): Promise<IOrganization | null> {
+    const res = await request({
+      url: `/api/organization/${id}`,
+      method: 'GET',
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchOrganizationsList(): Promise<IOrganization[]> {
+    const res = await request({
+      url: '/api/organization',
+      method: 'GET',
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 
   static async fetchCurrentOrganization(): Promise<IOrganization | null> {
     const res = await request({

@@ -1,4 +1,4 @@
-import styles from 'pages/guestpage/index.module.scss'
+import styles from 'pages/corporate/index.module.scss'
 import { useEffect, useState } from 'react'
 import cookie from 'js-cookie'
 import {getAuthServerSide} from 'utils/auth'
@@ -7,22 +7,32 @@ import {CookiesType, RegistrationMode} from 'types/enums'
 import {addDays} from 'date-fns'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import Profile from 'components/ui/Profile'
+import Organization from 'components/ui/Organization'
 
-const GuestPage = (props) => {
+const FindCompaniesGuest = (props) => {
 
   const [isOpen, setIsOpen] = useState(true)
   const signUpCookie = cookie.get('signUpMobile')
+  const [companies, setCompanies] = useState<IOrganization[]>([])
   useEffect(() => {
     setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 600) ? false : true)
+    OrganizationRepository.fetchOrganizationsList().then((data) => {
+      if(data){
+        setCompanies(data)
+      }
+      
+    })
   }, [])
 
 
   return (
     <Layout>
-      <div className={styles.welcome}>
-        <div className={styles.image}><img src='/img/GuestPage/welcome.svg' alt=''/></div>
-        <div className={styles.text}>"Welcome! Please, use left hand menu to navigate."</div>
-      </div>
+      <>
+        {companies.map(company => <Organization key={company.id} organization={company}/>)}
+      </>
       <Modals/>
     </Layout>
   )
@@ -34,4 +44,4 @@ export const getServerSideProps = async (ctx) => {
   return {props: {...res.props}}
 
 }
-export default GuestPage
+export default FindCompaniesGuest

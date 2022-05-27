@@ -183,8 +183,8 @@ const PublicProfile = (props) => {
           </>
         :
         <>
-        {currentProfile.role === 'corporate' && organization && <CardDescription isEdit={isEdit} organization={organization}/>}
-        {currentProfile.role === 'corporate' && organization && 
+        {currentProfile?.role === 'corporate' && organization && <CardDescription isEdit={isEdit} organization={organization}/>}
+        {currentProfile?.role === 'corporate' && organization && 
           <>
           {loading && total === 0 && <Loader/>}
           {total > 0 && <InfiniteScroll
@@ -198,7 +198,7 @@ const PublicProfile = (props) => {
           {currentProject && <ProjectModal showType={'client'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
-      {!currentSkill && props.showType ==='profile' && currentProfile.role !== 'corporate' && <CardProfileStat profile={profile}/>}
+      {!currentSkill && props.showType ==='profile' && currentProfile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
           {props.showType === 'recommendations' && <>
             <CardRecommendations profile={profile}/>
 

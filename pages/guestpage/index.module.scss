@@ -1,5 +1,30 @@
 @import "../../scss/index";
 .root{
-  background: black;
-  color: white;
+  
+}
+
+.welcome{
+  padding-left: 75px;
+  padding-right: 75px;
+  padding-bottom: 75px;
+  padding-top: 88px;
+  background: #FFF8E3;
+  border-radius: 50px;
+  width: 30%;
+  position: absolute;
+  right: 62%;
+}
+
+.image{
+  display: flex;
+  justify-content: center;
+}
+
+.text{
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 100%;
+  color: #555555;
+  text-align: center;
+  margin-top: 35px;
 }
