@@ -102,9 +102,9 @@ const ProjectCard = (props: Props) => {
       case 'unPublish':
         return <Button color={'grey'} onClick={handleUnPublish}>UnPublish</Button>
       case 'apply':
-        return <Button color={'grey'} onClick={handleApply}>Apply</Button>
+        return <Button color={'grey'} onClick={() => profile ? handleApply : dispatch(signUpOpen())}>Apply</Button>
       case 'save':
-        return <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'grey'}>SAVE</Button>
+        return <Button onClick={() => profile ? ProfileRepository.addToSavedProjects({projectId: project.id}) : dispatch(signUpOpen())} color={'grey'}>SAVE</Button>
       case 'open':
         return <Button onClick={() => props.onViewOpen ? props.onViewOpen(project) : null} type='button' projectBtn='default'>OPEN</Button>
       case 'pause':

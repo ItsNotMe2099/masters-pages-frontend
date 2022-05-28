@@ -112,7 +112,6 @@ const PublicProfile = (props) => {
     }
   }, [props.skill])
 
-  console.log('PRO', currentProfile)
 
 
   useEffect(() => {
