@@ -20,8 +20,11 @@ const GuestPage = (props) => {
   return (
     <Layout>
       <div className={styles.welcome}>
-        <div className={styles.image}><img src='/img/GuestPage/welcome.svg' alt=''/></div>
-        <div className={styles.text}>"Welcome! Please, use left hand menu to navigate."</div>
+        <div className={styles.container}>
+          <div className={styles.triangle}></div>
+          <div className={styles.image}><img src='/img/GuestPage/welcome.svg' alt=''/></div>
+          <div className={styles.text}>"Welcome! Please, use left hand menu to navigate."</div>
+        </div>
       </div>
       <Modals/>
     </Layout>
