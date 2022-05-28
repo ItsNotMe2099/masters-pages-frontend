@@ -260,6 +260,10 @@
     padding-left: 24px;
     padding-right: 24px;
     margin-right: 16px;
+    background-color: #e9e9ed;
+    &:hover{
+      background-color: #acacac;
+    }
   }
   @media screen and (max-width: 400px){
     flex-direction: column;

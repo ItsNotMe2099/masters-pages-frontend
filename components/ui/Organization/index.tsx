@@ -1,28 +1,17 @@
 import {signUpOpen} from 'components/Modal/actions'
-import {saveProfileRequest} from 'components/SavedPeople/actions'
 import StarRatings from 'react-star-ratings'
 import Avatar from 'components/ui/Avatar'
 import Button from 'components/ui/Button'
-import {useRouter} from 'next/router'
 import {default as React} from 'react'
-import {IRootState, ITask} from 'types'
 import styles from './index.module.scss'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { IOrganization } from 'data/intefaces/IOrganization'
 interface Props {
   organization: IOrganization,
-  actionsType: 'public' | 'client' | 'master'
   className?: string,
   isActive?: boolean,
-  selectedCategoryId?: number,
-  selectedSubCategoryId?: number,
-  onClick?: (task: ITask) => void,
-  onEdit?: (task: ITask) => void,
-  onDelete?: (task: ITask) => void,
-  onPublish?: (task: ITask) => void,
-  onUnPublish?: (task: ITask) => void,
 }
 
 export default function Organization({organization, className, isActive}: Props) {

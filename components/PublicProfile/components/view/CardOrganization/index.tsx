@@ -8,10 +8,6 @@ import Button from 'components/PublicProfile/components/Button'
 import UserIcon from 'components/svg/UserIcon'
 import {useSelector, useDispatch} from 'react-redux'
 import {signInOpen} from 'components/Modal/actions'
-import {
-  updateOrganizationAvatar,
-  updateOrganizationByForm
-} from 'components/Organization/actions'
 import AvatarForm from 'components/for_pages/Invite/AvatarForm'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
@@ -19,7 +15,7 @@ import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
 import {useAppContext} from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
-import { hideProfileForm, showProfileForm } from 'components/Profile/actions'
+import { hideProfileForm, showProfileForm, updateProfileAvatar, updateProfileByForm } from 'components/Profile/actions'
 
 interface Props{
   organization: IOrganization,
@@ -52,18 +48,18 @@ const CardOrganization = (props: Props) => {
   }
 
   const handleSubmitAvatar =(data) => {
-    dispatch(updateOrganizationAvatar(organization.id, {photo: data.photo}, 'avatar'))
+    dispatch(updateProfileAvatar(organization.corporateProfile.id, {photo: data.photo}, 'avatar'))
   }
 
   const handleDeleteAvatar = () => {
-    dispatch(updateOrganizationByForm(organization.id, {photo: null}, 'avatar'))
+    dispatch(updateProfileByForm(organization.corporateProfile.id, {photo: null}, 'avatar'))
   }
 
   return (
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
-        {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: organization.photo}}/>}
-        {(!showForm || !isEdit) &&  <a href={`/id${organization.id}`}><Avatar size={'large'} image={organization.photo}/></a>}
+        {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: organization.corporateProfile.photo}}/>}
+        {(!showForm || !isEdit) &&  <a href={`/id${organization.corporateProfile.id}`}><Avatar size={'large'} image={organization.corporateProfile.photo}/></a>}
       <a href={`/id${organization.id}`} className={styles.name}>{organization.name}</a>
       <div className={styles.allStats}>
       <div className={styles.left}>

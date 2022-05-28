@@ -11,12 +11,15 @@ import { IOrganization } from 'data/intefaces/IOrganization'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import Profile from 'components/ui/Profile'
 import Organization from 'components/ui/Organization'
+import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLayout'
 
 const FindCompaniesGuest = (props) => {
 
   const [isOpen, setIsOpen] = useState(true)
   const signUpCookie = cookie.get('signUpMobile')
   const [companies, setCompanies] = useState<IOrganization[]>([])
+  const [company, setCompany] = useState<IOrganization>(null)
+  const [view, setView] = useState('list')
   useEffect(() => {
     setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 600) ? false : true)
     OrganizationRepository.fetchOrganizationsList().then((data) => {

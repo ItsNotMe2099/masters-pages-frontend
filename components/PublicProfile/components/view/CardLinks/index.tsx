@@ -54,7 +54,7 @@ const CardLinks = (props: Props) => {
   }
 
   return (
-    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.visitUs')} toolbar={<FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/>}>
+    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.visitUs')} toolbar={isEdit ? [<FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/>] : []}>
       {!showForm ? <div className={styles.links}>
         {organization.socialLinks.map(item =>
           item.link && <SocialLink type={item.type} link={item.link}/>

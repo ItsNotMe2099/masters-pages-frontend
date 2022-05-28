@@ -55,6 +55,7 @@ const PublicProfile = (props) => {
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills)
   const router = useRouter()
+  console.log(router)
   useEffect(() => {
     if(currentSkill && isEdit){
 
@@ -111,14 +112,30 @@ const PublicProfile = (props) => {
     }
   }, [props.skill])
 
+  console.log('PRO', currentProfile)
+
 
   useEffect(() => {
+    if(currentProfile){
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
       if(data){
         setOrganization(data)
       }
       
     })
+  }
+  else{
+    OrganizationRepository.fetchOrganizationsList().then((data) => {
+      if(data){
+        data.filter(item => item.corporateProfile.id === +router.asPath.slice(3))
+        OrganizationRepository.fetchOrganization(data[0].id).then((data) => {
+          if(data){
+            setOrganization(data)
+          }
+        })
+      }
+    })
+  }
     if (isEdit) {
       dispatch(fetchSkillList())
     }
@@ -183,8 +200,8 @@ const PublicProfile = (props) => {
           </>
         :
         <>
-        {currentProfile?.role === 'corporate' && organization && <CardDescription isEdit={isEdit} organization={organization}/>}
-        {currentProfile?.role === 'corporate' && organization && 
+        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && <CardDescription isEdit={isEdit} organization={organization}/>}
+        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && 
           <>
           {loading && total === 0 && <Loader/>}
           {total > 0 && <InfiniteScroll

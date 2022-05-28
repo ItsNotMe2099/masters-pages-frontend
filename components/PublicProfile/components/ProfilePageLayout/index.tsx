@@ -21,13 +21,13 @@ import CardLinks from '../view/CardLinks'
 
 
 interface Props{
-  profile: IProfile,
+  profile?: IProfile,
   organization?: IOrganization
-  isEdit: boolean,
+  isEdit?: boolean,
   children?: any,
-  subCategory: any,
+  subCategory?: any,
   isCurrentProfileOpened?: boolean
-  onCategoryChange: (categoryId, subCategoryId) => void
+  onCategoryChange?: (categoryId, subCategoryId) => void
 }
 const ProfilePageLayout = (props: Props) => {
   const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened, organization} = props
