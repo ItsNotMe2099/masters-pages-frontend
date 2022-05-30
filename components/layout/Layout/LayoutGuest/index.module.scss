@@ -154,7 +154,7 @@
 .container{
   position: relative;
   margin-left: 190px;
-
+  background-color:#F8F6F9;
   padding-top: 22px;
   padding-left: 22px;
   padding-right: 22px;
@@ -245,4 +245,14 @@
 
 .btnContainer{
   padding: 0 21px;
+}
+
+.about{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration-line: underline;
+  color: #414141;
+  margin-top: 12px;
+  text-align: center;
 }

@@ -1,19 +1,12 @@
 import Map from 'components/Map'
-import {
-  fetchTaskSearchList, resetTaskSearchList,
-  setFilterTaskSearch, setPageTaskSearch,
-  setSortTaskSearch
-} from 'components/TaskSearch/actions'
 import Button from 'components/ui/Button'
 import { DropDown } from 'components/ui/DropDown'
 import Loader from 'components/ui/Loader'
 import { useRouter } from 'next/router'
 import { default as React, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
-import { IRootState } from 'types'
 import styles from './index.module.scss'
-import Task from 'components/Task'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Sticky from 'react-stickynode'
 const queryString = require('query-string')
@@ -31,7 +24,7 @@ import {IProject} from 'data/intefaces/IProject'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import ProjectRepository, {IProjectSearchRequest} from 'data/repositories/ProjectRepository'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
-import {modalClose, projectOpen} from 'components/Modal/actions'
+
 interface Props {
   onShowMap: () => void
 }

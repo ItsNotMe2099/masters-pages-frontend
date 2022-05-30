@@ -665,6 +665,8 @@
   "taskSearch": {
     "tasks": "Tasks",
     "showOnTheMap": "Show on the map",
+    "projects": "Projects",
+    "companies": "Companies",
     "filter": {
       "fieldMainCategory": "Main category",
       "fieldCategory": "Category",

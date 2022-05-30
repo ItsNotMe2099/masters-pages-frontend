@@ -1,5 +1,24 @@
 @import "../../scss/index";
 .root{
-  background: black;
-  color: white;
+  
+}
+
+.projectsTobBar{
+  display: flex;
+  margin-bottom: 18px;
+  margin-top: 24px;
+}
+
+.projectsAmount{
+  flex: 1;
+  span{
+    font-weight: 700;
+  }
+}
+
+.projectsSort{
+  display: flex;
+  span{
+    margin-right: 8px;
+  }
 }

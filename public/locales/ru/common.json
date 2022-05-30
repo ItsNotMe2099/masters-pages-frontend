@@ -654,6 +654,8 @@
   "taskSearch": {
     "tasks": "Заказы",
     "showOnTheMap": "Показать на карте",
+    "projects": "Проекты",
+    "companies": "Организации",
     "filter": {
       "fieldMainCategory": "Главная категория",
       "fieldCategory": "Категория",

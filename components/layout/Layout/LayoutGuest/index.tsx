@@ -1,27 +1,21 @@
 import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import MenuItem from 'components/layout/Layout/components/MenuItem'
 import { useTranslation } from 'next-i18next'
-import {default as React, ReactElement, useEffect, useRef, useState} from 'react'
-import {IRootState} from 'types'
+import {default as React, ReactElement, useEffect, useState} from 'react'
 import Logo from 'components/Logo'
 import cx from 'classnames'
 import {useRouter} from 'next/router'
-import {logout} from 'components/Auth/actions'
-import ModeSelect from 'components/layout/Layout/components/ModeSelect'
-import NotificationSelect from 'components/layout/Layout/components/NotificationSelect'
 import LogoSvg from 'components/svg/Logo'
 import cookie from 'js-cookie'
 import {getProfileRoleByRoute} from 'utils/profileRole'
-import Header from '../LayoutAuthorized/mobile/Header'
 import LangSelect  from 'components/LangSelect'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
-import {useAuthContext} from 'context/auth_state'
-import MainSectionButton from 'components/for_pages/Corporate/Button'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
+import Link from 'next/link'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -130,6 +124,11 @@ export default function LayoutGuest(props: Props) {
           <Button size="normal" className={styles.red} onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</Button>
           <Button size="normal" className={styles.signIn} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</Button>
         </div>
+        <Link href='/'>
+          <a className={styles.about}>
+            About MastersPages
+          </a>
+        </Link>
       </div>}
       <div className={styles.header}>
         <div className={styles.headerLeft}>

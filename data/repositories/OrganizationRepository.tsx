@@ -7,6 +7,13 @@ export interface IDataQueryList{
   search?: string,
   lang?: string
 }
+
+export interface IOrganizationSearchRequest{
+  keywords?: string
+  country?: string
+  city?: string
+}
+
 export default class OrganizationRepository {
 
   static async fetchOrganization(id: number): Promise<IOrganization | null> {
