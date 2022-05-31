@@ -135,9 +135,9 @@ export default function LayoutAuthorized(props: Props) {
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div
-            className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {t('personalArea.profile.youAreIn')}
+            className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {roleCurrent !== 'corporate' && t('personalArea.profile.youAreIn')}
           </div>
-          <ModeSelect user={props.user}/>
+          {roleCurrent !== 'corporate' && <ModeSelect user={props.user}/>}
         </div>
         <NotificationSelect color='black'/>
         <LangSelect isAuth={false}/>
