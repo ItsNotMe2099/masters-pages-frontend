@@ -23,6 +23,7 @@ import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
 import {IProfile} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props{
   profile: IProfile,
@@ -37,14 +38,11 @@ const CardProfile = (props: Props) => {
   const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed)
   const isSubscribed = profile.isSubscribedByCurrentProfile || isTempSubscribed
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar')
+  //const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar')
+  const [showForm, setShowForm] = React.useState(false)
   const { t } = useTranslation('common')
   const handleEditClick = () => {
-    if(showForm){
-      dispatch(hideProfileForm( 'avatar'))
-    }else {
-      dispatch(showProfileForm('avatar'))
-    }
+    setShowForm(true)
   }
   const handleRecommend = () => {
     dispatch(createProfileRecommendation(profile.id))
@@ -64,8 +62,9 @@ const CardProfile = (props: Props) => {
     dispatch(taskNegotiationSetCurrentProfile(profile))
     dispatch(taskOfferOpen())
   }
-  const handleSubmitAvatar =(data) => {
-    dispatch(updateProfileAvatar(profile.id, {photo: data.photo}, 'avatar'))
+  const handleSubmit = async (data) => {
+    await ProfileRepository.updateProfile(currentProfile.id, {...data})
+    setShowForm(false)
   }
 
   const handleDeleteAvatar = () => {
@@ -75,7 +74,7 @@ const CardProfile = (props: Props) => {
   return (
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
-        {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: profile.photo}}/>}
+        {isEdit && showForm && <AvatarForm onSubmit={handleSubmit}/>}
         {(!showForm || !isEdit) &&  <a href={`/id${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
       <a href={`/id${profile.id}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
       <div className={styles.allStats}>

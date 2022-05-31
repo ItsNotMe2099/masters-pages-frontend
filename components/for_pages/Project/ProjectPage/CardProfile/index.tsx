@@ -8,19 +8,14 @@ import Button from 'components/PublicProfile/components/Button'
 import UserIcon from 'components/svg/UserIcon'
 import {useSelector, useDispatch} from 'react-redux'
 import {
-  createProfileRecommendation,
   fetchProfileRecommendationShortList
 } from 'components/ProfileRecommendations/actions'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import {signInOpen, taskOfferOpen} from 'components/Modal/actions'
 import {
-  hideProfileForm,
-  showProfileForm,
   updateProfileAvatar,
   updateProfileByForm
 } from 'components/Profile/actions'
-import AvatarForm from 'components/for_pages/Invite/AvatarForm'
-import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createFollower} from 'components/Follower/actions'
 import {useTranslation} from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
