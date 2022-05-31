@@ -1,8 +1,7 @@
 import styles from './index.module.scss'
-import cx from 'classnames';
+import cx from 'classnames'
 import {UserActivityStatus} from 'types'
-import {useTranslation} from 'i18n'
-import {differenceInDays, differenceInHours, differenceInMinutes, differenceInWeeks} from 'date-fns'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   activityStatus: UserActivityStatus
@@ -10,7 +9,7 @@ interface Props {
 }
 
 export default function ProfileStatus({activityStatus, lastActivityAt}: Props) {
-const {t} = useTranslation();
+const {t} = useTranslation()
 /*
 if(activityStatus === UserActivityStatus.Offline && lastActivityAt){
   const getTimeText = () => {
@@ -48,7 +47,7 @@ if(activityStatus === UserActivityStatus.Offline && lastActivityAt){
 }*/
   return (<div className={cx(styles.root, {
     [styles.offline]: !activityStatus || activityStatus === UserActivityStatus.Offline,
-    [styles.online]:  activityStatus === UserActivityStatus.Online
+    [styles.online]: activityStatus === UserActivityStatus.Online
   })}><div className={styles.circle}/>{activityStatus === UserActivityStatus.Online ? t('online') : t('offline')}</div>)
 
 }

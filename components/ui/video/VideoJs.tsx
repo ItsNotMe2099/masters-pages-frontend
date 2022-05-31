@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import ReactPlayer from "react-player";
+import React, { useEffect, useRef, useState } from 'react'
 import videojs from 'video.js'
 
-import dynamic from 'next/dynamic';
 
 
 interface Props {
@@ -38,46 +36,46 @@ export default function VideoJs(props: Props) {
         'playing',
         'ended',
         'error',
-    ];
+    ]
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [loadOnReady, setLoadOnReady] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
+    const [loadOnReady, setLoadOnReady] = useState(null)
 
-    const [onDurationCalled, setOnDurationCalled] = useState(false);
-    let progressTimeout;
-    let durationCheckTimeout;
-    const videoRef = useRef();
-    const playerRef = useRef();
+    const [onDurationCalled, setOnDurationCalled] = useState(false)
+    let progressTimeout
+    let durationCheckTimeout
+    const videoRef = useRef()
+    const playerRef = useRef()
     const volumeRef = useRef()
     const isReadyRef = useRef(false)
     const isPlayingRef = useRef(false)
-    const seekOnPlay = useRef(0);
-    const prevPlayed = useRef(0);
-    const prevLoaded = useRef(0);
-    const playbackRateRef = useRef();
+    const seekOnPlay = useRef(0)
+    const prevPlayed = useRef(0)
+    const prevLoaded = useRef(0)
+    const playbackRateRef = useRef()
     const getDuration = () => {
         return (playerRef?.current as any).duration()
-    };
+    }
 
     const getCurrentTime = () => {
         return (playerRef?.current as any).currentTime()
-    };
+    }
 
     const getSecondsLoaded = () => {
         return (playerRef?.current as any).bufferedPercent()
-    };
+    }
     const handlePause = (e) => {
         if (!isPlayingRef.current) {
 
         }
-        isPlayingRef.current = false;
+        isPlayingRef.current = false
         if (!seekOnPlay.current) {
-            props.onPause();
+            props.onPause()
         }
 
     }
     const handleEnded = () => {
-        isPlayingRef.current = false;
+        isPlayingRef.current = false
         if (!seekOnPlay.current) {
             props.onEnded()
         }
@@ -85,21 +83,21 @@ export default function VideoJs(props: Props) {
     }
 
     const handleError = (e) => {
-        setIsLoading(false);
+        setIsLoading(false)
         props.onError(e)
     }
     const handlePlay = () => {
 
         if (isPlayingRef.current) {
-            return;
+            return
         }
 
-        isPlayingRef.current = true;
+        isPlayingRef.current = true
 
-        setIsLoading(false);
-        props.onPlay();
+        setIsLoading(false)
+        props.onPlay()
         handleDurationCheck()
-    };
+    }
     const handleDurationCheck = () => {
         clearTimeout(durationCheckTimeout)
 
@@ -108,7 +106,7 @@ export default function VideoJs(props: Props) {
             if (!onDurationCalled) {
 
                 props.onDuration(duration)
-                setOnDurationCalled(true);
+                setOnDurationCalled(true)
             }
         } else {
             durationCheckTimeout = setTimeout(handleDurationCheck, 100)
@@ -117,7 +115,7 @@ export default function VideoJs(props: Props) {
 
     const progress = () => {
         if (seekOnPlay.current) {
-            return;
+            return
         }
         const duration = getDuration()
         const playedSeconds = getCurrentTime() || 0
@@ -150,11 +148,11 @@ export default function VideoJs(props: Props) {
                 //       (playerRef?.current as any).currentTime(seekOnPlay.current)
 
             }
-            return;
+            return
         }
-        isReadyRef.current = true;
-        setIsLoading(true);
-        props.onReady();
+        isReadyRef.current = true
+        setIsLoading(true)
+        props.onReady()
         if (volumeRef.current !== null) {
             (playerRef?.current as any).volume(volumeRef.current)
         }
@@ -165,23 +163,23 @@ export default function VideoJs(props: Props) {
             //  (playerRef as any)?.current?.src({src: loadOnReady});
             // (playerRef?.current as any).load()
 
-            setLoadOnReady(null);
+            setLoadOnReady(null)
         } else if (isPlayingRef.current || seekOnPlay.current) {
 
             (playerRef?.current as any).play()
             if (seekOnPlay.current) {
                 (playerRef?.current as any).currentTime(seekOnPlay.current)
-                seekOnPlay.current = null;
+                seekOnPlay.current = null
             }
 
         }
 
-        handleDurationCheck();
+        handleDurationCheck()
     }
 
     useEffect(() => {
         if (!(playerRef as any)?.current) {
-            return;
+            return
         }
         if (props.playing) {
        //     (playerRef as any)?.current?.play();
@@ -191,60 +189,60 @@ export default function VideoJs(props: Props) {
     }, [props.playing])
 
     useEffect(() => {
-        (volumeRef as any).current = props.volume;
+        (volumeRef as any).current = props.volume
         if (!(playerRef as any)?.current) {
-            return;
+            return
         }
 
-        (playerRef as any)?.current?.volume(props.volume);
+        (playerRef as any)?.current?.volume(props.volume)
 
     }, [props.volume])
     useEffect(() => {
         if (!(playerRef as any)?.current) {
-            return;
+            return
         }
         (playerRef as any)?.current?.playbackRate(props.playbackRate);
-        (playbackRateRef as any).current = props.playbackRate;
+        (playbackRateRef as any).current = props.playbackRate
 
     }, [props.playbackRate])
 
     const handleVideoJsEvent = (event, value) => {
         switch (event) {
             case 'canplay':
-                handleReady();
-                break;
+                handleReady()
+                break
             case 'play':
-                handlePlay();
-                break;
+                handlePlay()
+                break
             case 'pause':
-                handlePause(value);
-                break;
+                handlePause(value)
+                break
             case 'error':
                 handleError(value)
-                break;
+                break
             case 'ended':
                 handleEnded()
-                break;
+                break
             case 'waiting':
-                break;
+                break
             case 'timeupdate':
-                progress();
-                break;
+                progress()
+                break
         }
     }
     const listenEvents = () => {
-        const onEdEvents = {};
+        const onEdEvents = {}
 
         for (let i = 0; i < events.length; i += 1) {
             if (typeof events[i] === 'string' && onEdEvents[events[i]] === undefined) {
                 (event => {
                     const handleEvent = (value) => {
-                        handleVideoJsEvent(event, value);
+                        handleVideoJsEvent(event, value)
                     }
                     onEdEvents[event] = null;
                     (playerRef as any)?.current.off(event);
-                    (playerRef as any)?.current.on(event, handleEvent);
-                })(events[i]);
+                    (playerRef as any)?.current.on(event, handleEvent)
+                })(events[i])
             }
         }
     }
@@ -252,21 +250,21 @@ export default function VideoJs(props: Props) {
     useEffect(() => {
 
         if (!props.source) {
-            return;
+            return
         }
 
-        const video = videoRef?.current as any;
+        const video = videoRef?.current as any
         if (!video) {
-            return;
+            return
         }
 
         if (!playerRef?.current) {
             if (props.playInline) {
-                video.setAttribute('webkit-playsinline', true);
-                video.setAttribute('playsInline', true);
-                video.setAttribute('x5-playsinline', true);
-                video.setAttribute('x5-video-player-type', 'h5');
-                video.setAttribute('x5-video-player-fullscreen', false);
+                video.setAttribute('webkit-playsinline', true)
+                video.setAttribute('playsInline', true)
+                video.setAttribute('x5-playsinline', true)
+                video.setAttribute('x5-video-player-type', 'h5')
+                video.setAttribute('x5-video-player-fullscreen', false)
             }
 
           //  video.crossOrigin = true;
@@ -284,20 +282,20 @@ export default function VideoJs(props: Props) {
                 listenEvents()
 
             });
-            (playerRef as any)?.current?.src({ src: props.source });
+            (playerRef as any)?.current?.src({ src: props.source })
 
-            props.onCreateRef(playerRef.current);
+            props.onCreateRef(playerRef.current)
         } else {
 
-            setIsLoading(true);
-            setOnDurationCalled(false);
+            setIsLoading(true)
+            setOnDurationCalled(false)
 
             if (isPlayingRef.current) {
-                seekOnPlay.current = prevPlayed.current;
+                seekOnPlay.current = prevPlayed.current
             }
-            isReadyRef.current = false;
+            isReadyRef.current = false
             isPlayingRef.current = false;
-            (playerRef as any)?.current?.src({ src: props.source });
+            (playerRef as any)?.current?.src({ src: props.source })
 
         }
 
@@ -306,12 +304,12 @@ export default function VideoJs(props: Props) {
     useEffect(() => {
         return () => {
             if (!(playerRef as any)?.current) {
-                return;
+                return
             }
             for (let i = 0; i < events.length; i += 1) {
                 (event => {
-                    (playerRef as any)?.current.off(event);
-                })(events[i]);
+                    (playerRef as any)?.current.off(event)
+                })(events[i])
 
             }
         }
@@ -320,7 +318,7 @@ export default function VideoJs(props: Props) {
                    height='100%'>
 
         </video>
-    );
-};
+    )
+}
 
 

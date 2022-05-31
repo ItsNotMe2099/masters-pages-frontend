@@ -1,9 +1,7 @@
 import styles from './index.module.scss'
-import {IEvent} from 'types'
-import {format} from 'date-fns'
-import {Calendar, Views, momentLocalizer} from "react-big-calendar";
+import { Views} from 'react-big-calendar'
 import CalendarToolbarViewButton from 'components/Calendar/components/CalendarToolbar/CalendarToolbarViewButton'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -12,8 +10,8 @@ interface Props {
 }
 
 export default function CalendarToolbarViews(props: Props) {
-  const {currentView, onChange} = props;
-  const { t } = useTranslation('common');
+  const {currentView, onChange} = props
+  const { t } = useTranslation('common')
   const options = [
     {label: t('day'), value: Views.DAY},
     {label: t('week'), value: Views.WEEK},

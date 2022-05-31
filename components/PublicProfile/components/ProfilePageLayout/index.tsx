@@ -1,61 +1,66 @@
 import styles from './index.module.scss'
-import CardTitle from 'components/PublicProfile/components/CardTitle'
-import AddCircleIcon from 'components/svg/AddCircleIcon'
-import Loader from 'components/ui/Loader'
 import CardProfile from 'components/PublicProfile/components/view/CardProfile'
 import CardPreferWorkIn from 'components/PublicProfile/components/view/CardPreferWorkIn'
 import CardCategories from 'components/PublicProfile/components/view/CardCategories'
 import CardLanguages from 'components/PublicProfile/components/view/CardLanguages'
 import CardBio from 'components/PublicProfile/components/view/CardBio'
-import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
 import CardReviewsShort from 'components/PublicProfile/components/view/CardReviewsShort'
-import CardRewards from 'components/PublicProfile/components/view/CardRewards'
 
 import Modals from 'components/layout/Modals'
-import {ProfileData} from 'types'
-import {default as React, ReactElement, useEffect, useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import {fetchFeedbacksToProfileShortRequest} from 'components/ProfileFeedback/actions'
+
+import {default as React, useState} from 'react'
 import CardRecommendationsShort from 'components/PublicProfile/components/view/CardRecommendationsShort'
 import Layout from 'components/layout/Layout'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
+import cookie from 'js-cookie'
+import CardAbout from '../view/CardAbout'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import CardOrganization from '../view/CardOrganization'
+import CardLinks from '../view/CardLinks'
 
 
 interface Props{
-  profile: ProfileData,
-  isEdit: boolean,
+  profile?: IProfile,
+  organization?: IOrganization
+  isEdit?: boolean,
   children?: any,
-  subCategory: any,
+  subCategory?: any,
   isCurrentProfileOpened?: boolean
-  onCategoryChange: (categoryId, subCategoryId) => void
+  onCategoryChange?: (categoryId, subCategoryId) => void
 }
 const ProfilePageLayout = (props: Props) => {
-  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened} = props;
-  const isMaster = ['master', 'volunteer'].includes(profile.role);
+  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened, organization} = props
+  const isMaster = ['master', 'volunteer'].includes(profile.role)
   const [isOpen, setIsOpen] = useState(false)
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
+  const mode = cookie.get('mode')
   const getRoleClass = () => {
     switch (profile.role) {
       case 'master':
-        return styles.roleMaster;
+        return styles.roleMaster
       case 'volunteer':
-        return styles.roleVolunteer;
+        return styles.roleVolunteer
       case 'client':
       default:
-        return styles.roleClient;
+        return styles.roleClient
     }
   }
+
+  console.log("LAYOUTORGANIZATION", organization)
   return (
     <Layout isCurrentProfileOpened={isCurrentProfileOpened}  title={<>{t('lookingAt')}  <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>
-          <CardProfile profile={profile} isEdit={isEdit}/>
+          {profile.role === 'corporate' && organization ? <CardOrganization organization={organization} isEdit={isEdit}/> : <CardProfile profile={profile} isEdit={isEdit}/>}
           <div className={styles.desktop}>
-          <CardPreferWorkIn profile={profile} isEdit={isEdit}/>
-          {isMaster && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
-          <CardLanguages profile={profile} isEdit={isEdit}/>
+          {profile.role !== 'corporate' && <CardPreferWorkIn profile={profile} isEdit={isEdit}/>}
+          {isMaster && profile.role !== 'corporate' && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
+          {profile.role !== 'corporate' && <CardLanguages profile={profile} isEdit={isEdit}/>}
           {isMaster && <CardBio profile={profile} isEdit={isEdit}/>}
+          {profile.role === 'corporate' && organization && <CardLinks organization={organization} isEdit={isEdit}/>}
+          {profile.role === 'corporate' && organization && <CardAbout organization={organization} isEdit={isEdit}/>}
           {isMaster && <CardRecommendationsShort profile={profile}/>}
           <CardReviewsShort profile={profile} subCategory={subCategory}/>
           {/*<CardRewards profile={profile}/>*/}

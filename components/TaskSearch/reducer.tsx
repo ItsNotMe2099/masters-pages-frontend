@@ -1,8 +1,7 @@
-import { setSortTaskSearch } from "components/TaskSearch/actions";
-import ApiActionTypes from "constants/api";
-import { ITask, SkillData, SkillListItem } from "types";
-import ActionTypes from "./const";
-import SavedTasksActionTypes from "components/SavedTasks/const";
+import ApiActionTypes from 'constants/api'
+import { ITask } from 'types'
+import ActionTypes from './const'
+import SavedTasksActionTypes from 'components/SavedTasks/const'
 
 export interface TaskSearchState {
   list: ITask[],
@@ -34,7 +33,7 @@ const initialState: TaskSearchState = {
 export default function TaskSearchReducer(state = { ...initialState }, action) {
   switch (action.type) {
     case ActionTypes.TASK_LIST_SET_CURRENT_TASK:
-      state.currentTask = action.payload;
+      state.currentTask = action.payload
       break
     case ActionTypes.FETCH_TASK_LIST:
 
@@ -43,66 +42,66 @@ export default function TaskSearchReducer(state = { ...initialState }, action) {
       state.page = action.payload
       break
     case ActionTypes.TASK_LIST_SET_FILTER:
-      state.filter = action.payload;
+      state.filter = action.payload
       break
     case ActionTypes.TASK_LIST_SET_SORT:
-      state.sortType = action.payload;
+      state.sortType = action.payload
       switch (action.payload) {
         case 'newFirst':
           state.sort = 'id'
           state.sortOrder = 'DESC'
 
-          break;
+          break
         case 'highPrice':
           state.sort = 'budget'
           state.sortOrder = 'DESC'
 
-          break;
+          break
         case 'lowPrice':
           state.sort = 'budget'
           state.sortOrder = 'ASC'
-          break;
+          break
       }
       break
     case ActionTypes.TASK_LIST_SET_USE_LOCATION_FILTER:
-      state.useLocationFilter = action.payload.useFilter;
-      state.exactLocation = action.payload.exactLocation;
+      state.useLocationFilter = action.payload.useFilter
+      state.exactLocation = action.payload.exactLocation
       break
     case ActionTypes.FETCH_TASK_LIST_REQUEST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_TASK_LIST_REQUEST + ApiActionTypes.SUCCESS:
-      state.listLoading = false;
+      state.listLoading = false
       state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
       break
     case ActionTypes.FETCH_TASK_LIST_REQUEST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
 
     case ActionTypes.FETCH_TASK_LIST_ONE_REQUEST + ApiActionTypes.SUCCESS:
       state.list = state.list.map(item => {
         if (item.id === action.payload.id) {
-          return action.payload;
+          return action.payload
         }
-        return item;
+        return item
       })
       break
     case SavedTasksActionTypes.SAVE_TASK_REQUEST + ApiActionTypes.SUCCESS:
       state.list = state.list.map(item => {
         if (item.id === action.payload.taskId) {
-          return {...item, isSavedByCurrentProfile: true};
+          return {...item, isSavedByCurrentProfile: true}
         }
-        return item;
+        return item
       })
-      break;
+      break
     case ActionTypes.RESET_TASK_LIST:
-      state.listLoading = false;
+      state.listLoading = false
       state.list = []
       state.total = 0
       state.page = 1
       break
   }
 
-  return state
+   return {...state}
 }

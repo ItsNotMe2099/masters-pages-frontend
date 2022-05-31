@@ -1,4 +1,4 @@
-import {IProfilePortfolio, IProfileTab, SkillData} from "types";
+import {IProfilePortfolio, IProfileTab} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -17,7 +17,7 @@ export const resetProfilePortfolioForm = () => action(ActionTypes.RESET_PROFILE_
 export const createProfilePortfolio = (data: IProfilePortfolio, formKey: string) => action(ActionTypes.CREATE_PROFILE_PORTFOLIO, { data, formKey})
 export const createProfilePortfolioRequest = (data: IProfilePortfolio) => action(ActionTypes.CREATE_PROFILE_PORTFOLIO_REQUEST, {
   api: {
-    url: `/api/profile-portfolio`,
+    url: '/api/profile-portfolio',
     method: 'POST',
     data: {...data},
   }

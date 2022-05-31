@@ -1,4 +1,4 @@
-import { SkillData } from "types";
+import { SkillData } from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 
@@ -6,7 +6,7 @@ export const resetSkillForm = () => action(ActionTypes.RESET_SKILL_FORM)
 export const createSkillCategory = (data: any) => action(ActionTypes.CREATE_SKILL_CATEGORY, {data})
 export const createSkillCategoryRequest = (data: any) => action(ActionTypes.CREATE_SKILL_CATEGORY_REQUEST, {
   api: {
-    url: `/api/profile/skill/category`,
+    url: '/api/profile/skill/category',
     method: 'POST',
     data: {...data},
   }
@@ -14,7 +14,7 @@ export const createSkillCategoryRequest = (data: any) => action(ActionTypes.CREA
 export const createSkill = (data: SkillData) => action(ActionTypes.CREATE_SKILL, { data})
 export const createSkillRequest = (data: SkillData) => action(ActionTypes.CREATE_SKILL_REQUEST, {
   api: {
-    url: `/api/profile/skill`,
+    url: '/api/profile/skill',
     method: 'POST',
     data: {...data},
   }
@@ -31,7 +31,7 @@ export const updateSkillRequest = (skillId: number, data: SkillData) => action(A
 })
 export const fetchSkillList = () => action(ActionTypes.FETCH_SKILL_LIST, {
   api: {
-    url: `/api/profile/skill`,
+    url: '/api/profile/skill',
     method: 'GET',
   }
 })

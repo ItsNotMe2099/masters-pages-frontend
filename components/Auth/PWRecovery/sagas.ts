@@ -1,24 +1,21 @@
-import { phoneConfirmOpen, PWRecoverySuccessOpen } from "components/Modal/actions";
-import { takeLatest, put, select, takeEvery } from 'redux-saga/effects'
+import { PWRecoverySuccessOpen } from 'components/Modal/actions'
+import { takeLatest, put, select } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
-import requestGen from "utils/requestGen";
+import requestGen from 'utils/requestGen'
 import ActionTypes from './const'
 import {
   PWRecoverySubmit,
   PWRecoverySecondSubmit,
-  PWRecoveryIsSuccess,
   PWRecoveryFinalSubmit,
   PWRecoveryError,
   PWRecoveryFinalError,
   PWRecoverySecondError,
   PWRecoverySuccess,
-  PWRecoverySecondSuccess,
-  PWRecoveryFinalSuccess, PWRecoverySetCode
+  PWRecoverySecondSuccess, PWRecoverySetCode
 } from './actions'
 import { IRequestData, IResponse, IRootState } from 'types'
-import cookie from "js-cookie";
-import PWRecoverySucces from "./Success";
-import {afterAuthRedirect} from 'utils/auth'
+import cookie from 'js-cookie'
+import {afterAuthRedirect} from 'utils/authRedirect'
 
 function* PWRecoverySaga() {
 
@@ -26,7 +23,7 @@ function* PWRecoverySaga() {
   yield takeLatest(ActionTypes.RESET_PW_FIRST_STEP_SUBMIT,
     function* (action: ActionType<typeof PWRecoverySubmit>) {
       const res: IResponse = yield requestGen({
-        url: `/api/auth/forgot`,
+        url: '/api/auth/forgot',
         method: 'POST',
         data: {
           phone: action.payload.phone,
@@ -35,7 +32,7 @@ function* PWRecoverySaga() {
 
       if(!res.err){
         if(res.data.code){
-          yield put(PWRecoverySetCode(res.data.code));
+          yield put(PWRecoverySetCode(res.data.code))
         }
         yield put(PWRecoverySuccess())
         yield put({type: ActionTypes.RESET_PW_FIRST_STEP_SUCCESS})
@@ -49,7 +46,7 @@ function* PWRecoverySaga() {
       function* (action: ActionType<typeof PWRecoverySecondSubmit>) {
 
       const res: IResponse = yield requestGen({
-          url: `/api/auth/phoneConfirmation`,
+          url: '/api/auth/phoneConfirmation',
           method: 'POST',
           data: {
             phone: action.payload.phone,
@@ -58,9 +55,9 @@ function* PWRecoverySaga() {
         } as IRequestData)
 
         if(!res.err){
-          cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
-          yield put(PWRecoverySecondSuccess());
-          yield put(PWRecoverySuccessOpen());
+          cookie.set('token', res.data.accessToken, { expires: 365 * 3 })
+          yield put(PWRecoverySecondSuccess())
+          yield put(PWRecoverySuccessOpen())
         }else{
           yield put(PWRecoverySecondError(res.err?.errors))
         }
@@ -73,7 +70,7 @@ function* PWRecoverySaga() {
           const code = yield select((state: IRootState) => state.PWRecovery.code)
 
           const res: IResponse = yield requestGen({
-            url: `/api/auth/passwordChangeConfirmation`,
+            url: '/api/auth/passwordChangeConfirmation',
             method: 'POST',
             data: {
               newPassword: action.payload.password,
@@ -82,8 +79,8 @@ function* PWRecoverySaga() {
             },
           } as IRequestData)
           if(!res.err){
-            cookie.set("token", res.data.accessToken, { expires: 365 * 3 });
-            afterAuthRedirect();
+            cookie.set('token', res.data.accessToken, { expires: 365 * 3 })
+            afterAuthRedirect()
           }else{
 
             yield put(PWRecoveryFinalError(res.err?.errors))

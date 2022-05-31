@@ -1,15 +1,11 @@
-import AvatarInput from "components/ui/AvatarInput";
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
-import { useSelector, useDispatch, connect } from 'react-redux'
-import { IRootState } from "types";
+import FormError from 'components/ui/Form/FormError'
+import * as React from 'react'
+import { useSelector, connect } from 'react-redux'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import {useTranslation, withTranslation} from "i18n";
-import TextArea from 'components/ui/Inputs/TextArea'
+import { useTranslation } from 'next-i18next'
 import Button from 'components/PublicProfile/components/Button'
-import InputAddress from 'components/ui/Inputs/InputAddress'
 import SelectInput from 'components/ui/Inputs/SelectInput'
 import {LanguagesList} from 'data/languages'
 import {required} from 'utils/validations'
@@ -19,7 +15,7 @@ interface Props{
   onSubmit?: (data) => void
 }
 let LanguageForm = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const error = useSelector((state: IRootState) => state.profile.formErrorByKey['language'])
 
   return (

@@ -1,6 +1,5 @@
 import StarRating from 'components/svg/StarRating'
-import StarRatingStroke from 'components/svg/StarRatingStroke';
-import { useState } from 'react'
+import StarRatingStroke from 'components/svg/StarRatingStroke'
 import styles from './index.module.scss'
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 
@@ -11,7 +10,7 @@ interface Props {
 }
 
 export default function Rating(props: Props) {
-  const { value, onChange } = props.input;
+  const { value, onChange } = props.input
 
   return (
     <div className={styles.root}>
@@ -24,5 +23,5 @@ export default function Rating(props: Props) {
     </div>
       <ErrorInput {...props}/>
       </div>
-  );
+  )
 }

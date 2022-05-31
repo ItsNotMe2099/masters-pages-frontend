@@ -1,15 +1,9 @@
 import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
-import Input from 'components/ui/Inputs/Input'
 import * as React from 'react'
-import {IRootState, ISharePersonalLabel} from 'types'
+import { ISharePersonalLabel} from 'types'
 import Phone from 'components/svg/Phone'
-var QRCode = require('qrcode.react');
-import parsePhoneNumber, {isPossiblePhoneNumber} from 'libphonenumber-js'
-import Logo from 'components/Logo'
-import LogoSvg from 'components/svg/Logo'
-import LogoMobileSvg from 'components/svg/LogoMobileSvg'
-import Link from 'next/link'
+const QRCode = require('qrcode.react')
+import parsePhoneNumber from 'libphonenumber-js'
 interface Props {
   name: string,
   phone: string,
@@ -22,22 +16,22 @@ interface Props {
 const ShareLabel = React.forwardRef((props: Props, ref) => {
   const {settings, name, id, phone, link} = props
 
-  const phoneNumber = phone ? parsePhoneNumber(phone) : null;
-  const showInfo = settings.options.webAddress || settings.options.name || settings.options.phone;
+  const phoneNumber = phone ? parsePhoneNumber(phone) : null
+  const showInfo = settings.options.webAddress || settings.options.name || settings.options.phone
   const getThemeClass = () => {
     switch (settings.theme){
       case 'dark':
-        return styles.dark;
+        return styles.dark
       case 'light':
-        return styles.light;
+        return styles.light
     }
   }
   const getStyleClass = () => {
     switch (settings.style){
       case 'vertical':
-        return styles.vertical;
+        return styles.vertical
       case 'horizontal':
-        return styles.horizontal;
+        return styles.horizontal
     }
   }
   return (
@@ -63,4 +57,4 @@ const ShareLabel = React.forwardRef((props: Props, ref) => {
     </div>
   )
 })
-export default ShareLabel;
+export default ShareLabel

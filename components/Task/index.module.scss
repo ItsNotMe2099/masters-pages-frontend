@@ -8,13 +8,13 @@
   &:first-of-type {
     margin-top: 0px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     flex-direction: column;
   }
 }
 .wrapper{
   display: flex;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     flex-direction: column;
   }
 }
@@ -23,7 +23,7 @@
 }
 .profile{
   padding: 20px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: flex;
     border-bottom: 1px solid #cccccc;
   }
@@ -46,7 +46,7 @@
   @media screen and (min-width: $md-min){
     max-width: 224px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 100%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -59,7 +59,7 @@
 }
 .paymentLarge{
   max-width: 255px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     max-width: 100%;
   }
 }
@@ -89,7 +89,7 @@
 
   div {
     flex: 1;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       flex: 0;
       margin-right: 21px;
     }
@@ -106,7 +106,7 @@
 }
 
 .mobileWrapper{
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin: auto 0 auto 19px;
   }
 }
@@ -114,7 +114,7 @@
 .name {
   display: flex;
   flex: 1;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
   &__mobile{
@@ -130,7 +130,7 @@
   .title{
     padding-top: 0px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     flex: 0;
   }
 }
@@ -164,7 +164,7 @@
   img {
     margin-right: 9px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 
@@ -200,7 +200,7 @@
   &:hover{
     text-decoration: underline;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     text-align: center;
     padding: 0;
     margin: auto 0;
@@ -216,7 +216,7 @@
   font-weight: 500;
   font-size: 14px;
   padding-top: 5px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin-top: 14px;
   }
 }
@@ -228,7 +228,7 @@
   @media screen and (min-width: $md-min){
     text-align: center;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     text-align: center;
   }
 }
@@ -244,7 +244,7 @@
 
   img {
     margin-right: 9px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       width: 16px;
     }
   }
@@ -253,7 +253,7 @@
   .methodSafe {
     display: flex;
     margin-top: 8px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       flex: 1;
     }
 
@@ -264,7 +264,7 @@
 
     img {
       margin-right: 9px;
-      @media screen and (max-width: $sm-max){
+      @media screen and (max-width: $xs-max){
         width: 16px;
       }
     }
@@ -284,7 +284,7 @@
   color: #000;
 
   margin-top: 15px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin: auto 8px auto 0;
   }
 }
@@ -319,7 +319,7 @@
   background: #414141;
   margin: 0px 22px;
   opacity: 0.3;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }
@@ -327,7 +327,7 @@
 .bottom {
   display: flex;
   margin-top: 10px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     font-weight: 500;
     font-size: 14px;
     div{
@@ -426,14 +426,14 @@
 }
 
 .methodWrapper{
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: flex;
     grid-gap: 12px;
   }
 }
 
 .priceWrapper{
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: flex;
     margin-top: 22px;
   }
@@ -441,13 +441,13 @@
 
 .mobile{
   display: none;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: block;
   }
 }
 
 .desktop{
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: none;
   }
 }
@@ -456,13 +456,13 @@
   font-weight: bold;
   font-size: 14px;
   color: #000;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin: auto 8px auto 0;
   }
 }
 
 .priceDetailsItem{
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: flex;
   }
 }

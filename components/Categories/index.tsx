@@ -1,8 +1,7 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
 import CategoryItem from './CategoryItem'
 import Button from 'components/ui/Button'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {}
 
@@ -23,7 +22,7 @@ export default function Categories(props: Props) {
     { icon: 'img/icons/service.svg', name: 'Сантехничесие услуги', color: '#38C7D7' },
     { icon: 'img/icons/service.svg', name: 'Сантехничесие услуги', color: '#38C7D7' },
   ]
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   return (
     <div className={styles.root}>
       <div className={styles.title}>{t('categories.findSpecialist')}</div>

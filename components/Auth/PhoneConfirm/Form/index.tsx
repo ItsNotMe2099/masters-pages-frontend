@@ -1,17 +1,18 @@
 import Button from 'components/ui/Button'
-import FormError from "components/ui/Form/FormError";
-import OtpCodeInput from "components/ui/Inputs/OtpCodeInput";
+import FormError from 'components/ui/Form/FormError'
+import OtpCodeInput from 'components/ui/Inputs/OtpCodeInput'
 import { Field, reduxForm } from 'redux-form'
-import { IRootState } from "types";
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'next-i18next'
+import {useAuthContext} from 'context/auth_state'
 
 let PhoneConfirmForm = props => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const { handleSubmit } = props
-  const error = useSelector((state: IRootState) => state.phoneConfirmReducer.formError)
-
+  const authContext = useAuthContext();
+  const error = authContext.error;
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Field

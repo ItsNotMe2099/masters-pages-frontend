@@ -1,26 +1,22 @@
-import { confirmOpen, modalClose, taskShowOffer } from "components/Modal/actions";
-import { createSkill, fetchSkillList, resetSkillForm, updateSkill } from "components/Skill/actions";
+import { confirmOpen, modalClose, taskShowOffer } from 'components/Modal/actions'
 import {
   taskNegotiationAcceptTaskResponse,
-  taskNegotiationCreateTaskResponse,
   taskNegotiationDeclineTaskResponse
-} from "components/TaskNegotiation/actions";
-import TaskOfferAcceptForm from "components/TaskNegotiation/TaskOfferAcceptModal/TaskOfferAcceptForm";
-import AvatarRound from "components/ui/AvatarRound";
-import Button from "components/ui/Button";
+} from 'components/TaskNegotiation/actions'
+import AvatarRound from 'components/ui/AvatarRound'
+import Button from 'components/ui/Button'
 
-import Modal from "components/ui/Modal";
-import { format } from "date-fns";
-import { useRouter } from "next/router";
+import Modal from 'components/ui/Modal'
+import { format } from 'date-fns'
+import { useRouter } from 'next/router'
 
-import { useEffect } from "react";
-import * as React from "react";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
+import * as React from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -32,8 +28,8 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
   const loading = useSelector((state: IRootState) => state.taskOffer.taskResponseLoading)
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   const response = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
   const {t} = useTranslation('common')
 
   const handleDecline = (e) => {
@@ -43,9 +39,9 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         dispatch(taskNegotiationDeclineTaskResponse(response.taskId, response.id))
       },
       onCancel: () => {
-        dispatch(taskShowOffer());
+        dispatch(taskShowOffer())
       }
-    }));
+    }))
   }
   const handleAccept = (e) => {
     dispatch(confirmOpen({
@@ -54,13 +50,13 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
         dispatch(taskNegotiationAcceptTaskResponse(response))
       },
       onCancel: () => {
-        dispatch(taskShowOffer());
+        dispatch(taskShowOffer())
       }
-    }));
+    }))
   }
   const handleMessages = () => {
-    router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`);
-    dispatch(modalClose());
+    router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`)
+    dispatch(modalClose())
   }
 
   return (
@@ -68,7 +64,7 @@ const TaskOfferShowModal = ({ isOpen, onClose }: Props) => {
            onRequestClose={onClose}>
       <div className={styles.header}>
         <div className={styles.icon}>
-          <img src={`/img/icons/message.svg`}/>
+          <img src={'/img/icons/message.svg'}/>
         </div>
         <div className={styles.title}>{t('taskNegotiation.coverLetter')}</div>
       </div>

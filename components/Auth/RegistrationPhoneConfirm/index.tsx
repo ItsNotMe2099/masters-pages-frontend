@@ -1,11 +1,10 @@
-import { phoneConfirmSubmit } from "components/Auth/PhoneConfirm/actions";
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
-import {registrationPhoneConfirm} from "../RegistrationPhone/actions";
+import { useTranslation } from 'next-i18next'
+import {registrationPhoneConfirm} from '../RegistrationPhone/actions'
 
 interface Props {
   isOpen: boolean
@@ -13,12 +12,12 @@ interface Props {
 }
 
 const RegistrationPhoneConfirm = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.registrationPhone.confirmLoading)
   const code = useSelector((state: IRootState) => state.registrationPhone.code)
   const handleSubmit = (data) => {
-    dispatch(registrationPhoneConfirm(data));
+    dispatch(registrationPhoneConfirm(data))
   }
   return (
     <Modal
@@ -39,4 +38,4 @@ const RegistrationPhoneConfirm = (props: Props) => {
     </Modal>
   )
 }
-export default RegistrationPhoneConfirm;
+export default RegistrationPhoneConfirm

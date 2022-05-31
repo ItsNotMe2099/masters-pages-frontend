@@ -1,14 +1,11 @@
-import { chatLogin, chatLogout, fetchChat, fetchChatMessages, updateChatMessagesState } from "components/Chat/actions";
-import ChatMessage from "components/Chat/ChatMessage";
-import ChatNewMessage from "components/Chat/ChatNewMessage";
-import ChatTitle from "components/Chat/ChatTitle";
-import { fetchProfileSearchList, setPageProfileSearch } from "components/ProfileSearch/actions";
-import Loader from "components/ui/Loader";
-import Modal from "components/ui/Modal";
-import Profile from "components/ui/Profile";
-import { default as React, useEffect, useRef, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { IChat, IRootState } from "types";
+import { chatLogin, chatLogout, fetchChatMessages, updateChatMessagesState } from 'components/Chat/actions'
+import ChatMessage from 'components/Chat/ChatMessage'
+import ChatNewMessage from 'components/Chat/ChatNewMessage'
+import ChatTitle from 'components/Chat/ChatTitle'
+import Loader from 'components/ui/Loader'
+import { default as React, useEffect, useRef, useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { IChat, IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -31,7 +28,7 @@ export default function ChatMessageList({chat, onClick}: Props) {
   const total = useSelector((state: IRootState) => state.chat.totalMessages)
   const messagesLoading = useSelector((state: IRootState) => state.chat.chatLoading)
   const lastMessageId = useSelector((state: IRootState) => state.chat.lastMessageId)
-  const scrollableTarget = useRef(null);
+  const scrollableTarget = useRef(null)
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -40,7 +37,7 @@ export default function ChatMessageList({chat, onClick}: Props) {
       if (messages.length > 50) {
         for (const message of messages) {
           if (!message?.profileStates || message?.profileStates.length === 0){
-            continue;
+            continue
           }
           if (message?.profileStates[0]?.read) {
             break
@@ -50,7 +47,7 @@ export default function ChatMessageList({chat, onClick}: Props) {
       } else {
         for (const message of messages) {
           if (!message?.profileStates || message?.profileStates.length === 0){
-            continue;
+            continue
           }
           if (message?.profileStates[0]?.read) {
             continue
@@ -84,12 +81,12 @@ export default function ChatMessageList({chat, onClick}: Props) {
   }
   useEffect(() => {
     if (lastMessageId && scrollableTarget?.current) {
-       scrollableTarget.current.scroll({ top: scrollableTarget?.current.scrollHeight, behavior: 'smooth' });
+       scrollableTarget.current.scroll({ top: scrollableTarget?.current.scrollHeight, behavior: 'smooth' })
     }
   }, [lastMessageId])
 
   if (total === 0 && messagesLoading) {
-    return <Loader/>;
+    return <Loader/>
   }
 
   return (<div className={styles.root}>
@@ -103,7 +100,7 @@ export default function ChatMessageList({chat, onClick}: Props) {
           dataLength={messages.length} //This is important field to render the next data
           next={handleScrollNext}
           inverse={true}
-          scrollableTarget={"chat-messages"}
+          scrollableTarget={'chat-messages'}
           hasMore={total > messages.length}
           loader={<Loader/>}>
           {messages.map(message => <ChatMessage key={message.id} message={message} chat={chat}/>)}

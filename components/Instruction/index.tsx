@@ -1,11 +1,11 @@
 import styles from './index.module.scss'
 import SimpleSlider from './Slider'
-import {useTranslation, withTranslation, Trans} from "i18n";
+import { useTranslation, Trans } from 'next-i18next'
 
 interface Props {}
 
 export default function Instruction(props: Props) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   return (
     <div className={styles.root}>
       <div className={styles.title}>{t('instruction.howItWorks')}</div>

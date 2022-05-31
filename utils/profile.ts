@@ -22,16 +22,18 @@ export const getProfilePageProps = (mode) => async (ctx) => {
   }else if(profilePageType?.type === ProfilePageType.Profile){
     profile = (await request({ url: `/api/profile/${profilePageType.id}`, method: 'GET' }))?.data
   }else{
+    console.log("Profile not found0 ", ctx.query)
     return {
       notFound: true
     }
   }
   if(!profile){
+    console.log("Profile not found1 ", ctx.query)
     return {
       notFound: true
     }
   }
-
+  console.log("Profile not found2 ", ctx.query)
   const res = await getAuthServerSide()(ctx as any);
   return {props: {...(res as any).props, profile, skill, ...getProfilePageShowTypeProps(ctx)}}
 
@@ -56,11 +58,3 @@ export const getProfilePageShowTypeProps =  (ctx) => {
   return {showType};
 }
 
-export const getProfileRoleByRoute = (route: string) => {
-  if(route.includes('MasterProfile')){
-    return 'master'
-  }else if(route.includes('VolunteerProfile')){
-    return 'volunteer'
-  }
-  return null;
-}

@@ -3,10 +3,9 @@ import styles from './index.module.scss'
 import CalendarSideBarCalendar from 'components/Calendar/components/CalendarSideBar/CalendarSideBarCalendar'
 import CalendarSideBarEvents from 'components/Calendar/components/CalendarSideBar/CalendarSideBarEvents'
 import Plus from 'components/svg/Plus'
-import {IEvent, IRootState} from 'types'
+import { IRootState} from 'types'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {createEventOpen} from 'components/Modal/actions'
 import {format, isSameDay} from 'date-fns'
 
 interface Props {
@@ -18,13 +17,13 @@ interface Props {
 
 
 export default function CalendarSideBar(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const eventsSidebar = useSelector((state: IRootState) => state.event.listSideBar)
-  const {currentDate, onChange, onCreate, onClickEvent} = props;
+  const {currentDate, onChange, onCreate, onClickEvent} = props
   const getTomorrowDate = () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
-    return tomorrow;
+    return tomorrow
   }
   return (
     <div className={`${styles.root}`}>

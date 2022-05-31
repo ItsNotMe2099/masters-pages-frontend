@@ -5,6 +5,7 @@
   padding: 4px 29px;
   @media screen and (max-width: 850px){
     flex-direction: column;
+    align-self: flex-start;
     .time{
       order: 1;
     }
@@ -14,6 +15,9 @@
   }
 }
 .rootAuthor{
+  @media screen and (max-width: 850px){
+    align-self: flex-end;
+  }
   .time{
     order: 1;
     text-align: right;

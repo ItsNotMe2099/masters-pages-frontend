@@ -1,5 +1,4 @@
 import styles from './index.module.scss'
-import Link from 'next/link'
 import FormEditIcon from 'components/svg/FormEditIcon'
 import AddCircleIcon from 'components/svg/AddCircleIcon'
 import FormArrowDownIcon from 'components/svg/FormArrowDownIcon'
@@ -7,8 +6,8 @@ import FormArrowUpIcon from 'components/svg/FormArrowUpIcon'
 import FormDeleteIcon from 'components/svg/FormDeleteIcon'
 
 interface Props {
-  type: 'edit' | 'create' | 'moveDown' | 'moveUp' | 'delete',
-  title: string,
+  type?: 'edit' | 'create' | 'moveDown' | 'moveUp' | 'delete',
+  title?: string,
   children?: any
   onClick: () => void
 }

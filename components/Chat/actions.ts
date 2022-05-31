@@ -7,10 +7,10 @@ export const fetchChatListFirst = () => action(ActionTypes.FETCH_CHAT_LIST_FIRST
 export const fetchChatListFirstSuccess = () => action(ActionTypes.FETCH_CHAT_LIST_FIRST_SUCCESS, {})
 
 export const fetchChatTasksList = () => action(ActionTypes.FETCH_CHAT_LIST, {
-  api: `/api/chat/task-dialog`,
+  api: '/api/chat/task-dialog',
 })
 export const fetchChatWithUsersList = () => action(ActionTypes.FETCH_CHAT_LIST, {
-  api: `/api/chat/dialog`,
+  api: '/api/chat/dialog',
 })
 export const fetchChat = (id: number) => action(ActionTypes.FETCH_CHAT, {
   api: `/api/chat/${id}`,
@@ -36,7 +36,7 @@ export const fetchOneChatMessage = (messageId) => action(ActionTypes.FETCH_CHAT_
 })
 export const updateChatMessagesState = ({ids, read}) => action(ActionTypes.UPDATE_CHAT_MESSAGES_STATE, {
   api: {
-    url: `/api/chat/messages/state`,
+    url: '/api/chat/messages/state',
     method: 'POST',
     data: {
       ids,

@@ -1,0 +1,26 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  display: flex;
+}
+
+.buttons{
+ display: flex;
+  align-items: center;
+  flex-direction: row;
+  > button{
+    &:first-of-type{
+      margin-right: 16px;
+    }
+  }
+}
+
+.textarea{
+  border: 1px solid #909090 !important;
+  border-radius: 10px !important;
+}
+
+.invisible{
+  display: none;
+}

@@ -1,13 +1,16 @@
-import {signInReset, signInSubmit} from "components/Auth/SignIn/actions";
+import {signInReset, signInSubmit} from 'components/Auth/SignIn/actions'
 import Button from 'components/ui/Button'
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import SignIn from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import {  PWRecoveryOpen, signUpOpen } from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import {useEffect} from 'react'
+import AuthRepository from 'data/repositories/AuthRepository'
+import {useAppContext} from 'context/state'
+import {useAuthContext} from 'context/auth_state'
 
 interface Props {
   isOpen?: boolean
@@ -17,20 +20,21 @@ interface Props {
 }
 
 const SignInComponent = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
+  const authContext = useAuthContext();
   const dispatch = useDispatch()
-  const isLoading = useSelector((state: IRootState) => state.authSignIn.loading)
+  const isLoading = authContext.loginSpinner
 
 
   useEffect(() => {
-    dispatch(signInReset());
+    authContext.clear();
   }, [])
-  const handleSubmit = (data) => {
-    dispatch(signInSubmit(data));
+  const handleSubmit = async (data) => {
+    authContext.login(data);
   }
   return (
     <Modal{...props} loading={isLoading}>
-    
+
         <div className={styles.logo}>
           <img src='/img/icons/logo.svg' alt=''/>
         </div>
@@ -63,4 +67,4 @@ const SignInComponent = (props: Props) => {
     </Modal>
   )
 }
-export default SignInComponent;
+export default SignInComponent

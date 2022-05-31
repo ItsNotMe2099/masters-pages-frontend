@@ -1,0 +1,49 @@
+@import "scss/index";
+
+.root{
+
+}
+
+.top{
+  display: flex;
+}
+
+.filtersBtn{
+  background: #F6F6F6;
+  border: 1px solid #C4C4C4;
+  border-radius: 4px;
+  padding: 12px 30px;
+  margin-left: 12px;
+  display: flex;
+  cursor: pointer;
+  &:hover{
+    background-color: #b7b7b7;
+  }
+}
+
+.icon{
+  display: flex;
+  margin-right: 11px;
+}
+
+.text{
+  display: flex;
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+  align-items: center;
+}
+
+.panel{
+  background-color: #fff;
+  padding: 22px 0 24px 20px;
+}
+
+.visible{
+  background: #fff;
+  border: 1px solid #fff;
+  height: 62px;
+  &:hover{
+    background-color: #fff;
+  }
+}

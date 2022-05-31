@@ -1,4 +1,4 @@
-import {IEvent, IEventExpense, IProfileTab, SkillData} from "types";
+import {IEvent, IEventExpense} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -18,7 +18,7 @@ export const updateEventExpenses = (type, data: IEventExpense[]) => action(Actio
 export const createEvent = (data: IEvent, formKey?: string) => action(ActionTypes.CREATE_EVENT, { data, formKey})
 export const createEventRequest = (data: IEvent) => action(ActionTypes.CREATE_EVENT_REQUEST, {
   api: {
-    url: `/api/event`,
+    url: '/api/event',
     method: 'POST',
     data: {...data},
   }

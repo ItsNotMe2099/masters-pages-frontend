@@ -1,13 +1,13 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
 import Button from 'components/ui/Button'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
 }
 
 export default function BannerSection(props: Props) {
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
       <div className={styles.container}>

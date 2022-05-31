@@ -1,18 +1,18 @@
 import InputCategory from 'components/ui/Inputs/InputCategory'
-import InputPriceFilter from "components/ui/Inputs/InputPriceFilter";
-import SelectInput from "components/ui/Inputs/SelectInput";
+import InputPriceFilter from 'components/ui/Inputs/InputPriceFilter'
+import SelectInput from 'components/ui/Inputs/SelectInput'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
 import { connect } from 'react-redux'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
-import {useWindowWidth} from "@react-hook/window-size";
-import Input from "../../../ui/Inputs/Input";
-import * as React from "react";
-import {useTranslation} from "i18n";
+import {useWindowWidth} from '@react-hook/window-size'
+import Input from '../../../ui/Inputs/Input'
+import * as React from 'react'
+import { useTranslation } from 'next-i18next'
 import {IRootState} from 'types'
 import {useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 interface Props{
   type: 'master' | 'client'
   collapsed: boolean
@@ -22,11 +22,11 @@ interface Props{
   initialValues: any
 }
 let SearchProfileForm = (props) => {
-  const {change} = props;
-  const { t } = useTranslation();
+  const {change} = props
+  const { t } = useTranslation()
   const { handleSubmit, collapsed } = props
   const width = useWindowWidth()
-  const isMobile = width < 700;
+  const isMobile = width < 700
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
 
   useEffect(() => {
@@ -54,7 +54,7 @@ let SearchProfileForm = (props) => {
                 showEmpty={true}
                 labelType={'placeholder'}
                 onChange={() => {
-                  props.change('subCategoryId', null);
+                  props.change('subCategoryId', null)
                 }}
               />
               {!isMobile && <Field
@@ -99,8 +99,8 @@ let SearchProfileForm = (props) => {
                 showEmpty={true}
                 labelType={'placeholder'}
                 onChange={() => {
-                  props.change('categoryId', null);
-                  props.change('subCategoryId', null);
+                  props.change('categoryId', null)
+                  props.change('subCategoryId', null)
                 }}
               />
               <Field
@@ -142,7 +142,7 @@ let SearchProfileForm = (props) => {
                 withIcon={false}
                 showEmpty={true}
                 onChange={() => {
-                    props.change('subCategoryId', null);
+                    props.change('subCategoryId', null)
                 }}
                 labelType={'placeholder'}
               />
@@ -259,6 +259,7 @@ const selector = formValueSelector('searchTaskForm') // <-- same as form name
 SearchProfileForm = connect(state => {
   const mainCategoryId = selector(state, 'mainCategoryId')
   const categoryId = selector(state, 'categoryId')
+  console.log('MainCateogryForm', mainCategoryId)
   return {
     categoryId,
     mainCategoryId,

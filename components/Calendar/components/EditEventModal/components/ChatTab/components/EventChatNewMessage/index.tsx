@@ -1,15 +1,15 @@
-import { fetchChat, sendMessage } from "components/Chat/actions";
-import CloseIcon from "components/svg/CloseIcon";
-import TextArea from "components/ui/Inputs/TextArea";
-import Loader from "components/ui/Loader";
-import { default as React, useEffect, useState } from "react";
-import { IRootState } from "types";
-import { isMediaImage } from "utils/media";
+import { sendMessage } from 'components/Chat/actions'
+import CloseIcon from 'components/svg/CloseIcon'
+import TextArea from 'components/ui/Inputs/TextArea'
+import Loader from 'components/ui/Loader'
+import { default as React, useEffect, useState } from 'react'
+import { IRootState } from 'types'
+import { isMediaImage } from 'utils/media'
 import styles from './index.module.scss'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 import EventChatAttachFile
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventChatNewMessage/components/ChatAttachFile'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 interface Props {
 
 }
@@ -17,38 +17,38 @@ interface Props {
 export default function EventChatNewMessage(props: Props) {
   const dispatch = useDispatch()
   const {chat, messageSentError, messageIsSending, messageSentSuccess} = useSelector((state: IRootState) => state.chat)
-  const [message, setMessage] = useState('');
-  const [files, setFiles] = useState([]);
-  const {t} = useTranslation('common');
+  const [message, setMessage] = useState('')
+  const [files, setFiles] = useState([])
+  const {t} = useTranslation('common')
   const handleSendMessage = () => {
-    console.log("handleSendMessage");
+    console.log('handleSendMessage')
     if((message || files.length > 0) && chat) {
-      console.log("Files send", files);
+      console.log('Files send', files)
       dispatch(sendMessage({ message, chatId: chat.id, files: files.map(file => file.fileKey) }))
     }
   }
   const handleFileUploaded = (result) => {
-    setFiles([result]);
+    setFiles([result])
   }
   const handleFileDrop = (file) => {
-    setFiles([file]);
+    setFiles([file])
   }
   const handleChange = (e) => {
-    setMessage(e.currentTarget.value);
+    setMessage(e.currentTarget.value)
   }
   useEffect(() => {
     if(messageSentSuccess){
       setMessage('')
-      setFiles([]);
+      setFiles([])
     }
   }, [messageSentSuccess])
   const handleDeleteFile = () => {
-    setFiles([]);
+    setFiles([])
   }
   const getImageSrc = (file) => {
-    const srcValue = file?.preview ? file.preview : file.fileKey;
+    const srcValue = file?.preview ? file.preview : file.fileKey
     if(!srcValue){
-      return;
+      return
     }
     return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
   }

@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import {IRootState, ProfileData, ProfileWorkExperience, SkillData} from 'types'
+import {IRootState, ProfileWorkExperience, SkillData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import CardWorkExperienceListItem
   from 'components/PublicProfile/components/view/CardWorkExperience/components/CardWorkExperienceListItem'
@@ -14,45 +14,43 @@ import {
 } from 'components/ProfileWorkExpirience/actions'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {hideProfileForm, showProfileForm} from 'components/Profile/actions'
-import {updateSkillByForm} from 'components/Skill/actions'
-import SalesPitchForm from 'components/PublicProfile/components/view/CardSalesPitch/Form'
 import CardAdd from 'components/PublicProfile/components/CardAdd'
 import {confirmOpen} from 'components/Modal/actions'
-import {taskNegotiationDeclineConditions} from 'components/TaskNegotiation/actions'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean,
   skill: SkillData
 }
 const CardWorkExperience = (props: Props) => {
-  const { profile, skill, isEdit } = props;
-  const dispatch = useDispatch();
+  const { profile, skill, isEdit } = props
+  const dispatch = useDispatch()
   const {i18n, t} = useTranslation('common')
 
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'workExperience');
-  const list = useSelector((state: IRootState) => state.profileWorkExperience.list);
-  const listLoading = useSelector((state: IRootState) => state.profileWorkExperience.listLoading);
-  const formLoading = useSelector((state: IRootState) => state.profileWorkExperience.formLoading);
-  const [currentEditModel, setCurrentEditModel] = useState(null);
-  const [currentSkillId, setCurrentSkillId] = useState(null);
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'workExperience')
+  const list = useSelector((state: IRootState) => state.profileWorkExperience.list)
+  const listLoading = useSelector((state: IRootState) => state.profileWorkExperience.listLoading)
+  const formLoading = useSelector((state: IRootState) => state.profileWorkExperience.formLoading)
+  const [currentEditModel, setCurrentEditModel] = useState(null)
+  const [currentSkillId, setCurrentSkillId] = useState(null)
   useEffect(() => {
     if(!skill || (currentSkillId === skill?.id)){
       return
     }
-    dispatch(resetProfileWorkExperienceList());
+    dispatch(resetProfileWorkExperienceList())
     dispatch(fetchProfileWorkExperienceList({
       profileId: profile.id,
       categoryId: skill.categoryId,
       subCategoryId: skill.subCategoryId
-    }));
+    }))
     setCurrentSkillId(skill.id)
-  }, [skill]);
+  }, [skill])
 
   const handleCreateClick = () => {
-    setCurrentEditModel(null);
-    dispatch(showProfileForm( 'workExperience'));
+    setCurrentEditModel(null)
+    dispatch(showProfileForm( 'workExperience'))
 
   }
   const handleSubmit = (data) => {
@@ -61,26 +59,26 @@ const CardWorkExperience = (props: Props) => {
         profileId: profile.id,
         categoryId: skill.categoryId,
         subCategoryId: skill.subCategoryId, ...data
-      }, 'workExperience'));
+      }, 'workExperience'))
     }else{
       dispatch(updateProfileWorkExperience(currentEditModel.id, {...data
-      }, 'workExperience'));
+      }, 'workExperience'))
     }
   }
   const handleCancel = () => {
-    dispatch(hideProfileForm( 'workExperience'));
+    dispatch(hideProfileForm( 'workExperience'))
   }
   const handleEdit = (model: ProfileWorkExperience) => {
-    setCurrentEditModel(model);
-    dispatch(showProfileForm( 'workExperience'));
+    setCurrentEditModel(model)
+    dispatch(showProfileForm( 'workExperience'))
   }
   const handleDelete = (model: ProfileWorkExperience) => {
     dispatch(confirmOpen({
       description: t('post.areYouSureToDelete', { model }),
       onConfirm: () => {
-        dispatch(deleteProfileWorkExperience(model.id));
+        dispatch(deleteProfileWorkExperience(model.id))
       }
-    }));
+    }))
 
   }
   return (

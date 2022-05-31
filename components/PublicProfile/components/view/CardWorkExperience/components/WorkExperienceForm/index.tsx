@@ -1,17 +1,15 @@
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import TextArea from "components/ui/Inputs/TextArea";
-import * as React from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { IRootState } from "types";
+import FormError from 'components/ui/Form/FormError'
+import Input from 'components/ui/Inputs/Input'
+import TextArea from 'components/ui/Inputs/TextArea'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
 import Button from 'components/PublicProfile/components/Button'
-import {birthdate, date, required} from 'utils/validations'
+import { date, required} from 'utils/validations'
 import AvatarInput from 'components/ui/AvatarInput'
-import {format, parse} from 'date-fns'
-import {dateFormat} from 'utils/masks'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 import InputDate from 'components/ui/Inputs/InputDate'
 
 let WorkExperienceForm = (props) => {
@@ -47,7 +45,7 @@ let WorkExperienceForm = (props) => {
           component={InputDate}
           size={'small'}
           label={t('cardWorkExperience.form.toDate')}
-          validate={[required, date]}
+          validate={[date]}
           labelType={'placeholder'}
         />
       </div>

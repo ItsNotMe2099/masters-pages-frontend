@@ -1,6 +1,6 @@
-import ApiActionTypes from "constants/api";
-import {IProfileGalleryItem, IProfileTab, SkillData, SkillListItem} from "types";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import {IProfileGalleryItem} from 'types'
+import ActionTypes from './const'
 export interface NewsState {
   list: IProfileGalleryItem[],
   currentItem: IProfileGalleryItem
@@ -54,68 +54,68 @@ export default function NewsReducer(state = {...initialState}, action) {
   switch(action.type) {
 
     case ActionTypes.FETCH_NEWS_LIST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_NEWS_LIST + ApiActionTypes.SUCCESS:
-      state.list = [...state.list, ...action.payload.data];
+      state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.FETCH_NEWS_LIST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
 
     case ActionTypes.FETCH_NEWS:
-      state.currentItemLoading = true;
+      state.currentItemLoading = true
 
       break
     case ActionTypes.FETCH_NEWS + ApiActionTypes.SUCCESS:
       state.currentItem = action.payload
-      state.currentItemLoading = false;
+      state.currentItemLoading = false
       break
     case ActionTypes.FETCH_NEWS + ApiActionTypes.FAIL:
-      state.currentItemLoading = false;
+      state.currentItemLoading = false
       break
 
     case ActionTypes.FETCH_NEWS_ITEM_COMMENT_LIST_REQUEST:
-      state.currentItemCommentLoading = true;
+      state.currentItemCommentLoading = true
 
       break
     case ActionTypes.FETCH_NEWS_ITEM_COMMENT_LIST_REQUEST + ApiActionTypes.SUCCESS:
-      state.currentItemCommentList = [...state.currentItemCommentList, ...action.payload.data];
+      state.currentItemCommentList = [...state.currentItemCommentList, ...action.payload.data]
       state.currentItemCommentTotal = action.payload.total
-      state.currentItemCommentLoading = false;
+      state.currentItemCommentLoading = false
       break
     case ActionTypes.FETCH_NEWS_ITEM_COMMENT_LIST_REQUEST + ApiActionTypes.FAIL:
-      state.currentItemCommentLoading = false;
+      state.currentItemCommentLoading = false
       break
 
     case ActionTypes.SET_NEWS_TAB:
-      state.currentProfileTab = action.payload.tab;
+      state.currentProfileTab = action.payload.tab
       break
     case ActionTypes.RESET_NEWS_LIST:
-      state.listLoading = false;
-      state.total = 0;
-      state.page = 1;
-      state.list = [];
+      state.listLoading = false
+      state.total = 0
+      state.page = 1
+      state.list = []
       break
     case ActionTypes.SET_NEWS_ITEM_COMMENT_PAGE:
-      state.currentItemCommentPage = action.payload;
+      state.currentItemCommentPage = action.payload
       break
     case ActionTypes.SET_NEWS_CURRENT:
-      state.currentItem = action.payload;
-      state.currentItemCommentList = [];
-      state.currentItemCommentTotal = 0;
-      state.currentItemCommentLoading = false;
-      state.currentItemCommentPage = 1;
-      state.likeIsSending = false;
-      state.likeSentError = null;
+      state.currentItem = action.payload
+      state.currentItemCommentList = []
+      state.currentItemCommentTotal = 0
+      state.currentItemCommentLoading = false
+      state.currentItemCommentPage = 1
+      state.likeIsSending = false
+      state.likeSentError = null
       state.commentIsSending = false
       state.commentSentSuccess = false
       state.commentSentError = null
       break
     case ActionTypes.SET_NEWS_CURRENT_INDEX:
-      state.currentItemIndex = action.payload;
+      state.currentItemIndex = action.payload
       break
 
     case ActionTypes.CREATE_NEWS_COMMENT:
@@ -129,15 +129,15 @@ export default function NewsReducer(state = {...initialState}, action) {
       state.commentSentSuccess = true
       state.commentSentError = null
       state.currentItemCommentList = [action.payload, ...state.currentItemCommentList]
-      state.currentItemCommentTotal++;
+      state.currentItemCommentTotal++
       if(state.currentItem) {
-        state.currentItem.commentsCount = parseInt(state.currentItem.commentsCount as string, 10)  + 1;
+        state.currentItem.commentsCount = parseInt(state.currentItem.commentsCount as string, 10)  + 1
       }
       state.list = state.list.map(item =>{
         if(item.id === action.payload.profileGalleryId){
           return {...item, commentsCount: parseInt(item.commentsCount as string, 10) + 1}
         }
-        return item;
+        return item
       })
 
       break
@@ -149,27 +149,27 @@ export default function NewsReducer(state = {...initialState}, action) {
 
 
     case ActionTypes.CREATE_NEWS_COMMENT_LIKE_REQUEST:
-      state.likeIsSending = true;
+      state.likeIsSending = true
 
       break
     case ActionTypes.CREATE_NEWS_COMMENT_LIKE_REQUEST + ApiActionTypes.SUCCESS:
-      state.likeIsSending = false;
+      state.likeIsSending = false
       if(state.currentItem) {
-        state.currentItem.likesCount = state.currentItem.likesCount ? parseInt(state.currentItem.likesCount as string, 10) + 1 : 1;
-        state.currentItem.isLiked = true;
+        state.currentItem.likesCount = state.currentItem.likesCount ? parseInt(state.currentItem.likesCount as string, 10) + 1 : 1
+        state.currentItem.isLiked = true
       }
       state.list = state.list.map(item =>{
         if(item.id === action.payload.profileGalleryId){
           return {...item,isLiked: true, likesCount: parseInt(item.likesCount as string, 10) + 1}
         }
-        return item;
+        return item
       })
       break
     case ActionTypes.CREATE_NEWS_COMMENT_LIKE_REQUEST + ApiActionTypes.FAIL:
-      state.likeIsSending = false;
+      state.likeIsSending = false
       state.likeSentError = action.payload.error || action.payload.errors || 'Unknow error'
       break
   }
 
-  return state
+   return {...state}
 }

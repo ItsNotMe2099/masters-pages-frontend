@@ -1,52 +1,51 @@
-import {changePasswordOpen, confirmOpen, modalClose} from "components/Modal/actions";
-import { deleteSkillCategory } from "components/Skill/actions";
-import Button from "components/ui/Button";
-import * as React from "react";
-import { getCategoryTranslation } from "utils/translations";
+import {changePasswordOpen, confirmOpen, modalClose} from 'components/Modal/actions'
+import Button from 'components/ui/Button'
+import * as React from 'react'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {useEffect} from "react";
+import {useEffect} from 'react'
 import {
   fetchProfileSettingsRequest,
   updateProfileSettingsRequest
-} from "components/ProfileSettings/actions";
-import {IRootState} from "types";
-import Loader from "components/ui/Loader";
-import {deleteProfile, updateProfile} from "components/Profile/actions";
-import RegistrationPhone from "components/Auth/RegistrationPhone";
-import RegistrationPhoneConfirm from "components/Auth/RegistrationPhoneConfirm";
-import {useTranslation} from "i18n";
+} from 'components/ProfileSettings/actions'
+import {IRootState} from 'types'
+import Loader from 'components/ui/Loader'
+import {deleteProfile, updateProfile} from 'components/Profile/actions'
+import RegistrationPhone from 'components/Auth/RegistrationPhone'
+import RegistrationPhoneConfirm from 'components/Auth/RegistrationPhoneConfirm'
+import { useTranslation } from 'next-i18next'
 import {getAuthServerSide} from 'utils/auth'
 import Layout from 'components/layout/Layout'
-import TabSettingsForm from 'pages/me/settings/components/TabSettingsForm'
-import TabPersonalForm from './components/TabPersonalForm'
-import TabEmailForm from 'pages/me/settings/components/TabEmailForm'
-import TabPhoneForm from 'pages/me/settings/components/TabPhoneForm'
-import TabNotificationsForm from 'pages/me/settings/components/TabNotificationsForm'
+import TabPersonalForm from '../../../components/for_pages/Settings/TabPersonalForm'
+import TabEmailForm from 'components/for_pages/Settings/TabEmailForm'
+import TabPhoneForm from 'components/for_pages/Settings/TabPhoneForm'
+import TabNotificationsForm from 'components/for_pages/Settings/TabNotificationsForm'
 import Modals from 'components/layout/Modals'
-import TabLanguageForm from 'pages/me/settings/components/TabLanguageForm'
+import TabLanguageForm from 'components/for_pages/Settings/TabLanguageForm'
+import {useAppContext} from 'context/state'
 interface Props {
   t?: (string) => string,
   user?: any
 }
 const TabSettings= (props: Props) => {
-  const {t} = useTranslation('common');
-  const dispatch = useDispatch();
+  const {t} = useTranslation('common')
+  const dispatch = useDispatch()
 
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const loading = useSelector((state: IRootState) => state.profileSettings.loading)
   const settings = useSelector((state: IRootState) => state.profileSettings.settings)
   useEffect(() => {
-    dispatch(fetchProfileSettingsRequest());
+    dispatch(fetchProfileSettingsRequest())
 
   }, [])
   const handleSubmit = (data) => {
-    dispatch(updateProfile(profile.id, data));
+    dispatch(updateProfile(profile.id, data))
   }
   const handleSubmitSettings = (data) => {
-    dispatch(updateProfileSettingsRequest(data));
+    dispatch(updateProfileSettingsRequest(data))
   }
 
   const handleRemoveAccount = () => {
@@ -55,7 +54,7 @@ const TabSettings= (props: Props) => {
       onConfirm: () => {
         dispatch(deleteProfile(profile.role))
       }
-    }));
+    }))
   }
 
   return (
@@ -69,7 +68,7 @@ const TabSettings= (props: Props) => {
           firstName: profile.firstName,
           lastName: profile.lastName,
           birthday: profile.birthday,
-          postcode: profile.postcode,
+          zipcode: profile.zipcode,
           address1: profile.address1,
           address2: profile.address2,
           geonameid: profile.geonameid,
@@ -132,4 +131,4 @@ const TabSettings= (props: Props) => {
 
 export default TabSettings
 
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})

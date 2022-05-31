@@ -1,21 +1,20 @@
-import { createFeedBackSite } from "components/ProfileFeedback/actions";
-import Modal from "components/ui/Modal";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import SaveTaskSearchForm from "./Form";
+import SaveTaskSearchForm from './Form'
 
 import { useSelector, useDispatch } from 'react-redux'
 import {saveTaskSearch} from 'components/SavedSearches/actions'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
   isOpen: boolean
   onRequestClose?: () => void
 }
 
 export default function SaveTaskSearchModal(props: Props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const filter = useSelector((state: IRootState) => state.taskSearch.filter)
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
   const formLoading = useSelector((state: IRootState) => state.profileFeedback.formLoading)
   const handleSubmit = (data) => {
@@ -24,7 +23,7 @@ export default function SaveTaskSearchModal(props: Props) {
       ...(filter.price && filter.price.type === 'fixed' ? { budgetMin: filter.price?.min, budgetMax: filter.price?.max} : {}),
       ...(filter.price && filter.price.type === 'rate' ? { ratePerHourMin: filter.price?.min, ratePerHourMax: filter.price?.max} : {}),
       price: undefined,
-      ...data}));
+      ...data}))
   }
 
   return (

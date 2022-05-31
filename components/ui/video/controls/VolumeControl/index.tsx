@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-import Slider from 'react-input-slider';
+import Slider from 'react-input-slider'
 interface Props {
   value: any
   onChange: (value) => void
@@ -10,12 +10,12 @@ export default function VolumeControl(props: Props) {
 
     const handleChange = (val) => {
         if(isNaN(val)){
-            return;
+            return
         }
         props.onChange(val)
     }
     const handleIconClick = (val) => {
-        props.onChange(props.value === 0 ? 50 : 0);
+        props.onChange(props.value === 0 ? 50 : 0)
     }
   return (
       <div className={styles.root}>

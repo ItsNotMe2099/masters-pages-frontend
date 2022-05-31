@@ -2,7 +2,7 @@ import styles from './index.module.scss'
 import {IEvent} from 'types'
 import CalendarSideBarEvent from 'components/Calendar/components/CalendarSideBarEvent'
 import {add, format, isSameDay} from 'date-fns'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -12,13 +12,13 @@ interface Props {
 }
 
 export default function CalendarSideBarEvents(props: Props) {
-  const { type, events, onClickEvent } = props;
-  const {t} = useTranslation('common');
+  const { type, events, onClickEvent } = props
+  const {t} = useTranslation('common')
 
   const tomorrowDate = add(new Date(), {
     days: 1,
 
-  });
+  })
   const list = type === 'today' ? events.filter(event => isSameDay(event.actualStart, new Date())) : events.filter(event => isSameDay(event.actualStart, tomorrowDate))
   const getTitle = (type) => {
     switch (type){
@@ -31,7 +31,7 @@ export default function CalendarSideBarEvents(props: Props) {
   const getDate = () => {
     switch (type){
       case 'today':
-        return new Date();
+        return new Date()
       case 'tomorrow':
         return tomorrowDate
     }

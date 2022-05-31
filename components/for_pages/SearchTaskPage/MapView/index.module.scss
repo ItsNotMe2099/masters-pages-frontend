@@ -1,0 +1,124 @@
+@import "../../../../scss/index";
+.root{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+
+}
+.container{
+
+  flex: 1 1 auto;
+  overflow-y: auto;
+  position: relative;
+}
+.wrapper{
+
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  max-height: 100%;
+  flex-direction: column;
+}
+
+.tasks{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+}
+.tasksWrapper{
+  flex: 1;
+  padding: 0px 30px 20px;
+  overflow-y: auto;
+}
+
+.map{
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-height: 500px;
+}
+.backButton{
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  z-index: 2;
+}
+.tasksContainer{
+  display: flex;
+  padding: 30px 0px;
+
+}
+.tasksTobBar{
+  display: flex;
+  border-bottom: 1px solid #C4C4C4;
+  padding: 21px 0px 12px;
+  margin-bottom: 18px;
+}
+.tasksAmount{
+  flex: 1;
+  span{
+    font-weight: 700;
+  }
+}
+.tasksSort{
+  display: flex;
+  span{
+    margin-right: 8px;
+  }
+}
+.showOnTheMap{
+  margin-top: 16px;
+}
+.filter{
+  border: 1px solid #dfdfdf;
+  border-radius: 20px;
+  padding: 26px;
+  margin-top: 30px;
+}
+.filterLabel{
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #000000;
+}
+.clusterMarker{
+  width: 74px;
+  height: 74px;
+  background: #FD5742;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 18px;
+
+}
+.mapMarker{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #FD5742;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+
+  border: 2px solid #FD5742;
+}
+.mapMarkerActive{
+  background: white;
+  border: 2px solid #FD5742;
+  svg{
+    path{
+      fill: #FD5742;
+    }
+  }
+}

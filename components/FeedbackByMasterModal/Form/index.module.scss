@@ -39,7 +39,7 @@
     button{
         font-family: Roboto;
         border-radius: 6px;
-        @media screen and (max-width: $sm-max){
+        @media screen and (max-width: $xs-max){
             font-size: 12px;
           }
         &:first-child{

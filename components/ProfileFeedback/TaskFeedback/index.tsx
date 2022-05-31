@@ -1,17 +1,18 @@
-import * as React from "react";
-import {IEvent, IFeedbacksToProfile, IRootState, ITask, ProfileData, SkillData, SkillListItem} from "types";
+import * as React from 'react'
+import { IFeedbacksToProfile} from 'types'
 import styles from './index.module.scss'
-import StarRatings from 'react-star-ratings';
+import StarRatings from 'react-star-ratings'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props {
   feedback: IFeedbacksToProfile,
   title?: string
-  profile?: ProfileData
+  profile?: IProfile
 }
 
 const TaskFeedback = (props: Props) => {
-  const {feedback, title} = props;
+  const {feedback, title} = props
   const profile = feedback.fromProfile || props.profile
   return (
    <div className={styles.root}>

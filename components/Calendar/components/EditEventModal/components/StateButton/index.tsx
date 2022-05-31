@@ -1,12 +1,13 @@
-import {useRouter} from "next/router";
-import * as React from "react";
+import {useRouter} from 'next/router'
+import * as React from 'react'
 import styles from './index.module.scss'
 import {EventStatus, IEvent, IRootState} from 'types'
 import MarkIcon from 'components/svg/MarkIcon'
 
 import {useSelector} from 'react-redux'
-import {getEventBgColor, getEventBorderColor, getEventColor} from 'utils/event'
-import {useTranslation} from 'i18n'
+import { getEventColor} from 'utils/event'
+import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   event: IEvent,
@@ -14,12 +15,13 @@ interface Props {
 
 }
 const StateButton = ({event, type}: Props) => {
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
   const isOtherSide =  (currentProfile.role !== type)
-  const showAuthor = type === currentProfile.role && event.isAuthor || type !== currentProfile.role && !event.isAuthor;
+  const showAuthor = type === currentProfile.role && event.isAuthor || type !== currentProfile.role && !event.isAuthor
   const isOverdue = event.isOverdue && currentProfile.role !== 'client' && type === 'master'
-  const router = useRouter();
-  const {t} = useTranslation('common');
+  const router = useRouter()
+  const {t} = useTranslation('common')
   const handleClick = (e) => {
 
   }
@@ -29,27 +31,27 @@ const StateButton = ({event, type}: Props) => {
     const color = getEventColor(event, {
       isOtherSide: type !== currentProfile.role,
       isOverdue
-    });
-    return ['green', 'blue'].includes(color);
+    })
+    return ['green', 'blue'].includes(color)
   }
   const getClass = () => {
     const color = getEventColor(event, {
       isOtherSide: type !== currentProfile.role,
       isOverdue
-    });
+    })
     switch (color){
       case 'grey':
-        return styles.root__grey;
+        return styles.root__grey
       case 'green':
-        return styles.root__green;
+        return styles.root__green
       case 'red':
-        return styles.root__red;
+        return styles.root__red
       case 'blue':
-        return styles.root__blue;
+        return styles.root__blue
       case 'yellow':
-        return styles.root__orange;
+        return styles.root__orange
       case 'orange':
-        return styles.root__orange;
+        return styles.root__orange
     }
 
 
@@ -65,13 +67,13 @@ const StateButton = ({event, type}: Props) => {
   const getStatusName = () => {
       if(!showAuthor){
         if(event.status === EventStatus.Draft){
-          return t('draft');
+          return t('draft')
         }
         if([EventStatus.Planned].includes(event.status)){
-          return t('pending');
+          return t('pending')
         }
         if([EventStatus.Declined].includes(event.status)){
-          return t('declined');
+          return t('declined')
         }
         if([EventStatus.Confirmed].includes(event.status)){
            return t('task.page.planned')

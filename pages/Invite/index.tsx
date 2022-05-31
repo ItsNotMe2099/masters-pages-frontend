@@ -2,49 +2,40 @@ import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 
-import {useEffect, useState} from "react";
-import {useTranslation} from "i18n";
+import {useEffect, useState} from 'react'
+import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
-import Tabs from 'components/ui/Tabs'
-import SharePersonalLink from 'components/Share/PersonalLink'
-import ShareByEmail from 'components/Share/ShareByEmail'
-import ShareBySocialMedia from 'components/Share/ShareBySocialMedia'
-import SharePersonalLabel from 'components/Share/PersonalLabel'
 import {IRootState} from 'types'
-import {formatSkillList} from 'utils/skills'
-import {setCurrentSkill} from 'components/Profile/actions'
-import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {fetchSkillList} from 'components/Skill/actions'
 import Tab from 'components/PublicProfile/components/Tab'
 import {getCategoryTranslation} from 'utils/translations'
-import ShareByEmailForm from 'components/Share/ShareByEmail/Form'
-import InviteForm from 'pages/Invite/Form'
+import InviteForm from 'components/for_pages/Invite/Form'
 import {inviteRequest} from 'components/Invite/actions'
 
 const InvitePage = (props) => {
-  const {t, i18n} = useTranslation('common');
-  const router = useRouter();
+  const {t, i18n} = useTranslation('common')
+  const router = useRouter()
   const dispatch = useDispatch()
-  const [activeSkill, setActiveSkill] = useState(null);
-  const skills =  useSelector((state: IRootState) => state.skill.list) ;
-  const [customLink, setCustomLink] = useState();
+  const [activeSkill, setActiveSkill] = useState(null)
+  const skills =  useSelector((state: IRootState) => state.skill.list)
+  const [customLink, setCustomLink] = useState()
 
 
   useEffect(() => {
-    dispatch(fetchSkillList());
+    dispatch(fetchSkillList())
   }, [])
 
   const handleSubmit = (data) => {
-    dispatch(inviteRequest(data));
+    dispatch(inviteRequest(data))
   }
   const handleSkillClick = (skill) => {
-    setActiveSkill(skill);
-    setCustomLink(null);
+    setActiveSkill(skill)
+    setCustomLink(null)
   }
   const handleCustomLinkClick = (type) => {
-    setActiveSkill(null);
-    setCustomLink(type);
+    setActiveSkill(null)
+    setCustomLink(type)
   }
   return (
     <Layout>
@@ -64,5 +55,5 @@ const InvitePage = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default InvitePage

@@ -5,7 +5,7 @@
     @include lg{
         width: 50%;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
 
     }
 
@@ -21,7 +21,7 @@
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
       border-radius: 0;
     padding: 70px 20px 50px;
     }
@@ -35,7 +35,7 @@
   transform: translateX(-90%);
   z-index: 1;
   background-color: #EDEDED;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }
@@ -45,7 +45,7 @@
         font-size: 24px;
         margin-bottom: 57px;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-weight: bold;
         font-size: 30px;
       text-align: center;
@@ -56,7 +56,7 @@
 .icon{
     float: left;
     margin-right: 27px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         width: 65px;
         height: 58px;
     }
@@ -67,7 +67,7 @@
     font-weight: 500;
     color: #26BA35;
     margin-right: 27px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-size: 48px;
     }
     @include lg{
@@ -80,7 +80,7 @@
     line-height: 29px;
     color: #26BA35;
     margin-bottom: 35px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-size: 17px;
     }
     @include lg{
@@ -105,7 +105,7 @@
     @include lg{
         font-size: 16px;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-size: 14px;
     }
     line-height: 30px;

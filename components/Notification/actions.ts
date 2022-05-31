@@ -14,7 +14,7 @@ export const fetchSavedTasksRequest = (page?: number, limit?: number) => action(
 
 export const saveTaskRequest = (taskId: number) => action(ActionTypes.SAVE_TASK_REQUEST, {
   api: {
-    url: `/api/profile/saved-tasks`,
+    url: '/api/profile/saved-tasks',
     method: 'POST',
     data: {
       taskId

@@ -1,13 +1,13 @@
-import ChatMessageAction from "components/Chat/ChatMessageAction";
-import ChatMessageTaskDetails from "components/Chat/ChatMessageTaskDetails";
-import ChatMessageText from "components/Chat/ChatMessageText";
-import {confirmOpen, finishTaskAsClientOpen} from "components/Modal/actions";
+import ChatMessageAction from 'components/Chat/ChatMessageAction'
+import ChatMessageTaskDetails from 'components/Chat/ChatMessageTaskDetails'
+import ChatMessageText from 'components/Chat/ChatMessageText'
+import {confirmOpen, finishTaskAsClientOpen} from 'components/Modal/actions'
 import {
   taskNegotiationDeclineConditions,
   taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
-} from "components/TaskNegotiation/actions";
-import {format} from "date-fns";
+} from 'components/TaskNegotiation/actions'
+import {format} from 'date-fns'
 import {
   EventStatus,
   IChat,
@@ -17,11 +17,12 @@ import {
   IRootState,
   ITaskNegotiationState,
   ITaskNegotiationType
-} from "types";
+} from 'types'
 import styles from './index.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 
 interface Props {
@@ -31,30 +32,31 @@ interface Props {
 }
 
 export default function ChatMessage({ message, chat, size }: Props) {
-  const dispatch =  useDispatch();
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const dispatch =  useDispatch()
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const lastCondition = useSelector((state: IRootState) => state.taskOffer.lastCondition)
 
   const handleTaskMarkAsDoneConfirm = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskNegotiationSetCurrentNegotiation(lastCondition));
-    dispatch(finishTaskAsClientOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastCondition))
+    dispatch(finishTaskAsClientOpen())
   }
 
   const handleTaskMarkAsDoneReject = () => {
     dispatch(confirmOpen({
       description: t('chat.areYouSure'),
       onConfirm: () => {
-        dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id));
+        dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id))
       }
-    }));
+    }))
   }
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const renderMessage = (component, hasTime = false) => {
     return (<div className={`${styles.root} ${message.profileId === profile.id ? styles.rootAuthor : ''}`}>
       <div className={styles.message}>{component}</div>
       <div className={styles.time}> {hasTime && format(new Date(message.createdAt), 'MM.dd.yyy hh:mm')}</div>
-    </div>);
+    </div>)
   }
   const messageStatus = () => {
     switch (message.eventLogRecordData.newStatus){
@@ -81,28 +83,28 @@ export default function ChatMessage({ message, chat, size }: Props) {
   const renderMessages = (): ReactElement[] => {
     switch (message.type) {
       case IChatMessageType.EventLogRecord:
-          let text = '';
-          let profileText = message.profileId === profile.id ? t('you') : `${profile.firstName} ${profile.lastName}`
-          let status = messageStatus()
+          let text = ''
+          const profileText = message.profileId === profile.id ? t('you') : `${profile.firstName} ${profile.lastName}`
+          const status = messageStatus()
           switch (message.eventLogRecordType){
             case IEventLogRecordType.Created:
               text = t('chat.message.createdEvent', { profileText })
-              break;
+              break
             case IEventLogRecordType.StatusChanged:
               text = t('chat.message.changedStatus', { profileText, status })
-              break;
+              break
             case IEventLogRecordType.DetailesChanged:
               text = t('chat.message.changedEvent', { profileText })
-              break;
+              break
             case IEventLogRecordType.CommentAdded:
               text = t('chat.message.commentAdded', { profileText })
-              break;
+              break
             case IEventLogRecordType.FileUploaded:
               text = t('chat.message.attachedFile', { profileText })
-              break;
+              break
             case IEventLogRecordType.FeedbackAdded:
               text = t('chat.message.addedFeedback', { profileText })
-              break;
+              break
 
           }
         return [<ChatMessageText size={size} message={text} files={message.files} isRight={message.profileId === profile.id}/>]
@@ -114,9 +116,9 @@ export default function ChatMessage({ message, chat, size }: Props) {
       case IChatMessageType.TaskNegotiation:
         const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? t('chat.message.taskOutdated', { message, lastCondition }) : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {
-          const showReject = ['privately_published', 'published'].includes(chat.task.status );
-          const showHire =  ['privately_published', 'published'].includes(chat.task.status );
-          const showEdit =  ['privately_published', 'published'].includes(chat.task.status );
+          const showReject = ['privately_published', 'published'].includes(chat.task.status )
+          const showHire =  ['privately_published', 'published'].includes(chat.task.status )
+          const showEdit =  ['privately_published', 'published'].includes(chat.task.status )
 
           if (message.profileId === profile.id) {
             return [<ChatMessageTaskDetails message={message} task={chat.task} showReject={showReject} showEdit={showEdit}
@@ -128,11 +130,11 @@ export default function ChatMessage({ message, chat, size }: Props) {
               <ChatMessageText message={t('chat.message.negotiationStarted')} suffixText={t('chat.message.systemMessage')} large={true}/>]
           }
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskOffer) {
-          const showHire = false;
-          const showEdit = ['privately_published', 'published'].includes(chat.task.status );
-          const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id;
-          const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
-          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
+          const showHire = false
+          const showEdit = ['privately_published', 'published'].includes(chat.task.status )
+          const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id
+          const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id
+          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected')
 
           const youTextStatus = t('chat.message.textStatus', {statusText})
           const youTextNew = t('chat.message.sendTaskOffer')
@@ -140,7 +142,7 @@ export default function ChatMessage({ message, chat, size }: Props) {
           const fromTextStatus = message.taskNegotiation.authorId === profile.id && profile.role === 'client' ? t('chat.message.master', {statusText}) : t('chat.message.clientOffer', {statusText})
           if (message.taskNegotiation.authorId !== profile.id && message.profileId === profile.id) {
             // You change status of task offer
-            console.log("message.taskNegotiation", message.taskNegotiation, message.profileId, profile.id);
+            console.log('message.taskNegotiation', message.taskNegotiation, message.profileId, profile.id)
 
             return [<ChatMessageTaskDetails message={message} task={chat.task} outDatedText={outDatedText}
                                             showHire={showHire} showEdit={showEdit} showReject={showReject} showAccept={showAccept}/>,
@@ -165,10 +167,10 @@ export default function ChatMessage({ message, chat, size }: Props) {
         } else if (message.taskNegotiation.type === ITaskNegotiationType.TaskNegotiation) {
 
           const showEdit = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined)
-          const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id;
-          const showHire = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role === 'client' && message.taskNegotiation.authorId != profile.id;
-          const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id;
-          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
+          const showReject = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && message.taskNegotiation.authorId != profile.id
+          const showHire = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role === 'client' && message.taskNegotiation.authorId != profile.id
+          const showAccept = !(message.taskNegotiation.state === ITaskNegotiationState.Accepted || message.taskNegotiation.state === ITaskNegotiationState.Declined) && profile.role !== 'client' && message.taskNegotiation.authorId != profile.id
+          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected')
           const youTextStatus = t('chat.message.youStatusText', {statusText})
           const youTextNew = t('chat.message.youSend')
           const fromTextNew = profile.role === 'client' ? t('chat.message.negotiationFromMaster') : t('chat.message.negotiationFromClient')
@@ -205,7 +207,7 @@ export default function ChatMessage({ message, chat, size }: Props) {
           return [
             <ChatMessageText message={'Task canceled'} suffixText={t('chat.message.systemMessage')} large={true}/>]
         }else if (message.taskNegotiation.type === ITaskNegotiationType.MarkAsDone) {
-          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected');
+          const statusText = message.taskNegotiation.state === ITaskNegotiationState.Accepted ? t('chat.message.accepted') : t('chat.message.rejected')
 
           const youTextStatus = t('chat.message.markJobAsDone', {statusText})
           const youTextNew = t('chat.message.markedJobAsDone')
@@ -229,11 +231,11 @@ export default function ChatMessage({ message, chat, size }: Props) {
 
         }
 
-        break;
+        break
     }
-    return [];
+    return []
   }
-  const messages = renderMessages();
+  const messages = renderMessages()
   return (
     <>
       {messages.map((item, index) => renderMessage(React.cloneElement(item), index === messages.length - 1))}

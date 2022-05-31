@@ -10,7 +10,7 @@ function BookmarkSvg({color, className, isSaved}: Props) {
   const getColor = () => {
     switch (color) {
       case 'white':
-        return '#ffffff';
+        return '#ffffff'
       default:
         return '#2A2C39'
     }

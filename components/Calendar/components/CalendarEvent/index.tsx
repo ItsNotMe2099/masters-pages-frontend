@@ -1,10 +1,9 @@
 import styles from './index.module.scss'
-import {EventStatus, IEvent, IRootState} from 'types'
+import { IEvent} from 'types'
 import {format} from 'date-fns'
-import {getEventBgColor, getEventBorderColor, getEventColor, getEventPlannedAllowed} from 'utils/event'
-import { useSelector } from 'react-redux'
-import { usePopperTooltip } from 'react-popper-tooltip';
-import 'react-popper-tooltip/dist/styles.css';
+import { getEventColor, getEventPlannedAllowed} from 'utils/event'
+import { usePopperTooltip } from 'react-popper-tooltip'
+import 'react-popper-tooltip/dist/styles.css'
 import {useState} from 'react'
 import CalendarEventToolTip from 'components/Calendar/components/CalendarEventToolTip'
 import Avatar from 'components/ui/Avatar'
@@ -18,8 +17,8 @@ interface Props {
 
 export default function CalendarEvent(props: Props) {
 
-  const {event} = props;
-  const [isToolTipVisible, setIsToolTipVisible] = useState(false);
+  const {event} = props
+  const [isToolTipVisible, setIsToolTipVisible] = useState(false)
   const {
     getArrowProps,
     getTooltipProps,
@@ -32,51 +31,51 @@ export default function CalendarEvent(props: Props) {
     closeOnOutsideClick: false,
     visible: isToolTipVisible,
     onVisibleChange: setIsToolTipVisible,
-  });
+  })
   const getRootClass = () => {
     const color = getEventColor(event, {
       isOtherSide: false
-    });
+    })
 
     switch (color){
       case 'grey':
-        return styles.root__grey;
+        return styles.root__grey
       case 'green':
-        return styles.root__green;
+        return styles.root__green
       case 'red':
-        return styles.root__red;
+        return styles.root__red
       case 'blue':
-        return styles.root__blue;
+        return styles.root__blue
       case 'yellow':
-        return styles.root__yellow;
+        return styles.root__yellow
       case 'orange':
-        return styles.root__orange;
+        return styles.root__orange
     }
   }
   const getBorderClass = () => {
     const color = getEventColor(event, {
       isOtherSide: true,
       showUnreadAlert: true
-    });
+    })
     switch (color){
       case 'grey':
-        return styles.border__grey;
+        return styles.border__grey
       case 'green':
-        return styles.border__green;
+        return styles.border__green
       case 'red':
-        return styles.border__red;
+        return styles.border__red
       case 'blue':
-        return styles.border__blue;
+        return styles.border__blue
       case 'orange':
-        return styles.border__orange;
+        return styles.border__orange
       case 'yellow':
-        return styles.border__yellow;
+        return styles.border__yellow
     }
 
   }
-  const unreadCount = event.unreadTextMessagesCount + event.unreadMediaMessagesCount;
+  const unreadCount = parseInt(event.unreadTextMessagesCount, 10) + parseInt(event.unreadMediaMessagesCount,10)
 
-  const otherSide = event.isAuthor ? event.participant : event.author;
+  const otherSide = event.isAuthor ? event.participant : event.author
   // @ts-ignore
   return (
     <div className={`${styles.root} ${getRootClass()} ${props.className}`} onClick={props.onClick} ref={setTriggerRef}>

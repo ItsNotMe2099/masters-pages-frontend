@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
 
-import {IProfileGalleryItem, ProfileData} from 'types'
+import {IProfileGalleryItem} from 'types'
 import {getMediaPath} from 'utils/media'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {useTranslation} from 'i18n'
-import ShowMoreText from 'react-show-more-text';
+import { useTranslation } from 'next-i18next'
+import ShowMoreText from 'react-show-more-text'
 
 interface Props{
   model: IProfileGalleryItem,
@@ -16,9 +16,9 @@ interface Props{
 const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
 
   const handleClick = () => {
-    onClick(model);
+    onClick(model)
   }
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
       <div className={styles.image}>
@@ -47,7 +47,6 @@ const GalleryItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
             lines={2}
             more=''
             less='<-'
-
             onClick={handleClick}
             expanded={false}
 

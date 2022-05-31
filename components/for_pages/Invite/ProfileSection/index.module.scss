@@ -1,0 +1,113 @@
+@import "../../../../scss/index";
+.root{
+  display: flex;
+  margin-top: 45px;
+  @media screen and (max-width: $xs-max) {
+    flex-direction: column;
+  }
+}
+.separator{
+  @media screen and (max-width: $xs-max) {
+    display: none;
+  }
+
+}
+.details{
+  display: flex;
+  .avatar{
+
+    img{
+      border-radius: 8px;
+      width: 98px;
+      height: 111px;
+      object-fit: cover;
+      @media screen and (max-width: $xs-max) {
+        width: 71px;
+        height: 89px;
+      }
+    }
+  }
+  .detailsInfo{
+    margin-left: 34px;
+    @media screen and (max-width: $xs-max) {
+      margin-left: 16px;
+    }
+    .location{
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      label{
+      font-weight: normal;
+      }
+    }
+    }
+
+}
+
+.stat{
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  margin-top: 12px;
+  .statItem{
+    margin-left: 12px;
+    &:first-of-type{
+      margin-left: 0px;
+    }
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    img{
+      margin-right: 6px;
+    }
+  }
+}
+
+.registered{
+  display: flex;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 15px;
+  label{
+    font-weight: normal;
+    margin-right: 4px;
+  }
+}
+.rating{
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  .ratingValue{
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}
+.separator{
+  width: 1px;
+  background: #C4C4C4;
+  height: 100px;
+  align-self: stretch;
+  margin-left: 49px;
+  margin-right: 39px;
+}
+.personalLink{
+flex: 1;
+  .personalLinkWrapper{
+  width: 360px;
+  @media screen and (max-width: $xs-max) {
+    width: auto;
+    margin-top: 26px;
+  }
+}
+}
+.buttonArea{
+  justify-self: flex-end;
+  @media screen and (max-width: $xs-max) {
+    font-size: 14px;
+    button{
+      width: 100%;
+    }
+  }
+}

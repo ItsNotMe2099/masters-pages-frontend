@@ -1,4 +1,4 @@
-import Modals from "components/layout/Modals";
+import Modals from 'components/layout/Modals'
 import Facebook from 'components/svg/Facebook'
 import Telegram from 'components/svg/Telegram'
 import VK from 'components/svg/VK'
@@ -8,13 +8,13 @@ import BannerFooter from './BannerFooter'
 import Logo from 'components/Logo'
 import styles from './index.module.scss'
 import format from 'date-fns/format'
-import {useTranslation, withTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 interface Props {
 }
 
 export default function Footer(props: Props) {
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const renderSocials = () => {
     return <div className={styles.social}>
         <a href="#" target="_blank"><WhatsApp className={styles.whatsapp}/></a>

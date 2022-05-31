@@ -2,8 +2,18 @@
 
 .root{
   position: relative;
-  display: flex;
+
 }
+.items{
+  margin-bottom: 15px;
+}
+.tabTitle{
+  margin-right: 8px;
+}
+.accordionTitle{
+  margin-right: 8px;
+}
+
 
 .buttons{
  display: flex;

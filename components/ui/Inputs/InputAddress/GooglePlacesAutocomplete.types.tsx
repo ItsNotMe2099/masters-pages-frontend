@@ -1,4 +1,4 @@
-import { Props, OptionTypeBase } from 'react-select';
+import { Props } from 'react-select'
 
 interface LatLng {
   lat: number;
@@ -20,6 +20,6 @@ export default interface GooglePlacesAutocompleteProps {
   debounce?: number;
   minLengthAutocomplete?: number;
   onLoadFailed?: (error: Error) => void;
-  selectProps?: Props<OptionTypeBase>;
+  selectProps?: Props<any>;
   withSessionToken?: boolean;
 }

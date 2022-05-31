@@ -1,4 +1,4 @@
-import ActionTypes from "./const";
+import ActionTypes from './const'
 
 export interface CreateTaskCompleteState {
   formIsSuccess: boolean
@@ -20,27 +20,27 @@ export default function CreateTaskReducer(state = {...initialState}, action) {
     case ActionTypes.CREATE_TASK:
       state.formError = ''
       state.formIsSuccess = false
-      state.isCompleted = false;
-      state.loading = true;
+      state.isCompleted = false
+      state.loading = true
       break
 
     case ActionTypes.CREATE_TASK_ERROR:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error'
-      state.loading = false;
+      state.loading = false
       break
     case ActionTypes.CREATE_TASK_SUCCESS:
       state.formIsSuccess = true
-      state.isCompleted = true;
-      state.loading = false;
+      state.isCompleted = true
+      state.loading = false
       break
 
     case ActionTypes.CREATE_TASK_RESET:
       state.formIsSuccess = false
       state.formError = ''
-      state.loading = false;
-      state.isCompleted = false;
+      state.loading = false
+      state.isCompleted = false
       break
   }
 
-  return state
+   return {...state}
 }

@@ -1,7 +1,7 @@
 @import "scss/index";
 .root{
   margin-top: 80px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin-top: 42px;
   }
 }
@@ -14,7 +14,7 @@
 
         margin-bottom: 87px;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-size: 30px;
         line-height: 36px;
         margin-bottom: 32px;
@@ -29,7 +29,7 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-gap: 2vw;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -54,7 +54,7 @@
     @include lg{
         margin: 62px auto auto auto;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         margin: 42px auto auto auto;
     }
     button{

@@ -1,4 +1,3 @@
-import ActionTypes from "./const";
 
 export interface State {
   modalKey: string,
@@ -14,5 +13,5 @@ export default function authReducer(state = {...initialState}, action) {
 
   }
 
-  return state
+   return {...state}
 }

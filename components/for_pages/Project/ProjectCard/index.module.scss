@@ -1,0 +1,110 @@
+.root{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgba(196, 196, 196, 1);
+  padding: 25px;
+  background: white;
+  font-size: 14px;
+}
+.left{
+margin-right: 24px;
+  min-width: 150px;
+}
+.right{
+  flex: 1;
+}
+.center{
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  .section{
+    &.sectionCategories{
+      flex: 1;
+    }
+  }
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(196, 196, 196, 1);
+  padding-bottom: 20px;
+  .title{
+    flex: 1;
+    padding-right: 15px;
+    font-weight: 600;
+    font-size: 22px;
+    color: #000000;
+  }
+
+}
+.sectionHeader{
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+}
+.stat{
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+}
+.statItem{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  .statLabel{
+    color: rgba(109, 113, 140, 1);
+    flex: 1;
+    margin-left: 12px;
+  }
+  .statValue{
+    color: black;
+  }
+}
+.durationDate{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  .name{
+    padding-right: 10px;
+  }
+  .icon{
+    margin-right: 7px;
+  }
+  .duration{
+
+  }
+}
+.sectionLocations{
+  padding-right: 15px;
+}
+.skills{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.footer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 15px;
+  margin-top: 15px;
+}
+.stats{
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 12px 0px;
+}
+.sectionAdditional{
+  display: flex;
+  flex-direction: column;
+  grid-gap: 24px 0px;
+}
+.additionalItem{
+  .additionValue{
+    margin-top: 4px;
+    color: rgba(109, 113, 140, 1);
+    font-size: 18px;
+  }
+}

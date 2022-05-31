@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import styles from './index.module.scss'
-import {IFeedbacksToProfile} from "../../types";
-import {getMediaPath} from "../../utils/media";
-import {getCategoryTranslation} from "../../utils/translations";
-import {default as React} from "react";
-import AvatarRound from "../ui/AvatarRound";
+import {IFeedbacksToProfile} from '../../types'
+import {getMediaPath} from '../../utils/media'
+import {getCategoryTranslation} from '../../utils/translations'
+import {default as React} from 'react'
+import AvatarRound from '../ui/AvatarRound'
 
 interface Props {
  feedback: IFeedbacksToProfile

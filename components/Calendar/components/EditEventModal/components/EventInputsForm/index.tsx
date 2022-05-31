@@ -1,12 +1,10 @@
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
-import { required } from "utils/validations";
+import * as React from 'react'
+import { required } from 'utils/validations'
 import styles from './index.module.scss'
-import { Field, reduxForm,formValueSelector } from 'redux-form'
-import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
+import { Field } from 'redux-form'
 import DateTime from 'components/ui/Inputs/DateTime'
 import {differenceInHours, format} from 'date-fns'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   price?: {total: number, rate: number}
@@ -19,20 +17,20 @@ interface Props {
   isPlannedDisabled?: boolean,
   isCompletedDisabled?: boolean
 }
-let EventInputsForm = (props: Props) => {
-  const {change, price, actualPrice, end, start, actualEnd, actualStart, isPlannedDisabled, isCompletedDisabled} = props;
-  const {t} = useTranslation('common');
+const EventInputsForm = (props: Props) => {
+  const {change, price, actualPrice, end, start, actualEnd, actualStart, isPlannedDisabled, isCompletedDisabled} = props
+  const {t} = useTranslation('common')
   const handleCurrentStartChange = (value) => {
 
     const newPrice = {
       ...price,
       total: differenceInHours(end, value)
     }
-    change('price', newPrice);
+    change('price', newPrice)
 
     if(isCompletedDisabled){
-      change('actualStart', value);
-      change('actualPrice', newPrice);
+      change('actualStart', value)
+      change('actualPrice', newPrice)
     }
   }
   const handleCurrentEndChange = (value) => {
@@ -41,10 +39,10 @@ let EventInputsForm = (props: Props) => {
       total: differenceInHours(value, start)
     }
 
-    change('price', newPrice);
+    change('price', newPrice)
     if(isCompletedDisabled){
-      change('actualEnd', value);
-      change('actualPrice', newPrice);
+      change('actualEnd', value)
+      change('actualPrice', newPrice)
     }
   }
 
@@ -52,13 +50,13 @@ let EventInputsForm = (props: Props) => {
     change('actualPrice', {
       ...actualPrice,
       total: differenceInHours(actualEnd, value)
-    });
+    })
   }
   const handleActualEndChange = (value) => {
     change('actualPrice', {
       ...actualPrice,
       total: differenceInHours(value, actualStart)
-    });
+    })
   }
   return (
     <>

@@ -1,4 +1,3 @@
-import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab, SkillData} from "types";
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 import {format} from 'date-fns'

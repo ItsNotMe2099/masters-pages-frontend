@@ -1,7 +1,6 @@
-import {IRootState, ISavedSearchItem} from "types";
+import { ISavedSearchItem} from 'types'
 import styles from './index.module.scss'
 
-import { useSelector, useDispatch } from 'react-redux'
 
 import FormDeleteIcon from 'components/svg/FormDeleteIcon'
 interface Props {
@@ -11,9 +10,9 @@ interface Props {
 }
 
 export default function SavedSearchListItem(props: Props) {
-  const {item, onDelete, onClick} = props;
+  const {item, onDelete, onClick} = props
   const handleDelete = e => {
-    e.stopPropagation();
+    e.stopPropagation()
   onDelete(item)
   }
   return (

@@ -1,14 +1,10 @@
-import { fetchSkillList } from "components/Skill/actions";
-import Loader from "components/ui/Loader";
-import { useEffect } from "react";
-import * as React from "react";
-import { IRootState, SkillListItem } from "types";
-import { getMediaPath } from "utils/media";
-import { getCategoryTranslation } from "utils/translations";
+import * as React from 'react'
+import { SkillListItem } from 'types'
+import { getMediaPath } from 'utils/media'
+import { getCategoryTranslation } from 'utils/translations'
 import styles from 'components/Portfolio/SkillCategoryHeader/index.module.scss'
-import {useTranslation, Trans} from 'i18n'
+import {useTranslation} from 'next-i18next'
 
-import { useSelector, useDispatch } from 'react-redux'
 interface Props {
   item: SkillListItem,
   onAdd?:(SkillListItem) => void,
@@ -16,7 +12,7 @@ interface Props {
   allowEdit?: boolean
 }
 const SkillCategoryHeader = ({allowEdit, item, onAdd, onRemove}: Props) => {
-  const {t} = useTranslation('common');
+  const {t, i18n} = useTranslation('common')
   return (
     <div className={styles.root}>
       {item.icon && <div className={styles.icon}> <img src={getMediaPath(item.icon)}/></div>}

@@ -1,24 +1,24 @@
-import { confirmChangeData, modalClose } from "components/Modal/actions";
+import { confirmChangeData, modalClose } from 'components/Modal/actions'
 
-import ApiActionTypes from "constants/api";
+import ApiActionTypes from 'constants/api'
 import { takeLatest, put, take, select } from 'redux-saga/effects'
-import { IRootState } from "types";
+import { IRootState } from 'types'
 import { ActionType } from 'typesafe-actions'
 import ActionTypes from './const'
 import {hideProfileForm} from 'components/Profile/actions'
 import {
   createProfilePortfolio, createProfilePortfolioRequest,
-  deleteProfilePortfolio, deleteProfilePortfolioRequest, fetchProfilePortfolioList,
+  deleteProfilePortfolio, deleteProfilePortfolioRequest,
   updateProfilePortfolio, updateProfilePortfolioRequest
 } from 'components/ProfilePortfolio/actions'
 function* ProfilePortfolioSaga() {
   yield takeLatest(ActionTypes.CREATE_PROFILE_PORTFOLIO,
     function* (action: ActionType<typeof createProfilePortfolio>) {
-      yield put(createProfilePortfolioRequest(action.payload.data));
+      yield put(createProfilePortfolioRequest(action.payload.data))
       const result = yield take([ActionTypes.CREATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.CREATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.SUCCESS){
         if(action.payload.formKey) {
-          yield put(hideProfileForm(action.payload.formKey));
+          yield put(hideProfileForm(action.payload.formKey))
         }
         const currentSkill = yield select((state: IRootState) => state.profile.currentSkill)
         const currentProfileTab = yield select((state: IRootState) => state.profilePortfolio.currentProfileTab)
@@ -27,11 +27,11 @@ function* ProfilePortfolioSaga() {
     })
   yield takeLatest(ActionTypes.UPDATE_PROFILE_PORTFOLIO,
     function* (action: ActionType<typeof updateProfilePortfolio>) {
-      yield put(updateProfilePortfolioRequest(action.payload.id, action.payload.data));
+      yield put(updateProfilePortfolioRequest(action.payload.id, action.payload.data))
       const result = yield take([ActionTypes.UPDATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.UPDATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.UPDATE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.SUCCESS){
         if(action.payload.formKey) {
-          yield put(hideProfileForm(action.payload.formKey));
+          yield put(hideProfileForm(action.payload.formKey))
         }
 
       }
@@ -39,11 +39,11 @@ function* ProfilePortfolioSaga() {
 
   yield takeLatest(ActionTypes.DELETE_PROFILE_PORTFOLIO,
     function* (action: ActionType<typeof deleteProfilePortfolio>) {
-      yield put(confirmChangeData({loading: true}));
-      yield put(deleteProfilePortfolioRequest(action.payload.id));
+      yield put(confirmChangeData({loading: true}))
+      yield put(deleteProfilePortfolioRequest(action.payload.id))
       const result = yield take([ActionTypes.DELETE_PROFILE_PORTFOLIO_REQUEST+ ApiActionTypes.SUCCESS, ActionTypes.DELETE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_PROFILE_PORTFOLIO_REQUEST + ApiActionTypes.SUCCESS){
-        yield put(modalClose());
+        yield put(modalClose())
 
       }
     })

@@ -1,23 +1,24 @@
 import styles from './index.module.scss'
-import {IProfilePreferWorkIn, ProfileData} from 'types'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {LanguagesList} from 'data/languages'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import classNames from 'classnames'
 
 interface Props{
-  index: number
+  index?: number
   model: string,
-  onMoveUp: (model, index) => void,
-  onMoveDown: (model, index) => void,
-  onDelete: (model, index) => void,
-  isEdit: boolean,
+  onMoveUp?: (model, index) => void,
+  onMoveDown?: (model, index) => void,
+  onDelete?: (model, index) => void,
+  isEdit?: boolean,
+  className?: string
 }
 const LanguageListItem = (props: Props) => {
-  const {  model, index, isEdit, onMoveUp, onMoveDown } = props;
-  const { t } = useTranslation('common');
+  const {  model, index, isEdit, onMoveUp, onMoveDown } = props
+  const { t } = useTranslation('common')
 
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, props.className)}>
       <img className={styles.icon} src={`/img/icons/flags/${LanguagesList[model]?.icon || model}.svg`} alt=''/>
       <div className={styles.name}>{LanguagesList[model]?.name || model}</div>
       {isEdit && <div className={styles.actions}>

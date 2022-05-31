@@ -1,33 +1,26 @@
 
-import PriceSelectFormMini from "components/TaskNegotiation/TaskOfferModal/components/TaskOfferNewOrder/PriceSelect";
-import { fetchTaskUserListRequest, resetTaskUserList } from "components/TaskUser/actions";
-import Button from "components/ui/Button";
-import Checkbox from "components/ui/Inputs/Checkbox";
-import Input from "components/ui/Inputs/Input";
-import InputAddress from "components/ui/Inputs/InputAddress";
-import InputCategory from "components/ui/Inputs/InputCategory";
-import InputLocation from "components/ui/Inputs/InputLocation";
-import InputSubCategory from "components/ui/Inputs/InputSubCategory";
-import FileInput from "components/ui/Inputs/FilesUploadInput";
-import SelectInput from "components/ui/Inputs/SelectInput";
-import TextArea from "components/ui/Inputs/TextArea";
-import Loader from "components/ui/Loader";
+import PriceSelectFormMini from 'components/TaskNegotiation/TaskOfferModal/components/TaskOfferNewOrder/PriceSelect'
+import Button from 'components/ui/Button'
+import Checkbox from 'components/ui/Inputs/Checkbox'
+import Input from 'components/ui/Inputs/Input'
+import InputAddress from 'components/ui/Inputs/InputAddress'
+import InputLocation from 'components/ui/Inputs/InputLocation'
+import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
+import FileInput from 'components/ui/Inputs/FilesUploadInput'
+import SelectInput from 'components/ui/Inputs/SelectInput'
+import TextArea from 'components/ui/Inputs/TextArea'
+import Loader from 'components/ui/Loader'
 
-import Modal from "components/ui/Modal";
-import Link from "next/link";
-import CreateTaskForm from "pages/CreateTaskPage/Form";
-import PriceSelectForm from "pages/CreateTaskPage/Form/components/PriceSelect";
-import { useEffect } from "react";
-import * as React from "react";
-import { IRootState, ITask, SkillData, SkillListItem } from "types";
-import { maskBirthDate } from "utils/masks";
-import { required } from "utils/validations";
+import Link from 'next/link'
+import * as React from 'react'
+import { IRootState } from 'types'
+import { required } from 'utils/validations'
 import styles from './index.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-import {useTranslation, Trans} from "i18n";
+import { useTranslation } from 'next-i18next'
 import { connect } from 'react-redux'
 import InputCountry from 'components/ui/Inputs/InputCountry'
 interface Props {
@@ -44,7 +37,7 @@ interface Props {
 let TaskOfferNewOrder = (props: Props) => {
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const {t} = useTranslation('common')
 
 
@@ -86,8 +79,8 @@ let TaskOfferNewOrder = (props: Props) => {
           name="mainCategoryId"
           component={InputSubCategory}
           onChange={(value) => {
-            props.change('categoryId', null);
-            props.change('subCategoryId', null);
+            props.change('categoryId', null)
+            props.change('subCategoryId', null)
           }}
           label={`${t('createTask.fieldMainCategory')}`}
           validate={required}

@@ -1,4 +1,4 @@
-import {EventStatus, IEvent, ProfileData} from 'types'
+import {EventStatus, IEvent} from 'types'
 import styles from 'components/Calendar/components/CalendarEvent/index.module.scss'
 export const getEventBgColor = (event: IEvent, currentRole) => {
   if(event.isAuthor){
@@ -84,7 +84,7 @@ export const getEventBorderColor = (event: IEvent, currentRole) => {
       }
 
     }
-    if([EventStatus.Completed].includes(event.status) && (event.unreadMediaMessagesCount > 0 || event.unreadTextMessagesCount > 0)){
+    if([EventStatus.Completed].includes(event.status) && (parseInt(event.unreadMediaMessagesCount, 10) > 0 || parseInt(event.unreadTextMessagesCount, 10) > 0)){
       return 'red';
     }
     if([EventStatus.Completed].includes(event.status)){
@@ -162,7 +162,7 @@ export const getEventColor = (event: IEvent, {
     if(isOverdue){
       return 'red';
     }
-    if(showUnreadAlert && isOtherSide && [EventStatus.Completed].includes(event.status) && (event.unreadMediaMessagesCount > 0 || event.unreadTextMessagesCount > 0)){
+    if(showUnreadAlert && isOtherSide && [EventStatus.Completed].includes(event.status) && (parseInt(event.unreadMediaMessagesCount, 10) > 0 || parseInt(event.unreadTextMessagesCount, 10) > 0)){
       return 'red';
     }
     if([EventStatus.Completed].includes(event.status)){

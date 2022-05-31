@@ -1,14 +1,12 @@
-import * as React from "react";
-import { getMonthStart, getMonthEnd } from '@wojtekmaj/date-utils';
+import * as React from 'react'
 import styles from './index.module.scss'
 import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import {useEffect, useState} from 'react'
-import {addDays, addHours} from 'date-fns'
 import {getBegin, getBeginNext, getBeginPrevious, getEnd, getEndNext, getEndPrevious} from 'utils/dateFormatters'
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
-import {useTranslation} from 'i18n'
-import { TabSelect } from "components/TabSelect";
+import { useTranslation } from 'next-i18next'
+import { TabSelect } from 'components/TabSelect'
 
 const RangeSelector = ({onChange, isActive, label, id}) => {
   return     <div className={`${isActive && styles.selectorActive} ${styles.selector}`} onClick={() => onChange(id)}>{label}</div>
@@ -20,9 +18,9 @@ interface Props {
   showAll?: boolean,
   showToday?: boolean
 }
-let ReportDateSelector = (props: Props) => {
-  const { showAll, showToday} = props;
-  const {value, onChange} = props.input;
+const ReportDateSelector = (props: Props) => {
+  const { showAll, showToday} = props
+  const {value, onChange} = props.input
   const [range, setRange ]= useState('day')
   const {i18n, t} = useTranslation('common')
 
@@ -35,39 +33,39 @@ let ReportDateSelector = (props: Props) => {
     {key: 'week', label: t('week')},
     {key: 'month', label: t('month')},
     {key: 'year', label: t('year')},
-  ];
+  ]
 
   const handleDateChange = (val) => {
-    onChange(val);
+    onChange(val)
   }
   const handleRangeChange = (range) => {
     if(range === 'all'){
-      setRange('all');
-      onChange(null);
-      return;
+      setRange('all')
+      onChange(null)
+      return
     }
     const newValue = {
       start: getBegin(range, new Date()),
       end: getEnd(range, new Date()),
-    };
-    setRange(range);
-    onChange(newValue);
+    }
+    setRange(range)
+    onChange(newValue)
   }
   const handleNavigatePrevious = () => {
     const newValue = {
       start: getBeginPrevious(range, value.start),
       end: getEndPrevious(range,  value.start),
-    };
-    setRange(range);
-    onChange(newValue);
+    }
+    setRange(range)
+    onChange(newValue)
   }
   const handleNavigateNext = () => {
     const newValue = {
       start: getBeginNext(range, value.start),
       end: getEndNext(range,  value.start),
-    };
-    setRange(range);
-    onChange(newValue);
+    }
+    setRange(range)
+    onChange(newValue)
   }
   return (
      <div className={styles.root} >

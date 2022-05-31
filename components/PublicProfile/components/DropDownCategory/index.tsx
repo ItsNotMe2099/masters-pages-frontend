@@ -1,8 +1,7 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
 interface OptionItem{
   label: string
   value: any
@@ -14,14 +13,14 @@ interface Props {
   value?: any,
 }
 export const DropDownCategory = (props: Props) => {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const onClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
 
-  const [value, setValue] = useState(props.options[0]);
+  const [value, setValue] = useState(props.options[0])
 
   useEffect(() => {
     if(props.value){
@@ -30,21 +29,21 @@ export const DropDownCategory = (props: Props) => {
   }, [props.value, props.options])
   const handleOptionClick = (e, item) => {
     e.preventDefault()
-    setValue(item);
+    setValue(item)
     if(props.onChange){
-      props.onChange(item);
+      props.onChange(item)
     }
-    setIsActive(false);
+    setIsActive(false)
   }
   const handleActiveOptionClick = (e) => {
-    e.preventDefault();
-    setIsActive(false);
+    e.preventDefault()
+    setIsActive(false)
   }
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
         {value && props.item(value)}
-        <img className={styles.arrow} src={`/img/icons/arrow.svg`} alt=''/>
+        <img className={styles.arrow} src={'/img/icons/arrow.svg'} alt=''/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <ul>
@@ -52,7 +51,7 @@ export const DropDownCategory = (props: Props) => {
           <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
             {props.item(value)}
             <img className={styles.arrowActive}
-                 src={`/img/icons/arrow_active.svg`}
+                 src={'/img/icons/arrow_active.svg'}
                  alt=''/></a></li>
           }
           {props.options.filter(item => !value || item.value != value.value).map(item => (
@@ -66,5 +65,5 @@ export const DropDownCategory = (props: Props) => {
         </ul>
       </nav>
     </div>
-  );
-};
+  )
+}

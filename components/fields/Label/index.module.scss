@@ -1,0 +1,18 @@
+@import "scss/index";
+.root{
+
+}
+.cross{
+  position: absolute;
+  padding: 0 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #828282;
+  top: -7px;
+  left: 15px;
+}
+.static{
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 7px;
+}

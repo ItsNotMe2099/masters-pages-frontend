@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-import {IRootState, ProfileData, SkillData, SkillListItem} from 'types'
+import {IRootState, SkillData, SkillListItem} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import {formatSkillList} from 'utils/skills'
 import Accordion from 'components/PublicProfile/components/view/CardCategories/components/Accordion'
@@ -8,47 +8,47 @@ import {getCategoryTranslation} from 'utils/translations'
 
 import { useSelector, useDispatch } from 'react-redux'
 import Tab from 'components/PublicProfile/components/Tab'
-import {hideProfileForm, showProfileForm, updateProfileByForm} from 'components/Profile/actions'
+import {hideProfileForm, showProfileForm} from 'components/Profile/actions'
 import CardCategoryForm from 'components/PublicProfile/components/view/CardCategories/components/Form'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import {createSkillCategory, deleteSkill, deleteSkillCategory} from 'components/Skill/actions'
 import FormActionIconButton from 'components/PublicProfile/components/FormActionIconButton'
 import {confirmOpen} from 'components/Modal/actions'
-import {taskNegotiationDeclineTaskResponse} from 'components/TaskNegotiation/actions'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean,
   subCategory,
   onCategoryChange: (categoryId, subCategoryId) => void
 }
 const CardCategories = (props: Props) => {
   const {i18n, t} = useTranslation('common')
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.skill.formLoading)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
-  const {profile, isEdit, onCategoryChange, subCategory} = props;
-  const skillsCurrentProfile = useSelector((state: IRootState) => state.skill.list);
-  const skills = props.isEdit ? skillsCurrentProfile : formatSkillList(profile.skills);
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories')
+  const {profile, isEdit, onCategoryChange, subCategory} = props
+  const skillsCurrentProfile = useSelector((state: IRootState) => state.skill.list)
+  const skills = props.isEdit ? skillsCurrentProfile : formatSkillList(profile.skills)
 
   const handleEditClick = () => {
-    dispatch(showProfileForm( 'categories'));
+    dispatch(showProfileForm( 'categories'))
   }
   const handleSubmit = (data) => {
     dispatch(createSkillCategory(data))
    }
   const handleCancel = () => {
-    dispatch(hideProfileForm( 'categories'));
+    dispatch(hideProfileForm( 'categories'))
   }
 
   const handleRemoveCategory = (item: SkillListItem) => {
     dispatch(confirmOpen({
-      description: `${t('doYouWantToDelete')} «${getCategoryTranslation(item).name}»?`,
+      description: `${t('doYouWantToDelete')} «${getCategoryTranslation(item, i18n.language).name}»?`,
 
       onConfirm: () => {
         dispatch(deleteSkillCategory(item.id))
       }
-    }));
+    }))
   }
   const handleRemoveSkill = (item: SkillData) => {
     dispatch(confirmOpen({
@@ -56,10 +56,10 @@ const CardCategories = (props: Props) => {
       onConfirm: () => {
         dispatch(deleteSkill(item.id))
       }
-    }));
+    }))
   }
   const handleSkillClick = (item: SkillData) => {
-    onCategoryChange(item.categoryId, item.subCategoryId);
+    onCategoryChange(item.categoryId, item.subCategoryId)
   }
   return (
     <Card isHidden={!isEdit && skills.length === 0} className={styles.root} isLoading={showForm && formLoading} title={t('worksInCategories')} toolbar={isEdit ? [<FormActionButton type={'create'} title={t('add')} onClick={handleEditClick}/>] : []}>

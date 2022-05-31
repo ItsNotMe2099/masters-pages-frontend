@@ -1,8 +1,7 @@
-import styles from './index.module.scss';
-import {addDays, format} from 'date-fns';
-import RCTimePicker from "rc-time-picker";
-import {useEffect} from 'react' // theme css file
-import "rc-time-picker/assets/index.css";
+import styles from './index.module.scss'
+import RCTimePicker from 'rc-time-picker'
+// theme css file
+import 'rc-time-picker/assets/index.css'
 interface Props {
   input: any,
   disabledHours?: () => number[]
@@ -11,10 +10,10 @@ interface Props {
 }
 
 export default function TimePicker(props: Props) {
-  const { value, onChange } = props.input;
+  const { value, onChange } = props.input
   const {disabledHours, disabledMinutes, disabled} = props
   const handleChange = (v) => {
-    onChange(v);
+    onChange(v)
   }
 
   return (
@@ -25,9 +24,9 @@ export default function TimePicker(props: Props) {
       minuteStep={5}
       disabled={disabled}
       onChange={handleChange}
-    value={value}
+      value={value}
       disabledHours={disabledHours}
       disabledMinutes={disabledMinutes}
     />
-  );
+  )
 }

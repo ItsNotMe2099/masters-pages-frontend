@@ -1,6 +1,6 @@
-import Chat from "components/Chat";
-import Loader from "components/ui/Loader";
-import { IRootState } from "types";
+import Chat from 'components/Chat'
+import Loader from 'components/ui/Loader'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'components/layout/Layout'

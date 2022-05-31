@@ -12,7 +12,7 @@
    @include lg{
     padding: 63px 0 59px 118px;
    }
-   @media screen and (max-width: $sm-max){
+   @media screen and (max-width: $xs-max){
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -21,7 +21,7 @@
     padding: 30px 0;
   }
   button{
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         width: 200px;
         margin: 0 auto;
     }
@@ -32,7 +32,7 @@
     font-weight: 600;
     color: #FFFFFF;
     margin-bottom: 33px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         display: none;
     }
     font-size: 36px;
@@ -57,14 +57,14 @@
         top: -253px;
         right: 85px;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         height: 319px;
         right: -60px;
     }
 }
 
 .icon{
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         height: 319px;
         width: 321px;
         overflow: hidden;

@@ -1,5 +1,5 @@
-import Tab from "components/ui/Tabs/Tab";
-import * as React from "react";
+import Tab from 'components/ui/Tabs/Tab'
+import * as React from 'react'
 
 import styles from './index.module.scss'
 interface TabOption {
@@ -18,7 +18,7 @@ interface Props {
 const Tabs = ({tabs, activeTab, onChange, style, tabClassName}: Props) => {
   const handleChange = (item: TabOption) => {
     if(onChange){
-      onChange(item);
+      onChange(item)
     }
   }
   return (

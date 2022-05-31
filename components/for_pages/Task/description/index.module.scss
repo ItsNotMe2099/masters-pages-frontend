@@ -1,0 +1,110 @@
+@import "../../../../scss/index";
+
+.main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  @media screen and (max-width: $xs-max){
+    padding: 15px 20px;
+  }
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}
+
+.name {
+  display: flex;
+  flex: 1;
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+  &__mobile{
+    display: flex;
+    @media screen and (min-width: $md-min){
+      display: none;
+    }
+  }
+
+}
+
+.nameText{
+  margin-right: 11px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
+}
+
+.taskTitle{
+  flex: 1;
+  .title{
+    padding-top: 28px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #6D718C;
+    @media screen and (max-width: $xs-max){
+      text-align: center;
+      padding: 0;
+    }
+  }
+}
+
+.time {
+  display: flex;
+  padding-left: 15px;
+  div {
+    margin: auto;
+    padding: 0;
+  }
+
+  img {
+    margin-right: 9px;
+  }
+
+}
+
+.desc {
+  font-weight: 500;
+  font-size: 14px;
+  padding-top: 9px;
+}
+
+.separatorLine {
+  height: 28px;
+  width: 1px;
+  background: #414141;
+  margin: 0px 22px;
+  opacity: 0.3;
+}
+
+.bottom {
+  display: flex;
+  margin-top: 10px;
+  div{
+    font-weight: 500;
+    font-size: 14px;
+    color: #2A2C39;
+  }
+}
+
+.category{
+  font-size: 14px;
+  color: #000000;
+  opacity: 0.7;
+  margin-top: 5px;
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}

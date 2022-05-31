@@ -1,5 +1,5 @@
-import GoogleMapReact from 'google-map-react';
-import { ReactElement } from "react";
+import GoogleMapReact from 'google-map-react'
+import { ReactElement } from 'react'
 interface Props {
   children?: ReactElement[] | ReactElement
 }

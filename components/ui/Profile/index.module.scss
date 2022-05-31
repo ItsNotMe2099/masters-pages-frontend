@@ -9,7 +9,7 @@
   &:first-of-type {
     margin-top: 0px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     flex-direction: column;
   }
 }
@@ -18,7 +18,7 @@
 }
 .profile{
   padding: 20px 0px 20px 20px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: flex;
     border-bottom: 1px solid #cccccc;
   }
@@ -42,7 +42,7 @@
   @media screen and (min-width: $md-min){
     max-width: 224px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 100%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -85,7 +85,7 @@
 
   div {
     flex: 1;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       flex: 0;
       margin-right: 21px;
     }
@@ -96,7 +96,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }
@@ -104,7 +104,7 @@
 .name {
   display: flex;
   flex: 1;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
   &__mobile{
@@ -157,7 +157,7 @@
   font-weight: bold;
   font-size: 18px;
   padding-top: 20px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     text-align: center;
     padding: 0;
     margin: auto 0;
@@ -199,7 +199,7 @@
 
   img {
     margin-right: 9px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       width: 16px;
     }
   }
@@ -215,7 +215,7 @@
   font-size: 14px;
   color: #000;
   margin-top: 15px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin: auto 8px auto 0;
   }
 }
@@ -248,7 +248,10 @@
 .bottom {
   display: flex;
   margin-top: 10px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: 400px){
+    flex-direction: column;
+  }
+  @media screen and (max-width: $xs-max){
     justify-content: center;
   }
 }
@@ -395,7 +398,7 @@
 }
 
 .mobileWrapper{
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin: auto 0 auto 19px;
   }
 }

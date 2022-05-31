@@ -1,7 +1,5 @@
-import ApiActionTypes from "constants/api";
-import ActionTypes from "./const";
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSubCategory } from "./actions";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 
 export interface SubCategoryCheckboxState {
   subCategories: string[],
@@ -31,8 +29,8 @@ export default function authReducer(state = {...initialState}, action) {
           label: item.name,
           value: item.id
     }
-      });
+      })
       break
   }
-  return state
+   return {...state}
 }

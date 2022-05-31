@@ -1,15 +1,11 @@
-import { fetchSkillList } from "components/Skill/actions";
-import Loader from "components/ui/Loader";
-import SliderControl from "components/ui/SliderControl";
-import { useEffect } from "react";
-import * as React from "react";
-import { IRootState, SkillData, SkillListItem } from "types";
-import { getMediaPath } from "utils/media";
-import { getCategoryTranslation } from "utils/translations";
+import SliderControl from 'components/ui/SliderControl'
+import * as React from 'react'
+import { SkillData } from 'types'
+import { getMediaPath } from 'utils/media'
+import { getCategoryTranslation } from 'utils/translations'
 import styles from 'components/Portfolio/Skill/index.module.scss'
-import Slider from "react-slick";
-import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, Trans} from 'i18n'
+import Slider from 'react-slick'
+import {useTranslation} from 'next-i18next'
 interface Props {
   item: SkillData,
   onEdit: (SkillData) => void
@@ -17,7 +13,7 @@ interface Props {
   allowEdit?: boolean
 }
 const Skill = ({allowEdit, item, onEdit, onRemove}: Props) => {
-  var settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -48,8 +44,8 @@ const Skill = ({allowEdit, item, onEdit, onRemove}: Props) => {
         }
       }
     ]
-  };
-  const {t} = useTranslation('common');
+  }
+  const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
       {allowEdit && <div className={styles.editButton} onClick={() => onEdit(item)}>

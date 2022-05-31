@@ -1,33 +1,33 @@
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import {IRootState, ProfileData} from 'types'
+import {IRootState} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {useState} from 'react'
 import CardBioForm from 'components/PublicProfile/components/view/CardBio/Form'
-import {hideProfileForm, showProfileForm, updateProfile, updateProfileByForm} from 'components/Profile/actions'
+import {hideProfileForm, showProfileForm, updateProfileByForm} from 'components/Profile/actions'
 import Loader from 'components/ui/Loader'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean
 }
 const CardBio = (props: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'bio');
-  const {profile,isEdit} = props;
-  const {t} = useTranslation('common');
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'bio')
+  const {profile,isEdit} = props
+  const {t} = useTranslation('common')
   const handleEditClick = () => {
-    dispatch(showProfileForm( 'bio'));
+    dispatch(showProfileForm( 'bio'))
 
   }
   const handleSubmit = (data) => {
-    dispatch(updateProfileByForm(profile.id, {bio: {...data, visible: true}}, 'bio'));
+    dispatch(updateProfileByForm(profile.id, {bio: {...data, visible: true}}, 'bio'))
   }
   const handleCancel = () => {
-    dispatch(hideProfileForm( 'bio'));
+    dispatch(hideProfileForm( 'bio'))
   }
 
   return (

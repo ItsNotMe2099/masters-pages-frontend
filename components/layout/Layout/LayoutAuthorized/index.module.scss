@@ -4,6 +4,7 @@
   min-height: 100%;
   height: 100%;
   padding-top: 60px;
+  overflow-x: hidden;
   &.menuHidden{
     margin-left: 0px;
     .leftMenu {
@@ -113,14 +114,19 @@
 
 }
 
-.modeAgency {
+.modeCorporate{
   .leftMenu {
     background: #F2B705;
   }
   .logo{
     background: #E2AB05;
   }
+  .menuSeparator{
+    background: #FFDA6B;
+  }
+
 }
+
 .logo{
   padding: 0px 13px;
   min-height: 59px;

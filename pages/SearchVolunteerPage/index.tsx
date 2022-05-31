@@ -1,29 +1,28 @@
-import Modals from "components/layout/Modals";
+import Modals from 'components/layout/Modals'
 import {
   resetProfileSearchList,
   setFilterProfileSearch,
-  setRoleProfileSearch,
   setSortProfileSearch
-} from "components/ProfileSearch/actions";
-import SearchProfileListView from "components/SearchPage/ListView";
-import SearchProfileMapView from "components/SearchPage/MapView";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import {getAuthServerSide} from "utils/auth";
-import { useDispatch, useSelector } from 'react-redux'
+} from 'components/ProfileSearch/actions'
+import SearchProfileListView from 'components/SearchPage/ListView'
+import SearchProfileMapView from 'components/SearchPage/MapView'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import {getAuthServerSide} from 'utils/auth'
+import { useDispatch } from 'react-redux'
 const queryString = require('query-string')
 const SearchVolunteerPage = (props) => {
   const dispatch = useDispatch()
-  const router = useRouter();
+  const router = useRouter()
   const [showMap, setShowMap] = useState(false)
 
   useEffect(() => {
-    dispatch(resetProfileSearchList());
+    dispatch(resetProfileSearchList())
     if(router.query.filter) {
-      dispatch(setFilterProfileSearch(JSON.parse((router.query as any).filter)));
+      dispatch(setFilterProfileSearch(JSON.parse((router.query as any).filter)))
     }
     if(router.query.sortType) {
-      dispatch(setSortProfileSearch((router.query as any).sortType));
+      dispatch(setSortProfileSearch((router.query as any).sortType))
     }
 
   }, [])
@@ -36,5 +35,5 @@ const SearchVolunteerPage = (props) => {
   </>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: false})
 export default SearchVolunteerPage

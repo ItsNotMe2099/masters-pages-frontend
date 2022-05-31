@@ -1,7 +1,7 @@
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import { useCallback } from 'react'
 import styles from './index.module.scss'
-import Checkbox from "react-custom-checkbox";
+import Checkbox from 'react-custom-checkbox'
 
 interface Props {
   options: [{ value: string, label: string }],
@@ -17,13 +17,13 @@ interface Props {
 }
 
 export const CheckboxList = (props) => {
-  const { meta: { error, touched }, input,restrictedValues, options, label, type, ...rest } = props;
+  const { meta: { error, touched }, input,restrictedValues, options, label, type, ...rest } = props
 
   const handleCheckboxChanged = useCallback((item, isChecked) => {
     if(isChecked){
-      input.onChange([...input.value, props.changeWithValue ? item : item.value]);
+      input.onChange([...input.value, props.changeWithValue ? item : item.value])
     }else{
-      input.onChange(input.value.filter(val => props.changeWithValue ? val.value !== item.value : val !== item.value));
+      input.onChange(input.value.filter(val => props.changeWithValue ? val.value !== item.value : val !== item.value))
     }
   }, [input.value])
 
@@ -53,8 +53,8 @@ export const CheckboxList = (props) => {
       <div className={styles.error}><ErrorInput {...props}/></div>
       </div>
 
-  );
-};
+  )
+}
 
 CheckboxList.defaultProps = {
   labelType: 'static',

@@ -1,11 +1,10 @@
-import { modalClose, phoneConfirmOpen } from "components/Modal/actions";
-import { changePassword, changePasswordError, changePasswordSuccess } from "components/Auth/ChangePassword/actions";
-import { signInError, signInSubmit } from "components/Auth/SignIn/actions";
-import { takeLatest, put, select, call } from 'redux-saga/effects'
+import { modalClose } from 'components/Modal/actions'
+import { changePassword, changePasswordError, changePasswordSuccess } from 'components/Auth/ChangePassword/actions'
+import { takeLatest, put } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
-import requestGen from "utils/requestGen";
+import requestGen from 'utils/requestGen'
 import ActionTypes from './const'
-import { IRequestData, IResponse, IRootState } from 'types'
+import { IRequestData, IResponse } from 'types'
 function* signInSaga() {
 
 
@@ -13,15 +12,15 @@ function* signInSaga() {
     function* (action: ActionType<typeof changePassword>) {
 
       const res: IResponse = yield requestGen({
-        url: `/api/auth/resetPassByCurrentUser`,
+        url: '/api/auth/resetPassByCurrentUser',
         method: 'POST',
         data: action.payload,
       } as IRequestData)
       if(!res.err){
-        yield put(changePasswordSuccess());
+        yield put(changePasswordSuccess())
         yield put(modalClose())
       }else{
-        yield put(changePasswordError(res.err?.errors));
+        yield put(changePasswordError(res.err?.errors))
       }
 
     })

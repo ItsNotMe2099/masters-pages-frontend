@@ -1,4 +1,4 @@
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 import styles from './index.module.scss'
 
 interface Props {

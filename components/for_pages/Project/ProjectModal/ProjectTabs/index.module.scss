@@ -1,0 +1,20 @@
+@import "scss/index";
+
+.root{
+
+  min-width: 209px;
+  max-width: 209px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #F2B705;
+  padding: 40px 0px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+
+.volunteer{
+  background-color: #199AC2;
+}
+
+

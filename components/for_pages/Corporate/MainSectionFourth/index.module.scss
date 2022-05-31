@@ -1,0 +1,136 @@
+@import "../../../../scss/index";
+.root{
+  background: #fafafa;
+}
+
+.container{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  padding-top: 113px;
+  padding-bottom: 77px;
+  justify-content: space-between;
+  @media (max-width: 1450px) {
+    flex-direction: column;
+  }
+  @media (max-width: 1250px) {
+    width: 95%;
+  }
+  @media (max-width: 1060px) {
+    flex-direction: column-reverse;
+  }
+  @media (max-width: 660px) {
+    padding-top: 49px;
+  }
+}
+
+.title{
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 110%;
+    letter-spacing: 0.03em;
+    color: #373948;
+    @media (max-width: 1060px) {
+        text-align: center;
+     }
+     @media (max-width: 660px) {
+        font-size: 24px;
+      }
+}
+
+
+.videos{
+    flex: 1;
+    @media (max-width: 1060px) {
+        margin-top: 46px;
+    }
+}
+
+.video{
+    margin-top: 41px;
+    @media (max-width: 1060px) {
+        display: flex;
+        justify-content: center;
+     }
+}
+
+.btns{
+    display: flex;
+    padding-top: 90px;
+    justify-content: center;
+    padding-bottom: 98px;
+    a:first-child{
+      margin-right: 10px;
+      @media (max-width: 660px) {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+    @media (max-width: 1060px) {
+       justify-content: center;
+    }
+    @media (max-width: 660px) {
+        flex-direction: column;
+        padding-top: 66px;
+        width: 95%;
+        margin: auto;
+      }
+  }
+
+  .findMaster{
+    padding: 0px 35px;
+    height: 47px;
+    line-height: 47px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .firstBtn{
+      margin-right: 33px;
+      @media (max-width: 660px) {
+        margin-right: 0;
+        margin-bottom: 14px;
+      }
+  }
+
+  .review{
+    padding: 25px;
+    background: #FFF8E3;
+    border-radius: 18px;
+    margin-top: 32px;
+  }
+
+  .avatar{
+    margin-right: 10px;
+    img{
+      border-radius: 100%;
+    }
+  }
+
+  .top{
+    display: flex;
+  }
+
+  .name{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+  }
+
+  .text{
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+  }
+
+  .profiles{
+    flex: 1;
+  }
+
+  .reviews{
+    flex: 1;
+    .review:first-child{
+      margin-top: 40px;
+    }
+  }

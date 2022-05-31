@@ -7,7 +7,7 @@
     width: $container-lg;
     margin: auto;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     padding: 17px 22px 0 22px;
 }
 
@@ -36,13 +36,13 @@
   opacity: 0.5;
   font-size: 14px;
   margin-bottom: 20px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     text-align: center;
 }
 }
 
 .footer{
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }

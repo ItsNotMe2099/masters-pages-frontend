@@ -1,11 +1,11 @@
-import { ChangeEvent, ComponentType, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { ChangeEvent, ComponentType, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './index.module.scss'
 
-import { WrappedFieldProps } from 'redux-form';
-import debounce from 'lodash.debounce';
+import { WrappedFieldProps } from 'redux-form'
+import debounce from 'lodash.debounce'
 
 import InputMask from 'react-input-mask'
-import _uniqueId from 'lodash/uniqueId';
+import _uniqueId from 'lodash/uniqueId'
 type OnChange = (evt: React.ChangeEvent<HTMLInputElement>) => any;
 
 interface Indexed {
@@ -43,71 +43,71 @@ interface Props {
 export default function BaseInput(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
-  const [name] = useState(_uniqueId('input-'));
-  const {mask} = props;
+  const [name] = useState(_uniqueId('input-'))
+  const {mask} = props
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
-        return styles.inputSmall;
+        return styles.inputSmall
       case 'normal':
       default:
-        return styles.inputNormal;
+        return styles.inputNormal
     }
   }
-  const [ debounceFieldValue, setDebounceFieldValue ] = useState('');
-  const [ debouncing, setDebouncing ] = useState(false);
-  const lastInputValue = useRef(props.input?.value);
+  const [ debounceFieldValue, setDebounceFieldValue ] = useState('')
+  const [ debouncing, setDebouncing ] = useState(false)
+  const lastInputValue = useRef(props.input?.value)
 
   useEffect(() => {
     if (debouncing) {
-      return;
+      return
     }
 
     if (props.input?.value === lastInputValue.current) {
-      setDebounceFieldValue(props.input?.value);
-      return;
+      setDebounceFieldValue(props.input?.value)
+      return
     }
-    lastInputValue.current = props.input.value;
-    setDebounceFieldValue(props.input.value);
-  }, [ debouncing, props.input?.value ]);
+    lastInputValue.current = props.input.value
+    setDebounceFieldValue(props.input.value)
+  }, [ debouncing, props.input?.value ])
 
   const call = useMemo(() => debounce((
     onChange: OnChange,
     evt: ChangeEvent<HTMLInputElement>,
   ) => {
-    setDebouncing(false);
+    setDebouncing(false)
     if(onChange){
-      onChange(evt);
+      onChange(evt)
     }
-  }, props.debounce || 0), [ setDebouncing, props.debounce ]);
+  }, props.debounce || 0), [ setDebouncing, props.debounce ])
 
   const onChange = useCallback((evt: ChangeEvent<HTMLInputElement>) => {
-    evt.persist();
-    setDebouncing(true);
-    call(props.input?.onChange, evt);
-    setDebounceFieldValue(evt.target.value);
-  }, [ setDebouncing, call, setDebounceFieldValue ]);
+    evt.persist()
+    setDebouncing(true)
+    call(props.input?.onChange, evt)
+    setDebounceFieldValue(evt.target.value)
+  }, [ setDebouncing, call, setDebounceFieldValue ])
 
   const onBlur = useCallback((evt) => {
-    call.cancel();
-    setDebouncing(false);
+    call.cancel()
+    setDebouncing(false)
     if(props.input?.onChange) {
-      props.input?.onChange(evt);
+      props.input?.onChange(evt)
     }
     if(props.input?.onBlur) {
-      props.input?.onBlur(evt);
+      props.input?.onBlur(evt)
     }
-  }, [ call, setDebouncing, props.input?.onChange, props.input?.onBlur ]);
+  }, [ call, setDebouncing, props.input?.onChange, props.input?.onBlur ])
 
   const onKeyDown = useCallback((evt) => {
     if (evt.keyCode === 13) {
-      call.cancel();
-      setDebouncing(false);
+      call.cancel()
+      setDebouncing(false)
       if(props.input?.onChange) {
-        props.input?.onChange(evt);
+        props.input?.onChange(evt)
       }
     }
-  }, [ call, setDebouncing, props.input?.onChange ]);
+  }, [ call, setDebouncing, props.input?.onChange ])
 
   const renderInput = (inputProps) => {
     return  ( <input className={`${styles.input} ${getSizeClass(props.size)} ${styles.inputClassName} ${(error && touched) && styles.inputError} ${(props.withIcon) && styles.withIcon} ${(props.withPadding) && styles.withPadding} ${(props.transparent) && styles.transparent} ${(props.withBorder) && styles.withBorder}`}
@@ -126,7 +126,7 @@ export default function BaseInput(props: Props) {
     <InputMask mask={mask}  disabled={props.disabled}   {...(props.debounce > 0 ? {value: debounceFieldValue} : {value: props.input.value, onChange: props.input.onChange}) }  maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
       {(inputProps) => renderInput(inputProps)}
     </InputMask>
-  ) : renderInput(props.input);
+  ) : renderInput(props.input)
 
 }
 BaseInput.defaultProps = {

@@ -37,6 +37,7 @@ import NewsSaga from 'components/News/sagas'
 import FollowerSaga from 'components/Follower/sagas'
 import ReportSaga from 'components/Report/sagas'
 import ContactsSaga from 'components/Contacts/sagas'
+import OrganizationSaga from "components/Organization/sagas";
 
 export const rootSaga = function* root() {
   yield all([
@@ -77,6 +78,7 @@ export const rootSaga = function* root() {
     NewsSaga(),
     FollowerSaga(),
     ReportSaga(),
-    ContactsSaga()
+    ContactsSaga(),
+    OrganizationSaga()
   ]);
 };

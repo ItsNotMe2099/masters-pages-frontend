@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
-import {useTranslation, withTranslation} from "i18n";
-import SignIn from "../../../../../Auth/SignIn/Form";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   meta?: {
@@ -11,7 +10,7 @@ interface Props {
 
 const ErrorInput = (props: Props) => {
 
-  const {t} = useTranslation();
+  const {t} = useTranslation()
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
   if(touched && error) {
     return (<div className={styles.root}>{t(`validation.${error}`)}</div>)

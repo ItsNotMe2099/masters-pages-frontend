@@ -1,20 +1,22 @@
 
-import * as React from "react";
+import * as React from 'react'
 
 import {getAuthServerSide} from 'utils/auth'
 import {useRouter} from 'next/router'
 import {useEffect} from 'react'
 import {IRootState} from 'types'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import {useAppContext} from 'context/state'
 interface Props {
 }
 const TabOrders = (props: Props) => {
-  const router = useRouter();
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const router = useRouter()
+  const appContext = useAppContext();
+  const profile = appContext.profile
   useEffect(() => {
-  router.replace( profile.role === 'client' ? '/orders/published' : '/orders/negotiation');
-  }, []);
+  router.replace( profile.role === 'client' ? '/orders/published' : '/orders/negotiation')
+  }, [])
   return <></>
 }
 export default TabOrders
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})

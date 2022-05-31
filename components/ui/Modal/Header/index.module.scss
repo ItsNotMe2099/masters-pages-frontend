@@ -18,7 +18,7 @@
   overflow: hidden;
   width: 40px;
   height: 40px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin-right: 6px;
   }
 }
@@ -28,7 +28,7 @@
   font-size: 16px;
   color: #27C60D;
   margin: auto 12px auto 0;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 84px;
   }
 }

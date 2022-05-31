@@ -1,0 +1,38 @@
+.root{
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  :global .react-calendar{
+    background: white;
+  }
+  .datePicker{
+    display: flex;
+    :global .react-date-picker__calendar{
+      z-index: 3;
+    }
+    :global .react-date-picker__wrapper{
+      border: 1px solid #C4C4C4;
+      width: 100%;
+
+      padding: 0px 16px;
+      margin: 0px;
+      font-size: 14px;
+      &::placeholder{
+        color: #050505;
+        opacity: 1;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      height: 44px;
+      border-radius: 6px;
+    }
+  }
+
+}
+
+
+.label{
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 7px;
+}

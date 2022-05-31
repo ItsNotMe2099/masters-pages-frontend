@@ -1,5 +1,5 @@
-import ApiActionTypes from "constants/api";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 
 export interface CountryInputState {
   countries: string[],
@@ -20,9 +20,9 @@ export default function authReducer(state = {...initialState}, action) {
           label: item.country_name,
           value: item.country_code
         }
-      });
+      })
       break
 
   }
-  return state
+   return {...state}
 }

@@ -1,37 +1,34 @@
-import {modalClose, phoneConfirmOpen, registrationPhoneConfirmOpen} from "components/Modal/actions";
+import {modalClose, registrationPhoneConfirmOpen} from 'components/Modal/actions'
 import {
   registrationPhoneChange,
   registrationPhoneChangeConfirmRequest,
   registrationPhoneChangeRequest, registrationPhoneConfirm,
   registrationPhoneSubmit, registrationPhoneSubmitRequest
-} from "components/Auth/RegistrationPhone/actions";
-import {takeLatest, put, select, call, take} from 'redux-saga/effects'
+} from 'components/Auth/RegistrationPhone/actions'
+import {takeLatest, put, select, take} from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
-import requestGen from "utils/requestGen";
 import ActionTypes from './const'
-import { IRequestData, IResponse, IRootState } from 'types'
-import cookie from "js-cookie";
-import ApiActionTypes from "../../../constants/api";
-import {fetchChat} from "../../Chat/actions";
+import { IRootState } from 'types'
+import ApiActionTypes from '../../../constants/api'
 function* registrationPhoneSaga() {
 
 
   yield takeLatest(ActionTypes.REGISTRATION_PHONE_SUBMIT,
     function* (action: ActionType<typeof registrationPhoneSubmit>) {
-      yield put(registrationPhoneSubmitRequest(action.payload));
+      yield put(registrationPhoneSubmitRequest(action.payload))
       const result = yield take([ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.REGISTRATION_PHONE_SUBMIT_REQUEST + ApiActionTypes.SUCCESS) {
-        yield put(registrationPhoneConfirmOpen());
+        yield put(registrationPhoneConfirmOpen())
       }
 
     })
 
   yield takeLatest(ActionTypes.REGISTRATION_PHONE_CHANGE,
     function* (action: ActionType<typeof registrationPhoneChange>) {
-      yield put(registrationPhoneChangeRequest(action.payload));
+      yield put(registrationPhoneChangeRequest(action.payload))
       const result = yield take([ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST + ApiActionTypes.SUCCESS) {
-        yield put(registrationPhoneConfirmOpen());
+        yield put(registrationPhoneConfirmOpen())
       }
 
     })
@@ -41,13 +38,13 @@ function* registrationPhoneSaga() {
 
       const phone = yield select((state: IRootState) => state.registrationPhone.phone)
 
-      yield put(registrationPhoneChangeConfirmRequest({code: action.payload.code, phone}));
+      yield put(registrationPhoneChangeConfirmRequest({code: action.payload.code, phone}))
       const result = yield take([ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.REGISTRATION_PHONE_CHANGE_CONFIRM_REQUEST + ApiActionTypes.SUCCESS) {
         const red = yield select((state: IRootState) => state.registrationPhone)
         const cb = yield select((state: IRootState) => state.registrationPhone.cb)
         cb(phone)
-        yield put(modalClose());
+        yield put(modalClose())
 
       }
 

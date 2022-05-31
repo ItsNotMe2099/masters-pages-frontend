@@ -3,7 +3,7 @@
 .root{
     display: flex;
   padding: 25px 0px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         display: none;
     }
 
@@ -22,7 +22,7 @@
     border-radius: 100%;
     padding: 5px;
     margin-bottom: 21px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     margin-bottom: 0px;
   }
   }

@@ -13,7 +13,7 @@
   background: #E4474E;
   padding: 20px 0px 0px;
 
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     padding: 12px 22px 12px 22px;
     position: relative;
     z-index: 3;
@@ -32,7 +32,7 @@
   .more {
     display: none;
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     width: 100%;
 
     .more {
@@ -54,7 +54,7 @@
 }
 .sidebar{
   width: 328px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 100%;
     padding: 0 22px;
     background-image: url("../../../public/img/icons/mapBackgrnd.png");
@@ -79,7 +79,7 @@
 .tasks{
   flex: 1;
   padding-left: 30px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     padding: 0 22px;
   }
 }
@@ -91,7 +91,7 @@
   height: 250px;
   border-radius: 12px;
   overflow: hidden;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }
@@ -115,13 +115,13 @@
       display: none;
     }
   }
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     margin-top: 20px;
     .showOnTheMap{
       max-width: 100%;
     }
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     flex-direction: column;
     padding: 0;
   }
@@ -129,7 +129,7 @@
 .tasksTobBar{
   display: flex;
   margin-bottom: 18px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin-top: 25px;
   }
 }
@@ -153,7 +153,7 @@
   border-radius: 20px;
   padding: 26px;
   margin-top: 30px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }

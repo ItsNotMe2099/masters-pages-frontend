@@ -1,8 +1,6 @@
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import Radio from "components/ui/Inputs/RadioList/Radio";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import Radio from 'components/ui/Inputs/RadioList/Radio'
 import styles from './index.module.scss'
-import Checkbox from "react-custom-checkbox";
 
 interface Props {
   options: [{ value: string, label: string }],
@@ -17,7 +15,7 @@ interface Props {
 }
 
 export const RadioList = (props) => {
-  const { meta: { error, touched },restrictedValues, input, options, label, type, ...rest } = props;
+  const { meta: { error, touched },restrictedValues, input, options, label, type, ...rest } = props
 
   const handleCheckboxChanged = (value) => {
       input.onChange(value)
@@ -43,8 +41,8 @@ export const RadioList = (props) => {
       </div>
     </div>
 
-  );
-};
+  )
+}
 
 RadioList.defaultProps = {
   labelType: 'static',

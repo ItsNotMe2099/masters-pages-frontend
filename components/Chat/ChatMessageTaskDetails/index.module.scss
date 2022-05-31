@@ -66,6 +66,14 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0px 20px;
+  @media screen and (max-width: 840px){
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
+  @media screen and (max-width: 600px){
+    padding: 0 10px;
+    padding-bottom: 10px;
+  }
   @media screen and (max-width: 550px){
     justify-content: center;
     padding-top: 10px;

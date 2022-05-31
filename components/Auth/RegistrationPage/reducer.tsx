@@ -1,4 +1,4 @@
-import ActionTypes from "./const";
+import ActionTypes from './const'
 
 export interface RegistrationCompleteState {
   formIsSuccess: boolean
@@ -21,24 +21,24 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.REGISTRATION_COMPLETE_SUBMIT:
       state.formIsSuccess = false
-      state.loading = true;
+      state.loading = true
       break
     case ActionTypes.REGISTRATION_COMPLETE_SUCCESS:
       state.formIsSuccess = true
-      state.loading = false;
+      state.loading = false
       break
 
     case ActionTypes.REGISTRATION_COMPLETE_ERROR:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.loading = false;
+      state.loading = false
       break
 
     case ActionTypes.REGISTRATION_COMPLETE_RESET:
       state.formIsSuccess = false
       state.formError = ''
-      state.loading = false;
+      state.loading = false
       break
   }
 
-  return state
+   return {...state}
 }

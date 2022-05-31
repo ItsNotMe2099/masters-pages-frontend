@@ -1,0 +1,78 @@
+@import "scss/index";
+.root{
+  margin-top: 0;
+  padding: 25px;
+}
+.loader{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: rgba(255, 255, 255, 0.6);
+  > div{
+    justify-content: center;
+  }
+}
+
+.desc{
+  display: flex;
+  justify-content: space-between;
+}
+
+.btns{
+  display: flex;
+  margin-top: 15px;
+  a:first-child{
+    margin-right: 16px;
+  }
+}
+
+.attachments{
+  padding: 25px;
+  background: #F9F9F9;
+  border: 0.3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  margin-top: 15px;
+  display: flex;
+  .item:last-child{
+    margin-right: 0;
+  }
+}
+
+.right{
+  img{
+    height: 236px;
+    width: 420px;
+  }
+}
+
+.text{
+  word-break: break-word;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  span{
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #6D718C;
+    margin-top: 10px;
+  }
+}
+
+.image{
+  display: flex;
+  justify-content: center;
+  img{
+    width: 56px;
+  }
+}
+
+.player{
+  width: 420px;
+}

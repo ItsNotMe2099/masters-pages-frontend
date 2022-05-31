@@ -2,8 +2,8 @@ import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import dynamic from 'next/dynamic'
-import {useEffect, useState} from "react";
-import {useTranslation} from "i18n";
+import {useEffect, useState} from 'react'
+import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 import Tabs from 'components/ui/Tabs'
@@ -15,25 +15,22 @@ const SharePersonalLabel = dynamic(() => import('components/Share/PersonalLabel'
   ssr: false
 })
 import {IRootState} from 'types'
-import {formatSkillList} from 'utils/skills'
-import {setCurrentSkill} from 'components/Profile/actions'
-import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {fetchSkillList} from 'components/Skill/actions'
 import Tab from 'components/PublicProfile/components/Tab'
 import {getCategoryTranslation} from 'utils/translations'
-import { TabSelect } from 'components/TabSelect';
+import { TabSelect } from 'components/TabSelect'
 
 const SharePage = (props) => {
-  const {t, i18n} = useTranslation('common');
-  const router = useRouter();
+  const {t, i18n} = useTranslation('common')
+  const router = useRouter()
   const dispatch = useDispatch()
-  const [activeSkill, setActiveSkill] = useState(null);
-  const [customLink, setCustomLink] = useState();
-  const skills =  useSelector((state: IRootState) => state.skill.list) ;
+  const [activeSkill, setActiveSkill] = useState(null)
+  const [customLink, setCustomLink] = useState()
+  const skills =  useSelector((state: IRootState) => state.skill.list) 
 
 
   useEffect(() => {
-    dispatch(fetchSkillList());
+    dispatch(fetchSkillList())
   }, [])
   const tabs = [
 
@@ -42,7 +39,7 @@ const SharePage = (props) => {
     { name: t('sharePage.shareBySocialMedia'), key: 'shareBySocialMedia' },
     { name: t('sharePage.personalLabel'), key: 'personalLabel' },
   ]
-  const [activeTab, setActiveTab] = useState(tabs[0].key);
+  const [activeTab, setActiveTab] = useState(tabs[0].key)
 
   const getTabContent = (activeTab) => {
     switch (activeTab){
@@ -58,12 +55,12 @@ const SharePage = (props) => {
   }
 
   const handleSkillClick = (skill) => {
-    setActiveSkill(skill);
-    setCustomLink(null);
+    setActiveSkill(skill)
+    setCustomLink(null)
   }
   const handleCustomLinkClick = (type) => {
-    setActiveSkill(null);
-    setCustomLink(type);
+    setActiveSkill(null)
+    setCustomLink(type)
   }
   return (
     <Layout>
@@ -78,7 +75,7 @@ const SharePage = (props) => {
           <Tabs style={'fullWidthRound'} tabs={tabs} activeTab={activeTab} onChange={(tab) => setActiveTab(tab.key)}/>
         </div>
         <div className={styles.mobile}>
-          <TabSelect 
+          <TabSelect
             tabs={tabs}
             activeTab={activeTab}
             onChange={(tab) => setActiveTab(tab.key)}
@@ -90,5 +87,5 @@ const SharePage = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default SharePage

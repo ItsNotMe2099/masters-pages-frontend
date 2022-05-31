@@ -1,14 +1,14 @@
-import { signUpReset, signUpSubmit } from "components/Auth/SignUp/actions";
+import { signUpReset, signUpSubmit } from 'components/Auth/SignUp/actions'
 import Button from 'components/ui/Button'
-import Modal from "components/ui/Modal";
-import { useEffect } from "react";
-import { IRootState } from "types";
+import Modal from 'components/ui/Modal'
+import { useEffect } from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import Link from 'next/link'
 import SignUp from './Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInOpen} from 'components/Modal/actions'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
+import {useAuthContext} from 'context/auth_state'
 
 interface Props {
   isOpen?: boolean
@@ -18,15 +18,20 @@ interface Props {
 }
 
 const SignUpComponent = (props: Props) =>  {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  const isLoading = useSelector((state: IRootState) => state.authSignUp.loading)
-  const handleSubmit = (data) => {
-    dispatch(signUpSubmit(data));
+  const authContext = useAuthContext();
+  const isLoading = authContext.signUpSpinner;
+  const handleSubmit = async (data) => {
+    authContext.signUp(data);
   }
   useEffect(() => {
-    dispatch(signUpReset());
-  })
+    return () => {
+      if (authContext.error) {
+        authContext.clear();
+      }
+    }
+  }, [])
   return (
     <Modal {...props} loading={isLoading}>
 
@@ -48,7 +53,7 @@ const SignUpComponent = (props: Props) =>  {
             <span>{t('createTask.priceSelect.or')}</span>
             <div className={styles.separator}></div>
           </div>
-          <SignUp onSubmit={handleSubmit}/>
+          <SignUp onSubmit={handleSubmit} onClick={props.onRequestClose}/>
         <div className={styles.signUp}>
           <div>{t('auth.signUp.alreadyHaveAccount')}</div>
           <div><a onClick={() => dispatch(signInOpen())}>{t('auth.signInLink')}</a></div>

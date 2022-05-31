@@ -1,10 +1,10 @@
 import 'firebase/messaging'
 import firebase from 'firebase/app'
 import localforage from 'localforage'
-
+import { getMessaging, getToken } from "firebase/messaging";
 const firebaseCloudMessaging = {
   init: async  () => {
-    if (!firebase.apps.length) {
+    if (!firebase.getApps().length) {
       firebase.initializeApp({
         apiKey: "AIzaSyBZhENNFzCSyFZi7LpeTSfk0K7MNtE4B80",
         authDomain: "masterspages-178c2.firebaseapp.com",
@@ -16,14 +16,14 @@ const firebaseCloudMessaging = {
       })
 
       try {
-        const messaging = firebase.messaging()
+        const messaging = getMessaging()
         const tokenInLocalForage = window.localStorage.getItem('push_token')
         if (tokenInLocalForage !== null) {
           return {token: tokenInLocalForage}
         }
         const status = await Notification.requestPermission()
         if (status && status === 'granted') {
-          const fcm_token = await messaging.getToken({
+          const fcm_token = await getToken(messaging, {
             vapidKey: 'BG_JD4UHfDkDybN9Z9PMi0zVUrMoVySrc3LqEctLETFwdSCYGh7pvLz73r2DjTljQQcFV2I7VgC1H9SDIWOLsuM'
           })
           if (fcm_token) {

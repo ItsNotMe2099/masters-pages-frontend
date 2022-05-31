@@ -1,10 +1,10 @@
-import * as constants from '../constants';
+import * as constants from '../constants'
 
-let injectionState: string = constants.INJECTION_STATE_NOT_YET;
-let injectionError: Error | null = null;
+let injectionState: string = constants.INJECTION_STATE_NOT_YET
+let injectionError: Error | null = null
 
-let onScriptLoadCallbacks: (() => void)[] = [];
-let onScriptLoadErrorCallbacks: ((error: Error | null) => void)[] = [];
+let onScriptLoadCallbacks: (() => void)[] = []
+let onScriptLoadErrorCallbacks: ((error: Error | null) => void)[] = []
 
 // Returns a promise that resolves
 //   - when the script becomes available or
@@ -20,64 +20,64 @@ const injectScript = (apiKey: string): Promise<void> => {
   switch (injectionState) {
     case constants.INJECTION_STATE_DONE:
 
-      return injectionError ? Promise.reject(injectionError) : Promise.resolve();
+      return injectionError ? Promise.reject(injectionError) : Promise.resolve()
 
     case constants.INJECTION_STATE_IN_PROGRESS:
 
       return new Promise((resolve, reject) => {
-        onScriptLoadCallbacks.push(resolve);
-        onScriptLoadErrorCallbacks.push(reject);
-      });
+        onScriptLoadCallbacks.push(resolve)
+        onScriptLoadErrorCallbacks.push(reject)
+      })
 
     default: // INJECTION_STATE_NOT_YET
 
-      injectionState = constants.INJECTION_STATE_IN_PROGRESS;
+      injectionState = constants.INJECTION_STATE_IN_PROGRESS
 
       return new Promise((resolve, reject) => {
         if (process.browser) {
-          const script = document.createElement('script');
+          const script = document.createElement('script')
 
-          script.type = 'text/javascript';
-          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-          script.async = true;
-          script.defer = true;
+          script.type = 'text/javascript'
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
+          script.async = true
+          script.defer = true
 
           const onScriptLoad = () => {
             // Resolve current promise
-            resolve();
+            resolve()
             // Resolve the pending promises in their respective order
-            onScriptLoadCallbacks.forEach((cb) => cb());
+            onScriptLoadCallbacks.forEach((cb) => cb())
 
-            cleanup();
-          };
+            cleanup()
+          }
           const onScriptLoadError = () => {
             // Reject all promises with this error
-            injectionError = new Error('[react-google-places-autocomplete] Could not inject Google script');
+            injectionError = new Error('[react-google-places-autocomplete] Could not inject Google script')
             // Reject current promise with the error
-            reject(injectionError);
+            reject(injectionError)
             // Reject all pending promises in their respective order with the error
-            onScriptLoadErrorCallbacks.forEach((cb) => cb(injectionError));
+            onScriptLoadErrorCallbacks.forEach((cb) => cb(injectionError))
 
-            cleanup();
-          };
+            cleanup()
+          }
 
           // Release callbacks and unregister listeners
           const cleanup = () => {
-            script.removeEventListener('load', onScriptLoad);
-            script.removeEventListener('error', onScriptLoadError);
-            onScriptLoadCallbacks = [];
-            onScriptLoadErrorCallbacks = [];
-            injectionState = constants.INJECTION_STATE_DONE;
-          };
+            script.removeEventListener('load', onScriptLoad)
+            script.removeEventListener('error', onScriptLoadError)
+            onScriptLoadCallbacks = []
+            onScriptLoadErrorCallbacks = []
+            injectionState = constants.INJECTION_STATE_DONE
+          }
 
-          script.addEventListener('load', onScriptLoad);
-          script.addEventListener('error', onScriptLoadError);
+          script.addEventListener('load', onScriptLoad)
+          script.addEventListener('error', onScriptLoadError)
 
-          document.body.appendChild(script);
+          document.body.appendChild(script)
         }
-      });
+      })
       }
 
-};
+}
 
-export default injectScript;
+export default injectScript
