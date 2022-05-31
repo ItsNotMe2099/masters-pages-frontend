@@ -19,8 +19,8 @@ export default function CardAboutForm(props: Props) {
   const initialValues = {  
 
       about: {
-        about: props.organization.about.about,
-        visible: props.organization.about.visible
+        about: props.organization.about?.about,
+        visible: true
       }
   }
 

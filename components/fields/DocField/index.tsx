@@ -40,6 +40,7 @@ export interface FileFieldProps<T>  extends IField<T>{
   minSize?: number
   multiple?: boolean,
   addFileButton?: ReactElement
+  maxAmount?: number
 }
 
 
@@ -51,6 +52,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
     maxSize,
     minSize,
     multiple = false,
+    maxAmount,
     ...rest
   } = props
   const dispatch = useDispatch()
@@ -60,6 +62,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
   const appContext = useAppContext()
   const role = appContext.role
   const hasError = !!meta.error && meta.touched
+  console.log('VALUEV', value)
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
     accept: '*/*',
@@ -144,12 +147,12 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
           />
         ))}
       </div>}
-      {files.length === 0 && <div
+      {(files.length === 0 || multiple) &&<div
         data-testid="dropzone"
         className={styles.dropZone}
         {...getRootProps()}
       >
-        <div className={styles.add}>
+        {(!maxAmount || maxAmount !== value.length) && <div className={styles.add}>
           <div className={styles.image}>
             <img src='/img/DocField/plus.svg' alt=''/>
           </div>
@@ -159,7 +162,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
           <div className={styles.only}>
             Format allowed PDF, DOC and TXT
           </div>
-        </div>
+        </div>}
         <input
           {...getInputProps()}
         />

@@ -34,6 +34,10 @@
   border: 0.3px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   margin-top: 15px;
+  display: flex;
+  .item:last-child{
+    margin-right: 0;
+  }
 }
 
 .right{
@@ -45,4 +49,30 @@
 
 .text{
   word-break: break-word;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  span{
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #6D718C;
+    margin-top: 10px;
+  }
+}
+
+.image{
+  display: flex;
+  justify-content: center;
+  img{
+    width: 56px;
+  }
+}
+
+.player{
+  width: 420px;
 }

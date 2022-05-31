@@ -42,7 +42,7 @@ const PublicProfile = (props) => {
   const isEdit = currentProfile && currentProfile.id === props.profile.id
   const profile = isEdit ? currentProfile : props.profile
   const [category, setCategory] = useState(null)
-  const [organization, setOrganization] = useState<IOrganization | null>(null)
+  const [organization, setOrganization] = useState<IOrganization | null>(appContext.organization)
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
   const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list)
@@ -189,6 +189,8 @@ const PublicProfile = (props) => {
     setCurrentProject(project);
 
   }
+
+  console.log('ORGANIZATION', appContext.organization)
 
   return (
     <ProfilePageLayout {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>

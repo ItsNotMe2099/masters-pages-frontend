@@ -10,7 +10,8 @@ import { IOrganization } from 'data/intefaces/IOrganization'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { useState } from 'react'
 import Button from '../../Button'
-import { getMediaPath } from 'utils/media'
+import { getMediaPath, isMediaImage, isMediaVideo } from 'utils/media'
+import Player from 'components/ui/video/Player'
 
 interface Props{
   isEdit: boolean
@@ -32,7 +33,7 @@ const CardDescription = (props: Props) => {
   }
 
   const handleSubmit = async (data) => {
-    await OrganizationRepository.updateOrganizationData(organization.id, data)
+    await OrganizationRepository.updateOrganizationData(organization.id, {...data, visible: true})
     setShowForm(false)
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
       if(data){
@@ -41,26 +42,55 @@ const CardDescription = (props: Props) => {
     })
   }
 
-  const webSiteLink = organization.socialLinks.filter(item => item.type === 'web')
-  const instLink = organization.socialLinks.filter(item => item.type === 'instagram')
+  const fileName = (file: string) => {
+    const name = file.split('.').splice(0, 1)
+    return name
+  }
+
+  const getImageSrc = (file: string) => {
+
+    const srcValue = file
+    if(!srcValue){
+      return
+    }
+    const extension = srcValue.split('.').pop().toUpperCase()
+    //return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
+    switch(extension){
+      case 'TXT':
+        return '/img/DocField/doc.svg'
+      case 'DOC':
+        return '/img/DocField/doc.svg'
+      case 'PDF':
+        return '/img/DocField/pdf.svg'
+    }
+  }
+
+  const webSiteLink = organization?.socialLinks?.find(item => item.type === 'web')
+  const instLink = organization?.socialLinks?.find(item => item.type === 'instagram')
 
   return (
     <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.desc')} toolbar={isEdit ? <FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/> : null}>
       {!showForm ? 
         <div className={styles.desc}>
           <div className={styles.left}>
-            <div className={styles.text}>{organization.description.description}</div>
+            <div className={styles.text}>{organization.description?.description}</div>
+            {organization.attachmentsObjects?.length > 0 &&
             <div className={styles.attachments}>
-              {organization.attachments.map(item => 
-                <div></div>
+              {organization.attachmentsObjects?.map(item => 
+                  <a className={styles.item} href={getMediaPath(item.urlS3)} download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
               )}
-            </div>
+            </div>}
             <div className={styles.btns}>
-              <Button projectBtn='default' href={webSiteLink[0].link}>VISIT WEBSITE</Button>
-              <Button projectBtn='default' href={instLink[0].link}>INSTAGRAM</Button>
+              {webSiteLink?.link && <Button projectBtn='default' href={webSiteLink?.link}>VISIT WEBSITE</Button>}
+              {instLink?.link && <Button projectBtn='default' href={instLink?.link}>INSTAGRAM</Button>}
             </div>
             </div>
-            <div className={styles.right}><img src={getMediaPath(organization.photo)} alt=''/></div>
+            {organization.photo && <div className={styles.right}>
+            {(organization.photo && isMediaVideo(organization.photo)) && <div className={styles.video}>
+            <Player className={styles.player}
+            source={getMediaPath(organization.photo)}/></div>}
+          {(organization.photo && isMediaImage(organization.photo)) && <img className={styles.image} src={getMediaPath(organization.photo)} />}
+              </div>}
           </div>
          : <CardDescriptionForm organization={organization} handleSubmit={handleSubmit} onCancel={handleCancel}/>}
       {showForm && formLoading && <div className={styles.loader}><Loader/></div>}

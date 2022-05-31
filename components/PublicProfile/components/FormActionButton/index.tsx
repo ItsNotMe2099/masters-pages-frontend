@@ -6,8 +6,8 @@ import FormArrowUpIcon from 'components/svg/FormArrowUpIcon'
 import FormDeleteIcon from 'components/svg/FormDeleteIcon'
 
 interface Props {
-  type: 'edit' | 'create' | 'moveDown' | 'moveUp' | 'delete',
-  title: string,
+  type?: 'edit' | 'create' | 'moveDown' | 'moveUp' | 'delete',
+  title?: string,
   children?: any
   onClick: () => void
 }

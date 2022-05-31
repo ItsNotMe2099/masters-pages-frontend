@@ -68,4 +68,17 @@ export default class ProfileRepository {
     }
     return res.data
   }
+
+  static async updateProfile(id: number, data: any): Promise<IProfile | null> {
+    const res = await request({
+      url: `/api/profile/${id}`,
+      method: 'PUT',
+      data
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }

@@ -22,6 +22,8 @@ export interface ISocialLink{
   type: string
 }
 
+
+
 export interface IOrganization{
   id: number
   status: OrganizationStatus;
@@ -38,4 +40,5 @@ export interface IOrganization{
  // locations
   photo: string
   attachments: string[]
+  attachmentsObjects: IUserFile[]
 }

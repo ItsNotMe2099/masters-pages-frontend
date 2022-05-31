@@ -39,8 +39,8 @@ const CardAbout = (props: Props) => {
   }
 
   return (
-    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.about')} toolbar={isEdit ? [<FormActionButton type={organization.about.about ? 'edit' : 'create'} title={organization.about.about ? t('edit') : t('add')} onClick={handleEditClick}/>] : []}>
-      {!showForm ? <div className={styles.bioText}>{organization.about.about && organization.about.about}</div> : <CardAboutForm organization={organization} handleSubmit={handleSubmit} onCancel={handleCancel}/>}
+    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.about')} toolbar={isEdit ? [<FormActionButton type={organization.about?.about ? 'edit' : 'create'} title={organization.about?.about ? t('edit') : t('add')} onClick={handleEditClick}/>] : []}>
+      {!showForm ? <div className={styles.bioText}>{organization.about?.about && organization.about?.about}</div> : <CardAboutForm organization={organization} handleSubmit={handleSubmit} onCancel={handleCancel}/>}
       {showForm && formLoading && <div className={styles.loader}><Loader/></div>}
     </Card>
   )

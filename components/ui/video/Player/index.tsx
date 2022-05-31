@@ -8,6 +8,7 @@ import VolumeControl from 'components/ui/video/controls/VolumeControl'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
+import classNames from 'classnames'
 
 const screenfull = dynamic(() => import('screenfull') as any, {
   ssr: false
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export default function Player(props) {
+    const {className} = props
     const [source, setSource] = useState(null)
     const [pip, setPip] = useState(false)
     const [playing, setPlaying] = useState(false)
@@ -147,7 +149,7 @@ export default function Player(props) {
 
     }
 
-    return (<div className={styles.root} ref={root}>
+    return (<div className={classNames(styles.root, className)} ref={root}>
             {/*<ReactPlayer
               ref={player}
               className={styles.player}

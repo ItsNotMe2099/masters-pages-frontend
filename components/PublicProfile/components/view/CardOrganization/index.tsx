@@ -16,28 +16,29 @@ import ProfileStatus from 'components/ui/ProfileStatus'
 import {useAppContext} from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { hideProfileForm, showProfileForm, updateProfileAvatar, updateProfileByForm } from 'components/Profile/actions'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
+import { getMediaPath } from 'utils/media'
 
 interface Props{
   organization: IOrganization,
   isEdit: boolean
 }
 const CardOrganization = (props: Props) => {
-  const {organization, isEdit} = props
+  const {isEdit} = props
   const dispatch = useDispatch()
   const appContext = useAppContext();
   const currentOrganization = appContext.organization
   const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading)
   const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed)
-  const isSubscribed = organization.corporateProfile.isSubscribedByCurrentProfile || isTempSubscribed
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar')
-  const { t } = useTranslation('common')
+  //const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar')
+  const [showForm, setShowForm] = React.useState(false)
+  const {t} = useTranslation('common')
+  const [organization, setOrganization] = React.useState(props.organization)
+  const isSubscribed = organization.corporateProfile.isSubscribedByCurrentProfile || isTempSubscribed
   const handleEditClick = () => {
-    if(showForm){
-      dispatch(hideProfileForm( 'avatar'))
-    }else {
-      dispatch(showProfileForm('avatar'))
-    }
+    setShowForm(true)
   }
   const handleSubscribe = () => {
     if(!currentOrganization){
@@ -47,18 +48,20 @@ const CardOrganization = (props: Props) => {
     dispatch(createFollower({organizationId: organization.corporateProfile.id}))
   }
 
-  const handleSubmitAvatar =(data) => {
-    dispatch(updateProfileAvatar(organization.corporateProfile.id, {photo: data.photo}, 'avatar'))
-  }
-
-  const handleDeleteAvatar = () => {
-    dispatch(updateProfileByForm(organization.corporateProfile.id, {photo: null}, 'avatar'))
+  const handleSubmit = async (data) => {
+    await ProfileRepository.updateProfile(organization.corporateProfile.id, {...data})
+    setShowForm(false)
+    OrganizationRepository.fetchCurrentOrganization().then((data) => {
+      if(data){
+        setOrganization(data)
+      }
+    })
   }
 
   return (
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
-        {isEdit && showForm && <AvatarForm onSubmit={handleSubmitAvatar} handleDelete={handleDeleteAvatar} initialValues={{photo: organization.corporateProfile.photo}}/>}
+        {isEdit && showForm && <AvatarForm organization={organization} onSubmit={handleSubmit}/>}
         {(!showForm || !isEdit) &&  <a href={`/id${organization.corporateProfile.id}`}><Avatar size={'large'} image={organization.corporateProfile.photo}/></a>}
       <a href={`/id${organization.id}`} className={styles.name}>{organization.name}</a>
       <div className={styles.allStats}>

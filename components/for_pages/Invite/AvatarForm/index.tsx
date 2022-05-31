@@ -1,36 +1,35 @@
-import AvatarInput from 'components/ui/AvatarInput'
 import * as React from 'react'
-import { required } from 'utils/validations'
-import styles from 'components/for_pages/Invite/AvatarForm/index.module.scss'
-import { Field, reduxForm } from 'redux-form'
-import {IRootState} from 'types'
+import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
-import { useSelector } from 'react-redux'
-let AvatarForm = (props) => {
-  const { t } = useTranslation('common')
-  const error = useSelector((state: IRootState) => state.profile.avatarFormError)
-  const loading = useSelector((state: IRootState) => state.profile.avatarLoading)
-  return (
-    <form className={styles.form} onSubmit={props.handleSubmit}>
-      <Field
-        name="photo"
-        component={AvatarInput}
-        label={`${t('avatar')}*`}
-        loading={loading}
-        error={error}
-        validate={required}
-        handleChangePhoto={() => props.handleSubmit()}
-        handleDeletePhoto={() => {props.handleDelete()}}
-      />
-    </form>
-  )
+import Button from 'components/PublicProfile/components/Button'
+import { Field, Form, Formik } from 'formik'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import TextAreaInput from 'components/ui/Formik/TextArea'
+import DocField from 'components/fields/DocField'
+import AvatarField from 'components/fields/AvatarField'
+import { IProfile } from 'data/intefaces/IProfile'
+
+interface Props{
+  onSubmit?: (data) => void,
+  organization?: IOrganization
+  profile?: IProfile
 }
 
+export default function AvatarForm(props: Props) {
+  const { t } = useTranslation('common')
 
-AvatarForm  = reduxForm({
-  form: 'tabPersonalFormAvatar',
+  const initialValues = {  
+    photo: props.organization ? props.organization?.corporateProfile.photo : props.profile?.photo
+}
 
-}) (AvatarForm )
-
-
-export default AvatarForm
+return (
+  <Formik initialValues={initialValues} onSubmit={props.onSubmit}>
+    <Form>
+      <AvatarField name={'photo'} label={'Upload Photo or Video'} accept={['image/jpeg', 'image/png', 'image/jpg', 'video/mp4']}/>
+      <div className={styles.buttons}>
+        <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
+      </div>
+    </Form>
+  </Formik>
+)
+}
