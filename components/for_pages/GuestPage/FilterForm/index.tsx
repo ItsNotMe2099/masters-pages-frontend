@@ -1,16 +1,12 @@
 import { useRouter } from 'next/router'
 import styles from './index.module.scss'
-import {useEffect, useState} from 'react'
 import { useTranslation } from 'next-i18next'
 import {removeObjectEmpty} from 'utils/array'
 import {Form, FormikProvider, useFormik} from 'formik'
-import ServiceCategoryField from 'components/fields/ServiceCategoryField'
-import Validator from 'utils/validator'
 import * as React from 'react'
 import FormikOnChange from 'components/fields/FormikOnChange'
-import CountryField from 'components/fields/CountryField'
-import {LabelStyleType} from 'types/types'
-import CityField from 'components/fields/CityField'
+import LocationField from 'components/fields/LocationField'
+import SelectField from 'components/fields/SelectField'
 const queryString = require('query-string')
 
 interface Props {
@@ -38,38 +34,29 @@ const Filter = (props: Props) => {
     }
   }
   const initialValues = {
-    mainCategoryId: null,
-    categoryId:  null,
-    subCategoryId: null,
-    countryId: null,
-    geonameid: null,
+    location: null,
+    radius: null
   };
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit
   })
-  const {values, setFieldValue} = formik;
-  useEffect(() => {
-    console.log("changeVal", values);
-    setFieldValue('categoryId', null);
-    setFieldValue('subCategoryId', null);
-  }, [values.mainCategoryId])
-  useEffect(() => {
-    setFieldValue('subCategoryId', null);
-  }, [values.categoryId])
+  const {values, setFieldValue} = formik
 
+  const radiusOptions=[
+    {label: `10 ${t('forms.radiusOfSearchInput.values.km')}`, value: 10},
+    {label: `50 ${t('forms.radiusOfSearchInput.values.km')}`, value: 50},
+    {label: `100 ${t('forms.radiusOfSearchInput.values.km')}`, value: 100},
+    {label: t('forms.radiusOfSearchInput.values.province'), value: 500},
+    {label: t('forms.radiusOfSearchInput.values.country'), value: 2000},
+  ]
 
   return (<FormikProvider value={formik}>
       <Form>
         <div className={styles.root}>
         <FormikOnChange delay={300} onChange={handleChange}/>
-        <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} placeholder={t('createTask.fieldMainCategory')}/>
-        <ServiceCategoryField name={'categoryId'}  categoryId={values.mainCategoryId}  validate={Validator.required} placeholder={t('createTask.fieldCategory')}/>
-         <ServiceCategoryField name={'subCategoryId'}  categoryId={values.categoryId} validate={Validator.required} placeholder={t('createTask.fieldSubCategory')}/>
-        <CountryField name={'country'}
-                      validate={Validator.required} labelType={LabelStyleType.Cross} placeholder={t('masterForm.country')} size='normal'/>
-        <CityField name={'geonameid'} countryCode={values.country}
-                   validate={Validator.required} labelType={LabelStyleType.Cross} placeholder={t('corporateAccount.city')} size='normal'/>
+        <LocationField name='location' placeholder={t('taskSearch.filter.fieldLocation')}/>
+        <SelectField name='radius' placeholder={t('taskSearch.filter.fieldRadiusOfSearch')} options={radiusOptions}/>
         </div>
       </Form>
     </FormikProvider>

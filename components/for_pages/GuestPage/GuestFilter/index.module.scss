@@ -38,3 +38,12 @@
   background-color: #fff;
   padding: 22px 0 24px 20px;
 }
+
+.visible{
+  background: #fff;
+  border: 1px solid #fff;
+  height: 62px;
+  &:hover{
+    background-color: #fff;
+  }
+}

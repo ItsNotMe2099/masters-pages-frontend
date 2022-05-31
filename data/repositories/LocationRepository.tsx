@@ -45,4 +45,22 @@ export default class LocationRepository {
     }
     return res.data
   }
+  static async fetchLocations({id = null, page = 1, limit = 10, search, lang = 'en', countryCode}: IDataQueryList & {id?: number, countryCode?: string}): Promise<ICity[] | null> {
+    const res = await request({
+      url: '/api/location/city',
+      method: 'GET',
+      data: {
+        ...(id ? {id} : {}),
+        search,
+        page,
+        limit,
+        lang,
+        //country: countryCode
+      }
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }
