@@ -14,10 +14,9 @@ const TabProjects = (props: Props) => {
   const appContext = useAppContext();
   const profile = appContext.profile
   useEffect(() => {
-  router.replace( '/projects/published'/*profile.role === 'client' ? '/projects/published' : '/projects/applied'*/)
+  router.replace( profile.role === 'client' ? '/projects/published' : '/projects/published')
   }, [])
   return <></>
 }
 export default TabProjects
 export const getServerSideProps = getAuthServerSide({redirect: true})
- 
