@@ -9,6 +9,7 @@ import ProjectRepository from 'data/repositories/ProjectRepository'
 import TabApplication from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication'
 import TabProjectDescription from 'components/for_pages/Project/ProjectModal/Tabs/ProjectDescriptionTab'
 import TabVolunteers from './Tabs/TabVolunteers'
+import { useAppContext } from 'context/state'
 
 interface Props {
   showType: 'client' | 'public'
@@ -20,6 +21,8 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
   const dispatch = useDispatch()
   const [tab, setTab] = useState('description');
   const [project, setProject] = useState<IProject>(null);
+  const appContext = useAppContext()
+  const profile = appContext.profile
   useEffect(() => {
     if(showType === 'public'){
       ProjectRepository.findPublicById(projectId).then(i => setProject(i));
@@ -37,14 +40,16 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
     {name: 'Events', key: 'events', icon: 'events'},
     {name: 'Reports', key: 'reports', icon: 'reports'},
   ] : 
-  (showType === 'client' && !projectId) ?
+  ((showType === 'client' && !projectId || !profile)) ?
   [
     {name: 'Description', key: 'description', icon: 'description'},
   ] :
   [
     {name: 'Description', key: 'description', icon: 'description'},
     {name: 'Application', key: 'application', icon: 'application'},
-  ];
+  ]
+  
+  ;
   const handleSaveProject = async (data) => {
     if(projectId){
      await ProjectRepository.update(projectId ,{...data, id: projectId});
