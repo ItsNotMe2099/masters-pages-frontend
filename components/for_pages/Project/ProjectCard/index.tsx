@@ -4,7 +4,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import classNames from 'classnames'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
-import {confirmOpen, signUpOpen} from 'components/Modal/actions'
+import {confirmOpen, modalClose, signUpOpen} from 'components/Modal/actions'
 import { useDispatch} from 'react-redux'
 import {useTranslation} from 'next-i18next'
 import ProjectRepository from 'data/repositories/ProjectRepository'
@@ -65,6 +65,7 @@ const ProjectCard = (props: Props) => {
       onConfirm: async () => {
         await ProjectRepository.update(project.id, {status: ProjectStatus.Published});
         props.onUpdateStatus(ProjectStatus.Published, project);
+        dispatch(modalClose())
       }
     }))
   }
@@ -74,6 +75,7 @@ const ProjectCard = (props: Props) => {
       onConfirm: async () => {
         await ProjectRepository.update(project.id, {status: ProjectStatus.Draft});
         props.onUpdateStatus(ProjectStatus.Draft, project);
+        dispatch(modalClose())
       }
     }))
   }
@@ -83,6 +85,7 @@ const ProjectCard = (props: Props) => {
       onConfirm: async () => {
         await ProfileRepository.deleteFromSavedProjects({profileId: profile?.id}, project.id)
         props.onDelete(project);
+        dispatch(modalClose())
       }
     }))
   }
