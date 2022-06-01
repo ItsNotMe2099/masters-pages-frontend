@@ -157,7 +157,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
           )
     }
   }
-  const profileLink = `/id${profile.id}`
+  const profileLink = `/id${props.profile.id}`
   return (
       <div className={styles.profile}>
         <div className={styles.left}>
