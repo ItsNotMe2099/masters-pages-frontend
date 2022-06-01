@@ -1,6 +1,7 @@
 import {
   confirmOpen, feedbackByMasterOpen,
   finishTaskAsClientOpen,
+  signUpOpen,
   taskMarkAsDoneOpen,
   taskOfferAcceptOpen,
   taskShareOpen
@@ -117,11 +118,21 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     dispatch(fetchTaskUserResponseRequest(task.id, { page: 1, limit: 1000, ...getSortData(sortType) }))
   }
   const handleShare = () => {
+    if(profile){
     dispatch(taskSearchSetCurrentTask(task))
     dispatch(taskShareOpen())
+    }
+    else{
+      dispatch(signUpOpen())
+    }
   }
   const handleFavorite = () => {
-    dispatch(saveTaskRequest(task.id))
+    if(profile){
+      dispatch(saveTaskRequest(task.id))
+    }
+    else{
+      dispatch(signUpOpen())
+    }
   }
 
   const handleAcceptAsMasterToClient = () => {

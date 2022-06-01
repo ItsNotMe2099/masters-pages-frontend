@@ -96,13 +96,13 @@ const ProjectCard = (props: Props) => {
       case 'view':
         return <Button color={'grey'}  onClick={() => props.onViewOpen ? props.onViewOpen(project) : null}>VIEW</Button>
       case 'delete':
-        return <Button color={'grey'}>Delete</Button>
+        return <Button color={'grey'}>DELETE</Button>
       case 'publish':
-        return <Button color={'grey'} onClick={handlePublish}>Publish</Button>
+        return <Button color={'grey'} onClick={handlePublish}>PUBLISH</Button>
       case 'unPublish':
-        return <Button color={'grey'} onClick={handleUnPublish}>UnPublish</Button>
+        return <Button color={'grey'} onClick={handleUnPublish}>UNPUBLISH</Button>
       case 'apply':
-        return <Button color={'grey'} onClick={() => profile ? handleApply : dispatch(signUpOpen())}>Apply</Button>
+        return <Button color={'grey'} onClick={() => profile ? handleApply : dispatch(signUpOpen())}>APPLY</Button>
       case 'save':
         return <Button onClick={() => profile ? ProfileRepository.addToSavedProjects({projectId: project.id}) : dispatch(signUpOpen())} color={'grey'}>SAVE</Button>
       case 'open':
