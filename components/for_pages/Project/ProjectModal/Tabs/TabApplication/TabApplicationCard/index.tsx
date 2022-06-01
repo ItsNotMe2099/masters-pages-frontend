@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux'
 import VolunteerStats from '../VolunteerStats'
 import StarRatings from 'react-star-ratings'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import Link from 'next/link'
+import {default as React} from 'react'
 
 
 interface Props {
@@ -80,8 +82,8 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist)))} type='button' projectBtn='default'>
               SHORTLIST
             </Button>
-            <Button 
-            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)} 
+            <Button
+            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
         )
@@ -92,7 +94,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
             <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
               INVITE
             </Button>
-            <Button 
+            <Button
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
@@ -101,7 +103,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
         return (
           <div className={styles.btns}>
             <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
-            <Button 
+            <Button
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
             type='button' projectBtn='red'>CANCEL INVITATION</Button>
           </div>
@@ -114,7 +116,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
             type='button' projectBtn='default'>
               COMPLETE
             </Button>
-            <Button 
+            <Button
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
@@ -126,7 +128,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
                 <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))} type='button' projectBtn='default'>
                   CONFIRM COMPLETION
                 </Button>
-                <Button 
+                <Button
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Execution)))}
             type='button' projectBtn='red'>REJECT COMPLETION</Button>
               </div>
@@ -146,7 +148,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
           return (
             <div className={styles.btns}>
               <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
-              <Button 
+              <Button
               type='button' projectBtn='default'>
                 RESTORE
               </Button>
@@ -155,14 +157,16 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
           )
     }
   }
-
+  const profileLink = `/id${profile.id}`
   return (
       <div className={styles.profile}>
         <div className={styles.left}>
-          <div className={styles.avatar}>
+          <Link href={profileLink}>
+          <a className={styles.avatar}>
             <Avatar image={props.profile.photo} size='largeSquare'/>
             <Button type='button' className={styles.details}><img src='/img/projects/account-details.svg' alt=''/></Button>
-          </div>
+          </a>
+          </Link>
           <div className={styles.icons}>
               <div className={styles.stat}>
               <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
@@ -192,9 +196,11 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
         <div className={styles.middle}>
           <div className={styles.top}>
             <div className={styles.left}>
-              <div className={styles.name}>
+              <Link href={profileLink}>
+              <a className={styles.name}>
                 {props.profile.firstName} {props.profile.lastName}
-              </div>
+              </a>
+              </Link>
               <div className={styles.online}>
                 <Marker color={props.profile.activityStatus === 'offline' ? '#DC2626' : '#27C60D'}/>
                 <div className={classNames(styles.text, {[styles.textOff]: props.profile.activityStatus === 'offline'})}>
