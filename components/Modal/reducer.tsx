@@ -28,6 +28,7 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.MODAL_CLOSE:
       console.log('resetModal')
       state.modalKey = ''
+      state.confirmModalKey = ''
       break
 
     case ActionTypes.CONFIRM_MODAL_CLOSE:
@@ -42,7 +43,7 @@ export default function authReducer(state = {...initialState}, action) {
       state.modalKey = 'phoneConfirm'
       break
     case ActionTypes.REGISTRATION_PHONE_OPEN:
-      console.log('ModalKeyReg')
+
       state.modalKey = 'registrationPhone'
       break
     case ActionTypes.REGISTRATION_PHONE_CONFIRM_OPEN:
