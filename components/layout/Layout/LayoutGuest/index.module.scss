@@ -150,6 +150,9 @@
   font-weight: 700;
   margin-right: 19px;
   color: #000000;
+  span{
+    text-decoration: underline;
+  }
 }
 .container{
   position: relative;
@@ -255,4 +258,12 @@
   color: #414141;
   margin-top: 12px;
   text-align: center;
+}
+
+.btns{
+  display: flex;
+  align-items: center;
+  a, button, div{
+    margin-right: 20px;
+  }
 }

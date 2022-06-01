@@ -16,6 +16,7 @@ import {useAppContext} from 'context/state'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import Link from 'next/link'
+import MainSectionButton from 'components/for_pages/Corporate/Button'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -120,23 +121,20 @@ export default function LayoutGuest(props: Props) {
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
           link={item.link} mode={role}/>)}
         </div>
-        <div className={styles.btnContainer}>
-          <Button size="normal" className={styles.red} onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</Button>
-          <Button size="normal" className={styles.signIn} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</Button>
-        </div>
-        <Link href='/'>
-          <a className={styles.about}>
-            About MastersPages
-          </a>
-        </Link>
       </div>}
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div
-            className={styles.hello}>Hello guest. Please register for FREE to get full functionality
+            className={styles.hello}>Hello guest! Please register for <span>FREE</span> to get full functionality.
           </div>
         </div>
-        <LangSelect isAuth={false}/>
+        <div className={styles.btns}>
+            <MainSectionButton size={'small'} color='yellow' href='/corporate'>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
+            <LangSelect isAuth={false}/>
+            <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+          </div>
       </div>
       <div className={cx(styles.container)}>
         {children}
