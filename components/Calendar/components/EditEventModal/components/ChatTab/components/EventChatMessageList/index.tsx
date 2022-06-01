@@ -4,10 +4,11 @@ import ChatNewMessage from 'components/Chat/ChatNewMessage'
 import Loader from 'components/ui/Loader'
 import { default as React, useEffect, useRef, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import {IChat, IEvent, IRootState} from 'types'
+import { IEvent, IRootState} from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {emptyEventUnread} from 'components/Events/actions'
+import {IChat} from 'data/intefaces/IChat'
 
 /*
   task chat

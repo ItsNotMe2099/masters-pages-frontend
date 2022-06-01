@@ -10,6 +10,7 @@ import TabApplication from 'components/for_pages/Project/ProjectModal/Tabs/TabAp
 import TabProjectDescription from 'components/for_pages/Project/ProjectModal/Tabs/ProjectDescriptionTab'
 import TabVolunteers from './Tabs/TabVolunteers'
 import { useAppContext } from 'context/state'
+import TabChat from 'components/for_pages/Project/ProjectModal/Tabs/TabChat'
 
 interface Props {
   showType: 'client' | 'public'
@@ -33,29 +34,30 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
   }, [projectId])
 
   const tabs = (showType === 'client' && projectId) ? [
-    {name: 'Description', key: 'description', icon: 'description'},
-    {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
-    {name: 'Messages', key: 'messages', icon: 'messages'},
-    {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
-    {name: 'Events', key: 'events', icon: 'events'},
-    {name: 'Reports', key: 'reports', icon: 'reports'},
-  ] : 
-  ((showType === 'client' && !projectId || !profile)) ?
-  [
-    {name: 'Description', key: 'description', icon: 'description'},
-  ] :
-  [
-    {name: 'Description', key: 'description', icon: 'description'},
-    {name: 'Application', key: 'application', icon: 'application'},
-  ]
-  
+      {name: 'Description', key: 'description', icon: 'description'},
+      {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
+      {name: 'Messages', key: 'messages', icon: 'messages'},
+      {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
+      {name: 'Events', key: 'events', icon: 'events'},
+      {name: 'Reports', key: 'reports', icon: 'reports'},
+    ] :
+    ((showType === 'client' && !projectId || !profile)) ?
+      [
+        {name: 'Description', key: 'description', icon: 'description'},
+      ] :
+      [
+        {name: 'Description', key: 'description', icon: 'description'},
+        {name: 'Application', key: 'application', icon: 'application'},
+        {name: 'Messages', key: 'messages', icon: 'messages'},
+      ]
+
   ;
   const handleSaveProject = async (data) => {
     if(projectId){
-     await ProjectRepository.update(projectId ,{...data, id: projectId});
+      await ProjectRepository.update(projectId ,{...data, id: projectId});
       await ProjectRepository.findById(projectId).then(i => setProject(i));
     }else{
-     const project = await ProjectRepository.create(data);
+      const project = await ProjectRepository.create(data);
       await ProjectRepository.findById(project.id).then(i => setProject(i));
     }
 
@@ -69,17 +71,18 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
   console.log("ModalProject", project);
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={handleClose}>
-    <div className={styles.root}>
-    <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
-    <div className={styles.content}>
+      <div className={styles.root}>
+        <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
+        <div className={styles.content}>
 
-      {((projectId && project) || !projectId) && <>
-      {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')}/>}
-      {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
-      {tab === 'volunteers' && <TabVolunteers project={project}/>}
-      </>}
-    </div>
-    </div>
+          {((projectId && project) || !projectId) && <>
+            {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')}/>}
+            {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
+            {tab === 'volunteers' && <TabVolunteers project={project}/>}
+            {tab === 'messages' && <TabChat project={project}/>}
+          </>}
+        </div>
+      </div>
     </Modal>
   )
 }

@@ -1,8 +1,9 @@
 import ApiActionTypes from 'constants/api'
-import {IChat, IChatMessage} from 'types'
+import { IChatMessage} from 'types'
 import {ActionType} from 'typesafe-actions'
 import ActionTypes from './const'
 import * as appActions from './actions'
+import {IChat} from 'data/intefaces/IChat'
 
 export interface ChatState {
   chatPageLoading: boolean

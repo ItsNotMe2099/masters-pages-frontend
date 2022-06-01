@@ -14,14 +14,15 @@ import {
 import { taskCancel } from 'components/TaskUser/actions'
 import AvatarRound from 'components/ui/AvatarRound'
 import Button from 'components/ui/Button'
-import { IChat, IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
+import { IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import cx from 'classnames'
 import {useAppContext} from 'context/state'
-
+import {IChat} from 'data/intefaces/IChat'
+import Link from 'next/link'
 interface Props {
   chat: IChat
   onRequestClose?: () => void
@@ -67,17 +68,18 @@ export default function ChatTitle({chat, onClick}: Props) {
   const isInProgress = chat.task &&  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId)
   const isFinished =  chat.task &&  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId)
   const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled
-
+  const isProjectGroup = chat.isGroup && chat.projectId
   const [isOpen, setIsOpen] = useState(false)
-
+  const profileLink = `/id${profile?.id}`
   return (
    <div className={styles.root}>
      <div className={styles.controls}>
       <CloseIcon onClick={onClick}/>
     </div>
      <div className={styles.left}>
-     <AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/>
-     {<div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>}
+       {isProjectGroup ? <img src='/img/icons/chat_group.svg'/> : <Link href={profileLink}><a><AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/></a></Link>}
+       <div className={styles.title}>{isProjectGroup ? chat.name : <Link href={profileLink}><a>{`${profile.firstName} ${profile.lastName} ${chat.task ? `(${chat.task.title})` : ''}`}</a></Link>}
+       </div>
      </div>
      <div className={styles.more} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
        {isOpen ? t('taskSearch.filter.less') : t('taskSearch.filter.more')}

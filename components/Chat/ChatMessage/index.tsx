@@ -10,7 +10,6 @@ import {
 import {format} from 'date-fns'
 import {
   EventStatus,
-  IChat,
   IChatMessage,
   IChatMessageType,
   IEventLogRecordType,
@@ -23,6 +22,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import {IChat} from 'data/intefaces/IChat'
 
 
 interface Props {
