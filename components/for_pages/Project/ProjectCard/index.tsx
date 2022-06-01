@@ -73,9 +73,10 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmUnPublish')} «${project.title}»?`,
       onConfirm: async () => {
+        dispatch(modalClose())
         await ProjectRepository.update(project.id, {status: ProjectStatus.Draft});
         props.onUpdateStatus(ProjectStatus.Draft, project);
-        dispatch(modalClose())
+
       }
     }))
   }
@@ -83,9 +84,10 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
+        dispatch(modalClose())
         await ProfileRepository.deleteFromSavedProjects({profileId: profile?.id}, project.id)
         props.onDelete(project);
-        dispatch(modalClose())
+
       }
     }))
   }
