@@ -14,7 +14,7 @@ const TabProjects = (props: Props) => {
   const appContext = useAppContext();
   const profile = appContext.profile
   useEffect(() => {
-  router.replace( profile.role === 'client' ? '/projects/published' : '/projects/applied')
+  router.replace( '/projects/published'/*profile.role === 'client' ? '/projects/published' : '/projects/applied'*/)
   }, [])
   return <></>
 }
