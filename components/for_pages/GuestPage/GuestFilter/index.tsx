@@ -7,18 +7,24 @@ import Filter from '../FilterForm'
 
 
 interface Props {
-
+  state?: boolean
+  onClick?: () => void
 }
 const GuestFilter = (props: Props) => {
 
   const { t } = useTranslation()
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(props.state)
+
+  const handleClick = () => {
+    setIsVisible(isVisible ? false : true)
+    props.onClick && props.onClick()
+  }
 
   return (
     <div className={styles.root}>
       <div className={styles.top}>
         <InputSearch/>
-        <div className={classNames(styles.filtersBtn, {[styles.visible]: isVisible})} onClick={() => setIsVisible(isVisible ? false : true)}>
+        <div className={classNames(styles.filtersBtn, {[styles.visible]: isVisible})} onClick={handleClick}>
           <div className={styles.icon}><img src='/img/icons/filter.svg' alt=''/></div>
           <div className={styles.text}>Filters</div>
         </div>

@@ -1,10 +1,6 @@
 import styles from 'pages/FindCompaniesGuest/index.module.scss'
 import { useEffect, useState } from 'react'
 import cookie from 'js-cookie'
-import {getAuthServerSide} from 'utils/auth'
-import {setCookie} from 'nookies'
-import {CookiesType, RegistrationMode} from 'types/enums'
-import {addDays} from 'date-fns'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
 import { IOrganization } from 'data/intefaces/IOrganization'
@@ -14,6 +10,16 @@ import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
+import Sticky from 'react-stickynode'
+import Button from 'components/ui/Button'
+import Map from 'components/Map'
+import classNames from 'classnames'
+import { getAuthServerSide } from 'utils/auth'
+import { setCookie } from 'nookies'
+import { CookiesType, RegistrationMode } from 'types/enums'
+import {addDays} from 'date-fns'
+import { useDispatch } from 'react-redux'
+import { signUpOpen } from 'components/Modal/actions'
 
 const queryString = require('query-string')
 
@@ -27,7 +33,9 @@ const FindCompaniesGuest = (props) => {
   const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
   const [filter, setFilter] = useState<IOrganizationSearchRequest>({})
+  const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation('common')
+  const dispatch = useDispatch()
   useEffect(() => {
     setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 600) ? false : true)
     OrganizationRepository.fetchOrganizationsList().then((data) => {
@@ -49,7 +57,12 @@ const FindCompaniesGuest = (props) => {
   return (
     <Layout>
       <div className={styles.root}>
-      <GuestFilter/>
+ 
+        <div className={styles.container}>
+          <div className={styles.left}>
+          <div className={styles.topContent}>
+          <div className={styles.filters}>
+          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
       <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.companies')}: <span>{total}</span></div>}
           {companies.length > 0 && <div className={styles.projectsSort}>
@@ -62,7 +75,24 @@ const FindCompaniesGuest = (props) => {
             />
           </div>}
         </div>
-        {companies.map(company => <Organization key={company.id} organization={company}/>)}
+        </div>
+        <div className={styles.block}></div>
+        </div>
+        <div className={styles.content}>
+          {companies.map(company => <Organization className={styles.organization} key={company.id} organization={company}/>)}
+          <div className={classNames(styles.sidebar, {[styles.visible]: isVisible})}>
+        <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
+          <div className={styles.sidebarWrapper}>
+        <div className={styles.map}>
+          <Map/>
+        </div>
+        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.showOnTheMap')}</Button>
+          </div>
+        </Sticky>
+      </div>
+        </div>
+          </div>
+        </div>
       </div>
       <Modals/>
     </Layout>
@@ -75,4 +105,5 @@ export const getServerSideProps = async (ctx) => {
   return {props: {...res.props}}
 
 }
+
 export default FindCompaniesGuest
