@@ -22,7 +22,6 @@ import FileField from 'components/fields/FileField'
 import Button from 'components/PublicProfile/components/Button'
 import LocationFormField from 'components/fields/LocationFormField'
 import { Educations } from 'data/educations'
-import ProjectRepository from 'data/repositories/ProjectRepository'
 
 interface Props {
   project: IProject | null
@@ -42,17 +41,13 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id
     }))
-    if(!project) {
-      await ProjectRepository.create(dartFormatted);
-    }else{
-      await ProjectRepository.update(project.id ,{...data, id: project.id});
-    }
     props.onSave(dartFormatted)
-
+    return;
     setError(null)
     setIsLoading(true);
     try {
-       reachGoal('project:created')
+      //    const res = await AuthRepository.completeRegistration(data);
+      reachGoal('project:created')
 
     } catch (e) {
       setError(e);
@@ -199,9 +194,9 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
         <div className={styles.bottomBar}>
 
-          <Button size={'small'} color={'red'} type={'button'} disabled={isLoading} onClick={handleSubmitDraft}>Save as draft</Button>
-          <Button size={'small'} color={'red'} type={'button'} disabled={isLoading} onClick={handleSubmitDraft}>Preview</Button>
-          <Button size={'small'} color={'red'} type={'button'} disabled={isLoading} onClick={handleSubmitPublish}>Publish</Button>
+          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
+          <Button size={'small'} color={'red'} type={'button'}  onClick={handleSubmitDraft}>Preview</Button>
+          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Publish</Button>
         </div>
       </Form>
     </FormikProvider>

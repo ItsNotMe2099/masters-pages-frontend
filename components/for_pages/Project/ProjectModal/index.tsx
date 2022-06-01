@@ -54,9 +54,10 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
   ;
   const handleSaveProject = async (data) => {
     if(projectId){
+      await ProjectRepository.update(projectId ,{...data, id: projectId});
       await ProjectRepository.findById(projectId).then(i => setProject(i));
     }else{
-
+      const project = await ProjectRepository.create(data);
       await ProjectRepository.findById(project.id).then(i => setProject(i));
     }
 
