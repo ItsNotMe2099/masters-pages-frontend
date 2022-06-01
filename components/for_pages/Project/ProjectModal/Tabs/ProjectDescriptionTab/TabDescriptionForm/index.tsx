@@ -103,7 +103,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
         <div className={styles.formHeader}>Required fields</div>
         <div className={styles.columns}>
           <div className={styles.colLeft}>
-            <TextField name={'title'} label={'Project title'} size='normal'/>
+            <TextField name={'title'} label={'Project title*'} size='normal' validate={Validator.required}/>
             <SelectField name={'executionType'} options={[{
               value: 'online',
               label: t('forms.executionTypeInput.values.online')
@@ -111,7 +111,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
               value: 'combo',
               label: t('forms.executionTypeInput.values.combo')
             }]} label={'Execution type'} size='normal'/>
-            <TextAreaField name={'description'} label={'Project Description'}/>
+            <TextAreaField name={'description'} label={'Project Description'}  validate={Validator.required}/>
           </div>
           <div className={styles.colRight}>
             <div className={styles.fieldset}>
@@ -195,7 +195,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
         <div className={styles.bottomBar}>
 
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
-          <Button size={'small'} color={'red'} type={'button'}>Preview</Button>
+          <Button size={'small'} color={'red'} type={'button'}  onClick={handleSubmitDraft}>Preview</Button>
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Publish</Button>
         </div>
       </Form>
