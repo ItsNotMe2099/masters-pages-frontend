@@ -107,7 +107,7 @@ const ProjectsPage = (props: Props) => {
 
   }, [projectType])
 
-  
+
 
   useEffect(() => {
     return () => {
@@ -134,6 +134,15 @@ const ProjectsPage = (props: Props) => {
 
   const appStatus = (status: string) => {
     return {status: status}
+  }
+  const handleUpdateStatus = (status: ProjectStatus, project: IProject) => {
+      ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
+      ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
+        if(data) {
+          setProjects(data.data)
+          setTotal(data.total)
+        }
+      });
   }
 
   const handleChangeStatus = async (newStatus: ApplicationStatus, projectId: number) => {
@@ -184,7 +193,7 @@ const ProjectsPage = (props: Props) => {
 
   return (
     <Layout>
-    <div className={styles.root}> 
+    <div className={styles.root}>
       {profile.role === ProfileRole.Corporate &&
       <div className={styles.actions}>
       <Button  red={true} bold={true} size={'12px 40px'}
@@ -213,8 +222,12 @@ const ProjectsPage = (props: Props) => {
           loader={loading ? <Loader/> : null}>
           {projects.map(project => <ProjectCard
             onDelete={handleModalClose}
+            onUpdateStatus={handleUpdateStatus}
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
-           status={projectType} key={project.id} onApplyClick={() => handleProjectApplyOpen(project, profile)}  onViewOpen={handleProjectViewOpen} project={project} actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
+           status={projectType} key={project.id}
+            onApplyClick={() => handleProjectApplyOpen(project, profile)}
+            onViewOpen={handleProjectViewOpen} project={project}
+            actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
       <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>
