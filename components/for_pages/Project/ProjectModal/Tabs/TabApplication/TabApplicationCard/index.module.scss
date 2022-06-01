@@ -17,13 +17,13 @@
       margin-top: 25px;
       color: rgba(109, 113, 140, 1);
       font-size: 14px;
-  
-  
+
+
     }
   }
-  
-  
-  
+
+
+
   .info {
 
     color: #6D718C;
@@ -35,31 +35,31 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-  
+
     }
-  
+
     .status {
       font-size: 14px;
       font-weight: 700;
       color: #27C60D;
     }
-  
+
     .title {
       font-size: 24px;
       font-weight: 700;
       color: #000000;
     }
-  
+
     .header {
       font-weight: 700;
       font-size: 36px;
       color: #000000;
     }
-  
+
     .projectId {
       color: #9A9A9A;
     }
-  
+
     .dates {
       color: #6D718C;
       display: flex;
@@ -67,28 +67,28 @@
       align-items: center;
       margin-top: 16px;
       font-size: 14px;
-  
+
       .dateItem {
         display: flex;
         flex-direction: row;
         align-items: center;
-  
+
         .dateItemLabel {
           margin-right: 8px;
         }
-  
+
         img {
           margin-right: 4px;
         }
       }
-  
+
       .separator {
         width: 1px;
         height: 15px;
         background: rgba(196, 196, 196, 1);
         margin: 0px 16px;
       }
-  
+
     }
   }
 
@@ -123,6 +123,7 @@
 
   .avatar{
     position: relative;
+    display: block;
   }
 
   .details{
@@ -141,6 +142,7 @@
       margin-bottom: 20px;
       .left{
         .name{
+          display: block;
           font-weight: 700;
           font-size: 24px;
           color: #000;
@@ -253,7 +255,7 @@
     img {
       margin-right: 5px;
     }
-  
+
     div {
       @media screen and (max-width: $xs-max){
         flex: 0;
@@ -261,7 +263,7 @@
       }
     }
   }
-  
+
   .stars {
     display: flex;
     align-items: center;
