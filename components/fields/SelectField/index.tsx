@@ -13,6 +13,7 @@ interface Props<T> extends IField<T> {
   onMenuOpen?: () => void
   onInputChange?: (newValue: string, actionMeta: InputActionMeta) => void
   loadOptions?: (initialValue) => Promise<IOption<T>[]>
+  className?: string
 }
 
 export default function SelectField<T>(props: Props<T>) {
@@ -32,6 +33,7 @@ export default function SelectField<T>(props: Props<T>) {
         onMenuOpen={props.onMenuOpen}
         onInputChange={props.onInputChange}
         loadOptions={props.loadOptions}
+        className={props.className}
         onChange={(value) => {
           console.log("SetValue", value);
           helpers.setValue(value)
