@@ -702,6 +702,11 @@
     "exactLocationTab": "Точное расположение",
     "approximateLocationTab": "Примерное расположение"
   },
+  "findCompanies": {
+    "filter": {
+      "applyFilters": "ПРИМЕНИТЬ ФИЛЬТРЫ"
+    }
+  },
   "createMasterProfile": {
 
   },

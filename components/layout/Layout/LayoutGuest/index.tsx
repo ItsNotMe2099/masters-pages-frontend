@@ -57,13 +57,13 @@ export default function LayoutGuest(props: Props) {
   ]
 
   const itemsVolunteer = [
-    {title: t('menu.findProjects'), icon: 'find-clients-blue', link: '/project-search'},
-    {title: t('menu.findOrders'), icon: 'orders-blue', link: '/SearchTaskPage',},
+    {title: t('menu.findProjects'), icon: 'find-clients-blue', link: '/FindProjectsGuest'},
+    {title: t('menu.findOrders'), icon: 'orders-blue', link: '/FindOrdersGuest',},
   ]
 
   const itemsMaster = [
-    {title: t('menu.findProjects'), icon: 'find-clients-red', link: '/project-search'},
-    {title: t('menu.findOrders'), icon: 'orders-red', link: '/SearchTaskPage',},
+    {title: t('menu.findProjects'), icon: 'find-clients-red', link: '/FindProjectsGuest'},
+    {title: t('menu.findOrders'), icon: 'orders-red', link: '/FindOrdersGuest',},
   ]
   const itemsCompanies = [
     {title: t('menu.findVolunteer'), icon: 'find-clients-yellow', link: '/SearchVolunteerPage'},

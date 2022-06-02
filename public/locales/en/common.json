@@ -713,6 +713,13 @@
     "exactLocationTab": "Exact location",
     "approximateLocationTab": "Approximate location"
   },
+
+  "findCompanies": {
+    "filter": {
+      "applyFilters": "APPLY FILTERS"
+    }
+  },
+
   "createMasterProfile": {
 
   },

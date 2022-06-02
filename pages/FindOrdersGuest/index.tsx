@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react'
 import cookie from 'js-cookie'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
-import { IOrganization } from 'data/intefaces/IOrganization'
-import OrganizationRepository, { IOrganizationSearchRequest } from 'data/repositories/OrganizationRepository'
-import Organization from 'components/ui/Organization'
 import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
@@ -20,32 +17,41 @@ import { CookiesType, RegistrationMode } from 'types/enums'
 import {addDays} from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
+import ProjectModal from 'components/for_pages/Project/ProjectModal'
+import Loader from 'components/ui/Loader'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskRepository'
+import { ITask } from 'types'
+import Task from 'components/Task'
 
 const queryString = require('query-string')
 
-const FindCompaniesGuest = (props) => {
+const FindOrdersGuest = (props) => {
 
-  const [isOpen, setIsOpen] = useState(true)
-  const signUpCookie = cookie.get('signUpMobile')
-  const [companies, setCompanies] = useState<IOrganization[]>([])
+  const [tasks, setTasks] = useState<ITask[]>([])
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true)
   const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
-  const [filter, setFilter] = useState<IOrganizationSearchRequest>({})
+  const [filter, setFilter] = useState<ITaskSearchRequest>({})
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  useEffect(() => {
-    setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 600) ? false : true)
-    OrganizationRepository.fetchOrganizationsList().then((data) => {
+  const [currentProject, setCurrentProject] = useState<ITask | null>(null)
+  const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+  const [page, setPage] = useState<number>(1)
+
+  const fetchTasks = (filter?: ITaskSearchRequest, sortType?: string, page?: number, limit?: number) => {
+    TaskRepository.search(filter, page, limit).then(data => {
       if(data){
-        setCompanies(data)
-        setLoading(false)
-        setTotal(data.length)
+        setTasks(data.data);
+        setTotal(data.total);
       }
-      
     })
+  }
+  useEffect(() => {
+    fetchTasks()
+    setLoading(false);
   }, [])
 
   const handleSortChange = (item) => {
@@ -53,6 +59,15 @@ const FindCompaniesGuest = (props) => {
     //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
+  const handleProjectViewOpen = (task: ITask) => {
+    setInitialProjectTab('description')
+    setCurrentProject(task);
+  }
+
+  const handleScrollNext = () => {
+    setPage(page + 1);
+    fetchTasks(filter, sortType, page + 1);
+  }
 
   return (
     <Layout>
@@ -64,8 +79,8 @@ const FindCompaniesGuest = (props) => {
           <div className={styles.filters}>
           <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
       <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.companies')}: <span>{total}</span></div>}
-          {companies.length > 0 && <div className={styles.projectsSort}>
+           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
+          {tasks.length > 0 && <div className={styles.projectsSort}>
             <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
               {value: 'newFirst',  label: t('sort.newFirst')},
@@ -80,9 +95,17 @@ const FindCompaniesGuest = (props) => {
         </div>
         <div className={styles.content}>
           <div>
-          {companies.map(company => 
-              <Organization className={styles.organization} key={company.id} organization={company}/>
+          {(loading && total === 0) && <Loader/>}
+          {total > 0 && <InfiniteScroll
+          dataLength={tasks.length} //This is important field to render the next data
+          next={handleScrollNext}
+          hasMore={total > tasks.length}
+          loader={<Loader/>}
+        >
+          {tasks.map(task => 
+              <Task key={task.id} task={task}/>
           )}
+          </InfiniteScroll>}
           </div>
           <div className={classNames(styles.sidebar, {[styles.visible]: isVisible})}>
         <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
@@ -98,6 +121,7 @@ const FindCompaniesGuest = (props) => {
           </div>
         </div>
       </div>
+      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
       <Modals/>
     </Layout>
   )
@@ -110,4 +134,4 @@ export const getServerSideProps = async (ctx) => {
 
 }
 
-export default FindCompaniesGuest
+export default FindOrdersGuest

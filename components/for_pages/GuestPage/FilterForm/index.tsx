@@ -8,7 +8,12 @@ import FormikOnChange from 'components/fields/FormikOnChange'
 import LocationField from 'components/fields/LocationField'
 import SelectField from 'components/fields/SelectField'
 import Input from 'components/ui/Inputs/Input'
+import Button from 'components/ui/Button'
+import { useDispatch } from 'react-redux'
+import { signUpOpen } from 'components/Modal/actions'
+import Favorite from 'components/svg/Favorite'
 const queryString = require('query-string')
+
 
 interface Props {
   initialValues?: any
@@ -20,6 +25,7 @@ const Filter = (props: Props) => {
 
   const { t } = useTranslation()
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const handleChange = (data) => {
 
@@ -30,7 +36,7 @@ const Filter = (props: Props) => {
       props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined})
     }else{
 
-      router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(removeObjectEmpty(data))})}`, undefined, { shallow: true })
+      router.replace(`/FindCompanies?${queryString.stringify({filter: JSON.stringify(removeObjectEmpty(data))})}`, undefined, { shallow: true })
 
     }
   }
@@ -68,6 +74,10 @@ const Filter = (props: Props) => {
         />
         <LocationField name='location' placeholder={t('taskSearch.filter.fieldLocation')} className={styles.select}/>
         <SelectField name='radius' placeholder={t('taskSearch.filter.fieldRadiusOfSearch')} options={radiusOptions} className={styles.select}/>
+        <div className={styles.btns}>
+          <Button style='applyFilters' type='button' onClick={() => dispatch(signUpOpen())}>{t('findCompanies.filter.applyFilters')}</Button>
+          <div className={styles.saveSearch} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.saveTheSearch')}<Favorite/></div>
+        </div>
         </div>
       </Form>
     </FormikProvider>
