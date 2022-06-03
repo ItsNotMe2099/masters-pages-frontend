@@ -3,11 +3,12 @@ import ChatMessage from 'components/Chat/ChatMessage'
 import ChatNewMessage from 'components/Chat/ChatNewMessage'
 import ChatTitle from 'components/Chat/ChatTitle'
 import Loader from 'components/ui/Loader'
-import { default as React, useEffect, useRef, useState } from 'react'
+import {default as React, ReactElement, useEffect, useRef, useState} from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { IChat, IRootState } from 'types'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import {IChat} from 'data/intefaces/IChat'
 
 /*
   task chat
@@ -17,11 +18,12 @@ import { useSelector, useDispatch } from 'react-redux'
  */
 interface Props {
   chat: IChat
+  title?: ReactElement
   onRequestClose?: () => void
   onClick?: () => void
 }
 
-export default function ChatMessageList({chat, onClick}: Props) {
+export default function ChatMessageList({chat, onClick, title}: Props) {
   const dispatch = useDispatch()
 
   const messages = useSelector((state: IRootState) => state.chat.messages)
@@ -90,9 +92,9 @@ export default function ChatMessageList({chat, onClick}: Props) {
   }
 
   return (<div className={styles.root}>
-      <div className={styles.title}>
+    {title ? title : <div className={styles.title}>
         <ChatTitle chat={chat} onClick={onClick}/>
-      </div>
+      </div>}
       <div className={styles.messages} ref={scrollableTarget} id="chat-messages">
         {(messagesLoading && total === 0) && <Loader/>}
         {messages.length > 0 && <InfiniteScroll

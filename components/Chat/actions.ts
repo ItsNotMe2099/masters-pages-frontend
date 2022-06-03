@@ -9,8 +9,13 @@ export const fetchChatListFirstSuccess = () => action(ActionTypes.FETCH_CHAT_LIS
 export const fetchChatTasksList = () => action(ActionTypes.FETCH_CHAT_LIST, {
   api: '/api/chat/task-dialog',
 })
+
 export const fetchChatWithUsersList = () => action(ActionTypes.FETCH_CHAT_LIST, {
   api: '/api/chat/dialog',
+})
+export const fetchChaProjectList = (projectId: number
+) => action(ActionTypes.FETCH_CHAT_LIST, {
+  api: `/api/chat/project-dialog?projectId=${projectId}`,
 })
 export const fetchChat = (id: number) => action(ActionTypes.FETCH_CHAT, {
   api: `/api/chat/${id}`,

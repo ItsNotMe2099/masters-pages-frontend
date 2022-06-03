@@ -48,6 +48,8 @@ import {ContactsState} from 'components/Contacts/reducer'
 import {ILocation} from 'data/intefaces/ILocation'
 import {IProfile} from 'data/intefaces/IProfile'
 import {IServiceCategory} from 'data/intefaces/IServiceCategory'
+import {IProject} from 'data/intefaces/IProject'
+import {IChat} from 'data/intefaces/IChat'
 
 export interface IRootState {
   authComponent: authState,
@@ -462,23 +464,6 @@ export interface ISavedPeople {
   photoObject: null
   skills: SkillData[]
   photo: null
-}
-
-export interface IChat {
-  id: number;
-  name: string;
-  isGroup: boolean;
-  task: ITask;
-  taskId: number;
-  profile: IProfile;
-  profileId: number;
-  lastMessage: string;
-  participant: IProfile;
-  participantId: number;
-  profiles: IProfile[]
-  lastMessageAt: string
-  createdAt: string
-  totalUnread: number
 }
 
 export enum IEventLogRecordType {

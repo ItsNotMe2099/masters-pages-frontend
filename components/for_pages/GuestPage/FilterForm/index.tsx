@@ -2,12 +2,18 @@ import { useRouter } from 'next/router'
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
 import {removeObjectEmpty} from 'utils/array'
-import {Form, FormikProvider, useFormik} from 'formik'
+import {Field, Form, FormikProvider, useFormik} from 'formik'
 import * as React from 'react'
 import FormikOnChange from 'components/fields/FormikOnChange'
 import LocationField from 'components/fields/LocationField'
 import SelectField from 'components/fields/SelectField'
+import Input from 'components/ui/Inputs/Input'
+import Button from 'components/ui/Button'
+import { useDispatch } from 'react-redux'
+import { signUpOpen } from 'components/Modal/actions'
+import Favorite from 'components/svg/Favorite'
 const queryString = require('query-string')
+
 
 interface Props {
   initialValues?: any
@@ -19,6 +25,7 @@ const Filter = (props: Props) => {
 
   const { t } = useTranslation()
   const router = useRouter()
+  const dispatch = useDispatch()
 
   const handleChange = (data) => {
 
@@ -29,11 +36,12 @@ const Filter = (props: Props) => {
       props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined})
     }else{
 
-      router.replace(`/SearchTaskPage?${queryString.stringify({filter: JSON.stringify(removeObjectEmpty(data))})}`, undefined, { shallow: true })
+      router.replace(`/FindCompanies?${queryString.stringify({filter: JSON.stringify(removeObjectEmpty(data))})}`, undefined, { shallow: true })
 
     }
   }
   const initialValues = {
+    keywords: null,
     location: null,
     radius: null
   };
@@ -53,10 +61,23 @@ const Filter = (props: Props) => {
 
   return (<FormikProvider value={formik}>
       <Form>
+
         <div className={styles.root}>
         <FormikOnChange delay={300} onChange={handleChange}/>
-        <LocationField name='location' placeholder={t('taskSearch.filter.fieldLocation')}/>
-        <SelectField name='radius' placeholder={t('taskSearch.filter.fieldRadiusOfSearch')} options={radiusOptions}/>
+        <Field name='keywords' component={Input}
+        label={t('taskSearch.filter.fieldKeywords')}
+        labelType={'placeholder'}
+        noMargin={true}
+        withIcon={false}
+        showEmpty={true}
+        debounce={1000}
+        />
+        <LocationField name='location' placeholder={t('taskSearch.filter.fieldLocation')} className={styles.select}/>
+        <SelectField name='radius' placeholder={t('taskSearch.filter.fieldRadiusOfSearch')} options={radiusOptions} className={styles.select}/>
+        <div className={styles.btns}>
+          <Button style='applyFilters' type='button' onClick={() => dispatch(signUpOpen())}>{t('findCompanies.filter.applyFilters')}</Button>
+          <div className={styles.saveSearch} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.saveTheSearch')}<Favorite/></div>
+        </div>
         </div>
       </Form>
     </FormikProvider>

@@ -27,7 +27,7 @@ const ProjectTabs = ({tabs, activeTab, onChange, tabClassName}: Props) => {
   }
 
   const rootClass = {
-    [styles.volunteer]: profile.role === ProfileRole.Volunteer
+    [styles.volunteer]: profile?.role === ProfileRole.Volunteer
   }
 
   return (

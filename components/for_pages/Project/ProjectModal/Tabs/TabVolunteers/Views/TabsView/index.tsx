@@ -118,6 +118,7 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
     {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
     index === currentIndex &&
     <>
+    {currentTab === ApplicationStatus.Applied &&
     <div className={styles.controls}>
       <div className={styles.prev} onClick={() => handlePrev(currentIndex, applications)}>
         <img src='/img/icons/back.svg' alt=''/>
@@ -127,7 +128,7 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
         <div className={styles.text}>NEXT VOLUNTEER</div>
         <img src='/img/icons/back.svg' alt=''/>
       </div>
-    </div>
+    </div>}
      <ApplicationPage onStatusChange={(newStatus) => handleChangeStatus(newStatus, item)} project={currentProject} application={currentApplication} index={currentIndex} modal currentTab={currentTab}/>
      </>
     )}

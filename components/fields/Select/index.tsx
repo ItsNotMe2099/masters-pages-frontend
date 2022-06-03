@@ -22,6 +22,7 @@ interface Props<T> {
   onMenuOpen?: () => void
   loadOptions?: (initialValue) => Promise<IOption<T>[]>
   onInputChange?: (newValue: string, actionMeta: InputActionMeta) => void
+  className?: string
 }
 
 const CustomOption = (props) => {
@@ -79,7 +80,7 @@ export default function Select<T>(props: Props<T>) {
     }
   }
   return (
-    <div className={styles.root} ref={ref}>
+    <div className={classNames(styles.root, props.className)} ref={ref}>
       <Label label={props.label} style={props.labelType} hasError={props.hasError} />
       {props.loadOptions ?
         <AsyncSelect<IOption<T>> {...getProps() as any} key={props.key} isLoading={!isInit} loadOptions={handleLoadOptions} defaultOptions={lastOptions}/> :

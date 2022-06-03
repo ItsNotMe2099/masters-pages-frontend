@@ -29,6 +29,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
+  const profile = appContext.profile
 
   const formatProjectAge = () => {
     if(project.minAge && project.maxAge){
@@ -86,9 +87,9 @@ const ProjectPage = ({  project, ...props}: Props) => {
          <div className={styles.sectionContent}>{project.benefits}</div>
        </div>}
 
-       <div className={styles.controls}>
+       {profile && <div className={styles.controls}>
          {props.controls}
-       </div>
+       </div>}
      </div>
      <div className={styles.right}>
         <div className={styles.header}>Project Info</div>

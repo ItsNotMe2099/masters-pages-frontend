@@ -4,7 +4,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import classNames from 'classnames'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
-import {confirmOpen, signUpOpen} from 'components/Modal/actions'
+import {confirmOpen, modalClose, signUpOpen} from 'components/Modal/actions'
 import { useDispatch} from 'react-redux'
 import {useTranslation} from 'next-i18next'
 import ProjectRepository from 'data/repositories/ProjectRepository'
@@ -65,6 +65,7 @@ const ProjectCard = (props: Props) => {
       onConfirm: async () => {
         await ProjectRepository.update(project.id, {status: ProjectStatus.Published});
         props.onUpdateStatus(ProjectStatus.Published, project);
+        dispatch(modalClose())
       }
     }))
   }
@@ -72,8 +73,10 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmUnPublish')} «${project.title}»?`,
       onConfirm: async () => {
+        dispatch(modalClose())
         await ProjectRepository.update(project.id, {status: ProjectStatus.Draft});
         props.onUpdateStatus(ProjectStatus.Draft, project);
+
       }
     }))
   }
@@ -81,8 +84,10 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
+        dispatch(modalClose())
         await ProfileRepository.deleteFromSavedProjects({profileId: profile?.id}, project.id)
         props.onDelete(project);
+
       }
     }))
   }
@@ -96,13 +101,13 @@ const ProjectCard = (props: Props) => {
       case 'view':
         return <Button color={'grey'}  onClick={() => props.onViewOpen ? props.onViewOpen(project) : null}>VIEW</Button>
       case 'delete':
-        return <Button color={'grey'}>Delete</Button>
+        return <Button color={'grey'}>DELETE</Button>
       case 'publish':
-        return <Button color={'grey'} onClick={handlePublish}>Publish</Button>
+        return <Button color={'grey'} onClick={handlePublish}>PUBLISH</Button>
       case 'unPublish':
-        return <Button color={'grey'} onClick={handleUnPublish}>UnPublish</Button>
+        return <Button color={'grey'} onClick={handleUnPublish}>UNPUBLISH</Button>
       case 'apply':
-        return <Button color={'grey'} onClick={() => profile ? handleApply : dispatch(signUpOpen())}>Apply</Button>
+        return <Button color={'grey'} onClick={() => profile ? handleApply() : dispatch(signUpOpen())}>APPLY</Button>
       case 'save':
         return <Button onClick={() => profile ? ProfileRepository.addToSavedProjects({projectId: project.id}) : dispatch(signUpOpen())} color={'grey'}>SAVE</Button>
       case 'open':

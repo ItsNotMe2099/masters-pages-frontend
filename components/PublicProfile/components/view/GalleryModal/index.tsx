@@ -23,6 +23,7 @@ import {
   setPageNewsCurrentItemCommentsPage
 } from 'components/News/actions'
 import cx from 'classnames'
+import {useAppContext} from 'context/state'
 interface Props {
   isOpen: boolean,
   isNews?: boolean
@@ -32,7 +33,8 @@ interface Props {
 export default function GalleryModal(props: Props) {
   const {isNews} = props
   const dispatch = useDispatch()
-
+  const appContext = useAppContext()
+  const currentProfile = appContext.profile
   const model = useSelector((state: IRootState) => isNews ? state.news.currentItem : state.profileGallery.currentItem)
   const currentIndex = useSelector((state: IRootState) => isNews ? state.news.currentItemIndex : state.profileGallery.currentItemIndex)
   const total = useSelector((state: IRootState) => isNews ? state.news.total : state.profileGallery.total)
@@ -64,7 +66,7 @@ export default function GalleryModal(props: Props) {
   }
 
   const handleLike = () => {
-    if(model.isLiked){
+    if(model.isLiked || model.profileId === currentProfile.id){
       return
     }
     if(isNews) {

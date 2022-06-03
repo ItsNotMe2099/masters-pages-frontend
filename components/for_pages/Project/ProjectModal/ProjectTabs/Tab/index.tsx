@@ -35,7 +35,7 @@ const ProjectTabItem = ({name, label, link, icon, style, onClick, isActive, clas
   const profile = appContext.profile
 
   const rootClass = {
-    [styles.volunteer]: profile.role === ProfileRole.Volunteer
+    [styles.volunteer]: profile?.role === ProfileRole.Volunteer
   }
 
   return (

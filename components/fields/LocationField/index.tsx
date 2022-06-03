@@ -7,6 +7,7 @@ import LocationRepository from 'data/repositories/LocationRepository'
 
 interface Props<T> extends IField<T> {
   styleType?: InputStyleType
+  className?: string
 }
 
 export default function LocationField(props: Props<string>) {
@@ -35,6 +36,6 @@ export default function LocationField(props: Props<string>) {
   }
 
   return (
-    <SelectField options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} />
+    <SelectField className={props.className} options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} />
   )
 }

@@ -1,5 +1,6 @@
 import {IProfile} from 'data/intefaces/IProfile'
 import {IUserFile} from 'types'
+import { ILocation } from './ILocation'
 
 export enum OrganizationStatus {
   Moderation = 'moderation',
@@ -22,6 +23,10 @@ export interface ISocialLink{
   type: string
 }
 
+export interface IOrganizationLocation{
+  location: ILocation
+}
+
 
 
 export interface IOrganization{
@@ -41,4 +46,5 @@ export interface IOrganization{
   photo: string
   attachments: string[]
   attachmentsObjects: IUserFile[]
+  location: IOrganizationLocation
 }

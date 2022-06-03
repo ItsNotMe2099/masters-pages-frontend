@@ -10,7 +10,6 @@ import {
 import {format} from 'date-fns'
 import {
   EventStatus,
-  IChat,
   IChatMessage,
   IChatMessageType,
   IEventLogRecordType,
@@ -23,6 +22,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import React, {ReactElement} from 'react'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import {IChat} from 'data/intefaces/IChat'
 
 
 interface Props {
@@ -110,9 +110,9 @@ export default function ChatMessage({ message, chat, size }: Props) {
         return [<ChatMessageText size={size} message={text} files={message.files} isRight={message.profileId === profile.id}/>]
 
       case IChatMessageType.Text:
-        return [<ChatMessageText size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
+        return [<ChatMessageText author={message.profileId !== profile.id && chat.isGroup ? message.profile : null} size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
       case IChatMessageType.File:
-        return [<ChatMessageText size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
+        return [<ChatMessageText author={message.profileId !== profile.id && chat.isGroup ? message.profile : null} size={size} message={message.message} files={message.files} isRight={message.profileId === profile.id}/>]
       case IChatMessageType.TaskNegotiation:
         const outDatedText = lastCondition && message.taskNegotiation.id != lastCondition.id ? t('chat.message.taskOutdated', { message, lastCondition }) : null
         if (message.taskNegotiation.type === ITaskNegotiationType.ResponseToTask && message.taskNegotiation.state === ITaskNegotiationState.Accepted) {
