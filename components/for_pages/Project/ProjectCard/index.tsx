@@ -103,7 +103,7 @@ const ProjectCard = (props: Props) => {
       case 'delete':
         return <Button color={'grey'}>DELETE</Button>
       case 'publish':
-        return <Button color={'grey'} onClick={handlePublish}>PUBLISH</Button>
+        return <Button color={'grey'} onClick={handlePublish} projectBtn='default'>PUBLISH</Button>
       case 'unPublish':
         return <Button color={'grey'} onClick={handleUnPublish}>UNPUBLISH</Button>
       case 'apply':
@@ -154,8 +154,10 @@ const ProjectCard = (props: Props) => {
         if (([ProjectStatus.Draft, ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
         }
         if (([ProjectStatus.Draft] as ProjectStatus[]).includes(project.status)) {
-          actions.push('delete')
+          actions.pop()
+          actions.push('open')
           actions.push('publish')
+          actions.push('recycleBin')
         }
 
         if (([ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
