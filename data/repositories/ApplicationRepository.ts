@@ -145,10 +145,11 @@ export default class ApplicationRepository {
     return map;
   }
 
-  static async fetchApplicationsByCorporateForProject(projectId: number): Promise<IPagination<IApplication>> {
+  static async fetchApplicationsByCorporateForProject(projectId: number, profileRole: string = 'corporate'): Promise<IPagination<IApplication>> {
     const res = await request({
       url: `/api/application?s={"projectId" : ${projectId}}`,
       method: 'GET',
+      profileRole
     })
     if (res.err) {
       return null

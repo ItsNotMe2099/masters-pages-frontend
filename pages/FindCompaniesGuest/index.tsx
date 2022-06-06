@@ -62,7 +62,7 @@ const FindCompaniesGuest = (props) => {
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
+          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)} filter='companies'/>
       <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.companies')}: <span>{total}</span></div>}
           {companies.length > 0 && <div className={styles.projectsSort}>

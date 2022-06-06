@@ -9,6 +9,7 @@ import Filter from '../FilterForm'
 interface Props {
   state?: boolean
   onClick?: () => void
+  filter?: 'projects' | 'companies'
 }
 const GuestFilter = (props: Props) => {
 
@@ -31,7 +32,7 @@ const GuestFilter = (props: Props) => {
       </div>
       {isVisible &&
       <div className={styles.panel}>
-        <Filter/>
+        <Filter filter={props.filter}/>
       </div>}
     </div>
   )

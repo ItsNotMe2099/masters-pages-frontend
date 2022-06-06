@@ -13,8 +13,10 @@ import {useAppContext} from 'context/state'
 import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
 import ProjectCategories from 'components/for_pages/Project/ProjectCategories'
 import Button from 'components/PublicProfile/components/Button'
-import { ApplicationStatus } from 'data/intefaces/IApplication'
+import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import {useState, useEffect} from 'react'
 
 interface Props {
   project: IProject
@@ -49,6 +51,7 @@ const ProjectCard = (props: Props) => {
   const dispatch = useDispatch()
   const appContext = useAppContext();
   const profile = appContext.profile
+  const [applications, setApplications] = useState<IApplication[]>([])
   const formatAge = () => {
     if(project.minAge && project.maxAge){
       return `${project.minAge} - ${project.maxAge}`
@@ -59,6 +62,11 @@ const ProjectCard = (props: Props) => {
     }
     return null
   }
+
+  useEffect(() => {
+    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+  }, [])
+
   const handlePublish = () => {
     dispatch(confirmOpen({
       description: `${t('task.confirmPublish')} «${project.title}»?`,
@@ -80,7 +88,7 @@ const ProjectCard = (props: Props) => {
       }
     }))
   }
-  const handleDelete = () => {
+  const handleDeleteFromSaved = () => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
@@ -91,6 +99,20 @@ const ProjectCard = (props: Props) => {
       }
     }))
   }
+
+  const handleDeleteApplication = () => {
+    const currentApp = applications.find(app => app.projectId === project.id)
+    console.log('APPP', currentApp)
+    dispatch(confirmOpen({
+      description: `${t('task.confirmDelete')} «${project.title}»?`,
+      onConfirm: async () => {
+        dispatch(modalClose())
+        await ApplicationRepository.delete(currentApp.id)
+        props.onDelete(project);
+      }
+    }))
+  }
+
   const handleApply = () => {
     props.onApplyClick(project)
   }
@@ -103,7 +125,7 @@ const ProjectCard = (props: Props) => {
       case 'delete':
         return <Button color={'grey'}>DELETE</Button>
       case 'publish':
-        return <Button color={'grey'} onClick={handlePublish}>PUBLISH</Button>
+        return <Button color={'grey'} onClick={handlePublish} projectBtn='default'>PUBLISH</Button>
       case 'unPublish':
         return <Button color={'grey'} onClick={handleUnPublish}>UNPUBLISH</Button>
       case 'apply':
@@ -128,7 +150,7 @@ const ProjectCard = (props: Props) => {
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.CompleteRequest)} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
         return <Button
-        onClick={props.status === 'saved' && handleDelete}
+        onClick={props.status === 'saved' ? handleDeleteFromSaved : handleDeleteApplication}
         projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
         /*
       case 'cancel':
@@ -154,8 +176,10 @@ const ProjectCard = (props: Props) => {
         if (([ProjectStatus.Draft, ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
         }
         if (([ProjectStatus.Draft] as ProjectStatus[]).includes(project.status)) {
-          actions.push('delete')
+          actions.pop()
+          actions.push('open')
           actions.push('publish')
+          actions.push('recycleBin')
         }
 
         if (([ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {

@@ -43,6 +43,23 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
   const [isLoading, setIsLoading] = useState(true);
   const profile = appContext.profile
 
+  const EducationGradation = (education: string) => {
+    switch(education){
+      case 'student':
+        return 1
+      case 'graduate':
+        return 2
+      case 'undergraduate':
+        return 3
+      case 'bachelor':
+        return 4
+      case 'master':
+        return 5
+      case 'phd':
+        return 6
+    }
+  }
+
   const formatProjectAge = () => {
     if(project.minAge && project.maxAge){
       return `${project.minAge} - ${project.maxAge}`
@@ -375,7 +392,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
          </div>}
 
          <div className={styles.requirementItem}>
-           <RequirementStatus name={'Education'} success={application.education === project.education}/>
+           <RequirementStatus name={'Education'} success={EducationGradation(application.education) >= EducationGradation(project.education)}/>
            <div className={styles.requirementItemValue}>
              <div>{application.education}</div>
              <div>{project.education}</div>

@@ -12,6 +12,11 @@ import Button from 'components/ui/Button'
 import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
 import Favorite from 'components/svg/Favorite'
+import ServiceCategoryField from 'components/fields/ServiceCategoryField'
+import CountryField from 'components/fields/CountryField'
+import CityField from 'components/fields/CityField'
+import Validator from 'utils/validator'
+import { LabelStyleType } from 'types/types'
 const queryString = require('query-string')
 
 
@@ -20,6 +25,7 @@ interface Props {
   collapsed?: boolean,
   onChange?: (data) => void,
   form?: string
+  filter?: 'projects' | 'companies'
 }
 const Filter = (props: Props) => {
 
@@ -64,6 +70,8 @@ const Filter = (props: Props) => {
 
         <div className={styles.root}>
         <FormikOnChange delay={300} onChange={handleChange}/>
+        {props.filter === 'companies' ?
+        <>
         <Field name='keywords' component={Input}
         label={t('taskSearch.filter.fieldKeywords')}
         labelType={'placeholder'}
@@ -74,13 +82,29 @@ const Filter = (props: Props) => {
         />
         <LocationField name='location' placeholder={t('taskSearch.filter.fieldLocation')} className={styles.select}/>
         <SelectField name='radius' placeholder={t('taskSearch.filter.fieldRadiusOfSearch')} options={radiusOptions} className={styles.select}/>
+        </>
+        :
+        <>
+        <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} placeholder={t('createTask.fieldMainCategory')}/>
+        <ServiceCategoryField name={'categoryId'}  categoryId={values.mainCategoryId}  validate={Validator.required} placeholder={t('createTask.fieldCategory')}/>
+         <ServiceCategoryField name={'subCategoryId'}  categoryId={values.categoryId} validate={Validator.required} placeholder={t('createTask.fieldSubCategory')}/>
+        <CountryField name={'country'}
+                      validate={Validator.required} labelType={LabelStyleType.Cross} placeholder={t('masterForm.country')} size='normal'/>
+        <CityField name={'geonameid'} countryCode={values.country}
+                   validate={Validator.required} labelType={LabelStyleType.Cross} placeholder={t('corporateAccount.city')} size='normal'/>
+        </>
+        }
+        </div>
         <div className={styles.btns}>
           <Button style='applyFilters' type='button' onClick={() => dispatch(signUpOpen())}>{t('findCompanies.filter.applyFilters')}</Button>
           <div className={styles.saveSearch} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.saveTheSearch')}<Favorite/></div>
-        </div>
         </div>
       </Form>
     </FormikProvider>
   )
 }
 export default Filter
+
+Filter.defaultProps = {
+  filter: 'projects'
+}

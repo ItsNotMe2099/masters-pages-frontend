@@ -74,38 +74,6 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
     setCurrentCategoryTab(tab.key)
     setCurrentSkill(profile.skills.find(skill => `${skill.id}` === tab.key))
   }
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    variableWidth: false,
-    adaptiveHeight: true,
-    arrows: true,
-    nextArrow: <SliderControl taskPage direction='next' arrowClassName={styles.sliderArrow}/>,
-    prevArrow: <SliderControl taskPage direction='prev' arrowClassName={styles.sliderArrow}/>,
-    dotsClass: `${styles.dots}`,
-    responsive: [
-      {
-        breakpoint: 360,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          variableWidth: false,
-          adaptiveHeight: true
-        }
-      },
-      {
-        breakpoint: 667,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  }
 
 const profileLink = `/id${profile.id}`
   return (
