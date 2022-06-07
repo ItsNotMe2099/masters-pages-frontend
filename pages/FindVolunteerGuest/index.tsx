@@ -21,6 +21,7 @@ import ProfileRepository from 'data/repositories/ProfileRepostory'
 import Profile from 'components/ui/Profile'
 import { fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, setRoleProfileSearch } from 'components/ProfileSearch/actions'
 import { IRootState } from 'types'
+import Modals from 'components/layout/Modals'
 
 const FindVolunteerGuest = (props) => {
 
@@ -114,6 +115,7 @@ const FindVolunteerGuest = (props) => {
           </div>
         </div>
       </div>
+      <Modals/>
     </Layout>
   )
 }
