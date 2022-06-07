@@ -1,13 +1,11 @@
 import {signUpOpen, taskOfferOpen} from 'components/Modal/actions'
 import {saveProfileRequest} from 'components/SavedPeople/actions'
 import ArrowRight from 'components/svg/ArrowRight'
-
 import StarRatings from 'react-star-ratings'
 import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
 import Avatar from 'components/ui/Avatar'
 import Button from 'components/ui/Button'
 import ProfileActionButton from 'components/ui/Profile/components/ActionButton'
-import SliderControl from 'components/ui/SliderControl'
 import Tabs from 'components/ui/Tabs'
 import {useRouter} from 'next/router'
 import {default as React, useState} from 'react'

@@ -66,7 +66,7 @@ export default function LayoutGuest(props: Props) {
     {title: t('menu.findOrders'), icon: 'orders-red', link: '/FindOrdersGuest',},
   ]
   const itemsCompanies = [
-    {title: t('menu.findVolunteer'), icon: 'find-clients-yellow', link: '/SearchVolunteerPage'},
+    {title: t('menu.findVolunteer'), icon: 'find-clients-yellow', link: '/FindVolunteerGuest'},
     {title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '',},
   ]
   const handleCollapse = () => {
