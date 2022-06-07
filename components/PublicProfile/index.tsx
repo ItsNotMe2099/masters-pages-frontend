@@ -159,6 +159,14 @@ const PublicProfile = (props) => {
     })
   }
   useEffect(() => {
+    if(currentProfile){
+      OrganizationRepository.fetchCurrentOrganization().then((data) => {
+        if(data){
+          setOrganization(data)
+        }
+        
+      })
+    }
     fetchProjects(page, 10)
     setLoading(false);
   }, [])
