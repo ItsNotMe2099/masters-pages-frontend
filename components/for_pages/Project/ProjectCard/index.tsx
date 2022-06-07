@@ -64,7 +64,9 @@ const ProjectCard = (props: Props) => {
   }
 
   useEffect(() => {
-    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+    if(profile){
+      ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+    }
   }, [])
 
   const handlePublish = () => {
