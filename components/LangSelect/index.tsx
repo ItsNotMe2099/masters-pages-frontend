@@ -1,11 +1,12 @@
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import ArrowDropDown from 'components/svg/ArrowDropDown'
 import { useTranslation} from 'next-i18next'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
 import { setCookie } from 'nookies'
-//import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
+
 interface Props {
   isAuth: boolean
 
@@ -26,11 +27,13 @@ interface Props {
    console.log('Language', i18n.language)
   const [value, setValue] = useState(options.find(item => item.value === language))
 
-  /*useEffect(() => {
-    const lang = {value: Cookies.get('next-i18next'), label: Cookies.get('next-i18next').toUpperCase()}
-    i18n.changeLanguage(lang.value)
-    setValue(lang)
-  }, [])*/
+  useEffect(() => {
+    if(Cookies.get('next-i18next')){
+      const lang = {value: Cookies.get('next-i18next'), label: Cookies.get('next-i18next').toUpperCase()}
+      i18n.changeLanguage(lang.value)
+      setValue(lang)
+    }
+  }, [])
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
