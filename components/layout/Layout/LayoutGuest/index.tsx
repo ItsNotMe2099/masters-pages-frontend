@@ -14,8 +14,6 @@ import {ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
-import Button from 'components/ui/Button'
-import Link from 'next/link'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 
 interface Props {
