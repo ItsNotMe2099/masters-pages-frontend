@@ -13,35 +13,29 @@ import FormActionButton from 'components/PublicProfile/components/FormActionButt
 import {createFollower} from 'components/Follower/actions'
 import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
-import {useAppContext} from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
-import { hideProfileForm, showProfileForm, updateProfileAvatar, updateProfileByForm } from 'components/Profile/actions'
-import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
-import { getMediaPath } from 'utils/media'
 
 interface Props{
   organization: IOrganization,
   isEdit: boolean
+  onOrganizationUpdate: () => void
 }
 const CardOrganization = (props: Props) => {
-  const {isEdit} = props
+  const {isEdit, organization, onOrganizationUpdate} = props
   const dispatch = useDispatch()
-  const appContext = useAppContext();
-  const currentOrganization = appContext.organization
   const recommendationLoading = useSelector((state: IRootState) => state.follower.formLoading)
   const isTempSubscribed = useSelector((state: IRootState) => state.follower.isSubscribed)
   const recommendationTotal = useSelector((state: IRootState) => state.profileRecommendation.totalShort)
   //const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'avatar')
   const [showForm, setShowForm] = React.useState(false)
   const {t} = useTranslation('common')
-  const [organization, setOrganization] = React.useState(props.organization)
   const isSubscribed = organization.corporateProfile.isSubscribedByCurrentProfile || isTempSubscribed
   const handleEditClick = () => {
     setShowForm(true)
   }
   const handleSubscribe = () => {
-    if(!currentOrganization){
+    if(!organization){
       dispatch(signInOpen())
       return
     }
@@ -51,11 +45,7 @@ const CardOrganization = (props: Props) => {
   const handleSubmit = async (data) => {
     await ProfileRepository.updateProfile(organization.corporateProfile.id, {...data})
     setShowForm(false)
-    OrganizationRepository.fetchCurrentOrganization().then((data) => {
-      if(data){
-        setOrganization(data)
-      }
-    })
+    onOrganizationUpdate && onOrganizationUpdate()
   }
 
   return (

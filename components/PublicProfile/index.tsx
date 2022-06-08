@@ -12,7 +12,7 @@ import {fetchProfileTabList} from 'components/ProfileTab/actions'
 import {setCurrentSkill} from 'components/Profile/actions'
 import {useRouter} from 'next/router'
 import CardProfileStat from 'components/PublicProfile/components/view/CardProfileStat'
-import CardDescription from 'components/PublicProfile/components/view/CardDescription'
+import CardOrganizationDescription from 'components/PublicProfile/components/view/CardOrganizationDescription'
 import ProfilePageLayout from 'components/PublicProfile/components/ProfilePageLayout'
 import CardReviews from 'components/PublicProfile/components/view/CardReviews'
 import CardRecommendations from 'components/PublicProfile/components/view/CardRecommendations'
@@ -42,7 +42,7 @@ const PublicProfile = (props) => {
   const isEdit = currentProfile && currentProfile.id === props.profile.id
   const profile = isEdit ? currentProfile : props.profile
   const [category, setCategory] = useState(null)
-  const [organization, setOrganization] = useState<IOrganization | null>(appContext.organization)
+  const [organization, setOrganization] = useState<IOrganization | null>(null)
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
   const currentSkill = isEdit ? reduxSkill ||  props.skill : props.skill
   const categoriesCurrentProfile = useSelector((state: IRootState) => state.skill.list)
@@ -52,6 +52,14 @@ const PublicProfile = (props) => {
   const [page, setPage] = useState<number>(1)
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+
+  const handleUpdateOrganization = () => {
+    OrganizationRepository.fetchCurrentOrganization().then((data) => {
+      if(data){
+        setOrganization(data)
+      }
+    })
+  }
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills)
   const router = useRouter()
@@ -115,7 +123,7 @@ const PublicProfile = (props) => {
 
 
   useEffect(() => {
-    if(currentProfile){
+    if(currentProfile && currentProfile.role === 'corporate'){
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
       if(data){
         setOrganization(data)
@@ -123,7 +131,7 @@ const PublicProfile = (props) => {
       
     })
   }
-  else{
+  else if(!currentProfile){
     OrganizationRepository.fetchOrganizationsList().then((data) => {
       if(data){
         data.filter(item => item.corporateProfile.id === +router.asPath.slice(3))
@@ -159,14 +167,6 @@ const PublicProfile = (props) => {
     })
   }
   useEffect(() => {
-    if(currentProfile){
-      OrganizationRepository.fetchCurrentOrganization().then((data) => {
-        if(data){
-          setOrganization(data)
-        }
-        
-      })
-    }
     fetchProjects(page, 10)
     setLoading(false);
   }, [])
@@ -198,10 +198,8 @@ const PublicProfile = (props) => {
 
   }
 
-  console.log('ORGANIZATION', appContext.organization)
-
   return (
-    <ProfilePageLayout {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
+    <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
       {props.showType ==='news' ? <CardPosts profile={profile}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
 
@@ -209,7 +207,7 @@ const PublicProfile = (props) => {
           </>
         :
         <>
-        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && <CardDescription isEdit={isEdit} organization={organization}/>}
+        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && <CardOrganizationDescription onOrganizationUpdate={handleUpdateOrganization} isEdit={isEdit} organization={organization}/>}
         {(currentProfile?.role === 'corporate' || !currentProfile) && organization && 
           <>
           {loading && total === 0 && <Loader/>}

@@ -63,12 +63,6 @@ const ProjectCard = (props: Props) => {
     return null
   }
 
-  useEffect(() => {
-    if(profile){
-      ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
-    }
-  }, [])
-
   const handlePublish = () => {
     dispatch(confirmOpen({
       description: `${t('task.confirmPublish')} «${project.title}»?`,
@@ -102,7 +96,8 @@ const ProjectCard = (props: Props) => {
     }))
   }
 
-  const handleDeleteApplication = () => {
+  const handleDeleteApplication = async () => {
+    await ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
     const currentApp = applications.find(app => app.projectId === project.id)
     console.log('APPP', currentApp)
     dispatch(confirmOpen({

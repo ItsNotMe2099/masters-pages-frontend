@@ -87,12 +87,6 @@ export function AppWrapper(props: Props) {
     if (!props.token && user) {
       setUser(null)
     }
-    if(profile){
-    OrganizationRepository.fetchCurrentOrganization().then((data) => {
-      if(data){
-        setOrganization(data)
-      }
-    })}
   }, [props.token])
 
   /** update user data from the server or just set them if passed to parameter */
