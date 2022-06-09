@@ -154,6 +154,19 @@ const ProjectsPage = (props: Props) => {
     }
   }
 
+  const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number) => {
+    const changedProject = await ProjectRepository.update(projectId, {status: newStatus})
+    if(changedProject.status !== projectType){
+      ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
+        if(data) {
+          setProjects(data.data)
+          setTotal(data.total)
+        }
+      })
+      ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
+    }
+  }
+
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
@@ -224,6 +237,7 @@ const ProjectsPage = (props: Props) => {
             onDelete={handleModalClose}
             onUpdateStatus={handleUpdateStatus}
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
+            onProjectStatusChange={(newStatus) => handleChangeProjectStatus(newStatus, project.id)}
            status={projectType} key={project.id}
             onApplyClick={() => handleProjectApplyOpen(project, profile)}
             onViewOpen={handleProjectViewOpen} project={project}

@@ -134,7 +134,7 @@ const ProjectCard = (props: Props) => {
       case 'pause':
         return <Button type='button' onClick={() => props.onProjectStatusChange(ProjectStatus.Paused)} projectBtn='default'>PAUSE</Button>
       case 'launch':
-        return <Button type='button' projectBtn='default'>LAUNCH</Button>
+        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Published)} type='button' projectBtn='default'>LAUNCH</Button>
       case 'applyAlt':
         return <Button onClick={handleApply} type='button' projectBtn='default'>APPLY</Button>
       case 'recall':
@@ -183,6 +183,12 @@ const ProjectCard = (props: Props) => {
           actions.pop()
           actions.push('open')
           actions.push('pause')
+          //actions.push('launch')
+        }
+        if (([ProjectStatus.Paused] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
+          actions.pop()
+          actions.push('open')
+          //actions.push('pause')
           actions.push('launch')
         }
         if (([ProjectStatus.Execution] as ProjectStatus[]).includes(project.status)) {
