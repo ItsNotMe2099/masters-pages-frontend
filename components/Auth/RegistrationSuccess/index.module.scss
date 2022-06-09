@@ -1,17 +1,12 @@
 .root{
-  width: 441px;
   position: relative;
   padding: 0px 67px;
   z-index: 5;
-  margin: 0 auto;
   display: flex;
   align-items: stretch;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  @media screen and (max-width: 460px){
-    width: 100%;
-  }
 }
 .headText{
     font-weight: bold;
@@ -44,4 +39,17 @@
     font-size: 16px;
     text-decoration: underline;
     margin-top: 32px;
+}
+
+.btns{
+    display: flex;
+    justify-content: center;
+    a, button, div{
+      margin-right: 20px;
+    }
+  }
+
+.image{
+    width: 25%;
+    align-self: center;
 }

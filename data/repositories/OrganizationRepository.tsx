@@ -1,5 +1,6 @@
 import request from 'utils/request'
 import { IOrganization } from 'data/intefaces/IOrganization';
+import { IPagination } from 'types/types';
 
 export interface IDataQueryList{
   page?: number,
@@ -59,6 +60,18 @@ export default class OrganizationRepository {
       data
     })
     console.log("Res111", res);
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async search(data?: IOrganizationSearchRequest, page: number = 1, limit: number = 10): Promise<IPagination<IOrganization> | null> {
+    const res = await request({
+      url: `/api/organization/search`,
+      method: 'GET',
+      data
+    })
     if (res.err) {
       return null
     }

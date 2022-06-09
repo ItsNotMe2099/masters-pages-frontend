@@ -68,7 +68,7 @@ const profileLink = `/id${organization.corporateProfile.id}`
             </div>  
           </div>
           <div className={styles.desc}>
-              {organization.description.description}
+              {organization.description?.description}
             </div>
           <div className={styles.bottom}>
             <Button type='button' projectBtn='default' href={profileLink}>VIEW</Button>

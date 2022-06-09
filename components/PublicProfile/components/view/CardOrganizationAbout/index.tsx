@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import {IRootState} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import CardAboutForm from 'components/PublicProfile/components/view/CardAbout/Form'
+import CardAboutForm from 'components/PublicProfile/components/view/CardOrganizationAbout/Form'
 import Loader from 'components/ui/Loader'
 import { useTranslation } from 'next-i18next'
 import { IOrganization } from 'data/intefaces/IOrganization'
@@ -13,13 +13,13 @@ import { useState } from 'react'
 interface Props{
   isEdit: boolean
   organization: IOrganization
+  onOrganizationUpdate: () => void
 }
-const CardAbout = (props: Props) => {
+const CardOrganizationAbout = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const [showForm, setShowForm] = useState(false)
-  const {isEdit} = props
+  const {isEdit, organization, onOrganizationUpdate} = props
   const {t} = useTranslation('common')
-  const [organization, setOrganization] = useState(props.organization)
 
   const handleEditClick = () => {
     setShowForm(true)
@@ -31,11 +31,7 @@ const CardAbout = (props: Props) => {
   const handleSubmit = async (data) => {
     await OrganizationRepository.updateOrganizationData(organization.id, data)
     setShowForm(false)
-    OrganizationRepository.fetchCurrentOrganization().then((data) => {
-      if(data){
-        setOrganization(data)
-      }
-    })
+    onOrganizationUpdate && onOrganizationUpdate()
   }
 
   return (
@@ -46,4 +42,4 @@ const CardAbout = (props: Props) => {
   )
 }
 
-export default CardAbout
+export default CardOrganizationAbout

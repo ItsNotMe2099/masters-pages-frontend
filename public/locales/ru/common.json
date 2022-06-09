@@ -370,8 +370,8 @@
       "logout": "Выход"
     },
     "registrationSuccess": {
-      "title": "СПАСИБО ЗА РЕГИСТРАЦИЮ",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id fusce suscipit pretium ornare sit tincidunt et.",
+      "title": "СПАСИБО ЗА ЗАЯВКУ!",
+      "description": "Ваша заявка будет рассмотрена в течение 1-2 рабочих дней. Вы будет уведомлены по электронной почте.",
       "buttonCreateTask": "СОЗДАТЬ ЗАКАЗ",
       "buttonBecomeMaster": "СТАТЬ МАСТЕРОМ",
       "buttonBecomeVolunteer": "СТАТЬ ВОЛОНТЕРОМ",

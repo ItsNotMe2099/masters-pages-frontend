@@ -14,8 +14,6 @@ import {ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
-import Button from 'components/ui/Button'
-import Link from 'next/link'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 
 interface Props {
@@ -66,7 +64,7 @@ export default function LayoutGuest(props: Props) {
     {title: t('menu.findOrders'), icon: 'orders-red', link: '/FindOrdersGuest',},
   ]
   const itemsCompanies = [
-    {title: t('menu.findVolunteer'), icon: 'find-clients-yellow', link: '/SearchVolunteerPage'},
+    {title: t('menu.findVolunteer'), icon: 'find-clients-yellow', link: '/FindVolunteerGuest'},
     {title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '',},
   ]
   const handleCollapse = () => {

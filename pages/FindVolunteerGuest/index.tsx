@@ -1,9 +1,6 @@
 import styles from 'pages/FindCompaniesGuest/index.module.scss'
 import { useEffect, useState } from 'react'
-import cookie from 'js-cookie'
 import Layout from 'components/layout/Layout'
-import Modals from 'components/layout/Modals'
-import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
@@ -15,43 +12,45 @@ import { getAuthServerSide } from 'utils/auth'
 import { setCookie } from 'nookies'
 import { CookiesType, RegistrationMode } from 'types/enums'
 import {addDays} from 'date-fns'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
-import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskRepository'
-import { ITask } from 'types'
-import Task from 'components/Task'
+import { IProfile } from 'data/intefaces/IProfile'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
+import Profile from 'components/ui/Profile'
+import { fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, setRoleProfileSearch } from 'components/ProfileSearch/actions'
+import { IRootState } from 'types'
+import Modals from 'components/layout/Modals'
 
-const queryString = require('query-string')
+const FindVolunteerGuest = (props) => {
 
-const FindOrdersGuest = (props) => {
-
-  const [tasks, setTasks] = useState<ITask[]>([])
-  const router = useRouter()
-  const [loading, setLoading] = useState<boolean>(true)
-  const [total, setTotal] = useState<number>(0)
+  //const [volunteers, setVolunteers] = useState<IProfile[]>([])
+  const volunteers = useSelector((state: IRootState) => state.profileSearch.list)
+  //const [loading, setLoading] = useState<boolean>(true)
+  //const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
-  const [filter, setFilter] = useState<ITaskSearchRequest>({})
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  const [currentProject, setCurrentProject] = useState<ITask | null>(null)
-  const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
-  const [page, setPage] = useState<number>(1)
+  //const [page, setPage] = useState<number>(1)
+  const total = useSelector((state: IRootState) => state.profileSearch.total)
+  const page = useSelector((state: IRootState) => state.profileSearch.page)
+  const loading = useSelector((state: IRootState) => state.profileSearch.listLoading)
 
-  const fetchTasks = (filter?: ITaskSearchRequest, sortType?: string, page?: number, limit?: number) => {
-    TaskRepository.search(filter, page, limit).then(data => {
+  const fetchVolunteers = (page?: number) => {
+    ProfileRepository.fetchProfiles(page).then(data => {
       if(data){
-        setTasks(data.data);
-        setTotal(data.total);
+        //setVolunteers(data.data);
+        //setTotal(data.total);
       }
     })
   }
+
   useEffect(() => {
-    fetchTasks()
-    setLoading(false);
+    dispatch(resetProfileSearchList())
+    dispatch(setRoleProfileSearch('volunteer'))
+    dispatch(fetchProfileSearchList())
   }, [])
 
   const handleSortChange = (item) => {
@@ -60,8 +59,8 @@ const FindOrdersGuest = (props) => {
   }
 
   const handleScrollNext = () => {
-    setPage(page + 1);
-    fetchTasks(filter, sortType, page + 1);
+    dispatch(setPageProfileSearch(page + 1))
+    dispatch(fetchProfileSearchList())
   }
 
   return (
@@ -74,8 +73,8 @@ const FindOrdersGuest = (props) => {
           <div className={styles.filters}>
           <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
       <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
-          {tasks.length > 0 && <div className={styles.projectsSort}>
+           {!loading && <div className={styles.projectsAmount}>{t('menu.volunteers')}: <span>{total}</span></div>}
+          {volunteers.length > 0 && <div className={styles.projectsSort}>
             <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
               {value: 'newFirst',  label: t('sort.newFirst')},
@@ -91,14 +90,14 @@ const FindOrdersGuest = (props) => {
         <div className={styles.content}>
           <div>
           {(loading && total === 0) && <Loader/>}
-          {total > 0 && <InfiniteScroll
-          dataLength={tasks.length} //This is important field to render the next data
+          {total > 0 &&  <InfiniteScroll
+          dataLength={volunteers.length} //This is important field to render the next data
           next={handleScrollNext}
-          hasMore={total > tasks.length}
+          hasMore={total > volunteers.length}
           loader={<Loader/>}
         >
-          {tasks.map(task => 
-              <Task key={task.id} task={task}/>
+          {volunteers.map(profile => 
+              <Profile key={profile.id} profile={profile}/>
           )}
           </InfiniteScroll>}
           </div>
@@ -116,7 +115,6 @@ const FindOrdersGuest = (props) => {
           </div>
         </div>
       </div>
-      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
       <Modals/>
     </Layout>
   )
@@ -129,4 +127,4 @@ export const getServerSideProps = async (ctx) => {
 
 }
 
-export default FindOrdersGuest
+export default FindVolunteerGuest

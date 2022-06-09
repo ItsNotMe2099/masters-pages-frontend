@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import {IRootState} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import CardDescriptionForm from 'components/PublicProfile/components/view/CardDescription/Form'
+import CardDescriptionForm from 'components/PublicProfile/components/view/CardOrganizationDescription/Form'
 import Loader from 'components/ui/Loader'
 import { useTranslation } from 'next-i18next'
 import { IOrganization } from 'data/intefaces/IOrganization'
@@ -16,14 +16,14 @@ import Player from 'components/ui/video/Player'
 interface Props{
   isEdit: boolean
   organization: IOrganization
+  onOrganizationUpdate: () => void
 }
 
-const CardDescription = (props: Props) => {
+const CardOrganizationDescription = (props: Props) => {
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
   const [showForm, setShowForm] = useState(false)
-  const {isEdit} = props
+  const {isEdit, organization, onOrganizationUpdate} = props
   const {t} = useTranslation('common')
-  const [organization, setOrganization] = useState(props.organization)
 
   const handleEditClick = () => {
     setShowForm(true)
@@ -35,11 +35,7 @@ const CardDescription = (props: Props) => {
   const handleSubmit = async (data) => {
     await OrganizationRepository.updateOrganizationData(organization.id, {...data, visible: true})
     setShowForm(false)
-    OrganizationRepository.fetchCurrentOrganization().then((data) => {
-      if(data){
-        setOrganization(data)
-      }
-    })
+    onOrganizationUpdate && onOrganizationUpdate()
   }
 
   const fileName = (file: string) => {
@@ -69,7 +65,7 @@ const CardDescription = (props: Props) => {
   const instLink = organization?.socialLinks?.find(item => item.type === 'instagram')
 
   return (
-    <Card isHidden={!isEdit && !organization.about} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.desc')} toolbar={isEdit ? <FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/> : null}>
+    <Card isHidden={!isEdit && !organization.description} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.desc')} toolbar={isEdit ? <FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/> : null}>
       {!showForm ? 
         <div className={styles.desc}>
           <div className={styles.left}>
@@ -98,4 +94,4 @@ const CardDescription = (props: Props) => {
   )
 }
 
-export default CardDescription
+export default CardOrganizationDescription

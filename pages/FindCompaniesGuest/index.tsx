@@ -20,6 +20,9 @@ import { CookiesType, RegistrationMode } from 'types/enums'
 import {addDays} from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
+import Loader from 'components/ui/Loader'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import InputSearch from 'components/ui/Inputs/InputSearch'
 
 const queryString = require('query-string')
 
@@ -36,13 +39,33 @@ const FindCompaniesGuest = (props) => {
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
+  const [page, setPage] = useState<number>(1)
+  const currentQuery = queryString.parse(router.asPath.split('?').pop())
+  const [query, setQuery] = useState('')
+
   useEffect(() => {
     setIsOpen((signUpCookie === 'no' || window.screen.availWidth > 600) ? false : true)
-    OrganizationRepository.fetchOrganizationsList().then((data) => {
+    OrganizationRepository.search().then((data) => {
       if(data){
-        setCompanies(data)
-        setLoading(false)
-        setTotal(data.length)
+        if (query === '' || !query) {
+          OrganizationRepository.search().then((data) => {
+            if(data){
+              setCompanies(data.data)
+              setLoading(false)
+              setTotal(data.total)
+            }
+            
+          })
+        } else {
+          //returns filtered array
+          OrganizationRepository.search().then((data) => {
+            if(data){
+              setCompanies(data.data.filter(item => item.name.toLowerCase().includes(query.toLowerCase())))
+              setLoading(false)
+              setTotal(data.total)
+            }        
+          })
+        }
       }
       
     })
@@ -53,6 +76,42 @@ const FindCompaniesGuest = (props) => {
     //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
+  const handleScrollNext = async () => {
+    setPage(page + 1);
+    const res = await OrganizationRepository.search(filter, page + 1)
+    setCompanies(companies => [...companies, ...res.data])
+  }
+
+  const handleSearch = () => {
+    
+  }
+
+  const handleChange = async (e) => {
+    await setQuery(e.currentTarget.value)
+    if (query === '' || !query) {
+      OrganizationRepository.search().then((data) => {
+        if(data){
+          setCompanies(data.data)
+          setLoading(false)
+          setTotal(data.total)
+        }
+        
+      })
+    } else {
+      //returns filtered array
+      OrganizationRepository.search().then((data) => {
+        if(data){
+          setCompanies(data.data.filter(item => item.name.toLowerCase().includes(query.toLowerCase())))
+          setLoading(false)
+          setTotal(data.total)
+        }        
+      })
+    }
+  }
+
+  console.log('QUERY', currentQuery)
+  console.log('SETTED', query)
+
 
   return (
     <Layout>
@@ -62,7 +121,11 @@ const FindCompaniesGuest = (props) => {
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)} filter='companies'/>
+          <GuestFilter 
+          search={() => <InputSearch searchValue={query} onChange={handleChange} onClick={handleSearch}/>}
+          state={isVisible} 
+          onClick={() => setIsVisible(isVisible ? false : true)} filter='companies'
+          />
       <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.companies')}: <span>{total}</span></div>}
           {companies.length > 0 && <div className={styles.projectsSort}>
@@ -80,9 +143,17 @@ const FindCompaniesGuest = (props) => {
         </div>
         <div className={styles.content}>
           <div>
+          {(loading && total === 0) && <Loader/>}
+          {total > 0 && <InfiniteScroll
+          dataLength={companies.length} //This is important field to render the next data
+          next={handleScrollNext}
+          hasMore={total > companies.length}
+          loader={<Loader/>}
+        >
           {companies.map(company => 
               <Organization className={styles.organization} key={company.id} organization={company}/>
           )}
+          </InfiniteScroll>}
           </div>
           <div className={classNames(styles.sidebar, {[styles.visible]: isVisible})}>
         <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
