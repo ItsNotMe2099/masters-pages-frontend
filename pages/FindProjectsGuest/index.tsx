@@ -1,9 +1,7 @@
 import styles from 'pages/FindCompaniesGuest/index.module.scss'
 import { useEffect, useState } from 'react'
-import cookie from 'js-cookie'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
-import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
@@ -25,14 +23,10 @@ import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const queryString = require('query-string')
 
 const FindProjectsGuest = (props) => {
 
-  const [isOpen, setIsOpen] = useState(true)
-  const signUpCookie = cookie.get('signUpMobile')
   const [projects, setProjects] = useState<IProject[]>([])
-  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true)
   const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
@@ -43,17 +37,19 @@ const FindProjectsGuest = (props) => {
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
+  const limit = 10
 
-  const fetchProjects = (filter?: IProjectSearchRequest, sortType?: string, page?: number, limit?: number) => {
-    ProjectRepository.search(filter, page, limit).then(data => {
+  const fetchProjects = (page: number, limit: number, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
       }
     })
   }
+
   useEffect(() => {
-    fetchProjects()
+    fetchProjects(page, limit)
     setLoading(false);
   }, [])
 
@@ -64,12 +60,16 @@ const FindProjectsGuest = (props) => {
 
   const handleProjectViewOpen = (project: IProject) => {
     setInitialProjectTab('description')
-    setCurrentProject(project);
+    setCurrentProject(project)
   }
 
   const handleScrollNext = () => {
-    setPage(page + 1);
-    fetchProjects(filter, sortType, page + 1);
+    setPage(page + 1)
+    ProjectRepository.search(page + 1, limit).then(data => {
+      if(data){
+        setProjects(projects => [...data.data, ...projects])
+      }
+    })
   }
 
   return (
@@ -104,6 +104,7 @@ const FindProjectsGuest = (props) => {
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={<Loader/>}
+          scrollableTarget='scrollableDiv'
         >
           {projects.map(project => 
               <ProjectCard project={project} actionsType='public' onViewOpen={handleProjectViewOpen}/>

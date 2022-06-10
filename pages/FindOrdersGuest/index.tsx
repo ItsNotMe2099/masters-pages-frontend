@@ -1,9 +1,7 @@
 import styles from 'pages/FindCompaniesGuest/index.module.scss'
 import { useEffect, useState } from 'react'
-import cookie from 'js-cookie'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
-import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
@@ -24,12 +22,10 @@ import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskReposi
 import { ITask } from 'types'
 import Task from 'components/Task'
 
-const queryString = require('query-string')
 
 const FindOrdersGuest = (props) => {
 
   const [tasks, setTasks] = useState<ITask[]>([])
-  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true)
   const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
@@ -38,11 +34,11 @@ const FindOrdersGuest = (props) => {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const [currentProject, setCurrentProject] = useState<ITask | null>(null)
-  const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
+  const limit = 10
 
-  const fetchTasks = (filter?: ITaskSearchRequest, sortType?: string, page?: number, limit?: number) => {
-    TaskRepository.search(filter, page, limit).then(data => {
+  const fetchTasks = (page: number, limit: number, filter?: ITaskSearchRequest) => {
+    TaskRepository.search(page, limit).then(data => {
       if(data){
         setTasks(data.data);
         setTotal(data.total);
@@ -50,7 +46,7 @@ const FindOrdersGuest = (props) => {
     })
   }
   useEffect(() => {
-    fetchTasks()
+    fetchTasks(page, limit)
     setLoading(false);
   }, [])
 
@@ -61,7 +57,11 @@ const FindOrdersGuest = (props) => {
 
   const handleScrollNext = () => {
     setPage(page + 1);
-    fetchTasks(filter, sortType, page + 1);
+    TaskRepository.search(page + 1, limit).then((data) => {
+      if(data){
+        setTasks(tasks => [...data.data, ...tasks])
+      }
+    })
   }
 
   return (
@@ -96,6 +96,7 @@ const FindOrdersGuest = (props) => {
           next={handleScrollNext}
           hasMore={total > tasks.length}
           loader={<Loader/>}
+          scrollableTarget='scrollableDiv'
         >
           {tasks.map(task => 
               <Task key={task.id} task={task}/>

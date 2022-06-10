@@ -16,9 +16,9 @@ export interface ITaskSearchRequest{
 }
 export default class TaskRepository {
 
-  static async search(data?: ITaskSearchRequest, page: number = 1, limit: number = 100): Promise<IPagination<ITask> | null> {
+  static async search(page: number = 1, limit: number = 10, data?: ITaskSearchRequest): Promise<IPagination<ITask> | null> {
     const res = await request({
-      url: `/api/tasks/search`,
+      url: `/api/tasks/search?page=${page}&limit=${limit}`,
       method: 'GET',
       data
     })

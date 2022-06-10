@@ -70,9 +70,9 @@ export default class ProjectRepository {
     console.log("FindPublicById", res.data);
     return res.data?.data?.length > 0 ? res.data.data[0] : null
   }
-  static async search(data?: IProjectSearchRequest, page: number = 1, limit: number = 100): Promise<IPagination<IProject> | null> {
+  static async search(page: number = 1, limit: number = 10, data?: IProjectSearchRequest): Promise<IPagination<IProject> | null> {
     const res = await request({
-      url: `/api/project/search`,
+      url: `/api/project/search?page=${page}&limit=${limit}`,
       method: 'GET',
       data
     })

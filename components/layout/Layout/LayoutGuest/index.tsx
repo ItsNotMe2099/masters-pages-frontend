@@ -79,7 +79,7 @@ export default function LayoutGuest(props: Props) {
 
 
   return (
-    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})}>
+    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})} id='scrollableDiv'>
       {showLeftMenu && <div className={styles.leftMenu}>
         <div className={styles.logo}>
           {collapsed && <LogoSvg className={styles.logoCollapsed}/>}
