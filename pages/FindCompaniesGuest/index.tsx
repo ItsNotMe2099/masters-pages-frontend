@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import InputSearch from 'components/ui/Inputs/InputSearch'
 
 const FindCompaniesGuest = (props) => {
 
@@ -33,9 +34,10 @@ const FindCompaniesGuest = (props) => {
   const dispatch = useDispatch()
   const [page, setPage] = useState<number>(1)
   const limit = 10
+  const [value, setValue] = useState('')
 
-  const fetchOrganizations = (page: number, limit: number, filter?: IOrganizationSearchRequest) => {
-    OrganizationRepository.search(page, limit).then((data) => {
+  const fetchOrganizations = (page: number, limit: number, keywords?: string, filter?: IOrganizationSearchRequest) => {
+    OrganizationRepository.search(page, limit, keywords).then((data) => {
       if(data){
         setOrganizations(data.data)
         setTotal(data.total)
@@ -53,13 +55,19 @@ const FindCompaniesGuest = (props) => {
     //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
-  const handleScrollNext = () => {
+  const handleScrollNext = (value: string) => {
     setPage(page + 1);
-    OrganizationRepository.search(page + 1, limit).then((data) => {
+    OrganizationRepository.search(page + 1, limit, value).then((data) => {
       if(data){
         setOrganizations(organizations => [...data.data, ...organizations])
       }
     })
+  }
+
+  const serachRequest = async (value: string) => {
+    setValue(value)
+    await setPage(1)
+    fetchOrganizations(page, limit, value)
   }
 
   return (
@@ -71,6 +79,7 @@ const FindCompaniesGuest = (props) => {
           <div className={styles.topContent}>
           <div className={styles.filters}>
           <GuestFilter 
+          search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
           state={isVisible} 
           onClick={() => setIsVisible(isVisible ? false : true)} filter='companies'
           />
@@ -95,7 +104,7 @@ const FindCompaniesGuest = (props) => {
           {total > 0 && <InfiniteScroll
           dataLength={organizations.length} //This is important field to render the next data
           hasMore={total > organizations.length}
-          next={handleScrollNext}
+          next={() => handleScrollNext(value)}
           loader={<Loader/>}
           scrollableTarget='scrollableDiv'
         >

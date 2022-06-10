@@ -22,6 +22,7 @@ import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import InputSearch from 'components/ui/Inputs/InputSearch'
 
 
 const FindProjectsGuest = (props) => {
@@ -38,9 +39,10 @@ const FindProjectsGuest = (props) => {
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
   const limit = 10
+  const [value, setValue] = useState('')
 
-  const fetchProjects = (page: number, limit: number, filter?: IProjectSearchRequest) => {
-    ProjectRepository.search(page, limit).then(data => {
+  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, keywords).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
@@ -63,13 +65,19 @@ const FindProjectsGuest = (props) => {
     setCurrentProject(project)
   }
 
-  const handleScrollNext = () => {
+  const handleScrollNext = (value: string) => {
     setPage(page + 1)
-    ProjectRepository.search(page + 1, limit).then(data => {
+    ProjectRepository.search(page + 1, limit, value).then(data => {
       if(data){
         setProjects(projects => [...data.data, ...projects])
       }
     })
+  }
+
+  const serachRequest = async (value: string) => {
+    setValue(value)
+    await setPage(1)
+    fetchProjects(page, limit, value)
   }
 
   return (
@@ -80,7 +88,11 @@ const FindProjectsGuest = (props) => {
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
+          <GuestFilter 
+            search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
+            state={isVisible} 
+            onClick={() => setIsVisible(isVisible ? false : true)}
+          />
       <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
           {projects.length > 0 && <div className={styles.projectsSort}>
@@ -101,7 +113,7 @@ const FindProjectsGuest = (props) => {
           {(loading && total === 0) && <Loader/>}
           {total > 0 && <InfiniteScroll
           dataLength={projects.length} //This is important field to render the next data
-          next={handleScrollNext}
+          next={() => handleScrollNext(value)}
           hasMore={total > projects.length}
           loader={<Loader/>}
           scrollableTarget='scrollableDiv'

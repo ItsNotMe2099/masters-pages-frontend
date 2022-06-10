@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
-import InputSearch from 'components/ui/Inputs/InputSearch'
 import { ReactElement, useState } from 'react'
 import classNames from 'classnames'
 import Filter from '../FilterForm'

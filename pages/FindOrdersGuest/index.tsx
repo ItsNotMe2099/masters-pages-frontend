@@ -21,6 +21,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskRepository'
 import { ITask } from 'types'
 import Task from 'components/Task'
+import InputSearch from 'components/ui/Inputs/InputSearch'
 
 
 const FindOrdersGuest = (props) => {
@@ -36,15 +37,17 @@ const FindOrdersGuest = (props) => {
   const [currentProject, setCurrentProject] = useState<ITask | null>(null)
   const [page, setPage] = useState<number>(1)
   const limit = 10
+  const [value, setValue] = useState('')
 
-  const fetchTasks = (page: number, limit: number, filter?: ITaskSearchRequest) => {
-    TaskRepository.search(page, limit).then(data => {
+  const fetchTasks = (page: number, limit: number, keywords?: string, filter?: ITaskSearchRequest) => {
+    TaskRepository.search(page, limit, keywords).then(data => {
       if(data){
         setTasks(data.data);
         setTotal(data.total);
       }
     })
   }
+
   useEffect(() => {
     fetchTasks(page, limit)
     setLoading(false);
@@ -55,13 +58,19 @@ const FindOrdersGuest = (props) => {
     //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
-  const handleScrollNext = () => {
+  const handleScrollNext = (value: string) => {
     setPage(page + 1);
-    TaskRepository.search(page + 1, limit).then((data) => {
+    TaskRepository.search(page + 1, limit, value).then((data) => {
       if(data){
         setTasks(tasks => [...data.data, ...tasks])
       }
     })
+  }
+
+  const serachRequest = async (value: string) => {
+    setValue(value)
+    await setPage(1)
+    fetchTasks(page, limit, value)
   }
 
   return (
@@ -72,7 +81,11 @@ const FindOrdersGuest = (props) => {
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
+          <GuestFilter 
+            search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
+            state={isVisible} 
+            onClick={() => setIsVisible(isVisible ? false : true)}
+          />
       <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
           {tasks.length > 0 && <div className={styles.projectsSort}>
@@ -93,7 +106,7 @@ const FindOrdersGuest = (props) => {
           {(loading && total === 0) && <Loader/>}
           {total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data
-          next={handleScrollNext}
+          next={() => handleScrollNext(value)}
           hasMore={total > tasks.length}
           loader={<Loader/>}
           scrollableTarget='scrollableDiv'

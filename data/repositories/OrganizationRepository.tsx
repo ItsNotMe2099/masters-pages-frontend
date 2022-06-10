@@ -66,9 +66,9 @@ export default class OrganizationRepository {
     return res.data
   }
 
-  static async search(page: number = 1, limit: number = 10, data?: IOrganizationSearchRequest): Promise<IPagination<IOrganization> | null> {
+  static async search(page: number = 1, limit: number = 10, keywords: string = '', data?: IOrganizationSearchRequest): Promise<IPagination<IOrganization> | null> {
     const res = await request({
-      url: `/api/organization/search?page=${page}&limit=${limit}`,
+      url: `/api/organization/search?page=${page}&limit=${limit}&keywords=${keywords}`,
       method: 'GET',
       data
     })
