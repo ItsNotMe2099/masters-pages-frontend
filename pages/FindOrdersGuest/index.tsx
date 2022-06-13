@@ -87,7 +87,7 @@ const FindOrdersGuest = (props) => {
             onClick={() => setIsVisible(isVisible ? false : true)}
           />
       <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
+           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.tasks')}: <span>{total}</span></div>}
           {tasks.length > 0 && <div className={styles.projectsSort}>
             <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[

@@ -51,7 +51,7 @@ export default function LayoutGuest(props: Props) {
   }
 
   const item = [
-    {title: 'Find companies', icon: 'find-clients-black', link: '/FindCompaniesGuest', isSeparator: true},
+    {title: t('menu.findCompanies'), icon: 'find-clients-black', link: '/FindCompaniesGuest', isSeparator: true},
   ]
 
   const itemsVolunteer = [
@@ -91,7 +91,7 @@ export default function LayoutGuest(props: Props) {
           link={item.link} mode={role}/></>)}
         <div className={styles.volunteers}>
           <div className={styles.title}>
-            For voulunteers
+            {t('guestPage.forVolunteers')}
           </div>
           {itemsVolunteer.map(item => 
           <MenuItem
@@ -101,7 +101,7 @@ export default function LayoutGuest(props: Props) {
         </div>
         <div className={styles.masters}>
           <div className={styles.title}>
-            For masters
+          {t('guestPage.forMasters')}
           </div>
           {itemsMaster.map(item => 
           <MenuItem
@@ -111,7 +111,7 @@ export default function LayoutGuest(props: Props) {
         </div>
         <div className={styles.companies}>
           <div className={styles.title}>
-            For companies
+          {t('guestPage.forCompanies')}
           </div>
           {itemsCompanies.map(item => 
           <MenuItem

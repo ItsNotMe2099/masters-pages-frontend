@@ -27,7 +27,7 @@ const GuestFilter = (props: Props) => {
         {props.search && props.search()}
         <div className={classNames(styles.filtersBtn, {[styles.visible]: isVisible})} onClick={handleClick}>
           <div className={styles.icon}><img src='/img/icons/filter.svg' alt=''/></div>
-          <div className={styles.text}>Filters</div>
+          <div className={styles.text}>{t('findCompanies.filter.filters')}</div>
         </div>
       </div>
       {isVisible &&
