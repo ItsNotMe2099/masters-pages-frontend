@@ -69,7 +69,7 @@ const FindProjectsGuest = (props) => {
     setPage(page + 1)
     ProjectRepository.search(page + 1, limit, value).then(data => {
       if(data){
-        setProjects(projects => [...data.data, ...projects])
+        setProjects(projects => [...projects, ...data.data])
       }
     })
   }

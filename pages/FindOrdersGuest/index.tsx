@@ -62,7 +62,7 @@ const FindOrdersGuest = (props) => {
     setPage(page + 1);
     TaskRepository.search(page + 1, limit, value).then((data) => {
       if(data){
-        setTasks(tasks => [...data.data, ...tasks])
+        setTasks(tasks => [...tasks, ...data.data])
       }
     })
   }
