@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 import cx from 'classnames'
 import { setCookie } from 'nookies'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 
 interface Props {
   isAuth: boolean
@@ -16,6 +17,7 @@ interface Props {
    const { language } = i18n
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
+  const router = useRouter()
   const onClick = (e) => {
     e.preventDefault()
     setIsActive(!isActive)
@@ -42,11 +44,14 @@ interface Props {
     setCookie(null,'next-i18next', item.value)
     i18n.changeLanguage(item.value)
     setIsActive(false)
+    router.push(router.asPath, router.asPath, { locale: item.value })
   }
   const handleActiveOptionClick = (e) => {
     e.preventDefault()
     setIsActive(false)
   }
+
+  console.log('ROUTERRRRRRR', router)
   return (
     <div className={`${styles.root} ${props.isAuth && styles.rootAuth}`}>
       <a onClick={onClick} className={styles.dropDownTrigger}>

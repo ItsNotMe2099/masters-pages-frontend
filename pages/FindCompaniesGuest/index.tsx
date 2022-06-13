@@ -108,8 +108,8 @@ const FindCompaniesGuest = (props) => {
           loader={<Loader/>}
           scrollableTarget='scrollableDiv'
         >
-          {organizations.map(company => 
-              <Organization className={styles.organization} key={company.id} organization={company}/>
+          {organizations.map(organization => 
+              <Organization className={styles.organization} key={organization.id} organization={organization}/>
           )}
           </InfiniteScroll>}
           </div>
