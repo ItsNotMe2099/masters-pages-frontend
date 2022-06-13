@@ -123,7 +123,7 @@ export default function LayoutGuest(props: Props) {
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div
-            className={styles.hello}>Hello guest! Please register for <span>FREE</span> to get full functionality.
+            className={styles.hello}>Hello guest! Please register for <span onClick={() => dispatch(signUpOpen())}>FREE</span> to get full functionality.
           </div>
         </div>
         <div className={styles.btns}>
