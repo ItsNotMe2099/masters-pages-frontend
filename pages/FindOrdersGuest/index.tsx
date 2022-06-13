@@ -1,9 +1,7 @@
 import styles from 'pages/FindCompaniesGuest/index.module.scss'
 import { useEffect, useState } from 'react'
-import cookie from 'js-cookie'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
-import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
@@ -23,13 +21,12 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskRepository'
 import { ITask } from 'types'
 import Task from 'components/Task'
+import InputSearch from 'components/ui/Inputs/InputSearch'
 
-const queryString = require('query-string')
 
 const FindOrdersGuest = (props) => {
 
   const [tasks, setTasks] = useState<ITask[]>([])
-  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true)
   const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
@@ -38,19 +35,21 @@ const FindOrdersGuest = (props) => {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const [currentProject, setCurrentProject] = useState<ITask | null>(null)
-  const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
+  const limit = 10
+  const [value, setValue] = useState('')
 
-  const fetchTasks = (filter?: ITaskSearchRequest, sortType?: string, page?: number, limit?: number) => {
-    TaskRepository.search(filter, page, limit).then(data => {
+  const fetchTasks = (page: number, limit: number, keywords?: string, filter?: ITaskSearchRequest) => {
+    TaskRepository.search(page, limit, keywords).then(data => {
       if(data){
         setTasks(data.data);
         setTotal(data.total);
       }
     })
   }
+
   useEffect(() => {
-    fetchTasks()
+    fetchTasks(page, limit)
     setLoading(false);
   }, [])
 
@@ -59,9 +58,19 @@ const FindOrdersGuest = (props) => {
     //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
-  const handleScrollNext = () => {
+  const handleScrollNext = (value: string) => {
     setPage(page + 1);
-    fetchTasks(filter, sortType, page + 1);
+    TaskRepository.search(page + 1, limit, value).then((data) => {
+      if(data){
+        setTasks(tasks => [...tasks, ...data.data])
+      }
+    })
+  }
+
+  const serachRequest = async (value: string) => {
+    setValue(value)
+    await setPage(1)
+    fetchTasks(page, limit, value)
   }
 
   return (
@@ -72,9 +81,13 @@ const FindOrdersGuest = (props) => {
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
+          <GuestFilter 
+            search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
+            state={isVisible} 
+            onClick={() => setIsVisible(isVisible ? false : true)}
+          />
       <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
+           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.tasks')}: <span>{total}</span></div>}
           {tasks.length > 0 && <div className={styles.projectsSort}>
             <span>{t('sort.title')}:</span>
             <DropDown onChange={handleSortChange} value={sortType} options={[
@@ -93,9 +106,10 @@ const FindOrdersGuest = (props) => {
           {(loading && total === 0) && <Loader/>}
           {total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data
-          next={handleScrollNext}
+          next={() => handleScrollNext(value)}
           hasMore={total > tasks.length}
           loader={<Loader/>}
+          scrollableTarget='scrollableDiv'
         >
           {tasks.map(task => 
               <Task key={task.id} task={task}/>

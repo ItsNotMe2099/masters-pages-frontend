@@ -716,7 +716,8 @@
 
   "findCompanies": {
     "filter": {
-      "applyFilters": "APPLY FILTERS"
+      "applyFilters": "APPLY FILTERS",
+      "filters": "Filters"
     }
   },
 
@@ -1336,6 +1337,12 @@
     "bachelor": "Bachelor",
     "master": "Master",
     "phd": "Phd"
+  },
+
+  "guestPage": {
+    "forVolunteers": "For volunteers",
+    "forMasters": "For masters",
+    "forCompanies": "For companies"
   }
 
 }

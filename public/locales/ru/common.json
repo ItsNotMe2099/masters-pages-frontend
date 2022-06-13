@@ -704,7 +704,8 @@
   },
   "findCompanies": {
     "filter": {
-      "applyFilters": "ПРИМЕНИТЬ ФИЛЬТРЫ"
+      "applyFilters": "ПРИМЕНИТЬ ФИЛЬТРЫ",
+      "filters": "Фильтры"
     }
   },
   "createMasterProfile": {
@@ -1275,14 +1276,14 @@
   },
 
   "newMainVolunteer": {
-    "guestAccess": "Guest Access",
-    "forIndividuals": "FOR INDIVIDUALS",
-    "forCompanies": "FOR COMPANIES",
-    "forOrganization": "FOR ORGANIZATION",
+    "guestAccess": "Гостевой Доступ",
+    "forIndividuals": "ДЛЯ ФИЗ. ЛИЦ",
+    "forCompanies": "ДЛЯ КОМПАНИЙ",
+    "forOrganization": "ДЛЯ ОРГАНИЗАЦИИ",
     "portal": "Volunteer management Portal",
     "individualAssignments": "Individual assignments",
     "projects": "Multi-participant projects",
-    "freeSignUp": "FREE SIGN UP",
+    "freeSignUp": "ЗАРЕГИСТРИРОВАТЬСЯ",
     "corporatePlatform": "Corporate platform for <1/> projects with volunteers",
     "corporateProfile": "Corporate profile",
     "volunteerAds": "Volunteer projects ads",
@@ -1323,5 +1324,11 @@
     "bachelor": "Бакалавр",
     "master": "Магистр",
     "phd": "Научная степень"
+  },
+
+  "guestPage": {
+    "forVolunteers": "Для волонтеров",
+    "forMasters": "Для мастеров",
+    "forCompanies": "Для компаний"
   }
 }

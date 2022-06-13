@@ -1,6 +1,5 @@
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
-import InputSearch from 'components/ui/Inputs/InputSearch'
 import { ReactElement, useState } from 'react'
 import classNames from 'classnames'
 import Filter from '../FilterForm'
@@ -25,10 +24,10 @@ const GuestFilter = (props: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.top}>
-        {props.search()}
+        {props.search && props.search()}
         <div className={classNames(styles.filtersBtn, {[styles.visible]: isVisible})} onClick={handleClick}>
           <div className={styles.icon}><img src='/img/icons/filter.svg' alt=''/></div>
-          <div className={styles.text}>Filters</div>
+          <div className={styles.text}>{t('findCompanies.filter.filters')}</div>
         </div>
       </div>
       {isVisible &&

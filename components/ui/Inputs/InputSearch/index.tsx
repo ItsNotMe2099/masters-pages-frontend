@@ -1,33 +1,61 @@
-import Button from 'components/ui/Button'
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
+import Button from 'components/ui/Button'
+import { useThrottleFn } from '@react-cmpt/use-throttle'
 
 interface Props {
   placeholder?: string
-  onChange?: (e) => void
-  onClick?: () => void
   searchValue?: string
+  hasAutocomplete?: boolean
+  searchRequest: (keywords: string) => void
 }
 
 export default function InputSearch(props: Props) {
-  const [value, setValue] = useState(props.searchValue)
 
-  const handleSearch = (e) => {
-    setValue(e.currentTarget.value)
-    props.onChange(e.currentTarget.value)
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    if (props.searchValue && !value) {
+      setValue(props.searchValue)
+    }
+  }, [props.searchValue])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (value) {
+      props.searchRequest(value)
+    }
   }
+
+  const handleSearch = async (value: string) => {
+    if (value.length < 3 && value !== '') {
+      return
+    } else  {
+      setValue(value)
+    }
+    const res = await props.searchRequest(value)
+    console.log('Res', res)
+  }
+
+  const { callback: search } = useThrottleFn(handleSearch, 300)
+
   return (
-    <form className={styles.root}>
-      <input
-        name="query"
-        type="text"
-        value={props.searchValue}
-        autoComplete={'off'}
-        onChange={props.onChange}
-        placeholder={props.placeholder}
-      />
-        <Button className={styles.btn} onClick={props.onClick}>
-          <img src="/img/icons/search.svg" alt="" />
+    <form className={styles.root} action="/search" onSubmit={handleSubmit}>
+        <input
+          name="query"
+          type="text"
+          value={value}
+          autoComplete={'off'}
+          onChange={(e) => {
+            const value = e.currentTarget.value
+            setValue(value)
+            search(value)
+          }}
+          placeholder={props.placeholder}
+        />
+         <Button className={styles.btn}>
+            <img src="/img/icons/search.svg" alt="" />
         </Button>
     </form>
   )

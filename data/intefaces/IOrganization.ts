@@ -31,6 +31,7 @@ export interface IOrganizationLocation{
 
 export interface IOrganization{
   id: number
+  corporateProfileId: number
   status: OrganizationStatus;
   isPublished: boolean
   corporateProfile: IProfile

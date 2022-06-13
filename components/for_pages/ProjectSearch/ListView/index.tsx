@@ -46,8 +46,8 @@ const ProjectSearchListView = (props: Props) => {
   const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
   console.log('Fetch1112')
-  const fetchProjects = (filter?: IProjectSearchRequest, sortType?: string, page?: number, limit?: number) => {
-    ProjectRepository.search(filter, page, limit).then(data => {
+  const fetchProjects = (filter?: IProjectSearchRequest, sortType?: string, page?: number, limit?: number, keywords?: '') => {
+    ProjectRepository.search(page, limit, keywords, filter).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);

@@ -1,9 +1,7 @@
 import styles from 'pages/FindCompaniesGuest/index.module.scss'
 import { useEffect, useState } from 'react'
-import cookie from 'js-cookie'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
-import { useRouter } from 'next/router'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
@@ -24,15 +22,12 @@ import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import InputSearch from 'components/ui/Inputs/InputSearch'
 
-const queryString = require('query-string')
 
 const FindProjectsGuest = (props) => {
 
-  const [isOpen, setIsOpen] = useState(true)
-  const signUpCookie = cookie.get('signUpMobile')
   const [projects, setProjects] = useState<IProject[]>([])
-  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(true)
   const [total, setTotal] = useState<number>(0)
   const [sortType, setSortType] = useState<string | null>()
@@ -43,17 +38,20 @@ const FindProjectsGuest = (props) => {
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
+  const limit = 10
+  const [value, setValue] = useState('')
 
-  const fetchProjects = (filter?: IProjectSearchRequest, sortType?: string, page?: number, limit?: number) => {
-    ProjectRepository.search(filter, page, limit).then(data => {
+  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, keywords).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
       }
     })
   }
+
   useEffect(() => {
-    fetchProjects()
+    fetchProjects(page, limit)
     setLoading(false);
   }, [])
 
@@ -64,12 +62,22 @@ const FindProjectsGuest = (props) => {
 
   const handleProjectViewOpen = (project: IProject) => {
     setInitialProjectTab('description')
-    setCurrentProject(project);
+    setCurrentProject(project)
   }
 
-  const handleScrollNext = () => {
-    setPage(page + 1);
-    fetchProjects(filter, sortType, page + 1);
+  const handleScrollNext = (value: string) => {
+    setPage(page + 1)
+    ProjectRepository.search(page + 1, limit, value).then(data => {
+      if(data){
+        setProjects(projects => [...projects, ...data.data])
+      }
+    })
+  }
+
+  const serachRequest = async (value: string) => {
+    setValue(value)
+    await setPage(1)
+    fetchProjects(page, limit, value)
   }
 
   return (
@@ -80,7 +88,11 @@ const FindProjectsGuest = (props) => {
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
+          <GuestFilter 
+            search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
+            state={isVisible} 
+            onClick={() => setIsVisible(isVisible ? false : true)}
+          />
       <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
           {projects.length > 0 && <div className={styles.projectsSort}>
@@ -101,9 +113,10 @@ const FindProjectsGuest = (props) => {
           {(loading && total === 0) && <Loader/>}
           {total > 0 && <InfiniteScroll
           dataLength={projects.length} //This is important field to render the next data
-          next={handleScrollNext}
+          next={() => handleScrollNext(value)}
           hasMore={total > projects.length}
           loader={<Loader/>}
+          scrollableTarget='scrollableDiv'
         >
           {projects.map(project => 
               <ProjectCard project={project} actionsType='public' onViewOpen={handleProjectViewOpen}/>
