@@ -20,10 +20,10 @@ export default function CityField(props: Props<number>) {
   const fetchData = async (search = '') => {
     const data = await LocationRepository.fetchCities({countryCode: props.countryCode, id: !search ? field.value : null, search, lang: i18n.language})
     console.log('FetchData', data)
-    return data?.map(item => ({
+    setOptions(data?.map(item => ({
         value: item.id,
         label: item.name,
-    })) || [];
+    })) || [])
   }
   const handleMenuOpen = async () => {
     await fetchData()
@@ -33,6 +33,6 @@ export default function CityField(props: Props<number>) {
     return res;
   }
   return (
-    <SelectField options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} loadOptions={handleLoadOptions}/>
+    <SelectField options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen}/>
   )
 }

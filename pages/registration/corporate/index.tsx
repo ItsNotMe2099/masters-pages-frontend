@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {IRootState} from 'types'
 import RegistrationSuccess from 'components/Auth/RegistrationSuccess'
 import {IUser} from 'data/intefaces/IUser'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -18,13 +19,14 @@ interface Props {
 const Corporate = (props: Props) => {
   const dispatch = useDispatch()
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
+  const { t } = useTranslation('common')
 
   console.log('modalKey', modalKey)
   return (
     <div className={styles.body}>
       <div className={styles.root}>
         <div className={styles.title}>
-          Corporate account application
+          {t('corporateAccount.applicationTitle')}
         </div>
         {modalKey === 'registrationSuccess' ? <RegistrationSuccess
           isOpen={true}

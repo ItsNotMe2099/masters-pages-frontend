@@ -1285,7 +1285,9 @@
     "streetAndNumber": "Street and number *",
     "office": "Office",
     "site": "Web site link",
-    "submit": "SEND APPLICATION"
+    "submit": "SEND APPLICATION",
+    "applicationTitle": "Corporate account application",
+    "agree": "I agree with <1>Terms & Conditions</1>"
   },
 
   "newMainVolunteer": {
@@ -1343,6 +1345,24 @@
     "forVolunteers": "For volunteers",
     "forMasters": "For masters",
     "forCompanies": "For companies"
+  },
+
+  "welcome": {
+    "welcome": "Welcome!",
+    "thankYou": "Thank you for your interest in MastersPages corporate services. Corporate account at MastersPages is free of charge for registered companies.",
+    "functionality": "Corporate account provides the following functionality:",
+    "list": {
+      "collection": "Collection of standardized applications from volunteers and self-employed professionals",
+      "managment": "Management of applications received",
+      "accounting": "Accounting for services received",
+      "reports": "Instant reports",
+      "review": "Review and Recommendations for volunteers and self-employed",
+      "communication": "Communication with volunteers and self employed",
+      "publication": "Publication of corporate news for volunteers and self-employed",
+      "scheduling": "Scheduling of events for volunteers and self employed",
+      "placement": "Placement of ads for volunteers and self-employed"
+    },
+    "toGet": "To get your free corporate account at MastersPages please, complete corporate registration form. Normal corporate application processing time is 2 business days. We will review application and notify you once account is open."
   }
 
 }
