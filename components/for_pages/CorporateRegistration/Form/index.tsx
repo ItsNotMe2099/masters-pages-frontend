@@ -125,7 +125,7 @@ export default function CorporateAccountForm({user}: Props) {
         </div>
         <div className={styles.checkbox}>
           <CheckBoxField name={'terms'} validate={Validator.required} label={<div className={styles.terms}>
-            I agree with <Link href=''><a>Terms & Conditions</a></Link>
+            I agree with <Link href='/Terms'><a>Terms & Conditions</a></Link>
           </div>}/>
 
         </div>

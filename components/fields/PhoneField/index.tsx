@@ -11,6 +11,7 @@ import BaseInput from 'components/fields/BaseTextField'
 import ErrorInput from 'components/ui/Formik/components/ErrorInput'
 import {CodeSelect} from './components/CodeSelect'
 import FieldError from 'components/ui/FieldError'
+import { useRouter } from 'next/router'
 // @ts-ignore
 const metadata = new Metadata(minMetadata)
 
@@ -62,8 +63,9 @@ export default function PhoneField(props: Props & FieldConfig) {
   const {setFieldValue, setFieldTouched} = useFormikContext()
   const hasError = !!meta.error && meta.touched
   const [changed, setChanged] = useState(false)
+  const router = useRouter()
 
-  const [code, setCode] = useState(findCountryCode(value) || findCountryCode('7'))
+  const [code, setCode] = useState(findCountryCode(value) || router.locale === 'ru' ? findCountryCode('7') : findCountryCode('1'))
 
   useEffect(() => {
     if (value) {
