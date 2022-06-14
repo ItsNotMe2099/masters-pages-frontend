@@ -1,7 +1,5 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import ProjectTabItem from 'components/for_pages/Project/ProjectModal/ProjectTabs/Tab'
-import cx from 'classnames'
 import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import ProjectDescriptionHeader from 'components/for_pages/Project/ProjectModal/ProjectDescriptionHeader'
 import TextField from 'components/fields/TextField'
@@ -92,6 +90,9 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
     console.log("handleSubmitDraft")
     await formik.setFieldValue('status', ProjectStatus.Draft);
     await formik.submitForm();
+  }
+  const handleSubmitPreview = async () => {
+    console.log("handleSubmitPreview")
   }
   return (
     <FormikProvider value={formik}>
@@ -195,7 +196,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
         <div className={styles.bottomBar}>
 
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
-          <Button size={'small'} color={'red'} type={'button'}  onClick={handleSubmitDraft}>Preview</Button>
+          <Button size={'small'} color={'red'} type={'button'}  onClick={handleSubmitPreview}>Preview</Button>
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Publish</Button>
         </div>
       </Form>

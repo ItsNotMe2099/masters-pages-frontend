@@ -9,29 +9,30 @@ const Welcome = (props: Props) => {
 
   const {t} = useTranslation('common')
 
+
   const listItems = [
-    {text: 'Collection of standardized applications from volunteers and self-employed professionals'},
-    {text: 'Management of applications received'},
-    {text: 'Accounting for services received'},
-    {text: 'Instant reports'},
-    {text: 'Review and Recommendations for volunteers and self-employed'},
-    {text: 'Communication with volunteers and self employed'},
-    {text: 'Publication of corporate news for volunteers and self-employed'},
-    {text: 'Scheduling of events for volunteers and self employed'},
-    {text: 'Placement of ads for volunteers and self-employed'}
+    {text: t('welcome.list.collection')},
+    {text: t('welcome.list.managment')},
+    {text: t('welcome.list.accounting')},
+    {text: t('welcome.list.reports')},
+    {text: t('welcome.list.review')},
+    {text: t('welcome.list.communication')},
+    {text: t('welcome.list.publication')},
+    {text: t('welcome.list.scheduling')},
+    {text: t('welcome.list.placement')}
   ]
 
   return (
     <div className={styles.root}>
       <div className={styles.title}>
-        Welcome!
+        {t('welcome.welcome')}
       </div>
       <div className={styles.interest}>
-        Thank you for your interest in MastersPages corporate services.  Corporate account at MastersPages is free of charge for registered companies.
+        {t('welcome.thankYou')}
       </div>
       <div className={styles.list}>
         <div className={styles.listTitle}>
-          Corporate account provides the following functionality:
+        {t('welcome.functionality')}
         </div>
         {listItems.map((item, index) =>
           <div className={styles.item} key={index}>
@@ -45,7 +46,7 @@ const Welcome = (props: Props) => {
         )}
       </div>
       <div className={styles.bottom}>
-        To get your free corporate account at MastersPages please, complete corporate registration form.  Normal corporate application processing time is 2 business days.  We will review application and notify you once account is open.
+      {t('welcome.toGet')}
       </div>
     </div>
   )

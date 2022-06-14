@@ -1262,17 +1262,20 @@
   },
 
   "corporateAccount": {
-    "representative": "Representative",
-    "organization": "Organization",
-    "jobTitle": "Job title *",
-    "email": "Email*",
-    "phoneNumber": "Phone number*",
-    "organizationName": "Organization name *",
-    "city": "City *",
-    "postalCode": "Postal code *",
-    "office": "Office",
-    "site": "Web site link",
-    "submit": "SEND APPLICATION"
+    "representative": "Представитель",
+    "organization": "Организация",
+    "jobTitle": "Должность *",
+    "email": "Почта*",
+    "phoneNumber": "Номер телефона*",
+    "organizationName": "Название организации*",
+    "city": "Город*",
+    "postalCode": "Почтовый индекс *",
+    "streetAndNumber": "Улица *",
+    "office": "Офис",
+    "site": "Сайт",
+    "submit": "ОТПРАВИТЬ ЗАЯВКУ",
+    "applicationTitle": "Заявка для аккаунта организации",
+    "agree": "Согласен с <1>Условиями</1>"
   },
 
   "newMainVolunteer": {
@@ -1330,5 +1333,23 @@
     "forVolunteers": "Для волонтеров",
     "forMasters": "Для мастеров",
     "forCompanies": "Для компаний"
+  },
+
+  "welcome": {
+    "welcome": "Добро пожаловать!",
+    "thankYou": "Благодарим вас за интерес к корпоративным услугам MastersPages.",
+    "functionality": "Корпоративный аккаунт предлагает следующие функции:",
+    "list": {
+      "collection": "Сбор стандартизированных заявлений от волонтеров и самозанятых специалистов",
+      "managment": "Управление полученными заявлениями",
+      "accounting": "Учет полученных услуг",
+      "reports": "Мгновенные отчеты",
+      "review": "Ревью и рекомендации для волонтеров и самозанятых",
+      "communication": "Общение с волонтерами и самозанятыми",
+      "publication": "Публикация новостей организации для волонтеров и самозанятых",
+      "scheduling": "Планирование мероприятий для волонтеров и самозанятых",
+      "placement": "Размещение объявлений для волонтеров и самозанятых"
+    },
+    "toGet": "Чтобы получить бесплатную корпоративную учетную запись на MastersPages, пожалуйста, заполните корпоративную регистрационную форму. Обычное время обработки корпоративной заявки составляет 2 рабочих дня. Мы рассмотрим заявку и сообщим вам, как только учетная запись будет открыта."
   }
 }

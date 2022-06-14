@@ -3,7 +3,7 @@ import {Form, FormikProvider, useFormik} from 'formik'
 import styles from './index.module.scss'
 import Validator from 'utils/validator'
 import TextField from 'components/fields/TextField'
-import {useTranslation} from 'next-i18next'
+import {useTranslation, Trans} from 'next-i18next'
 import PasswordField from 'components/fields/PasswordField'
 import CheckBoxField from 'components/fields/CheckBoxField'
 import Link from 'next/link'
@@ -125,7 +125,7 @@ export default function CorporateAccountForm({user}: Props) {
         </div>
         <div className={styles.checkbox}>
           <CheckBoxField name={'terms'} validate={Validator.required} label={<div className={styles.terms}>
-            I agree with <Link href='/Terms'><a>Terms & Conditions</a></Link>
+          <Trans i18nKey="corporateAccount.agree">I agree with <a href='/Terms'>Terms & Conditions</a></Trans>
           </div>}/>
 
         </div>
