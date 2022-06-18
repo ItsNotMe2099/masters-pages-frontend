@@ -14,7 +14,7 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import {format} from 'date-fns'
 import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
 
@@ -94,6 +94,13 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
   const description = (newStatus: ApplicationStatus, button?: string) => {
     switch(newStatus){
       case ApplicationStatus.Completed:
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+      case ApplicationStatus.CompleteRequest:
         if(profile.role === 'volunteer'){
           return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
         }
@@ -196,7 +203,8 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           <div className={styles.btns}>
             {profile.role === 'volunteer' ?
             <>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            <Button 
+            onClick={() => profile.role === 'volunteer' ? dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest))) : dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
             type='button' projectBtn='default'>
               COMPLETE
             </Button>

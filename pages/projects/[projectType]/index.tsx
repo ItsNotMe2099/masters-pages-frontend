@@ -176,6 +176,7 @@ const ProjectsPage = (props: Props) => {
   }
 
   const handleModalClose = () => {
+    if(profile.role === ProfileRole.Volunteer){
     setCurrentProject(null)
     ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     ProfileRepository.fetchSavedProjects().then((data) => {
@@ -198,7 +199,19 @@ const ProjectsPage = (props: Props) => {
         setTotal(projects.length)
       }
     })
+  }
+  else if(profile.role === ProfileRole.Corporate){
+    ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
+    ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
+      if(data) {
+        setProjects(data.data)
+        setTotal(data.total)
+      }
+    })
+  }
+
     dispatch(confirmModalClose())
+    dispatch(modalClose())
   }
 
   const applied = counts['applied'] + counts['shortlist']
@@ -244,7 +257,7 @@ const ProjectsPage = (props: Props) => {
             actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>}
       </div>
-      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>
+      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
       {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
       <Modals/>
