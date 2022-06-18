@@ -45,7 +45,7 @@ const ProjectsPage = (props: Props) => {
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentProjectEdit, setCurrentProjectEdit] = useState(null)
-  console.log("Profile", profile);
+  console.log("currentProjectEdit", currentProjectEdit);
   const tabs = useMemo(
     () => (profile.role === ProfileRole.Corporate ? [
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
@@ -69,6 +69,8 @@ const ProjectsPage = (props: Props) => {
       }}),
     [profile.role, counts]
   )
+
+  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
 
   useEffect(() => {
     if(profile.role === ProfileRole.Corporate){
@@ -151,6 +153,16 @@ const ProjectsPage = (props: Props) => {
     if(changedApp.status !== projectType){
       setProjects(projects => projects.filter(item => item.status === projectType))
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
+      if(profile.role === ProfileRole.Volunteer){
+        ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
+          if(data) {
+            const projects = []
+            data.data.filter(item => projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
+            setProjects(projects)
+            setTotal(projects.length)
+          }
+        })
+      }
     }
   }
 
@@ -167,7 +179,6 @@ const ProjectsPage = (props: Props) => {
     }
   }
 
-  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
   const handleProjectApplyOpen = (project: IProject, profile: IProfile) => {
@@ -216,6 +227,8 @@ const ProjectsPage = (props: Props) => {
 
   const applied = counts['applied'] + counts['shortlist']
   const rejected = counts['rejectedByCompany'] + counts['rejectedByVolunteer']
+
+  console.log('PROJECTS', projects)
 
   return (
     <Layout>

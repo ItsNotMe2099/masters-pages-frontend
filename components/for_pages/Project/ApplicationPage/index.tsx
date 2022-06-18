@@ -146,7 +146,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             </Button>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
-            type='button' projectBtn='red'>REJECT</Button>
+            type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
@@ -167,7 +167,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             <>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
-            type='button' projectBtn='red'>REJECT</Button>
+            type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
@@ -210,7 +210,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             </Button>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
-            type='button' projectBtn='red'>REJECT</Button>
+            type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>

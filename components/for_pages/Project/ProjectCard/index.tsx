@@ -16,7 +16,7 @@ import Button from 'components/PublicProfile/components/Button'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 
 interface Props {
   project: IProject
@@ -185,7 +185,7 @@ const ProjectCard = (props: Props) => {
       case 'accept':
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.Execution)} type='button' projectBtn='green'>ACCEPT</Button>
       case 'reject':
-        return <Button onClick={() => props.onStatusChange(ApplicationStatus.RejectedByVolunteer)} type='button' projectBtn='red'>REJECT</Button>
+        return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))} type='button' projectBtn='red'>RECALL</Button>
       case 'complete':
         return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
@@ -258,7 +258,7 @@ const ProjectCard = (props: Props) => {
           actions.push('reject')
         }
         if(props.status === 'applied'){
-          actions.push('recall')
+          actions.push('reject')
         }
         if(props.status === 'completed' || props.status === 'rejected' || props.status === 'saved'){
           actions.push('recycleBin')
