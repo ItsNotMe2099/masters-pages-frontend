@@ -49,7 +49,9 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
       application?.status === ApplicationStatus.Invited ||
       application?.status === ApplicationStatus.Execution ||
       application?.status === ApplicationStatus.CompleteRequest ||
-      application?.status === ApplicationStatus.Completed) ? null : [<Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
+      application?.status === ApplicationStatus.Completed ||
+      application?.status === ApplicationStatus.RejectedByVolunteer ||
+      application?.status === ApplicationStatus.RejectedByCompany) ? null : [<Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
     <Button color={'white'} className={styles.edit} onClick={props.onChange}>Apply</Button>]}/>}
   </div>
   )

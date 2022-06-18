@@ -251,7 +251,6 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
               {profile.role ?
               <>
               <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-              <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
               </>
               :
               <>
@@ -269,7 +268,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
                 {profile.role ?
                 <>
                 <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-                <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
+                <Button type='button' projectBtn='default' onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Applied)))}>REAPPLY</Button>
                 </>
                 :
                 <>
