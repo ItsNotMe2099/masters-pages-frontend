@@ -228,8 +228,6 @@ const ProjectsPage = (props: Props) => {
   const applied = counts['applied'] + counts['shortlist']
   const rejected = counts['rejectedByCompany'] + counts['rejectedByVolunteer']
 
-  console.log('PROJECTS', projects)
-
   return (
     <Layout>
     <div className={styles.root}>
@@ -268,11 +266,13 @@ const ProjectsPage = (props: Props) => {
             onApplyClick={() => handleProjectApplyOpen(project, profile)}
             onViewOpen={handleProjectViewOpen} project={project}
             actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
-        </InfiniteScroll>}
+        </InfiniteScroll>
+      }
       </div>
       <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
       {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
+    {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>
     </Layout>
   )
