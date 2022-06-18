@@ -45,8 +45,12 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
     {(!isEdit && project) && <ProjectPage project={project} onSave={props.onSave} controls={ showType === 'client' ? [
       <Button color={'white'} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
       <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
-    ] : application?.status !== ApplicationStatus.Completed ? [<Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
-    <Button color={'white'} className={styles.edit} onClick={props.onChange}>Apply</Button>] : null}/>}
+    ] : (application?.status === ApplicationStatus.Applied || 
+      application?.status === ApplicationStatus.Invited ||
+      application?.status === ApplicationStatus.Execution ||
+      application?.status === ApplicationStatus.CompleteRequest ||
+      application?.status === ApplicationStatus.Completed) ? null : [<Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
+    <Button color={'white'} className={styles.edit} onClick={props.onChange}>Apply</Button>]}/>}
   </div>
   )
 }
