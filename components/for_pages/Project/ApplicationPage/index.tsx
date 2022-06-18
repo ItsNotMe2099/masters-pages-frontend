@@ -365,7 +365,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
        <div className={styles.sectionHeader}>
          <div>Cover Letter</div>
          {application.coverLetterFileObject &&
-         <a href={getMediaPath(application.coverLetterFileObject.urlS3)} download={fileName(application.coverLetterFileObject.name)}><img src={getImageSrc(application.coverLetterFile)} alt=''/></a>
+         <a target='_blank' href={getMediaPath(application.coverLetterFileObject.urlS3)} download={fileName(application.coverLetterFileObject.name)}><img src={getImageSrc(application.coverLetterFile)} alt=''/></a>
          }
          </div>
        <div className={styles.sectionContent}>{application.coverLetter}</div>
