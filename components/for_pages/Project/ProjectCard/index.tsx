@@ -4,7 +4,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import classNames from 'classnames'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
-import {confirmOpen, modalClose, signUpOpen} from 'components/Modal/actions'
+import {confirmModalClose, confirmOpen, modalClose, signUpOpen} from 'components/Modal/actions'
 import { useDispatch} from 'react-redux'
 import {useTranslation} from 'next-i18next'
 import ProjectRepository from 'data/repositories/ProjectRepository'
@@ -16,7 +16,7 @@ import Button from 'components/PublicProfile/components/Button'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 
 interface Props {
   project: IProject
@@ -114,6 +114,49 @@ const ProjectCard = (props: Props) => {
     props.onApplyClick(project)
   }
 
+  const handleConfirm = (status: ApplicationStatus) => {
+    props.onStatusChange(status)
+    dispatch(confirmModalClose())
+  }
+
+  const description = (newStatus: ApplicationStatus, button?: string) => {
+    switch(newStatus){
+      case ApplicationStatus.Completed:
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+      case ApplicationStatus.CompleteRequest:
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+      case ApplicationStatus.Invited:
+        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
+      case ApplicationStatus.Shortlist:
+        if(button === 'CANCEL INVITATION'){
+          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
+        }
+        else{
+          return 'The application will be “shortlisted”. Do you want to proceed?'
+        }
+      case ApplicationStatus.Execution:
+        return 'Accept invitation?'
+      case ApplicationStatus.RejectedByCompany:
+        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
+      case ApplicationStatus.RejectedByVolunteer:
+        return 'Your participation in the project will be ended. Do you want to proceed?'
+    }
+  }
+
+  const confirmData = (status: ApplicationStatus, button?: string) => {
+    return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
+  }
+
 
   const renderActionButton = (action) => {
     switch (action) {
@@ -142,9 +185,9 @@ const ProjectCard = (props: Props) => {
       case 'accept':
         return <Button onClick={() => props.onStatusChange(ApplicationStatus.Execution)} type='button' projectBtn='green'>ACCEPT</Button>
       case 'reject':
-        return <Button onClick={() => props.onStatusChange(ApplicationStatus.RejectedByVolunteer)} type='button' projectBtn='red'>REJECT</Button>
+        return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))} type='button' projectBtn='red'>RECALL</Button>
       case 'complete':
-        return <Button onClick={() => props.onStatusChange(ApplicationStatus.CompleteRequest)} type='button' projectBtn='green'>COMPLETE</Button>
+        return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
         return <Button
         onClick={props.status === 'saved' ? handleDeleteFromSaved : handleDeleteApplication}
@@ -215,7 +258,7 @@ const ProjectCard = (props: Props) => {
           actions.push('reject')
         }
         if(props.status === 'applied'){
-          actions.push('recall')
+          actions.push('reject')
         }
         if(props.status === 'completed' || props.status === 'rejected' || props.status === 'saved'){
           actions.push('recycleBin')

@@ -11,7 +11,7 @@ import {DateField} from 'components/fields/DateField'
 import {reachGoal} from 'utils/ymetrika'
 import {Form, FormikProvider, useFormik} from 'formik'
 import {useAppContext} from 'context/state'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import CheckBoxListField from 'components/fields/CheckBoxListField'
 import ServiceCategoryFormField from 'components/fields/ServiceCategoryFormField'
 import LanguageFormField from 'components/fields/LanguageFormField'
@@ -79,7 +79,8 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
+    enableReinitialize: true
   })
   const handleSubmitPublish = async () => {
     console.log("handleSubmitPublish")
@@ -94,6 +95,28 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   const handleSubmitPreview = async () => {
     console.log("handleSubmitPreview")
   }
+
+  const [isDisabled, setIsDisabled] = useState(false)
+
+  const {values, setFieldValue} = formik
+
+  const range = (minAge: number, maxAge: number) => {
+    if(minAge + 1 > maxAge && minAge > 0){
+      setFieldValue('minAge', minAge - 1)
+      setIsDisabled(true)
+    }
+    else if(maxAge < minAge){
+      setFieldValue('maxAge', maxAge + 1)
+    }
+    else if(minAge < 0){
+      setFieldValue('minAge', 0)
+    }
+  }
+
+  useEffect(() => {
+    range(values.minAge, values.maxAge)
+  }, [values.minAge, values.maxAge])
+
   return (
     <FormikProvider value={formik}>
       <Form className={styles.root}>
@@ -181,7 +204,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
             <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal'/>
             <div className={styles.fieldset}>
               <div className={styles.fieldsetTitle}>Age:</div>
-              <TextField name={'minAge'} type={'number'} label={'Min Age'}/>
+              <TextField name={'minAge'} type={'number'} label={'Min Age'} disabled={isDisabled}/>
               <TextField name={'maxAge'} type={'number'} label={'Max Age'}/>
 
             </div>

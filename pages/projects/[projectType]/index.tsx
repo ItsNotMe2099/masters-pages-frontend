@@ -45,7 +45,7 @@ const ProjectsPage = (props: Props) => {
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentProjectEdit, setCurrentProjectEdit] = useState(null)
-  console.log("Profile", profile);
+  console.log("currentProjectEdit", currentProjectEdit);
   const tabs = useMemo(
     () => (profile.role === ProfileRole.Corporate ? [
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
@@ -69,6 +69,8 @@ const ProjectsPage = (props: Props) => {
       }}),
     [profile.role, counts]
   )
+
+  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
 
   useEffect(() => {
     if(profile.role === ProfileRole.Corporate){
@@ -151,6 +153,16 @@ const ProjectsPage = (props: Props) => {
     if(changedApp.status !== projectType){
       setProjects(projects => projects.filter(item => item.status === projectType))
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
+      if(profile.role === ProfileRole.Volunteer){
+        ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
+          if(data) {
+            const projects = []
+            data.data.filter(item => projectType === 'applied' ? (item.status === projectType || item.status === 'shortlist') : projectType === 'rejected' ? (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer) : item.status === projectType).map(item => projects.push(item.project))
+            setProjects(projects)
+            setTotal(projects.length)
+          }
+        })
+      }
     }
   }
 
@@ -167,7 +179,6 @@ const ProjectsPage = (props: Props) => {
     }
   }
 
-  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
   const handleProjectApplyOpen = (project: IProject, profile: IProfile) => {
@@ -176,6 +187,7 @@ const ProjectsPage = (props: Props) => {
   }
 
   const handleModalClose = () => {
+    if(profile.role === ProfileRole.Volunteer){
     setCurrentProject(null)
     ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     ProfileRepository.fetchSavedProjects().then((data) => {
@@ -198,7 +210,19 @@ const ProjectsPage = (props: Props) => {
         setTotal(projects.length)
       }
     })
+  }
+  else if(profile.role === ProfileRole.Corporate){
+    ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
+    ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
+      if(data) {
+        setProjects(data.data)
+        setTotal(data.total)
+      }
+    })
+  }
+
     dispatch(confirmModalClose())
+    dispatch(modalClose())
   }
 
   const applied = counts['applied'] + counts['shortlist']
@@ -242,11 +266,13 @@ const ProjectsPage = (props: Props) => {
             onApplyClick={() => handleProjectApplyOpen(project, profile)}
             onViewOpen={handleProjectViewOpen} project={project}
             actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
-        </InfiniteScroll>}
+        </InfiniteScroll>
+      }
       </div>
-      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={() => dispatch(modalClose())}/>
+      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
       {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
+    {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>
     </Layout>
   )

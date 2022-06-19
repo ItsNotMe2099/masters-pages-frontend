@@ -14,7 +14,7 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import {format} from 'date-fns'
 import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
 
@@ -100,6 +100,13 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
         else{
           return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
         }
+      case ApplicationStatus.CompleteRequest:
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
       case ApplicationStatus.Invited:
         return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
       case ApplicationStatus.Shortlist:
@@ -139,7 +146,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             </Button>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
-            type='button' projectBtn='red'>REJECT</Button>
+            type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
@@ -160,7 +167,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             <>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
-            type='button' projectBtn='red'>REJECT</Button>
+            type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
@@ -196,13 +203,14 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           <div className={styles.btns}>
             {profile.role === 'volunteer' ?
             <>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            <Button 
+            onClick={() => profile.role === 'volunteer' ? dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest))) : dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
             type='button' projectBtn='default'>
               COMPLETE
             </Button>
             <Button 
             onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
-            type='button' projectBtn='red'>REJECT</Button>
+            type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
@@ -243,7 +251,6 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
               {profile.role ?
               <>
               <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-              <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
               </>
               :
               <>
@@ -261,7 +268,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
                 {profile.role ?
                 <>
                 <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-                <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
+                <Button type='button' projectBtn='default' onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Applied)))}>REAPPLY</Button>
                 </>
                 :
                 <>
@@ -357,7 +364,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
        <div className={styles.sectionHeader}>
          <div>Cover Letter</div>
          {application.coverLetterFileObject &&
-         <a href={getMediaPath(application.coverLetterFileObject.urlS3)} download={fileName(application.coverLetterFileObject.name)}><img src={getImageSrc(application.coverLetterFile)} alt=''/></a>
+         <a target='_blank' href={getMediaPath(application.coverLetterFileObject.urlS3)} download={fileName(application.coverLetterFileObject.name)}><img src={getImageSrc(application.coverLetterFile)} alt=''/></a>
          }
          </div>
        <div className={styles.sectionContent}>{application.coverLetter}</div>
