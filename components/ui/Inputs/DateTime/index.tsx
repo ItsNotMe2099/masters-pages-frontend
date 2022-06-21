@@ -1,17 +1,16 @@
-import { Calendar } from 'react-date-range';
+import { Calendar } from 'react-date-range'
 import styles from './index.module.scss'
-import {addDays, addHours, addMinutes, compareAsc, format, isSameDay, set} from 'date-fns'
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css';
-import {useEffect, useRef, useState} from 'react'
+import { format, set} from 'date-fns'
+import 'react-date-range/dist/styles.css' // main css file
+import 'react-date-range/dist/theme/default.css'
+import {useEffect, useRef} from 'react'
 import TimePicker from 'components/ui/Inputs/TimePicker'
 import CalendarIcon from 'components/svg/CalendarIcon'
 import {useDetectOutsideClick} from 'components/hooks/useDetectOutsideClick' // theme css file
-import moment from "moment";
-import {range} from 'utils/array'
+import moment from 'moment'
 import * as React from 'react'
-import * as rdrLocales from 'react-date-range/dist/locale';
-import {useTranslation} from 'i18n'
+import * as rdrLocales from 'react-date-range/dist/locale'
+import { useTranslation } from 'next-i18next'
 interface Props {
   input: any,
   showIcon?: boolean
@@ -20,22 +19,22 @@ interface Props {
 }
 
 export default function DateTime(props: Props) {
-  const { disabled } = props;
-  const { value, onChange } = props.input;
-  const {t, i18n} = useTranslation();
-  const dateRangeRef = useRef(null);
-  const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
+  const { disabled } = props
+  const { value, onChange } = props.input
+  const {t, i18n} = useTranslation()
+  const dateRangeRef = useRef(null)
+  const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false)
   useEffect(() => {
     if(!value){
     //  onChange(new Date());
     }
   }, [])
   const handleChange = (v) => {
-    onChange(v);
+    onChange(v)
   }
   const getDateRange = () => {
     if(!value){
-      return;
+      return
     }
 
     return format(typeof value === 'string' ? new Date(value) : value, 'dd.MM.yyyy')
@@ -74,7 +73,7 @@ export default function DateTime(props: Props) {
       />
       </div>
     </div>
-  );
+  )
 }
 DateTime.defaultProps = {
   showIcon: true

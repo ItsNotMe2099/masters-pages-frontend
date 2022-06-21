@@ -1,42 +1,43 @@
 import {
   confirmOpen, feedbackByMasterOpen,
   finishTaskAsClientOpen,
+  signUpOpen,
   taskMarkAsDoneOpen,
   taskOfferAcceptOpen,
   taskShareOpen
-} from "components/Modal/actions";
+} from 'components/Modal/actions'
 
-import StarRatings from 'react-star-ratings';
-import BookmarkSvg from "components/svg/Bookmark";
-import TaskActionButton from "components/Task/components/ActionButton";
-import TaskResponse from "components/Task/components/TaskResponse";
+import StarRatings from 'react-star-ratings'
+import BookmarkSvg from 'components/svg/Bookmark'
+import TaskActionButton from 'components/Task/components/ActionButton'
+import TaskResponse from 'components/Task/components/TaskResponse'
 import {
   taskNegotiationAcceptTaskOffer,
   taskNegotiationDeclineTaskOffer,
   taskNegotiationSetCurrentTask
-} from "components/TaskNegotiation/actions";
-import { taskSearchSetCurrentTask } from "components/TaskSearch/actions";
+} from 'components/TaskNegotiation/actions'
+import { taskSearchSetCurrentTask } from 'components/TaskSearch/actions'
 import {
   deleteTaskUser,
   fetchTaskUserResponseRequest,
   setPublishedTaskUser,
   taskCancel
-} from "components/TaskUser/actions";
-import Avatar from "components/ui/Avatar";
+} from 'components/TaskUser/actions'
+import Avatar from 'components/ui/Avatar'
 import Button from 'components/ui/Button'
-import { DropDown } from "components/ui/DropDown";
-import { format } from "date-fns";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { default as React, useEffect, useState } from "react";
+import { DropDown } from 'components/ui/DropDown'
+import { format } from 'date-fns'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { default as React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from "types";
-import { getCategoryTranslation } from "utils/translations";
+import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
+import { getCategoryTranslation } from 'utils/translations'
 import styles from './index.module.scss'
-import StarRating from "../svg/StarRating";
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import {getCurrencySymbol} from 'data/currency'
 import {saveTaskRequest} from 'components/SavedTasks/actions'
+import {useAppContext} from 'context/state'
 
 interface Props {
   task: ITask,
@@ -52,16 +53,17 @@ interface Props {
 }
 
 const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish, index }: Props) => {
-  const { t, i18n } = useTranslation('common');
-  const dispatch = useDispatch();
-  const [sortType, setSortType] = useState('newFirst');
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const { t, i18n } = useTranslation('common')
+  const dispatch = useDispatch()
+  const [sortType, setSortType] = useState('newFirst')
+  const appContext = useAppContext();
+  const profile = appContext.profile
 
-  console.log("TaskUpdate", task.id, task);
-  const router = useRouter();
+  console.log('TaskUpdate', task.id, task)
+  const router = useRouter()
   useEffect(() => {
     if(actionsType === 'client') {
-      dispatch(fetchTaskUserResponseRequest(task.id, { limit: 1, ...getSortData(sortType) }));
+      dispatch(fetchTaskUserResponseRequest(task.id, { limit: 1, ...getSortData(sortType) }))
     }
   }, [])
 
@@ -71,7 +73,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       onConfirm: () => {
         dispatch(setPublishedTaskUser(task.id, true))
       }
-    }));
+    }))
   }
   const handleUnPublish = () => {
     dispatch(confirmOpen({
@@ -79,7 +81,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       onConfirm: () => {
         dispatch(setPublishedTaskUser(task.id, false))
       }
-    }));
+    }))
   }
   const handleDelete = () => {
     dispatch(confirmOpen({
@@ -87,16 +89,16 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       onConfirm: () => {
         dispatch(deleteTaskUser(task.id))
       }
-    }));
+    }))
   }
 
   const handleTaskComplete = () => {
     if (profile.role === 'client') {
-      dispatch(taskNegotiationSetCurrentTask(task));
-      dispatch(finishTaskAsClientOpen());
+      dispatch(taskNegotiationSetCurrentTask(task))
+      dispatch(finishTaskAsClientOpen())
     } else {
-      dispatch(taskNegotiationSetCurrentTask(task));
-      dispatch(taskMarkAsDoneOpen());
+      dispatch(taskNegotiationSetCurrentTask(task))
+      dispatch(taskMarkAsDoneOpen())
     }
   }
 
@@ -105,53 +107,63 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     dispatch(confirmOpen({
       description: `${t('task.confirmCancel')}?`,
       onConfirm: () => {
-        dispatch(taskCancel(task.id));
+        dispatch(taskCancel(task.id))
       }
-    }));
+    }))
   }
   const handleReadMore = () => {
 
   }
   const handleLoadMore = () => {
-    dispatch(fetchTaskUserResponseRequest(task.id, { page: 1, limit: 1000, ...getSortData(sortType) }));
+    dispatch(fetchTaskUserResponseRequest(task.id, { page: 1, limit: 1000, ...getSortData(sortType) }))
   }
   const handleShare = () => {
-    dispatch(taskSearchSetCurrentTask(task));
-    dispatch(taskShareOpen());
+    if(profile){
+    dispatch(taskSearchSetCurrentTask(task))
+    dispatch(taskShareOpen())
+    }
+    else{
+      dispatch(signUpOpen())
+    }
   }
   const handleFavorite = () => {
-    dispatch(saveTaskRequest(task.id))
+    if(profile){
+      dispatch(saveTaskRequest(task.id))
+    }
+    else{
+      dispatch(signUpOpen())
+    }
   }
 
   const handleAcceptAsMasterToClient = () => {
-    dispatch(taskNegotiationSetCurrentTask(task));
-    dispatch(taskOfferAcceptOpen());
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskOfferAcceptOpen())
   }
   const handleAccept = () => {
     dispatch(confirmOpen({
       description: `${t('task.confirmAccept')}?`,
       onConfirm: () => {
-        dispatch(taskNegotiationAcceptTaskOffer(task.negotiations[0]));
+        dispatch(taskNegotiationAcceptTaskOffer(task.negotiations[0]))
       }
-    }));
+    }))
   }
 
   const handleDecline = () => {
     dispatch(confirmOpen({
       description: `${t('task.confirmDecline')}?`,
       onConfirm: () => {
-        dispatch(taskNegotiationDeclineTaskOffer(task.negotiations[0]));
+        dispatch(taskNegotiationDeclineTaskOffer(task.negotiations[0]))
       }
-    }));
+    }))
   }
   const handleFeedbackByMaster = () => {
-    dispatch(taskNegotiationSetCurrentTask(task));
-    dispatch(feedbackByMasterOpen());
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(feedbackByMasterOpen())
   }
 
   const handleEdit = () => {
     if (onEdit) {
-      onEdit(task);
+      onEdit(task)
     }
   }
   const getSortData = (sortType) => {
@@ -165,16 +177,16 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const handleMessages = () => {
     if (actionsType === 'master') {
 
-      router.push(`/Chat/task-dialog/${task.id}/${profile.id}`);
+      router.push(`/Chat/task-dialog/${task.id}/${profile.id}`)
     } else if (actionsType === 'client') {
-      router.push(`/Chat/task-dialog/${task.id}/${task.masterId}`);
+      router.push(`/Chat/task-dialog/${task.id}/${task.masterId}`)
     }else if (actionsType === 'public') {
-      const response = task.lastNegotiation;
-      router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`);
+      const response = task.lastNegotiation
+      router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`)
     }
 
   }
-  const actions = [];
+  const actions = []
 
   if (actionsType === 'client') {
     if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && profile.id === task.profileId) {
@@ -193,15 +205,15 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }
     if (['in_progress'].includes(task.status)) {
       actions.push('cancel')
-      actions.push('markAsCompleted');
+      actions.push('markAsCompleted')
     }
 
   } else if (actionsType === 'master') {
     if (['in_progress'].includes(task.status)) {
-      actions.push('markAsCompleted');
+      actions.push('markAsCompleted')
     }
     if (['done'].includes(task.status) && !task.feedbacks.find(f => f.target === 'client')) {
-      actions.push('feedbackToClient');
+      actions.push('feedbackToClient')
     }
     if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && profile.id === task.profileId) {
       actions.push('edit')
@@ -213,39 +225,39 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       actions.push('cancel')
     }
   } else if (actionsType === 'public') {
-    actions.push('share');
-    actions.push('save');
+    actions.push('share')
+    actions.push('save')
   }
   const getStatusText = () => {
     switch (task.status) {
       case ITaskStatus.Draft:
-        return t('task.status.draft');
+        return t('task.status.draft')
       case ITaskStatus.Published:
-        return t('task.status.published');
+        return t('task.status.published')
       case ITaskStatus.PrivatelyPublished:
-        return t('task.status.private');
+        return t('task.status.private')
       case ITaskStatus.InProgress:
-        return t('task.status.inProgress');
+        return t('task.status.inProgress')
       case ITaskStatus.Done:
-        return t('task.status.done');
+        return t('task.status.done')
       case ITaskStatus.Canceled:
-        return t('task.status.canceled');
+        return t('task.status.canceled')
     }
   }
   const getStatusClassName = () => {
     switch (task.status) {
       case ITaskStatus.Draft:
-        return '';
+        return ''
       case ITaskStatus.Published:
-        return '';
+        return ''
       case ITaskStatus.PrivatelyPublished:
-        return '';
+        return ''
       case ITaskStatus.InProgress:
-        return styles.statusGreen;
+        return styles.statusGreen
       case ITaskStatus.Done:
-        return styles.statusGreen;
+        return styles.statusGreen
       case ITaskStatus.Canceled:
-        return styles.statusRed;
+        return styles.statusRed
     }
   }
 
@@ -253,25 +265,25 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const renderActionButton = (action) => {
     switch (action) {
       case 'readMore':
-        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>;
+        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>
       case 'edit':
-        return <TaskActionButton title={t('task.edit')} icon={'arrow-right'} onClick={handleEdit}/>;
+        return <TaskActionButton title={t('task.edit')} icon={'arrow-right'} onClick={handleEdit}/>
       case 'delete':
-        return <TaskActionButton title={t('task.delete')} icon={'delete'} onClick={handleDelete}/>;
+        return <TaskActionButton title={t('task.delete')} icon={'delete'} onClick={handleDelete}/>
       case 'publish':
-        return <TaskActionButton title={t('task.publish')} icon={'publish'} onClick={handlePublish}/>;
+        return <TaskActionButton title={t('task.publish')} icon={'publish'} onClick={handlePublish}/>
       case 'unPublish':
-        return <TaskActionButton title={t('task.unPublish')} icon={'unpublish'} onClick={handleUnPublish}/>;
+        return <TaskActionButton title={t('task.unPublish')} icon={'unpublish'} onClick={handleUnPublish}/>
       case 'cancel':
-        return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel}/>;
+        return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel}/>
       case 'markAsCompleted':
-        return <TaskActionButton title={t('task.markAsCompleted')} icon={'mark'} onClick={handleTaskComplete}/>;
+        return <TaskActionButton title={t('task.markAsCompleted')} icon={'mark'} onClick={handleTaskComplete}/>
       case 'share':
-        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>;
+        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>
       case 'save':
-        return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')} icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>;
+        return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')} icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>
       case 'feedbackToClient':
-        return <TaskActionButton title={t('task.postFeedback')} icon={'mark'}  onClick={handleFeedbackByMaster}/>;
+        return <TaskActionButton title={t('task.postFeedback')} icon={'mark'}  onClick={handleFeedbackByMaster}/>
     }
   }
 
@@ -282,18 +294,18 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   }
 
   const handleSortChange = (sort) => {
-    setSortType(sort.value);
+    setSortType(sort.value)
     dispatch(fetchTaskUserResponseRequest(task.id, {
       page: 1,
       limit: task.responses?.total <= task.responses?.data?.length ? 1000 : 1, ...getSortData(sort.value)
-    }));
+    }))
   }
-  const canEdit = actionsType === 'client';
-  const taskLink = `/task/${task.id}`;
-  const taskProfile = actionsType === 'master' && task.profileId === profile.id && task.negotiations.length > 0 ? task.negotiations[0].profile : task.profile;
-  console.log("TaskProfile", taskProfile, profile);
+  const canEdit = actionsType === 'client'
+  const taskLink = `/task/${task.id}`
+  const taskProfile = actionsType === 'master' && task.profileId === profile.id && task.negotiations.length > 0 ? task.negotiations[0].profile : task.profile
+  console.log('TaskProfile', taskProfile, profile)
 
-  const profileLink = `/id${taskProfile.id}`;
+  const profileLink = `/id${taskProfile.id}`
   const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id) || (actionsType === 'client' && task.profileId !== profile.id)) && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster)
 
   return (
@@ -375,7 +387,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
           <div className={styles.bottom}>
             {actions.map((action, index) => {
               return [renderActionButton(action), ...(index !== actions.length - 1 ? [<div
-                className={styles.separatorLine}/>] : [])];
+                className={styles.separatorLine}/>] : [])]
             })}
           </div>
         </div>

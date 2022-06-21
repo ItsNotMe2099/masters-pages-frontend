@@ -1,5 +1,5 @@
-import ApiActionTypes from "constants/api";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 
 export interface LocationInputState {
   cities: string[],
@@ -26,12 +26,12 @@ export default function authReducer(state = {...initialState}, action) {
           value: item.geonameid,
           location: {lat: item.latitude, lng: item.longitude}
         }
-      });
+      })
       break
     case ActionTypes.FETCH_LOCATION_COUNTRIES + ApiActionTypes.SUCCESS:
       state.countries = action.payload
       break
 
   }
-  return state
+   return {...state}
 }

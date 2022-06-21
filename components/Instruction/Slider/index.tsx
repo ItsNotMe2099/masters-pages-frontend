@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Slider from "react-slick";
+import React from 'react'
+import Slider from 'react-slick'
 import styles from './index.module.scss'
-import {useTranslation, withTranslation, Trans} from "i18n";
+import { useTranslation, Trans } from 'next-i18next'
 
 export default function SimpleSlider() {
 
@@ -33,8 +33,8 @@ export default function SimpleSlider() {
           }
         }
       ]
-    };
-    const { t } = useTranslation('common');
+    }
+    const { t } = useTranslation('common')
     return (
       <div className={styles.root}>
         <div className={styles.sliderContainer}>

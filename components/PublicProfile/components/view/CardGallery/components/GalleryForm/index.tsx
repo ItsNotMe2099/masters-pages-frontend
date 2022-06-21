@@ -1,24 +1,22 @@
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import TextArea from "components/ui/Inputs/TextArea";
-import * as React from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { IRootState } from "types";
+import FormError from 'components/ui/Form/FormError'
+import Input from 'components/ui/Inputs/Input'
+import TextArea from 'components/ui/Inputs/TextArea'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { Field, reduxForm } from 'redux-form'
 import Button from 'components/PublicProfile/components/Button'
-import {birthdate, date, required} from 'utils/validations'
+import { required} from 'utils/validations'
 import SelectInput from 'components/ui/Inputs/SelectInput'
-import FileInput from 'components/ui/Inputs/FilesUploadInput'
 import AvatarInput from 'components/ui/AvatarInput'
 import Checkbox from 'components/ui/Inputs/Checkbox'
-import Link from 'next/link'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 let GalleryForm = (props) => {
   const error = useSelector((state: IRootState) => state.profilePortfolio.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'gallery')
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>

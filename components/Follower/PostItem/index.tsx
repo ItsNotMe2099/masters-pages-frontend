@@ -1,8 +1,7 @@
 import styles from './index.module.scss'
 
-import {IProfileGalleryItem, ProfileData} from 'types'
+import {IProfileGalleryItem} from 'types'
 import {getMediaPath} from 'utils/media'
-import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import EditOutlineIcon from 'components/svg/EditOutlineIcon'
 import BaskerOutlineIcon from 'components/svg/BaskerOutlineIcon'
 
@@ -17,7 +16,7 @@ interface Props{
 const PostItem = ({model, isEdit, onEdit, onDelete, onClick}: Props) => {
 
   const handleClick = () => {
-    onClick(model);
+    onClick(model)
   }
   return (
     <div className={styles.root}>

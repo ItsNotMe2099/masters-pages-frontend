@@ -1,9 +1,9 @@
-import Modal from "components/ui/Modal";
-import Tabs from "components/ui/Tabs";
-import {differenceInHours, differenceInMinutes} from "date-fns";
-import * as React from "react";
-import {useEffect, useState} from "react";
-import {EventStatus, IEvent, IRootState} from "types";
+import Modal from 'components/ui/Modal'
+import Tabs from 'components/ui/Tabs'
+import {differenceInHours, differenceInMinutes} from 'date-fns'
+import * as React from 'react'
+import {useEffect, useState} from 'react'
+import {EventStatus, IRootState} from 'types'
 import styles from './index.module.scss'
 
 import {useDispatch, useSelector} from 'react-redux'
@@ -21,8 +21,7 @@ import {editEventOpen, eventExpenseActualOpen, eventExpensePlannedOpen, modalClo
 import {getEventCompletedAllowed, getEventPlannedAllowed} from 'utils/event'
 import ArrowLeftSmall from 'components/svg/ArrowLeftSmall'
 import ArrowRightSmall from 'components/svg/ArrowRightSmall'
-import {setProfileGalleryCurrentItemIndex} from 'components/ProfileGallery/actions'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -31,31 +30,30 @@ interface Props {
   onClose: () => void
 }
 const differenceInHoursCeil = (end, start) => {
-  const diff = differenceInHours(end, start);
+  const diff = differenceInHours(end, start)
   if(differenceInMinutes(end, start) % 60 !== 0){
-    return diff + 1;
+    return diff + 1
   }
-  return diff;
+  return diff
 }
 const EditEventModal = (props: Props) => {
-  const {isOpen, onClose, range} = props;
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const {t} = useTranslation('common');
+  const {isOpen, onClose, range} = props
+  const {t} = useTranslation('common')
 
 
   useEffect(() => {
     return () => {
-      dispatch(resetEventForm());
+      dispatch(resetEventForm())
     }
   }, [])
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [activeTab, setActiveTab] = useState('time')
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
 
-  const [currentEventEditExpenseType, setCurrentEventEditExpenseType] = useState('actual');
-  const [currentEventEditExpenseKey, setCurrentEventEditExpenseKey] = useState(0);
-  const [currentEventEditExpense, setCurrentEventEditExpense] = useState(null);
+  const [currentEventEditExpenseType, setCurrentEventEditExpenseType] = useState('actual')
+  const [currentEventEditExpenseKey, setCurrentEventEditExpenseKey] = useState(0)
+  const [currentEventEditExpense, setCurrentEventEditExpense] = useState(null)
 
   const currentEventExpenses = useSelector((state: IRootState) => state.event.currentEventExpenses)
   const currentEventActualExpenses = useSelector((state: IRootState) => state.event.currentEventActualExpenses)
@@ -66,22 +64,22 @@ const EditEventModal = (props: Props) => {
 
 
 
-  const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null;
-  const newRangeEnd = getEventPlannedAllowed(event) ? range?.end : null;
-  const newRangeActualStart = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.start : null;
-  const newRangeActualEnd = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.end : null;
+  const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null
+  const newRangeEnd = getEventPlannedAllowed(event) ? range?.end : null
+  const newRangeActualStart = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.start : null
+  const newRangeActualEnd = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.end : null
 
   const tabs = [
     {name: t('event.timePlaceCharge'), key: 'time'},
     {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
     {name: t('event.info'), key: 'info'},
-  ];
+  ]
 
   const handleChangeTab = (item) => {
-    setActiveTab(item.key);
+    setActiveTab(item.key)
   }
 
-  const isAllowCompleted = [EventStatus.Draft, EventStatus.Confirmed];
+  const isAllowCompleted = [EventStatus.Draft, EventStatus.Confirmed]
 
   const handleSubmit = (data) => {
 
@@ -109,36 +107,36 @@ const EditEventModal = (props: Props) => {
       address1: data.address1,
       address2: data.address2
 
-    };
-    dispatch(submitEvent(event, submitData));
+    }
+    dispatch(submitEvent(event, submitData))
   }
 
   const handleAddExpense = (type) => {
-    setCurrentEventEditExpenseType(type);
-    setCurrentEventEditExpense(null);
+    setCurrentEventEditExpenseType(type)
+    setCurrentEventEditExpense(null)
     if (type === 'actual') {
-      dispatch(eventExpenseActualOpen());
+      dispatch(eventExpenseActualOpen())
     } else {
-      dispatch(eventExpensePlannedOpen());
+      dispatch(eventExpensePlannedOpen())
     }
   }
   const handleEditExpense = (type, key, data) => {
-    setCurrentEventEditExpenseType(type);
-    setCurrentEventEditExpense(data);
+    setCurrentEventEditExpenseType(type)
+    setCurrentEventEditExpense(data)
     setCurrentEventEditExpenseKey(key)
   }
   const handleCancel = () => {
-    dispatch(modalClose());
+    dispatch(modalClose())
   }
   const handleExpanseSubmit = (data) => {
     if (currentEventEditExpense) {
-      const newExpenses = currentEventEditExpenseType === 'actual' ? [...currentEventActualExpenses] : [...currentEventExpenses];
-      newExpenses[currentEventEditExpenseKey] = data;
-      dispatch(updateEventExpenses(currentEventEditExpenseType, newExpenses));
+      const newExpenses = currentEventEditExpenseType === 'actual' ? [...currentEventActualExpenses] : [...currentEventExpenses]
+      newExpenses[currentEventEditExpenseKey] = data
+      dispatch(updateEventExpenses(currentEventEditExpenseType, newExpenses))
     } else {
-      const newExpenses = currentEventEditExpenseType === 'actual' ? [...currentEventActualExpenses] : [...currentEventExpenses];
-      newExpenses.push(data);
-      dispatch(updateEventExpenses(currentEventEditExpenseType, newExpenses));
+      const newExpenses = currentEventEditExpenseType === 'actual' ? [...currentEventActualExpenses] : [...currentEventExpenses]
+      newExpenses.push(data)
+      dispatch(updateEventExpenses(currentEventEditExpenseType, newExpenses))
     }
   }
 
@@ -150,9 +148,9 @@ const EditEventModal = (props: Props) => {
       dispatch(setCurrentEventPrevious())
   }
 
-  const actualStart = event ? event.actualStart || event.start : 0;
-  const actualEnd = event ? event.actualEnd || event.end : 0;
-  console.log("newRangeStart", newRangeStart, newRangeEnd, differenceInHours(new Date(newRangeEnd), new Date(newRangeStart)))
+  const actualStart = event ? event.actualStart || event.start : 0
+  const actualEnd = event ? event.actualEnd || event.end : 0
+  console.log('newRangeStart', newRangeStart, newRangeEnd, differenceInHours(new Date(newRangeEnd), new Date(newRangeStart)))
   return (
     <div>
       <Modal isOpen={isOpen} size={'medium'} className={styles.root} loading={false} closeClassName={styles.modalClose}
@@ -172,9 +170,9 @@ const EditEventModal = (props: Props) => {
                                                         onCancel={handleCancel}
                                                         initialValues={{
                                                           ...event,
-                                                          start:  newRangeStart || new Date(event.start),
+                                                          start: newRangeStart || new Date(event.start),
                                                           end: newRangeEnd || new Date(event.end),
-                                                          actualStart:  newRangeActualStart || new Date(actualStart),
+                                                          actualStart: newRangeActualStart || new Date(actualStart),
                                                           actualEnd: newRangeActualEnd || new Date(actualEnd),
                                                           price: {
                                                             rate: event.ratePerHour || event.task.ratePerHour,

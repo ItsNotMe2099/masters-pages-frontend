@@ -1,5 +1,5 @@
-import LogoSvg from "components/svg/Logo";
-import LogoMobileSvg from "components/svg/LogoMobileSvg";
+import LogoSvg from 'components/svg/Logo'
+import LogoMobileSvg from 'components/svg/LogoMobileSvg'
 import Link from 'next/link'
 import styles from './index.module.scss'
 

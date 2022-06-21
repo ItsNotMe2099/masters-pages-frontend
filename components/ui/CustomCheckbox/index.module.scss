@@ -1,0 +1,48 @@
+@import "scss/index";
+
+.root {
+  cursor: pointer;
+  label{
+    align-items: unset !important;
+    span{
+      div{
+        color: #27C60D;
+      }
+    }
+  }
+}
+.shadow{
+  span{
+    box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.07), 0px 41.7776px 33.4221px rgba(0, 0, 0, 0.0503198), 0px 22.3363px 17.869px rgba(0, 0, 0, 0.0417275), 0px 12.5216px 10.0172px rgba(0, 0, 0, 0.035), 0px 6.6501px 5.32008px rgba(0, 0, 0, 0.0282725), 0px 2.76726px 2.21381px rgba(0, 0, 0, 0.0196802);
+  }
+}
+.icon{
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #27C60D;
+  cursor: pointer;
+}
+.checkboxLabel{
+  cursor: pointer;
+  margin-left: 10px;
+  letter-spacing: -0.01em;
+  box-shadow: none !important;
+  text-align: left;
+  color: #a5a5a8;
+  &.large{
+    font-size: 16px;
+  }
+  &.normal{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+  &.small{
+    font-size: 12px;
+  }
+
+}
+

@@ -7,6 +7,38 @@
   align-items: center;
   justify-content: center;
 }
+
+.deafaultProject{
+  border-radius: 8px;
+  border: 1px solid #ACACAC;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.redProject{
+  border-radius: 8px;
+  border: 1px solid #DC2626;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  display: flex;
+  padding: 12px 0;
+  width: 100%;
+  background: #DC2626;
+  color: #fff;
+}
+
+.recycleBin{
+  border-radius: 8px;
+  border: 1px solid #ACACAC;
+  padding: 9px 10px;
+  background-color: #fff;
+}
+
 .disabled{
   position: relative;
   &:before {
@@ -34,6 +66,9 @@
 
 .red{
   background-color: #FD5742;
+  &:active{
+    background-color: #DC2626;
+  }
 }
 
 .green{
@@ -45,6 +80,9 @@
 
 .white{
   background-color:  white;
+  &:active{
+    background-color: #b7b7b7;
+  }
 
 }
 
@@ -71,12 +109,19 @@
   background-color: #F6F6F6;
   border: 1px solid #ACACAC;
   color: #000000;
+  &:active{
+    background-color: #ACACAC;
+  }
 }
 .fullWidth{
   width: 100%;
 }
 .transparent{
   background-color: transparent;
+  &:active{
+    background-color: #000;
+    color: #F6F6F6;
+  }
 }
 
 .lightGrey{
@@ -125,4 +170,13 @@
   border: 3px solid #000;
   border-radius: 8px;
   color: #000;
+}
+
+.applyFilters{
+  padding: 10px 24px;
+  background: #F6F6F6;
+  border-radius: 8.14136px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
 }

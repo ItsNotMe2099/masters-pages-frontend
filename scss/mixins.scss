@@ -24,7 +24,7 @@
 
 // Medium devices
 @mixin md {
-  @media (min-width: #{$screen-md-min}) {
+  @media (min-width: #{$xs-max}) {
     @content;
   }
 }
@@ -79,4 +79,17 @@
   position: absolute;
   bottom: -16px;
   left: 0px;
+}
+
+
+
+//ui
+@mixin inputLabel {
+  position: absolute;
+  padding: 0 5px;
+  background-color: #fff;
+  font-size: 15px;
+  color: #828282;
+  top: -8px;
+  left: 15px;
 }

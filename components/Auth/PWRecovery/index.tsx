@@ -1,13 +1,12 @@
-import { PWRecoveryResetState, PWRecoverySecondSubmit, PWRecoverySubmit } from "components/Auth/PWRecovery/actions";
-import Button from 'components/ui/Button'
-import Modal from "components/ui/Modal";
-import { useEffect } from "react";
+import { PWRecoveryResetState, PWRecoverySecondSubmit, PWRecoverySubmit } from 'components/Auth/PWRecovery/actions'
+import Modal from 'components/ui/Modal'
+import { useEffect } from 'react'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
 import { signInOpen} from 'components/Modal/actions'
-import PWRecovery from "./Form";
-import {useTranslation, withTranslation} from "i18n";
+import PWRecovery from './Form'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   isOpen: boolean
@@ -15,20 +14,20 @@ interface Props {
 }
 
 const PWRecoveryComponent = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const firstStepIsComplete = useSelector((state: IRootState) => state.PWRecovery.formIsSuccess)
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
   const code = useSelector((state: IRootState) => state.PWRecovery.codeSet)
   useEffect(() => {
-    dispatch(PWRecoveryResetState());
+    dispatch(PWRecoveryResetState())
   }, [])
   const handleSubmit = (data) => {
-    dispatch(PWRecoverySubmit(data));
+    dispatch(PWRecoverySubmit(data))
   }
 
   const handleSubmitSecondStep = (data) => {
-    dispatch(PWRecoverySecondSubmit(data));
+    dispatch(PWRecoverySecondSubmit(data))
   }
 
   return (

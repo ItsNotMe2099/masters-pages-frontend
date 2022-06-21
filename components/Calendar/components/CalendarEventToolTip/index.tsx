@@ -1,35 +1,37 @@
 import styles from './index.module.scss'
-import {EventStatus, IEvent, IRootState} from 'types'
+import { IEvent, IRootState} from 'types'
 import {format} from 'date-fns'
 import {getEventColor, getEventPlannedAllowed, getEventStatusName} from 'utils/event'
 
 import {useSelector} from 'react-redux'
 import Avatar from 'components/ui/Avatar'
 import AvatarSvg from 'components/svg/AvatarSvg'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 
 interface Props {
   event: IEvent
 }
 
 export default function CalendarEventToolTip(props: Props) {
-  const {event} = props;
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const { t } = useTranslation('common');
+  const {event} = props
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
+  const { t } = useTranslation('common')
   const getValueClass = (color) => {
     switch (color){
       case 'grey':
-        return styles.value__grey;
+        return styles.value__grey
       case 'green':
-        return styles.value__green;
+        return styles.value__green
       case 'red':
-        return styles.value__red;
+        return styles.value__red
       case 'blue':
-        return styles.value__blue;
+        return styles.value__blue
       case 'yellow':
-        return styles.value__orange;
+        return styles.value__orange
       case 'orange':
-        return styles.value__orange;
+        return styles.value__orange
     }
   }
   return (

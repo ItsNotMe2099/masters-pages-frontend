@@ -114,14 +114,19 @@
 
 }
 
-.modeAgency {
+.modeCorporate{
   .leftMenu {
     background: #F2B705;
   }
   .logo{
     background: #E2AB05;
   }
+  .menuSeparator{
+    background: #FFDA6B;
+  }
+
 }
+
 .logo{
   padding: 0px 13px;
   min-height: 59px;

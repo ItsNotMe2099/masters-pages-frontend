@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
 interface Props {
   value: number,
@@ -9,12 +9,12 @@ interface Props {
   onChange: (boolean) => void
 }
 export default function Radio(props: Props) {
-  const [active, setActive] = useState(props.isActive);
+  const [active, setActive] = useState(props.isActive)
   useEffect(() => {
     setActive(props.isActive)
   }, [props.isActive])
   const handleClick = () => {
-    props.onChange(props.value);
+    props.onChange(props.value)
   }
   return (
     <div className={`${styles.root} ${props.className || ''}`} onClick={handleClick}>

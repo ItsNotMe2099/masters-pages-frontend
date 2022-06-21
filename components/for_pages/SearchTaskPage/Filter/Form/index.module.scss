@@ -1,0 +1,34 @@
+@import "../../../../../scss/index";
+
+.root{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1vw;
+    grid-row-gap: 1vw;
+  padding-bottom: 18px;
+    @media screen and (max-width: $xs-max){
+      display: flex;
+      flex-direction: column;
+      grid-row-gap: 16px;
+    }
+}
+.additionFieldsCollapsed{
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}
+.filterPrice{
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}
+.filterSubCategory{
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}
+.filterLocation{
+  @media screen and (max-width: $xs-max){
+    display: none;
+  }
+}

@@ -2,12 +2,11 @@ import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import {
   FacebookShareButton, LinkedinShareButton,
-  TelegramShareButton,
   TwitterShareButton,
-  VKShareButton,
 } from 'react-share'
 import {IRootState} from 'types'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
+import {useAppContext} from 'context/state'
 interface Props {
   customLink?: string
   subCategoryId?: number
@@ -15,10 +14,11 @@ interface Props {
 
 export default function ShareBySocialMedia({subCategoryId, customLink}: Props) {
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile);
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const {t} = useTranslation('common')
 
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
 
   return (
     <div className={styles.root}>

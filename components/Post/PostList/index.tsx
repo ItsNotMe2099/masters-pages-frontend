@@ -1,15 +1,9 @@
-import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import dynamic from 'next/dynamic'
-import {default as React, useEffect, useState} from "react";
-import {useTranslation} from "i18n";
+import {default as React, useEffect, useState} from 'react'
+import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
-import Layout from 'components/layout/Layout'
-import Tabs from 'components/ui/Tabs'
-import SharePersonalLink from 'components/Share/PersonalLink'
-import ShareByEmail from 'components/Share/ShareByEmail'
-import ShareBySocialMedia from 'components/Share/ShareBySocialMedia'
 
 const SharePersonalLabel = dynamic(() => import('components/Share/PersonalLabel'), {
   ssr: false
@@ -21,48 +15,43 @@ import {
   deleteProfileGallery,
   fetchProfileGalleryList,
   resetProfileGalleryList,
-  setProfileGalleryCurrentItemIndex,
-  setProfileGalleryTab
+  setProfileGalleryCurrentItemIndex
 } from 'components/ProfileGallery/actions'
 import {setPageTaskUser} from 'components/TaskUser/actions'
-import {fetchPostList, resetPostList} from 'components/Post/actions'
 import GalleryModal from 'components/PublicProfile/components/view/GalleryModal'
-import Card from 'components/PublicProfile/components/Card'
-import PostModal from 'components/Post/PostModal'
-import {confirmOpen, modalClose, postEditOpen} from 'components/Modal/actions'
-import Button from 'components/ui/Button'
-import Modals from 'components/layout/Modals'
+import {confirmOpen} from 'components/Modal/actions'
 import GalleryItem from 'components/GalleryItem'
+import {useAppContext} from 'context/state'
 interface Props{
   profileId?: number
   onEdit?: (item) => void
 }
 const PostList = (props: Props) => {
   const {t} = useTranslation('common')
-  const router = useRouter();
+  const router = useRouter()
   const dispatch = useDispatch()
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const listLoading = useSelector((state: IRootState) => state.profileGallery.listLoading);
+  const listLoading = useSelector((state: IRootState) => state.profileGallery.listLoading)
   const total = useSelector((state: IRootState) => state.profileGallery.total)
   const page = useSelector((state: IRootState) => state.profileGallery.page)
   const list = useSelector((state: IRootState) => state.profileGallery.list)
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile)
-  const isEdit = currentProfile && (currentProfile.id === props.profileId || !props.profileId);
+  const appContext = useAppContext();
+  const profile = appContext.profile
+  const isEdit = profile && (profile.id === props.profileId || !props.profileId)
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [currentEditPost, setCurrentEditPost] = useState(null);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const [isEditOpen, setIsEditOpen] = useState(false)
+  const [currentEditPost, setCurrentEditPost] = useState(null)
 
-  const limit = 30;
+  const limit = 30
   useEffect(() => {
     dispatch(resetProfileGalleryList())
     dispatch(fetchProfileGalleryList({
       profileId: props.profileId || profile.id,
       page: 1,
       limit
-    }));
+    }))
 
-  }, []);
+  }, [])
   const handleSortChange = (sort) => {
 
   }
@@ -72,7 +61,7 @@ const PostList = (props: Props) => {
       profileId: props.profileId || profile.id,
       page: page + 1,
       limit
-    }));
+    }))
   }
   const showGallery = (model, index) => {
     dispatch(setProfileGalleryCurrentItemIndex(index))
@@ -83,13 +72,13 @@ const PostList = (props: Props) => {
     dispatch(confirmOpen({
       description: t('post.areYouSureToDelete', { model }),
       onConfirm: () => {
-        dispatch(deleteProfileGallery(model.id));
+        dispatch(deleteProfileGallery(model.id))
       }
-    }));
+    }))
   }
   const handleEdit = (item) => {
     if(props.onEdit){
-      props.onEdit(item);
+      props.onEdit(item)
     }
   }
 
@@ -110,5 +99,4 @@ const PostList = (props: Props) => {
     </div>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
 export default PostList

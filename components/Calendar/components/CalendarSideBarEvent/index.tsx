@@ -1,21 +1,23 @@
 import styles from './index.module.scss'
 import {IEvent, IRootState} from 'types'
 import {format} from 'date-fns'
-import {getEventBorderColor, getEventColor} from 'utils/event'
+import { getEventColor} from 'utils/event'
 import { useSelector } from 'react-redux'
 import {useState} from 'react'
 import {usePopperTooltip} from 'react-popper-tooltip'
 import CalendarEventToolTip from 'components/Calendar/components/CalendarEventToolTip'
+import {useAppContext} from 'context/state'
 interface Props {
   event: IEvent,
   onClick: (event) => void
 }
 
 export default function CalendarSideBarEvent(props: Props) {
-  const currentProfile = useSelector((state: IRootState) => state.profile.currentProfile);
+  const appContext = useAppContext();
+  const currentProfile = appContext.profile
 
-  const {event, onClick} = props;
-  const [isToolTipVisible, setIsToolTipVisible] = useState(false);
+  const {event, onClick} = props
+  const [isToolTipVisible, setIsToolTipVisible] = useState(false)
   const {
     getArrowProps,
     getTooltipProps,
@@ -28,22 +30,22 @@ export default function CalendarSideBarEvent(props: Props) {
     closeOnOutsideClick: false,
     visible: isToolTipVisible,
     onVisibleChange: setIsToolTipVisible,
-  });
+  })
 
   const getCircleClass = (color) => {
     switch (color){
       case 'grey':
-        return styles.circleSide__grey;
+        return styles.circleSide__grey
       case 'green':
-        return styles.circleSide__green;
+        return styles.circleSide__green
       case 'blue':
-        return styles.circleSide__blue;
+        return styles.circleSide__blue
       case 'red':
-        return styles.circleSide__red;
+        return styles.circleSide__red
       case 'orange':
-        return styles.circleSide__orange;
+        return styles.circleSide__orange
       case 'yellow':
-        return styles.circleSide__yellow;
+        return styles.circleSide__yellow
     }
   }
 

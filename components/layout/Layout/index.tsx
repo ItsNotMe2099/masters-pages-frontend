@@ -1,16 +1,10 @@
-import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
-import MenuItem from 'components/layout/Layout/components/MenuItem'
-import {useTranslation} from 'i18n'
+import {useSelector} from 'react-redux'
 import {default as React, ReactElement} from 'react'
 import {IRootState} from 'types'
-import Logo from 'components/Logo'
 
-import {useRouter} from 'next/router'
-import {logout} from 'components/Auth/actions'
-import ModeSelect from 'components/layout/Layout/components/ModeSelect'
 import LayoutAuthorized from 'components/layout/Layout/LayoutAuthorized'
-import LayoutPublic from 'components/layout/Layout/LayoutPublic'
+import LayoutGuest from 'components/layout/Layout/LayoutGuest'
+import {useAppContext} from 'context/state'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -20,7 +14,8 @@ interface Props {
 }
 
 export default function Layout(props: Props) {
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
-
-  return profile ? <LayoutAuthorized {...props}/> : <LayoutPublic {...props}/>
+  const appContext = useAppContext()
+  const profile = appContext.profile
+  console.log('CurrentProfile', appContext);
+  return profile ? <LayoutAuthorized {...props}/> : <LayoutGuest {...props}/>
 }

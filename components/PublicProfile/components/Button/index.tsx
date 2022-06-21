@@ -1,5 +1,6 @@
 import styles from './index.module.scss'
 import Link from 'next/link'
+import classNames from 'classnames'
 
 interface Props {
   children?: React.ReactNode
@@ -12,20 +13,31 @@ interface Props {
   onClick?: (e: any) => void
 
   target: string
-  color?: 'white' | 'transparent' | 'green' | 'red'
+  color?: 'white' | 'transparent' | 'green' | 'red' | 'grey'
   size?: 'normal' | 'small'
   like?: boolean
+  projectBtn?: 'default' | 'red' | 'recycleBin' | 'green'
 }
 
 export default function Button(props: Props) {
 
   const getClassName = () => {
-    return (
-      `${props.size === 'normal' && styles.sizeNormal} ${props.size === 'small' && styles.sizeSmall}
-      ${props.color === 'white' && styles.white} ${props.color === 'green' && styles.green} ${props.color === 'red' && styles.red} ${props.color === 'transparent' && styles.transparent}
-      ${props.className && props.className}
-          `
+    return classNames(
+      {
+        [styles.sizeNormal]:props.size === 'normal',
+        [styles.sizeSmall]: props.size === 'small',
+        [styles.white]: props.color === 'white',
+        [styles.green]: props.color === 'green',
+        [styles.red]: props.color === 'red',
+        [styles.transparent]: props.color === 'transparent',
+        [styles.grey]: props.color === 'grey',
+        [styles.deafaultProject]: props.projectBtn === 'default',
+        [styles.redProject]: props.projectBtn === 'red',
+        [styles.greenProject]: props.projectBtn === 'green',
+        [styles.recycleBin]: props.projectBtn === 'recycleBin'
+  }, props.className
     )
+
   }
 
   return (

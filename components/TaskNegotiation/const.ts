@@ -1,4 +1,3 @@
-import { action } from "typesafe-actions";
 
 enum ActionTypes {
   TASK_NEGOTIATION_CREATE_TASK_RESPONSE = 'TaskNegotiation/TASK_NEGOTIATION_CREATE_TASK_RESPONSE',

@@ -1,9 +1,8 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import { useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import ArrowDropDown from 'components/svg/ArrowDropDown'
 import Checkbox from 'components/ui/Inputs/Checkbox'
 
@@ -27,45 +26,45 @@ interface Props {
 
 const MultiSelect = (props: Props) => {
   const {t} = useTranslation()
-  const {value, onChange} = props.input;
-  const { meta: { error, touched },restrictedValues, input, options, onOpenDropDown, label, ...rest } = props;
-  const dropdownRef = useRef(null);
-  const searchInputRef = useRef(null);
-  const valueInputRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const [currentLabel, setCurrentLabel] = useState('');
+  const {value, onChange} = props.input
+  const { meta: { error, touched },restrictedValues, input, options, onOpenDropDown, label, ...rest } = props
+  const dropdownRef = useRef(null)
+  const searchInputRef = useRef(null)
+  const valueInputRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
+  const [currentLabel, setCurrentLabel] = useState('')
 
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
-        return styles.dropDownSmall;
+        return styles.dropDownSmall
       case 'normal':
       default:
-        return styles.dropDownNormal;
+        return styles.dropDownNormal
     }
   }
   const onClick = (e) => {
 
     if (!isActive && onOpenDropDown) {
-      onOpenDropDown();
+      onOpenDropDown()
     }
-   setIsActive(!isActive);
+   setIsActive(!isActive)
   }
 
   const handleOptionClick = (e, item) => {
-    e.stopPropagation();
+    e.stopPropagation()
     if((value as any[]).includes(item.value)){
-      input.onChange((value as any[]).filter(val => val != item.value));
+      input.onChange((value as any[]).filter(val => val != item.value))
     }else{
-      input.onChange([...(value as any[]), item.value]);
+      input.onChange([...(value as any[]), item.value])
     }
   }
   const handleAll = (e) => {
-    e.stopPropagation();
+    e.stopPropagation()
     if(value.length === options.length){
-      onChange([]);
+      onChange([])
     }else{
-      onChange(options.map(item => item.value));
+      onChange(options.map(item => item.value))
     }
   }
 
@@ -89,8 +88,8 @@ const MultiSelect = (props: Props) => {
       </div>
     </div>
 
-  );
-};
+  )
+}
 
 MultiSelect.defaultProps = {
   labelType: 'placeholder',

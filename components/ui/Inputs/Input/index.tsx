@@ -1,6 +1,6 @@
-import BaseInput from "components/ui/Inputs/Input/components/BaseInput";
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import { ReactElement, useState } from 'react'
+import BaseInput from 'components/ui/Inputs/Input/components/BaseInput'
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import { ReactElement } from 'react'
 import styles from './index.module.scss'
 
 interface Props {

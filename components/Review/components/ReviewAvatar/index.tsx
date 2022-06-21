@@ -1,7 +1,6 @@
-import * as React from "react";
+import * as React from 'react'
 import styles from './index.module.scss'
-import { IFeedbacksToProfile } from "types";
-import { isTemplateTail } from "typescript";
+import { IFeedbacksToProfile } from 'types'
 
 interface Props {
   mini?: boolean

@@ -1,9 +1,9 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import { ReactElement, useContext, useEffect, useRef, useState } from "react";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import { useRef } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
 import ArrowDropDown from 'components/svg/ArrowDropDown'
-import Link from 'next/link';
+import Link from 'next/link'
 interface OptionItem{
   label: string
   link: string
@@ -15,20 +15,20 @@ interface Props {
   items: OptionItem[]
 }
 export const SkillDropDown = (props: Props) => {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const onClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
   const getDropDownClass = () => {
     switch (props.role){
       case 'master':
-        return styles.master;
+        return styles.master
       case 'client':
-        return styles.client;
+        return styles.client
       case 'volunteer':
-        return styles.volunteer;
+        return styles.volunteer
     }
   }
 
@@ -41,5 +41,5 @@ export const SkillDropDown = (props: Props) => {
         {props.items.map(item => <Link href={item.link}><a className={styles.skill}>{item.label}</a></Link>)}
       </nav>
     </div>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react'
 import styles from './index.module.scss'
-import { IFeedbacksToProfile, IRootState } from "types";
+import { IFeedbacksToProfile } from 'types'
 import format from 'date-fns/format'
-import ReviewAvatar from "./components/ReviewAvatar";
+import ReviewAvatar from './components/ReviewAvatar'
 
 interface Props {
   item: IFeedbacksToProfile

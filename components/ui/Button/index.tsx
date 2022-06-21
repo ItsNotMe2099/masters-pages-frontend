@@ -1,9 +1,9 @@
 import styles from './index.module.scss'
 import cx from 'classnames'
-import Link from 'next/link';
+import Link from 'next/link'
 
 interface Props {
-  type?: "submit" | "button" | "reset"
+  type?: 'submit' | 'button' | 'reset'
   disabled?: boolean
   blue?: boolean
   red?: boolean
@@ -33,12 +33,14 @@ interface Props {
   outlineRed?: boolean
   outlineBlue?: boolean
   outlineBlack?: boolean
+  projectBtn?: 'default' | 'red' | 'recycleBin'
+  style?: 'applyFilters'
 }
 
 export default function Button(props: Props) {
 
   const getClasses = () => {
-    return cx(styles.root, {
+    return cx(styles.root, props.className, {
       [styles.disabled]: props.disabled,
       [styles.bold]: props.bold,
       [styles.blue]: props.blue,
@@ -61,9 +63,12 @@ export default function Button(props: Props) {
       [styles.largeFont]: props.largeFont,
       [styles.outlineRed]: props.outlineRed,
       [styles.outlineBlue]: props.outlineBlue,
-      [styles.outlineBlack]: props.outlineBlack
-
-    }, props.className);
+      [styles.outlineBlack]: props.outlineBlack,
+      [styles.deafaultProject]: props.projectBtn === 'default',
+      [styles.redProject]: props.projectBtn === 'red',
+      [styles.recycleBin]: props.projectBtn === 'recycleBin',
+      [styles.applyFilters]: props.style === 'applyFilters'
+    }, props.className)
   }
   return (props.href ? <Link href={props.href}>
         <a href={props.href} target={props.target} className={getClasses()}

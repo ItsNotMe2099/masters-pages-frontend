@@ -37,18 +37,18 @@ export const deleteSavedProfileSearchRequest = (id: number) => action(ActionType
 
 export const resetSavedSearchesList = () => action(ActionTypes.RESET_SAVED_SEARCHES_LIST)
 
-export const saveTaskSearch = (data) => action(ActionTypes.SAVED_TASK_SEARCH_CREATE, data);
+export const saveTaskSearch = (data) => action(ActionTypes.SAVED_TASK_SEARCH_CREATE, data)
 export const saveTaskSearchRequest = (data: any) => action(ActionTypes.SAVED_TASK_SEARCH_CREATE_REQUEST, {
   api: {
-    url: `/api/task-searches`,
+    url: '/api/task-searches',
     method: 'POST',
     data,
   }
 })
-export const saveProfileSearch = (data) => action(ActionTypes.SAVED_PROFILE_SEARCH_CREATE, data);
+export const saveProfileSearch = (data) => action(ActionTypes.SAVED_PROFILE_SEARCH_CREATE, data)
 export const saveProfileSearchRequest = (data: any) => action(ActionTypes.SAVED_PROFILE_SEARCH_CREATE_REQUEST, {
   api: {
-    url: `/api/profile-searches`,
+    url: '/api/profile-searches',
     method: 'POST',
     data,
   }

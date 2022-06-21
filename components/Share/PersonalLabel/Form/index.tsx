@@ -1,15 +1,9 @@
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
+import * as React from 'react'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-import { required } from "utils/validations";
 import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import {CheckboxList} from 'components/ui/Inputs/CheckboxList'
 import SelectInput from 'components/ui/Inputs/SelectInput'
-import Button from 'components/PublicProfile/components/Button'
-import ShareLabel from 'components/Share/ShareLabel'
-import {IRootState} from 'types'
 const queryString = require('query-string')
 
 let PersonalLabelForm = props => {

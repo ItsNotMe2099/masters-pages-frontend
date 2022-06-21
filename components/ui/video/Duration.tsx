@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatSeconds } from "utils/formatters";
+import { formatSeconds } from 'utils/formatters'
 
 interface Props {
     className?:string

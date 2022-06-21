@@ -1,15 +1,19 @@
-import Pause from "components/svg/Pause";
-import Play from "components/svg/Play";
-import QualitySelect from "components/ui/video/controls/QualitySelect";
-import Duration from "components/ui/video/Duration";
+import Pause from 'components/svg/Pause'
+import Play from 'components/svg/Play'
+import QualitySelect from 'components/ui/video/controls/QualitySelect'
+import Duration from 'components/ui/video/Duration'
 
-import SeekSlider from "components/ui/video/controls/SeekSlider";
-import VolumeControl from "components/ui/video/controls/VolumeControl";
-import dynamic from "next/dynamic";
+import SeekSlider from 'components/ui/video/controls/SeekSlider'
+import VolumeControl from 'components/ui/video/controls/VolumeControl'
+import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState } from 'react'
-import ReactPlayer from 'react-player'
 import styles from './index.module.scss'
-import screenfull from 'screenfull'
+import classNames from 'classnames'
+
+const screenfull = dynamic(() => import('screenfull') as any, {
+  ssr: false
+})
+
 import { findDOMNode } from 'react-dom'
 
 const VideoJs = dynamic(() => import('components/ui/video/VideoJs'), {
@@ -22,105 +26,106 @@ interface Props {
 }
 
 export default function Player(props) {
-    const [source, setSource] = useState(null);
-    const [pip, setPip] = useState(false);
-    const [playing, setPlaying] = useState(false);
-    const [controls, setControls] = useState(false);
-    const [light, setLight] = useState(false);
-    const [volume, setVolume] = useState(50);
-    const [muted, setMuted] = useState(false);
-    const [played, setPlayed] = useState(0);
-    const [loaded, setLoaded] = useState(0);
-    const [duration, setDuration] = useState(0);
-    const [fullScreen, setFullscreen] = useState(false);
-    const [playbackRate, setPlaybackRate] = useState(1.0);
-    const [loop, setLoop] = useState(false);
-    const [seeking, setSeeking] = useState(false);
-    const player = useRef();
-    const root = useRef();
+    const {className} = props
+    const [source, setSource] = useState(null)
+    const [pip, setPip] = useState(false)
+    const [playing, setPlaying] = useState(false)
+    const [controls, setControls] = useState(false)
+    const [light, setLight] = useState(false)
+    const [volume, setVolume] = useState(50)
+    const [muted, setMuted] = useState(false)
+    const [played, setPlayed] = useState(0)
+    const [loaded, setLoaded] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const [fullScreen, setFullscreen] = useState(false)
+    const [playbackRate, setPlaybackRate] = useState(1.0)
+    const [loop, setLoop] = useState(false)
+    const [seeking, setSeeking] = useState(false)
+    const player = useRef()
+    const root = useRef()
     useEffect(() => {
         setSource(props.source)
     }, [])
 
     const handlePlayPause = () => {
        if (!playing) {
-                 (player as any)?.current?.play();
+                 (player as any)?.current?.play()
         } else {
-               (player as any)?.current?.pause();
+               (player as any)?.current?.pause()
         }
-        setPlaying((playing) => !playing);
+        setPlaying((playing) => !playing)
 
     }
 
     const handleStop = () => {
-        setSource(null);
-        setPlaying(false);
+        setSource(null)
+        setPlaying(false)
     }
 
 
     const handleVolumeChange = value => {
-        setVolume(value);
+        setVolume(value)
     }
 
     const handleToggleMuted = () => {
-        setMuted((muted) => !muted);
+        setMuted((muted) => !muted)
     }
 
     const handleSetPlaybackRate = e => {
-        setPlaybackRate(e.value);
+        setPlaybackRate(e.value)
     }
 
     const handleTogglePIP = () => {
-        setPip((pip) => !pip);
+        setPip((pip) => !pip)
     }
 
     const handlePlay = () => {
-        setPlaying(true);
+        setPlaying(true)
     }
 
     const handleEnablePIP = () => {
 
-        setPip(true);
+        setPip(true)
     }
 
     const handleDisablePIP = () => {
 
-        setPip(false);
+        setPip(false)
     }
 
     const handlePause = () => {
 
-        setPlaying(false);
+        setPlaying(false)
     }
 
 
     const handleSeekChange = value => {
         setPlayed(value / duration);
-        (player?.current as any).currentTime(value);
+        (player?.current as any).currentTime(value)
     }
 
 
     const handleProgress = state => {
-        setPlayed(state.played);
-        setLoaded(state.loaded);
+        setPlayed(state.played)
+        setLoaded(state.loaded)
     }
 
     const handleEnded = () => {
-        setPlaying(loop);
+        setPlaying(loop)
     }
 
     const handleDuration = (duration) => {
-        setDuration(duration);
+        setDuration(duration)
     }
 
     const handleClickFullscreen = (event) => {
         if (player?.current) {
             if (fullScreen) {
-                (screenfull as any).exit();
+                (screenfull as any).exit()
             }else {
                 (screenfull as any).request(findDOMNode(root?.current))
             }
-            setFullscreen(f => !f);
+            setFullscreen(f => !f)
         }
     }
 
@@ -138,13 +143,13 @@ export default function Player(props) {
     }
     const handleSourceChange = (item) => {
 
-        setLoaded(0);
-        setPip(false);
-        setSource(item.value);
+        setLoaded(0)
+        setPip(false)
+        setSource(item.value)
 
     }
 
-    return (<div className={styles.root} ref={root}>
+    return (<div className={classNames(styles.root, className)} ref={root}>
             {/*<ReactPlayer
               ref={player}
               className={styles.player}
@@ -221,7 +226,7 @@ export default function Player(props) {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 

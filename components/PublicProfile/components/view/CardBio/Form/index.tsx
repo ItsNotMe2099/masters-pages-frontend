@@ -1,15 +1,13 @@
-import AvatarInput from "components/ui/AvatarInput";
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
-import { useSelector, useDispatch, connect } from 'react-redux'
-import { IRootState } from "types";
+import FormError from 'components/ui/Form/FormError'
+import * as React from 'react'
+import { useSelector, connect } from 'react-redux'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import TextArea from 'components/ui/Inputs/TextArea'
 import Button from 'components/PublicProfile/components/Button'
-import {bioMaxLength, maxLength} from 'utils/validations'
+import {bioMaxLength} from 'utils/validations'
 interface Props{
   onCancel: () => void,
   handleSubmit?: () => void,
@@ -17,7 +15,7 @@ interface Props{
   initialValues?: any
 }
 let CardBioForm = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const error = useSelector((state: IRootState) => state.profile.formErrorByKey['bio'])
 
   return (

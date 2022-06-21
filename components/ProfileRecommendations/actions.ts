@@ -1,4 +1,3 @@
-import {IProfileRecommendation, IProfileTab, SkillData} from "types";
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -9,7 +8,7 @@ interface IProfileRecommendationList{
 export const createProfileRecommendation = (profileId: number) => action(ActionTypes.CREATE_PROFILE_RECOMMENDATION, { profileId })
 export const createProfileRecommendationRequest = (profileId: number) => action(ActionTypes.CREATE_PROFILE_RECOMMENDATION_REQUEST, {
   api: {
-    url: `/api/profile-recommendations`,
+    url: '/api/profile-recommendations',
     method: 'POST',
     data: {
       profileId

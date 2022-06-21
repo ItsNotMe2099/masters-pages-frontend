@@ -1,6 +1,6 @@
-import ApiActionTypes from "constants/api";
-import {IProfileTab, SkillData, SkillListItem} from "types";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import {IProfileTab} from 'types'
+import ActionTypes from './const'
 export interface ProfileTabState {
   list: IProfileTab[],
   listTotal: number,
@@ -26,80 +26,80 @@ export default function ProfileTabReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.RESET_PROFILE_TAB_FORM:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
     case ActionTypes.CREATE_PROFILE_TAB_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.CREATE_PROFILE_TAB_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
+      state.formIsSuccess = true
+      state.formLoading = false
       break
     case ActionTypes.CREATE_PROFILE_TAB_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
     case ActionTypes.UPDATE_PROFILE_TAB_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.UPDATE_PROFILE_TAB_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
-      state.list = state.list.map(item => item.id === action.payload.id ? ({...item, ...action.payload}) : item);
+      state.formIsSuccess = true
+      state.formLoading = false
+      state.list = state.list.map(item => item.id === action.payload.id ? ({...item, ...action.payload}) : item)
       break
     case ActionTypes.UPDATE_PROFILE_TAB_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
     case ActionTypes.DELETE_PROFILE_TAB_REQUEST:
       state.formError = ''
-      state.formIsSuccess = false;
-      state.formLoading = true;
+      state.formIsSuccess = false
+      state.formLoading = true
       break
     case ActionTypes.DELETE_PROFILE_TAB_REQUEST + ApiActionTypes.SUCCESS:
       state.formError = ''
-      state.formIsSuccess = true;
-      state.formLoading = false;
-      state.list = state.list.filter(item => item.id !== action.payload.id);
+      state.formIsSuccess = true
+      state.formLoading = false
+      state.list = state.list.filter(item => item.id !== action.payload.id)
       break
     case ActionTypes.DELETE_PROFILE_TAB_REQUEST + ApiActionTypes.FAIL:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error' || 'Unknown error'
-      state.formIsSuccess = false;
-      state.formLoading = false;
+      state.formIsSuccess = false
+      state.formLoading = false
       break
 
     case ActionTypes.FETCH_PROFILE_TAB_LIST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_PROFILE_TAB_LIST + ApiActionTypes.SUCCESS:
       state.list = action.payload.data
       state.listTotal = action.payload.total
-      state.listLoading = false;
+      state.listLoading = false
       break
     case ActionTypes.FETCH_PROFILE_TAB_LIST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
 
     case ActionTypes.FETCH_PROFILE_TAB:
-      state.currentLoading = true;
+      state.currentLoading = true
       break
     case ActionTypes.FETCH_PROFILE_TAB + ApiActionTypes.SUCCESS:
       state.currentProfileTab = action.payload
-      state.currentLoading = false;
+      state.currentLoading = false
       break
     case ActionTypes.FETCH_PROFILE_TAB + ApiActionTypes.FAIL:
-      state.currentLoading = false;
+      state.currentLoading = false
       break
   }
 
-  return state
+   return {...state}
 }

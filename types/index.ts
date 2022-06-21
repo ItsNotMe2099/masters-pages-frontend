@@ -45,6 +45,11 @@ import {NewsState} from 'components/News/reducer'
 import {FollowerState} from 'components/Follower/reducer'
 import {ReportState} from 'components/Report/reducer'
 import {ContactsState} from 'components/Contacts/reducer'
+import {ILocation} from 'data/intefaces/ILocation'
+import {IProfile} from 'data/intefaces/IProfile'
+import {IServiceCategory} from 'data/intefaces/IServiceCategory'
+import {IProject} from 'data/intefaces/IProject'
+import {IChat} from 'data/intefaces/IChat'
 
 export interface IRootState {
   authComponent: authState,
@@ -94,16 +99,14 @@ export interface IRootState {
   contacts: ContactsState
 }
 
-export interface ILocation {
-  lng: number,
-  lat: number,
-}
-
 export interface ConfirmDataModal {
+  title?: string
+  description?: string
   cancelText?: string,
   confirmText?: string
   onConfirm?: () => void,
   onCancel?: () => void
+  loading?: boolean
 }
 
 export interface IProfilePreferWorkIn {
@@ -112,59 +115,12 @@ export interface IProfilePreferWorkIn {
 }
 
 export interface ContactData {
-  contactProfile: ProfileData,
+  contactProfile: IProfile,
   contactProfileId: number
 }
 export enum UserActivityStatus {
   Offline = "offline",
   Online = "online",
-}
-export interface ProfileData {
-  id?: number
-  avatar?: string
-  firstName?: string
-  lastName?: string
-  phone?: string
-  email?: string
-  role?: string
-  geonameid?: string
-  birthday?: string
-  country?: string
-  city?: string
-  region?: string
-  zipcode?: string
-  address1?: string
-  address2?: string
-  photo?: string
-  geoname?: any,
-  rating?: number
-  location?: ILocation,
-  preferredCategories?: number[],
-  preferredSubCategories?: number[],
-  skills?: SkillData[]
-  notificationTotalCount?: number
-  notificationFeedbackCount?: number
-  notificationMessageCount?: number
-  notificationTaskOfferCount?: number
-  notificationTaskResponseCount?: number
-  notificationTaskOfferDeclinedCount?: number
-  notificationTaskResponseDeclinedCount?: number
-  notificationEventCount?: number
-  notificationNewsCount?: number
-  feedbacksCount?: number
-  tasksCount?: number
-  totalAmount?: number
-  totalHours?: number,
-  preferToWorkIn?: IProfilePreferWorkIn[]
-  languages?: string[]
-  isSavedByCurrentProfile?: boolean
-  bio?: {
-    bio: string,
-    visible: false
-  },
-  isSubscribedByCurrentProfile?: boolean
-  isRecommendedByCurrentProfile?: boolean
-  activityStatus?: UserActivityStatus
 }
 
 export interface IProfileSettingsNotificationItem {
@@ -186,7 +142,7 @@ export interface IProfileSettings {
   notifications: IProfileSettingsNotification
 }
 
-export interface FullProfileData {
+export interface FullIProfile {
   id: number
   userId: number
   role: string
@@ -250,6 +206,9 @@ export interface SkillListItem {
   id?: number
   name?: string
   icon: string,
+  mainCategory: IServiceCategory
+  category: IServiceCategory
+  subCategory: IServiceCategory
   skills: SkillData[]
 }
 
@@ -312,7 +271,7 @@ export interface IProfileGalleryComment {
   profileId?: number
   content: string
   profileGalleryId: number
-  profile?: ProfileData
+  profile?: IProfile
   createdAt?: Date;
 }
 
@@ -348,7 +307,7 @@ export enum ITaskNegotiationState {
 
 export interface ITaskNegotiation {
   id: number,
-  profile: ProfileData,
+  profile: IProfile,
   profileId: number,
   authorId: number,
   clientId: number,
@@ -402,14 +361,16 @@ export interface ITask {
   createdAt: string
   updatedAt: string
   deletedAt: string
-  profile: ProfileData,
+  profile: IProfile,
+  photos: string[]
   currency: string
   deadline: string,
   priceType: string,
+  budgetMax?: number
   photosObjects: any[],
   lastNegotiation: ITaskNegotiation
   masterId: number
-  master: ProfileData,
+  master: IProfile,
   negotiations: ITaskNegotiation[]
   isSavedByCurrentProfile?: boolean
   responses: {
@@ -505,23 +466,6 @@ export interface ISavedPeople {
   photo: null
 }
 
-export interface IChat {
-  id: number;
-  name: string;
-  isGroup: boolean;
-  task: ITask;
-  taskId: number;
-  profile: ProfileData;
-  profileId: number;
-  lastMessage: string;
-  participant: ProfileData;
-  participantId: number;
-  profiles: ProfileData[]
-  lastMessageAt: string
-  createdAt: string
-  totalUnread: number
-}
-
 export enum IEventLogRecordType {
   Created = 'created',
   StatusChanged = 'status_changed',
@@ -545,11 +489,12 @@ export enum IChatMessageType {
 export interface IUserFile {
   id: number
   urlS3: string
+  name: string
 }
 
 export interface IChatMessageProfile {
   id: number
-  profile: ProfileData
+  profile: IProfile
   profileId: number
   message: IChatMessage
   messageId: number
@@ -568,7 +513,7 @@ export interface IChatMessage {
   taskNegotiationId: number
   chat: IChat
   chatId: number
-  profile: ProfileData
+  profile: IProfile
   profileId: number
   profileStates: IChatMessageProfile[]
   files: IUserFile[]
@@ -738,8 +683,8 @@ export interface IFeedbacksToProfile {
   task: ITask,
   taskId: number,
   eventId: number
-  fromProfile: ProfileData
-  toProfile: ProfileData
+  fromProfile: IProfile
+  toProfile: IProfile
   photos: string[]
 }
 
@@ -747,7 +692,7 @@ export interface IProfileRecommendation{
   id: number,
   profileId: number,
   profileThatRecommendsId: number
-  profileThatRecommends: ProfileData,
+  profileThatRecommends: IProfile,
   createdAt: string
 }
 export enum EventStatus {
@@ -781,12 +726,13 @@ export interface IEvent {
   end?: Date
   actualStart?: Date,
   actualEnd?: Date,
+  actualHours?: number
   task?: ITask,
-  participant?: ProfileData
-  author?: ProfileData
+  participant?: IProfile
+  author?: IProfile
   feedbacks?: IFeedbacksToProfile[],
-  unreadTextMessagesCount?: number
-  unreadMediaMessagesCount?: number
+  unreadTextMessagesCount?: string
+  unreadMediaMessagesCount?: string
   expenses?: IEventExpense[]
   actualExpenses?: IEventExpense[]
   participantId?: number

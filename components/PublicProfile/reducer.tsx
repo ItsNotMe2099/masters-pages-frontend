@@ -1,9 +1,6 @@
-import ApiActionTypes from "constants/api";
-import { formatSkillList } from "utils/skills";
-import ActionTypes from "./const";
-import cookie from "js-cookie";
-import {parse, format} from 'date-fns'
-import { FullProfileData, SkillData } from "types";
+import ApiActionTypes from 'constants/api'
+import { formatSkillList } from 'utils/skills'
+import ActionTypes from './const'
 
 export interface PublicProfileState {
   profile: any
@@ -20,16 +17,16 @@ const initialState: PublicProfileState = {
 export default function ProfileReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.FETCH_PROFILE_BY_ID:
-      state.loading = true;
+      state.loading = true
       break
     case ActionTypes.FETCH_PROFILE_BY_ID + ApiActionTypes.SUCCESS:
       state.profile = {...action.payload}
       state.skills = formatSkillList(action.payload.skills)
-      state.loading = false;
+      state.loading = false
       break
     case ActionTypes.FETCH_PROFILE_BY_ID + ApiActionTypes.FAIL:
-      state.loading = false;
+      state.loading = false
       break
 }
-return state
+ return {...state}
 }

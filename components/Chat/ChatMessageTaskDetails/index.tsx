@@ -1,27 +1,19 @@
-import { fetchChat } from "components/Chat/actions";
-import { confirmOpen, taskEditConditionsOpen, taskHireMasterOpen } from "components/Modal/actions";
-import { deleteSkill } from "components/Skill/actions";
-import CloseIcon from "components/svg/CloseIcon";
-import MarkIcon from "components/svg/MarkIcon";
+import { confirmOpen, taskEditConditionsOpen, taskHireMasterOpen } from 'components/Modal/actions'
+import CloseIcon from 'components/svg/CloseIcon'
+import MarkIcon from 'components/svg/MarkIcon'
 import {
-  taskNegotiationAcceptConditions,
-  taskNegotiationAcceptConditionsRequest, taskNegotiationAcceptTaskOffer,
-  taskNegotiationDeclineConditions,
-  taskNegotiationDeclineConditionsRequest, taskNegotiationDeclineTaskOffer, taskNegotiationSetCurrentMessage,
+  taskNegotiationAcceptConditions, taskNegotiationAcceptTaskOffer,
+  taskNegotiationDeclineConditions, taskNegotiationDeclineTaskOffer, taskNegotiationSetCurrentMessage,
   taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
-} from "components/TaskNegotiation/actions";
-import Avatar from "components/ui/Avatar";
-import AvatarRound from "components/ui/AvatarRound";
-import Button from "components/ui/Button";
-import Modal from "components/ui/Modal";
-import { format } from "date-fns";
-import { IChat, IChatMessage, ITask, ITaskNegotiationState, ITaskNegotiationType } from "types";
-import { getCategoryTranslation } from "utils/translations";
+} from 'components/TaskNegotiation/actions'
+import Button from 'components/ui/Button'
+import { format } from 'date-fns'
+import { IChatMessage, ITask, ITaskNegotiationState, ITaskNegotiationType } from 'types'
 import styles from './index.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 
 
@@ -37,24 +29,24 @@ interface Props {
 }
 
 export default function ChatMessageTaskDetails({ message, task, showHire, showEdit, showReject, showFinish, showAccept, outDatedText }: Props) {
-  const dispatch = useDispatch();
-  const { t } = useTranslation('common');
-  const isActionsDisabled = [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToMaster].includes(message.taskNegotiation.state);
+  const dispatch = useDispatch()
+  const { t } = useTranslation('common')
+  const isActionsDisabled = [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToMaster].includes(message.taskNegotiation.state)
   const handleReject = () => {
     if(message.taskNegotiation.type === ITaskNegotiationType.TaskOffer){
       dispatch(confirmOpen({
         description: t('task.confirmDecline'),
         onConfirm: () => {
-          dispatch(taskNegotiationDeclineTaskOffer(message.taskNegotiation));
+          dispatch(taskNegotiationDeclineTaskOffer(message.taskNegotiation))
         }
-      }));
+      }))
     }else{
       dispatch(confirmOpen({
         description: t('chat.rejectConditions'),
         onConfirm: () => {
-          dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id));
+          dispatch(taskNegotiationDeclineConditions(message.taskNegotiation.id, message.id))
         }
-      }));
+      }))
     }
 
   }
@@ -64,30 +56,30 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
       dispatch(confirmOpen({
         description: t('chat.acceptOffer'),
         onConfirm: () => {
-          dispatch(taskNegotiationAcceptTaskOffer(message.taskNegotiation));
+          dispatch(taskNegotiationAcceptTaskOffer(message.taskNegotiation))
         }
-      }));
+      }))
     }else{
       dispatch(confirmOpen({
         description: t('chat.acceptConditions'),
         onConfirm: () => {
-          dispatch(taskNegotiationAcceptConditions(message.taskNegotiation.id, message.id));
+          dispatch(taskNegotiationAcceptConditions(message.taskNegotiation.id, message.id))
         }
-      }));
+      }))
     }
   }
 
   const handleEdit = () => {
-    dispatch(taskNegotiationSetCurrentTask(task));
-    dispatch(taskNegotiationSetCurrentMessage(message));
-    dispatch(taskNegotiationSetCurrentNegotiation(message.taskNegotiation));
-    dispatch(taskEditConditionsOpen());
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskNegotiationSetCurrentMessage(message))
+    dispatch(taskNegotiationSetCurrentNegotiation(message.taskNegotiation))
+    dispatch(taskEditConditionsOpen())
   }
   const handleHire = () => {
-    dispatch(taskNegotiationSetCurrentTask(task));
-    dispatch(taskNegotiationSetCurrentMessage(message));
-    dispatch(taskNegotiationSetCurrentNegotiation(message.taskNegotiation));
-    dispatch(taskHireMasterOpen());
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskNegotiationSetCurrentMessage(message))
+    dispatch(taskNegotiationSetCurrentNegotiation(message.taskNegotiation))
+    dispatch(taskHireMasterOpen())
   }
   const getStatus = () => {
     switch (message.taskNegotiation.state) {
@@ -98,7 +90,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
       case ITaskNegotiationState.SentToMaster:
       case ITaskNegotiationState.SentToClient:
       default:
-        return null;
+        return null
     }
   }
   return (

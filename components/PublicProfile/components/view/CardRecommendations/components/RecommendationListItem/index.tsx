@@ -1,9 +1,6 @@
 import styles from './index.module.scss'
 
-import {IProfileRecommendation, ProfileData} from 'types'
-import Card from 'components/PublicProfile/components/Card'
-import LocationIcon from 'components/svg/LocationIcon'
-import UserIcon from 'components/svg/UserIcon'
+import {IProfileRecommendation} from 'types'
 import Avatar from 'components/ui/Avatar'
 import {format} from 'date-fns'
 

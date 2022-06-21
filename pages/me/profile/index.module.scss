@@ -7,7 +7,7 @@
 .formTip{
   font-size: 14px;
   line-height: 36px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     padding: 0 20px;
   }
 
@@ -17,13 +17,13 @@
   background:  #DDDDE5;
   margin: 70px 0px 58px;
   width: 100%;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     display: none;
   }
 }
 .form{
   width: 50%;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     width: 100%;
     padding: 0 20px;
     margin-top: 75px;
@@ -33,7 +33,7 @@
   margin-top: 30px;
   display: flex;
   align-items: flex-start;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     flex-direction: column;
     padding: 0 20px;
   }
@@ -43,7 +43,7 @@
 }
 
 .wrapper{
-    @media screen and (max-width: $sm-max) {
+    @media screen and (max-width: $xs-max) {
       width: 100%;
       button{
         width: 100%;

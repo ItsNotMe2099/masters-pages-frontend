@@ -1,28 +1,24 @@
-import AvatarInput from "components/ui/AvatarInput";
+import AvatarInput from 'components/ui/AvatarInput'
 import Button from 'components/ui/Button'
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import InputCheckbox from "components/ui/Inputs/InputCheckbox";
-import * as React from "react";
+import FormError from 'components/ui/Form/FormError'
+import Input from 'components/ui/Inputs/Input'
+import InputCheckbox from 'components/ui/Inputs/InputCheckbox'
+import * as React from 'react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
-import { createTextMask } from "redux-form-input-masks";
-import { IRootState } from "types";
-import { maskBirthDate } from "utils/masks";
-import {arrayNotEmpty, birthdate, date, required} from "utils/validations";
-import { useDispatch, useSelector, connect } from 'react-redux'
+import { IRootState } from 'types'
+import { birthdate, date, required} from 'utils/validations'
+import { useSelector, connect } from 'react-redux'
 import InputLocation from 'components/ui/Inputs/InputLocation'
 import styles from './index.module.scss'
-import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory';
-import {useTranslation, Trans} from 'i18n'
+import CheckboxSubCategory from 'components/ui/Form/MasterProfile/CheckboxSubCategory'
+import {useTranslation, Trans} from 'next-i18next'
 import InputCountry from 'components/ui/Inputs/InputCountry'
-import RegistrationForm from 'pages/RegistrationPage/Form'
-import CreateTaskForm from 'pages/CreateTaskPage/Form'
 import InputDate from 'components/ui/Inputs/InputDate'
 
 let MasterForm = props => {
   const { handleSubmit } = props
   const error = useSelector((state: IRootState) => state.profile.formError)
-  const {t} = useTranslation();
+  const {t} = useTranslation()
   return (
     <div>
     <form className={styles.form} onSubmit={handleSubmit}>

@@ -1,15 +1,12 @@
-import { attachPhoto, fetchChat, sendMessage } from "components/Chat/actions";
-import TextArea from "components/ui/Inputs/TextArea";
-import Loader from "components/ui/Loader";
-import { useEffect, useState } from "react";
+import { sendMessage } from 'components/Chat/actions'
+import { useEffect, useState } from 'react'
 import S3Upload from 'utils/s3upload'
-import { IChat, IChatMessage, IChatMessageType, IRootState } from "types";
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import { Field, reduxForm } from 'redux-form'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 
 import Cookies from 'js-cookie'
-import { useDropzone, DropzoneOptions } from 'react-dropzone'
+import { useDropzone } from 'react-dropzone'
 interface Props {
   onFileUploaded: (file) => void
   onFileDrop: (file) => void
@@ -21,7 +18,7 @@ export default function EventChatAttachFile(props: Props) {
 
 
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('')
 
   const transformFile = file => {
     if (!(file instanceof File)) {
@@ -40,7 +37,7 @@ export default function EventChatAttachFile(props: Props) {
     return transformedFile
   }
   const onFinishFileUpload = (result) => {
-    props.onFileUploaded(result);
+    props.onFileUploaded(result)
   }
 
   const onFileUploadError = (error) => {
@@ -68,7 +65,7 @@ export default function EventChatAttachFile(props: Props) {
       files: files,
       ...{}
     }
-    props.onFileDrop(transformFile(files[0]));
+    props.onFileDrop(transformFile(files[0]))
     new S3Upload(options as any)
 
   }
@@ -79,7 +76,7 @@ export default function EventChatAttachFile(props: Props) {
     }
   }
   const handleChange = (e) => {
-    setMessage(e.currentTarget.value);
+    setMessage(e.currentTarget.value)
   }
 
   useEffect(() => {

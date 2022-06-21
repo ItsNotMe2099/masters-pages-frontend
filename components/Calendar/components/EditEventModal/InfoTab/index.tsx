@@ -1,15 +1,14 @@
-import * as React from "react";
-import {IEvent, IRootState, ITask, SkillData, SkillListItem} from "types";
+import * as React from 'react'
+import {IEvent, IRootState} from 'types'
 import styles from './index.module.scss'
 import {getCategoryTranslation} from 'utils/translations'
 import EventChatMessageList
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventChatMessageList'
 import {useEffect, useState} from 'react'
-import {fetchChatEventDialog, fetchChatEventLogDialog} from 'components/Chat/actions'
+import { fetchChatEventLogDialog} from 'components/Chat/actions'
 import {useDispatch, useSelector} from 'react-redux'
-import ArrowDown from 'components/svg/ArrowDown'
 import ArrowDownSmall from 'components/svg/ArrowDownSmall'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   event?: IEvent
@@ -19,14 +18,14 @@ const InfoTab = ({event}: Props) => {
 
   const chatLoading = useSelector((state: IRootState) => state.chat.chatLoading)
   const chat = useSelector((state: IRootState) => state.chat.chat)
-  const dispatch = useDispatch();
-  const [eventLogIsShow, setEventLogIsShow] = useState(false);
-  const {t, i18n} = useTranslation('common');
+  const dispatch = useDispatch()
+  const [eventLogIsShow, setEventLogIsShow] = useState(false)
+  const {t, i18n} = useTranslation('common')
   useEffect(() => {
-    dispatch(fetchChatEventLogDialog(event.id, event.participantId));
-  }, []);
+    dispatch(fetchChatEventLogDialog(event.id, event.participantId))
+  }, [])
   const handleEventLogToolbarClick = () => {
-    setEventLogIsShow(!eventLogIsShow);
+    setEventLogIsShow(!eventLogIsShow)
   }
   return (
     <div className={styles.root} >

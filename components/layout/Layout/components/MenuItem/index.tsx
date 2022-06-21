@@ -1,9 +1,8 @@
-import Chat from "components/Chat";
-import Loader from "components/ui/Loader";
-import {IRootState} from "types";
 import Link from 'next/link'
 import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
+import { useDispatch} from 'react-redux'
+import {ProfileRole} from 'data/intefaces/IProfile'
+import classNames from 'classnames'
 
 interface Props {
   isActive: boolean
@@ -12,6 +11,7 @@ interface Props {
   icon?: string
   mode?: string
   badge?: number
+  className?: string
 
   onClick?: () => void
 }
@@ -22,19 +22,22 @@ export default function MenuItem(props: Props) {
 
   const getModeClass = () => {
     switch (mode) {
-      case 'master':
-        return styles.modeMaster;
-      case 'volunteer':
-        return styles.modeVolunteer;
-      case 'client':
+      case ProfileRole.Master:
+        return styles.modeMaster
+      case ProfileRole.Volunteer:
+        return styles.modeVolunteer
+      case ProfileRole.Corporate:
+        return styles.modeCorporate
+      case ProfileRole.Client:
+        return styles.modeClient
       default:
-        return styles.modeClient;
+        return styles.modeGuest
     }
   }
   const handleClick = (e) => {
    if(onClick) {
-     e.stopPropagation();
-    onClick();
+     e.stopPropagation()
+    onClick()
    }
   }
   const renderButton = () => {
@@ -54,14 +57,14 @@ export default function MenuItem(props: Props) {
   if(link) {
     return (
       <Link href={link}>
-        <a className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()}`} onClick={handleClick}>
+        <a className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()} ${props.className}`} onClick={handleClick}>
           {renderButton()}
         </a>
       </Link>
     )
   }else{
-    return (  <div className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()}`} onClick={handleClick}>
+    return (  <div className={`${styles.root} ${isActive && styles.isActive} ${getModeClass()} ${props.className}`} onClick={handleClick}>
       {renderButton()}
-    </div>);
+    </div>)
   }
 }

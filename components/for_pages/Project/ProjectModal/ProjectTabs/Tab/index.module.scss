@@ -1,0 +1,30 @@
+@import "scss/index";
+.root{
+  position: relative;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  padding: 0px 15px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  .icon{
+    margin-right: 10px;
+  }
+  &:hover{
+    background: #FFCB2E;
+  }
+  &.active{
+    background: #FFCB2E;
+  }
+}
+
+.volunteer{
+  &:hover{
+    background: #01516A;
+  }
+  &.active{
+    background: #01516A;
+  }
+}
+

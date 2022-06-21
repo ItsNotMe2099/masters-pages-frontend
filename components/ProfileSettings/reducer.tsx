@@ -1,6 +1,6 @@
-import ApiActionTypes from "../../constants/api";
-import ActionTypes from "./const";
-import {IProfileSettings} from "../../types";
+import ApiActionTypes from '../../constants/api'
+import ActionTypes from './const'
+import {IProfileSettings} from '../../types'
 
 export interface ProfileSettingsState {
   loading: boolean
@@ -18,29 +18,29 @@ export default function ProfileSettingsReducer(state = {...initialState}, action
   switch (action.type) {
 
     case ActionTypes.FETCH_PROFILE_SETTINGS:
-      state.loading = true;
+      state.loading = true
       break
     case ActionTypes.FETCH_PROFILE_SETTINGS + ApiActionTypes.SUCCESS:
-      state.loading = false;
+      state.loading = false
       state.settings = action.payload
       break
     case ActionTypes.FETCH_PROFILE_SETTINGS + ApiActionTypes.FAIL:
-      state.loading = false;
+      state.loading = false
       break
 
     case ActionTypes.UPDATE_PROFILE_SETTINGS_REQUEST:
-      state.formLoading = true;
+      state.formLoading = true
       break
     case ActionTypes.UPDATE_PROFILE_SETTINGS_REQUEST + ApiActionTypes.SUCCESS:
-      state.formLoading = false;
+      state.formLoading = false
       break
     case ActionTypes.UPDATE_PROFILE_SETTINGS_REQUEST + ApiActionTypes.FAIL:
-      state.formLoading = false;
+      state.formLoading = false
       state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break
 
 
   }
 
-  return state
+   return {...state}
 }

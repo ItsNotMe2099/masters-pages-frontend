@@ -11,7 +11,7 @@ export const fetchSavedPeopleRequest = (data: {page: number, limit?: number}) =>
 
 export const saveProfileRequest = (profileId: number) => action(ActionTypes.SAVE_PEOPLE_REQUEST, {
   api: {
-    url: `/api/profile/saved-profiles`,
+    url: '/api/profile/saved-profiles',
     method: 'POST',
     data: {
       profileId

@@ -1,10 +1,10 @@
-import { PWRecoverySecondSubmit, PWRecoveryFinalSubmit} from "components/Auth/PWRecovery/actions";
-import Modal from "components/ui/Modal";
+import { PWRecoveryFinalSubmit} from 'components/Auth/PWRecovery/actions'
+import Modal from 'components/ui/Modal'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from 'types'
-import PWRecoveryNewPW from "./Form";
-import {useTranslation, withTranslation} from "i18n";
+import PWRecoveryNewPW from './Form'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   isOpen: boolean
@@ -12,12 +12,12 @@ interface Props {
 }
 
 const PWRecoverySuccess = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
 
   const handleSubmit = (data) => {
-    dispatch(PWRecoveryFinalSubmit(data));
+    dispatch(PWRecoveryFinalSubmit(data))
   }
 
   return (
@@ -35,4 +35,4 @@ const PWRecoverySuccess = (props: Props) => {
     </Modal>
   )
 }
-export default PWRecoverySuccess;
+export default PWRecoverySuccess

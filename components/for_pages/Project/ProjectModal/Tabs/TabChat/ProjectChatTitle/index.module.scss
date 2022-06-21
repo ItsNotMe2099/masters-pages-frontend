@@ -1,0 +1,43 @@
+@import "scss/index";
+.root{
+  display: flex;
+  align-items: center;
+  height: 71px;
+  padding: 0px 19px;
+  z-index: 3;
+  position: relative;
+  justify-content: space-between;
+  border-bottom: 1px solid #C4C4C4;
+  @media screen and (max-width: 1280px){
+    flex-direction: column;
+    padding: 19px;
+    height: 100%;
+  }
+}
+
+.left{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.controls{
+  @media screen and (min-width: 1281px){
+    display: none;
+  }
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+  svg{
+    cursor: pointer;
+  }
+}
+.title{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #47495D;
+  text-decoration: underline;
+  margin-left: 12px;
+  flex: 1;
+}

@@ -1,22 +1,22 @@
-import Logo from "components/Logo";
-import SearchProfileFilter from "components/SearchPage/Filter";
-import ArrowDown from "components/svg/ArrowDown";
-import { fetchProfileSearchList, resetProfileSearchList, setFilterProfileSearch } from "components/ProfileSearch/actions";
-import { useRouter } from "next/router";
-import {default as React, useState} from "react";
-import { IRootState } from "types";
+import Logo from 'components/Logo'
+import SearchProfileFilter from 'components/SearchPage/Filter'
+import ArrowDown from 'components/svg/ArrowDown'
+import { fetchProfileSearchList, resetProfileSearchList, setFilterProfileSearch } from 'components/ProfileSearch/actions'
+import { useRouter } from 'next/router'
+import {default as React, useState} from 'react'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "i18n";
-import Header from "../../../layout/Layout/LayoutAuthorized/mobile/Header";
+import { useTranslation } from 'next-i18next'
+import Header from '../../../layout/Layout/LayoutAuthorized/mobile/Header'
 interface Props {
   searchRole?: 'master' | 'volunteer'
 }
 const MapHeader = (props: Props) => {
   const {t} = useTranslation()
   const [expanded, setExpanded] = useState(false)
-  const router = useRouter();
+  const router = useRouter()
   const dispatch = useDispatch()
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
 
@@ -26,7 +26,7 @@ const MapHeader = (props: Props) => {
   const getQueryFilter = () => {
     try {
       if((router.query as any).filter) {
-        return JSON.parse((router.query as any).filter);
+        return JSON.parse((router.query as any).filter)
       }
     }catch (e) {
 
@@ -46,7 +46,7 @@ const MapHeader = (props: Props) => {
     }
   }
   const handleOnChangeFilter = (data) => {
-    dispatch(setFilterProfileSearch(data));
+    dispatch(setFilterProfileSearch(data))
     dispatch(resetProfileSearchList())
     dispatch(fetchProfileSearchList({limit: 10000}))
     router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(data), sortType})}`, undefined, { shallow: true })

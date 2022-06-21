@@ -2,24 +2,21 @@ import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import dynamic from 'next/dynamic'
-import {default as React, useEffect, useState} from "react";
-import {useTranslation} from "i18n";
+import {default as React, useState} from 'react'
+import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 import {format} from 'date-fns'
-import cookie from "js-cookie";
+import cookie from 'js-cookie'
 const queryString = require('query-string')
-import axios from 'axios';
+import axios from 'axios'
 const SharePersonalLabel = dynamic(() => import('components/Share/PersonalLabel'), {
   ssr: false
 })
-import {IProfileGalleryItem, IRootState} from 'types'
+import { IRootState} from 'types'
 
 import Modals from 'components/layout/Modals'
-import {fetchReportFilters, fetchReportList} from 'components/Report/actions'
-import MultiSelect from 'components/ui/Inputs/MultiSelect'
-import {CheckboxList} from 'components/ui/Inputs/CheckboxList'
-import {addDays} from 'date-fns'
+import { fetchReportList} from 'components/Report/actions'
 import ReportFilterForm from 'components/Report/ReportFilterForm'
 import Button from 'components/PublicProfile/components/Button'
 import Loader from 'components/ui/Loader'
@@ -27,13 +24,13 @@ import Loader from 'components/ui/Loader'
 
 const ReportPage = (props) => {
   const {t} = useTranslation('common')
-  const router = useRouter();
+  const router = useRouter()
 
-  const filter = useSelector((state: IRootState) => state.report.filter);
-  const list = useSelector((state: IRootState) => state.report.list);
-  const listLoading = useSelector((state: IRootState) => state.report.listLoading);
+  const filter = useSelector((state: IRootState) => state.report.filter)
+  const list = useSelector((state: IRootState) => state.report.list)
+  const listLoading = useSelector((state: IRootState) => state.report.listLoading)
   const dispatch = useDispatch()
-  const [fields, setFields] = useState([]);
+  const [fields, setFields] = useState([])
   const [filterData, setFilterData] = useState({
     range: {
       start: new Date(),
@@ -53,23 +50,23 @@ const ReportPage = (props) => {
       'events',
       'reviewMark',
       'address', ]
-  });
+  })
 
 
 
   const handleChange = (data) => {
     if(data.fields){
-      setFields(data.fields);
+      setFields(data.fields)
     }
     const filter = {
       ...data,
       ...data.range as {start: Date, end: Date},
 
-    };
+    }
 
 
     setFilterData(filter)
-    dispatch(fetchReportList(filter));
+    dispatch(fetchReportList(filter))
   }
   const handleDownload = () => {
     const token = cookie.get('token') as string
@@ -90,7 +87,7 @@ const ReportPage = (props) => {
       }
     })
       .then(response => new Blob([response.data], {
-        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       }))
       .then(blob => {
         const url = window.URL.createObjectURL(blob)
@@ -148,5 +145,5 @@ const ReportPage = (props) => {
     </Layout>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default ReportPage

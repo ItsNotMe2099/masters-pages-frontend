@@ -1,8 +1,7 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import { ReactElement, useContext, useRef, useState } from "react";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import { ReactElement, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
 interface OptionItem{
   label: string
   value: string
@@ -13,32 +12,32 @@ interface Props {
   onChange?: (item) => void
 }
 export const DropDownInput = (props: Props) => {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const dropdownRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const onClick = (e) => {
     e.preventDefault()
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
 
-  const [value, setValue] = useState(props.options[0]);
+  const [value, setValue] = useState(props.options[0])
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
-    setValue(item);
+    setValue(item)
     if(props.onChange){
-      props.onChange(item);
+      props.onChange(item)
     }
-    setIsActive(false);
+    setIsActive(false)
   }
   const handleActiveOptionClick = (e) => {
-    e.preventDefault();
-    setIsActive(false);
+    e.preventDefault()
+    setIsActive(false)
   }
   return (
     <div className={styles.root}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
         {value && props.item(value)}
-        <img className={styles.arrow} src={`/img/icons/arrowLarge.svg`} alt=''/>
+        <img className={styles.arrow} src={'/img/icons/arrowLarge.svg'} alt=''/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
         <ul>
@@ -46,7 +45,7 @@ export const DropDownInput = (props: Props) => {
           <li className={styles.dropdownItem}><a href="" onClick={handleActiveOptionClick}>
             {props.item(value)}
             <img className={styles.arrowActive}
-                 src={`/img/icons/arrowLarge.svg`}
+                 src={'/img/icons/arrowLarge.svg'}
                  alt=''/></a></li>
           }
           {props.options.filter(item => !value || item.value != value.value).map(item => (
@@ -61,5 +60,5 @@ export const DropDownInput = (props: Props) => {
         </ul>
       </nav>
     </div>
-  );
-};
+  )
+}

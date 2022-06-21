@@ -1,18 +1,13 @@
-import AvatarInput from "components/ui/AvatarInput";
-import FormError from "components/ui/Form/FormError";
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
-import { useSelector, useDispatch, connect } from 'react-redux'
-import { IRootState } from "types";
+import FormError from 'components/ui/Form/FormError'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
-import { Field, reduxForm, formValueSelector } from 'redux-form'
-import {useTranslation, withTranslation} from "i18n";
-import TextArea from 'components/ui/Inputs/TextArea'
+import { Field, reduxForm } from 'redux-form'
+import { useTranslation } from 'next-i18next'
 import Button from 'components/PublicProfile/components/Button'
 import {useEffect, useState} from 'react'
-import InputCategory from 'components/ui/Inputs/InputCategory'
-import {arrayNotEmpty, required} from 'utils/validations'
-import CheckboxListSubCategories from 'components/ui/Inputs/CheckboxListSubCategories'
+import { required} from 'utils/validations'
 import InputSubCategory from 'components/ui/Inputs/InputSubCategory'
 interface Props{
   onCancel: () => void,
@@ -22,15 +17,15 @@ interface Props{
   change?: (name, val) => void
 }
 let CardCategoryForm = (props: Props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
   const error = useSelector((state: IRootState) => state.skill.formError)
-  const [categoryId, setCategoryId] = useState(null);
-  const [mainCategoryId, setMainCategoryId] = useState(null);
+  const [categoryId, setCategoryId] = useState(null)
+  const [mainCategoryId, setMainCategoryId] = useState(null)
 
   useEffect(() => {
     const categoryId = props.initialValues?.categoryId
     if(categoryId){
-      setCategoryId(categoryId);
+      setCategoryId(categoryId)
     }
   }, [])
 
@@ -43,8 +38,8 @@ let CardCategoryForm = (props: Props) => {
         label={t('createTask.fieldMainCategory')}
         validate={[required]}
         onChange={(val) =>{
-          props.change('categoryId', null);
-          props.change('subCategoryId', null);
+          props.change('categoryId', null)
+          props.change('subCategoryId', null)
           setMainCategoryId(val)}
         }
       />
@@ -56,7 +51,7 @@ let CardCategoryForm = (props: Props) => {
         validate={[required]}
         categoryId={mainCategoryId}
         onChange={(val) =>{
-          props.change('subCategoryId', null);
+          props.change('subCategoryId', null)
           setCategoryId(val)}
         }
       />}

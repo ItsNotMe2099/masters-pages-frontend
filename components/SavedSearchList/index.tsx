@@ -1,4 +1,4 @@
-import {IRootState} from "types";
+import {IRootState} from 'types'
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import {
@@ -9,10 +9,8 @@ import {
 import SavedSearchListItem from 'components/SavedSearchList/components'
 import React, {useEffect} from 'react'
 import {confirmOpen, saveProfileSearchOpen, saveTaskSearchOpen} from 'components/Modal/actions'
-import {setFilterTaskSearch} from 'components/TaskSearch/actions'
-import {setFilterProfileSearch} from 'components/ProfileSearch/actions'
 import BookmarkSvg from 'components/svg/Bookmark'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
@@ -21,17 +19,17 @@ interface Props {
 }
 
 export default function SavedSearchList(props: Props) {
-  const {type, onChange} = props;
-  const dispatch = useDispatch();
+  const {type, onChange} = props
+  const dispatch = useDispatch()
   const list = useSelector((state: IRootState) => state.savedSearch.list)
-  const {t} = useTranslation();
+  const {t} = useTranslation()
 
   useEffect(() => {
-    dispatch(resetSavedSearchesList());
+    dispatch(resetSavedSearchesList())
     if (type === 'task') {
-      dispatch(fetchSavedTaskSearchesRequest(1, 100));
+      dispatch(fetchSavedTaskSearchesRequest(1, 100))
     } else {
-      dispatch(fetchSavedProfileSearchesRequest(1, 100));
+      dispatch(fetchSavedProfileSearchesRequest(1, 100))
     }
   }, [])
 
@@ -51,25 +49,25 @@ export default function SavedSearchList(props: Props) {
       estimateMin: item.estimateMin,
       estimateMax: item.estimateMax,
       executionType: item.executionType,
-      masterRole: item.masterRole};
+      masterRole: item.masterRole}
     if(item.budgetMin || item.budgetMax){
       data.price = {type: 'fixed', min: item.budgetMin, max: item.budgetMax}
     }else if(item.ratePerHourMin || item.ratePerHourMax){
       data.price = {type: 'rate', min: item.budgetMin, max: item.budgetMax}
     }
-    onChange(data);
+    onChange(data)
   }
   const handleDelete = (item) => {
     dispatch(confirmOpen({
       description: `${t('savedSearch.areYouSure')}«${item.name || `${t('savedSearch.search')} #${item.id}`}»?`,
       onConfirm: () => {
         if (type === 'task') {
-          dispatch(deleteSavedTaskSearch(item.id));
+          dispatch(deleteSavedTaskSearch(item.id))
         } else {
-          dispatch(deleteSavedProfileSearch(item.id));
+          dispatch(deleteSavedProfileSearch(item.id))
         }
       }
-    }));
+    }))
 
   }
 
@@ -77,7 +75,7 @@ export default function SavedSearchList(props: Props) {
     if (type === 'task') {
       dispatch(saveTaskSearchOpen())
     }else{
-      dispatch(saveProfileSearchOpen());
+      dispatch(saveProfileSearchOpen())
     }
   }
 

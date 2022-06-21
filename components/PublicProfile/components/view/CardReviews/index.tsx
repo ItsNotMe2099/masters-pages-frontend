@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import {IFeedbacksToProfile, IRootState, ProfileData, SkillData} from 'types'
+import { IRootState, SkillData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import {default as React, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,23 +7,24 @@ import {fetchFeedbacksToProfileRequest, resetFeedbackList, setPageFeedback} from
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import ReviewListItem from 'components/PublicProfile/components/view/CardReviews/components/ReviewListItem'
-import {useTranslation, withTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   skill?: SkillData
 }
 const CardReviews = (props: Props) => {
-  const { profile, skill} = props;
-  const dispatch = useDispatch();
-  const list = useSelector((state: IRootState) => state.profileFeedback.list);
-  const listLoading = useSelector((state: IRootState) => state.profileFeedback.isLoading);
+  const { profile, skill} = props
+  const dispatch = useDispatch()
+  const list = useSelector((state: IRootState) => state.profileFeedback.list)
+  const listLoading = useSelector((state: IRootState) => state.profileFeedback.isLoading)
   const total = useSelector((state: IRootState) => state.profileFeedback.total)
   const page = useSelector((state: IRootState) => state.profileFeedback.page)
-  const  limit = 30;
-  const { t } = useTranslation('common');
+  const  limit = 30
+  const { t } = useTranslation('common')
   useEffect(() => {
-    dispatch(resetFeedbackList());
+    dispatch(resetFeedbackList())
     dispatch(fetchFeedbacksToProfileRequest({
       profileId: profile.id,
     ...(skill ? {subCategoryId: skill.id} : {}),
@@ -41,7 +42,7 @@ const CardReviews = (props: Props) => {
       ...(skill ? {subCategoryId: skill.id} : {}),
       page: page + 1,
       limit
-    }));
+    }))
   }
 
   return (

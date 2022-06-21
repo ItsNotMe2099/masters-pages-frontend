@@ -1,4 +1,3 @@
-import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab, SkillData} from "types";
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -19,7 +18,7 @@ interface IFollowerItemCommentList{
 export const createFollower = (data: any) => action(ActionTypes.CREATE_FOLLOWER, { data })
 export const createFollowerRequest = (data) => action(ActionTypes.CREATE_FOLLOWER_REQUEST, {
   api: {
-    url: `/api/profile-followers`,
+    url: '/api/profile-followers',
     method: 'POST',
     data: {...data},
   }

@@ -1,19 +1,17 @@
 import styles from './index.module.scss'
 
-import {IProfilePortfolio, ProfileData, SkillData} from 'types'
-import UserIcon from 'components/svg/UserIcon'
+import { SkillData} from 'types'
 import Button from 'components/PublicProfile/components/Button'
-import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {getMediaPath} from 'utils/media'
 import ProfileStatItemCard
   from 'components/PublicProfile/components/view/CardProfileStat/components/ProfileStatItemCard'
 import {getCategoryTranslation} from 'utils/translations'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 
 
 interface Props{
   model: SkillData,
-  profile: ProfileData
+  profile: IProfile
 }
 const ProfileStatItem = ({model, profile}: Props) => {
   const {i18n, t} = useTranslation('common')

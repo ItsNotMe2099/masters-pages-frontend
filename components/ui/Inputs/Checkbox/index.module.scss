@@ -3,7 +3,7 @@
 .root{
   position: relative;
   margin-bottom: 20px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     margin-bottom: 35px;
 }
 }

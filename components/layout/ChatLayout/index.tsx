@@ -1,6 +1,6 @@
-import Chat from "components/Chat";
-import Loader from "components/ui/Loader";
-import { IRootState } from "types";
+import Chat from 'components/Chat'
+import Loader from 'components/ui/Loader'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from 'components/layout/Layout'
@@ -15,7 +15,7 @@ interface Props {
 
  */
 
-export default function ChatPageLayout(props) {
+export default function ChatPageLayout(props: Props) {
   const dispatch = useDispatch()
   const chatLoading = useSelector((state: IRootState) => state.chat.chatLoading)
   const chat = useSelector((state: IRootState) => state.chat.chat)

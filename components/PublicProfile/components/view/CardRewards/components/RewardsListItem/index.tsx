@@ -1,9 +1,5 @@
 import styles from './index.module.scss'
 
-import {ProfileData} from 'types'
-import Card from 'components/PublicProfile/components/Card'
-import LocationIcon from 'components/svg/LocationIcon'
-import UserIcon from 'components/svg/UserIcon'
 
 interface Props{
   name: string

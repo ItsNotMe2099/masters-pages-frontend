@@ -1,0 +1,58 @@
+@import "scss/index";
+
+.root{
+
+  color: #6D718C;
+  padding: 25px 0px;
+}
+.top{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.status{
+  font-size: 14px;
+  font-weight: 700;
+  color: #27C60D;
+}
+.title{
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+}
+.header{
+  font-weight: 700;
+  font-size: 36px;
+  color: #000000;
+}
+.projectId{
+  color: #9A9A9A;
+}
+.dates{
+  color: #6D718C;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+  font-size: 14px;
+  .dateItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .dateItemLabel{
+      margin-right: 8px;
+    }
+    img{
+      margin-right: 4px;
+    }
+  }
+  .separator{
+    width: 1px;
+    height: 15px;
+    background: rgba(196, 196, 196, 1);
+    margin: 0px 16px;
+  }
+
+}

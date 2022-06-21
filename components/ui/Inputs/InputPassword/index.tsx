@@ -1,8 +1,5 @@
-import Input from "components/ui/Inputs/Input";
-import BaseInput from "components/ui/Inputs/Input/components/BaseInput";
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
+import Input from 'components/ui/Inputs/Input'
 import { useState } from 'react'
-import styles from './index.module.scss'
 
 interface Props {
   label: string

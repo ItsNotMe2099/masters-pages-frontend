@@ -1,15 +1,16 @@
-import Input from "components/ui/Inputs/Input";
-import * as React from "react";
+import Input from 'components/ui/Inputs/Input'
+import * as React from 'react'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-import { required } from "utils/validations";
+import { required } from 'utils/validations'
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import Button from 'components/ui/Button'
 import {IRootState} from 'types'
 import Logo from 'components/Logo'
 import FormError from 'components/ui/Form/FormError'
 import {resetShareByEmail} from 'components/Share/actions'
+import {useAppContext} from 'context/state'
 const queryString = require('query-string')
 
 interface Props {
@@ -24,16 +25,17 @@ let ShareByEmailForm = (props: Props) => {
   const dispatch = useDispatch()
 
   const { handleSubmit, subCategoryId, reset, customLink } = props
-  const error = useSelector((state: IRootState) => state.share.formError);
-  const loading = useSelector((state: IRootState) => state.share.formLoading);
-  const success = useSelector((state: IRootState) => state.share.formIsSuccess);
+  const error = useSelector((state: IRootState) => state.share.formError)
+  const loading = useSelector((state: IRootState) => state.share.formLoading)
+  const success = useSelector((state: IRootState) => state.share.formIsSuccess)
 
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile);
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + "//" + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`;
+  const appContext = useAppContext();
+  const profile = appContext.profile
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
 
   const handleReset = () => {
     reset()
-    dispatch(resetShareByEmail());
+    dispatch(resetShareByEmail())
   }
   return (
     <form className={styles.root} onSubmit={handleSubmit}>

@@ -7,14 +7,14 @@
 
 .iconDesktop{
   margin-right: 9px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: none;
   }
 }
 .iconMobile{
   margin-right: 9px;
   display: none;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     display: block;
   }
 }

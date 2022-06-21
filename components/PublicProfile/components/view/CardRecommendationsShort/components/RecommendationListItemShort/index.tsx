@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-import {IProfileRecommendation, ProfileData} from 'types'
+import {IProfileRecommendation} from 'types'
 import UserIcon from 'components/svg/UserIcon'
 
 interface Props{

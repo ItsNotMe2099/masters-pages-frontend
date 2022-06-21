@@ -1,5 +1,5 @@
-import ApiActionTypes from "constants/api";
-import ActionTypes from "./const";
+import ApiActionTypes from 'constants/api'
+import ActionTypes from './const'
 export interface SavedPeopleState {
   list: any[]
   listLoading: boolean,
@@ -20,34 +20,34 @@ export default function TaskUserReducer(state = {...initialState}, action) {
 
 
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST:
-      state.listLoading = true;
+      state.listLoading = true
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
-      state.listLoading = false;
+      state.listLoading = false
       state.list = [...state.list, ...action.payload.data]
       state.total = action.payload.total
       break
     case ActionTypes.FETCH_SAVED_PEOPLE_REQUEST + ApiActionTypes.FAIL:
-      state.listLoading = false;
+      state.listLoading = false
       break
 
     case ActionTypes.SAVE_PEOPLE_REQUEST:
-      state.savingProfileId = action.payload.api.data.profileId;
-      break;
+      state.savingProfileId = action.payload.api.data.profileId
+      break
     case ActionTypes.SAVE_PEOPLE_REQUEST + ApiActionTypes.SUCCESS:
-      state.savingProfileId = null;
-      break;
+      state.savingProfileId = null
+      break
 
     case ActionTypes.SAVE_PEOPLE_REQUEST + ApiActionTypes.FAIL:
-      state.savingProfileId = null;
-      break;
+      state.savingProfileId = null
+      break
     case ActionTypes.RESET_SAVED_PEOPLE_LIST:
-      state.listLoading = false;
+      state.listLoading = false
       state.list = []
       state.total = 0
-      state.page = 1;
+      state.page = 1
       break
   }
 
-  return state
+   return {...state}
 }

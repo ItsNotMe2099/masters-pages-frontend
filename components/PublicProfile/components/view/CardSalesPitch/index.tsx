@@ -1,38 +1,38 @@
 import styles from './index.module.scss'
 
-import {IRootState, ProfileData, SkillData} from 'types'
+import {IRootState, SkillData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
-import {hideProfileForm, showProfileForm, updateProfileByForm} from 'components/Profile/actions'
+import {hideProfileForm, showProfileForm} from 'components/Profile/actions'
 import { useSelector, useDispatch } from 'react-redux'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import SalesPitchForm from 'components/PublicProfile/components/view/CardSalesPitch/Form'
-import {updateSkill, updateSkillByForm} from 'components/Skill/actions'
-import ReactPlayer from 'react-player'
+import { updateSkillByForm} from 'components/Skill/actions'
 import {getMediaPath, isMediaImage, isMediaVideo} from 'utils/media'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 import Player from 'components/ui/video/Player'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   skill: SkillData
   isEdit: boolean
 }
 const CardSalesPitch = (props: Props) => {
-  const { profile, skill, isEdit } = props;
-  const dispatch = useDispatch();
+  const { profile, skill, isEdit } = props
+  const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.skill.formLoading)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'salesPitch');
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'salesPitch')
   const media = 'img.png'
   const file = skill.photos.length > 0 ? skill.photos[0] : null
   const {i18n, t} = useTranslation('common')
   const handleEditClick = () => {
-    dispatch(showProfileForm( 'salesPitch'));
+    dispatch(showProfileForm( 'salesPitch'))
 
   }
   const handleSubmit = (data) => {
-    dispatch(updateSkillByForm(skill.id, {...data, ...(data.photo ? {photos: [data.photo]} : {photos: []})}, 'salesPitch'));
+    dispatch(updateSkillByForm(skill.id, {...data, ...(data.photo ? {photos: [data.photo]} : {photos: []})}, 'salesPitch'))
   }
   const handleCancel = () => {
-    dispatch(hideProfileForm( 'salesPitch'));
+    dispatch(hideProfileForm( 'salesPitch'))
   }
   return (
     <Card isHidden={!isEdit && !file && !skill?.description} title={t('cardSalesPitch.salesPitch')} isLoading={showForm && formLoading} toolbar={isEdit ? [<FormActionButton type={'edit'} title={t('editSmall')} onClick={handleEditClick}/>] : []}>

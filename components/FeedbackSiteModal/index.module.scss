@@ -2,13 +2,13 @@
 
 .root{
     padding: 0;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         border-radius: 0;
-      } 
+      }
 }
 
 .innards{
-    padding: 0 22px 33px 28px; 
+    padding: 0 22px 33px 28px;
     display: flex;
     flex-direction: column;
 }
@@ -20,9 +20,9 @@
 .close{
     top: 25px;
     right: 22px;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         top: 18px;
-      } 
+      }
 }
 
 .money{

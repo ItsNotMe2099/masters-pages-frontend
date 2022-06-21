@@ -1,12 +1,11 @@
 import S3Upload from 'utils/s3upload'
 
-import FileInputPreview from "components/ui/Inputs/FilesUploadInput/components/FileInputPreview";
+import FileInputPreview from 'components/ui/Inputs/FilesUploadInput/components/FileInputPreview'
 import React, {
   useState, useCallback, useEffect, useRef,
 } from 'react'
-import Button from "../../../Button";
-import {modalClose} from "../../../../Modal/actions";
-import {useTranslation, Trans} from "i18n";
+import Button from '../../../Button'
+import { useTranslation } from 'next-i18next'
 export interface FileEntity {
   catalogId?: number
   key?: string
@@ -37,24 +36,24 @@ const FileWrapper = (props: Props) => {
 
   const {t} = useTranslation('common')
 
-  const [confirmRemove, setConfirmRemove] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(!file.rawFile);
-  const [progress, setProgress] = useState(0);
-  const fileUpload = useRef(null);
+  const [confirmRemove, setConfirmRemove] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(!file.rawFile)
+  const [progress, setProgress] = useState(0)
+  const fileUpload = useRef(null)
   const onFinishFileUpload = useCallback((result) => {
     onUpload({ ...file, catalogId: result.catalogId, path: result.fileKey, mediaId: result.mediaId })
-    setIsLoaded(true);
+    setIsLoaded(true)
   }, [props.onUpload])
   const onFileUploadError = (error) => {
     console.error('onFileUploadError', error)
-    setIsLoaded(true);
+    setIsLoaded(true)
   }
   const onProgress = (progress) => {
     setProgress(progress)
   }
   useEffect(() => {
     if (file.rawFile &&  !(file.rawFile as any)._uploading) {
-      (file.rawFile as any)._uploading = true;
+      (file.rawFile as any)._uploading = true
       const options = {
         ...uploadOptions,
         files: [file.rawFile],
@@ -62,21 +61,21 @@ const FileWrapper = (props: Props) => {
         onProgress: onProgress,
         onError: onFileUploadError,
       }
-      fileUpload.current = new S3Upload(options);
+      fileUpload.current = new S3Upload(options)
 
     }
   },[])
   const handleRemove = () => {
     if(  fileUpload.current  && file.rawFile){
-      fileUpload.current.cancel();
+      fileUpload.current.cancel()
     }
     onRemove(file)
   }
   const handleConfirmRemove = () => {
-    setConfirmRemove(true);
+    setConfirmRemove(true)
   }
   const handleCancelRemove = () => {
-    setConfirmRemove(false);
+    setConfirmRemove(false)
   }
 
 

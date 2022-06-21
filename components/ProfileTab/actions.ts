@@ -1,4 +1,4 @@
-import {IProfileTab, SkillData} from "types";
+import {IProfileTab} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -12,7 +12,7 @@ export const resetProfileTabForm = () => action(ActionTypes.RESET_PROFILE_TAB_FO
 export const createProfileTab = (data: IProfileTab, formKey: string) => action(ActionTypes.CREATE_PROFILE_TAB, { data, formKey})
 export const createProfileTabRequest = (data: IProfileTab) => action(ActionTypes.CREATE_PROFILE_TAB_REQUEST, {
   api: {
-    url: `/api/profile-tab`,
+    url: '/api/profile-tab',
     method: 'POST',
     data: {...data},
   }

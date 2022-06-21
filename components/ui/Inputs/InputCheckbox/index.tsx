@@ -1,6 +1,6 @@
-import styles from "./index.module.scss";
-import ErrorInput from "components/ui/Inputs/Input/components/ErrorInput";
-import Checkbox from "react-custom-checkbox";
+import styles from './index.module.scss'
+import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
+import Checkbox from 'react-custom-checkbox'
 
 interface Props {
   label: string
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function InputCheckbox(props: Props) {
-  const {input: {value, onChange}} = props;
+  const {input: {value, onChange}} = props
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
   return (

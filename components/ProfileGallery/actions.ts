@@ -1,4 +1,4 @@
-import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab, SkillData} from "types";
+import {IProfileGalleryComment, IProfileGalleryItem, IProfileTab} from 'types'
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 const queryString = require('query-string')
@@ -24,7 +24,7 @@ export const resetProfileGalleryForm = () => action(ActionTypes.RESET_PROFILE_GA
 export const createProfileGallery = (data: IProfileGalleryItem, formKey?: string) => action(ActionTypes.CREATE_PROFILE_GALLERY, { data, formKey})
 export const createProfileGalleryRequest = (data: IProfileGalleryItem) => action(ActionTypes.CREATE_PROFILE_GALLERY_REQUEST, {
   api: {
-    url: `/api/profile-gallery`,
+    url: '/api/profile-gallery',
     method: 'POST',
     data: {...data},
   }
@@ -68,7 +68,7 @@ export const fetchProfileGalleryItemCommentList = (data: IProfileGalleryItemComm
 
 export const createProfileGalleryLikeRequest = (profileGalleryId: number) => action(ActionTypes.CREATE_PROFILE_GALLERY_COMMENT_LIKE_REQUEST, {
   api: {
-    url: `/api/like`,
+    url: '/api/like',
     method: 'POST',
     data: {
       profileGalleryId

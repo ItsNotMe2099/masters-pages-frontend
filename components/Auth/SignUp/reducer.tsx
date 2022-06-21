@@ -1,4 +1,4 @@
-import ActionTypes from "./const";
+import ActionTypes from './const'
 
 export interface AuthSignUpState {
   formIsSuccess: boolean
@@ -19,24 +19,24 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
   switch(action.type) {
     case ActionTypes.SIGN_UP_SUBMIT:
       state.phone = action.payload.phone
-      state.loading = true;
+      state.loading = true
       break
     case ActionTypes.SIGN_UP_SUCCESS:
-      state.formIsSuccess = true;
-      state.loading = false;
+      state.formIsSuccess = true
+      state.loading = false
       break
 
     case ActionTypes.SIGN_UP_ERROR:
       state.formError = action.payload.error || action.payload.errors || 'Unknow error'
-      state.loading = false;
+      state.loading = false
       break
 
     case ActionTypes.SIGN_UP_RESET:
       state.formIsSuccess = false
       state.formError = ''
-      state.loading = false;
+      state.loading = false
       break
   }
 
-  return state
+   return {...state}
 }

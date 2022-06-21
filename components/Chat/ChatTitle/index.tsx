@@ -4,25 +4,25 @@ import {
   taskEditConditionsOpen,
   taskHireMasterOpen,
   taskMarkAsDoneOpen
-} from "components/Modal/actions";
-import CloseIcon from "components/svg/CloseIcon";
-import MarkIcon from "components/svg/MarkIcon";
+} from 'components/Modal/actions'
+import CloseIcon from 'components/svg/CloseIcon'
+import MarkIcon from 'components/svg/MarkIcon'
 import {
-  taskNegotiationAcceptTaskOffer,
   taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
-} from "components/TaskNegotiation/actions";
-import { taskCancel } from "components/TaskUser/actions";
-import AvatarRound from "components/ui/AvatarRound";
-import Button from "components/ui/Button";
-import { IChat, IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from "types";
+} from 'components/TaskNegotiation/actions'
+import { taskCancel } from 'components/TaskUser/actions'
+import AvatarRound from 'components/ui/AvatarRound'
+import Button from 'components/ui/Button'
+import { IRootState, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import {useTranslation, withTranslation} from "i18n";
-import { useState } from "react";
+import { useTranslation } from 'next-i18next'
+import { useState } from 'react'
 import cx from 'classnames'
-import ArrowDown from "components/svg/ArrowDown";
-
+import {useAppContext} from 'context/state'
+import {IChat} from 'data/intefaces/IChat'
+import Link from 'next/link'
 interface Props {
   chat: IChat
   onRequestClose?: () => void
@@ -30,54 +30,56 @@ interface Props {
 }
 
 export default function ChatTitle({chat, onClick}: Props) {
-  const dispatch = useDispatch();
-  const profile = useSelector((state: IRootState) => state.profile.currentProfile)
+  const dispatch = useDispatch()
+  const appContext = useAppContext();
+  const profile = appContext.profile
   const lastNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
   const handleHireMaster = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskHireMasterOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskHireMasterOpen())
 
   }
   const handleEditConditions = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation));
-    dispatch(taskEditConditionsOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(taskEditConditionsOpen())
 
   }
   const handleMarkAsDone = () => {
 
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskMarkAsDoneOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskMarkAsDoneOpen())
   }
   const handleFinish = () => {
-    dispatch(taskNegotiationSetCurrentTask(chat.task));
-    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation));
-    dispatch(finishTaskAsClientOpen());
+    dispatch(taskNegotiationSetCurrentTask(chat.task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(finishTaskAsClientOpen())
   }
   const handleCancel = () => {
     dispatch(confirmOpen({
       description: t('chat.cancelTask'),
       onConfirm: () => {
-        dispatch(taskCancel(chat.taskId));
+        dispatch(taskCancel(chat.taskId))
       }
-    }));
+    }))
   }
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('common')
 
-  const isInProgress = chat.task &&  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
-  const isFinished =  chat.task &&  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId);
-  const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled;
-
+  const isInProgress = chat.task &&  chat.task.status == ITaskStatus.InProgress && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId)
+  const isFinished =  chat.task &&  chat.task.status == ITaskStatus.Done && (chat.task.masterId === chat.profileId || chat.task.masterId === chat.participantId)
+  const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled
+  const isProjectGroup = chat.isGroup && chat.projectId
   const [isOpen, setIsOpen] = useState(false)
-
+  const profileLink = `/id${profile?.id}`
   return (
    <div className={styles.root}>
      <div className={styles.controls}>
       <CloseIcon onClick={onClick}/>
     </div>
      <div className={styles.left}>
-     <AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/>
-     {<div className={styles.title}>{`${profile.firstName} ${profile.lastName} (${chat.task ? chat.task.title : ''})`}</div>}
+       {isProjectGroup ? <img src='/img/icons/chat_group.svg'/> : <Link href={profileLink}><a><AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/></a></Link>}
+       <div className={styles.title}>{isProjectGroup ? chat.name : <Link href={profileLink}><a>{`${profile.firstName} ${profile.lastName} ${chat.task ? `(${chat.task.title})` : ''}`}</a></Link>}
+       </div>
      </div>
      <div className={styles.more} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
        {isOpen ? t('taskSearch.filter.less') : t('taskSearch.filter.more')}

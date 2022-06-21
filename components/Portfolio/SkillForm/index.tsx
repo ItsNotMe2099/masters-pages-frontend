@@ -1,48 +1,42 @@
-import AvatarInput from "components/ui/AvatarInput";
-import Button from "components/ui/Button";
-import FormError from "components/ui/Form/FormError";
-import CheckboxListSubCategories from "components/ui/Inputs/CheckboxListSubCategories";
-import Input from "components/ui/Inputs/Input";
-import InputCategory from "components/ui/Inputs/InputCategory";
-import InputCountry from "components/ui/Inputs/InputCountry";
-import InputLocation from "components/ui/Inputs/InputLocation";
-import { RadioList } from "components/ui/Inputs/RadioList";
-import RadioListSubCategories from "components/ui/Inputs/RadioListSubCategories";
-import FileInput from "components/ui/Inputs/FilesUploadInput";
-import SelectInput from "components/ui/Inputs/SelectInput";
-import TextArea from "components/ui/Inputs/TextArea";
-import { useEffect, useState } from "react";
-import * as React from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { IRootState } from "types";
-import { parserNumber } from "utils/formatters";
-import { maskBirthDate } from "utils/masks";
-import { arrayNotEmpty, required } from "utils/validations";
+import Button from 'components/ui/Button'
+import FormError from 'components/ui/Form/FormError'
+import Input from 'components/ui/Inputs/Input'
+import InputCategory from 'components/ui/Inputs/InputCategory'
+import RadioListSubCategories from 'components/ui/Inputs/RadioListSubCategories'
+import FileInput from 'components/ui/Inputs/FilesUploadInput'
+import SelectInput from 'components/ui/Inputs/SelectInput'
+import TextArea from 'components/ui/Inputs/TextArea'
+import { useEffect, useState } from 'react'
+import * as React from 'react'
+import { useSelector } from 'react-redux'
+import { IRootState } from 'types'
+import { parserNumber } from 'utils/formatters'
+import { required } from 'utils/validations'
 import styles from 'components/Portfolio/SkillForm/index.module.scss'
 import { Field, reduxForm } from 'redux-form'
-import {useTranslation, Trans} from 'i18n'
+import {useTranslation} from 'next-i18next'
 
 let SkillForm = (props) => {
   const error = useSelector((state: IRootState) => state.profile.formError)
-  const [categoryId, setCategoryId] = useState(null);
+  const [categoryId, setCategoryId] = useState(null)
   const [priceType, setPriceType] = useState(props.initialValues?.priceType || 'fixed')
-  const {t} = useTranslation('common');
+  const {t} = useTranslation('common')
   useEffect(() => {
 
     const categoryId = props.initialValues?.categoryId
     if(categoryId){
-      setCategoryId(categoryId);
+      setCategoryId(categoryId)
     }
   }, [])
 
   const handlePriceTypeChange = (value) => {
     if(value === 'fixed'){
-      props.change('pricePerHour', null);
+      props.change('pricePerHour', null)
     }
     if(value === 'rate'){
-      props.change('price', null);
+      props.change('price', null)
     }
-    setPriceType(value);
+    setPriceType(value)
   }
   return (
     <form className={styles.form} onSubmit={props.handleSubmit}>

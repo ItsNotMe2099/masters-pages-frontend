@@ -1,14 +1,14 @@
 import styles from './index.module.scss'
 
-import {ProfileData} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import RewardsListItem from 'components/PublicProfile/components/view/CardRewards/components/RewardsListItem'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData
+  profile: IProfile
 }
 const CardRewards = (props: Props) => {
-  const { profile } = props;
+  const { profile } = props
   const list = [
     {name: 'fdf dfd fdf'},
     {name: 'fdf dfd fdf'},

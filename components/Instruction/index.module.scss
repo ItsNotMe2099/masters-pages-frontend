@@ -1,7 +1,7 @@
 @import "scss/index";
 .root{
   margin-top: 110px;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
 
     margin-top: 70px;
   }
@@ -13,7 +13,7 @@
     }
     font-weight: bold;
     text-align: center;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-weight: bold;
         font-size: 30px;
         margin-bottom: 49px;
@@ -23,7 +23,7 @@
 .images{
     display: flex;
     position: relative;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     flex-direction: column;
   }
 }
@@ -31,7 +31,7 @@
 .texts{
     display: flex;
     margin-top: 109px;
-  @media screen and (max-width: $sm-max) {
+  @media screen and (max-width: $xs-max) {
     flex-direction: column;
   }
 }
@@ -40,7 +40,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         flex-direction: column;
         margin: auto;
     }
@@ -54,7 +54,7 @@
         flex: 1;
         margin-top: 109px;
     }
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         font-size: 18px;
         line-height: 22px;
     }
@@ -75,7 +75,7 @@
 
 .icon{
     margin: auto;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         width: 60px;
         height: 60px;
         margin: auto auto 19px auto !important;
@@ -87,7 +87,7 @@
     right: 56%;
     bottom: 70%;
     width: 20%;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         display: none;
     }
     &__mobile{
@@ -103,7 +103,7 @@
     left: 56%;
     bottom: 75%;
     width: 20%;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
         display: none;
     }
     &__mobile{

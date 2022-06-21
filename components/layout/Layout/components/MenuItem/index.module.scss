@@ -12,6 +12,12 @@
   padding: 0px 13px 0px 12px;
 
 }
+.modeGuest{
+  color: #383838;
+  &:hover{
+    background: #a39e9e;
+  }
+  }
 .modeClient{
 &:hover{
   background: #3AC073;
@@ -25,6 +31,11 @@
 .modeVolunteer{
   &:hover{
     background: #22A3CC;
+  }
+}
+.modeCorporate{
+  &:hover{
+    background: #E2AB05;
   }
 }
 .imageWrapper{
@@ -45,6 +56,9 @@
   }
   &.modeVolunteer{
     background: #01516A;
+  }
+  &.modeCorporate{
+    background: #E2AB05;
   }
 }
 

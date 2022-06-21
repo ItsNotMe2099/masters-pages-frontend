@@ -1,22 +1,18 @@
-import { confirmOpen } from "components/Modal/actions";
 import {
   fetchProfileSearchList,
   resetProfileSearchList,
   setFilterProfileSearch
-} from "components/ProfileSearch/actions";
-import SearchProfileForm from "components/SearchPage/Filter/Form";
-import BookmarkSvg from "components/svg/Bookmark";
-import { setPublishedTaskUser } from "components/TaskUser/actions";
-import { useRouter } from "next/router";
-import {useEffect, useRef, useState} from "react";
+} from 'components/ProfileSearch/actions'
+import SearchProfileForm from 'components/SearchPage/Filter/Form'
+import { useRouter } from 'next/router'
+import { useRef, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { IRootState } from "types";
-import styles from './index.module.scss'
-import {useTranslation} from "i18n";
+import { IRootState } from 'types'
+import { useTranslation } from 'next-i18next'
 import SavedSearchList from 'components/SavedSearchList'
 import {removeObjectEmpty} from 'utils/array'
 const queryString = require('query-string')
-import {change, initialize} from 'redux-form';
+import { initialize} from 'redux-form'
 interface Props {
   initialValues?: any
   collapsed?: boolean,
@@ -26,12 +22,12 @@ interface Props {
 }
 const SearchProfileFilter = (props: Props) => {
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const dispatch = useDispatch()
-  const router = useRouter();
+  const router = useRouter()
   const filter = useSelector((state: IRootState) => state.profileSearch.filter)
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
-      const ref = useRef(null);
+      const ref = useRef(null)
   const [showMap, setShowMap] = useState(false)
   const [formTriggerUpdate, setFormTriggerUpdate] = useState(false)
 
@@ -47,25 +43,25 @@ const SearchProfileFilter = (props: Props) => {
     }
   }
   const handleFilterChange = (data) => {
-    console.log("handleFilterChange",  ref.current)
+    console.log('handleFilterChange',  ref.current)
     if(      ref.current){
-      return;
+      return
     }
-    setFormTriggerUpdate(!formTriggerUpdate);
+    setFormTriggerUpdate(!formTriggerUpdate)
     if(props.onChange){
       //props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined});
 
     }else{
-      ref.current = true;
+      ref.current = true
 
-      dispatch(initialize('searchTaskForm', data));
+      dispatch(initialize('searchTaskForm', data))
 
       setTimeout(() => {
-        ref.current = false;
-      }, 800);
+        ref.current = false
+      }, 800)
 
-      console.log("FilterData", data, removeObjectEmpty(data));
-      dispatch(setFilterProfileSearch(data));
+      console.log('FilterData', data, removeObjectEmpty(data))
+      dispatch(setFilterProfileSearch(data))
       dispatch(resetProfileSearchList())
       dispatch(fetchProfileSearchList())
       router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(removeObjectEmpty(data)), sortType})}`, undefined, { shallow: true })

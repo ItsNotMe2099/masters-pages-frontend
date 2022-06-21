@@ -1,0 +1,82 @@
+@import "scss/index";
+.root{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1vw;
+  grid-row-gap: 1vw;
+  padding-bottom: 18px;
+  width: 67%;
+  @media screen and (max-width: $xs-max){
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 16px;
+  }
+}
+
+.select{
+  div{
+  :global{
+    .ma-select__menu{
+      z-index: 2;
+      margin-top: -8px;
+      box-shadow: none;
+      border-radius: 0px 0px 10px 10px;
+      border-bottom: 1px solid $grey;
+      border-left: 1px solid $grey;
+      border-right: 1px solid $grey;
+ //     @include boxShadowCard;
+   //   border: 1px solid $lightGrey;
+    }
+    .ma-select__control{
+      box-shadow: none;
+      border-radius: 6px !important;
+      min-height: 44px !important;
+    }
+    .ma-select__single-value{
+      font-size: 14px;
+      font-weight: 600;
+      color: $black;
+      margin: 0;
+    }
+    .ma-select__indicator-separator{
+      display: none;
+    }
+    .ma-select__option{
+      font-size: 14px;
+      font-weight: 500;
+      color: $black;
+      padding: 5px 10px;
+    }
+    .ma-select__option--is-focused{
+     // background: $lightGrey;
+    }
+    .ma-select__option--is-selected{
+      //background: $lightGrey;
+    }
+    .ma-select__placeholder{
+      color: #050505;
+      opacity: 1;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
+}
+
+.btns{
+  display: flex;
+}
+
+.saveSearch{
+  cursor: pointer;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-left: 26px;
+  svg{
+    margin-left: 8px;
+  }
+  &:hover{
+    font-weight: 700;
+  }
+}

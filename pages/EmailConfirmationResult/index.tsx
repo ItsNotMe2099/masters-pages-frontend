@@ -1,14 +1,13 @@
-import { modalClose } from "components/Modal/actions";
-import { registrationCompleteSubmit } from "components/Auth/RegistrationPage/actions";
+import { registrationCompleteSubmit } from 'components/Auth/RegistrationPage/actions'
 
-import Router, {useRouter} from "next/router";
-import { IRootState } from "types";
-import {getAuthServerSide} from "utils/auth";
+import {useRouter} from 'next/router'
+import { IRootState } from 'types'
+import {getAuthServerSide} from 'utils/auth'
 
 import styles from './index.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import Backgrounds from 'components/Backgrounds'
 
 interface Props {
@@ -17,13 +16,13 @@ interface Props {
 
 
 const RegistrationPage = (props: Props) => {
-  const { t } = useTranslation('common');
-  const router = useRouter();
+  const { t } = useTranslation('common')
+  const router = useRouter()
   const dispatch = useDispatch()
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
 
   const handleSubmit = (data) => {
-    dispatch(registrationCompleteSubmit(data));
+    dispatch(registrationCompleteSubmit(data))
   }
 
   return (
@@ -34,5 +33,5 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
-export const getServerSideProps = getAuthServerSide({redirect: true});
+export const getServerSideProps = getAuthServerSide({redirect: true})
 export default RegistrationPage

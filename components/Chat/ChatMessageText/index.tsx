@@ -1,18 +1,12 @@
-import { fetchChat } from "components/Chat/actions";
-import CloseIcon from "components/svg/CloseIcon";
-import MarkIcon from "components/svg/MarkIcon";
-import Avatar from "components/ui/Avatar";
-import AvatarRound from "components/ui/AvatarRound";
-import Modal from "components/ui/Modal";
-import { useState } from "react";
-import { IChat, IChatMessage } from "types";
-import { getMediaPath, isMediaImage, isMediaVideo } from "utils/media";
+import CloseIcon from 'components/svg/CloseIcon'
+import MarkIcon from 'components/svg/MarkIcon'
+import { useState } from 'react'
+import { getMediaPath, isMediaImage, isMediaVideo } from 'utils/media'
 import styles from './index.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
-import VideoThumbnail from 'react-video-thumbnail';
-import formatDistance from 'date-fns/formatDistance'
-import FsLightbox from 'fslightbox-react';
-import ChatMessage from 'components/Chat/ChatMessage'
+import VideoThumbnail from 'react-video-thumbnail'
+import FsLightbox from 'fslightbox-react'
+import {IProfile} from 'data/intefaces/IProfile'
+import Link from 'next/link'
 interface Props {
   message: string
   files?: any[]
@@ -22,25 +16,26 @@ interface Props {
   large?: boolean
   isRight?: boolean
   size: 'small' | 'normal'
+  author?: IProfile
 }
 
-export default function ChatMessageText({message, files, size, isRight, suffixIcon, suffixColor, suffixText, large}: Props) {
+export default function ChatMessageText({message, files, size, isRight, suffixIcon, suffixColor, suffixText, large, author}: Props) {
 
-  const [showGallery, setShowGallery] = useState(false);
+  const [showGallery, setShowGallery] = useState(false)
   const getIcon = () => {
       switch (suffixIcon) {
         case 'accepted':
           return <MarkIcon color={'#27C60D'}/>
-          break;
+          break
         case 'declined':
           return <CloseIcon color={'#000000'}/>
-          break;
+          break
       }
 
 
   }
   const handleImageClick = () =>{
-    setShowGallery(showGallery => !showGallery);
+    setShowGallery(showGallery => !showGallery)
   }
 
   const renderFile = (file, name) => {
@@ -62,10 +57,13 @@ export default function ChatMessageText({message, files, size, isRight, suffixIc
     return  <div className={styles.file}><img src={'/img/icons/file-document.svg'}/><a href={getMediaPath(file)} target={'blank'}>{name || file.split('/').pop()}</a></div>
   }
 
-  const mediaFiles = files ? files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)) : [];
+  const mediaFiles = files ? files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)) : []
   return (
    <div className={`${styles.root}  ${size === 'small' && styles.rootSmall} ${large && styles.rootLarge} ${isRight && styles.rootRight}`}>
      <div className={styles.messageWrapper}>
+       {author && <div className={styles.author}>
+          <Link href={`/id${author.id}`}><a>{`${author.firstName} ${author.lastName}`}:</a></Link>
+        </div>}
      {files && files.length > 0 && <div className={styles.files}>{files.map(file => renderFile(file.urlS3, file.name))}</div>}
      {files && files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)).length > 0 &&
      <FsLightbox

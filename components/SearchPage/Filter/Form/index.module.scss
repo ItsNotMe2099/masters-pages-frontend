@@ -7,7 +7,7 @@
     grid-row-gap: 1vw;
   padding-bottom: 18px;
 
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       display: flex;
       flex-direction: column;
       grid-row-gap: 16px;

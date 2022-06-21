@@ -6,7 +6,7 @@
   padding: 50px 30px 64px;
   z-index: 5;
   margin:  auto;
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 100% !important;
   }
   @media screen and (max-width: 600px){

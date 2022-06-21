@@ -1,41 +1,39 @@
 import styles from './index.module.scss'
-import Calendar from 'react-calendar';
+import Calendar from 'react-calendar'
 import CalendarSideBarCalendarCell
   from 'components/Calendar/components/CalendarSideBar/CalendarSideBarCalendar/CalendarSideBarCalendarCell'
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
 import {useEffect, useState} from 'react'
-import { getUserLocale } from 'get-user-locale';
-import cookie from 'js-cookie'
 import {
 
   getMonthStart,
-} from '@wojtekmaj/date-utils';
+} from '@wojtekmaj/date-utils'
 import {
   formatMonthYear,
   formatYear, getBegin,
   getBeginNext,
   getBeginPrevious, getCenturyLabel, getDecadeLabel
 } from 'utils/dateFormatters'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 
 
 interface Props {
   onChange: (value) => void,
   value: Date,
 }
-const views = ['decade', 'year', 'month'];
+const views = ['decade', 'year', 'month']
 
 export default function CalendarSideBarCalendar(props: Props) {
-  const {value, onChange} = props;
-  const [activeStartDate, setActiveStartDate] = useState(getMonthStart(new Date()));
-  const [view, setView] = useState('month');
-  const {t, i18n} = useTranslation('common');
+  const {value, onChange} = props
+  const [activeStartDate, setActiveStartDate] = useState(getMonthStart(new Date()))
+  const [view, setView] = useState('month')
+  const {t, i18n} = useTranslation('common')
 
   useEffect(() => {
-    const beginOfMonth = new Date(value.getFullYear(), value.getMonth(), 1);
+    const beginOfMonth = new Date(value.getFullYear(), value.getMonth(), 1)
 
-    setActiveStartDate(beginOfMonth);
+    setActiveStartDate(beginOfMonth)
   }, [value])
 
   const handlePrevClick = () => {
@@ -46,31 +44,31 @@ export default function CalendarSideBarCalendar(props: Props) {
   }
   const handleViewChange = ({view, activeStartDate, value}) => {
     setView(view)
-    setActiveStartDate(activeStartDate);
+    setActiveStartDate(activeStartDate)
   }
   const handleDrillUp = () => {
     if(views.indexOf(view) === 0){
-      return;
+      return
     }
-    const nextView = views[views.indexOf(view) - 1];
-    const nextActiveStartDate = getBegin(nextView, activeStartDate);
-    setView(nextView);
-    setActiveStartDate(nextActiveStartDate);
+    const nextView = views[views.indexOf(view) - 1]
+    const nextActiveStartDate = getBegin(nextView, activeStartDate)
+    setView(nextView)
+    setActiveStartDate(nextActiveStartDate)
   }
 
   const renderLabel = (date) => {
       switch (view) {
         case 'century':
-          return getCenturyLabel(i18n.language, formatYear, date);
+          return getCenturyLabel(i18n.language, formatYear, date)
         case 'decade':
-          return getDecadeLabel(i18n.language, formatYear, date);
+          return getDecadeLabel(i18n.language, formatYear, date)
         case 'year':
-          return formatYear(i18n.language, date);
+          return formatYear(i18n.language, date)
         case 'month':
-          const parts = formatMonthYear(i18n.language, date).split(' ');
+          const parts = formatMonthYear(i18n.language, date).split(' ')
           return (<>{parts[0]} <span className={styles.year}>{parts[1]}</span></>)
         default:
-          throw new Error(`Invalid view: ${view}.`);
+          throw new Error(`Invalid view: ${view}.`)
       }
     }
     return (

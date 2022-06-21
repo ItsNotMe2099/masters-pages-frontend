@@ -1,0 +1,176 @@
+@import "../../../scss/index";
+
+.root {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  margin: 200px auto;
+  @media screen and (max-width: $xs-max) {
+    margin: 39px 19px 43px 19px;
+  }
+}
+
+.head {
+  margin: auto auto 54px auto;
+  font-weight: 500;
+  font-size: 36px;
+  @media screen and (max-width: $xs-max) {
+    font-size: 28px;
+    text-align: center;
+  }
+
+}
+
+.inner {
+  margin: auto;
+  display: flex;
+  position: relative;
+  @media screen and (max-width: $xs-max) {
+    flex-direction: column;
+  }
+}
+
+.separator {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0 118px;
+  .or {
+    font-weight: 500;
+    font-size: 28px;
+    color: #4E4E4E;
+    padding: 7px 0;
+    background-color: #fff;
+    align-self: center;
+    z-index: 2
+  ;
+    @include lg {
+      padding: 7px 0;
+    }
+    @media screen and (max-width: $xs-max) {
+      margin: 33px auto 43px auto;
+      padding: 0 7px;
+    }
+  }
+}
+
+
+.border {
+  background-color: #c4c4c4;
+  position: absolute;
+  @include lg {
+    width: 2px;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+  }
+  @media screen and (max-width: $xs-max) {
+    height: 2px;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -1px;
+  }
+
+}
+
+.left {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    margin: auto auto 10px auto;
+
+    &:last-child {
+      margin: auto;
+    }
+  }
+}
+
+.socialText {
+  font-size: 18px;
+  color: #373737;
+  text-align: center;
+  width: 75%;
+  margin: auto auto 28px auto;
+}
+
+.google {
+  width: 287px;
+  height: 50px;
+  background-color: #DC4E41;
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+
+  img {
+    padding-left: 24px;
+    position: absolute;
+    top: 14px;
+  }
+
+  div {
+    margin: auto;
+    font-weight: 600;
+    font-size: 21px;
+    color: #fff;
+  }
+}
+
+.facebook {
+  width: 287px;
+  height: 50px;
+  background-color: #3B5998;
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+
+  img {
+    padding-left: 27px;
+    position: absolute;
+    top: 14px;
+  }
+
+  div {
+    margin: auto;
+    font-weight: 600;
+    font-size: 21px;
+    color: #fff;
+  }
+}
+
+.instagram {
+  width: 287px;
+  height: 50px;
+  background: linear-gradient(49.12deg, #FFDD55 6.62%, #FF543E 50.06%, #C837AB 93.5%);
+  border-radius: 10px;
+  display: flex;
+  position: relative;
+
+  img {
+    padding-left: 20px;
+    position: absolute;
+    top: 14px;
+  }
+
+  div {
+    margin: auto;
+    font-weight: 600;
+    font-size: 21px;
+    color: #fff;
+  }
+}
+

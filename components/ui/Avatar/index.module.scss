@@ -22,7 +22,7 @@
     width: 31px !important;
     height: 38px !important;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 31px !important;
     height: 32px !important;
     svg{
@@ -52,6 +52,14 @@
     height: 10px !important;
   }
 }
+
+.largeSquare{
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
+}
+
+
 .exSquare{
   border-radius: 10px;
   width: 127px;
@@ -79,14 +87,14 @@
   img{
     border-radius: 13px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 71px;
     height: 89px;
   }
   svg{
     width: 71px !important;
     height: 86px !important;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       height: 50px !important;
     }
   }
@@ -100,14 +108,14 @@
   img{
     border-radius: 13px;
   }
-  @media screen and (max-width: $sm-max){
+  @media screen and (max-width: $xs-max){
     width: 71px;
     height: 89px;
   }
   svg{
     width: 71px !important;
     height: 86px !important;
-    @media screen and (max-width: $sm-max){
+    @media screen and (max-width: $xs-max){
       height: 50px !important;
     }
   }

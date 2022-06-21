@@ -1,11 +1,9 @@
-import {confirmChangeData, modalClose} from "components/Modal/actions";
+import {confirmChangeData, modalClose} from 'components/Modal/actions'
 
-import ApiActionTypes from "constants/api";
-import {takeLatest, put, take, select} from 'redux-saga/effects'
-import {IRootState} from "types";
+import ApiActionTypes from 'constants/api'
+import {takeLatest, put, take} from 'redux-saga/effects'
 import {ActionType} from 'typesafe-actions'
 import ActionTypes from './const'
-import {hideProfileForm} from 'components/Profile/actions'
 import {
   createFollower,
   createFollowerRequest,
@@ -16,7 +14,7 @@ import {
 function* FollowerSaga() {
   yield takeLatest(ActionTypes.CREATE_FOLLOWER,
     function* (action: ActionType<typeof createFollower>) {
-      yield put(createFollowerRequest(action.payload.data));
+      yield put(createFollowerRequest(action.payload.data))
       const result = yield take([ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.CREATE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS) {
 
@@ -26,11 +24,11 @@ function* FollowerSaga() {
 
   yield takeLatest(ActionTypes.DELETE_FOLLOWER,
     function* (action: ActionType<typeof deleteFollower>) {
-      yield put(confirmChangeData({loading: true}));
-      yield put(deleteFollowerRequest(action.payload.id));
+      yield put(confirmChangeData({loading: true}))
+      yield put(deleteFollowerRequest(action.payload.id))
       const result = yield take([ActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.FAIL])
       if (result.type === ActionTypes.DELETE_FOLLOWER_REQUEST + ApiActionTypes.SUCCESS) {
-        yield put(modalClose());
+        yield put(modalClose())
 
       }
     })

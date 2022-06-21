@@ -1,12 +1,10 @@
 
-import { confirmChangeData, modalClose } from "components/Modal/actions";
 import {
   fetchTaskSearchList,
   fetchTaskSearchListRequest
-} from "components/TaskSearch/actions";
-import ApiActionTypes from "constants/api";
-import { takeLatest, put, take, select } from 'redux-saga/effects'
-import { IRootState } from "types";
+} from 'components/TaskSearch/actions'
+import { takeLatest, put, select } from 'redux-saga/effects'
+import { IRootState } from 'types'
 import { ActionType } from 'typesafe-actions'
 import ActionTypes from './const'
 import {removeObjectEmpty} from 'utils/array'
@@ -28,7 +26,7 @@ function* TaskSearchSaga() {
         ...(useLocationFilter ? {exactLocation} : {}),
           limit: 10,
         ...action.payload
-        }));
+        }))
 
     })
 }

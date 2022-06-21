@@ -1,0 +1,47 @@
+@import "scss/index";
+
+
+.chatArea{
+  margin-top: 24px;
+  position: relative;
+  border: 1px solid #c9c9c9;
+  border-radius: 10px;
+  min-height: 62vh;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: stretch;
+
+}
+.rootLoading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chatList{
+  max-width: 350px;
+  min-width: 220px;
+  border-right: 1px solid #DDDDE5;
+  overflow-y: auto;
+  min-height: 50%;
+
+}
+.chatMessages{
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100%;
+
+}
+.tab{
+  font-weight: 500;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: none;
+  background: #eeeef2;
+}
+
+

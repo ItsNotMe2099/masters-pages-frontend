@@ -4,12 +4,12 @@
   align-items: stretch;
   background: #E4474E;
   padding: 20px 9px 0px;
-  @media (max-width: $sm-max){
+  @media (max-width: $xs-max){
     display: block;
     padding: 13px 22px;
   }
   &.opened {
-    @media (max-width: $sm-max) {
+    @media (max-width: $xs-max) {
       position: fixed;
       top: 68px;
       bottom: 0;
@@ -23,7 +23,7 @@
 
 .headerMobile{
   display: none;
-  @media (max-width: $sm-max){
+  @media (max-width: $xs-max){
     display: block;
   }
 }
@@ -33,7 +33,7 @@
   flex-direction: row;
   width: 100%;
 
-  @media (max-width: $sm-max){
+  @media (max-width: $xs-max){
     display: block;
   }
   @include lg{
@@ -47,7 +47,7 @@
 }
 .logo{
   margin-right: 30px;
-  @media (max-width: $sm-max){
+  @media (max-width: $xs-max){
     display: none;
   }
 }
@@ -59,7 +59,7 @@
   align-items: center;
   margin-left: 30px;
   cursor: pointer;
-  @media (max-width: $sm-max){
+  @media (max-width: $xs-max){
     display: none;
   }
   svg{
@@ -78,7 +78,7 @@
   img {
     margin-left: 10px;
   }
-  @media (max-width: $sm-max){
+  @media (max-width: $xs-max){
     display: block;
   }
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 import styles from './index.module.scss'
 export type Time = {
     hh: string;
@@ -35,55 +35,55 @@ export type TransformType = {
 };
 
 export default class SeekSlider extends React.Component<VideoSeekSliderProps, VideoSeekSliderStates> {
-    private seeking: boolean;
-    private mobileSeeking: boolean;
-    private track: HTMLDivElement | null;
-    private hoverTime: HTMLDivElement | null;
-    private readonly offset: number = 0;
-    private readonly secondsPrefix: string = "00:00:";
-    private readonly minutesPrefix: string = "00:";
+    private seeking: boolean
+    private mobileSeeking: boolean
+    private track: HTMLDivElement | null
+    private hoverTime: HTMLDivElement | null
+    private readonly offset: number = 0
+    private readonly secondsPrefix: string = '00:00:'
+    private readonly minutesPrefix: string = '00:'
 
     public constructor(props: VideoSeekSliderProps) {
-        super(props);
+        super(props)
         if (this.props.offset) {
-            this.offset = this.props.offset;
+            this.offset = this.props.offset
         }
         if (this.props.secondsPrefix) {
-            this.secondsPrefix = this.props.secondsPrefix;
+            this.secondsPrefix = this.props.secondsPrefix
         }
         if (this.props.minutesPrefix) {
-            this.minutesPrefix = this.props.minutesPrefix;
+            this.minutesPrefix = this.props.minutesPrefix
         }
         this.state = {
             ready: false,
             trackWidth: 0,
             seekHoverPosition: 0,
-        };
+        }
 
     }
 
     public componentDidMount(): void {
-        this.setTrackWidthState();
+        this.setTrackWidthState()
         if (this.track) {
-            window.addEventListener("resize", this.setTrackWidthState);
-            this.track.addEventListener("resize", this.setTrackWidthState);
-            this.track.addEventListener("mousemove", this.handleSeeking);
-            this.track.addEventListener("mouseup", this.mouseSeekingHandler);
-            this.track.addEventListener("touchmove", this.handleTouchSeeking);
-            this.track.addEventListener("touchend", this.mobileTouchSeekingHandler);
-            this.track.addEventListener("touchstart", this.handleTouchStart);
+            window.addEventListener('resize', this.setTrackWidthState)
+            this.track.addEventListener('resize', this.setTrackWidthState)
+            this.track.addEventListener('mousemove', this.handleSeeking)
+            this.track.addEventListener('mouseup', this.mouseSeekingHandler)
+            this.track.addEventListener('touchmove', this.handleTouchSeeking)
+            this.track.addEventListener('touchend', this.mobileTouchSeekingHandler)
+            this.track.addEventListener('touchstart', this.handleTouchStart)
         }
     }
 
     public componentWillUnmount(): void {
         if (this.track) {
-            window.removeEventListener("resize", this.setTrackWidthState);
-            this.track.removeEventListener("resize", this.setTrackWidthState);
-            this.track.removeEventListener("mousemove", this.handleSeeking);
-            this.track.removeEventListener("mouseup", this.mouseSeekingHandler);
-            this.track.removeEventListener("touchmove", this.handleTouchSeeking);
-            this.track.removeEventListener("touchend", this.mobileTouchSeekingHandler);
-            this.track.removeEventListener("touchstart", this.handleTouchStart);
+            window.removeEventListener('resize', this.setTrackWidthState)
+            this.track.removeEventListener('resize', this.setTrackWidthState)
+            this.track.removeEventListener('mousemove', this.handleSeeking)
+            this.track.removeEventListener('mouseup', this.mouseSeekingHandler)
+            this.track.removeEventListener('touchmove', this.handleTouchSeeking)
+            this.track.removeEventListener('touchend', this.mobileTouchSeekingHandler)
+            this.track.removeEventListener('touchstart', this.handleTouchStart)
         }
     }
 
@@ -93,56 +93,56 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
      * @param event
      */
     private handleTouchStart = (event: any): void => {
-        let pageX: number = 0;
+        let pageX = 0
 
         for (let i = 0; i < event.changedTouches.length; i++) {
-            pageX = event.changedTouches[i].pageX;
+            pageX = event.changedTouches[i].pageX
         }
 
-        pageX = pageX < 0 ? 0 : pageX;
+        pageX = pageX < 0 ? 0 : pageX
 
-        this.changeCurrentTimePosition(pageX);
+        this.changeCurrentTimePosition(pageX)
     }
 
     private handleTouchSeeking = (event: any): void => {
-        let pageX: number = 0;
+        let pageX = 0
 
         for (let i = 0; i < event.changedTouches.length; i++) {
-            pageX = event.changedTouches[i].pageX;
+            pageX = event.changedTouches[i].pageX
         }
 
-        pageX = pageX < 0 ? 0 : pageX;
+        pageX = pageX < 0 ? 0 : pageX
 
         if (this.mobileSeeking) {
-            this.changeCurrentTimePosition(pageX);
+            this.changeCurrentTimePosition(pageX)
         }
     }
 
     private handleSeeking = (evt: any): void => {
         if (this.seeking) {
-            this.changeCurrentTimePosition(evt.pageX);
+            this.changeCurrentTimePosition(evt.pageX)
         }
     }
 
     private changeCurrentTimePosition(pageX: number): void {
         if (this.track) {
-            let position: number = pageX - this.track.getBoundingClientRect().left;
+            let position: number = pageX - this.track.getBoundingClientRect().left
 
-            position = position < 0 ? 0 : position;
-            position = position > this.state.trackWidth ? this.state.trackWidth : position;
+            position = position < 0 ? 0 : position
+            position = position > this.state.trackWidth ? this.state.trackWidth : position
 
             this.setState({
                 seekHoverPosition: position,
-            });
+            })
 
-            const percent: number = position * 100 / this.state.trackWidth;
-            const time: number = +(percent * (this.props.fullTime / 100)).toFixed(0);
-            this.props.onChangeCurTime(time);
+            const percent: number = position * 100 / this.state.trackWidth
+            const time: number = +(percent * (this.props.fullTime / 100)).toFixed(0)
+            this.props.onChangeCurTime(time)
         }
     }
 
     private setTrackWidthState = (): void => {
-        const track = this.track;
+        const track = this.track
         if (track) {
             setTimeout(() => {
                 this.setState({
@@ -154,148 +154,148 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
 
     private handleTrackHover = (clear: boolean, evt: React.MouseEvent): void => {
         if (this.track) {
-            let position: number = evt.pageX - this.track.getBoundingClientRect().left;
+            let position: number = evt.pageX - this.track.getBoundingClientRect().left
             if (clear) {
-                position = 0;
+                position = 0
             }
             if(position < 0){
-                this.setSeeking(false, evt);
+                this.setSeeking(false, evt)
             }else {
                 this.setState({
                     seekHoverPosition: position,
-                });
+                })
             }
         }
     }
 
     private getPositionStyle(time: number): TransformType {
         if (this.mobileSeeking || this.seeking) {
-            const position: number = this.state.seekHoverPosition * 100 / this.state.trackWidth;
+            const position: number = this.state.seekHoverPosition * 100 / this.state.trackWidth
             //  const position: number = 100 * 100 / this.state.trackWidth;
             return {
                 transform: `scaleX(${position / 100})`,
-            };
+            }
         } else {
 
-            const position: number = time === 0 ? 0 : time * 100 / this.props.fullTime;
+            const position: number = time === 0 ? 0 : time * 100 / this.props.fullTime
             return {
                 transform: `scaleX(${position / 100})`,
-            };
+            }
         }
     }
 
     private getThumbHandlerPosition(): TransformType {
 
         if (this.mobileSeeking || this.seeking) {
-            const position = this.state.seekHoverPosition;
+            const position = this.state.seekHoverPosition
             return {
                 transform: `translateX(${position}px)`,
-            };
+            }
         } else {
-            const position: number = this.state.trackWidth / (this.props.fullTime / this.props.currentTime);
+            const position: number = this.state.trackWidth / (this.props.fullTime / this.props.currentTime)
             return {
                 transform: `translateX(${position}px)`,
-            };
+            }
         }
 
     }
 
     private getSeekHoverPosition(): TransformType {
-        const position: number = this.state.seekHoverPosition * 100 / this.state.trackWidth;
+        const position: number = this.state.seekHoverPosition * 100 / this.state.trackWidth
 
         return {
             transform: `scaleX(${position / 100})`,
-        };
+        }
     }
 
     private getHoverTimePosition(): TransformType {
-        let position: number = 0;
+        let position = 0
 
         if (this.hoverTime) {
-            position = this.state.seekHoverPosition - this.hoverTime.offsetWidth / 2;
+            position = this.state.seekHoverPosition - this.hoverTime.offsetWidth / 2
 
             if (this.props.limitTimeTooltipBySides) {
                 if (position < 0) {
-                    position = 0;
+                    position = 0
                 } else if (position + this.hoverTime.offsetWidth > this.state.trackWidth) {
-                    position = this.state.trackWidth - this.hoverTime.offsetWidth;
+                    position = this.state.trackWidth - this.hoverTime.offsetWidth
                 }
             }
         }
 
         return {
             transform: `translateX(${position}px)`,
-        };
+        }
     }
 
     private secondsToTime(seconds: number): Time {
-        seconds = Math.round((seconds + this.offset) * 1000) / 1000;
+        seconds = Math.round((seconds + this.offset) * 1000) / 1000
 
-        const hours: number = Math.floor(seconds / 3600);
-        const divirsForMinutes: number = seconds % 3600;
-        const minutes: number = Math.floor(divirsForMinutes / 60);
-        const sec: number = Math.ceil(divirsForMinutes % 60);
-        const ms: number = Math.round((seconds % 1) * 1000);
-        let mSeconds: string = ms.toString();
+        const hours: number = Math.floor(seconds / 3600)
+        const divirsForMinutes: number = seconds % 3600
+        const minutes: number = Math.floor(divirsForMinutes / 60)
+        const sec: number = Math.ceil(divirsForMinutes % 60)
+        const ms: number = Math.round((seconds % 1) * 1000)
+        let mSeconds: string = ms.toString()
 
         if (ms < 10) {
-            mSeconds = "00" + ms;
+            mSeconds = '00' + ms
         } else if (ms < 100) {
-            mSeconds = "0" + ms;
+            mSeconds = '0' + ms
         }
 
         return {
             hh: hours.toString(),
-            mm: minutes < 10 ? "0" + minutes : minutes.toString(),
-            ss: sec < 10 ? "0" + sec : sec.toString(),
+            mm: minutes < 10 ? '0' + minutes : minutes.toString(),
+            ss: sec < 10 ? '0' + sec : sec.toString(),
             ms: mSeconds,
-        };
+        }
     }
 
     private getHoverTime(): string {
-        const percent: number = this.state.seekHoverPosition * 100 / this.state.trackWidth;
-        let time: number = +(percent * (this.props.fullTime / 100));
-        time = Math.floor(time * 1000) / 1000;
-        const times: Time = this.secondsToTime(time);
+        const percent: number = this.state.seekHoverPosition * 100 / this.state.trackWidth
+        let time: number = +(percent * (this.props.fullTime / 100))
+        time = Math.floor(time * 1000) / 1000
+        const times: Time = this.secondsToTime(time)
 
         if ((this.props.fullTime + this.offset) < 60) {
-            return this.secondsPrefix + (times.ss + ":" + times.ms);
+            return this.secondsPrefix + (times.ss + ':' + times.ms)
         } else if ((this.props.fullTime + this.offset) < 3600) {
-            return this.minutesPrefix + times.mm + ":" + times.ss + ":" + times.ms;
+            return this.minutesPrefix + times.mm + ':' + times.ss + ':' + times.ms
         } else {
-            return times.hh + ":" + times.mm + ":" + times.ss + ":" + times.ms;
+            return times.hh + ':' + times.mm + ':' + times.ss + ':' + times.ms
         }
     }
 
     private mouseSeekingHandler = (event: any): void => {
-        this.setSeeking(false, event);
+        this.setSeeking(false, event)
     }
 
     private seekOnChange = (state: boolean): void => {
-        const percent: number = this.state.seekHoverPosition * 100 / this.state.trackWidth;
-        const time: number = +(percent * (this.props.fullTime / 100)).toFixed(0);
+        const percent: number = this.state.seekHoverPosition * 100 / this.state.trackWidth
+        const time: number = +(percent * (this.props.fullTime / 100)).toFixed(0)
         if (!state) {
-            this.props.onChange(time, (time + this.offset));
+            this.props.onChange(time, (time + this.offset))
         }
         this.setState({
             seekHoverPosition: this.state.seekHoverPosition,
-        });
+        })
     }
 
     private setSeeking = (state: boolean, evt: React.MouseEvent): void => {
-        this.handleSeeking(evt);
-        this.seeking = state;
-        this.seekOnChange(state);
+        this.handleSeeking(evt)
+        this.seeking = state
+        this.seekOnChange(state)
     }
 
     private mobileTouchSeekingHandler = (): void => {
-        this.setMobileSeeking(false);
+        this.setMobileSeeking(false)
     }
 
     private setMobileSeeking = (state: boolean): void => {
-        this.mobileSeeking = state;
+        this.mobileSeeking = state
 
-        this.seekOnChange(state);
+        this.seekOnChange(state)
     }
 
     private isThumbActive(): boolean {
@@ -310,14 +310,14 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
                     style={{
                         ...this.getPositionStyle(this.props.bufferProgress),
                         backgroundColor: this.props.bufferColor,
-                    }}/>;
+                    }}/>
             } else {
                 return <div
                     className={styles.buffered}
-                    style={this.getPositionStyle(this.props.bufferProgress)}/>;
+                    style={this.getPositionStyle(this.props.bufferProgress)}/>
             }
         } else {
-            return null;
+            return null
         }
     }
 
@@ -327,23 +327,23 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
             return <div
                 className={styles.connect}
                 style={{...this.getPositionStyle(this.props.currentTime), backgroundColor: this.props.sliderColor}}
-            />;
+            />
         } else {
             return <div
                 className={styles.connect}
-                style={this.getPositionStyle(this.props.currentTime)}/>;
+                style={this.getPositionStyle(this.props.currentTime)}/>
         }
     }
 
     private renderHoverProgress = () => {
         if (this.props.sliderHoverColor) {
             return <div
-                className={styles["seek-hover"]}
-                style={{...this.getSeekHoverPosition(), backgroundColor: this.props.sliderHoverColor}}/>;
+                className={styles['seek-hover']}
+                style={{...this.getSeekHoverPosition(), backgroundColor: this.props.sliderHoverColor}}/>
         } else {
             return <div
-                className={styles["seek-hover"]}
-                style={this.getSeekHoverPosition()}/>;
+                className={styles['seek-hover']}
+                style={this.getSeekHoverPosition()}/>
         }
     }
 
@@ -353,13 +353,13 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
                 className={this.isThumbActive() ? `${styles.thumb} ${styles.active}` : styles.thumb}
                 style={{...this.getThumbHandlerPosition()}}>
                 <div style={{backgroundColor: this.props.thumbColor}} className="handler" />
-            </div>;
+            </div>
         } else {
             return <div
                 className={this.isThumbActive() ? `${styles.thumb} ${styles.active}` : styles.thumb}
                 style={{...this.getThumbHandlerPosition()}}>
                 <div className='handler'/>
-            </div>;
+            </div>
         }
         return <div></div>
     }
@@ -368,22 +368,22 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
         if (!this.props.hideHoverTime) {
             return (
                 <div
-                    className={this.isThumbActive() ? `${styles["hover-time"]} ${styles.active}` : styles["hover-time"]}
+                    className={this.isThumbActive() ? `${styles['hover-time']} ${styles.active}` : styles['hover-time']}
                     style={this.getHoverTimePosition()}
                     ref={ref => this.hoverTime = ref}
                 >
                     {this.getHoverTime()}
                 </div>
-            );
+            )
         } else {
-            return null;
+            return null
         }
     }
 
 
     public render(): React.ReactNode {
         return (
-            <div className={styles["ui-video-seek-slider"]}>
+            <div className={styles['ui-video-seek-slider']}>
                 <div
                     className={this.isThumbActive() ? `${styles.track} ${styles.active}` : styles.track}
                     ref={ref => this.track = ref}
@@ -403,6 +403,6 @@ export default class SeekSlider extends React.Component<VideoSeekSliderProps, Vi
 
                 {this.renderThumb()}
             </div>
-        );
+        )
     }
 }

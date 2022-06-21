@@ -1,0 +1,28 @@
+@import "scss/index";
+.root{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 13px;
+  &:first-of-type{
+    margin-top: 0px;
+  }
+}
+.name{
+  margin-left: 10px;
+  flex: 1;
+}
+.nameOnline{
+  color: #27C60D;
+}
+.iconOnline{
+  path {
+    fill: #27C60D;
+  }
+}
+
+.actions{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}

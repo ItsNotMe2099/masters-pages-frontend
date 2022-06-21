@@ -1,12 +1,11 @@
-import { useDetectOutsideClick } from "components/hooks/useDetectOutsideClick";
-import Input from "components/ui/Inputs/Input";
-import BaseInput from "components/ui/Inputs/Input/components/BaseInput";
+import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
+import Input from 'components/ui/Inputs/Input'
+import BaseInput from 'components/ui/Inputs/Input/components/BaseInput'
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
-import nextI18 from "i18n";
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   options: [{ value: string, label: string }],
@@ -28,68 +27,68 @@ interface Props {
 
 const SelectInput = (props: Props) => {
   const {t} = useTranslation()
-  const { meta: { error, touched },restrictedValues, input, onOpenDropDown, label, ...rest } = props;
-  const dropdownRef = useRef(null);
-  const searchInputRef = useRef(null);
-  const valueInputRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const [currentLabel, setCurrentLabel] = useState('');
-  const [filter, setFilter] = useState('');
-  const options = filter ? props.options.filter(option => option.label?.toLowerCase().indexOf(filter.toLowerCase()) === 0) : props.options;
+  const { meta: { error, touched },restrictedValues, input, onOpenDropDown, label, ...rest } = props
+  const dropdownRef = useRef(null)
+  const searchInputRef = useRef(null)
+  const valueInputRef = useRef(null)
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
+  const [currentLabel, setCurrentLabel] = useState('')
+  const [filter, setFilter] = useState('')
+  const options = filter ? props.options.filter(option => option.label?.toLowerCase().indexOf(filter.toLowerCase()) === 0) : props.options
   const getSizeClass = (size) => {
     switch (size) {
       case 'small':
-        return styles.dropDownSmall;
+        return styles.dropDownSmall
       case 'normal':
       default:
-        return styles.dropDownNormal;
+        return styles.dropDownNormal
     }
   }
   const onClick = (e) => {
     e?.preventDefault()
     if (!isActive && onOpenDropDown) {
-      onOpenDropDown();
+      onOpenDropDown()
     }
 
     if (!isActive) {
       setTimeout(() => {
         if (searchInputRef.current) {
-          searchInputRef.current.focus();
+          searchInputRef.current.focus()
         }
       }, 100)
     }
-    setIsActive(!isActive);
+    setIsActive(!isActive)
   }
 
   const handleOptionClick = (e, item) => {
     e.preventDefault()
 
     if(props.changeWithValue){
-      input.onChange(item);
+      input.onChange(item)
     }else {
-      input.onChange(item.value);
+      input.onChange(item.value)
     }
-    setIsActive(false);
+    setIsActive(false)
     if (searchInputRef && searchInputRef?.current) {
-      searchInputRef.current.value = '';
+      searchInputRef.current.value = ''
     }
 
   }
   const handleOptionEmptyClick = (e) => {
     e.preventDefault()
-    input.onChange(null);
-    setIsActive(false);
+    input.onChange(null)
+    setIsActive(false)
     if (searchInputRef && searchInputRef?.current) {
-      searchInputRef.current.value = '';
+      searchInputRef.current.value = ''
     }
-    setCurrentLabel('');
+    setCurrentLabel('')
   }
   useEffect(() => {
     if(!input){
-      return;
+      return
     }
-    console.log("MainCateogryFormChange", input.value);
-    let _setCurrentLabel = null;
+    console.log('MainCateogryFormChange', input.value)
+    let _setCurrentLabel = null
     if(props.allowCustomInput){
       _setCurrentLabel = (props.changeWithValue ? input.value.label :  input.value )
     }else {
@@ -97,18 +96,18 @@ const SelectInput = (props: Props) => {
     }
 
 
-    setCurrentLabel(_setCurrentLabel || '');
+    setCurrentLabel(_setCurrentLabel || '')
     }, [input, options])
 
   const handleActiveOptionClick = (e) => {
-    e.preventDefault();
-    setIsActive(false);
+    e.preventDefault()
+    setIsActive(false)
   }
   const handleSearchChange = (value) => {
     if(    props.onSearchChange) {
       props.onSearchChange(value)
     }else{
-      setFilter(value);
+      setFilter(value)
     }
   }
   return (
@@ -156,8 +155,8 @@ const SelectInput = (props: Props) => {
       </div>
     </Input>
 
-  );
-};
+  )
+}
 
 SelectInput.defaultProps = {
   labelType: 'static',

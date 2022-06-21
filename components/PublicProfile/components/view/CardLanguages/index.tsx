@@ -1,20 +1,19 @@
 import styles from './index.module.scss'
 
-import {IProfilePreferWorkIn, IRootState, ProfileData} from 'types'
+import {IProfilePreferWorkIn, IRootState} from 'types'
 import Card from 'components/PublicProfile/components/Card'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
 import {hideProfileForm, showProfileForm, updateProfileByForm} from 'components/Profile/actions'
 import {changeArrayOrder} from 'utils/array'
 
 import { useSelector, useDispatch } from 'react-redux'
-import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import LanguageForm from 'components/PublicProfile/components/view/CardLanguages/components/Form'
-import {useTranslation} from 'i18n'
-import {LanguagesList} from 'data/languages'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean
 
 
@@ -342,34 +341,34 @@ export enum LanguageCode {
   zu = 'zu',
 }
 const CardLanguages = (props: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'language');
-  const { profile, isEdit } = props;
-  const { t } = useTranslation('common');
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'language')
+  const { profile, isEdit } = props
+  const { t } = useTranslation('common')
 
   const handleEditClick = () => {
-    dispatch(showProfileForm( 'language'));
+    dispatch(showProfileForm( 'language'))
   }
   const handleSubmit = (data) => {
-    dispatch(updateProfileByForm(profile.id, {languages: [...profile.languages ? profile.languages : [], data.language]}, 'language'));
+    dispatch(updateProfileByForm(profile.id, {languages: [...profile.languages ? profile.languages : [], data.language]}, 'language'))
   }
   const handleCancel = () => {
-    dispatch(hideProfileForm( 'language'));
+    dispatch(hideProfileForm( 'language'))
   }
   const handleMoveUp = (model: IProfilePreferWorkIn, index: number) => {
-    const newArray = changeArrayOrder(profile.languages, index, index - 1);
-    dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'));
+    const newArray = changeArrayOrder(profile.languages, index, index - 1)
+    dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'))
   }
 
   const handleMoveDown = (model: IProfilePreferWorkIn, index: number) => {
-    const newArray = changeArrayOrder(profile.languages, index, index + 1);
-    dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'));
+    const newArray = changeArrayOrder(profile.languages, index, index + 1)
+    dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'))
   }
   const handleDelete = (model: IProfilePreferWorkIn, index: number) => {
-    const newArray = [...profile.languages];
+    const newArray = [...profile.languages]
     newArray.splice(index, 1)
-    dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'));
+    dispatch(updateProfileByForm(profile.id, {languages: newArray}, 'language'))
   }
 
   return (

@@ -1,17 +1,17 @@
-import { DateRange } from 'react-date-range';
+import { DateRange } from 'react-date-range'
 import styles from './index.module.scss'
-import {addDays, addHours, addMinutes, compareAsc, format, isSameDay, set} from 'date-fns'
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css';
-import {useEffect, useRef, useState} from 'react'
+import { addHours, addMinutes, compareAsc, format, isSameDay, set} from 'date-fns'
+import 'react-date-range/dist/styles.css' // main css file
+import 'react-date-range/dist/theme/default.css'
+import {useEffect, useRef} from 'react'
 import TimePicker from 'components/ui/Inputs/TimePicker'
 import CalendarIcon from 'components/svg/CalendarIcon'
 import {useDetectOutsideClick} from 'components/hooks/useDetectOutsideClick' // theme css file
-import moment from "moment";
+import moment from 'moment'
 import {range} from 'utils/array'
 import * as React from 'react'
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
 import * as dLocales from 'date-fns/locale'
 interface Props {
   input: any,
@@ -27,40 +27,40 @@ interface Props {
 }
 
 export default function DateTimeRange(props: Props) {
-  const {disabled, inputClassName} = props;
-  const { value, onChange } = props.input;
-  const {t, i18n} = useTranslation();
-  const dateRangeRef = useRef(null);
-  const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false);
+  const {disabled, inputClassName} = props
+  const { value, onChange } = props.input
+  const {t, i18n} = useTranslation()
+  const dateRangeRef = useRef(null)
+  const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false)
   useEffect(() => {
     if(!value){
       onChange({
         start: new Date(),
         end: addHours(new Date(), 1)
-      });
+      })
     }
   }, [])
   const handleChange = (v) => {
-    const startDate = v.selection.startDate;
-    const endDate = v.selection.endDate;
-    console.log("HandleChange", v.selection.startDate.getDate(), v.selection.startDate.getFullYear(), v.selection.startDate.getMonth());
+    const startDate = v.selection.startDate
+    const endDate = v.selection.endDate
+    console.log('HandleChange', v.selection.startDate.getDate(), v.selection.startDate.getFullYear(), v.selection.startDate.getMonth())
     const newValue = {...value,
       start: set(value.start, {date: startDate.getDate(), month: startDate.getMonth(), year: startDate.getFullYear()}),
         end: set(value.end, {date: endDate.getDate(), month: endDate.getMonth(), year: endDate.getFullYear()})
       }
 
-    onChange(newValue);
+    onChange(newValue)
   }
   const getDateRange = () => {
     if(!value){
-      return;
+      return
     }
 
     if(!value.start || !value.end){
-      return;
+      return
     }
-    const startDate = format(value.start, 'dd.MM.yyyy');
-    const endDate = format(value.end, 'dd.MM.yyyy');
+    const startDate = format(value.start, 'dd.MM.yyyy')
+    const endDate = format(value.end, 'dd.MM.yyyy')
 
     if(isSameDay(value.start, value.end)){
       return `${startDate}`
@@ -70,14 +70,14 @@ export default function DateTimeRange(props: Props) {
   const handleStartTime = (time) => {
     const newValue = {...value, start: set(value.start, {hours: time.hour(), minutes: time.minute()})}
     if(compareAsc(newValue.start, newValue.end) === 1){
-        newValue.end = addMinutes(newValue.start, 5);
+        newValue.end = addMinutes(newValue.start, 5)
     }
     onChange(newValue)
   }
 
   const handleEndTime = (time) => {
     const newValue = {...value, end: set(value.end, {hours: time.hour(), minutes: time.minute()})}
-    console.log("NewValue1", newValue, value);
+    console.log('NewValue1', newValue, value)
     onChange(newValue)
   }
   return (
@@ -99,28 +99,28 @@ export default function DateTimeRange(props: Props) {
           }}
                       disabledHours={() => {
                         if(!isSameDay(value.start, value.end)){
-                          return [];
+                          return []
                         }
 
-                        const hour = moment(value.start).hour();
+                        const hour = moment(value.start).hour()
                         if(hour === 0){
-                          return [];
+                          return []
                         }
-                        return range(hour);
+                        return range(hour)
 
                       }}
                       disabledMinutes={() => {
                         if(moment(value.start).hour() < moment(value.end).hour()){
-                          return [];
+                          return []
                         }
                         if(!isSameDay(value.start, value.end)){
-                          return [];
+                          return []
                         }
-                        const min = moment(value.start).minute();
+                        const min = moment(value.start).minute()
                         if(min === 0){
-                          return [];
+                          return []
                         }
-                        return range(min);
+                        return range(min)
 
                       }}/>
         </div>}
@@ -146,7 +146,7 @@ export default function DateTimeRange(props: Props) {
       </div>
       <ErrorInput meta={props.meta} />
     </div>
-  );
+  )
 }
 DateTimeRange.defaultProps = {
   showIcon: true,

@@ -1,18 +1,14 @@
 import styles from './index.module.scss'
 
-import {Category, IRootState, ProfileData, SkillData, SkillListItem} from 'types'
-import Card from 'components/PublicProfile/components/Card'
-import {formatSkillList} from 'utils/skills'
-import Accordion from 'components/PublicProfile/components/view/CardCategories/components/Accordion'
+import { IRootState, SkillData} from 'types'
 import {getCategoryTranslation} from 'utils/translations'
-
 import { useSelector, useDispatch } from 'react-redux'
 import Tab from 'components/PublicProfile/components/Tab'
 import {DropDownCategory} from 'components/PublicProfile/components/DropDownCategory'
-import {useEffect, useState} from 'react'
-import {useTranslation} from 'i18n'
+import { useTranslation } from 'next-i18next'
+import {IProfile} from 'data/intefaces/IProfile'
 interface Props{
-  profile: ProfileData,
+  profile: IProfile,
   isEdit: boolean,
   category,
   subCategory,
@@ -20,17 +16,17 @@ interface Props{
   onCategoryChange: (category, subCategory) => void
 }
 const CardCategorySelector = (props: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const {i18n} = useTranslation()
   const formLoading = useSelector((state: IRootState) => state.profile.formLoading)
-  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories');
-  const {profile} = props;
+  const showForm = useSelector((state: IRootState) => state.profile.showForms).find(key => key === 'categories')
+  const {profile} = props
   const categories = props.categories
 
   const handleChangeCategory = (category) => {
 
-    const newCategory = categories.find(cat => cat.category.id === category.value);
-    props.onCategoryChange(newCategory, newCategory.skills[0]);
+    const newCategory = categories.find(cat => cat.category.id === category.value)
+    props.onCategoryChange(newCategory, newCategory.skills[0])
   }
   const handleChangeSubCategory = (subCategory) => {
     props.onCategoryChange(props.category, subCategory)

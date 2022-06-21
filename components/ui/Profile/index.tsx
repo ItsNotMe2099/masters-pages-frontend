@@ -1,28 +1,28 @@
-import {taskOfferOpen} from "components/Modal/actions";
-import {saveProfileRequest} from "components/SavedPeople/actions";
-import ArrowRight from "components/svg/ArrowRight";
-
-import StarRatings from 'react-star-ratings';
-import {taskNegotiationSetCurrentProfile} from "components/TaskNegotiation/actions";
-import Avatar from "components/ui/Avatar";
+import {signUpOpen, taskOfferOpen} from 'components/Modal/actions'
+import {saveProfileRequest} from 'components/SavedPeople/actions'
+import ArrowRight from 'components/svg/ArrowRight'
+import StarRatings from 'react-star-ratings'
+import {taskNegotiationSetCurrentProfile} from 'components/TaskNegotiation/actions'
+import Avatar from 'components/ui/Avatar'
 import Button from 'components/ui/Button'
-import ProfileActionButton from "components/ui/Profile/components/ActionButton";
-import SliderControl from "components/ui/SliderControl";
-import Tabs from "components/ui/Tabs";
-import {useRouter} from "next/router";
-import {default as React, useState} from "react";
-import {IRootState, ITask, ProfileData, UserActivityStatus} from "types";
-import {getMediaPath} from "utils/media";
-import {getCategoryTranslation} from "utils/translations";
+import ProfileActionButton from 'components/ui/Profile/components/ActionButton'
+import Tabs from 'components/ui/Tabs'
+import {useRouter} from 'next/router'
+import {default as React, useState} from 'react'
+import {IRootState, ITask} from 'types'
+import {getMediaPath} from 'utils/media'
+import {getCategoryTranslation} from 'utils/translations'
 import styles from './index.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import BookmarkSvg from 'components/svg/Bookmark'
-import {useTranslation} from "i18n";
+import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
-import cx from 'classnames';
 import ProfileStatus from 'components/ui/ProfileStatus'
+import {IProfile} from 'data/intefaces/IProfile'
+import { useAppContext } from 'context/state'
+
 interface Props {
-  profile: ProfileData,
+  profile: IProfile,
   actionsType: 'public' | 'client' | 'master'
   className?: string,
   isActive?: boolean,
@@ -36,15 +36,22 @@ interface Props {
 }
 
 export default function Profile({ actionsType,selectedCategoryId, selectedSubCategoryId, profile, className, isActive, onEdit, onDelete, onPublish, onUnPublish }: Props) {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const [currentCategoryTab, setCurrentCategoryTab] = useState(`${(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0])?.id}`);
-  const [currentSkill, setCurrentSkill] = useState(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0]);
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const appContext = useAppContext()
+  const appProfile = appContext.profile
+  const [currentCategoryTab, setCurrentCategoryTab] = useState(`${(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0])?.id}`)
+  const [currentSkill, setCurrentSkill] = useState(selectedCategoryId ? profile.skills.find(item => item.id === selectedCategoryId) : profile.skills[0])
   const savingProfileId = useSelector((state: IRootState) => state.savedPeople.savingProfileId)
 
   const handleOffer = () => {
-    dispatch(taskNegotiationSetCurrentProfile(profile));
-    dispatch(taskOfferOpen());
+    if(appProfile){
+      dispatch(taskNegotiationSetCurrentProfile(profile))
+      dispatch(taskOfferOpen())
+    }
+    else{
+      dispatch(signUpOpen())
+    }
   }
   const {t, i18n} = useTranslation('common')
   const handleReadMore = () => {
@@ -52,49 +59,21 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
   }
 
   const handleSave = () => {
-
-    dispatch(saveProfileRequest(profile.id));
+    if(appProfile){
+      dispatch(saveProfileRequest(profile.id))
+    }
+    else{
+      dispatch(signUpOpen())
+    }
   }
 
   const handleChangeTab = (tab) => {
 
-    setCurrentCategoryTab(tab.key);
+    setCurrentCategoryTab(tab.key)
     setCurrentSkill(profile.skills.find(skill => `${skill.id}` === tab.key))
   }
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    variableWidth: false,
-    adaptiveHeight: true,
-    arrows: true,
-    nextArrow: <SliderControl taskPage direction='next' arrowClassName={styles.sliderArrow}/>,
-    prevArrow: <SliderControl taskPage direction='prev' arrowClassName={styles.sliderArrow}/>,
-    dotsClass: `${styles.dots}`,
-    responsive: [
-      {
-        breakpoint: 360,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          variableWidth: false,
-          adaptiveHeight: true
-        }
-      },
-      {
-        breakpoint: 667,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
 
-const profileLink = `/id${profile.id}`;
+const profileLink = `/id${profile.id}`
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.profile}>
@@ -196,7 +175,7 @@ const profileLink = `/id${profile.id}`;
         </div>
         <div className={styles.btnContainer}>
            <Button bold smallFont transparent size='16px 0' onClick={handleOffer}>{t('profileComponent.offerTask')}</Button>
-          {profile.role === 'client' && <Button bold smallFont transparent size='16px 0' href={`/Chat/dialog/${profile.id}`}>{t('profileComponent.sendMessage')}</Button>}
+          {(profile.role === 'client' || profile.role === 'volunteer') && <Button bold smallFont transparent size='16px 0' href={appProfile ? `/Chat/dialog/${profile.id}` : `login?redirect=/Chat/dialog/231`}>{t('profileComponent.sendMessage')}</Button>}
 
         </div>
       </div>
