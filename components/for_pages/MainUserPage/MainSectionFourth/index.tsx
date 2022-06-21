@@ -1,10 +1,12 @@
 import styles from 'components/for_pages/MainUserPage/MainSectionFourth/index.module.scss'
 import { useTranslation } from 'next-i18next'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Video from 'components/for_pages/MainUserPage/MainSectionFourth/Video'
 import SampleProfile from 'components/for_pages/MainUserPage/MainSectionFourth/SampleProfile'
 import Button from 'components/ui/Button'
 import useSWR from 'swr'
+import { IProfile } from 'data/intefaces/IProfile'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 
 const MainSectionFourth = (props) => {
@@ -15,7 +17,17 @@ const MainSectionFourth = (props) => {
   {url: 'https://youtu.be/6uzJXmxIJ8U', title: t('mainPage.fourthSection.videos.secondVideo')},]
 
   const url = '/api/profile/for-main-page'
-  const { data: data } = useSWR(url)
+  //const { data: data } = useSWR(url)
+
+  const [data, setData] = useState<IProfile[]>([])
+
+  useEffect(() => {
+    ProfileRepository.fetchProfilesForMainPage().then(data => {
+      if(data){
+        setData(data)
+      }
+    })
+  }, [])
 
   return (
     <div className={styles.root}>

@@ -92,4 +92,15 @@ export default class ProfileRepository {
     }
     return res.data
   }
+
+  static async fetchProfilesForMainPage(): Promise<IProfile[]> {
+    const res = await request({
+      url: `/api/profile/for-main-page`,
+      method: 'GET'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }

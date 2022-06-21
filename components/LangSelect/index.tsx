@@ -23,7 +23,7 @@ interface Props {
     setIsActive(!isActive)
   }
   const options = [
-    { value: 'ru', label: 'RU' },
+    //{ value: 'ru', label: 'RU' },
     { value: 'en', label: 'EN' },
   ]
    console.log('Language', i18n.language)

@@ -135,11 +135,12 @@ const PublicProfile = (props) => {
     OrganizationRepository.fetchOrganizationsList().then((data) => {
       if(data){
         const newData = data.filter(item => item.corporateProfileId === +router.asPath.slice(3))
+        if(newData[0]){
         OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
           if(data){
             setOrganization(data)
           }
-        })
+        })}
       }
     })
   }

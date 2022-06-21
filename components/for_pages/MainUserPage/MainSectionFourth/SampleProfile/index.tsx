@@ -20,7 +20,7 @@ const SampleProfile = ({item}: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.image}>
-        <img className={styles.small} src={getMediaPath(item.photoObject.urlS3)} alt=''/>
+        <img className={styles.small} src={getMediaPath(item.photoObject?.urlS3)} alt=''/>
       </div>
       <div className={styles.info}>
         {categories.map(category =>
