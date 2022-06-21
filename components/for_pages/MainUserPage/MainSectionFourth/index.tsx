@@ -29,8 +29,6 @@ const MainSectionFourth = (props) => {
     })
   }, [])
 
-  console.log('DATA', data)
-
   return (
     <div className={styles.root}>
       <div className={styles.container}>

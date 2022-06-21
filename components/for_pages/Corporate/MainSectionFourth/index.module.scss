@@ -40,7 +40,6 @@
 
 
 .videos{
-    flex: 1;
     @media (max-width: 1060px) {
         margin-top: 46px;
     }
@@ -125,12 +124,26 @@
   }
 
   .profiles{
-    flex: 1;
   }
 
   .reviews{
-    flex: 1;
     .review:first-child{
       margin-top: 40px;
     }
   }
+
+  .separator{
+    width: 1px;
+    height: 603px;
+    margin: 0 30px;
+    margin-top: 62px;
+    @media (max-width: 1440px) {
+        margin: 0 15px;
+      }
+    @media (max-width: 1200px) {
+        margin: 0 10px;
+    }
+    @media (max-width: 1060px) {
+        display: none;
+    }
+}

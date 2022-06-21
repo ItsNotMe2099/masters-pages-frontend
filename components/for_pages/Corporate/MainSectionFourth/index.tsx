@@ -1,11 +1,13 @@
 import styles from 'components/for_pages/Corporate/MainSectionFourth/index.module.scss'
 import { useTranslation } from 'next-i18next'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Video from 'components/for_pages/Corporate/MainSectionFourth/Video'
-import SampleProfile from 'components/for_pages/Corporate/MainSectionFourth/SampleProfile'
+import SampleProfile from 'components/for_pages/MainUserPage/MainSectionFourth/SampleProfile'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
+import { IProfile } from 'data/intefaces/IProfile'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface IReview {
   image: string
@@ -30,15 +32,17 @@ const MainSectionFourth = (props) => {
   const url = '/api/profile/for-main-page'
   //const { data: data } = useSWR(url)
 
-  const data = [
-    {image: '/img/MainVolunteer/sample1.png', link: '#'},
-    {image: '/img/MainVolunteer/sample1.png', link: '#'},
-    {image: '/img/MainVolunteer/sample1.png', link: '#'},
-  ]
+  const [data, setData] = useState<IProfile[]>([])
+
+  useEffect(() => {
+    ProfileRepository.fetchProfilesForMainPage().then(data => {
+      if(data){
+        setData(data)
+      }
+    })
+  }, [])
 
   const reviews = [
-    {image: '/img/MainVolunteer/reviews-avatar.png', name: 'Mark Smith', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis sed orci in nec luctus fermentum et. Ac pulvinar in ac eros, lectus viverra urna. Mauris suscipit proin libero,'},
-    {image: '/img/MainVolunteer/reviews-avatar.png', name: 'Mark Smith', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis sed orci in nec luctus fermentum et. Ac pulvinar in ac eros, lectus viverra urna. Mauris suscipit proin libero,'},
     {image: '/img/MainVolunteer/reviews-avatar.png', name: 'Mark Smith', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis sed orci in nec luctus fermentum et. Ac pulvinar in ac eros, lectus viverra urna. Mauris suscipit proin libero,'},
   ]
 
@@ -71,12 +75,14 @@ const MainSectionFourth = (props) => {
           </div>
         )}
       </div>
+      <div className={styles.separator}></div>
       <div className={styles.profiles}>
         <div className={styles.title}>{t('newMainVolunteer.sampleProfiles')}</div>
-        {data && data.map(item =>
+        {data && data.slice(0, 3).map(item =>
           <SampleProfile item={item}/>
         )}
       </div>
+      <div className={styles.separator}></div>
       <div className={styles.reviews}>
         <div className={styles.title}>{t('newMainVolunteer.customerReviews')}</div>
         {reviews.map((item, index) =>
