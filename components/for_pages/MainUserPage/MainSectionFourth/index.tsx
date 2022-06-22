@@ -7,6 +7,8 @@ import Button from 'components/ui/Button'
 import useSWR from 'swr'
 import { IProfile } from 'data/intefaces/IProfile'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import { useDispatch } from 'react-redux'
+import { signUpOpen } from 'components/Modal/actions'
 
 
 const MainSectionFourth = (props) => {
@@ -29,6 +31,8 @@ const MainSectionFourth = (props) => {
     })
   }, [])
 
+  const dispatch = useDispatch()
+
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -48,9 +52,9 @@ const MainSectionFourth = (props) => {
         )}
         <div className={styles.btns}>
           <div className={styles.firstBtn}>
-            <Button href='/SearchMasterPage' target='_self' outlineRed className={styles.findMaster}>{t('findMaster')}</Button>
+            <Button onClick={() => dispatch(signUpOpen())} target='_self' outlineRed className={styles.findMaster}>{t('findMaster')}</Button>
           </div>
-            <Button href='/SearchVolunteerPage' target='_self' outlineBlue className={styles.findMaster}>{t('findVolunteer')}</Button>
+            <Button onClick={() => dispatch(signUpOpen())} target='_self' outlineBlue className={styles.findMaster}>{t('findVolunteer')}</Button>
         </div>
       </div>
       </div>
