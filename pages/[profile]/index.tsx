@@ -1,17 +1,42 @@
 import {getAuthServerSide} from 'utils/auth'
-
 import request from 'utils/request'
 import { SkillData} from 'types'
-
 import PublicProfile from 'components/PublicProfile'
 import {IProfile} from 'data/intefaces/IProfile'
+import { useAppContext } from 'context/state'
+import { useEffect, useState } from 'react'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { IOrganization, OrganizationStatus } from 'data/intefaces/IOrganization'
+import RegistrationSuccess from 'components/Auth/RegistrationSuccess'
+import styles from './index.module.scss'
+
 interface Props {
   profile: IProfile,
   skill: SkillData
 }
 
 const ProfilePage = (props) => {
- return <PublicProfile {...props} showType={'profile'}/>
+  const [organization, setOrganization] = useState<IOrganization>(null)
+  const context = useAppContext()
+
+  useEffect(() => {
+    if(context.profile.role === 'corporate'){
+      OrganizationRepository.fetchCurrentOrganization().then(data => setOrganization(data))
+    }
+  }, [])
+
+if(context.profile.role === 'corporate' && organization?.status === OrganizationStatus.Moderation){
+  return (
+    <div className={styles.success}>
+      <RegistrationSuccess isOpen={true}/>
+    </div>
+  )
+}
+else{
+  return (
+   <PublicProfile {...props} showType={'profile'}/>
+  )
+ }
 }
 export const getServerSideProps = async (ctx) => {
 

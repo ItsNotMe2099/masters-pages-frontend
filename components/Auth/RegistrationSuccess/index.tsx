@@ -3,6 +3,8 @@ import styles from './index.module.scss'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
+import { useDispatch } from 'react-redux'
+import { logout } from '../actions'
 
 interface Props {
   isOpen: boolean
@@ -13,6 +15,13 @@ interface Props {
 const RegistrationSuccess = (props: Props) => {
   const { t } = useTranslation('common')
   const router = useRouter()
+  const dispatch = useDispatch()
+
+  const handleClick = (href?: string) => {
+    dispatch(logout())
+    href && router.push(href)
+  }
+
   return (
     <div className={styles.root}>
         <div className={styles.image}><img src={'/img/Modal/success.svg'}/></div>
@@ -23,11 +32,11 @@ const RegistrationSuccess = (props: Props) => {
           {t('auth.registrationSuccess.description')}
         </div>
         <div className={styles.btns}>
-            <MainSectionButton size={'small'} color='yellow' href='/corporate'>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
-            <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
-            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick('/corporate')}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineGreen' onClick={() => handleClick('/')}>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
+            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
           </div>
-        <Link href="/SearchTaskPage"><a className={styles.link}>{t('auth.registrationSuccess.lookAtTaskList')}</a></Link>
+        <Link href="/FindOrdersGuest"><a className={styles.link} onClick={() => handleClick()}>{t('auth.registrationSuccess.lookAtTaskList')}</a></Link>
     </div>
   )
 }
