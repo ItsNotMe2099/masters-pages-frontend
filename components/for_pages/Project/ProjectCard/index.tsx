@@ -96,8 +96,13 @@ const ProjectCard = (props: Props) => {
     }))
   }
 
+  React.useEffect(() => {
+    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+  }, [])
+
   const handleDeleteApplication = async () => {
-    await ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+    //await ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+    console.log('APPPS', applications)
     const currentApp = applications.find(app => app.projectId === project.id)
     console.log('APPP', currentApp)
     dispatch(confirmOpen({
