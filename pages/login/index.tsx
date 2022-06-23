@@ -1,4 +1,4 @@
-import { signUpOpen } from 'components/Modal/actions'
+import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import PhoneConfirmComponent from 'components/Auth/PhoneConfirm'
 import PWRecoveryComponent from 'components/Auth/PWRecovery'
 import PWRecoverySucces from 'components/Auth/PWRecovery/Success'
@@ -13,6 +13,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import Backgrounds from 'components/Backgrounds'
 import cookie from 'js-cookie'
+import { useRouter } from 'next/router'
+import {getAuthServerSide} from 'utils/auth'
+import {setCookie} from 'nookies'
+import {CookiesType, RegistrationMode} from 'types/enums'
+import { addDays} from 'date-fns'
 interface Props {
   user?: any
 }
@@ -22,12 +27,14 @@ const RegistrationPage = (props: Props) => {
   const dispatch = useDispatch()
   const key = useSelector((state: IRootState) => state.modal.modalKey)
   useEffect(() => {
-    dispatch(signUpOpen())
+    dispatch(signInOpen())
   }, [])
+
+  const router = useRouter()
 
   const handleAbout = () => {
     cookie.set('signUpMobile', 'no', { expires: 365 * 3 })
-    window.location.href = '/'
+    router.push('/')
   }
   return (
     <div className={styles.root}>
@@ -52,4 +59,18 @@ const RegistrationPage = (props: Props) => {
     </div>
   )
 }
+
+export const getServerSideProps = async (ctx) => {
+  const res = await getAuthServerSide()(ctx as any)
+
+  if((res as any).props.user){
+    ctx.res.writeHead(302, { Location: '/me' })
+    ctx.res.end()
+    return {props: {...res.props}}
+  }
+  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, {expires: addDays(new Date(), 5)})
+  return {props: {...res.props}}
+
+}
+
 export default RegistrationPage
