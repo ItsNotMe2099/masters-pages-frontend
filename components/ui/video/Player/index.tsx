@@ -9,10 +9,11 @@ import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import classNames from 'classnames'
+import screenfull from 'screenfull';
 
-const screenfull = dynamic(() => import('screenfull') as any, {
+/*const screenfull = dynamic(() => import('screenfull') as any, {
   ssr: false
-})
+})*/
 
 import { findDOMNode } from 'react-dom'
 
@@ -121,9 +122,9 @@ export default function Player(props) {
     const handleClickFullscreen = (event) => {
         if (player?.current) {
             if (fullScreen) {
-                (screenfull as any).exit()
+                screenfull.exit()
             }else {
-                (screenfull as any).request(findDOMNode(root?.current))
+                screenfull.request(findDOMNode(root?.current))
             }
             setFullscreen(f => !f)
         }
