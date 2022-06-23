@@ -20,12 +20,12 @@ const ProfilePage = (props) => {
   const context = useAppContext()
 
   useEffect(() => {
-    if(context.profile.role === 'corporate'){
+    if(context.profile?.role === 'corporate'){
       OrganizationRepository.fetchCurrentOrganization().then(data => setOrganization(data))
     }
   }, [])
 
-if(context.profile.role === 'corporate' && organization?.status === OrganizationStatus.Moderation){
+if(context.profile?.role === 'corporate' && organization?.status === OrganizationStatus.Moderation){
   return (
     <div className={styles.success}>
       <RegistrationSuccess isOpen={true}/>
