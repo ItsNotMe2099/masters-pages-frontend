@@ -32,7 +32,7 @@ const CardOrganization = (props: Props) => {
   const {t} = useTranslation('common')
   const isSubscribed = organization.corporateProfile.isSubscribedByCurrentProfile || isTempSubscribed
   const handleEditClick = () => {
-    setShowForm(true)
+    setShowForm(showForm ? false : true)
   }
   const handleSubscribe = () => {
     if(!organization){

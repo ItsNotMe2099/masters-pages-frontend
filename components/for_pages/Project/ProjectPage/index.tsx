@@ -98,7 +98,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
        <div className={styles.sectionHeader}>Execution type</div>
        <div className={classNames(styles.sectionContent, styles.executionType)}>
          {[ProjectExecutionType.Online, ProjectExecutionType.Combo].includes(project.executionType) && <div className={classNames(styles.executionTypeItem, styles.online)}><img src={'/img/Project/location_green.svg'}/> Online</div>}
-         {[ProjectExecutionType.Offline, ProjectExecutionType.Combo].includes(project.executionType) && <div className={styles.executionTypeItem}><img src={'/img/Project/location.svg'}/> Offline</div>}
+         {[ProjectExecutionType.Offline, ProjectExecutionType.Combo].includes(project.executionType) && <div className={styles.executionTypeItem}><img src={'/img/Project/location.svg'}/> In Person</div>}
        </div>
      </div>
 
