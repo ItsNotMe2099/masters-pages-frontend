@@ -20,6 +20,7 @@ import FileField from 'components/fields/FileField'
 import Button from 'components/PublicProfile/components/Button'
 import LocationFormField from 'components/fields/LocationFormField'
 import { Educations } from 'data/educations'
+import ProjectRepository from 'data/repositories/ProjectRepository'
 
 interface Props {
   project: IProject | null
@@ -111,6 +112,11 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
     else if(minAge < 0){
       setFieldValue('minAge', 0)
     }
+  }
+
+  const handleSave = async () => {
+    ProjectRepository.update(project.id, values)
+    await formik.submitForm();
   }
 
   useEffect(() => {
@@ -218,7 +224,10 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
         <div className={styles.bottomBar}>
 
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
+          {!project ? <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
+            :
+            <Button size={'small'} color={'red'} type={'button'} onClick={handleSave}>Save</Button>
+          }
           <Button size={'small'} color={'red'} type={'button'}  onClick={handleSubmitPreview}>Preview</Button>
           <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Publish</Button>
         </div>
