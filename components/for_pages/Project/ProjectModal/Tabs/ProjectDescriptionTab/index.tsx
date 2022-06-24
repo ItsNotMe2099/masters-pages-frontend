@@ -9,6 +9,7 @@ import ProjectPage from 'components/for_pages/Project/ProjectPage'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import ProjectRepository from 'data/repositories/ProjectRepository'
 
 interface Props {
   project: IProject | null
@@ -16,6 +17,7 @@ interface Props {
   showType: 'client' | 'public'
   onChange?: (item) => void
   onPreview?: (data) => void
+  onDelete: () => void | null
 }
 
 
@@ -43,6 +45,12 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
     )
   }
   }, [])
+  const handleDelete = async () => {
+    await ProjectRepository.delete(project.id)
+    if(props.onDelete){
+    props.onDelete()
+    }
+  }
 
   return (
   <div className={styles.root}>

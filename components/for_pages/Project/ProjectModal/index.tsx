@@ -17,8 +17,9 @@ interface Props {
   isOpen: boolean,
   projectId?: number,
   onClose: () => void
+  onDelete: () => void
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) => {
   const dispatch = useDispatch()
   const [tab, setTab] = useState('description');
   const [project, setProject] = useState<IProject>(null);
@@ -80,7 +81,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
         <div className={styles.content}>
 
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && <TabProjectDescription project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')}/>}
+            {tab === 'description' && <TabProjectDescription project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}
