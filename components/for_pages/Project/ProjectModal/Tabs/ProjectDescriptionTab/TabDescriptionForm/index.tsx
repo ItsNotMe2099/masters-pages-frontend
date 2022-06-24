@@ -25,6 +25,7 @@ import ProjectRepository from 'data/repositories/ProjectRepository'
 interface Props {
   project: IProject | null
   onSave: (data) => any;
+  onPreview?: (data) => any
 }
 
 const TabDescriptionForm = ({project, ...props}: Props) => {
@@ -53,6 +54,18 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
     }
     setIsLoading(false);
 
+  }
+
+  const handleSubmitFormPreview = async (data) => {
+
+    const dartFormatted = {...data};
+    dartFormatted.skills = data.skills.map(i => ({
+      mainCategoryId: i.mainCategory?.id,
+      categoryId: i.category?.id,
+      subCategoryId: i.subCategory?.id
+    }))
+    props.onPreview(dartFormatted)
+    return;
   }
   const initialValues = {
     title: project?.title ?? '',
@@ -95,6 +108,8 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   }
   const handleSubmitPreview = async () => {
     console.log("handleSubmitPreview")
+    handleSubmitFormPreview(values)
+
   }
 
   const [isDisabled, setIsDisabled] = useState(false)

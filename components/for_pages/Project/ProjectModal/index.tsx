@@ -63,6 +63,10 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
 
   }
 
+  const handlePreviewProject = (data) => {
+    setProject(data)
+  }
+
   const handleClose = () => {
     setTab('description')
     onClose()
@@ -76,7 +80,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType}: Props) => {
         <div className={styles.content}>
 
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && <TabProjectDescription project={project}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')}/>}
+            {tab === 'description' && <TabProjectDescription project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}

@@ -15,6 +15,7 @@ interface Props {
   onSave: (data) => any
   showType: 'client' | 'public'
   onChange?: (item) => void
+  onPreview?: (data) => void
 }
 
 
@@ -25,6 +26,11 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
   const handleSave = (data) => {
     setIsEdit(false);
     props.onSave(data);
+  }
+
+  const handlePreview = (data) => {
+    setIsEdit(false);
+    props.onPreview(data);
   }
 
   useEffect(() => {
@@ -40,11 +46,13 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
 
   return (
   <div className={styles.root}>
-    {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave}/>}
-    {(!isEdit && project) && <ProjectPage project={project} onSave={props.onSave} controls={ showType === 'client' ? [
+    {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
+    {(!isEdit && project) && <ProjectPage project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
       <Button color={'white'} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
       <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
-    ] : (application?.status === ApplicationStatus.Applied || 
+    ] : 
+    (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
+    (application?.status === ApplicationStatus.Applied || 
       application?.status === ApplicationStatus.Invited ||
       application?.status === ApplicationStatus.Execution ||
       application?.status === ApplicationStatus.CompleteRequest ||

@@ -46,7 +46,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
   return (
    <div className={styles.root}>
     <div className={styles.left}>
-      <CardProfile profileId={project.corporateProfileId}/>
+      <CardProfile profileId={profile.id}/>
     </div>
      <div className={styles.center}>
        <div className={classNames(styles.section, styles.info)}>
