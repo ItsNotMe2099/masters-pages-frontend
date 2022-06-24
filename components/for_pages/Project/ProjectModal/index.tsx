@@ -17,7 +17,7 @@ interface Props {
   isOpen: boolean,
   projectId?: number,
   onClose: () => void
-  onDelete: () => void
+  onDelete?: () => void | null | undefined
 }
 const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) => {
   const dispatch = useDispatch()
