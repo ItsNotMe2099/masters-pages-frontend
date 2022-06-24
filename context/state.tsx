@@ -81,6 +81,9 @@ export function AppWrapper(props: Props) {
     if (!props.token && user) {
       setUser(null)
     }
+    if (!props.token){
+      setProfile(null)
+    }
   }, [props.token])
 
   /** update user data from the server or just set them if passed to parameter */

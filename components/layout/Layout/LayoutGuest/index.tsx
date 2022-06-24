@@ -8,11 +8,8 @@ import cx from 'classnames'
 import {useRouter} from 'next/router'
 import LogoSvg from 'components/svg/Logo'
 import cookie from 'js-cookie'
-import {getProfileRoleByRoute} from 'utils/profileRole'
 import LangSelect  from 'components/LangSelect'
-import {ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
-import {useAppContext} from 'context/state'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 
@@ -25,9 +22,6 @@ interface Props {
 export default function LayoutGuest(props: Props) {
   const {children, showLeftMenu} = props
   const {route: currentRoute} = useRouter()
-  const appContext = useAppContext()
-  const roleCurrent = appContext.role
-  const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
   const [collapsed, setCollapsed] = useState(false)
   useEffect(() => {
     setCollapsed(!!cookie.get('menu-collapsed'))
@@ -35,20 +29,6 @@ export default function LayoutGuest(props: Props) {
 
   const {t} = useTranslation('common')
   const dispatch = useDispatch()
-
-  const getModeClass = () => {
-    switch (role) {
-      case ProfileRole.Master:
-        return styles.modeMaster
-      case ProfileRole.Volunteer:
-        return styles.modeVolunteer
-      case ProfileRole.Corporate:
-        return styles.modeCorporate
-      case ProfileRole.Client:
-      default:
-        return styles.modeClient
-    }
-  }
 
   const item = [
     {title: t('menu.findCompanies'), icon: 'find-clients-black', link: '/FindCompaniesGuest', isSeparator: true},
@@ -79,7 +59,7 @@ export default function LayoutGuest(props: Props) {
 
 
   return (
-    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})} id='scrollableDiv'>
+    <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})} id='scrollableDiv'>
       {showLeftMenu && <div className={styles.leftMenu}>
         <div className={styles.logo}>
           {collapsed && <LogoSvg className={styles.logoCollapsed}/>}
@@ -88,7 +68,7 @@ export default function LayoutGuest(props: Props) {
         </div>
         {item.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
-          link={item.link} mode={role}/></>)}
+          link={item.link}/></>)}
         <div className={styles.volunteers}>
           <div className={styles.title}>
             {t('guestPage.forVolunteers')}
@@ -97,7 +77,7 @@ export default function LayoutGuest(props: Props) {
           <MenuItem
           className={styles.volunteersItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
-          link={item.link} mode={role}/>)}
+          link={item.link}/>)}
         </div>
         <div className={styles.masters}>
           <div className={styles.title}>
@@ -107,7 +87,7 @@ export default function LayoutGuest(props: Props) {
           <MenuItem
           className={styles.mastersItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
-          link={item.link} mode={role}/>)}
+          link={item.link}/>)}
         </div>
         <div className={styles.companies}>
           <div className={styles.title}>
@@ -117,7 +97,7 @@ export default function LayoutGuest(props: Props) {
           <MenuItem
           className={styles.companiesItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
-          link={item.link} mode={role}/>)}
+          link={item.link}/>)}
         </div>
       </div>}
       <div className={styles.header}>
