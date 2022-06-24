@@ -55,7 +55,7 @@ export default function ChatAttachFile(props: Props) {
     const options = {
       signingUrlMethod: 'GET',
       accept: '*/*',
-      uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
+      uploadRequestHeaders: { 'x-amz-acl': 'private' },
       signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role},
       signingUrlWithCredentials: false,
       signingUrlQueryParams: { uploadType: 'avatar' },

@@ -66,7 +66,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
     accept: '*/*',
-    uploadRequestHeaders: { 'x-amz-acl': 'public-read' },
+    uploadRequestHeaders: { 'x-amz-acl': 'private' },
     signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role},
     signingUrlWithCredentials: false,
     signingUrlQueryParams: { uploadType: 'avatar' },
