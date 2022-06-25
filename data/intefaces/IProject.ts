@@ -42,6 +42,7 @@ export interface IProjectLocation{
   id: number
   type: 'online' | 'offline',
   location: string
+  address: string
 }
 
 export interface IProject {

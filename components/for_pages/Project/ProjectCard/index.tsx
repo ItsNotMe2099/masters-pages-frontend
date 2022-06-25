@@ -115,6 +115,17 @@ const ProjectCard = (props: Props) => {
     }))
   }
 
+  const handleDeleteProject = async () => {
+    dispatch(confirmOpen({
+      description: `${t('task.confirmDelete')} «${project.title}»?`,
+      onConfirm: async () => {
+        dispatch(modalClose())
+        await ProjectRepository.delete(project.id)
+        props.onDelete(project);
+      }
+    }))
+  }
+
   const handleApply = () => {
     props.onApplyClick(project)
   }
@@ -195,7 +206,7 @@ const ProjectCard = (props: Props) => {
         return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' projectBtn='green'>COMPLETE</Button>
       case 'recycleBin':
         return <Button
-        onClick={props.status === 'saved' ? handleDeleteFromSaved : handleDeleteApplication}
+        onClick={props.status === 'saved' ? handleDeleteFromSaved : profile.role !== 'corporate' ? handleDeleteApplication : handleDeleteProject}
         projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
         /*
       case 'cancel':
@@ -298,7 +309,7 @@ console.log("actionsType", actionsType);
           <div className={classNames(styles.section, styles.sectionLocations)}>
             <div className={styles.sectionHeader}>Locations</div>
             <div className={styles.locations}>
-            {project.locations?.map(i => <WorkInListItem model={{type: i.type, location: i.location}}/>)}
+            {project.locations?.map(i => <WorkInListItem model={{type: i.type, location: i.location}} address={i.address}/>)}
             </div>
           </div>
           <div className={classNames(styles.section, styles.sectionCategories)}>

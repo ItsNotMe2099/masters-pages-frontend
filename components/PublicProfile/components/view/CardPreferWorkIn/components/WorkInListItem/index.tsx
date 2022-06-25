@@ -12,6 +12,7 @@ interface Props{
   onMoveDown?: (model, index) => void,
   onDelete?: (model, index) => void
   isEdit?: boolean
+  address?: string
 }
 const LocationItem = (props: Props) => {
   const {  model, index, onMoveUp, onMoveDown, isEdit } = props
@@ -19,7 +20,8 @@ const LocationItem = (props: Props) => {
   return (
     <div className={styles.root}>
       <LocationIcon className={model.type === 'online' ? styles.iconOnline : styles.icon} />
-      <div className={`${styles.name} ${model.type === 'online' && styles.nameOnline}`}>{model.type === 'online' ? t('online') : model.location}</div>
+      <div className={`${styles.name} ${model.type === 'online' && styles.nameOnline}`}>
+        {model.type === 'online' ? t('online') : model.location ? model.location : props.address}</div>
       {isEdit && <div className={styles.actions}>
       {onMoveDown && <FormActionButton type={'moveDown'} title={t('down')} onClick={() => onMoveDown(model, index)}/>}
       {onMoveUp && <FormActionButton type={'moveUp'} title={t('up')} onClick={() => onMoveUp(model, index)}/>}

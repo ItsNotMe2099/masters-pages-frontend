@@ -25,3 +25,23 @@ export interface IGeoname{
   cc2: string
   population: number
 }
+
+export interface IPlaceResponse{
+  id: number
+  profileId: number
+  country: string
+  city: string
+  region: null
+  zipcode: string
+  address: string
+  office: string
+  geonameid: number
+  location: ILocation
+  isExactLocation: boolean
+  isOnline: boolean
+  sort: null
+  createdAt: string
+  updatedAt: string
+  geoname: IGeoname
+  countryCode: string
+}

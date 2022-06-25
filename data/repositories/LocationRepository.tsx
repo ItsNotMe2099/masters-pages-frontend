@@ -1,13 +1,22 @@
 import request from 'utils/request'
 
 import {IPagination} from 'types/types'
-import {ICity, ICountry} from 'data/intefaces/ILocation'
+import {ICity, ICountry, IPlaceResponse} from 'data/intefaces/ILocation'
 export interface IDataQueryList{
   page?: number,
   limit?: number,
   search?: string,
   lang?: string
 }
+
+export interface IDataPlace{
+  geonameid?: number
+  zipcode?: string
+  address: string
+  office?: string
+  isOnline?: boolean
+}
+
 export default class LocationRepository {
   static async fetchCountries({page = 1, limit = 1000, search, lang = 'en'}: IDataQueryList): Promise<ICountry[] | null> {
     console.log("fetchCountries111")
@@ -58,6 +67,24 @@ export default class LocationRepository {
         //country: countryCode
       }
     })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+  static async addPlaceToCurrentProfile({geonameid = null, zipcode = null, address = null, office = null, isOnline = false}: IDataPlace): Promise<IPlaceResponse | null> {
+    const res = await request({
+      url: '/api/place',
+      method: 'POST',
+      data: {
+        geonameid,
+        zipcode,
+        address,
+        office,
+        isOnline
+      }
+    })
+    console.log("Res111", res);
     if (res.err) {
       return null
     }

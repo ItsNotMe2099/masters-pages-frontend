@@ -9,6 +9,7 @@ import FormActionButton from 'components/PublicProfile/components/FormActionButt
 import LocationForm from 'components/fields/LocationFormField/Form'
 import LocationItem from 'components/fields/LocationFormField/LocationItem'
 import Button from 'components/PublicProfile/components/Button'
+import LocationRepository from 'data/repositories/LocationRepository'
 
 interface Props<T> extends IField<T> {
   styleType?: InputStyleType
@@ -24,7 +25,8 @@ export default function LocationFormField(props: Props<any[]>) {
 
   }
   const handleSubmit =  async (data) => {
-    helpers.setValue([...(field.value || []), data]);
+    const place = await LocationRepository.addPlaceToCurrentProfile(data)
+    helpers.setValue([...(field.value || []), place]);
     setShowForm(false);
   }
   const handleDelete = (data, index: number) => {

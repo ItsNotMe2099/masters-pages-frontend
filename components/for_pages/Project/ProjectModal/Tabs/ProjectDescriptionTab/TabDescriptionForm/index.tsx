@@ -24,7 +24,7 @@ import ProjectRepository from 'data/repositories/ProjectRepository'
 
 interface Props {
   project: IProject | null
-  onSave: (data) => any;
+  onSave: (data: IProject) => any;
   onPreview?: (data) => any
 }
 
@@ -33,6 +33,17 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const handleSaveProject = async (data: IProject) => {
+    if(project?.id){
+      await ProjectRepository.update(project.id ,{...data, id: project.id});
+      await props.onSave(data)
+    }else{
+      const project = await ProjectRepository.create(data)
+      await props.onSave(project)
+    }
+  }
+
   const handleSubmit = async (data) => {
 
     const dartFormatted = {...data};
@@ -41,8 +52,9 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id
     }))
-    props.onSave(dartFormatted)
-    return;
+    dartFormatted.locationsIds = data.locations.map(i => i.id)
+    handleSaveProject(dartFormatted)
+  
     setError(null)
     setIsLoading(true);
     try {
@@ -64,8 +76,18 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id
     }))
+    dartFormatted.locationids = data.locations.map(i => (i.id))
     props.onPreview(dartFormatted)
-    return;
+    setError(null)
+    setIsLoading(true);
+    try {
+      //    const res = await AuthRepository.completeRegistration(data);
+      reachGoal('project:created')
+
+    } catch (e) {
+      setError(e);
+    }
+    setIsLoading(false);
   }
   const initialValues = {
     title: project?.title ?? '',
@@ -116,6 +138,8 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
   const {values, setFieldValue} = formik
 
+  console.log('VALLLLLLLLL', values)
+
   const range = (minAge: number, maxAge: number) => {
     if(minAge + 1 > maxAge && minAge > 0){
       setFieldValue('minAge', minAge - 1)
@@ -131,6 +155,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
   const handleSave = async () => {
     ProjectRepository.update(project.id, values)
+    await formik.setFieldValue('status', project.status);
     await formik.submitForm();
   }
 
@@ -239,7 +264,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
         <div className={styles.bottomBar}>
 
-          {!project ? <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
+          {(!project || !project.status) ? <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
             :
             <Button size={'small'} color={'red'} type={'button'} onClick={handleSave}>Save</Button>
           }
