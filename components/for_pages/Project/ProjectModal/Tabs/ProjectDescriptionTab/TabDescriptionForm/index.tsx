@@ -130,8 +130,11 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   }
   const handleSubmitPreview = async () => {
     console.log("handleSubmitPreview")
+    if(project){
+      await formik.setFieldValue('status', project.status);
+      await formik.submitForm();
+    }
     handleSubmitFormPreview(values)
-
   }
 
   const [isDisabled, setIsDisabled] = useState(false)
