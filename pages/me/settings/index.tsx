@@ -11,7 +11,7 @@ import {
 } from 'components/ProfileSettings/actions'
 import {IRootState} from 'types'
 import Loader from 'components/ui/Loader'
-import {deleteProfile, updateProfile} from 'components/Profile/actions'
+import {updateProfile} from 'components/Profile/actions'
 import RegistrationPhone from 'components/Auth/RegistrationPhone'
 import RegistrationPhoneConfirm from 'components/Auth/RegistrationPhoneConfirm'
 import { useTranslation } from 'next-i18next'
@@ -40,9 +40,10 @@ const TabSettings= (props: Props) => {
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const appContext = useAppContext();
   const profile = appContext.profile
-  const loading = useSelector((state: IRootState) => state.profileSettings.loading)
+  //const loading = useSelector((state: IRootState) => state.profileSettings.loading)
   const settings = useSelector((state: IRootState) => state.profileSettings.settings)
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     dispatch(fetchProfileSettingsRequest())
 
@@ -55,7 +56,8 @@ const TabSettings= (props: Props) => {
   }
 
   const handleConfirm = async () => {
-    ProfileRepository.delete(profile.role)
+    const deleted = await ProfileRepository.delete(profile.role)
+    !deleted ? setLoading(true) : setLoading(false)
     dispatch(confirmModalClose())
     if(profile.role === ProfileRole.Client){
       router.push('/registration')
