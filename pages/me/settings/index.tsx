@@ -1,4 +1,4 @@
-import {changePasswordOpen, confirmOpen, modalClose} from 'components/Modal/actions'
+import {changePasswordOpen, confirmModalClose, confirmOpen, modalClose} from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import * as React from 'react'
 import styles from './index.module.scss'
@@ -24,6 +24,11 @@ import TabNotificationsForm from 'components/for_pages/Settings/TabNotifications
 import Modals from 'components/layout/Modals'
 import TabLanguageForm from 'components/for_pages/Settings/TabLanguageForm'
 import {useAppContext} from 'context/state'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
+import {useState} from 'react'
+import { useRouter } from 'next/router'
+import { ProfileRole } from 'data/intefaces/IProfile'
+import { logout } from 'components/Auth/actions'
 interface Props {
   t?: (string) => string,
   user?: any
@@ -37,6 +42,7 @@ const TabSettings= (props: Props) => {
   const profile = appContext.profile
   const loading = useSelector((state: IRootState) => state.profileSettings.loading)
   const settings = useSelector((state: IRootState) => state.profileSettings.settings)
+  const router = useRouter()
   useEffect(() => {
     dispatch(fetchProfileSettingsRequest())
 
@@ -48,13 +54,29 @@ const TabSettings= (props: Props) => {
     dispatch(updateProfileSettingsRequest(data))
   }
 
+  const handleConfirm = async () => {
+    ProfileRepository.delete(profile.role)
+    dispatch(confirmModalClose())
+    if(profile.role === ProfileRole.Client){
+      router.push('/registration')
+    }
+    else if(profile.role === ProfileRole.Master){
+      router.push('/MasterProfile')
+    }
+    else if(profile.role === ProfileRole.Volunteer){
+      router.push('/VolunteerProfile')
+    }
+    else{
+      dispatch(logout())
+    }
+  }
+
+  const confirmData = () => {
+    return  {description: t('personalArea.tabSettings.deleteMyAccountConfirm'), onConfirm: () => {handleConfirm()}, onCancel: () => {dispatch(confirmModalClose())}}
+  }
+
   const handleRemoveAccount = () => {
-    dispatch(confirmOpen({
-      description: t('personalArea.tabSettings.deleteMyAccountConfirm'),
-      onConfirm: () => {
-        dispatch(deleteProfile(profile.role))
-      }
-    }))
+    dispatch(confirmOpen(confirmData()))
   }
 
   return (

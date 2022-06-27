@@ -103,4 +103,15 @@ export default class ProfileRepository {
     }
     return res.data
   }
+
+  static async delete(role: string): Promise<IProfile | null> {
+    const res = await request({
+      url: `/api/profile/${role}`,
+      method: 'DELETE',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }
