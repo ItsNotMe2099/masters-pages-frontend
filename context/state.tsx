@@ -8,6 +8,7 @@ import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import UserRepository from 'data/repositories/UserRepostory'
+import { useRouter } from 'next/router'
 
 interface IState {
   isMobile: boolean
@@ -72,6 +73,7 @@ export function AppWrapper(props: Props) {
   const [user, setUser] = useState<IUser | null>(props.user)
   const [profile, setProfile] = useState<IProfile | null>(props.profile)
   const [role, setRole] = useState<ProfileRole | null>(props.role )
+  const router = useRouter()
   useEffect(() => {
     setToken(props.token ?? null)
     if (props.token && !user) {
@@ -90,7 +92,7 @@ export function AppWrapper(props: Props) {
   const updateUser = async (newUser?: IUser) => {
     if (newUser) {
       setUser(newUser)
-      return newUser;
+      return newUser
     } else {
       const data = await UserRepository.fetchUser()
       if (data) {
@@ -108,6 +110,18 @@ export function AppWrapper(props: Props) {
       const data = await ProfileRepository.fetchProfile(newRole || role)
       if (data) {
         setProfile(data)
+      }else{
+        switch(newRole){
+          case ProfileRole.Client:
+            router.push('/registration')
+            break;
+          case ProfileRole.Master:
+            router.push('/MasterProfile')
+            break;   
+          case ProfileRole.Volunteer:
+            router.push('/VolunteerProfile')
+            break;       
+        }
       }
     }
   }
