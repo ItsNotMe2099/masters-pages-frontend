@@ -29,11 +29,12 @@ const RegistrationSuccess = (props: Props) => {
     <div className={styles.root}>
         <div className={styles.image}><img src={'/img/Modal/success.svg'}/></div>
         <div className={styles.headText}>
-          {t('auth.registrationSuccess.title')}
+          {context.profile?.role === 'corporate' ? t('auth.registrationSuccess.title') : t('auth.registrationSuccess.titleForClient')}
         </div>
+        {context.profile?.role === 'corporate' &&
         <div className={styles.text}>
           {t('auth.registrationSuccess.description')}
-        </div>
+        </div>}
         <div className={styles.btns}>
             {context.profile?.role === 'corporate' ?
             <>
