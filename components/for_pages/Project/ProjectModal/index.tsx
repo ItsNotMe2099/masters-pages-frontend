@@ -28,13 +28,17 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) =
   useEffect(() => {
     if(showType === 'public'){
       ProjectRepository.findPublicById(projectId).then(i => setProject(i));
-    }else{
+    }
+    if(!profile){
+      ProjectRepository.searchByProjectId(1, 10, projectId).then(data => setProject(data.data[0]))
+    }
+    else{
       ProjectRepository.findById(projectId).then(i => setProject(i));
     }
 
   }, [projectId])
 
-  const tabs = (showType === 'client' && projectId) ? [
+  const tabs = (showType === 'client' && projectId && profile) ? [
       {name: 'Description', key: 'description', icon: 'description'},
       {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
       {name: 'Messages', key: 'messages', icon: 'messages'},
@@ -42,7 +46,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) =
       {name: 'Events', key: 'events', icon: 'events'},
       {name: 'Reports', key: 'reports', icon: 'reports'},
     ] :
-    ((showType === 'client' && !projectId || !profile)) ?
+    ((!profile || showType === 'client' && !projectId)) ?
       [
         {name: 'Description', key: 'description', icon: 'description'},
       ] :

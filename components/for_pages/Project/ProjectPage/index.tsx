@@ -65,11 +65,13 @@ const ProjectPage = ({  project, ...props}: Props) => {
     }
   }
 
+  console.log('PROJJJJJJJJJ', project)
+
   const profileLink = `/id${project.corporateProfileId}`
   return (
    <div className={styles.root}>
     <div className={styles.left}>
-      <CardProfile profileId={profile.id}/>
+      <CardProfile profileId={profile?.id}/>
     </div>
      <div className={styles.center}>
        <div className={classNames(styles.section, styles.info)}>
@@ -86,11 +88,11 @@ const ProjectPage = ({  project, ...props}: Props) => {
            </div>
 
            <div className={styles.dates}>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.applicationsClothingDate), 'MM.dd.yyy')}</div>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.applicationsClothingDate), 'MM.dd.yyy')}</div>
              <div className={styles.separator}/>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.endDate), 'MM.dd.yyy')}</div>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.endDate), 'MM.dd.yyy')}</div>
 
-           </div>
+  </div>
 
        </div>
        {project.inquiries && <div className={styles.section}>

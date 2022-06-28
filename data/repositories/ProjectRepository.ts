@@ -70,11 +70,21 @@ export default class ProjectRepository {
     console.log("FindPublicById", res.data);
     return res.data?.data?.length > 0 ? res.data.data[0] : null
   }
-  static async search(page: number = 1, limit: number = 10, keywords: string = '', data?: IProjectSearchRequest, corporateProfileId?: number): Promise<IPagination<IProject> | null> {
+  static async search(page: number = 1, limit: number = 10, keywords: string = '', data?: IProjectSearchRequest, corporateProfileId?: number, projectId?: number): Promise<IPagination<IProject> | null> {
     const res = await request({
-      url: `/api/project/search?page=${page}&limit=${limit}&keywords=${keywords}&${corporateProfileId && `corporateProfileId=${corporateProfileId}`}`,
+      url: `/api/project/search?page=${page}&limit=${limit}&keywords=${keywords}&${corporateProfileId && `corporateProfileId=${corporateProfileId}`}&${projectId && `projectId=${projectId}`}`,
       method: 'GET',
       data
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+  static async searchByProjectId(page: number = 1, limit: number = 1, projectId?: number): Promise<IPagination<IProject> | null> {
+    const res = await request({
+      url: `/api/project/search?page=${page}&limit=${limit}&projectId=${projectId}`,
+      method: 'GET',
     })
     if (res.err) {
       return null

@@ -191,6 +191,7 @@ const PublicProfile = (props) => {
     return {}
   }
   const handleProjectViewOpen = (project: IProject) => {
+    console.log('PROJ', project)
     setInitialProjectTab('description')
     setCurrentProject(project);
   }
@@ -219,7 +220,7 @@ const PublicProfile = (props) => {
             next={handleScrollNext}
             loader={<Loader/>}
           >
-            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={() => profile ? handleProjectViewOpen : dispatch(signUpOpen())}/></div>)}
+            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
           {currentProject && <ProjectModal showType={'client'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
