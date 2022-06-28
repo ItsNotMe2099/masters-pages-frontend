@@ -194,3 +194,17 @@
     max-height: 230px;
   }
 }
+
+.attachments{
+  display: flex;
+  margin-top: 25px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  div{
+    align-self: center;
+  }
+}

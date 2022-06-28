@@ -97,7 +97,7 @@ const ProjectCard = (props: Props) => {
   }
 
   React.useEffect(() => {
-    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data.data))
+    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id, 'volunteer').then(data => setApplications(data?.data))
   }, [])
 
   const handleDeleteApplication = async () => {

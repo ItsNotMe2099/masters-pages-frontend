@@ -21,6 +21,7 @@ import Button from 'components/PublicProfile/components/Button'
 import LocationFormField from 'components/fields/LocationFormField'
 import { Educations } from 'data/educations'
 import ProjectRepository from 'data/repositories/ProjectRepository'
+import DocField from 'components/fields/DocField'
 
 interface Props {
   project: IProject | null
@@ -110,7 +111,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
     education: project?.education ?? null,
     minAge: project?.minAge ?? null,
     maxAge: project?.maxAge ?? null,
-    languages: project?.languages ?? []
+    languages: project?.languages ?? [],
   }
 
   const formik = useFormik({
@@ -130,10 +131,6 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   }
   const handleSubmitPreview = async () => {
     console.log("handleSubmitPreview")
-    if(project){
-      await formik.setFieldValue('status', project.status);
-      await formik.submitForm();
-    }
     handleSubmitFormPreview(values)
   }
 
@@ -157,7 +154,6 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   }
 
   const handleSave = async () => {
-    ProjectRepository.update(project.id, values)
     await formik.setFieldValue('status', project.status);
     await formik.submitForm();
   }
@@ -226,7 +222,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
             <div className={styles.fieldset}>
               <div className={styles.fieldsetTitle}>Files</div>
-              <FileField name={'attachmentsInput'}
+              {/*<FileField name={'attachmentsInput'} multiple
                          addFileButton={<div>
                            <Button type={'button'} size="small"> <img src="/img/icons/camera.svg"
                                                                       alt=''/> {t('forms.fileInput.uploadFiles')}
@@ -235,6 +231,13 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
                              {t('forms.fileInput.description')}
                            </div>
                          </div>}
+                         />*/}
+              <DocField name={'attachmentsInput'} multiple maxAmount={3}
+                         addFileButton={<div className={styles.addFileBtn}>
+                          <Button type={'button'} size="small"> <img src="/img/icons/staple.svg"
+                                                                     alt=''/> {t('forms.fileInput.uploadFiles')}
+                          </Button>
+                        </div>}
               />
             </div>
             <div className={styles.fieldset}>
@@ -272,7 +275,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
             <Button size={'small'} color={'red'} type={'button'} onClick={handleSave}>Save</Button>
           }
           <Button size={'small'} color={'red'} type={'button'}  onClick={handleSubmitPreview}>Preview</Button>
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Publish</Button>
+          {project?.status !== ProjectStatus.Published  && <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Publish</Button>}
         </div>
       </Form>
     </FormikProvider>

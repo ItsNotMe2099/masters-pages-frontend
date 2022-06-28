@@ -53,6 +53,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
     minSize,
     multiple = false,
     maxAmount,
+    addFileButton,
     ...rest
   } = props
   const dispatch = useDispatch()
@@ -152,7 +153,10 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
         className={styles.dropZone}
         {...getRootProps()}
       >
-        {(!maxAmount || maxAmount !== value.length) && <div className={styles.add}>
+        {(!maxAmount || maxAmount !== value.length) && 
+        <>
+        {addFileButton ? addFileButton :
+        <div className={styles.add}>
           <div className={styles.image}>
             <img src='/img/DocField/plus.svg' alt=''/>
           </div>
@@ -163,6 +167,8 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
             Format allowed PDF, DOC and TXT
           </div>
         </div>}
+        </>
+        }
         <input
           {...getInputProps()}
         />

@@ -42,6 +42,29 @@ const ProjectPage = ({  project, ...props}: Props) => {
     return null
   }
 
+  const fileName = (file: string) => {
+    const name = file.split('.').splice(0, 1)
+    return name
+  }
+
+  const getImageSrc = (file: string) => {
+
+    const srcValue = file
+    if(!srcValue){
+      return
+    }
+    const extension = srcValue.split('.').pop().toUpperCase()
+    //return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
+    switch(extension){
+      case 'TXT':
+        return '/img/DocField/doc.svg'
+      case 'DOC':
+        return '/img/DocField/doc.svg'
+      case 'PDF':
+        return '/img/DocField/pdf.svg'
+    }
+  }
+
   const profileLink = `/id${project.corporateProfileId}`
   return (
    <div className={styles.root}>
@@ -77,6 +100,14 @@ const ProjectPage = ({  project, ...props}: Props) => {
        {project.description && <div className={styles.section}>
          <div className={styles.sectionHeader}>Project Description</div>
          <div className={styles.sectionContent}>{project.description}</div>
+       </div>}
+       {project.attachments && <div className={styles.section}>
+         <div className={styles.sectionHeader}>Files</div>
+         {<div className={styles.attachments}>
+              {project.attachmentsObjects?.map(item => 
+                  <a className={styles.item} target='_blank' href={getMediaPath(item.urlS3)} download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
+              )}
+            </div>}
        </div>}
        {project.requirements && <div className={styles.section}>
          <div className={styles.sectionHeader}>Application Requirements</div>

@@ -54,12 +54,11 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) =
 
   ;
   const handleSaveProject = async (data) => {
-    setProject(data)
-
+    ProjectRepository.findById(projectId).then(i => setProject(i))
   }
 
   const handlePreviewProject = (data) => {
-    setProject(data)
+    setProject(i => ({...i, ...data}))
   }
 
   const handleClose = () => {
