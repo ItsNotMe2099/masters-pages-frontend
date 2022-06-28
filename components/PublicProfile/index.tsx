@@ -28,6 +28,7 @@ import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './index.module.scss'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
+import { signUpOpen } from 'components/Modal/actions'
 
 interface Props {
   profile: IProfile,
@@ -159,8 +160,8 @@ const PublicProfile = (props) => {
     }
   }
 
-  const fetchProjects = (page?: number, limit?: number) => {
-    ProjectRepository.fetchByStatus(ProjectStatus.Published, page, limit).then(data => {
+  const fetchProjects = (page: number, limit: number, keywords: string, data: null, corporateProfileId: number) => {
+    ProjectRepository.search(page, limit, '', null, corporateProfileId).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
@@ -168,13 +169,13 @@ const PublicProfile = (props) => {
     })
   }
   useEffect(() => {
-    fetchProjects(page, 10)
+    fetchProjects(page, 10, '', null, profile.id)
     setLoading(false);
   }, [])
 
   const handleScrollNext = () => {
     setPage(page + 1);
-    fetchProjects(page + 1, 10);
+    fetchProjects(page + 1, 10,  '', null, profile.id);
   }
   const handleRefresh = () => {
 
@@ -218,12 +219,12 @@ const PublicProfile = (props) => {
             next={handleScrollNext}
             loader={<Loader/>}
           >
-            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={handleProjectApplyOpen} onViewOpen={handleProjectViewOpen}/></div>)}
+            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={() => profile ? handleProjectViewOpen : dispatch(signUpOpen())}/></div>)}
           </InfiniteScroll>}
           {currentProject && <ProjectModal showType={'client'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
-      {!currentSkill && props.showType ==='profile' && currentProfile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
+      {!currentSkill && props.showType ==='profile' && currentProfile?.role !== 'corporate' && currentProfile && <CardProfileStat profile={profile}/>}
           {props.showType === 'recommendations' && <>
             <CardRecommendations profile={profile}/>
 
