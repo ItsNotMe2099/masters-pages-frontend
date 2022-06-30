@@ -10,6 +10,10 @@ import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProjectRepository from 'data/repositories/ProjectRepository'
+import { useAppContext } from 'context/state'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import { useRouter } from 'next/router'
 
 interface Props {
   project: IProject | null
@@ -18,17 +22,21 @@ interface Props {
   onChange?: (item) => void
   onPreview?: (data) => void
   onDelete: () => void | null
+  organization?: IOrganization
 }
 
 
-const TabProjectDescription = ({project, showType, ...props}: Props) => {
+const TabProjectDescription = ({project, showType, organization, ...props}: Props) => {
   const {t} = useTranslation();
   const [isEdit, setIsEdit] = useState(!project)
   const [application, setApplication] = useState<IApplication | null>(null)
+  const router = useRouter()
   const handleSave = (data) => {
     setIsEdit(false);
     props.onSave(data);
   }
+
+  const context = useAppContext()
 
   const handlePreview = (data) => {
     setIsEdit(false);
@@ -52,10 +60,12 @@ const TabProjectDescription = ({project, showType, ...props}: Props) => {
     }
   }
 
+  console.log('ORGGDFDTDT', organization)
+
   return (
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
-    {(!isEdit && project) && <ProjectPage project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
+    {(!isEdit && project) && <ProjectPage organization={organization} project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
       <Button color={'white'} onClick={handleDelete} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
       <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : 

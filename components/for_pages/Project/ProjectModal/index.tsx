@@ -11,6 +11,9 @@ import TabProjectDescription from 'components/for_pages/Project/ProjectModal/Tab
 import TabVolunteers from './Tabs/TabVolunteers'
 import { useAppContext } from 'context/state'
 import TabChat from 'components/for_pages/Project/ProjectModal/Tabs/TabChat'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { useRouter } from 'next/router'
 
 interface Props {
   showType: 'client' | 'public'
@@ -18,22 +21,25 @@ interface Props {
   projectId?: number,
   onClose: () => void
   onDelete?: () => void | null | undefined
+  organization?: IOrganization
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization}: Props) => {
   const dispatch = useDispatch()
   const [tab, setTab] = useState('description');
   const [project, setProject] = useState<IProject>(null);
   const appContext = useAppContext()
   const profile = appContext.profile
+  const router = useRouter()
+
   useEffect(() => {
     if(showType === 'public'){
-      ProjectRepository.findPublicById(projectId).then(i => setProject(i));
+      ProjectRepository.findPublicById(projectId).then(i => setProject(i))
     }
     if(!profile){
       ProjectRepository.searchByProjectId(1, 10, projectId).then(data => setProject(data.data[0]))
     }
     else{
-      ProjectRepository.findById(projectId).then(i => setProject(i));
+      ProjectRepository.findById(projectId).then(i => setProject(i))
     }
 
   }, [projectId])
@@ -78,7 +84,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete}: Props) =
         <div className={styles.content}>
 
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && <TabProjectDescription project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
+            {tab === 'description' && <TabProjectDescription organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}

@@ -24,6 +24,8 @@ import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 import { ApplicationStatus } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { IOrganization } from 'data/intefaces/IOrganization'
 
 interface Props {
 }
@@ -41,6 +43,7 @@ const ProjectsPage = (props: Props) => {
   const [saved, setSaved] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [counts, setCounts] = useState<IProjectCounts>({})
+  const [organization, setOrganization] = useState<IOrganization | null>(null)
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
@@ -112,11 +115,10 @@ const ProjectsPage = (props: Props) => {
 
 
   useEffect(() => {
-    return () => {
-
-
-    }
-  }, [])
+    if(profile.role === ProfileRole.Corporate){
+      OrganizationRepository.fetchCurrentOrganization().then(data => setOrganization(data))
+  }
+}, [])
   const handleScrollNext = async () => {
     setPage(page + 1);
     const data = await ProjectRepository.fetchByStatus(ProjectStatus.Draft);
@@ -269,8 +271,8 @@ const ProjectsPage = (props: Props) => {
         </InfiniteScroll>
       }
       </div>
-      <ProjectModal projectId={currentProjectEdit?.id} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
-      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
+      <ProjectModal projectId={currentProjectEdit?.id} organization={organization} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
+      {currentProject && <ProjectModal organization={organization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
     {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>

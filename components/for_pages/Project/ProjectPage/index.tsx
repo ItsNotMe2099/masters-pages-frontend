@@ -1,8 +1,7 @@
 import * as React from 'react'
-import {ReactElement, useEffect, useState} from 'react'
+import {ReactElement, useState} from 'react'
 import styles from './index.module.scss'
 import {IProject, ProjectExecutionType} from 'data/intefaces/IProject'
-import StarRatings from 'react-star-ratings'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
 import classNames from 'classnames'
@@ -12,13 +11,16 @@ import CardProfile from 'components/for_pages/Project/ProjectPage/CardProfile'
 import cx from 'classnames'
 import ProjectStatusLabel from 'components/for_pages/Project/ProjectModal/ProjectStatusLabel'
 import {getMediaPath} from 'utils/media'
-
 import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
 import ProjectCategories from 'components/for_pages/Project/ProjectCategories'
+import { IOrganization } from 'data/intefaces/IOrganization'
+import CardOrganization from 'components/for_pages/Project/ProjectPage/CardOrganization'
+
 interface Props {
   project: IProject
   controls: ReactElement[] | ReactElement
   onSave: (data) => any;
+  organization?: IOrganization
 }
 const RequirementStatus = (props: {name: string, success: boolean}) => {
   return <div className={classNames(styles.requirementStatus, {[styles.success]: props.success, [styles.failed]: !props.success})}>
@@ -67,11 +69,14 @@ const ProjectPage = ({  project, ...props}: Props) => {
 
   console.log('PROJJJJJJJJJ', project)
 
+  console.log('PROJPAGEORG', props.organization)
+
   const profileLink = `/id${project.corporateProfileId}`
   return (
    <div className={styles.root}>
     <div className={styles.left}>
-      <CardProfile profileId={profile?.id}/>
+        <CardOrganization organization={props.organization}/>
+        {/*<CardProfile profileId={profile?.id}/>*/}
     </div>
      <div className={styles.center}>
        <div className={classNames(styles.section, styles.info)}>
@@ -120,7 +125,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
          <div className={styles.sectionContent}>{project.benefits}</div>
        </div>}
 
-       {profile && <div className={styles.controls}>
+       {props.organization.corporateProfile && <div className={styles.controls}>
          {props.controls}
        </div>}
      </div>

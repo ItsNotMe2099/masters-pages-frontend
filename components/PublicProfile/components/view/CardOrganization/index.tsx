@@ -50,6 +50,8 @@ const CardOrganization = (props: Props) => {
     onOrganizationUpdate && onOrganizationUpdate()
   }
 
+  
+
   return (
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 

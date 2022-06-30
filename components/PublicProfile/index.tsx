@@ -190,7 +190,7 @@ const PublicProfile = (props) => {
     }
     return {}
   }
-  const handleProjectViewOpen = (project: IProject) => {
+  const handleProjectViewOpen = async (project: IProject) => {
     console.log('PROJ', project)
     setInitialProjectTab('description')
     setCurrentProject(project);
@@ -200,6 +200,8 @@ const PublicProfile = (props) => {
     setCurrentProject(project);
 
   }
+
+  console.log('CURRENTPROJJJ', currentProject)
 
   return (
     <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
@@ -222,7 +224,7 @@ const PublicProfile = (props) => {
           >
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
-          {currentProject && <ProjectModal showType={'client'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+          {currentProject && <ProjectModal showType={'client'} organization={organization} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile?.role !== 'corporate' && currentProfile && <CardProfileStat profile={profile}/>}
