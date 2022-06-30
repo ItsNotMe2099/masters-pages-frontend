@@ -55,7 +55,8 @@ const ProfilePageLayout = (props: Props) => {
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>
-          {profile.role === 'corporate' && organization ? <CardOrganization onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/> : <CardProfile profile={profile} isEdit={isEdit}/>}
+          {profile.role === 'corporate' && organization && <CardOrganization onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
+          {profile.role !== 'corporate' && <CardProfile profile={profile} isEdit={isEdit}/>}
           <div className={styles.desktop}>
           {profile.role !== 'corporate' && <CardPreferWorkIn profile={profile} isEdit={isEdit}/>}
           {isMaster && profile.role !== 'corporate' && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
