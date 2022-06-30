@@ -37,8 +37,8 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
   const handleSaveProject = async (data: IProject) => {
     if(project?.id){
-      await ProjectRepository.update(project.id ,{...data, id: project.id});
-      await props.onSave(data)
+      const item = await ProjectRepository.update(project.id ,{...data, id: project.id});
+      await props.onSave(item)
     }else{
       const project = await ProjectRepository.create(data)
       await props.onSave(project)

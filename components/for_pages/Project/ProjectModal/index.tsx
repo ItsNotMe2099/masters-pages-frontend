@@ -63,8 +63,8 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
       ]
 
   ;
-  const handleSaveProject = async (data) => {
-    ProjectRepository.findById(projectId).then(i => setProject(i))
+  const handleSaveProject = async (data: IProject) => {
+    await ProjectRepository.findById(data.id).then(i => setProject(i))
   }
 
   const handlePreviewProject = (data) => {
