@@ -8,6 +8,8 @@ import NewMessage from 'components/svg/NewMessage'
 import {createProfileGalleryComment} from 'components/ProfileGallery/actions'
 import {createNewsComment} from 'components/News/actions'
 import { useTranslation } from 'next-i18next'
+import { useAppContext } from 'context/state'
+import { signUpOpen } from 'components/Modal/actions'
 interface Props {
   isNews?: boolean
 }
@@ -18,14 +20,18 @@ export default function GalleryNewComment({isNews}: Props) {
   const galleryItem = useSelector((state: IRootState) =>  isNews ?  state.news.currentItem : state.profileGallery.currentItem)
   const [message, setMessage] = useState('')
   const {i18n, t} = useTranslation('common')
+  const context = useAppContext()
 
   const handleSendMessage = () => {
-    if(message && galleryItem) {
+    if(message && galleryItem && context.profile) {
       if(isNews){
         dispatch(createNewsComment({ content: message, profileGalleryId: galleryItem.id }, () => setMessage('')))
       }else{
         dispatch(createProfileGalleryComment({ content: message, profileGalleryId: galleryItem.id }, () => setMessage('')))
       }
+    }
+    else if(!context.profile){
+      dispatch(signUpOpen())
     }
   }
 

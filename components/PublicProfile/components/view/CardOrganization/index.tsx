@@ -15,6 +15,7 @@ import { useTranslation } from 'next-i18next'
 import ProfileStatus from 'components/ui/ProfileStatus'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import { useAppContext } from 'context/state'
 
 interface Props{
   organization: IOrganization,
@@ -31,11 +32,12 @@ const CardOrganization = (props: Props) => {
   const [showForm, setShowForm] = React.useState(false)
   const {t} = useTranslation('common')
   const isSubscribed = organization.corporateProfile.isSubscribedByCurrentProfile || isTempSubscribed
+  const context = useAppContext()
   const handleEditClick = () => {
     setShowForm(showForm ? false : true)
   }
   const handleSubscribe = () => {
-    if(!organization){
+    if(!context.profile){
       dispatch(signInOpen())
       return
     }
