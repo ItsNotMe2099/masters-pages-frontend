@@ -259,7 +259,7 @@ const ProjectsPage = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={loading ? <Loader/> : null}>
-          {projects.map(project => <ProjectCard
+          {projects.sort((a, b) => +new Date(b.updatedAt) - +new Date(a.updatedAt)).map(project => <ProjectCard
             onDelete={handleModalClose}
             onUpdateStatus={handleUpdateStatus}
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}

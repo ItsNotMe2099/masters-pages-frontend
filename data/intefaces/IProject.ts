@@ -75,4 +75,5 @@ export interface IProject {
   status: ProjectStatus;
   profile: IProfile
   createdAt: Date;
+  updatedAt: string
 }
