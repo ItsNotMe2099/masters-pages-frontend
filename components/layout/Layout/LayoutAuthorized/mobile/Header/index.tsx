@@ -56,6 +56,8 @@ const Header = (props: Props) => {
         return styles.modeMaster
       case 'volunteer':
         return styles.modeVolunteer
+      case 'corporate':
+        return styles.modeCorporate
       case 'client':
       default:
         return styles.modeClient

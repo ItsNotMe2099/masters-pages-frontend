@@ -25,6 +25,15 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px 60px;
+  @media screen and (max-width: 500px){
+    gap: 10px 20px;
+  }
+  @media screen and (max-width: 400px){
+    gap: 5px 10px;
+  }
+  @media screen and (max-width: 350px){
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .link{

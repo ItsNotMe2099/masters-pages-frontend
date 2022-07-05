@@ -69,10 +69,12 @@ const ProfilePageLayout = (props: Props) => {
           {/*<CardRewards profile={profile}/>*/}
           </div>
           <div className={styles.mobile}>
-          <div className={styles.additionalInfo} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
+          {profile.role !== 'corporate' && <div className={styles.additionalInfo} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
             {t('personalArea.profile.additionalInfo')}
             <img className={isOpen && styles.reverse} src='/img/icons/arrowDown.svg' alt=''/>
-          </div>
+          </div>}
+          {profile.role === 'corporate' && organization && <CardOrganizationLinks onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
+          {profile.role === 'corporate' && organization && <CardOrganizationAbout onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
           {isOpen &&
           <div className={styles.cards}>
           <CardPreferWorkIn profile={profile} isEdit={isEdit}/>

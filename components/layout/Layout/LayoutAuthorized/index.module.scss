@@ -162,6 +162,11 @@
   @media screen and (max-width: 800px){
     margin-left: 0;
   }
+  @media screen and (max-width: 500px){
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+  }
 }
 
 .mobile{
