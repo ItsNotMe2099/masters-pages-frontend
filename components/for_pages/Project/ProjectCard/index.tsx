@@ -289,7 +289,7 @@ const ProjectCard = (props: Props) => {
     },
     [actionsType, project.status, profile?.id, props.status]
   )
-console.log("actionsType", actionsType);
+
   return (
     <div className={styles.root}>
       <div className={styles.left}>
@@ -304,7 +304,8 @@ console.log("actionsType", actionsType);
       <div className={styles.right}>
         <div className={styles.header}>
           <div className={styles.title}>{project.title}</div>
-          {project.applicationsClothingDate && <DurationDates name={'Application until:'} endDate={project.applicationsClothingDate}/>}
+          {project.applicationsClothingDate && <div className={styles.dateWrapper}>
+            <DurationDates name={'Application until:'} endDate={project.applicationsClothingDate}/></div>}
           <DurationDates name={'Project:'} startDate={project.startDate} endDate={project.endDate}/>
         </div>
         <div className={styles.center}>
