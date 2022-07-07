@@ -7,8 +7,6 @@ import {useAppContext} from 'context/state'
 import classNames from 'classnames'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
 import {format} from 'date-fns'
-import CardProfile from 'components/for_pages/Project/ProjectPage/CardProfile'
-import cx from 'classnames'
 import ProjectStatusLabel from 'components/for_pages/Project/ProjectModal/ProjectStatusLabel'
 import {getMediaPath} from 'utils/media'
 import WorkInListItem from 'components/PublicProfile/components/view/CardPreferWorkIn/components/WorkInListItem'
@@ -75,7 +73,9 @@ const ProjectPage = ({  project, ...props}: Props) => {
   return (
    <div className={styles.root}>
     <div className={styles.left}>
-        <CardOrganization organization={props.organization}/>
+        <div className={styles.cardOrg}>
+          <CardOrganization organization={props.organization}/>
+        </div>
         {/*<CardProfile profileId={profile?.id}/>*/}
     </div>
      <div className={styles.center}>
@@ -125,7 +125,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
          <div className={styles.sectionContent}>{project.benefits}</div>
        </div>}
 
-       {props.organization.corporateProfile && <div className={styles.controls}>
+       {props.organization.corporateProfile && profile && <div className={styles.controls}>
          {props.controls}
        </div>}
      </div>
@@ -171,6 +171,9 @@ const ProjectPage = ({  project, ...props}: Props) => {
          <div className={classNames(styles.sectionContent, styles.webLink)}>
            <img src={'/img/Project/web.svg'}/> <a href={project.webLink} target={'_blank'}>{project.webLink}</a>
          </div>
+       </div>}
+       {props.organization.corporateProfile && profile && <div className={styles.controlsAlt}>
+         {props.controls}
        </div>}
      </div>
 
