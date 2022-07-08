@@ -12,8 +12,8 @@ import TabVolunteers from './Tabs/TabVolunteers'
 import { useAppContext } from 'context/state'
 import TabChat from 'components/for_pages/Project/ProjectModal/Tabs/TabChat'
 import { IOrganization } from 'data/intefaces/IOrganization'
-import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { useRouter } from 'next/router'
+import { TabSelect } from 'components/TabSelect'
 
 interface Props {
   showType: 'client' | 'public'
@@ -80,9 +80,9 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={handleClose}>
       <div className={styles.root}>
-        <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
+        <div className={styles.desktop}><ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/></div>
+        <div className={styles.mobile}><TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/></div>
         <div className={styles.content}>
-
           {((projectId && project) || !projectId) && <>
             {tab === 'description' && <TabProjectDescription organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}

@@ -1,21 +1,48 @@
+@import "scss/index";
+
 .modal{
   background: none;
   padding: 0px 80px !important;
   width: 100%;
-
+  @media screen and (max-width: $xs-max){
+    padding: 70px 16px 0 16px !important;
+  }
 }
 .modalClose{
   top: 20px;
   right: 100px;
+  @media screen and (max-width: $xs-max){
+    right: 0;
+  }
 }
 .root{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  @media screen and (max-width: 900px){
+    flex-direction: column;
+  }
 }
 .content{
   flex: 1;
   background: white;
   padding: 30px;
   text-align: left;
+  @media screen and (max-width: $xs-max){
+    padding: 16px;
+  }
+}
+
+.desktop{
+  @media screen and (max-width: 900px){
+    display: none;
+  }
+}
+
+.mobile{
+  width: 100%;
+  background: #F2B705;
+  @media screen and (min-width: 901px){
+    display: none;
+  }
 }

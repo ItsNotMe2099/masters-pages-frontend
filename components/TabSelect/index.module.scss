@@ -91,3 +91,19 @@ position: relative;
   display: flex;
   flex-direction: column;
 }
+
+.projectModal{
+  border: 0;
+  span{
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .withIcon{
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 10px;
+    }
+  }
+}

@@ -9,7 +9,8 @@ interface TabOption {
   name?: string,
   label?: string,
   link?: string,
-  key: string
+  key: string,
+  icon?: string
 }
 
 interface Props {
@@ -17,9 +18,10 @@ interface Props {
   activeTab: string,
   onChange?: (item) => void
   reports?: boolean
+  style?: 'projectModal'
 }
 
-export const TabSelect = ({tabs, activeTab, onChange, reports}: Props) => {
+export const TabSelect = ({tabs, activeTab, onChange, reports, style}: Props) => {
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
@@ -27,10 +29,14 @@ export const TabSelect = ({tabs, activeTab, onChange, reports}: Props) => {
     setIsActive(!isActive)
   }
 
+const rootClass = {
+  [styles.projectModal]: style === 'projectModal'
+}
+
   return (
     <div className={styles.root}>
-      <a href="#" onClick={handleClick} className={cx(styles.dropDownTrigger)}>
-        {tabs.map(item => activeTab === item.key && <span>{item.name}{item.label}</span>)}
+      <a href="#" onClick={handleClick} className={cx(styles.dropDownTrigger, rootClass)}>
+        {tabs.map(item => activeTab === item.key && <div className={styles.withIcon}>{item.icon && <img className={styles.icon} src={`/img/Project/menu/${item.icon}.svg`}/>} <span>{item.name}{item.label}</span></div>)}
       <img src="/img/field/arrowDown.svg" alt=""/>
       </a>
        <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
