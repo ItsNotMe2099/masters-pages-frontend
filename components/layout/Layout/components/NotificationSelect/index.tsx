@@ -1,10 +1,8 @@
 import { useDetectOutsideClick } from 'components/hooks/useDetectOutsideClick'
 import {default as React, useRef, useState} from 'react'
-import {IRootState, NotificationType} from 'types'
+import {NotificationType} from 'types'
 import styles from './index.module.scss'
 import cx from 'classnames'
-
-import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import Bell from 'components/svg/Bell'
 import request from 'utils/request'
@@ -16,6 +14,7 @@ import {useAppContext} from 'context/state'
 
 interface Props {
   color?: string
+  className?: string
 }
 
 
@@ -100,7 +99,7 @@ interface Props {
    const notificationCount =  profile?.notificationNewsCount + profile?.notificationMessageCount + profile?.notificationEventCount + profile?.notificationTaskResponseDeclinedCount + profile?.notificationTaskOfferDeclinedCount + profile?.notificationTaskResponseCount + profile?.notificationTaskOfferCount
 
   return (
-    <div className={styles.root}>
+    <div className={cx(styles.root, props.className)}>
       <Bell className={styles.bell} onClick={onClick} color={props.color}/>
       {notificationCount > 0 && <div className={styles.badge}/>}
       <div ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>

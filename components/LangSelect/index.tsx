@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 
 interface Props {
   isAuth: boolean
-
+  className?: string
 }
  const LangSelect = (props: Props) => {
   const { i18n } = useTranslation()
@@ -53,7 +53,7 @@ interface Props {
 
   console.log('ROUTERRRRRRR', router)
   return (
-    <div className={`${styles.root} ${props.isAuth && styles.rootAuth}`}>
+    <div className={cx(styles.root, {[styles.rootAuth]: props.isAuth}, props.className)}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
         <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
         <span className={props.isAuth ? styles.dropdownItemLabelAuth : styles.dropdownItemLabel}>{value.label}</span>

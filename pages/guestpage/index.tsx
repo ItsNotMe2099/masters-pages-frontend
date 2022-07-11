@@ -24,6 +24,7 @@ const GuestPage = (props) => {
           <div className={styles.triangle}></div>
           <div className={styles.image}><img src='/img/GuestPage/welcome.svg' alt=''/></div>
           <div className={styles.text}>"Welcome! Please, use left hand menu to navigate."</div>
+          <div className={styles.textMobile}>"Welcome! Please, use top menu icon to navigate."</div>
         </div>
       </div>
       <Modals/>

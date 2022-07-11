@@ -12,15 +12,17 @@ import LangSelect  from 'components/LangSelect'
 import {IUser} from 'data/intefaces/IUser'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
+import Header from './mobile/Header'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
   showLeftMenu?: boolean
   user?: IUser
+  isCurrentProfileOpened?: boolean
 }
 
 export default function LayoutGuest(props: Props) {
-  const {children, showLeftMenu} = props
+  const {children, showLeftMenu, isCurrentProfileOpened} = props
   const {route: currentRoute} = useRouter()
   const [collapsed, setCollapsed] = useState(false)
   useEffect(() => {
@@ -114,6 +116,7 @@ export default function LayoutGuest(props: Props) {
             <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
       </div>
+      <Header isCurrentProfileOpened={isCurrentProfileOpened}/>
       <div className={cx(styles.container)}>
         {children}
       </div>
