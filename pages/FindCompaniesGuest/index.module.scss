@@ -26,13 +26,26 @@
 .container{
   display: flex;
   justify-content: space-between;
+  @media screen and (max-width: 1600px){
+    display: block;
+  }
 }
 
 .content{
-  display: grid;
+  display: flex;
   grid-template-areas: "a b" ". b";
   grid-template-columns: 1fr;
   gap: 0 18px;
+  @media screen and (max-width: 1600px){
+    flex-direction: column-reverse;
+  }
+}
+
+.cards{
+  width: 70%;
+  @media screen and (max-width: 1600px){
+    width: 100%;
+  }
 }
 
 .organization{
@@ -49,10 +62,15 @@
   display: flex;
 }
 .sidebar{
-  width: 512px;
+  width: 30%;
+  max-width: 512px;
   visibility: hidden;
   grid-area: b;
   justify-self: flex-end;
+  @media screen and (max-width: 1600px){
+    width: 100%;
+    display: none;
+  }
 
   @media screen and (max-width: $xs-max){
     width: 100%;
@@ -76,6 +94,9 @@
 
 .visible{
   visibility: visible;
+  @media screen and (max-width: 1600px){
+    display: block;
+  }
 }
 .sidebarWrapper{
 
@@ -105,4 +126,8 @@
     margin-top: 15px;
     margin-bottom: 10px;
 
+  }
+
+  .mobile{
+    flex-direction: column;
   }

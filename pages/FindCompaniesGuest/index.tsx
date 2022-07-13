@@ -21,6 +21,7 @@ import { signUpOpen } from 'components/Modal/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import InputSearch from 'components/ui/Inputs/InputSearch'
+import { useAppContext } from 'context/state'
 
 const FindCompaniesGuest = (props) => {
 
@@ -35,6 +36,8 @@ const FindCompaniesGuest = (props) => {
   const [page, setPage] = useState<number>(1)
   const limit = 10
   const [value, setValue] = useState('')
+
+  const context = useAppContext()
 
   const fetchOrganizations = (page: number, limit: number, keywords?: string, filter?: IOrganizationSearchRequest) => {
     OrganizationRepository.search(page, limit, keywords).then((data) => {
@@ -99,7 +102,7 @@ const FindCompaniesGuest = (props) => {
         <div className={styles.block}></div>
         </div>
         <div className={styles.content}>
-          <div>
+          <div className={styles.cards}>
           {(loading && total === 0) && <Loader/>}
           {total > 0 && <InfiniteScroll
           dataLength={organizations.length} //This is important field to render the next data
@@ -109,7 +112,7 @@ const FindCompaniesGuest = (props) => {
           scrollableTarget='scrollableDiv'
         >
           {organizations.map(organization => 
-              <Organization className={styles.organization} key={organization.id} organization={organization}/>
+              <Organization className={classNames(styles.organization, {[styles.mobile]: context.isMobile})} key={organization.id} organization={organization}/>
           )}
           </InfiniteScroll>}
           </div>
