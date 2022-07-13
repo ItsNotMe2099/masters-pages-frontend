@@ -36,7 +36,7 @@
   grid-template-areas: "a b" ". b";
   grid-template-columns: 1fr;
   gap: 0 18px;
-  @media screen and (max-width: 1600px){
+  @media screen and (max-width: 1420px){
     flex-direction: column-reverse;
   }
 }
@@ -44,7 +44,11 @@
 .cards{
   width: 70%;
   @media screen and (max-width: 1600px){
+    width: 60%;
+  }
+  @media screen and (max-width: 1420px){
     width: 100%;
+    margin-top: 30px;
   }
 }
 
@@ -57,6 +61,9 @@
 }
 .filters{
   width: 68%;
+  @media screen and (max-width: 1000px){
+    width: 100%;
+  }
 }
 .topContent{
   display: flex;
@@ -71,25 +78,11 @@
     width: 100%;
     display: none;
   }
-
-  @media screen and (max-width: $xs-max){
-    width: 100%;
-    padding: 0 22px;
-    background-image: url("../../public/img/icons/mapBackgrnd.png");
-    display: flex;
-    justify-content: center;
-    height: 85px;
-    background-size: cover;
-    box-shadow: (0px 33.0756px 44.1008px rgba(0, 0, 0, 0.04)), (0px 22.0504px 33.0756px rgba(0, 0, 0, 0.04)), (0px 5.51261px 11.0252px rgba(0, 0, 0, 0.04)), (0px 0px 1.37815px rgba(0, 0, 0, 0.04));
-    div{
-      width: 100%;
-    }
-    :global .sticky-inner-wrapper {
-      position: static!important;
-      transform: none !important;
-      width: auto !important;
-    }
+  @media screen and (max-width: 1000px){
+    max-width: 100%;
   }
+
+  
 }
 
 .visible{
@@ -117,9 +110,6 @@
   height: 425px;
   border-radius: 12px;
   overflow: hidden;
-  @media screen and (max-width: $xs-max){
-    display: none;
-  }
 }
   .showOnTheMap{
    max-width: 328px;

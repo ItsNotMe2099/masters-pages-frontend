@@ -95,6 +95,11 @@ const profileLink = `/id${organization.corporateProfile.id}`
 
         </div>
       </div>
+      <div className={styles.bottomMobile}>
+            <Button type='button' projectBtn='default' href={profileLink}>VIEW</Button>
+            <Button type='button' projectBtn='default' onClick={() => dispatch(signUpOpen())}>SAVE</Button>
+            <Button type='button' projectBtn='default' onClick={() => dispatch(signUpOpen())}>SUBSCRIBE</Button>
+          </div>
     </div>
   )
 }

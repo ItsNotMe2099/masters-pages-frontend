@@ -173,6 +173,9 @@
   padding-right: 22px;
   padding-bottom: 60px;
   min-height: 100%;
+  @media screen and (max-width: 1000px){
+    padding: 16px;
+  }
   @media screen and (max-width: 800px){
     margin-left: 0;
   }
