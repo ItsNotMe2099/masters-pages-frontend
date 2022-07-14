@@ -59,9 +59,10 @@ export default function LayoutGuest(props: Props) {
     setCollapsed(!collapsed)
   }
 
+  const [isScrollable, setIsScrollable] = useState(true)
 
   return (
-    <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})} id='scrollableDiv'>
+    <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
       {showLeftMenu && <div className={styles.leftMenu}>
         <div className={styles.logo}>
           {collapsed && <LogoSvg className={styles.logoCollapsed}/>}
@@ -116,7 +117,11 @@ export default function LayoutGuest(props: Props) {
             <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
       </div>
-      <Header isCurrentProfileOpened={isCurrentProfileOpened}/>
+      <Header 
+      isCurrentProfileOpened={isCurrentProfileOpened}
+      state={isScrollable} 
+      onClick={() => setIsScrollable(isScrollable ? false : true)}
+      />
       <div className={cx(styles.container)}>
         {children}
       </div>

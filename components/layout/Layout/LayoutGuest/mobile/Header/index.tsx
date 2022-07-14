@@ -24,6 +24,8 @@ import { signUpOpen } from 'components/Modal/actions'
 interface Props {
   isCurrentProfileOpened?: boolean
   user?: IUser
+  onClick?: () => void
+  state?: boolean
 }
 
 const Header = (props: Props) => {
@@ -35,12 +37,18 @@ const Header = (props: Props) => {
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
   const profile = appContext.profile
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false)
+  const [isScrollable, setIsScrollable] = useState(props.state)
+
+  const handleClick = (isScrollable: boolean) => {
+    setIsScrollable(isScrollable)
+    props.onClick && props.onClick()
+  }
 
   const handleOpenMobileMenu = () => {
     if (process.browser) {
       document.body.classList.add('modal-open')
     }
-
+    handleClick(false)
     setMenuMobileOpen(true)
   }
 
@@ -48,6 +56,7 @@ const Header = (props: Props) => {
     if (process.browser) {
       document.body.classList.remove('modal-open')
     }
+    handleClick(true)
     setMenuMobileOpen(false)
   }
 
