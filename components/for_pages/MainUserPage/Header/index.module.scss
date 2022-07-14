@@ -96,6 +96,11 @@
         margin-bottom: 20px;
       }
     }
+    a{
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
   }
   @media (min-width: 671px) {
     display: none;
@@ -131,4 +136,10 @@
 
 .guest{
   margin-right: 20px;
+}
+
+.org{
+  @media (max-width: 670px) {
+    display: none;
+  }
 }

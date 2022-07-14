@@ -45,7 +45,7 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </a>
       </Link>
-      <MainSectionButton size={'small'} color='yellow' href='/corporate'>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
+      <MainSectionButton size={'small'} color='yellow' href='/corporate' className={styles.org}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
       </div>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
@@ -64,6 +64,8 @@ const MainSectionHeader = (props: Props) => {
       <div className={styles.dropdownMobile}>
           <div className={styles.actionsMobile}>
           <div className={styles.actionsButtons}>
+            <MainSectionButton size={'small'} color='yellow' href='/corporate'>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
+            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>}
             {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>}
           </div>

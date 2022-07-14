@@ -67,9 +67,8 @@ const MainSectionHeader = (props: Props) => {
       <div className={styles.dropdownMobile}>
           <div className={styles.actionsMobile}>
           <div className={styles.actionsButtons}>
-            <MainSectionButton size={'small'} color='outlineGreen' onClick={() => dispatch(signInOpen())}>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
-            <MainSectionButton size={'small'} color='yellow' onClick={() => dispatch(signInOpen())}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
-            <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
