@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 import MenuMobile from 'components/svg/MenuMobile'
 import MenuMobileClose from 'components/svg/MenuMobileClose'
+import { useRouter } from 'next/router'
 
 
 interface Props{
@@ -21,6 +22,7 @@ const MainSectionHeader = (props: Props) => {
   const trans = useTranslation('common')
   const {t} = trans
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false)
+  const router = useRouter()
   const handleOpenMobileMenu = () => {
     if (process.browser) {
       document.body.classList.add('modal-open')
@@ -34,6 +36,11 @@ const MainSectionHeader = (props: Props) => {
       document.body.classList.remove('modal-open')
     }
     setMenuMobileOpen(false)
+  }
+
+  const handleClick = (href?: string) => {
+    document.body.classList.remove('modal-open')
+    href && router.push(href)
   }
 
   return (
@@ -67,8 +74,8 @@ const MainSectionHeader = (props: Props) => {
       <div className={styles.dropdownMobile}>
           <div className={styles.actionsMobile}>
           <div className={styles.actionsButtons}>
-            <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
-            <MainSectionButton size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineGreen' onClick={() => handleClick('/')}>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
