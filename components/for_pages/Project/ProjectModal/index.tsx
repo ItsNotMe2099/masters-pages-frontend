@@ -22,10 +22,11 @@ interface Props {
   onClose: () => void
   onDelete?: () => void | null | undefined
   organization?: IOrganization
+  initialTab?: string
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization, initialTab}: Props) => {
   const dispatch = useDispatch()
-  const [tab, setTab] = useState('description');
+  const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const [project, setProject] = useState<IProject>(null);
   const appContext = useAppContext()
   const profile = appContext.profile

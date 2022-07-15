@@ -23,6 +23,8 @@ import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import InputSearch from 'components/ui/Inputs/InputSearch'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { IOrganization } from 'data/intefaces/IOrganization'
 
 
 const FindProjectsGuest = (props) => {
@@ -36,6 +38,7 @@ const FindProjectsGuest = (props) => {
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
+  const [currentOrganization, setCurrentOrganization] = useState<IOrganization | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
   const limit = 10
@@ -60,8 +63,19 @@ const FindProjectsGuest = (props) => {
     //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
-  const handleProjectViewOpen = (project: IProject) => {
+  const handleProjectViewOpen = async (project: IProject) => {
     setInitialProjectTab('description')
+    await OrganizationRepository.fetchOrganizationsList().then((data) => {
+      if(data){
+        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
+        if(newData[0]){
+        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+          if(data){
+            setCurrentOrganization(data)
+          }
+        })}
+      }
+    })
     setCurrentProject(project)
   }
 
@@ -78,6 +92,11 @@ const FindProjectsGuest = (props) => {
     setValue(value)
     await setPage(1)
     fetchProjects(page, limit, value)
+  }
+
+  const handleOnClose = () => {
+    setCurrentProject(null)
+    setCurrentOrganization(null)
   }
 
   return (
@@ -119,7 +138,7 @@ const FindProjectsGuest = (props) => {
           scrollableTarget='scrollableDiv'
         >
           {projects.map(project => 
-              <ProjectCard project={project} actionsType='public' onViewOpen={handleProjectViewOpen}/>
+              <ProjectCard  project={project} actionsType='public' onViewOpen={handleProjectViewOpen}/>
           )}
           </InfiniteScroll>}
           </div>
@@ -137,7 +156,7 @@ const FindProjectsGuest = (props) => {
           </div>
         </div>
       </div>
-      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+      {currentProject && <ProjectModal organization={currentOrganization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleOnClose}/>}
       <Modals/>
     </Layout>
   )

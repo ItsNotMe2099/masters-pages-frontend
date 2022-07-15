@@ -36,7 +36,7 @@ const ProjectsPage = (props: Props) => {
 
   const { projectType } = router.query
   const appContext = useAppContext()
-  const profile = appContext.profile
+  const currentProfile = appContext.profile
   const loading = false
   const [projects, setProjects] = useState<IProject[]>([])
   const [total, setTotal] = useState<number>(0)
@@ -50,7 +50,7 @@ const ProjectsPage = (props: Props) => {
   const [currentProjectEdit, setCurrentProjectEdit] = useState(null)
   console.log("currentProjectEdit", currentProjectEdit);
   const tabs = useMemo(
-    () => (profile.role === ProfileRole.Corporate ? [
+    () => (currentProfile.role === ProfileRole.Corporate ? [
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
       {name: t('personalArea.tabProjects.menu.intake'), key: ProjectStatus.Published},
       {name: t('personalArea.tabProjects.menu.paused'), key: ProjectStatus.Paused},
@@ -70,13 +70,13 @@ const ProjectsPage = (props: Props) => {
         ...item,
         link: `/projects/${item.key}`
       }}),
-    [profile.role, counts]
+    [currentProfile.role, counts]
   )
 
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
 
   useEffect(() => {
-    if(profile.role === ProfileRole.Corporate){
+    if(currentProfile.role === ProfileRole.Corporate){
     ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
     ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
       if(data) {
@@ -85,7 +85,7 @@ const ProjectsPage = (props: Props) => {
       }
     }
     )}
-    else if(profile.role === ProfileRole.Volunteer){
+    else if(currentProfile.role === ProfileRole.Volunteer){
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
       ProfileRepository.fetchSavedProjects().then((data) => {
         if(data){
@@ -115,9 +115,9 @@ const ProjectsPage = (props: Props) => {
 
 
   useEffect(() => {
-    if(profile.role === ProfileRole.Corporate){
+    if(currentProfile.role === ProfileRole.Corporate){
       OrganizationRepository.fetchCurrentOrganization().then(data => setOrganization(data))
-  }
+    }
 }, [])
   const handleScrollNext = async () => {
     setPage(page + 1);
@@ -127,9 +127,24 @@ const ProjectsPage = (props: Props) => {
       setTotal(data.total)
     }
   }
-  const handleProjectViewOpen = (project: IProject) => {
+  const handleProjectViewOpen = async (project: IProject) => {
     setCurrentProjectEdit(project);
-    dispatch(projectOpen())
+    if(currentProfile.role !== ProfileRole.Corporate){
+    await OrganizationRepository.fetchOrganizationsList().then((data) => {
+      if(data){
+        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
+        if(newData[0]){
+        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+          if(data){
+            setOrganization(data)
+          }
+        })}
+      }
+    })
+    setCurrentProject(project)}
+    else{
+      dispatch(projectOpen())
+    }
   }
   const handleCreateProject = () => {
     setCurrentProjectEdit(null)
@@ -149,13 +164,14 @@ const ProjectsPage = (props: Props) => {
       });
   }
 
+
   const handleChangeStatus = async (newStatus: ApplicationStatus, projectId: number) => {
     const app = await ApplicationRepository.fetchOneByProject(projectId)
     const changedApp = await ApplicationRepository.changeApplicationStatus(app.id, appStatus(newStatus), 'volunteer')
     if(changedApp.status !== projectType){
       setProjects(projects => projects.filter(item => item.status === projectType))
       ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
-      if(profile.role === ProfileRole.Volunteer){
+      if(currentProfile.role === ProfileRole.Volunteer){
         ApplicationRepository.fetchApplicationsByVolunteer().then((data) => {
           if(data) {
             const projects = []
@@ -183,13 +199,25 @@ const ProjectsPage = (props: Props) => {
 
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
-  const handleProjectApplyOpen = (project: IProject, profile: IProfile) => {
+  const handleProjectApplyOpen =  async (project: IProject, profile: IProfile) => {
     setInitialProjectTab('application')
+    if(currentProfile.role !== ProfileRole.Corporate){
+      await OrganizationRepository.fetchOrganizationsList().then((data) => {
+        if(data){
+          const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
+          if(newData[0]){
+          OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+            if(data){
+              setOrganization(data)
+            }
+          })}
+        }
+      })}
     setCurrentProject(project);
   }
 
   const handleModalClose = () => {
-    if(profile.role === ProfileRole.Volunteer){
+    if(currentProfile.role === ProfileRole.Volunteer){
     setCurrentProject(null)
     ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     ProfileRepository.fetchSavedProjects().then((data) => {
@@ -213,7 +241,7 @@ const ProjectsPage = (props: Props) => {
       }
     })
   }
-  else if(profile.role === ProfileRole.Corporate){
+  else if(currentProfile.role === ProfileRole.Corporate){
     ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
     ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
       if(data) {
@@ -233,7 +261,7 @@ const ProjectsPage = (props: Props) => {
   return (
     <Layout>
     <div className={styles.root}>
-      {profile.role === ProfileRole.Corporate &&
+      {currentProfile.role === ProfileRole.Corporate &&
       <div className={styles.actions}>
       <Button  red={true} bold={true} size={'12px 40px'}
               type={'button'} onClick={handleCreateProject}>{t('personalArea.tabProjects.menu.create')}</Button>
@@ -265,14 +293,14 @@ const ProjectsPage = (props: Props) => {
             onStatusChange={(newStatus) => handleChangeStatus(newStatus, project.id)}
             onProjectStatusChange={(newStatus) => handleChangeProjectStatus(newStatus, project.id)}
            status={projectType} key={project.id}
-            onApplyClick={() => handleProjectApplyOpen(project, profile)}
+            onApplyClick={() => handleProjectApplyOpen(project, currentProfile)}
             onViewOpen={handleProjectViewOpen} project={project}
             actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>
       }
       </div>
-      <ProjectModal projectId={currentProjectEdit?.id} organization={organization} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
-      {currentProject && <ProjectModal organization={organization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
+      <ProjectModal projectId={currentProjectEdit?.id} initialTab={initialProjectTab} organization={organization} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
+      {currentProject && <ProjectModal initialTab={initialProjectTab} organization={organization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
     {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>

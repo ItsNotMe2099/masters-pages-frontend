@@ -24,6 +24,8 @@ import {IProject} from 'data/intefaces/IProject'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import ProjectRepository, {IProjectSearchRequest} from 'data/repositories/ProjectRepository'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
+import OrganizationRepository from 'data/repositories/OrganizationRepository'
+import { IOrganization } from 'data/intefaces/IOrganization'
 
 interface Props {
   onShowMap: () => void
@@ -40,6 +42,7 @@ const ProjectSearchListView = (props: Props) => {
   const [total, setTotal] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
+  const [currentOrganization, setCurrentOrganization] = useState<IOrganization| null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
 
   const appContext = useAppContext()
@@ -56,7 +59,7 @@ const ProjectSearchListView = (props: Props) => {
   }
   useEffect(() => {
     fetchProjects()
-    setLoading(false);
+    setLoading(false)
   }, [])
 
 
@@ -81,14 +84,42 @@ const ProjectSearchListView = (props: Props) => {
     }
     return {}
   }
-  const handleProjectViewOpen = (project: IProject) => {
+  const handleProjectViewOpen = async (project: IProject) => {
     setInitialProjectTab('description')
-    setCurrentProject(project);
+      await OrganizationRepository.fetchOrganizationsList().then((data) => {
+        if(data){
+          const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
+          console.log('NEWDATA', newData)
+          if(newData[0]){
+          OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+            if(data){
+              setCurrentOrganization(data)
+            }
+          })}
+        }
+      })
+      setCurrentProject(project)
   }
-  const handleProjectApplyOpen = (project: IProject) => {
+  const handleProjectApplyOpen = async (project: IProject) => {
+    await OrganizationRepository.fetchOrganizationsList().then((data) => {
+      if(data){
+        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
+        console.log('NEWDATA', newData)
+        if(newData[0]){
+        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+          if(data){
+            setCurrentOrganization(data)
+          }
+        })}
+      }
+    })
     setInitialProjectTab('application')
     setCurrentProject(project);
 
+  }
+  const handleOnClose = () => {
+    setCurrentProject(null)
+    setCurrentOrganization(null)
   }
   return (
     <Layout>
@@ -145,7 +176,7 @@ const ProjectSearchListView = (props: Props) => {
       </div>
 
     </div>
-      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+      {currentProject && <ProjectModal initialTab={initialProjectTab} organization={currentOrganization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleOnClose}/>}
 
       <Modals/>
     </Layout>

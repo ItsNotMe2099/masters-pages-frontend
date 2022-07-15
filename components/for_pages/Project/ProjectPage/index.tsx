@@ -75,7 +75,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
     <div className={styles.left}>
         <div className={styles.cardOrg}>
           <CardOrganization organization={props.organization}/>
-        </div>
+  </div>
         {/*<CardProfile profileId={profile?.id}/>*/}
     </div>
      <div className={styles.center}>
@@ -125,7 +125,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
          <div className={styles.sectionContent}>{project.benefits}</div>
        </div>}
 
-       {props.organization.corporateProfile && profile && <div className={styles.controls}>
+       {profile && <div className={styles.controls}>
          {props.controls}
        </div>}
      </div>
@@ -172,7 +172,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
            <img src={'/img/Project/web.svg'}/> <a href={project.webLink} target={'_blank'}>{project.webLink}</a>
          </div>
        </div>}
-       {props.organization.corporateProfile && profile && <div className={styles.controlsAlt}>
+       {profile && <div className={styles.controlsAlt}>
          {props.controls}
        </div>}
      </div>
