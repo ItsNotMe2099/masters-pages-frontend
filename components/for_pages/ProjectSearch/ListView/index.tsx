@@ -98,7 +98,7 @@ const ProjectSearchListView = (props: Props) => {
           })}
         }
       })
-      setCurrentProject(project)
+      await setCurrentProject(project)
   }
   const handleProjectApplyOpen = async (project: IProject) => {
     await OrganizationRepository.fetchOrganizationsList().then((data) => {
@@ -114,13 +114,16 @@ const ProjectSearchListView = (props: Props) => {
       }
     })
     setInitialProjectTab('application')
-    setCurrentProject(project);
+    await setCurrentProject(project);
 
   }
   const handleOnClose = () => {
     setCurrentProject(null)
     setCurrentOrganization(null)
   }
+
+  console.log('PROJECTSEARCH_PROJECT', currentProject)
+  console.log('PROJECTSEARCH_ORGANIZATION', currentOrganization)
   return (
     <Layout>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>

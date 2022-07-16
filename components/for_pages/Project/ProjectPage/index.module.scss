@@ -49,6 +49,9 @@
 
   color: #6D718C;
     font-size: 14px;
+    @media screen and (max-width: 400px) {
+      font-size: 10px;
+    }
   .left{
     flex: 1;
   }
@@ -93,6 +96,13 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      @media screen and (max-width: 500px) {
+        flex-direction: column;
+        align-items: baseline;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 10px;
+      }
 
       .dateItemLabel {
         margin-right: 8px;
@@ -108,8 +118,17 @@
       height: 15px;
       background: rgba(196, 196, 196, 1);
       margin: 0px 16px;
+      @media screen and (max-width: 500px) {
+        height: 40px;
+      }
     }
-
+    @media screen and (max-width: 500px) {
+      .date{
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 }
 .right{

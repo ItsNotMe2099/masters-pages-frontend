@@ -112,6 +112,9 @@
     padding: 25px;
     border-radius: 3px;
     border: 1px solid #C4C4C4;
+    @media screen and (max-width: 1250px){
+      padding: 20px;
+    }
   }
 
   .profile{
@@ -306,5 +309,28 @@
   img{
     transform: rotate(180deg);
     margin-left: 19px;
+  }
+}
+
+.desktop{
+  @media screen and (max-width: 1250px){
+    display: none;
+  }
+}
+
+.mobile{
+  width: 100%;
+  background: #F2B705;
+  margin-top: 16px;
+  @media screen and (min-width: 1251px){
+    display: none;
+  }
+}
+
+.select{
+  span{
+    font-weight: 700;
+    font-size: 16px;
+    color:#000;
   }
 }

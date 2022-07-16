@@ -17,6 +17,17 @@
     flex-direction: column;
     grid-gap: 24px 0px;
   }
+  @media screen and (max-width: 1250px){
+    flex-direction: column;
+    .rightSide{
+      width: 100%;
+      margin-left: 0;
+      display: flex;
+      flex-direction: column;
+      grid-gap: 24px 0px;
+      margin-top: 10px;
+    }
+  }
 }
 .section{
   padding: 25px;
@@ -42,6 +53,9 @@
   .right{
     flex: 1;
     margin-left: 24px;
+    @media screen and (max-width: 1250px){
+      margin-left: 0;
+    }
   }
   .header{
     padding-bottom: 15px;
@@ -72,11 +86,25 @@
           flex: 1;
         }
       }
+      @media screen and (max-width: 1250px){
+        margin-top: 16px;
+      }
+    }
+    @media screen and (max-width: 1250px){
+      flex-direction: column;
     }
   }
   .statusBlock{
     display: flex;
     padding: 24px 0px;
+    @media screen and (max-width: 1250px){
+      padding: 0;
+      padding-top: 18px;
+    }
+  }
+  @media screen and (max-width: 1250px){
+    flex-direction: column;
+    align-items: center;
   }
 }
 .status{
@@ -91,6 +119,9 @@
   color: black;
   img{
     margin-right: 10px;
+  }
+  @media screen and (max-width: 1250px){
+    width: 100%;
   }
 }
 .icons {
@@ -202,6 +233,10 @@
   button{
     margin-right: 16px;
     width: 20%;
+    @media screen and (max-width: 1250px){
+      width: 100%;
+      margin-right: 0;
+    }
   }
 }
 
@@ -216,4 +251,13 @@
 
 .recycle{
   width: auto !important;
+}
+
+.profileInfo{
+  @media screen and (max-width: 1250px){
+    width: 119px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -59,6 +59,9 @@ const TabProjectDescription = ({project, showType, organization, ...props}: Prop
     }
   }
 
+  console.log('TABDESCRIPTION_PROJECT', project)
+  console.log('TABDESCRIPTION_ORGANIZATION', organization)
+
   return (
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}

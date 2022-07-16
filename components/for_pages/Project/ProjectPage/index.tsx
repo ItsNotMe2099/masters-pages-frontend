@@ -65,9 +65,8 @@ const ProjectPage = ({  project, ...props}: Props) => {
     }
   }
 
-  console.log('PROJJJJJJJJJ', project)
-
-  console.log('PROJPAGEORG', props.organization)
+  console.log('PROJECTPAGE_PROJECT', project)
+  console.log('PROJECTPAGE_ORGANIZATION', props.organization)
 
   const profileLink = `/id${project.corporateProfileId}`
   return (
@@ -93,9 +92,11 @@ const ProjectPage = ({  project, ...props}: Props) => {
            </div>
 
            <div className={styles.dates}>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.applicationsClothingDate), 'MM.dd.yyy')}</div>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> 
+             <div className={styles.date}><img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.applicationsClothingDate), 'MM.dd.yyy')}</div></div>
              <div className={styles.separator}/>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.endDate), 'MM.dd.yyy')}</div>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> 
+             <div className={styles.date}><img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.endDate), 'MM.dd.yyy')}</div></div>
 
   </div>
 

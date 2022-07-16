@@ -7,6 +7,7 @@ import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import Tabs from '../../Tabs'
 import ApplicationPage from 'components/for_pages/Project/ApplicationPage'
 import TabApplicationCard from '../../../TabApplication/TabApplicationCard'
+import { TabSelect } from 'components/TabSelect'
 
 interface Props {
   project: IProject
@@ -99,13 +100,18 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
   <>
   {view === 'tabs' ?
    <div className={styles.root}>
+      <div className={styles.desktop}>
        <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
         const statResult = counts[tab.key];
-        console.log("TabRender", tab);
         return {...tab, name: `${tab.name} (${statResult ? statResult : 0})`}
       }))} onChange={(item) => handleChange(item)}
       activeTab={currentTab}
       />
+      </div>
+      <div className={styles.mobile}><TabSelect className={styles.select} style='projectModal' tabs={tabs.map((tab => {
+        const statResult = counts[tab.key];
+        return {...tab, name: `${tab.name} (${statResult ? statResult : 0})`}
+      }))} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/></div>
       <div className={styles.list}>
         {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
           <TabApplicationCard profile={item.profile} application={item} key={index} currentTab={currentTab} onDelete={(item) => handleDelete(item)}

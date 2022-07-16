@@ -35,7 +35,9 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-
+      @media screen and (max-width: 1250px){
+        flex-direction: column;
+      }
     }
 
     .status {
@@ -106,6 +108,12 @@
       color: black;
       text-align: center;
     }
+    @media screen and (max-width: 1250px){
+      margin-top: 16px;
+      .applied:nth-child(2){
+        margin-top: 9px;
+      }
+    }
   }
 
   .list{
@@ -119,11 +127,20 @@
     border-radius: 3px;
     border: 1px solid #C4C4C4;
     display: flex;
+    @media screen and (max-width: 1250px){
+      flex-direction: column;
+      .left{
+        align-self: center;
+      }
+      padding: 20px;
+    }
   }
 
   .avatar{
     position: relative;
     display: block;
+    width: 150px;
+    height: 150px;
   }
 
   .details{
@@ -177,6 +194,13 @@
           }
         }
       }
+      @media screen and (max-width: 1250px){
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    @media screen and (max-width: 1250px){
+      padding: 0;
     }
   }
 
@@ -188,19 +212,30 @@
     font-weight: 600;
     font-size: 14px;
     color: #000;
+    @media screen and (max-width: 1250px){
+      padding-bottom: 18px;
+    }
   }
 
   .bottom{
-    display: flex;
     justify-content: space-between;
     margin-top: 24px;
     align-items: center;
+    @media screen and (max-width: 1250px){
+      display: flex;
+    }
+    @media screen and (max-width: 370px){
+      display: block;
+    }
   }
 
   .age{
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
+    @media screen and (max-width: 1250px){
+      margin-top: 24px;
+    }
   }
 
   .value{
@@ -209,6 +244,10 @@
     color: #000;
     text-align: center;
     margin-top: 4px;
+    @media screen and (max-width: 1250px){
+      text-align: start;
+      margin-top: 4px;
+    }
   }
 
   .sectionHeader{
@@ -234,6 +273,13 @@
     button{
       margin-right: 16px;
     }
+    @media screen and (max-width: 428px){
+      flex-direction: column;
+      button{
+        margin-top: 20px;
+        margin-right: 0;
+      }
+    }
   }
 
   .btnsCompleted{
@@ -241,6 +287,13 @@
     margin-top: 23px;
     button{
       margin-right: 4px;
+    }
+    @media screen and (max-width: 428px){
+      flex-direction: column;
+      button{
+        margin-top: 20px;
+        margin-right: 0;
+      }
     }
   }
 
@@ -262,6 +315,9 @@
         margin-right: 21px;
       }
     }
+    @media screen and (max-width: 1250px){
+      width: 150px;
+    }
   }
 
   .stars {
@@ -274,8 +330,45 @@
       font-weight: bold;
       font-size: 12px;
     }
+    @media screen and (max-width: 1250px){
+      width: 150px;
+    }
   }
 
   .stat{
     display: flex;
+  }
+
+  .desktop{
+    @media screen and (max-width: 1250px){
+      display: none;
+    }
+  }
+
+  .mobile{
+    display: block;
+    @media screen and (min-width: 1251px){
+      display: none;
+    }
+  }
+
+  .bottomWrapper{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    align-items: center;
+    @media screen and (max-width: 1250px){
+      flex-direction: column;
+      align-items: baseline;
+      margin-top: 0;
+    }
+    @media screen and (max-width: 370px){
+      margin-bottom: 20px;
+    }
+  }
+
+  .langs{
+    @media screen and (max-width: 1250px){
+      margin-top: 24px;
+    }
   }

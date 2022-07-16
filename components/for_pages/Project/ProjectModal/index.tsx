@@ -77,7 +77,8 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
     onClose()
   }
 
-  console.log("ModalProject", project);
+  console.log('PROJECTMODAL_PROJECT', project)
+  console.log('PROJECTMODAL_ORGANIZATION', organization)
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={handleClose}>
       <div className={styles.root}>

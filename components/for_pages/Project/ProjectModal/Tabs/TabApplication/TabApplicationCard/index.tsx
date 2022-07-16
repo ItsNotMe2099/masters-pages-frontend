@@ -220,6 +220,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
             Main Requirements
           </div>
           <div className={styles.bottom}>
+            <div className={styles.bottomWrapper}>
           <div className={styles.age}>
             <div>Age</div>
             <div className={styles.value}>
@@ -232,16 +233,18 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
               {application.education}
             </div>
           </div>
-          {application.languages.length > 0 && <div>
+          {application.languages.length > 0 && <div className={styles.langs}>
          <div className={styles.sectionHeader}>Languages:</div>
          <div className={classNames(styles.sectionContent, styles.languages)}>
            {application.languages.map(i => <LanguageListItem className={styles.lang} model={i}/>)}
          </div>
        </div>}
         </div>
+        <div className={styles.mobile}><VolunteerStats/></div>
+        </div>
         <Buttons onViewClick={props.onViewClick} application={application}/>
         </div>
-        <VolunteerStats/>
+        <div className={styles.desktop}><VolunteerStats/></div>
       </div>
     )
   }

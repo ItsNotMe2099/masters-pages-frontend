@@ -5,6 +5,7 @@ import ProjectStatusLabel from '../../ProjectStatusLabel'
 import {format} from 'date-fns'
 import TabsView from './Views/TabsView'
 import { useState } from 'react'
+import { useAppContext } from 'context/state'
 
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 const TabVolunteers = ({project, ...props}: Props) => {
 
   const [view, setView] = useState('tabs')
+  const context = useAppContext()
 
   return (
    <div className={styles.root}>
@@ -38,9 +40,17 @@ const TabVolunteers = ({project, ...props}: Props) => {
            </div>
 
            <div className={styles.dates}>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.applicationsClothingDate), 'MM.dd.yyy')}</div>
+             <div className={styles.dateItem}>
+              <div className={styles.dateItemLabel}>Applications Deadline: </div> 
+              <div className={styles.date}>
+                <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.applicationsClothingDate), 'MM.dd.yy')}</div>
+              </div>
              <div className={styles.separator}/>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.endDate), 'MM.dd.yyy')}</div>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> 
+             <div className={styles.date}>
+              <img src={'/img/Project/calendar.svg'}/><span>{format(new Date(project.endDate), 'MM.dd.yy')}</span>
+            </div>
+             </div>
 
            </div>
 
