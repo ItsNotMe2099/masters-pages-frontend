@@ -10,16 +10,31 @@
     }
   }
 
+  .drop{
+    padding: 14px 16px;
+    cursor: pointer;
+    .withUs{
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .view{
+      justify-content: space-between;
+    }
+  }
+
   .withUs{
     font-weight: 600;
     font-size: 14px;
     color: #000;
     padding-bottom: 15px;
     border-bottom: 1px solid #C4C4C4;
-    display: flex;
+    //display: flex;
     justify-content: space-between;
     @media screen and (max-width: 1250px){
       font-size: 10px;
+    }
+    @media screen and (max-width: 768px){
+      font-size: 14px;
     }
   }
 
@@ -32,6 +47,9 @@
     @media screen and (max-width: 1250px){
       font-size: 10px;
     }
+    @media screen and (max-width: 768px){
+      font-size: 14px;
+    }
     .text{
       color: #000;
       font-weight: 600;
@@ -41,5 +59,16 @@
       @media screen and (max-width: 1250px){
         font-size: 10px;
       }
+      @media screen and (max-width: 768px){
+        font-size: 14px;
+      }
     }
+  }
+
+  .view{
+    display: flex;
+  }
+
+  .separate{
+    display: flex;
   }

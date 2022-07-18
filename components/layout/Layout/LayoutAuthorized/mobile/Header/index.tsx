@@ -18,11 +18,14 @@ import ModeSelect from 'components/layout/Layout/components/ModeSelect'
 import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
 import {useAuthContext} from 'context/auth_state'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 
 interface Props {
   isCurrentProfileOpened?: boolean
   user?: IUser
+  onClick?: () => void
+  state?: boolean
 }
 
 const Header = (props: Props) => {
@@ -34,12 +37,18 @@ const Header = (props: Props) => {
   const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
   const profile = appContext.profile
   const [isMenuMobileOpen, setMenuMobileOpen] = useState(false)
+  const [isScrollable, setIsScrollable] = useState(props.state)
+
+  const handleClick = (isScrollable: boolean) => {
+    setIsScrollable(isScrollable)
+    props.onClick && props.onClick()
+  }
 
   const handleOpenMobileMenu = () => {
     if (process.browser) {
       document.body.classList.add('modal-open')
     }
-
+    handleClick(false)
     setMenuMobileOpen(true)
   }
 
@@ -47,6 +56,7 @@ const Header = (props: Props) => {
     if (process.browser) {
       document.body.classList.remove('modal-open')
     }
+    handleClick(true)
     setMenuMobileOpen(false)
   }
 
@@ -70,7 +80,8 @@ const Header = (props: Props) => {
         return styles.modeMasterMenu
       case 'volunteer':
         return styles.modeVolunteerMenu
-      case 'client':
+      case 'corporate':
+        return styles.modeCorproateMenu
       default:
         return styles.modeClientMenu
     }
@@ -86,7 +97,21 @@ const Header = (props: Props) => {
 
   const profileLink = `/id${profile?.id}`
 
-  const items = [
+  const items = role === ProfileRole.Corporate ? [
+    {title: t('menu.profile'), icon: 'profile', link: profileLink},
+    {title: t('menu.posts'), icon: 'posts', link: '/Posts'},
+    {title: t('menu.news'), icon: 'news', link: '/News', badge: profile.notificationNewsCount},
+    {title: t('menu.contacts'), icon: 'subscriptions', link: '/Contacts'},
+    {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
+    {title: t('menu.volunteerProjects'), icon: 'orders', link: '/projects', isSeparator: true},
+    {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage', isSeparator: true},
+    {title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount},
+    {title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
+    {title: t('menu.reports'), icon: 'reports', link: '/Report'},
+
+    {title: t('menu.settings'), icon: 'settings', link: '/me/settings', isSeparator: true},
+  ]:
+  [
     {title: t('menu.profile'), icon: 'profile', link: profileLink},
     {title: t('menu.share'), icon: 'share', link: '/Share'},
     {title: t('menu.invite'), icon: 'invite', link: '/Invite'},

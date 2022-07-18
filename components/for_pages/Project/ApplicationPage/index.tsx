@@ -18,6 +18,7 @@ import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/act
 import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
 
+
 interface Props {
   project: IProject
   application: IApplication
@@ -307,6 +308,10 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
     }
   }
 
+  const [isDrop, setIsDrop] = useState(false)
+
+  const [isReq, setIsReq] = useState(appContext.isMobile ? false : true)
+
   return (
    <div className={styles.root}>
      <div className={styles.leftSide}>
@@ -382,11 +387,21 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
      </div>
      <div className={styles.rightSide}>
        {modal &&
+       appContext.isMobile ?
+        <VolunteerStats view drop={isDrop} onClick={() => setIsDrop(isDrop ? false : true)} style='drop'/>
+        :
         <VolunteerStats view/>
         }
+
        <div className={styles.requirements}>
-         <div className={styles.header}>Requirements Check</div>
-         <div className={styles.columns}>
+         <div className={styles.header} 
+         style={{cursor: appContext.isMobile ? 'pointer' : 'auto'}}
+         onClick={() => appContext.isMobile ? setIsReq(isReq ? false : true): null}>Requirements Check
+         {appContext.isMobile &&<div><img src='/img/icons/arrowBlack.svg' alt=''/></div>}
+         </div>
+         {isReq &&
+         <>
+          <div className={styles.columns}>
            <div>Applicant</div>
            <div>Requirements</div>
          </div>
@@ -413,6 +428,8 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
              <div>{project.languages.map(i => <LanguageListItem  model={i}/>)}</div>
            </div>
          </div>
+         </>
+         }
 
 
 

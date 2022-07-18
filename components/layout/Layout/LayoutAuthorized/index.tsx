@@ -116,8 +116,11 @@ export default function LayoutAuthorized(props: Props) {
   }
 
   console.log('CURRENTROUTE', currentRoute)
+
+  const [isScrollable, setIsScrollable] = useState(true)
+
   return (
-    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu})}>
+    <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
       {showLeftMenu && <div className={styles.leftMenu}>
         <div className={styles.logo}>
           {collapsed && <LogoSvg className={styles.logoCollapsed} color={'white'}/>}
@@ -140,7 +143,11 @@ export default function LayoutAuthorized(props: Props) {
         <NotificationSelect color='black'/>
         <LangSelect isAuth={false}/>
       </div>
-      <Header isCurrentProfileOpened={isCurrentProfileOpened}/>
+      <Header 
+      isCurrentProfileOpened={isCurrentProfileOpened}
+      state={isScrollable} 
+      onClick={() => setIsScrollable(isScrollable ? false : true)}
+      />
       <div className={cx(styles.container)}>
         {children}
       </div>
