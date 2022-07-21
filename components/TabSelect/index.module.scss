@@ -93,7 +93,6 @@ position: relative;
 }
 
 .projectModal{
-  border: 0;
   span{
     color: #FFFFFF;
     font-weight: 700;
@@ -105,5 +104,17 @@ position: relative;
     img{
       margin-right: 10px;
     }
+  }
+  .dropDownTrigger {
+    height: 40px;
+    border: 0;
+  }
+}
+
+.arrow{
+  display: flex;
+  img{
+    width: auto;
+    height: auto;
   }
 }

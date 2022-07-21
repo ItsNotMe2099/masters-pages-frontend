@@ -14,6 +14,7 @@ import TabChat from 'components/for_pages/Project/ProjectModal/Tabs/TabChat'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
 import { TabSelect } from 'components/TabSelect'
+import CloseIcon from 'components/svg/CloseIcon'
 
 interface Props {
   showType: 'client' | 'public'
@@ -78,11 +79,21 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
   }
 
   return (
-    <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose} onRequestClose={handleClose}>
+    <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose}>
       <div className={styles.root}>
-        <div className={styles.desktop}><ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/></div>
-        <div className={styles.mobile}><TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/></div>
+        <div className={styles.desktop}>
+          <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
+        </div>
+        <div className={styles.mobile}>
+          <div className={styles.topPanel}>
+            <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
+          </div>
+          <TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
+        </div>
         <div className={styles.content}>
+          <div className={styles.topPanel}>
+            <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
+          </div>
           {((projectId && project) || !projectId) && <>
             {tab === 'description' && <TabProjectDescription organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
