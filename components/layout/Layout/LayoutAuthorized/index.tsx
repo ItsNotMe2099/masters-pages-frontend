@@ -120,7 +120,7 @@ export default function LayoutAuthorized(props: Props) {
   const [isScrollable, setIsScrollable] = useState(true)
 
   return (
-    <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
+    <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
       {showLeftMenu && <div className={styles.leftMenu}>
         <div className={styles.logo}>
           {collapsed && <LogoSvg className={styles.logoCollapsed} color={'white'}/>}
