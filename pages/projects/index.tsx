@@ -1,14 +1,12 @@
-
 import * as React from 'react'
-
 import {getAuthServerSide} from 'utils/auth'
 import {useRouter} from 'next/router'
 import {useEffect} from 'react'
-import {IRootState} from 'types'
-import { useSelector } from 'react-redux'
 import {useAppContext} from 'context/state'
+
 interface Props {
 }
+
 const TabProjects = (props: Props) => {
   const router = useRouter()
   const appContext = useAppContext();

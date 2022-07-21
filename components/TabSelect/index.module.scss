@@ -111,10 +111,60 @@ position: relative;
   }
 }
 
+.projectModal{
+  span{
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .withIcon{
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 10px;
+    }
+  }
+  .dropDownTrigger {
+    height: 40px;
+    border: 0;
+  }
+}
+
+.projectStatus{
+  background: #F2B705;
+  width: 100%;
+  .withIcon{
+    display: flex;
+    align-items: center;
+  }
+  span{
+    color: #000;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .dropDownTrigger {
+    height: 40px;
+    border: 0;
+  }
+  .dropDownActive{
+    border-radius: 0;
+  }
+  .dropDown {
+    padding: 0;
+  }
+  .option{
+    a{
+      font-weight: 700;
+      font-size: 16px;
+      border-bottom: 1px solid #C4C4C4;
+      &:hover{
+        background: #E2AB05;
+      }
+    }
+  }
+}
+
 .arrow{
   display: flex;
-  img{
-    width: auto;
-    height: auto;
-  }
+  align-items: center;
 }

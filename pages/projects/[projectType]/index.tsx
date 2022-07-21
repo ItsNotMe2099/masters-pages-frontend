@@ -48,7 +48,6 @@ const ProjectsPage = (props: Props) => {
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentProjectEdit, setCurrentProjectEdit] = useState(null)
-  console.log("currentProjectEdit", currentProjectEdit);
   const tabs = useMemo(
     () => (currentProfile.role === ProfileRole.Corporate ? [
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
@@ -274,7 +273,7 @@ const ProjectsPage = (props: Props) => {
       }))} activeTab={projectType as string}/>
       </div>
       <div className={styles.mobile}>
-        <TabSelect tabs={tabs.map((tab => {
+        <TabSelect style='projectStatus' tabs={tabs.map((tab => {
           const statResult = counts[tab.key]
           return {...tab, name: tab.key === 'saved' ? `${tab.name} (${saved})` : tab.key === ApplicationStatus.Applied ? `${tab.name} (${applied ? applied : 0})` : tab.key === 'rejected' ? `${tab.name} (${rejected ? rejected : 0})` : `${tab.name} (${statResult ? statResult : 0})`}
       }))} activeTab={projectType as string}/>
