@@ -8,6 +8,7 @@ import Tabs from '../../Tabs'
 import ApplicationPage from 'components/for_pages/Project/ApplicationPage'
 import TabApplicationCard from '../../../TabApplication/TabApplicationCard'
 import { TabSelect } from 'components/TabSelect'
+import { useAppContext } from 'context/state'
 
 interface Props {
   project: IProject
@@ -96,6 +97,14 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
     }
   }
 
+  const getAppsAmountByStatus = (appStatus: ApplicationStatus) => {
+      const filtered = applications.filter(app => app.status === appStatus)
+      return filtered.length
+  }
+
+  const context = useAppContext()
+  const isMobile = context.isMobile
+
   return (
   <>
   {view === 'tabs' ?
@@ -124,14 +133,14 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
     {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
     index === currentIndex &&
     <>
-    {currentTab === ApplicationStatus.Applied &&
+    {getAppsAmountByStatus(currentTab) > 1 &&
     <div className={styles.controls}>
       <div className={styles.prev} onClick={() => handlePrev(currentIndex, applications)}>
         <img src='/img/icons/back.svg' alt=''/>
-        <div className={styles.text}>PREVIOUS VOLUNTEER</div>
+        <div className={styles.text}>PREVIOUS {!isMobile && <span>VOLUNTEER</span>}</div>
       </div>
       <div className={styles.next} onClick={() => handleNext(currentIndex, applications)}>
-        <div className={styles.text}>NEXT VOLUNTEER</div>
+        <div className={styles.text}>NEXT {!isMobile && <span>VOLUNTEER</span>}</div>
         <img src='/img/icons/back.svg' alt=''/>
       </div>
     </div>}
