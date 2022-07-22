@@ -1,9 +1,11 @@
 @import "scss/index";
 
 .root{
-
   color: #6D718C;
   padding: 25px 0px;
+  @media screen and (max-width: 900px){
+    padding-top: 0;
+  }
 }
 .top{
   display: flex;
@@ -11,6 +13,9 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 25px;
+  @media screen and (max-width: 900px){
+    margin-top: 9px;
+  }
 }
 .status{
   font-size: 14px;
@@ -21,14 +26,23 @@
   font-size: 24px;
   font-weight: 700;
   color: #000000;
+  @media screen and (max-width: 900px){
+    
+  }
 }
 .header{
   font-weight: 700;
   font-size: 36px;
   color: #000000;
+  @media screen and (max-width: 900px){
+    text-align: center;
+  }
 }
 .projectId{
   color: #9A9A9A;
+  @media screen and (max-width: 900px){
+    margin-top: 8px;
+  }
 }
 .dates{
   color: #6D718C;
@@ -54,5 +68,26 @@
     background: rgba(196, 196, 196, 1);
     margin: 0px 16px;
   }
+  @media screen and (max-width: 900px){
+    justify-content: center;
+  }
+}
 
+.line{
+  display: flex;
+  @media screen and (max-width: 900px){
+    flex-direction: column;
+    div:first-child{
+      margin-bottom: 4px;
+    }
+    div:last-child{
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.left{
+  @media screen and (max-width: 900px){
+    flex: 1;
+  }
 }

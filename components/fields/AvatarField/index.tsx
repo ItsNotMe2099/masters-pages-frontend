@@ -13,6 +13,7 @@ import {useAppContext} from 'context/state'
 import {useField} from 'formik'
 import FieldError from 'components/ui/FieldError'
 import {IField} from 'types/types'
+import classNames from 'classnames'
 
 
 export interface AvatarFieldProps<T> extends IField<T>{
@@ -31,6 +32,7 @@ export interface AvatarFieldProps<T> extends IField<T>{
   infoFormatAllowed?: string
   infoRequirements?: string
   t?: (string) => string,
+  style?: 'projectEdit'
 }
 
 
@@ -40,7 +42,7 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
         children,
         className,
         label,
-
+        style,
         infoTitle,
         infoFormatAllowed,
         infoRequirements,
@@ -212,9 +214,13 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
         onDropRejected,
       }
 
+      const rootClass = {
+        [styles.projectEdit]: style === 'projectEdit'
+      }
+
       return (
         <>
-      <div className={`${styles.root} ${!!(files.length > 0) && styles.hasBackDrop}`}>
+      <div className={classNames(styles.root, {[styles.hasBackDrop]: !!(files.length > 0)}, className, rootClass)}>
         <Dropzone ref={dropZoneRef}   {...dopZoneProps}>
           {({getRootProps, getInputProps, acceptedFiles}) =>
             <div className={styles.preview}>
@@ -245,9 +251,9 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
         </div>}
        </Dropzone>
         <div className={styles.info}>
-          <div>{infoTitle || t('forms.avatarInput.uploadYourPhoto')}</div>
+          <div className={styles.upload}>{infoTitle || t('forms.avatarInput.uploadYourPhoto')}</div>
           <div>{infoFormatAllowed || t('forms.avatarInput.formatAllowed')}</div>
-          <div>{infoRequirements || `${t('forms.avatarInput.minimalSize')}: 180×180 px.`}</div>
+          <div className={styles.minSize}>{infoRequirements || `${t('forms.avatarInput.minimalSize')}: 180×180 px.`}</div>
           <FieldError showError={hasError}>{meta.error}</FieldError>
           {(error || props.error) && <FormError error={error || props.error}/>}
           <div className={styles.infoActions}>

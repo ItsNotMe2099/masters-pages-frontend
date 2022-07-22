@@ -5,6 +5,8 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {format} from 'date-fns'
 import {useTranslation} from 'next-i18next'
 import ProjectStatusLabel from 'components/for_pages/Project/ProjectModal/ProjectStatusLabel'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 interface Props {
   project: IProject
@@ -14,16 +16,21 @@ const ProjectDescriptionHeader = ({project, title}: Props) => {
   const {t} = useTranslation();
   return (
     <div className={cx(styles.root)}>
+      <VisibleXs>
+          <div className={styles.header}>{title}</div>
+        </VisibleXs>
       <div className={styles.top}>
         <div className={styles.left}>
           <ProjectStatusLabel status={project?.status ?? ProjectStatus.Draft}/>
           <div className={styles.title}>{project?.title || '[Project title]'}</div>
           <div className={styles.projectId}>Project id#: {project?.id}</div>
         </div>
-        <div className={styles.header}>{title}</div>
+        <HiddenXs>
+          <div className={styles.header}>{title}</div>
+        </HiddenXs>
         {project && <div className={styles.right}>
-          <div className={styles.line}>Application Limit: 0/{project.applicationsLimits}</div>
-          <div className={styles.line}>Vacancies: 0/{project.vacanciesLimits}</div>
+          <div className={styles.line}><div>Application Limit:</div> <div>0/{project.applicationsLimits}</div></div>
+          <div className={styles.line}><div>Vacancies:</div> <div>0/{project.vacanciesLimits}</div></div>
         </div>}
       </div>
 

@@ -5,6 +5,21 @@
   display: flex;
   position: relative;
 }
+
+.projectEdit{
+  @media screen and (max-width: 900px){
+    flex-direction: column;
+    align-items: center;
+    .info{
+      margin-left: 0;
+      margin-top: 24px;
+    }
+    .upload, .minSize{
+      text-align: center;
+    }
+  }
+}
+
 .backdrop{
   position: absolute;
   left: 0;

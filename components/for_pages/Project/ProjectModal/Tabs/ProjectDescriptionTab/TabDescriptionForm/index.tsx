@@ -201,7 +201,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
         <div className={styles.formHeader}>Optional fields</div>
         <div className={styles.columns}>
           <div className={styles.colLeft}>
-            <AvatarField name={'photo'} label={'Upload Photo or Video'}/>
+            <AvatarField style='projectEdit' className={styles.avatar} name={'photo'} label={'Upload Photo or Video'}/>
             <TextAreaField name={'benefits'} label={'Project benefits'}/>
             <div className={styles.dates}>
               <DateField name={'startDate'} label={'Expected Project Start Date'}/>

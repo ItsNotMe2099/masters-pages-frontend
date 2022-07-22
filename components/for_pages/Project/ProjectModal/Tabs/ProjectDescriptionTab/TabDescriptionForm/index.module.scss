@@ -3,16 +3,25 @@
 .root{
   border: 1px solid #C4C4C4;
   padding: 25px;
-
+  @media screen and (max-width: 900px){
+    border: 0;
+    padding: 0;
+  }
 }
 .projectFormTitle{
   font-weight: 600;
   font-size: 36px;
   color: #000000;
+  @media screen and (max-width: 900px){
+    text-align: center;
+  }
 }
 .projectId{
   color: #9A9A9A;
   font-size: 12px;
+  @media screen and (max-width: 900px){
+    text-align: center;
+  }
 }
 .formHeader{
   font-weight: 600;
@@ -21,6 +30,9 @@
   padding-bottom: 15px;
   color: #000000;
   margin-bottom: 25px;
+  @media screen and (max-width: 900px){
+    margin-top: 16px;
+  }
 }
 
 
@@ -32,6 +44,11 @@
   grid-gap: 0px 30px;
   grid-template-rows: 1fr 1fr;
   margin-bottom: 20px;
+  @media screen and (max-width: 900px){
+    margin-top: 16px;
+    padding: 16px;
+    display: block;
+  }
 }
 .columns{
   display: flex;
@@ -40,6 +57,10 @@
   .colLeft{
     width: 60%;
     padding-right: 40px;
+    @media screen and (max-width: 900px){
+      padding: 0;
+      width: 100%;
+    }
   }
   .colRight{
     width: 40%;
@@ -48,6 +69,12 @@
         margin-bottom: 0px;
       }
     }
+    @media screen and (max-width: 900px){
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 1080px){
+    flex-direction: column;
   }
 }
 .fieldset{
@@ -79,10 +106,21 @@
   button{
     text-transform: uppercase;
   }
+  @media screen and (max-width: 500px){
+    flex-direction: column;
+    button{
+      width: 100%;
+      margin-top: 16px;
+    }
+  }
 }
 
 .addFileBtn{
   img{
     margin-right: 16px;
   }
+}
+
+.avatar{
+
 }
