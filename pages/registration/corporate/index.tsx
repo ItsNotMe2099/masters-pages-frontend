@@ -10,6 +10,7 @@ import {IRootState} from 'types'
 import RegistrationSuccess from 'components/Auth/RegistrationSuccess'
 import {IUser} from 'data/intefaces/IUser'
 import { useTranslation } from 'next-i18next'
+import HiddenXs from 'components/ui/HiddenXS'
 
 
 interface Props {
@@ -34,7 +35,9 @@ const Corporate = (props: Props) => {
             window.location.href = '/me'
           }}/> : <div className={styles.content}>
           <CorporateAccountForm user={props.user}/>
-          <Welcome/>
+          <HiddenXs>
+            <Welcome/>
+          </HiddenXs>
         </div>}
       </div>
       {modalKey === 'registrationPhone' && <RegistrationPhone

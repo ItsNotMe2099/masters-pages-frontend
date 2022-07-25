@@ -10,8 +10,10 @@
 @media screen and (max-width: 1200px){
   margin-right: 50px;
 }
-@media screen and (max-width: 650px){
+
+@media screen and (max-width: 1000px){
   margin-right: 0;
+  margin-top: 47px;
 }
 }
 
@@ -30,6 +32,9 @@
     line-height: 36px;
     color: #000;
     margin-bottom: 31px;
+    @media screen and (max-width: $xs-max){
+      text-align: center;
+    }
 }
 
 .representative{
@@ -74,5 +79,8 @@
   button{
     font-weight: 900;
     font-size: 18px;
+    @media screen and (max-width: $xs-max){
+      width: 100%;
+    }
   }
 }

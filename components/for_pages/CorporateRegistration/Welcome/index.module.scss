@@ -13,6 +13,9 @@
   @media screen and (max-width: 1000px){
     width: 100%;
   }
+  @media screen and (max-width: $xs-max){
+    margin-top: 47px;
+  }
 }
 
 .title{

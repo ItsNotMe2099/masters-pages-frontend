@@ -23,6 +23,8 @@ import {useAppContext} from 'context/state'
 import {reachGoal} from 'utils/ymetrika'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import {LabelStyleType} from 'types/types'
+import VisibleXs from 'components/ui/VisibleXS'
+import Welcome from '../Welcome'
 
 interface Props {
   user: IUser
@@ -123,6 +125,9 @@ export default function CorporateAccountForm({user}: Props) {
             <TextField name={'organization.site'} validate={Validator.required}  labelType={LabelStyleType.Cross} label={t('corporateAccount.site')} size='normal'/>
           </div>
         </div>
+        <VisibleXs>
+          <Welcome/>
+        </VisibleXs>
         <div className={styles.checkbox}>
           <CheckBoxField name={'terms'} validate={Validator.required} label={<div className={styles.terms}>
           <Trans i18nKey="corporateAccount.agree">I agree with <a href='/Terms'>Terms & Conditions</a></Trans>

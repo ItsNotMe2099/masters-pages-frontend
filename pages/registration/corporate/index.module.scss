@@ -8,13 +8,17 @@
 .root{
   width: 85%;
   margin: 0 auto;
+  @media screen and (max-width: $xs-max){
+    width: 90%;
+  }
 }
 
 .content{
   display: flex;
   padding-bottom: 197px;
   @media screen and (max-width: 1000px){
-    flex-direction: column-reverse;
+    flex-direction: column;
+    padding-bottom: 46px;
   }
 }
 
@@ -24,4 +28,10 @@
   font-weight: 600;
   text-align: center;
   padding-top: 133px;
+  @media screen and (max-width: 1000px){
+    padding-top: 25px;
+  }
+  @media screen and (max-width: $xs-max){
+    font-size: 36px;
+  }
 }
