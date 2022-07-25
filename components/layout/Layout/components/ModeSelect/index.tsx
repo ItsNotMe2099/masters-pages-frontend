@@ -35,12 +35,13 @@ interface Props {
     setIsActive(!isActive)
   }
 
-  const options = [
+  const options = role !== ProfileRole.Corporate ? [
     { value: ProfileRole.Client, label: t('personalArea.profile.modeClient') },
     { value: ProfileRole.Master, label: t('personalArea.profile.modeMaster') },
     { value: ProfileRole.Volunteer, label: t('personalArea.profile.modeVolunteer') },
-    { value: ProfileRole.Corporate, label: t('personalArea.profile.modeCorporate') },
-  ]
+    //{ value: ProfileRole.Corporate, label: t('personalArea.profile.modeCorporate') },
+  ] :
+  [{ value: ProfileRole.Corporate, label: t('personalArea.profile.modeCorporate') }]
 
   const [value, setValue] = useState(options.find(item => role ? item.value === role : item.value === 'client'))
 

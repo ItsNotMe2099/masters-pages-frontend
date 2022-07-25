@@ -75,9 +75,10 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
 
   const handleClose = () => {
     setTab('description')
+    setProject(null)
     onClose()
   }
-
+  
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose}>
       <div className={styles.root}>

@@ -1,10 +1,7 @@
 import styles from './index.module.scss'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import {default as React, ReactElement, useState} from 'react'
-import {IRootState} from 'types'
-
-
 import {useRouter} from 'next/router'
 import {signInOpen, signUpOpen} from 'components/Modal/actions'
 import Button from 'components/PublicProfile/components/Button'
