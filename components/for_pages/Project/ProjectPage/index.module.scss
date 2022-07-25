@@ -250,6 +250,11 @@
   display: flex;
   flex-direction: column;
   margin-right: 20px;
+  span{
+    max-width: 75px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   div{
     align-self: center;
   }

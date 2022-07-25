@@ -1,4 +1,4 @@
-import styles from 'pages/FindCompaniesGuest/index.module.scss'
+import styles from 'pages/FindProjectsGuest/index.module.scss'
 import { useEffect, useState } from 'react'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
