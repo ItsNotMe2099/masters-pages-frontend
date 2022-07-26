@@ -1,6 +1,7 @@
 @import "scss/index";
 .root{
   position: relative;
+  border-radius: 10px 10px 0px 0px;
 }
 .fullWidth{
   font-size: 18px;
@@ -12,10 +13,11 @@
   padding: 15px;
   flex: 1;
   &:hover{
-    background: #FFFFFF;
+    background: #F2B705;
   }
   &.active{
-    background: #FFFFFF;
+    background: #F2B705;
+    border: 1px solid #F2B705;
   }
   @media (max-width: $xs-max){
     font-size: 14px;

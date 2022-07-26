@@ -33,3 +33,13 @@
   left: 10px;
   right: 10px;
 }
+
+.modal{
+  .messages{
+    top: 80px;
+    z-index: 100;
+  }
+  .newMessage{
+    z-index: 200;
+  }
+}

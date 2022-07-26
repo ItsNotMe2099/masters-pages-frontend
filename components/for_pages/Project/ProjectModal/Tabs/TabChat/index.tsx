@@ -2,25 +2,20 @@ import * as React from 'react'
 import {useEffect, useState} from 'react'
 import styles from './index.module.scss'
 import {IProject} from 'data/intefaces/IProject'
-import ProjectDescriptionHeader from 'components/for_pages/Project/ProjectModal/ProjectDescriptionHeader'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
-import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
-import TabApplicationView from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationView'
-import TabApplicationForm from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationForm'
-import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import Loader from 'components/ui/Loader'
-import ChatPageLayout from 'components/layout/ChatLayout'
-import Chat from 'components/Chat'
 import Tabs from 'components/ui/Tabs'
 import ChatListItem from 'components/Chat/ChatListItem'
 import ChatMessageList from 'components/Chat/ChatMessageList'
-import ChatRepository from 'data/repositories/ChatRepository'
-import {IChat} from 'data/intefaces/IChat'
 import {useDispatch, useSelector} from 'react-redux'
 import {IRootState} from 'types'
 import ProjectChatTitle from 'components/for_pages/Project/ProjectModal/Tabs/TabChat/ProjectChatTitle'
-import {fetchChaProjectList, fetchChatTasksList, fetchChatWithUsersList, resetChatList} from 'components/Chat/actions'
+import {fetchChaProjectList, resetChatList} from 'components/Chat/actions'
+import ProjectStatusLabel from '../../ProjectStatusLabel'
+import classNames from 'classnames'
+import {format} from 'date-fns'
+
 enum TabType{
   People = 'people',
   Groups = 'groups'
@@ -53,16 +48,54 @@ const TabChat = ({project, ...props}: Props) => {
   if(chatListLoading){
     return <div className={styles.rootLoading}><Loader/></div>
   }
+
+
   return (
     <div className={styles.root}>
-      <ProjectDescriptionHeader project={project} title={'Messages'}/>
+      <div className={classNames(styles.section, styles.info)}>
+           <div className={styles.top}>
+             <div className={styles.left}>
+               <ProjectStatusLabel status={project.status}/>
+               <div className={styles.title}>{project?.title || '[Project title]'}</div>
+               <div className={styles.projectId}>Project id#: {project?.id}</div>
+             </div>
+             {project && <div className={styles.right}>
+               <div className={styles.line}>Application Limit: 0/{project.applicationsLimits}</div>
+               <div className={styles.line}>Vacancies: 0/{project.vacanciesLimits}</div>
+             </div>}
+           </div>
+
+           <div className={styles.dates}>
+             <div className={styles.dateItem}>
+              <div className={styles.dateItemLabel}>Applications Deadline: </div> 
+              <div className={styles.date}>
+                <img src={'/img/Project/calendar.svg'}/>{format(new Date(project.applicationsClothingDate), 'MM.dd.yy')}</div>
+              </div>
+             <div className={styles.separator}/>
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> 
+             <div className={styles.date}>
+              <img src={'/img/Project/calendar.svg'}/><span>{format(new Date(project.endDate), 'MM.dd.yy')}</span>
+            </div>
+             </div>
+
+           </div>
+
+       </div>
       <div className={styles.chatArea}>
 
       <div className={styles.chatList}>
         <Tabs tabs={tabs} activeTab={activeTab} tabClassName={styles.tab} onChange={handleChangeTab}/>
-        <div>
+        <div className={styles.desktop}>
           {chatList.filter(i => (activeTab === TabType.People ? !i.isGroup : i.isGroup))
             .map(chatItem => <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
+        </div>
+        <div className={styles.mobile}>
+          {chatList.filter(i => (activeTab === TabType.People ? !i.isGroup : i.isGroup))
+            .map(chatItem => !chat && <ChatListItem key={chatItem?.id} chat={chatItem} isActive={chatItem.id === chat?.id}/>)}
+          {chat &&
+      <div className={styles.chatMessagesMobile}>
+        <ChatMessageList style='modal' chat={chat} title={<ProjectChatTitle chat={chat}/>}/>
+      </div>}
         </div>
       </div>
       {chat &&

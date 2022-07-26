@@ -48,10 +48,22 @@
 
 .mobile{
   width: 100%;
-  background: #F2B705;
   @media screen and (min-width: 901px){
     display: none;
   }
+}
+
+.modeMaster{
+    background: #EB5757;
+}
+.modeClient{
+    background: #27AE60;
+}
+.modeVolunteer{
+    background: #199AC2;
+}
+.modeCorporate{
+    background: #F2B705;
 }
 
 .topPanel{

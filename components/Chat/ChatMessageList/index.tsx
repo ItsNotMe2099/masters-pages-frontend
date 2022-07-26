@@ -9,6 +9,7 @@ import { IRootState } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {IChat} from 'data/intefaces/IChat'
+import classNames from 'classnames'
 
 /*
   task chat
@@ -21,9 +22,10 @@ interface Props {
   title?: ReactElement
   onRequestClose?: () => void
   onClick?: () => void
+  style?: 'modal'
 }
 
-export default function ChatMessageList({chat, onClick, title}: Props) {
+export default function ChatMessageList({chat, onClick, title, style}: Props) {
   const dispatch = useDispatch()
 
   const messages = useSelector((state: IRootState) => state.chat.messages)
@@ -91,7 +93,11 @@ export default function ChatMessageList({chat, onClick, title}: Props) {
     return <Loader/>
   }
 
-  return (<div className={styles.root}>
+  const rootClass = {
+    [styles.modal]: style === 'modal'
+  }
+
+  return (<div className={classNames(styles.root, rootClass)}>
     {title ? title : <div className={styles.title}>
         <ChatTitle chat={chat} onClick={onClick}/>
       </div>}

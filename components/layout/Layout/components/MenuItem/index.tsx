@@ -2,7 +2,6 @@ import Link from 'next/link'
 import styles from './index.module.scss'
 import { useDispatch} from 'react-redux'
 import {ProfileRole} from 'data/intefaces/IProfile'
-import classNames from 'classnames'
 
 interface Props {
   isActive: boolean

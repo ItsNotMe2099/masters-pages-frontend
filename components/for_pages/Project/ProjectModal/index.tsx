@@ -15,6 +15,8 @@ import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
 import { TabSelect } from 'components/TabSelect'
 import CloseIcon from 'components/svg/CloseIcon'
+import { ProfileRole } from 'data/intefaces/IProfile'
+import classNames from 'classnames'
 
 interface Props {
   showType: 'client' | 'public'
@@ -78,6 +80,23 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
     setProject(null)
     onClose()
   }
+
+  const roleCurrent = appContext.role
+
+  const getModeClass = () => {
+    switch (roleCurrent) {
+      case ProfileRole.Master:
+        return styles.modeMaster
+      case ProfileRole.Volunteer:
+        return styles.modeVolunteer
+      case ProfileRole.Corporate:
+        return styles.modeCorporate
+      case ProfileRole.Client:
+        return styles.modeClient
+      default:
+        return styles.modeGuest
+    }
+  }
   
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose}>
@@ -85,7 +104,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
         <div className={styles.desktop}>
           <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
         </div>
-        <div className={styles.mobile}>
+        <div className={classNames(styles.mobile, getModeClass())}>
           <div className={styles.topPanel}>
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>

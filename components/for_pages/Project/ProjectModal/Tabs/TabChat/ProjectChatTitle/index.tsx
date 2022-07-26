@@ -23,6 +23,7 @@ import cx from 'classnames'
 import {useAppContext} from 'context/state'
 import {IChat} from 'data/intefaces/IChat'
 import Link from 'next/link'
+import { resetChatList } from 'components/Chat/actions'
 interface Props {
   chat: IChat
 }
@@ -70,6 +71,7 @@ export default function ProjectChatTitle({chat}: Props) {
   return (
    <div className={styles.root}>
      <div className={styles.left}>
+      <div className={styles.back} onClick={() => dispatch(resetChatList())}><img src='/img/icons/back2.svg' alt=''/></div>
        {isProjectGroup ? <img src='/img/icons/chat_group.svg'/> : <Link href={profileLink}><a><AvatarRound image={chat.profile?.avatar} name={chat.profile?.firstName}/></a></Link>}
        <div className={styles.title}>{isProjectGroup ? chat.name : <Link href={profileLink}><a>{`${profile.firstName} ${profile.lastName} ${chat.task ? `(${chat.task.title})` : ''}`}</a></Link>}
        </div>
