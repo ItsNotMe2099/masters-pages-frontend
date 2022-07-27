@@ -3,6 +3,7 @@
 .root{
   border: 1px solid #C4C4C4;
   padding: 25px;
+  margin-top: 16px;
 
 }
 .projectFormTitle{
@@ -40,6 +41,10 @@
   .colLeft{
     width: 60%;
     padding-right: 40px;
+    @media screen and (max-width: $xs-max){
+      width: 100%;
+      padding-right: 0;
+    }
   }
   .colRight{
     width: 40%;
@@ -48,6 +53,12 @@
         margin-bottom: 0px;
       }
     }
+    @media screen and (max-width: $xs-max){
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
   }
 }
 .fieldset{
@@ -78,5 +89,24 @@
   grid-gap: 0px 32px;
   button{
     text-transform: uppercase;
+  }
+  @media screen and (max-width: $xs-max){
+    border-top: 0;
+    flex-direction: column;
+    padding-top: 16px;
+    button:first-child{
+      margin-bottom: 16px;
+    }
+    button{
+      width: 100%;
+    }
+  }
+}
+
+.innerContent{
+  @media screen and (max-width: $xs-max){
+    button{
+      width: 100%;
+    }
   }
 }

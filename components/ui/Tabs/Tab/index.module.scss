@@ -1,8 +1,49 @@
 @import "scss/index";
 .root{
   position: relative;
-  border-radius: 10px 10px 0px 0px;
 }
+
+.modeClien {
+  &.active{
+    background: #27AE60;
+    border: 1px solid #27AE60;
+  }
+  &:hover{
+    background: #27AE60;
+  }
+}
+
+.modeMaster{
+  &.active{
+    background: #EB5757;
+    border: 1px solid #EB5757;
+  }
+  &:hover{
+    background: #EB5757;
+  }
+}
+
+.modeVolunteer{
+  &.active{
+    background: #199AC2;
+    border: 1px solid #199AC2;
+  }
+  &:hover{
+    background: #199AC2;
+  }
+}
+
+.modeCorproate{
+  background: #F2B705;
+  &.active{
+    background: #F2B705;
+    border: 1px solid #F2B705;
+  }
+  &:hover{
+    background: #F2B705;
+  }
+}
+
 .fullWidth{
   font-size: 18px;
   font-weight: 700;
@@ -12,12 +53,11 @@
   text-align: center;
   padding: 15px;
   flex: 1;
+  border-radius: 10px 10px 0px 0px;
   &:hover{
-    background: #F2B705;
+    
   }
   &.active{
-    background: #F2B705;
-    border: 1px solid #F2B705;
   }
   @media (max-width: $xs-max){
     font-size: 14px;

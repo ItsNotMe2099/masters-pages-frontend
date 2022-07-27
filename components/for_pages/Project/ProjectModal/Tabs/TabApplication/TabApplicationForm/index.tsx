@@ -79,7 +79,7 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
           <div className={styles.colLeft}>
             <TextAreaField name={'coverLetter'} label={'Cover Letter'} validate={Validator.required}/>
             <DocField name={'coverLetterFile'}
-                         addFileButton={<div>
+                         addFileButton={<div className={styles.innerContent}>
                            <Button type={'button'} size="small"> <img src="/img/icons/camera.svg"
                                                                       alt=''/> {t('forms.fileInput.uploadFiles')}
                            </Button>
@@ -90,8 +90,8 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
               />
             <TextAreaField name={'resume'} label={'Resume'}/>
             <DocField name={'resumeFile'}
-                         addFileButton={<div>
-                           <Button type={'button'} size="small"> <img src="/img/icons/camera.svg"
+                         addFileButton={<div className={styles.innerContent}>
+                           <Button className={styles.btn} type={'button'} size="small"> <img src="/img/icons/camera.svg"
                                                                       alt=''/> {t('forms.fileInput.uploadFiles')}
                            </Button>
                            <div className={styles.addFileButtonDesc}>

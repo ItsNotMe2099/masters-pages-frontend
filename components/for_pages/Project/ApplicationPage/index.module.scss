@@ -240,6 +240,12 @@
       margin-right: 0;
     }
   }
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+    button:first-child{
+      margin-bottom: 18px;
+    }
+  }
 }
 
 .btnsCompleted{
