@@ -76,7 +76,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
     console.log(project.minAge)
     if(project.minAge && project.maxAge && (profileAge <= project.maxAge && profileAge >= project.minAge)){
       return true
-    }else if(project.minAge && profileAge >= project.minAge){
+    }else if(project.minAge && (profileAge <= project.maxAge && profileAge >= project.minAge)){
       return true
     }else if(project.maxAge && !project.minAge && profileAge <= project.maxAge ){
       return true
