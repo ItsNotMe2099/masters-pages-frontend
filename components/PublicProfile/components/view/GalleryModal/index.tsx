@@ -24,6 +24,7 @@ import {
 } from 'components/News/actions'
 import cx from 'classnames'
 import {useAppContext} from 'context/state'
+import { signUpOpen } from 'components/Modal/actions'
 interface Props {
   isOpen: boolean,
   isNews?: boolean
@@ -66,7 +67,10 @@ export default function GalleryModal(props: Props) {
   }
 
   const handleLike = () => {
-    if(model.isLiked || model.profileId === currentProfile.id){
+    if(!currentProfile){
+      dispatch(signUpOpen())
+    }
+    if(model.isLiked || model.profileId === currentProfile?.id){
       return
     }
     if(isNews) {
