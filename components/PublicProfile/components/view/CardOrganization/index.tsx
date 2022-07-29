@@ -57,7 +57,7 @@ const CardOrganization = (props: Props) => {
 
         {isEdit && showForm && <AvatarForm organization={organization} onSubmit={handleSubmit}/>}
         {(!showForm || !isEdit) &&  <a href={`/id${organization.corporateProfile.id}`}><Avatar size={'large'} image={organization.corporateProfile.photo}/></a>}
-      <a href={`/id${organization.id}`} className={styles.name}>{organization.name}</a>
+      <div className={styles.name}>{organization.name}</div>
       <div className={styles.allStats}>
       <div className={styles.left}>
       <div className={styles.stat}>
