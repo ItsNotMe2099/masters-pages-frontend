@@ -17,6 +17,7 @@ import { TabSelect } from 'components/TabSelect'
 import CloseIcon from 'components/svg/CloseIcon'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import classNames from 'classnames'
+import ProjectAutorepliesTab from './Tabs/ProjectAutoRepliesTab'
 
 interface Props {
   showType: 'client' | 'public'
@@ -119,6 +120,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}
+            {tab === 'autoReplies' && <ProjectAutorepliesTab project={project}/>}
           </>}
         </div>
       </div>

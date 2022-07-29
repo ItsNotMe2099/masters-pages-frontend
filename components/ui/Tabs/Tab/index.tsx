@@ -48,7 +48,8 @@ const Tab = ({name, label, link, style, onClick, isActive, className, badge, isF
 
   return (
     <Link href={`${link}`}>
-      <a className=
+      <a 
+      className=
       {classNames(styles.root, {[styles.isFirst]: isFirst, [styles.isLast]: isLast, [styles.fullWidth]: style === 'fullwidth', [styles.fullWidthRound]: style === 'fullWidthRound', [styles.round]: style === 'round', [styles.roundSmall]: style === 'roundSmall', [styles.outline]: style === 'outline', [styles.active]: isActive}, className, getModeClass())} onClick={handleClick}>{name}{label}
         {badge > 0 && <NotificationBadge right={style === 'round' ? '18px' : '4px'} top={style === 'round' ? '10px' : '6px'} border={style === 'round'} amount={badge}/>}
       </a>
