@@ -194,8 +194,10 @@ const ProjectCard = (props: Props) => {
         return <Button onClick={() => props.onViewOpen ? props.onViewOpen(project) : null} type='button' projectBtn='default'>OPEN</Button>
       case 'pause':
         return <Button type='button' onClick={() => props.onProjectStatusChange(ProjectStatus.Paused)} projectBtn='default'>PAUSE</Button>
+      case 'resume':
+        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Published)} type='button' projectBtn='default'>RESUME</Button>
       case 'launch':
-        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Published)} type='button' projectBtn='default'>LAUNCH</Button>
+        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Execution)} type='button' projectBtn='default'>LAUNCH</Button>
       case 'applyAlt':
         return <Button onClick={handleApply} type='button' projectBtn='default'>APPLY</Button>
       case 'recall':
@@ -244,13 +246,14 @@ const ProjectCard = (props: Props) => {
           actions.pop()
           actions.push('open')
           actions.push('pause')
-          //actions.push('launch')
+          actions.push('launch')
         }
         if (([ProjectStatus.Paused] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
           actions.pop()
           actions.push('open')
           //actions.push('pause')
-          actions.push('launch')
+          actions.push('resume')
+          actions.push('recycleBin')
         }
         if (([ProjectStatus.Execution] as ProjectStatus[]).includes(project.status)) {
           actions.push('cancel')
