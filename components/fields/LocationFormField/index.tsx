@@ -1,11 +1,9 @@
-import { IField, InputStyleType, IOption } from 'types/types'
-import {Form, FormikProvider, useField, useFormik} from 'formik'
-import {useEffect, useState} from 'react'
+import { IField, InputStyleType} from 'types/types'
+import {useField} from 'formik'
+import {useState} from 'react'
 import {useTranslation} from 'next-i18next'
 import styles from 'components/PublicProfile/components/view/CardCategories/components/Form/index.module.scss'
 import * as React from 'react'
-
-import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 import LocationForm from 'components/fields/LocationFormField/Form'
 import LocationItem from 'components/fields/LocationFormField/LocationItem'
 import Button from 'components/PublicProfile/components/Button'
@@ -17,13 +15,9 @@ interface Props<T> extends IField<T> {
 
 export default function LocationFormField(props: Props<any[]>) {
   const [field, meta, helpers] = useField<any[]>(props)
-  const [options, setOptions] = useState<IOption<number>[]>([])
   const { t, i18n } = useTranslation('common')
 
   const [showForm, setShowForm] = useState(false);
-  const handleMenuOpen = async () => {
-
-  }
   const handleSubmit =  async (data) => {
     const place = await LocationRepository.addPlaceToCurrentProfile(data)
     helpers.setValue([...(field.value || []), place]);

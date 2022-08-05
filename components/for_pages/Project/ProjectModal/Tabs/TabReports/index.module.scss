@@ -1,0 +1,70 @@
+@import "scss/index";
+
+.root{
+  border: 1px solid #C4C4C4;
+  padding: 25px;
+
+}
+
+.content{
+  margin-top: 17px;
+  border-top: 1px solid #C4C4C4;
+}
+
+.miniTabsContent{
+  padding: 50px;
+  border: 1px solid #C4C4C4;
+}
+
+.tables{
+  display: flex;
+}
+
+.title{
+  padding-bottom: 24px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #000;
+}
+
+.table{
+  display: table;
+  width: 100%;
+  .row:nth-child(even){
+    background: #F6F6F6;
+  }
+}
+
+.row{
+  display: table-row;
+}
+
+.cellFirst{
+  display: table-cell;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  padding: 15px 10px;
+}
+
+.cell{
+  display: table-cell;
+  color: #6D718C;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 15px 10px;
+  width: 20%;
+  text-align: end;
+}
+
+.dates{
+  width: 100%;
+  margin-right: 100px;
+}
+
+.volunteers{
+  width: 100%;
+  .cell{
+    width: 10%;
+  }
+}

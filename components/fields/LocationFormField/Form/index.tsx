@@ -1,4 +1,3 @@
-import { IField, InputStyleType, IOption } from 'types/types'
 import {Form, FormikProvider, useFormik} from 'formik'
 import SelectField from 'components/fields/SelectField'
 import {useEffect, useState} from 'react'
@@ -6,9 +5,7 @@ import {useTranslation} from 'next-i18next'
 import styles from 'components/PublicProfile/components/view/CardCategories/components/Form/index.module.scss'
 import Button from 'components/PublicProfile/components/Button'
 import * as React from 'react'
-import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import Validator from 'utils/validator'
-import CountryField from 'components/fields/CountryField'
 import TextField from 'components/fields/TextField'
 
 interface Props<T> {
