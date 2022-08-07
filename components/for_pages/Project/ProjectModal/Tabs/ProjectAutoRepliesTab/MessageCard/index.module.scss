@@ -1,0 +1,32 @@
+@import "scss/index";
+
+.root{
+    margin-bottom: 25px;
+}
+
+.title{
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 24px;
+}
+
+.message{
+    border: 1px solid #C4C4C4;
+    border-radius: 4px;
+    padding: 21px;
+    padding-right: 73px;
+}
+
+.greetings{
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+}
+
+.text{
+    font-weight: 500;
+    font-size: 16px;
+    color: #6D718C;
+    padding-top: 20px;
+}

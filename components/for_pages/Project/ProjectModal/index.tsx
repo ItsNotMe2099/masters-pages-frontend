@@ -12,13 +12,14 @@ import TabVolunteers from './Tabs/TabVolunteers'
 import { useAppContext } from 'context/state'
 import TabChat from 'components/for_pages/Project/ProjectModal/Tabs/TabChat'
 import { IOrganization } from 'data/intefaces/IOrganization'
-import { useRouter } from 'next/router'
 import { TabSelect } from 'components/TabSelect'
 import CloseIcon from 'components/svg/CloseIcon'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import classNames from 'classnames'
 import ProjectAutorepliesTab from './Tabs/ProjectAutoRepliesTab'
 import TabReports from './Tabs/TabReports'
+import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
+import { IAutoMessages } from 'data/intefaces/IAutoMessages'
 
 interface Props {
   showType: 'client' | 'public'
@@ -35,7 +36,8 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
   const [project, setProject] = useState<IProject>(null);
   const appContext = useAppContext()
   const profile = appContext.profile
-  const router = useRouter()
+  const autoMessagesObject = {applicationStatusChangeMessages: [], projectStatusChangeMessages: [], projectId: projectId, id: null}
+  const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(autoMessagesObject)
 
   useEffect(() => {
     if(showType === 'public'){
@@ -47,6 +49,12 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
     else{
       ProjectRepository.findById(projectId).then(i => setProject(i))
     }
+
+    AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId).then(data => {
+      if(data){
+        setAutomessages(data)
+      }
+  })
 
   }, [projectId])
 
@@ -121,7 +129,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}
-            {tab === 'autoReplies' && <ProjectAutorepliesTab project={project}/>}
+            {tab === 'autoReplies' && <ProjectAutorepliesTab project={project} autoMessages={autoMessages}/>}
             {tab === 'reports' && <TabReports project={project}/>}
           </>}
         </div>
