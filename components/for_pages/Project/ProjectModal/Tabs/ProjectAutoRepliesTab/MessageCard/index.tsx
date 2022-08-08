@@ -5,9 +5,10 @@ import {useAppContext} from 'context/state'
 import MessageCardForm from './Form'
 import { IProject } from 'data/intefaces/IProject'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
+import classNames from 'classnames'
 
 interface Props {
-  name: string
+  name?: string
   project?: IProject
   prevStatus: string
   nextStatus: string
@@ -15,6 +16,8 @@ interface Props {
   onSubmit?: (data) => void
   autoMessages?: IAutoMessages
   loading?: boolean
+  className?: string
+  desc: boolean
 }
 
 const MessageCard = (props: Props) => {
@@ -22,11 +25,11 @@ const MessageCard = (props: Props) => {
   const appContext = useAppContext();
 
   return (
-    <div className={styles.root}>
-      <div className={styles.title}>
+    <div className={classNames(styles.root, props.className)}>
+      {props.name && <div className={styles.title}>
         {props.name}
-      </div>
-      <MessageCardForm autoMessages={props.autoMessages} onSubmit={props.onSubmit} project={props.project} applicationStatusChange={props.applicationStatusChange} prevStatus={props.prevStatus} nextStatus={props.nextStatus}/> 
+      </div>}
+      <MessageCardForm desc={props.desc} autoMessages={props.autoMessages} onSubmit={props.onSubmit} project={props.project} applicationStatusChange={props.applicationStatusChange} prevStatus={props.prevStatus} nextStatus={props.nextStatus}/> 
     </div>
   )
 }

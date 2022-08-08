@@ -5,14 +5,13 @@ import {useAppContext} from 'context/state'
 import { Form, FormikProvider, useFormik } from 'formik'
 import { IProject } from 'data/intefaces/IProject'
 import TextAreaField from 'components/fields/TextAreaField'
-import {useState, useEffect} from 'react'
-import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
+import {useState} from 'react'
 import Button from 'components/PublicProfile/components/Button'
-import Switch from 'react-switch'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
 import Validator from 'utils/validator'
 import SwitchField from 'components/fields/SwitchField'
-import Loader from 'components/ui/Loader'
+import ProjectsPage from 'pages/projects/[projectType]'
+import { ApplicationStatus } from 'data/intefaces/IApplication'
 
 interface Props {
   project: IProject
@@ -21,6 +20,7 @@ interface Props {
   nextStatus?: string
   onSubmit?: (data) => void
   autoMessages?: IAutoMessages
+  desc?: boolean
 }
 
 const MessageCardForm = ({project, applicationStatusChange, autoMessages, ...props}: Props) => {
@@ -28,7 +28,7 @@ const MessageCardForm = ({project, applicationStatusChange, autoMessages, ...pro
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const filtered = applicationStatusChange ? autoMessages?.applicationStatusChangeMessages.find(item => item.nextStatus === props.nextStatus) : autoMessages?.projectStatusChangeMessages.find(item => item.nextStatus === props.nextStatus)
+  const filtered = applicationStatusChange ? autoMessages?.applicationStatusChangeMessages.find(item => item.nextStatus === props.nextStatus && item.prevStatus === props.prevStatus) : autoMessages?.projectStatusChangeMessages.find(item => item.nextStatus === props.nextStatus && item.prevStatus === props.prevStatus)
  
   const initialValues = {
     projectId: project.id,
@@ -70,15 +70,32 @@ const MessageCardForm = ({project, applicationStatusChange, autoMessages, ...pro
     enableReinitialize: true
   })
 
-  const {values, setFieldValue} = formik
+  const renderActionButton = (nextStatus) => {
+    switch (nextStatus) {
+      case ApplicationStatus.Applied:
+        return <Button type='button' projectBtn='green'>APPLY</Button>
+      case ApplicationStatus.Shortlist:
+        if(props.prevStatus !== ApplicationStatus.Invited){
+          return <Button type='button' projectBtn='green'>SHORTLIST</Button>
+        }
+        else{
+          return <Button type='button' projectBtn='red'>CANCEL INVITATION</Button>
+        }
+      case ApplicationStatus.RejectedByCompany:
+        return <Button type='button' projectBtn='red'>REJECT</Button>
+      case ApplicationStatus.Invited:
+        return <Button type='button' projectBtn='green'>INVITE</Button>
+    }
+  }
 
-    console.log('AUTOMESSAGESFORM', autoMessages)
+  const {values, setFieldValue} = formik
 
   return (
     <FormikProvider value={formik}>
       <Form className={styles.root}>
         <TextAreaField name={'message'} validate={Validator.required}/>
         <div className={styles.controls}>
+        {props.desc && <div className={styles.fakeBtn}>{renderActionButton(props.nextStatus)}</div>}
         <SwitchField  name='enabled' onChange={() => handleSwitch(values)}/>     
         <Button type='submit' size={'small'} color={'red'}>Save</Button>
         </div>

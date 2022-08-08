@@ -13,3 +13,10 @@
     display: flex !important;
     align-self: center;
 }
+
+.fakeBtn{
+    margin-right: 16px;
+    button{
+        padding: 12px 50px;
+    }
+}

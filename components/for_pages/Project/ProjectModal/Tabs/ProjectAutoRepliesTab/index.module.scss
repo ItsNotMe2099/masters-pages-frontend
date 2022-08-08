@@ -84,3 +84,19 @@
   border-top: 0;
   border-radius: 0px 0px 3px 3px;
 }
+
+.columns{
+  display: flex;
+  .messageCard:nth-child(1){
+    margin-right: 32px;
+  }
+  .messageCard{
+    margin-bottom: 0;
+  }
+}
+
+.altMessageCard{
+    margin: 0;
+    border: 1px solid #C4C4C4;
+    padding: 25px;
+}
