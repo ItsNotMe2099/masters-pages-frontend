@@ -6,7 +6,7 @@ export interface IAutoMessage {
 }
 
 export interface IAutoMessages {
-  id: number
+  id?: number
   projectId: number
   applicationStatusChangeMessages?: IAutoMessage[]
   projectStatusChangeMessages?: IAutoMessage[]

@@ -74,6 +74,7 @@ const ProjectAutorepliesTab = ({project, autoMessages}: Props) => {
   []
 
 const handleSubmit = async (data, item) => {
+  autoMessages.projectId = project.id
   if(item.applicationStatusChange){
     const filtered = autoMessages?.applicationStatusChangeMessages.find(i => i.nextStatus === item.nextStatus && i.prevStatus === item.prevStatus)
     if(filtered){
@@ -148,7 +149,7 @@ const isColumns = () => {
           name={item.name} 
           project={project} 
           prevStatus={item.prevStatus} 
-          nextStatus={item .nextStatus} 
+          nextStatus={item.nextStatus} 
           applicationStatusChange={item.applicationStatusChange}
           onSubmit={(data) => handleSubmit(data, item)}
           autoMessages={autoMessages}
