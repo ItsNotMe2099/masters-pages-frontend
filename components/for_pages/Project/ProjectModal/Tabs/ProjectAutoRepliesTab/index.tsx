@@ -11,6 +11,7 @@ import MessageCard from './MessageCard'
 import { IAutoMessages} from 'data/intefaces/IAutoMessages'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import classNames from 'classnames'
+import { TabSelect } from 'components/TabSelect'
 
 interface Props {
   project: IProject | null
@@ -158,7 +159,12 @@ const isColumns = () => {
           />
         )}
         </div>
+        <div className={styles.desktop}>
         <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab}/>
+        </div>
+        <div className={styles.mobile}>
+          <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/>
+        </div>
         <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
         {messages.slice(1).map(item => 
           <MessageCard 
@@ -177,7 +183,12 @@ const isColumns = () => {
       </div>
       :
       <>
+      <div className={styles.desktop}>
       <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab}/>
+      </div>
+      <div className={styles.mobile}>
+          <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/>
+        </div>
       <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
         {messages.map(item => 
           <MessageCard 

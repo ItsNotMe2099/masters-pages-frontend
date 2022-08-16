@@ -95,8 +95,10 @@ const MessageCardForm = ({project, applicationStatusChange, autoMessages, ...pro
       <Form className={styles.root}>
         <TextAreaField name={'message'} validate={Validator.required}/>
         <div className={styles.controls}>
+        <div className={styles.switch}>
         {props.desc && <div className={styles.fakeBtn}>{renderActionButton(props.nextStatus)}</div>}
-        <SwitchField  name='enabled' onChange={() => handleSwitch(values)}/>     
+        <SwitchField  name='enabled' onChange={() => handleSwitch(values)}/>   
+        </div>  
         <Button type='submit' size={'small'} color={'red'}>Save</Button>
         </div>
       </Form>

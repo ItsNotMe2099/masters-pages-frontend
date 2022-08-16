@@ -3,6 +3,10 @@
 .root{
   border: 1px solid #C4C4C4;
   padding: 25px;
+  @media screen and (max-width: 1120px){
+    padding: 0;
+    border: 0;
+  }
 
 }
 .projectFormTitle{
@@ -89,9 +93,16 @@
   display: flex;
   .messageCard:nth-child(1){
     margin-right: 32px;
+    @media screen and (max-width: 1120px){
+      margin-right: 0;
+      margin-bottom: 45px;
+    }
   }
   .messageCard{
     margin-bottom: 0;
+  }
+  @media screen and (max-width: 1120px){
+    flex-direction: column;
   }
 }
 
@@ -99,4 +110,29 @@
     margin: 0;
     border: 1px solid #C4C4C4;
     padding: 25px;
+    @media screen and (max-width: 475px){
+      padding: 0;
+      border: 0;
+    }
+}
+
+.desktop{
+  @media screen and (max-width: 1120px){
+    display: none;
+  }
+}
+
+.mobile{
+  width: 100%;
+  margin-top: 16px;
+  @media screen and (min-width: 1121px){
+    display: none;
+  }
+}
+
+.altMessageCards{
+  @media screen and (max-width: 1120px){
+    margin-top: 16px;
+    border-top: 1px solid #C4C4C4;
+  }
 }

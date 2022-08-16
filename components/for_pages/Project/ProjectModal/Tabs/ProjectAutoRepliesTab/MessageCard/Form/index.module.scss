@@ -6,17 +6,28 @@
 
 .controls{
     display: flex;
+    @media screen and (max-width: 428px){
+        flex-direction: column;
+      }
 }
 
 .switch{
-    margin-right: 10px;
-    display: flex !important;
-    align-self: center;
+    display: flex;
+    @media screen and (max-width: 428px){
+        margin-bottom: 10px;
+      }
 }
 
 .fakeBtn{
     margin-right: 16px;
+    @media screen and (max-width: 428px){
+        width: 100%;
+      }
     button{
         padding: 12px 50px;
+        @media screen and (max-width: 428px){
+            width: 100%;
+            padding: 12px 20px;
+          }
     }
 }

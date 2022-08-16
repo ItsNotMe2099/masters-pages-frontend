@@ -185,7 +185,7 @@ const ProjectsPage = (props: Props) => {
 
   const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number) => {
     const changedProject = await ProjectRepository.update(projectId, {status: newStatus})
-    if(changedProject.status !== projectType){
+    if(changedProject?.status !== projectType){
       ProjectRepository.fetchByStatus(projectType as ProjectStatus).then((data) => {
         if(data) {
           setProjects(data.data)

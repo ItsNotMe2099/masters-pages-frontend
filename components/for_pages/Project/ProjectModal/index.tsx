@@ -1,7 +1,6 @@
 import Modal from 'components/ui/Modal'
 import * as React from 'react'
 import styles from './index.module.scss'
-import { useDispatch } from 'react-redux'
 import {IProject} from 'data/intefaces/IProject'
 import ProjectTabs from 'components/for_pages/Project/ProjectModal/ProjectTabs'
 import {useEffect, useState} from 'react'
@@ -31,15 +30,12 @@ interface Props {
   initialTab?: string
 }
 const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization, initialTab}: Props) => {
-  const dispatch = useDispatch()
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const [project, setProject] = useState<IProject>(null);
   const appContext = useAppContext()
   const profile = appContext.profile
   const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: []}
   const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(autoMessagesObject)
-
-  console.log('PROJECTID', projectId)
 
   useEffect(() => {
     if(showType === 'public'){
