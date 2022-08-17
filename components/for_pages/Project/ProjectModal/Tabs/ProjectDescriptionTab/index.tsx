@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import {IProject} from 'data/intefaces/IProject'
+import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {useTranslation} from 'next-i18next'
 import {useState, useEffect} from 'react'
 import Button from 'components/PublicProfile/components/Button'
@@ -65,7 +65,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
     {(!isEdit && project) && <ProjectPage organization={organization}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
       <Button color={'white'} onClick={handleDelete} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
-      <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
+      (project.status === ProjectStatus.Draft || project.status === ProjectStatus.Published || project.status === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : 
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
     (application?.status === ApplicationStatus.Applied || 
