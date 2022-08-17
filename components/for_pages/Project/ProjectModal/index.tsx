@@ -19,6 +19,7 @@ import ProjectAutorepliesTab from './Tabs/ProjectAutoRepliesTab'
 import TabReports from './Tabs/TabReports'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
+import ProjectsPage from 'pages/projects/[projectType]'
 
 interface Props {
   showType: 'client' | 'public'
@@ -28,8 +29,9 @@ interface Props {
   onDelete?: () => void | null | undefined
   organization?: IOrganization
   initialTab?: string
+  outerVar?: boolean
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization, initialTab}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization, initialTab, outerVar}: Props) => {
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const [project, setProject] = useState<IProject>(null);
   const appContext = useAppContext()
@@ -123,7 +125,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && <TabProjectDescription organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
+            {tab === 'description' && <TabProjectDescription outerVar={outerVar} organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}

@@ -65,9 +65,6 @@ const ProjectPage = ({  project, ...props}: Props) => {
     }
   }
 
-  console.log('PROJECTPAGE_PROJECT', project)
-  console.log('PROJECTPAGE_ORGANIZATION', props.organization)
-
   const profileLink = `/id${project.corporateProfileId}`
   return (
    <div className={styles.root}>

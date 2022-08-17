@@ -17,11 +17,13 @@ import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import {useState} from 'react'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 interface Props {
   project: IProject
   actionsType: 'client' | 'public' | 'volunteer' | 'corporate'
   onViewOpen: (project: IProject) => void
+  onEdit: (project: IProject) => void
   onApplyClick?: (project: IProject) => void
   onDelete?: (project: IProject) => void
   onUpdateStatus?: (status: ProjectStatus, project: IProject) => void
@@ -182,6 +184,8 @@ const ProjectCard = (props: Props) => {
         return <Button color={'grey'}  onClick={() => props.onViewOpen ? props.onViewOpen(project) : null}>VIEW</Button>
       case 'delete':
         return <Button color={'grey'}>DELETE</Button>
+      case 'edit':
+        return <Button onClick={() => props.onEdit ? props.onEdit(project) : null} type='button' projectBtn='default'>EDIT</Button>
       case 'publish':
         return <Button color={'grey'} onClick={handlePublish} projectBtn='default'>PUBLISH</Button>
       case 'unPublish':
@@ -207,7 +211,11 @@ const ProjectCard = (props: Props) => {
       case 'reject':
         return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))} type='button' projectBtn='red'>RECALL</Button>
       case 'complete':
-        return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' projectBtn='green'>COMPLETE</Button>
+        return <Button 
+        onClick={() => profile.role === ProfileRole.Corporate ? props.onProjectStatusChange(ProjectStatus.Completed) : dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' 
+        projectBtn={profile.role === ProfileRole.Corporate ? 'default' : 'green'}>COMPLETE</Button>
+      case 'abort':
+        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Canceled)} type='button' projectBtn='default'>ABORT</Button>
       case 'recycleBin':
         return <Button
         onClick={props.status === 'saved' ? handleDeleteFromSaved : profile.role !== 'corporate' ? handleDeleteApplication : handleDeleteProject}
@@ -252,12 +260,20 @@ const ProjectCard = (props: Props) => {
           actions.pop()
           actions.push('open')
           //actions.push('pause')
+          actions.push('edit')
           actions.push('resume')
           actions.push('recycleBin')
         }
         if (([ProjectStatus.Execution] as ProjectStatus[]).includes(project.status)) {
-          actions.push('cancel')
-          actions.push('markAsCompleted')
+          actions.pop()
+          actions.push('open')
+          actions.push('complete')
+          actions.push('abort')
+        }
+        if (([ProjectStatus.Completed] as ProjectStatus[]).includes(project.status) || ([ProjectStatus.Canceled] as ProjectStatus[]).includes(project.status)) {
+          actions.pop()
+          actions.push('open')
+          actions.push('recycleBin')
         }
 
       } else if (actionsType === 'public') {

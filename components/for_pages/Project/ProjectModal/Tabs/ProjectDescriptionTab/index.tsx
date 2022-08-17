@@ -22,12 +22,13 @@ interface Props {
   onPreview?: (data) => void
   onDelete: () => void | null
   organization?: IOrganization
+  outerVar?: boolean
 }
 
 
-const TabProjectDescription = ({project, showType, organization, ...props}: Props) => {
+const TabProjectDescription = ({project, showType, organization, outerVar, ...props}: Props) => {
   const {t} = useTranslation();
-  const [isEdit, setIsEdit] = useState(!project)
+  const [isEdit, setIsEdit] = useState(outerVar ? outerVar : !project)
   const [application, setApplication] = useState<IApplication | null>(null)
   const router = useRouter()
   const handleSave = (data) => {
@@ -58,9 +59,6 @@ const TabProjectDescription = ({project, showType, organization, ...props}: Prop
     props.onDelete()
     }
   }
-
-  console.log('TABDESCRIPTION_PROJECT', project)
-  console.log('TABDESCRIPTION_ORGANIZATION', organization)
 
   return (
   <div className={styles.root}>
