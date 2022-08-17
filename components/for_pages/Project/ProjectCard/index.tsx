@@ -23,7 +23,7 @@ interface Props {
   project: IProject
   actionsType: 'client' | 'public' | 'volunteer' | 'corporate'
   onViewOpen: (project: IProject) => void
-  onEdit: (project: IProject) => void
+  onEdit?: (project: IProject) => void
   onApplyClick?: (project: IProject) => void
   onDelete?: (project: IProject) => void
   onUpdateStatus?: (status: ProjectStatus, project: IProject) => void
