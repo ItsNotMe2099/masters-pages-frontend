@@ -22,7 +22,7 @@ export default function LocationForm(props: Props<any[]>) {
   }
   const initialValues = {
     type: null,
-    location:  null
+    location:  null,
   };
   const formik = useFormik({
     initialValues,
@@ -31,13 +31,14 @@ export default function LocationForm(props: Props<any[]>) {
   const {values, setFieldValue} = formik;
   useEffect(() => {
     setShowAddress(values.type === 'offline')
+    values.type === 'offline' ? setFieldValue('isOnline', false) : setFieldValue('isOnline', true)
   }, [values.type])
-
 
   return (<FormikProvider value={formik}>
   <Form>
     <SelectField name={'type'} options={[{label: t('forms.executionTypeInput.values.online'), value: 'online'}, {label: t('forms.executionTypeInput.values.offline'), value: 'offline'}]} validate={Validator.required} label={t('type')}/>
     {showAddress && <TextField name={'address'} label={'Address'} />}
+    <div style={{display: 'none'}}><SelectField name={'isOnline'} options={[{label: '', value: true}, {label: '', value: false}]}/></div>
     <div className={styles.buttons}>
       <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
       <Button size={'small'} type={'submit'} onClick={(e) => formik.handleSubmit(e)}>{t('task.save')}</Button>
