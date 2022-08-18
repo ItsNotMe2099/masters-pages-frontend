@@ -30,6 +30,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   const {t} = useTranslation();
   const [isEdit, setIsEdit] = useState(outerVar ? outerVar : !project)
   const [application, setApplication] = useState<IApplication | null>(null)
+  const [projectStatus, setProjectStatus] = useState(project?.status)
   const router = useRouter()
   const handleSave = (data) => {
     setIsEdit(false);
@@ -60,12 +61,37 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
     }
   }
 
+  const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number) => {
+    await ProjectRepository.update(projectId, {status: newStatus})
+    setProjectStatus(newStatus)
+  }
+
+  const renderActionButton = (status: ProjectStatus) => {
+    switch (status) {
+      case ProjectStatus.Draft:
+        return <Button color={'grey'} onClick={() => handleChangeProjectStatus(ProjectStatus.Published, project.id)} projectBtn='default'>PUBLISH</Button>
+      case ProjectStatus.Published:
+        return <><Button type='button' onClick={() => handleChangeProjectStatus(ProjectStatus.Paused, project.id)} projectBtn='default'>PAUSE</Button>
+                <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Execution, project.id)} type='button' projectBtn='default'>LAUNCH</Button></>
+      case ProjectStatus.Paused:
+        return <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Published, project.id)} type='button' projectBtn='default'>RESUME</Button>
+      case ProjectStatus.Execution:
+        return <><Button 
+        onClick={() => handleChangeProjectStatus(ProjectStatus.Completed, project.id)} type='button' projectBtn='default'>COMPLETE</Button>
+          <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Canceled, project.id)} type='button' projectBtn='default'>ABORT</Button></>
+    }
+  }
+
   return (
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
-    {(!isEdit && project) && <ProjectPage organization={organization}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
+    {(!isEdit && project) && <ProjectPage organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
+      projectStatus === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
+      projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
+      projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
+      projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
       <Button color={'white'} onClick={handleDelete} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
-      (project.status === ProjectStatus.Draft || project.status === ProjectStatus.Published || project.status === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
+      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Published || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : 
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
     (application?.status === ApplicationStatus.Applied || 

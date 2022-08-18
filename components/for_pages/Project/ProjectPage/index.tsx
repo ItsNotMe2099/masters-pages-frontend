@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ReactElement, useState} from 'react'
 import styles from './index.module.scss'
-import {IProject, ProjectExecutionType} from 'data/intefaces/IProject'
+import {IProject, ProjectExecutionType, ProjectStatus} from 'data/intefaces/IProject'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
 import classNames from 'classnames'
@@ -19,13 +19,14 @@ interface Props {
   controls: ReactElement[] | ReactElement
   onSave: (data) => any;
   organization?: IOrganization
+  projectStatus?: ProjectStatus
 }
 const RequirementStatus = (props: {name: string, success: boolean}) => {
   return <div className={classNames(styles.requirementStatus, {[styles.success]: props.success, [styles.failed]: !props.success})}>
     {props.name} <img src={`/img/Project/requirements_${props.success ? 'success' : 'failed'}.svg`}/>
   </div>
 }
-const ProjectPage = ({  project, ...props}: Props) => {
+const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
@@ -78,7 +79,7 @@ const ProjectPage = ({  project, ...props}: Props) => {
        <div className={classNames(styles.section, styles.info)}>
            <div className={styles.top}>
              <div className={styles.left}>
-               <ProjectStatusLabel status={project.status}/>
+               <ProjectStatusLabel status={projectStatus}/>
                <div className={styles.title}>{project?.title || '[Project title]'}</div>
                <div className={styles.projectId}>Project id#: {project?.id}</div>
              </div>
