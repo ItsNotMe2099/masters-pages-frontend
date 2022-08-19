@@ -119,7 +119,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
     {(!isEdit && project) && <ProjectPage organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
-      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
+      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button projectBtn='default' className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
       projectStatus === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
       projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
       projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
