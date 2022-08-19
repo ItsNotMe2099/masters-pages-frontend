@@ -606,7 +606,7 @@
     "accept": "Accept",
     "youDeclined": "You declined",
     "loadMore": "Load more",
-    "confirmPublish": "Do you want to publish task",
+    "confirmPublish": "Project description will be publicly available. Do you want to proceed?",
     "confirmUnPublish": "Do you want to unpublish task",
     "confirmDelete": "Do you want to delete task",
     "confirmCancel": "Are you sure that you want to cancel task",

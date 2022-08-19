@@ -13,6 +13,8 @@ import ProjectRepository from 'data/repositories/ProjectRepository'
 import { useAppContext } from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 
 interface Props {
   project: IProject | null
@@ -32,6 +34,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   const [application, setApplication] = useState<IApplication | null>(null)
   const [projectStatus, setProjectStatus] = useState(project?.status)
   const router = useRouter()
+  const dispatch = useDispatch()
   const handleSave = (data) => {
     setIsEdit(false);
     props.onSave(data);
@@ -61,10 +64,33 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
     }
   }
 
-  const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number) => {
-    await ProjectRepository.update(projectId, {status: newStatus})
-    setProjectStatus(newStatus)
+  const descriptionProject = (newStatus: ProjectStatus) => {
+    switch(newStatus){
+      case ProjectStatus.Published:
+        return `${t('task.confirmPublish')}`
+      case ProjectStatus.Paused:
+        return 'Project will be put on hold. No actions will be possible until project is resumed. Do you want to proceed?'
+      case ProjectStatus.Execution:
+        return 'Project will be moved to “execution” mode. Do you want to proceed?'
+      case ProjectStatus.Canceled:
+        return 'Project will be moved to "cancelled" folder. Do you want to proceed?'
+      case ProjectStatus.Completed:
+        return 'Project will be closed for “execution”. Do you want to proceed?'
+    }
   }
+
+  const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number) => {
+    dispatch(confirmOpen({
+      description: descriptionProject(newStatus),
+      onConfirm: async () => {
+        await ProjectRepository.update(projectId, {status: newStatus});
+        dispatch(confirmModalClose())
+        setProjectStatus(newStatus)
+      }
+    }))
+  }
+
+
 
   const renderActionButton = (status: ProjectStatus) => {
     switch (status) {
@@ -90,7 +116,8 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
       projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
       projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
       projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
-      <Button color={'white'} onClick={handleDelete} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
+      projectStatus !== ProjectStatus.Execution && <Button color={'white'} 
+      onClick={() => projectStatus !== ProjectStatus.Canceled ? handleChangeProjectStatus(ProjectStatus.Canceled, project.id) : handleDelete()} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
       (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Published || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : 
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :

@@ -65,12 +65,61 @@ const ProjectCard = (props: Props) => {
     return null
   }
 
-  const handlePublish = () => {
+  const description = (newStatus: ApplicationStatus, button?: string) => {
+    switch(newStatus){
+      case ApplicationStatus.Completed:
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+      case ApplicationStatus.CompleteRequest:
+        if(profile.role === 'volunteer'){
+          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+        else{
+          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
+        }
+      case ApplicationStatus.Invited:
+        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
+      case ApplicationStatus.Shortlist:
+        if(button === 'CANCEL INVITATION'){
+          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
+        }
+        else{
+          return 'The application will be “shortlisted”. Do you want to proceed?'
+        }
+      case ApplicationStatus.Execution:
+        return 'Accept invitation?'
+      case ApplicationStatus.RejectedByCompany:
+        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
+      case ApplicationStatus.RejectedByVolunteer:
+        return 'Your participation in the project will be ended. Do you want to proceed?'
+    }
+  }
+
+  const descriptionProject = (newStatus: ProjectStatus) => {
+    switch(newStatus){
+      case ProjectStatus.Published:
+        return `${t('task.confirmPublish')}`
+      case ProjectStatus.Paused:
+        return 'Project will be put on hold. No actions will be possible until project is resumed. Do you want to proceed?'
+      case ProjectStatus.Execution:
+        return 'Project will be moved to “execution” mode. Do you want to proceed?'
+      case ProjectStatus.Canceled:
+        return 'Project will be moved to "cancelled" folder. Do you want to proceed?'
+      case ProjectStatus.Completed:
+        return 'Project will be closed for “execution”. Do you want to proceed?'
+    }
+  }
+
+  const handleChangeProjectStatus = (newStatus: ProjectStatus) => {
     dispatch(confirmOpen({
-      description: `${t('task.confirmPublish')} «${project.title}»?`,
+      description: descriptionProject(newStatus),
       onConfirm: async () => {
-        await ProjectRepository.update(project.id, {status: ProjectStatus.Published});
-        props.onUpdateStatus(ProjectStatus.Published, project);
+        await ProjectRepository.update(project.id, {status: newStatus});
+        props.onUpdateStatus(newStatus, project);
         dispatch(modalClose())
       }
     }))
@@ -139,44 +188,9 @@ const ProjectCard = (props: Props) => {
     dispatch(confirmModalClose())
   }
 
-  const description = (newStatus: ApplicationStatus, button?: string) => {
-    switch(newStatus){
-      case ApplicationStatus.Completed:
-        if(profile.role === 'volunteer'){
-          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-        else{
-          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-      case ApplicationStatus.CompleteRequest:
-        if(profile.role === 'volunteer'){
-          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-        else{
-          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-      case ApplicationStatus.Invited:
-        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
-      case ApplicationStatus.Shortlist:
-        if(button === 'CANCEL INVITATION'){
-          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
-        }
-        else{
-          return 'The application will be “shortlisted”. Do you want to proceed?'
-        }
-      case ApplicationStatus.Execution:
-        return 'Accept invitation?'
-      case ApplicationStatus.RejectedByCompany:
-        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
-      case ApplicationStatus.RejectedByVolunteer:
-        return 'Your participation in the project will be ended. Do you want to proceed?'
-    }
-  }
-
   const confirmData = (status: ApplicationStatus, button?: string) => {
     return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
   }
-
 
   const renderActionButton = (action) => {
     switch (action) {
@@ -187,7 +201,7 @@ const ProjectCard = (props: Props) => {
       case 'edit':
         return <Button onClick={() => props.onEdit ? props.onEdit(project) : null} type='button' projectBtn='default'>EDIT</Button>
       case 'publish':
-        return <Button color={'grey'} onClick={handlePublish} projectBtn='default'>PUBLISH</Button>
+        return <Button color={'grey'} onClick={() => handleChangeProjectStatus(ProjectStatus.Published)} projectBtn='default'>PUBLISH</Button>
       case 'unPublish':
         return <Button color={'grey'} onClick={handleUnPublish}>UNPUBLISH</Button>
       case 'apply':
@@ -197,11 +211,11 @@ const ProjectCard = (props: Props) => {
       case 'open':
         return <Button onClick={() => props.onViewOpen ? props.onViewOpen(project) : null} type='button' projectBtn='default'>OPEN</Button>
       case 'pause':
-        return <Button type='button' onClick={() => props.onProjectStatusChange(ProjectStatus.Paused)} projectBtn='default'>PAUSE</Button>
+        return <Button type='button' onClick={() => handleChangeProjectStatus(ProjectStatus.Paused)} projectBtn='default'>PAUSE</Button>
       case 'resume':
-        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Published)} type='button' projectBtn='default'>RESUME</Button>
+        return <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Published)} type='button' projectBtn='default'>RESUME</Button>
       case 'launch':
-        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Execution)} type='button' projectBtn='default'>LAUNCH</Button>
+        return <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Execution)} type='button' projectBtn='default'>LAUNCH</Button>
       case 'applyAlt':
         return <Button onClick={handleApply} type='button' projectBtn='default'>APPLY</Button>
       case 'recall':
@@ -212,13 +226,16 @@ const ProjectCard = (props: Props) => {
         return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))} type='button' projectBtn='red'>RECALL</Button>
       case 'complete':
         return <Button 
-        onClick={() => profile.role === ProfileRole.Corporate ? props.onProjectStatusChange(ProjectStatus.Completed) : dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' 
+        onClick={() => profile.role === ProfileRole.Corporate ? handleChangeProjectStatus(ProjectStatus.Completed) : dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest)))} type='button' 
         projectBtn={profile.role === ProfileRole.Corporate ? 'default' : 'green'}>COMPLETE</Button>
       case 'abort':
-        return <Button onClick={() => props.onProjectStatusChange(ProjectStatus.Canceled)} type='button' projectBtn='default'>ABORT</Button>
+        return <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Canceled)} type='button' projectBtn='default'>ABORT</Button>
       case 'recycleBin':
         return <Button
-        onClick={props.status === 'saved' ? handleDeleteFromSaved : profile.role !== 'corporate' ? handleDeleteApplication : handleDeleteProject}
+        onClick={() => props.status === 'saved' ? handleDeleteFromSaved() : 
+        profile.role !== 'corporate' ? handleDeleteApplication() : 
+        project.status === ProjectStatus.Canceled ?
+        handleDeleteProject() : handleChangeProjectStatus(ProjectStatus.Canceled)}
         projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
         /*
       case 'cancel':
