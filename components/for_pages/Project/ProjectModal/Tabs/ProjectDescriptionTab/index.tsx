@@ -34,6 +34,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   const [application, setApplication] = useState<IApplication | null>(null)
   const [projectStatus, setProjectStatus] = useState(project?.status)
   const router = useRouter()
+  console.log('router', router)
   const dispatch = useDispatch()
   const handleSave = (data) => {
     setIsEdit(false);
@@ -127,7 +128,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
       application?.status === ApplicationStatus.CompleteRequest ||
       application?.status === ApplicationStatus.Completed ||
       application?.status === ApplicationStatus.RejectedByVolunteer ||
-      application?.status === ApplicationStatus.RejectedByCompany) ? null : [<Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
+      application?.status === ApplicationStatus.RejectedByCompany) ? null : [router.query.projectType !== 'saved' && <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
     <Button color={'white'} className={styles.edit} onClick={props.onChange}>Apply</Button>]}/>}
   </div>
   )

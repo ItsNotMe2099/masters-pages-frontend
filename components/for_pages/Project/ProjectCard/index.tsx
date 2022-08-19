@@ -221,7 +221,7 @@ const ProjectCard = (props: Props) => {
       case 'recall':
         return <Button type='button' projectBtn='red'>RECALL</Button>
       case 'accept':
-        return <Button onClick={() => props.onStatusChange(ApplicationStatus.Execution)} type='button' projectBtn='green'>ACCEPT</Button>
+        return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Execution)))} type='button' projectBtn='green'>ACCEPT</Button>
       case 'reject':
         return <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))} type='button' projectBtn='red'>RECALL</Button>
       case 'complete':
