@@ -272,6 +272,7 @@ const ProjectCard = (props: Props) => {
           actions.push('open')
           actions.push('pause')
           actions.push('launch')
+          actions.push('recycleBin')
         }
         if (([ProjectStatus.Paused] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
           actions.pop()
@@ -285,7 +286,8 @@ const ProjectCard = (props: Props) => {
           actions.pop()
           actions.push('open')
           actions.push('complete')
-          actions.push('abort')
+          //actions.push('abort')
+          actions.push('recycleBin')
         }
         if (([ProjectStatus.Completed] as ProjectStatus[]).includes(project.status) || ([ProjectStatus.Canceled] as ProjectStatus[]).includes(project.status)) {
           actions.pop()

@@ -14,7 +14,7 @@ import { useAppContext } from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
 
 interface Props {
   project: IProject | null
@@ -59,10 +59,16 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   }
   }, [])
   const handleDelete = async () => {
+    
     await ProjectRepository.delete(project.id)
-    if(props.onDelete){
-    props.onDelete()
-    }
+    dispatch(confirmOpen({
+      description: `${t('task.confirmDelete')} «${project.title}»?`,
+      onConfirm: async () => {
+        dispatch(confirmModalClose())
+        await ProjectRepository.delete(project.id)
+        props.onDelete && props.onDelete();
+      }
+    }))
   }
 
   const descriptionProject = (newStatus: ProjectStatus) => {
@@ -105,7 +111,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
       case ProjectStatus.Execution:
         return <><Button 
         onClick={() => handleChangeProjectStatus(ProjectStatus.Completed, project.id)} type='button' projectBtn='default'>COMPLETE</Button>
-          <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Canceled, project.id)} type='button' projectBtn='default'>ABORT</Button></>
+          <Button  className={styles.delete} onClick={() => handleChangeProjectStatus(ProjectStatus.Canceled, project.id)} type='button' projectBtn='default'><img src='/img/icons/recycle-bin.svg' alt=''/></Button></>
     }
   }
 
@@ -119,7 +125,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
       projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
       projectStatus !== ProjectStatus.Execution && <Button color={'white'} 
       onClick={() => projectStatus !== ProjectStatus.Canceled ? handleChangeProjectStatus(ProjectStatus.Canceled, project.id) : handleDelete()} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
-      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Published || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
+      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : 
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
     (application?.status === ApplicationStatus.Applied || 
