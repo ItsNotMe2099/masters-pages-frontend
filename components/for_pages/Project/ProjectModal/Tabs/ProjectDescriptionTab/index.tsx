@@ -119,13 +119,13 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
     {(!isEdit && project) && <ProjectPage organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
+      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
       projectStatus === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
       projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
       projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
       projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
       projectStatus !== ProjectStatus.Execution && <Button color={'white'} 
       onClick={() => projectStatus !== ProjectStatus.Canceled ? handleChangeProjectStatus(ProjectStatus.Canceled, project.id) : handleDelete()} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
-      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>
     ] : 
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
     (application?.status === ApplicationStatus.Applied || 
