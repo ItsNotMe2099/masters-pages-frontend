@@ -21,6 +21,8 @@ import LocationFormField from 'components/fields/LocationFormField'
 import { Educations } from 'data/educations'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import DocField from 'components/fields/DocField'
+import { useDispatch } from 'react-redux'
+import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
 
 interface Props {
   project: IProject | null
@@ -113,6 +115,20 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
     languages: project?.languages ?? [],
   }
 
+  const dispatch = useDispatch()
+
+  const handlePublishModal = async () => {
+    dispatch(confirmOpen({
+      description: `${t('task.confirmPublish')}`,
+      onConfirm: async () => {
+        project && await ProjectRepository.update(project.id, {status: ProjectStatus.Published})
+        dispatch(confirmModalClose())
+        await formik.setFieldValue('status', ProjectStatus.Published)
+        await formik.submitForm();
+      }
+    }))
+  }
+
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit,
@@ -120,8 +136,9 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
   })
   const handleSubmitPublish = async () => {
     console.log("handleSubmitPublish")
-    await formik.setFieldValue('status', ProjectStatus.Published)
-    await formik.submitForm();
+    handlePublishModal()
+    //await formik.setFieldValue('status', ProjectStatus.Published)
+    //await formik.submitForm();
   }
   const handleSubmitDraft = async () => {
     console.log("handleSubmitDraft")
