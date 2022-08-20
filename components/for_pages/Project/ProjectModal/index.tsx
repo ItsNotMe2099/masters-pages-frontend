@@ -125,7 +125,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && <TabProjectDescription outerVar={outerVar} organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
+            {tab === 'description' && <TabProjectDescription onClose={onClose} outerVar={outerVar} organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}

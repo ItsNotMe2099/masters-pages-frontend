@@ -14,7 +14,7 @@ import { useAppContext } from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen} from 'components/Modal/actions'
 
 interface Props {
   project: IProject | null
@@ -25,10 +25,11 @@ interface Props {
   onDelete: () => void | null
   organization?: IOrganization
   outerVar?: boolean
+  onClose: () => void
 }
 
 
-const TabProjectDescription = ({project, showType, organization, outerVar, ...props}: Props) => {
+const TabProjectDescription = ({project, showType, organization, outerVar, onClose, ...props}: Props) => {
   const {t} = useTranslation();
   const [isEdit, setIsEdit] = useState(outerVar ? outerVar : !project)
   const [application, setApplication] = useState<IApplication | null>(null)
@@ -86,12 +87,12 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
     }
   }
 
-  const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number) => {
+  const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number, oldStatus?: ProjectStatus) => {
     dispatch(confirmOpen({
       description: descriptionProject(newStatus),
       onConfirm: async () => {
         await ProjectRepository.update(projectId, {status: newStatus});
-        dispatch(confirmModalClose())
+        oldStatus && oldStatus === ProjectStatus.Draft ? onClose() : !oldStatus && dispatch(confirmModalClose())
         setProjectStatus(newStatus)
       }
     }))
@@ -102,7 +103,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, ...pr
   const renderActionButton = (status: ProjectStatus) => {
     switch (status) {
       case ProjectStatus.Draft:
-        return <Button color={'grey'} onClick={() => handleChangeProjectStatus(ProjectStatus.Published, project.id)} projectBtn='default'>PUBLISH</Button>
+        return <Button color={'grey'} onClick={() => handleChangeProjectStatus(ProjectStatus.Published, project.id, ProjectStatus.Draft)} projectBtn='default'>PUBLISH</Button>
       case ProjectStatus.Published:
         return <><Button type='button' onClick={() => handleChangeProjectStatus(ProjectStatus.Paused, project.id)} projectBtn='default'>PAUSE</Button>
                 <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Execution, project.id)} type='button' projectBtn='default'>LAUNCH</Button></>
