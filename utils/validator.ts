@@ -20,6 +20,14 @@ export default class Validator {
     return value || typeof value === 'number' ? undefined : 'required'
   }
 
+  static numberOnly(value: number){
+    return value === null || typeof value === 'number' ? undefined : 'Value not a number'
+  }
+
+  static minAgeHigherThanMaxAge = (allValues: any) => (value: string): string => {
+    return (allValues.minAge < allValues.maxAge || allValues.maxAge === null) ? undefined : 'Min age cannot be higher than max age'
+  }
+
   static email(value: string): string | undefined {
     return value && !Validator.emailRe.test(value)
       ? 'email'

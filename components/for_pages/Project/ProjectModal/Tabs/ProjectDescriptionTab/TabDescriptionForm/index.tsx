@@ -156,16 +156,12 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
   console.log('VALLLLLLLLL', values)
 
-  const range = (minAge: number, maxAge: number) => {
-    if(minAge + 1 > maxAge && minAge > 0){
-      setFieldValue('minAge', minAge - 1)
-      setIsDisabled(true)
+  const range = (minAge: number | string, maxAge: number | string) => {
+    if(minAge === ''){
+      setFieldValue('minAge', null)
     }
-    else if(maxAge < minAge){
-      setFieldValue('maxAge', maxAge + 1)
-    }
-    else if(minAge < 0){
-      setFieldValue('minAge', 0)
+    if(maxAge === ''){
+      setFieldValue('maxAge', null)
     }
   }
 
@@ -272,8 +268,8 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
             <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal'/>
             <div className={styles.fieldset}>
               <div className={styles.fieldsetTitle}>Age:</div>
-              <TextField name={'minAge'} type={'number'} label={'Min Age'} disabled={isDisabled}/>
-              <TextField name={'maxAge'} type={'number'} label={'Max Age'}/>
+              <TextField name={'minAge'} type={'number'} label={'Min Age'} disabled={isDisabled} validate={Validator.combine([Validator.numberOnly, Validator.minAgeHigherThanMaxAge(values)])}/>
+              <TextField name={'maxAge'} type={'number'} label={'Max Age'} validate={Validator.numberOnly}/>
 
             </div>
             <div className={styles.fieldset}>
