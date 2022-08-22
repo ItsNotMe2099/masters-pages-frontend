@@ -201,7 +201,6 @@ const PublicProfile = (props) => {
 
   }
 
-  console.log('CURRENTPROJJJ', currentProject)
 
   return (
     <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
@@ -212,7 +211,7 @@ const PublicProfile = (props) => {
           </>
         :
         <>
-        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && <CardOrganizationDescription onOrganizationUpdate={handleUpdateOrganization} isEdit={isEdit} organization={organization}/>}
+        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && profile.id !== +router.query.profile.slice(2) && <CardOrganizationDescription onOrganizationUpdate={handleUpdateOrganization} isEdit={isEdit} organization={organization}/>}
         {(currentProfile?.role === 'corporate' || !currentProfile) && organization && 
           <>
           {loading && total === 0 && <Loader/>}
