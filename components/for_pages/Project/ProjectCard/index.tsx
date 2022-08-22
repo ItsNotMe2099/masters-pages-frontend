@@ -179,6 +179,16 @@ const ProjectCard = (props: Props) => {
     }))
   }
 
+  const handleSave = async () => {
+    dispatch(confirmOpen({
+      description: `Do you want to save this project?`,
+      onConfirm: async () => {
+        dispatch(modalClose())
+        await ProfileRepository.addToSavedProjects({projectId: project.id})
+      }
+    }))
+  }
+
   const handleApply = () => {
     props.onApplyClick(project)
   }
@@ -207,7 +217,7 @@ const ProjectCard = (props: Props) => {
       case 'apply':
         return <Button color={'grey'} onClick={() => profile ? handleApply() : dispatch(signUpOpen())}>APPLY</Button>
       case 'save':
-        return <Button onClick={() => profile ? ProfileRepository.addToSavedProjects({projectId: project.id}) : dispatch(signUpOpen())} color={'grey'}>SAVE</Button>
+        return <Button onClick={() => profile ? handleSave() : dispatch(signUpOpen())} color={'grey'}>SAVE</Button>
       case 'open':
         return <Button onClick={() => props.onViewOpen ? props.onViewOpen(project) : null} type='button' projectBtn='default'>OPEN</Button>
       case 'pause':

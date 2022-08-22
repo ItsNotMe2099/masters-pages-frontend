@@ -64,7 +64,9 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
   }
   const handleSubmitDraft = async () => {
     console.log("handleSubmitDraft")
-    await formik.setFieldValue('status', ProjectStatus.Draft);
+    await formik.setFieldValue('status', ApplicationStatus.Draft);
+    await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
+    await ProfileRepository.addToSavedProjects({projectId: projectId})
     await formik.submitForm()
   }
   const handleSubmitSave = async () => {

@@ -48,7 +48,6 @@ const ProjectSearchListView = (props: Props) => {
   const appContext = useAppContext()
   const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
-  console.log('Fetch1112')
   const fetchProjects = (filter?: IProjectSearchRequest, sortType?: string, page?: number, limit?: number, keywords?: '') => {
     ProjectRepository.search(page, limit, keywords, filter).then(data => {
       if(data){
@@ -89,7 +88,6 @@ const ProjectSearchListView = (props: Props) => {
       await OrganizationRepository.fetchOrganizationsList().then((data) => {
         if(data){
           const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-          console.log('NEWDATA', newData)
           if(newData[0]){
           OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
             if(data){
@@ -104,7 +102,6 @@ const ProjectSearchListView = (props: Props) => {
     await OrganizationRepository.fetchOrganizationsList().then((data) => {
       if(data){
         const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-        console.log('NEWDATA', newData)
         if(newData[0]){
         OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
           if(data){
@@ -122,8 +119,6 @@ const ProjectSearchListView = (props: Props) => {
     setCurrentOrganization(null)
   }
 
-  console.log('PROJECTSEARCH_PROJECT', currentProject)
-  console.log('PROJECTSEARCH_ORGANIZATION', currentOrganization)
   return (
     <Layout>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
