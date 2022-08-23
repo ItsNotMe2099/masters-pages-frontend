@@ -21,8 +21,8 @@ import {IProfile} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { IOrganization } from 'data/intefaces/IOrganization'
-import ProjectRepository, { IProjectSearchRequest } from 'data/repositories/ProjectRepository'
-import { IProject, ProjectStatus } from 'data/intefaces/IProject'
+import ProjectRepository from 'data/repositories/ProjectRepository'
+import { IProject } from 'data/intefaces/IProject'
 import Loader from 'components/ui/Loader'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -202,7 +202,6 @@ const PublicProfile = (props) => {
 
   }
 
-
   return (
     <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
@@ -227,7 +226,7 @@ const PublicProfile = (props) => {
           {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
-      {!currentSkill && props.showType ==='profile' && currentProfile?.role !== 'corporate' && currentProfile && <CardProfileStat profile={profile}/>}
+      {!currentSkill && props.showType ==='profile' && currentProfile && profile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
           {props.showType === 'recommendations' && <>
             <CardRecommendations profile={profile}/>
 
