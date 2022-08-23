@@ -136,11 +136,13 @@ const ProjectCard = (props: Props) => {
     }))
   }
   const handleDeleteFromSaved = () => {
+    const currentApp = applications.find(app => app.projectId === project.id)
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
       onConfirm: async () => {
         dispatch(modalClose())
         await ProfileRepository.deleteFromSavedProjects({profileId: profile?.id}, project.id)
+        await ApplicationRepository.delete(currentApp.id)
         props.onDelete(project);
 
       }

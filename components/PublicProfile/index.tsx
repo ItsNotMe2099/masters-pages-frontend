@@ -124,18 +124,19 @@ const PublicProfile = (props) => {
 
 
   useEffect(() => {
-    if(currentProfile && currentProfile.role === 'corporate'){
+    /*if(currentProfile && currentProfile.role === 'corporate'){
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
       if(data){
         setOrganization(data)
       }
       
     })
-  }
-  else if(!currentProfile){
+  }*/
+  //else if(!currentProfile){
+    if(profile.role === 'corporate'){
     OrganizationRepository.fetchOrganizationsList().then((data) => {
       if(data){
-        const newData = data.filter(item => item.corporateProfileId === +router.asPath.slice(3))
+        const newData = data.filter(item => item.corporateProfileId === profile.id)
         if(newData[0]){
         OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
           if(data){
@@ -145,6 +146,7 @@ const PublicProfile = (props) => {
       }
     })
   }
+  //}
     if (isEdit) {
       dispatch(fetchSkillList())
     }
@@ -171,7 +173,7 @@ const PublicProfile = (props) => {
   useEffect(() => {
     fetchProjects(page, 10, '', null, profile.id)
     setLoading(false);
-  }, [])
+  }, [router])
 
   const handleScrollNext = () => {
     setPage(page + 1);
@@ -191,7 +193,6 @@ const PublicProfile = (props) => {
     return {}
   }
   const handleProjectViewOpen = async (project: IProject) => {
-    console.log('PROJ', project)
     setInitialProjectTab('description')
     setCurrentProject(project);
   }
@@ -211,8 +212,8 @@ const PublicProfile = (props) => {
           </>
         :
         <>
-        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && profile.id !== +router.query.profile.slice(2) && <CardOrganizationDescription onOrganizationUpdate={handleUpdateOrganization} isEdit={isEdit} organization={organization}/>}
-        {(currentProfile?.role === 'corporate' || !currentProfile) && organization && 
+        {(profile?.role === 'corporate' || !currentProfile) && organization && <CardOrganizationDescription onOrganizationUpdate={handleUpdateOrganization} isEdit={isEdit} organization={organization}/>}
+        {(profile?.role === 'corporate' || !currentProfile) && organization && 
           <>
           {loading && total === 0 && <Loader/>}
           {total > 0 && <InfiniteScroll
@@ -223,7 +224,7 @@ const PublicProfile = (props) => {
           >
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
-          {currentProject && <ProjectModal showType={'client'} organization={organization} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+          {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile?.role !== 'corporate' && currentProfile && <CardProfileStat profile={profile}/>}

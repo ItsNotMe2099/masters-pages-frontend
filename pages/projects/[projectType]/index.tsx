@@ -267,9 +267,6 @@ const ProjectsPage = (props: Props) => {
   const applied = counts['applied'] + counts['shortlist']
   const rejected = counts['rejectedByCompany'] + counts['rejectedByVolunteer']
 
-  console.log('currentProject', currentProject)
-  console.log('currentProjectEdit', currentProjectEdit)
-
   return (
     <Layout>
     <div className={styles.root}>

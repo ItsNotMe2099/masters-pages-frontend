@@ -16,6 +16,7 @@ import screenfull from 'screenfull';
 })*/
 
 import { findDOMNode } from 'react-dom'
+import { useRouter } from 'next/router'
 
 const VideoJs = dynamic(() => import('components/ui/video/VideoJs'), {
     ssr: false
@@ -46,7 +47,7 @@ export default function Player(props) {
     const root = useRef()
     useEffect(() => {
         setSource(props.source)
-    }, [])
+    }, [props.source])
 
     const handlePlayPause = () => {
        if (!playing) {
