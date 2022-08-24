@@ -28,8 +28,10 @@ export const TabSelect = ({tabs, activeTab, onChange, reports, style, className}
   const dropdownRef = useRef(null)
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false)
   const handleClick = (e) => {
+    if(tabs.length > 1){
     e.preventDefault()
     setIsActive(!isActive)
+    }
   }
 
 const rootClass = {
@@ -41,7 +43,7 @@ const rootClass = {
     <div className={classNames(styles.root, className, rootClass)}>
       <a href="#" onClick={handleClick} className={cx(styles.dropDownTrigger)}>
         {tabs.map(item => activeTab === item.key && <div className={styles.withIcon}>{item.icon && <img className={styles.icon} src={`/img/Project/menu/${item.icon}.svg`}/>} <span>{item.name}{item.label}</span></div>)}
-      <div className={styles.arrow}><NewArrowDown color={style === 'projectModal' ? '#fff' : '#000'}/></div>
+      {tabs.length > 1 && <div className={styles.arrow}><NewArrowDown color={style === 'projectModal' ? '#fff' : '#000'}/></div>}
       </a>
        <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>
        <div className={styles.option} onClick={() => setIsActive(false)}>{tabs.filter(item => item.key !== activeTab).map((item, index) => <Tab isFirst={index === 0}  isLast={tabs.length - 1 == index} name={item.name} label={item.label} link={item.link} isActive={activeTab === item.key} onClick={onChange ? () => onChange(reports ? item.key : item) : null}/>)}</div>

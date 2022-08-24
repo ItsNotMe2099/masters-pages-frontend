@@ -28,3 +28,12 @@
   }
 }
 
+.guest{
+  &:hover{
+    background: #a39e9e;
+  }
+  &.active{
+    background: #a39e9e;
+  }
+}
+
