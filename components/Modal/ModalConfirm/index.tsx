@@ -30,13 +30,13 @@ export default function ModalConfirm(props: Props) {
       loading={data.loading}
       {...props}
     >
-      <div className={styles.title}>{data.title || t('confirmModal.title')}</div>
+      <div className={styles.title}>{!data.infoOnly ? (data.title || t('confirmModal.title')) : ''}</div>
       {data.description && <div className={styles.description}>{data.description}</div>}
+      {!data.infoOnly &&
       <div className={styles.buttons}>
         <Button className={styles.button} white={true} borderGrey={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCancel}>{data.cancelText ? data.cancelText : t('confirmModal.buttonCancel')}</Button>
         <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true} size={'12px 40px'} type={'submit'} onClick={data.onConfirm}>{data.confirmText ? data.confirmText : t('confirmModal.buttonConfirm')}</Button>
-      </div>
-
+      </div>}
     </Modal>
   )
 }

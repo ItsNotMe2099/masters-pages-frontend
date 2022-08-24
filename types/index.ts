@@ -107,6 +107,7 @@ export interface ConfirmDataModal {
   onConfirm?: () => void,
   onCancel?: () => void
   loading?: boolean
+  infoOnly?: boolean
 }
 
 export interface IProfilePreferWorkIn {

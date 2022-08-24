@@ -42,8 +42,6 @@ const TabApplication = ({project, ...props}: Props) => {
     setIsEdit(true)
   }
 
-  console.log('TABAPPLICATION_PROJECT', project)
-
   return (
    <div className={styles.root}>
       <div className={classNames(styles.section, styles.info)}>

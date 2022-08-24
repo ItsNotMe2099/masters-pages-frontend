@@ -16,6 +16,8 @@ import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { Educations } from 'data/educations'
 import DocField from 'components/fields/DocField'
+import { useDispatch } from 'react-redux'
+import { confirmOpen, modalClose } from 'components/Modal/actions'
 
 interface Props {
   application: IApplication | null
@@ -30,6 +32,7 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
   const profile = appContext.profile
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const dispatch = useDispatch()
   const handleSubmit = async (data) => {
     console.log("HandleSubmit", data)
     if(application){
@@ -62,12 +65,23 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
     await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
     await formik.submitForm()
   }
+
+  const handleInfoModal = async () => {
+    dispatch(confirmOpen({
+      description: 'Your application was saved in Projects!',
+      infoOnly: true,
+      onConfirm: async () => {
+        dispatch(modalClose())
+      }
+    }))
+  }
   const handleSubmitDraft = async () => {
     console.log("handleSubmitDraft")
     await formik.setFieldValue('status', ApplicationStatus.Draft);
     await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
     await ProfileRepository.addToSavedProjects({projectId: projectId})
     await formik.submitForm()
+    handleInfoModal()
   }
   const handleSubmitSave = async () => {
     console.log("handleSubmitSave")
