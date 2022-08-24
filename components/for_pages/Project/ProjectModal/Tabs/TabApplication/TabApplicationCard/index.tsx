@@ -161,7 +161,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
       <div className={styles.profile}>
         <div className={styles.left}>
           <Link href={profileLink}>
-          <a className={styles.avatar}>
+          <a className={styles.avatar} target='_blank'>
             <Avatar image={props.profile.photo} size='largeSquare'/>
             <Button type='button' className={styles.details}><img src='/img/projects/account-details.svg' alt=''/></Button>
           </a>
@@ -196,7 +196,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
           <div className={styles.top}>
             <div className={styles.left}>
               <Link href={profileLink}>
-              <a className={styles.name}>
+              <a className={styles.name} target='_blank'>
                 {props.profile.firstName} {props.profile.lastName}
               </a>
               </Link>

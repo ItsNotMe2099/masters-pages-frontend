@@ -73,7 +73,7 @@ const CardOrganizationDescription = (props: Props) => {
             {organization.attachmentsObjects?.length > 0 &&
             <div className={styles.attachments}>
               {organization.attachmentsObjects?.map(item => 
-                  <a className={styles.item} href={getMediaPath(item.urlS3)} download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
+                  <a className={styles.item} href={getMediaPath(item.urlS3)} target='_blank' download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
               )}
             </div>}
             <div className={styles.btns}>

@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux'
 import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
+import Link from 'next/link'
 
 
 interface Props {
@@ -314,10 +315,15 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
 
   return (
    <div className={styles.root}>
+
      <div className={styles.leftSide}>
         <div className={classNames(styles.section, styles.profile)}>
           <div className={styles.profileInfo}>
-            <Avatar image={application.profile.photo} href={profileLink}/>
+          <Link href={profileLink}>
+            <a target='_blank'>
+            <Avatar image={application.profile.photo}/>
+            </a>
+          </Link>
             <div className={styles.icons}>
               <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
               <div>{application.profile.tasksCount || 0}</div>
@@ -344,7 +350,9 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           <div className={styles.right}>
             <div className={styles.header}>
               <div className={styles.headerLeft}>
-                <div className={styles.profileName}>{application.profile.firstName} {application.profile.lastName}</div>
+              <Link href={profileLink}>
+                <a target='_blank' className={styles.profileName}>{application.profile.firstName} {application.profile.lastName}</a>
+              </Link>
                 <ProfileStatus activityStatus={application.profile.activityStatus}/>
               </div>
               <div className={styles.headerRight}>
