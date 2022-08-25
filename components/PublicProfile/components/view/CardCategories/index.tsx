@@ -21,6 +21,7 @@ interface Props{
   isEdit: boolean,
   subCategory,
   onCategoryChange: (categoryId, subCategoryId) => void
+  onProfileUpdate?: () => void
 }
 const CardCategories = (props: Props) => {
   const {i18n, t} = useTranslation('common')
@@ -36,6 +37,8 @@ const CardCategories = (props: Props) => {
   }
   const handleSubmit = (data) => {
     dispatch(createSkillCategory(data))
+    props.onProfileUpdate && props.onProfileUpdate()
+    dispatch(hideProfileForm( 'categories'))
    }
   const handleCancel = () => {
     dispatch(hideProfileForm( 'categories'))
