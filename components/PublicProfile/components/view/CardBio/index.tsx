@@ -26,7 +26,7 @@ const CardBio = (props: Props) => {
 
   }
   const handleSubmit = async (data) => {
-    dispatch(updateProfileByForm(profile.id, {bio: {...data, visible: true}}, 'bio'))
+    //dispatch(updateProfileByForm(profile.id, {bio: {...data, visible: true}}, 'bio'))
     await ProfileRepository.updateProfile(profile.id, {bio: {...data, visible: true}})
     props.onProfileUpdate && props.onProfileUpdate()
     dispatch(hideProfileForm( 'bio'))
