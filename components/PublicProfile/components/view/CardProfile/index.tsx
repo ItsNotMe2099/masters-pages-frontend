@@ -28,6 +28,7 @@ import ProfileRepository from 'data/repositories/ProfileRepostory'
 interface Props{
   profile: IProfile,
   isEdit: boolean
+  onProfileUpdate?: () => void
 }
 const CardProfile = (props: Props) => {
   const {profile, isEdit} = props
@@ -65,6 +66,7 @@ const CardProfile = (props: Props) => {
   const handleSubmit = async (data) => {
     await ProfileRepository.updateProfile(currentProfile.id, {...data})
     setShowForm(false)
+    props.onProfileUpdate && props.onProfileUpdate()
   }
 
   const handleDeleteAvatar = () => {

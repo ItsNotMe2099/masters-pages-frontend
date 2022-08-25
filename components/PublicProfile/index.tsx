@@ -29,6 +29,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './index.module.scss'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import { signUpOpen } from 'components/Modal/actions'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props {
   profile: IProfile,
@@ -41,7 +42,7 @@ const PublicProfile = (props) => {
   const appContext = useAppContext();
   const currentProfile = appContext.profile
   const isEdit = currentProfile && currentProfile.id === props.profile.id
-  const profile = isEdit ? currentProfile : props.profile
+  const [profile, setProfile] = useState(isEdit ? currentProfile : props.profile)
   const [category, setCategory] = useState(null)
   const [organization, setOrganization] = useState<IOrganization | null>(null)
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
@@ -58,6 +59,14 @@ const PublicProfile = (props) => {
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
       if(data){
         setOrganization(data)
+      }
+    })
+  }
+
+  const handleUpdateProfile = () => {
+    ProfileRepository.fetchById(profile.id).then((data) => {
+      if(data){
+        setProfile(data)
       }
     })
   }
@@ -203,7 +212,7 @@ const PublicProfile = (props) => {
   }
 
   return (
-    <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
+    <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} onProfileUpdate={handleUpdateProfile} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
       {props.showType ==='news' ? <CardPosts profile={profile}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
 

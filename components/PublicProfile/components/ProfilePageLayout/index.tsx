@@ -29,10 +29,10 @@ interface Props{
   isCurrentProfileOpened?: boolean
   onCategoryChange?: (categoryId, subCategoryId) => void
   onOrganizationUpdate?: () => void
-
+  onProfileUpdate?: () => void
 }
 const ProfilePageLayout = (props: Props) => {
-  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened, organization, onOrganizationUpdate} = props
+  const {profile, isEdit, onCategoryChange, subCategory, isCurrentProfileOpened, organization, onOrganizationUpdate, onProfileUpdate} = props
   const isMaster = ['master', 'volunteer'].includes(profile.role)
   const [isOpen, setIsOpen] = useState(false)
   const {t} = useTranslation('common')
@@ -49,19 +49,18 @@ const ProfilePageLayout = (props: Props) => {
     }
   }
 
-  console.log("LAYOUTORGANIZATION", organization)
   return (
     <Layout isCurrentProfileOpened={isCurrentProfileOpened}  title={<>{t('lookingAt')}  <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
 
       <div className={styles.container}>
         <div className={styles.leftColumn}>
           {profile.role === 'corporate' && organization && <CardOrganization onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
-          {profile.role !== 'corporate' && <CardProfile profile={profile} isEdit={isEdit}/>}
+          {profile.role !== 'corporate' && <CardProfile onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit}/>}
           <div className={styles.desktop}>
-          {profile.role !== 'corporate' && <CardPreferWorkIn profile={profile} isEdit={isEdit}/>}
-          {isMaster && profile.role !== 'corporate' && <CardCategories profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
-          {profile.role !== 'corporate' && <CardLanguages profile={profile} isEdit={isEdit}/>}
-          {isMaster && <CardBio profile={profile} isEdit={isEdit}/>}
+          {profile.role !== 'corporate' && <CardPreferWorkIn onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit}/>}
+          {isMaster && profile.role !== 'corporate' && <CardCategories onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
+          {profile.role !== 'corporate' && <CardLanguages onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit}/>}
+          {isMaster && <CardBio onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit}/>}
           {profile.role === 'corporate' && organization && <CardOrganizationLinks onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
           {profile.role === 'corporate' && organization && <CardOrganizationAbout onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
           {isMaster && <CardRecommendationsShort profile={profile}/>}

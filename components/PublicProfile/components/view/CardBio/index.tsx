@@ -8,10 +8,12 @@ import {hideProfileForm, showProfileForm, updateProfileByForm} from 'components/
 import Loader from 'components/ui/Loader'
 import { useTranslation } from 'next-i18next'
 import {IProfile} from 'data/intefaces/IProfile'
+import ProfileRepository from 'data/repositories/ProfileRepostory'
 
 interface Props{
   profile: IProfile,
   isEdit: boolean
+  onProfileUpdate?: () => void
 }
 const CardBio = (props: Props) => {
   const dispatch = useDispatch()
@@ -23,8 +25,11 @@ const CardBio = (props: Props) => {
     dispatch(showProfileForm( 'bio'))
 
   }
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     dispatch(updateProfileByForm(profile.id, {bio: {...data, visible: true}}, 'bio'))
+    await ProfileRepository.updateProfile(profile.id, {bio: {...data, visible: true}})
+    props.onProfileUpdate && props.onProfileUpdate()
+    dispatch(hideProfileForm( 'bio'))
   }
   const handleCancel = () => {
     dispatch(hideProfileForm( 'bio'))
