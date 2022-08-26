@@ -57,7 +57,6 @@ const ProjectAutorepliesTab = ({project, autoMessages}: Props) => {
   ] :
   currentTab === ProjectAutoRepliesTabType.Applications ?
   [
-    {name: '', prevStatus: ApplicationStatus.Draft, nextStatus: ApplicationStatus.Applied, applicationStatusChange: true},
     {name: '', prevStatus: ApplicationStatus.Applied, nextStatus: ApplicationStatus.Shortlist, applicationStatusChange: true},
     {name: '', prevStatus: ApplicationStatus.Applied, nextStatus: ApplicationStatus.RejectedByCompany, applicationStatusChange: true},
   ]
@@ -70,6 +69,12 @@ const ProjectAutorepliesTab = ({project, autoMessages}: Props) => {
   currentTab === ProjectAutoRepliesTabType.Invited ?
   [
     {name: '', prevStatus: ApplicationStatus.Invited, nextStatus: ApplicationStatus.Shortlist, applicationStatusChange: true},
+  ]
+  :
+  currentTab === ProjectAutoRepliesTabType.Completed ?
+  [
+    {name: '',  nextStatus: 'feedback', isEvent: true},
+    {name: '',  nextStatus: 'recommendation', isEvent: true},
   ]
   :
   []
@@ -97,6 +102,25 @@ const handleSubmit = async (data, item) => {
     })
   }
   } 
+  else if(item.isEvent){
+    const filtered = autoMessages?.eventMessages.find(i => i.event === item.nextStatus)
+    if(filtered){
+      const index = autoMessages?.eventMessages.indexOf(filtered)
+      autoMessages?.eventMessages.splice(index, 1)
+      autoMessages?.eventMessages.push({
+        event: item.nextStatus,
+        enabled: data.enabled,
+        message: data.message 
+    })
+    }
+    else{
+    autoMessages?.eventMessages.push({
+      event: item.nextStatus,
+      enabled: true,
+      message: data.message 
+  })
+  }
+  }
   else{
     const filtered = autoMessages?.projectStatusChangeMessages.find(i => i.nextStatus === item.nextStatus && i.prevStatus === item.prevStatus)
     if(filtered){
@@ -118,7 +142,7 @@ const handleSubmit = async (data, item) => {
   })
 }
   }
-  if(!autoMessages?.applicationStatusChangeMessages.length || !autoMessages?.projectStatusChangeMessages.length){
+  if(!autoMessages?.applicationStatusChangeMessages.length || !autoMessages?.projectStatusChangeMessages.length || !autoMessages?.eventMessages.length){
     AutoMessagesRepository.addProjectAutoMessages(autoMessages)
   }
   else{
@@ -144,21 +168,6 @@ const isColumns = () => {
       <ProjectTabHeader project={project}/>
       {currentTab === ProjectAutoRepliesTabType.Applications ?
       <div className={styles.altMessageCards}>
-        <div className={styles.messageCards}>
-        {messages.slice(0, 1).map(item => 
-          <MessageCard 
-          name={item.name} 
-          project={project} 
-          prevStatus={item.prevStatus} 
-          nextStatus={item.nextStatus} 
-          applicationStatusChange={item.applicationStatusChange}
-          onSubmit={(data) => handleSubmit(data, item)}
-          autoMessages={autoMessages}
-          className={styles.altMessageCard}
-          desc
-          />
-        )}
-        </div>
         <div className={styles.desktop}>
         <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab}/>
         </div>
@@ -166,7 +175,7 @@ const isColumns = () => {
           <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/>
         </div>
         <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
-        {messages.slice(1).map(item => 
+        {messages.map(item => 
           <MessageCard 
           name={item.name} 
           project={project} 
@@ -197,6 +206,7 @@ const isColumns = () => {
           prevStatus={item.prevStatus} 
           nextStatus={item .nextStatus} 
           applicationStatusChange={item.applicationStatusChange}
+          isEvent={item.isEvent}
           onSubmit={(data) => handleSubmit(data, item)}
           autoMessages={autoMessages}
           className={styles.messageCard}

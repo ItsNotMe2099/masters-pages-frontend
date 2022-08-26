@@ -13,6 +13,7 @@ interface Props {
   prevStatus: string
   nextStatus: string
   applicationStatusChange: boolean
+  isEvent?: boolean
   onSubmit?: (data) => void
   autoMessages?: IAutoMessages
   loading?: boolean
@@ -29,7 +30,7 @@ const MessageCard = (props: Props) => {
       {props.name && <div className={styles.title}>
         {props.name}
       </div>}
-      <MessageCardForm desc={props.desc} autoMessages={props.autoMessages} onSubmit={props.onSubmit} project={props.project} applicationStatusChange={props.applicationStatusChange} prevStatus={props.prevStatus} nextStatus={props.nextStatus}/> 
+      <MessageCardForm desc={props.desc} autoMessages={props.autoMessages} isEvent={props.isEvent} onSubmit={props.onSubmit} project={props.project} applicationStatusChange={props.applicationStatusChange} prevStatus={props.prevStatus} nextStatus={props.nextStatus}/> 
     </div>
   )
 }

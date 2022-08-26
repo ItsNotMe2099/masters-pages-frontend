@@ -16,6 +16,7 @@ import { ApplicationStatus } from 'data/intefaces/IApplication'
 interface Props {
   project: IProject
   applicationStatusChange?: boolean
+  isEvent?: boolean
   prevStatus?: string
   nextStatus?: string
   onSubmit?: (data) => void
@@ -23,17 +24,18 @@ interface Props {
   desc?: boolean
 }
 
-const MessageCardForm = ({project, applicationStatusChange, autoMessages, ...props}: Props) => {
+const MessageCardForm = ({project, applicationStatusChange, autoMessages, isEvent, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const filtered = applicationStatusChange ? autoMessages?.applicationStatusChangeMessages.find(item => item.nextStatus === props.nextStatus && item.prevStatus === props.prevStatus) : autoMessages?.projectStatusChangeMessages.find(item => item.nextStatus === props.nextStatus && item.prevStatus === props.prevStatus)
+  const filtered = applicationStatusChange ? autoMessages?.applicationStatusChangeMessages.find(item => item.nextStatus === props.nextStatus && item.prevStatus === props.prevStatus) : isEvent ? autoMessages?.eventMessages.find(item => item.event === props.nextStatus) : autoMessages?.projectStatusChangeMessages.find(item => item.nextStatus === props.nextStatus && item.prevStatus === props.prevStatus)
  
   const initialValues = {
     projectId: project.id,
     applicationStatusChangeMessages: [],
     projectStatusChangeMessages: [] ,
+    eventMessages: [],
     message: filtered ? filtered?.message : '',
     enabled: filtered ? filtered?.enabled : false
   }
@@ -85,6 +87,10 @@ const MessageCardForm = ({project, applicationStatusChange, autoMessages, ...pro
         return <Button type='button' projectBtn='red'>REJECT</Button>
       case ApplicationStatus.Invited:
         return <Button type='button' projectBtn='green'>INVITE</Button>
+      case 'feedback':
+        return <Button type='button' projectBtn='green'>REVIEW</Button>
+      case 'recommendation':
+        return <Button type='button' projectBtn='green'>RECOMMEND</Button>
     }
   }
 
