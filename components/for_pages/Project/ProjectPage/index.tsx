@@ -142,7 +142,7 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
        {project.locations.length > 0 && <div className={styles.section}>
          <div className={styles.sectionHeader}>Project Locations:</div>
          <div className={classNames(styles.sectionContent, styles.projectLocations)}>
-           {project.locations.map(i => <WorkInListItem model={{type: i.type, location: i.location}} address={i.address}/>)}
+           {project.locations.map(i => <WorkInListItem model={{type: i.type, location: i.location, isOnline: i.isOnline}} address={i.address}/>)}
          </div>
        </div>}
        {project.skills.length > 0 && <div className={styles.section}>
