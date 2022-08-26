@@ -14,14 +14,15 @@ interface Props{
   isEdit?: boolean
   address?: string
 }
+
 const LocationItem = (props: Props) => {
   const {  model, index, onMoveUp, onMoveDown, isEdit } = props
   const {t} = useTranslation('common')
   return (
     <div className={styles.root}>
-      <LocationIcon className={model.type === 'online' ? styles.iconOnline : styles.icon} />
-      <div className={`${styles.name} ${model.type === 'online' && styles.nameOnline}`}>
-        {model.type === 'online' ? t('online') : model.location ? model.location : props.address}</div>
+      <LocationIcon className={model.isOnline ? styles.iconOnline : styles.icon}/>
+      <div className={`${styles.name} ${model.isOnline && styles.nameOnline}`}>
+        {model.isOnline ? t('online') : model.location ? model.location : props.address}</div>
       {isEdit && <div className={styles.actions}>
       {onMoveDown && <FormActionButton type={'moveDown'} title={t('down')} onClick={() => onMoveDown(model, index)}/>}
       {onMoveUp && <FormActionButton type={'moveUp'} title={t('up')} onClick={() => onMoveUp(model, index)}/>}

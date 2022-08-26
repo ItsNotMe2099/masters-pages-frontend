@@ -362,7 +362,7 @@ const ProjectCard = (props: Props) => {
           <div className={classNames(styles.section, styles.sectionLocations)}>
             <div className={styles.sectionHeader}>Locations</div>
             <div className={styles.locations}>
-            {project.locations?.map(i => <WorkInListItem model={{type: i.type, location: i.location}} address={i.address}/>)}
+            {project.locations?.map(i => <WorkInListItem model={{type: i.type, location: i.location, isOnline: i.isOnline}} address={i.address}/>)}
             </div>
           </div>
           <div className={classNames(styles.section, styles.sectionCategories)}>

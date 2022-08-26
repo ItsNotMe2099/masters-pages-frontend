@@ -43,6 +43,7 @@ export interface IProjectLocation{
   type: 'online' | 'offline',
   location: string
   address: string
+  isOnline?: boolean
 }
 
 export interface IProject {

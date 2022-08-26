@@ -113,6 +113,7 @@ export interface ConfirmDataModal {
 export interface IProfilePreferWorkIn {
   type: 'offline' | 'online'
   location: string
+  isOnline?: boolean
 }
 
 export interface ContactData {
