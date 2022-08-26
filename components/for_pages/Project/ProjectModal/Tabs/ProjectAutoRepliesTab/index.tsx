@@ -73,8 +73,8 @@ const ProjectAutorepliesTab = ({project, autoMessages}: Props) => {
   :
   currentTab === ProjectAutoRepliesTabType.Completed ?
   [
-    {name: '',  nextStatus: 'feedback', isEvent: true},
-    {name: '',  nextStatus: 'recommendation', isEvent: true},
+    {name: '',  nextStatus: 'feedback.created', isEvent: true},
+    {name: '',  nextStatus: 'recommendation.created', isEvent: true},
   ]
   :
   []
