@@ -36,7 +36,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
   const [project, setProject] = useState<IProject>(null);
   const appContext = useAppContext()
   const profile = appContext.profile
-  const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: []}
+  const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: [], eventMessages: []}
   const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(autoMessagesObject)
 
   useEffect(() => {
