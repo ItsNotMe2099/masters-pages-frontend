@@ -50,6 +50,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
     const dartFormatted = {...data};
     dartFormatted.skills = data.skills.map(i => ({
+      id: i.id,
       mainCategoryId: i.mainCategory?.id,
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id
@@ -74,6 +75,7 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
     const dartFormatted = {...data};
     dartFormatted.skills = data.skills.map(i => ({
+      id: i.id,
       mainCategoryId: i.mainCategory?.id,
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id

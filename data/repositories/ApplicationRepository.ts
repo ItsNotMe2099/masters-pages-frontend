@@ -145,9 +145,9 @@ export default class ApplicationRepository {
     return map;
   }
 
-  static async fetchApplicationsByCorporateForProject(projectId: number, profileRole: string = 'corporate'): Promise<IPagination<IApplication>> {
+  static async fetchApplicationsByCorporateForProject(projectId: number, profileRole: string = 'corporate', page?: number, limit?: number): Promise<IPagination<IApplication>> {
     const res = await request({
-      url: `/api/application?s={"projectId" : ${projectId}}`,
+      url: page && limit ? `/api/application?s={"projectId" : ${projectId}}&page=${page}&limit=${limit}` : `/api/application?s={"projectId" : ${projectId}}`,
       method: 'GET',
       profileRole
     })

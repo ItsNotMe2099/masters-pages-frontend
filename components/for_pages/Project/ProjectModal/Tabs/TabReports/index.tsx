@@ -9,6 +9,9 @@ import ProjectTabHeader from '../../ProjectTabHeader'
 import { format } from 'date-fns'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
+import { DropDown } from 'components/ui/DropDown'
+import classNames from 'classnames'
+import SliderVolunteers from './Slider'
 
 interface Props {
   project: IProject | null
@@ -56,16 +59,22 @@ const TabReports = ({project}: Props) => {
       }});
 
 
-  const [currentMiniTab, setCurrentMiniTab] = useState(miniTabs[0].key)
+  const [currentMiniTab, setCurrentMiniTab] = useState(miniTabs.length ? miniTabs[0].key : null) 
 
   const [applications, setApplications] = useState<IApplication[]>([])
+  const [total, setTotal] = useState(0)
 
   const handleChange = (item, miniTabs?: boolean) => {
     miniTabs ? setCurrentMiniTab(item.key) : setCurrentTab(item.key)
   }
 
   useEffect(() => {
-    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id).then(data => setApplications(data.data))
+    ApplicationRepository.fetchApplicationsByCorporateForProject(project.id).then(data => {
+      if(data){
+        setApplications(data.data)
+        setTotal(data.total)
+      }
+    })
   }, [])
 
   const firstTable = [
@@ -91,11 +100,12 @@ const TabReports = ({project}: Props) => {
     <div className={styles.root}>
       <ProjectTabHeader project={project}/>
       <Tabs onChange={(item) => handleChange(item)} style={'reports'} tabs={tabs} activeTab={currentTab}/>
-      <div className={styles.content}>
+      <div className={classNames(styles.content, {[styles.border]: currentTab !== ProjectReportsTabType.Project})}>
         {currentTab === ProjectReportsTabType.Project && 
-        <Tabs onChange={(item) => handleChange(item, true)} style={'mini'} tabs={miniTabs} activeTab={currentMiniTab}/>}
+        <>
+        <Tabs onChange={(item) => handleChange(item, true)} style={'mini'} tabs={miniTabs} activeTab={currentMiniTab}/>
         <div className={styles.miniTabsContent}>
-          {currentMiniTab === ProjectReportsTabTypeProject.Summary && 
+          {currentMiniTab === ProjectReportsTabTypeProject.Summary &&
             <div className={styles.tables}>
               <div className={styles.dates}>
                 <div className={styles.title}>
@@ -134,6 +144,17 @@ const TabReports = ({project}: Props) => {
             </div>
           }
         </div>
+        </>
+        }
+        {currentTab === ProjectReportsTabType.Volunteers && 
+          <>
+            <div className={styles.header}>
+              <div>
+                <span>Volunteers:</span><span className={styles.total}>{total}</span></div>
+              </div>
+            <SliderVolunteers project={project}/>
+          </>
+        }
       </div>    
     </div>
   )

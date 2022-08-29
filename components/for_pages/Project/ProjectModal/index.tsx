@@ -37,7 +37,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
   const appContext = useAppContext()
   const profile = appContext.profile
   const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: [], eventMessages: []}
-  const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(autoMessagesObject)
+  const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(null)
 
   useEffect(() => {
     if(showType === 'public'){

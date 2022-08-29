@@ -1,14 +1,13 @@
 @import "scss/index";
 
 .root{
-  border: 1px solid #C4C4C4;
-  padding: 25px;
 
 }
 
 .content{
   margin-top: 17px;
   border-top: 1px solid #C4C4C4;
+  padding: 50px;
 }
 
 .miniTabsContent{
@@ -67,4 +66,25 @@
   .cell{
     width: 10%;
   }
+}
+
+.border{
+  border: 1px solid #C4C4C4;
+}
+
+.header{
+  display: flex;
+  margin-bottom: 17px;
+  span{
+    font-weight: 700;
+    font-size: 14px;
+    color: #000;
+    margin-right: 8px;
+  }
+}
+
+.total{
+  font-weight: 400 !important;
+  font-size: 14px;
+  color: #6D718C !important;
 }

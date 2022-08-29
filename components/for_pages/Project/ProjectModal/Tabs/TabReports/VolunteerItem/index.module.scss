@@ -1,0 +1,51 @@
+@import "scss/index";
+
+.root{
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name{
+  font-family: 'Inter';
+  margin-left: 8px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #333333;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+}
+
+.status{
+  font-family: 'Inter';
+  font-weight: 800;
+  font-size: 13px;
+  color: #22A3CC;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  img{
+    margin-right: 6px;
+  }
+}
+
+.completed{
+  color: #3AC073;
+}
+
+.declined{
+  color: #DC2626;
+}
+
+.active{
+  background: #FFF9E6 !important;
+  border: 2px solid #F2B705;
+}
+
+.image{
+  display: flex;
+}

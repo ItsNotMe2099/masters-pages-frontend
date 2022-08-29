@@ -1,0 +1,35 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+}
+
+.slide{
+  display: flex;
+  section:nth-child(odd){
+    background: #F7F7F7;
+  }
+}
+
+.left{
+  margin-right: 8px;
+  width: 50%;
+}
+
+.right{
+  width: 50%;
+}
+
+.prev, .next{
+  position: absolute;
+}
+
+.next{
+  right: -2%;
+  bottom: 45%;
+}
+
+.prev{
+  left: -2%;
+  bottom: 45%;
+}

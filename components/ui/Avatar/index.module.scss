@@ -120,3 +120,12 @@
     }
   }
 }
+
+.circle{
+  width: 26px;
+  height: 26px;
+  border-radius: 100%;
+  svg{
+    height: 16px;
+  }
+}

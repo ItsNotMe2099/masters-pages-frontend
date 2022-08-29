@@ -6,6 +6,9 @@ import {SnackbarType} from 'types/enums'
 export interface IPagination<T>{
   data: T[]
   total: number
+  count?: number
+  page?: number
+  pageCount?: number
 }
 export interface IField<T> extends FieldConfig<T> {
   label?: string
