@@ -85,7 +85,7 @@ const SearchProfileListView = (props: Props) => {
   }
   return (
     <Layout>
-    <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
+    <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer} ${role === 'corporate' && styles.filtersCorporate}`}>
       <div className={styles.form}>
         <SearchProfileFilter  collapsed={!isShow} initialValues={getQueryFilter()} searchRole={props.searchRole}/>
         <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
