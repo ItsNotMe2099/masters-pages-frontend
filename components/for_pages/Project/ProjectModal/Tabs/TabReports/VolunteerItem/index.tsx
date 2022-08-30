@@ -11,6 +11,8 @@ interface Props {
   application: any//IApplication
   active: boolean
   onClick: () => void
+  index: number
+  itemIndex: number
 }
 
 const VolunteerItem = (props: Props) => {
@@ -18,7 +20,7 @@ const VolunteerItem = (props: Props) => {
   const appContext = useAppContext();
 
   return (
-    <section className={classNames(styles.root, {[styles.active]: props.active})} onClick={props.onClick}>
+    <section className={classNames(styles.root, {[styles.active]: props.index === props.itemIndex})} onClick={props.onClick}>
       <div className={styles.left}>
         <Avatar image={props.application.profile.photo} size='circle'/>
         <div className={styles.name}>{props.application.profile.firstName} {props.application.profile.lastName}</div>

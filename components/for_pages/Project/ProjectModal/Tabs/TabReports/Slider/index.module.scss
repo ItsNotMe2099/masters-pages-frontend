@@ -33,3 +33,42 @@
   left: -2%;
   bottom: 45%;
 }
+
+.head{
+  display: flex;
+  align-items: center;
+}
+
+.name{
+  font-weight: 600;
+  font-size: 18px;
+  margin-left: 8px;
+  font-family: 'Inter';
+  color: #333333;
+}
+
+.info{
+  margin-top: 33px;
+}
+
+.row{
+  display: table-row;
+}
+
+.cellFirst{
+  display: table-cell;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  padding: 15px 10px;
+}
+
+.cell{
+  display: table-cell;
+  color: #6D718C;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 15px 10px;
+  width: 20%;
+  text-align: end;
+}

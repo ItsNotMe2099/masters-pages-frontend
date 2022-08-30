@@ -9,7 +9,6 @@ import ProjectTabHeader from '../../ProjectTabHeader'
 import { format } from 'date-fns'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
-import { DropDown } from 'components/ui/DropDown'
 import classNames from 'classnames'
 import SliderVolunteers from './Slider'
 

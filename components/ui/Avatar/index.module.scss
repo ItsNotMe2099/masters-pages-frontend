@@ -129,3 +129,15 @@
     height: 16px;
   }
 }
+
+.circleLarge{
+  width: 52px;
+  height: 52px;
+  border-radius: 100%;
+  svg{
+    height: 25px;
+  }
+  img{
+    border-radius: 100%;
+  }
+}
