@@ -8,6 +8,10 @@
   margin-top: 17px;
   border-top: 1px solid #C4C4C4;
   padding: 50px;
+  @media screen and (max-width: 900px){
+    border: 0;
+    padding: 0;
+  }
 }
 
 .miniTabsContent{
@@ -70,6 +74,9 @@
 
 .border{
   border: 1px solid #C4C4C4;
+  @media screen and (max-width: 900px){
+    border: 0;
+  }
 }
 
 .header{

@@ -2,10 +2,14 @@
 
 .root{
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .slide{
   display: flex;
+  flex: 1;
+  margin: 0 15px;
   section:nth-child(odd){
     background: #F7F7F7;
   }
@@ -14,6 +18,9 @@
 .left{
   margin-right: 8px;
   width: 50%;
+  @media screen and (max-width: 1024px){
+    width: 100%;
+  }
 }
 
 .right{
@@ -21,22 +28,25 @@
 }
 
 .prev, .next{
-  position: absolute;
+  
 }
 
 .next{
   right: -2%;
-  bottom: 45%;
+  bottom: 50%;
+  cursor: pointer;
 }
 
 .prev{
   left: -2%;
-  bottom: 45%;
+  bottom: 50%;
+  cursor: pointer;
 }
 
 .head{
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .name{
@@ -49,10 +59,24 @@
 
 .info{
   margin-top: 33px;
+  @media screen and (max-width: 900px){
+    margin-top: 16px;
+  }
+}
+
+.table{
+  width: 100%;
+  .row:nth-child(even){
+    background: #F6F6F6;
+  }
 }
 
 .row{
   display: table-row;
+  @media screen and (max-width: 900px){
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .cellFirst{
@@ -69,6 +93,53 @@
   font-weight: 600;
   font-size: 14px;
   padding: 15px 10px;
-  width: 20%;
   text-align: end;
+  width: 20%;
+  @media screen and (max-width: 900px){
+    width: 100%;
+  }
+}
+
+.status{
+  font-family: 'Inter';
+  font-weight: 800;
+  font-size: 13px;
+  color: #22A3CC;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  img{
+    margin-right: 6px;
+  }
+}
+
+.completed{
+  color: #3AC073;
+}
+
+.declined{
+  color: #DC2626;
+}
+
+.separator{
+  height: 1px;
+  background-color: #c4c4c4;
+  width: 20%;
+  margin-top: 34px;
+  @media screen and (max-width: 900px){
+    width: 100%;
+    margin-top: 17px;
+  }
+}
+
+.dot{
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.dots{
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
 }

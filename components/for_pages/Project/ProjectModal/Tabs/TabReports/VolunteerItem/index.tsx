@@ -2,14 +2,12 @@ import * as React from 'react'
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
-import { IApplication } from 'data/intefaces/IApplication'
 import Avatar from 'components/ui/Avatar'
 import classNames from 'classnames'
-import { ApplicationStatus } from 'data/intefaces/IApplication'
+import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 
 interface Props {
-  application: any//IApplication
-  active: boolean
+  application: IApplication
   onClick: () => void
   index: number
   itemIndex: number
@@ -31,7 +29,7 @@ const VolunteerItem = (props: Props) => {
         <div className={styles.image}>
           <img 
           src={props.application.status === ApplicationStatus.Completed ? '/img/Reports/Volunteers/completed.svg' : props.application.status === ApplicationStatus.RejectedByCompany || props.application.status === ApplicationStatus.RejectedByVolunteer ? '/img/Reports/Volunteers/declined.svg' : '/img/Reports/Volunteers/invited.svg'} 
-          alt=''/></div>{props.application.status}
+          alt=''/></div>{props.application.status === ApplicationStatus.RejectedByCompany || props.application.status === ApplicationStatus.RejectedByVolunteer ? 'Declined' : props.application.status}
       </div>
     </section>
   )

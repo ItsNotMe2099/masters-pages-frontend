@@ -1,20 +1,15 @@
 import { IField, InputStyleType, IOption } from 'types/types'
-import {Form, FormikProvider, useField, useFormik} from 'formik'
-import SelectField from 'components/fields/SelectField'
-import {useEffect, useState} from 'react'
+import {useField} from 'formik'
+import {useState} from 'react'
 import {useTranslation} from 'next-i18next'
 import styles from 'components/PublicProfile/components/view/CardCategories/components/Form/index.module.scss'
 import Button from 'components/PublicProfile/components/Button'
 import * as React from 'react'
-import ServiceCategoryField from 'components/fields/ServiceCategoryField'
-import Validator from 'utils/validator'
 import Accordion from './Accordion'
 import {getCategoryTranslation} from 'utils/translations'
 import Tab from 'components/PublicProfile/components/Tab'
 import FormActionIconButton from 'components/PublicProfile/components/FormActionIconButton'
-import {IServiceCategory} from 'data/intefaces/IServiceCategory'
 import ServiceCategoryForm from 'components/fields/ServiceCategoryFormField/Form'
-import FormActionButton from 'components/PublicProfile/components/FormActionButton'
 
 interface Props<T> extends IField<T> {
   styleType?: InputStyleType
@@ -51,6 +46,7 @@ export default function ServiceCategoryFormField(props: Props<any[]>) {
 
     return Object.keys(categoriesMap).map(i => categoriesMap[i])
   }
+
   return (
     <div className={styles.root}>
       <div className={styles.items}>
