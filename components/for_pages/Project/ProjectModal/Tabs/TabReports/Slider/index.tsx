@@ -112,9 +112,10 @@ const SliderVolunteers = (props: Props) => {
         <Slide/>
       {pageCount > 1 && <a className={styles.next} onClick={() => pageCount !== page && setPage(page + 1)}><img src='/img/Reports/Volunteers/next.svg' alt=''/></a>}
     </div>
+    {pageCount > 1 &&
     <div className={styles.dots}>
         {dots.map((i, index) => <Dot index={index} page={page} onClick={() => setPage(index + 1)}/>)}
-    </div>
+    </div>}
     {currentItem &&
       <>
       <div className={styles.separator}></div>
