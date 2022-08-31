@@ -11,6 +11,8 @@ import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import classNames from 'classnames'
 import SliderVolunteers from './Slider'
+import { TabSelect } from 'components/TabSelect'
+import { useWindowWidth } from '@react-hook/window-size'
 
 interface Props {
   project: IProject | null
@@ -57,11 +59,14 @@ const TabReports = ({project}: Props) => {
         link: `/projects/${item.key}`
       }});
 
+  const [tab, setTab] = useState(miniTabs[0]);
 
   const [currentMiniTab, setCurrentMiniTab] = useState(miniTabs.length ? miniTabs[0].key : null) 
 
   const [applications, setApplications] = useState<IApplication[]>([])
   const [total, setTotal] = useState(0)
+  const width = useWindowWidth()
+  const isMobile = width < 429
 
   const handleChange = (item, miniTabs?: boolean) => {
     miniTabs ? setCurrentMiniTab(item.key) : setCurrentTab(item.key)
@@ -102,7 +107,11 @@ const TabReports = ({project}: Props) => {
       <div className={classNames(styles.content, {[styles.border]: currentTab !== ProjectReportsTabType.Project})}>
         {currentTab === ProjectReportsTabType.Project && 
         <>
-        <Tabs onChange={(item) => handleChange(item, true)} style={'mini'} tabs={miniTabs} activeTab={currentMiniTab}/>
+          {!isMobile ?
+          <Tabs onChange={(item) => handleChange(item, true)} style={'mini'} tabs={miniTabs} activeTab={currentMiniTab}/>
+          :
+          <TabSelect style='projectStatus' tabs={miniTabs} activeTab={currentMiniTab} onChange={(item) => handleChange(item, true)}/>
+          }
         <div className={styles.miniTabsContent}>
           {currentMiniTab === ProjectReportsTabTypeProject.Summary &&
             <div className={styles.tables}>

@@ -17,10 +17,16 @@
 .miniTabsContent{
   padding: 50px;
   border: 1px solid #C4C4C4;
+  @media screen and (max-width: 900px){
+    padding: 20px;
+  }
 }
 
 .tables{
   display: flex;
+  @media screen and (max-width: 900px){
+    flex-direction: column;
+  }
 }
 
 .title{
@@ -48,6 +54,9 @@
   font-size: 14px;
   color: #000000;
   padding: 15px 10px;
+  @media screen and (max-width: 428px){
+    width: 50%;
+  }
 }
 
 .cell{
@@ -58,6 +67,9 @@
   padding: 15px 10px;
   width: 20%;
   text-align: end;
+  @media screen and (max-width: 1700px){
+    width: 100%;
+  }
 }
 
 .dates{
@@ -69,6 +81,9 @@
   width: 100%;
   .cell{
     width: 10%;
+  }
+  @media screen and (max-width: 900px){
+    margin-top: 45px;
   }
 }
 

@@ -19,7 +19,6 @@ import ProjectAutorepliesTab from './Tabs/ProjectAutoRepliesTab'
 import TabReports from './Tabs/TabReports'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
-import ProjectsPage from 'pages/projects/[projectType]'
 
 interface Props {
   showType: 'client' | 'public'
