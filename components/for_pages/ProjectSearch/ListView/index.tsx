@@ -44,12 +44,13 @@ const ProjectSearchListView = (props: Props) => {
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [currentOrganization, setCurrentOrganization] = useState<IOrganization| null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+  const limit = 10
 
   const appContext = useAppContext()
   const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
-  const fetchProjects = (filter?: IProjectSearchRequest, sortType?: string, page?: number, limit?: number, keywords?: '') => {
-    ProjectRepository.search(page, limit, keywords, filter).then(data => {
+  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, keywords).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
@@ -57,7 +58,7 @@ const ProjectSearchListView = (props: Props) => {
     })
   }
   useEffect(() => {
-    fetchProjects()
+    fetchProjects(page, limit)
     setLoading(false)
   }, [])
 
@@ -66,10 +67,16 @@ const ProjectSearchListView = (props: Props) => {
     setSortType(item.value);
     router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
+
   const handleScrollNext = () => {
-    setPage(page + 1);
-    fetchProjects(filter, sortType, page + 1);
+    setPage(page + 1)
+    ProjectRepository.search(page + 1, limit).then(data => {
+      if(data){
+        setProjects(projects => [...projects, ...data.data])
+      }
+    })
   }
+
   const handleRefresh = () => {
 
   }
@@ -131,7 +138,7 @@ const ProjectSearchListView = (props: Props) => {
       </div>
     </div>
     <div className={styles.container}>
-      <div className={styles.projectsContainer}>
+      <div className={styles.projectsContainer} id='scrollableDiv'>
         <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={props.onShowMap}>{t('taskSearch.showOnTheMap')}</Button>
 
         <div className={styles.sidebar}>
@@ -167,6 +174,7 @@ const ProjectSearchListView = (props: Props) => {
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={<Loader/>}
+          scrollableTarget="scrollableDiv"
         >
           {projects.map((project, index) => <ProjectCard key={project.id} actionsType={'public'} project={project} onApplyClick={handleProjectApplyOpen} onViewOpen={handleProjectViewOpen}/>)}
         </InfiniteScroll>}

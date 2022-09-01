@@ -4,7 +4,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {IPagination} from 'types/types'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 export interface IProjectSearchRequest{
-  keywords?: string,
+  keywords?: string 
   mainCategoryId?: number
   subCategoryId?: number
   categoryId?: number
@@ -70,9 +70,9 @@ export default class ProjectRepository {
     console.log("FindPublicById", res.data);
     return res.data?.data?.length > 0 ? res.data.data[0] : null
   }
-  static async search(page: number = 1, limit: number = 10, keywords: string = '', data?: IProjectSearchRequest, corporateProfileId?: number, projectId?: number): Promise<IPagination<IProject> | null> {
+  static async search(page: number = 1, limit: number = 10, keywords: string = '', data?: IProjectSearchRequest): Promise<IPagination<IProject> | null> {
     const res = await request({
-      url: `/api/project/search?page=${page}&limit=${limit}&keywords=${keywords}&${corporateProfileId && `corporateProfileId=${corporateProfileId}`}&${projectId && `projectId=${projectId}`}`,
+      url: `/api/project/search?page=${page}&limit=${limit}&keywords=${keywords}&${data?.corporateProfileId && `corporateProfileId=${data?.corporateProfileId}`}&${data?.projectId && `projectId=${data.projectId}`}`,
       method: 'GET',
       data
     })

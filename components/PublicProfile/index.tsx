@@ -30,6 +30,7 @@ import styles from './index.module.scss'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import { signUpOpen } from 'components/Modal/actions'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import { IProjectSearchRequest } from 'data/repositories/ApplicationRepository'
 
 interface Props {
   profile: IProfile,
@@ -54,6 +55,7 @@ const PublicProfile = (props) => {
   const [page, setPage] = useState<number>(1)
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+  const limit = 10
 
   const handleUpdateOrganization = () => {
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
@@ -171,8 +173,8 @@ const PublicProfile = (props) => {
     }
   }
 
-  const fetchProjects = (page: number, limit: number, keywords: string, data: null, corporateProfileId: number) => {
-    ProjectRepository.search(page, limit, '', null, corporateProfileId).then(data => {
+  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, keywords, filter).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
@@ -180,13 +182,17 @@ const PublicProfile = (props) => {
     })
   }
   useEffect(() => {
-    fetchProjects(page, 10, '', null, profile.id)
+    fetchProjects(page, limit, '', {corporateProfileId: profile.id})
     setLoading(false);
   }, [router])
 
   const handleScrollNext = () => {
-    setPage(page + 1);
-    fetchProjects(page + 1, 10,  '', null, profile.id);
+    setPage(page + 1)
+    ProjectRepository.search(page + 1, limit, '', {corporateProfileId: profile.id}).then(data => {
+      if(data){
+        setProjects(projects => [...projects, ...data.data])
+      }
+    })
   }
   const handleRefresh = () => {
 
@@ -211,8 +217,54 @@ const PublicProfile = (props) => {
 
   }
 
+  /*
+  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, keywords).then(data => {
+      if(data){
+        setProjects(data.data);
+        setTotal(data.total);
+      }
+    })
+  }
+
+  useEffect(() => {
+    fetchProjects(page, limit)
+    setLoading(false);
+  }, [])
+
+  const handleSortChange = (item) => {
+    setSortType(item.value);
+    //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
+  }
+
+  const handleProjectViewOpen = async (project: IProject) => {
+    setInitialProjectTab('description')
+    await OrganizationRepository.fetchOrganizationsList().then((data) => {
+      if(data){
+        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
+        if(newData[0]){
+        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+          if(data){
+            setCurrentOrganization(data)
+          }
+        })}
+      }
+    })
+    setCurrentProject(project)
+  }
+
+  const handleScrollNext = (value: string) => {
+    setPage(page + 1)
+    ProjectRepository.search(page + 1, limit, value).then(data => {
+      if(data){
+        setProjects(projects => [...projects, ...data.data])
+      }
+    })
+  }
+  */ 
+
   return (
-    <ProfilePageLayout onOrganizationUpdate={handleUpdateOrganization} onProfileUpdate={handleUpdateProfile} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
+    <ProfilePageLayout id='scrollableDiv' onOrganizationUpdate={handleUpdateOrganization} onProfileUpdate={handleUpdateProfile} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
       {props.showType ==='news' ? <CardPosts profile={profile}/>  : profile.role === 'client' && props.showType ==='profile' ? <>
 
@@ -229,6 +281,7 @@ const PublicProfile = (props) => {
             hasMore={projects.length < total}
             next={handleScrollNext}
             loader={<Loader/>}
+            scrollableTarget='scrollableDiv'
           >
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
