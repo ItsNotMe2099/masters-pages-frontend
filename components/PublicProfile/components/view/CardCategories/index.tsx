@@ -11,11 +11,12 @@ import Tab from 'components/PublicProfile/components/Tab'
 import {hideProfileForm, showProfileForm} from 'components/Profile/actions'
 import CardCategoryForm from 'components/PublicProfile/components/view/CardCategories/components/Form'
 import FormActionButton from 'components/PublicProfile/components/FormActionButton'
-import {createSkillCategory, deleteSkill, deleteSkillCategory} from 'components/Skill/actions'
+import {createSkillCategory, deleteSkill, deleteSkillCategory, fetchSkillList} from 'components/Skill/actions'
 import FormActionIconButton from 'components/PublicProfile/components/FormActionIconButton'
 import {confirmOpen} from 'components/Modal/actions'
 import { useTranslation } from 'next-i18next'
 import {IProfile} from 'data/intefaces/IProfile'
+
 interface Props{
   profile: IProfile,
   isEdit: boolean,
@@ -35,9 +36,10 @@ const CardCategories = (props: Props) => {
   const handleEditClick = () => {
     dispatch(showProfileForm( 'categories'))
   }
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     dispatch(createSkillCategory(data))
     props.onProfileUpdate && props.onProfileUpdate()
+    await dispatch(fetchSkillList())
     dispatch(hideProfileForm( 'categories'))
    }
   const handleCancel = () => {

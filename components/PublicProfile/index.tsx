@@ -217,52 +217,6 @@ const PublicProfile = (props) => {
 
   }
 
-  /*
-  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
-    ProjectRepository.search(page, limit, keywords).then(data => {
-      if(data){
-        setProjects(data.data);
-        setTotal(data.total);
-      }
-    })
-  }
-
-  useEffect(() => {
-    fetchProjects(page, limit)
-    setLoading(false);
-  }, [])
-
-  const handleSortChange = (item) => {
-    setSortType(item.value);
-    //router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
-  }
-
-  const handleProjectViewOpen = async (project: IProject) => {
-    setInitialProjectTab('description')
-    await OrganizationRepository.fetchOrganizationsList().then((data) => {
-      if(data){
-        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-        if(newData[0]){
-        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
-          if(data){
-            setCurrentOrganization(data)
-          }
-        })}
-      }
-    })
-    setCurrentProject(project)
-  }
-
-  const handleScrollNext = (value: string) => {
-    setPage(page + 1)
-    ProjectRepository.search(page + 1, limit, value).then(data => {
-      if(data){
-        setProjects(projects => [...projects, ...data.data])
-      }
-    })
-  }
-  */ 
-
   return (
     <ProfilePageLayout id='scrollableDiv' onOrganizationUpdate={handleUpdateOrganization} onProfileUpdate={handleUpdateProfile} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 
