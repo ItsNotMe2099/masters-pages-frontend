@@ -16,6 +16,7 @@ import FormActionIconButton from 'components/PublicProfile/components/FormAction
 import {confirmOpen} from 'components/Modal/actions'
 import { useTranslation } from 'next-i18next'
 import {IProfile} from 'data/intefaces/IProfile'
+import { useEffect } from 'react'
 
 interface Props{
   profile: IProfile,
@@ -38,7 +39,7 @@ const CardCategories = (props: Props) => {
   }
   const handleSubmit = async (data) => {
     dispatch(createSkillCategory(data))
-    props.onProfileUpdate && props.onProfileUpdate()
+    await props.onProfileUpdate && props.onProfileUpdate()
     await dispatch(fetchSkillList())
     dispatch(hideProfileForm( 'categories'))
    }
