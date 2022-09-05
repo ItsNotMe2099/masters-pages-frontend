@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { IOrganization } from 'data/intefaces/IOrganization'
+import { useAppContext } from 'context/state'
 interface Props {
   organization: IOrganization,
   className?: string,
@@ -16,6 +17,10 @@ interface Props {
 
 export default function Organization({organization, className, isActive}: Props) {
   const dispatch = useDispatch()
+
+  const context = useAppContext()
+
+  const profile = context.profile
 
   const {t, i18n} = useTranslation('common')
   const handleReadMore = () => {
@@ -72,8 +77,8 @@ const profileLink = `/id${organization.corporateProfile.id}`
             </div>
           <div className={styles.bottom}>
             <Button type='button' projectBtn='default' href={profileLink}>VIEW</Button>
-            <Button type='button' projectBtn='default' onClick={() => dispatch(signUpOpen())}>SAVE</Button>
-            <Button type='button' projectBtn='default' onClick={() => dispatch(signUpOpen())}>SUBSCRIBE</Button>
+            <Button type='button' projectBtn='default' onClick={() => profile ? null : dispatch(signUpOpen())}>SAVE</Button>
+            <Button type='button' projectBtn='default' onClick={() => profile ? null : dispatch(signUpOpen())}>SUBSCRIBE</Button>
           </div>
       </div>
       </div>
@@ -97,8 +102,8 @@ const profileLink = `/id${organization.corporateProfile.id}`
       </div>
       <div className={styles.bottomMobile}>
             <Button type='button' projectBtn='default' href={profileLink}>VIEW</Button>
-            <Button type='button' projectBtn='default' onClick={() => dispatch(signUpOpen())}>SAVE</Button>
-            <Button type='button' projectBtn='default' onClick={() => dispatch(signUpOpen())}>SUBSCRIBE</Button>
+            <Button type='button' projectBtn='default' onClick={() => profile ? null : dispatch(signUpOpen())}>SAVE</Button>
+            <Button type='button' projectBtn='default' onClick={() => profile ? null : dispatch(signUpOpen())}>SUBSCRIBE</Button>
           </div>
     </div>
   )

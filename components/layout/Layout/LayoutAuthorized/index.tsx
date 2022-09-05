@@ -77,23 +77,27 @@ export default function LayoutAuthorized(props: Props) {
     {title: t('menu.profile'), icon: 'profile', link: profileLink},
     {title: t('menu.share'), icon: 'share', link: '/Share'},
     {title: t('menu.invite'), icon: 'invite', link: '/Invite'},
-    ...(role !== ProfileRole.Client ? [
+    ...(role === ProfileRole.Master ? [
     {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage', isSeparator: true}
     ] : []),
+    ...(role === ProfileRole.Client ?
+      [
     {title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount},
+      ] : []),
     ...(role === ProfileRole.Volunteer ? [
-      {title: t('menu.projects'), icon: 'projects', link: '/projects', isSeparator: true}
+      {title: t('menu.projects'), icon: 'projects', link: '/projects', isSeparator: true},
+      {title: t('menu.findProjects'), icon: 'find-projects', link: '/project-search', isSeparator: false},
+      {title: t('menu.findCompanies'), icon: 'find-clients', link: '/FindCompanies', isSeparator: false},
       ] : []),
     {title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
     {title: t('menu.reports'), icon: 'reports', link: '/Report'},
 
     ...(role === ProfileRole.Client ? [
       {title: t('menu.findMaster'), icon: 'find-clients', link: '/SearchMasterPage', isSeparator: true},
-      {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage'},
-    ] : [
+    ] : []),
+    ...(role === ProfileRole.Master ? [
       {title: t('menu.findClients'), icon: 'find-clients', link: '/SearchClientPage', isSeparator: true},
-      {title: t('menu.findProjects'), icon: 'find-projects', link: '/project-search', isSeparator: true}
-    ]),
+    ] : []),
 
     {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     {title: t('menu.contacts'), icon: 'subscriptions', link: '/Contacts'},

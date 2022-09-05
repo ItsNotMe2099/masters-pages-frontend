@@ -1,4 +1,4 @@
-import styles from 'pages/FindCompaniesGuest/index.module.scss'
+import styles from 'pages/FindCompanies/index.module.scss'
 import { useEffect, useState } from 'react'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
@@ -23,7 +23,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import InputSearch from 'components/ui/Inputs/InputSearch'
 import { useAppContext } from 'context/state'
 
-const FindCompaniesGuest = (props) => {
+const FindCompanies = (props) => {
 
   const [organizations, setOrganizations] = useState<IOrganization[]>([])
   const [loading, setLoading] = useState<boolean>(true)
@@ -142,4 +142,4 @@ export const getServerSideProps = async (ctx) => {
 
 }
 
-export default FindCompaniesGuest
+export default FindCompanies

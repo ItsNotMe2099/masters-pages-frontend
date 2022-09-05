@@ -33,7 +33,7 @@ export default function LayoutGuest(props: Props) {
   const dispatch = useDispatch()
 
   const item = [
-    {title: t('menu.findCompanies'), icon: 'find-clients-black', link: '/FindCompaniesGuest', isSeparator: true},
+    {title: t('menu.findCompanies'), icon: 'find-clients-black', link: '/FindCompanies', isSeparator: true},
   ]
 
   const itemsVolunteer = [
