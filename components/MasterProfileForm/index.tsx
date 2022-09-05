@@ -115,7 +115,7 @@ let MasterForm = props => {
 
         <div className={styles.btnContainer}>
           <FormError error={error}/>
-          <Button red size="14px 105px">{t('ready')}</Button>
+          <Button red size="14px 105px">{t('task.save')}</Button>
         </div>
       </div>
     </form>

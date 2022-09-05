@@ -37,11 +37,11 @@ const MasterProfile = (props) => {
   }
   return (
     <Layout showLeftMenu={false}>
-      <div className={styles.steps}>
+      {/*<div className={styles.steps}>
         <div className={styles.stepsContainer}>
         <SimpleSlider/>
         </div>
-      </div>
+  </div>*/}
       <div className={styles.container}>
 
         <div className={styles.required}>* {t('requiredField')}</div>
