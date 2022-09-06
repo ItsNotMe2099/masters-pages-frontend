@@ -347,8 +347,8 @@ const ProjectCard = (props: Props) => {
           <Avatar image={project.photo}/>
         </div>
         <div className={styles.stats}>
-          <StatItem name={'Vacancies'} value={0}/>
-          <StatItem name={'Applications'} value={0}/>
+          <StatItem name={'Vacancies'} value={project.vacanciesLimits ? project.vacanciesLimits : 0}/>
+          <StatItem name={'Applications'} value={project.applicationsLimits ? project.applicationsLimits : 0}/>
         </div>
       </div>
       <div className={styles.right}>

@@ -68,7 +68,6 @@ export default function LayoutAuthorized(props: Props) {
     {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     {title: t('menu.volunteerProjects'), icon: 'orders', link: '/projects', isSeparator: true},
     {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage', isSeparator: true},
-    {title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount},
     {title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
     {title: t('menu.reports'), icon: 'reports', link: '/Report'},
 
