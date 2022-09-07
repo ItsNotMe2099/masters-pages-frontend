@@ -6,6 +6,7 @@ import {useState} from 'react'
 import {registrationPhoneSetCallback} from 'components/Auth/RegistrationPhone/actions'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import { profilePhoneChangeOpen } from 'components/Modal/actions'
 
 const TabPhoneForm = (props) => {
   const {t} = useTranslation()
@@ -15,7 +16,7 @@ const TabPhoneForm = (props) => {
   const [newPhone, setNewPhone] = useState()
 
   const handlePhoneChange = () => {
-    dispatch(registrationPhoneSetCallback((phone) => setNewPhone(phone)))
+    dispatch(profilePhoneChangeOpen()/*registrationPhoneSetCallback((phone) => setNewPhone(phone))*/)
   }
 
     return (

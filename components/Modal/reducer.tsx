@@ -113,6 +113,9 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.EMAIL_CHANGE_OPEN:
       state.modalKey = 'emailChangeModal'
       break
+    case ActionTypes.PHONE_CHANGE_OPEN:
+      state.modalKey = 'phoneChangeModal'
+      break
     case ActionTypes.EVENT_CREATE_OPEN:
       state.modalKey = 'eventCreateModal'
       break

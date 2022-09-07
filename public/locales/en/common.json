@@ -515,6 +515,13 @@
       "fieldEmail": "New Email",
       "success": "Please check your email inbox for verification.",
       "buttonConfirm": "CHANGE EMAIL"
+    },
+    "phoneChange": {
+      "title": "Change phone",
+      "titleSuccess": "Phone changes",
+      "fieldPhone": "New Phone",
+      "success": "Success",
+      "buttonConfirm": "CHANGE PHONE"
     }
   },
   "forms": {

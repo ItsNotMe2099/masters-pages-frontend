@@ -29,6 +29,7 @@ export const feedbackSuccessOpen = () => action(ActionTypes.FEEDBACK_SUCCESS_OPE
 export const taskSuccessOpen = () => action(ActionTypes.TASK_SUCCESS_OPEN)
 export const taskOfferOpen = () => action(ActionTypes.TASK_OFFER_OPEN)
 export const profileEmailChangeOpen = () => action(ActionTypes.EMAIL_CHANGE_OPEN)
+export const profilePhoneChangeOpen = () => action(ActionTypes.PHONE_CHANGE_OPEN)
 
 export const registrationSuccessOpen = () => action(ActionTypes.REGISTRATION_SUCCESS_OPEN)
 export const registrationPhoneOpen = () => action(ActionTypes.REGISTRATION_PHONE_OPEN)
