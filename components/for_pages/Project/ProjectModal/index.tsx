@@ -19,6 +19,7 @@ import ProjectAutorepliesTab from './Tabs/ProjectAutoRepliesTab'
 import TabReports from './Tabs/TabReports'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
+import OrganizationRepository from "data/repositories/OrganizationRepository";
 
 interface Props {
   showType: 'client' | 'public'
@@ -26,37 +27,40 @@ interface Props {
   projectId?: number,
   onClose: () => void
   onDelete?: () => void | null | undefined
-  organization?: IOrganization
   initialTab?: string
   outerVar?: boolean
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organization, initialTab, outerVar}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTab, outerVar}: Props) => {
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const [project, setProject] = useState<IProject>(null);
+  const [organization, setOrganization] = useState<IOrganization | null>(null);
   const appContext = useAppContext()
   const profile = appContext.profile
   const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: [], eventMessages: []}
   const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(null)
-
+  console.log("ProjectInModal", project)
   useEffect(() => {
+
     if(showType === 'public'){
       ProjectRepository.findPublicById(projectId).then(i => setProject(i))
-    }
-    if(!profile){
-      ProjectRepository.searchByProjectId(1, 10, projectId).then(data => setProject(data.data[0]))
-    }
-    else{
+    }else {
       ProjectRepository.findById(projectId).then(i => setProject(i))
+      AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId).then(data => {
+        if(data){
+          setAutomessages(data)
+        }
+      })
     }
 
-    AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId).then(data => {
-      if(data){
-        setAutomessages(data)
-      }
-  })
 
-  }, [projectId])
 
+  }, [projectId, showType, profile])
+  useEffect(() => {
+    console.log("FetchOrg", project?.corporateProfile)
+    if(project?.corporateProfile?.organization) {
+      OrganizationRepository.fetchOrganization(project?.corporateProfile?.organization.id).then(i => setOrganization(i))
+    }
+  }, [project?.corporateProfile?.organization])
   const tabs = (showType === 'client' && projectId && profile) ? [
       {name: 'Description', key: 'description', icon: 'description'},
       {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
@@ -106,7 +110,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
         return styles.modeGuest
     }
   }
-  
+
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose}>
       <div className={styles.root}>
@@ -124,7 +128,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, organizat
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && <TabProjectDescription onClose={onClose} outerVar={outerVar} organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
+            {tab === 'description' && organization && <TabProjectDescription onClose={onClose} outerVar={outerVar} organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}

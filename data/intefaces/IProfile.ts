@@ -57,6 +57,7 @@ export interface IProfile{
   isRecommendedByCurrentProfile?: boolean
   activityStatus?: UserActivityStatus
   organization?: IOrganization
+  organizationId: number
   createdAt: string
 }
 export interface ICity{

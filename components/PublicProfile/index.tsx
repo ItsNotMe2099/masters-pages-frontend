@@ -140,23 +140,11 @@ const PublicProfile = (props) => {
       if(data){
         setOrganization(data)
       }
-      
+
     })
   }*/
   //else if(!currentProfile){
-    if(profile.role === 'corporate'){
-    OrganizationRepository.fetchOrganizationsList().then((data) => {
-      if(data){
-        const newData = data.filter(item => item.corporateProfileId === profile.id)
-        if(newData[0]){
-        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
-          if(data){
-            setOrganization(data)
-          }
-        })}
-      }
-    })
-  }
+
   //}
     if (isEdit) {
       dispatch(fetchSkillList())
@@ -227,7 +215,7 @@ const PublicProfile = (props) => {
         :
         <>
         {(profile?.role === 'corporate' || !currentProfile) && organization && <CardOrganizationDescription onOrganizationUpdate={handleUpdateOrganization} isEdit={isEdit} organization={organization}/>}
-        {(profile?.role === 'corporate' || !currentProfile) && organization && 
+        {(profile?.role === 'corporate' || !currentProfile) && organization &&
           <>
           {loading && total === 0 && <Loader/>}
           {total > 0 && <InfiniteScroll
@@ -239,7 +227,7 @@ const PublicProfile = (props) => {
           >
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
-          {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+          {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'}  projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile && profile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}

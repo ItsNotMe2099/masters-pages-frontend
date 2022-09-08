@@ -200,18 +200,6 @@ const ProjectsPage = (props: Props) => {
 
   const handleProjectApplyOpen =  async (project: IProject, profile: IProfile) => {
     setInitialProjectTab('application')
-    if(currentProfile.role !== ProfileRole.Corporate){
-      await OrganizationRepository.fetchOrganizationsList().then((data) => {
-        if(data){
-          const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-          if(newData[0]){
-          OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
-            if(data){
-              setOrganization(data)
-            }
-          })}
-        }
-      })}
     setCurrentProject(project);
   }
 
@@ -303,15 +291,15 @@ const ProjectsPage = (props: Props) => {
             onProjectStatusChange={(newStatus) => handleChangeProjectStatus(newStatus, project.id)}
            status={projectType} key={project.id}
             onApplyClick={() => handleProjectApplyOpen(project, currentProfile)}
-            onViewOpen={handleProjectViewOpen} 
+            onViewOpen={handleProjectViewOpen}
             onEdit={handleProjectEdit}
             project={project}
             actionsType={projectType === 'saved' && role !== 'volunteer' ? 'public' : role === 'corporate' ? 'client' : role === 'volunteer' ? 'volunteer' : 'public'}/>)}
         </InfiniteScroll>
       }
       </div>
-      <ProjectModal outerVar={isEdit} projectId={currentProjectEdit?.id} initialTab={initialProjectTab} organization={organization} showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
-      {currentProject && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} organization={organization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
+      <ProjectModal outerVar={isEdit} projectId={currentProjectEdit?.id} initialTab={initialProjectTab}  showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
+      {currentProject && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
     </div>
     {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>

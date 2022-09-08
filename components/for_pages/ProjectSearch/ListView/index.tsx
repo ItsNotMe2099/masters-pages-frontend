@@ -41,14 +41,18 @@ const ProjectSearchListView = (props: Props) => {
   const [projects, setProjects] = useState<IProject[]>([])
   const [total, setTotal] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
-  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
-  const [currentOrganization, setCurrentOrganization] = useState<IOrganization| null>(null)
+  const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const limit = 10
 
   const appContext = useAppContext()
   const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
+  useEffect(() => {
+    if(router.query.projectId){
+      setCurrentProjectId(parseInt(router.query.projectId as string, 10))
+    }
+  }, [router.query.projectId])
   const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
     ProjectRepository.search(page, limit, keywords).then(data => {
       if(data){
@@ -92,38 +96,21 @@ const ProjectSearchListView = (props: Props) => {
   }
   const handleProjectViewOpen = async (project: IProject) => {
     setInitialProjectTab('description')
-      await OrganizationRepository.fetchOrganizationsList().then((data) => {
-        if(data){
-          const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-          if(newData[0]){
-          OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
-            if(data){
-              setCurrentOrganization(data)
-            }
-          })}
-        }
-      })
-      await setCurrentProject(project)
+    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType , projectId: project.id})}`, undefined, {shallow: true})
+
+     setCurrentProjectId(project.id)
   }
   const handleProjectApplyOpen = async (project: IProject) => {
-    await OrganizationRepository.fetchOrganizationsList().then((data) => {
-      if(data){
-        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-        if(newData[0]){
-        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
-          if(data){
-            setCurrentOrganization(data)
-          }
-        })}
-      }
-    })
+    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType , projectId: project.id})}`, undefined, {shallow: true})
+
     setInitialProjectTab('application')
-    await setCurrentProject(project);
+     setCurrentProjectId(project.id);
 
   }
   const handleOnClose = () => {
-    setCurrentProject(null)
-    setCurrentOrganization(null)
+    setCurrentProjectId(null)
+    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType})}`, undefined, { shallow: true })
+
   }
 
   return (
@@ -182,7 +169,7 @@ const ProjectSearchListView = (props: Props) => {
       </div>
 
     </div>
-      {currentProject && <ProjectModal initialTab={initialProjectTab} organization={currentOrganization} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleOnClose}/>}
+      {currentProjectId && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleOnClose}/>}
 
       <Modals/>
     </Layout>
