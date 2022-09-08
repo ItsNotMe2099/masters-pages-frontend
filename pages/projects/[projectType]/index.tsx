@@ -47,7 +47,7 @@ const ProjectsPage = (props: Props) => {
   const stat = useSelector((state: IRootState) => state.taskUser.stat)
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-  const [currentProjectEdit, setCurrentProjectEdit] = useState(null)
+  const [currentProjectEditId, setCurrentProjectEditId] = useState<number>(null)
   const tabs = useMemo(
     () => (currentProfile.role === ProfileRole.Corporate ? [
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
@@ -72,8 +72,12 @@ const ProjectsPage = (props: Props) => {
     [currentProfile.role, counts]
   )
 
-  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
-
+  const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
+  useEffect(() => {
+    if(router.query.projectId){
+      setCurrentProjectId(parseInt(router.query.projectId as string, 10))
+    }
+  }, [router.query.projectId])
   useEffect(() => {
     if(currentProfile.role === ProfileRole.Corporate){
     ProjectRepository.fetchCounts().then(data => setCounts(data ?? {}))
@@ -127,7 +131,7 @@ const ProjectsPage = (props: Props) => {
     }
   }
   const handleProjectViewOpen = async (project: IProject) => {
-    setCurrentProjectEdit(project);
+    setCurrentProjectEditId(project.id);
     if(currentProfile.role !== ProfileRole.Corporate){
     await OrganizationRepository.fetchOrganizationsList().then((data) => {
       if(data){
@@ -140,13 +144,16 @@ const ProjectsPage = (props: Props) => {
         })}
       }
     })
-    setCurrentProject(project)}
+    setCurrentProjectId(project.id)
+     }
     else{
       dispatch(projectOpen())
     }
+    router.push(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
+
   }
   const handleCreateProject = () => {
-    setCurrentProjectEdit(null)
+    setCurrentProjectEditId(null)
     dispatch(projectOpen())
   }
 
@@ -200,12 +207,14 @@ const ProjectsPage = (props: Props) => {
 
   const handleProjectApplyOpen =  async (project: IProject, profile: IProfile) => {
     setInitialProjectTab('application')
-    setCurrentProject(project);
+    setCurrentProjectId(project.id);
+    router.push(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
+
   }
 
   const handleModalClose = () => {
     if(currentProfile.role === ProfileRole.Volunteer){
-    setCurrentProject(null)
+    setCurrentProjectId(null)
     ApplicationRepository.fetchCountsByProfile().then(data => setCounts(data ?? {}))
     ProfileRepository.fetchSavedProjects().then((data) => {
       if(data){
@@ -237,17 +246,21 @@ const ProjectsPage = (props: Props) => {
       }
     })
   }
-    setCurrentProject(null)
-    setCurrentProjectEdit(null)
+    setCurrentProjectId(null)
+    setCurrentProjectEditId(null)
     setIsEdit(false)
     dispatch(confirmModalClose())
     dispatch(modalClose())
+    router.push(`/projects/${projectType}`, undefined , {shallow: true})
+
   }
 
   const [isEdit, setIsEdit] = useState(false)
 
   const handleProjectEdit = (project: IProject) => {
-    setCurrentProjectEdit(project);
+    setCurrentProjectEditId(project.id);
+    router.push(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
+
     dispatch(projectOpen())
     setIsEdit(true)
   }
@@ -298,8 +311,8 @@ const ProjectsPage = (props: Props) => {
         </InfiniteScroll>
       }
       </div>
-      <ProjectModal outerVar={isEdit} projectId={currentProjectEdit?.id} initialTab={initialProjectTab}  showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
-      {currentProject && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} showType={'public'} projectId={currentProject?.id} isOpen onClose={handleModalClose}/>}
+      <ProjectModal outerVar={isEdit} projectId={currentProjectEditId} initialTab={initialProjectTab}  showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
+      {currentProjectId && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleModalClose}/>}
     </div>
     {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>
