@@ -10,7 +10,6 @@ import Button from 'components/PublicProfile/components/Button'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
 import Validator from 'utils/validator'
 import SwitchField from 'components/fields/SwitchField'
-import ProjectsPage from 'pages/projects/[projectType]'
 import { ApplicationStatus } from 'data/intefaces/IApplication'
 
 interface Props {

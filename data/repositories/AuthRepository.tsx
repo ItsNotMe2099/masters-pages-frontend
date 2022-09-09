@@ -60,6 +60,19 @@ export default class AuthRepository {
     return res.data
   }
 
+  static async phoneChangeConfirmation({phone, code}: AuthPhoneConfirmFormData): Promise<IAuthResponse | null> {
+    const res = await request({
+      url: '/api/auth/phoneChangeConfirmation',
+      method: 'POST',
+      data: {phone, code},
+    })
+    console.log("Res112", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
   static async passwordForgot({phone}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
     const res = await request({
       url: '/api/auth/forgot',
