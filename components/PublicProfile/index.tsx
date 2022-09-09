@@ -241,7 +241,7 @@ const PublicProfile = (props) => {
           >
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
           </InfiniteScroll>}
-          {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'}  projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+          {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile && profile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
