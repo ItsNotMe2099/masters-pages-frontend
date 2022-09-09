@@ -75,7 +75,14 @@ const ProjectsPage = (props: Props) => {
   const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
   useEffect(() => {
     if(router.query.projectId){
-      setCurrentProjectId(parseInt(router.query.projectId as string, 10))
+      console.log("OpenProjectId11")
+      if(currentProfile.role === ProfileRole.Corporate){
+        setCurrentProjectEditId(parseInt(router.query.projectId as string, 10))
+        dispatch(projectOpen())
+        setIsEdit(true)
+      }else {
+        setCurrentProjectId(parseInt(router.query.projectId as string, 10))
+      }
     }
   }, [router.query.projectId])
   useEffect(() => {
@@ -133,13 +140,12 @@ const ProjectsPage = (props: Props) => {
   const handleProjectViewOpen = async (project: IProject) => {
     setCurrentProjectEditId(project.id);
     if(currentProfile.role !== ProfileRole.Corporate){
-
     setCurrentProjectId(project.id)
      }
     else{
       dispatch(projectOpen())
     }
-    router.push(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
+    router.replace(`/projects/${projectType}?projectId=${project.id}`, `/projects/${projectType}?projectId=${project.id}` , {shallow: true})
 
   }
   const handleCreateProject = () => {
@@ -198,7 +204,7 @@ const ProjectsPage = (props: Props) => {
   const handleProjectApplyOpen =  async (project: IProject, profile: IProfile) => {
     setInitialProjectTab('application')
     setCurrentProjectId(project.id);
-    router.push(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
+    router.push(`/projects/${projectType}?projectId=${project.id}`, `/projects/${projectType}?projectId=${project.id}` , {shallow: true})
 
   }
 
@@ -241,7 +247,7 @@ const ProjectsPage = (props: Props) => {
     setIsEdit(false)
     dispatch(confirmModalClose())
     dispatch(modalClose())
-    router.push(`/projects/${projectType}`, undefined , {shallow: true})
+    router.replace(`/projects/${projectType}`, `/projects/${projectType}` , {shallow: true})
 
   }
 
@@ -249,7 +255,7 @@ const ProjectsPage = (props: Props) => {
 
   const handleProjectEdit = (project: IProject) => {
     setCurrentProjectEditId(project.id);
-    router.push(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
+    router.replace(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
 
     dispatch(projectOpen())
     setIsEdit(true)
@@ -302,7 +308,7 @@ const ProjectsPage = (props: Props) => {
       }
       </div>
       <ProjectModal organization={organization} outerVar={isEdit} projectId={currentProjectEditId} initialTab={initialProjectTab}  showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
-      {currentProjectId && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleModalClose}/>}
+      {!currentProjectEditId && currentProjectId && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleModalClose}/>}
     </div>
     {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
       <Modals/>

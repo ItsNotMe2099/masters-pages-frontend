@@ -56,7 +56,7 @@ const PublicProfile = (props) => {
   const [currentProject, setCurrentProject] = useState<IProject | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const limit = 10
-
+  console.log("organization", organization)
   const handleUpdateOrganization = () => {
     OrganizationRepository.fetchCurrentOrganization().then((data) => {
       if(data){
@@ -146,6 +146,20 @@ const PublicProfile = (props) => {
   //else if(!currentProfile){
 
   //}
+    if(profile.role === 'corporate'){
+      OrganizationRepository.fetchOrganizationsList().then((data) => {
+        if(data){
+          const newData = data.filter(item => item.corporateProfileId === profile.id)
+          if(newData[0]){
+            OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
+              if(data){
+                setOrganization(data)
+              }
+            })}
+        }
+      })
+    }
+
     if (isEdit) {
       dispatch(fetchSkillList())
     }
