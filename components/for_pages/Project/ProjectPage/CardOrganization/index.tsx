@@ -69,8 +69,8 @@ const CardOrganization = (props: Props) => {
   }*/
   return (
     <div className={styles.root}>
-      <a href={`/id${props.organization.id}`}><Avatar size={'large'} image={props.organization.corporateProfile.photo}/></a>
-      <a href={`/id${props.organization.id}`} className={styles.name}>{props.organization.name}</a>
+      <a href={`/id${props.organization.corporateProfile.id}`}><Avatar size={'large'} image={props.organization.corporateProfile.photo}/></a>
+      <a href={`/id${props.organization.corporateProfile.id}`} className={styles.name}>{props.organization.name}</a>
       <div className={styles.allStats}>
         <div className={styles.stat}>
           <div className={styles.statItem}>
