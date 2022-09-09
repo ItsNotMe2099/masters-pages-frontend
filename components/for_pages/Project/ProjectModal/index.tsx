@@ -29,11 +29,12 @@ interface Props {
   onDelete?: () => void | null | undefined
   initialTab?: string
   outerVar?: boolean
+  organization?: IOrganization
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTab, outerVar}: Props) => {
+const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTab, outerVar, ...props}: Props) => {
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const [project, setProject] = useState<IProject>(null);
-  const [organization, setOrganization] = useState<IOrganization | null>(null);
+  const [organization, setOrganization] = useState<IOrganization | null>(props.organization);
   const appContext = useAppContext()
   const profile = appContext.profile
   const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: [], eventMessages: []}
@@ -41,9 +42,9 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTa
   console.log("ProjectInModal", project)
   useEffect(() => {
 
-    if(showType === 'public'){
+    if(showType === 'public' && projectId){
       ProjectRepository.findPublicById(projectId).then(i => setProject(i))
-    }else {
+    }else if(projectId){
       ProjectRepository.findById(projectId).then(i => setProject(i))
       AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId).then(data => {
         if(data){
@@ -128,7 +129,7 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTa
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
           {((projectId && project) || !projectId) && <>
-            {tab === 'description' && organization && <TabProjectDescription onClose={onClose} outerVar={outerVar} organization={organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
+            {tab === 'description' && (organization || props.organization) && <TabProjectDescription onClose={onClose} outerVar={outerVar} organization={organization ?? props.organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
             {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}

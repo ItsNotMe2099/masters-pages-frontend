@@ -133,17 +133,7 @@ const ProjectsPage = (props: Props) => {
   const handleProjectViewOpen = async (project: IProject) => {
     setCurrentProjectEditId(project.id);
     if(currentProfile.role !== ProfileRole.Corporate){
-    await OrganizationRepository.fetchOrganizationsList().then((data) => {
-      if(data){
-        const newData = data.filter(item => item.corporateProfileId === project.corporateProfileId)
-        if(newData[0]){
-        OrganizationRepository.fetchOrganization(newData[0].id).then((data) => {
-          if(data){
-            setOrganization(data)
-          }
-        })}
-      }
-    })
+
     setCurrentProjectId(project.id)
      }
     else{
@@ -311,7 +301,7 @@ const ProjectsPage = (props: Props) => {
         </InfiniteScroll>
       }
       </div>
-      <ProjectModal outerVar={isEdit} projectId={currentProjectEditId} initialTab={initialProjectTab}  showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
+      <ProjectModal organization={organization} outerVar={isEdit} projectId={currentProjectEditId} initialTab={initialProjectTab}  showType={role === 'corporate' ? 'client' : 'public'} isOpen={modalKey === 'projectModal'} onClose={handleModalClose}/>
       {currentProjectId && <ProjectModal outerVar={isEdit} initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleModalClose}/>}
     </div>
     {total === 0 && <div className={styles.noProjects}><span>{t('noProjects')}</span></div>}
