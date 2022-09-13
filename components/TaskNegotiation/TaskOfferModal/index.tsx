@@ -14,6 +14,7 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import { fetchProfileSearchStatRequest, setSearchStatFilter } from 'components/ProfileSearch/actions'
 interface Props {
   isOpen: boolean,
   onClose: () => void
@@ -26,9 +27,11 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
   const taskListTotal = useSelector((state: IRootState) => state.taskUser.total)
   const taskListLoading = useSelector((state: IRootState) => state.taskUser.listLoading)
+  const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter)
   const {t} = useTranslation('common')
-  const appContext = useAppContext();
+  const appContext = useAppContext()
   const profile = appContext.profile
+  const isMaster = profile.role !== 'client'
   useEffect(() => {
     if(profile.role === 'client') {
       dispatch(fetchTaskUserListRequest({
@@ -54,6 +57,15 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
     dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: profile.id}, profile.id))
   }
 
+  const handleChangeForStat = (key, value) => {
+    statFilter[key] = value
+    dispatch(setSearchStatFilter(statFilter))
+    dispatch(fetchProfileSearchStatRequest({
+      limit: 1,
+      ...statFilter
+    }))
+  }
+
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
@@ -65,7 +77,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
       <div className={styles.body}>
         {!sendOfferLoading && !taskListLoading && taskListTotal > 0 && <Tabs tabs={tabs} activeTab={activeTab} onChange={handleChangeTab}/>}
       {activeTab === 'tasks' && taskListTotal > 0 && <TaskOfferOrderList onCancel={onClose}/>}
-      {(activeTab === 'newTask' || taskListTotal === 0) && <TaskOfferNewOrder onCancel={onClose} initialValues={{
+      {(activeTab === 'newTask' || taskListTotal === 0) && <TaskOfferNewOrder onChangeForStat={handleChangeForStat} isMaster={isMaster} onCancel={onClose} initialValues={{
         priceType: 'fixed',
         masterRole: profile.role === 'client' ? profile.role : profile.role,
         countryCode: profile?.geoname?.country,

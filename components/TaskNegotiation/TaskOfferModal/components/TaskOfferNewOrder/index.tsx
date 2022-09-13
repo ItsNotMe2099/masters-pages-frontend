@@ -23,6 +23,7 @@ import { Field, reduxForm,formValueSelector } from 'redux-form'
 import { useTranslation } from 'next-i18next'
 import { connect } from 'react-redux'
 import InputCountry from 'components/ui/Inputs/InputCountry'
+import { useAppContext } from 'context/state'
 interface Props {
   change?: (name, val) => void
   countryCode?: string
@@ -32,7 +33,9 @@ interface Props {
   priceType?: string
   initialValues?: any,
   handleSubmit?: (e) => void
+  onChangeForStat?: (role: string, value: any) => void
   onSubmit: (data) => void
+  isMaster: boolean
 }
 let TaskOfferNewOrder = (props: Props) => {
   const sendOfferLoading = useSelector((state: IRootState) => state.taskOffer.sendOfferLoading)
@@ -40,6 +43,9 @@ let TaskOfferNewOrder = (props: Props) => {
   const dispatch = useDispatch()
   const {t} = useTranslation('common')
 
+  const appContext = useAppContext()
+  const profile = appContext.profile
+  const isMaster = profile.role !== 'client'
 
   return (
      <form className={styles.root} onSubmit={props.handleSubmit}>
@@ -70,6 +76,15 @@ let TaskOfferNewOrder = (props: Props) => {
           labelType={'static'}
           validate={required}
         />}
+        {!props.isMaster && <Field
+                name="masterRole"
+                onChange={(value) => props.onChangeForStat('masterRole', value)}
+                component={SelectInput}
+                label={`${t('createTask.fieldMasterType')}*`}
+                options={[{value: 'master', label: t('master')}, {value: 'volunteer', label: t('volunteer')}]}    validate={required}
+                size={'small'}
+                labelType={'static'}
+              />}
         <Field
           name="address"
           component={InputAddress}
