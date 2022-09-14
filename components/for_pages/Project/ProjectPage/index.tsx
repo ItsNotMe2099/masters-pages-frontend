@@ -13,6 +13,7 @@ import WorkInListItem from 'components/PublicProfile/components/view/CardPreferW
 import ProjectCategories from 'components/for_pages/Project/ProjectCategories'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import CardOrganization from 'components/for_pages/Project/ProjectPage/CardOrganization'
+import ProjectLink from "components/for_pages/Project/ProjectPage/ProjectLink";
 
 interface Props {
   project: IProject
@@ -90,10 +91,10 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
            </div>
 
            <div className={styles.dates}>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div> 
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div>
              <div className={styles.date}><img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.applicationsClothingDate), 'MM.dd.yyy')}</div></div>
              <div className={styles.separator}/>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div> 
+             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div>
              <div className={styles.date}><img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.endDate), 'MM.dd.yyy')}</div></div>
 
   </div>
@@ -110,7 +111,7 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
        {project.attachments && <div className={styles.section}>
          <div className={styles.sectionHeader}>Files</div>
          {<div className={styles.attachments}>
-              {project.attachmentsObjects?.map(item => 
+              {project.attachmentsObjects?.map(item =>
                   <a className={styles.item} target='_blank' href={getMediaPath(item.urlS3)} download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
               )}
             </div>}
@@ -131,6 +132,10 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
      <div className={styles.right}>
         <div className={styles.header}>Project Info</div>
      {project.photo && <div className={styles.photo}><img src={getMediaPath(project.photo)}/></div>}
+       <div className={styles.section}>
+         <div className={styles.sectionHeader}>Share Link</div>
+        <ProjectLink projectId={project.id}/>
+       </div>
      <div className={styles.section}>
        <div className={styles.sectionHeader}>Execution type</div>
        <div className={classNames(styles.sectionContent, styles.executionType)}>

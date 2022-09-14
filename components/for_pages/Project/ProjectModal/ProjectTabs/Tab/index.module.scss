@@ -29,11 +29,14 @@
 }
 
 .guest{
+  color: black;
   &:hover{
     background: #a39e9e;
+    color: black;
   }
   &.active{
     background: #a39e9e;
+    color: black;
   }
 }
 

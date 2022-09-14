@@ -25,7 +25,7 @@ interface Props {
   onDelete: () => void | null
   organization?: IOrganization
   outerVar?: boolean
-  onClose: () => void
+  onClose?: () => void
 }
 
 
@@ -37,7 +37,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
   const router = useRouter()
   console.log('router', router)
   const dispatch = useDispatch()
-  
+
   const handleSave = (data) => {
     setIsEdit(false);
     props.onSave(data);
@@ -61,7 +61,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
   }
   }, [])
   const handleDelete = async () => {
-    
+
     await ProjectRepository.delete(project.id)
     dispatch(confirmOpen({
       description: `${t('task.confirmDelete')} «${project.title}»?`,
@@ -111,7 +111,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
       case ProjectStatus.Paused:
         return <Button onClick={() => handleChangeProjectStatus(ProjectStatus.Published, project.id)} type='button' projectBtn='default'>RESUME</Button>
       case ProjectStatus.Execution:
-        return <><Button 
+        return <><Button
         onClick={() => handleChangeProjectStatus(ProjectStatus.Completed, project.id)} type='button' projectBtn='default'>COMPLETE</Button>
           <Button  className={styles.delete} onClick={() => handleChangeProjectStatus(ProjectStatus.Canceled, project.id)} type='button' projectBtn='default'><img src='/img/icons/recycle-bin.svg' alt=''/></Button></>
     }
@@ -126,11 +126,11 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
       projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
       projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
       projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
-      projectStatus !== ProjectStatus.Execution && <Button color={'white'} 
+      projectStatus !== ProjectStatus.Execution && <Button color={'white'}
       onClick={() => projectStatus !== ProjectStatus.Canceled ? handleChangeProjectStatus(ProjectStatus.Canceled, project.id) : handleDelete()} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
-    ] : 
+    ] :
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
-    (application?.status === ApplicationStatus.Applied || 
+    (application?.status === ApplicationStatus.Applied ||
       application?.status === ApplicationStatus.Invited ||
       application?.status === ApplicationStatus.Execution ||
       application?.status === ApplicationStatus.CompleteRequest ||
