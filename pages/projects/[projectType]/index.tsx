@@ -145,7 +145,6 @@ const ProjectsPage = (props: Props) => {
     else{
       dispatch(projectOpen())
     }
-    router.replace(`/projects/${projectType}?projectId=${project.id}`, `/projects/${projectType}?projectId=${project.id}` , {shallow: true})
 
   }
   const handleCreateProject = () => {
@@ -204,7 +203,6 @@ const ProjectsPage = (props: Props) => {
   const handleProjectApplyOpen =  async (project: IProject, profile: IProfile) => {
     setInitialProjectTab('application')
     setCurrentProjectId(project.id);
-    router.push(`/projects/${projectType}?projectId=${project.id}`, `/projects/${projectType}?projectId=${project.id}` , {shallow: true})
 
   }
 
@@ -255,7 +253,6 @@ const ProjectsPage = (props: Props) => {
 
   const handleProjectEdit = (project: IProject) => {
     setCurrentProjectEditId(project.id);
-    router.replace(`/projects/${projectType}?projectId=${project.id}`, undefined , {shallow: true})
 
     dispatch(projectOpen())
     setIsEdit(true)
