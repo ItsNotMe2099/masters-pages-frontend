@@ -77,7 +77,8 @@ export default function LayoutAuthorized(props: Props) {
     {title: t('menu.share'), icon: 'share', link: '/Share'},
     {title: t('menu.invite'), icon: 'invite', link: '/Invite'},
     ...(role === ProfileRole.Master ? [
-    {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage', isSeparator: true}
+    {title: t('menu.findOrders'), icon: 'find-orders', link: '/SearchTaskPage', isSeparator: true},
+    {title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount},
     ] : []),
     ...(role === ProfileRole.Client ?
       [
