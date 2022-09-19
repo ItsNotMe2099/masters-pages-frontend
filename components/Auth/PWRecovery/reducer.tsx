@@ -37,6 +37,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       break
     case ActionTypes.RESET_PW_FIRST_STEP_ERROR:
       state.loading = false
+      console.log(" action.payloadReset", action.payload)
       state.formError = action.payload.error || action.payload.errors || 'Unknow error'
       break
     case ActionTypes.RESET_PW_SET_CODE:
