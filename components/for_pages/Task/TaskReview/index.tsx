@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IRootState, ITask} from 'types'
+import {IRootState, ITask, ITaskStatus} from 'types'
 import styles from 'components/for_pages/Task/TaskReview/index.module.scss'
 
 import {useSelector, useDispatch} from 'react-redux'
@@ -41,6 +41,9 @@ const TaskReview = ({task}: Props) => {
   }
   if(!otherSide){
     return null
+  }
+  if(task.status !== ITaskStatus.Done){
+    return null;
   }
   const isCanPostReviewVisible = () => {
     return [task.profileId, task.masterId].includes(currentProfile.id)
