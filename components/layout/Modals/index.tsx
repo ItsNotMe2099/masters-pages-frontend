@@ -29,6 +29,7 @@ import ProfileEmailChangeModal from '../../ProfileEmailChangeModal'
 import SaveTaskSearchModal from 'components/SaveTaskSearchModal'
 import SaveProfileSearchModal from 'components/SaveProfileSearchModal'
 import ProfilePhoneChangeModal from 'components/ProfilePhoneChangeModal'
+import RegistrationPhoneConfirm from "components/Auth/RegistrationPhoneConfirm";
 
 
 interface Props {
@@ -51,6 +52,10 @@ const Modals = (props: Props) => {
         onRequestClose={() => dispatch(modalClose())}
       />}
       {key === 'phoneConfirm' && <PhoneConfirmComponent
+        isOpen={true}
+        onRequestClose={() => dispatch(modalClose())}
+      />}
+      {key === 'registrationPhoneConfirm' && <RegistrationPhoneConfirm
         isOpen={true}
         onRequestClose={() => dispatch(modalClose())}
       />}

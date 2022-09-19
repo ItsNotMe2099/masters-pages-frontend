@@ -8,6 +8,7 @@ interface RegistrationSubmitData{
   city: string,
   password: string
   organization: any
+  cb: () => void
 }
 export const registrationCompleteSubmit = (data: RegistrationSubmitData) => action(ActionTypes.REGISTRATION_COMPLETE_SUBMIT, data)
 export const registrationCompleteSuccess = () => action(ActionTypes.REGISTRATION_COMPLETE_SUCCESS)

@@ -42,7 +42,7 @@ export default function registrationPhoneReducer(state = {...initialState}, acti
     case ActionTypes.REGISTRATION_PHONE_CHANGE:
       state.formIsSuccess = false
       state.loading = true
-      state.phone = action.payload.phone
+      state.phone = action.payload.newPhone
       break
 
     case ActionTypes.REGISTRATION_PHONE_CHANGE_REQUEST + ApiActionTypes.SUCCESS:

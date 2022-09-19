@@ -1,14 +1,12 @@
-import {phoneConfirmReset} from 'components/Auth/PhoneConfirm/actions'
+import {phoneConfirmReset, phoneConfirmSubmit} from 'components/Auth/PhoneConfirm/actions'
 import Modal from 'components/ui/Modal'
+import { IRootState } from 'types'
 import styles from './index.module.scss'
 import SignUp from './Form'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import {useEffect} from 'react'
 import {useAuthContext} from 'context/auth_state'
-import Cookies from 'js-cookie'
-import ProfileRepository from 'data/repositories/ProfileRepostory'
-import { useAppContext } from 'context/state'
 
 interface Props {
   isOpen: boolean
@@ -23,26 +21,12 @@ const PhoneConfirmComponent = (props: Props) => {
   const isLoading = authContext.confirmSpinner;
   const code = authContext.codeRes?.code
 
-  const phone = authContext.signUpFormData?.phone
-
-  const appContext = useAppContext()
-
-  const profile = appContext.profile
-
-  const currentToken = Cookies.get('token')
-
   useEffect(() => {
     dispatch(phoneConfirmReset())
   }, [])
-
-  const handleSubmit = async (data) => {
-    const result = await authContext.confirmCode(data.code)
-    if(currentToken && result){
-      await ProfileRepository.updateProfile(profile.id, {phone: phone})
-      appContext.updateProfile()
-    }
+  const handleSubmit = (data) => {
+    authContext.confirmCode(data.code);
   }
-
   return (
     <Modal
       {...props}

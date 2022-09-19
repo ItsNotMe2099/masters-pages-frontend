@@ -12,6 +12,8 @@ import RegistrationPhone from 'components/Auth/RegistrationPhone'
 import RegistrationPhoneConfirm from 'components/Auth/RegistrationPhoneConfirm'
 import Backgrounds from 'components/Backgrounds'
 import {IUser} from 'data/intefaces/IUser'
+import {ProfileRole} from "data/intefaces/IProfile";
+import {useAppContext} from "context/state";
 interface Props {
   user?: IUser
 }
@@ -21,9 +23,12 @@ const RegistrationPage = (props: Props) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-
+  const appContext = useAppContext()
   const handleSubmit = (data) => {
-    dispatch(registrationCompleteSubmit(data))
+    dispatch(registrationCompleteSubmit({...data, cb: async () => {
+        await appContext.updateUser();
+        await appContext.updateRole(ProfileRole.Client);
+      }}))
   }
   return (
     <div className={styles.root}>

@@ -25,14 +25,14 @@ function* registrationCompleteSaga() {
       } as IRequestData)
       const isOrganization = !!action.payload.organization
       const role = isOrganization ? ProfileRole.Corporate : ProfileRole.Client
-      cookie.set(CookiesType.profileRole, role, {expires: 60 * 60* 24 * 365})
 
-      yield put(fetchProfile(role))
-      yield take([ProfileActionTypes.FETCH_PROFILE + ApiActionTypes.SUCCESS, ProfileActionTypes.FETCH_PROFILE + ApiActionTypes.FAIL])
 
       if(!res.err){
         yield put(registrationCompleteSuccess())
         yield put(registrationSuccessOpen())
+          if(action.payload.cb){
+            action.payload.cb()
+          }
         reachGoal('auth:signup:completed')
       }else{
         yield put(registrationCompleteError(res.err?.errors))

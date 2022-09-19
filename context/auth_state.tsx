@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 import {AuthLoginFormData, AuthRegisterFormData, IPhoneConfirmResponse} from 'data/intefaces/IAuth'
 import AuthRepository from 'data/repositories/AuthRepository'
 import {useDispatch} from 'react-redux'
-import {modalClose, phoneConfirmOpen} from 'components/Modal/actions'
+import {modalClose, phoneConfirmOpen, registrationPhoneConfirmOpen} from 'components/Modal/actions'
 import Router, {useRouter} from 'next/router'
 import {reachGoal} from 'utils/ymetrika'
 
@@ -69,7 +69,6 @@ export function AuthWrapper(props: Props) {
   const [remainSec, setRemainSec] = useState(0)
   const [error, setError] = useState<string | null>(null)
 
-  const currentToken = Cookies.get('token')
 
   useInterval(() => {
     if (remainSec > 0) {
@@ -131,13 +130,12 @@ export function AuthWrapper(props: Props) {
       dispatch(phoneConfirmOpen())
     }
   }
-
-  // Sign up step 2
+// Sign up step 2
   const confirmCode = async (code: string): Promise<boolean> => {
     setError(null);
     setConfirmSpinner(true)
     try {
-      const resConfirm = currentToken ? await AuthRepository.phoneChangeConfirmation({code, phone: signUpFormData?.phone}) : await AuthRepository.phoneConfirmation({code, phone: signUpFormData?.phone});
+      const resConfirm = await AuthRepository.phoneConfirmation({code, phone: signUpFormData?.phone});
       console.log("resConfirm", resConfirm)
       const accessToken = resConfirm.accessToken
 
@@ -147,23 +145,17 @@ export function AuthWrapper(props: Props) {
         return false
       }
       reachGoal('auth:phone:confirmed')
-      console.log("PhoneConfirmed")
-      if(!currentToken){
-      setToken(resConfirm.accessToken)
+      console.log("PhoneConfirmed");
+      setToken(resConfirm.accessToken);
       setConfirmSpinner(false)
-      dispatch(modalClose())
+      dispatch(modalClose());
       appContext.updateTokenFromCookies()
-      console.log("Redirect")
-      await router.push('/registration')
-      }
-      else{
-        setConfirmSpinner(false)
-        dispatch(modalClose())
-      }
+      console.log("Redirect");
+      await router.push('/registration');
     }catch (e){
       setConfirmSpinner(false)
-      setError(e)
-      return false
+      setError(e);
+      return false;
     }
     return true
   }
