@@ -17,6 +17,7 @@ import {
 function* SavedSearchesSaga() {
   yield takeLatest(ActionTypes.DELETE_SAVED_TASK_SEARCHES,
     function* (action: ActionType<typeof deleteSavedTaskSearch>) {
+    console.log("DELETE_SAVED_TASK_SEARCHES")
       yield put(confirmChangeData({loading: true}))
       yield put(deleteSavedTaskSearchRequest(action.payload.id))
       const result = yield take([ActionTypes.DELETE_SAVED_TASK_SEARCHES_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SAVED_TASK_SEARCHES_REQUEST + ApiActionTypes.FAIL])
@@ -24,9 +25,10 @@ function* SavedSearchesSaga() {
         yield put(modalClose())
       }
     })
-  yield takeLatest(ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST,
+  yield takeLatest(ActionTypes.DELETE_SAVED_PROFILE_SEARCHES,
     function* (action: ActionType<typeof deleteSavedProfileSearch>) {
       yield put(confirmChangeData({loading: true}))
+      console.log("deleteSavedProfileSearchRequest")
       yield put(deleteSavedProfileSearchRequest(action.payload.id))
       const result = yield take([ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.FAIL])
       if(result.type === ActionTypes.DELETE_SAVED_PROFILE_SEARCHES_REQUEST + ApiActionTypes.SUCCESS){

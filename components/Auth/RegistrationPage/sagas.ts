@@ -35,7 +35,7 @@ function* registrationCompleteSaga() {
           }
         reachGoal('auth:signup:completed')
       }else{
-        yield put(registrationCompleteError(res.err?.errors))
+        yield put(registrationCompleteError(res.err))
       }
 
     })

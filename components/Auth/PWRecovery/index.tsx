@@ -23,6 +23,7 @@ const PWRecoveryComponent = (props: Props) => {
     dispatch(PWRecoveryResetState())
   }, [])
   const handleSubmit = (data) => {
+    console.log("handleSubmit")
     dispatch(PWRecoverySubmit(data))
   }
 

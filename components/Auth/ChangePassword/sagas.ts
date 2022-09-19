@@ -20,7 +20,7 @@ function* signInSaga() {
         yield put(changePasswordSuccess())
         yield put(modalClose())
       }else{
-        yield put(changePasswordError(res.err?.errors))
+        yield put(changePasswordError(res.err))
       }
 
     })

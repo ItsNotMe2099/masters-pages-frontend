@@ -3,6 +3,7 @@ import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {format, parse} from 'date-fns'
 import { IProject } from 'data/intefaces/IProject'
 import { IPagination } from 'types/types'
+import {IProfileSettings} from "types";
 export interface IDataQueryList{
   page?: number,
   limit?: number,
@@ -86,7 +87,6 @@ export default class ProfileRepository {
       method: 'PUT',
       data
     })
-    console.log("Res111", res);
     if (res.err) {
       return null
     }
@@ -97,6 +97,30 @@ export default class ProfileRepository {
     const res = await request({
       url: `/api/profile/for-main-page`,
       method: 'GET'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async getSettings(): Promise<IProfileSettings | null> {
+    const res = await request({
+      url: '/api/profile/settings',
+      method: 'GET',
+
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async updateSettings( data: any): Promise<IProfile | null> {
+    const res = await request({
+      url: `/api/profile/settings`,
+      method: 'POST',
+      data
     })
     if (res.err) {
       return null

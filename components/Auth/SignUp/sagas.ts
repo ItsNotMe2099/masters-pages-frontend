@@ -29,7 +29,7 @@ function* signUpSaga() {
         yield put(signUpSuccess())
         yield put(phoneConfirmOpen())
       }else{
-        yield put(signUpError(res.err?.errors))
+        yield put(signUpError(res.err))
       }
 
     })

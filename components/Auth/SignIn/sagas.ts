@@ -24,7 +24,7 @@ function* signInSaga() {
         yield put(modalClose())
         afterAuthRedirect()
       }else{
-        yield put(signInError(res.err?.errors))
+        yield put(signInError(res.err))
       }
 
     })

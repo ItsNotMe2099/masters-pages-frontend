@@ -33,7 +33,7 @@ function* CreateTaskCompleteSaga() {
       if(!res.err){
         yield put(createTaskSuccess(res.data))
       }else{
-        yield put(createTaskError(res.err?.errors))
+        yield put(createTaskError(res.err))
       }
 
     })

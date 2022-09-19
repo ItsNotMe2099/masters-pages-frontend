@@ -1,7 +1,7 @@
 import Input from 'components/ui/Inputs/Input'
 import * as React from 'react'
 import { Field, reduxForm,formValueSelector } from 'redux-form'
-import { required } from 'utils/validations'
+import {email, required} from 'utils/validations'
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import { useTranslation } from 'next-i18next'
@@ -62,7 +62,7 @@ let ShareByEmailForm = (props: Props) => {
           noMargin={true}
           placeholder={t('email')}
           component={Input}
-          validate={required}
+          validate={[required, email]}
         />
         </div>
       </div>
@@ -91,7 +91,7 @@ let ShareByEmailForm = (props: Props) => {
       <div className={styles.message}>
         {profile.firstName} {profile.lastName} {t('shareByEmail.wouldLike')}<br/>
         •  {t('shareByEmail.toSee')} <a href={shareUrl}> {profile.firstName} {profile.lastName} </a>{t('shareByEmail.profile')}<br/>
-        •  {t('shareByEmail.toLearn')} <a href='masterspages.com' target={'_blank'}>MastersPages</a><br/>
+        •  {t('shareByEmail.toLearn')} <a href='/' target={'_blank'}>MastersPages</a><br/>
         •  {t('shareByEmail.ifYouGot')} <a href={'mailto:abuse@masterspages.com'}>abuse@masterspages.com</a>.<br/>
         <br/>
         {t('shareByEmail.trulyYours')}<br/>

@@ -14,6 +14,8 @@ import {AuthWrapper} from 'context/auth_state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import Head from 'next/head'
 
+import Snackbar from 'components/layout/Snackbar'
+import {useEffect, useState} from "react";
 interface IPageProps {
   namespacesRequired: string[]
 }
@@ -21,7 +23,10 @@ interface IPageProps {
 
 function MyApp({Component, pageProps}: AppProps) {
 
-
+  const [clientVisible, setClientVisible] = useState(true)
+  useEffect(() => {
+    setClientVisible(true)
+  });
   return (
     <Provider store={store}>
     <AppWrapper isMobile={pageProps.isMobile} token={pageProps.token} user={pageProps.user} profile={pageProps.currentProfile} role={pageProps.mode}>
@@ -29,11 +34,13 @@ function MyApp({Component, pageProps}: AppProps) {
         <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com"/>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/> 
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         </Head>
         <Component {...pageProps} />
       </AuthWrapper>
+      {clientVisible && <Snackbar />}
     </AppWrapper>
+
     </Provider>
   )
 }

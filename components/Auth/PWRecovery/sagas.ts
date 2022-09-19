@@ -37,7 +37,7 @@ function* PWRecoverySaga() {
         yield put(PWRecoverySuccess())
         yield put({type: ActionTypes.RESET_PW_FIRST_STEP_SUCCESS})
       }else{
-        yield put(PWRecoveryError(res.err?.errors))
+        yield put(PWRecoveryError(res.err))
       }
 
     })
@@ -59,7 +59,7 @@ function* PWRecoverySaga() {
           yield put(PWRecoverySecondSuccess())
           yield put(PWRecoverySuccessOpen())
         }else{
-          yield put(PWRecoverySecondError(res.err?.errors))
+          yield put(PWRecoverySecondError(res.err))
         }
 
       })
@@ -83,7 +83,7 @@ function* PWRecoverySaga() {
             afterAuthRedirect()
           }else{
 
-            yield put(PWRecoveryFinalError(res.err?.errors))
+            yield put(PWRecoveryFinalError(res.err))
           }
 
         })

@@ -47,7 +47,7 @@ let TabLanguageForm = (props) => {
       </div>
 
        <FormError error={error}/>
-      <Button className={styles.button} disabled={loading} grey={true} bold={true} size={'12px 70px'}  type={'submit'}>{t('personalArea.tabSettings.buttonSave')}</Button>
+      <Button className={styles.button} disabled={props.sending} grey={true} bold={true} size={'12px 70px'}  type={'submit'}>{t('personalArea.tabSettings.buttonSave')}</Button>
 
 
     </form>

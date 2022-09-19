@@ -15,7 +15,7 @@ let TabNotificationsForm = (props) => {
   const {t} = useTranslation()
   const dispatch = useDispatch()
   const error = useSelector((state: IRootState) => state.profileSettings.formError)
-  const loading = useSelector((state: IRootState) => state.profileSettings.formLoading)
+  const loading = props.settings;
   const [newPhone, setNewPhone] = useState()
   const handleEmailChange = () => {
     dispatch(profileEmailChangeOpen())
@@ -28,7 +28,7 @@ let TabNotificationsForm = (props) => {
     <form className={styles.root} onSubmit={props.handleSubmit}>
       <NotificationsForm {...props}/>
        <FormError error={error}/>
-      <Button className={styles.button} disabled={loading} grey={true} bold={true} size={'12px 70px'}  type={'submit'}>{t('personalArea.tabSettings.buttonSave')}</Button>
+      <Button className={styles.button} disabled={loading}  grey={true} bold={true} size={'12px 70px'}  type={'submit'}>{t('personalArea.tabSettings.buttonSave')}</Button>
 
     </form>
   )

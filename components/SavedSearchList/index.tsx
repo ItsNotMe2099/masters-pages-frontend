@@ -61,6 +61,7 @@ export default function SavedSearchList(props: Props) {
     dispatch(confirmOpen({
       description: `${t('savedSearch.areYouSure')}«${item.name || `${t('savedSearch.search')} #${item.id}`}»?`,
       onConfirm: () => {
+        console.log("handleDelete", type)
         if (type === 'task') {
           dispatch(deleteSavedTaskSearch(item.id))
         } else {

@@ -1,12 +1,12 @@
-import { createContext, useContext, useState } from 'react'
-import { useAppContext } from 'context/state'
-import { CookiesType, SnackbarType } from 'types/enums'
+import {createContext, useContext, useState} from 'react'
+import {useAppContext} from 'context/state'
+import {CookiesType, SnackbarType} from 'types/enums'
 import useInterval from 'use-interval'
 import Cookies from 'js-cookie'
 import {AuthLoginFormData, AuthRegisterFormData, IPhoneConfirmResponse} from 'data/intefaces/IAuth'
 import AuthRepository from 'data/repositories/AuthRepository'
 import {useDispatch} from 'react-redux'
-import {modalClose, phoneConfirmOpen, registrationPhoneConfirmOpen} from 'components/Modal/actions'
+import {modalClose, phoneConfirmOpen} from 'components/Modal/actions'
 import Router, {useRouter} from 'next/router'
 import {reachGoal} from 'utils/ymetrika'
 
@@ -182,6 +182,7 @@ export function AuthWrapper(props: Props) {
     if (signUpFormData?.phone) {
       await sendCodeToPhone(signUpFormData?.phone)
     }
+    appContext.showSnackbar('code sent', SnackbarType.success)
     setAgainSpinner(false)
   }
 

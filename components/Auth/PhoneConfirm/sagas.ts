@@ -26,7 +26,7 @@ function* phoneConfirmSaga() {
           window.location.href = '/registration'
 
       }else{
-        yield put(phoneConfirmError(res.err?.errors))
+        yield put(phoneConfirmError(res.err))
       }
 
     })

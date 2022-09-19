@@ -89,7 +89,7 @@ let TabPersonalForm = (props) => {
       </div>
 
       <FormError error={error}/>
-      <div className={styles.wrapper}><Button className={styles.button} grey={true} bold={true} size={'12px 70px'} >{t('personalArea.tabProfile.buttonSave')}</Button></div>
+      <div className={styles.wrapper}><Button className={styles.button} disabled={props.sending} grey={true} bold={true} size={'12px 70px'} >{t('personalArea.tabProfile.buttonSave')}</Button></div>
 
     </form>
   )
