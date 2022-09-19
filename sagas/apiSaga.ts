@@ -14,7 +14,7 @@ function* apiSaga() {
   yield takeEvery<any>(isApi, function* (action: BaseAction) {
     const res = yield requestGen(action.payload.api)
     if (res.err) {
-      yield put(typeAction(action.type + ApiActionTypes.FAIL, res.err))
+      yield put(typeAction(action.type + ApiActionTypes.FAIL, res.data ?? res.err))
     } else {
       yield put(typeAction(action.type + ApiActionTypes.SUCCESS, res.data))
     }

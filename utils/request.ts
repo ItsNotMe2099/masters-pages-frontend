@@ -63,7 +63,7 @@ async function request(options: string | Options, ctx: any = null): Promise<IRes
     const contentType = res.headers.get('content-type')
     const isJson = contentType && contentType.indexOf('application/json') !== -1;
 
-    const jsonData = await res.json() ?? await res.text();
+    const jsonData =  isJson ? await res.json() : await res.text();
     console.log("Res11122", res.status, jsonData, jsonData.errors);
 
     if (res.status === 200 || res.status === 201) {
@@ -72,6 +72,10 @@ async function request(options: string | Options, ctx: any = null): Promise<IRes
         err: null,
       }
     } else {
+      console.log("errRes11", {
+        data: jsonData,
+        err: jsonData.errors ?? 'Error',
+      })
       return {
         data: jsonData,
         err: jsonData.errors ?? 'Error',

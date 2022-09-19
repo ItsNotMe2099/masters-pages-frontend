@@ -13,6 +13,7 @@ function* requestGen(options: IRequestData | string): Generator<any, IResponse> 
   //  yield put(logout())
   }
 
+  console.log("RequestGen", res)
   return res
 }
 
