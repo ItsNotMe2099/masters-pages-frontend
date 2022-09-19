@@ -22,6 +22,7 @@ import {ProfileRole} from "data/intefaces/IProfile";
 import {signUpOpen} from "components/Modal/actions";
 import {useDispatch} from "react-redux";
 import Modals from "components/layout/Modals";
+import { useRouter } from 'next/router'
 
 interface Props {
   projectId: number
@@ -58,6 +59,7 @@ const ProjectPublicPage = (props: Props) => {
   const tabs = [
     {name: 'Description', key: 'description', icon: !profile ? 'description_black' : 'description'},
   ...(!profile || profile.role === ProfileRole.Volunteer ? [{name: 'Application', key: 'application', icon: !profile ? 'application_black' : 'application'}] : []),
+  ...(props.fullWidth && [{name: 'Back', key: 'back', icon: !profile ? 'back_black' : 'back'}])
   ];
   const handleSaveProject = async (data: IProject) => {
     await ProjectRepository.findById(data.id).then(i => setProject(i))
@@ -69,6 +71,8 @@ const ProjectPublicPage = (props: Props) => {
 
 
   const roleCurrent = appContext.role
+
+  const router = useRouter()
 
   const getModeClass = () => {
     switch (roleCurrent) {
@@ -97,11 +101,16 @@ const ProjectPublicPage = (props: Props) => {
     }
   }
   const handleChangeTab = (item) => {
-    if (!profile) {
+    if (!profile && item.key !== 'back') {
       dispatch(signUpOpen())
       return;
     }
-    setTab(item.key);
+    if(item.key === 'back'){
+      !profile ? router.push(`/`) : router.push(`/id${profile.id}`)
+    }
+    else{
+      setTab(item.key);
+    }
   }
 
   return (
@@ -109,7 +118,7 @@ const ProjectPublicPage = (props: Props) => {
       className={getRoleClass()}>{t(profile?.role)} {t('profile')}</span> {t('of')} {profile?.firstName} {profile?.lastName}</>}>
       <div className={styles.root}>
         <div className={styles.desktop}>
-          <ProjectTabs tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
+          <ProjectTabs fullWidth tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
         </div>
         <div className={classNames(styles.mobile, getModeClass())}>
 

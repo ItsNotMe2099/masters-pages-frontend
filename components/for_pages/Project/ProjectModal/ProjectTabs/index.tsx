@@ -16,8 +16,9 @@ interface Props {
   activeTab: string,
   onChange?: (item) => void
   tabClassName?: string
+  fullWidth?: boolean
 }
-const ProjectTabs = ({tabs, activeTab, onChange, tabClassName}: Props) => {
+const ProjectTabs = ({tabs, activeTab, onChange, tabClassName, fullWidth}: Props) => {
   const appContext = useAppContext()
   const profile = appContext.profile
   const handleChange = (item: TabOption) => {
@@ -28,7 +29,8 @@ const ProjectTabs = ({tabs, activeTab, onChange, tabClassName}: Props) => {
 
   const rootClass = {
     [styles.volunteer]: profile?.role === ProfileRole.Volunteer,
-    [styles.guest]: !profile
+    [styles.guest]: !profile,
+    [styles.fullWidth]: fullWidth
   }
 
   return (
