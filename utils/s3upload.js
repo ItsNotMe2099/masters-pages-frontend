@@ -218,6 +218,9 @@ S3Upload.prototype.uploadFile = function(file) {
 S3Upload.prototype.abortUpload = function() {
   this.httprequest && this.httprequest.abort();
 };
+S3Upload.prototype.cancel = function() {
+  this.httprequest && this.httprequest.abort();
+};
 
 
 module.exports = S3Upload;
