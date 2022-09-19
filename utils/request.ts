@@ -73,7 +73,7 @@ async function request(options: string | Options, ctx: any = null): Promise<IRes
       }
     } else {
       return {
-        data: null,
+        data: jsonData,
         err: jsonData.errors ?? 'Error',
       }
     }
