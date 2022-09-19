@@ -31,7 +31,7 @@ const TaskFeedback = (props: Props) => {
        starSpacing={'1px'}
      />
      </div>
-       <div className={styles.time}>{format(new Date(feedback.createdAt), 'dd/MM/yyyy hh:mm')}</div>
+       <div className={styles.time}>{format(new Date(feedback.createdAt), 'dd/MM/yyyy HH:mm')}</div>
      </div>
      {feedback.description && <div className={styles.message}>{feedback.description}</div>}
    </div>

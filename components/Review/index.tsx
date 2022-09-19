@@ -15,7 +15,7 @@ const Review = (props: Props) => {
       <div className={styles.top}>
         <ReviewAvatar item={item}/>
           <div className={styles.date}>
-          {format(new Date(item.createdAt), 'MM/dd/yyy hh:mm')}
+          {format(new Date(item.createdAt), 'MM/dd/yyy HH:mm')}
           </div>
       </div>
       <div className={styles.taskText}>

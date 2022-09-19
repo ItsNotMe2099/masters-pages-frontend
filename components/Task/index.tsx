@@ -365,7 +365,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               <div className={styles.time}>
                 <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
                 <div
-                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy hh:mm') : ''}</div>
+                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
             </div>
             <div>
@@ -373,7 +373,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               <div className={styles.timeMobile}>
                 <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
                 <div
-                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy hh:mm') : ''}</div>
+                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
               <div className={styles.desktop}>{actionsType !== 'client' && <Link href={taskLink}><div className={styles.title}>
                 {task.title}

@@ -48,7 +48,7 @@ const TaskResponse = ({ response, task }: Props) => {
   return ( <div className={styles.root}>
     {!response.isRead && <NotificationBadge/> }
     <div className={styles.left}>
-    <div className={styles.time}>{format(new Date(response.createdAt), 'MM.dd.yyy hh:mm')}</div>
+    <div className={styles.time}>{format(new Date(response.createdAt), 'MM.dd.yyy HH:mm')}</div>
     <Link href={`/id${response.profile?.id}`}>
     <a className={styles.profile}>{response.profile?.firstName} {response.profile?.lastName}</a>
     </Link>

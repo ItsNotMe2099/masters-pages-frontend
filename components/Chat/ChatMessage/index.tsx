@@ -55,7 +55,7 @@ export default function ChatMessage({ message, chat, size }: Props) {
   const renderMessage = (component, hasTime = false) => {
     return (<div className={`${styles.root} ${message.profileId === profile.id ? styles.rootAuthor : ''}`}>
       <div className={styles.message}>{component}</div>
-      <div className={styles.time}> {hasTime && format(new Date(message.createdAt), 'MM.dd.yyy hh:mm')}</div>
+      <div className={styles.time}> {hasTime && format(new Date(message.createdAt), 'MM.dd.yyy HH:mm')}</div>
     </div>)
   }
   const messageStatus = () => {

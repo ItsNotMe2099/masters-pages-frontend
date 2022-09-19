@@ -30,7 +30,7 @@ const ReviewListItem = ({feedback}: Props) => {
         starSpacing={'1px'}
       />
      </div>
-      <div className={styles.time}>{ format(new Date(feedback.createdAt), 'MM.dd.yy hh:mm')}</div>
+      <div className={styles.time}>{ format(new Date(feedback.createdAt), 'MM.dd.yy HH:mm')}</div>
       </div>
       <div className={styles.content}>
         <div className={styles.task}>{feedback.task.title}</div>

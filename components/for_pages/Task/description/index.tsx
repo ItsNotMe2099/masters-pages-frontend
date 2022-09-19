@@ -35,7 +35,7 @@ const Description = (props: Props) => {
         </div>
         <div className={styles.time}>
           <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
-          <div className={styles.desc}>{format(new Date(props.task.createdAt), 'MM.dd.yyy hh:mm')}</div>
+          <div className={styles.desc}>{format(new Date(props.task.createdAt), 'MM.dd.yyy HH:mm')}</div>
         </div>
       </div>
       <div>
