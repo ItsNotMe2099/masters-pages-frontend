@@ -19,6 +19,26 @@
     flex-direction: column;
   }
 }
+.fullWidth{
+  display: flex;
+  flex-direction: row;
+  .left{
+   
+  }
+  .center{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 20px 0px;
+    padding: 0px 25px;
+    flex: 1;
+    @media screen and (max-width: 1150px) {
+      padding: 0;
+    }
+  }
+  @media screen and (max-width: 1150px) {
+    flex-direction: column;
+  }
+}
 .section{
   padding: 20px;
   border: 1px solid rgba(196, 196, 196, 1);

@@ -20,7 +20,7 @@ interface Props {
 
 const ProfilePage = (props) => {
   const router = useRouter();
-return <ProjectPublicPage initialProject={props.project} projectId={parseInt(router.query.id as string, 10)}/>
+return <ProjectPublicPage fullWidth={true} initialProject={props.project} projectId={parseInt(router.query.id as string, 10)}/>
 }
 export const getServerSideProps = async (ctx) => {
 

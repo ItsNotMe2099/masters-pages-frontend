@@ -13,6 +13,7 @@ import {IUser} from 'data/intefaces/IUser'
 import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 import Header from './mobile/Header'
+import classNames from 'classnames'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -61,14 +62,17 @@ export default function LayoutGuest(props: Props) {
 
   const [isScrollable, setIsScrollable] = useState(true)
 
+  const logo = (<div className={styles.logo}>
+    {collapsed && <LogoSvg className={styles.logoCollapsed}/>}
+    {!collapsed && <Logo/>}
+    <div className={styles.collapseMenu} onClick={handleCollapse}/>
+  </div>)
+  
+
   return (
     <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
       {showLeftMenu && <div className={styles.leftMenu}>
-        <div className={styles.logo}>
-          {collapsed && <LogoSvg className={styles.logoCollapsed}/>}
-          {!collapsed && <Logo/>}
-          <div className={styles.collapseMenu} onClick={handleCollapse}/>
-        </div>
+        {logo}
         {item.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
           link={item.link}/></>)}
@@ -103,10 +107,11 @@ export default function LayoutGuest(props: Props) {
           link={item.link}/>)}
         </div>
       </div>}
-      <div className={styles.header}>
+      <div className={classNames(styles.header, {[styles.proj]: !showLeftMenu})}>
         <div className={styles.headerLeft}>
+          {!showLeftMenu && logo}
           <div
-            className={styles.hello}>Hello guest! Please register for <span onClick={() => dispatch(signUpOpen())}>FREE</span> to get full functionality.
+            className={classNames(styles.hello, {[styles.none]: !showLeftMenu})}>Hello guest! Please register for <span onClick={() => dispatch(signUpOpen())}>FREE</span> to get full functionality.
           </div>
         </div>
         <div className={styles.btns}>

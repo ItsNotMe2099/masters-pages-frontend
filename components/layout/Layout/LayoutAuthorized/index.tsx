@@ -17,12 +17,14 @@ import {ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
 import {useAuthContext} from 'context/auth_state'
+import classNames from 'classnames'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
   showLeftMenu?: boolean
   isCurrentProfileOpened?: boolean
   user?: IUser
+  hideMenu?: boolean
 }
 
 export default function LayoutAuthorized(props: Props) {
@@ -123,22 +125,26 @@ export default function LayoutAuthorized(props: Props) {
 
   const [isScrollable, setIsScrollable] = useState(true)
 
+  const logo = (<div className={classNames(styles.logo, {[styles.logoAlt]: !showLeftMenu})}>
+    {collapsed && <LogoSvg className={styles.logoCollapsed} color={'white'}/>}
+    {!collapsed && <Logo color={'white'}/>}
+    <div className={styles.collapseMenu} onClick={handleCollapse}/>
+  </div>)
+
   return (
     <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
+      
       {showLeftMenu && <div className={styles.leftMenu}>
-        <div className={styles.logo}>
-          {collapsed && <LogoSvg className={styles.logoCollapsed} color={'white'}/>}
-          {!collapsed && <Logo color={'white'}/>}
-          <div className={styles.collapseMenu} onClick={handleCollapse}/>
-        </div>
+        {logo}
         {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
           isActive={(isCurrentProfileOpened && item.link === profileLink ) || (item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
           link={item.link} badge={item.badge} mode={role}/></>)}
         <MenuItem isActive={false} onClick={handleLogout} title={t('menu.logout')} icon={'logout'}
                   mode={role}/>
       </div>}
-      <div className={styles.header}>
+      <div className={classNames(styles.header, {[styles.proj]: !showLeftMenu})}>
         <div className={styles.headerLeft}>
+          {!showLeftMenu && logo}
           <div
             className={styles.hello}>{t('personalArea.profile.hello')} {profile?.firstName}. {roleCurrent !== 'corporate' && t('personalArea.profile.youAreIn')}
           </div>

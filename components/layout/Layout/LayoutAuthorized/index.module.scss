@@ -32,6 +32,9 @@
     }
   }
 }
+.logoAlt{
+  padding: 0 52px !important;
+}
 .header{
   position: fixed;
   left: 190px;
@@ -54,6 +57,9 @@
   @media screen and (max-width: 800px){
     display: none;
   }
+}
+.proj{
+  padding-left: 0;
 }
 .leftMenu{
   position: fixed;

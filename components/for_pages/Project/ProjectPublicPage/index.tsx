@@ -26,7 +26,7 @@ import Modals from "components/layout/Modals";
 interface Props {
   projectId: number
   initialProject?: IProject
-
+  fullWidth?: boolean
 }
 
 const ProjectPublicPage = (props: Props) => {
@@ -105,7 +105,7 @@ const ProjectPublicPage = (props: Props) => {
   }
 
   return (
-    <Layout title={<>{t('lookingAt')} <span
+    <Layout showLeftMenu={false} title={<>{t('lookingAt')} <span
       className={getRoleClass()}>{t(profile?.role)} {t('profile')}</span> {t('of')} {profile?.firstName} {profile?.lastName}</>}>
       <div className={styles.root}>
         <div className={styles.desktop}>
@@ -118,7 +118,7 @@ const ProjectPublicPage = (props: Props) => {
         <div className={styles.content}>
 
           {(props.projectId && project) && <>
-            {tab === 'description' && (organization) && <TabProjectDescription onClose={() => {
+            {tab === 'description' && (organization) && <TabProjectDescription fullWidth={props.fullWidth} onClose={() => {
             }} onDelete={() => {
             }} organization={organization} project={project} onPreview={handlePreviewProject} onSave={handleSaveProject}
                                                                                showType={'public'}

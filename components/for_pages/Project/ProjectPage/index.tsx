@@ -21,6 +21,7 @@ interface Props {
   onSave: (data) => any;
   organization?: IOrganization
   projectStatus?: ProjectStatus
+  fullWidth?: boolean
 }
 const RequirementStatus = (props: {name: string, success: boolean}) => {
   return <div className={classNames(styles.requirementStatus, {[styles.success]: props.success, [styles.failed]: !props.success})}>
@@ -69,7 +70,7 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
 
   const profileLink = `/id${project.corporateProfileId}`
   return (
-   <div className={styles.root}>
+   <div className={props.fullWidth ? styles.fullWidth : styles.root}>
     <div className={styles.left}>
         <div className={styles.cardOrg}>
           <CardOrganization organization={props.organization}/>

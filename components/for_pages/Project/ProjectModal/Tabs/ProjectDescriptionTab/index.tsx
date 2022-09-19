@@ -26,10 +26,11 @@ interface Props {
   organization?: IOrganization
   outerVar?: boolean
   onClose?: () => void
+  fullWidth?: boolean
 }
 
 
-const TabProjectDescription = ({project, showType, organization, outerVar, onClose, ...props}: Props) => {
+const TabProjectDescription = ({project, showType, organization, outerVar, onClose, fullWidth, ...props}: Props) => {
   const {t} = useTranslation();
   const [isEdit, setIsEdit] = useState(outerVar ? outerVar : !project)
   const [application, setApplication] = useState<IApplication | null>(null)
@@ -120,7 +121,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
   return (
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
-    {(!isEdit && project) && <ProjectPage organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
+    {(!isEdit && project) && <ProjectPage fullWidth={fullWidth} organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
       (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button projectBtn='default' className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
       projectStatus === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
       projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
