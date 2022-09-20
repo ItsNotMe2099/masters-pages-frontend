@@ -35,7 +35,7 @@ const ProjectAutorepliesTab = ({project, autoMessages}: Props) => {
     {name: 'Applications', key: ProjectAutoRepliesTabType.Applications},
     {name: 'Shortlist', key: ProjectAutoRepliesTabType.Shortlist},
     {name: 'Invited', key: ProjectAutoRepliesTabType.Invited},
-    {name: 'Accepted', key: ProjectAutoRepliesTabType.Accepted},
+    //{name: 'Accepted', key: ProjectAutoRepliesTabType.Accepted},
     {name: 'Completed', key: ProjectAutoRepliesTabType.Completed},
   ]).map(item => {
     return{
