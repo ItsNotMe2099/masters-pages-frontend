@@ -69,6 +69,11 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
   }
 
   const profileLink = `/id${project.corporateProfileId}`
+  const handleClickAttachment = (e, item) => {
+    e.preventDefault();
+    e.stopPropagation()
+    window.open(getMediaPath(item.urlS3))
+  }
   return (
    <div className={props.fullWidth ? styles.fullWidth : styles.root}>
     <div className={styles.left}>
@@ -113,7 +118,7 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
          <div className={styles.sectionHeader}>Files</div>
          {<div className={styles.attachments}>
               {project.attachmentsObjects?.map(item =>
-                  <a className={styles.item} target={'_blank'} href={getMediaPath(item.urlS3)} onClick={() => window.open(getMediaPath(item.urlS3))} download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
+                  <a className={styles.item} target={'_blank'} href={getMediaPath(item.urlS3)} onClick={(e) => handleClickAttachment(e, item)} download={fileName(item.name || item.urlS3)}><div className={styles.image}><img src={getImageSrc(item.urlS3)} alt=''/></div><span>{item.name}</span></a>
               )}
             </div>}
        </div>}
