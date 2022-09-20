@@ -106,7 +106,7 @@ const ProjectPublicPage = (props: Props) => {
       return;
     }
     if(item.key === 'back'){
-      !profile ? router.push(`/`) : router.push(`/id${profile.id}`)
+      !profile ? router.push(`/guestpage`) : router.push(`/id${profile.id}`)
     }
     else{
       setTab(item.key);
