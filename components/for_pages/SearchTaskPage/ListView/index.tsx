@@ -128,6 +128,7 @@ const SearchTaskListView = (props: Props) => {
           dataLength={tasks.length} //This is important field to render the next data
           next={handleScrollNext}
           hasMore={total > tasks.length}
+          scrollableTarget='scrollableDiv'
           loader={<Loader/>}
         >
           {tasks.map((task, index) => <Task key={task.id} task={task} index={index}/>)}

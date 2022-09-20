@@ -62,7 +62,7 @@ const TaskOfferOrderList = (props: Props) => {
        scrollableTarget={'task-offer-orders'}
        hasMore={total > list.length}
        loader={<Loader/>}>
-       {list.map(item => <Radio className={styles.radioItem} value={item.id} isActive={activeTask && activeTask.id === item.id}  onChange={handleChange}>
+       {list.map(item => <Radio className={styles.radioItem} value={item.id} isActive={activeTask && activeTask.id === item.id}  onChange={() => handleChange(item)}>
          <div className={styles.radioItemTitle}>{item.title}</div>
          <div className={styles.radioItemPrice}>{item.priceType === 'fixed' ? (item.budget ? `${getCurrencySymbol(item.currency)}  ${item.budget}` : 'free') : `${getCurrencySymbol(item.currency)} ${item.ratePerHour}/${t('priceRateSuffix')}`}</div>
        </Radio>)}

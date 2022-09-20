@@ -42,7 +42,7 @@ const SearchProfileListView = (props: Props) => {
   const appContext = useAppContext()
   const role = appContext.role
   const [isShow, setIsShow] = useState(width > 700)
-
+    console.log("Total12", total, tasks.length)
   const getSearchPageLink = () => {
     switch (props.searchRole){
       case 'master':
@@ -67,6 +67,7 @@ const SearchProfileListView = (props: Props) => {
     router.replace(`/${getSearchPageLink()}?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
   const handleScrollNext = () => {
+    console.log("handleScrollNext111")
     dispatch(setPageProfileSearch(page + 1))
     dispatch(fetchProfileSearchList())
   }
@@ -130,6 +131,7 @@ const SearchProfileListView = (props: Props) => {
         {total > 0 && <InfiniteScroll
           dataLength={tasks.length} //This is important field to render the next data
           next={handleScrollNext}
+          scrollableTarget='scrollableDiv'
           hasMore={total > tasks.length}
           loader={<Loader/>}>
           {tasks.map(profile => <Profile key={profile.id} profile={profile} selectedSubCategoryId={filter.subCategoryId} selectedCategoryId={filter.categoryId}/>)}

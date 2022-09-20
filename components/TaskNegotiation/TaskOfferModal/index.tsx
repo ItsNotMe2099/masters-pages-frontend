@@ -31,6 +31,8 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   const {t} = useTranslation('common')
   const appContext = useAppContext()
   const profile = appContext.profile
+  const currentProfile = useSelector((state: IRootState) => state.taskOffer.currentProfile)
+
   const isMaster = profile.role !== 'client'
   useEffect(() => {
     if(profile.role === 'client') {
@@ -54,7 +56,7 @@ const TaskOfferModal = ({isOpen, onClose}: Props) => {
   }
 
   const handleSubmitNewOrder = (data) => {
-    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: profile.id}, profile.id))
+    dispatch(taskNegotiationSendOfferCreateTask({...data, visibilityType: 'private', profileId: currentProfile.id}, profile.id))
   }
 
   const handleChangeForStat = (key, value) => {
