@@ -56,7 +56,7 @@ const TaskResponse = ({ response, task }: Props) => {
     <div className={styles.message} onClick={handleShowOffer}><img src={'/img/icons/chat_small.svg'} />{response.message}</div>
     </div>
     <div className={styles.right}>
-    <div className={styles.priceDetails}>{response.budget ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/${t('priceRateSuffix')}`}</div>
+    <div className={styles.priceDetails}>{response.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${response.budget}` : `${getCurrencySymbol(task.currency)} ${response.ratePerHour}/${t('priceRateSuffix')}`}</div>
     <div className={styles.priceDetails}></div>
     {response.state === 'declined' && <div className={styles.declined}>{t('taskResponse.declined')}</div>}
     {response.state !== 'declined' && <div className={styles.actions}>

@@ -22,6 +22,9 @@ const SignUpComponent = (props: Props) =>  {
   const dispatch = useDispatch()
   const authContext = useAuthContext();
   const isLoading = authContext.signUpSpinner;
+  useEffect(() => {
+    authContext.clear()
+  }, [])
   const handleSubmit = async (data) => {
     authContext.signUp(data);
   }
