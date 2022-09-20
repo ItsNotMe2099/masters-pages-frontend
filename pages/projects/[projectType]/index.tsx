@@ -138,11 +138,12 @@ const ProjectsPage = (props: Props) => {
     }
   }
   const handleProjectViewOpen = async (project: IProject) => {
-    setCurrentProjectEditId(project.id);
+    console.log("handleProjectViewOpen", project)
     if(currentProfile.role !== ProfileRole.Corporate){
-    setCurrentProjectId(project.id)
-     }
-    else{
+      setCurrentProjectId(project.id)
+    } else{
+      setCurrentProjectEditId(project.id);
+
       dispatch(projectOpen())
     }
 
