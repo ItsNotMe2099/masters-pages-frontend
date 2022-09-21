@@ -48,7 +48,7 @@ const ProfilePageLayout = (props: Props) => {
         return styles.roleClient
     }
   }
-
+console.log("isMaster111", profile.role)
   return (
     <Layout isCurrentProfileOpened={isCurrentProfileOpened}  title={<>{t('lookingAt')}  <span className={getRoleClass()}>{t(profile.role)} {t('profile')}</span> {t('of')} {profile.firstName} {profile.lastName}</>}>
 

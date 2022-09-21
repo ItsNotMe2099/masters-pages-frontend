@@ -198,7 +198,7 @@ let SearchTaskForm = (props) => {
 
 
               <Field
-                name="keyword"
+                name="keywords"
                 label={t('taskSearch.filter.fieldKeywords')}
                 component={Input}
                 labelType={'placeholder'}

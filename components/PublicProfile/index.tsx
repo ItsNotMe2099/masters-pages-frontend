@@ -71,6 +71,7 @@ const PublicProfile = (props) => {
         setProfile(data)
       }
     })
+    appContext.updateProfile(appContext.role)
   }
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills)

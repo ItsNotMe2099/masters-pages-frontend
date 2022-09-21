@@ -10,6 +10,9 @@ const queryString = require('query-string')
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'next-i18next'
 import Header from '../../../layout/Layout/LayoutAuthorized/mobile/Header'
+import classNames from "classnames";
+import {useAppContext} from "context/state";
+import {ProfileRole} from "data/intefaces/IProfile";
 interface Props {
   searchRole?: 'master' | 'volunteer'
 }
@@ -18,6 +21,7 @@ const MapHeader = (props: Props) => {
   const [expanded, setExpanded] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
+  const appContext = useAppContext()
   const sortType = useSelector((state: IRootState) => state.profileSearch.sortType)
 
   const handleMoreClick = () => {
@@ -56,7 +60,12 @@ const MapHeader = (props: Props) => {
       <div className={styles.headerMobile}>
         <Header/>
       </div>
-      <div  className={`${styles.root} ${expanded && styles.opened}`}>
+      <div  className={classNames(styles.root, {
+        [styles.opened]: expanded,
+        [styles.client]: appContext.role === ProfileRole.Client,
+        [styles.volunteer]: appContext.role === ProfileRole.Volunteer,
+        [styles.corporate]: appContext.role === ProfileRole.Corporate,
+      })}>
         <div className={`${styles.container}`}>
           <div className={styles.logo}>
             <Logo color={'white'}/>

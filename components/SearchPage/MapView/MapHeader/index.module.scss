@@ -4,6 +4,15 @@
   align-items: stretch;
   background: #E4474E;
   padding: 20px 9px 0px;
+  &.volunteer{
+    background: #0D99C6;
+  }
+  &.client{
+    background: #27C60D;
+  }
+  &.corporate{
+    background: #F2B705;
+  }
   @media (max-width: $xs-max){
     display: block;
     padding: 13px 22px;
