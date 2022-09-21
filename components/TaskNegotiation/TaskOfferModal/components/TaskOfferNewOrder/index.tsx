@@ -156,7 +156,7 @@ let TaskOfferNewOrder = (props: Props) => {
       <Field
         name="terms"
         component={Checkbox}
-        label={<div>{t('taskNegotiation.iAmAgreeWith')} <Link href="/">{t('taskNegotiation.termsAndConditions')}</Link></div>}
+        label={<div>{t('taskNegotiation.iAmAgreeWith')} <Link href="#">{t('taskNegotiation.termsAndConditions')}</Link></div>}
       />
       </div>
       {!sendOfferLoading && <div className={styles.buttons}>

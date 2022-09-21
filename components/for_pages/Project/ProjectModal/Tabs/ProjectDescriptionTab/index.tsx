@@ -14,7 +14,7 @@ import { useAppContext } from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen} from 'components/Modal/actions'
+import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
 
 interface Props {
   project: IProject | null
@@ -94,7 +94,7 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
       description: descriptionProject(newStatus),
       onConfirm: async () => {
         await ProjectRepository.update(projectId, {status: newStatus});
-        /*oldStatus && oldStatus === ProjectStatus.Draft ? onClose() : !oldStatus &&*/ dispatch(confirmModalClose())
+        onClose()
         setProjectStatus(newStatus)
       }
     }))

@@ -41,6 +41,7 @@ const CreateTaskPage = (props) => {
     dispatch(createTaskComplete(data))
     reachGoal('order:create', {role: profile?.role})
   }
+   
   const handleChangeForStat = (key, value) => {
     statFilter[key] = value
     dispatch(setSearchStatFilter(statFilter))
