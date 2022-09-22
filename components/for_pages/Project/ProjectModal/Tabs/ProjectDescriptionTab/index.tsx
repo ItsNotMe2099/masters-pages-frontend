@@ -122,12 +122,12 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
   <div className={styles.root}>
     {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
     {(!isEdit && project) && <ProjectPage fullWidth={fullWidth} organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
-      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button projectBtn='default' className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
-      projectStatus === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
-      projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
-      projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
-      projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
-      projectStatus !== ProjectStatus.Execution && <Button color={'white'}
+      (project?.status === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button projectBtn='default' className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
+      project?.status === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
+      project?.status === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
+      project?.status === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
+      project?.status === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
+      project?.status !== ProjectStatus.Execution && <Button color={'white'}
       onClick={() => projectStatus !== ProjectStatus.Canceled ? handleChangeProjectStatus(ProjectStatus.Canceled, project.id) : handleDelete()} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
     ] :
     (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
