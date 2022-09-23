@@ -250,18 +250,11 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
         case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
-              {profile.role ?
-              <>
-              <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-              </>
-              :
-              <>
               <Button 
               type='button' projectBtn='default'>
                 RESTORE
               </Button>
               <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-              </>}
             </div>
           )
           case ApplicationStatus.RejectedByVolunteer:

@@ -123,7 +123,7 @@ const TabsView = ({project, application, view, onChangeView, ...props}: Props) =
       }))} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/></div>
       <div className={styles.list}>
         {applications && applications.filter(item => item.status === currentTab).filter(item => item.profile.role === 'volunteer').map((item, index) =>
-          <TabApplicationCard profile={item.profile} application={item} key={index} currentTab={currentTab} onDelete={(item) => handleDelete(item)}
+          <TabApplicationCard total={applications.length} profile={item.profile} application={item} index={index} key={index} currentTab={currentTab} onDelete={(item) => handleDelete(item)}
           onStatusChange={(newStatus) => handleChangeStatus(newStatus, item)} onViewClick={() => handleView(project, item, index)}/>
         )}
       </div>

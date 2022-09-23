@@ -17,6 +17,8 @@ import {default as React} from 'react'
 
 interface Props {
   application?: IApplication
+  index?: number
+  total?: number
   onViewClick?: () => void
   currentTab: ApplicationStatus
   profile?: IProfile
@@ -29,7 +31,7 @@ interface ButtonsProps {
   onViewClick?: () => void
 }
 
-const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, ...props}: Props) => {
+const TabApplicationCard = ({application, index, total, currentTab, onStatusChange, onDelete, ...props}: Props) => {
 
   const dispatch = useDispatch()
 
@@ -212,7 +214,7 @@ const TabApplicationCard = ({application, currentTab, onStatusChange, onDelete, 
                 Applied on: <img src='/img/projects/calendar.svg' alt=''/> {format(new Date(application.appliedAt), 'dd.MM.yy')}
               </div>
               <div className={styles.applied}>
-                Application No:
+                Application No: {index + 1}/{total}
               </div>
             </div>
           </div>
