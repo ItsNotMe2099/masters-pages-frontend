@@ -65,7 +65,7 @@ const FindVolunteerGuest = (props) => {
   return (
     <Layout>
       <div className={styles.root}>
- 
+
         <div className={styles.container}>
           <div className={styles.left}>
           <div className={styles.topContent}>
@@ -90,12 +90,13 @@ const FindVolunteerGuest = (props) => {
           <div>
           {(loading && total === 0) && <Loader/>}
           {total > 0 &&  <InfiniteScroll
+            scrollableTarget="scrollableDiv"
           dataLength={volunteers.length} //This is important field to render the next data
           next={handleScrollNext}
           hasMore={total > volunteers.length}
           loader={<Loader/>}
         >
-          {volunteers.map(profile => 
+          {volunteers.map(profile =>
               <Profile key={profile.id} profile={profile}/>
           )}
           </InfiniteScroll>}

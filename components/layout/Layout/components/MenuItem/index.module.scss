@@ -45,8 +45,14 @@
 
 }
 .isActive{
+  &.modeGuest {
+    background: #a39e9e;
+  }
   .border{
     display: block;
+  }
+  &.modeClient{
+    background: #007230;
   }
   &.modeClient{
     background: #007230;
