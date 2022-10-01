@@ -15,7 +15,7 @@ const MainSectionFourth = (props) => {
 
   const { t } = useTranslation('common')
 
-  const videos = [{url: 'https://www.youtube.com/watch?v=FMa-WUJKw0k', title: t('mainPage.fourthSection.videos.firstVideo')},
+  const videos = [{url: 'https://youtu.be/bFahL1qBliU', title: t('mainPage.fourthSection.videos.firstVideo')},
   {url: 'https://youtu.be/6uzJXmxIJ8U', title: t('mainPage.fourthSection.videos.secondVideo')},]
 
   const url = '/api/profile/for-main-page'
