@@ -27,7 +27,8 @@ const MainSectionFourth = (props) => {
   const dispatch = useDispatch()
 
   const videos = [{url: 'https://youtu.be/FMa-WUJKw0k', title: 'How to set up an organisation\' profile'},
-  {url: 'https://youtu.be/6uzJXmxIJ8U', title: t('mainPage.fourthSection.videos.secondVideo')},]
+  {url: 'https://youtu.be/bF1GaeD4JZo', title: 'How to launch a volunteer project ad'},
+   {url: 'https://youtu.be/GXo_2eNyl8o', title: 'How to manage a volunteer project'},]
 
   const url = '/api/profile/for-main-page'
   //const { data: data } = useSWR(url)
