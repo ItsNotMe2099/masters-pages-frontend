@@ -191,7 +191,7 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
                 Applied on: <img src='/img/projects/calendar.svg' alt=''/> {format(new Date(application.appliedAt), 'dd.MM.yy')}
               </div>
               <div className={styles.applied}>
-                Application No: {index + 1}/{total}
+                Application No: {props.index + 1}/{props.total}
               </div>
             </div>
           </div>

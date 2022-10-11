@@ -31,6 +31,7 @@ import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import {projectOpen, signUpOpen} from 'components/Modal/actions'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { IProjectSearchRequest } from 'data/repositories/ApplicationRepository'
+import ProjectActions from "components/for_pages/Project/ProjectActions";
 
 interface Props {
   profile: IProfile,
@@ -261,7 +262,7 @@ const PublicProfile = (props) => {
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} project={project} actions={<ProjectActions  onModalOpen={(mode) => handleModalOpen(project, mode)}
                                                                                                                                                         actionsType={'public'} project={project}/>}/></div>)}
           </InfiniteScroll>}
-          {currentProjectId && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProjectId} isOpen onClose={() => setCurrentProjectId(null)}/>}
+          {currentProjectId && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProjectId} isOpen />}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile && profile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
