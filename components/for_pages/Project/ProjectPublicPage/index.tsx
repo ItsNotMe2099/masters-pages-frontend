@@ -44,7 +44,6 @@ const ProjectPublicPage = (props: Props) => {
     projectStatusChangeMessages: [],
     eventMessages: []
   }
-  const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(null)
   console.log("ProjectInModal", project)
   useEffect(() => {
     ProjectRepository.findPublicById(props.projectId).then(i => setProject(i))
@@ -136,7 +135,7 @@ const ProjectPublicPage = (props: Props) => {
             {tab === 'application' && <TabApplication/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}
-            {tab === 'autoReplies' && <ProjectAutorepliesTab project={project} autoMessages={autoMessages}/>}
+            {tab === 'autoReplies' && <ProjectAutorepliesTab project={project}/>}
             {tab === 'reports' && <TabReports project={project}/>}
           </>}
         </div>

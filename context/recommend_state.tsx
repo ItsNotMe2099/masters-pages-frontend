@@ -1,3 +1,4 @@
+/*
 import { NotificationType } from 'data/interfaces/INotification'
 import { INotificationStats, INotificationStatsItem } from 'data/interfaces/INotificationStats'
 import NotificationRepository from 'data/repositories/NotificationRepository'
@@ -216,3 +217,5 @@ function join(a: NotificationUnreadStoreType, b: NotificationUnreadStoreType): N
   }
   return result
 }
+*/
+export const a = 1;

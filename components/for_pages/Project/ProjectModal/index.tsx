@@ -37,7 +37,6 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const appContext = useAppContext()
   const projectContext = useProjectContext()
-  const autoMessages = projectContext.autoMessage
   const organization = projectContext.organization
   const profile = appContext.profile
 
@@ -104,7 +103,7 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
             {tab === 'application' && <TabApplication />}
             {tab === 'volunteers' && <TabVolunteers project={projectContext.project}/>}
             {tab === 'messages' && <TabChat project={projectContext.project}/>}
-            {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project} autoMessages={autoMessages}/>}
+            {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project}/>}
             {tab === 'reports' && <TabReports project={projectContext.project}/>}
           </>}
 
