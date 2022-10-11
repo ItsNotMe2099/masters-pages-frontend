@@ -12,8 +12,8 @@ import { useDispatch } from 'react-redux'
 import VolunteerStats from '../VolunteerStats'
 import StarRatings from 'react-star-ratings'
 import Link from 'next/link'
-import {default as React} from 'react'
-
+import React from 'react'
+import {ApplicationWrapper, useApplicationContext} from "context/application_state";
 
 interface Props {
   application?: IApplication
@@ -31,10 +31,10 @@ interface ButtonsProps {
   onViewClick?: () => void
 }
 
-const TabApplicationCard = ({application, index, total, currentTab, onStatusChange, onDelete, ...props}: Props) => {
+const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDelete, ...props}: Props) => {
 
   const dispatch = useDispatch()
-
+  const applicationContext = useApplicationContext()
   const handleConfirm = (status: ApplicationStatus) => {
     onStatusChange(status)
     dispatch(confirmModalClose())
@@ -45,33 +45,10 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
     dispatch(confirmModalClose())
   }
 
-  const description = (newStatus: ApplicationStatus, button?: string) => {
-    switch(newStatus){
-      case ApplicationStatus.Completed:
-        return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-      case ApplicationStatus.Invited:
-        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
-      case ApplicationStatus.Shortlist:
-        if(button === 'CANCEL INVITATION'){
-          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
-        }
-        else{
-          return 'The application will be “shortlisted”. Do you want to proceed?'
-        }
-      case ApplicationStatus.RejectedByCompany:
-        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
-    }
+
+  const changeStatus = (status: ApplicationStatus, isCancel?: boolean) => {
+    applicationContext.changeStatus(status, isCancel);
   }
-
-  const confirmData = (status: ApplicationStatus, button?: string) => {
-    return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
-  }
-
-  const confirmDelete = (application: IApplication) => {
-    return {title: ' ', description: 'Do you want to proceed?', onConfirm: () => {handleDelete(application)}, onCancel: () => {dispatch(confirmModalClose())}}
-  }
-
-
 
   const Buttons = (props: ButtonsProps) => {
 
@@ -80,11 +57,11 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
         return (
           <div className={styles.btns}>
             <Button onClick={props.onViewClick}  type='button' projectBtn='default'>VIEW</Button>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist)))} type='button' projectBtn='default'>
+            <Button onClick={() => changeStatus(ApplicationStatus.Shortlist)} type='button' projectBtn='default'>
               SHORTLIST
             </Button>
             <Button
-            onClick={() => onStatusChange(ApplicationStatus.RejectedByCompany)}
+            onClick={() => changeStatus(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
         )
@@ -92,11 +69,11 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
         return (
           <div className={styles.btns}>
             <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
+            <Button onClick={() => changeStatus(ApplicationStatus.Invited)}  type='button' projectBtn='default'>
               INVITE
             </Button>
             <Button
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            onClick={() => changeStatus(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
         )
@@ -105,7 +82,7 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
           <div className={styles.btns}>
             <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
             <Button
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
+            onClick={() => changeStatus(ApplicationStatus.Shortlist, true)}
             type='button' projectBtn='red'>CANCEL INVITATION</Button>
           </div>
         )
@@ -113,12 +90,12 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
         return (
           <div className={styles.btns}>
             <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            <Button onClick={() => changeStatus(ApplicationStatus.Completed)}
             type='button' projectBtn='default'>
               COMPLETE
             </Button>
             <Button
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            onClick={() => changeStatus(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
           </div>
           )
@@ -126,11 +103,11 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
             return (
               <div className={styles.btnsCompleted}>
                 <Button  onClick={props.onViewClick} type='button' projectBtn='default'>OPEN</Button>
-                <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))} type='button' projectBtn='default'>
+                <Button onClick={() => changeStatus(ApplicationStatus.Completed)} type='button' projectBtn='default'>
                   CONFIRM COMPLETION
                 </Button>
                 <Button
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Execution)))}
+            onClick={() => changeStatus(ApplicationStatus.Execution)}
             type='button' projectBtn='red'>REJECT COMPLETION</Button>
               </div>
             )
@@ -142,18 +119,18 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
                 REVIEW
               </Button>
               <Button type='button' projectBtn='default'>RECOMMEND</Button>
-              <Button onClick={() => dispatch(confirmOpen(confirmDelete(application)))} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              <Button onClick={() => applicationContext.delete()} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
         case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
               <Button onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
-              <Button
+              {/*<Button
               type='button' projectBtn='default'>
                 RESTORE
-              </Button>
-              <Button onClick={() => dispatch(confirmOpen(confirmDelete(application)))} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+              </Button>*/}
+              <Button onClick={() => applicationContext.delete()} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )
     }
@@ -251,4 +228,9 @@ const TabApplicationCard = ({application, index, total, currentTab, onStatusChan
     )
   }
 
-export default TabApplicationCard
+export default function TabApplicationCard(props: Props){
+  return ( <ApplicationWrapper application={props.application} applicationId={props.application.id}>
+    <TabApplicationCardInner {...props}/>
+  </ApplicationWrapper>)
+
+}

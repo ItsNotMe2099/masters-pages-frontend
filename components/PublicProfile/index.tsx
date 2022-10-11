@@ -4,7 +4,7 @@ import CardWorkExperience from 'components/PublicProfile/components/view/CardWor
 import CardPortfolio from 'components/PublicProfile/components/view/CardPortfolio'
 import CardGallery from 'components/PublicProfile/components/view/CardGallery'
 import {useSelector, useDispatch} from 'react-redux'
-import {useEffect, useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import {fetchSkillList} from 'components/Skill/actions'
 import CardCategorySelector from 'components/PublicProfile/components/view/CardCategorySelector'
 import {formatSkillList} from 'utils/skills'
@@ -28,7 +28,7 @@ import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import styles from './index.module.scss'
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
-import { signUpOpen } from 'components/Modal/actions'
+import {projectOpen, signUpOpen} from 'components/Modal/actions'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { IProjectSearchRequest } from 'data/repositories/ApplicationRepository'
 
@@ -43,7 +43,7 @@ const PublicProfile = (props) => {
   const appContext = useAppContext();
   const currentProfile = appContext.profile
   const isEdit = currentProfile && currentProfile.id === props.profile.id
-  const [profile, setProfile] = useState(isEdit ? currentProfile : props.profile)
+  const [profile, setProfile] = useState<IProfile>(isEdit ? currentProfile : props.profile)
   const [category, setCategory] = useState(null)
   const [organization, setOrganization] = useState<IOrganization | null>(null)
   const reduxSkill = useSelector((state: IRootState) => state.profile.currentSkill)
@@ -53,8 +53,10 @@ const PublicProfile = (props) => {
   const [projects, setProjects] = useState<IProject[]>([])
   const [total, setTotal] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
-  const [currentProject, setCurrentProject] = useState<IProject | null>(null)
+  const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
+
   const limit = 10
   console.log("organization", organization)
   const handleUpdateOrganization = () => {
@@ -197,6 +199,30 @@ const PublicProfile = (props) => {
       }
     })
   }
+
+  const handleModalOpen = (project: IProject, type: 'create' | 'view' | 'edit' | 'application') => {
+    console.log("handleModalOpen", type)
+    switch (type) {
+      case "create":
+        setInitialProjectTab(null)
+        setCurrentProjectId(null)
+        break;
+      case "view":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id)
+        break;
+      case "edit":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id);
+        dispatch(projectOpen())
+        break;
+      case "application":
+        setInitialProjectTab('application')
+        setCurrentProjectId(project.id);
+        break;
+    }
+    dispatch(projectOpen())
+  }
   const handleRefresh = () => {
 
   }
@@ -210,15 +236,7 @@ const PublicProfile = (props) => {
     }
     return {}
   }
-  const handleProjectViewOpen = async (project: IProject) => {
-    setInitialProjectTab('description')
-    setCurrentProject(project);
-  }
-  const handleProjectApplyOpen = (project: IProject) => {
-    setInitialProjectTab('application')
-    setCurrentProject(project);
 
-  }
 
   return (
     <ProfilePageLayout id='scrollableDiv' onOrganizationUpdate={handleUpdateOrganization} onProfileUpdate={handleUpdateProfile} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
@@ -240,9 +258,10 @@ const PublicProfile = (props) => {
             loader={<Loader/>}
             scrollableTarget='scrollableDiv'
           >
-            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} actionsType={'corporate'} project={project} onApplyClick={() => profile ? handleProjectApplyOpen : dispatch(signUpOpen())} onViewOpen={handleProjectViewOpen}/></div>)}
+            {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} project={project} actions={<ProjectActions  onModalOpen={(mode) => handleModalOpen(project, mode)}
+                                                                                                                                                        actionsType={'public'} project={project}/>}/></div>)}
           </InfiniteScroll>}
-          {currentProject && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
+          {currentProjectId && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProjectId} isOpen onClose={() => setCurrentProjectId(null)}/>}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile && profile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
@@ -251,7 +270,7 @@ const PublicProfile = (props) => {
 
           </>}
       {currentSkill  && <>
-        <CardCategorySelector categories={categories} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
+        <CardCategorySelector categories={categories as SkillData[]} profile={profile} isEdit={isEdit} category={category} subCategory={currentSkill}
                               onCategoryChange={handleCategoryChange}/>
         {props.showType === 'profile' && category && <><CardSalesPitch profile={profile} isEdit={isEdit} skill={currentSkill}/>
         <CardWorkExperience profile={profile} isEdit={isEdit} skill={currentSkill}/>
@@ -262,6 +281,7 @@ const PublicProfile = (props) => {
             <CardReviews profile={profile} skill={currentSkill}/>
           </>}
      </>}
+      {modalKey === 'projectModal'  && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen/>}
     </ProfilePageLayout>
   )
 }

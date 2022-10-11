@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { default as React, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import styles from './index.module.scss'
-import { useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Sticky from 'react-stickynode'
 const queryString = require('query-string')
@@ -26,6 +26,9 @@ import ProjectRepository, {IProjectSearchRequest} from 'data/repositories/Projec
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { IOrganization } from 'data/intefaces/IOrganization'
+import ProjectActions from "components/for_pages/Project/ProjectActions";
+import {projectOpen} from "components/Modal/actions";
+import {IRootState} from "types";
 
 interface Props {
   onShowMap: () => void
@@ -43,6 +46,8 @@ const ProjectSearchListView = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
+
   const limit = 10
 
   const appContext = useAppContext()
@@ -94,23 +99,29 @@ const ProjectSearchListView = (props: Props) => {
     }
     return {}
   }
-  const handleProjectViewOpen = async (project: IProject) => {
-    setInitialProjectTab('description')
-    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType , projectId: project.id})}`, undefined, {shallow: true})
 
-     setCurrentProjectId(project.id)
-  }
-  const handleProjectApplyOpen = async (project: IProject) => {
-    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType , projectId: project.id})}`, undefined, {shallow: true})
-
-    setInitialProjectTab('application')
-     setCurrentProjectId(project.id);
-
-  }
-  const handleOnClose = () => {
-    setCurrentProjectId(null)
-    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType})}`, undefined, { shallow: true })
-
+  const handleModalOpen = (project: IProject, type: 'create' | 'view' | 'edit' | 'application') => {
+    console.log("handleModalOpen", type)
+    switch (type) {
+      case "create":
+        setInitialProjectTab(null)
+        setCurrentProjectId(null)
+        break;
+      case "view":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id)
+        break;
+      case "edit":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id);
+        dispatch(projectOpen())
+        break;
+      case "application":
+        setInitialProjectTab('application')
+        setCurrentProjectId(project.id);
+        break;
+    }
+    dispatch(projectOpen())
   }
 
   return (
@@ -163,13 +174,16 @@ const ProjectSearchListView = (props: Props) => {
           loader={<Loader/>}
           scrollableTarget="scrollableDiv"
         >
-          {projects.map((project, index) => <ProjectCard key={project.id} actionsType={'public'} project={project} onApplyClick={handleProjectApplyOpen} onViewOpen={handleProjectViewOpen}/>)}
+          {projects.map((project, index) => <ProjectCard key={project.id}
+            actions={<ProjectActions  onModalOpen={(mode) => handleModalOpen(project, mode)}
+              actionsType={'public'} project={project}/>}
+                                                         project={project}/>)}
         </InfiniteScroll>}
       </div>
       </div>
 
     </div>
-      {currentProjectId && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleOnClose}/>}
+        {modalKey === 'projectModal'  && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen/>}
 
       <Modals/>
     </Layout>

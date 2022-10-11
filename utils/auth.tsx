@@ -62,7 +62,7 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => (asy
     ctx.res.end();
     return;
   }
-  if(user && user.isRegistrationCompleted && (ctx.req.url.includes('registration') && !ctx.req.url.includes('.json'))){
+  if(user && user.isRegistrationCompleted && (ctx.req.url.includes('registration/user') && !ctx.req.url.includes('.json'))){
     ctx.res.writeHead(404, { Location: "/" });
     ctx.res.end();
     return;

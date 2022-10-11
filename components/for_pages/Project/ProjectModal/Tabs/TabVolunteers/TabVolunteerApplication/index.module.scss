@@ -1,0 +1,80 @@
+@import "scss/index";
+
+.root{
+
+}
+
+
+
+  .list{
+    padding: 25px;
+    border-radius: 3px;
+    border: 1px solid #C4C4C4;
+    @media screen and (max-width: 1250px){
+      padding: 20px;
+    }
+  }
+
+
+
+
+.controls{
+  display: flex;
+  margin: 22px 0;
+}
+
+.prev{
+  border: 1px solid #f0f0f0;
+  padding: 13px 18px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+  img{
+    margin-right: 19px;
+  }
+}
+
+.next{
+  border: 1px solid #f0f0f0;
+  border-left: 0;
+  padding: 13px 18px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+  img{
+    transform: rotate(180deg);
+    margin-left: 19px;
+  }
+}
+
+.desktop{
+  @media screen and (max-width: 1250px){
+    display: none;
+  }
+}
+
+.mobile{
+  width: 100%;
+  background: #F2B705;
+  margin-top: 16px;
+  @media screen and (min-width: 1251px){
+    display: none;
+  }
+}
+
+.select{
+  span{
+    font-weight: 700;
+    font-size: 16px;
+    color:#000;
+  }
+}

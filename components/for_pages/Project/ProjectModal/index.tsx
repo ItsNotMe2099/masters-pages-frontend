@@ -20,48 +20,28 @@ import TabReports from './Tabs/TabReports'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
 import OrganizationRepository from "data/repositories/OrganizationRepository";
+import {ProjectWrapper, useProjectContext} from "context/project_state";
+import {useDispatch} from "react-redux";
+import {modalClose} from "components/Modal/actions";
 
 interface Props {
   showType: 'client' | 'public'
   isOpen: boolean,
   projectId?: number,
-  onClose: () => void
-  onDelete?: () => void | null | undefined
   initialTab?: string
-  outerVar?: boolean
+  isEdit?: boolean
   organization?: IOrganization
+
 }
-const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTab, outerVar, ...props}: Props) => {
+const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...props}: Props) => {
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
-  const [project, setProject] = useState<IProject>(null);
-  const [organization, setOrganization] = useState<IOrganization | null>(props.organization);
   const appContext = useAppContext()
+  const projectContext = useProjectContext()
+  const autoMessages = projectContext.autoMessage
+  const organization = projectContext.organization
   const profile = appContext.profile
-  const autoMessagesObject = {projectId: projectId, applicationStatusChangeMessages: [], projectStatusChangeMessages: [], eventMessages: []}
-  const [autoMessages, setAutomessages] = useState<IAutoMessages | null>(null)
-  console.log("ProjectInModal", showType, projectId)
-  useEffect(() => {
 
-    if(showType === 'public' && projectId){
-      ProjectRepository.findPublicById(projectId).then(i => setProject(i))
-    }else if(projectId){
-      ProjectRepository.findById(projectId).then(i => setProject(i))
-      AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId).then(data => {
-        if(data){
-          setAutomessages(data)
-        }
-      })
-    }
-
-
-
-  }, [projectId, showType, profile])
-  useEffect(() => {
-    console.log("FetchOrg", project?.corporateProfile)
-    if(project?.corporateProfile?.organization) {
-      OrganizationRepository.fetchOrganization(project?.corporateProfile?.organization.id).then(i => setOrganization(i))
-    }
-  }, [project?.corporateProfile?.organization])
+  const dispatch = useDispatch()
   const tabs = (showType === 'client' && projectId && profile) ? [
       {name: 'Description', key: 'description', icon: 'description'},
       {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
@@ -80,19 +60,9 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTa
         {name: 'Messages', key: 'messages', icon: 'messages'},
       ]
 
-  ;
-  const handleSaveProject = async (data: IProject) => {
-    await ProjectRepository.findById(data.id).then(i => setProject(i))
-  }
-
-  const handlePreviewProject = (data) => {
-    setProject(i => ({...i, ...data}))
-  }
 
   const handleClose = () => {
-    setTab('description')
-    setProject(null)
-    onClose()
+    dispatch(modalClose())
   }
 
   const roleCurrent = appContext.role
@@ -128,18 +98,26 @@ const ProjectModal = ({projectId, isOpen, onClose, showType, onDelete, initialTa
           <div className={styles.topPanel}>
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
-          {((projectId && project) || !projectId) && <>
-            {tab === 'description' && (organization || props.organization) && <TabProjectDescription onClose={onClose} outerVar={outerVar} organization={organization ?? props.organization} project={project} onPreview={handlePreviewProject}  onSave={handleSaveProject} showType={showType} onChange={(item) => setTab('application')} onDelete={onDelete}/>}
-            {tab === 'application' && <TabApplication project={project}  onSave={handleSaveProject}/>}
-            {tab === 'volunteers' && <TabVolunteers project={project}/>}
-            {tab === 'messages' && <TabChat project={project}/>}
-            {tab === 'autoReplies' && <ProjectAutorepliesTab project={project} autoMessages={autoMessages}/>}
-            {tab === 'reports' && <TabReports project={project}/>}
+          {tab === 'description' && (organization || props.organization) && <TabProjectDescription project={projectContext.project} isEdit={isEdit || !projectId} organization={organization ?? props.organization}  showType={showType} onApply={(item) => setTab('application')}/>}
+
+          {projectContext.projectId && <>
+            {tab === 'application' && <TabApplication />}
+            {tab === 'volunteers' && <TabVolunteers project={projectContext.project}/>}
+            {tab === 'messages' && <TabChat project={projectContext.project}/>}
+            {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project} autoMessages={autoMessages}/>}
+            {tab === 'reports' && <TabReports project={projectContext.project}/>}
           </>}
+
+
         </div>
       </div>
     </Modal>
   )
 }
 
-export default ProjectModal
+export default function ProjectModal(props: Props){
+  console.log("projectModal", props)
+  return <ProjectWrapper projectId={props.projectId}  mode={props.showType === 'client' ? 'private' : 'public'}>
+    <ProjectModalInner {...props}/>
+  </ProjectWrapper>
+}

@@ -23,6 +23,7 @@ import {signUpOpen} from "components/Modal/actions";
 import {useDispatch} from "react-redux";
 import Modals from "components/layout/Modals";
 import { useRouter } from 'next/router'
+import {ProjectWrapper} from "context/project_state";
 
 interface Props {
   projectId: number
@@ -116,6 +117,8 @@ const ProjectPublicPage = (props: Props) => {
   return (
     <Layout showLeftMenu={false} title={<>{t('lookingAt')} <span
       className={getRoleClass()}>{t(profile?.role)} {t('profile')}</span> {t('of')} {profile?.firstName} {profile?.lastName}</>}>
+  <ProjectWrapper projectId={props.projectId}  mode={'public'}>
+
       <div className={styles.root}>
         <div className={styles.desktop}>
           <ProjectTabs fullWidth tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
@@ -128,11 +131,9 @@ const ProjectPublicPage = (props: Props) => {
 
           {(props.projectId && project) && <>
             {tab === 'description' && (organization) && <TabProjectDescription fullWidth={props.fullWidth} onClose={() => {
-            }} onDelete={() => {
-            }} organization={organization} project={project} onPreview={handlePreviewProject} onSave={handleSaveProject}
-                                                                               showType={'public'}
-                                                                               onChange={(item) => setTab('application')}/>}
-            {tab === 'application' && <TabApplication project={project} onSave={handleSaveProject}/>}
+            }}  organization={organization} project={project} onPreview={handlePreviewProject}
+                                                                               showType={'public'}/>}
+            {tab === 'application' && <TabApplication/>}
             {tab === 'volunteers' && <TabVolunteers project={project}/>}
             {tab === 'messages' && <TabChat project={project}/>}
             {tab === 'autoReplies' && <ProjectAutorepliesTab project={project} autoMessages={autoMessages}/>}
@@ -140,6 +141,8 @@ const ProjectPublicPage = (props: Props) => {
           </>}
         </div>
       </div>
+
+  </ProjectWrapper>
       <Modals/>
     </Layout>
   )

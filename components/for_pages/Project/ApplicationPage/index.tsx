@@ -18,6 +18,7 @@ import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/act
 import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
 import Link from 'next/link'
+import {useApplicationContext} from "context/application_state";
 
 
 interface Props {
@@ -26,9 +27,9 @@ interface Props {
   index?: number
   total?: number
   modal?: boolean
-  onStatusChange?: (newStatus: ApplicationStatus) => void
   onEdit?: () => void
   currentTab?: ApplicationStatus
+  onChangeStatus?: (status: ApplicationStatus) => void
 }
 interface ButtonsProps {
   application?: IApplication
@@ -39,9 +40,10 @@ const RequirementStatus = (props: {name: string, success: boolean}) => {
     {props.name} <img src={`/img/Project/requirements_${props.success ? 'success' : 'failed'}.svg`}/>
   </div>
 }
-const ApplicationPage = ({application, index, total, project, modal, onStatusChange, onEdit, currentTab, ...props}: Props) => {
+const ApplicationPage = ({application, index, total, project, modal, onEdit, currentTab, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
+  const applicationContext = useApplicationContext();
   const [isLoading, setIsLoading] = useState(true);
   const profile = appContext.profile
 
@@ -88,48 +90,14 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
 
   const dispatch = useDispatch()
 
-  const handleConfirm = (status: ApplicationStatus) => {
-    onStatusChange(status)
-    dispatch(confirmModalClose())
-  }
-
-  const description = (newStatus: ApplicationStatus, button?: string) => {
-    switch(newStatus){
-      case ApplicationStatus.Completed:
-        if(profile.role === 'volunteer'){
-          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-        else{
-          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-      case ApplicationStatus.CompleteRequest:
-        if(profile.role === 'volunteer'){
-          return 'Your involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-        else{
-          return 'Volunteer involvement will be marked as “completed” and will be ended. Do you want to proceed?'
-        }
-      case ApplicationStatus.Invited:
-        return 'Invitation to join the project will be sent to the applicant. Do you want to proceed?'
-      case ApplicationStatus.Shortlist:
-        if(button === 'CANCEL INVITATION'){
-          return 'Invitation to join the project will be withdrawn. Do you want to proceed?'
-        }
-        else{
-          return 'The application will be “shortlisted”. Do you want to proceed?'
-        }
-      case ApplicationStatus.Execution:
-        return 'Accept invitation?'
-      case ApplicationStatus.RejectedByCompany:
-        return 'Volunteer involvement will be cancelled. Do you want to proceed?'
-      case ApplicationStatus.RejectedByVolunteer:
-        return 'Your participation in the project will be ended. Do you want to proceed?'
+  const changeStatus = (status: ApplicationStatus, isCancel?: boolean) => {
+    applicationContext.changeStatus(status, isCancel);
+    if(props.onChangeStatus){
+      props.onChangeStatus(status)
     }
   }
 
-  const confirmData = (status: ApplicationStatus, button?: string) => {
-    return  {title: ' ', description: description(status, button), onConfirm: () => {handleConfirm(status)}, onCancel: () => {dispatch(confirmModalClose())}}
-  }
+
 
   const handleEdit = () => {
     onEdit()
@@ -146,17 +114,17 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             <Button type='button' projectBtn='default' onClick={handleEdit}>
               EDIT
             </Button>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByVolunteer)}
             type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist)))} type='button' projectBtn='default'>
+            <Button onClick={() => changeStatus(ApplicationStatus.Shortlist)} type='button' projectBtn='default'>
               SHORTLIST
             </Button>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
             </>
             }
@@ -167,17 +135,17 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           <div className={styles.btns}>
             {profile.role === 'volunteer' ?
             <>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByVolunteer)}
             type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Invited)))}  type='button' projectBtn='default'>
+            <Button onClick={() => changeStatus(ApplicationStatus.Invited)}  type='button' projectBtn='default'>
               INVITE
             </Button>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
             </>}
           </div>
@@ -187,15 +155,15 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           <div className={styles.btns}>
             {profile.role === 'volunteer' ?
             <>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Execution)))} type='button' projectBtn='default'>ACCEPT</Button>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            <Button onClick={() => changeStatus(ApplicationStatus.Execution)} type='button' projectBtn='default'>ACCEPT</Button>
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByVolunteer)}
             type='button' projectBtn='red'>REJECT</Button>
             </>
             :
             <>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Shortlist, 'CANCEL INVITATION')))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.Shortlist, true)}
             type='button' projectBtn='red'>CANCEL INVITATION</Button>
             </>}
           </div>
@@ -205,23 +173,23 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
           <div className={styles.btns}>
             {profile.role === 'volunteer' ?
             <>
-            <Button 
-            onClick={() => profile.role === 'volunteer' ? dispatch(confirmOpen(confirmData(ApplicationStatus.CompleteRequest))) : dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            <Button
+            onClick={() => profile.role === 'volunteer' ? changeStatus(ApplicationStatus.CompleteRequest) : changeStatus(ApplicationStatus.Completed)}
             type='button' projectBtn='default'>
               COMPLETE
             </Button>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByVolunteer)))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByVolunteer)}
             type='button' projectBtn='red'>RECALL</Button>
             </>
             :
             <>
-            <Button onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Completed)))}
+            <Button onClick={() => changeStatus(ApplicationStatus.Completed)}
             type='button' projectBtn='default'>
               COMPLETE
             </Button>
-            <Button 
-            onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.RejectedByCompany)))}
+            <Button
+            onClick={() => changeStatus(ApplicationStatus.RejectedByCompany)}
             type='button' projectBtn='red'>REJECT</Button>
             </>
             }
@@ -250,7 +218,8 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
         case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
-              <Button 
+              <Button
+
               type='button' projectBtn='default'>
                 RESTORE
               </Button>
@@ -263,11 +232,11 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
                 {profile.role ?
                 <>
                 <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
-                <Button type='button' projectBtn='default' onClick={() => dispatch(confirmOpen(confirmData(ApplicationStatus.Applied)))}>REAPPLY</Button>
+                <Button type='button' projectBtn='default' onClick={() => changeStatus(ApplicationStatus.Applied)}>REAPPLY</Button>
                 </>
                 :
                 <>
-                <Button 
+                <Button
                 type='button' projectBtn='default'>
                   RESTORE
                 </Button>
@@ -360,7 +329,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
             <div className={styles.statusBlock}>
             <div className={styles.status}><img src={'/img/Project/folder.svg'}/> {application.status}</div>
             </div>
-            {modal && 
+            {modal &&
               <Buttons application={application}/>
             }
             <div className={styles.actions}></div>
@@ -395,7 +364,7 @@ const ApplicationPage = ({application, index, total, project, modal, onStatusCha
         }
 
        <div className={styles.requirements}>
-         <div className={styles.header} 
+         <div className={styles.header}
          style={{cursor: appContext.isMobile ? 'pointer' : 'auto'}}
          onClick={() => appContext.isMobile ? setIsReq(isReq ? false : true): null}>Requirements Check
          {appContext.isMobile &&<div><img src='/img/icons/arrowBlack.svg' alt=''/></div>}

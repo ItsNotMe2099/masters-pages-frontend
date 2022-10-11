@@ -39,5 +39,6 @@ export class IApplication {
   statsWithCompanyApplicationsCount: number;
   statsWithCompanyProjectsCount: number;
   createdAt: Date;
+  updatedAt: Date;
 
 }

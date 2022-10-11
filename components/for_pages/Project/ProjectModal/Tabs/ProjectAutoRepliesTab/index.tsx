@@ -49,7 +49,7 @@ const ProjectAutorepliesTab = ({project, autoMessages}: Props) => {
     setCurrentTab(item.key)
   }
 
-  const messages = currentTab === ProjectAutoRepliesTabType.Status ? 
+  const messages = currentTab === ProjectAutoRepliesTabType.Status ?
   [
     {name: 'Welcome/Restore', prevStatus: ApplicationStatus.Draft, nextStatus: ApplicationStatus.Applied, applicationStatusChange: true},
     {name: 'Pause', prevStatus: ProjectStatus.Published, nextStatus: ProjectStatus.Paused, applicationStatusChange: false},
@@ -90,7 +90,7 @@ const handleSubmit = async (data, item) => {
         prevStatus: item.prevStatus,
         nextStatus: item.nextStatus,
         enabled: data.enabled,
-        message: data.message 
+        message: data.message
     })
     }
     else{
@@ -98,10 +98,10 @@ const handleSubmit = async (data, item) => {
         prevStatus: item.prevStatus,
         nextStatus: item.nextStatus,
         enabled: true,
-        message: data.message 
+        message: data.message
     })
   }
-  } 
+  }
   else if(item.isEvent){
     const filtered = autoMessages?.eventMessages.find(i => i.event === item.nextStatus)
     if(filtered){
@@ -110,14 +110,14 @@ const handleSubmit = async (data, item) => {
       autoMessages?.eventMessages.push({
         event: item.nextStatus,
         enabled: data.enabled,
-        message: data.message 
+        message: data.message
     })
     }
     else{
     autoMessages?.eventMessages.push({
       event: item.nextStatus,
       enabled: true,
-      message: data.message 
+      message: data.message
   })
   }
   }
@@ -130,7 +130,7 @@ const handleSubmit = async (data, item) => {
         prevStatus: item.prevStatus,
         nextStatus: item.nextStatus,
         enabled: data.enabled,
-        message: data.message 
+        message: data.message
     })
     }
     else{
@@ -138,7 +138,7 @@ const handleSubmit = async (data, item) => {
       prevStatus: item.prevStatus,
       nextStatus: item.nextStatus,
       enabled: true,
-      message: data.message 
+      message: data.message
   })
 }
   }
@@ -175,12 +175,12 @@ const isColumns = () => {
           <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/>
         </div>
         <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
-        {messages.map(item => 
-          <MessageCard 
-          name={item.name} 
-          project={project} 
-          prevStatus={item.prevStatus} 
-          nextStatus={item .nextStatus} 
+        {messages.map(item =>
+          <MessageCard
+          name={item.name}
+          project={project}
+          prevStatus={item.prevStatus}
+          nextStatus={item .nextStatus}
           applicationStatusChange={item.applicationStatusChange}
           onSubmit={(data) => handleSubmit(data, item)}
           autoMessages={autoMessages}
@@ -199,12 +199,12 @@ const isColumns = () => {
           <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab} onChange={(item) => setCurrentTab(item.key)}/>
         </div>
       <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
-        {messages.map(item => 
-          <MessageCard 
-          name={item.name} 
-          project={project} 
-          prevStatus={item.prevStatus} 
-          nextStatus={item .nextStatus} 
+        {messages.map(item =>
+          <MessageCard
+          name={item.name}
+          project={project}
+          prevStatus={item.prevStatus}
+          nextStatus={item .nextStatus}
           applicationStatusChange={item.applicationStatusChange}
           isEvent={item.isEvent}
           onSubmit={(data) => handleSubmit(data, item)}
@@ -215,7 +215,7 @@ const isColumns = () => {
         )}
       </div>
       </>
-      } 
+      }
     </div>
   )
 }
