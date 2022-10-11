@@ -96,6 +96,11 @@ export function ApplicationWrapper(props: Props) {
     const application = await ApplicationRepository.create({...data, projectId: props.projectId})
     setApplicationId(application.id)
     const res = await  fetch(application.id)
+    try {
+      await ProfileRepository.deleteFromSavedProjects({profileId: appContext.profile?.id}, props.projectId)
+    }catch (e) {
+
+    }
     appContext.applicationCreateState$.next(res)
 
   }
