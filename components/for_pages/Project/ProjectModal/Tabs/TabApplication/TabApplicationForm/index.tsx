@@ -56,7 +56,7 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
     resumeFile: application?.resumeFile ?? null,
     education: application?.education ?? null,
     age: application?.age ?? null,
-    languages: application?.languages ?? appContext.profile.languages ?? []
+    languages: [],//application?.languages ?? appContext.profile.languages ?? []
   }
   console.log("initialValues", initialValues, application)
 

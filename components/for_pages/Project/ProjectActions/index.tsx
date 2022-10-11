@@ -266,7 +266,7 @@ const ProjectActionsInner = (props: Props) => {
           actions.push('reject')
         }
         if(props.status === 'rejected'){
-          actions.push('reapply')
+       //   actions.push('reapply')
         }
         if(props.status === 'completed' || props.status === 'rejected' || props.status === 'saved'){
           actions.push('recycleBin')

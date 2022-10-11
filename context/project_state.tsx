@@ -19,14 +19,16 @@ import {useTranslation} from "next-i18next";
 import {useDispatch} from "react-redux";
 import OrganizationRepository from "data/repositories/OrganizationRepository";
 import {IAutoMessages} from "data/intefaces/IAutoMessages";
+import AutoMessagesRepository from "data/repositories/AutoMessagesRepository";
 
 interface IState {
   project: IProject | null,
   projectId?: number | null
   organization: IOrganization | null
-  autoMessage: IAutoMessages | null
+  autoMessages: IAutoMessages | null
   loading?: boolean
   editLoading?: boolean
+  autoMessageLoading: boolean
   fetch: () => void
   changeStatus: (status: ProjectStatus) => Promise<boolean>,
   update: (data: DeepPartial<IProject>) => void,
@@ -35,7 +37,7 @@ interface IState {
   setPublish: () => void,
   setDraft: () => void,
   delete: () => void,
-  fetchAutoMessage: () => void
+  fetchAutoMessages: () => void
 }
 
 const loginState$ = new Subject<boolean>()
@@ -44,9 +46,10 @@ const defaultValue: IState = {
   organization: null,
   project: null,
   projectId: null,
-  autoMessage: null,
+  autoMessages: null,
   loading: false,
   editLoading: false,
+  autoMessageLoading: false,
   fetch: () => null,
   changeStatus: (status: ProjectStatus) => null,
   update: (data: DeepPartial<IProject>) => null,
@@ -55,7 +58,7 @@ const defaultValue: IState = {
   setPublish: () =>null,
   setDraft: () => null,
   delete: () =>null,
-  fetchAutoMessage: () => null
+  fetchAutoMessages: () => null
 }
 
 const ProjectContext = createContext<IState>(defaultValue)
@@ -76,7 +79,9 @@ export function ProjectWrapper(props: Props) {
   const [projectId, setProjectId] = useState<number | null>(props.projectId)
   const [autoMessages, setAutoMessages] = useState<IAutoMessages | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
+  const [autoMessageLoading, setAutoMessageLoading] = useState<boolean>(true)
   const [editLoading, setEditLoading] = useState<boolean>(false)
+
   const dispatch = useDispatch()
   useEffect(() => {
     console.log("FetchOrg", project?.corporateProfile)
@@ -104,7 +109,13 @@ export function ProjectWrapper(props: Props) {
     }
   }, [props.projectId, props.project])
 
+  const fetchAutoMessages = async () => {
+    setAutoMessageLoading(true);
+    const res = await AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId);
+    setAutoMessages(res);
+    setAutoMessageLoading(false);
 
+  }
   const fetch = async (_projectId?: number) => {
     const res = props.mode === 'public' ? await ProjectRepository.findPublicById(_projectId ?? projectId) : await ProjectRepository.findById(_projectId ?? projectId)
     if (res) {
@@ -164,7 +175,7 @@ export function ProjectWrapper(props: Props) {
     }
   }
   const handleChangeStatus = async (status: ProjectStatus): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       dispatch(confirmOpen({
         description: statusConfirmText(status),
         onConfirm: async () => {
@@ -192,6 +203,9 @@ export function ProjectWrapper(props: Props) {
     projectId,
     organization,
     fetch,
+    autoMessageLoading,
+    autoMessages,
+    fetchAutoMessages,
     loading,
     editLoading,
     update,
