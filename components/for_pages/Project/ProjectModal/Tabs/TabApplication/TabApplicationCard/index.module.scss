@@ -372,3 +372,13 @@
       margin-top: 24px;
     }
   }
+  .switch{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .switchName{
+      margin-left: 4px;
+      flex: 1;
+    }
+    margin-right: 4px;
+  }

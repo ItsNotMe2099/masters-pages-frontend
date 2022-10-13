@@ -5,6 +5,7 @@ import ApplicationPage from 'components/for_pages/Project/ApplicationPage'
 import { useAppContext } from 'context/state'
 import {IProject} from "data/intefaces/IProject";
 import {ApplicationWrapper} from "context/application_state";
+import {useRecommendContext} from "context/recommend_state";
 
 interface Props {
   project?: IProject
@@ -21,6 +22,8 @@ const TabVolunteerApplication = (props: Props) => {
   const isMobile = context.isMobile
   const hasNext = props.index < props.total
   const hasPrev = props.index > 0
+  const recommendContext = useRecommendContext()
+
   return (
    <div>
     {(hasPrev || hasNext) &&

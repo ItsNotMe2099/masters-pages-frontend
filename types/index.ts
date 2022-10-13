@@ -692,7 +692,7 @@ export interface IFeedbacksToProfile {
 
 export interface IProfileRecommendation{
   id: number,
-  profileId: number,
+  recommendedProfileId: number,
   profileThatRecommendsId: number
   profileThatRecommends: IProfile,
   createdAt: string

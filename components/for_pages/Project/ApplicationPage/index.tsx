@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import styles from './index.module.scss'
 import {IProject} from 'data/intefaces/IProject'
 import StarRatings from 'react-star-ratings'
@@ -19,6 +19,8 @@ import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
 import Link from 'next/link'
 import {useApplicationContext} from "context/application_state";
+import Switch from "components/ui/Switch";
+import {useRecommendContext} from "context/recommend_state";
 
 
 interface Props {
@@ -45,8 +47,25 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
   const appContext = useAppContext();
   const applicationContext = useApplicationContext();
   const [isLoading, setIsLoading] = useState(true);
+  const recommendContext = useRecommendContext()
   const profile = appContext.profile
+  useEffect(() => {
+    recommendContext.addRecord(application.profileId)
+    return () => {
+      recommendContext.removeRecord(application.profileId)
+    }
+  }, [])
 
+  const handleRecommend = (val) => {
+    if(recommendContext.sending.includes(application.profileId)){
+      return;
+    }
+    if(val) {
+      recommendContext.createRecommend(application.profileId)
+    }else{
+      recommendContext.deleteRecommend(application.profileId)
+    }
+  }
   const EducationGradation = (education: string) => {
     switch(education){
       case 'student':
@@ -210,8 +229,10 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
               <Button type='button' projectBtn='default'>
                 REVIEW
               </Button>
-              <Button type='button' projectBtn='default'>RECOMMEND</Button>
-              <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+                <div className={styles.switch}>
+                  <Switch checked={!!recommendContext.store.find(i => i.eId === application.profileId)} onChange={handleRecommend}/> <div className={styles.switchName}>RECOMMEND</div></div>
+
+                <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
               </>}
             </div>
           )

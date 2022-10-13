@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import { FieldConfig, useField, useFormikContext } from 'formik'
 import React from 'react'
-import Switch from 'react-switch'
+import Switch from "components/ui/Switch";
 
 interface Props {
   onChange?: () => void
@@ -22,16 +22,6 @@ export default function SwitchField(props: Props & FieldConfig) {
       <Switch
           onChange={(val) => handleChange(val)}
           checked={field.value}
-          handleDiameter={26}
-          uncheckedIcon={false}
-          checkedIcon={false}
-          height={30}
-          width={51}
-          offColor="#C4C4C4"
-          onColor="#6EDC5F"
-          offHandleColor="#fff"
-          onHandleColor="#fff"
-          className={styles.switch}
           />
     </div>
   )

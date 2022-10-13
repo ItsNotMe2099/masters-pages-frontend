@@ -12,8 +12,10 @@ import { useDispatch } from 'react-redux'
 import VolunteerStats from '../VolunteerStats'
 import StarRatings from 'react-star-ratings'
 import Link from 'next/link'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {ApplicationWrapper, useApplicationContext} from "context/application_state";
+import {useRecommendContext} from "context/recommend_state";
+import Switch from "components/ui/Switch";
 
 interface Props {
   application?: IApplication
@@ -35,6 +37,8 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
 
   const dispatch = useDispatch()
   const applicationContext = useApplicationContext()
+  const recommendContext = useRecommendContext()
+
   const handleConfirm = (status: ApplicationStatus) => {
     onStatusChange(status)
     dispatch(confirmModalClose())
@@ -50,6 +54,23 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
     applicationContext.changeStatus(status, isCancel);
   }
 
+  useEffect(() => {
+    recommendContext.addRecord(application.profileId)
+    return () => {
+      recommendContext.removeRecord(application.profileId)
+    }
+  }, [])
+
+  const handleRecommend = (val) => {
+    if(recommendContext.sending.includes(application.profileId)){
+      return;
+    }
+    if(val) {
+      recommendContext.createRecommend(application.profileId)
+    }else{
+      recommendContext.deleteRecommend(application.profileId)
+    }
+  }
   const Buttons = (props: ButtonsProps) => {
 
     switch(currentTab){
@@ -118,7 +139,8 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
               <Button type='button' projectBtn='default'>
                 REVIEW
               </Button>
-              <Button type='button' projectBtn='default'>RECOMMEND</Button>
+             <div className={styles.switch}>
+               <Switch checked={!!recommendContext.store.find(i => i.eId === application.profileId)} onChange={handleRecommend}/> <div className={styles.switchName}>RECOMMEND</div></div>
               <Button onClick={() => applicationContext.delete()} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )

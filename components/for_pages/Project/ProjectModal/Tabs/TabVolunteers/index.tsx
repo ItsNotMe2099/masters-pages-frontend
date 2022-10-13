@@ -130,7 +130,10 @@ const TabVolunteers = ({project, ...props}: Props) => {
         </div>
         <div className={styles.list}>
           {list.map((item, index) =>
-            <TabApplicationCard profile={item.profile} application={item} key={index} currentTab={currentTab}
+            <TabApplicationCard profile={item.profile} application={item} key={index}
+                                total={list.length}
+                                index={index}
+                                currentTab={currentTab}
                                 onViewClick={() => handleView(project, item, index)}/>
           )}
         </div>
