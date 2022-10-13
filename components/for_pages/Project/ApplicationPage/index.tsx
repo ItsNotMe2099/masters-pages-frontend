@@ -230,7 +230,7 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
                 REVIEW
               </Button>
                 <div className={styles.switch}>
-                  <Switch checked={!!recommendContext.store.find(i => i.eId === application.profileId)} onChange={handleRecommend}/> <div className={styles.switchName}>RECOMMEND</div></div>
+                  <Switch checked={!!recommendContext.store.find(i => i.eId === application.profileId)} onChange={handleRecommend}/> <div className={styles.switchName}>{ !!recommendContext.store.find(i => i.eId === application.profileId) ? 'Recommended' : 'No recommendation'}</div></div>
 
                 <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
               </>}
