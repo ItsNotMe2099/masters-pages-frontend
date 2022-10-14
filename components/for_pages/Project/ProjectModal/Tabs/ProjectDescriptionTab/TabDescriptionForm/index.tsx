@@ -290,12 +290,12 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
         <div className={styles.bottomBar}>
 
-          {(!project || !project.status) ? <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
+          {(!project || !project.status) ? <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSubmitDraft} disabled={projectContext.editLoading} >Save as draft</Button>
             :
-            <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSave}>Save</Button>
+            <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSave} disabled={projectContext.editLoading} >Save</Button>
           }
-          <Button size={'small'} projectBtn='default' type={'button'}  onClick={handleSubmitPreview}>Preview</Button>
-          {project?.status !== ProjectStatus.Published  && <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSubmitPublish}>Publish</Button>}
+          <Button size={'small'} projectBtn='default' type={'button'}  onClick={handleSubmitPreview} >Preview</Button>
+          {project?.status !== ProjectStatus.Published  && <Button size={'small'} projectBtn='default' disabled={projectContext.editLoading} type={'button'} onClick={handleSubmitPublish}>Publish</Button>}
         </div>
       </Form>
     </FormikProvider>

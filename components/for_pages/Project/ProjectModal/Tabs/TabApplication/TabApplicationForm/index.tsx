@@ -124,11 +124,11 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
 
         <div className={styles.bottomBar}>
           {(!application || application.status === ApplicationStatus.Draft) &&
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>}
+          <Button size={'small'} color={'red'} disabled={applicationContext.editLoading} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>}
           {(!application || application.status === ApplicationStatus.Draft ) &&
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Apply</Button>}
+          <Button size={'small'} color={'red'} disabled={applicationContext.editLoading} type={'button'} onClick={handleSubmitPublish}>Apply</Button>}
           {edit &&
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitSave}>Save</Button>}
+          <Button size={'small'} color={'red'} disabled={applicationContext.editLoading} type={'button'} onClick={handleSubmitSave}>Save</Button>}
         </div>
       </Form>
     </FormikProvider>

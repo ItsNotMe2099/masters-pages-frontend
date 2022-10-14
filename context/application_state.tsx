@@ -29,6 +29,7 @@ interface IState {
   changeStatus: (status: ApplicationStatus, isCancel?: boolean) => void
   delete: () => void
   loading: boolean
+  editLoading: boolean
 }
 
 const defaultValue: IState = {
@@ -37,7 +38,8 @@ const defaultValue: IState = {
   create: (data: DeepPartial<IApplication>) => null,
   changeStatus: (status: ApplicationStatus, isCancel?: boolean) => null,
   delete: () => null,
-  loading: false
+  loading: false,
+  editLoading: false
 }
 
 const ApplicationContext = createContext<IState>(defaultValue)
@@ -117,15 +119,21 @@ export function ApplicationWrapper(props: Props) {
   }
 
   const create = async (data: DeepPartial<IApplication>) => {
-    const application = await ApplicationRepository.create({...data, projectId: props.projectId})
-    setApplicationId(application.id)
-    const res = await  fetch(application.id)
+    setEditLoading(true)
     try {
-      await ProfileRepository.deleteFromSavedProjects({profileId: appContext.profile?.id}, props.projectId)
+      const application = await ApplicationRepository.create({...data, projectId: props.projectId})
+      setApplicationId(application.id)
+      const res = await fetch(application.id)
+      try {
+        await ProfileRepository.deleteFromSavedProjects({profileId: appContext.profile?.id}, props.projectId)
+      } catch (e) {
+
+      }
+      appContext.applicationCreateState$.next(res)
     }catch (e) {
 
     }
-    appContext.applicationCreateState$.next(res)
+    setEditLoading(false)
 
   }
   const update = async (data: IApplication) => {
@@ -206,6 +214,7 @@ export function ApplicationWrapper(props: Props) {
     create,
     update,
     loading,
+    editLoading,
     changeStatus: handleChangeStatus,
     delete: handleDelete,
 

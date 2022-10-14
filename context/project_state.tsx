@@ -142,10 +142,16 @@ export function ProjectWrapper(props: Props) {
     appContext.projectUpdateState$.next({...project, ...data as IProject})
   }
   const create = async (data: DeepPartial<IProject>) => {
-    const project = await ProjectRepository.create(data)
-    setProjectId(project.id)
-    const res = await  fetch(project.id)
-    appContext.projectCreateState$.next(res)
+    setEditLoading(true)
+    try {
+      const project = await ProjectRepository.create(data)
+      setProjectId(project.id)
+      const res = await fetch(project.id)
+      appContext.projectCreateState$.next(res)
+    }catch (e) {
+
+    }
+    setEditLoading(false)
 
   }
   const update = async (data: DeepPartial<IProject>) => {
