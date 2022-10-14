@@ -23,6 +23,8 @@ import OrganizationRepository from "data/repositories/OrganizationRepository";
 import {ProjectWrapper, useProjectContext} from "context/project_state";
 import {useDispatch} from "react-redux";
 import {modalClose} from "components/Modal/actions";
+import {ProjectVolunteerFeedbackModal} from "components/for_pages/Project/ProjectVolunteerFeedback";
+import {ModalType} from "types/enums";
 
 interface Props {
   showType: 'client' | 'public'
@@ -106,10 +108,9 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
             {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project}/>}
             {tab === 'reports' && <TabReports project={projectContext.project}/>}
           </>}
-
-
         </div>
       </div>
+      {projectContext.modal === ModalType.VolunteerFeedBackModal && <ProjectVolunteerFeedbackModal  projectId={projectContext.projectId}/>}
     </Modal>
   )
 }

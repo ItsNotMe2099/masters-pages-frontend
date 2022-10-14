@@ -1,0 +1,27 @@
+@import "scss/index";
+
+.modal{
+
+}
+.modalClose{
+
+}
+.root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > * + * {
+    margin-top: 20px;
+  }
+}
+.text{
+  width: 100%;
+}
+.buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > * + * {
+    margin-left: 15px;
+  }
+}

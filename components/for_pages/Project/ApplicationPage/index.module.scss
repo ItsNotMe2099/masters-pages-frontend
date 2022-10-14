@@ -47,6 +47,14 @@
 .sectionContent{
   padding: 18px 0px;
 }
+.sectionFeedbackActions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > * + * {
+    margin-left: 15px;
+  }
+}
 .profile{
   display: flex;
   flex-direction: row;

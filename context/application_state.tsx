@@ -24,7 +24,7 @@ import ApplicationRepository from "data/repositories/ApplicationRepository";
 
 interface IState {
   application: IApplication | null,
-  update: (data: DeepPartial<IApplication>) => void,
+  update: (data: IApplication) => void,
   create: (data: DeepPartial<IApplication>) => void,
   changeStatus: (status: ApplicationStatus, isCancel?: boolean) => void
   delete: () => void
@@ -33,7 +33,7 @@ interface IState {
 
 const defaultValue: IState = {
   application: null,
-  update: (data: DeepPartial<IApplication>) => null,
+  update: (data: IApplication) => null,
   create: (data: DeepPartial<IApplication>) => null,
   changeStatus: (status: ApplicationStatus, isCancel?: boolean) => null,
   delete: () => null,
@@ -60,6 +60,30 @@ export function ApplicationWrapper(props: Props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const feedbackCreate = appContext.feedbackCreateState$.subscribe((feedback) => {
+      if(application?.id === feedback.applicationId){
+        setApplication(i => ({...i,  feedbacks: [...i.feedbacks, feedback] }))
+      }
+    });
+    const feedbackUpdate = appContext.feedbackUpdateState$.subscribe((feedback) => {
+      if(application?.id === feedback.applicationId){
+        setApplication(i => ({...i,  feedbacks: i.feedbacks.map(i => i.id === feedback.id ? {...i, ...feedback} : i) }))
+      }
+
+    });
+    const feedbackDelete = appContext.feedbackDeleteState$.subscribe((feedback) => {
+      if(application?.id === feedback.applicationId){
+        setApplication(i => ({...i,  feedbacks: i.feedbacks.filter(i => i.id !== feedback.id) }))
+      }
+
+    });
+    return () => {
+      feedbackCreate.unsubscribe()
+      feedbackUpdate.unsubscribe()
+      feedbackDelete.unsubscribe()
+    }
+  }, [application])
+  useEffect(() => {
     if (props.application) {
       setApplication(props.application)
       setLoading(false)
@@ -71,9 +95,9 @@ export function ApplicationWrapper(props: Props) {
       fetch()
     }
   }, [props.applicationId, props.application, props.projectId])
-  const handleUpdate = (data: DeepPartial<IApplication>) => {
-    setApplication(b => ({...b, ...data as IApplication}))
-    appContext.applicationUpdateState$.next({...application, ...data as IApplication})
+  const handleUpdate = (data: IApplication) => {
+    setApplication(b => ({...b, ...(data as any)}))
+    appContext.applicationUpdateState$.next({...application, ...(data as any)})
   }
 
   const fetch = async (_applicationId?: number) => {
@@ -104,7 +128,7 @@ export function ApplicationWrapper(props: Props) {
     appContext.applicationCreateState$.next(res)
 
   }
-  const update = async (data: DeepPartial<IApplication>) => {
+  const update = async (data: IApplication) => {
     try {
       setEditLoading(true)
       const res = await ApplicationRepository.update(applicationId, data)

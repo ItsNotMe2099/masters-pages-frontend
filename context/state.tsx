@@ -11,6 +11,7 @@ import UserRepository from 'data/repositories/UserRepostory'
 import {useRouter} from 'next/router'
 import {IProject} from "data/intefaces/IProject";
 import {IApplication} from "data/intefaces/IApplication";
+import {IFeedbacksToProfile} from "types";
 
 interface IState {
   isMobile: boolean
@@ -37,6 +38,9 @@ interface IState {
   applicationUpdateState$: Subject<IApplication>
   applicationDeleteState$: Subject<IApplication>
   applicationCreateState$: Subject<IApplication>
+  feedbackUpdateState$: Subject<IFeedbacksToProfile>
+  feedbackDeleteState$: Subject<IFeedbacksToProfile>
+  feedbackCreateState$: Subject<IFeedbacksToProfile>
 }
 
 const loginState$ = new Subject<boolean>()
@@ -46,6 +50,9 @@ const projectCreateState$ = new Subject<IProject>()
 const applicationUpdateState$ = new Subject<IApplication>()
 const applicationDeleteState$ = new Subject<IApplication>()
 const applicationCreateState$ = new Subject<IApplication>()
+const feedbackUpdateState$ = new Subject<IFeedbacksToProfile>()
+const feedbackDeleteState$ = new Subject<IFeedbacksToProfile>()
+const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
 
 const defaultValue: IState = {
   isMobile: false,
@@ -65,6 +72,9 @@ const defaultValue: IState = {
   applicationUpdateState$: applicationUpdateState$,
   applicationDeleteState$: applicationDeleteState$,
   applicationCreateState$: applicationCreateState$,
+  feedbackUpdateState$: feedbackUpdateState$,
+  feedbackDeleteState$: feedbackDeleteState$,
+  feedbackCreateState$: feedbackCreateState$,
   showModal: (type) => null,
   hideModal: () => null,
   showSnackbar: (text, type) => null,

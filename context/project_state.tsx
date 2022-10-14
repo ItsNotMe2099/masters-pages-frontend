@@ -14,7 +14,14 @@ import {DeepPartial} from "redux";
 import ProjectRepository from "data/repositories/ProjectRepository";
 import {useAppContext} from "context/state";
 import {IOrganization} from "data/intefaces/IOrganization";
-import {confirmChangeData, confirmModalClose, confirmOpen, modalClose} from "components/Modal/actions";
+import {
+  confirmChangeData,
+  confirmModalClose,
+  confirmOpen,
+  modalClose,
+  projectVolunteerFeedBackOpen,
+  skillModalOpen
+} from "components/Modal/actions";
 import {useTranslation} from "next-i18next";
 import {useDispatch} from "react-redux";
 import OrganizationRepository from "data/repositories/OrganizationRepository";
@@ -29,15 +36,17 @@ interface IState {
   loading?: boolean
   editLoading?: boolean
   autoMessageLoading: boolean
+  modal: ModalType | null
+  modalArguments: any
   fetch: () => void
   changeStatus: (status: ProjectStatus) => Promise<boolean>,
   update: (data: DeepPartial<IProject>) => void,
   create: (data: DeepPartial<IProject>) => void,
   saveToFavorite: () => void,
-  setPublish: () => void,
-  setDraft: () => void,
   delete: () => void,
   fetchAutoMessages: () => void
+  showModal: (type: ModalType, args?: any) => void
+  hideModal: () => void
 }
 
 const loginState$ = new Subject<boolean>()
@@ -50,15 +59,17 @@ const defaultValue: IState = {
   loading: false,
   editLoading: false,
   autoMessageLoading: false,
+  modal: null,
+  modalArguments: null,
   fetch: () => null,
   changeStatus: (status: ProjectStatus) => null,
   update: (data: DeepPartial<IProject>) => null,
   create: (data: DeepPartial<IProject>) => null,
   saveToFavorite: () => null,
-  setPublish: () =>null,
-  setDraft: () => null,
   delete: () =>null,
-  fetchAutoMessages: () => null
+  fetchAutoMessages: () => null,
+  showModal: (type, args) => null,
+  hideModal: () => null,
 }
 
 const ProjectContext = createContext<IState>(defaultValue)
@@ -81,6 +92,8 @@ export function ProjectWrapper(props: Props) {
   const [loading, setLoading] = useState<boolean>(true)
   const [autoMessageLoading, setAutoMessageLoading] = useState<boolean>(true)
   const [editLoading, setEditLoading] = useState<boolean>(false)
+  const [modal, setModal] = useState<ModalType | null>(null)
+  const [modalArguments, setModalArguments] = useState<any>(null)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -197,11 +210,21 @@ export function ProjectWrapper(props: Props) {
   const saveToFavorite = async () => {
    await ProfileRepository.addToSavedProjects({projectId: project.id})
   }
+  const  showModal = (type: ModalType, args?: any) => {
+    console.log("ShowModal", type)
+    setModalArguments(args)
+    setModal(type)
+  };
+  const  hideModal = () => {
+    setModal(null)
+  };
   const value: IState = {
     ...defaultValue,
     project,
     projectId,
     organization,
+    modal,
+    modalArguments,
     fetch,
     autoMessageLoading,
     autoMessages,
@@ -212,8 +235,9 @@ export function ProjectWrapper(props: Props) {
     create,
     delete: handleDelete,
     changeStatus: handleChangeStatus,
-    saveToFavorite
-
+    saveToFavorite,
+    showModal,
+    hideModal,
   }
 
   return (

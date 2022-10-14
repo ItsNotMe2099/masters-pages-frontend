@@ -134,6 +134,9 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.SAVE_PROFILE_SEARCH_OPEN:
       state.modalKey = 'saveProfileSearchModal'
       break
+    case ActionTypes.PROJECT_VOLUNTEER_FEEDBACK_OPEN:
+      state.modalKey = 'projectVolunteerFeedBack'
+      break
     case ActionTypes.POST_EDIT_OPEN:
       state.modalKey = 'postEditOpen'
       break

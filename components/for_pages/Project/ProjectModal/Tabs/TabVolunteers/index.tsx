@@ -58,19 +58,40 @@ const TabVolunteers = ({project, ...props}: Props) => {
     const subscriptionUpdate = appContext.applicationUpdateState$.subscribe((application) => {
 
       setApplications(applications => applications.map(item => item.id === application.id ? ({...item, ...application}) : item))
-     if(currentApplication?.id === application.id){
-       setCurrentApplication(null)
-       setView(ViewType.List)
-     }
+      if(currentApplication?.id === application.id){
+        setCurrentApplication(null)
+        setView(ViewType.List)
+      }
       fetchCounts()
     });
     const subscriptionDelete = appContext.applicationDeleteState$.subscribe((application) => {
       setApplications(applications => applications.filter(item => item.id !== application.id))
       fetchCounts()
     });
+
+
+    const feedbackCreate = appContext.feedbackCreateState$.subscribe((feedback) => {
+      setApplications(applications => applications.map(item => item.id === feedback.applicationId  ? ({...item, feedbacks: [...item.feedbacks, feedback] }) : item))
+
+      if(currentApplication?.id === feedback.applicationId){
+
+      }
+    });
+    const feedbackUpdate = appContext.feedbackUpdateState$.subscribe((feedback) => {
+      console.log("feedbackUpdate", feedback)
+      setApplications(applications => applications.map(item => item.id === feedback.applicationId  ? ({...item, feedbacks: item.feedbacks.map(i => i.id === feedback.id ? {...i, ...feedback} : i) }) : item))
+
+    });
+    const feedbackDelete = appContext.feedbackDeleteState$.subscribe((feedback) => {
+      setApplications(applications => applications.map(item => item.id === feedback.applicationId  ? ({...item, feedbacks: item.feedbacks.filter(i => i.id !== feedback.id) }) : item))
+
+    });
     return () => {
       subscriptionUpdate.unsubscribe()
       subscriptionDelete.unsubscribe()
+      feedbackCreate.unsubscribe()
+      feedbackUpdate.unsubscribe()
+      feedbackDelete.unsubscribe()
     }
   }, [applications, currentApplication])
 

@@ -196,7 +196,8 @@ export interface SkillData {
   ratePerHour: number,
   price: number,
   skills: SkillData[]
-
+  projectsCount?: number
+  applicationsCount?: number
   tasksCount?: number
   likesCount?: number
   feedbacksCount?: number
@@ -655,6 +656,8 @@ export interface IFeedbacksToProfile {
   id: number
   title: string,
   target: string
+  projectId: number
+  applicationId: number
   fromProfileId: number
   toProfileId: number
   totalMark: number

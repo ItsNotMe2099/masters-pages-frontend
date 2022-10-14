@@ -9,7 +9,7 @@ export enum RegistrationMode{
 }
 
 export enum ModalType {
-
+  VolunteerFeedBackModal
 }
 
 export enum SnackbarType {

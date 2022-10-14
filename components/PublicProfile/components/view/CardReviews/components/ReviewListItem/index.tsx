@@ -33,7 +33,7 @@ const ReviewListItem = ({feedback}: Props) => {
       <div className={styles.time}>{ format(new Date(feedback.createdAt), 'MM.dd.yy HH:mm')}</div>
       </div>
       <div className={styles.content}>
-        <div className={styles.task}>{feedback.task.title}</div>
+        <div className={styles.task}>{feedback.task?.title}</div>
         <div className={styles.description}>{feedback.description}</div>
       </div>
     </div>

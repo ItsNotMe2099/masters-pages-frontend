@@ -1,14 +1,14 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import {format} from 'date-fns'
-import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
-import { IProfile } from 'data/intefaces/IProfile'
+import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
+import {IProfile} from 'data/intefaces/IProfile'
 import Avatar from 'components/ui/Avatar'
 import Button from 'components/ui/Button'
 import Marker from 'components/svg/Marker'
 import LanguageListItem from 'components/PublicProfile/components/view/CardLanguages/components/LanguageListItem'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
-import { useDispatch } from 'react-redux'
+import {confirmModalClose} from 'components/Modal/actions'
+import {useDispatch} from 'react-redux'
 import VolunteerStats from '../VolunteerStats'
 import StarRatings from 'react-star-ratings'
 import Link from 'next/link'
@@ -16,6 +16,8 @@ import React, {useEffect} from 'react'
 import {ApplicationWrapper, useApplicationContext} from "context/application_state";
 import {useRecommendContext} from "context/recommend_state";
 import Switch from "components/ui/Switch";
+import {useProjectContext} from "context/project_state";
+import {ModalType} from "types/enums";
 
 interface Props {
   application?: IApplication
@@ -37,6 +39,7 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
 
   const dispatch = useDispatch()
   const applicationContext = useApplicationContext()
+  const projectContext = useProjectContext()
   const recommendContext = useRecommendContext()
 
   const handleConfirm = (status: ApplicationStatus) => {
@@ -136,8 +139,10 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
           return (
             <div className={styles.btnsCompleted}>
               <Button  onClick={props.onViewClick} type='button' projectBtn='default'>VIEW</Button>
-              <Button type='button' projectBtn='default'>
-                REVIEW
+              <Button type='button' projectBtn='default' onClick={() => projectContext.showModal(ModalType.VolunteerFeedBackModal, {
+                feedback: application.feedbacks?.filter(i => !i.deletedAt).find(i => i.target === 'master'),
+                profileId: application.profileId, applicationId: application.id})}>
+                {application.feedbacks?.filter(i => !i.deletedAt).find(i => i.target === 'master') ? 'EDIT REVIEW' : 'REVIEW'}
               </Button>
              <div className={styles.switch}>
                <Switch checked={!!recommendContext.store.find(i => i.eId === application.profileId)} onChange={handleRecommend}/> <div className={styles.switchName}>{ !!recommendContext.store.find(i => i.eId === application.profileId) ? 'Recommended' : 'No recommendation'}</div></div>

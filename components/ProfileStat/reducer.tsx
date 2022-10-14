@@ -18,7 +18,9 @@ export default function ProfileStatReducer(state = {...initialState}, action) {
       state.isLoading = true
       break
     case ActionTypes.FETCH_PROFILE_STAT_REQUEST + ApiActionTypes.SUCCESS:
-      state.list = action.payload
+      state.list = action.payload.map(i => ({...i, applicationsCount: parseInt(i.applicationsCount, 10),
+        projectsCount: parseInt(i.projectsCount, 10),
+        tasksCount: parseInt(i.tasksCount, 10),}))
       state.isLoading = false
       break
     case ActionTypes.FETCH_PROFILE_STAT_REQUEST + ApiActionTypes.FAIL:

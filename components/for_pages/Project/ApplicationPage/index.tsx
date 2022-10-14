@@ -14,13 +14,17 @@ import LanguageListItem from 'components/PublicProfile/components/view/CardLangu
 import {format} from 'date-fns'
 import VolunteerStats from '../ProjectModal/Tabs/TabApplication/VolunteerStats'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import {confirmChangeData, confirmModalClose, confirmOpen, modalClose} from 'components/Modal/actions'
 import Button from 'components/ui/Button'
 import { getMediaPath } from 'utils/media'
 import Link from 'next/link'
 import {useApplicationContext} from "context/application_state";
 import Switch from "components/ui/Switch";
 import {useRecommendContext} from "context/recommend_state";
+import {ModalType, SnackbarType} from "types/enums";
+import {useProjectContext} from "context/project_state";
+import RatingStars from "components/ui/RatingStars";
+import FeedbackRepository from "data/repositories/FeedbackRepository";
 
 
 interface Props {
@@ -46,16 +50,30 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
   const {t} = useTranslation();
   const appContext = useAppContext();
   const applicationContext = useApplicationContext();
+  const projectContext = useProjectContext();
   const [isLoading, setIsLoading] = useState(true);
   const recommendContext = useRecommendContext()
   const profile = appContext.profile
+  const feedback = applicationContext.application?.feedbacks?.filter(i => !i.deletedAt).find(i => i.target === 'master')
+
   useEffect(() => {
     recommendContext.addRecord(application.profileId)
     return () => {
       recommendContext.removeRecord(application.profileId)
     }
   }, [])
-
+  const handleDeleteReview = () => {
+    dispatch(confirmOpen({
+      description: 'Do you want to delete your review?',
+      onConfirm: async () => {
+        dispatch(confirmChangeData({loading: true}))
+        await FeedbackRepository.delete(feedback.id);
+        appContext.feedbackDeleteState$.next(feedback)
+        dispatch(confirmModalClose())
+        appContext.showSnackbar('Your review deleted', SnackbarType.success);
+      }
+    }))
+  }
   const handleRecommend = (val) => {
     if(recommendContext.sending.includes(application.profileId)){
       return;
@@ -115,7 +133,6 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
       props.onChangeStatus(status)
     }
   }
-
 
 
   const handleEdit = () => {
@@ -219,16 +236,18 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
             <div className={styles.btnsCompleted}>
               {profile.role === 'volunteer' ?
               <>
-              <Button type='button' projectBtn='default'>
+              {/*<Button type='button' projectBtn='default'>
                 REQUEST REVIEW
-              </Button>
-              <Button type='button' projectBtn='default'>WRITE REVIEW</Button>
+              </Button>*/}
+              {/*<Button type='button' projectBtn='default'>WRITE REVIEW</Button>*/}
               </>
               :
               <>
-              <Button type='button' projectBtn='default'>
-                REVIEW
-              </Button>
+                <Button type='button' projectBtn='default' onClick={() => projectContext.showModal(ModalType.VolunteerFeedBackModal, {
+                  feedback,
+                  profileId: application.profileId, applicationId: application.id})}>
+                  {feedback ? 'EDIT REVIEW' : 'REVIEW'}
+                </Button>
                 <div className={styles.switch}>
                   <Switch checked={!!recommendContext.store.find(i => i.eId === application.profileId)} onChange={handleRecommend}/> <div className={styles.switchName}>{ !!recommendContext.store.find(i => i.eId === application.profileId) ? 'Recommended' : 'No recommendation'}</div></div>
 
@@ -356,6 +375,24 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
             <div className={styles.actions}></div>
           </div>
         </div>
+       {feedback && <div className={classNames(styles.section, styles.feedback)}>
+         <div className={styles.sectionHeader}>
+           <div>Review</div>
+         <RatingStars mark={feedback.mark}/>
+         </div>
+         <div className={styles.sectionContent}>{feedback.description}</div>
+         {feedback.fromProfileId === profile.id && <div className={styles.sectionFeedbackActions}>
+            <Button type='button' projectBtn='default' onClick={() => projectContext.showModal(ModalType.VolunteerFeedBackModal, {
+              feedback,
+              profileId: application.profileId, applicationId: application.id})}>
+              EDIT REVIEW
+            </Button>
+
+            <Button className={styles.recycle} onClick={handleDeleteReview} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+
+          </div>}
+       </div>}
+
      <div className={classNames(styles.section, styles.coverLetter)}>
        <div className={styles.sectionHeader}>
          <div>Cover Letter</div>
