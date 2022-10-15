@@ -92,6 +92,11 @@ export function ApplicationWrapper(props: Props) {
     }
   }, [props.application])
   useEffect(() => {
+    if (props.applicationId) {
+      setApplicationId(props.applicationId)
+    }
+  }, [props.applicationId])
+  useEffect(() => {
     console.log("FetchData111", props.projectId, props.applicationId)
     if (!props.application && (props.applicationId || props.projectId)) {
       fetch()

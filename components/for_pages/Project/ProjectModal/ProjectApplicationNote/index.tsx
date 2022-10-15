@@ -28,12 +28,15 @@ const ProjectApplicationNoteInner = (props: Props) => {
    const notesRef = useRef<HTMLDivElement>()
    const [expanded, setExpanded] = useState(applicationContext.application?.notes?.length > 0)
    const [notes, setNotes] = useState(applicationContext.application?.notes ?? []);
-  console.log("notes11", notes)
+  console.log("notes11", applicationContext.application.id, notes)
    useEffect(() => {
      if( notesRef.current) {
        notesRef.current.scrollTop = notesRef.current.scrollHeight
      }
    }, [])
+  useEffect(() => {
+    setNotes(props.application?.notes)
+  }, [props.application?.id])
   const handleSubmit = (data) => {
     console.log("handleSubmit", data)
     setNotes([...notes, {note: data.message, createdAt: (new Date()).toISOString()}])

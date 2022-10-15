@@ -83,18 +83,22 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
         return styles.modeGuest
     }
   }
+  const handleChangeTab = (item) => {
+    setTab(item.key)
+    projectContext.setCurrentApplication(null)
+  }
 
   return (
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose}>
       <div className={styles.root}>
         <div className={styles.desktop}>
-          <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
+          <ProjectTabs tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
          </div>
         <div className={classNames(styles.mobile, getModeClass())}>
           <div className={styles.topPanel}>
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
-          <TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
+          <TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
         </div>
         <div className={styles.content}>
           <div className={styles.topPanel}>

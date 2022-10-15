@@ -323,7 +323,7 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
           <div className={styles.profileInfo}>
           <Link href={profileLink}>
             <a target='_blank'>
-            <Avatar image={application.profile.photo}/>
+            <Avatar image={application.profile.photo} size={'largeSquare'}/>
             </a>
           </Link>
             <div className={styles.icons}>
