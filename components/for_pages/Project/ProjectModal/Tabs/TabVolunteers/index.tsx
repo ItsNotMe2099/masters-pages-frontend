@@ -12,6 +12,7 @@ import ApplicationRepository from "data/repositories/ApplicationRepository";
 import {IApplicationCounts} from "data/intefaces/IApplicationCounts";
 import TabVolunteerApplication
   from "components/for_pages/Project/ProjectModal/Tabs/TabVolunteers/TabVolunteerApplication";
+import {useProjectContext} from "context/project_state";
 
 enum ViewType {
   List,
@@ -26,6 +27,7 @@ const TabVolunteers = ({project, ...props}: Props) => {
   const [counts, setCounts] = useState<IApplicationCounts>({})
   const [view, setView] = useState<ViewType>(ViewType.List)
   const appContext = useAppContext()
+  const projectContext = useProjectContext()
   const tabs = useMemo(
     () => ( [
       {name: 'Applications', key: ApplicationStatus.Applied},
@@ -59,8 +61,9 @@ const TabVolunteers = ({project, ...props}: Props) => {
 
       setApplications(applications => applications.map(item => item.id === application.id ? ({...item, ...application}) : item))
       if(currentApplication?.id === application.id){
-        setCurrentApplication(null)
-        setView(ViewType.List)
+      //  setCurrentApplication(null)
+        //projectContext.setCurrentApplication(null)
+        //setView(ViewType.List)
       }
       fetchCounts()
     });
@@ -107,6 +110,7 @@ const TabVolunteers = ({project, ...props}: Props) => {
   const handleView = (project: IProject, application: IApplication, index: number) => {
     setCurrentProject(project)
     setCurrentApplication(application)
+    projectContext.setCurrentApplication(application)
     setCurrentIndex(index)
     setView(ViewType.Application)
   }
@@ -115,6 +119,7 @@ const TabVolunteers = ({project, ...props}: Props) => {
     if(currentIndex + 1 < list.length){
       setCurrentIndex(currentIndex + 1)
       setCurrentApplication(applications[currentIndex + 1])
+      projectContext.setCurrentApplication(applications[currentIndex + 1])
     }
   }
 
@@ -122,13 +127,18 @@ const TabVolunteers = ({project, ...props}: Props) => {
     if(currentIndex > 0){
       setCurrentIndex(currentIndex - 1)
       setCurrentApplication(applications[currentIndex - 1])
+      projectContext.setCurrentApplication(applications[currentIndex - 1])
     }
   }
 
 
   const header = (view === ViewType.Application ?
     <div className={styles.header}>
-      <div className={styles.back} onClick={() => setView(ViewType.List)}>
+      <div className={styles.back} onClick={() => {
+        setView(ViewType.List)
+        setCurrentApplication(null)
+        projectContext.setCurrentApplication(null)
+      }}>
         <img src='/img/icons/back.svg' alt=''/>
         <div>Back</div>
       </div>

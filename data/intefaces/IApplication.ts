@@ -15,7 +15,10 @@ export enum ApplicationStatus {
   RejectedByCompany = 'rejectedByCompany',
   RejectedByVolunteer = 'rejectedByVolunteer',
 }
-
+export interface IApplicationNote{
+  createdAt: string
+  note: string
+}
 export class IApplication {
   id: number;
   project: IProject;
@@ -41,5 +44,5 @@ export class IApplication {
   createdAt: Date;
   updatedAt: Date;
   feedbacks?: IFeedbacksToProfile[]
-
+  notes: IApplicationNote[]
 }

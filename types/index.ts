@@ -837,7 +837,14 @@ export enum ProfilePageType {
   Skill = 'skill',
   Profile = 'profile'
 }
-
+export interface IProfileNoteNote{
+  createdAt: string
+  note: string
+}
+export interface IProfileNote{
+  id: number,
+  notes: IProfileNoteNote[]
+}
 export const CONTACTS = {
   email: 'admin@masterspages.com',
   instagram: 'https://www.instagram.com/masterspages',

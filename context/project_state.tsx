@@ -27,18 +27,21 @@ import {useDispatch} from "react-redux";
 import OrganizationRepository from "data/repositories/OrganizationRepository";
 import {IAutoMessages} from "data/intefaces/IAutoMessages";
 import AutoMessagesRepository from "data/repositories/AutoMessagesRepository";
+import {IApplication} from "data/intefaces/IApplication";
 
 interface IState {
   project: IProject | null,
   projectId?: number | null
   organization: IOrganization | null
   autoMessages: IAutoMessages | null
+  currentApplication: IApplication
   loading?: boolean
   editLoading?: boolean
   autoMessageLoading: boolean
   modal: ModalType | null
   modalArguments: any
   fetch: () => void
+  setCurrentApplication: (application: IApplication) => void,
   changeStatus: (status: ProjectStatus) => Promise<boolean>,
   update: (data: DeepPartial<IProject>) => void,
   create: (data: DeepPartial<IProject>) => void,
@@ -61,7 +64,9 @@ const defaultValue: IState = {
   autoMessageLoading: false,
   modal: null,
   modalArguments: null,
+  currentApplication: null,
   fetch: () => null,
+  setCurrentApplication: (application: IApplication) => null,
   changeStatus: (status: ProjectStatus) => null,
   update: (data: DeepPartial<IProject>) => null,
   create: (data: DeepPartial<IProject>) => null,
@@ -94,6 +99,7 @@ export function ProjectWrapper(props: Props) {
   const [editLoading, setEditLoading] = useState<boolean>(false)
   const [modal, setModal] = useState<ModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<any>(null)
+  const [currentApplication, setCurrentApplication] = useState<IApplication | null>(null)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -231,6 +237,8 @@ export function ProjectWrapper(props: Props) {
     organization,
     modal,
     modalArguments,
+    currentApplication,
+    setCurrentApplication,
     fetch,
     autoMessageLoading,
     autoMessages,

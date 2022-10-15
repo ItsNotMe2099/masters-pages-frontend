@@ -24,7 +24,7 @@ import ApplicationRepository from "data/repositories/ApplicationRepository";
 
 interface IState {
   application: IApplication | null,
-  update: (data: IApplication) => void,
+  update: (data: IApplication | DeepPartial<IApplication>) => void,
   create: (data: DeepPartial<IApplication>) => void,
   changeStatus: (status: ApplicationStatus, isCancel?: boolean) => void
   delete: () => void
@@ -34,7 +34,7 @@ interface IState {
 
 const defaultValue: IState = {
   application: null,
-  update: (data: IApplication) => null,
+  update: (data: IApplication | DeepPartial<IApplication>) => null,
   create: (data: DeepPartial<IApplication>) => null,
   changeStatus: (status: ApplicationStatus, isCancel?: boolean) => null,
   delete: () => null,
@@ -140,7 +140,7 @@ export function ApplicationWrapper(props: Props) {
     try {
       setEditLoading(true)
       const res = await ApplicationRepository.update(applicationId, data)
-      handleUpdate( {...res, ...data})
+      handleUpdate( {...data})
       appContext.hideModal()
     } catch (err) {
       appContext.showSnackbar(err.message, SnackbarType.error)

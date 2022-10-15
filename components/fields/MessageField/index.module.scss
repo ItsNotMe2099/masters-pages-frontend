@@ -1,0 +1,32 @@
+@import "scss/index";
+
+.root{
+  position: relative;
+  border: 1px solid #C4C4C4;
+  border-radius: 17px;
+  padding: 12px;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.textarea {
+  outline: none !important;
+  border-radius: 0px;
+  padding-right: 6px;
+  border: none;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  &::placeholder {
+    color: #050505;
+    opacity: 1;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  &.error{
+    @include inputError
+  }
+}
+

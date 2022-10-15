@@ -25,6 +25,7 @@ import {useDispatch} from "react-redux";
 import {modalClose} from "components/Modal/actions";
 import {ProjectVolunteerFeedbackModal} from "components/for_pages/Project/ProjectVolunteerFeedback";
 import {ModalType} from "types/enums";
+import ProjectApplicationNote from "components/for_pages/Project/ProjectModal/ProjectApplicationNote";
 
 interface Props {
   showType: 'client' | 'public'
@@ -88,7 +89,7 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
       <div className={styles.root}>
         <div className={styles.desktop}>
           <ProjectTabs tabs={tabs} activeTab={tab} onChange={(item) => setTab(item.key)}/>
-        </div>
+         </div>
         <div className={classNames(styles.mobile, getModeClass())}>
           <div className={styles.topPanel}>
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
@@ -111,6 +112,8 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
         </div>
       </div>
       {projectContext.modal === ModalType.VolunteerFeedBackModal && <ProjectVolunteerFeedbackModal  projectId={projectContext.projectId}/>}
+      {projectContext.currentApplication && <ProjectApplicationNote application={projectContext.currentApplication} />}
+
     </Modal>
   )
 }

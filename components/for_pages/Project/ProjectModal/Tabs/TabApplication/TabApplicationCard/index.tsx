@@ -169,7 +169,11 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
           <Link href={profileLink}>
           <a className={styles.avatar} target='_blank'>
             <Avatar image={props.profile.photo} size='largeSquare'/>
-            <Button type='button' className={styles.details}><img src='/img/projects/account-details.svg' alt=''/></Button>
+            {applicationContext.application?.notes?.length > 0 && <Button type='button' onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              props.onViewClick()
+            }} className={styles.details}><img src='/img/projects/account-details.svg' alt=''/></Button>}
           </a>
           </Link>
           <div className={styles.icons}>
