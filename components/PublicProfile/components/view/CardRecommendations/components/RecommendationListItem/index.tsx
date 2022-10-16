@@ -11,7 +11,7 @@ const RecommendationListItem = ({model}: Props) => {
 
   return (
     <div className={styles.root}>
-      <Avatar size={'exSquare'} image={model.profileThatRecommends.organization.photo  ?? model.profileThatRecommends.photo}/>
+      <Avatar size={'exSquare'} image={ model.profileThatRecommends.photo}/>
       <div className={styles.name}>{model.profileThatRecommends.organization ? model.profileThatRecommends.organization.name : `${model.profileThatRecommends.firstName} ${model.profileThatRecommends.lastName}`}</div>
       <div className={styles.date}>{format(new Date(model.createdAt), 'dd.MM.yyyy')}</div>
     </div>
