@@ -79,7 +79,7 @@ const ProjectSearchListView = (props: Props) => {
 
   const handleScrollNext = () => {
     setPage(page + 1)
-    ProjectRepository.search(page + 1, limit, filter).then(data => {
+    ProjectRepository.search(page + 1, limit,null, filter).then(data => {
       if(data){
         setProjects(projects => [...projects, ...data.data])
       }
