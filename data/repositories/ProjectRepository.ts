@@ -4,7 +4,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {IPagination} from 'types/types'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 export interface IProjectSearchRequest{
-  keywords?: string 
+  keywords?: string
   mainCategoryId?: number
   subCategoryId?: number
   categoryId?: number
@@ -72,9 +72,16 @@ export default class ProjectRepository {
   }
   static async search(page: number = 1, limit: number = 10, keywords: string = '', data?: IProjectSearchRequest): Promise<IPagination<IProject> | null> {
     const res = await request({
-      url: `/api/project/search?page=${page}&limit=${limit}&keywords=${keywords}&${data?.corporateProfileId && `corporateProfileId=${data?.corporateProfileId}`}&${data?.projectId && `projectId=${data.projectId}`}`,
+      url: `/api/project/search`,
       method: 'GET',
-      data
+      data: {
+        page,
+        limit,
+        sort: 'id',
+        sortOrder: 'DESC',
+        ...(data ? {...data} : {}),
+        ...(keywords ? {keywords} : {}),
+      }
     })
     if (res.err) {
       return null

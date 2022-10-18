@@ -26,7 +26,9 @@ const MainSectionFourth = (props) => {
 
   const dispatch = useDispatch()
 
-  const videos = [{url: 'https://youtu.be/FMa-WUJKw0k', title: 'How to set up an organisation\' profile'},
+  const videos = [
+    {url: 'https://youtu.be/O3i3XX6Fj-A', title: 'About Masterspages services for organizations'},
+    {url: 'https://youtu.be/FMa-WUJKw0k', title: 'How to set up an organisation\' profile'},
   {url: 'https://youtu.be/bF1GaeD4JZo', title: 'How to launch a volunteer project ad'},
    {url: 'https://youtu.be/GXo_2eNyl8o', title: 'How to manage a volunteer project'},]
 

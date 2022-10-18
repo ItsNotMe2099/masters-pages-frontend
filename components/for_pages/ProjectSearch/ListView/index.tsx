@@ -58,8 +58,8 @@ const ProjectSearchListView = (props: Props) => {
       setCurrentProjectId(parseInt(router.query.projectId as string, 10))
     }
   }, [router.query.projectId])
-  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
-    ProjectRepository.search(page, limit, keywords).then(data => {
+  const fetchProjects = (page: number, limit: number, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, null, filter).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
@@ -74,19 +74,22 @@ const ProjectSearchListView = (props: Props) => {
 
   const handleSortChange = (item) => {
     setSortType(item.value);
-    router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
+    router.replace(`/projects-search?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
   const handleScrollNext = () => {
     setPage(page + 1)
-    ProjectRepository.search(page + 1, limit).then(data => {
+    ProjectRepository.search(page + 1, limit, filter).then(data => {
       if(data){
         setProjects(projects => [...projects, ...data.data])
       }
     })
   }
 
-  const handleRefresh = () => {
+  const handleFilterChange = (data) => {
+    setPage(1)
+    setFilter(data)
+    fetchProjects(1, limit, data)
 
   }
   const getQueryFilter = () => {
@@ -128,7 +131,7 @@ const ProjectSearchListView = (props: Props) => {
     <Layout>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
-        <ProjectSearchFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
+        <ProjectSearchFilter onChange={handleFilterChange} collapsed={!isShow} initialValues={getQueryFilter()}/>
         <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
           {isShow ? <span>{t('taskSearch.filter.hideMoreOptions')}</span> : <span>{t('taskSearch.filter.showMoreOptions')}</span>}
           <img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/>
@@ -156,15 +159,7 @@ const ProjectSearchListView = (props: Props) => {
       <div className={styles.projects} id={'projects-list'}>
          <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
-          {projects.length > 0 && <div className={styles.projectsSort}>
-            <span>{t('sort.title')}:</span>
-            <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: t('sort.newFirst')},
-              {value: 'highPrice', label: t('sort.highestPrice')},
-              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
-                      item={(item) => <div>{item?.label}</div>}
-            />
-          </div>}
+
         </div>
         {(loading && total === 0) && <Loader/>}
         {total > 0 && <InfiniteScroll

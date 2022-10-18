@@ -28,6 +28,7 @@ interface Props {
   onModalOpen: (mode: 'edit' | 'view' | 'application') => void
   status?: string | string[]
   onDelete?: () => void
+  fetchOrganization?: boolean
 }
 
 const ProjectActionsInner = (props: Props) => {
@@ -288,7 +289,7 @@ const ProjectActionsInner = (props: Props) => {
 }
 
 export default function ProjectActions(props: Props){
-return (<ProjectWrapper mode={['client'].includes(props.actionsType) ? 'private' : 'public'} projectId={props.project?.id} project={props.project}>
+return (<ProjectWrapper fetchOrganization={props.fetchOrganization} mode={['client'].includes(props.actionsType) ? 'private' : 'public'} projectId={props.project?.id} project={props.project}>
   <ApplicationWrapper applicationId={props.application?.id} application={props.application}>
     <ProjectActionsInner {...props}/>
   </ApplicationWrapper>

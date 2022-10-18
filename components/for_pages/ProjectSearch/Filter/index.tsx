@@ -25,7 +25,9 @@ const ProjectSearchFilter = (props: Props) => {
   const router = useRouter()
 
   const handleChange = (data) => {
-
+    if(props.onChange){
+      props.onChange({...data, keyword: data.keyword && data.keyword.length > 2 ? data.keyword: undefined})
+    }
   }
   const handleSubmit =   (data) => {
     console.log("Submit", data);

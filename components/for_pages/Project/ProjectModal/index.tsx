@@ -124,7 +124,7 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
 
 export default function ProjectModal(props: Props){
   console.log("projectModal", props)
-  return <ProjectWrapper projectId={props.projectId}  mode={props.showType === 'client' ? 'private' : 'public'}>
+  return <ProjectWrapper fetchOrganization projectId={props.projectId}  mode={props.showType === 'client' ? 'private' : 'public'}>
     <ProjectModalInner {...props}/>
   </ProjectWrapper>
 }

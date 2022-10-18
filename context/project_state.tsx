@@ -84,6 +84,7 @@ interface Props {
   projectId: number
   project?: IProject
   organization?: IOrganization
+  fetchOrganization?: boolean
   mode: 'public' | 'private'
 }
 
@@ -104,13 +105,16 @@ export function ProjectWrapper(props: Props) {
   const dispatch = useDispatch()
   useEffect(() => {
     console.log("FetchOrg", project?.corporateProfile)
+    if(!props.fetchOrganization){
+      return;
+    }
     if(!props.projectId){
       OrganizationRepository.fetchCurrentOrganization().then(data => setOrganization(data))
 
     }else if(project?.corporateProfile?.organization) {
       OrganizationRepository.fetchOrganization(project?.corporateProfile?.organization.id).then(i => setOrganization(i))
     }
-  }, [project?.corporateProfile?.organization, props.projectId])
+  }, [project?.corporateProfile?.organization, props.projectId, props.fetchOrganization])
   useEffect(() => {
     if (props.organization) {
       setOrganization(props.organization)
