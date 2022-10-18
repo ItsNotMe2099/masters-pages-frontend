@@ -126,7 +126,7 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
           case ApplicationStatus.CompleteRequest:
             return (
               <div className={styles.btnsCompleted}>
-                <Button  onClick={props.onViewClick} type='button' projectBtn='default'>OPEN</Button>
+                <Button  onClick={props.onViewClick} type='button' projectBtn='default'>View</Button>
                 <Button onClick={() => changeStatus(ApplicationStatus.Completed)} type='button' projectBtn='default'>
                   CONFIRM COMPLETION
                 </Button>

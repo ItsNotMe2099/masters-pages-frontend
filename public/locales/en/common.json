@@ -443,7 +443,7 @@
       "buttonChangePassword": "Change Password",
       "fieldFirstName": "First Name",
       "fieldLastName": "Last Name",
-      "fieldBirthDate": "BOD* MM / DD / YYYY",
+      "fieldBirthDate": "BOD* DD / MM / YYYY",
       "fieldZip": "ZIP Code",
       "fieldAddress": "Address",
       "fieldAddress2": "Address 2",

@@ -36,7 +36,7 @@ let MasterForm = props => {
               <Field
                 name="birthday"
                 component={InputDate}
-                label="BOD* MM / DD / YYYY"
+                label="BOD* DD / MM / YYYY"
                 validate={[required, date, birthdate]}
               />
             </div>
@@ -78,9 +78,7 @@ let MasterForm = props => {
           <div className={styles.title__top}>3. {t('masterForm.chooseCategories')}</div>
           <div className={styles.taskData}>
             <div className={styles.column}>
-              <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> Nunc dictum
-                duis risus imperdiet
-              </div>
+
               <div className={styles.inputContainer}>
                 <Field
                   name="categories"
@@ -92,14 +90,7 @@ let MasterForm = props => {
           </div>
         </div>
         <div className={styles.important}>
-          <div className={styles.head}>{t('masterForm.importantInformation')}</div>
-          <div className={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id quam at lacinia
-            integer cursus venenatis fringilla arcu eget. Sed fames sed praesent cursus ornare fermentum. Fusce varius
-            quisque
-          </div>
-          <div className={styles.text__bottom}>dolor elementum neque tellus vivamus nunc. Sodales integer aenean
-            vestibulum
-          </div>
+
         </div>
       </div>
       <div className={styles.footer}>
