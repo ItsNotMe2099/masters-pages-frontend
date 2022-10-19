@@ -194,6 +194,10 @@ const ProjectActionsInner = (props: Props) => {
           projectBtn={profile.role === ProfileRole.Corporate ? 'default' : 'green'}>COMPLETE</Button>
       case 'abort':
         return <Button onClick={handleAbort} type='button' projectBtn='default'>ABORT</Button>
+      case 'recycleBinCancel':
+        return <Button
+          onClick={handleAbort}
+          projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
       case 'recycleBin':
         return <Button
           onClick={handleDelete}
@@ -213,7 +217,7 @@ const ProjectActionsInner = (props: Props) => {
           actions.pop()
           actions.push('open')
           actions.push('publish')
-          actions.push('recycleBin')
+          actions.push('recycleBinCancel')
         }
 
         if (([ProjectStatus.Published] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
@@ -221,7 +225,7 @@ const ProjectActionsInner = (props: Props) => {
           actions.push('open')
           actions.push('pause')
           actions.push('launch')
-          actions.push('recycleBin')
+          actions.push('recycleBinCancel')
         }
         if (([ProjectStatus.Paused] as ProjectStatus[]).includes(project.status) && profile?.id === project.corporateProfileId) {
           actions.pop()
@@ -229,14 +233,14 @@ const ProjectActionsInner = (props: Props) => {
           //actions.push('pause')
           actions.push('edit')
           actions.push('resume')
-          actions.push('recycleBin')
+          actions.push('recycleBinCancel')
         }
         if (([ProjectStatus.Execution] as ProjectStatus[]).includes(project.status)) {
           actions.pop()
           actions.push('open')
           actions.push('complete')
           //actions.push('abort')
-          actions.push('recycleBin')
+          actions.push('recycleBinCancel')
         }
         if (([ProjectStatus.Completed] as ProjectStatus[]).includes(project.status) || ([ProjectStatus.Canceled] as ProjectStatus[]).includes(project.status)) {
           actions.pop()
