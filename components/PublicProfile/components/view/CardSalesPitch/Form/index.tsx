@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next'
 import TextArea from 'components/ui/Inputs/TextArea'
 import Button from 'components/PublicProfile/components/Button'
 import {bioMaxLength} from 'utils/validations'
+import {FileUploadAcceptType} from "types/enums";
 interface Props{
   onCancel: () => void,
   handleSubmit?: () => void,
@@ -35,7 +36,7 @@ let SalesPitchForm = (props: Props) => {
         <Field
           name="photo"
           component={AvatarInput}
-          accept={['image/jpeg', 'image/png', 'video/mp4', 'video/quicktime']}
+          accept={[FileUploadAcceptType.Media]}
           maxSize={5242880 * 10}
           labelType="placeholder"
           label={t('uploadPhoto')}

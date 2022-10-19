@@ -7,6 +7,7 @@ import { IOrganization } from 'data/intefaces/IOrganization'
 import TextAreaInput from 'components/ui/Formik/TextArea'
 import DocField from 'components/fields/DocField'
 import AvatarField from 'components/fields/AvatarField'
+import {FileUploadAcceptType} from "types/enums";
 
 interface Props{
   onCancel: () => void,
@@ -17,7 +18,7 @@ interface Props{
 export default function CardDescriptionForm(props: Props) {
   const { t } = useTranslation('common')
 
-  const initialValues = {  
+  const initialValues = {
 
     description: {
       description: props.organization.description?.description,
@@ -42,7 +43,7 @@ return (
                            </div>
                          </div>}
               />
-      <AvatarField name={'photo'} label={'Upload Photo or Video'} accept={['image/jpeg', 'image/png', 'image/jpg', 'video/mp4']}/>
+      <AvatarField name={'photo'} label={'Upload Photo or Video'} accept={[FileUploadAcceptType.Media]}/>
       <div className={styles.buttons}>
         <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
         <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
