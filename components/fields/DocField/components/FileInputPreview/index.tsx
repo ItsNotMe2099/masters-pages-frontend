@@ -36,14 +36,15 @@ const FileInputPreview: FunctionComponent<Props> = props => {
     if(!srcValue){
       return
     }
-    const extension = srcValue.split('.').pop().toUpperCase()
+    const extension = srcValue.split('.').pop().toLowerCase()
     //return `${srcValue.indexOf('blob:') === 0 ? srcValue : (`${process.env.NEXT_PUBLIC_API_URL || ''}/api/s3/${srcValue}`)}`
     switch(extension){
-      case 'TXT':
+      case 'txt':
         return '/img/DocField/doc.svg'
-      case 'DOC':
+      case 'doc':
+      case 'docx':
         return '/img/DocField/doc.svg'
-      case 'PDF':
+      case 'pdf':
         return '/img/DocField/pdf.svg'
     }
   }

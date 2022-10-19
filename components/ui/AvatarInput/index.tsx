@@ -229,12 +229,9 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
 
   }
   const dropzoneAccept: Accept = useMemo(() => {
-    let obj = {}
-    const arr = (props.accept ?? [FileUploadAcceptType.Image]).map(i => Converter.getFileUploadAccept(i))
-    arr.forEach(i => {
-      obj = {...obj, ...i}
-    })
-    return obj
+    let arr = [];
+    (props.accept ?? [FileUploadAcceptType.Image]).forEach(i => {arr = [...arr, ...Converter.getFileUploadAccept(i)]})
+    return {'': arr}
   }, [props.accept])
 
 

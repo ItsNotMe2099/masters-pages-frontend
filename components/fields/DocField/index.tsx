@@ -66,12 +66,9 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
   const role = appContext.role
   const hasError = !!meta.error && meta.touched
   const dropzoneAccept: Accept = useMemo(() => {
-    let obj = {}
-    const arr = (props.accept ?? (props.isImage ? [FileUploadAcceptType.Image] : [])).map(i => Converter.getFileUploadAccept(i))  ?? {} as Accept
-    arr.forEach(i => {
-      obj = {...obj, ...i}
-    })
-    return obj
+    let arr = [];
+    (props.accept ?? [FileUploadAcceptType.Image]).forEach(i => {arr = [...arr, ...Converter.getFileUploadAccept(i)]})
+    return {'': arr}
   }, [props.accept])
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
@@ -134,7 +131,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
       return newFiles
     })
   }
-
+  console.log("dropzoneAccept", dropzoneAccept)
   const { getRootProps, getInputProps } = useDropzone({
     accept: dropzoneAccept,
     maxSize,
