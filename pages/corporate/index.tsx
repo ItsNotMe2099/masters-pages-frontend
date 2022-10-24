@@ -13,6 +13,8 @@ import {getAuthServerSide} from 'utils/auth'
 import {setCookie} from 'nookies'
 import {CookiesType, RegistrationMode} from 'types/enums'
 import {addDays} from 'date-fns'
+import HowToUse from 'components/for_pages/Corporate/HowToUse'
+import Tutorials from 'components/for_pages/Corporate/Tutorials'
 
 const NewMain = (props) => {
 
@@ -39,6 +41,8 @@ const NewMain = (props) => {
       <MainSectionFirst/>
       <MainSectionSecond/>
       <MainSectionThird/>
+      <HowToUse/>
+      <Tutorials/>
       <MainSectionFourth/>
       <MainSectionFooter/>
     </div>

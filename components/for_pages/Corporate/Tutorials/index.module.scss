@@ -1,0 +1,48 @@
+@import "../../../../scss/index";
+
+.root{
+  padding-top: 108px;
+  background-color: #fff;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+  }
+
+.title{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 110%;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #373948;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    padding-bottom: 64px;
+  }
+
+.videos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px 32px;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+}
+
+.video{
+    width: 100% !important;
+    height: 445px !important;
+    @media (max-width: 768px) {
+       height: 220px !important;
+    }
+    :global{
+        .react-player__preview{
+            border-radius: 16px;
+        }
+    }
+    iframe{
+        border-radius: 16px;
+    }
+}

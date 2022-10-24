@@ -1,0 +1,65 @@
+@import "../../../../scss/index";
+
+.root{
+  background-color: #fff;
+  padding-top: 64px;
+}
+
+.container{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.title{
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 110%;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: #373948;
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  padding-bottom: 64px;
+}
+
+.tips{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tip{
+  padding: 32px;
+  border: 1px solid #ADADAD;
+  border-radius: 16px;
+  .title{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 110%;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #373948;
+    padding-bottom: 17px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+  }
+  img{
+    margin-right: 10px;
+  }
+}
+
+.text{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
