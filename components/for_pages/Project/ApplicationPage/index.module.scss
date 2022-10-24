@@ -47,6 +47,14 @@
 .sectionContent{
   padding: 18px 0px;
 }
+.sectionFeedbackActions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > * + * {
+    margin-left: 15px;
+  }
+}
 .profile{
   display: flex;
   flex-direction: row;
@@ -55,6 +63,7 @@
     margin-left: 24px;
     @media screen and (max-width: 1250px){
       margin-left: 0;
+      width: 100%;
     }
   }
   .header{
@@ -121,7 +130,7 @@
     margin-right: 10px;
   }
   @media screen and (max-width: 1250px){
-    width: 100%;
+
   }
 }
 .icons {
@@ -268,4 +277,14 @@
     flex-direction: column;
     align-items: center;
   }
+}
+.switch{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .switchName{
+    margin-left: 4px;
+    flex: 1;
+  }
+  margin-right: 4px;
 }

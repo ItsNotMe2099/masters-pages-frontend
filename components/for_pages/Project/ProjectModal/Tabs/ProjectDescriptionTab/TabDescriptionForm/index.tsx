@@ -22,32 +22,34 @@ import { Educations } from 'data/educations'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import DocField from 'components/fields/DocField'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import {confirmChangeData, confirmModalClose, confirmOpen} from 'components/Modal/actions'
+import {useProjectContext} from "context/project_state";
 
 interface Props {
   project: IProject | null
-  onSave: (data: IProject) => any;
+  onSave: () => any;
   onPreview?: (data) => any
 }
 
 const TabDescriptionForm = ({project, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
+  const projectContext = useProjectContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const handleSaveProject = async (data: IProject) => {
+    console.log('handleSaveProject', project)
     if(project?.id){
-      const item = await ProjectRepository.update(project.id ,{...data, id: project.id});
-      await props.onSave(item)
+      projectContext.update(data)
+       await props.onSave()
     }else{
-      const project = await ProjectRepository.create(data)
-      await props.onSave(project)
+      projectContext.create(data)
+      await props.onSave()
     }
   }
 
   const handleSubmit = async (data) => {
-
     const dartFormatted = {...data};
     dartFormatted.skills = data.skills.map(i => ({
       id: i.id,
@@ -55,9 +57,10 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id
     }))
+    console.log(" dartFormatted.skills",  dartFormatted.skills)
     dartFormatted.locationsIds = data.locations.map(i => i.id)
     handleSaveProject(dartFormatted)
-  
+
     setError(null)
     setIsLoading(true);
     try {
@@ -75,18 +78,21 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
     const dartFormatted = {...data};
     dartFormatted.skills = data.skills.map(i => ({
+      ...i,
       id: i.id,
       mainCategoryId: i.mainCategory?.id,
       categoryId: i.category?.id,
       subCategoryId: i.subCategory?.id
     }))
+    console.log(" dartFormatted.skills",  dartFormatted)
     dartFormatted.locationids = data.locations.map(i => (i.id))
+    dartFormatted.attachments = dartFormatted.attachmentsInput
+    dartFormatted.attachmentsObjects = dartFormatted.attachments.map(i => ({urlS3: i}))
     props.onPreview(dartFormatted)
     setError(null)
     setIsLoading(true);
     try {
       //    const res = await AuthRepository.completeRegistration(data);
-      reachGoal('project:created')
 
     } catch (e) {
       setError(e);
@@ -123,10 +129,10 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
     dispatch(confirmOpen({
       description: `${t('task.confirmPublish')}`,
       onConfirm: async () => {
-        project && await ProjectRepository.update(project.id, {status: ProjectStatus.Published})
-        dispatch(confirmModalClose())
+        dispatch(confirmChangeData({loading: true}))
         await formik.setFieldValue('status', ProjectStatus.Published)
         await formik.submitForm();
+        dispatch(confirmModalClose());
       }
     }))
   }
@@ -284,12 +290,12 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
 
         <div className={styles.bottomBar}>
 
-          {(!project || !project.status) ? <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>
+          {(!project || !project.status) ? <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSubmitDraft} disabled={projectContext.editLoading} >Save as draft</Button>
             :
-            <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSave}>Save</Button>
+            <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSave} disabled={projectContext.editLoading} >Save</Button>
           }
-          <Button size={'small'} projectBtn='default' type={'button'}  onClick={handleSubmitPreview}>Preview</Button>
-          {project?.status !== ProjectStatus.Published  && <Button size={'small'} projectBtn='default' type={'button'} onClick={handleSubmitPublish}>Publish</Button>}
+          <Button size={'small'} projectBtn='default' type={'button'}  onClick={handleSubmitPreview} >Preview</Button>
+          {project?.status !== ProjectStatus.Published  && <Button size={'small'} projectBtn='default' disabled={projectContext.editLoading} type={'button'} onClick={handleSubmitPublish}>Publish</Button>}
         </div>
       </Form>
     </FormikProvider>

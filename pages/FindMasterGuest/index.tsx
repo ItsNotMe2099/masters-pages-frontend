@@ -66,7 +66,7 @@ const FindMasterGuest = (props) => {
   return (
     <Layout>
       <div className={styles.root}>
- 
+
         <div className={styles.container}>
           <div className={styles.left}>
           <div className={styles.topContent}>
@@ -93,10 +93,11 @@ const FindMasterGuest = (props) => {
           {total > 0 &&  <InfiniteScroll
           dataLength={masters.length} //This is important field to render the next data
           next={handleScrollNext}
+          scrollableTarget="scrollableDiv"
           hasMore={total > masters.length}
           loader={<Loader/>}
         >
-          {masters.map(profile => 
+          {masters.map(profile =>
               <Profile key={profile.id} profile={profile}/>
           )}
           </InfiniteScroll>}

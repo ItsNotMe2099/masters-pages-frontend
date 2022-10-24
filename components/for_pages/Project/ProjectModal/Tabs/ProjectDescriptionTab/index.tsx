@@ -14,41 +14,47 @@ import { useAppContext } from 'context/state'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import {confirmModalClose, confirmOpen, modalClose} from 'components/Modal/actions'
+import {useProjectContext} from "context/project_state";
+import classNames from "classnames";
 
 interface Props {
   project: IProject | null
-  onSave: (data) => any
   showType: 'client' | 'public'
-  onChange?: (item) => void
+  onApply?: (item) => void
   onPreview?: (data) => void
-  onDelete: () => void | null
   organization?: IOrganization
-  outerVar?: boolean
+  isEdit?: boolean
   onClose?: () => void
   fullWidth?: boolean
 }
 
 
-const TabProjectDescription = ({project, showType, organization, outerVar, onClose, fullWidth, ...props}: Props) => {
+const TabProjectDescription = ({project, showType, organization, onClose, fullWidth, ...props}: Props) => {
   const {t} = useTranslation();
-  const [isEdit, setIsEdit] = useState(outerVar ? outerVar : !project)
+  const projectContext = useProjectContext()
+  const [isEdit, setIsEdit] = useState(props.isEdit)
+  const [projectPreview, setProjectPreview] = useState<IProject | null>(null)
   const [application, setApplication] = useState<IApplication | null>(null)
-  const [projectStatus, setProjectStatus] = useState(project?.status)
+  const projectStatus = project?.status
   const router = useRouter()
   console.log('router', router)
+  console.log("ISEdit11", isEdit)
   const dispatch = useDispatch()
 
-  const handleSave = (data) => {
+  const handleSave = () => {
     setIsEdit(false);
-    props.onSave(data);
+    setProjectPreview(null)
   }
 
   const context = useAppContext()
 
-  const handlePreview = (data) => {
-    setIsEdit(false);
-    props.onPreview(data);
+  const handlePreview = (data: IProject) => {
+    setProjectPreview(data)
+  }
+  const handleEdit = () => {
+    setIsEdit(true);
+    setProjectPreview(null)
   }
 
   useEffect(() => {
@@ -61,45 +67,18 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
     )
   }
   }, [])
-  const handleDelete = async () => {
 
-    await ProjectRepository.delete(project.id)
-    dispatch(confirmOpen({
-      description: `${t('task.confirmDelete')} «${project.title}»?`,
-      onConfirm: async () => {
-        dispatch(confirmModalClose())
-        await ProjectRepository.delete(project.id)
-        props.onDelete && props.onDelete();
-      }
-    }))
-  }
 
-  const descriptionProject = (newStatus: ProjectStatus) => {
-    switch(newStatus){
-      case ProjectStatus.Published:
-        return `${t('task.confirmPublish')}`
-      case ProjectStatus.Paused:
-        return 'Project will be put on hold. No actions will be possible until project is resumed. Do you want to proceed?'
-      case ProjectStatus.Execution:
-        return 'Project will be moved to “execution” mode. Do you want to proceed?'
-      case ProjectStatus.Canceled:
-        return 'Project will be moved to "cancelled" folder. Do you want to proceed?'
-      case ProjectStatus.Completed:
-        return 'Project will be closed for “execution”. Do you want to proceed?'
-    }
-  }
 
   const handleChangeProjectStatus = async (newStatus: ProjectStatus, projectId: number, oldStatus?: ProjectStatus) => {
-    dispatch(confirmOpen({
-      description: descriptionProject(newStatus),
-      onConfirm: async () => {
-        await ProjectRepository.update(projectId, {status: newStatus});
-        onClose()
-        setProjectStatus(newStatus)
-      }
-    }))
-  }
+    if(await projectContext.changeStatus(newStatus)){
+      dispatch(modalClose())
+    }
 
+  }
+  const handleDelete = () => {
+    projectContext.delete();
+  }
 
 
   const renderActionButton = (status: ProjectStatus) => {
@@ -120,25 +99,25 @@ const TabProjectDescription = ({project, showType, organization, outerVar, onClo
 
   return (
   <div className={styles.root}>
-    {(isEdit || !project) && <TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/>}
-    {(!isEdit && project) && <ProjectPage fullWidth={fullWidth} organization={organization} projectStatus={projectStatus}  project={project} onSave={props.onSave} controls={ (showType === 'client' && project.status) ? [
-      (project?.status === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button projectBtn='default' className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>,
-      project?.status === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
-      project?.status === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
-      project?.status === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
-      project?.status === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
-      project?.status !== ProjectStatus.Execution && <Button color={'white'}
+    {(isEdit) && <div className={classNames({[styles.hidden]: !!projectPreview})}><TabDescriptionForm project={project} onSave={handleSave} onPreview={handlePreview}/></div>}
+    {((!isEdit && project) || !!projectPreview) && <ProjectPage fullWidth={fullWidth} organization={organization} projectStatus={projectStatus}  project={projectPreview ?? project} onSave={handleSave} controls={ (showType === 'client' && project?.status) ? [
+      (projectStatus === ProjectStatus.Draft || projectStatus === ProjectStatus.Paused) && <Button projectBtn='default' className={styles.edit} onClick={handleEdit}>Edit</Button>,
+      projectStatus === ProjectStatus.Draft && renderActionButton(ProjectStatus.Draft),
+      projectStatus === ProjectStatus.Published && renderActionButton(ProjectStatus.Published),
+      projectStatus === ProjectStatus.Paused && renderActionButton(ProjectStatus.Paused),
+      projectStatus === ProjectStatus.Execution && renderActionButton(ProjectStatus.Execution),
+      projectStatus !== ProjectStatus.Execution && <Button color={'white'}
       onClick={() => projectStatus !== ProjectStatus.Canceled ? handleChangeProjectStatus(ProjectStatus.Canceled, project.id) : handleDelete()} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>,
     ] :
-    (!project.status) ? [<Button color={'red'} className={styles.edit} onClick={() => setIsEdit(true)}>Edit</Button>] :
+    (!project?.status) ? [<Button color={'red'} className={styles.edit} onClick={handleEdit}>Edit</Button>] :
     (application?.status === ApplicationStatus.Applied ||
       application?.status === ApplicationStatus.Invited ||
       application?.status === ApplicationStatus.Execution ||
       application?.status === ApplicationStatus.CompleteRequest ||
       application?.status === ApplicationStatus.Completed ||
       application?.status === ApplicationStatus.RejectedByVolunteer ||
-      application?.status === ApplicationStatus.RejectedByCompany) ? null : [router.query.projectType !== 'saved' && <Button onClick={() => ProfileRepository.addToSavedProjects({projectId: project.id})} color={'white'} className={styles.delete}>SAVE</Button>,
-    <Button color={'white'} className={styles.edit} onClick={props.onChange}>Apply</Button>]}/>}
+      application?.status === ApplicationStatus.RejectedByCompany) ? null : [router.query.projectType !== 'saved' && <Button onClick={() => projectContext.saveToFavorite()} color={'white'} className={styles.delete}>SAVE</Button>,
+    <Button color={'white'} className={styles.edit} onClick={props.onApply}>Apply</Button>]}/>}
   </div>
   )
 }

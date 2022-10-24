@@ -13,13 +13,11 @@ interface Props {
 
 const TabApplicationView = ({application, project, ...props}: Props) => {
 
-  async function handleChangeStatus(newStatus: ApplicationStatus, application: IApplication) {
-    await ApplicationRepository.changeApplicationStatus(application.id, {status: newStatus}, 'volunteer')
-  }
+
 
   return (
     <div className={styles.root}>
-      <ApplicationPage onEdit={props.onEdit} onStatusChange={(newStatus) => handleChangeStatus(newStatus, application)} application={application} project={project} modal currentTab={application.status}/>
+      <ApplicationPage onEdit={props.onEdit}  application={application} project={project} modal currentTab={application.status}/>
     </div>
   )
 }

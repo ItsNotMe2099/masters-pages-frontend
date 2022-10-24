@@ -1,9 +1,10 @@
 import AvatarAddFileBtn from './components/AvatarAddFileBtn'
 import AvatarFieldPreview from './components/AvatarInputPreview'
-import React, { useState, useCallback, useRef,
+import React, {
+  useState, useCallback, useRef, useMemo,
 } from 'react'
 import { shallowEqual } from 'recompose'
-import Dropzone from 'react-dropzone'
+import Dropzone, {Accept} from 'react-dropzone'
 import S3Upload from 'utils/s3upload'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
@@ -14,11 +15,13 @@ import {useField} from 'formik'
 import FieldError from 'components/ui/FieldError'
 import {IField} from 'types/types'
 import classNames from 'classnames'
+import {FileUploadAcceptType} from "types/enums";
+import Converter from "utils/converter";
 
 
 export interface AvatarFieldProps<T> extends IField<T>{
   className?: string
-  accept?: string | string[]
+  accept?: FileUploadAcceptType[]
   labelMultiple?: string
   labelSingle?: string
   maxSize?: number
@@ -60,6 +63,11 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
   const appContext = useAppContext()
   const role = appContext.role
   const {t} = useTranslation('common')
+  const dropzoneAccept: Accept = useMemo(() => {
+    let arr = [];
+    (props.accept ?? [FileUploadAcceptType.Image]).forEach(i => {arr = [...arr, ...Converter.getFileUploadAccept(i)]})
+    return {'': arr}
+  }, [props.accept])
   const handleChangePhoto = () => {
     if (dropZoneRef.current) {
       dropZoneRef.current.open()
@@ -209,7 +217,7 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
         maxSize,
         minSize,
         multiple,
-        accept,
+        accept:  dropzoneAccept,
         onDrop,
         onDropRejected,
       }
@@ -274,7 +282,7 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
 
 AvatarField.defaultProps = {
   //maxSize: 5242880,
-  accept: ['image/jpeg', 'image/png', 'image/jpg']
+  accept: [FileUploadAcceptType.Image]
 }
 
 export default AvatarField

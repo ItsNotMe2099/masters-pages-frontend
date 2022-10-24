@@ -15,7 +15,7 @@ const ReviewShortListItem = ({feedback}: Props) => {
     <div className={styles.root}>
       <UserIcon/>
      <div className={styles.nameWrapper}>
-      <div className={styles.name}>{feedback.fromProfile.firstName} {feedback.fromProfile.lastName}</div>
+      <div className={styles.name}>{feedback.fromProfile?.organization ? feedback.fromProfile.organization.name : `${feedback.fromProfile.firstName} ${feedback.fromProfile.lastName}`}</div>
       <StarRatings
         rating={(feedback as any).totalMark || 0}
         starRatedColor="#F2B705"

@@ -1,6 +1,6 @@
 import {SocialLink} from 'data/intefaces/ISocialLink'
 import {LanguageCode} from 'components/PublicProfile/components/view/CardLanguages'
-import {IUserFile} from 'types'
+import {IFeedbacksToProfile, IUserFile} from 'types'
 import {IProfile} from 'data/intefaces/IProfile'
 import {IProject} from 'data/intefaces/IProject'
 
@@ -15,7 +15,10 @@ export enum ApplicationStatus {
   RejectedByCompany = 'rejectedByCompany',
   RejectedByVolunteer = 'rejectedByVolunteer',
 }
-
+export interface IApplicationNote{
+  createdAt: string
+  note: string
+}
 export class IApplication {
   id: number;
   project: IProject;
@@ -39,5 +42,7 @@ export class IApplication {
   statsWithCompanyApplicationsCount: number;
   statsWithCompanyProjectsCount: number;
   createdAt: Date;
-
+  updatedAt: Date;
+  feedbacks?: IFeedbacksToProfile[]
+  notes: IApplicationNote[]
 }

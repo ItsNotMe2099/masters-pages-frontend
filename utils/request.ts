@@ -3,6 +3,7 @@ import fetch from 'cross-fetch'
 import {parseCookies, setCookie, destroyCookie} from 'nookies'
 import {CookiesType} from 'types/enums'
 
+const queryString = require('query-string')
 interface Options {
   url: string
   method?: 'POST' | 'PUT' | 'GET' | 'DELETE' | 'PATCH'
@@ -91,9 +92,7 @@ async function request(options: string | Options, ctx: any = null): Promise<IRes
 }
 
 function queryParams(params: { [key: string]: any }) {
-  return Object.keys(params)
-    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-    .join('&')
+  return   queryString.stringify(params)
 }
 
 export default request

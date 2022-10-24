@@ -17,7 +17,7 @@ const ReviewListItem = ({feedback}: Props) => {
       <div className={styles.header}>
      <div className={styles.nameWrapper}>
        <Avatar size={'exSmall'} image={feedback.fromProfile.photo}/>
-      <div className={styles.name}>{feedback.fromProfile.firstName} {feedback.fromProfile.lastName}</div>
+      <div className={styles.name}>{feedback.fromProfile?.organization ? feedback.fromProfile.organization.name : `${feedback.fromProfile.firstName} ${feedback.fromProfile.lastName}`}</div>
       <StarRatings
         rating={(feedback as any).totalMark || 0}
         starRatedColor="#F2B705"
@@ -33,7 +33,7 @@ const ReviewListItem = ({feedback}: Props) => {
       <div className={styles.time}>{ format(new Date(feedback.createdAt), 'MM.dd.yy HH:mm')}</div>
       </div>
       <div className={styles.content}>
-        <div className={styles.task}>{feedback.task.title}</div>
+        <div className={styles.task}>{feedback.task?.title}</div>
         <div className={styles.description}>{feedback.description}</div>
       </div>
     </div>

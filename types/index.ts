@@ -196,7 +196,8 @@ export interface SkillData {
   ratePerHour: number,
   price: number,
   skills: SkillData[]
-
+  projectsCount?: number
+  applicationsCount?: number
   tasksCount?: number
   likesCount?: number
   feedbacksCount?: number
@@ -655,6 +656,8 @@ export interface IFeedbacksToProfile {
   id: number
   title: string,
   target: string
+  projectId: number
+  applicationId: number
   fromProfileId: number
   toProfileId: number
   totalMark: number
@@ -692,7 +695,7 @@ export interface IFeedbacksToProfile {
 
 export interface IProfileRecommendation{
   id: number,
-  profileId: number,
+  recommendedProfileId: number,
   profileThatRecommendsId: number
   profileThatRecommends: IProfile,
   createdAt: string
@@ -834,7 +837,14 @@ export enum ProfilePageType {
   Skill = 'skill',
   Profile = 'profile'
 }
-
+export interface IProfileNoteNote{
+  createdAt: string
+  note: string
+}
+export interface IProfileNote{
+  id: number,
+  notes: IProfileNoteNote[]
+}
 export const CONTACTS = {
   email: 'admin@masterspages.com',
   instagram: 'https://www.instagram.com/masterspages',

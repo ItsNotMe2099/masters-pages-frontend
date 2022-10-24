@@ -2,9 +2,9 @@ import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 
 import FileWrapper, { FileEntity } from './components/FileWrapper'
 import React, {
-  ReactElement, useState, useCallback, useEffect,
+  ReactElement, useState, useCallback, useEffect, useMemo,
 } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { Accept, useDropzone } from 'react-dropzone'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 import nextId from 'react-id-generator'
@@ -14,6 +14,8 @@ import {useAppContext} from 'context/state'
 import {useField} from 'formik'
 import FieldError from 'components/ui/FieldError'
 import {IField} from 'types/types'
+import {FileUploadAcceptType} from "types/enums";
+import Converter from "utils/converter";
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -33,7 +35,7 @@ const formatValue = (value): FileEntity[]  => {
 
 
 export interface FileFieldProps<T>  extends IField<T>{
-  accept?: string
+  accept?: FileUploadAcceptType[]
   labelMultiple?: string
   labelSingle?: string
   maxSize?: number
@@ -63,7 +65,11 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
   const appContext = useAppContext()
   const role = appContext.role
   const hasError = !!meta.error && meta.touched
-  console.log('VALUEV', value)
+  const dropzoneAccept: Accept = useMemo(() => {
+    let arr = [];
+    (props.accept ?? [FileUploadAcceptType.Image]).forEach(i => {arr = [...arr, ...Converter.getFileUploadAccept(i)]})
+    return {'': arr}
+  }, [props.accept])
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
     accept: '*/*',
@@ -125,9 +131,9 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
       return newFiles
     })
   }
-
+  console.log("dropzoneAccept", dropzoneAccept)
   const { getRootProps, getInputProps } = useDropzone({
-    accept,
+    accept: dropzoneAccept,
     maxSize,
     minSize,
     multiple,
@@ -153,7 +159,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
         className={styles.dropZone}
         {...getRootProps()}
       >
-        {(!maxAmount || maxAmount !== value.length) && 
+        {(!maxAmount || maxAmount !== value.length) &&
         <>
         {addFileButton ? addFileButton :
         <div className={styles.add}>
@@ -180,7 +186,7 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
 }
 
 DocField.defaultProps = {
-  accept: ['text/plain', 'application/pdf', 'application/msword']
+  accept: [FileUploadAcceptType.Document]
 }
 
 export default DocField

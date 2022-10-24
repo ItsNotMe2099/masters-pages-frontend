@@ -49,9 +49,9 @@ export default class ApplicationRepository {
     }
     return res.data
   }
-  static async findById(id: number): Promise<IProject | null> {
+  static async findById(id: number): Promise<IApplication | null> {
     const res = await request({
-      url: `/api/project/${id}`,
+      url: `/api/application/${id}`,
       method: 'GET'
     })
     if (res.err) {
@@ -157,10 +157,13 @@ export default class ApplicationRepository {
     return res.data
   }
 
-  static async fetchApplicationsByVolunteer(): Promise<IPagination<IApplication>> {
+  static async fetchApplicationsByVolunteer(page: number = 1, limit: number = 30): Promise<IPagination<IApplication>> {
     const res = await request({
       url: `/api/application`,
       method: 'GET',
+      data: {
+        page, limit
+      }
     })
     if (res.err) {
       return null

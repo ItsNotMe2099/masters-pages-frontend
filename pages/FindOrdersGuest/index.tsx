@@ -34,7 +34,6 @@ const FindOrdersGuest = (props) => {
   const [isVisible, setIsVisible] = useState(false)
   const { t } = useTranslation('common')
   const dispatch = useDispatch()
-  const [currentProject, setCurrentProject] = useState<ITask | null>(null)
   const [page, setPage] = useState<number>(1)
   const limit = 10
   const [value, setValue] = useState('')
@@ -76,14 +75,14 @@ const FindOrdersGuest = (props) => {
   return (
     <Layout>
       <div className={styles.root}>
- 
+
         <div className={styles.container}>
           <div className={styles.left}>
           <div className={styles.topContent}>
           <div className={styles.filters}>
-          <GuestFilter 
+          <GuestFilter
             search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
-            state={isVisible} 
+            state={isVisible}
             onClick={() => setIsVisible(isVisible ? false : true)}
           />
       <div className={styles.projectsTobBar}>
@@ -111,7 +110,7 @@ const FindOrdersGuest = (props) => {
           loader={<Loader/>}
           scrollableTarget='scrollableDiv'
         >
-          {tasks.map(task => 
+          {tasks.map(task =>
               <Task key={task.id} task={task}/>
           )}
           </InfiniteScroll>}
@@ -130,8 +129,7 @@ const FindOrdersGuest = (props) => {
           </div>
         </div>
       </div>
-      {currentProject && <ProjectModal showType={'public'} projectId={currentProject?.id} isOpen onClose={() => setCurrentProject(null)}/>}
-      <Modals/>
+       <Modals/>
     </Layout>
   )
 }

@@ -21,13 +21,18 @@ export default function CheckboxListSubCategories(props) {
      request({url: `/api/service-category?${queryString.stringify({categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
       .then((response) => {
          const data = response.data
+        const options = data ? data.map(item => {
+          return {
+            value: item.id,
+            label: item.name,
+          }
+        }) : []
+         setOptions(options)
 
-         setOptions(data ? data.map(item => {
-           return {
-             value: item.id,
-             label: item.name,
-           }
-         }) : [])
+        const generalItem = options.find(i => i.label?.toLowerCase() === 'general')
+        if(generalItem){
+          props.input?.onChange([props.changeWithValue ? generalItem : generalItem.value])
+        }
        })
   }, [props.categoryId])
   return (

@@ -24,17 +24,17 @@ export default function InputSubCategory(props) {
 
 
 
-  const getSearchCategory = (search = '') => {
-    return request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
-      .then((response) => {
-        const data = response.data
-        setOptions(data ? data.map(item => {
-          return {
-            value: item.id,
-            label: item.name,
-          }
-        }) : [])
-      })
+  const getSearchCategory = async (search = '') => {
+    const response = await request({url: `/api/service-category?${queryString.stringify({search, categoryId: props.categoryId, lang: i18n.language, id: props.changeWithValue ?  props.input?.value?.value :  props.input?.value})}`, method: 'GET'})
+    const data = response.data
+    const options = data ? data.map(item => {
+      return {
+        value: item.id,
+        label: item.name,
+      }
+    }) : []
+    setOptions(options)
+    return options;
   }
   const handleOnOpen = () => {
     getSearchCategory(value)
@@ -46,7 +46,9 @@ export default function InputSubCategory(props) {
 
   useEffect(() => {
     if(props.categoryId) {
-      getSearchCategory()
+      getSearchCategory().then(options => {
+
+      })
     }
   }, [props.categoryId])
 

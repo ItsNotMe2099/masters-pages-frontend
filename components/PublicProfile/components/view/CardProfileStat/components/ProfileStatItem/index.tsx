@@ -25,7 +25,7 @@ const ProfileStatItem = ({model, profile}: Props) => {
         <Button className={styles.btn} size={'small'} target={''} href={`/sk${model.id}`}>{t('cardProfile.stat.learnMore')}</Button>
       </div>
       <div className={styles.cards}>
-        <ProfileStatItemCard value={model.tasksCount} label={t('works')} icon={'works'}/>
+        <ProfileStatItemCard value={model.tasksCount + model.applicationsCount + model.projectsCount} label={t('works')} icon={'works'}/>
         <ProfileStatItemCard value={model.likesCount} label={t('likes')} icon={'likes'}/>
         <ProfileStatItemCard value={model.feedbacksCount} label={t('reviews')} icon={'star'}/>
         <ProfileStatItemCard value={model.totalHours || 'N/A'} label={t('hours')} icon={'star'}/>

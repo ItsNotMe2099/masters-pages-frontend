@@ -1,5 +1,5 @@
 import styles from 'pages/FindProjectsGuest/index.module.scss'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
 import { DropDown } from 'components/ui/DropDown'
@@ -13,8 +13,8 @@ import { getAuthServerSide } from 'utils/auth'
 import { setCookie } from 'nookies'
 import { CookiesType, RegistrationMode } from 'types/enums'
 import {addDays} from 'date-fns'
-import { useDispatch } from 'react-redux'
-import { signUpOpen } from 'components/Modal/actions'
+import {useDispatch, useSelector} from 'react-redux'
+import {projectOpen, signUpOpen} from 'components/Modal/actions'
 import { IProject } from 'data/intefaces/IProject'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import { IProjectSearchRequest } from 'data/repositories/ApplicationRepository'
@@ -26,6 +26,8 @@ import InputSearch from 'components/ui/Inputs/InputSearch'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import {useRouter} from "next/router";
+import ProjectActions from "components/for_pages/Project/ProjectActions";
+import {IRootState} from "types";
 
 
 const FindProjectsGuest = (props) => {
@@ -41,6 +43,7 @@ const FindProjectsGuest = (props) => {
   const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
+  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const limit = 10
   const [value, setValue] = useState('')
   useEffect(() => {
@@ -95,6 +98,29 @@ const FindProjectsGuest = (props) => {
 
   }
 
+  const handleModalOpen = (project: IProject, type: 'create' | 'view' | 'edit' | 'application') => {
+    console.log("handleModalOpen", type)
+    switch (type) {
+      case "create":
+        setInitialProjectTab(null)
+        setCurrentProjectId(null)
+        break;
+      case "view":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id)
+        break;
+      case "edit":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id);
+        dispatch(projectOpen())
+        break;
+      case "application":
+        setInitialProjectTab('application')
+        setCurrentProjectId(project.id);
+        break;
+    }
+    dispatch(projectOpen())
+  }
   return (
     <Layout>
       <div className={styles.root}>
@@ -134,7 +160,8 @@ const FindProjectsGuest = (props) => {
           scrollableTarget='scrollableDiv'
         >
           {projects.map(project =>
-              <ProjectCard  project={project} actionsType='public' onViewOpen={handleProjectViewOpen}/>
+              <ProjectCard  project={project}  actions={<ProjectActions  onModalOpen={(mode) => handleModalOpen(project, mode)}
+                                                                                             actionsType={'public'} project={project}/>} />
           )}
           </InfiniteScroll>}
           </div>
@@ -152,7 +179,8 @@ const FindProjectsGuest = (props) => {
           </div>
         </div>
       </div>
-      {currentProjectId && <ProjectModal showType={'public'} projectId={currentProjectId} isOpen onClose={handleOnClose}/>}
+      {modalKey === 'projectModal'  && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen/>}
+
       <Modals/>
     </Layout>
   )

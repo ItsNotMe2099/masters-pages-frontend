@@ -14,6 +14,7 @@ import ProjectCategories from 'components/for_pages/Project/ProjectCategories'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import CardOrganization from 'components/for_pages/Project/ProjectPage/CardOrganization'
 import ProjectLink from "components/for_pages/Project/ProjectPage/ProjectLink";
+import ProjectTabHeader from "components/for_pages/Project/ProjectModal/ProjectTabHeader";
 
 interface Props {
   project: IProject
@@ -74,6 +75,7 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
     e.stopPropagation()
     window.open(getMediaPath(item.urlS3))
   }
+  console.log("ProjectPhoto11", project.photo, project)
   return (
    <div className={props.fullWidth ? styles.fullWidth : styles.root}>
     <div className={styles.left}>
@@ -83,29 +85,7 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
         {/*<CardProfile profileId={profile?.id}/>*/}
     </div>
      <div className={styles.center}>
-       <div className={classNames(styles.section, styles.info)}>
-           <div className={styles.top}>
-             <div className={styles.left}>
-               <ProjectStatusLabel status={projectStatus}/>
-               <div className={styles.title}>{project?.title || '[Project title]'}</div>
-               <div className={styles.projectId}>Project id#: {project?.id}</div>
-             </div>
-             {project && <div className={styles.right}>
-               <div className={styles.line}>Application Limit: 0/{project.applicationsLimits}</div>
-               <div className={styles.line}>Vacancies: 0/{project.vacanciesLimits}</div>
-             </div>}
-           </div>
-
-           <div className={styles.dates}>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Applications Deadline: </div>
-             <div className={styles.date}><img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.applicationsClothingDate), 'MM.dd.yyy')}</div></div>
-             <div className={styles.separator}/>
-             <div className={styles.dateItem}><div className={styles.dateItemLabel}>Project Deadline: </div>
-             <div className={styles.date}><img src={'/img/Project/calendar.svg'}/>{format(new Date(project?.endDate), 'MM.dd.yyy')}</div></div>
-
-  </div>
-
-       </div>
+       <ProjectTabHeader project={project}/>
        {project.inquiries && <div className={styles.section}>
          <div className={styles.sectionHeader}>Inquiries</div>
          <div className={styles.sectionContent}>{project.inquiries}</div>

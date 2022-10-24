@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { default as React, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import styles from './index.module.scss'
-import { useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Sticky from 'react-stickynode'
 const queryString = require('query-string')
@@ -26,6 +26,9 @@ import ProjectRepository, {IProjectSearchRequest} from 'data/repositories/Projec
 import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import OrganizationRepository from 'data/repositories/OrganizationRepository'
 import { IOrganization } from 'data/intefaces/IOrganization'
+import ProjectActions from "components/for_pages/Project/ProjectActions";
+import {projectOpen} from "components/Modal/actions";
+import {IRootState} from "types";
 
 interface Props {
   onShowMap: () => void
@@ -43,6 +46,8 @@ const ProjectSearchListView = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)
   const [initialProjectTab, setInitialProjectTab] = useState<string | null>(null)
+  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
+
   const limit = 10
 
   const appContext = useAppContext()
@@ -53,8 +58,8 @@ const ProjectSearchListView = (props: Props) => {
       setCurrentProjectId(parseInt(router.query.projectId as string, 10))
     }
   }, [router.query.projectId])
-  const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
-    ProjectRepository.search(page, limit, keywords).then(data => {
+  const fetchProjects = (page: number, limit: number, filter?: IProjectSearchRequest) => {
+    ProjectRepository.search(page, limit, null, filter).then(data => {
       if(data){
         setProjects(data.data);
         setTotal(data.total);
@@ -69,19 +74,22 @@ const ProjectSearchListView = (props: Props) => {
 
   const handleSortChange = (item) => {
     setSortType(item.value);
-    router.replace(`/ProjectSearchPage?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
+    router.replace(`/projects-search?${queryString.stringify({filter: JSON.stringify(filter), sortType: item.value})}`, undefined, { shallow: true })
   }
 
   const handleScrollNext = () => {
     setPage(page + 1)
-    ProjectRepository.search(page + 1, limit).then(data => {
+    ProjectRepository.search(page + 1, limit,null, filter).then(data => {
       if(data){
         setProjects(projects => [...projects, ...data.data])
       }
     })
   }
 
-  const handleRefresh = () => {
+  const handleFilterChange = (data) => {
+    setPage(1)
+    setFilter(data)
+    fetchProjects(1, limit, data)
 
   }
   const getQueryFilter = () => {
@@ -94,30 +102,36 @@ const ProjectSearchListView = (props: Props) => {
     }
     return {}
   }
-  const handleProjectViewOpen = async (project: IProject) => {
-    setInitialProjectTab('description')
-    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType , projectId: project.id})}`, undefined, {shallow: true})
 
-     setCurrentProjectId(project.id)
-  }
-  const handleProjectApplyOpen = async (project: IProject) => {
-    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType , projectId: project.id})}`, undefined, {shallow: true})
-
-    setInitialProjectTab('application')
-     setCurrentProjectId(project.id);
-
-  }
-  const handleOnClose = () => {
-    setCurrentProjectId(null)
-    router.replace(`/project-search?${queryString.stringify({...(Object.keys(filter).length > 0  ? {filter: JSON.stringify(filter)} :{}), sortType})}`, undefined, { shallow: true })
-
+  const handleModalOpen = (project: IProject, type: 'create' | 'view' | 'edit' | 'application') => {
+    console.log("handleModalOpen", type)
+    switch (type) {
+      case "create":
+        setInitialProjectTab(null)
+        setCurrentProjectId(null)
+        break;
+      case "view":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id)
+        break;
+      case "edit":
+        setInitialProjectTab(null)
+        setCurrentProjectId(project.id);
+        dispatch(projectOpen())
+        break;
+      case "application":
+        setInitialProjectTab('application')
+        setCurrentProjectId(project.id);
+        break;
+    }
+    dispatch(projectOpen())
   }
 
   return (
     <Layout>
     <div className={`${styles.filters} ${role === 'client' && styles.filtersClient} ${role === 'volunteer' && styles.filtersVolunteer}`}>
       <div className={styles.form}>
-        <ProjectSearchFilter collapsed={!isShow} initialValues={getQueryFilter()}/>
+        <ProjectSearchFilter onChange={handleFilterChange} collapsed={!isShow} initialValues={getQueryFilter()}/>
         <div className={styles.more} onClick={() => isShow ? setIsShow(false) : setIsShow(true)}>
           {isShow ? <span>{t('taskSearch.filter.hideMoreOptions')}</span> : <span>{t('taskSearch.filter.showMoreOptions')}</span>}
           <img className={isShow ? styles.hide : null} src="/img/icons/arrowDownSrchTask.svg" alt=""/>
@@ -145,15 +159,7 @@ const ProjectSearchListView = (props: Props) => {
       <div className={styles.projects} id={'projects-list'}>
          <div className={styles.projectsTobBar}>
            {!loading && <div className={styles.projectsAmount}>{t('taskSearch.projects')}: <span>{total}</span></div>}
-          {projects.length > 0 && <div className={styles.projectsSort}>
-            <span>{t('sort.title')}:</span>
-            <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: t('sort.newFirst')},
-              {value: 'highPrice', label: t('sort.highestPrice')},
-              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
-                      item={(item) => <div>{item?.label}</div>}
-            />
-          </div>}
+
         </div>
         {(loading && total === 0) && <Loader/>}
         {total > 0 && <InfiniteScroll
@@ -163,13 +169,16 @@ const ProjectSearchListView = (props: Props) => {
           loader={<Loader/>}
           scrollableTarget="scrollableDiv"
         >
-          {projects.map((project, index) => <ProjectCard key={project.id} actionsType={'public'} project={project} onApplyClick={handleProjectApplyOpen} onViewOpen={handleProjectViewOpen}/>)}
+          {projects.map((project, index) => <ProjectCard key={project.id}
+            actions={<ProjectActions  onModalOpen={(mode) => handleModalOpen(project, mode)}
+              actionsType={'public'} project={project}/>}
+                                                         project={project}/>)}
         </InfiniteScroll>}
       </div>
       </div>
 
     </div>
-      {currentProjectId && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen onClose={handleOnClose}/>}
+        {modalKey === 'projectModal'  && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen/>}
 
       <Modals/>
     </Layout>

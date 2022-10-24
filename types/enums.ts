@@ -9,10 +9,17 @@ export enum RegistrationMode{
 }
 
 export enum ModalType {
-
+  VolunteerFeedBackModal
 }
 
 export enum SnackbarType {
   error,
   success,
+}
+export enum FileUploadAcceptType {
+  Image = 'image',
+  Video = 'video',
+  Document = 'document',
+  Scan = 'scan',
+  Media = 'media'
 }

@@ -1,0 +1,124 @@
+@import "scss/index";
+.collapsed{
+  position: fixed;
+  left: 20px;
+  z-index: 1;
+  bottom: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: #FFF8E3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  img{
+    width: 48px;
+  }
+  @media screen and (max-width: $xs-max){
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 48px;
+    height: 48px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    img{
+      width: 32px;
+    }
+  }
+}
+.root{
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1;
+  background: #FFF8E3;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
+  border-radius: 18px;
+  max-width: 280px;
+}
+.header{
+  text-align: left;
+  padding: 0px 20px 8px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.close{
+  cursor: pointer;
+}
+.closeIcon{
+  width: 12px;
+  height: 12px;
+}
+.wrapper{
+  padding-right: 12px;
+}
+.title{
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+.desc{
+  margin-top: 4px;
+  font-size: 14px;
+  color: #000000;
+
+}
+.notes{
+  max-height: 20vh;
+  overflow-y: auto;
+  padding: 10px 20px;
+  > * + *{
+    margin-top: 12px;
+  }
+}
+.note{
+  text-align: left;
+  background: #FFE9A8;
+  padding: 16px;
+  border-radius: 10px;
+  color: #000000;
+  white-space: pre-line;
+}
+
+.time {
+  display: inline-block;
+  float: right;
+  padding: 0 0 0 7px;
+  position: relative;
+  bottom: -4px;
+  font-size: 12px;
+  color: $grey;
+
+}
+
+.message{
+  position: relative;
+  padding: 20px 20px 0px 20px;
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: #C4C4C4;
+  }
+}
+
+.fullWidth{
+  border-radius: 0;
+}
+
+.volunteer{
+  background-color: #199AC2;
+}
+
+.guest{
+  background-color: #fff;
+}
+

@@ -1,6 +1,6 @@
 import * as React from 'react'
+import {useState} from 'react'
 import styles from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication/TabApplicationForm/index.module.scss'
-import {ProjectStatus} from 'data/intefaces/IProject'
 import TextField from 'components/fields/TextField'
 import Validator from 'utils/validator'
 import SelectField from 'components/fields/SelectField'
@@ -8,16 +8,15 @@ import {useTranslation} from 'next-i18next'
 import TextAreaField from 'components/fields/TextAreaField'
 import {Form, FormikProvider, useFormik} from 'formik'
 import {useAppContext} from 'context/state'
-import {useState} from 'react'
 import LanguageFormField from 'components/fields/LanguageFormField'
 import Button from 'components/PublicProfile/components/Button'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
-import ApplicationRepository from 'data/repositories/ApplicationRepository'
-import ProfileRepository from 'data/repositories/ProfileRepostory'
-import { Educations } from 'data/educations'
+import {Educations} from 'data/educations'
 import DocField from 'components/fields/DocField'
-import { useDispatch } from 'react-redux'
-import { confirmOpen, modalClose } from 'components/Modal/actions'
+import {useDispatch} from 'react-redux'
+import {useApplicationContext} from "context/application_state";
+import {SnackbarType} from "types/enums";
+import {DeepPartial} from "redux";
 
 interface Props {
   application: IApplication | null
@@ -29,22 +28,27 @@ interface Props {
 const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => {
   const {t} = useTranslation();
   const appContext = useAppContext();
+  const applicationContext = useApplicationContext()
   const profile = appContext.profile
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const dispatch = useDispatch()
   const handleSubmit = async (data) => {
-    console.log("HandleSubmit", data)
+    console.log("HandleSubmitAp", data)
     if(application){
-      const res = await ApplicationRepository.update(application.id, data);
+      await applicationContext.update(data);
     }else{
-      const res = await ApplicationRepository.create({...data, projectId});
+      await applicationContext.create(data);
+    }
+    if((data as  DeepPartial<IApplication>).status === ApplicationStatus.Draft){
+      handleInfoModal()
     }
 
     props.onSave()
 
 
   }
+  console.log("application111", application)
   const initialValues = {
     resume: application?.resume ?? '',
     coverLetter: application?.coverLetter ?? '',
@@ -52,8 +56,9 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
     resumeFile: application?.resumeFile ?? null,
     education: application?.education ?? null,
     age: application?.age ?? null,
-    languages: application?.languages ?? appContext.profile.languages ?? []
+    languages: [],//application?.languages ?? appContext.profile.languages ?? []
   }
+  console.log("initialValues", initialValues, application)
 
   const formik = useFormik({
     initialValues,
@@ -62,26 +67,19 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
   const handleSubmitPublish = async () => {
     console.log("handleSubmitPublish")
     await formik.setFieldValue('status', ApplicationStatus.Applied)
-    await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
     await formik.submitForm()
   }
 
   const handleInfoModal = async () => {
-    dispatch(confirmOpen({
-      description: 'Your application was saved in Projects!',
-      infoOnly: true,
-      onConfirm: async () => {
-        dispatch(modalClose())
-      }
-    }))
+  appContext.showSnackbar('Your application was saved in Projects!', SnackbarType.success)
   }
   const handleSubmitDraft = async () => {
     console.log("handleSubmitDraft")
     await formik.setFieldValue('status', ApplicationStatus.Draft);
-    await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
-    await ProfileRepository.addToSavedProjects({projectId: projectId})
+ //   await ProfileRepository.deleteFromSavedProjects({profileId: profile.id}, projectId)
+ //   await ProfileRepository.addToSavedProjects({projectId: projectId})
     await formik.submitForm()
-    handleInfoModal()
+
   }
   const handleSubmitSave = async () => {
     console.log("handleSubmitSave")
@@ -126,11 +124,11 @@ const TabApplicationForm = ({application, projectId, edit, ...props}: Props) => 
 
         <div className={styles.bottomBar}>
           {(!application || application.status === ApplicationStatus.Draft) &&
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>}
+          <Button size={'small'} color={'red'} disabled={applicationContext.editLoading} type={'button'} onClick={handleSubmitDraft}>Save as draft</Button>}
           {(!application || application.status === ApplicationStatus.Draft ) &&
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitPublish}>Apply</Button>}
+          <Button size={'small'} color={'red'} disabled={applicationContext.editLoading} type={'button'} onClick={handleSubmitPublish}>Apply</Button>}
           {edit &&
-          <Button size={'small'} color={'red'} type={'button'} onClick={handleSubmitSave}>Save</Button>}
+          <Button size={'small'} color={'red'} disabled={applicationContext.editLoading} type={'button'} onClick={handleSubmitSave}>Save</Button>}
         </div>
       </Form>
     </FormikProvider>

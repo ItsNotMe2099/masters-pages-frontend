@@ -8,7 +8,10 @@ import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
 import {IUser} from 'data/intefaces/IUser'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import UserRepository from 'data/repositories/UserRepostory'
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
+import {IProject} from "data/intefaces/IProject";
+import {IApplication} from "data/intefaces/IApplication";
+import {IFeedbacksToProfile} from "types";
 
 interface IState {
   isMobile: boolean
@@ -29,9 +32,27 @@ interface IState {
   updateUser: (newUser?: IUser) => void
   updateProfile: (role?: ProfileRole, newUser?: IProfile) => void
   updateRole: (role?: ProfileRole) => void
+  projectUpdateState$: Subject<IProject>
+  projectDeleteState$: Subject<IProject>
+  projectCreateState$: Subject<IProject>
+  applicationUpdateState$: Subject<IApplication>
+  applicationDeleteState$: Subject<IApplication>
+  applicationCreateState$: Subject<IApplication>
+  feedbackUpdateState$: Subject<IFeedbacksToProfile>
+  feedbackDeleteState$: Subject<IFeedbacksToProfile>
+  feedbackCreateState$: Subject<IFeedbacksToProfile>
 }
 
 const loginState$ = new Subject<boolean>()
+const projectUpdateState$ = new Subject<IProject>()
+const projectDeleteState$ = new Subject<IProject>()
+const projectCreateState$ = new Subject<IProject>()
+const applicationUpdateState$ = new Subject<IApplication>()
+const applicationDeleteState$ = new Subject<IApplication>()
+const applicationCreateState$ = new Subject<IApplication>()
+const feedbackUpdateState$ = new Subject<IFeedbacksToProfile>()
+const feedbackDeleteState$ = new Subject<IFeedbacksToProfile>()
+const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
 
 const defaultValue: IState = {
   isMobile: false,
@@ -45,6 +66,15 @@ const defaultValue: IState = {
   profile: null,
   role: null,
   loginState$: loginState$,
+  projectUpdateState$: projectUpdateState$,
+  projectDeleteState$: projectDeleteState$,
+  projectCreateState$: projectCreateState$,
+  applicationUpdateState$: applicationUpdateState$,
+  applicationDeleteState$: applicationDeleteState$,
+  applicationCreateState$: applicationCreateState$,
+  feedbackUpdateState$: feedbackUpdateState$,
+  feedbackDeleteState$: feedbackDeleteState$,
+  feedbackCreateState$: feedbackCreateState$,
   showModal: (type) => null,
   hideModal: () => null,
   showSnackbar: (text, type) => null,
@@ -72,7 +102,7 @@ export function AppWrapper(props: Props) {
   const [token, setToken] = useState<string | null>(props.token ?? null)
   const [user, setUser] = useState<IUser | null>(props.user)
   const [profile, setProfile] = useState<IProfile | null>(props.profile)
-  const [role, setRole] = useState<ProfileRole | null>(props.role )
+  const [role, setRole] = useState<ProfileRole | null>(props.role)
   const router = useRouter()
   useEffect(() => {
     setToken(props.token ?? null)
@@ -83,7 +113,7 @@ export function AppWrapper(props: Props) {
     if (!props.token && user) {
       setUser(null)
     }
-    if (!props.token){
+    if (!props.token) {
       setProfile(null)
     }
   }, [props.token])
@@ -110,17 +140,17 @@ export function AppWrapper(props: Props) {
       const data = await ProfileRepository.fetchProfile(newRole || role)
       if (data) {
         setProfile(data)
-      }else{
-        switch(newRole){
+      } else {
+        switch (newRole) {
           case ProfileRole.Client:
             router.push('/registration')
             break;
           case ProfileRole.Master:
             router.push('/MasterProfile')
-            break;   
+            break;
           case ProfileRole.Volunteer:
             router.push('/VolunteerProfile')
-            break;       
+            break;
         }
       }
     }

@@ -1,11 +1,12 @@
 import AvatarAddFileBtn from 'components/ui/AvatarInput/components/AvatarAddFileBtn'
 import AvatarInputPreview from 'components/ui/AvatarInput/components/AvatarInputPreview'
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
-import React, { useState, useCallback, useRef,
+import React, {
+  useState, useCallback, useRef, useMemo,
 } from 'react'
 import PropTypes from 'prop-types'
 import { shallowEqual } from 'recompose'
-import Dropzone, {DropzoneOptions} from 'react-dropzone'
+import Dropzone, {Accept, DropzoneOptions} from 'react-dropzone'
 import S3Upload from 'utils/s3upload'
 import styles from './index.module.scss'
 
@@ -15,10 +16,12 @@ import { useTranslation } from 'next-i18next'
 import FormError from 'components/ui/Form/FormError'
 import {IRootState} from 'types'
 import {useAppContext} from 'context/state'
+import {FileUploadAcceptType} from "types/enums";
+import Converter from "utils/converter";
 
 
 export interface AvatarInputProps {
-  accept?: string | string[]
+  accept?: FileUploadAcceptType[]
   labelMultiple?: string
   labelSingle?: string
   maxSize?: number
@@ -225,7 +228,11 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
     }
 
   }
-
+  const dropzoneAccept: Accept = useMemo(() => {
+    let arr = [];
+    (props.accept ?? [FileUploadAcceptType.Image]).forEach(i => {arr = [...arr, ...Converter.getFileUploadAccept(i)]})
+    return {'': arr}
+  }, [props.accept])
 
 
       const dopZoneProps = {
@@ -233,7 +240,7 @@ const AvatarInput = (props: any & AvatarInputProps & AvatarInputOptions) => {
         maxSize,
         minSize,
         multiple,
-        accept,
+        accept: dropzoneAccept,
         onDrop,
         onDropRejected,
       }
@@ -312,7 +319,7 @@ AvatarInput.propTypes = {
 }
 AvatarInput.defaultProps = {
   //maxSize: 5242880,
-  accept: ['image/jpeg', 'image/png', 'image/jpg']
+  accept: [FileUploadAcceptType.Image]
 }
 
 export default AvatarInput

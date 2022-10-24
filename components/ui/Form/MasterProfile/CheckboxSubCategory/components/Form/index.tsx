@@ -47,7 +47,7 @@ let FormNewCategory = props => {
         }
 
       />
-      <Field
+      {mainCategoryId && <Field
         name="category"
         component={InputSubCategory}
         label={t('category')}
@@ -59,7 +59,7 @@ let FormNewCategory = props => {
           setCategoryId(val.value)
         }}
 
-      />
+      />}
       {categoryId &&
       <Field
                 name="subCategories"
