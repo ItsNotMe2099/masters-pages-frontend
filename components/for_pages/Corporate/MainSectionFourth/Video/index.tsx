@@ -1,6 +1,6 @@
 import styles from 'components/for_pages/Corporate/MainSectionFourth/Video/index.module.scss'
 import { useTranslation } from 'next-i18next'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import ReactPlayer from 'react-player'
 import PlayIcon from 'components/svg/PlayIcon'
 import classNames from 'classnames'
@@ -11,6 +11,7 @@ interface Props{
   title: string
   className?: string
   style?: 'altIcon'
+  playBtn?: ReactElement
 }
 
 
@@ -33,7 +34,7 @@ const Video = (props: Props) => {
        url={props.url}
        light
        controls
-       playIcon={props.style === 'altIcon' ? <PlayIconAlt/> : <PlayIcon/>}
+       playIcon={props.style === 'altIcon' ? <PlayIconAlt/> : props.playBtn ? props.playBtn : <PlayIcon/>}
        width='100%'
        height='100%'
       />

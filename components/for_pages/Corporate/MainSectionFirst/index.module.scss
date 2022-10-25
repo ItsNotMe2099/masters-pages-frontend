@@ -104,3 +104,14 @@
     margin-top: 10px;
   }
 }
+
+.hidden{
+  :global .react-player__preview{
+    background-image: none !important; 
+  }
+}
+
+.video{
+  width: 100% !important;
+  height: 100% !important;
+}

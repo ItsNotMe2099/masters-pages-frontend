@@ -63,6 +63,7 @@
     "react-device-detect": "^2.2.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^14.2.3",
+    "react-full-screen": "^1.1.1",
     "react-id-generator": "^3.0.2",
     "react-image-lightbox": "^5.1.4",
     "react-infinite-scroll-component": "^6.1.0",
