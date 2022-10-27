@@ -10,6 +10,10 @@ interface Props {
 
 }
 
+interface PlayProps{
+  onClick: () => void
+}
+
 
 const MainSectionFirst = (props: Props) => {
 
@@ -22,6 +26,19 @@ const MainSectionFirst = (props: Props) => {
     return (<div className={styles.category}>
       <div><img src={'/img/Main/icons/mark.svg'}/></div> {label}
     </div>)
+  }
+
+  const Play = (props: PlayProps) => {
+    return (
+      <div className={styles.play}>
+        <div className={styles.icon} onClick={props.onClick}>
+          <img src='/img/MainVolunteer/bg/play-btn.svg' alt=''/>
+        </div>
+        <div className={styles.watch}>
+          WATCH VIDEO
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -46,7 +63,12 @@ const MainSectionFirst = (props: Props) => {
           </div>
         </div>
         <div className={styles.image}>
-          <img src='/img/MainVolunteer/bg/first.svg' alt=''/>
+        <div className={styles.hidden}>
+        <FullScreen handle={handle}>
+          <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title='' playBtn={<Play onClick={handle.enter}/>}/>
+        </FullScreen>
+        </div>
+          <img src='/img/MainVolunteer/bg/first.png' alt=''/>
         </div>
       </div>
       <div className={styles.footer}></div>
