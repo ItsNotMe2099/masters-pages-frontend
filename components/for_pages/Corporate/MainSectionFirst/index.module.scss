@@ -43,6 +43,7 @@
   img{
     width: 100%;
   }
+
 }
 
 .footer{
@@ -107,7 +108,19 @@
 
 .hidden{
   :global .react-player__preview{
-    background-image: none !important; 
+    background-image: none !important;
+  }
+}
+.imageVideo{
+  position: absolute;
+  bottom: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  @media screen and (max-width: $xs-max){
+    bottom: 0;
   }
 }
 
@@ -131,8 +144,6 @@
 }
 
 .play{
-  position: absolute;
-  bottom: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;

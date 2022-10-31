@@ -51,10 +51,10 @@ const NewMain = (props) => {
   )
 }
 
+export default NewMain
 export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any)
   setCookie(ctx, CookiesType.registrationMode, RegistrationMode.Corporate, {expires: addDays(new Date(), 5)})
   return {props: {...res.props}}
 
 }
-export default NewMain

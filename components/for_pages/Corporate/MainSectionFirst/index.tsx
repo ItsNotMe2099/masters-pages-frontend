@@ -1,16 +1,17 @@
 import styles from 'components/for_pages/Corporate/MainSectionFirst/index.module.scss'
 import React from 'react'
-import { useTranslation } from 'next-i18next'
-import { useDispatch } from 'react-redux'
+import {useTranslation} from 'next-i18next'
+import {useDispatch} from 'react-redux'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 import Video from '../MainSectionFourth/Video'
-import { FullScreen, useFullScreenHandle } from "react-full-screen"
+import {FullScreen, useFullScreenHandle} from "react-full-screen"
+import classNames from "classnames";
 
 interface Props {
 
 }
 
-interface PlayProps{
+interface PlayProps {
   onClick: () => void
 }
 
@@ -22,9 +23,10 @@ const MainSectionFirst = (props: Props) => {
 
   const handle = useFullScreenHandle()
 
-  const Category = ({label}: {label: string}) => {
+  const Category = ({label}: { label: string }) => {
     return (<div className={styles.category}>
-      <div><img src={'/img/Main/icons/mark.svg'}/></div> {label}
+      <div><img src={'/img/Main/icons/mark.svg'}/></div>
+      {label}
     </div>)
   }
 
@@ -57,17 +59,20 @@ const MainSectionFirst = (props: Props) => {
             <MainSectionButton size="normal" color="yellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</MainSectionButton>*/}
             <div className={styles.hidden}>
               <FullScreen handle={handle}>
-              <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title='' playBtn={<MainSectionButton onClick={handle.enter} size="normal" color="yellow">WATCH VIDEO</MainSectionButton>}/>
+                <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title=''
+                       playBtn={<MainSectionButton onClick={handle.enter} size="normal" color="yellow">WATCH
+                         VIDEO</MainSectionButton>}/>
               </FullScreen>
             </div>
           </div>
         </div>
         <div className={styles.image}>
-        <div className={styles.hidden}>
-        <FullScreen handle={handle}>
-          <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title='' playBtn={<Play onClick={handle.enter}/>}/>
-        </FullScreen>
-        </div>
+          <div className={classNames(styles.hidden, {[styles.imageVideo]: true})}>
+            <FullScreen handle={handle}>
+              <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title=''
+                     playBtn={<Play onClick={handle.enter}/>}/>
+            </FullScreen>
+          </div>
           <img src='/img/MainVolunteer/bg/first.png' alt=''/>
         </div>
       </div>
