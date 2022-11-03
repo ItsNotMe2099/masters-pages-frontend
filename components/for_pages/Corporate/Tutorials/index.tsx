@@ -9,7 +9,7 @@ const Tutorials = (props) => {
   const videos = [
     {url: 'https://www.youtube.com/watch?v=FMa-WUJKw0k', title: 'How to set up an organization’s profile'},
     {url: 'https://www.youtube.com/watch?v=bF1GaeD4JZo&t=4s', title: 'How to launch a volunteering project ad'},
-    {url: 'https://www.youtube.com/watch?v=bF1GaeD4JZo&t=4s', title: 'How to manage volunteers'},
+    {url: 'https://youtu.be/AkSc50UjtyE', title: 'How to manage volunteers'},
     {url: 'https://www.youtube.com/watch?v=jt7ehRqFj3I', title: 'How to manage a volunteering project'},
   ]
 
