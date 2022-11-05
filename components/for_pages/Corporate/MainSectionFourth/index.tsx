@@ -26,7 +26,7 @@ const MainSectionFourth = (props) => {
   const [data, setData] = useState<IProfile[]>([])
 
   useEffect(() => {
-    ProfileRepository.fetchProfilesForMainPage().then(data => {
+    ProfileRepository.fetchProfilesForCorpPage().then(data => {
       if(data){
         setData(data)
       }
