@@ -12,10 +12,10 @@ export interface AuthLoginFormData {
 }
 
 export interface AuthRegisterFormData {
-  phone: string
+  email: string
 }
 
-export interface AuthPhoneConfirmFormData {
-  phone: string,
+export interface AuthEmailConfirmFormData {
+  email: string,
   code: string
 }

@@ -1,7 +1,7 @@
 import request from 'utils/request'
 import {
   AuthLoginFormData,
-  AuthPhoneConfirmFormData,
+  AuthEmailConfirmFormData,
   AuthRegisterFormData,
   IAuthResponse, IPhoneConfirmResponse
 } from 'data/intefaces/IAuth'
@@ -34,11 +34,11 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async register({phone}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+  static async register({email}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
     const res = await request({
       url: '/api/auth/register',
       method: 'POST',
-      data: {phone},
+      data: {email},
     })
     console.log("Res111", res);
     if (res.err) {
@@ -47,11 +47,11 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async phoneConfirmation({phone, code}: AuthPhoneConfirmFormData): Promise<IAuthResponse | null> {
+  static async phoneConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/phoneConfirmation',
       method: 'POST',
-      data: {phone, code},
+      data: {email, code},
     })
     console.log("Res112", res);
     if (res.err) {
@@ -60,11 +60,11 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async phoneChangeConfirmation({phone, code}: AuthPhoneConfirmFormData): Promise<IAuthResponse | null> {
+  static async phoneChangeConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/phoneChangeConfirmation',
       method: 'POST',
-      data: {phone, code},
+      data: {email, code},
     })
     console.log("Res112", res);
     if (res.err) {
@@ -73,11 +73,11 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async passwordForgot({phone}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+  static async passwordForgot({email}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
     const res = await request({
       url: '/api/auth/forgot',
       method: 'POST',
-      data: {phone},
+      data: {email},
     })
     console.log("Res111", res);
     if (res.err) {

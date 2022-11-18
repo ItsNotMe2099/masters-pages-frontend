@@ -5,6 +5,7 @@ import React, {ReactElement} from 'react'
 import FieldError from 'components/ui/FieldError'
 import Label from 'components/fields/Label'
 import {LabelStyleType} from 'types/types'
+import classNames from 'classnames'
 
 interface Props {
   label?: string,
@@ -29,9 +30,21 @@ export default function TextField(props: Props & FieldConfig) {
   const {label, placeholder, className, inputClassName,hasAutoComplete, icon, variant} = props
   const [field, meta] = useField(props)
   const hasError = !!meta.error && meta.touched
-  console.log("props.labelType", props.labelType);
+
+  const getClassName = () => {
+    return classNames(
+      styles.root,
+      className,
+      {
+        [styles.noMargin]: props.noMargin,
+        [styles.rootWithError]: (meta.error && meta.touched),
+        [styles.rootWithLabelCross]: props.labelType === 'cross',
+        [styles.hidden]: props.hidden
+      }
+    )
+  }
   return (
-    <div className={`${styles.root} ${props.noMargin && styles.noMargin} ${(meta.error && meta.touched) && styles.rootWithError} ${props.labelType === 'cross' && styles.rootWithLabelCross} ${props.hidden && styles.hidden}`}>
+    <div className={getClassName()}>
       {props.labelType === LabelStyleType.Static && <Label label={label} style={props.labelType} hasError={hasError} />}
       <div className={styles.inputContainer}>
         <BaseTextField size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ?  props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type}/>

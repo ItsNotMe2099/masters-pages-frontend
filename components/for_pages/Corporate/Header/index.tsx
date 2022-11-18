@@ -66,7 +66,7 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.actionsButtons}>
             <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
-            <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+            <MainSectionButton size={'small'} onClick={() => handleClick('/registration/corporatenew')}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ const MainSectionHeader = (props: Props) => {
             <MainSectionButton size={'small'} color='outlineGreen' onClick={() => handleClick('/')}>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
-            <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+            <MainSectionButton size={'small'} onClick={() => handleClick('/registration/corporatenew')}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
         </div>
       </div>}
