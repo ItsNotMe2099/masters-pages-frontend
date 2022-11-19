@@ -1,6 +1,7 @@
 import styles from './index.module.scss'
 import cx from 'classnames'
 import Link from 'next/link'
+import React from 'react'
 
 interface Props {
   type?: 'submit' | 'button' | 'reset'
@@ -29,7 +30,7 @@ interface Props {
   className?: string
   fullWidth?: boolean
   target?: string
-  onClick?: (e: React.MouseEvent) => void
+  onClick?: (e: React.MouseEvent | React.FormEvent<HTMLFormElement>) => void
   outlineRed?: boolean
   outlineBlue?: boolean
   outlineBlack?: boolean

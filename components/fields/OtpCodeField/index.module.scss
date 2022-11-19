@@ -1,0 +1,17 @@
+.root{
+  position: relative;
+
+}
+.inputs{
+  display: flex;
+  .input:first-child{
+    margin-left: 0px;
+  }
+}
+.input{
+  margin-left: 12px;
+}
+
+.additional{
+  justify-content: center;
+}

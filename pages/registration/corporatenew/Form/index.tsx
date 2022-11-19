@@ -1,13 +1,9 @@
 import styles from './index.module.scss'
 import {Form, FormikProvider, useFormik} from 'formik'
 import { useState } from 'react'
-import TextField from 'components/fields/TextField'
-import { LabelStyleType } from 'types/types'
-import Validator from 'utils/validator'
-import Button from 'components/ui/Button'
-import classNames from 'classnames'
 import { useAuthContext } from 'context/auth_state'
-import { AuthRegisterFormData } from 'data/intefaces/IAuth'
+import EmailConfirmForm from './EmailConfirmForm'
+import SignUpFormField from './SignUpFormField'
 
 
 interface Props {
@@ -48,32 +44,18 @@ export default function RegForm(props: Props) {
 
   const authContext = useAuthContext()
 
-  const handleStep = (step: number, data?: AuthRegisterFormData) => {
-    switch(step) {
-      case 1:
-        authContext.signUp(data)
-        setStep(2)
-        break
-    }
-  }
+  console.log('formik.values', formik.values)
+
+  const isOk = true //temp
 
   return (
     <FormikProvider value={formik}>
       <Form className={styles.form}>
         {step === 1 && 
-          <>
-          <div className={styles.illustration}><img src={getIllustration()} alt=''/></div>
-          <div className={styles.text}>Please enter your email. It will be your organization’s login.</div>
-          <TextField className={styles.field} name='email' label='Email' labelType={LabelStyleType.Cross} validate={Validator.email}/>
-          <Button 
-          className={classNames(styles.btn, {[styles.active]: Validator.emailRe.test(formik.values.email)})} 
-          disabled={!Validator.emailRe.test(formik.values.email)} 
-          onClick={() => handleStep(1, formik.values.email)}>Confirm email<img src='/img/Registration/new/corp/next.svg' alt=''/></Button>
-          </>
+          <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='email'/>
         }
-        {step === 2 && authContext.isOk &&
-          <>
-          </>
+        {step === 2 &&
+          <EmailConfirmForm onSubmit={() => setStep(3)}/>
         }
       </Form>
     </FormikProvider>

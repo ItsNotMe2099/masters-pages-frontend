@@ -47,7 +47,7 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async phoneConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
+  static async emailConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/phoneConfirmation',
       method: 'POST',
@@ -60,7 +60,7 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async phoneChangeConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
+  static async emailChangeConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/phoneChangeConfirmation',
       method: 'POST',

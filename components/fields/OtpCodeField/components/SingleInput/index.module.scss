@@ -1,0 +1,21 @@
+@import "scss/index";
+
+.input{
+  border-radius: 9px;
+  background-color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  width: 52px;
+  height: 46px;
+  border: 0;
+  padding: 0;
+  color: $white;
+  @media screen and (max-width: $xs-max){
+    width: 38px;
+    height: 36px;
+  }
+}
+.inputError{
+  border-color: #F15151;
+}

@@ -139,7 +139,7 @@ export function AuthWrapper(props: Props) {
     setError(null);
     setConfirmSpinner(true)
     try {
-      const resConfirm = await AuthRepository.phoneConfirmation({code, email: signUpFormData?.email});
+      const resConfirm = await AuthRepository.emailConfirmation({code, email: signUpFormData?.email});
       console.log("resConfirm", resConfirm)
       const accessToken = resConfirm.accessToken
 
@@ -155,7 +155,7 @@ export function AuthWrapper(props: Props) {
       dispatch(modalClose());
       appContext.updateTokenFromCookies()
       console.log("Redirect");
-      await router.push('/registration');
+      //await router.push('/registration');
     }catch (e){
       setConfirmSpinner(false)
       setError(e);
@@ -218,6 +218,7 @@ export function AuthWrapper(props: Props) {
     sendCodeAgain,
     againSpinner,
     confirmSpinner,
+    isOk,
     logOut,
     clear,
   }
