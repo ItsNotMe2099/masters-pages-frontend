@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useAuthContext } from 'context/auth_state'
 import EmailConfirmForm from './EmailConfirmForm'
 import SignUpFormField from './SignUpFormField'
+import Button from 'components/ui/Button'
 
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 
 export default function RegForm(props: Props) {
 
-  const handleSubmit =   (data) => {
+  const handleSubmit = (data) => {
     props.onSubmit(data)
   }
 
@@ -48,6 +49,14 @@ export default function RegForm(props: Props) {
 
   const isOk = true //temp
 
+  const BackButton = () => {
+    return(
+      <Button className={styles.back} type='button' onClick={() => setStep(step => step - 1)}>
+        <img src='/img/Registration/new/corp/prev.svg' alt=''/>
+      </Button>
+    )
+  }
+
   return (
     <FormikProvider value={formik}>
       <Form className={styles.form}>
@@ -55,7 +64,10 @@ export default function RegForm(props: Props) {
           <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='email'/>
         }
         {step === 2 &&
-          <EmailConfirmForm onSubmit={() => setStep(3)}/>
+          <EmailConfirmForm onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
+        }
+        {step === 3 &&
+          <div>This is STEP 3</div>
         }
       </Form>
     </FormikProvider>

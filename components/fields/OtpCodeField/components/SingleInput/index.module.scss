@@ -1,16 +1,22 @@
 @import "scss/index";
 
 .input{
-  border-radius: 9px;
-  background-color: #000;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
-  width: 52px;
-  height: 46px;
-  border: 0;
+  border: 2px solid #C4C4C4;
+  width: 64px;
+  height: 64px;
   padding: 0;
-  color: $white;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: #000000;
   @media screen and (max-width: $xs-max){
     width: 38px;
     height: 36px;
@@ -18,4 +24,5 @@
 }
 .inputError{
   border-color: #F15151;
+  color: #F15151;
 }

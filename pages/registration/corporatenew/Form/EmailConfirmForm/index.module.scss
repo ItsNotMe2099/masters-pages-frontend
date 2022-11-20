@@ -1,8 +1,7 @@
 @import 'scss/index';
 
 .form{
-  width: 25%;
-  margin: 0 auto;
+  
 }
 
 .illustration{
@@ -41,6 +40,7 @@
   text-align: center;
   color: #000000 !important;
   background-color: #f4f4f4;
+  margin-left: 16px;
   img{
     margin-left: 14px;
   }
@@ -50,5 +50,37 @@
   background: #F2B705;
   &:hover{
     background: #f3c331;
+  }
+}
+
+.btns{
+  display: flex;
+}
+
+.remain{
+  display: flex;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.seconds{
+  font-weight: 600;
+  margin-right: 12px;
+}
+
+.get{
+  font-weight: 400;
+  span{
+    text-decoration: underline;
+    cursor: pointer;
   }
 }

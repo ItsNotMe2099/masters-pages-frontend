@@ -10,7 +10,7 @@ import React from 'react'
 
 
 interface Props {
-  onSubmit: (data) => void
+  onSubmit: (data: AuthRegisterFormData) => void
 }
 
 export default function SignUpForm(props: Props) {

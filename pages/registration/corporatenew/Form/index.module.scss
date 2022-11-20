@@ -53,3 +53,12 @@
     background: #f3c331;
   }
 }
+
+.back{
+  height: 54px;
+  width: 54px;
+  flex-shrink: 0;
+  background-color: transparent;
+  border-radius: 10px !important;
+  border: 2px solid #F2B705 !important;
+}

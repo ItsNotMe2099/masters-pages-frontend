@@ -6,15 +6,17 @@ import {FieldConfig, useField, useFormikContext} from 'formik'
 import {SingleOTPInputComponent} from 'components/fields/OtpCodeField/components/SingleInput'
 import FieldError from 'components/ui/FieldError'
 import cx from 'classnames'
+import { useAuthContext } from 'context/auth_state'
 
 interface Props {
   length: number,
   center?: boolean
   onComplete?: (code) => void
+  error?: boolean
 }
 
 export default function OtpCodeField(props: Props & FieldConfig) {
-  const {length, onComplete} = props
+  const {length, onComplete, error} = props
   const [field, meta] = useField(props)
   const {value} = field
   const { setFieldValue} = useFormikContext()
@@ -161,6 +163,8 @@ export default function OtpCodeField(props: Props & FieldConfig) {
     [activeInput, getRightValue, length, otpValues],
   )
 
+  const authContext = useAuthContext()
+
   return (
     <div className={styles.root}>
       <div className={cx(styles.inputs, { [styles.additional]: props.center })}>
@@ -172,18 +176,18 @@ export default function OtpCodeField(props: Props & FieldConfig) {
             focus={activeInput === index}
             value={otpValues && otpValues[index]}
             autoFocus={true}
-            error={hasError}
+            error={hasError || error}
             onFocus={handleOnFocus(index)}
             onChange={handleOnChange}
             onKeyDown={handleOnKeyDown}
             onBlur={onBlur}
             onPaste={handleOnPaste}
-            placeholder='0'
+            placeholder=''
           />
           </div>
         ))}
       </div>
-      <FieldError showError={hasError}>{meta?.error}</FieldError>
+      <FieldError showError={hasError || error}>{meta?.error || error && authContext.error}</FieldError>
     </div>
   )
 }
