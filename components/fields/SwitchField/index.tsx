@@ -1,10 +1,13 @@
 import styles from './index.module.scss'
 import { FieldConfig, useField, useFormikContext } from 'formik'
 import React from 'react'
-import Switch from "components/ui/Switch";
+import Switch from "components/ui/Switch"
+import classNames from 'classnames'
 
 interface Props {
   onChange?: () => void
+  label?: string
+  className?: string
 }
 
 export default function SwitchField(props: Props & FieldConfig) {
@@ -18,11 +21,15 @@ export default function SwitchField(props: Props & FieldConfig) {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, props.className)}>
       <Switch
           onChange={(val) => handleChange(val)}
           checked={field.value}
           />
+          {props.label ?
+          <div className={styles.label}>
+            {props.label}
+          </div> : null}
     </div>
   )
 }

@@ -10,6 +10,10 @@ import { LabelStyleType } from 'types/types'
 import Validator from 'utils/validator'
 import PhoneField from 'components/fields/PhoneField'
 import classNames from 'classnames'
+import QuestionPopover from 'components/ui/QuestionPopover'
+import SwitchField from 'components/fields/SwitchField'
+import PasswordField from 'components/fields/PasswordField'
+import CheckBoxField from 'components/fields/CheckBoxField'
 
 
 interface Props {
@@ -19,6 +23,7 @@ interface Props {
 export default function RegForm(props: Props) {
 
   const handleSubmit = (data) => {
+    console.log('SUBMIT')
     props.onSubmit(data)
   }
 
@@ -28,24 +33,22 @@ export default function RegForm(props: Props) {
     email: '',
     firstName: '',
     lastName: '',
-    phone: ''
+    phone: '',
+    organization: {
+      name: '',
+      id: '',
+      site: '',
+      searchable: true
+    },
+    password: '',
+    passwordConfirm: '',
+    terms: false
   }
 
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit
   })
-
-  const getIllustration = () => {
-    switch(step) {
-      case 3:
-        return '/img/Registration/new/corp/step2.svg'
-      case 4:
-        return '/img/Registration/new/corp/step3.svg'
-      default:
-        return '/img/Registration/new/corp/step3.svg'
-    }
-  }
 
   const authContext = useAuthContext()
 
@@ -99,7 +102,63 @@ export default function RegForm(props: Props) {
           </>
         }
         {step === 4 &&
-          <div>This is STEP 4</div>
+          <>
+          <div className={styles.steps}>
+            <img src='/img/Registration/new/corp/steps-line-step3.svg' alt=''/>
+          </div>
+          <div className={styles.illustration}><img src='/img/Registration/new/corp/step3.svg' alt=''/></div>
+          <div className={styles.text}>Almost done.</div>
+          <TextField 
+          className={styles.field} 
+          name='organization.name' label='Organization name' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+          <TextField 
+          className={styles.altField} 
+          name='organization.site' label='Organization website' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+          <div className={styles.id}>
+            <TextField 
+              className={styles.altField} 
+              name='organization.id' label='MastersPages.com ID' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+            <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'} 
+            className={styles.question}/>
+          </div>
+          <SwitchField name='organization.searchable' label='Searchable' className={styles.switch}/>
+          <PasswordField 
+          className={styles.field}  
+          name='password' 
+          label='Create password' 
+          labelType={LabelStyleType.Cross}
+          validate={Validator.required}
+          />
+          <PasswordField 
+          className={styles.altField}  
+          name='passwordConfirm' 
+          label='Re-type password' 
+          labelType={LabelStyleType.Cross}
+          validate={Validator.combine([Validator.required, Validator.passwordsMustMatch(formik.values)])}
+          />
+          <CheckBoxField className={styles.checkbox} name={'terms'} validate={Validator.required} label={<div className={styles.terms}>
+            Accept <a href='/Terms'>Terms & Conditions</a>
+          </div>}/>
+          <div className={styles.btns}>
+            <BackButton/>
+            <Button 
+              className=
+              {classNames(styles.btn, 
+              {[styles.active]: formik.values.organization.name !== '' && 
+              formik.values.organization.id !== '' && 
+              formik.values.organization.site !== '' &&
+              formik.values.password === formik.values.passwordConfirm &&
+              formik.values.terms})} 
+              disabled=
+              {formik.values.organization.name === '' && 
+              formik.values.organization.id === '' && 
+              formik.values.organization.site === '' &&
+              formik.values.password !== formik.values.passwordConfirm &&
+              !formik.values.terms}>
+              Send aplication<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            </Button>
+          </div>
+        </>
         }
       </Form>
     </FormikProvider>

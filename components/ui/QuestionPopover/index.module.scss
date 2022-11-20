@@ -1,0 +1,31 @@
+@import "scss/index";
+
+.root{
+  display: flex;
+}
+
+
+
+.dropDown{
+  font-size: 12px;
+  padding: 16px;
+  white-space: pre-line;
+  visibility: hidden;
+  border-radius: 3px;
+  background: #EBEBEB;
+  min-width: 300px;
+  @media screen and (max-width: $xs-max){
+    width: calc(100vw - 36px);
+  }
+}
+
+.inner{
+  display: flex;
+  cursor: pointer;
+}
+
+.opened{
+  visibility: visible;
+  top: -60% !important;
+  margin: 0 0 0 20px;
+}

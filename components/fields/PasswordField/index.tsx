@@ -28,7 +28,7 @@ export default function PasswordField(props: Props & FieldConfig) {
 
 
   return (
-      <TextField size='normal' label={label}  labelType={labelType} {...field} type={isShown ? 'text' :'password'} icon={
+      <TextField className={className} size='normal' label={label}  labelType={labelType} {...field} type={isShown ? 'text' :'password'} icon={
       isShown ?
         (<a onClick={() => setIsShown(false)}><img src='/img/field/show.svg' alt=''/></a>)
         :

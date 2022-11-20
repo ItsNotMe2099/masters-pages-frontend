@@ -77,3 +77,40 @@
   justify-content: center;
   margin-top: 32px;
 }
+
+.id{
+  position: relative;
+  .altField{
+    flex: 1;
+  }
+}
+
+.question{
+  margin-left: 17px;
+  position: absolute;
+  right: -37px;
+  top: 35%;
+}
+
+.switch{
+  justify-content: center;
+}
+
+.terms{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #828282 !important;
+  a{
+    color: #000000;
+    text-decoration: underline;
+  }
+}
+
+.checkbox{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}

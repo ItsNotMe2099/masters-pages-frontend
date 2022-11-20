@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, MutableRefObject } from 'react'
 
 export const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState)
@@ -22,4 +22,18 @@ export const useDetectOutsideClick = (el, initialState) => {
 
   }, [isActive, el])
   return [isActive, setIsActive]
+}
+
+export function listenForOutsideClicks(listening: boolean, setListening: (val: boolean) => void, menuRef: MutableRefObject<any>, setIsOpen: (val: boolean) => void) {
+  return () => {
+    if (listening) return
+    if (!menuRef.current) return
+    setListening(true);
+    ['click', 'touchstart'].forEach((type) => {
+      document.addEventListener('click', (evt) => {
+        if (menuRef.current && menuRef.current.contains(evt.target)) return
+        setIsOpen(false)
+      })
+    })
+  }
 }
