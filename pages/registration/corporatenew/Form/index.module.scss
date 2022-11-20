@@ -29,6 +29,10 @@
   margin-top: 40px;
 }
 
+.altField{
+  margin-top: 25px;
+}
+
 .btn{
   height: 56px;
   width: 100%;
@@ -42,9 +46,14 @@
   text-align: center;
   color: #000000 !important;
   background-color: #f4f4f4;
+  margin-left: 16px;
   img{
     margin-left: 14px;
   }
+}
+
+.btns{
+  display: flex;
 }
 
 .active{
@@ -61,4 +70,10 @@
   background-color: transparent;
   border-radius: 10px !important;
   border: 2px solid #F2B705 !important;
+}
+
+.steps{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
 }

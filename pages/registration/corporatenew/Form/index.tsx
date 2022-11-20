@@ -5,6 +5,11 @@ import { useAuthContext } from 'context/auth_state'
 import EmailConfirmForm from './EmailConfirmForm'
 import SignUpFormField from './SignUpFormField'
 import Button from 'components/ui/Button'
+import TextField from 'components/fields/TextField'
+import { LabelStyleType } from 'types/types'
+import Validator from 'utils/validator'
+import PhoneField from 'components/fields/PhoneField'
+import classNames from 'classnames'
 
 
 interface Props {
@@ -20,7 +25,10 @@ export default function RegForm(props: Props) {
   const [step, setStep] = useState<number>(1)
 
   const initialValues = {
-    email: ''
+    email: '',
+    firstName: '',
+    lastName: '',
+    phone: ''
   }
 
   const formik = useFormik({
@@ -30,16 +38,12 @@ export default function RegForm(props: Props) {
 
   const getIllustration = () => {
     switch(step) {
-      case 1:
-        return '/img/Registration/new/corp/step1.svg'
-      case 2:
-        return '/img/Registration/new/corp/step1.svg'
       case 3:
         return '/img/Registration/new/corp/step2.svg'
       case 4:
         return '/img/Registration/new/corp/step3.svg'
       default:
-        return '/img/Registration/new/corp/step1.svg'
+        return '/img/Registration/new/corp/step3.svg'
     }
   }
 
@@ -67,7 +71,35 @@ export default function RegForm(props: Props) {
           <EmailConfirmForm onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
         }
         {step === 3 &&
-          <div>This is STEP 3</div>
+          <>
+            <div className={styles.steps}>
+              <img src='/img/Registration/new/corp/steps-line-step2.svg' alt=''/>
+            </div>
+            <div className={styles.illustration}><img src='/img/Registration/new/corp/step2.svg' alt=''/></div>
+            <div className={styles.text}>Please, provide contact information</div>
+            <TextField 
+            className={styles.field} 
+            name='firstName' label='First name' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+            <TextField 
+            className={styles.altField} 
+            name='lastName' label='Last name' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+            <PhoneField label='Phone number (optional)' name='phone' labelType={LabelStyleType.Cross} validate={Validator.phone}/>
+            <div className={styles.btns}>
+              <BackButton/>
+              <Button 
+                type='button'
+                onClick={() => setStep(4)}
+                className=
+                {classNames(styles.btn, 
+                {[styles.active]: formik.values.firstName !== '' && formik.values.lastName !== ''})} 
+                disabled={formik.values.firstName === '' && formik.values.lastName === ''}>
+                Next step<img src='/img/Registration/new/corp/next.svg' alt=''/>
+              </Button>
+            </div>
+          </>
+        }
+        {step === 4 &&
+          <div>This is STEP 4</div>
         }
       </Form>
     </FormikProvider>
