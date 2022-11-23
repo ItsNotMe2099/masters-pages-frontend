@@ -49,7 +49,7 @@ export default function RegForm(props: Props) {
     setIsLoading(false)
   }
 
-  const [step, setStep] = useState<number>(3)
+  const [step, setStep] = useState<number>(1)
 
   const initialValues = {
     email: '',

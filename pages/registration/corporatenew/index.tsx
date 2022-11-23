@@ -2,6 +2,8 @@ import styles from 'pages/registration/corporatenew/index.module.scss'
 import {getAuthServerSide} from 'utils/auth'
 import RegForm from 'components/for_pages/CorporateRegistration/FormNew'
 import { useState } from 'react'
+import Button from 'components/ui/Button'
+import classNames from 'classnames'
 
 
 interface Props {
@@ -14,7 +16,7 @@ const CorporateNew = (props: Props) => {
 
   return (
     <div className={styles.body}>
-      <div className={styles.root}>
+      <div className={classNames(styles.root, {[styles.alt]: isSuccess})}>
         {isSuccess ?
         <>
         <div className={styles.title}>
@@ -24,7 +26,29 @@ const CorporateNew = (props: Props) => {
         <div className={styles.text}>Regular application processing time is 2 business days. <br/>
         <div>We will review the application and notify you once your account is open.</div></div>
         <div className={styles.btns}>
-
+          <div className={styles.wrapper}>
+          <Button 
+            type='button'
+            href='/guestpage'
+            className={styles.btn}>
+            Guest access<img src='/img/Registration/new/corp/next.svg' alt=''/>
+          </Button>
+          <div className={styles.desc}>
+            Search volunteers
+          </div>
+          </div>
+          <div className={styles.separator}></div>
+          <div className={styles.wrapper}>
+          <Button 
+            type='button'
+            href='/corporate'
+            className={styles.btn}>
+            Organizations site<img src='/img/Registration/new/corp/next.svg' alt=''/>
+          </Button>
+          <div className={styles.desc}>
+            Tutorial, videos and sample profiles
+          </div>
+          </div>
         </div>
         </>
         :
