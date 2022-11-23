@@ -24,3 +24,29 @@
   text-align: center;
   color: #000000;
 }
+
+.illustration{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.text{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 16px;
+  justify-content: center;
+  div{
+    margin-top: 15px;
+  }
+}
+
+.btns{
+  margin-top: 64px;
+}

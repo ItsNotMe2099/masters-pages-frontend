@@ -1,26 +1,35 @@
 import styles from 'pages/registration/corporatenew/index.module.scss'
 import {getAuthServerSide} from 'utils/auth'
-import {IUser} from 'data/intefaces/IUser'
-import RegForm from './Form'
+import RegForm from 'components/for_pages/CorporateRegistration/FormNew'
+import { useState } from 'react'
 
 
 interface Props {
-  user: IUser
+  
 }
 
 const CorporateNew = (props: Props) => {
 
-  const handleSubmit = () => {
-
-  }
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
   return (
     <div className={styles.body}>
       <div className={styles.root}>
+        {isSuccess ?
+        <>
         <div className={styles.title}>
-          Organization account application
+          THANK YOU FOR THE APPLICATION
         </div>
-        <RegForm onSubmit={handleSubmit}/>
+        <div className={styles.illustration}><img src='/img/Registration/new/corp/success.svg' alt=''/></div>
+        <div className={styles.text}>Regular application processing time is 2 business days. <br/>
+        <div>We will review the application and notify you once your account is open.</div></div>
+        <div className={styles.btns}>
+
+        </div>
+        </>
+        :
+        <RegForm onSubmit={() => setIsSuccess(true)}/>
+        }
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import {Form, FormikProvider, useFormik} from 'formik'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthContext } from 'context/auth_state'
 import EmailConfirmForm from './EmailConfirmForm'
 import SignUpFormField from './SignUpFormField'
@@ -14,26 +14,49 @@ import QuestionPopover from 'components/ui/QuestionPopover'
 import SwitchField from 'components/fields/SwitchField'
 import PasswordField from 'components/fields/PasswordField'
 import CheckBoxField from 'components/fields/CheckBoxField'
+import AuthRepository from 'data/repositories/AuthRepository'
+import { reachGoal } from 'utils/ymetrika'
+import { useAppContext } from 'context/state'
+import { ProfileRole } from 'data/intefaces/IProfile'
+import FormError from 'components/ui/Form/FormError'
 
 
 interface Props {
-  onSubmit: (data) => void
+  onSubmit: () => void
 }
 
 export default function RegForm(props: Props) {
 
-  const handleSubmit = (data) => {
-    console.log('SUBMIT')
-    props.onSubmit(data)
+  const [isLoading, setIsLoading ] = useState(false)
+  const [error, setError] = useState(null)
+
+  const appContext = useAppContext()
+
+  const handleSubmit = async (data) => {
+    console.log('Submit', data)
+    setError(null)
+    setIsLoading(true);
+    try {
+      const res = await AuthRepository.completeRegistration(data)
+      reachGoal('auth:signup:completed')
+      await appContext.updateUser()
+      await appContext.updateRole(ProfileRole.Corporate)
+      props.onSubmit()
+
+    }catch (e){
+      setError(e)
+    }
+    setIsLoading(false)
   }
 
-  const [step, setStep] = useState<number>(1)
+  const [step, setStep] = useState<number>(3)
 
   const initialValues = {
     email: '',
     firstName: '',
     lastName: '',
     phone: '',
+    phoneExtension: '',
     organization: {
       name: '',
       id: '',
@@ -64,8 +87,18 @@ export default function RegForm(props: Props) {
     )
   }
 
+  useEffect(() => {
+    const result = formik.values.phoneExtension.replace(/\D/g, '').slice(0, 5)
+    formik.setFieldValue('phoneExtension', result)
+  }, [formik.values.phoneExtension])
+
+  console.log('phoneExtension', formik.values.phoneExtension)
+
   return (
     <FormikProvider value={formik}>
+      <div className={styles.title}>
+        Organization account application
+      </div>
       <Form className={styles.form}>
         {step === 1 && 
           <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='email'/>
@@ -86,7 +119,16 @@ export default function RegForm(props: Props) {
             <TextField 
             className={styles.altField} 
             name='lastName' label='Last name' labelType={LabelStyleType.Cross} validate={Validator.required}/>
-            <PhoneField label='Phone number (optional)' name='phone' labelType={LabelStyleType.Cross} validate={Validator.phone}/>
+            <div className={styles.id}>
+              <PhoneField label='Phone number (optional)' name='phone' labelType={LabelStyleType.Cross} validate={Validator.phone}/>
+              <TextField 
+              className={styles.extension} 
+              label='Extension' 
+              name='phoneExtension' 
+              placeholder='77777' 
+              labelType={LabelStyleType.Cross}
+              />
+            </div>
             <div className={styles.btns}>
               <BackButton/>
               <Button 
@@ -139,6 +181,7 @@ export default function RegForm(props: Props) {
           <CheckBoxField className={styles.checkbox} name={'terms'} validate={Validator.required} label={<div className={styles.terms}>
             Accept <a href='/Terms'>Terms & Conditions</a>
           </div>}/>
+          <FormError error={error}/>
           <div className={styles.btns}>
             <BackButton/>
             <Button 
