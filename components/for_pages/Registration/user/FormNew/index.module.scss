@@ -1,0 +1,172 @@
+@import 'scss/index';
+
+.form{
+  width: 25%;
+  margin: 0 auto;
+  @media (max-width: 1250px) {
+    width: 55%;
+  }
+  @media (max-width: $xs-max) {
+    width: 100%;
+    padding: 0 16px;
+  }
+}
+
+.illustration{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.title{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+}
+
+.text{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 16px;
+  justify-content: center;
+}
+
+.field{
+  margin-top: 40px;
+}
+
+.altField{
+  margin-top: 25px;
+}
+
+.btn{
+  height: 56px;
+  width: 100%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000 !important;
+  background-color: #f4f4f4;
+  margin-left: 16px;
+  img{
+    margin-left: 14px;
+  }
+  @media (max-width: $xs-max) {
+    margin-left: 0;
+  }
+}
+
+.btns{
+  display: flex;
+  @media (max-width: $xs-max) {
+    flex-direction: column-reverse;
+  }
+}
+
+.active{
+  background: #F2B705;
+  &:hover{
+    background: #f3c331;
+  }
+}
+
+.back{
+  height: 54px;
+  width: 54px;
+  flex-shrink: 0;
+  background-color: transparent;
+  border-radius: 10px !important;
+  border: 2px solid #F2B705 !important;
+  @media (max-width: $xs-max) {
+    width: 100%;
+    margin-top: 11px;
+  }
+}
+
+.steps{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.id{
+  position: relative;
+  .altField{
+    flex: 1;
+  }
+}
+
+.question{
+  margin-left: 17px;
+  position: absolute;
+  right: -37px;
+  top: 35%;
+  @media (max-width: $xs-max) {
+    right: 35px;
+    top: 16%;
+  }
+}
+
+.switch{
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.terms{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #828282 !important;
+  a{
+    color: #000000;
+    text-decoration: underline;
+  }
+}
+
+.checkbox{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.extension{
+  margin: 0;
+  position: absolute !important;
+  right: -70%;
+  top: -9%;
+  @media (max-width: 1400px) {
+    right: -80%;
+  }
+  @media (max-width: 1250px) {
+    position: static !important;
+  }
+}
+
+.choose{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  margin-top: 86px;
+}

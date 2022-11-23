@@ -1,0 +1,126 @@
+@import 'scss/index';
+
+.body{
+  background: url("../../../public/img/Corporate/bg.svg") no-repeat;
+  background-size: cover;
+  padding-bottom: 200px;
+}
+
+.root{
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 60px;
+  @media screen and (max-width: 1250px){
+    overflow-x: hidden;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+  }
+}
+
+.alt{
+  width: 43%;
+  @media screen and (max-width: 1310px){
+    width: 75%;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+    padding: 0 16px;
+  }
+}
+
+.title{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+}
+
+.illustration{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.text{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 16px;
+  justify-content: center;
+  div{
+    margin-top: 15px;
+  }
+}
+
+.btns{
+  margin-top: 64px;
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+  }
+}
+
+.btn{
+  height: 56px;
+  width: 100%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000 !important;
+  background: #F2B705;
+  &:hover{
+    background: #f3c331;
+  }
+  img{
+    margin-left: 14px;
+  }
+}
+
+.separator{
+  width: 1px;
+  height: 43px;
+  margin: 0 32px;
+  background: #D9D9D9;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 5px;
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+    transform: rotate(180deg);
+    height: 1px;
+    margin: 25px 0;
+  }
+}
+
+.wrapper{
+  width: 100%;
+}
+
+.desc{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  justify-content: center;
+  margin-top: 16px;
+}

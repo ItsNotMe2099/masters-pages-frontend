@@ -1,7 +1,7 @@
 import request from 'utils/request'
 import {
   AuthLoginFormData,
-  AuthEmailConfirmFormData,
+  AuthConfirmFormData,
   AuthRegisterFormData,
   IAuthResponse, IPhoneConfirmResponse
 } from 'data/intefaces/IAuth'
@@ -34,11 +34,11 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async register({email}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+  static async register({data}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
     const res = await request({
       url: '/api/auth/register',
       method: 'POST',
-      data: {email},
+      data: {data},
     })
     console.log("Res111", res);
     if (res.err) {
@@ -47,7 +47,7 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async emailConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
+  static async emailConfirmation({email, code}: AuthConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/phoneConfirmation',
       method: 'POST',
@@ -60,7 +60,20 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async emailChangeConfirmation({email, code}: AuthEmailConfirmFormData): Promise<IAuthResponse | null> {
+  static async phoneConfirmation({phone, code}: AuthConfirmFormData): Promise<IAuthResponse | null> {
+    const res = await request({
+      url: '/api/auth/phoneConfirmation',
+      method: 'POST',
+      data: {phone, code},
+    })
+    console.log("Res112", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
+  static async emailChangeConfirmation({email, code}: AuthConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/phoneChangeConfirmation',
       method: 'POST',
@@ -73,11 +86,24 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async passwordForgot({email}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+  static async phoneChangeConfirmation({phone, code}: AuthConfirmFormData): Promise<IAuthResponse | null> {
+    const res = await request({
+      url: '/api/auth/phoneChangeConfirmation',
+      method: 'POST',
+      data: {phone, code},
+    })
+    console.log("Res112", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
+  static async passwordForgot({data}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
     const res = await request({
       url: '/api/auth/forgot',
       method: 'POST',
-      data: {email},
+      data: {data},
     })
     console.log("Res111", res);
     if (res.err) {

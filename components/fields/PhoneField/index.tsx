@@ -12,6 +12,7 @@ import ErrorInput from 'components/ui/Formik/components/ErrorInput'
 import {CodeSelect} from './components/CodeSelect'
 import FieldError from 'components/ui/FieldError'
 import { useRouter } from 'next/router'
+import classNames from 'classnames'
 // @ts-ignore
 const metadata = new Metadata(minMetadata)
 
@@ -21,6 +22,7 @@ interface Props {
   disabled?: boolean
   onClick?: () => void
   labelType: 'placeholder' | 'cross' | 'static'
+  className?: string
 }
 
 const codeDoubles = {
@@ -149,7 +151,7 @@ export default function PhoneField(props: Props & FieldConfig) {
   }
 
   return (
-    <div className={styles.root}    onClick={props.onClick}>
+    <div className={classNames(styles.root, props.className)}    onClick={props.onClick}>
       {props.labelType === 'static' && <label className={styles.labelStatic}>{props.label}</label>}
       <div className={`${styles.inputContainer} ${(meta.error && meta.touched) && styles.inputError}`}>
         <div className={styles.country}>

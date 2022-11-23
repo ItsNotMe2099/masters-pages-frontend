@@ -11,9 +11,11 @@ import { useAuthContext } from 'context/auth_state'
 interface Props {
   onSubmit: () => void
   backBtn?: () => ReactElement
+  illustration: string
+  email?: boolean
 }
 
-export default function EmailConfirmForm(props: Props) {
+export default function ConfirmForm(props: Props) {
 
   const [error, setError] = useState<boolean>(false)
 
@@ -41,7 +43,7 @@ export default function EmailConfirmForm(props: Props) {
   return (
     <FormikProvider value={formik}>
       <Form className={styles.form}>
-        <div className={styles.illustration}><img src='/img/Registration/new/corp/step1.svg' alt=''/></div>
+        <div className={styles.illustration}><img src={props.illustration} alt=''/></div>
         <div className={styles.text}>Please, check your email Inbox or Spam folders and enter below the code provided:</div>
         <OtpCodeField error={error} name='code' length={4} validate={Validator.otpValidation}/>
         <div className={styles.btns}>
@@ -52,12 +54,12 @@ export default function EmailConfirmForm(props: Props) {
           {classNames(styles.btn, 
             {[styles.active]: (Validator.otpValidation(formik.values.code) === undefined && formik.values.code.length === 4)})} 
           disabled={Validator.otpValidation(formik.values.code) !== undefined || formik.values.code.length < 4}>
-            Confirm email<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            Confirm number<img src='/img/Registration/new/corp/next.svg' alt=''/>
         </Button>
         </div>
         <div className={styles.remain}>
           <div className={styles.seconds}>{authContext.remainSec}s</div>
-          <div className={styles.get}>Didn’t get an email? <span onClick={() => authContext.sendCodeAgain()}>Resend</span></div>
+          <div className={styles.get}>{props.email ? 'Didn’t get an email?' : 'Didn’t get the sms?'} <span onClick={() => authContext.sendCodeAgain()}>Resend</span></div>
         </div>
       </Form>
     </FormikProvider>

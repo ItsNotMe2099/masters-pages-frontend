@@ -7,6 +7,7 @@ import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import { AuthRegisterFormData } from 'data/intefaces/IAuth'
 import React from 'react'
+import PhoneField from 'components/fields/PhoneField'
 
 
 interface Props {
@@ -31,14 +32,14 @@ export default function SignUpForm(props: Props) {
   return (
     <FormikProvider value={formik}>
       <Form className={styles.form}>
-        <div className={styles.illustration}><img src='/img/Registration/new/corp/step1.svg' alt=''/></div>
+        <div className={styles.illustration}><img src='/img/Registration/new/user/step1.svg' alt=''/></div>
         <div className={styles.text}>Please enter your email.<br/> It will be your organization’s login.</div>
-        <TextField className={styles.field} name='data' label='Email' labelType={LabelStyleType.Cross} validate={Validator.email}/>
+        <PhoneField className={styles.field} label='Phone number' name='data' labelType={LabelStyleType.Cross} validate={Validator.phone}/>
         <Button 
         onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
           className={classNames(styles.btn, {[styles.active]: Validator.emailRe.test(formik.values.data)})} 
           disabled={!Validator.emailRe.test(formik.values.data)}>
-            Confirm email<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            Confirm number<img src='/img/Registration/new/corp/next.svg' alt=''/>
         </Button>
       </Form>
     </FormikProvider>

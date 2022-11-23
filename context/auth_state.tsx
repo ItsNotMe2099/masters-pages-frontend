@@ -113,7 +113,7 @@ export function AuthWrapper(props: Props) {
     setError(null);
     setSignUpSpinner(true)
     setSignUpFormData(values)
-    const isOk = await sendCodeToEmail(values.email)
+    const isOk = await sendCode(values.data)
     reachGoal('auth:signup:phone')
     setSignUpSpinner(false)
     if (isOk) {
@@ -126,7 +126,7 @@ export function AuthWrapper(props: Props) {
     setError(null);
     setSignUpSpinner(true)
     setSignUpFormData(values)
-    const isOk = await sendCodeToEmail(values.email)
+    const isOk = await sendCode(values.data)
     reachGoal('auth:signup:phone')
     setSignUpSpinner(false)
     if (isOk) {
@@ -139,7 +139,7 @@ export function AuthWrapper(props: Props) {
     setError(null);
     setConfirmSpinner(true)
     try {
-      const resConfirm = await AuthRepository.emailConfirmation({code, email: signUpFormData?.email});
+      const resConfirm = await AuthRepository.emailConfirmation({code, email: signUpFormData?.data});
       console.log("resConfirm", resConfirm)
       const accessToken = resConfirm.accessToken
 
@@ -164,10 +164,27 @@ export function AuthWrapper(props: Props) {
     return true
   }
 
-  const sendCodeToEmail = async (email: string): Promise<boolean> => {
+  const sendCode = async (data: string): Promise<boolean> => {
     try {
       setError(null);
-      const res = await AuthRepository.register({email})
+      const res = await AuthRepository.register({data})
+
+      setCodRes(res)
+      setRemainSec(res.codeCanRetryIn ?? 0)
+    }catch (e){
+      appContext.showSnackbar(e, SnackbarType.error)
+      setError(e);
+      return false
+    }
+
+
+    return true
+  }
+
+  const sendCodeToPhone = async (data: string): Promise<boolean> => {
+    try {
+      setError(null);
+      const res = await AuthRepository.register({data})
 
       setCodRes(res)
       setRemainSec(res.codeCanRetryIn ?? 0)
@@ -183,8 +200,8 @@ export function AuthWrapper(props: Props) {
 
   const sendCodeAgain = async () => {
     setAgainSpinner(true)
-    if (signUpFormData?.email) {
-      await sendCodeToEmail(signUpFormData?.email)
+    if (signUpFormData?.data) {
+      await sendCode(signUpFormData?.data)
     }
     appContext.showSnackbar('code sent', SnackbarType.success)
     setAgainSpinner(false)

@@ -1,17 +1,17 @@
 import styles from 'pages/registration/corporatenew/index.module.scss'
 import {getAuthServerSide} from 'utils/auth'
-import RegForm from 'components/for_pages/CorporateRegistration/FormNew'
 import { useState } from 'react'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
-import MainSectionHeader from 'components/for_pages/Corporate/Header'
+import MainSectionHeader from 'components/for_pages/MainUserPage/Header'
+import RegForm from 'components/for_pages/Registration/user/FormNew'
 
 
 interface Props {
   
 }
 
-const CorporateNew = (props: Props) => {
+const UserNew = (props: Props) => {
 
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
@@ -63,4 +63,4 @@ const CorporateNew = (props: Props) => {
 
 export const getServerSideProps = getAuthServerSide({redirect: false})
 
-export default CorporateNew
+export default UserNew

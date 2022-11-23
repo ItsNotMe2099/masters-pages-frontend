@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 import {Form, FormikProvider, useFormik} from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useAuthContext } from 'context/auth_state'
-import EmailConfirmForm from './EmailConfirmForm'
 import SignUpFormField from './SignUpFormField'
 import Button from 'components/ui/Button'
 import TextField from 'components/fields/TextField'
@@ -21,6 +20,7 @@ import { ProfileRole } from 'data/intefaces/IProfile'
 import FormError from 'components/ui/Form/FormError'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
+import ConfirmForm from 'components/ConfirmForm'
 
 
 interface Props {
@@ -106,7 +106,7 @@ export default function RegForm(props: Props) {
           <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='email'/>
         }
         {step === 2 &&
-          <EmailConfirmForm onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
+          <ConfirmForm email illustration='/img/Registration/new/corp/step1' onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
         }
         {step === 3 &&
           <>
