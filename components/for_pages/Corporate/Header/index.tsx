@@ -1,4 +1,3 @@
-
 import styles from 'components/for_pages/Corporate/Header/index.module.scss'
 import Link from 'next/link'
 import LangSelect from 'components/LangSelect'
@@ -53,21 +52,23 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </a>
       </Link>
+      {router.asPath !== '/registration/corporatenew' ?
       <div className={styles.btns}>
         <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
-      </div>
+      </div> : null}
       </div>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
-          {!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>}
+          {router.asPath !== '/registration/corporatenew' ? (!isMenuMobileOpen ? <MenuMobile color='#c4c4c4' onClick={handleOpenMobileMenu}/> : <MenuMobileClose color='#c4c4c4' onClick={handleCloseMobileMenu}/>) : null}
         </div>
         <div className={styles.actions}>
           <LangSelect isAuth={false}/>
+          {router.asPath !== '/registration/corporatenew' ?
           <div className={styles.actionsButtons}>
             <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <MainSectionButton size={'small'} onClick={() => handleClick('/registration/corporatenew')}>{t('auth.signUp.title')}</MainSectionButton>
-          </div>
+          </div> : null}
         </div>
       </div>
       {isMenuMobileOpen &&

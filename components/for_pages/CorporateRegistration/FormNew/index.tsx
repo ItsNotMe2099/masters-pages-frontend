@@ -19,6 +19,8 @@ import { reachGoal } from 'utils/ymetrika'
 import { useAppContext } from 'context/state'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import FormError from 'components/ui/Form/FormError'
+import HiddenXs from 'components/ui/HiddenXS'
+import VisibleXs from 'components/ui/VisibleXS'
 
 
 interface Props {
@@ -160,10 +162,17 @@ export default function RegForm(props: Props) {
             <TextField 
               className={styles.altField} 
               name='organization.id' label='MastersPages.com ID' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+            <HiddenXs>
+            <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'} 
+            className={styles.question}/></HiddenXs>
+          </div>
+          <div className={styles.id}>
+            <SwitchField name='organization.searchable' label='Searchable' className={styles.switch}/>
+            <VisibleXs>
             <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'} 
             className={styles.question}/>
+            </VisibleXs>
           </div>
-          <SwitchField name='organization.searchable' label='Searchable' className={styles.switch}/>
           <PasswordField 
           className={styles.field}  
           name='password' 

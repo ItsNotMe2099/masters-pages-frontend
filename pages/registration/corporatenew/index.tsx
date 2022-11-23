@@ -4,6 +4,7 @@ import RegForm from 'components/for_pages/CorporateRegistration/FormNew'
 import { useState } from 'react'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
+import MainSectionHeader from 'components/for_pages/Corporate/Header'
 
 
 interface Props {
@@ -12,10 +13,11 @@ interface Props {
 
 const CorporateNew = (props: Props) => {
 
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState<boolean>(true)
 
   return (
     <div className={styles.body}>
+      <MainSectionHeader/>
       <div className={classNames(styles.root, {[styles.alt]: isSuccess})}>
         {isSuccess ?
         <>

@@ -10,13 +10,23 @@
   width: 85%;
   margin: 0 auto;
   padding-top: 60px;
+  @media screen and (max-width: 1250px){
+    overflow-x: hidden;
+  }
   @media screen and (max-width: $xs-max){
-    width: 90%;
+    width: 100%;
   }
 }
 
 .alt{
   width: 43%;
+  @media screen and (max-width: 1310px){
+    width: 75%;
+  }
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+    padding: 0 16px;
+  }
 }
 
 .title{
@@ -55,6 +65,9 @@
   margin-top: 64px;
   display: flex;
   align-items: center;
+  @media screen and (max-width: $xs-max){
+    flex-direction: column;
+  }
 }
 
 .btn{
@@ -86,6 +99,12 @@
   flex-shrink: 0;
   align-self: flex-start;
   margin-top: 5px;
+  @media screen and (max-width: $xs-max){
+    width: 100%;
+    transform: rotate(180deg);
+    height: 1px;
+    margin: 25px 0;
+  }
 }
 
 .wrapper{
