@@ -41,8 +41,11 @@
   color: #000000 !important;
   background-color: #f4f4f4;
   margin-left: 16px;
-  img{
+  svg{
     margin-left: 14px;
+    path{
+      fill: #000;
+    }
   }
   @media (max-width: $xs-max) {
     margin-left: 0;

@@ -41,8 +41,11 @@
   text-align: center;
   color: #000000 !important;
   background-color: #f4f4f4;
-  img{
+  svg{
     margin-left: 14px;
+    path{
+      fill: #000;
+    }
   }
 }
 

@@ -21,6 +21,7 @@ import FormError from 'components/ui/Form/FormError'
 import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import ConfirmForm from 'components/ConfirmForm'
+import NextSvg from 'components/svg/NextSvg'
 
 
 interface Props {
@@ -106,7 +107,7 @@ export default function RegForm(props: Props) {
           <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='email'/>
         }
         {step === 2 &&
-          <ConfirmForm email illustration='/img/Registration/new/corp/step1' onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
+          <ConfirmForm email illustration='/img/Registration/new/corp/step1.svg' onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
         }
         {step === 3 &&
           <>
@@ -140,7 +141,7 @@ export default function RegForm(props: Props) {
                 {classNames(styles.btn, 
                 {[styles.active]: formik.values.firstName !== '' && formik.values.lastName !== ''})} 
                 disabled={formik.values.firstName === '' && formik.values.lastName === ''}>
-                Next step<img src='/img/Registration/new/corp/next.svg' alt=''/>
+                Next step<NextSvg/>
               </Button>
             </div>
           </>
@@ -207,7 +208,7 @@ export default function RegForm(props: Props) {
               formik.values.organization.site === '' &&
               formik.values.password !== formik.values.passwordConfirm &&
               !formik.values.terms}>
-              Send aplication<img src='/img/Registration/new/corp/next.svg' alt=''/>
+              Send aplication<NextSvg/>
             </Button>
           </div>
         </>

@@ -86,8 +86,11 @@
   &:hover{
     background: #f3c331;
   }
-  img{
+  svg{
     margin-left: 14px;
+    path{
+      fill: #000;
+    }
   }
 }
 

@@ -1,6 +1,115 @@
 @import "scss/index";
 
 .root{
-  
+  display: flex;
+  .item:nth-child(2){
+    margin: 0 40px;
+  }
 }
 
+.item{
+    border-radius: 8px;
+    padding: 0 22px 26px 22px;
+    min-width: 300px;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.chosen{
+    cursor: default;
+}
+
+.master{
+    background: #EB5757;
+    .active{
+        color: #EB5757;
+        svg{
+            margin-left: 14px;
+           path{
+            fill: #EB5757;
+           } 
+        }
+    }
+    .opacity{
+        background: #EB5757;
+    }
+}
+
+.client{
+    background: #27AE60;
+    .active{
+        color: #27AE60;
+        svg{
+            margin-left: 14px;
+           path{
+            fill: #27AE60;
+           } 
+        }
+    }
+    .opacity{
+        background: #27AE60;
+    }
+}
+
+.volunteer{
+    background: #199AC2;
+    .active{
+        color: #199AC2;
+        svg{
+            margin-left: 14px;
+           path{
+            fill: #199AC2;
+           } 
+        }
+    }
+    .opacity{
+        background: #199AC2;
+    }
+}
+
+.btn{
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    height: 54px;
+    background-color: transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 11px;
+    width: 100%;
+    &::before{
+        opacity: 0 !important;
+    }
+    svg{
+        margin-left: 14px;
+       path{
+        fill: #fff;
+       } 
+    }
+}
+
+.active{
+    background-color: #fff;
+}
+
+.img{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.opacity{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5; 
+}

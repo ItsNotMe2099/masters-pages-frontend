@@ -17,6 +17,8 @@ import { useAppContext } from 'context/state'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import FormError from 'components/ui/Form/FormError'
 import ConfirmForm from 'components/ConfirmForm'
+import NextSvg from 'components/svg/NextSvg'
+import ModeField from 'components/fields/ModeField'
 
 
 interface Props {
@@ -142,7 +144,7 @@ export default function RegForm(props: Props) {
                 formik.values.password !== formik.values.passwordConfirm &&
                 !formik.values.terms
                 }>
-                Register<img src='/img/Registration/new/corp/next.svg' alt=''/>
+                Register<NextSvg/>
               </Button>
             </div>
           </>
@@ -154,9 +156,14 @@ export default function RegForm(props: Props) {
               CHOOSE YOUR STARTING MODE
             </div>
             <div className={styles.modes}>
-              
+              <ModeField name='mode' onClick={() => setStep(5)}/>
             </div>
           </>
+        }
+        {step === 5 && (
+          formik.values.mode === ProfileRole.Master ? <>Master</> :
+          formik.values.mode === ProfileRole.Volunteer ? <>Volunteer</> :
+          <>Client</>)
         }
       </Form>
     </FormikProvider>

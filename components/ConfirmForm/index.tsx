@@ -6,6 +6,7 @@ import classNames from 'classnames'
 import OtpCodeField from 'components/fields/OtpCodeField'
 import { ReactElement, useState } from 'react'
 import { useAuthContext } from 'context/auth_state'
+import NextSvg from 'components/svg/NextSvg'
 
 
 interface Props {
@@ -54,7 +55,7 @@ export default function ConfirmForm(props: Props) {
           {classNames(styles.btn, 
             {[styles.active]: (Validator.otpValidation(formik.values.code) === undefined && formik.values.code.length === 4)})} 
           disabled={Validator.otpValidation(formik.values.code) !== undefined || formik.values.code.length < 4}>
-            Confirm number<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            Confirm number<NextSvg/>
         </Button>
         </div>
         <div className={styles.remain}>

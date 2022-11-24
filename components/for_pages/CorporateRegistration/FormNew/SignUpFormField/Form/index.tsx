@@ -7,6 +7,7 @@ import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import { AuthRegisterFormData } from 'data/intefaces/IAuth'
 import React from 'react'
+import NextSvg from 'components/svg/NextSvg'
 
 
 interface Props {
@@ -38,7 +39,7 @@ export default function SignUpForm(props: Props) {
         onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
           className={classNames(styles.btn, {[styles.active]: Validator.emailRe.test(formik.values.data)})} 
           disabled={!Validator.emailRe.test(formik.values.data)}>
-            Confirm email<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            Confirm email<NextSvg/>
         </Button>
       </Form>
     </FormikProvider>

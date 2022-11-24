@@ -1,20 +1,24 @@
 import styles from './index.module.scss'
-import { FieldConfig, useField } from 'formik'
+import { FieldConfig, useField, useFormikContext } from 'formik'
 import FieldError from 'components/ui/FieldError'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import classNames from 'classnames'
+import Button from 'components/ui/Button'
+import NextSvg from 'components/svg/NextSvg'
 
 interface Props {
-  
+  onClick: () => void
 }
 
 interface ItemProps {
   role: ProfileRole
+  onClick: () => void
 }
 
 export default function ModeField(props: Props & FieldConfig) {
   const [field, meta, helpers] = useField(props)
   const showError = meta.touched && !!meta.error
+  const { setFieldValue } = useFormikContext()
 
   const Item = (props: ItemProps) => {
 
@@ -27,16 +31,42 @@ export default function ModeField(props: Props & FieldConfig) {
         }
       )
     }
+
+    const getImage = (role: ProfileRole) => {
+      switch(role){
+        case ProfileRole.Master:
+          return '/img/Registration/new/user/ModeField/master.png'
+        case ProfileRole.Volunteer:
+          return '/img/Registration/new/user/ModeField/volunteer.png'
+        case ProfileRole.Client:
+          return '/img/Registration/new/user/ModeField/client.png'
+      }
+    }
+
     return (
-      <div className={classNames(styles.item, getClass(props.role))}>
-        
+      <div className=
+      {classNames(styles.item, getClass(props.role), {[styles.chosen]: field.value === props.role})} 
+      onClick={() => setFieldValue(field.name, props.role)}>
+        <div className={styles.img}>
+          {(field.value !== props.role && field.value) ? 
+          <div className={styles.opacity}></div> : null}
+          <img src={getImage(props.role)} alt=''/>
+        </div>
+        <Button className={classNames(styles.btn, {[styles.active]: field.value === props.role})}
+          disabled={!field.value || field.value !== props.role}
+          onClick={props.onClick}
+        >
+          {props.role} mode <NextSvg/>
+        </Button>
       </div>
     )
   }
 
   return (
     <div className={styles.root}>
-      
+      <Item role={ProfileRole.Master} onClick={props.onClick}/>
+      <Item role={ProfileRole.Client} onClick={props.onClick}/>
+      <Item role={ProfileRole.Volunteer} onClick={props.onClick}/>
       <FieldError showError={showError}>{meta.error}</FieldError>
     </div>
   )

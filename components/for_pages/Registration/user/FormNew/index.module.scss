@@ -64,8 +64,11 @@
   color: #000000 !important;
   background-color: #f4f4f4;
   margin-left: 16px;
-  img{
+  svg{
     margin-left: 14px;
+    path{
+      fill: #000;
+    }
   }
   @media (max-width: $xs-max) {
     margin-left: 0;
@@ -169,4 +172,10 @@
   text-align: center;
   color: #000000;
   margin-top: 86px;
+}
+
+.modes{
+  display: flex;
+  justify-content: center;
+  margin-top: 33px;
 }

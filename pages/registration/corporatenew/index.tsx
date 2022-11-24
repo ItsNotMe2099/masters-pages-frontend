@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import MainSectionHeader from 'components/for_pages/Corporate/Header'
+import NextSvg from 'components/svg/NextSvg'
 
 
 interface Props {
@@ -33,7 +34,7 @@ const CorporateNew = (props: Props) => {
             type='button'
             href='/guestpage'
             className={styles.btn}>
-            Guest access<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            Guest access<NextSvg/>
           </Button>
           <div className={styles.desc}>
             Search volunteers
@@ -45,7 +46,7 @@ const CorporateNew = (props: Props) => {
             type='button'
             href='/corporate'
             className={styles.btn}>
-            Organizations site<img src='/img/Registration/new/corp/next.svg' alt=''/>
+            Organizations site<NextSvg/>
           </Button>
           <div className={styles.desc}>
             Tutorial, videos and sample profiles
