@@ -179,3 +179,77 @@
   justify-content: center;
   margin-top: 33px;
 }
+
+.label{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+
+.master{
+  .label{
+    color: #EB5757;
+  }
+  .back{
+    border: 2px solid #EB5757 !important;
+    &:hover{
+      border: 2px solid #ef7676!important;
+    }
+  }
+  .btn{
+    background-color: #EB5757;
+    &:hover{
+      background-color: #ef7676;
+    }
+  }
+}
+
+.volunteer{
+  .label{
+    color: #199AC2;
+  }
+  .back{
+    border: 2px solid #199AC2 !important;
+    &:hover{
+      border: 2px solid #2faad0 !important;
+    }
+  }
+  .btn{
+    background-color: #199AC2;
+    &:hover{
+      background-color: #2faad0;
+    }
+  }
+}
+
+.client{
+  .label{
+    color: #27AE60;
+  }
+  .back{
+    border: 2px solid #27AE60 !important;
+    &:hover{
+      border: 2px solid #3bba70!important;
+    }
+  }
+  .btn{
+    background-color: #27AE60;
+    &:hover{
+      background-color: #3bba70;
+    }
+  }
+}
+
+.final{
+  .btns{
+    margin-top: 32px;
+  }
+}

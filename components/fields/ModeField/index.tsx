@@ -5,6 +5,7 @@ import { ProfileRole } from 'data/intefaces/IProfile'
 import classNames from 'classnames'
 import Button from 'components/ui/Button'
 import NextSvg from 'components/svg/NextSvg'
+import { getImage } from 'utils/profileRole'
 
 interface Props {
   onClick: () => void
@@ -30,17 +31,6 @@ export default function ModeField(props: Props & FieldConfig) {
           [styles.client]: role === ProfileRole.Client
         }
       )
-    }
-
-    const getImage = (role: ProfileRole) => {
-      switch(role){
-        case ProfileRole.Master:
-          return '/img/Registration/new/user/ModeField/master.png'
-        case ProfileRole.Volunteer:
-          return '/img/Registration/new/user/ModeField/volunteer.png'
-        case ProfileRole.Client:
-          return '/img/Registration/new/user/ModeField/client.png'
-      }
     }
 
     return (

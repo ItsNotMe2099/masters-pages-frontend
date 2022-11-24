@@ -19,10 +19,17 @@ import FormError from 'components/ui/Form/FormError'
 import ConfirmForm from 'components/ConfirmForm'
 import NextSvg from 'components/svg/NextSvg'
 import ModeField from 'components/fields/ModeField'
+import { getImage } from 'utils/profileRole'
+import HiddenXs from 'components/ui/HiddenXS'
+import QuestionPopover from 'components/ui/QuestionPopover'
 
 
 interface Props {
   onSubmit: () => void
+}
+
+interface FinalStepProps {
+  role: ProfileRole
 }
 
 export default function RegForm(props: Props) {
@@ -49,7 +56,7 @@ export default function RegForm(props: Props) {
     setIsLoading(false)
   }
 
-  const [step, setStep] = useState<number>(4)
+  const [step, setStep] = useState<number>(5)
 
   const initialValues = {
     phone: '',
@@ -60,7 +67,8 @@ export default function RegForm(props: Props) {
     passwordConfirm: '',
     terms: false,
     searchable: true,
-    mode: ''
+    mode: ProfileRole.Client,
+    id: ''
   }
 
   const formik = useFormik({
@@ -74,11 +82,51 @@ export default function RegForm(props: Props) {
 
   const isOk = true //temp
 
+  const getClass = (role: ProfileRole) => {
+    return classNames(
+      {
+        [styles.master]: role === ProfileRole.Master,
+        [styles.volunteer]: role === ProfileRole.Volunteer,
+        [styles.client]: role === ProfileRole.Client
+      }
+    )
+  }
+
   const BackButton = () => {
     return(
       <Button className={styles.back} type='button' onClick={() => setStep(step => step - 1)}>
         <img src='/img/Registration/new/corp/prev.svg' alt=''/>
       </Button>
+    )
+  }
+
+  const FinalStep = (props: FinalStepProps) => {
+
+    return (
+      <div className={classNames(styles.final, getClass(props.role))}>
+        <div className={styles.illustration}><img src={getImage(props.role)} alt=''/></div>
+        <div className={styles.label}>{props.role} mode</div>
+        {props.role !== ProfileRole.Client ?
+          <></> : null
+        }
+        <div className={styles.id}>
+          <TextField 
+            className={styles.altField} 
+            name='id' label='MastersPages.com ID' labelType={LabelStyleType.Cross} validate={Validator.required}/>
+          <HiddenXs>
+            <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'} 
+            className={styles.question}/></HiddenXs>
+        </div>
+        <SwitchField name='searchable' label='Searchable' className={styles.switch}/>
+        <div className={styles.btns}>
+          <BackButton/>
+          <Button 
+            className=
+            {classNames(styles.btn)}>
+                Create profile<NextSvg/>
+              </Button>
+        </div>
+      </div>
     )
   }
 
@@ -161,9 +209,9 @@ export default function RegForm(props: Props) {
           </>
         }
         {step === 5 && (
-          formik.values.mode === ProfileRole.Master ? <>Master</> :
-          formik.values.mode === ProfileRole.Volunteer ? <>Volunteer</> :
-          <>Client</>)
+          formik.values.mode === ProfileRole.Master ? <FinalStep role={ProfileRole.Master}/> :
+          formik.values.mode === ProfileRole.Volunteer ? <FinalStep role={ProfileRole.Volunteer}/> :
+          <FinalStep role={ProfileRole.Client}/>)
         }
       </Form>
     </FormikProvider>
