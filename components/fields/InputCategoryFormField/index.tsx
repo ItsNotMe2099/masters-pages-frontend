@@ -20,7 +20,7 @@ interface Props<T> extends IField<T> {
   setFieldValue?: (id: string) => void
 }
 
-export default function InputCategoryFormField(props: Props<Categories>) {
+export default function InputCategoryField(props: Props<Categories>) {
   const [field, meta, helpers] = useField<Categories>(props)
   const { t, i18n } = useTranslation('common')
 
@@ -42,9 +42,9 @@ export default function InputCategoryFormField(props: Props<Categories>) {
     )
   }
 
-  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-
   const dispatch = useDispatch()
+
+  const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
 
   return (
     <>

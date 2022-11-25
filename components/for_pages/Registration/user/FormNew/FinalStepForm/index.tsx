@@ -14,7 +14,7 @@ import Validator from 'utils/validator'
 import { getImage } from 'utils/profileRole'
 import { useDispatch } from 'react-redux'
 import { modalFormOpen } from 'components/Modal/actions'
-import { useFormik, useFormikContext } from 'formik'
+import { useFormikContext } from 'formik'
 
 
 interface Props {
@@ -70,6 +70,5 @@ export default function FinalStepForm (props: Props) {
         </Button>
       </div>
     </div>
-    
   )
 }
