@@ -7,17 +7,17 @@ import * as React from 'react'
 import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import Validator from 'utils/validator'
 import Modal from 'components/ui/Modal'
-import { Categories, LabelStyleType } from 'types/types'
+import { LabelStyleType } from 'types/types'
 import TextField from 'components/fields/TextField'
-import Label from 'components/fields/Label'
+import { useDispatch } from 'react-redux'
+import { modalClose } from 'components/Modal/actions'
 
-interface Props<T> {
+interface Props {
   onSubmit: (data, id) => void,
   onCancel: () => void
-  isOpen: boolean
 }
 
-export default function ModalCategoryForm(props: Props<any[]>) {
+export default function ModalCategoryForm(props: Props) {
   const { t, i18n } = useTranslation('common')
 
   const handleSubmit =   (data) => {
@@ -44,9 +44,11 @@ export default function ModalCategoryForm(props: Props<any[]>) {
     setFieldValue('subCategory', null)
   }, [values.category])
 
+  const dispatch = useDispatch()
+
 
   return (
-    <Modal isOpen={props.isOpen}>
+    <Modal isOpen onRequestClose={() => dispatch(modalClose())}>
   <FormikProvider value={formik}>
   <Form>
     <ServiceCategoryField name={'mainCategory'} valueAsObject validate={Validator.required} label={t('createTask.fieldMainCategory')}/>

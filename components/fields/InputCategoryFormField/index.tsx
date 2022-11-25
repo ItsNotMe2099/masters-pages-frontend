@@ -56,7 +56,7 @@ export default function InputCategoryField(props: Props<Categories>) {
         <EditFieldComponent onClick={() => dispatch(modalFormOpen())}/>
       <FieldError showError={hasError}>{meta?.error}</FieldError>
     </div>
-    {modalKey === 'modalForm' && <ModalCategoryForm isOpen onSubmit={handleSubmit} onCancel={() => dispatch(modalClose())}/>}
+    {modalKey === 'modalForm' && <ModalCategoryForm onSubmit={handleSubmit} onCancel={() => dispatch(modalClose())}/>}
     </>
     )
 }
