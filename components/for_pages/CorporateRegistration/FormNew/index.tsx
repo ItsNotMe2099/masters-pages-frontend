@@ -22,6 +22,7 @@ import HiddenXs from 'components/ui/HiddenXS'
 import VisibleXs from 'components/ui/VisibleXS'
 import ConfirmForm from 'components/ConfirmForm'
 import NextSvg from 'components/svg/NextSvg'
+import BackButton from 'components/BackButton'
 
 
 interface Props {
@@ -82,14 +83,6 @@ export default function RegForm(props: Props) {
 
   const isOk = true //temp
 
-  const BackButton = () => {
-    return(
-      <Button className={styles.back} type='button' onClick={() => setStep(step => step - 1)}>
-        <img src='/img/Registration/new/corp/prev.svg' alt=''/>
-      </Button>
-    )
-  }
-
   useEffect(() => {
     const result = formik.values.phoneExtension.replace(/\D/g, '').slice(0, 5)
     formik.setFieldValue('phoneExtension', result)
@@ -107,7 +100,10 @@ export default function RegForm(props: Props) {
           <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='email'/>
         }
         {step === 2 &&
-          <ConfirmForm email illustration='/img/Registration/new/corp/step1.svg' onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
+          <ConfirmForm email 
+          illustration='/img/Registration/new/corp/step1.svg' 
+          onSubmit={() => setStep(3)} 
+          backBtn={() => <BackButton onClick={() => setStep(step => step - 1)}/>}/>
         }
         {step === 3 &&
           <>
@@ -133,7 +129,7 @@ export default function RegForm(props: Props) {
               />
             </div>
             <div className={styles.btns}>
-              <BackButton/>
+              <BackButton onClick={() => setStep(step => step - 1)}/>
               <Button 
                 type='button'
                 onClick={() => setStep(4)}
@@ -193,7 +189,7 @@ export default function RegForm(props: Props) {
           </div>}/>
           <FormError error={error}/>
           <div className={styles.btns}>
-            <BackButton/>
+            <BackButton onClick={() => setStep(step => step - 1)}/>
             <Button 
               className=
               {classNames(styles.btn, 

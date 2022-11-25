@@ -1,0 +1,35 @@
+@import "scss/index";
+
+.back{
+    height: 54px;
+    width: 54px;
+    flex-shrink: 0;
+    background-color: transparent;
+    border-radius: 10px !important;
+    border: 2px solid #F2B705 !important;
+    @media (max-width: $xs-max) {
+      width: 100%;
+      margin-top: 11px;
+    }
+  }
+
+  .volunteer{
+      border: 2px solid #199AC2 !important;
+      &:hover{
+        border: 2px solid #2faad0 !important;
+      }
+  }
+  
+  .client{
+      border: 2px solid #27AE60 !important;
+      &:hover{
+        border: 2px solid #3bba70!important;
+      }
+  }
+
+  .master{
+      border: 2px solid #EB5757 !important;
+      &:hover{
+        border: 2px solid #ef7676!important;
+      }
+  }

@@ -1,4 +1,4 @@
-import { ProfileRole } from "data/intefaces/IProfile";
+import { ProfileRole } from "data/intefaces/IProfile"
 
 export const getProfileRoleByRoute = (route: string) => {
   if(route.includes('MasterProfile')){

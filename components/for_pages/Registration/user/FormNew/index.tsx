@@ -22,6 +22,7 @@ import ModeField from 'components/fields/ModeField'
 import { getImage } from 'utils/profileRole'
 import HiddenXs from 'components/ui/HiddenXS'
 import QuestionPopover from 'components/ui/QuestionPopover'
+import BackButton from 'components/BackButton'
 
 
 interface Props {
@@ -67,7 +68,7 @@ export default function RegForm(props: Props) {
     passwordConfirm: '',
     terms: false,
     searchable: true,
-    mode: ProfileRole.Client,
+    mode: ProfileRole.Master,
     id: ''
   }
 
@@ -82,25 +83,17 @@ export default function RegForm(props: Props) {
 
   const isOk = true //temp
 
-  const getClass = (role: ProfileRole) => {
-    return classNames(
-      {
-        [styles.master]: role === ProfileRole.Master,
-        [styles.volunteer]: role === ProfileRole.Volunteer,
-        [styles.client]: role === ProfileRole.Client
-      }
-    )
-  }
-
-  const BackButton = () => {
-    return(
-      <Button className={styles.back} type='button' onClick={() => setStep(step => step - 1)}>
-        <img src='/img/Registration/new/corp/prev.svg' alt=''/>
-      </Button>
-    )
-  }
-
   const FinalStep = (props: FinalStepProps) => {
+
+    const getClass = (role: ProfileRole) => {
+      return classNames(
+        {
+          [styles?.master]: role === ProfileRole.Master,
+          [styles?.volunteer]: role === ProfileRole.Volunteer,
+          [styles?.client]: role === ProfileRole.Client
+        }
+      )
+    }
 
     return (
       <div className={classNames(styles.final, getClass(props.role))}>
@@ -119,7 +112,7 @@ export default function RegForm(props: Props) {
         </div>
         <SwitchField name='searchable' label='Searchable' className={styles.switch}/>
         <div className={styles.btns}>
-          <BackButton/>
+          <BackButton onClick={() => setStep(step => step - 1)} role={props.role}/>
           <Button 
             className=
             {classNames(styles.btn)}>
@@ -140,7 +133,9 @@ export default function RegForm(props: Props) {
           <SignUpFormField onSubmit={() => /*authContext.*/isOk ? setStep(2) : null} name='phone'/>
         }
         {step === 2 &&
-          <ConfirmForm illustration='/img/Registration/new/user/step1.svg' onSubmit={() => setStep(3)} backBtn={() => <BackButton/>}/>
+          <ConfirmForm illustration='/img/Registration/new/user/step1.svg' 
+          onSubmit={() => setStep(3)} 
+          backBtn={() => <BackButton onClick={() => setStep(step => step - 1)}/>}/>
         }
         {step === 3 &&
           <>
@@ -176,7 +171,7 @@ export default function RegForm(props: Props) {
             Accept <a href='/Terms'>Terms & Conditions</a>
           </div>}/>
             <div className={styles.btns}>
-              <BackButton/>
+              <BackButton onClick={() => setStep(step => step - 1)}/>
               <Button 
                 type='button'
                 onClick={() => setStep(4)}

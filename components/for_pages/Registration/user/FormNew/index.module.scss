@@ -89,19 +89,6 @@
   }
 }
 
-.back{
-  height: 54px;
-  width: 54px;
-  flex-shrink: 0;
-  background-color: transparent;
-  border-radius: 10px !important;
-  border: 2px solid #F2B705 !important;
-  @media (max-width: $xs-max) {
-    width: 100%;
-    margin-top: 11px;
-  }
-}
-
 .steps{
   display: flex;
   justify-content: center;
@@ -198,12 +185,6 @@
   .label{
     color: #EB5757;
   }
-  .back{
-    border: 2px solid #EB5757 !important;
-    &:hover{
-      border: 2px solid #ef7676!important;
-    }
-  }
   .btn{
     background-color: #EB5757;
     &:hover{
@@ -216,12 +197,6 @@
   .label{
     color: #199AC2;
   }
-  .back{
-    border: 2px solid #199AC2 !important;
-    &:hover{
-      border: 2px solid #2faad0 !important;
-    }
-  }
   .btn{
     background-color: #199AC2;
     &:hover{
@@ -233,12 +208,6 @@
 .client{
   .label{
     color: #27AE60;
-  }
-  .back{
-    border: 2px solid #27AE60 !important;
-    &:hover{
-      border: 2px solid #3bba70!important;
-    }
   }
   .btn{
     background-color: #27AE60;
