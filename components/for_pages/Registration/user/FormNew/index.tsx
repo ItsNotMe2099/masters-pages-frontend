@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import {Form, FormikProvider, useFormik} from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAuthContext } from 'context/auth_state'
 import SignUpFormField from './SignUpFormField'
 import Button from 'components/ui/Button'
@@ -19,18 +19,12 @@ import FormError from 'components/ui/Form/FormError'
 import ConfirmForm from 'components/ConfirmForm'
 import NextSvg from 'components/svg/NextSvg'
 import ModeField from 'components/fields/ModeField'
-import { getImage } from 'utils/profileRole'
-import HiddenXs from 'components/ui/HiddenXS'
-import QuestionPopover from 'components/ui/QuestionPopover'
 import BackButton from 'components/BackButton'
+import FinalStepForm from './FinalStepForm'
 
 
 interface Props {
   onSubmit: () => void
-}
-
-interface FinalStepProps {
-  role: ProfileRole
 }
 
 export default function RegForm(props: Props) {
@@ -69,7 +63,12 @@ export default function RegForm(props: Props) {
     terms: false,
     searchable: true,
     mode: ProfileRole.Master,
-    id: ''
+    categories: {
+      mainCategory: null,
+      category: null,
+      subCategory: null
+    },
+    id: '',
   }
 
   const formik = useFormik({
@@ -82,46 +81,6 @@ export default function RegForm(props: Props) {
   console.log('formik.values', formik.values)
 
   const isOk = true //temp
-
-  const FinalStep = (props: FinalStepProps) => {
-
-    const getClass = (role: ProfileRole) => {
-      return classNames(
-        {
-          [styles?.master]: role === ProfileRole.Master,
-          [styles?.volunteer]: role === ProfileRole.Volunteer,
-          [styles?.client]: role === ProfileRole.Client
-        }
-      )
-    }
-
-    return (
-      <div className={classNames(styles.final, getClass(props.role))}>
-        <div className={styles.illustration}><img src={getImage(props.role)} alt=''/></div>
-        <div className={styles.label}>{props.role} mode</div>
-        {props.role !== ProfileRole.Client ?
-          <></> : null
-        }
-        <div className={styles.id}>
-          <TextField 
-            className={styles.altField} 
-            name='id' label='MastersPages.com ID' labelType={LabelStyleType.Cross} validate={Validator.required}/>
-          <HiddenXs>
-            <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'} 
-            className={styles.question}/></HiddenXs>
-        </div>
-        <SwitchField name='searchable' label='Searchable' className={styles.switch}/>
-        <div className={styles.btns}>
-          <BackButton onClick={() => setStep(step => step - 1)} role={props.role}/>
-          <Button 
-            className=
-            {classNames(styles.btn)}>
-                Create profile<NextSvg/>
-              </Button>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <FormikProvider value={formik}>
@@ -204,9 +163,12 @@ export default function RegForm(props: Props) {
           </>
         }
         {step === 5 && (
-          formik.values.mode === ProfileRole.Master ? <FinalStep role={ProfileRole.Master}/> :
-          formik.values.mode === ProfileRole.Volunteer ? <FinalStep role={ProfileRole.Volunteer}/> :
-          <FinalStep role={ProfileRole.Client}/>)
+          formik.values.mode === ProfileRole.Master ? <FinalStepForm role={ProfileRole.Master} 
+          onBackClick={() => setStep(step => step -1)}/> :
+          formik.values.mode === ProfileRole.Volunteer ? <FinalStepForm role={ProfileRole.Volunteer}
+          onBackClick={() => setStep(step => step -1)}/> :
+          <FinalStepForm role={ProfileRole.Client}
+          onBackClick={() => setStep(step => step -1)}/>)
         }
       </Form>
     </FormikProvider>

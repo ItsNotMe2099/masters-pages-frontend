@@ -42,3 +42,5 @@ export const postEditOpen = () => action(ActionTypes.POST_EDIT_OPEN)
 export const saveTaskSearchOpen = () => action(ActionTypes.SAVE_TASK_SEARCH_OPEN)
 export const saveProfileSearchOpen = () => action(ActionTypes.SAVE_PROFILE_SEARCH_OPEN)
 export const projectVolunteerFeedBackOpen = () => action(ActionTypes.PROJECT_VOLUNTEER_FEEDBACK_OPEN)
+
+export const modalFormOpen = () => action(ActionTypes.MODAL_FORM_OPEN)

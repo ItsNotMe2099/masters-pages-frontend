@@ -6,24 +6,30 @@ import Button from 'components/PublicProfile/components/Button'
 import * as React from 'react'
 import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import Validator from 'utils/validator'
+import Modal from 'components/ui/Modal'
+import { Categories, LabelStyleType } from 'types/types'
+import TextField from 'components/fields/TextField'
+import Label from 'components/fields/Label'
 
 interface Props<T> {
-  onSubmit: (data) => void,
+  onSubmit: (data, id) => void,
   onCancel: () => void
+  isOpen: boolean
 }
 
-export default function ServiceCategoryForm(props: Props<any[]>) {
+export default function ModalCategoryForm(props: Props<any[]>) {
   const { t, i18n } = useTranslation('common')
 
   const handleSubmit =   (data) => {
     console.log("Submit", data)
-    props.onSubmit(data)
+    props.onSubmit(data, data.id)
   }
   const initialValues = {
     mainCategory: null,
-    category:  null,
-    subCategory: null
-  };
+    category: null,
+    subCategory: null,
+    id: ''
+  }
   const formik = useFormik({
     initialValues,
     onSubmit: handleSubmit
@@ -39,16 +45,22 @@ export default function ServiceCategoryForm(props: Props<any[]>) {
   }, [values.category])
 
 
-  return (<FormikProvider value={formik}>
+  return (
+    <Modal isOpen={props.isOpen}>
+  <FormikProvider value={formik}>
   <Form>
     <ServiceCategoryField name={'mainCategory'} valueAsObject validate={Validator.required} label={t('createTask.fieldMainCategory')}/>
-    {values.mainCategory && <ServiceCategoryField name={'category'} valueAsObject categoryId={values.mainCategory?.id}  validate={Validator.required} label={t('createTask.fieldCategory')}/>}
-    {values.category && <ServiceCategoryField name={'subCategory'} valueAsObject categoryId={values.category?.id} validate={Validator.required} label={t('createTask.fieldSubCategory')}/>}
+    <ServiceCategoryField name={'category'} valueAsObject categoryId={values.mainCategory?.id}  validate={Validator.required} label={t('createTask.fieldCategory')}/>
+    <ServiceCategoryField name={'subCategory'} valueAsObject categoryId={values.category?.id} validate={Validator.required} label={t('createTask.fieldSubCategory')}/>
+    <TextField
+          className={styles.altField} 
+          name='id' label='MastersPages.com ID' labelType={LabelStyleType.Cross} validate={Validator.required}/>
     <div className={styles.buttons}>
       <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
       <Button size={'small'} type={'submit'} onClick={(e) => formik.handleSubmit(e)}>{t('task.save')}</Button>
     </div>
   </Form>
     </FormikProvider>
+    </Modal>
   )
 }

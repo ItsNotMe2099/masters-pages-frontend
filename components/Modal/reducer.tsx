@@ -21,6 +21,11 @@ export default function authReducer(state = {...initialState}, action) {
     case ActionTypes.LOADER_OPEN:
       state.modalKey = 'loader'
       break
+      
+    case ActionTypes.MODAL_FORM_OPEN:
+      state.modalKey = 'modalForm'
+      break
+
     case ActionTypes.SIGN_IN_OPEN:
       state.modalKey = 'signIn'
       break

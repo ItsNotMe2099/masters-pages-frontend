@@ -6,6 +6,7 @@ import FieldError from 'components/ui/FieldError'
 import Label from 'components/fields/Label'
 import {LabelStyleType} from 'types/types'
 import classNames from 'classnames'
+import EditFieldComponent from 'components/EditFieldComponent'
 
 interface Props {
   label?: string,
@@ -24,6 +25,8 @@ interface Props {
   hidden?: boolean
   size?: 'normal'
   type?: 'text' | 'password' | 'number'
+  onClick?: () => void
+  editable?: boolean
 }
 
 export default function TextField(props: Props & FieldConfig) {
@@ -50,6 +53,7 @@ export default function TextField(props: Props & FieldConfig) {
         <BaseTextField size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ?  props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type}/>
         {props.labelType === LabelStyleType.Cross && <Label label={label} style={props.labelType} hasError={hasError} />}
         {props.icon && <div className={styles.icon} onClick={props.onIconClick}> {props.icon}</div>}
+        {props.editable ? <EditFieldComponent className={styles.edit} onClick={props.onClick}/> : null}
        </div>
       {props.children}
       <FieldError showError={hasError}>{meta?.error}</FieldError>

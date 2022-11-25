@@ -43,3 +43,10 @@ export interface SnackbarData {
   text: string
   type: SnackbarType
 }
+
+export interface Categories {
+  mainCategory: null
+  category: null
+  subCategory: null
+  id: string
+}
