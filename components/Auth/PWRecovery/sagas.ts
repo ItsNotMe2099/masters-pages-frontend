@@ -26,7 +26,7 @@ function* PWRecoverySaga() {
         url: '/api/auth/forgot',
         method: 'POST',
         data: {
-          phone: action.payload.phone,
+          login: action.payload.login,
         },
       } as IRequestData)
 

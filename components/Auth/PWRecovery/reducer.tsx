@@ -9,6 +9,7 @@ export interface PWRecoveryState {
   isOpenSuccess: boolean,
   password: string,
   loading: boolean,
+  mode?: string
   formError?: string | string[]
 }
 
@@ -16,6 +17,7 @@ const initialState: PWRecoveryState = {
   formIsSuccess: false,
   phone: '',
   code: '',
+  mode: '',
   isOpen: false,
   isOpenSuccess: false,
   password: '',
@@ -28,6 +30,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
 
     case ActionTypes.RESET_PW_FIRST_STEP_SUBMIT:
       state.phone = action.payload.phone
+      state.mode = action.payload.mode
       state.loading = true
       state.formError = null
       break
@@ -69,6 +72,7 @@ export default function loginSubmitReducer(state = {...initialState}, action) {
       state.formIsSuccess = false,
       state.code = '',
       state.phone = '',
+      state.mode = '',
       state.isOpen = false,
       state.isOpenSuccess = false
       state.loading = false

@@ -67,7 +67,7 @@ let SignIn = props => {
       </div>
       <div className={styles.signUp}>
         <div>{t('auth.signIn.dontHaveAccount')}</div>
-        <div><a onClick={() => router.push(props.mode === 'email' ? '/registration/corporate' : '/registration/email')}>{t('auth.signUpLink')}</a></div>
+        <div><a onClick={() => router.push(props.mode === 'email' ? '/registration/corporate' : '/registration/user')}>{t('auth.signUpLink')}</a></div>
       </div>
     </form>
   )

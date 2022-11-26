@@ -47,8 +47,9 @@ export default function ProfileRegistration(props: Props) {
           } : {})
         });
         await appContext.updateRole(props.role);
-      router.push('/me')
 
+      router.push('/me')
+      appContext.updateUser()
     }catch (e) {
       setError(e);
     }

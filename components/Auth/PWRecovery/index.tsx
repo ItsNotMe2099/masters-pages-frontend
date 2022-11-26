@@ -46,9 +46,9 @@ const PWRecoveryComponent = (props: Props) => {
 
       <div className={styles.fakeMargin}></div>
           {firstStepIsComplete ?
-          <PWRecovery onSubmit={handleSubmitSecondStep}/>
+          <PWRecovery onSubmit={handleSubmitSecondStep} initialValues={{mode: 'phone'}}/>
           :
-          <PWRecovery firstStep onSubmit={handleSubmit}/>}
+          <PWRecovery firstStep onSubmit={handleSubmit} initialValues={{mode: 'phone'}}/>}
 
         <div className={styles.signUp}>
           <div>        {t('auth.passwordRecovery.rememberPassword')}</div>

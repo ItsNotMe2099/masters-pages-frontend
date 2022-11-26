@@ -50,7 +50,7 @@ export default function ConfirmStep(props: Props) {
           onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
           className=
           {classNames(styles.btn,
-            {[styles.active]: (Validator.otpValidation(formik.values.code) === undefined && formik.values.code.length === 4)})}
+            {[styles.active]: true})}
           disabled={Validator.otpValidation(formik.values.code) !== undefined || formik.values.code.length < 4}>
             Confirm number<NextSvg/>
         </Button>

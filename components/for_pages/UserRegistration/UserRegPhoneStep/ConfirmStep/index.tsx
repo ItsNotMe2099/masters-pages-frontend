@@ -50,7 +50,7 @@ export default function ConfirmStep(props: Props) {
           onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
           className=
           {classNames(styles.btn,
-            {[styles.active]: (formik.values.code && !Validator.otpValidation(formik.values.code))})}
+            {[styles.active]: true})}
           disabled={authContext.confirmSpinner}>
             Confirm number<NextSvg/>
         </Button>

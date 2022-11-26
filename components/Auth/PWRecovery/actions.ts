@@ -1,7 +1,7 @@
 import ActionTypes from './const'
 import { action } from 'typesafe-actions'
 interface PWRecoveryData{
-  phone: string,
+  login: string,
 }
 interface PWRecoveryDataSecond{
   phone: PWRecoveryData,
