@@ -30,8 +30,8 @@ interface IState {
   showSnackbar: (text: string, type: SnackbarType) => void
   updateTokenFromCookies: () => void
   updateUser: (newUser?: IUser) => void
-  updateProfile: (role?: ProfileRole, newUser?: IProfile) => void
-  updateRole: (role?: ProfileRole) => void
+  updateProfile: (role?: ProfileRole, newUser?: IProfile) => Promise<IProfile | null>
+  updateRole: (role?: ProfileRole) => Promise<IProfile | null>
   projectUpdateState$: Subject<IProject>
   projectDeleteState$: Subject<IProject>
   projectCreateState$: Subject<IProject>
@@ -140,7 +140,7 @@ export function AppWrapper(props: Props) {
       const data = await ProfileRepository.fetchProfile(newRole || role)
       if (data) {
         setProfile(data)
-        return true;
+        return data;
       } else {
         switch (newRole) {
           case ProfileRole.Client:
@@ -153,7 +153,7 @@ export function AppWrapper(props: Props) {
             router.push('/profile-new/volunteer')
             break;
         }
-        return false;
+        return null;
       }
     }
   }
@@ -163,10 +163,11 @@ export function AppWrapper(props: Props) {
   const updateRole = async (role: ProfileRole) => {
     console.log("updateRole", role);
     setRole(role);
-
-    if(await updateProfile(role)) {
+    const newProfile = await updateProfile(role)
+    if(newProfile) {
       Cookies.set(CookiesType.profileRole, role, {expires: 365})
     }
+    return newProfile
 
   }
 

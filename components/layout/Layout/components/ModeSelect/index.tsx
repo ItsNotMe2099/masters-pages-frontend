@@ -13,6 +13,7 @@ import {useRouter} from 'next/router'
 import {IUser} from 'data/intefaces/IUser'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 
 interface Props {
   onClick?: () => void
@@ -24,6 +25,7 @@ interface Props {
    const { t } = useTranslation('common')
    const {route: currentRoute} = useRouter()
    const appContext = useAppContext()
+   const router = useRouter()
    const roleCurrent = appContext.role
    const role =  getProfileRoleByRoute(currentRoute)  || roleCurrent
   const dispatch = useDispatch()
@@ -48,13 +50,17 @@ interface Props {
   useEffect(() => {
     setValue(options.find(item => role ? item.value === role : item.value === 'client'))
   }, [role])
-  const handleOptionClick = (e, item) => {
+  const handleOptionClick = async (e, item) => {
     e.preventDefault()
     setValue(item)
-    appContext.updateRole(item.value);
+    const newProfile = await appContext.updateRole(item.value);
+
     setIsActive(false)
     if(props.onClick) {
     props.onClick()
+    }
+    if(newProfile){
+      router.push(Routes.profile(newProfile));
     }
   }
   const handleActiveOptionClick = (e) => {
