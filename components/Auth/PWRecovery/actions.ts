@@ -4,7 +4,7 @@ interface PWRecoveryData{
   login: string,
 }
 interface PWRecoveryDataSecond{
-  phone: PWRecoveryData,
+  login: PWRecoveryData,
   code: string
 }
 

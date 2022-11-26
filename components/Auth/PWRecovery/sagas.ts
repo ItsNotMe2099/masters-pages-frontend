@@ -44,15 +44,23 @@ function* PWRecoverySaga() {
 
     yield takeLatest(ActionTypes.RESET_PW_SECOND_STEP_SUBMIT,
       function* (action: ActionType<typeof PWRecoverySecondSubmit>) {
+        const mode = yield select((state: IRootState) => state.PWRecovery.mode)
 
-      const res: IResponse = yield requestGen({
-          url: '/api/auth/phoneConfirmation',
-          method: 'POST',
-          data: {
-            phone: action.payload.phone,
-            code: action.payload.code,
-          },
-        } as IRequestData)
+      const res: IResponse = mode === 'phone' ? yield requestGen({
+        url: '/api/auth/phoneConfirmation',
+        method: 'POST',
+        data: {
+          phone: action.payload.login,
+          code: action.payload.code,
+        },
+      } as IRequestData) :  yield requestGen({
+        url: '/api/auth/emailConfirmation',
+        method: 'POST',
+        data: {
+          email: action.payload.login,
+          code: action.payload.code,
+        },
+      } as IRequestData)
 
         if(!res.err){
           cookie.set('token', res.data.accessToken, { expires: 365 * 3 })

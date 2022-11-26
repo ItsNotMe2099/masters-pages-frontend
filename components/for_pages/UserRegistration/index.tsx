@@ -1,5 +1,5 @@
 import {IFormStep} from 'types/types'
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {useEffect, useMemo, useRef, useState} from 'react'
 import RegistrationLayout from "components/for_pages/Registration/RegistrationLayout";
 import {useRouter} from "next/router";
 import FormStepSwitch from "components/ui/FormStepSwitch";
@@ -60,9 +60,12 @@ export default function UserRegPage(props: Props) {
   const currentStepIndex = useMemo(() => steps.findIndex(i => i.key === step.key) ?? 0, [step, steps])
   console.log("Data", appContext.profile)
   const [loading, setLoading] = useState(appContext.isLogged ?  true : false)
-
+  const isLoggedRef = useRef<boolean>(appContext.isLogged);
   useEffect(() => {
-   if(!appContext.user){
+   if(!appContext.user ){
+     return;
+   }
+   if(!isLoggedRef.current){
      return;
    }
     if(appContext.user.isRegistrationCompleted){
