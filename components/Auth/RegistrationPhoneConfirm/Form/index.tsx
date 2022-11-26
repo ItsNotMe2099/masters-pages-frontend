@@ -25,7 +25,7 @@ let RegistrationPhoneConfirmForm = props => {
       <div className={styles.btnContainer}>
         <Button green largeFont  size="16px 0">{t('auth.phoneConfirm.buttonConfirm')}</Button>
       </div>
-      <div className={styles.resendSms} onClick={() => authContext.sendCodeAgain()}>
+      <div className={styles.resendSms} onClick={() => authContext.sendPhoneCodeAgain()}>
         {t('auth.phoneConfirm.dontReceiveSms')} <span>{t('auth.phoneConfirm.sendAgain')}</span>.
       </div>
     </form>

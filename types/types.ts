@@ -50,3 +50,9 @@ export interface Categories {
   subCategory: null
   id: string
 }
+
+export interface IFormStep<S> {
+  name?: string,
+  description?: string | null
+  key: S
+}

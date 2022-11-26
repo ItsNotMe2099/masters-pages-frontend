@@ -26,7 +26,7 @@ const SignUpComponent = (props: Props) =>  {
     authContext.clear()
   }, [])
   const handleSubmit = async (data) => {
-    authContext.signUp(data);
+   // authContext.signUp(data);
   }
   useEffect(() => {
     return () => {

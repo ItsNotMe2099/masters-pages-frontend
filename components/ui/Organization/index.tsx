@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import { useAppContext } from 'context/state'
+import Routes from "pages/routes";
 interface Props {
   organization: IOrganization,
   className?: string,
@@ -27,7 +28,7 @@ export default function Organization({organization, className, isActive}: Props)
 
   }
 
-const profileLink = `/id${organization.corporateProfile.id}`
+const profileLink = `${Routes.profile(organization.corporateProfile)}`
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.profile}>
@@ -70,7 +71,7 @@ const profileLink = `/id${organization.corporateProfile.id}`
             </div>
             <div className={styles.approved}>
               <img src='/img/OrganizationCard/approved.svg' alt=''/>
-            </div>  
+            </div>
           </div>
           <div className={styles.desc}>
               {organization.description?.description}

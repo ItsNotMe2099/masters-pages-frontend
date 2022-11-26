@@ -7,6 +7,7 @@ import {
 import {IRootState} from 'types'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 interface Props {
   customLink?: string
   subCategoryId?: number
@@ -18,7 +19,7 @@ export default function ShareBySocialMedia({subCategoryId, customLink}: Props) {
   const profile = appContext.profile
   const {t} = useTranslation('common')
 
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}${subCategoryId ? `/sk${subCategoryId}` : `${Routes.profile(profile)}${customLink ? `/${customLink}` : ''}`}`
 
   return (
     <div className={styles.root}>

@@ -14,6 +14,7 @@ import {feedbackByMasterOpen} from 'components/Modal/actions'
 import TaskFeedback from 'components/ProfileFeedback/TaskFeedback'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 
 interface Props {
   task?: ITask
@@ -52,7 +53,7 @@ const TaskReview = ({task}: Props) => {
     <div className={styles.root}>
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
-        <a href={`/id${otherSide.id}`}  target={'_blank'}
+        <a href={`${Routes.profile(otherSide)}`}  target={'_blank'}
            className={styles.author} rel="noreferrer"><Avatar size={'exSmall'} image={otherSide.photo}/>{otherSide.firstName} {otherSide.lastName}</a> {t('reviewNotAvailable')}
       </div>}
       {otherReview && <>

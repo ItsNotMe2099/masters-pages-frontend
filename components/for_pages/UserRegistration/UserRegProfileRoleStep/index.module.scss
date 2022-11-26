@@ -1,0 +1,152 @@
+@import 'scss/index';
+
+.text{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 16px;
+  justify-content: center;
+}
+
+
+.choose{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  margin-top: 86px;
+}
+
+.modes{
+  display: flex;
+  justify-content: center;
+  margin-top: 33px;
+  > * + * {
+    margin-left: 20px;
+  }
+}
+
+.item{
+  border-radius: 8px;
+  padding: 0 22px 26px 22px;
+  min-width: 300px;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  &:hover{
+    .btn{
+      background-color: white;
+    }
+  }
+}
+
+.chosen{
+  cursor: default;
+}
+
+.master{
+  background: #EB5757;
+  &:hover{
+    .btn {
+      color: #EB5757;
+    }
+    svg{
+      margin-left: 14px;
+      path{
+        fill: #EB5757;
+      }
+    }
+  }
+  .opacity{
+    background: #EB5757;
+  }
+}
+
+.client{
+  background: #27AE60;
+  &:hover{
+    .btn {
+      color: #27AE60;
+    }
+    svg{
+      margin-left: 14px;
+      path{
+        fill: #27AE60;
+      }
+    }
+  }
+  .opacity{
+    background: #27AE60;
+  }
+}
+
+.volunteer{
+  background: #199AC2;
+  &:hover{
+    .btn {
+      color: #199AC2;
+    }
+    svg{
+      margin-left: 14px;
+      path{
+        fill: #199AC2;
+      }
+    }
+  }
+  .opacity{
+    background: #199AC2;
+  }
+}
+
+.btn{
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  height: 54px;
+  background-color: transparent;
+  border: 2px solid #FFFFFF;
+  border-radius: 11px;
+  width: 100%;
+  &::before{
+    opacity: 0 !important;
+  }
+  svg{
+    margin-left: 14px;
+    path{
+      fill: #fff;
+    }
+  }
+}
+
+
+
+.img{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.opacity{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}

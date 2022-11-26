@@ -23,6 +23,7 @@ import cx from 'classnames'
 import {useAppContext} from 'context/state'
 import {IChat} from 'data/intefaces/IChat'
 import Link from 'next/link'
+import Routes from "pages/routes";
 interface Props {
   chat: IChat
   onRequestClose?: () => void
@@ -70,7 +71,7 @@ export default function ChatTitle({chat, onClick}: Props) {
   const isCanceled =  chat.task &&  chat.task.status == ITaskStatus.Canceled
   const isProjectGroup = chat.isGroup && chat.projectId
   const [isOpen, setIsOpen] = useState(false)
-  const profileLink = `/id${profile?.id}`
+  const profileLink = `${Routes.profile(profile)}`
   return (
    <div className={styles.root}>
      <div className={styles.controls}>

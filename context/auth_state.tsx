@@ -21,10 +21,13 @@ interface IState {
   remainSec: number
   isOk: boolean
   setSignUpFormData: (value: AuthRegisterFormData) => void
-  signUp: (values: AuthRegisterFormData) => void
+  signUpEmail: (email: string) => Promise<boolean>
+  signUpPhone: (phone: string) => Promise<boolean>
   login: (values: AuthLoginFormData) => void
-  sendCodeAgain: () => void
-  confirmCode: (code: string) => Promise<boolean>
+  sendPhoneCodeAgain: () => void
+  sendEmailCodeAgain: () => void
+  confirmPhoneCode: (code: string) => Promise<boolean>
+  confirmEmailCode: (code: string) => Promise<boolean>
   setSending: (value: boolean) => void
   setSendingAgain: (value: boolean) => void
   logOut: () => void
@@ -37,16 +40,19 @@ const defaultValue: IState = {
   signUpSpinner: false,
   confirmSpinner: false,
   againSpinner: false,
-  confirmCode: async (code: string) => false,
+  confirmPhoneCode: async (code: string) => false,
+  confirmEmailCode: async (code: string) => false,
   setSending: (value: boolean) => null,
   codeRes: null,
   signUpFormData: null,
   setSignUpFormData: (values) => null,
-  signUp: (values) => null,
+  signUpPhone: (values) => null,
+  signUpEmail: (values) => null,
   login: (values) => null,
   remainSec: 0,
   isOk: false,
-  sendCodeAgain: () => null,
+  sendPhoneCodeAgain: () => null,
+  sendEmailCodeAgain: () => null,
   setSendingAgain: (value) => null,
   logOut: () => null,
   clear: () => null,
@@ -113,29 +119,43 @@ export function AuthWrapper(props: Props) {
     setError(null);
     setSignUpSpinner(true)
     setSignUpFormData(values)
-    const isOk = await sendCode(values.data)
+    //const isOk = await sendCode(values.data)
     reachGoal('auth:signup:phone')
     setSignUpSpinner(false)
-    if (isOk) {
-      dispatch(phoneConfirmOpen())
-    }
+  //  if (isOk) {
+  //    dispatch(phoneConfirmOpen())
+  //  }
   }
 
   // Sign up step 1
-  const signUp = async (values: AuthRegisterFormData) => {
+  const signUpPhone = async (email: string) => {
     setError(null);
     setSignUpSpinner(true)
-    setSignUpFormData(values)
-    const isOk = await sendCode(values.data)
+    setSignUpFormData({data: email})
+    const isOk = await sendCodeToPhone(email)
     reachGoal('auth:signup:phone')
     setSignUpSpinner(false)
     if (isOk) {
       //dispatch(phoneConfirmOpen())
       setIsOk(true)
     }
+    return isOk;
+  }
+  const signUpEmail = async (email: string) => {
+    setError(null);
+    setSignUpSpinner(true)
+    setSignUpFormData({data: email})
+    const isOk = await sendCodeToEmail(email)
+    reachGoal('auth:signup:phone')
+    setSignUpSpinner(false)
+    if (isOk) {
+      //dispatch(phoneConfirmOpen())
+      setIsOk(true)
+    }
+    return isOk;
   }
 // Sign up step 2
-  const confirmCode = async (code: string): Promise<boolean> => {
+  const confirmEmailCode = async (code: string): Promise<boolean> => {
     setError(null);
     setConfirmSpinner(true)
     try {
@@ -164,10 +184,39 @@ export function AuthWrapper(props: Props) {
     return true
   }
 
-  const sendCode = async (data: string): Promise<boolean> => {
+  const confirmPhoneCode = async (code: string): Promise<boolean> => {
+    setError(null);
+    setConfirmSpinner(true)
+    try {
+      const resConfirm = await AuthRepository.phoneConfirmation({code, phone: signUpFormData?.data});
+      console.log("resConfirm", resConfirm)
+      const accessToken = resConfirm.accessToken
+
+      if (!accessToken) {
+        appContext.showSnackbar('Token error', SnackbarType.error)
+        setConfirmSpinner(false)
+        return false
+      }
+      reachGoal('auth:phone:confirmed')
+      console.log("PhoneConfirmed");
+      setToken(resConfirm.accessToken);
+      setConfirmSpinner(false)
+      dispatch(modalClose());
+      appContext.updateTokenFromCookies()
+      console.log("Redirect");
+      //await router.push('/registration');
+    }catch (e){
+      setConfirmSpinner(false)
+      setError(e);
+      return false;
+    }
+    return true
+  }
+
+  const sendCodeToPhone = async (phone: string): Promise<boolean> => {
     try {
       setError(null);
-      const res = await AuthRepository.register({data})
+      const res = await AuthRepository.registerByPhone({phone})
 
       setCodRes(res)
       setRemainSec(res.codeCanRetryIn ?? 0)
@@ -176,15 +225,13 @@ export function AuthWrapper(props: Props) {
       setError(e);
       return false
     }
-
-
     return true
   }
 
-  const sendCodeToPhone = async (data: string): Promise<boolean> => {
+  const sendCodeToEmail = async (email: string): Promise<boolean> => {
     try {
       setError(null);
-      const res = await AuthRepository.register({data})
+      const res = await AuthRepository.registerByEmail({email})
 
       setCodRes(res)
       setRemainSec(res.codeCanRetryIn ?? 0)
@@ -193,15 +240,22 @@ export function AuthWrapper(props: Props) {
       setError(e);
       return false
     }
-
-
     return true
   }
 
-  const sendCodeAgain = async () => {
+  const sendPhoneCodeAgain = async () => {
     setAgainSpinner(true)
     if (signUpFormData?.data) {
-      await sendCode(signUpFormData?.data)
+      await sendCodeToPhone(signUpFormData?.data)
+    }
+    appContext.showSnackbar('code sent', SnackbarType.success)
+    setAgainSpinner(false)
+  }
+
+  const sendEmailCodeAgain = async () => {
+    setAgainSpinner(true)
+    if (signUpFormData?.data) {
+      await sendCodeToEmail(signUpFormData?.data)
     }
     appContext.showSnackbar('code sent', SnackbarType.success)
     setAgainSpinner(false)
@@ -224,15 +278,18 @@ export function AuthWrapper(props: Props) {
   const value: IState = {
     ...defaultValue,
     error,
-    confirmCode,
+    confirmPhoneCode,
+    confirmEmailCode,
     loginSpinner,
     signUpSpinner,
     codeRes,
-    signUp,
+    signUpPhone,
+    signUpEmail,
     login,
     signUpFormData,
     remainSec,
-    sendCodeAgain,
+    sendPhoneCodeAgain,
+    sendEmailCodeAgain,
     againSpinner,
     confirmSpinner,
     isOk,

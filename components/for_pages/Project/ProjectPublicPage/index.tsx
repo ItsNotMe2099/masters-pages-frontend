@@ -24,6 +24,7 @@ import {useDispatch} from "react-redux";
 import Modals from "components/layout/Modals";
 import { useRouter } from 'next/router'
 import {ProjectWrapper} from "context/project_state";
+import Routes from "pages/routes";
 
 interface Props {
   projectId: number
@@ -106,7 +107,7 @@ const ProjectPublicPage = (props: Props) => {
       return;
     }
     if(item.key === 'back'){
-      !profile ? router.push(`/guestpage`) : router.push(`/id${profile.id}`)
+      !profile ? router.push(`/guestpage`) : router.push(`${Routes.profile(profile)}`)
     }
     else{
       setTab(item.key);

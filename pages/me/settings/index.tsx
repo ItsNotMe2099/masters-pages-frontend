@@ -97,7 +97,7 @@ const TabSettings= (props: Props) => {
       router.push('/MasterProfile')
     }
     else if(profile.role === ProfileRole.Volunteer){
-      router.push('/VolunteerProfile')
+      router.push('/profile-new/volunteer')
     }
     else{
       authContext.logOut();

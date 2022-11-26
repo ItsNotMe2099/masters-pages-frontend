@@ -24,6 +24,7 @@ import {useAppContext} from 'context/state'
 import {IChat} from 'data/intefaces/IChat'
 import Link from 'next/link'
 import { resetChatList } from 'components/Chat/actions'
+import Routes from "pages/routes";
 interface Props {
   chat: IChat
 }
@@ -67,7 +68,7 @@ export default function ProjectChatTitle({chat}: Props) {
 
   const isProjectGroup = chat.isGroup && chat.projectId
   const [isOpen, setIsOpen] = useState(false)
-  const profileLink = `/id${profile?.id}`
+  const profileLink = `${Routes.profile(profile)}`
   return (
    <div className={styles.root}>
      <div className={styles.left}>

@@ -10,6 +10,7 @@ import {SkillDropDown} from 'components/Contacts/ContactItem/SkillDropDown'
 import {getCategoryTranslation} from 'utils/translations'
 import ProfileCard from 'components/ui/ProfileCard'
 import {IProfile} from 'data/intefaces/IProfile'
+import Routes from "pages/routes";
 
 interface Props {
   profile: IProfile,
@@ -49,8 +50,8 @@ const ContactItem = ({profile, onDelete, deleteActionName}: Props) => {
           </div>
             <div className={styles.cell}>
         <div className={styles.actions}>
-          <Button className={styles.action} href={`/id${profile.id}`} onClick={handleActionProfile}>{t('menu.profile')}</Button>
-          <Button className={styles.action} href={`/id${profile.id}/news`}>{t('allPosts')}</Button>
+          <Button className={styles.action} href={`${Routes.profile(profile)}`} onClick={handleActionProfile}>{t('menu.profile')}</Button>
+          <Button className={styles.action} href={`${Routes.profile(profile)}/news`}>{t('allPosts')}</Button>
           <Button className={styles.action} onClick={handleActionNewOrder}>{t('newOrder')}</Button>
           {onDelete && <Button  className={styles.action} onClick={handleActionUnsubscribe}>{deleteActionName}</Button>}
         </div>

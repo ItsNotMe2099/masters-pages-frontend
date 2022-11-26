@@ -12,7 +12,7 @@ export enum ProfileRole {
 export interface IProfile{
   id?: number
   avatar?: string
-
+  slug?: string
   firstName?: string
   lastName?: string
   phone?: string

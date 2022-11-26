@@ -12,6 +12,7 @@ import NotificationBadge from '../../../ui/NotificationBadge'
 import { useTranslation } from 'next-i18next'
 import {getCurrencySymbol} from 'data/currency'
 import Link from 'next/link'
+import Routes from "pages/routes";
 interface Props {
   response: ITaskNegotiation,
   task: ITask,
@@ -49,7 +50,7 @@ const TaskResponse = ({ response, task }: Props) => {
     {!response.isRead && <NotificationBadge/> }
     <div className={styles.left}>
     <div className={styles.time}>{format(new Date(response.createdAt), 'MM.dd.yyy HH:mm')}</div>
-    <Link href={`/id${response.profile?.id}`}>
+    <Link href={`${Routes.profile(response.profile)}`}>
     <a className={styles.profile}>{response.profile?.firstName} {response.profile?.lastName}</a>
     </Link>
       <div className={styles.rating}></div>

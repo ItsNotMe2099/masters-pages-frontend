@@ -21,7 +21,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     redirect: {
       permanent: false,
-      destination: `/id${profile.id}`
+      destination: profile?.slug ? `/${profile.slug}` : `/id${profile.id}`
     }
   }
 }

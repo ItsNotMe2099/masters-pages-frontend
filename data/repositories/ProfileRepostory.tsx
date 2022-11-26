@@ -149,4 +149,17 @@ export default class ProfileRepository {
     }
     return res.data
   }
+
+
+  static async create(role: string, data: any): Promise<IProfile | null> {
+    const res = await request({
+      url: `/api/profile/${role}`,
+      method: 'POST',
+      data,
+    })
+    if (res.err) {
+      throw res.err
+    }
+    return res.data
+  }
 }

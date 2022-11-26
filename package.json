@@ -93,6 +93,7 @@
     "sass": "^1.49.9",
     "screenfull": "^6.0.2",
     "slick-carousel": "^1.8.1",
+    "slugify": "^1.6.5",
     "socket.io-client": "^4.4.1",
     "supercluster": "^7.1.4",
     "swr": "^1.0.1",

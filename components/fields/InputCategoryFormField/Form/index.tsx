@@ -54,10 +54,7 @@ export default function ModalCategoryForm(props: Props) {
     <ServiceCategoryField name={'mainCategory'} valueAsObject validate={Validator.required} label={t('createTask.fieldMainCategory')}/>
     <ServiceCategoryField name={'category'} valueAsObject categoryId={values.mainCategory?.id}  validate={Validator.required} label={t('createTask.fieldCategory')}/>
     <ServiceCategoryField name={'subCategory'} valueAsObject categoryId={values.category?.id} validate={Validator.required} label={t('createTask.fieldSubCategory')}/>
-    <TextField
-          className={styles.altField} 
-          name='id' label='MastersPages.com ID' labelType={LabelStyleType.Cross} validate={Validator.required}/>
-    <div className={styles.buttons}>
+     <div className={styles.buttons}>
       <Button size={'small'} type={'button'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
       <Button size={'small'} type={'submit'} onClick={(e) => formik.handleSubmit(e)}>{t('task.save')}</Button>
     </div>

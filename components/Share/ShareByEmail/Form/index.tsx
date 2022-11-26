@@ -11,6 +11,7 @@ import Logo from 'components/Logo'
 import FormError from 'components/ui/Form/FormError'
 import {resetShareByEmail} from 'components/Share/actions'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 const queryString = require('query-string')
 
 interface Props {
@@ -31,7 +32,7 @@ let ShareByEmailForm = (props: Props) => {
 
   const appContext = useAppContext();
   const profile = appContext.profile
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}${subCategoryId ? `/sk${subCategoryId}` : `${Routes.profile(profile)}${customLink ? `/${customLink}` : ''}`}`
 
   const handleReset = () => {
     reset()

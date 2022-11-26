@@ -140,18 +140,20 @@ export function AppWrapper(props: Props) {
       const data = await ProfileRepository.fetchProfile(newRole || role)
       if (data) {
         setProfile(data)
+        return true;
       } else {
         switch (newRole) {
           case ProfileRole.Client:
-            router.push('/registration')
+            router.push('/profile-new/client')
             break;
           case ProfileRole.Master:
-            router.push('/MasterProfile')
+            router.push('/profile-new/master')
             break;
           case ProfileRole.Volunteer:
-            router.push('/VolunteerProfile')
+            router.push('/profile-new/volunteer')
             break;
         }
+        return false;
       }
     }
   }
@@ -161,9 +163,11 @@ export function AppWrapper(props: Props) {
   const updateRole = async (role: ProfileRole) => {
     console.log("updateRole", role);
     setRole(role);
-    Cookies.set(CookiesType.profileRole, role, {expires: 365})
 
-    updateProfile(role);
+    if(await updateProfile(role)) {
+      Cookies.set(CookiesType.profileRole, role, {expires: 365})
+    }
+
   }
 
   const value: IState = {

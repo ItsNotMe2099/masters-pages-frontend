@@ -11,6 +11,7 @@ import RecommendationListItemShort
 import {fetchProfileRecommendationShortList} from 'components/ProfileRecommendations/actions'
 import { useTranslation } from 'next-i18next'
 import {IProfile} from 'data/intefaces/IProfile'
+import Routes from "pages/routes";
 
 interface Props{
   profile: IProfile,
@@ -30,7 +31,7 @@ const CardRecommendationsShort = (props: Props) => {
     <Card isHidden={total === 0} className={styles.root} title={total > 0 ? t('cardRecommenadationShort.recommendationsTotal', {total}) : t('cardRecommenadationShort.recommendations')}>
       {/*list.map(item => <RecommendationListItem profile={item}/>)*/}
       {!listLoading && list.map(item => <RecommendationListItemShort model={item}/>)}
-      {total > 0 && <a  className={styles.seeAll} href={`/id${profile.id}/recommendations`}>{t('cardRecommenadationShort.seeAll')}</a>}
+      {total > 0 && <a  className={styles.seeAll} href={`${Routes.profile(profile)}/recommendations`}>{t('cardRecommenadationShort.seeAll')}</a>}
     </Card>
   )
 }

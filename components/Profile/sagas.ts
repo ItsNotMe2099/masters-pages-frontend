@@ -35,13 +35,13 @@ function* ProfileSaga() {
       } else {
         switch (action.payload.role) {
           case 'client':
-            Router.push('/registration')
+            Router.push('/profile-new/client')
             break
           case 'master':
-            Router.push('/MasterProfile')
+            Router.push('/profile-new/master')
             break
           case 'volunteer':
-            Router.push('/VolunteerProfile')
+            Router.push('/profile-new/volunteer')
             break
         }
       }

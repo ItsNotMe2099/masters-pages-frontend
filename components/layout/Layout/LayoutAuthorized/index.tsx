@@ -18,6 +18,7 @@ import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
 import {useAuthContext} from 'context/auth_state'
 import classNames from 'classnames'
+import Routes from "pages/routes";
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -61,7 +62,7 @@ export default function LayoutAuthorized(props: Props) {
     }
   }
 
-  const profileLink = `/id${profile?.id}`
+  const profileLink = `${Routes.profile(profile)}`
   const items = role === ProfileRole.Corporate ? [
     {title: t('menu.profile'), icon: 'profile', link: profileLink},
     {title: t('menu.posts'), icon: 'posts', link: '/Posts'},
@@ -133,7 +134,7 @@ export default function LayoutAuthorized(props: Props) {
 
   return (
     <div className={cx(styles.root, getModeClass(), {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
-      
+
       {showLeftMenu && <div className={styles.leftMenu}>
         {logo}
         {items.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
@@ -153,9 +154,9 @@ export default function LayoutAuthorized(props: Props) {
         <NotificationSelect color='black'/>
         <LangSelect isAuth={false}/>
       </div>
-      <Header 
+      <Header
       isCurrentProfileOpened={isCurrentProfileOpened}
-      state={isScrollable} 
+      state={isScrollable}
       onClick={() => setIsScrollable(isScrollable ? false : true)}
       />
       <div className={cx(styles.container)}>

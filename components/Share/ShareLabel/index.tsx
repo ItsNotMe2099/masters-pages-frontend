@@ -50,7 +50,7 @@ const ShareLabel = React.forwardRef((props: Props, ref) => {
         </div>}
         {showInfo && <div className={styles.info}>
           {settings.options.name && <div className={styles.name}>{name}</div>}
-          {settings.options.webAddress && <div className={styles.mpId}>mp id: {id}</div>}
+          {settings.options.webAddress && <div className={styles.mpId}>mp id: {id?.replace('/', '')}</div>}
           {(settings.options.phone && phoneNumber) && <div className={styles.phone}><Phone/>{phoneNumber.formatInternational()}</div>}
         </div>}
       </div>

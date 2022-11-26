@@ -11,6 +11,7 @@ import Logo from 'components/Logo'
 import FormError from 'components/ui/Form/FormError'
 import {resetInviteForm} from 'components/Invite/actions'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 
 const queryString = require('query-string')
 interface Props {
@@ -30,7 +31,7 @@ let InviteForm = (props: Props) => {
   const success = useSelector((state: IRootState) => state.invite.formIsSuccess)
   const appContext = useAppContext();
   const profile = appContext.profile
-  const inviteUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
+  const inviteUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}${subCategoryId ? `/sk${subCategoryId}` : `${Routes.profile(profile)}${customLink ? `/${customLink}` : ''}`}`
   const handleReset = () => {
     reset()
     dispatch(resetInviteForm())

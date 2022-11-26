@@ -41,6 +41,7 @@ else{
 export const getServerSideProps = async (ctx) => {
 
   const id = ctx.query.profile as string
+  console.log("getProfile11", id)
   let profile, skill = null
   if(id.indexOf('id') === 0){
      profile = (await request({ url: `/api/profile/${id.replace('id', '')}`, method: 'GET' }, ctx))?.data
@@ -63,8 +64,12 @@ export const getServerSideProps = async (ctx) => {
     }
      profile = skill?.profile
   }else{
-    return {
-      notFound: true
+    profile = (await request({ url: `/api/profile/bySlug/${id}`, method: 'GET' }, ctx))?.data
+    console.log('get Prwrwrwe',profile,  `/api/profile/${id}`)
+    if(!profile){
+      return {
+        notFound: true
+      }
     }
   }
   const res = await getAuthServerSide()(ctx as any)

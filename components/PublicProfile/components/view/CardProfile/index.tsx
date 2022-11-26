@@ -24,6 +24,7 @@ import ProfileStatus from 'components/ui/ProfileStatus'
 import {IProfile} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
+import Routes from "pages/routes";
 
 interface Props{
   profile: IProfile,
@@ -77,8 +78,8 @@ const CardProfile = (props: Props) => {
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
         {isEdit && showForm && <AvatarForm onSubmit={handleSubmit}/>}
-        {(!showForm || !isEdit) &&  <a href={`/id${profile.id}`}><Avatar size={'large'} image={profile.photo}/></a>}
-      <a href={`/id${profile.id}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
+        {(!showForm || !isEdit) &&  <a href={`${Routes.profile(profile)}`}><Avatar size={'large'} image={profile.photo}/></a>}
+      <a href={`${Routes.profile(profile)}`} className={styles.name}>{profile.firstName} {profile.lastName}</a>
       <div className={styles.allStats}>
       <div className={styles.left}>
       <div className={styles.stat}>
@@ -118,7 +119,7 @@ const CardProfile = (props: Props) => {
       <div className={styles.followers}>
         {!isEdit && (isSubscribed ? <div className={styles.subscribed}>{t('cardProfile.subscribed')}</div> : <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>{t('personalArea.profile.subscribe')}</Button>)}
         {!isEdit && <Button className={styles.actionFollow} color={'green'} href={`/Chat/dialog/${profile.id}`}>{t('personalArea.profile.sendMessage')}</Button>}
-        {!isEdit && <Button className={styles.actionFollowLast} color={'green'} href={`/id${profile.id}/news`}>{t('news')}</Button>}
+        {!isEdit && <Button className={styles.actionFollowLast} color={'green'} href={`${Routes.profile(profile)}/news`}>{t('news')}</Button>}
       </div>
       </div>
       <div className={styles.actions}>

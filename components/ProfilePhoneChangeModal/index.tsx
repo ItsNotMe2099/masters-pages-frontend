@@ -26,7 +26,7 @@ export default function ProfilePhoneChangeModal(props: Props) {
     }
   }, [])
   const handleSubmit = async (data) => {
-    authContext.signUp(data)
+    authContext.signUpPhone(data)
   }
 
   return (

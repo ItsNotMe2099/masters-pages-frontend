@@ -66,7 +66,7 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.actionsButtons}>
             <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
-            <MainSectionButton size={'small'} href='/registration/usernew'>{t('auth.signUp.title')}</MainSectionButton>
+            <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>
           </div> : null}
         </div>
       </div>

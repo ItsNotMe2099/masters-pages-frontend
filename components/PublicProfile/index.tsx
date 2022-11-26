@@ -79,7 +79,7 @@ const PublicProfile = (props) => {
 
   const categories = isEdit ? categoriesCurrentProfile : formatSkillList(profile.skills)
   const router = useRouter()
-  console.log(router)
+
   useEffect(() => {
     if(currentSkill && isEdit){
 
@@ -238,7 +238,7 @@ const PublicProfile = (props) => {
     return {}
   }
 
-
+  console.log("Profile132323", props.profile)
   return (
     <ProfilePageLayout id='scrollableDiv' onOrganizationUpdate={handleUpdateOrganization} onProfileUpdate={handleUpdateProfile} {...props} organization={organization} isCurrentProfileOpened={isEdit} profile={profile} isEdit={isEdit} subCategory={currentSkill} onCategoryChange={handleCategoryChange}>
 

@@ -18,6 +18,7 @@ import {useRecommendContext} from "context/recommend_state";
 import Switch from "components/ui/Switch";
 import {useProjectContext} from "context/project_state";
 import {ModalType} from "types/enums";
+import Routes from "pages/routes";
 
 interface Props {
   application?: IApplication
@@ -162,7 +163,7 @@ const TabApplicationCardInner = ({application, currentTab, onStatusChange, onDel
           )
     }
   }
-  const profileLink = `/id${props.profile.id}`
+  const profileLink = `${Routes.profile(props.profile)}`
   return (
       <div className={styles.profile}>
         <div className={styles.left}>

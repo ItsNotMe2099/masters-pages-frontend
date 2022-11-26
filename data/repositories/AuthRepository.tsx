@@ -21,6 +21,19 @@ export default class AuthRepository {
     return !!res.data
   }
 
+  static async completeUserRegistration(data): Promise<boolean | null> {
+    const res = await request({
+      url: '/api/auth/completeUserRegistration',
+      method: 'POST',
+      data,
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      throw res.err
+    }
+    return !!res.data
+  }
+
   static async login(data: AuthLoginFormData): Promise<IAuthResponse | null> {
     const res = await request({
       url: '/api/auth/login',
@@ -34,11 +47,24 @@ export default class AuthRepository {
     return res.data
   }
 
-  static async register({data}: AuthRegisterFormData): Promise<IPhoneConfirmResponse | null> {
+  static async registerByPhone({phone}: {phone: string}): Promise<IPhoneConfirmResponse | null> {
     const res = await request({
       url: '/api/auth/register',
       method: 'POST',
-      data: {data},
+      data: {phone},
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      throw res.err;
+    }
+    return res.data
+  }
+
+  static async registerByEmail({email}: {email: string}): Promise<IPhoneConfirmResponse | null> {
+    const res = await request({
+      url: '/api/auth/register/corporate',
+      method: 'POST',
+      data: {email},
     })
     console.log("Res111", res);
     if (res.err) {
@@ -48,8 +74,9 @@ export default class AuthRepository {
   }
 
   static async emailConfirmation({email, code}: AuthConfirmFormData): Promise<IAuthResponse | null> {
+    console.log("resConfirm", '/api/auth/emailConfirmation')
     const res = await request({
-      url: '/api/auth/phoneConfirmation',
+      url: '/api/auth/emailConfirmation',
       method: 'POST',
       data: {email, code},
     })
@@ -75,7 +102,7 @@ export default class AuthRepository {
 
   static async emailChangeConfirmation({email, code}: AuthConfirmFormData): Promise<IAuthResponse | null> {
     const res = await request({
-      url: '/api/auth/phoneChangeConfirmation',
+      url: '/api/auth/emailChangeConfirmation',
       method: 'POST',
       data: {email, code},
     })

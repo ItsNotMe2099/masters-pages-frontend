@@ -55,8 +55,8 @@ interface Props {
   return (
     <div className={cx(styles.root, {[styles.rootAuth]: props.isAuth}, props.className)}>
       <a onClick={onClick} className={styles.dropDownTrigger}>
-        <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>
-        <span className={props.isAuth ? styles.dropdownItemLabelAuth : styles.dropdownItemLabel}>{value.label}</span>
+        {value && <img className={styles.dropdownItemIcon} src={`/img/icons/flags/${value.value}.svg`} alt=''/>}
+        {value && <span className={props.isAuth ? styles.dropdownItemLabelAuth : styles.dropdownItemLabel}>{value.label}</span>}
         <ArrowDropDown/>
       </a>
       <nav ref={dropdownRef} className={cx(styles.dropDown, { [styles.dropDownActive]: isActive })}>

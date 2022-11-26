@@ -80,7 +80,6 @@ const Header = (props: Props) => {
 
   const {t} = useTranslation('common')
 
-  const profileLink = `/id${profile?.id}`
 
   const item = [
     {title: t('menu.findCompanies'), icon: 'find-clients-black', link: '/FindCompaniesGuest', isSeparator: true},
@@ -128,7 +127,7 @@ const Header = (props: Props) => {
           <div className={styles.title}>
             {t('guestPage.forVolunteers')}
           </div>
-          {itemsVolunteer.map(item => 
+          {itemsVolunteer.map(item =>
           <MenuItem
           className={styles.volunteersItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
@@ -138,7 +137,7 @@ const Header = (props: Props) => {
           <div className={styles.title}>
           {t('guestPage.forMasters')}
           </div>
-          {itemsMaster.map(item => 
+          {itemsMaster.map(item =>
           <MenuItem
           className={styles.mastersItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
@@ -148,7 +147,7 @@ const Header = (props: Props) => {
           <div className={styles.title}>
           {t('guestPage.forCompanies')}
           </div>
-          {itemsCompanies.map(item => 
+          {itemsCompanies.map(item =>
           <MenuItem
           className={styles.companiesItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}

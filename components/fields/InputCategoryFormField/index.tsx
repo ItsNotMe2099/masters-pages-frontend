@@ -50,8 +50,8 @@ export default function InputCategoryField(props: Props<Categories>) {
     <>
     <div className={getClassName()}>
         <Label label={props.label} style={LabelStyleType.Cross} hasError={hasError} />
-        <div className={classNames(styles.title, {[styles.visibility]: field.value.mainCategory})}>
-          {getCategoryTranslation(field.value.mainCategory, i18n.language)?.name}/{getCategoryTranslation(field.value.category, i18n.language)?.name}/{getCategoryTranslation(field.value.subCategory, i18n.language)?.name}
+        <div className={classNames(styles.title, {[styles.visibility]: field.value?.mainCategory})}>
+          {getCategoryTranslation(field.value?.mainCategory, i18n.language)?.name}/{getCategoryTranslation(field.value?.category, i18n.language)?.name}/{getCategoryTranslation(field.value?.subCategory, i18n.language)?.name}
         </div>
         <EditFieldComponent onClick={() => dispatch(modalFormOpen())}/>
       <FieldError showError={hasError}>{meta?.error}</FieldError>

@@ -24,6 +24,7 @@ import {useAppContext} from 'context/state'
 import {useEffect, useState} from 'react'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { IOrganization } from 'data/intefaces/IOrganization'
+import Routes from "pages/routes";
 
 interface Props {
   organization?: IOrganization
@@ -69,8 +70,8 @@ const CardOrganization = (props: Props) => {
   }*/
   return (
     <div className={styles.root}>
-      <a href={`/id${props.organization.corporateProfile.id}`}><Avatar size={'large'} image={props.organization.corporateProfile.photo}/></a>
-      <a href={`/id${props.organization.corporateProfile.id}`} className={styles.name}>{props.organization.name}</a>
+      <a href={`${Routes.profile(props.organization.corporateProfile)}`}><Avatar size={'large'} image={props.organization.corporateProfile.photo}/></a>
+      <a href={`${Routes.profile(props.organization.corporateProfile)}`} className={styles.name}>{props.organization.name}</a>
       <div className={styles.allStats}>
         <div className={styles.stat}>
           <div className={styles.statItem}>
@@ -119,7 +120,7 @@ const CardOrganization = (props: Props) => {
       <div className={styles.actions}>
         <Button className={styles.actionFollow} color={'grey'}
                 href={`/Chat/dialog/${props.organization.corporateProfile.id}`}>{t('personalArea.profile.sendMessage')}</Button>
-        <Button className={styles.actionFollow} color={'grey'} href={`/id${props.organization.corporateProfile.id}/news`}>{t('news')}</Button>
+        <Button className={styles.actionFollow} color={'grey'} href={`${Routes.profile(props.organization.corporateProfile)}/news`}>{t('news')}</Button>
       </div>
       </>
       }

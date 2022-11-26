@@ -12,6 +12,7 @@ import EventFeedback
   from 'components/Calendar/components/EditEventModal/components/ChatTab/components/EventReview/EventFeedback'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 interface Props {
   event?: IEvent
 }
@@ -42,12 +43,12 @@ const EventReview = ({event}: Props) => {
     <div className={styles.root}>
       {formLoading && <Loader/>}
       {!otherReview && <div className={styles.noReview}>
-        <a href={`/id${otherSide.id}`}  target={'_blank'}
+        <a href={`${Routes.profile(otherSide)}`}  target={'_blank'}
            className={styles.author} rel="noreferrer">{otherSide.firstName} {otherSide.lastName}</a> {t('event.reviewNotAvailable')}
       </div>}
       {otherReview && <>
         <div className={styles.reviewTitle}>
-          <a href={`/id${otherSide.id}`}  target={'_blank'}
+          <a href={`${Routes.profile(otherSide)}`}  target={'_blank'}
              className={styles.author} rel="noreferrer">{otherSide.firstName} {otherSide.lastName}</a> {`${t('reviewSmall')}:`}
 
         </div>

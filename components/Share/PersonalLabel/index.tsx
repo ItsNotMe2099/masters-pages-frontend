@@ -9,6 +9,7 @@ import {useRef, useState} from 'react'
 import { exportComponentAsJPEG, exportComponentAsPDF } from 'react-component-export-image'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 
 interface Props {
   customLink?: string
@@ -33,7 +34,7 @@ export default function SharePersonalLabel(props: Props) {
       webAddress: true
     }
   })
-  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}/${subCategoryId ? `sk${subCategoryId}` : `id${profile.id}${customLink ? `/${customLink}` : ''}`}`
+  const shareUrl = `${ typeof window !== 'undefined' ? window?.location.protocol + '//' + window?.location.host : '/'}${subCategoryId ? `/sk${subCategoryId}` : `${Routes.profile(profile)}${customLink ? `/${customLink}` : ''}`}`
 
   const handleChange = (data) => {
     setSettings((settings) => ({...settings, ...data}))
@@ -55,7 +56,7 @@ export default function SharePersonalLabel(props: Props) {
       <div className={styles.title}>{t('personalLabel.yourPersonalLabel')}</div>
       <div className={styles.description}>{t('personalLabel.useYourPersonal')}</div>
       <PersonalLabelForm onChange={handleChange} initialValues={settings}/>
-      <div className={styles.shareLabel}><ShareLabel ref={labelRef} link={shareUrl} settings={settings} name={`${profile.firstName} ${profile.lastName}`} phone={phone} id={subCategoryId ? `sk${subCategoryId}` : `id${profile.id}`}/></div>
+      <div className={styles.shareLabel}><ShareLabel ref={labelRef} link={shareUrl} settings={settings} name={`${profile.firstName} ${profile.lastName}`} phone={phone} id={subCategoryId ? `sk${subCategoryId}` : `${Routes.profile(profile)}`}/></div>
       <div className={styles.btnContainer}>
         <Button size={'small'} onClick={handleDownloadPdf}>{t('personalLabel.downloadPDF')}</Button>
         <Button size={'small'} onClick={handleDownloadImage}>{t('personalLabel.downloadImage')}</Button>

@@ -17,6 +17,7 @@ import {IUser} from 'data/intefaces/IUser'
 import {useAppContext} from 'context/state'
 import {useAuthContext} from 'context/auth_state'
 import { ProfileRole } from 'data/intefaces/IProfile'
+import Routes from "pages/routes";
 
 
 interface Props {
@@ -91,7 +92,7 @@ const Header = (props: Props) => {
 
   const {t} = useTranslation('common')
 
-  const profileLink = `/id${profile?.id}`
+  const profileLink = `${Routes.profile(profile)}`
 
   const items = role === ProfileRole.Corporate ? [
     {title: t('menu.profile'), icon: 'profile', link: profileLink},

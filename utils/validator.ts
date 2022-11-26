@@ -26,7 +26,7 @@ export default class Validator {
   }
 
   static categories(value: Categories) {
-    return value.mainCategory ? undefined : 'required'
+    return value?.subCategory ? undefined : 'required'
   }
 
   static numberOnly(value: number){

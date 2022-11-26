@@ -187,7 +187,7 @@ export default function OtpCodeField(props: Props & FieldConfig) {
           </div>
         ))}
       </div>
-      <FieldError showError={hasError || error}>{meta?.error || error && authContext.error}</FieldError>
+      <FieldError showError={hasError}>{meta?.error}</FieldError>
     </div>
   )
 }

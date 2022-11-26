@@ -38,6 +38,7 @@ import { useTranslation } from 'next-i18next'
 import {getCurrencySymbol} from 'data/currency'
 import {saveTaskRequest} from 'components/SavedTasks/actions'
 import {useAppContext} from 'context/state'
+import Routes from "pages/routes";
 
 interface Props {
   task: ITask,
@@ -305,7 +306,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const taskProfile = actionsType === 'master' && task.profileId === profile.id && task.negotiations.length > 0 ? task.negotiations[0].profile : task.profile
   console.log('TaskProfile', taskProfile, profile)
 
-  const profileLink = `/id${taskProfile.id}`
+  const profileLink = `${Routes.profile(taskProfile)}`
   const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id) || (actionsType === 'client' && task.profileId !== profile.id)) && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster)
 
   return (

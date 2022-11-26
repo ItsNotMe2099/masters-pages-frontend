@@ -51,13 +51,13 @@ const RegistrationSuccess = (props: Props) => {
           </div>*/}
             <div className={styles.btnContainer}>
            <Button size="16px 0" onClick={() => {
-                router.push('/MasterProfile')
+                router.push('/profile-new/master')
               }}> {t('auth.registrationSuccess.buttonBecomeMaster')}</Button>
             </div>
             <div className={styles.btnContainer}>
         <Button size="16px 0" onClick={() => {
-    
-            router.push('/VolunteerProfile')
+
+            router.push('/profile-new/volunteer')
               }}> {t('auth.registrationSuccess.buttonBecomeVolunteer')}</Button>
             </div>
             </>

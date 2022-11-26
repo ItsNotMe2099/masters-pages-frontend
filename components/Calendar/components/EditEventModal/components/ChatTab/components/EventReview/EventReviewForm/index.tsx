@@ -16,6 +16,7 @@ import FormError from 'components/ui/Form/FormError'
 
 import Rating from 'components/ui/Inputs/Rating'
 import { useTranslation } from 'next-i18next'
+import Routes from "pages/routes";
 
 interface Props {
   onCancel?: () => void
@@ -34,7 +35,7 @@ let EventReviewForm = ({event, handleSubmit}: Props) => {
 
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
-      <div className={styles.title}>{t('event.describeYourExperience')} <a href={`/id${otherSide.id}`} target={'_blank'} className={styles.profileName} rel="noreferrer">{otherSide.firstName} {otherSide.lastName}</a></div>
+      <div className={styles.title}>{t('event.describeYourExperience')} <a href={`${Routes.profile(otherSide)}`} target={'_blank'} className={styles.profileName} rel="noreferrer">{otherSide.firstName} {otherSide.lastName}</a></div>
       <Field
         name="title"
         component={Input}

@@ -25,7 +25,7 @@ const PhoneConfirmComponent = (props: Props) => {
     dispatch(phoneConfirmReset())
   }, [])
   const handleSubmit = (data) => {
-    authContext.confirmCode(data.code);
+    authContext.confirmPhoneCode(data.code);
   }
   return (
     <Modal

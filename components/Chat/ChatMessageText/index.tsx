@@ -7,6 +7,7 @@ import VideoThumbnail from 'react-video-thumbnail'
 import FsLightbox from 'fslightbox-react'
 import {IProfile} from 'data/intefaces/IProfile'
 import Link from 'next/link'
+import Routes from "pages/routes";
 interface Props {
   message: string
   files?: any[]
@@ -62,7 +63,7 @@ export default function ChatMessageText({message, files, size, isRight, suffixIc
    <div className={`${styles.root}  ${size === 'small' && styles.rootSmall} ${large && styles.rootLarge} ${isRight && styles.rootRight}`}>
      <div className={styles.messageWrapper}>
        {author && <div className={styles.author}>
-          <Link href={`/id${author.id}`}><a>{`${author.firstName} ${author.lastName}`}:</a></Link>
+          <Link href={`${Routes.profile(author)}`}><a>{`${author.firstName} ${author.lastName}`}:</a></Link>
         </div>}
      {files && files.length > 0 && <div className={styles.files}>{files.map(file => renderFile(file.urlS3, file.name))}</div>}
      {files && files.filter(file => isMediaImage(file.urlS3) || isMediaVideo(file.urlS3)).length > 0 &&

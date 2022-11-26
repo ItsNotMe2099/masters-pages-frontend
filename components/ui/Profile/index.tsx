@@ -20,6 +20,7 @@ import Link from 'next/link'
 import ProfileStatus from 'components/ui/ProfileStatus'
 import {IProfile} from 'data/intefaces/IProfile'
 import { useAppContext } from 'context/state'
+import Routes from "pages/routes";
 
 interface Props {
   profile: IProfile,
@@ -73,7 +74,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
     setCurrentSkill(profile.skills.find(skill => `${skill.id}` === tab.key))
   }
 
-const profileLink = `/id${profile.id}`
+const profileLink = `${Routes.profile(profile)}`
   return (
     <div className={`${styles.root} ${className} ${isActive && styles.isActive}`}>
       <div className={styles.profile}>
@@ -144,7 +145,7 @@ const profileLink = `/id${profile.id}`
             </div>
           </div>
           <div className={styles.bottom}>
-           <ProfileActionButton href={`/id${profile.id}`} title={t('profileComponent.viewProfile')} icon={<img className={styles.icon} src='/img/icons/arrow-right-small.svg' alt=''/>} onClick={handleReadMore}/>
+           <ProfileActionButton href={`${Routes.profile(profile)}`} title={t('profileComponent.viewProfile')} icon={<img className={styles.icon} src='/img/icons/arrow-right-small.svg' alt=''/>} onClick={handleReadMore}/>
             <ProfileActionButton isLoading={savingProfileId === profile.id} title={profile.isSavedByCurrentProfile ? t('saved') : t('save')} icon={<BookmarkSvg isSaved={profile.isSavedByCurrentProfile}/>} onClick={handleSave}/>
           </div>
         </div>

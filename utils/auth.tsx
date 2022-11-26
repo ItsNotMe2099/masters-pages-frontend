@@ -62,20 +62,20 @@ export const getAuthServerSide = ({redirect}: {redirect?: boolean} = {}) => (asy
     ctx.res.end();
     return;
   }
-  if(user && user.isRegistrationCompleted && (ctx.req.url.includes('registration/user') && !ctx.req.url.includes('.json'))){
+  if(user && user.isRegistrationCompleted && user.profiles.length > 0 && (ctx.req.url.includes('registration/user') && !ctx.req.url.includes('.json'))){
     ctx.res.writeHead(404, { Location: "/" });
     ctx.res.end();
     return;
   }
     console.log("userProfiles", user.profiles[0])
 
-  if(user.profiles.length === 0 && user.isRegistrationCompleted){
+  if(user.profiles.length === 0 && user.isRegistrationCompleted && (!ctx.req.url.includes('registration/user') && !ctx.req.url.includes('.json')) ){
     //Недостежимый кейс но может случиться
-    destroyCookie(ctx, CookiesType.profileRole);
-    destroyCookie(ctx, CookiesType.accessToken);
-    return {props: {...translationProps}};
+    ctx.res.writeHead(302, { Location: "/registration" });
+    ctx.res.end();
+    return;
   }
-  const profile = token && user && user.isRegistrationCompleted ? await getProfile(token, user.profiles.find(profile => profile.role === mode) ? mode : user.profiles[0].role) : null;
+  const profile = token && user && user.isRegistrationCompleted  && user.profiles.length > 0 ? await getProfile(token, user.profiles.find(profile => profile.role === mode) ? mode : user.profiles[0]?.role) : null;
  console.log("profile1111", profile?.role, mode, user.profiles);
   if(profile && profile.role !== mode){
     setCookie(ctx, 'mode', profile.role, {

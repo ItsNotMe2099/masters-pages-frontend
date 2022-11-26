@@ -1,0 +1,95 @@
+@import 'scss/index';
+
+.form{
+  
+}
+
+.illustration{
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.text{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 16px;
+}
+
+.field{
+  margin-top: 40px;
+}
+
+.btn{
+  height: 56px;
+  width: 100%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000 !important;
+  background-color: #f4f4f4;
+  margin-left: 16px;
+  svg{
+    margin-left: 14px;
+    path{
+      fill: #000;
+    }
+  }
+  @media (max-width: $xs-max) {
+    margin-left: 0;
+  }
+}
+
+.active{
+  background: #F2B705;
+  &:hover{
+    background: #f3c331;
+  }
+}
+
+.btns{
+  display: flex;
+  @media (max-width: $xs-max) {
+    flex-direction: column-reverse;
+  }
+}
+
+.remain{
+  display: flex;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.seconds{
+  font-weight: 600;
+  margin-right: 12px;
+}
+
+.get{
+  font-weight: 400;
+  span{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

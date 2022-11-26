@@ -69,7 +69,6 @@ const ProjectPage = ({  project, projectStatus, ...props}: Props) => {
     }
   }
 
-  const profileLink = `/id${project.corporateProfileId}`
   const handleClickAttachment = (e, item) => {
     e.preventDefault();
     e.stopPropagation()

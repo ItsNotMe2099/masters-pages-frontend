@@ -16,6 +16,7 @@ import ProfileStatus from 'components/ui/ProfileStatus'
 import { IOrganization } from 'data/intefaces/IOrganization'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { useAppContext } from 'context/state'
+import Routes from "pages/routes";
 
 interface Props{
   organization: IOrganization,
@@ -50,13 +51,13 @@ const CardOrganization = (props: Props) => {
     onOrganizationUpdate && onOrganizationUpdate()
   }
 
-  
+
 
   return (
     <Card className={styles.root} toolbar={isEdit ? [<FormActionButton type={'edit'} title={showForm ? t('cancel')  : t('task.edit')} onClick={handleEditClick}/>] : []}>
 
         {isEdit && showForm && <AvatarForm organization={organization} onSubmit={handleSubmit}/>}
-        {(!showForm || !isEdit) &&  <a href={`/id${organization.corporateProfile.id}`}><Avatar size={'large'} image={organization.corporateProfile.photo}/></a>}
+        {(!showForm || !isEdit) &&  <a href={`${Routes.profile(organization.corporateProfile)}`}><Avatar size={'large'} image={organization.corporateProfile.photo}/></a>}
       <div className={styles.name}>{organization.name}</div>
       <div className={styles.allStats}>
       <div className={styles.left}>
@@ -97,7 +98,7 @@ const CardOrganization = (props: Props) => {
       <div className={styles.followers}>
         {!isEdit && (isSubscribed ? <div className={styles.subscribed}>{t('cardProfile.subscribed')}</div> : <Button className={styles.actionFollow} color={'green'} disabled={recommendationLoading} onClick={handleSubscribe}>{t('personalArea.profile.subscribe')}</Button>)}
         {!isEdit && <Button className={styles.actionFollow} color={'green'} href={`/Chat/dialog/${organization.corporateProfile.id}`}>{t('personalArea.profile.sendMessage')}</Button>}
-        {!isEdit && <Button className={styles.actionFollowLast} color={'green'} href={`/id${organization.corporateProfile.id}/news`}>{t('news')}</Button>}
+        {!isEdit && <Button className={styles.actionFollowLast} color={'green'} href={`${Routes.profile(organization.corporateProfile)}/news`}>{t('news')}</Button>}
       </div>
       </div>
     </Card>

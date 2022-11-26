@@ -25,6 +25,7 @@ import {ModalType, SnackbarType} from "types/enums";
 import {useProjectContext} from "context/project_state";
 import RatingStars from "components/ui/RatingStars";
 import FeedbackRepository from "data/repositories/FeedbackRepository";
+import Routes from "pages/routes";
 
 
 interface Props {
@@ -123,7 +124,7 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
     }
     return false;
   }
-  const profileLink = `/id${application.profile.id}`
+  const profileLink = `${Routes.profile(application.profile)}`
 
   const dispatch = useDispatch()
 
