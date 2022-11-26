@@ -52,7 +52,7 @@ export default function UserRegInfoStep(props: Props) {
     lastName: '',
     email: '',
     password: '',
-    passwordConfirm: ''
+    passwordConfirm: '',
   }
 
   const formik = useFormik({

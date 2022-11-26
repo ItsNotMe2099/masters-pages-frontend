@@ -45,7 +45,7 @@ export default function InputCategoryField(props: Props<Categories>) {
   const dispatch = useDispatch()
 
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
-
+  console.log("FieldValue", field.value)
   return (
     <>
     <div className={getClassName()}>

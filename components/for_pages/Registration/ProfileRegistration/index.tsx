@@ -66,7 +66,94 @@ export default function ProfileRegistration(props: Props) {
   const formik = useFormik({
     initialValues: {
       slug: '',
-      categories: null,
+      categories: {
+        "mainCategory": {
+          "id": 7855,
+          "createdAt": "2022-09-05T10:00:13.642Z",
+          "updatedAt": "2022-09-05T10:00:13.642Z",
+          "iconUrl": null,
+          "color": null,
+          "isMain": true,
+          "isGeneral": false,
+          "importId": null,
+          "parentId": null,
+          "sort": 0,
+          "deletedAt": null,
+          "translations": [
+            {
+              "id": 15712,
+              "createdAt": "2022-09-05T10:00:13.642Z",
+              "updatedAt": "2022-09-05T10:00:13.642Z",
+              "languageCode": "en",
+              "name": "General",
+              "description": "General",
+              "baseId": 7855
+            }
+          ],
+          "languageCode": "en",
+          "name": "General",
+          "description": "General",
+          "baseId": 7855
+        },
+        "category": {
+          "id": 7856,
+          "createdAt": "2022-09-05T10:02:28.101Z",
+          "updatedAt": "2022-09-05T10:02:28.101Z",
+          "iconUrl": null,
+          "color": null,
+          "isMain": false,
+          "isGeneral": false,
+          "importId": null,
+          "parentId": 7855,
+          "sort": 0,
+          "deletedAt": null,
+          "translations": [
+            {
+              "id": 15713,
+              "createdAt": "2022-09-05T10:02:28.101Z",
+              "updatedAt": "2022-09-05T10:02:28.101Z",
+              "languageCode": "en",
+              "name": "General",
+              "description": "General",
+              "baseId": 7856
+            }
+          ],
+          "languageCode": "en",
+          "name": "General",
+          "description": "General",
+          "baseId": 7856
+        },
+        "subCategory": {
+          "id": 7857,
+          "createdAt": "2022-09-05T10:02:41.705Z",
+          "updatedAt": "2022-09-05T10:02:41.705Z",
+          "iconUrl": null,
+          "color": null,
+          "isMain": false,
+          "isGeneral": false,
+          "importId": null,
+          "parentId": 7856,
+          "sort": 0,
+          "deletedAt": null,
+          "translations": [
+            {
+              "id": 15715,
+              "createdAt": "2022-09-05T10:02:41.705Z",
+              "updatedAt": "2022-09-05T10:02:41.705Z",
+              "languageCode": "en",
+              "name": "General",
+              "description": "General",
+              "baseId": 7857
+            }
+          ],
+          "languageCode": "en",
+          "name": "General",
+          "description": "General",
+          "baseId": 7857
+        },
+        "id": ""
+      },
+      published: true
     },
     onSubmit: handleSubmit
   })
@@ -99,7 +186,7 @@ export default function ProfileRegistration(props: Props) {
               <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'}
                                className={styles.question}/></HiddenXs>
           </div>
-          <SwitchField name='searchable' label='Searchable' className={styles.switch}/>
+          <SwitchField name='published' label='Searchable' className={styles.switch}/>
           <FormError error={error}/>
           <div className={styles.btns}>
             {props.onBackClick && <BackButton onClick={props.onBackClick} role={props.role}/>}
