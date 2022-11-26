@@ -1,9 +1,6 @@
 @import 'scss/index';
 .form{
-  max-width: 450px;
-  @media (max-width: $xs-max) {
-    padding: 0 16px;
-  }
+
 }
 .final{
   .btns{

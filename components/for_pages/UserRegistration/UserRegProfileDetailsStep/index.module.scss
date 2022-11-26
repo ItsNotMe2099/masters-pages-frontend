@@ -1,6 +1,6 @@
 @import 'scss/index';
 
-.form{
+.root{
   max-width: 450px;
   @media (max-width: $xs-max) {
     padding: 0 16px;
