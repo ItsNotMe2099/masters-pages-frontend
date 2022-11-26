@@ -103,7 +103,7 @@ export default function UserRegPage(props: Props) {
 
   return ( <RegistrationLayout>
     {loading ? <Loader/> : <FormStepSwitch index={currentStepIndex} options={[
-        <UserRegPhoneStep key={1} onNextStep={handleNextStep}  />,
+        <UserRegPhoneStep key={1} onNextStep={handleNextStep} />,
         <UserRegInfoStep key={2} onNextStep={handleNextStep}  />,
         <UserRegProfileRoleStep key={3} onNextStep={handleNextStep} />,
         <UserRegProfileDetailsStep role={formData?.profileRole} key={4} onBack={handleBack} onNextStep={handleNextStep}/>

@@ -28,7 +28,7 @@ export default function EmailStep(props: Props) {
   }
 
   const initialValues = {
-    data: '',
+    data: authContext.signUpFormData?.data ?? '',
   }
 
   const formik = useFormik({
@@ -47,7 +47,7 @@ export default function EmailStep(props: Props) {
         onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
           className={classNames(styles.btn, {[styles.active]: Validator.emailRe.test(formik.values.data)})}
 
-          disabled={!Validator.emailRe.test(formik.values.data) || isLoading}>
+          disabled={isLoading}>
             Confirm email<NextSvg/>
         </Button>
       </Form>

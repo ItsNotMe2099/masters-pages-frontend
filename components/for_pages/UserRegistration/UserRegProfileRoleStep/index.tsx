@@ -63,6 +63,9 @@ export default function UserRegProfileRoleStep(props: Props) {
 
   return (
   <div className={styles.root}>
+    <div className={styles.title}>
+      New Profile
+    </div>
     <div className={styles.text}>Your MastersPages account has 3 modes. You<br/> can switch between modes at any time.</div>
     <div className={styles.choose}>
       CHOOSE YOUR STARTING MODE

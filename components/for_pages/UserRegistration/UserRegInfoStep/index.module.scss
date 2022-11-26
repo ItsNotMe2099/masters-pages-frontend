@@ -1,13 +1,9 @@
 @import 'scss/index';
 
 .form{
-  width: 25%;
-  margin: 0 auto;
-  @media (max-width: 1250px) {
-    width: 55%;
-  }
+  max-width: 450px;
   @media (max-width: $xs-max) {
-    width: 100%;
+
     padding: 0 16px;
   }
 }
@@ -63,7 +59,6 @@
   text-align: center;
   color: #000000 !important;
   background-color: #f4f4f4;
-  margin-left: 16px;
   svg{
     margin-left: 14px;
     path{
@@ -77,6 +72,9 @@
 
 .btns{
   display: flex;
+  > * + *{
+    margin-left: 16px;
+  }
   @media (max-width: $xs-max) {
     flex-direction: column-reverse;
   }

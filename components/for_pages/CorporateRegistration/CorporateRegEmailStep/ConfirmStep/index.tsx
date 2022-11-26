@@ -4,15 +4,16 @@ import Validator from 'utils/validator'
 import Button from 'components/ui/Button'
 import classNames from 'classnames'
 import OtpCodeField from 'components/fields/OtpCodeField'
-import { ReactElement, useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useAuthContext } from 'context/auth_state'
 import NextSvg from 'components/svg/NextSvg'
 import FormError from "components/ui/Form/FormError";
+import BackButton from "components/BackButton";
 
 
 interface Props {
   onSubmit: () => void
-  backBtn?: () => ReactElement
+  onBack?: () => void
 }
 
 export default function ConfirmStep(props: Props) {
@@ -43,9 +44,9 @@ export default function ConfirmStep(props: Props) {
         <OtpCodeField error={!!authContext.error} name='code' length={4} validate={Validator.otpValidation}/>
         <FormError error={authContext.error}/>
         <div className={styles.btns}>
-        {props.backBtn ? props.backBtn() : null}
+          <BackButton onClick={props.onBack}/>
 
-        <Button
+          <Button
           onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
           className=
           {classNames(styles.btn,
@@ -58,6 +59,8 @@ export default function ConfirmStep(props: Props) {
           <div className={styles.seconds}>{authContext.remainSec}s</div>
           <div className={styles.get}>{'Didn’t get an email?'} <span onClick={() => authContext.sendEmailCodeAgain()}>Resend</span></div>
         </div>
+        {authContext.codeRes?.code && <div className={styles.codeEnter}>Enter: {authContext.codeRes?.code}</div>}
+
       </Form>
     </FormikProvider>
   )

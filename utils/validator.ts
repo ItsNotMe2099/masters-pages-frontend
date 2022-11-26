@@ -18,7 +18,7 @@ export default class Validator {
   }
 
   static otpValidation(value: string | number) {
-    return !value || `${value}`.length === 4  ? undefined : 'form_field_validation_otp'
+    return !value || `${value}`.length === 4  ? undefined : 'required'
   }
 
   static required(value: string | number): string | undefined {

@@ -67,7 +67,9 @@ export default function UserRegInfoStep(props: Props) {
 
   const isOk = true //temp
 
-
+  const isButtonActive = formik.values.firstName  && formik.values.lastName  &&
+    formik.values.password && formik.values.passwordConfirm &&
+    formik.values.terms
   return (
     <FormikProvider value={formik}>
       <div className={styles.title}>
@@ -80,6 +82,7 @@ export default function UserRegInfoStep(props: Props) {
         <div className={styles.illustration}><img src='/img/Registration/new/corp/step2.svg' alt=''/></div>
         <div className={styles.text}>Please, provide contact information</div>
         {/*<SwitchField name='searchable' label='Searchable' className={styles.switch}/>*/}
+        <div className={styles.fields}>
         <TextField
           className={styles.field}
           name='firstName' label='First name' labelType={LabelStyleType.Cross} validate={Validator.required}/>
@@ -105,25 +108,19 @@ export default function UserRegInfoStep(props: Props) {
         <CheckBoxField className={styles.checkbox} name={'terms'} validate={Validator.required} label={<div className={styles.terms}>
           Accept <a href='/Terms'>Terms & Conditions</a>
         </div>}/>
+        </div>
         <div className={styles.btns}>
-          <BackButton onClick={() => setStep(step => step - 1)}/>
           <Button
             type='submit'
             className=
               {classNames(styles.btn,
-                {[styles.active]: formik.values.firstName !== '' && formik.values.lastName !== '' &&
-                  Validator.emailRe.test(formik.values.email) &&
-                  formik.values.password === formik.values.passwordConfirm &&
-                  formik.values.terms
+                {[styles.active]: isButtonActive
                 })}
-            disabled={formik.values.firstName === '' && formik.values.lastName === '' &&
-              !Validator.emailRe.test(formik.values.email) &&
-              formik.values.password !== formik.values.passwordConfirm &&
-              !formik.values.terms
-            }>
+            disabled={isLoading}>
             Register<NextSvg/>
           </Button>
         </div>
+
       </Form>
     </FormikProvider>
   )

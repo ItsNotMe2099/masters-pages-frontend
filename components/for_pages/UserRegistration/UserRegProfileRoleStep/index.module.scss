@@ -1,5 +1,13 @@
 @import 'scss/index';
-
+.title{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+}
 .text{
   font-family: 'Montserrat';
   font-style: normal;
@@ -33,6 +41,14 @@
   > * + * {
     margin-left: 20px;
   }
+  @media (max-width: $xs-max) {
+    flex-direction: column;
+    > * + * {
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+  }
+
 }
 
 .item{

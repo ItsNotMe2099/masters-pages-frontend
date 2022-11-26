@@ -1,7 +1,8 @@
 import styles from './index.module.scss'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import ConfirmStep from "./ConfirmStep";
 import EmailStep from "./PhoneStep";
+import {useAuthContext} from "context/auth_state";
 
 
 enum Step{
@@ -15,6 +16,10 @@ interface Props {
 export default function UserRegPhoneStep(props: Props) {
   const [step, setStep] = useState<Step>(Step.Phone);
   const [sending, setSending] = useState(false)
+  const authContext = useAuthContext()
+  useEffect(() => {
+    authContext.clear();
+  }, [])
   const handleSubmitEmail = () => {
     setStep(Step.Confirm);
   }
@@ -24,9 +29,12 @@ export default function UserRegPhoneStep(props: Props) {
   }
 
   return (
-    <div>
+    <div className={styles.root}>
+      <div className={styles.title}>
+        Individual Account Registration
+      </div>
       {step === Step.Phone && <EmailStep onSubmit={handleSubmitEmail}/>}
-      {step === Step.Confirm && <ConfirmStep onSubmit={handleSubmitCode}/>}
+      {step === Step.Confirm && <ConfirmStep onSubmit={handleSubmitCode} onBack={() => setStep(Step.Phone)}/>}
     </div>
   )
 }

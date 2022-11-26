@@ -54,14 +54,8 @@ const SignInComponent = (props: Props) => {
             <span>{t('createTask.priceSelect.or')}</span>
             <div className={styles.separator}></div>
           </div>
-         <SignIn onSubmit={handleSubmit}/>
-        <div className={styles.forgot}>
-          <div><a onClick={() => dispatch(PWRecoveryOpen())}> {t('auth.signIn.forgotPassword')}</a></div>
-        </div>
-        <div className={styles.signUp}>
-          <div>{t('auth.signIn.dontHaveAccount')}</div>
-          <div><a onClick={() => dispatch(signUpOpen())}>{t('auth.signUpLink')}</a></div>
-        </div>
+         <SignIn onSubmit={handleSubmit} initialValues={{mode: 'phone'}}/>
+
         {props.showAbout && <Button transparent outlineBlack className={styles.findMaster} onClick={props.onClick}>{t('aboutSite')}</Button>}
 
     </Modal>

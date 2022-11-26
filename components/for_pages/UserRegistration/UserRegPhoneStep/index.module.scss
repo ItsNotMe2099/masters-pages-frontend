@@ -1,57 +1,14 @@
 @import 'scss/index';
 
-.form{
-  
+.root{
+max-width: 450px;
 }
-
-.illustration{
-  display: flex;
-  justify-content: center;
-  margin-top: 32px;
-}
-
-.text{
+.title{
   font-family: 'Montserrat';
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  display: flex;
-  align-items: center;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
   text-align: center;
   color: #000000;
-  margin-top: 16px;
-  justify-content: center;
-}
-
-.field{
-  margin-top: 40px;
-}
-
-.btn{
-  height: 56px;
-  width: 100%;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #000000 !important;
-  background-color: #f4f4f4;
-  svg{
-    margin-left: 14px;
-    path{
-      fill: #000;
-    }
-  }
-}
-
-.active{
-  background: #F2B705;
-  &:hover{
-    background: #f3c331;
-  }
 }

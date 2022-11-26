@@ -18,6 +18,7 @@ import BackButton from 'components/BackButton'
 
 interface Props {
   onNextStep: (data?: any) => void
+  initialData?: any
 }
 
 export default function CorporateRegContactsStep(props: Props) {
@@ -53,6 +54,7 @@ export default function CorporateRegContactsStep(props: Props) {
     lastName: '',
     phone: '',
     phoneExtension: '',
+    ...props.initialData,
   }
 
   const formik = useFormik({
@@ -91,8 +93,8 @@ export default function CorporateRegContactsStep(props: Props) {
             <TextField
               className={styles.altField}
               name='lastName' label='Last name' labelType={LabelStyleType.Cross} validate={Validator.required}/>
-            <div className={styles.id}>
-              <PhoneField label='Phone number (optional)' name='phone' labelType={LabelStyleType.Cross} validate={Validator.phone}/>
+            <div className={styles.phoneFields}>
+              <PhoneField label='Phone number (optional)' className={styles.phoneField} name='phone' labelType={LabelStyleType.Cross}/>
               <TextField
                 className={styles.extension}
                 label='Extension'
@@ -107,8 +109,8 @@ export default function CorporateRegContactsStep(props: Props) {
                 type='submit'
                 className=
                   {classNames(styles.btn,
-                    {[styles.active]: formik.values.firstName !== '' && formik.values.lastName !== ''})}
-                disabled={formik.values.firstName === '' && formik.values.lastName === ''}>
+                    {[styles.active]: formik.values.firstName && formik.values.lastName})}
+                disabled={isLoading}>
                 Next step<NextSvg/>
               </Button>
             </div>

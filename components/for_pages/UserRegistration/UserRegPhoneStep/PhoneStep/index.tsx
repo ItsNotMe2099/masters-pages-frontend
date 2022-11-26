@@ -29,7 +29,7 @@ export default function PhoneStep(props: Props) {
   }
 
   const initialValues = {
-    data: '',
+    data: authContext.signUpFormData?.data ?? '',
   }
 
   const formik = useFormik({
@@ -42,11 +42,12 @@ export default function PhoneStep(props: Props) {
       <Form className={styles.form}>
         <div className={styles.illustration}><img src='/img/Registration/new/user/step1.svg' alt=''/></div>
         <div className={styles.text}>Please enter your phone.<br/> It will be your account login.</div>
+        <></>
         <PhoneField className={styles.field} label='Phone number' name='data' labelType={LabelStyleType.Cross} validate={Validator.phone}/>
         <FormError error={error}/>
         <Button
         onClick={(e: React.FormEvent<HTMLFormElement>) => formik.handleSubmit(e)}
-          className={classNames(styles.btn, {[styles.active]: Validator.emailRe.test(formik.values.data)})}
+          className={classNames(styles.btn, {[styles.active]: !!formik.values.data})}
           disabled={isLoading}>
             Confirm number<NextSvg/>
         </Button>

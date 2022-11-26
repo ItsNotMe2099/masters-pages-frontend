@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import {Form, FormikProvider, useFormik} from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { useAuthContext } from 'context/auth_state'
 import Button from 'components/ui/Button'
 import TextField from 'components/fields/TextField'
@@ -26,6 +26,7 @@ import slugify from "slugify";
 
 interface Props {
   onNextStep: () => void
+  onBack: () => void
   initialData?: any
 }
 
@@ -52,10 +53,8 @@ export default function CorporateRegOrganizationStep(props: Props) {
     setIsLoading(false)
   }
 
-  const [step, setStep] = useState<number>(1)
 
   const initialValues = {
-    ...props.initialData,
     organization: {
       name: '',
       site: '',
@@ -64,7 +63,8 @@ export default function CorporateRegOrganizationStep(props: Props) {
     slug: '',
     password: '',
     passwordConfirm: '',
-    terms: false
+    terms: false,
+    ...props.initialData,
   }
 
   const formik = useFormik({
@@ -76,11 +76,9 @@ export default function CorporateRegOrganizationStep(props: Props) {
 
   console.log('formik.values', formik.values)
 
-  const isOk = true //temp
-
   useEffect(() => {
-    const result = formik.values.phoneExtension.replace(/\D/g, '').slice(0, 5)
-    formik.setFieldValue('slug', slugify(formik.values.name?.toLowerCase()));
+
+     formik.setFieldValue('slug', slugify(formik.values.organization.name?.toLowerCase() ?? ''));
   }, [formik.values.organization.name])
 
   console.log('phoneExtension', formik.values.phoneExtension)
@@ -137,22 +135,18 @@ export default function CorporateRegOrganizationStep(props: Props) {
         </div>}/>
         <FormError error={error}/>
         <div className={styles.btns}>
-          <BackButton onClick={() => setStep(step => step - 1)}/>
+          <BackButton onClick={props.onBack}/>
           <Button
             className=
               {classNames(styles.btn,
                 {[styles.active]: formik.values.organization.name !== '' &&
                   formik.values.organization.id !== '' &&
                   formik.values.organization.site !== '' &&
-                  formik.values.password === formik.values.passwordConfirm &&
+                  formik.values.password && formik.values.passwordConfirm &&
                   formik.values.terms})}
             disabled=
-              {formik.values.organization.name === '' &&
-                formik.values.organization.id === '' &&
-                formik.values.organization.site === '' &&
-                formik.values.password !== formik.values.passwordConfirm &&
-                !formik.values.terms}>
-            Send aplication<NextSvg/>
+              {isLoading}>
+            Send application<NextSvg/>
           </Button>
         </div>
       </Form>

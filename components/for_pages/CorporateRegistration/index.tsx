@@ -60,7 +60,7 @@ export default function CorporateRegPage(props: Props) {
   useEffect(() => {
     if(appContext.isLogged){
       OrganizationRepository.fetchCurrentOrganization().then((org) => {
-        if(org.status === OrganizationStatus.Moderation){
+        if(org?.status === OrganizationStatus.Moderation){
           setStep(steps[steps.length  -1]);
         }
         setLoading(false)
@@ -93,12 +93,16 @@ export default function CorporateRegPage(props: Props) {
     }
     setStepValue(steps[currentStepIndex + 1].key)
   }
+  const handleBack= (formData?: any) => {
+
+    setStepValue(steps[currentStepIndex - 1].key)
+  }
 
   return ( <RegistrationLayout>
     {loading ? <Loader/> : <FormStepSwitch index={currentStepIndex} options={[
-        <CorporateRegEmailStep key={1} onNextStep={handleNextStep}  />,
-        <CorporateRegContactsStep key={2} onNextStep={handleNextStep}  />,
-        <CorporateRegOrganizationStep key={3} onNextStep={handleNextStep} initialData={formData} />,
+        <CorporateRegEmailStep key={1} onNextStep={handleNextStep} />,
+        <CorporateRegContactsStep key={2} onNextStep={handleNextStep} initialData={formData}  />,
+        <CorporateRegOrganizationStep key={3} onNextStep={handleNextStep} initialData={formData} onBack={handleBack} />,
         <CorporateRegFinishStep key={4}/>
       ]} />}
   </RegistrationLayout>

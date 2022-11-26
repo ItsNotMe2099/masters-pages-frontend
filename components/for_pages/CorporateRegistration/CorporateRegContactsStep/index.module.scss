@@ -1,13 +1,9 @@
 @import 'scss/index';
 
 .form{
-  width: 25%;
-  margin: 0 auto;
-  @media (max-width: 1250px) {
-    width: 55%;
-  }
+  max-width: 450px;
   @media (max-width: $xs-max) {
-    width: 100%;
+
     padding: 0 16px;
   }
 }
@@ -63,7 +59,6 @@
   text-align: center;
   color: #000000 !important;
   background-color: #f4f4f4;
-  margin-left: 16px;
   svg{
     margin-left: 14px;
     path{
@@ -108,10 +103,32 @@
   margin-top: 32px;
 }
 
-.id{
-  position: relative;
-  .altField{
+.phoneFields{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  > * + * {
+    margin-left: 16px;
+  }
+  .phoneField{
     flex: 1;
+  }
+  .extension{
+    width: 100px;
+    margin-top: -4px;
+  }
+  @media (max-width: $xs-max) {
+    flex-direction: column;
+    > * + * {
+      margin-left: 0px;
+    }
+    .phoneField{
+      flex: unset;
+      width: 100%;
+    }
+    .extension{
+      margin-top: 0px;
+    }
   }
 }
 
@@ -147,17 +164,4 @@
   display: flex;
   justify-content: center;
   margin-bottom: 32px;
-}
-
-.extension{
-  margin: 0;
-  position: absolute !important;
-  right: -70%;
-  top: -9%;
-  @media (max-width: 1400px) {
-    right: -80%;
-  }
-  @media (max-width: 1250px) {
-    position: static !important;
-  }
 }
