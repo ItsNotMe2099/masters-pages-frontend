@@ -19,6 +19,7 @@ const PWRecoveryComponent = (props: Props) => {
   const firstStepIsComplete = useSelector((state: IRootState) => state.PWRecovery.formIsSuccess)
   const isLoading = useSelector((state: IRootState) => state.PWRecovery.loading)
   const code = useSelector((state: IRootState) => state.PWRecovery.codeSet)
+  const mode = useSelector((state: IRootState) => state.PWRecovery.mode)
   useEffect(() => {
     dispatch(PWRecoveryResetState())
   }, [])
@@ -39,9 +40,9 @@ const PWRecoveryComponent = (props: Props) => {
         <div className={styles.headText}>
           {t('auth.passwordRecovery.title')}
         </div>
-        <div className={styles.text}>
-          {t('auth.passwordRecovery.description')}
-        </div>
+      {mode && <div className={styles.text}>
+          {mode === 'phone' ? t('auth.passwordRecovery.description') : 'Recover your password by your email'}
+        </div>}
       {(firstStepIsComplete && code) && <div className={styles.code}>{t('auth.phoneConfirm.code')} {code}</div>}
 
       <div className={styles.fakeMargin}></div>
