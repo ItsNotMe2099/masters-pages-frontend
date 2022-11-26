@@ -121,7 +121,9 @@ const TabSettings= (props: Props) => {
       <div className={styles.fieldset}>
        <TabPersonalForm onSubmit={handleSubmit} sending={sendingInfo} initialValues={{
           firstName: profile.firstName,
-          lastName: profile.lastName,
+         lastName: profile.lastName,
+         slug: profile.slug,
+         published: profile.published,
           birthday: profile.birthday,
           zipcode: profile.zipcode,
           address1: profile.address1,

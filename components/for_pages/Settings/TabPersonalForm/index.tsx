@@ -11,6 +11,7 @@ import styles from 'components/for_pages/Settings/TabPersonalForm/index.module.s
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { useTranslation } from 'next-i18next'
 import InputDate from 'components/ui/Inputs/InputDate'
+import Checkbox from "components/ui/Inputs/Checkbox";
 
 let TabPersonalForm = (props) => {
   const { t } = useTranslation('common')
@@ -24,13 +25,13 @@ let TabPersonalForm = (props) => {
             name="firstName"
             component={Input}
             label={t('personalArea.tabProfile.fieldFirstName')}
-            labelType="placeholder"
+            labelType="static"
             validate={required}
           />
           <Field
             name="birthday"
             component={InputDate}
-            labelType="placeholder"
+            labelType="static"
             label={t('personalArea.tabProfile.fieldBirthDate')}
             validate={[date, birthdate]}
           />
@@ -40,28 +41,30 @@ let TabPersonalForm = (props) => {
             name="lastName"
             component={Input}
             label={t('personalArea.tabProfile.fieldLastName')}
-            labelType="placeholder"
+            labelType="static"
             validate={required}
           />
           <Field
             name="zipcode"
             component={Input}
-            labelType="placeholder"
+            labelType="static"
             label={t('personalArea.tabProfile.fieldZip')}
           />
         </div>
+
       </div>
+
       <Field
         name="address1"
         component={Input}
-        labelType="placeholder"
+        labelType="static"
         label={t('personalArea.tabProfile.fieldAddress')}
 
       />
       <Field
         name="address2"
         component={Input}
-        labelType="placeholder"
+        labelType="static"
         label={t('personalArea.tabProfile.fieldAddress2')}
       />
 
@@ -72,7 +75,7 @@ let TabPersonalForm = (props) => {
             component={InputCountry}
             onChange={() =>  {
               props.change('geonameid', null)}}
-            labelType="placeholder"
+            labelType="static"
             label={t('personalArea.tabProfile.fieldCountry')}
           />
         </div>
@@ -82,11 +85,25 @@ let TabPersonalForm = (props) => {
             name="geonameid"
             component={InputLocation}
             countryCode={props.countryCode}
-            labelType="placeholder"
+            labelType="static"
             label={t('personalArea.tabProfile.fieldLocation')}
           />
         </div>
       </div>
+
+      <Field
+        name="slug"
+        component={Input}
+        labelType="static"
+        label={'MastersPages ID'}
+      />
+
+      <Field
+        name="published"
+        component={Checkbox}
+        labelType="placeholder"
+        label={'Searchable'}
+      />
 
       <FormError error={error}/>
       <div className={styles.wrapper}><Button className={styles.button} disabled={props.sending} grey={true} bold={true} size={'12px 70px'} >{t('personalArea.tabProfile.buttonSave')}</Button></div>

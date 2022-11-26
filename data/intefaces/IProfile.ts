@@ -13,6 +13,7 @@ export interface IProfile{
   id?: number
   avatar?: string
   slug?: string
+  published?: boolean
   firstName?: string
   lastName?: string
   phone?: string
