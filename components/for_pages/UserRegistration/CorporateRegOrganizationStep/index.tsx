@@ -59,7 +59,7 @@ export default function CorporateRegOrganizationStep(props: Props) {
     organization: {
       name: '',
       site: '',
-      isPublished: true
+      published: true
     },
     slug: '',
     password: '',
@@ -112,7 +112,7 @@ export default function CorporateRegOrganizationStep(props: Props) {
                              className={styles.question}/></HiddenXs>
         </div>
         <div className={styles.id}>
-          <SwitchField name='organization.isPublished' label='Searchable' className={styles.switch}/>
+          <SwitchField name='organization.published' label='Searchable' className={styles.switch}/>
           <VisibleXs>
             <QuestionPopover info={'It will become your address in the format http://www.masterspages.com/orgid'}
                              className={styles.question}/>
