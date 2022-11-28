@@ -20,6 +20,7 @@ import ProfileRepository from "data/repositories/ProfileRepostory";
 import {useAppContext} from "context/state";
 import FormError from "components/ui/Form/FormError";
 import {useRouter} from "next/router";
+import slugify from "slugify";
 
 interface Props {
   role: ProfileRole
@@ -65,7 +66,7 @@ export default function ProfileRegistration(props: Props) {
   }
   const formik = useFormik({
     initialValues: {
-      slug: '',
+      slug: appContext?.user ? `${slugify(appContext.user.firstName)}-${slugify(appContext.user.lastName)}` : '',
       categories: {
         "mainCategory": {
           "id": 7855,

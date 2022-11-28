@@ -14,6 +14,5 @@ interface Props {
 export default function Layout(props: Props) {
   const appContext = useAppContext()
   const profile = appContext.profile
-  console.log('CurrentProfileGuest', props.isGuest);
   return profile && !props.isGuest ? <LayoutAuthorized {...props}/> : <LayoutGuest {...props}/>
 }
