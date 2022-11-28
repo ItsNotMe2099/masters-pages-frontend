@@ -26,6 +26,7 @@ interface Props {
   isCurrentProfileOpened?: boolean
   user?: IUser
   hideMenu?: boolean
+
 }
 
 export default function LayoutAuthorized(props: Props) {

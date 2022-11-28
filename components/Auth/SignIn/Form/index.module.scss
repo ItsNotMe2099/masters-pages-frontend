@@ -1,11 +1,25 @@
+.form{
+  margin-top: 32px;
+}
 .btnContainer{
     margin-top: 12px;
     button{
         width: 100%;
     }
 }
-
-
+.modeLabel{
+    text-align: center;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 93%;
+    margin-bottom: 16px;
+    margin-top: 16px;
+    color: #000;
+}
+.radioItemLabelMode{
+  font-size: 18px !important;
+  font-weight: 600;
+}
 .forgot{
   font-size: 15px;
   text-align: center;

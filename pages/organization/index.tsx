@@ -1,4 +1,4 @@
-import styles from 'pages/corporate/index.module.scss'
+import styles from 'pages/organization/index.module.scss'
 import MainSectionFirst from 'components/for_pages/Corporate/MainSectionFirst'
 import MainSectionSecond from 'components/for_pages/Corporate/MainSectionSecond'
 import MainSectionThird from 'components/for_pages/Corporate/MainSectionThird'

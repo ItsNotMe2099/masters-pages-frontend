@@ -9,6 +9,7 @@ import { useState } from 'react'
 import MenuMobile from 'components/svg/MenuMobile'
 import MenuMobileClose from 'components/svg/MenuMobileClose'
 import { useRouter } from 'next/router'
+import Routes from "pages/routes";
 
 
 interface Props{
@@ -53,7 +54,7 @@ const MainSectionHeader = (props: Props) => {
         </a>
       </Link>
       {router.asPath !== '/registration/user' ?
-        <MainSectionButton size={'small'} color='yellow' href='/corporate' className={styles.org}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
+        <MainSectionButton size={'small'} color='yellow' href={Routes.organizationMain} className={styles.org}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
       : null}
       </div>
         <div className={styles.menuMobile}>
@@ -74,7 +75,7 @@ const MainSectionHeader = (props: Props) => {
       <div className={styles.dropdownMobile}>
           <div className={styles.actionsMobile}>
           <div className={styles.actionsButtons}>
-            <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick('/corporate')}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick(Routes.organizationMain)}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
             <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>}
             {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>}

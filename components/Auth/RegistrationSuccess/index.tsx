@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../actions'
 import { useAppContext } from 'context/state'
 import Button from 'components/ui/Button'
+import Routes from "pages/routes";
 
 interface Props {
   isOpen: boolean
@@ -38,7 +39,7 @@ const RegistrationSuccess = (props: Props) => {
         <div className={styles.btns}>
             {context.profile?.role === 'corporate' ?
             <>
-            <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick('/corporate')}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick(Routes.organizationMain)}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineGreen' onClick={() => handleClick('/')}>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
             <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
            </>

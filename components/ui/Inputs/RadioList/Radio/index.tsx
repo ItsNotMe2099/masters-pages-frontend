@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './index.module.scss'
+import classNames from "classnames";
 interface Props {
   value: number,
   isActive: boolean
@@ -7,6 +8,7 @@ interface Props {
   className?: string
   children?: any
   onChange: (boolean) => void
+  labelClassName?: string
 }
 export default function Radio(props: Props) {
   const [active, setActive] = useState(props.isActive)
@@ -19,7 +21,7 @@ export default function Radio(props: Props) {
   return (
     <div className={`${styles.root} ${props.className || ''}`} onClick={handleClick}>
       {props.isActive ? <img src={'/img/icons/radio-active.svg'} /> : <img src={'/img/icons/radio.svg'} />}
-      {props.children && props.children.length ? props.children : <div className={styles.label}>{props.label}</div>}
+      {props.children && props.children.length ? props.children : <div className={classNames(styles.label, props.labelClassName)}>{props.label}</div>}
 
     </div>
   )

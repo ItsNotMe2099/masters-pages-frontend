@@ -1,6 +1,7 @@
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 import Radio from 'components/ui/Inputs/RadioList/Radio'
 import styles from './index.module.scss'
+import classNames from "classnames";
 
 interface Props {
   options: [{ value: string, label: string }],
@@ -12,6 +13,9 @@ interface Props {
   restrictedValues: any[],
   grid: number
   label: string
+  itemClassName?: string
+  itemLabelClassName?: string
+  labelClassName?: string
 }
 
 export const RadioList = (props) => {
@@ -23,7 +27,7 @@ export const RadioList = (props) => {
 
   return (
     <div className={styles.root}>
-      {label && <div className={styles.label}>{label}</div>}
+      {label && <div className={classNames(styles.label, props.labelClassName)}>{label}</div>}
 
       <div  style={{
       display: (props.grid) ? 'grid' : 'block',
@@ -33,7 +37,8 @@ export const RadioList = (props) => {
       {options.filter(item => restrictedValues.indexOf(item.value) === -1).map(item => (
         <div className={styles.radio}>
           <Radio
-            className={`${!props.grid && styles.radioNoGrid}`}
+            className={classNames(props.itemClassName, [...(!props.grid ? [styles.radioNoGrid] : [] )])}
+            labelClassName={props.itemLabelClassName}
                      value={item.value} isActive={item.value === input.value} label={item.label} onChange={handleCheckboxChanged}/>
         </div>
       ))}

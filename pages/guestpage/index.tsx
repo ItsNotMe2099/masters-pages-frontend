@@ -18,7 +18,7 @@ const GuestPage = (props) => {
 
 
   return (
-    <Layout>
+    <Layout isGuest>
       <div className={styles.welcome}>
         <div className={styles.container}>
           <div className={styles.triangle}></div>

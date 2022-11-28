@@ -63,7 +63,7 @@ const FindVolunteerGuest = (props) => {
   }
 
   return (
-    <Layout>
+    <Layout isGuest>
       <div className={styles.root}>
 
         <div className={styles.container}>

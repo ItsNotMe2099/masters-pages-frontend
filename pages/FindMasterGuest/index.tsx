@@ -64,7 +64,7 @@ const FindMasterGuest = (props) => {
   }
 
   return (
-    <Layout>
+    <Layout isGuest>
       <div className={styles.root}>
 
         <div className={styles.container}>

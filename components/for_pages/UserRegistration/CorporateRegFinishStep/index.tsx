@@ -21,6 +21,7 @@ import VisibleXs from "components/ui/VisibleXS";
 import PasswordField from "components/fields/PasswordField";
 import CheckBoxField from "components/fields/CheckBoxField";
 import FormError from "components/ui/Form/FormError";
+import Routes from "pages/routes";
 
 
 interface Props {
@@ -53,7 +54,7 @@ export default function CorporateRegFinishStep(props: Props) {
         <div className={styles.wrapper}>
           <Button
             type='button'
-            href='/corporate'
+            href={Routes.organizationMain}
             className={styles.btn}>
             Organizations site<NextSvg/>
           </Button>

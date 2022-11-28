@@ -14,6 +14,7 @@ import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 import Header from './mobile/Header'
 import classNames from 'classnames'
+import Routes from "pages/routes";
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -67,7 +68,7 @@ export default function LayoutGuest(props: Props) {
     {!collapsed && <Logo/>}
     <div className={styles.collapseMenu} onClick={handleCollapse}/>
   </div>)
-  
+
 
   return (
     <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
@@ -80,7 +81,7 @@ export default function LayoutGuest(props: Props) {
           <div className={styles.title}>
             {t('guestPage.forVolunteers')}
           </div>
-          {itemsVolunteer.map(item => 
+          {itemsVolunteer.map(item =>
           <MenuItem
           className={styles.volunteersItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
@@ -90,7 +91,7 @@ export default function LayoutGuest(props: Props) {
           <div className={styles.title}>
           {t('guestPage.forMasters')}
           </div>
-          {itemsMaster.map(item => 
+          {itemsMaster.map(item =>
           <MenuItem
           className={styles.mastersItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
@@ -100,7 +101,7 @@ export default function LayoutGuest(props: Props) {
           <div className={styles.title}>
           {t('guestPage.forCompanies')}
           </div>
-          {itemsCompanies.map(item => 
+          {itemsCompanies.map(item =>
           <MenuItem
           className={styles.companiesItem}
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
@@ -115,16 +116,16 @@ export default function LayoutGuest(props: Props) {
           </div>
         </div>
         <div className={styles.btns}>
-            <MainSectionButton size={'small'} color='yellow' href='/corporate'>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
+            <MainSectionButton size={'small'} color='yellow' href={Routes.organizationMain}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <LangSelect isAuth={false}/>
             <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
           </div>
       </div>
-      <Header 
+      <Header
       isCurrentProfileOpened={isCurrentProfileOpened}
-      state={isScrollable} 
+      state={isScrollable}
       onClick={() => setIsScrollable(isScrollable ? false : true)}
       />
       <div className={cx(styles.container)}>

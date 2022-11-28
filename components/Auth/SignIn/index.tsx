@@ -42,18 +42,18 @@ const SignInComponent = (props: Props) => {
           Masters <span>Pages</span>
         </div>
 
-        <div className={styles.headText}>
+      {/*<div className={styles.headText}>
           {t('auth.titleQuick')}
-        </div>
-        <div className={styles.social}>
+        </div>*/}
+      {/*<div className={styles.social}>
           <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/auth/google/login`}><img src="/img/icons/google.svg" alt=''/></a>
           <a href={`${process.env.NEXT_PUBLIC_API_URL}/api/auth/facebook/login`}><img src="/img/icons/facebook.svg" alt=''/></a>
 
-        </div>
-          <div className={styles.or}>
+        </div>*/}
+      {/*<div className={styles.or}>
             <span>{t('createTask.priceSelect.or')}</span>
             <div className={styles.separator}></div>
-          </div>
+          </div>*/}
          <SignIn onSubmit={handleSubmit} initialValues={{mode: 'phone'}}/>
 
         {props.showAbout && <Button transparent outlineBlack className={styles.findMaster} onClick={props.onClick}>{t('aboutSite')}</Button>}

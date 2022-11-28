@@ -29,6 +29,8 @@ let SignIn = props => {
         name="mode"
         component={RadioList}
         grid={2}
+        labelClassName={styles.modeLabel}
+        itemLabelClassName={styles.radioItemLabelMode}
         size={'small'}
         labelType="placeholder"
         label={'Mode'}
