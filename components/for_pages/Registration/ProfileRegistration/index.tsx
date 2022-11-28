@@ -64,9 +64,10 @@ export default function ProfileRegistration(props: Props) {
       }
     )
   }
+
   const formik = useFormik({
     initialValues: {
-      slug: appContext?.user ? `${slugify(appContext.user.firstName)}-${slugify(appContext.user.lastName)}` : '',
+      slug: appContext?.user?.firstName ? `${slugify(appContext.user.firstName)}-${slugify(appContext.user.lastName)}` : '',
       categories: {
         "mainCategory": {
           "id": 7855,

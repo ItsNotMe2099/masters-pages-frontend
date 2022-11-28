@@ -37,6 +37,7 @@ export default function UserRegInfoStep(props: Props) {
     try {
       const res = await AuthRepository.completeUserRegistration(data)
       reachGoal('auth:signup:completed')
+      await appContext.updateUser()
       props.onNextStep()
 
     }catch (e){
