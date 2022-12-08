@@ -69,7 +69,7 @@ export default function LayoutAuthorized(props: Props) {
     {title: t('menu.posts'), icon: 'posts', link: '/Posts'},
     {title: t('menu.news'), icon: 'news', link: '/News', badge: profile.notificationNewsCount},
     {title: t('menu.contacts'), icon: 'subscriptions', link: '/Contacts'},
-    {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
+    //{title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     {title: t('menu.volunteerProjects'), icon: 'orders', link: '/projects', isSeparator: true},
     {title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage', isSeparator: true},
     {title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
@@ -98,12 +98,13 @@ export default function LayoutAuthorized(props: Props) {
 
     ...(role === ProfileRole.Client ? [
       {title: t('menu.findMaster'), icon: 'find-clients', link: '/SearchMasterPage', isSeparator: true},
+      {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     ] : []),
     ...(role === ProfileRole.Master ? [
       {title: t('menu.findClients'), icon: 'find-clients', link: '/SearchClientPage', isSeparator: true},
+      {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     ] : []),
 
-    {title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     {title: t('menu.contacts'), icon: 'subscriptions', link: '/Contacts'},
     {title: t('menu.posts'), icon: 'posts', link: '/Posts', isSeparator: true},
     {title: t('menu.news'), icon: 'news', link: '/News', badge: profile.notificationNewsCount},
