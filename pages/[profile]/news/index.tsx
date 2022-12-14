@@ -64,8 +64,11 @@ export const getServerSideProps = async (ctx) => {
     skill = (await request({ url: `/api/profile/skill/${id.replace('sk', '')}`, method: 'GET' }, ctx))?.data
     profile = skill?.profile
   }else{
-    return {
-      notFound: true
+    profile = (await request({ url: `/api/profile/bySlug/${id}`, method: 'GET' }, ctx))?.data
+    if(!profile){
+      return {
+        notFound: true
+      }
     }
   }
 

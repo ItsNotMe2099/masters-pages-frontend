@@ -65,7 +65,6 @@ export const getServerSideProps = async (ctx) => {
      profile = skill?.profile
   }else{
     profile = (await request({ url: `/api/profile/bySlug/${id}`, method: 'GET' }, ctx))?.data
-    console.log('get Prwrwrwe',profile,  `/api/profile/${id}`)
     if(!profile){
       return {
         notFound: true
