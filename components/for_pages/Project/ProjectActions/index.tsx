@@ -187,7 +187,7 @@ const ProjectActionsInner = (props: Props) => {
       case 'accept':
         return <Button onClick={handleAccept} type='button' projectBtn='green'>ACCEPT</Button>
       case 'reject':
-        return <Button onClick={handleReject} type='button' projectBtn='red'>RECALL</Button>
+        return <Button onClick={handleReject} type='button' projectBtn='red'>REJECT</Button>
       case 'complete':
         return <Button
           onClick={handleComplete} type='button'
@@ -268,7 +268,7 @@ const ProjectActionsInner = (props: Props) => {
           actions.push('reject')
         }
         if(props.status === 'applied'){
-          actions.push('reject')
+          actions.push('recall')
         }
         if(props.status === 'rejected'){
        //   actions.push('reapply')
