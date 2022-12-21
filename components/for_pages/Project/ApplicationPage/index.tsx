@@ -174,7 +174,7 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
             <>
             <Button
             onClick={() => changeStatus(ApplicationStatus.RejectedByVolunteer)}
-            type='button' projectBtn='red'>RECALL</Button>
+            type='button' projectBtn='red'>REJECT</Button>
             </>
             :
             <>

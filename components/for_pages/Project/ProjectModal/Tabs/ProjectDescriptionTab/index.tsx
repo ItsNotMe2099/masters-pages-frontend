@@ -42,6 +42,9 @@ const TabProjectDescription = ({project, showType, organization, onClose, fullWi
   console.log("ISEdit11", isEdit)
   const dispatch = useDispatch()
 
+  const appContext = useAppContext()
+  const currentProfile = appContext.profile
+
   const handleSave = () => {
     setIsEdit(false);
     setProjectPreview(null)
@@ -80,6 +83,16 @@ const TabProjectDescription = ({project, showType, organization, onClose, fullWi
     projectContext.delete();
   }
 
+  const handleDeleteSaved = (project: IProject) => {
+    dispatch(confirmOpen({
+      description: `${t('task.confirmDelete')} «${project.title}»?`,
+      onConfirm: async () => {
+        dispatch(modalClose())
+        await ProfileRepository.deleteFromSavedProjects({profileId: currentProfile?.id}, project.id)
+      }
+    }))
+  }
+
 
   const renderActionButton = (status: ProjectStatus) => {
     switch (status) {
@@ -116,8 +129,11 @@ const TabProjectDescription = ({project, showType, organization, onClose, fullWi
       application?.status === ApplicationStatus.CompleteRequest ||
       application?.status === ApplicationStatus.Completed ||
       application?.status === ApplicationStatus.RejectedByVolunteer ||
-      application?.status === ApplicationStatus.RejectedByCompany) ? null : [router.query.projectType !== 'saved' && <Button onClick={() => projectContext.saveToFavorite()} color={'white'} className={styles.delete}>SAVE</Button>,
-    <Button color={'white'} className={styles.edit} onClick={props.onApply}>Apply</Button>]}/>}
+      application?.status === ApplicationStatus.RejectedByCompany) ? null : router.query.projectType !== 'saved' ? [<Button onClick={() => projectContext.saveToFavorite()} color={'white'} className={styles.delete}>SAVE</Button>,
+    <Button color={'white'} className={styles.edit} onClick={props.onApply}>Apply</Button>] : [<Button color={'white'} className={styles.edit} onClick={props.onApply}>Apply</Button>,
+    <Button color={'white'}
+      onClick={() => handleDeleteSaved(project)} className={styles.delete}><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
+    ]}/>}
   </div>
   )
 }

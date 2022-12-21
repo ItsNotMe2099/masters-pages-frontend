@@ -262,7 +262,7 @@ const PublicProfile = (props) => {
             {projects.map((project, index) => <div className={styles.project}><ProjectCard key={project.id} project={project} actions={<ProjectActions  onModalOpen={(mode) => handleModalOpen(project, mode)}
                                                                                                                                                         actionsType={'public'} project={project}/>}/></div>)}
           </InfiniteScroll>}
-          {currentProjectId && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProjectId} isOpen />}
+          {modalKey === 'projectModal' && <ProjectModal showType={profile?.role === 'corporate' && profile !== currentProfile ? 'public' : 'client'} organization={organization}  projectId={currentProjectId} isOpen />}
           </>
         }
       {!currentSkill && props.showType ==='profile' && currentProfile && profile?.role !== 'corporate' && <CardProfileStat profile={profile}/>}
@@ -282,7 +282,7 @@ const PublicProfile = (props) => {
             <CardReviews profile={profile} skill={currentSkill}/>
           </>}
      </>}
-      {modalKey === 'projectModal'  && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen/>}
+      {/*modalKey === 'projectModal'  && <ProjectModal initialTab={initialProjectTab} showType={'public'} projectId={currentProjectId} isOpen/>*/}
     </ProfilePageLayout>
   )
 }
