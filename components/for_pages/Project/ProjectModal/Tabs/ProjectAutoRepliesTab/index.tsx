@@ -80,13 +80,13 @@ const ProjectAutorepliesTab = ({project}: Props) => {
     currentTab === ProjectAutoRepliesTabType.Applications ?
       [
         {
-          name: '',
+          name: 'Shortlist',
           prevStatus: ApplicationStatus.Applied,
           nextStatus: ApplicationStatus.Shortlist,
           applicationStatusChange: true
         },
         {
-          name: '',
+          name: 'Reject',
           prevStatus: ApplicationStatus.Applied,
           nextStatus: ApplicationStatus.RejectedByCompany,
           applicationStatusChange: true
@@ -96,13 +96,13 @@ const ProjectAutorepliesTab = ({project}: Props) => {
       currentTab === ProjectAutoRepliesTabType.Shortlist ?
         [
           {
-            name: '',
+            name: 'Invite',
             prevStatus: ApplicationStatus.Shortlist,
             nextStatus: ApplicationStatus.Invited,
             applicationStatusChange: true
           },
           {
-            name: '',
+            name: 'Reject',
             prevStatus: ApplicationStatus.Shortlist,
             nextStatus: ApplicationStatus.RejectedByCompany,
             applicationStatusChange: true
@@ -111,7 +111,7 @@ const ProjectAutorepliesTab = ({project}: Props) => {
         currentTab === ProjectAutoRepliesTabType.Invited ?
           [
             {
-              name: '',
+              name: 'Cancel invitation',
               prevStatus: ApplicationStatus.Invited,
               nextStatus: ApplicationStatus.Shortlist,
               applicationStatusChange: true
@@ -120,8 +120,8 @@ const ProjectAutorepliesTab = ({project}: Props) => {
           :
           currentTab === ProjectAutoRepliesTabType.Completed ?
             [
-              {name: '', nextStatus: 'feedback.created', isEvent: true},
-              {name: '', nextStatus: 'recommendation.created', isEvent: true},
+              {name: 'Completed', nextStatus: 'feedback.created', isEvent: true},
+              {name: 'Completed', nextStatus: 'recommendation.created', isEvent: true},
             ]
             :
             []

@@ -259,11 +259,6 @@ const ApplicationPage = ({application, index, total, project, modal, onEdit, cur
         case ApplicationStatus.RejectedByCompany:
           return (
             <div className={styles.btns}>
-              <Button
-
-              type='button' projectBtn='default'>
-                RESTORE
-              </Button>
               <Button className={styles.recycle} projectBtn='recycleBin'><img src='/img/icons/recycle-bin.svg' alt=''/></Button>
             </div>
           )

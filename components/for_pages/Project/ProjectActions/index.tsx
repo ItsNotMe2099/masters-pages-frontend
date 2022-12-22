@@ -251,7 +251,7 @@ const ProjectActionsInner = (props: Props) => {
 
       } else if (actionsType === 'public') {
         actions.push('share')
-        actions.push('save')
+        profile?.role !== ProfileRole.Corporate ? actions.push('save') : null
         profile?.role !== ProfileRole.Corporate ? actions.push('apply') : null
       }
       else if (actionsType === 'volunteer') {
