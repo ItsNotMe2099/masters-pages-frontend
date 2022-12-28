@@ -6,6 +6,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta name="yandex-verification" content="0e58b02c4e2ae496" />
           <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
