@@ -70,7 +70,14 @@ export default function LayoutAuthorized(props: Props) {
     { title: t('menu.news'), icon: 'news', link: '/News', badge: profile.notificationNewsCount },
     { title: t('menu.contacts'), icon: 'subscriptions', link: '/Contacts' },
     //{title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
-    { title: t('menu.volunteerProjects'), icon: 'orders', link: '/projects', isSeparator: true },
+    { title: t('menu.volunteerProjects'), icon: 'orders', link: '/projects', isSeparator: true, badge:
+        profile.notificationNewApplicationCount +
+        profile.notificationApplicationShortlistCount+
+        profile.notificationApplicationCompleteRequestCount +
+        profile.notificationApplicationCompletedCount+
+        profile.notificationApplicationExecutionCount +
+        profile.notificationApplicationRejectedByVolunteerCount +
+        profile.notificationApplicationRejectedByCompanyCount },
     { title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage', isSeparator: true },
     //{title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
     //{title: t('menu.reports'), icon: 'reports', link: '/Report'},
@@ -91,7 +98,15 @@ export default function LayoutAuthorized(props: Props) {
         { title: t('menu.orders'), icon: 'orders', link: '/orders', isSeparator: profile.role === 'client', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount + profile.notificationTaskResponseCount + profile.notificationTaskOfferCount },
       ] : []),
     ...(role === ProfileRole.Volunteer ? [
-      { title: t('menu.projects'), icon: 'projects', link: '/projects', isSeparator: true },
+      { title: t('menu.projects'), icon: 'projects', link: '/projects', isSeparator: true,  badge:
+          profile.notificationNewApplicationCount +
+          profile.notificationApplicationShortlistCount+
+          profile.notificationApplicationCompleteRequestCount +
+          profile.notificationApplicationCompletedCount+
+          profile.notificationApplicationExecutionCount +
+          profile.notificationApplicationRejectedByVolunteerCount +
+          profile.notificationApplicationRejectedByCompanyCount
+      },
       { title: t('menu.findProjects'), icon: 'find-projects', link: '/project-search', isSeparator: false },
       { title: t('menu.findCompanies'), icon: 'find-clients', link: '/FindCompanies', isSeparator: false },
     ] : []),

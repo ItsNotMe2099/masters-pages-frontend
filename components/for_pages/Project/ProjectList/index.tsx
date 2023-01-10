@@ -50,9 +50,9 @@ const ProjectList = (props: Props) => {
   const tabs = useMemo(
     () => ([
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
-      {name: t('personalArea.tabProjects.menu.intake'), key: ProjectStatus.Published},
+      {name: t('personalArea.tabProjects.menu.intake'), key: ProjectStatus.Published, badge:   currentProfile.notificationNewApplicationCount + currentProfile.notificationApplicationShortlistCount + currentProfile.notificationApplicationRejectedByVolunteerCount},
       {name: t('personalArea.tabProjects.menu.paused'), key: ProjectStatus.Paused},
-      {name: t('personalArea.tabProjects.menu.execution'), key: ProjectStatus.Execution},
+      {name: t('personalArea.tabProjects.menu.execution'), key: ProjectStatus.Execution, badge:  currentProfile.notificationApplicationCompleteRequestCount +  currentProfile.notificationApplicationCompletedCount +  currentProfile.notificationApplicationExecutionCount},
       {name: t('personalArea.tabProjects.menu.completed'), key: ProjectStatus.Completed},
       {name: t('personalArea.tabProjects.menu.cancelled'), key: ProjectStatus.Canceled},
     ]).map(item => {
@@ -61,7 +61,15 @@ const ProjectList = (props: Props) => {
         link: `/projects/${item.key}`
       }
     }),
-    [currentProfile.role, counts]
+    [currentProfile.role, counts,
+      currentProfile.notificationNewApplicationCount,
+      currentProfile.notificationApplicationShortlistCount,
+      currentProfile.notificationApplicationCompleteRequestCount,
+      currentProfile.notificationApplicationCompletedCount,
+      currentProfile.notificationApplicationExecutionCount,
+      currentProfile.notificationApplicationRejectedByVolunteerCount,
+      currentProfile.notificationApplicationRejectedByCompanyCount,
+    ]
   )
 
   const [currentProjectId, setCurrentProjectId] = useState<number | null>(null)

@@ -1,31 +1,22 @@
-import {confirmChangeData, confirmModalClose, confirmOpen, modalClose, projectOpen} from 'components/Modal/actions'
+import {confirmOpen, modalClose} from 'components/Modal/actions'
 import Loader from 'components/ui/Loader'
 import Tabs from 'components/ui/Tabs'
 import {useRouter} from 'next/router'
 import * as React from 'react'
 import {useEffect, useMemo, useState} from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import {IRootState} from 'types'
 import styles from './index.module.scss'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {TabSelect} from 'components/TabSelect'
 import {useTranslation} from 'next-i18next'
-import Layout from 'components/layout/Layout'
-import {getAuthServerSide} from 'utils/auth'
-import Modals from 'components/layout/Modals'
-import Button from 'components/ui/Button'
-import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
-import ProjectModal from 'components/for_pages/Project/ProjectModal'
+import {ProfileRole} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
-import {IProject, ProjectStatus} from 'data/intefaces/IProject'
+import {IProject} from 'data/intefaces/IProject'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
-import ProjectRepository from 'data/repositories/ProjectRepository'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
-import OrganizationRepository from 'data/repositories/OrganizationRepository'
-import { IOrganization } from 'data/intefaces/IOrganization'
 import ProjectActions from "components/for_pages/Project/ProjectActions";
 
 interface Props {
@@ -52,17 +43,24 @@ const ApplicationList = (props: Props) => {
     () => ( [
       {name: t('personalArea.tabProjects.menu.saved'), key: 'saved'},
       {name: t('personalArea.tabProjects.menu.applied'), key: ApplicationStatus.Applied},
-      {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited},
-      {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution},
+      {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited, badge: currentProfile.notificationApplicationInvitedCount},
+      {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution, badge: currentProfile.notificationApplicationExecutionCount},
       {name: 'C-request', key: ApplicationStatus.CompleteRequest},
-      {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed},
-      {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected'},
+      {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed, badge: currentProfile.notificationApplicationCompletedCount},
+      {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected', badge:   currentProfile.notificationApplicationRejectedByCompanyCount},
     ]).map(item => {
       return{
         ...item,
         link: `/projects/${item.key}`
       }}),
-    [currentProfile.role, counts]
+    [currentProfile.role, counts, ProfileRole.Client,
+      currentProfile.notificationNewApplicationCount,
+      currentProfile.notificationApplicationShortlistCount,
+      currentProfile.notificationApplicationCompleteRequestCount,
+      currentProfile.notificationApplicationCompletedCount,
+      currentProfile.notificationApplicationExecutionCount,
+      currentProfile.notificationApplicationRejectedByVolunteerCount,
+      currentProfile.notificationApplicationRejectedByCompanyCount,]
   )
 
   const fetchInitial = async () => {

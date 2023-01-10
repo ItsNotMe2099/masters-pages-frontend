@@ -43,7 +43,19 @@ export interface IProfile{
   notificationTaskResponseDeclinedCount?: number
   notificationEventCount?: number
   notificationNewsCount?: number
-  feedbacksCount?: number
+
+
+
+ notificationNewApplicationCount?: number
+ notificationApplicationShortlistCount?: number
+ notificationApplicationInvitedCount?: number
+ notificationApplicationCompleteRequestCount?: number;
+ notificationApplicationCompletedCount?: number
+ notificationApplicationExecutionCount?: number
+ notificationApplicationRejectedByVolunteerCount?: number
+ notificationApplicationRejectedByCompanyCount?: number
+
+feedbacksCount?: number
   tasksCount?: number
   totalAmount?: number
   totalHours?: number,
