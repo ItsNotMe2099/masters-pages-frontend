@@ -93,13 +93,3 @@ export interface IProjectNotification {
   notificationProjectGroupChatMessagesCount: number,
 }
 
-
-
-  notificationNewApplicationCount: number,
-  notificationApplicationShortlistCount: number,
-  notificationApplicationInvitedCount: number,
-  notificationApplicationCompleteRequestCount: number,
-  notificationApplicationCompletedCount: number,
-  notificationApplicationExecutionCount: number,
-  notificationApplicationRejectedByVolunteerCount: number,
-  notificationApplicationRejectedByCompanyCount: number,
