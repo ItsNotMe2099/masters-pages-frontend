@@ -9,7 +9,7 @@ import {IUser} from 'data/intefaces/IUser'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import UserRepository from 'data/repositories/UserRepostory'
 import { useRouter } from 'next/router'
-import {IProject, ProjectStatus} from "data/intefaces/IProject";
+import {IProject, IProjectNotification, ProjectStatus} from "data/intefaces/IProject";
 import {DeepPartial} from "redux";
 import ProjectRepository from "data/repositories/ProjectRepository";
 import {useAppContext} from "context/state";
@@ -28,6 +28,8 @@ import OrganizationRepository from "data/repositories/OrganizationRepository";
 import {IAutoMessages} from "data/intefaces/IAutoMessages";
 import AutoMessagesRepository from "data/repositories/AutoMessagesRepository";
 import {IApplication} from "data/intefaces/IApplication";
+import NotificationRepository from "data/repositories/NotificationRepository";
+import useInterval from "use-interval";
 
 interface IState {
   project: IProject | null,
@@ -50,6 +52,7 @@ interface IState {
   fetchAutoMessages: () => void
   showModal: (type: ModalType, args?: any) => void
   hideModal: () => void
+  notification: IProjectNotification | null
 }
 
 const loginState$ = new Subject<boolean>()
@@ -65,6 +68,7 @@ const defaultValue: IState = {
   modal: null,
   modalArguments: null,
   currentApplication: null,
+  notification: null,
   fetch: () => null,
   setCurrentApplication: (application: IApplication) => null,
   changeStatus: (status: ProjectStatus) => null,
@@ -101,6 +105,7 @@ export function ProjectWrapper(props: Props) {
   const [modal, setModal] = useState<ModalType | null>(null)
   const [modalArguments, setModalArguments] = useState<any>(null)
   const [currentApplication, setCurrentApplication] = useState<IApplication | null>(null)
+  const [notification, setNotification] = useState<IProjectNotification | null>(null)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -132,6 +137,20 @@ export function ProjectWrapper(props: Props) {
     }
   }, [props.projectId, props.project])
 
+  useEffect(() => {
+   fetchNotification();
+  }, [props.projectId])
+
+  useInterval(() => {
+    fetchNotification();
+  }, 10000)
+
+  const fetchNotification = async () => {
+    const res = await NotificationRepository.getProjectNotification(props.projectId);
+    if(res != null){
+      setNotification(res);
+    }
+  }
   const fetchAutoMessages = async () => {
     setAutoMessageLoading(true);
     const res = await AutoMessagesRepository.getProjectAutoMessagesByProjectId(projectId);
@@ -249,6 +268,7 @@ export function ProjectWrapper(props: Props) {
     fetchAutoMessages,
     loading,
     editLoading,
+    notification,
     update,
     create,
     delete: handleDelete,

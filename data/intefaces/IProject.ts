@@ -78,3 +78,28 @@ export interface IProject {
   createdAt: Date;
   updatedAt: string
 }
+
+
+export interface IProjectNotification {
+  notificationNewApplicationCount: number,
+  notificationApplicationShortlistCount: number,
+  notificationApplicationInvitedCount: number,
+  notificationApplicationCompleteRequestCount: number,
+  notificationApplicationCompletedCount: number,
+  notificationApplicationExecutionCount: number,
+  notificationApplicationRejectedByVolunteerCount: number,
+  notificationApplicationRejectedByCompanyCount: number,
+  notificationProjectChatMessagesCount:number
+  notificationProjectGroupChatMessagesCount: number,
+}
+
+
+
+  notificationNewApplicationCount: number,
+  notificationApplicationShortlistCount: number,
+  notificationApplicationInvitedCount: number,
+  notificationApplicationCompleteRequestCount: number,
+  notificationApplicationCompletedCount: number,
+  notificationApplicationExecutionCount: number,
+  notificationApplicationRejectedByVolunteerCount: number,
+  notificationApplicationRejectedByCompanyCount: number,

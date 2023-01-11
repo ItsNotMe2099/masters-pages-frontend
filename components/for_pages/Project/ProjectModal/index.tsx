@@ -46,8 +46,15 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
   const dispatch = useDispatch()
   const tabs = (showType === 'client' && projectId && profile) ? [
       {name: 'Description', key: 'description', icon: 'description'},
-      {name: 'Volunteers', key: 'volunteers', icon: 'volunteers'},
-      {name: 'Messages', key: 'messages', icon: 'messages'},
+      {name: 'Volunteers', key: 'volunteers', icon: 'volunteers', badge: projectContext.notification?.notificationNewApplicationCount +
+          projectContext.notification?.notificationApplicationShortlistCount +
+          projectContext.notification?.notificationApplicationInvitedCount +
+          projectContext.notification?.notificationApplicationCompleteRequestCount +
+          projectContext.notification?.notificationApplicationCompletedCount +
+          projectContext.notification?.notificationApplicationExecutionCount +
+          projectContext.notification?.notificationApplicationRejectedByVolunteerCount +
+          projectContext.notification?.notificationApplicationRejectedByCompanyCount},
+      {name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount},
       {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
       {name: 'Events', key: 'events', icon: 'events'},
       {name: 'Reports', key: 'reports', icon: 'reports'},
@@ -59,7 +66,7 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
       [
         {name: 'Description', key: 'description', icon: 'description'},
         {name: 'Application', key: 'application', icon: 'application'},
-        {name: 'Messages', key: 'messages', icon: 'messages'},
+        {name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount},
       ]
 
 
