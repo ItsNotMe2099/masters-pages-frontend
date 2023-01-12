@@ -32,12 +32,12 @@ const TabVolunteers = ({project, ...props}: Props) => {
   const tabs = useMemo(
     () => ( [
       {name: 'Applications', key: ApplicationStatus.Applied, badge:  projectContext.notification?.notificationNewApplicationCount},
-      {name: 'Shortlist', key: ApplicationStatus.Shortlist, badge:   projectContext.notification?.notificationApplicationShortlistCount},
-      {name: 'Invited', key: ApplicationStatus.Invited, badge: projectContext.notification?.notificationApplicationInvitedCount},
+      {name: 'Shortlist', key: ApplicationStatus.Shortlist},
+      {name: 'Invited', key: ApplicationStatus.Invited},
       {name: 'Execution', key: ApplicationStatus.Execution, badge: projectContext.notification?.notificationApplicationExecutionCount},
       {name: 'C-request', key: ApplicationStatus.CompleteRequest, badge: projectContext.notification?.notificationApplicationCompleteRequestCount},
       {name: 'Completed', key: ApplicationStatus.Completed},
-      {name: 'Rejected', key: ApplicationStatus.RejectedByCompany, badge: projectContext.notification?.notificationApplicationRejectedByCompanyCount},
+      {name: 'Rejected', key: ApplicationStatus.RejectedByCompany},
     ]).map(item => {
       return{
         ...item,

@@ -47,13 +47,9 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
   const tabs = (showType === 'client' && projectId && profile) ? [
       {name: 'Description', key: 'description', icon: 'description'},
       {name: 'Volunteers', key: 'volunteers', icon: 'volunteers', badge: projectContext.notification?.notificationNewApplicationCount +
-          projectContext.notification?.notificationApplicationShortlistCount +
-          projectContext.notification?.notificationApplicationInvitedCount +
           projectContext.notification?.notificationApplicationCompleteRequestCount +
-          projectContext.notification?.notificationApplicationCompletedCount +
           projectContext.notification?.notificationApplicationExecutionCount +
-          projectContext.notification?.notificationApplicationRejectedByVolunteerCount +
-          projectContext.notification?.notificationApplicationRejectedByCompanyCount},
+          projectContext.notification?.notificationApplicationRejectedByVolunteerCount},
       {name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount},
       {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
       {name: 'Events', key: 'events', icon: 'events'},
