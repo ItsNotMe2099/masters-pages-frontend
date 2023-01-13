@@ -50,11 +50,11 @@ const ProjectList = (props: Props) => {
   const tabs = useMemo(
     () => ([
       {name: t('personalArea.tabProjects.menu.draft'), key: ProjectStatus.Draft},
-      {name: t('personalArea.tabProjects.menu.intake'), key: ProjectStatus.Published, badge:   currentProfile.notificationNewApplicationCount + currentProfile.notificationApplicationRejectedByVolunteerCount},
-      {name: t('personalArea.tabProjects.menu.paused'), key: ProjectStatus.Paused},
-      {name: t('personalArea.tabProjects.menu.execution'), key: ProjectStatus.Execution, badge:  currentProfile.notificationApplicationCompleteRequestCount + currentProfile.notificationApplicationExecutionCount},
-      {name: t('personalArea.tabProjects.menu.completed'), key: ProjectStatus.Completed},
-      {name: t('personalArea.tabProjects.menu.cancelled'), key: ProjectStatus.Canceled},
+      {name: t('personalArea.tabProjects.menu.intake'), key: ProjectStatus.Published, badge:  currentProfile.notificationsForIntakeProjectsCount},
+      {name: t('personalArea.tabProjects.menu.paused'), key: ProjectStatus.Paused, badge:   currentProfile.notificationsForPausedProjectsCount},
+      {name: t('personalArea.tabProjects.menu.execution'), key: ProjectStatus.Execution, badge:  currentProfile.notificationsForExecutionProjectsCount},
+      {name: t('personalArea.tabProjects.menu.completed'), key: ProjectStatus.Completed, badge:  currentProfile.notificationsForCompletedProjectsCount},
+      {name: t('personalArea.tabProjects.menu.cancelled'), key: ProjectStatus.Canceled, badge:  currentProfile.notificationsForCanceledProjectsCount},
     ]).map(item => {
       return {
         ...item,

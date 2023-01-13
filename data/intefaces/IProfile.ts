@@ -55,6 +55,15 @@ export interface IProfile{
  notificationApplicationRejectedByVolunteerCount?: number
  notificationApplicationRejectedByCompanyCount?: number
 
+
+  notificationsForIntakeProjectsCount?: number
+  notificationsForPausedProjectsCount?: number
+  notificationsForExecutionProjectsCount?: number
+  notificationsForCompletedProjectsCount?: number
+  notificationsForCanceledProjectsCount?: number
+
+  notificationProjectChatMessagesCount?: number
+
 feedbacksCount?: number
   tasksCount?: number
   totalAmount?: number

@@ -71,10 +71,11 @@ export default function LayoutAuthorized(props: Props) {
     { title: t('menu.contacts'), icon: 'subscriptions', link: '/Contacts' },
     //{title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount},
     { title: t('menu.volunteerProjects'), icon: 'orders', link: '/projects', isSeparator: true, badge:
-        profile.notificationNewApplicationCount +
-        profile.notificationApplicationCompleteRequestCount +
-        profile.notificationApplicationExecutionCount +
-        profile.notificationApplicationRejectedByCompanyCount},
+        profile.notificationsForIntakeProjectsCount +
+        profile.notificationsForPausedProjectsCount+
+        profile.notificationsForExecutionProjectsCount+
+        profile.notificationsForCompletedProjectsCount+
+        profile.notificationsForCanceledProjectsCount},
     { title: t('menu.findVolunteer'), icon: 'find-clients', link: '/SearchVolunteerPage', isSeparator: true },
     //{title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount},
     //{title: t('menu.reports'), icon: 'reports', link: '/Report'},
@@ -96,10 +97,12 @@ export default function LayoutAuthorized(props: Props) {
       ] : []),
     ...(role === ProfileRole.Volunteer ? [
       { title: t('menu.projects'), icon: 'projects', link: '/projects', isSeparator: true,  badge:
-          profile.notificationApplicationShortlistCount+
+
+        profile.notificationApplicationInvitedCount+
           profile.notificationApplicationCompletedCount+
           profile.notificationApplicationExecutionCount +
-          profile.notificationApplicationRejectedByCompanyCount
+          profile.notificationApplicationRejectedByCompanyCount +
+         profile.notificationProjectChatMessagesCount
       },
       { title: t('menu.findProjects'), icon: 'find-projects', link: '/project-search', isSeparator: false },
       { title: t('menu.findCompanies'), icon: 'find-clients', link: '/FindCompanies', isSeparator: false },
