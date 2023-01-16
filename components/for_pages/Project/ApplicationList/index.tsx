@@ -73,7 +73,7 @@ const ApplicationList = (props: Props) => {
       currentProfile.notificationApplicationCompletedCount,
       currentProfile.notificationApplicationExecutionCount,
       currentProfile.notificationApplicationRejectedByVolunteerCount,
-      currentProfile.notificationApplicationRejectedByCompanyCount,]
+      currentProfile.notificationApplicationRejectedByCompanyCount, notification]
   )
 
   const fetchInitial = async () => {
