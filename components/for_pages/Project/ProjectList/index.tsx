@@ -46,6 +46,8 @@ const ProjectList = (props: Props) => {
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentProjectEditId, setCurrentProjectEditId] = useState<number>(null)
+  useEffect(() => {
+  } ,[])
   const limit = 30;
   const tabs = useMemo(
     () => ([

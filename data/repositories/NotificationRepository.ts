@@ -1,6 +1,6 @@
 import request from 'utils/request'
 
-import {IProject, IProjectNotification, ProjectStatus} from 'data/intefaces/IProject'
+import {IProject, IProjectApplicationsNotification, IProjectNotification, ProjectStatus} from 'data/intefaces/IProject'
 import {IPagination} from 'types/types'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 export interface IProjectSearchRequest{
@@ -19,6 +19,17 @@ export default class NotificationRepository {
   static async getProjectNotification(projectId: number): Promise<IProjectNotification | null> {
     const res = await request({
       url: `/api/notification/project/${projectId}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async getApplicationStatus(): Promise<IProjectApplicationsNotification | null> {
+    const res = await request({
+      url: `/api/notification/byApplicationStatus`,
       method: 'GET',
     })
     if (res.err) {

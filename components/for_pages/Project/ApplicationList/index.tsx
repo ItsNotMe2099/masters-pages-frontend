@@ -11,13 +11,15 @@ import {TabSelect} from 'components/TabSelect'
 import {useTranslation} from 'next-i18next'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import {useAppContext} from 'context/state'
-import {IProject} from 'data/intefaces/IProject'
+import {IProject, IProjectApplicationsNotification, IProjectNotification} from 'data/intefaces/IProject'
 import ProjectCard from 'components/for_pages/Project/ProjectCard'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import ProjectActions from "components/for_pages/Project/ProjectActions";
+import useInterval from "use-interval";
+import NotificationRepository from "data/repositories/NotificationRepository";
 
 interface Props {
   onModalOpen: (project: IProject, mode: string) => void
@@ -37,18 +39,29 @@ const ApplicationList = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const [counts, setCounts] = useState<IProjectCounts>({})
   const [savedProjectsTotal, setSavedProjectsTotal] = useState(0)
+  const [notification, setNotification] = useState<IProjectApplicationsNotification | null>(null)
+
   const role = appContext.role
   const limit = 30;
+
+  const fetchNotification = async () => {
+    const res = await NotificationRepository.getApplicationStatus();
+    if(res != null){
+      setNotification(res);
+    }
+  }
+  useInterval(() => {
+    fetchNotification();
+  }, 10000)
   const tabs = useMemo(
     () => ( [
       {name: t('personalArea.tabProjects.menu.saved'), key: 'saved'},
-      {name: t('personalArea.tabProjects.menu.applied'), key: ApplicationStatus.Applied},
-      {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited, badge: currentProfile.notificationApplicationInvitedCount},
-      {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution, badge: currentProfile.notificationApplicationExecutionCount},
-      {name: 'C-request', key: ApplicationStatus.CompleteRequest},
-      {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed, badge: currentProfile.notificationApplicationCompletedCount},
-      {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected', badge:   currentProfile.notificationApplicationRejectedByCompanyCount},
-    ]).map(item => {
+      {name: t('personalArea.tabProjects.menu.applied'), key: ApplicationStatus.Applied, badge:  notification?.notificationProjectMessagesForAppliedApplicationCount},
+      {name: t('personalArea.tabProjects.menu.invited'), key: ApplicationStatus.Invited, badge: notification?.notificationProjectMessagesForInvitedApplicationCount + currentProfile.notificationApplicationInvitedCount},
+      {name: t('personalArea.tabProjects.menu.execution'), key: ApplicationStatus.Execution, badge: notification?.notificationProjectMessagesForExecutionApplicationCount + currentProfile.notificationApplicationExecutionCount},
+      {name: 'C-request', key: ApplicationStatus.CompleteRequest, badge: notification?.notificationProjectMessagesForCompleteRequestApplicationCount},
+      {name: t('personalArea.tabProjects.menu.completed'), key: ApplicationStatus.Completed, badge:  notification?.notificationProjectMessagesForCompletedApplicationCount + currentProfile.notificationApplicationCompletedCount},
+      {name: t('personalArea.tabProjects.menu.rejected'), key: 'rejected', badge:  notification?.notificationProjectMessagesForRejectedApplicationCount + currentProfile.notificationApplicationRejectedByCompanyCount},  ]).map(item => {
       return{
         ...item,
         link: `/projects/${item.key}`
@@ -91,6 +104,7 @@ const ApplicationList = (props: Props) => {
   }
   useEffect(() => {
     fetchInitial();
+    fetchNotification();
   }, [projectType, currentProfile])
 
 
