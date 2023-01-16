@@ -27,6 +27,7 @@ export default class NotificationRepository {
     return res.data
   }
 
+
   static async getApplicationStatus(): Promise<IProjectApplicationsNotification | null> {
     const res = await request({
       url: `/api/notification/byApplicationStatus`,
@@ -35,7 +36,12 @@ export default class NotificationRepository {
     if (res.err) {
       return null
     }
-    return res.data
+    const keys = Object.keys(res.data);
+    const map = {}
+    for(const key of keys){
+      map[key] = parseInt(res.data[key], 10) ?? 0;
+    }
+    return map as IProjectApplicationsNotification
   }
 
 }
