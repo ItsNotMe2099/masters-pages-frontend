@@ -87,7 +87,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
             name='description'
             label='Task description'
           />
-          <DocField name='photos' accept={[FileUploadAcceptType.Image]} multiple/>
+          <FileField name='photos' multiple largeBtn/>
           <DateField name='deadline' label='Deadline'/>
         </div>
       </Form>

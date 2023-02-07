@@ -9,14 +9,14 @@ import { useDropzone, DropzoneOptions } from 'react-dropzone'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 import nextId from 'react-id-generator'
-import { useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import AddFileButton from './components/AddFileBtn'
 import { Trans } from 'next-i18next'
-import {IRootState} from 'types'
-import {useAppContext} from 'context/state'
-import {useField} from 'formik'
+import { IRootState } from 'types'
+import { useAppContext } from 'context/state'
+import { useField } from 'formik'
 import FieldError from 'components/ui/FieldError'
-import {IField} from 'types/types'
+import { IField } from 'types/types'
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -30,12 +30,12 @@ const transformFile = file => {
   }
   return transformedFile
 }
-const formatValue = (value): FileEntity[]  => {
-  return value ? (Array.isArray(value) ? value.map((file) => { return {path: file?.path as string || file as string}}) : [{path: value?.path as string || value as string}]) : []
+const formatValue = (value): FileEntity[] => {
+  return value ? (Array.isArray(value) ? value.map((file) => { return { path: file?.path as string || file as string } }) : [{ path: value?.path as string || value as string }]) : []
 }
 
 
-export interface FileFieldProps<T>  extends IField<T>{
+export interface FileFieldProps<T> extends IField<T> {
   accept?: string
   labelMultiple?: string
   labelSingle?: string
@@ -43,6 +43,7 @@ export interface FileFieldProps<T>  extends IField<T>{
   minSize?: number
   multiple?: boolean,
   addFileButton?: ReactElement
+  largeBtn?: boolean
 }
 
 
@@ -54,11 +55,13 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
     maxSize,
     minSize,
     multiple = false,
+    maxAmount,
+    addFileButton,
     ...rest
   } = props
   const dispatch = useDispatch()
   const [field, meta, helpers] = useField(props)
-  const {value} = field;
+  const { value } = field;
   const token = Cookies.get('token')
   const appContext = useAppContext()
   const role = appContext.role
@@ -67,7 +70,7 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
     signingUrlMethod: 'GET',
     accept: '*/*',
     uploadRequestHeaders: { 'x-amz-acl': 'private' },
-    signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role},
+    signingUrlHeaders: { 'Authorization': `Bearer ${token}`, 'profile-role': role },
     signingUrlWithCredentials: false,
     signingUrlQueryParams: { uploadType: 'avatar' },
     autoUpload: true,
@@ -79,14 +82,14 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
 
   useEffect(() => {
     const filtered = files.filter((file => !!file.path))
-    if(multiple) {
+    if (multiple) {
       helpers.setValue(filtered.map(item => item.path))
-    }else{
+    } else {
       helpers.setValue(filtered[0]?.path || null)
     }
   }, [files])
   useEffect(() => {
-    if(props.filesFromDropZone && props.filesFromDropZone.length > 0){
+    if (props.filesFromDropZone && props.filesFromDropZone.length > 0) {
       onDrop(props.filesFromDropZone)
     }
   }, [props.filesFromDropZone])
@@ -98,7 +101,7 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
     setFiles(oldFiles => oldFiles.map(item => {
       return {
         ...item,
-        ...(item.rawFile?.name === file.rawFile.name ? {catalogId: file.catalogId, path: file.path, mediaId: file.mediaId} : {})
+        ...(item.rawFile?.name === file.rawFile.name ? { catalogId: file.catalogId, path: file.path, mediaId: file.mediaId } : {})
       }
     }))
   }
@@ -106,7 +109,7 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
     setFiles(oldFiles => oldFiles.map(item => {
       return {
         ...item,
-        ...( ( (file.path && item.path === file.path) || (!file.path && item.rawFile?.name === file.rawFile.name)) ? {data} : {})
+        ...(((file.path && item.path === file.path) || (!file.path && item.rawFile?.name === file.rawFile.name)) ? { data } : {})
       }
     }))
   }
@@ -115,9 +118,9 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
     setFiles(updatedFiles.map(transformFile))
   }, [files])
 
-  const onRemove =(file: FileEntity) => {
+  const onRemove = (file: FileEntity) => {
     setFiles(files => {
-      const index = files.findIndex( item => (file.key && file.key === item.key) || (!file.key && item.path === file.path))
+      const index = files.findIndex(item => (file.key && file.key === item.key) || (!file.key && item.path === file.path))
       const newFiles = [...files]
       newFiles.splice(index, 1)
       return newFiles
@@ -146,14 +149,14 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
           />
         ))}
       </div>}
-      {files.length === 0 && <div
+      {!props.largeBtn && files.length === 0 && <div
         data-testid="dropzone"
         className={styles.dropZone}
         {...getRootProps()}
       >
         <div className={styles.emptyFiles}>
           {/*<img src="/img/icons/attach_file.svg" alt=''/>*/}
-          <Trans i18nKey="fileInput.fileHere">Перенесите сюда файл или нажмите<br/> для выбора файла на компьютере</Trans>
+          <Trans i18nKey="fileInput.fileHere">Перенесите сюда файл или нажмите<br /> для выбора файла на компьютере</Trans>
         </div>
         <input
           {...getInputProps()}
@@ -161,17 +164,40 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
 
       </div>}
       <FieldError showError={hasError}>{meta.error}</FieldError>
-      {files.length > 0  && <div className={styles.footer}>
+      {!props.largeBtn && files.length > 0 && <div className={styles.footer}>
         <div
           data-testid="dropzone"
           className={styles.uploadDropZone}
           {...getRootProps()}
         >
-          {props.addFileButton ? props.addFileButton : props.altView ? <AddFileButton altView/> : <AddFileButton/>}
+          {props.addFileButton ? props.addFileButton : props.altView ? <AddFileButton altView /> : <AddFileButton />}
           <input
             {...getInputProps()}
           />
         </div>
+      </div>}
+      {(files.length === 0 || multiple) && props.largeBtn && <div
+        data-testid="dropzone"
+        className={styles.dropZone}
+        {...getRootProps()}
+      >
+        {(!maxAmount || maxAmount !== value.length) &&
+          <>
+            {addFileButton ? addFileButton :
+              <div className={styles.add}>
+                <div className={styles.image}>
+                  <img src='/img/DocField/plus.svg' alt='' />
+                </div>
+                <div className={styles.text}>
+                  Add File
+                </div>
+              </div>}
+          </>
+        }
+        <input
+          {...getInputProps()}
+        />
+
       </div>}
     </div>
   )
