@@ -169,9 +169,9 @@ const DocField = (props: any & FileFieldProps<string | string[]>) => {
           <div className={styles.text}>
             Add File
           </div>
-          <div className={styles.only}>
+          {!props.accept ? <div className={styles.only}>
             Format allowed PDF, DOC and TXT
-          </div>
+          </div> : null}
         </div>}
         </>
         }

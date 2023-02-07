@@ -62,6 +62,7 @@ const CardCategories = (props: Props) => {
         dispatch(deleteSkill(item.id))
       }
     }))
+    
   }
   const handleSkillClick = (item: SkillData) => {
     onCategoryChange(item.categoryId, item.subCategoryId)

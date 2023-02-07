@@ -1,10 +1,11 @@
 import request from 'utils/request'
-import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
-import {format, parse} from 'date-fns'
+import { IProfile, ProfileRole } from 'data/intefaces/IProfile'
+import { format, parse } from 'date-fns'
 import { IProject } from 'data/intefaces/IProject'
 import { IPagination } from 'types/types'
-import {IProfileSettings} from "types";
-export interface IDataQueryList{
+import { IProfileSettings } from "types";
+import { ISkill } from 'data/intefaces/ISkill'
+export interface IDataQueryList {
   page?: number,
   limit?: number,
   search?: string,
@@ -21,12 +22,23 @@ export default class ProfileRepository {
       return null
     }
     const data = res.data;
-    return data ? {...data, birthday: data.birthday ? format(parse(data.birthday, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy') : null} : null
+    return data ? { ...data, birthday: data.birthday ? format(parse(data.birthday, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy') : null } : null
 
   }
   static async fetchById(id: number): Promise<IProfile | null> {
     const res = await request({
       url: `/api/profile/${id}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchSkills(): Promise<ISkill[]> {
+    const res = await request({
+      url: `/api/profile/skill`,
       method: 'GET',
     })
     if (res.err) {
@@ -70,7 +82,7 @@ export default class ProfileRepository {
     return res.data
   }
 
-  static async fetchSavedProjects(page: number = 1, limit: number = 100): Promise<IPagination<IProject> | null>  {
+  static async fetchSavedProjects(page: number = 1, limit: number = 100): Promise<IPagination<IProject> | null> {
     const res = await request({
       url: `/api/profile/saved-projects?page=${page}&limit=${limit}`,
       method: 'GET',
@@ -127,7 +139,7 @@ export default class ProfileRepository {
     return res.data
   }
 
-  static async updateSettings( data: any): Promise<IProfile | null> {
+  static async updateSettings(data: any): Promise<IProfile | null> {
     const res = await request({
       url: `/api/profile/settings`,
       method: 'POST',

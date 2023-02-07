@@ -1,0 +1,66 @@
+@import "../../../../scss/index";
+
+.form {}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+  @media screen and (max-width: $xs-max) {
+    width: 100%;
+  }
+
+  .title__top {
+    @media screen and (max-width: $xs-max) {
+      display: none;
+    }
+  }
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+
+  &__top {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 32px;
+  }
+}
+
+.btnContainer {
+  @include lg {
+    margin: auto;
+  }
+
+  @media screen and (max-width: $xs-max) {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.tip {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #6D718C;
+  margin-bottom: 20px;
+}
+
+.optional{
+  margin-top: 60px;
+  width: 50%;
+}
+
+.separator{
+  height: 1px;
+  width: 100%;
+  background-color: rgba(144, 144, 144, 0.5);
+  margin-bottom: 20px;
+}

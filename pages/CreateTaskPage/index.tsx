@@ -1,7 +1,7 @@
 
 import Loader from 'components/ui/Loader'
 import Modal from 'components/ui/Modal'
-import CreateTaskForm from 'components/for_pages/CreateTaskPage/Form'
+import CreateTaskForm from 'components/for_pages/CreateTaskPage/NewForm'
 import { IRootState } from 'types'
 import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
@@ -60,12 +60,13 @@ const CreateTaskPage = (props) => {
       <div className={styles.container}>
 
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
-        <CreateTaskForm onSubmit={handleSubmit}    isMaster={isMaster} onChangeForStat={handleChangeForStat} initialValues={{
+        {/*<CreateTaskForm onSubmit={handleSubmit}    isMaster={isMaster} onChangeForStat={handleChangeForStat} initialValues={{
           countryCode: profile?.geoname?.country,
           geonameid: profile?.geonameid,
           visibilityType: isMaster ? 'private' : 'public',
           masterRole: isMaster ? profile.role : null,
-        }}/>
+        }}/>*/}
+        <CreateTaskForm isMaster={isMaster}/>
 
       </div>
 
