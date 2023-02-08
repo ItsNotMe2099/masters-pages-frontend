@@ -1,8 +1,8 @@
 import request from 'utils/request'
-import {IPagination} from 'types/types'
-import { ITask } from 'types'
+import { IPagination } from 'types/types'
+import { ITask, ITaskForm } from 'types'
 
-export interface ITaskSearchRequest{
+export interface ITaskSearchRequest {
   keywords?: string,
   mainCategoryId?: number
   subCategoryId?: number
@@ -20,6 +20,18 @@ export default class TaskRepository {
     const res = await request({
       url: `/api/tasks/search?page=${page}&limit=${limit}&keywords=${keywords}`,
       method: 'GET',
+      data
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async create(data: ITaskForm): Promise<ITask> {
+    const res = await request({
+      url: `/api/tasks`,
+      method: 'POST',
       data
     })
     if (res.err) {

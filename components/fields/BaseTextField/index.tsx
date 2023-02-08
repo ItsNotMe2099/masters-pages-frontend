@@ -39,14 +39,16 @@ interface Props {
   debounce?: number
   hasError: boolean
   onChange: (value) => void
+  min?: string
+  max?: string
   //onChange: (e: React.FormEvent<HTMLInputElement>) => void
 }
 
 export default function BaseTextField(props: Props) {
-  const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
+  const { error, touched } = props.meta ? props.meta : { error: null, touched: false }
 
   const [name] = useState(_uniqueId('input-'))
-  const {mask} = props
+  const { mask } = props
   const hasError = !!error && touched
 
   const getSizeClass = (size) => {
@@ -60,17 +62,18 @@ export default function BaseTextField(props: Props) {
   }
 
   const renderInput = (inputProps) => {
-    return  ( <input {...inputProps} className={
-      classNames({
-        [styles.input]: true,
-        [styles.inputSmall]: props.size === 'small',
-        [styles.inputNormal]: props.size === 'small',
-        [styles.withIcon]: props.withIcon,
-        [styles.inputError]: hasError
-      })} type={props.type || 'text'} disabled={props.disabled}/>)
+    return (<input {...inputProps} min={props.type === 'number' ? props.min : null}
+      max={props.type === 'number' ? props.max : null} className={
+        classNames({
+          [styles.input]: true,
+          [styles.inputSmall]: props.size === 'small',
+          [styles.inputNormal]: props.size === 'small',
+          [styles.withIcon]: props.withIcon,
+          [styles.inputError]: hasError
+        })} type={props.type || 'text'} disabled={props.disabled} />)
   }
   return mask ? (
-    <InputMask mask={mask}  disabled={props.disabled}   value={props.value} onChange={props.onChange}   maskPlaceholder={null}  alwaysShowMask={props.alwaysShowMask}   maskChar={props.maskChar}>
+    <InputMask mask={mask} disabled={props.disabled} value={props.value} onChange={props.onChange} maskPlaceholder={null} alwaysShowMask={props.alwaysShowMask} maskChar={props.maskChar}>
       {(inputProps) => renderInput(inputProps)}
     </InputMask>
   ) : renderInput(props)

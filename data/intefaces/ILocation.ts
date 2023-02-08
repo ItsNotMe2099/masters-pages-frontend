@@ -2,6 +2,7 @@ export interface ICountry{
   country_code: string
   country_name: string,
   name: string
+  geonameid: number
 }
 export interface ICity{
   id: number

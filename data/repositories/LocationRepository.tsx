@@ -17,6 +17,7 @@ export interface IDataPlace{
   isOnline?: boolean
 }
 
+
 export default class LocationRepository {
   static async fetchCountries({page = 1, limit = 1000, search, lang = 'en'}: IDataQueryList): Promise<ICountry[] | null> {
     console.log("fetchCountries111")
@@ -83,6 +84,32 @@ export default class LocationRepository {
         office,
         isOnline
       }
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchLocationCity({search, page, limit = 10, country}: IDataQueryList & {country: string}): Promise<ICity[]> {
+    const res = await request({
+      url: `/api/location/city?page=${page}&limit=${limit}&search=${search}&lang=en&country=${country}`,
+      method: 'GET',
+      data: {
+      }
+    })
+    console.log("Res111", res);
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchLocationCountry({search, page, limit = 10, country}: IDataQueryList & {country: string}): Promise<ICountry[]> {
+    const res = await request({
+      url: `/api/location/country?page=${page}&limit=${limit}&search=${search}&lang=en`,
+      method: 'GET',
     })
     console.log("Res111", res);
     if (res.err) {

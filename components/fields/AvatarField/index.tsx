@@ -54,6 +54,7 @@ const AvatarField = (props: AvatarFieldProps<string>) => {
         multiple = false,
         ...rest
     } = props
+    // @ts-ignore
   const [field, meta, helpers] = useField(props)
   const {value} = field;
   const [error, setError] = useState(null)

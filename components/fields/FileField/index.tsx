@@ -1,22 +1,21 @@
-import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
-
 import FileWrapper, { FileEntity } from './components/FileWrapper'
 import React, {
-  ReactElement, useState, useCallback, useEffect,
+  ReactElement, useState, useCallback, useEffect, useMemo,
 } from 'react'
-import PropTypes from 'prop-types'
-import { useDropzone, DropzoneOptions } from 'react-dropzone'
+import { useDropzone, Accept } from 'react-dropzone'
 import styles from './index.module.scss'
 import Cookies from 'js-cookie'
 import nextId from 'react-id-generator'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import AddFileButton from './components/AddFileBtn'
 import { Trans } from 'next-i18next'
-import { IRootState } from 'types'
 import { useAppContext } from 'context/state'
 import { useField } from 'formik'
 import FieldError from 'components/ui/FieldError'
 import { IField } from 'types/types'
+import { FileUploadAcceptType } from 'types/enums'
+import Converter from 'utils/converter'
+import classNames from 'classnames'
 
 const transformFile = file => {
   if (!(file instanceof File)) {
@@ -36,7 +35,7 @@ const formatValue = (value): FileEntity[] => {
 
 
 export interface FileFieldProps<T> extends IField<T> {
-  accept?: string
+  accept?: FileUploadAcceptType[]
   labelMultiple?: string
   labelSingle?: string
   maxSize?: number
@@ -66,6 +65,11 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
   const appContext = useAppContext()
   const role = appContext.role
   const hasError = !!meta.error && meta.touched
+  const dropzoneAccept: Accept = useMemo(() => {
+    let arr = [];
+    (props.accept ?? [FileUploadAcceptType.Image])?.forEach(i => { arr = [...arr, ...Converter.getFileUploadAccept(i)] })
+    return { '': arr }
+  }, [props.accept])
   const FileWrapperUploadOptions = {
     signingUrlMethod: 'GET',
     accept: '*/*',
@@ -128,7 +132,7 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
   }
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept,
+    accept: dropzoneAccept,
     maxSize,
     minSize,
     multiple,
@@ -137,7 +141,7 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
 
   return (
     <div className={styles.root}>
-      {files.length > 0 && <div className={styles.previewList}>
+      {files.length > 0 && !props.largeBtn && <div className={styles.previewList}>
         {files.map((file, index) => (
           <FileWrapper
             key={file.key}
@@ -162,7 +166,8 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
           {...getInputProps()}
         />
 
-      </div>}
+      </div>
+      }
       <FieldError showError={hasError}>{meta.error}</FieldError>
       {!props.largeBtn && files.length > 0 && <div className={styles.footer}>
         <div
@@ -198,6 +203,18 @@ const FileField = (props: any & FileFieldProps<string | string[]>) => {
           {...getInputProps()}
         />
 
+      </div>}
+      {files.length > 0 && props.largeBtn && <div className={classNames({[styles.previewList]: props.largeBtn})}>
+        {files.map((file, index) => (
+          <FileWrapper
+            key={file.key}
+            uploadOptions={FileWrapperUploadOptions}
+            file={file}
+            onUpload={onUpload}
+            onChangeFileData={onChangeFileData}
+            onRemove={onRemove}
+          />
+        ))}
       </div>}
     </div>
   )

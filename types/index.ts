@@ -1,55 +1,55 @@
-import {ChangePasswordState} from "components/Auth/ChangePassword/reducer";
-import phoneConfirmReducer, {PhoneConfirmState} from "components/Auth/PhoneConfirm/reducer";
-import authReducer, {State as authState} from 'components/Auth/reducer'
-import registrationCompleteReducer, {RegistrationCompleteState} from "components/Auth/RegistrationPage/reducer";
-import authSignInReducer, {SignInState} from "components/Auth/SignIn/reducer";
-import authSignUpReducer, {AuthSignUpState} from "components/Auth/SignUp/reducer";
-import PWRecoveryReducer, {PWRecoveryState} from "components/Auth/PWRecovery/reducer"
-import {ChatState} from "components/Chat/reducer";
-import {ModalState} from "components/Modal/reducer";
-import {ProfileState} from "components/Profile/reducer";
-import {ProfileSearchState} from "components/ProfileSearch/reducer";
-import {SkillState} from "components/Skill/reducer";
-import {TaskOfferState} from "components/TaskNegotiation/reducer";
-import {TaskSearchState} from "components/TaskSearch/reducer";
-import {TaskUserState} from "components/TaskUser/reducer";
-import {CountryInputState} from "components/ui/Inputs/InputCountry/reducer";
-import locationInputReducer, {LocationInputState} from "components/ui/Inputs/InputLocation/reducer";
-import categoryInputReducer, {CategoryInputState} from "components/ui/Inputs/InputCategory/reducer"
-import subCategoryInputReducer, {SubCategoryInputState} from "components/ui/Inputs/InputSubCategory/reducer"
-import subCategoryCheckboxReducer, {SubCategoryCheckboxState} from 'components/ui/Form/MasterProfile/CheckboxSubCategory/reducer'
-import {CreateTaskCompleteState} from "components/CreateTaskPage/reducer";
-import {SavedSearchesState} from "components/SavedSearches/reducer";
-import {SavedPeopleState} from "components/SavedPeople/reducer";
-import {SavedTasksState} from "components/SavedTasks/reducer";
-import {ProfileFeedbackState} from "components/ProfileFeedback/reducer";
-import {PublicProfileState} from "components/PublicProfile/reducer";
-import {TaskSearchWithLimitState} from "components/Split/OrderingSection/Task/reducer";
-import {StatState} from "../components/Stat/reducer";
-import {RegistrationPhoneState} from "../components/Auth/RegistrationPhone/reducer";
-import {PushState} from "../components/Push/reducer";
-import {ProfileSettingsState} from "../components/ProfileSettings/reducer";
-import {ProfileWorkExperienceState} from 'components/ProfileWorkExpirience/reducer'
-import {ProfileTabState} from 'components/ProfileTab/reducer'
-import {ProfilePortfolioState} from 'components/ProfilePortfolio/reducer'
-import {ProfileGalleryState} from 'components/ProfileGallery/reducer'
-import {ProfileStatState} from 'components/ProfileStat/reducer'
+import { ChangePasswordState } from "components/Auth/ChangePassword/reducer";
+import phoneConfirmReducer, { PhoneConfirmState } from "components/Auth/PhoneConfirm/reducer";
+import authReducer, { State as authState } from 'components/Auth/reducer'
+import registrationCompleteReducer, { RegistrationCompleteState } from "components/Auth/RegistrationPage/reducer";
+import authSignInReducer, { SignInState } from "components/Auth/SignIn/reducer";
+import authSignUpReducer, { AuthSignUpState } from "components/Auth/SignUp/reducer";
+import PWRecoveryReducer, { PWRecoveryState } from "components/Auth/PWRecovery/reducer"
+import { ChatState } from "components/Chat/reducer";
+import { ModalState } from "components/Modal/reducer";
+import { ProfileState } from "components/Profile/reducer";
+import { ProfileSearchState } from "components/ProfileSearch/reducer";
+import { SkillState } from "components/Skill/reducer";
+import { TaskOfferState } from "components/TaskNegotiation/reducer";
+import { TaskSearchState } from "components/TaskSearch/reducer";
+import { TaskUserState } from "components/TaskUser/reducer";
+import { CountryInputState } from "components/ui/Inputs/InputCountry/reducer";
+import locationInputReducer, { LocationInputState } from "components/ui/Inputs/InputLocation/reducer";
+import categoryInputReducer, { CategoryInputState } from "components/ui/Inputs/InputCategory/reducer"
+import subCategoryInputReducer, { SubCategoryInputState } from "components/ui/Inputs/InputSubCategory/reducer"
+import subCategoryCheckboxReducer, { SubCategoryCheckboxState } from 'components/ui/Form/MasterProfile/CheckboxSubCategory/reducer'
+import { CreateTaskCompleteState } from "components/CreateTaskPage/reducer";
+import { SavedSearchesState } from "components/SavedSearches/reducer";
+import { SavedPeopleState } from "components/SavedPeople/reducer";
+import { SavedTasksState } from "components/SavedTasks/reducer";
+import { ProfileFeedbackState } from "components/ProfileFeedback/reducer";
+import { PublicProfileState } from "components/PublicProfile/reducer";
+import { TaskSearchWithLimitState } from "components/Split/OrderingSection/Task/reducer";
+import { StatState } from "../components/Stat/reducer";
+import { RegistrationPhoneState } from "../components/Auth/RegistrationPhone/reducer";
+import { PushState } from "../components/Push/reducer";
+import { ProfileSettingsState } from "../components/ProfileSettings/reducer";
+import { ProfileWorkExperienceState } from 'components/ProfileWorkExpirience/reducer'
+import { ProfileTabState } from 'components/ProfileTab/reducer'
+import { ProfilePortfolioState } from 'components/ProfilePortfolio/reducer'
+import { ProfileGalleryState } from 'components/ProfileGallery/reducer'
+import { ProfileStatState } from 'components/ProfileStat/reducer'
 import ProfileStatItemCard
   from 'components/PublicProfile/components/view/CardProfileStat/components/ProfileStatItemCard'
-import {ProfileRecommendationState} from 'components/ProfileRecommendations/reducer'
-import {EventsState} from 'components/Events/reducer'
-import {ShareState} from 'components/Share/reducer'
-import {InviteState} from 'components/Invite/reducer'
-import {PostState} from 'components/Post/reducer'
-import {NewsState} from 'components/News/reducer'
-import {FollowerState} from 'components/Follower/reducer'
-import {ReportState} from 'components/Report/reducer'
-import {ContactsState} from 'components/Contacts/reducer'
-import {ILocation} from 'data/intefaces/ILocation'
-import {IProfile} from 'data/intefaces/IProfile'
-import {IServiceCategory} from 'data/intefaces/IServiceCategory'
-import {IProject} from 'data/intefaces/IProject'
-import {IChat} from 'data/intefaces/IChat'
+import { ProfileRecommendationState } from 'components/ProfileRecommendations/reducer'
+import { EventsState } from 'components/Events/reducer'
+import { ShareState } from 'components/Share/reducer'
+import { InviteState } from 'components/Invite/reducer'
+import { PostState } from 'components/Post/reducer'
+import { NewsState } from 'components/News/reducer'
+import { FollowerState } from 'components/Follower/reducer'
+import { ReportState } from 'components/Report/reducer'
+import { ContactsState } from 'components/Contacts/reducer'
+import { ILocation } from 'data/intefaces/ILocation'
+import { IProfile } from 'data/intefaces/IProfile'
+import { IServiceCategory } from 'data/intefaces/IServiceCategory'
+import { IProject } from 'data/intefaces/IProject'
+import { IChat } from 'data/intefaces/IChat'
 
 export interface IRootState {
   authComponent: authState,
@@ -383,6 +383,27 @@ export interface ITask {
   feedbacks: IFeedbacksToProfile[]
 }
 
+export interface ITaskForm {
+  profileId: number
+  title: string
+  mainCategoryId: number
+  categoryId: number
+  subCategoryId: number
+  description?: string
+  photos?: string[]
+  deadline?: string
+  executionType?: string
+  currency?: string
+  visibilityType: string
+  masterRole: string
+  countryCode?: string
+  geonameid?: number
+  budget?: number
+  ratePerHour?: number
+  estimate?: number
+  address?: string
+}
+
 export interface IStat {
   tasksCount: number,
   tasksDoneCount: number,
@@ -477,7 +498,7 @@ export enum IEventLogRecordType {
   FileUploaded = 'file_uploaded',
   FeedbackAdded = 'feedback_added',
 }
-export interface IEventLogRecordData{
+export interface IEventLogRecordData {
   newStatus: EventStatus
 }
 export enum IChatMessageType {
@@ -693,7 +714,7 @@ export interface IFeedbacksToProfile {
   photos: string[]
 }
 
-export interface IProfileRecommendation{
+export interface IProfileRecommendation {
   id: number,
   recommendedProfileId: number,
   profileThatRecommendsId: number
@@ -770,17 +791,17 @@ export interface ISharePersonalLabel {
   }
 }
 
-export interface IReportFilterProfileItem{
+export interface IReportFilterProfileItem {
   id: number,
   name: string
 
 }
-export interface IReportFilterTaskItem{
+export interface IReportFilterTaskItem {
   id: number,
   title: string
 
 }
-export interface IReportFilter{
+export interface IReportFilter {
   categoriesFilter: {
     total: number,
     data: SkillData[],
@@ -803,7 +824,7 @@ export interface IReportFilter{
   }
 }
 
-export interface ITaskStats{
+export interface ITaskStats {
   eventsCompleted: number,
   eventsPlanned: number,
   plannedTime: number,
@@ -837,11 +858,11 @@ export enum ProfilePageType {
   Skill = 'skill',
   Profile = 'profile'
 }
-export interface IProfileNoteNote{
+export interface IProfileNoteNote {
   createdAt: string
   note: string
 }
-export interface IProfileNote{
+export interface IProfileNote {
   id: number,
   notes: IProfileNoteNote[]
 }

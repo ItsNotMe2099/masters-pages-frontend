@@ -5,20 +5,33 @@ import { useTranslation } from 'next-i18next'
 import TextField from 'components/fields/TextField'
 import Button from 'components/ui/Button'
 import { useSelector } from 'react-redux'
-import { IRootState } from 'types'
+import { IRootState, ITask, ITaskForm } from 'types'
 import SkillsField from 'components/fields/SkillsField'
 import Validator from 'utils/validator'
 import TextAreaField from 'components/fields/TextAreaField'
 import FileField from 'components/fields/FileField'
-import DocField from 'components/fields/DocField'
-import { FileUploadAcceptType } from 'types/enums'
 import { DateField } from 'components/fields/DateField'
+import SelectField from 'components/fields/SelectField'
+import { getCurrencies } from 'data/currency'
+import { useAppContext } from 'context/state'
+import PriceSelectForm from './components/PriceSelect'
+import CountryField from 'components/fields/CountryField'
+import CityField from 'components/fields/CityField'
+import AddressField from 'components/fields/AddressField'
+import LocationField from 'components/fields/LocationField'
+import { useEffect, useState } from 'react'
+import TaskRepository from 'data/repositories/TaskRepository'
 
 interface Props {
   isMaster: boolean
 }
 
 export default function CreateTaskForm({ isMaster }: Props) {
+
+  const appContext = useAppContext()
+  const profile = appContext.profile
+
+  const [loading, setLoading] = useState(false)
 
   const initialValues = {
     profileId: null,
@@ -30,18 +43,50 @@ export default function CreateTaskForm({ isMaster }: Props) {
     },
     description: '',
     photos: [],
-    deadline: ''
+    deadline: '',
+    executionType: '',
+    currency: '',
+    visibilityType: isMaster ? 'private' : 'public',
+    masterRole: isMaster ? profile.role : null,
+    countryCode: '',
+    geonameid: null,
+    budget: null,
+    ratePerHour: null,
+    estimate: null,
+    address: null,
+    mainCategoryId: null,
+    categoryId: null,
+    subCategoryId: null
   }
 
-  const handleSubmit = async () => {
-
+  const handleSubmit = async (data) => {
+    setLoading(true)
+    const {skills, ...submittedValues} = data
+    try {
+      await TaskRepository.create(submittedValues)
+    }
+    catch (error: any) {
+      let errorMessage = error.toString()
+      // extract the error message from the error object
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message
+      }
+    }
+    setLoading(false)
   }
 
 
   const formik = useFormik({
     initialValues,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   })
+
+
+  useEffect(() => {
+    formik.setFieldValue('mainCategoryId', formik.values.skills.mainCategortyId)
+    formik.setFieldValue('categoryId', formik.values.skills.categoryId)
+    formik.setFieldValue('subCategoryId', formik.values.skills.subCategoryId)
+  }, [formik.values.skills])
 
   console.log('VALUES!!!!', formik.values)
 
@@ -56,12 +101,12 @@ export default function CreateTaskForm({ isMaster }: Props) {
       <Form className={styles.form}>
         <div className={styles.main}>
           <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
-          <ProfileContactField
+          {isMaster && formik.values.visibilityType === 'private' ? <ProfileContactField
             name='profileId'
             role={isMaster ? 'client' : null}
             label={`Client iD (required field)*`}
             validate={Validator.required}
-          />
+          /> : null}
           <TextField
             name='title'
             label='Task title (required field)*'
@@ -87,8 +132,36 @@ export default function CreateTaskForm({ isMaster }: Props) {
             name='description'
             label='Task description'
           />
-          <FileField name='photos' multiple largeBtn/>
-          <DateField name='deadline' label='Deadline'/>
+          <FileField
+            name='photos'
+            multiple
+            largeBtn
+          />
+          <DateField name='deadline' label='Deadline' />
+          <SelectField
+            name={'executionType'}
+            options={[{ value: 'physical', label: t('forms.executionTypeInput.values.physical') }, { value: 'virtual', label: t('forms.executionTypeInput.values.virtual') }, { value: 'combo', label: t('forms.executionTypeInput.values.combo') }]}
+            label={`${t('createTask.fieldExecutionType')}`} />
+          <SelectField
+            name={'currency'}
+            options={Object.entries(getCurrencies()).map(([key, value]) => ({ label: key, value: key }))}
+            label={`${t('currency')}`} />
+          <PriceSelectForm/>
+          <CountryField
+            name='countryCode'
+            label={`${t('createTask.fieldCountry')}`} />
+          {formik.values.countryCode ?
+            <CityField
+              countryCode={formik.values.countryCode}
+              name='geonameid'
+              label={`${t('createTask.fieldLocation')}`} />
+            :
+            null
+          }
+          <AddressField name='address' label={`${t('createTask.fieldAddress')}`} />
+          <div className={styles.wrapper}>
+            <Button red size="14px 65px">CREATE TASK</Button>
+          </div>
         </div>
       </Form>
     </FormikProvider>
