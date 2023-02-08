@@ -14,7 +14,6 @@ interface ICategories{
 
 interface Props<T> extends IField<T> {
   styleType?: InputStyleType
-  onChange?: (e) => void
 }
 
 export default function SkillsField(props: Props<string>) {
@@ -41,6 +40,6 @@ export default function SkillsField(props: Props<string>) {
   }
 
   return (
-    <SelectField onInputChange={props.onChange} options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} />
+    <SelectField options={options} label={props.label} placeholder={props.placeholder} name={props.name} onMenuOpen={handleMenuOpen} />
   )
 }
