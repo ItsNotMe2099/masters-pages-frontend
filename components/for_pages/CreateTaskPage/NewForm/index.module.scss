@@ -56,6 +56,9 @@
 .optional {
   margin-top: 60px;
   width: 50%;
+  @media screen and (max-width: $xs-max) {
+    width: 100%;
+  }
 }
 
 .separator {
