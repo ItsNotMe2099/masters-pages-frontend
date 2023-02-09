@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
 import TextField from 'components/fields/TextField'
 import Button from 'components/ui/Button'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IRootState, ITask, ITaskForm } from 'types'
 import SkillsField from 'components/fields/SkillsField'
 import Validator from 'utils/validator'
@@ -20,6 +20,11 @@ import CityField from 'components/fields/CityField'
 import AddressField from 'components/fields/AddressField'
 import { useEffect, useState } from 'react'
 import TaskRepository from 'data/repositories/TaskRepository'
+import Loader from 'components/ui/Loader'
+import Modal from 'components/ui/Modal'
+import { useRouter } from 'next/dist/client/router'
+import { createTaskeReset } from 'components/CreateTaskPage/actions'
+import { modalClose } from 'components/Modal/actions'
 
 interface Props {
   isMaster: boolean
@@ -30,7 +35,9 @@ export default function CreateTaskForm({ isMaster }: Props) {
   const appContext = useAppContext()
   const profile = appContext.profile
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const [success, setSuccess] = useState<boolean>(false)
 
   const initialValues = {
     profileId: null,
@@ -60,11 +67,25 @@ export default function CreateTaskForm({ isMaster }: Props) {
 
   const handleSubmit = async (data) => {
     setLoading(true)
-    const {skills, ...submittedValues} = data
+    const { skills, ...submittedValues } = data
     submittedValues.budget = Number(submittedValues.budget)
     submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
     try {
-      await TaskRepository.create(submittedValues)
+      if (submittedValues.deadline === '') {
+        const { deadline, skills, ...submittedValues } = data
+        submittedValues.budget = Number(submittedValues.budget)
+        submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
+        const res = await TaskRepository.create(submittedValues)
+        if(res){
+          setSuccess(true)
+        }
+      }
+      else {
+        const res = await TaskRepository.create(submittedValues)
+        if(res){
+          setSuccess(true)
+        }
+      }
     }
     catch (error: any) {
       let errorMessage = error.toString()
@@ -82,6 +103,10 @@ export default function CreateTaskForm({ isMaster }: Props) {
     onSubmit: handleSubmit,
   })
 
+  const dispatch = useDispatch()
+
+  const router = useRouter()
+
 
   useEffect(() => {
     formik.setFieldValue('mainCategoryId', formik.values.skills.mainCategortyId)
@@ -98,73 +123,95 @@ export default function CreateTaskForm({ isMaster }: Props) {
   console.log('sdafsegf', skillsCurrentProfile)
 
   return (
-    <FormikProvider value={formik}>
-      <Form className={styles.form}>
-        <div className={styles.main}>
-          <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
-          {isMaster && formik.values.visibilityType === 'private' ? <ProfileContactField
-            name='profileId'
-            role={isMaster ? 'client' : null}
-            label={`Client iD (required field)*`}
-            validate={Validator.required}
-          /> : null}
-          <TextField
-            name='title'
-            label='Task title (required field)*'
-            validate={Validator.required}
-          />
-          <SkillsField
-            name='skills'
-            label='Master Profile (required field)*'
-            validate={Validator.required}
-          />
-          <div className={styles.tip}>
-            Complete optional fields<br />
-            or
+    <>
+      <FormikProvider value={formik}>
+        <Form className={styles.form}>
+          <div className={styles.main}>
+            <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
+            {isMaster && formik.values.visibilityType === 'private' ? <ProfileContactField
+              name='profileId'
+              role={isMaster ? 'client' : null}
+              label={`Client iD (required field)*`}
+              validate={Validator.required}
+            /> : null}
+            <TextField
+              name='title'
+              label='Task title (required field)*'
+              validate={Validator.required}
+            />
+            <SkillsField
+              name='skills'
+              label='Master Profile (required field)*'
+              validate={Validator.required}
+            />
+            <div className={styles.tip}>
+              Complete optional fields<br />
+              or
+            </div>
+            <div className={styles.btnContainer}>
+              <Button red size="14px 65px">CREATE TASK NOW</Button>
+            </div>
           </div>
-          <div className={styles.btnContainer}>
-            <Button red size="14px 65px">CREATE TASK NOW</Button>
+          <div className={styles.optional}>
+            <div className={styles.title__top}>Optional fields</div>
+            <div className={styles.separator}></div>
+            <TextAreaField
+              name='description'
+              label='Task description'
+            />
+            <FileField
+              name='photos'
+              multiple
+              largeBtn
+            />
+            <DateField name='deadline' label='Deadline' />
+            <SelectField
+              name={'executionType'}
+              options={[{ value: 'physical', label: t('forms.executionTypeInput.values.physical') }, { value: 'virtual', label: t('forms.executionTypeInput.values.virtual') }, { value: 'combo', label: t('forms.executionTypeInput.values.combo') }]}
+              label={`${t('createTask.fieldExecutionType')}`} />
+            <SelectField
+              name={'currency'}
+              options={Object.entries(getCurrencies()).map(([key, value]) => ({ label: key, value: key }))}
+              label={`${t('currency')}`} />
+            <PriceSelectForm currency={formik.values.currency} />
+            <CountryField
+              name='countryCode'
+              label={`${t('createTask.fieldCountry')}`} />
+            {formik.values.countryCode ?
+              <CityField
+                countryCode={formik.values.countryCode}
+                name='geonameid'
+                label={`${t('createTask.fieldLocation')}`} />
+              :
+              null
+            }
+            <AddressField name='address' label={`${t('createTask.fieldAddress')}`} />
+            <div className={styles.wrapper}>
+              <Button red size="14px 65px">CREATE TASK</Button>
+            </div>
           </div>
-        </div>
-        <div className={styles.optional}>
-          <div className={styles.title__top}>Optional fields</div>
-          <div className={styles.separator}></div>
-          <TextAreaField
-            name='description'
-            label='Task description'
-          />
-          <FileField
-            name='photos'
-            multiple
-            largeBtn
-          />
-          <DateField name='deadline' label='Deadline' />
-          <SelectField
-            name={'executionType'}
-            options={[{ value: 'physical', label: t('forms.executionTypeInput.values.physical') }, { value: 'virtual', label: t('forms.executionTypeInput.values.virtual') }, { value: 'combo', label: t('forms.executionTypeInput.values.combo') }]}
-            label={`${t('createTask.fieldExecutionType')}`} />
-          <SelectField
-            name={'currency'}
-            options={Object.entries(getCurrencies()).map(([key, value]) => ({ label: key, value: key }))}
-            label={`${t('currency')}`} />
-          <PriceSelectForm currency={formik.values.currency}/>
-          <CountryField
-            name='countryCode'
-            label={`${t('createTask.fieldCountry')}`} />
-          {formik.values.countryCode ?
-            <CityField
-              countryCode={formik.values.countryCode}
-              name='geonameid'
-              label={`${t('createTask.fieldLocation')}`} />
-            :
-            null
+        </Form>
+      </FormikProvider>
+      <Modal
+        isOpen={loading} onRequestClose={() => {
+
+        }}>
+        <Loader />
+      </Modal>
+      <Modal
+        title={t('createTask.successTitle')}
+        image={'/img/icons/congratulations.svg'}
+        isOpen={success} onRequestClose={() => {
+          dispatch(createTaskeReset())
+          dispatch(modalClose())
+          if (profile.role === 'client') {
+            router.push('/orders/draft')
+          } else {
+            router.push('/orders/offers')
           }
-          <AddressField name='address' label={`${t('createTask.fieldAddress')}`} />
-          <div className={styles.wrapper}>
-            <Button red size="14px 65px">CREATE TASK</Button>
-          </div>
-        </div>
-      </Form>
-    </FormikProvider>
+        }}>
+
+      </Modal>
+    </>
   )
 }

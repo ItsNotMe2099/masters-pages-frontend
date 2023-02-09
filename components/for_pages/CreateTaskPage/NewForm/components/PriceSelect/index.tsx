@@ -3,8 +3,6 @@ import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
 import { useFormikContext } from 'formik'
 import Validator from 'utils/validator'
-import { useEffect } from 'react'
-import { getCurrencySymbol } from 'data/currency'
 
 interface Props {
   currency: string
@@ -13,13 +11,6 @@ interface Props {
 export default function PriceSelectForm(props: Props) {
 
   const { t } = useTranslation('common')
-
-  const { setFieldValue } = useFormikContext()
-
-  useEffect(() => {
-    setFieldValue('ratePerHour', getCurrencySymbol(props.currency))
-    setFieldValue('budget', getCurrencySymbol(props.currency))
-  }, [props.currency])
 
   return (
     <div className={styles.root}>
@@ -31,6 +22,8 @@ export default function PriceSelectForm(props: Props) {
               name='ratePerHour'
               label={t('createTask.priceSelect.fieldRatePerHour')}
               isNumbersOnly
+              currency={props.currency}
+              variant='currency'
             />
           </div>
           <div className={styles.inputHour}>
@@ -61,6 +54,8 @@ export default function PriceSelectForm(props: Props) {
               name='budget'
               label={t('createTask.priceSelect.fieldBudget')}
               isNumbersOnly
+              currency={props.currency}
+              variant='currency'
             />
           </div>
           <div className={styles.inputFixed}>

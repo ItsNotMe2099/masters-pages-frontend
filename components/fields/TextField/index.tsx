@@ -18,7 +18,7 @@ interface Props {
   hasAutoComplete?: boolean
   icon?: ReactElement
   name?: string
-  variant?: 'normal' | 'shadow' | 'large'
+  variant?: 'normal' | 'shadow' | 'large' | 'currency'
   labelType?: LabelStyleType
   onIconClick?: (e) => void
   children?: React.ReactNode
@@ -31,11 +31,12 @@ interface Props {
   min?: string
   max?: string
   isNumbersOnly?: boolean
+  currency?: string
 }
 
 export default function TextField(props: Props & FieldConfig) {
   const { label, placeholder, className, inputClassName, hasAutoComplete, icon, variant } = props
-  const [field, meta] = useField(props)
+  const [field, meta, helpers] = useField(props)
   const hasError = !!meta.error && meta.touched
 
 
@@ -51,11 +52,13 @@ export default function TextField(props: Props & FieldConfig) {
       }
     )
   }
-
+  
   return (
     <div className={getClassName()}>
       {props.labelType === LabelStyleType.Static && <Label label={label} style={props.labelType} hasError={hasError} />}
       <div className={styles.inputContainer}>
+        {variant === 'currency' && !field.value ?
+          <div className={styles.symbol}>{getCurrencySymbol(props.currency)}</div> : null}
         <BaseTextField isNumbersOnly={props.isNumbersOnly} min={props.min} max={props.max} size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ? props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type} />
         {props.labelType === LabelStyleType.Cross && <Label label={label} style={props.labelType} hasError={hasError} />}
         {props.icon && <div className={styles.icon} onClick={props.onIconClick}> {props.icon}</div>}
