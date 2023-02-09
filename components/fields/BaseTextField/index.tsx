@@ -41,6 +41,7 @@ interface Props {
   onChange: (value) => void
   min?: string
   max?: string
+  isNumbersOnly?: boolean
   //onChange: (e: React.FormEvent<HTMLInputElement>) => void
 }
 
@@ -63,7 +64,11 @@ export default function BaseTextField(props: Props) {
 
   const renderInput = (inputProps) => {
     return (<input {...inputProps} min={props.type === 'number' ? props.min : null}
-      max={props.type === 'number' ? props.max : null} className={
+      max={props.type === 'number' ? props.max : null} 
+      pattern={props.isNumbersOnly ? '[0-9]*' : null}
+      onInput=
+      {props.isNumbersOnly ? (e: ChangeEvent<HTMLInputElement>) => {e.target.value = e.target.value.replace(/[^0-9]/g, '')} : null}
+      className={
         classNames({
           [styles.input]: true,
           [styles.inputSmall]: props.size === 'small',

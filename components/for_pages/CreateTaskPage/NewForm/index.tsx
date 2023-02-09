@@ -18,7 +18,6 @@ import PriceSelectForm from './components/PriceSelect'
 import CountryField from 'components/fields/CountryField'
 import CityField from 'components/fields/CityField'
 import AddressField from 'components/fields/AddressField'
-import LocationField from 'components/fields/LocationField'
 import { useEffect, useState } from 'react'
 import TaskRepository from 'data/repositories/TaskRepository'
 
@@ -62,6 +61,8 @@ export default function CreateTaskForm({ isMaster }: Props) {
   const handleSubmit = async (data) => {
     setLoading(true)
     const {skills, ...submittedValues} = data
+    submittedValues.budget = Number(submittedValues.budget)
+    submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
     try {
       await TaskRepository.create(submittedValues)
     }
@@ -146,7 +147,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
             name={'currency'}
             options={Object.entries(getCurrencies()).map(([key, value]) => ({ label: key, value: key }))}
             label={`${t('currency')}`} />
-          <PriceSelectForm/>
+          <PriceSelectForm currency={formik.values.currency}/>
           <CountryField
             name='countryCode'
             label={`${t('createTask.fieldCountry')}`} />

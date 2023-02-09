@@ -1,7 +1,7 @@
 import autocompletionRequestBuilder from 'components/ui/Inputs/InputAddress/helpers/autocompletionRequestBuilder'
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { useField, useFormikContext } from 'formik'
+import { useField } from 'formik'
 import { IField, InputStyleType } from 'types/types'
 import { AutocompletionRequest } from './GooglePlacesAutocomplete.types'
 import injectScript from './helpers/injectScript'
@@ -22,8 +22,6 @@ export default function AddressField(props: Props<string>) {
   // @ts-ignore
   const [field, meta, helpers] = useField(props)
   const [options, setOptions] = useState([])
-
-  const { setFieldValue } = useFormikContext()
 
   const apiKey = `${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`
 
