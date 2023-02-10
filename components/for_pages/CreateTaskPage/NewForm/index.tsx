@@ -25,6 +25,8 @@ import Modal from 'components/ui/Modal'
 import { useRouter } from 'next/dist/client/router'
 import { createTaskeReset } from 'components/CreateTaskPage/actions'
 import { modalClose } from 'components/Modal/actions'
+import ServiceCategoryField from 'components/fields/ServiceCategoryField'
+import RadioListField from 'components/fields/RadioListField'
 
 interface Props {
   isMaster: boolean
@@ -76,13 +78,13 @@ export default function CreateTaskForm({ isMaster }: Props) {
         submittedValues.budget = Number(submittedValues.budget)
         submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
         const res = await TaskRepository.create(submittedValues)
-        if(res){
+        if (res) {
           setSuccess(true)
         }
       }
       else {
         const res = await TaskRepository.create(submittedValues)
-        if(res){
+        if (res) {
           setSuccess(true)
         }
       }
@@ -139,11 +141,37 @@ export default function CreateTaskForm({ isMaster }: Props) {
               label='Task title (required field)*'
               validate={Validator.required}
             />
-            <SkillsField
+            {isMaster ? <SkillsField
               name='skills'
               label='Master Profile (required field)*'
               validate={Validator.required}
-            />
+            /> : null}
+            {!isMaster ?
+              <>
+                <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} label={t('createTask.fieldMainCategory')} />
+                <ServiceCategoryField name={'categoryId'} categoryId={formik.values.mainCategory?.id} validate={Validator.required} label={t('createTask.fieldCategory')} />
+                <ServiceCategoryField name={'subCategoryId'} categoryId={formik.values.category?.id} validate={Validator.required} label={t('createTask.fieldSubCategory')} />
+                <SelectField
+                  name="masterRole"
+                  label={`${t('createTask.fieldMasterType')}*`}
+                  options={[{ value: 'master', label: t('master') }, { value: 'volunteer', label: t('volunteer') }]}
+                  validate={Validator.required}
+                />
+                <RadioListField
+                  name="visibilityType"
+                  label={`${t('type')}*`}
+                  options={[{ label: t('public'), value: 'public' }, { label: t('private'), value: 'private' }]} />
+                {formik.values.visibilityType === 'private' ?
+                  <ProfileContactField
+                    name='profileId'
+                    role={isMaster ? 'client' : null}
+                    label={`Client iD (required field)*`}
+                    validate={Validator.required}
+                  /> : null
+                }
+              </>
+              :
+              null}
             <div className={styles.tip}>
               Complete optional fields<br />
               or
