@@ -130,45 +130,47 @@ export default function CreateTaskForm({ isMaster }: Props) {
         <Form className={styles.form}>
           <div className={styles.main}>
             <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
-            {isMaster && formik.values.visibilityType === 'private' ? <ProfileContactField
-              name='profileId'
-              role={isMaster ? 'client' : null}
-              label={`Client iD (required field)*`}
-              validate={Validator.required}
-            /> : null}
-            <TextField
-              name='title'
-              label='Task title (required field)*'
-              validate={Validator.required}
-            />
-            {isMaster ? <SkillsField
-              name='skills'
-              label='Master Profile (required field)*'
-              validate={Validator.required}
-            /> : null}
             {!isMaster ?
               <>
-                <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} label={t('createTask.fieldMainCategory')} />
-                <ServiceCategoryField name={'categoryId'} categoryId={formik.values.mainCategory?.id} validate={Validator.required} label={t('createTask.fieldCategory')} />
-                <ServiceCategoryField name={'subCategoryId'} categoryId={formik.values.category?.id} validate={Validator.required} label={t('createTask.fieldSubCategory')} />
-                <SelectField
-                  name="masterRole"
-                  label={`${t('createTask.fieldMasterType')}*`}
-                  options={[{ value: 'master', label: t('master') }, { value: 'volunteer', label: t('volunteer') }]}
-                  validate={Validator.required}
-                />
                 <RadioListField
                   name="visibilityType"
-                  label={`${t('type')}*`}
-                  options={[{ label: t('public'), value: 'public' }, { label: t('private'), value: 'private' }]} />
+                  options={[{ label: t('public'), value: 'public' }, { label: t('private'), value: 'private' }]} flex />
                 {formik.values.visibilityType === 'private' ?
                   <ProfileContactField
                     name='profileId'
                     role={isMaster ? 'client' : null}
-                    label={`Client iD (required field)*`}
+                    label={`Master iD (required field)*`}
                     validate={Validator.required}
                   /> : null
                 }
+                <SelectField
+                  name={'executionType'}
+                  options={[{ value: 'physical', label: t('forms.executionTypeInput.values.physical') }, { value: 'virtual', label: t('forms.executionTypeInput.values.virtual') }, { value: 'combo', label: t('forms.executionTypeInput.values.combo') }]}
+                  label={`Execution Type (required field)*`} validate={Validator.required} />
+              </>
+              : null
+            }
+            {isMaster && formik.values.visibilityType === 'private' ? <ProfileContactField
+              name='profileId'
+              role={isMaster ? 'client' : null}
+              label={`Client’s ID (required field)*`}
+              validate={Validator.required}
+            /> : null}
+            <TextField
+              name='title'
+              label='Order title (required field)*'
+              validate={Validator.required}
+            />
+            {isMaster ? <SkillsField
+              name='skills'
+              label='Master’s Profile (required field)*'
+              validate={Validator.required}
+            /> : null}
+            {!isMaster ?
+              <>
+                <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} label={'Main category (required field)*'} />
+                <ServiceCategoryField name={'categoryId'} categoryId={formik.values.mainCategory?.id} validate={Validator.required} label={'Category (required field)*'} />
+                <ServiceCategoryField name={'subCategoryId'} categoryId={formik.values.category?.id} validate={Validator.required} label={'Sub category (required field)*'} />
               </>
               :
               null}
@@ -177,7 +179,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
               or
             </div>
             <div className={styles.btnContainer}>
-              <Button red size="14px 65px">CREATE TASK NOW</Button>
+              {isMaster ? <Button red size="14px 65px">CREATE ORDER NOW</Button> : <Button green size="14px 65px">CREATE ORDER NOW</Button>}
             </div>
           </div>
           <div className={styles.optional}>
@@ -185,7 +187,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
             <div className={styles.separator}></div>
             <TextAreaField
               name='description'
-              label='Task description'
+              label='Order description'
             />
             <FileField
               name='photos'
@@ -193,10 +195,10 @@ export default function CreateTaskForm({ isMaster }: Props) {
               largeBtn
             />
             <DateField name='deadline' label='Deadline' />
-            <SelectField
+            {isMaster ? <SelectField
               name={'executionType'}
               options={[{ value: 'physical', label: t('forms.executionTypeInput.values.physical') }, { value: 'virtual', label: t('forms.executionTypeInput.values.virtual') }, { value: 'combo', label: t('forms.executionTypeInput.values.combo') }]}
-              label={`${t('createTask.fieldExecutionType')}`} />
+              label={`${t('createTask.fieldExecutionType')}`} /> : null}
             <SelectField
               name={'currency'}
               options={Object.entries(getCurrencies()).map(([key, value]) => ({ label: key, value: key }))}
@@ -215,7 +217,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
             }
             <AddressField name='address' label={`${t('createTask.fieldAddress')}`} />
             <div className={styles.wrapper}>
-              <Button red size="14px 65px">CREATE TASK</Button>
+              {isMaster ? <Button red size="14px 65px">CREATE ORDER</Button> : <Button green size="14px 65px">CREATE ORDER</Button>}
             </div>
           </div>
         </Form>

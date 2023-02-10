@@ -17,10 +17,11 @@ interface Props<T> extends IField<T> {
   changeWithValue?: boolean
   restrictedValues?: string[],
   grid?: number
-  label: string
+  label?: string
   itemClassName?: string
   itemLabelClassName?: string
   labelClassName?: string
+  flex?: boolean
 }
 
 export default function RadioListField<T>(props: Props<string>) {
@@ -38,7 +39,7 @@ export default function RadioListField<T>(props: Props<string>) {
       {label && <div className={classNames(styles.label, props.labelClassName)}>{label}</div>}
 
       <div  style={{
-      display: (props.grid) ? 'grid' : 'block',
+      display: (props.grid) ? 'grid' : (props.flex) ? 'flex' : 'block',
       gridTemplateColumns: props.grid ? Array.from({ length: props.grid }, (_, i) => '1fr').join(' ') : '',
       gridGap: '1vw'
     }}>
