@@ -7,7 +7,7 @@ import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { getCategoryTranslation } from 'utils/translations'
 
 interface ICategories{
-  mainCategortyId: number
+  mainCategoryId: number
   categoryId: number
   subCategoryId: number
 }
@@ -28,7 +28,7 @@ export default function SkillsField(props: Props<string>) {
     const data = await ProfileRepository.fetchSkills()
     console.log('fetchSkills', data)
     setOptions(data?.map(item => ({
-        value: {mainCategortyId: item.mainCategory.id, categoryId: item.category.id, subCategoryId: item.subCategory.id},
+        value: {mainCategoryId: item.mainCategory.id, categoryId: item.category.id, subCategoryId: item.subCategory.id},
         label: `${getCategoryTranslation(item.mainCategory, i18n.language)?.name}/${getCategoryTranslation(item.category, i18n.language)?.name}/${getCategoryTranslation(item.subCategory, i18n.language)?.name}`
     })) || [])
   }

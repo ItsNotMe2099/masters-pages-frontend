@@ -383,13 +383,20 @@ export interface ITask {
   feedbacks: IFeedbacksToProfile[]
 }
 
-export interface ITaskForm {
+export interface ISkills {
+  mainCategoryId: number
+  categoryId: number
+  subCategoryId: number
+}
+
+export interface ITaskFormData {
   profileId: number
   title: string
   mainCategoryId: number
   categoryId: number
   subCategoryId: number
   description?: string
+  skills?: ISkills
   photos?: string[]
   deadline?: string
   executionType?: string

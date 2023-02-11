@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import TextField from 'components/fields/TextField'
 import Button from 'components/ui/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { IRootState, ITask, ITaskForm } from 'types'
+import { IRootState, ITaskFormData } from 'types'
 import SkillsField from 'components/fields/SkillsField'
 import Validator from 'utils/validator'
 import TextAreaField from 'components/fields/TextAreaField'
@@ -67,7 +67,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
     subCategoryId: null
   }
 
-  const handleSubmit = async (data) => {
+  const handleSubmit = async (data: ITaskFormData) => {
     setLoading(true)
     const { skills, ...submittedValues } = data
     submittedValues.budget = Number(submittedValues.budget)
@@ -111,7 +111,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
 
 
   useEffect(() => {
-    formik.setFieldValue('mainCategoryId', formik.values.skills.mainCategortyId)
+    formik.setFieldValue('mainCategoryId', formik.values.skills.mainCategoryId)
     formik.setFieldValue('categoryId', formik.values.skills.categoryId)
     formik.setFieldValue('subCategoryId', formik.values.skills.subCategoryId)
   }, [formik.values.skills])
@@ -169,8 +169,8 @@ export default function CreateTaskForm({ isMaster }: Props) {
             {!isMaster ?
               <>
                 <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} label={'Main category (required field)*'} />
-                <ServiceCategoryField name={'categoryId'} categoryId={formik.values.mainCategory?.id} validate={Validator.required} label={'Category (required field)*'} />
-                <ServiceCategoryField name={'subCategoryId'} categoryId={formik.values.category?.id} validate={Validator.required} label={'Sub category (required field)*'} />
+                <ServiceCategoryField name={'categoryId'} categoryId={formik.values.mainCategoryId} validate={Validator.required} label={'Category (required field)*'} />
+                <ServiceCategoryField name={'subCategoryId'} categoryId={formik.values.categoryId} validate={Validator.required} label={'Sub category (required field)*'} />
               </>
               :
               null}
