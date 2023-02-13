@@ -1,4 +1,3 @@
-import ProfileContactField from 'components/fields/ProfileContactField'
 import { useFormik, Form, FormikProvider } from 'formik'
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
@@ -27,6 +26,7 @@ import { createTaskeReset } from 'components/CreateTaskPage/actions'
 import { modalClose } from 'components/Modal/actions'
 import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import RadioListField from 'components/fields/RadioListField'
+import ProfileSearchField from 'components/fields/ProfileSearchField'
 
 interface Props {
   isMaster: boolean
@@ -136,12 +136,10 @@ export default function CreateTaskForm({ isMaster }: Props) {
                   name="visibilityType"
                   options={[{ label: t('public'), value: 'public' }, { label: t('private'), value: 'private' }]} flex />
                 {formik.values.visibilityType === 'private' ?
-                  <ProfileContactField
+                  <ProfileSearchField
                     name='profileId'
-                    role={isMaster ? 'client' : null}
-                    label={`Master iD (required field)*`}
                     validate={Validator.required}
-                  /> : null
+                    label={`Master iD (required field)*`} /> : null
                 }
                 <SelectField
                   name={'executionType'}
@@ -150,12 +148,10 @@ export default function CreateTaskForm({ isMaster }: Props) {
               </>
               : null
             }
-            {isMaster && formik.values.visibilityType === 'private' ? <ProfileContactField
+            {isMaster && formik.values.visibilityType === 'private' ? <ProfileSearchField
               name='profileId'
-              role={isMaster ? 'client' : null}
-              label={`Client’s ID (required field)*`}
               validate={Validator.required}
-            /> : null}
+              label={`Client iD (required field)*`} /> : null}
             <TextField
               name='title'
               label='Order title (required field)*'
