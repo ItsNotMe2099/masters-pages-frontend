@@ -129,7 +129,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
       <FormikProvider value={formik}>
         <Form className={styles.form}>
           <div className={styles.main}>
-            <div className={styles.title__top}>{t('createTask.stepFillUpTaskRequest')}</div>
+            <div className={styles.title__top}>Fill up the order request</div>
             {!isMaster ?
               <>
                 <RadioListField

@@ -15,7 +15,7 @@ export default function PriceSelectForm(props: Props) {
   return (
     <div className={styles.root}>
       <div className={styles.hourlySection}>
-        <div className={styles.title}>{t('createTask.priceSelect.hourlyTaskTitle')}</div>
+        <div className={styles.title}>Charge per hour</div>
         <div className={styles.fields}>
           <div className={styles.inputHour}>
             <TextField
@@ -29,7 +29,7 @@ export default function PriceSelectForm(props: Props) {
           <div className={styles.inputHour}>
             <TextField
               name='estimate'
-              label={t('createTask.priceSelect.fieldEstimate')}
+              label='Hours Estimate'
               placeholder={t('createTask.priceSelect.maxDays')}
               type={'number'}
               min="1"
