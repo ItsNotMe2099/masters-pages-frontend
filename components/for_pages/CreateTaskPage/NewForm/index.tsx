@@ -139,7 +139,9 @@ export default function CreateTaskForm({ isMaster }: Props) {
                   <ProfileSearchField
                     name='profileId'
                     validate={Validator.required}
-                    label={`Master iD (required field)*`} /> : null
+                    label={`Master iD (required field)*`}
+                    role={appContext.profile.role}
+                  /> : null
                 }
                 <SelectField
                   name={'executionType'}
@@ -151,7 +153,9 @@ export default function CreateTaskForm({ isMaster }: Props) {
             {isMaster && formik.values.visibilityType === 'private' ? <ProfileSearchField
               name='profileId'
               validate={Validator.required}
-              label={`Client iD (required field)*`} /> : null}
+              label={`Client iD (required field)*`}
+              role={appContext.profile.role}
+            /> : null}
             <TextField
               name='title'
               label='Order title (required field)*'

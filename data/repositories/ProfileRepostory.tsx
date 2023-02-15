@@ -47,7 +47,7 @@ export default class ProfileRepository {
     return res.data
   }
 
-  static async fetchProfiles(data: any, limit: number = 10, masterRole: string = 'volunteer', page: number = 1, sort: string = 'id', sortOrder: string = 'DESC'): Promise<IPagination<IProfile>> {
+  static async fetchProfiles(limit: number = 10, masterRole: string = 'volunteer', page: number = 1, sort: string = 'id', sortOrder: string = 'DESC'): Promise<IPagination<IProfile>> {
     const res = await request({
       url: `/api/profile/search?limit=${limit}&masterRole=${masterRole}&page=${page}&sort=${sort}&sortOrder=${sortOrder}`,
       method: 'GET',
