@@ -78,7 +78,7 @@ const MainSectionHeader = (props: Props) => {
             <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick(Routes.organizationMain)}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
             <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>}
-            {!isProd && <MainSectionButton size={'small'} onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>}
+            {!isProd && <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>}
           </div>
         </div>
       </div>}
