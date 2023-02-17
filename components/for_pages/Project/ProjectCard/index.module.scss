@@ -1,3 +1,5 @@
+@import "scss/index";
+
 .root{
   display: flex;
   flex-direction: row;
@@ -5,7 +7,7 @@
   padding: 25px;
   background: white;
   font-size: 14px;
-  @media screen and (max-width: 1350px){
+  @media screen and (max-width: $container-lg){
     flex-direction: column;
     padding: 21px;
   }

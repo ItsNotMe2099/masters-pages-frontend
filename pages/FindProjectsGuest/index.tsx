@@ -23,8 +23,6 @@ import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import InputSearch from 'components/ui/Inputs/InputSearch'
-import OrganizationRepository from 'data/repositories/OrganizationRepository'
-import { IOrganization } from 'data/intefaces/IOrganization'
 import {useRouter} from "next/router";
 import ProjectActions from "components/for_pages/Project/ProjectActions";
 import {IRootState} from "types";
@@ -150,7 +148,7 @@ const FindProjectsGuest = (props) => {
         <div className={styles.block}></div>
         </div>
         <div className={styles.content}>
-          <div>
+          <div className={styles.projects}>
           {(loading && total === 0) && <Loader/>}
           {total > 0 && <InfiniteScroll
           dataLength={projects.length} //This is important field to render the next data
