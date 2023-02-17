@@ -159,9 +159,9 @@ const ProjectPage = ({ project, projectStatus, ...props }: Props) => {
             <img src={'/img/Project/web.svg'} /> <a href={project.webLink} target={'_blank'}>{project.webLink}</a>
           </div>
         </div>}
-        {profile && <div className={styles.controlsAlt}>
+        <div className={styles.controlsAlt}>
           {props.controls}
-        </div>}
+        </div>
       </div>
 
 
