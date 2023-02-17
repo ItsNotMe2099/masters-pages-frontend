@@ -1,4 +1,4 @@
-import styles from 'pages/FindCompanies/index.module.scss'
+import styles from 'pages/FindOrdersGuest/index.module.scss'
 import { useEffect, useState } from 'react'
 import Layout from 'components/layout/Layout'
 import Modals from 'components/layout/Modals'
@@ -12,10 +12,9 @@ import classNames from 'classnames'
 import { getAuthServerSide } from 'utils/auth'
 import { setCookie } from 'nookies'
 import { CookiesType, RegistrationMode } from 'types/enums'
-import {addDays} from 'date-fns'
+import { addDays } from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
-import ProjectModal from 'components/for_pages/Project/ProjectModal'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskRepository'
@@ -40,7 +39,7 @@ const FindOrdersGuest = (props) => {
 
   const fetchTasks = (page: number, limit: number, keywords?: string, filter?: ITaskSearchRequest) => {
     TaskRepository.search(page, limit, keywords).then(data => {
-      if(data){
+      if (data) {
         setTasks(data.data);
         setTotal(data.total);
       }
@@ -60,7 +59,7 @@ const FindOrdersGuest = (props) => {
   const handleScrollNext = (value: string) => {
     setPage(page + 1);
     TaskRepository.search(page + 1, limit, value).then((data) => {
-      if(data){
+      if (data) {
         setTasks(tasks => [...tasks, ...data.data])
       }
     })
@@ -78,66 +77,66 @@ const FindOrdersGuest = (props) => {
 
         <div className={styles.container}>
           <div className={styles.left}>
-          <div className={styles.topContent}>
-          <div className={styles.filters}>
-          <GuestFilter
-            search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
-            state={isVisible}
-            onClick={() => setIsVisible(isVisible ? false : true)}
-          />
-      <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.tasks')}: <span>{total}</span></div>}
-          {tasks.length > 0 && <div className={styles.projectsSort}>
-            <span>{t('sort.title')}:</span>
-            <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: t('sort.newFirst')},
-              {value: 'highPrice', label: t('sort.highestPrice')},
-              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
+            <div className={styles.topContent}>
+              <div className={styles.filters}>
+                <GuestFilter
+                  search={() => <InputSearch searchRequest={(value) => serachRequest(value)} />}
+                  state={isVisible}
+                  onClick={() => setIsVisible(isVisible ? false : true)}
+                />
+                <div className={styles.projectsTobBar}>
+                  {!loading && <div className={styles.projectsAmount}>{t('taskSearch.tasks')}: <span>{total}</span></div>}
+                  {tasks.length > 0 && <div className={styles.projectsSort}>
+                    <span>{t('sort.title')}:</span>
+                    <DropDown onChange={handleSortChange} value={sortType} options={[
+                      { value: 'newFirst', label: t('sort.newFirst') },
+                      { value: 'highPrice', label: t('sort.highestPrice') },
+                      { value: 'lowPrice', label: t('sort.lowestPrice') }]}
                       item={(item) => <div>{item?.label}</div>}
-            />
-          </div>}
-        </div>
-        </div>
-        <div className={styles.block}></div>
-        </div>
-        <div className={styles.content}>
-          <div>
-          {(loading && total === 0) && <Loader/>}
-          {total > 0 && <InfiniteScroll
-          dataLength={tasks.length} //This is important field to render the next data
-          next={() => handleScrollNext(value)}
-          hasMore={total > tasks.length}
-          loader={<Loader/>}
-          scrollableTarget='scrollableDiv'
-        >
-          {tasks.map(task =>
-              <Task key={task.id} task={task}/>
-          )}
-          </InfiniteScroll>}
+                    />
+                  </div>}
+                </div>
+              </div>
+              <div className={styles.block}></div>
+            </div>
+            <div className={styles.content}>
+              <div className={styles.orders}>
+                {(loading && total === 0) && <Loader />}
+                {total > 0 && <InfiniteScroll
+                  dataLength={tasks.length} //This is important field to render the next data
+                  next={() => handleScrollNext(value)}
+                  hasMore={total > tasks.length}
+                  loader={<Loader />}
+                  scrollableTarget='scrollableDiv'
+                >
+                  {tasks.map(task =>
+                    <Task key={task.id} task={task} />
+                  )}
+                </InfiniteScroll>}
+              </div>
+              <div className={classNames(styles.sidebar, { [styles.visible]: isVisible })}>
+                <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
+                  <div className={styles.sidebarWrapper}>
+                    <div className={styles.map}>
+                      <Map />
+                    </div>
+                    <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true} borderRed={true} size={'16px 20px'} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.showOnTheMap')}</Button>
+                  </div>
+                </Sticky>
+              </div>
+            </div>
           </div>
-          <div className={classNames(styles.sidebar, {[styles.visible]: isVisible})}>
-        <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
-          <div className={styles.sidebarWrapper}>
-        <div className={styles.map}>
-          <Map/>
         </div>
-        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.showOnTheMap')}</Button>
-          </div>
-        </Sticky>
       </div>
-        </div>
-          </div>
-        </div>
-      </div>
-       <Modals/>
+      <Modals />
     </Layout>
   )
 }
 
 export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any)
-  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, {expires: addDays(new Date(), 5)})
-  return {props: {...res.props}}
+  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, { expires: addDays(new Date(), 5) })
+  return { props: { ...res.props } }
 
 }
 
