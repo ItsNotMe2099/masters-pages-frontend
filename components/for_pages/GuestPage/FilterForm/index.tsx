@@ -17,6 +17,7 @@ import CountryField from 'components/fields/CountryField'
 import CityField from 'components/fields/CityField'
 import Validator from 'utils/validator'
 import { LabelStyleType } from 'types/types'
+import Link from 'next/link'
 const queryString = require('query-string')
 
 
@@ -96,8 +97,8 @@ const Filter = (props: Props) => {
         }
         </div>
         <div className={styles.btns}>
-          <Button style='applyFilters' type='button' onClick={() => dispatch(signUpOpen())}>{t('findCompanies.filter.applyFilters')}</Button>
-          <div className={styles.saveSearch} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.saveTheSearch')}<Favorite/></div>
+          <Button style='applyFilters' type='button' href='/registration/user'>{t('findCompanies.filter.applyFilters')}</Button>
+          <Link href='/registration/user'> <a className={styles.saveSearch}>{t('taskSearch.saveTheSearch')}<Favorite/></a></Link>
         </div>
       </Form>
     </FormikProvider>

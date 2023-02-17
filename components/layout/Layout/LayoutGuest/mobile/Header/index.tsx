@@ -99,6 +99,8 @@ const Header = (props: Props) => {
     {title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '/FindMasterGuest',},
   ]
 
+  const router = useRouter()
+
   return (
     <div className={cx(styles.root)}>
       <Logo/>
@@ -118,7 +120,7 @@ const Header = (props: Props) => {
         {isMenuMobileOpen && (
         <div className={cx(styles.dropdownMobile)}>
           <div
-            className={styles.hello}>Hello guest! Please register for <span onClick={() => dispatch(signUpOpen())}>FREE</span> to get full functionality.
+            className={styles.hello}>Hello guest! Please register for <span onClick={() => router.push('/registration/user')}>FREE</span> to get full functionality.
           </div>
           {item.map(item => <>{item.isSeparator && <div className={styles.menuSeparator}/>}<MenuItem
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}

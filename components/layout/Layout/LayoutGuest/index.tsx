@@ -69,6 +69,8 @@ export default function LayoutGuest(props: Props) {
     <div className={styles.collapseMenu} onClick={handleCollapse}/>
   </div>)
 
+  const router = useRouter()
+
 
   return (
     <div className={cx(styles.root, {[styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable})} id='scrollableDiv'>
@@ -112,7 +114,7 @@ export default function LayoutGuest(props: Props) {
         <div className={styles.headerLeft}>
           {!showLeftMenu && logo}
           <div
-            className={classNames(styles.hello, {[styles.none]: !showLeftMenu})}>Hello guest! Please register for <span onClick={() => dispatch(signUpOpen())}>FREE</span> to get full functionality.
+            className={classNames(styles.hello, {[styles.none]: !showLeftMenu})}>Hello guest! Please register for <span onClick={() => router.push('/registration/user')}>FREE</span> to get full functionality.
           </div>
         </div>
         <div className={styles.btns}>

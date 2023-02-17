@@ -10,6 +10,7 @@ import {createNewsComment} from 'components/News/actions'
 import { useTranslation } from 'next-i18next'
 import { useAppContext } from 'context/state'
 import { signUpOpen } from 'components/Modal/actions'
+import { useRouter } from 'next/dist/client/router'
 interface Props {
   isNews?: boolean
 }
@@ -22,6 +23,8 @@ export default function GalleryNewComment({isNews}: Props) {
   const {i18n, t} = useTranslation('common')
   const context = useAppContext()
 
+  const router = useRouter()
+
   const handleSendMessage = () => {
     if(message && galleryItem && context.profile) {
       if(isNews){
@@ -31,7 +34,7 @@ export default function GalleryNewComment({isNews}: Props) {
       }
     }
     else if(!context.profile){
-      dispatch(signUpOpen())
+      router.push('/registration/user')
     }
   }
 

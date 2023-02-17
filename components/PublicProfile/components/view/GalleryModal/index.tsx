@@ -25,6 +25,7 @@ import {
 import cx from 'classnames'
 import {useAppContext} from 'context/state'
 import { signUpOpen } from 'components/Modal/actions'
+import { useRouter } from 'next/dist/client/router'
 interface Props {
   isOpen: boolean,
   isNews?: boolean
@@ -66,9 +67,11 @@ export default function GalleryModal(props: Props) {
     }
   }
 
+  const router = useRouter()
+
   const handleLike = () => {
     if(!currentProfile){
-      dispatch(signUpOpen())
+      router.push('/registration/user')
     }
     if(model.isLiked || model.profileId === currentProfile?.id){
       return

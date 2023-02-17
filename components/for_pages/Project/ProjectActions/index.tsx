@@ -20,6 +20,7 @@ import {useState} from 'react'
 import {ProfileRole} from 'data/intefaces/IProfile'
 import {ProjectWrapper, useProjectContext} from "context/project_state";
 import {ApplicationWrapper, useApplicationContext} from "context/application_state";
+import { useRouter } from 'next/dist/client/router'
 
 interface Props {
   project?: IProject
@@ -87,9 +88,11 @@ const ProjectActionsInner = (props: Props) => {
     }))
   }
 
+  const router = useRouter()
+
   const handleApply = () => {
     if (!profile) {
-      dispatch(signUpOpen())
+      router.push('/registration/user')
       return;
     }
     props.onModalOpen('application')
@@ -169,7 +172,7 @@ const ProjectActionsInner = (props: Props) => {
       case 'apply':
         return <Button color={'grey'} onClick={handleApply}>APPLY</Button>
       case 'save':
-        return <Button onClick={() => profile ? handleSave() : dispatch(signUpOpen())} color={'grey'}>SAVE</Button>
+        return <Button onClick={() => profile ? handleSave() : router.push('/registration/user')} color={'grey'}>SAVE</Button>
       case 'open':
         return <Button onClick={handleView} type='button' projectBtn='default'>OPEN</Button>
       case 'pause':

@@ -69,7 +69,7 @@ const MainSectionFourth = (props) => {
       </div>
       <div className={styles.btns}>
             <MainSectionButton size="normal" color="outlineYellow" href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
-            <MainSectionButton size="normal" color="yellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</MainSectionButton>
+            <MainSectionButton size="normal" color="yellow" href='/registration/user'>{t('newMainVolunteer.freeSignUp')}</MainSectionButton>
       </div>
     </div>
   )

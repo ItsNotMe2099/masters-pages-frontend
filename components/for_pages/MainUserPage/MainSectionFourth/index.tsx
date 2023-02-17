@@ -52,9 +52,9 @@ const MainSectionFourth = (props) => {
         )}
         <div className={styles.btns}>
           <div className={styles.firstBtn}>
-            <Button onClick={() => dispatch(signUpOpen())} target='_self' outlineRed className={styles.findMaster}>{t('findMaster')}</Button>
+            <Button href='/registration/user' target='_self' outlineRed className={styles.findMaster}>{t('findMaster')}</Button>
           </div>
-            <Button onClick={() => dispatch(signUpOpen())} target='_self' outlineBlue className={styles.findMaster}>{t('findVolunteer')}</Button>
+            <Button href='/registration/user' target='_self' outlineBlue className={styles.findMaster}>{t('findVolunteer')}</Button>
         </div>
       </div>
       </div>

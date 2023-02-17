@@ -15,7 +15,6 @@ import TabVolunteers from "components/for_pages/Project/ProjectModal/Tabs/TabVol
 import TabChat from "components/for_pages/Project/ProjectModal/Tabs/TabChat";
 import ProjectAutorepliesTab from "components/for_pages/Project/ProjectModal/Tabs/ProjectAutoRepliesTab";
 import TabReports from "components/for_pages/Project/ProjectModal/Tabs/TabReports";
-import {IAutoMessages} from "data/intefaces/IAutoMessages";
 import ProjectRepository from "data/repositories/ProjectRepository";
 import OrganizationRepository from "data/repositories/OrganizationRepository";
 import {ProfileRole} from "data/intefaces/IProfile";
@@ -103,7 +102,7 @@ const ProjectPublicPage = (props: Props) => {
   }
   const handleChangeTab = (item) => {
     if (!profile && item.key !== 'back') {
-      dispatch(signUpOpen())
+      router.push(`/registration/user`)
       return;
     }
     if(item.key === 'back'){

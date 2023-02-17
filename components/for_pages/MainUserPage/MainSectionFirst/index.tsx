@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { useDispatch } from 'react-redux'
 import { signUpOpen} from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/MainUserPage/Button'
+import { useRouter } from 'next/dist/client/router'
 
 interface Props {
 
@@ -15,6 +16,8 @@ const MainSectionFirst = (props: Props) => {
   const {t} = useTranslation('common')
   const dispatch = useDispatch()
 
+  const router = useRouter()
+
   return (
     <div className={styles.root}>
       <div className={styles.container}>
@@ -22,7 +25,7 @@ const MainSectionFirst = (props: Props) => {
           <div className={styles.text}>
             {t('mainPage.personalPortal')}
           </div>
-          <MainSectionButton onClick={() => dispatch(signUpOpen())}>{t('auth.signUp.title')}</MainSectionButton>
+          <MainSectionButton onClick={() => router.push('/registration/user')}>{t('auth.signUp.title')}</MainSectionButton>
         </div>
         <div className={styles.image}>
           <img src='/img/Main/bg/first.svg' alt=''/>

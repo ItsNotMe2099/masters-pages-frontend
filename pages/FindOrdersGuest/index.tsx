@@ -120,7 +120,8 @@ const FindOrdersGuest = (props) => {
                     <div className={styles.map}>
                       <Map />
                     </div>
-                    <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true} borderRed={true} size={'16px 20px'} onClick={() => dispatch(signUpOpen())}>{t('taskSearch.showOnTheMap')}</Button>
+                    <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true} borderRed={true} size={'16px 20px'} 
+                    href='/registration/user'>{t('taskSearch.showOnTheMap')}</Button>
                   </div>
                 </Sticky>
               </div>

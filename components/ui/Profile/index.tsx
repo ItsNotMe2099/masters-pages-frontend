@@ -51,7 +51,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       dispatch(taskOfferOpen())
     }
     else{
-      dispatch(signUpOpen())
+      router.push('/registration/user')
     }
   }
   const {t, i18n} = useTranslation('common')
@@ -64,7 +64,7 @@ export default function Profile({ actionsType,selectedCategoryId, selectedSubCat
       dispatch(saveProfileRequest(profile.id))
     }
     else{
-      dispatch(signUpOpen())
+      router.push('/registration/user')
     }
   }
 

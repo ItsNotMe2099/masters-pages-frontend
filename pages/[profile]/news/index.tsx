@@ -34,7 +34,7 @@ const ProfileNews = (props) => {
   console.log('ROUTERRERERER', profileId)
 
   const handleEdit = (item) => {
-    dispatch(signUpOpen())
+    router.push('/registration/user')
   }
 
   //return <PublicProfile {...props} showType={'news'}/>

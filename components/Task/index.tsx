@@ -124,7 +124,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     dispatch(taskShareOpen())
     }
     else{
-      dispatch(signUpOpen())
+      router.push('registration/user')
     }
   }
   const handleFavorite = () => {
@@ -132,7 +132,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       dispatch(saveTaskRequest(task.id))
     }
     else{
-      dispatch(signUpOpen())
+      router.push('registration/user')
     }
   }
 
