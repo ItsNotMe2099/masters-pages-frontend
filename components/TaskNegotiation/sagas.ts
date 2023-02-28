@@ -1,6 +1,6 @@
 import { fetchChat, fetchOneChatMessage } from 'components/Chat/actions'
 import { createTaskComplete } from 'components/CreateTaskPage/actions'
-import { confirmChangeData, modalClose, taskSuccessOpen } from 'components/Modal/actions'
+import { confirmChangeData, confirmModalClose, modalClose, taskSuccessOpen } from 'components/Modal/actions'
 import { createFeedBackMasterRequest } from 'components/ProfileFeedback/actions'
 import { fetchTaskSearchOneRequest } from 'components/TaskSearch/actions'
 import Router from 'next/router'
@@ -89,6 +89,8 @@ function* TaskOfferSaga() {
       yield put(confirmChangeData({ loading: true }))
       yield put(taskNegotiationAcceptTaskOfferRequest(action.payload.taskNegotiation.id))
       const result = yield take([ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.FAIL])
+      yield put(confirmChangeData({ loading: false }))
+      yield put(confirmModalClose())
       if (result.type === ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS) {
         const profile = yield select((state: IRootState) => state.profile.currentProfile)
         if(profile.role === 'client'){
@@ -107,7 +109,8 @@ function* TaskOfferSaga() {
       yield put(confirmChangeData({ loading: true }))
       yield put(taskNegotiationDeclineTaskOfferRequest(action.payload.taskNegotiation.id))
       const result = yield take([ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS, ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER_REQUEST + ApiActionTypes.FAIL])
-
+      yield put(confirmChangeData({ loading: false }))
+      yield put(confirmModalClose())
       if (result.type === ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS) {
         yield put(modalClose())
         yield put(taskUserRemoveFromList(action.payload.taskNegotiation.taskId))

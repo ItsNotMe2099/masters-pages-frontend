@@ -1,7 +1,7 @@
 import ApiActionTypes from 'constants/api'
 import { IChatMessage, ITask, ITaskNegotiation } from 'types'
 import ActionTypes from './const'
-import {IProfile} from 'data/intefaces/IProfile'
+import { IProfile } from 'data/intefaces/IProfile'
 export interface TaskOfferState {
   taskResponseLoading: boolean
   lastConditionLoading: boolean,
@@ -29,9 +29,9 @@ const initialState: TaskOfferState = {
   sendOfferLoading: false
 }
 
-export default function TaskOfferReducer(state = {...initialState}, action) {
+export default function TaskOfferReducer(state = { ...initialState }, action) {
 
-  switch(action.type) {
+  switch (action.type) {
     case ActionTypes.TASK_NEGOTIATION_SET_CURRENT_TASK:
       state.currentTask = action.payload
       break
@@ -90,6 +90,7 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS:
     case ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS_REQUEST + ApiActionTypes.SUCCESS:
     case ActionTypes.TASK_NEGOTIATION_HIRE_MASTER_REQUEST + ApiActionTypes.SUCCESS:
+    case ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.SUCCESS:
       state.actionLoading = false
       break
     case ActionTypes.TASK_NEGOTIATION_DECLINE_TASK_RESPONSE_REQUEST + ApiActionTypes.FAIL:
@@ -99,6 +100,7 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
     case ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST + ApiActionTypes.FAIL:
     case ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS_REQUEST + ApiActionTypes.FAIL:
     case ActionTypes.TASK_NEGOTIATION_HIRE_MASTER_REQUEST + ApiActionTypes.FAIL:
+    case ActionTypes.TASK_NEGOTIATION_ACCEPT_TASK_OFFER_REQUEST + ApiActionTypes.FAIL:
       state.actionLoading = false
       break
 
@@ -121,5 +123,5 @@ export default function TaskOfferReducer(state = {...initialState}, action) {
 
   }
 
-   return {...state}
+  return { ...state }
 }
