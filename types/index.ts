@@ -339,6 +339,11 @@ export enum ITaskStatus {
   Done = 'done',
 }
 
+export interface ITaskCount {
+  task_status: ITaskStatus
+  count: string
+}
+
 export interface ITask {
   id: number,
   profileId: number,

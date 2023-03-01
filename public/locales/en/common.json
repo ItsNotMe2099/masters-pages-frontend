@@ -659,7 +659,7 @@
     "fieldDescription": "Task description",
     "buttonCreateTask": "CREATE TASK",
     "faq": "FAQ",
-    "successTitle": "Your task created",
+    "successTitle": "Your order created",
     "priceSelect": {
       "or": "or",
       "hourlyTaskTitle": "Hourly task",

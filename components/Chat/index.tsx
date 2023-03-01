@@ -46,7 +46,7 @@ export default function Chat(props: Props) {
 
   const tabs = [
     { name: t('personalArea.tabSaved.menu.people'), key: 'people' },
-    { name: t('personalArea.tabSaved.menu.tasks'), key: 'tasks' },
+    { name: 'Orders', key: 'tasks' },
   ]
   const handleChangeTab = (item) => {
     setActiveTab(item.key)

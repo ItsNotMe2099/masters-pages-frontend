@@ -1,6 +1,6 @@
 import request from 'utils/request'
 import { IPagination } from 'types/types'
-import { ITask, ITaskFormData } from 'types'
+import { ITask, ITaskCount, ITaskFormData, ITaskStatus } from 'types'
 
 export interface ITaskSearchRequest {
   keywords?: string,
@@ -21,6 +21,30 @@ export default class TaskRepository {
       url: `/api/tasks/search?page=${page}&limit=${limit}&keywords=${keywords}`,
       method: 'GET',
       data
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchTaskListByUser
+    (page: number = 1, limit: number = 10, sort: string = 'createdAt', sortOrder: string = 'DESC', status?: ITaskStatus):
+    Promise<IPagination<ITask> | null> {
+    const res = await request({
+      url: `/api/tasks/search?page=${page}&limit=${limit}&sort=${sort}&sortOrder=${sortOrder}${status && `&status=${status}`}`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchTaskUserStatRequest(): Promise<ITaskCount[]> {
+    const res = await request({
+      url: '/api/tasks/count',
+      method: 'GET',
     })
     if (res.err) {
       return null

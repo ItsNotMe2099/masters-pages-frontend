@@ -432,7 +432,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             <Button bold smallFont transparent size='16px 0' onClick={handleDecline}> {t('task.decline')} </Button>}
             {hasOfferActions &&
             <Button bold smallFont transparent size='16px 0' onClick={handleAccept}> {t('task.accept')} </Button>}
-            {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.Declined) &&
+            {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations?.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.Declined) &&
             <div className={styles.actionStatus}> {t('task.youDeclined')} </div>}
             {(actionsType === 'public' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.lastNegotiation && task.lastNegotiation.state === ITaskNegotiationState.Accepted) &&
             <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
