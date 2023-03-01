@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import React, {useEffect, useState} from 'react'
 import ConfirmStep from "./ConfirmStep";
-import EmailStep from "./PhoneStep";
+import PhoneStep from "./PhoneStep";
 import {useAuthContext} from "context/auth_state";
 
 
@@ -33,7 +33,7 @@ export default function UserRegPhoneStep(props: Props) {
       <div className={styles.title}>
         Individual Account Registration
       </div>
-      {step === Step.Phone && <EmailStep onSubmit={handleSubmitEmail}/>}
+      {step === Step.Phone && <PhoneStep onSubmit={handleSubmitEmail}/>}
       {step === Step.Confirm && <ConfirmStep onSubmit={handleSubmitCode} onBack={() => setStep(Step.Phone)}/>}
     </div>
   )

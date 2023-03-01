@@ -3,13 +3,7 @@ import React, {useEffect, useMemo, useRef, useState} from 'react'
 import RegistrationLayout from "components/for_pages/Registration/RegistrationLayout";
 import {useRouter} from "next/router";
 import FormStepSwitch from "components/ui/FormStepSwitch";
-import CorporateRegEmailStep from "./UserRegPhoneStep";
-import CorporateRegContactsStep from "components/for_pages/CorporateRegistration/CorporateRegContactsStep";
-import CorporateRegOrganizationStep from "components/for_pages/CorporateRegistration/CorporateRegOrganizationStep";
-import CorporateRegFinishStep from "components/for_pages/CorporateRegistration/CorporateRegFinishStep";
 import {useAppContext} from "context/state";
-import OrganizationRepository from "data/repositories/OrganizationRepository";
-import {OrganizationStatus} from "data/intefaces/IOrganization";
 import Loader from "components/ui/Loader";
 import UserRegPhoneStep from "./UserRegPhoneStep";
 import UserRegInfoStep from "components/for_pages/UserRegistration/UserRegInfoStep";
