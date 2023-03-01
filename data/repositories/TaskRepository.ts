@@ -32,7 +32,7 @@ export default class TaskRepository {
     (page: number = 1, limit: number = 10, sort: string = 'createdAt', sortOrder: string = 'DESC', status?: ITaskStatus):
     Promise<IPagination<ITask> | null> {
     const res = await request({
-      url: `/api/tasks/search?page=${page}&limit=${limit}&sort=${sort}&sortOrder=${sortOrder}${status && `&status=${status}`}`,
+      url: `/api/tasks?page=${page}&limit=${limit}&sort=${sort}&sortOrder=${sortOrder}${status && `&status=${status}`}`,
       method: 'GET',
     })
     if (res.err) {
