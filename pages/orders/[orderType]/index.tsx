@@ -39,8 +39,6 @@ const TabOrders = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(false)
 
-  console.log('TASKSSKSSKSKSHGSGDG', tasks)
-
   console.log('profileEweqe', profile)
   const tabs = [
     ...(role === 'client' ? [{ name: t('personalArea.tabOrders.menu.draft'), key: 'draft' }, { name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount }] : []),
@@ -116,15 +114,38 @@ const TabOrders = (props: Props) => {
     }
   }, [orderType])
 
-  const handleScrollNext = () => {
+  const handleScrollNext = async () => {
     if (orderType === 'saved') {
       setPage(page + 1)
-      fetchSavedTasks(page + 1)
+      setLoading(true)
+      await ProfileRepository.fetchSavedTasks(page + 1, 10).then(i => {
+        if (i) {
+          setTasks(tasks => [...tasks, ...i.data])
+        }
+      })
+      setLoading(false)
     } else {
       setPage(page + 1)
-      fetchTaskUser(page + 1)
+      if (['published', 'in_progress'].includes(orderType as string)) {
+        setLoading(true)
+        await TaskRepository.fetchTaskListByUser(page + 1, 10, 'deadline', 'DESC', orderType as ITaskStatus).then(i => {
+          if (i) {
+            setTasks(tasks => [...tasks, ...i.data])
+          }
+        })
+        setLoading(false)
+      } else {
+        setLoading(true)
+        await TaskRepository.fetchTaskListByUser(page + 1, 10, 'createdAt', 'DESC', orderType as ITaskStatus).then(i => {
+          if (i) {
+            setTasks(tasks => [...tasks, ...i.data])
+          }
+        })
+        setLoading(false)
+      }
     }
   }
+
   const handleTaskEdit = (task: ITask) => {
     setCurrentTaskEdit(task)
     dispatch(taskUpdateOpen())
@@ -158,7 +179,9 @@ const TabOrders = (props: Props) => {
             dataLength={tasks.length} //This is important field to render the next data
             next={handleScrollNext}
             hasMore={total > tasks.length}
-            loader={loading ? <Loader /> : null}>
+            loader={loading ? <Loader /> : null}
+            scrollableTarget='scrollableDiv'
+          >
             {tasks.map(task => <Task onStatusChange={handleStatusChange} key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved' ? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false} />)}
           </InfiniteScroll>}
         </div>
