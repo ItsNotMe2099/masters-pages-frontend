@@ -51,9 +51,10 @@ interface Props {
   onDelete?: (task: ITask) => void,
   onPublish?: (task: ITask) => void,
   onUnPublish?: (task: ITask) => void,
+  onStatusChange?: () => void
 }
 
-const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish, index }: Props) => {
+const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPublish, onUnPublish, index, onStatusChange }: Props) => {
   const { t, i18n } = useTranslation('common')
   const dispatch = useDispatch()
   const [sortType, setSortType] = useState('newFirst')
@@ -89,6 +90,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       description: `${t('task.confirmDelete')} «${task.title}»?`,
       onConfirm: () => {
         dispatch(deleteTaskUser(task.id))
+        onStatusChange()
       }
     }))
   }
@@ -109,6 +111,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       description: `${t('task.confirmCancel')}?`,
       onConfirm: () => {
         dispatch(taskCancel(task.id))
+        onStatusChange()
       }
     }))
   }
@@ -145,6 +148,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       description: `${t('task.confirmAccept')}?`,
       onConfirm: () => {
         dispatch(taskNegotiationAcceptTaskOffer(task.negotiations[0]))
+        onStatusChange()
       }
     }))
   }

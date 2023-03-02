@@ -81,6 +81,17 @@ const TabOrders = (props: Props) => {
     setLoading(false)
   }
 
+  const handleStatusChange = () => {
+    if (orderType === 'saved') {
+      fetchSavedTasks(page)
+    }
+    if (['published', 'in_progress'].includes(orderType as string)) {
+      fetchTaskUser(page, 'deadline')
+    } else {
+      fetchTaskUser(page)
+    }
+  }
+
   useEffect(() => {
     if (orderType === 'saved') {
       fetchSavedTasks(page)
@@ -148,7 +159,7 @@ const TabOrders = (props: Props) => {
             next={handleScrollNext}
             hasMore={total > tasks.length}
             loader={loading ? <Loader /> : null}>
-            {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved' ? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false} />)}
+            {tasks.map(task => <Task onStatusChange={handleStatusChange} key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved' ? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false} />)}
           </InfiniteScroll>}
         </div>
         <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'} onClose={() => dispatch(modalClose())} />
