@@ -116,6 +116,7 @@ export default function LayoutAuthorized(props: Props) {
     ...(role === ProfileRole.Client ? [
       { title: t('menu.findMaster'), icon: 'find-clients', link: '/SearchMasterPage', isSeparator: true },
       { title: t('menu.messages'), icon: 'messages', link: '/Chat', badge: profile.notificationMessageCount },
+      { title: t('menu.events'), icon: 'events', link: '/Calendar', badge: profile.notificationEventCount },
     ] : []),
     ...(role === ProfileRole.Master ? [
       { title: t('menu.findClients'), icon: 'find-clients', link: '/SearchClientPage', isSeparator: true },
