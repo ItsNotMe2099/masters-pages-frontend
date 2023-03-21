@@ -10,14 +10,13 @@ import SelectField from 'components/fields/SelectField'
 import Input from 'components/ui/Inputs/Input'
 import Button from 'components/ui/Button'
 import { useDispatch } from 'react-redux'
-import { signUpOpen } from 'components/Modal/actions'
 import Favorite from 'components/svg/Favorite'
 import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import CountryField from 'components/fields/CountryField'
 import CityField from 'components/fields/CityField'
 import Validator from 'utils/validator'
 import { LabelStyleType } from 'types/types'
-import Link from 'next/link'
+
 const queryString = require('query-string')
 
 
@@ -98,7 +97,7 @@ const Filter = (props: Props) => {
         </div>
         <div className={styles.btns}>
           <Button style='applyFilters' type='button' href='/registration/user'>{t('findCompanies.filter.applyFilters')}</Button>
-          <Link href='/registration/user'> <a className={styles.saveSearch}>{t('taskSearch.saveTheSearch')}<Favorite/></a></Link>
+          <a href='/registration/user' target='_blank' rel='noopener noreferrer' className={styles.saveSearch}>{t('taskSearch.saveTheSearch')}<Favorite/></a>
         </div>
       </Form>
     </FormikProvider>

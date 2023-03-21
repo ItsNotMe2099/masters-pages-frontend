@@ -15,7 +15,7 @@ import classNames from 'classnames'
 import { getAuthServerSide } from 'utils/auth'
 import { setCookie } from 'nookies'
 import { CookiesType, RegistrationMode } from 'types/enums'
-import {addDays} from 'date-fns'
+import { addDays } from 'date-fns'
 import { useDispatch } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
 import Loader from 'components/ui/Loader'
@@ -41,7 +41,7 @@ const FindCompanies = (props) => {
 
   const fetchOrganizations = (page: number, limit: number, keywords?: string, filter?: IOrganizationSearchRequest) => {
     OrganizationRepository.search(page, limit, keywords).then((data) => {
-      if(data){
+      if (data) {
         setOrganizations(data.data)
         setTotal(data.total)
       }
@@ -61,7 +61,7 @@ const FindCompanies = (props) => {
   const handleScrollNext = (value: string) => {
     setPage(page + 1);
     OrganizationRepository.search(page + 1, limit, value).then((data) => {
-      if(data){
+      if (data) {
         setOrganizations(organizations => [...data.data, ...organizations])
       }
     })
@@ -76,69 +76,69 @@ const FindCompanies = (props) => {
   return (
     <Layout>
       <div className={styles.root}>
- 
+
         <div className={styles.container}>
           <div className={styles.left}>
-          <div className={styles.topContent}>
-          <div className={styles.filters}>
-          <GuestFilter 
-          search={() => <InputSearch searchRequest={(value) => serachRequest(value)}/>}
-          state={isVisible} 
-          onClick={() => setIsVisible(isVisible ? false : true)} filter='companies'
-          />
-      <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('taskSearch.companies')}: <span>{total}</span></div>}
-          {organizations.length > 0 && <div className={styles.projectsSort}>
-            <span>{t('sort.title')}:</span>
-            <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: t('sort.newFirst')},
-              {value: 'highPrice', label: t('sort.highestPrice')},
-              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
+            <div className={styles.topContent}>
+              <div className={styles.filters}>
+                <GuestFilter
+                  search={() => <InputSearch searchRequest={(value) => serachRequest(value)} />}
+                  state={isVisible}
+                  onClick={() => setIsVisible(isVisible ? false : true)} filter='companies'
+                />
+                <div className={styles.projectsTobBar}>
+                  {!loading && <div className={styles.projectsAmount}>{t('taskSearch.companies')}: <span>{total}</span></div>}
+                  {organizations.length > 0 && <div className={styles.projectsSort}>
+                    <span>{t('sort.title')}:</span>
+                    <DropDown onChange={handleSortChange} value={sortType} options={[
+                      { value: 'newFirst', label: t('sort.newFirst') },
+                      { value: 'highPrice', label: t('sort.highestPrice') },
+                      { value: 'lowPrice', label: t('sort.lowestPrice') }]}
                       item={(item) => <div>{item?.label}</div>}
-            />
-          </div>}
-        </div>
-        </div>
-        <div className={styles.block}></div>
-        </div>
-        <div className={styles.content}>
-          <div className={styles.cards}>
-          {(loading && total === 0) && <Loader/>}
-          {total > 0 && <InfiniteScroll
-          dataLength={organizations.length} //This is important field to render the next data
-          hasMore={total > organizations.length}
-          next={() => handleScrollNext(value)}
-          loader={<Loader/>}
-          scrollableTarget='scrollableDiv'
-        >
-          {organizations.map(organization => 
-              <Organization className={classNames(styles.organization, {[styles.mobile]: context.isMobile})} key={organization.id} organization={organization}/>
-          )}
-          </InfiniteScroll>}
+                    />
+                  </div>}
+                </div>
+              </div>
+              <div className={styles.block}></div>
+            </div>
+            <div className={styles.content}>
+              <div className={styles.cards}>
+                {(loading && total === 0) && <Loader />}
+                {total > 0 && <InfiniteScroll
+                  dataLength={organizations.length} //This is important field to render the next data
+                  hasMore={total > organizations.length}
+                  next={() => handleScrollNext(value)}
+                  loader={<Loader />}
+                  scrollableTarget='scrollableDiv'
+                >
+                  {organizations.map(organization =>
+                    <Organization className={classNames(styles.organization, { [styles.mobile]: context.isMobile })} key={organization.id} organization={organization} />
+                  )}
+                </InfiniteScroll>}
+              </div>
+              <div className={classNames(styles.sidebar, { [styles.visible]: isVisible })}>
+                <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
+                  <div className={styles.sidebarWrapper}>
+                    <div className={styles.map}>
+                      <Map />
+                    </div>
+                    <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true} borderRed={true} size={'16px 20px'} href='/registration/user'>{t('taskSearch.showOnTheMap')}</Button>
+                  </div>
+                </Sticky>
+              </div>
+            </div>
           </div>
-          <div className={classNames(styles.sidebar, {[styles.visible]: isVisible})}>
-        <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
-          <div className={styles.sidebarWrapper}>
-        <div className={styles.map}>
-          <Map/>
         </div>
-        <Button className={styles.showOnTheMap} fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} href='/registration/user'>{t('taskSearch.showOnTheMap')}</Button>
-          </div>
-        </Sticky>
       </div>
-        </div>
-          </div>
-        </div>
-      </div>
-      <Modals/>
+      <Modals />
     </Layout>
   )
 }
 
 export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any)
-  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, {expires: addDays(new Date(), 5)})
-  return {props: {...res.props}}
+  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, { expires: addDays(new Date(), 5) })
+  return { props: { ...res.props } }
 
 }
 
