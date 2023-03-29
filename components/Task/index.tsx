@@ -194,7 +194,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const actions = []
 
   if (actionsType === 'client') {
-    if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && profile.id === task.profileId) {
+    if ([ITaskStatus.Negotiation, ITaskStatus.Draft, ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && profile.id === task.profileId && router.asPath !== '/orders/offers') {
       actions.push('edit')
     }
     if (['draft'].includes(task.status)) {
@@ -206,7 +206,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       if(task.status !== ITaskStatus.PrivatelyPublished) {
         actions.push('unPublish')
       }
-      actions.push('cancel')
+      router.asPath !== '/orders/offers' ? actions.push('cancel') : null
     }
     if (['in_progress'].includes(task.status)) {
       actions.push('cancel')
