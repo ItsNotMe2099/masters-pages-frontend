@@ -30,15 +30,16 @@ import { format } from 'date-fns'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { default as React, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
+import { useDispatch } from 'react-redux'
+import { ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import { getCategoryTranslation } from 'utils/translations'
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
-import {getCurrencySymbol} from 'data/currency'
-import {saveTaskRequest} from 'components/SavedTasks/actions'
-import {useAppContext} from 'context/state'
+import { getCurrencySymbol } from 'data/currency'
+import { saveTaskRequest } from 'components/SavedTasks/actions'
+import { useAppContext } from 'context/state'
 import Routes from "pages/routes";
+import ChatSvg from 'components/svg/ChatSvg'
 
 interface Props {
   task: ITask,
@@ -64,7 +65,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   console.log('TaskUpdate', task.id, task)
   const router = useRouter()
   useEffect(() => {
-    if(actionsType === 'client') {
+    if (actionsType === 'client') {
       dispatch(fetchTaskUserResponseRequest(task.id, { limit: 1, ...getSortData(sortType) }))
     }
   }, [])
@@ -122,19 +123,19 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     dispatch(fetchTaskUserResponseRequest(task.id, { page: 1, limit: 1000, ...getSortData(sortType) }))
   }
   const handleShare = () => {
-    if(profile){
-    dispatch(taskSearchSetCurrentTask(task))
-    dispatch(taskShareOpen())
+    if (profile) {
+      dispatch(taskSearchSetCurrentTask(task))
+      dispatch(taskShareOpen())
     }
-    else{
+    else {
       router.push('registration/user')
     }
   }
   const handleFavorite = () => {
-    if(profile){
+    if (profile) {
       dispatch(saveTaskRequest(task.id))
     }
-    else{
+    else {
       router.push('registration/user')
     }
   }
@@ -185,7 +186,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       router.push(`/Chat/task-dialog/${task.id}/${profile.id}`)
     } else if (actionsType === 'client') {
       router.push(`/Chat/task-dialog/${task.id}/${task.masterId}`)
-    }else if (actionsType === 'public') {
+    } else if (actionsType === 'public') {
       const response = task.lastNegotiation
       router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`)
     }
@@ -203,7 +204,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     }
 
     if ([ITaskStatus.Published, ITaskStatus.PrivatelyPublished, ITaskStatus.Negotiation].includes(task.status) && profile.id === task.profileId) {
-      if(task.status !== ITaskStatus.PrivatelyPublished) {
+      if (task.status !== ITaskStatus.PrivatelyPublished) {
         actions.push('unPublish')
       }
       router.asPath !== '/orders/offers' ? actions.push('cancel') : null
@@ -224,7 +225,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       actions.push('edit')
     }
     if ([ITaskStatus.Published, ITaskStatus.PrivatelyPublished, ITaskStatus.Negotiation].includes(task.status) && profile.id === task.profileId) {
-      if(task.status !== ITaskStatus.PrivatelyPublished) {
+      if (task.status !== ITaskStatus.PrivatelyPublished) {
         actions.push('unPublish')
       }
       actions.push('cancel')
@@ -270,25 +271,25 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const renderActionButton = (action) => {
     switch (action) {
       case 'readMore':
-        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>
+        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore} />
       case 'edit':
-        return <TaskActionButton title={t('task.edit')} icon={'arrow-right'} onClick={handleEdit}/>
+        return <TaskActionButton title={t('task.edit')} icon={'arrow-right'} onClick={handleEdit} />
       case 'delete':
-        return <TaskActionButton title={t('task.delete')} icon={'delete'} onClick={handleDelete}/>
+        return <TaskActionButton title={t('task.delete')} icon={'delete'} onClick={handleDelete} />
       case 'publish':
-        return <TaskActionButton title={t('task.publish')} icon={'publish'} onClick={handlePublish}/>
+        return <TaskActionButton title={t('task.publish')} icon={'publish'} onClick={handlePublish} />
       case 'unPublish':
-        return <TaskActionButton title={t('task.unPublish')} icon={'unpublish'} onClick={handleUnPublish}/>
+        return <TaskActionButton title={t('task.unPublish')} icon={'unpublish'} onClick={handleUnPublish} />
       case 'cancel':
-        return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel}/>
+        return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel} />
       case 'markAsCompleted':
-        return <TaskActionButton title={t('task.markAsCompleted')} icon={'mark'} onClick={handleTaskComplete}/>
+        return <TaskActionButton title={t('task.markAsCompleted')} icon={'mark'} onClick={handleTaskComplete} />
       case 'share':
-        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>
+        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare} />
       case 'save':
-        return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')} icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>
+        return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')} icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile} />} onClick={handleFavorite} />
       case 'feedbackToClient':
-        return <TaskActionButton title={t('task.postFeedback')} icon={'mark'}  onClick={handleFeedbackByMaster}/>
+        return <TaskActionButton title={t('task.postFeedback')} icon={'mark'} onClick={handleFeedbackByMaster} />
     }
   }
 
@@ -319,18 +320,18 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
 
       <div className={styles.wrapper}>
         {actionsType === 'public' && <div className={styles.profile}>
-          <Avatar href={profileLink} image={task.profile?.photo}/>
+          <Avatar href={profileLink} image={task.profile?.photo} />
           <div className={styles.mobileWrapper}>
             <div className={styles.name__mobile}>
               <Link href={profileLink}>
-              <a
-                className={styles.nameText}>{`${taskProfile.firstName}${taskProfile.lastName ? ` ${taskProfile.lastName}` : ''}`}</a></Link>
-              <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
+                <a
+                  className={styles.nameText}>{`${taskProfile.firstName}${taskProfile.lastName ? ` ${taskProfile.lastName}` : ''}`}</a></Link>
+              <img src="/img/SearchTaskPage/icons/verification.svg" alt='' />
             </div>
             <div className={styles.icons}>
-              <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
+              <img src="/img/SearchTaskPage/icons/case.svg" alt='' />
               <div>{taskProfile.tasksCount || 0}</div>
-              <img src="/img/SearchTaskPage/icons/like.svg" alt=''/>
+              <img src="/img/SearchTaskPage/icons/like.svg" alt='' />
               <div>{taskProfile.feedbacksCount || 0}</div>
             </div>
             <div className={styles.stars}>
@@ -355,9 +356,9 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             <div className={styles.top}>
               {['public', 'master'].includes(actionsType) && <div className={styles.name}>
                 <Link href={profileLink}>
-                <a
-                  className={styles.nameText}>{`${taskProfile.firstName}${taskProfile.lastName ? ` ${taskProfile.lastName}` : ''}`}</a></Link>
-                <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
+                  <a
+                    className={styles.nameText}>{`${taskProfile.firstName}${taskProfile.lastName ? ` ${taskProfile.lastName}` : ''}`}</a></Link>
+                <img src="/img/SearchTaskPage/icons/verification.svg" alt='' />
               </div>}
               {(actionsType === 'client') && <div className={styles.taskTitle}>
                 <Link href={taskLink}><a className={styles.title}>{task.title}</a></Link>
@@ -369,7 +370,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
                 {getStatusText()}
               </div>}
               <div className={styles.time}>
-                <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/clock.svg" alt='' />
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
@@ -377,7 +378,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             <div>
               {actionsType === 'client' && renderCategory(task)}
               <div className={styles.timeMobile}>
-                <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/clock.svg" alt='' />
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
@@ -391,10 +392,17 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             </div>
           </div>
           <div className={styles.bottom}>
-            {actions.map((action, index) => {
-              return [renderActionButton(action), ...(index !== actions.length - 1 ? [<div
-                className={styles.separatorLine}/>] : [])]
-            })}
+            <div className={styles.left}>
+              {actions.map((action, index) => {
+                return [renderActionButton(action), ...(index !== actions.length - 1 ? [<div
+                  className={styles.separatorLine} />] : [])]
+              })}
+            </div>
+            {router.asPath === `/orders/${ITaskStatus.Negotiation}` &&
+              <div className={styles.chat} onClick={handleMessages}>
+                <ChatSvg />
+                <div className={styles.text}>Chat</div>
+              </div>}
           </div>
         </div>
         <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
@@ -405,7 +413,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               {t('task.price')} :
             </div>
             <div className={styles.priceDetailsValue}>
-              {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}`:
+              {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}` :
                 `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
             </div>
           </div>
@@ -429,17 +437,15 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
           </div>}
           <div className={styles.btnContainer}>
             {(actionsType === 'public' && profile && profile.role !== 'client' && !task.lastNegotiation) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>    {t('task.acceptTask')} </Button>}
-            {((actionsType !== 'public' && ![ITaskStatus.Draft].includes(task.status) && ((actionsType === 'master' && task.negotiations?.length > 0 && [ITaskNegotiationState.Accepted].includes(task.negotiations[0].state)) || (actionsType === 'client' && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status)) || (actionsType === 'master' &&  task.masterId === profile.id && [ITaskStatus.InProgress, ITaskStatus.Done, ITaskStatus.Canceled].includes(task.status))))) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
+              <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>    {t('task.acceptTask')} </Button>}
             {hasOfferActions &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}> {t('task.decline')} </Button>}
+              <Button bold smallFont transparent size='16px 0' onClick={handleDecline}> {t('task.decline')} </Button>}
             {hasOfferActions &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleAccept}> {t('task.accept')} </Button>}
+              <Button bold smallFont transparent size='16px 0' onClick={handleAccept}> {t('task.accept')} </Button>}
             {(actionsType === 'master' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations?.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.Declined) &&
-            <div className={styles.actionStatus}> {t('task.youDeclined')} </div>}
+              <div className={styles.actionStatus}> {t('task.youDeclined')} </div>}
             {(actionsType === 'public' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.lastNegotiation && task.lastNegotiation.state === ITaskNegotiationState.Accepted) &&
-            <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
+              <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
           </div>
         </div>
 
@@ -459,11 +465,11 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
         </div>
         <div className={styles.responsesList}>
           {(task.responses?.data ? task.responses?.data : []).map(response => <TaskResponse response={response}
-                                                                                            task={task}/>)}
+            task={task} />)}
         </div>
         <div className={styles.loadMoreArea}>
           {task.responses?.total > task.responses?.data?.length &&
-          <div className={styles.loadMore} onClick={handleLoadMore}>{t('loadMore')}</div>}
+            <div className={styles.loadMore} onClick={handleLoadMore}>{t('loadMore')}</div>}
         </div>
       </div>}
     </div>
