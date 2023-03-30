@@ -1,7 +1,8 @@
 import {
   confirmOpen, feedbackByMasterOpen,
   finishTaskAsClientOpen,
-  signUpOpen,
+  taskEditConditionsOpen,
+  taskHireMasterOpen,
   taskMarkAsDoneOpen,
   taskOfferAcceptOpen,
   taskShareOpen
@@ -14,11 +15,14 @@ import TaskResponse from 'components/Task/components/TaskResponse'
 import {
   taskNegotiationAcceptTaskOffer,
   taskNegotiationDeclineTaskOffer,
+  taskNegotiationFetchLastConditions,
+  taskNegotiationSetCurrentNegotiation,
   taskNegotiationSetCurrentTask
 } from 'components/TaskNegotiation/actions'
 import { taskSearchSetCurrentTask } from 'components/TaskSearch/actions'
 import {
   deleteTaskUser,
+  fetchOneTaskUserRequest,
   fetchTaskUserResponseRequest,
   setPublishedTaskUser,
   taskCancel
@@ -30,8 +34,8 @@ import { format } from 'date-fns'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { default as React, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
+import { useDispatch, useSelector } from 'react-redux'
+import { IRootState, ITask, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import { getCategoryTranslation } from 'utils/translations'
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
@@ -40,6 +44,10 @@ import { saveTaskRequest } from 'components/SavedTasks/actions'
 import { useAppContext } from 'context/state'
 import Routes from "pages/routes";
 import ChatSvg from 'components/svg/ChatSvg'
+import classNames from 'classnames'
+import CloseIcon from 'components/svg/CloseIcon'
+import MarkIcon from 'components/svg/MarkIcon'
+import { async } from '@firebase/util'
 
 interface Props {
   task: ITask,
@@ -62,9 +70,12 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const appContext = useAppContext();
   const profile = appContext.profile
 
+  const lastNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
+
   console.log('TaskUpdate', task.id, task)
   const router = useRouter()
   useEffect(() => {
+    dispatch(taskNegotiationFetchLastConditions(task.id, profile.id))
     if (actionsType === 'client') {
       dispatch(fetchTaskUserResponseRequest(task.id, { limit: 1, ...getSortData(sortType) }))
     }
@@ -116,6 +127,23 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       }
     }))
   }
+
+  const handleCancelNegotitation = () => {
+    dispatch(confirmOpen({
+      description: t('chat.cancelTask'),
+      onConfirm: () => {
+        dispatch(taskCancel(task.id))
+        onStatusChange()
+      }
+    }))
+  }
+
+  const [taskStatus, setTaskStatus] = useState<ITaskStatus>(task.status)
+
+  useEffect(() => {
+    setTaskStatus(task.status)
+  }, [task.status])
+
   const handleReadMore = () => {
 
   }
@@ -167,6 +195,17 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
     dispatch(feedbackByMasterOpen())
   }
 
+  const handleMarkAsDone = () => {
+
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskMarkAsDoneOpen())
+  }
+  const handleFinish = () => {
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(finishTaskAsClientOpen())
+  }
+
   const handleEdit = () => {
     if (onEdit) {
       onEdit(task)
@@ -190,6 +229,13 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
       const response = task.lastNegotiation
       router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`)
     }
+
+  }
+
+  const handleEditConditions = () => {
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(taskEditConditionsOpen())
 
   }
   const actions = []
@@ -314,6 +360,16 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   const profileLink = `${Routes.profile(taskProfile)}`
 
   const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id && task.negotiations && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster) || (actionsType === 'client' && task.negotiations && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToClient)))
+  const isInProgress = taskStatus == ITaskStatus.InProgress
+  const isFinished = taskStatus == ITaskStatus.Done
+  const isCanceled = taskStatus == ITaskStatus.Canceled
+
+
+  const handleHireMaster = () => {
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskHireMasterOpen())
+
+  }
 
   return (
     <div className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
@@ -435,7 +491,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               <span>{format(new Date(task.deadline), 'MM.dd.yyy')}</span>
             </div>
           </div>}
-          <div className={styles.btnContainer}>
+          <div className={classNames(styles.btnContainer, { [styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}` })}>
             {(actionsType === 'public' && profile && profile.role !== 'client' && !task.lastNegotiation) &&
               <Button bold smallFont transparent size='16px 0' onClick={handleAcceptAsMasterToClient}>    {t('task.acceptTask')} </Button>}
             {hasOfferActions &&
@@ -446,6 +502,21 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               <div className={styles.actionStatus}> {t('task.youDeclined')} </div>}
             {(actionsType === 'public' && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.lastNegotiation && task.lastNegotiation.state === ITaskNegotiationState.Accepted) &&
               <Button bold smallFont transparent size='16px 0' onClick={handleMessages}> {t('task.messages')} </Button>}
+            {router.asPath === `/orders/${ITaskStatus.Negotiation}` ?
+              <>
+                {task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancelNegotitation}>{t('confirmModal.buttonCancel')}</Button>}
+                {task && isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`} onClick={handleMarkAsDone}>{t('chat.markAsDone')}</Button>}
+                {task && isInProgress && profile.role === 'client' && <Button className={`${styles.action} ${styles.actionGreen}`} onClick={handleFinish}>{t('chat.finishTask')}</Button>}
+                {task && !isInProgress && !isFinished && lastNegotiation !== null && profile.role === 'client' &&
+                  (
+                    (lastNegotiation.authorId === profile.id && lastNegotiation.state === ITaskNegotiationState.Accepted)
+                    || (lastNegotiation.authorId !== profile.id && ![ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(lastNegotiation.state))
+                    || (lastNegotiation.type === ITaskNegotiationType.TaskOffer && [ITaskNegotiationState.Accepted].includes(lastNegotiation.state))
+                  )
+                  && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHireMaster}>{t('chat.hireMaster')}</Button>}
+                {task && !isInProgress && !isFinished && task.status == ITaskStatus.Published && <Button className={styles.action} onClick={handleEditConditions}>{t('chat.negotiateOffer')}</Button>}
+              </>
+              : null}
           </div>
         </div>
 

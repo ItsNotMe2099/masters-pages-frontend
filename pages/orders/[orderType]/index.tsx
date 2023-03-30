@@ -39,7 +39,7 @@ const TabOrders = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(false)
 
-  console.log('profileEweqe', profile)
+  console.log('profileEweqe', orderType)
   const tabs = [
     ...(role === 'client' ? [{ name: t('personalArea.tabOrders.menu.draft'), key: 'draft' }, { name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount }] : []),
     ...(role !== 'client' ? [{ name: t('personalArea.tabOrders.menu.responses'), key: 'responses' }, { name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount },] : []),
