@@ -36,6 +36,7 @@ const TabOrders = (props: Props) => {
   const [tasks, setTasks] = useState<ITask[]>([])
   const [stat, setStat] = useState<ITaskCount[]>([])
   const [total, setTotal] = useState<number>(0)
+  const [totalPublished, setTotalPublished] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -55,6 +56,8 @@ const TabOrders = (props: Props) => {
     }
   })
 
+  console.log('totalPublished', totalPublished)
+
   const fetchSavedTasks = async (page: number) => {
     setLoading(true)
     await ProfileRepository.fetchSavedTasks(page, 10).then(i => {
@@ -71,9 +74,12 @@ const TabOrders = (props: Props) => {
     setLoading(true)
     await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', orderType as ITaskStatus).then(i => {
       if (i) {
+        const filtered = i.data.filter(i => i.master === null)
+        console.log('filtered', filtered)
+        if (profile.role === 'client') {
+          setTotalPublished(filtered.length)
+        }
         if (orderType === ITaskStatus.Published && profile.role === 'client') {
-          const filtered = i.data.filter(i => i.master === null)
-          console.log('filtered', filtered)
           setTasks(filtered)
           setTotal(filtered.length)
         }
@@ -170,14 +176,14 @@ const TabOrders = (props: Props) => {
           <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
             const statResult = stat.find(item => item.task_status === tab.key)
 
-            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${tab.key === ITaskStatus.Published ? total : (statResult ? statResult.count : 0)})` }
+            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === ITaskStatus.Published ? `${tab.name} (${totalPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
           }))} activeTab={orderType as string} />
         </div>
         <div className={styles.mobile}>
           <TabSelect tabs={tabs.map((tab => {
             const statResult = stat.find(item => item.task_status === tab.key)
 
-            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})` }
+            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === ITaskStatus.Published ? `${tab.name} (${totalPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
           }))} activeTab={orderType as string} />
 
         </div>
