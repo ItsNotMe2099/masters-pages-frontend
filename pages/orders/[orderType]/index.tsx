@@ -71,8 +71,16 @@ const TabOrders = (props: Props) => {
     setLoading(true)
     await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', orderType as ITaskStatus).then(i => {
       if (i) {
-        setTasks(i.data)
-        setTotal(i.total)
+        if (orderType === ITaskStatus.Published && profile.role === 'client') {
+          const filtered = i.data.filter(i => i.master === null)
+          console.log('filtered', filtered)
+          setTasks(filtered)
+          setTotal(filtered.length)
+        }
+        else {
+          setTasks(i.data)
+          setTotal(i.total)
+        }
       }
     })
     await TaskRepository.fetchTaskUserStatRequest().then(i => setStat(i))
@@ -162,7 +170,7 @@ const TabOrders = (props: Props) => {
           <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
             const statResult = stat.find(item => item.task_status === tab.key)
 
-            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})` }
+            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${tab.key === ITaskStatus.Published ? total : (statResult ? statResult.count : 0)})` }
           }))} activeTab={orderType as string} />
         </div>
         <div className={styles.mobile}>
