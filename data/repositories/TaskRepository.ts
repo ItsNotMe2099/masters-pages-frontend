@@ -28,6 +28,17 @@ export default class TaskRepository {
     return res.data
   }
 
+  static async fetchOneTaskUserRequest(taskId: number): Promise<ITask> {
+    const res = await request({
+      url: `/api/tasks/${taskId}`,
+      method: 'GET'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
   static async fetchTaskListByUser
     (page: number = 1, limit: number = 10, sort: string = 'createdAt', sortOrder: string = 'DESC', status?: ITaskStatus):
     Promise<IPagination<ITask> | null> {

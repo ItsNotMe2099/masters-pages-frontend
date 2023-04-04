@@ -76,9 +76,7 @@ const TabOrders = (props: Props) => {
       if (i) {
         const filtered = i.data.filter(i => i.master === null)
         console.log('filtered', filtered)
-        if (profile.role === 'client') {
-          setTotalPublished(filtered.length)
-        }
+        setTotalPublished(filtered.length)
         if (orderType === ITaskStatus.Published && profile.role === 'client') {
           setTasks(filtered)
           setTotal(filtered.length)
