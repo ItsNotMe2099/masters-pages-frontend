@@ -325,7 +325,8 @@ export interface ITaskNegotiation {
   createdAt: string,
   isRead: boolean,
   priceType: 'fixed' | 'rate'
-
+  isSentToMaster: boolean
+  isSentToClient: boolean
 }
 
 export enum ITaskStatus {
@@ -337,6 +338,7 @@ export enum ITaskStatus {
   Canceled = 'canceled',
   InProgress = 'in_progress',
   Done = 'done',
+  Offers = 'offers'
 }
 
 export interface ITaskCount {

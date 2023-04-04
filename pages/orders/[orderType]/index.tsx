@@ -40,6 +40,9 @@ const TabOrders = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(false)
 
+  const [filteredOffers, setFilteredOffers] = useState<number>(0)
+  const [filteredPublished, setFilteredPublished] = useState<number>(0)
+
   console.log('profileEweqe', orderType)
   const tabs = [
     ...(role === 'client' ? [{ name: t('personalArea.tabOrders.menu.draft'), key: 'draft' }, { name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount }] : []),
@@ -74,12 +77,15 @@ const TabOrders = (props: Props) => {
     setLoading(true)
     await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', orderType as ITaskStatus).then(i => {
       if (i) {
-        const filtered = i.data.filter(i => i.master === null)
-        console.log('filtered', filtered)
-        setTotalPublished(filtered.length)
-        if (orderType === ITaskStatus.Published && profile.role === 'client') {
-          setTasks(filtered)
-          setTotal(filtered.length)
+        if (orderType === 'offers' && profile.role === 'client') {
+          const filteredOffers = i.data.filter(i => i.negotiations[0].isSentToClient)
+          setTasks(filteredOffers)
+          setTotal(filteredOffers.length)
+        }
+        else if (orderType === ITaskStatus.Published && profile.role === 'client') {
+          const filteredPublished = i.data.filter(i => i.master === null)
+          setTasks(filteredPublished)
+          setTotal(filteredPublished.length)
         }
         else {
           setTasks(i.data)
@@ -87,6 +93,20 @@ const TabOrders = (props: Props) => {
         }
       }
     })
+    if (profile.role === 'client') {
+      await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', ITaskStatus.Offers).then(i => {
+        if (i) {
+          const filteredOffers = i.data.filter(i => i.negotiations[0].isSentToClient)
+          setFilteredOffers(filteredOffers.length)
+        }
+      })
+      await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', ITaskStatus.Published).then(i => {
+        if (i) {
+          const filteredPublished = i.data.filter(i => i.master === null)
+          setFilteredPublished(filteredPublished.length)
+        }
+      })
+    }
     await TaskRepository.fetchTaskUserStatRequest().then(i => setStat(i))
     setLoading(false)
   }
@@ -142,14 +162,28 @@ const TabOrders = (props: Props) => {
         setLoading(true)
         await TaskRepository.fetchTaskListByUser(page + 1, 10, 'deadline', 'DESC', orderType as ITaskStatus).then(i => {
           if (i) {
-            setTasks(tasks => [...tasks, ...i.data])
+            if (orderType === 'offers' && profile.role === 'client') {
+              setTasks(tasks => [...tasks, ...i.data.filter(i => i.negotiations[0].isSentToClient)])
+            }
+            else if (orderType === ITaskStatus.Published && profile.role === 'client') {
+              setTasks(tasks => [...tasks, ...i.data.filter(i => (i.master === null))])
+            }
+            else {
+              setTasks(tasks => [...tasks, ...i.data])
+            }
           }
         })
         setLoading(false)
       } else {
         setLoading(true)
         await TaskRepository.fetchTaskListByUser(page + 1, 10, 'createdAt', 'DESC', orderType as ITaskStatus).then(i => {
-          if (i) {
+          if (orderType === 'offers' && profile.role === 'client') {
+            setTasks(tasks => [...tasks, ...i.data.filter(i => i.negotiations[0].isSentToClient)])
+          }
+          else if (orderType === ITaskStatus.Published && profile.role === 'client') {
+            setTasks(tasks => [...tasks, ...i.data.filter(i => (i.master === null))])
+          }
+          else {
             setTasks(tasks => [...tasks, ...i.data])
           }
         })
@@ -174,14 +208,14 @@ const TabOrders = (props: Props) => {
           <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
             const statResult = stat.find(item => item.task_status === tab.key)
 
-            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === ITaskStatus.Published ? `${tab.name} (${totalPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
+            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === 'offers' ? `${tab.name} (${filteredOffers})` : tab.key === ITaskStatus.Published ? `${tab.name} (${filteredPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
           }))} activeTab={orderType as string} />
         </div>
         <div className={styles.mobile}>
           <TabSelect tabs={tabs.map((tab => {
             const statResult = stat.find(item => item.task_status === tab.key)
 
-            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === ITaskStatus.Published ? `${tab.name} (${totalPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
+            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : `${tab.name} (${statResult ? statResult.count : 0})` }
           }))} activeTab={orderType as string} />
 
         </div>
