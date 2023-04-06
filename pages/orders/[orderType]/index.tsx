@@ -80,12 +80,12 @@ const TabOrders = (props: Props) => {
         if (orderType === 'offers' && profile.role === 'client') {
           const filteredOffers = i.data.filter(i => i.negotiations[0].isSentToClient)
           setTasks(filteredOffers)
-          setTotal(filteredOffers.length)
+          setTotal(i.total)
         }
         else if (orderType === ITaskStatus.Published && profile.role === 'client') {
-          const filteredPublished = i.data.filter(i => i.master === null)
+          const filteredPublished = i.data.filter(i => i.masterId === null)
           setTasks(filteredPublished)
-          setTotal(filteredPublished.length)
+          setTotal(i.total)
         }
         else {
           setTasks(i.data)
@@ -94,15 +94,15 @@ const TabOrders = (props: Props) => {
       }
     })
     if (profile.role === 'client') {
-      await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', ITaskStatus.Offers).then(i => {
+      await TaskRepository.fetchTaskListByUser(page, 10, 'createdAt', 'DESC', ITaskStatus.Offers).then(i => {
         if (i) {
           const filteredOffers = i.data.filter(i => i.negotiations[0].isSentToClient)
           setFilteredOffers(filteredOffers.length)
         }
       })
-      await TaskRepository.fetchTaskListByUser(page, 10, sort, 'DESC', ITaskStatus.Published).then(i => {
+      await TaskRepository.fetchTaskListByUser(page, 10, 'createdAt', 'DESC', ITaskStatus.Published).then(i => {
         if (i) {
-          const filteredPublished = i.data.filter(i => i.master === null)
+          const filteredPublished = i.data.filter(i => i.masterId === null)
           setFilteredPublished(filteredPublished.length)
         }
       })
@@ -166,7 +166,8 @@ const TabOrders = (props: Props) => {
               setTasks(tasks => [...tasks, ...i.data.filter(i => i.negotiations[0].isSentToClient)])
             }
             else if (orderType === ITaskStatus.Published && profile.role === 'client') {
-              setTasks(tasks => [...tasks, ...i.data.filter(i => (i.master === null))])
+
+              setTasks(tasks => [...tasks, ...i.data.filter(i => i.masterId === null)])
             }
             else {
               setTasks(tasks => [...tasks, ...i.data])
@@ -181,7 +182,7 @@ const TabOrders = (props: Props) => {
             setTasks(tasks => [...tasks, ...i.data.filter(i => i.negotiations[0].isSentToClient)])
           }
           else if (orderType === ITaskStatus.Published && profile.role === 'client') {
-            setTasks(tasks => [...tasks, ...i.data.filter(i => (i.master === null))])
+            setTasks(tasks => [...tasks, ...i.data.filter(i => i.masterId === null)])
           }
           else {
             setTasks(tasks => [...tasks, ...i.data])

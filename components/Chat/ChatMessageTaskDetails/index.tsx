@@ -18,8 +18,8 @@ import { useTranslation } from 'next-i18next'
 
 
 interface Props {
-  message: IChatMessage,
-  task: ITask,
+  message: IChatMessage
+  task: ITask
   outDatedText?: string
   showHire?: boolean
   showEdit?: boolean

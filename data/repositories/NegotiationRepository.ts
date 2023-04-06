@@ -13,4 +13,29 @@ export default class NegotiationRepository {
     }
     return res.data
   }
+
+  static async taskNegotiationFetchLastConditions(taskId: number, profileId: number = null): Promise<ITaskNegotiation> {
+    const res = await request({
+      url: `/api/task-negotiation/${taskId}/last-conditions?profileId=${profileId}`,
+      method: 'GET',
+    })
+
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async taskNegotiationEditConditionsRequest(taskNegotiationId: number, data): Promise<ITaskNegotiation> {
+    const res = await request({
+      url: `/api/task-negotiation/${taskNegotiationId}/edit-conditions`,
+      method: 'POST',
+      data,
+    })
+
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }
