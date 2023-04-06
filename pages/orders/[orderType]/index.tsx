@@ -209,7 +209,7 @@ const TabOrders = (props: Props) => {
           <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
             const statResult = stat.find(item => item.task_status === tab.key)
 
-            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === 'offers' ? `${tab.name} (${filteredOffers})` : tab.key === ITaskStatus.Published ? `${tab.name} (${filteredPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
+            return { ...tab, name: tab.key === 'saved' ? `${tab.name}` : tab.key === 'offers' && profile.role === 'client' ? `${tab.name} (${filteredOffers})` : tab.key === ITaskStatus.Published ? `${tab.name} (${filteredPublished})` : `${tab.name} (${statResult ? statResult.count : 0})` }
           }))} activeTab={orderType as string} />
         </div>
         <div className={styles.mobile}>
