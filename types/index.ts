@@ -318,6 +318,7 @@ export interface ITaskNegotiation {
   type: ITaskNegotiationType,
   state: ITaskNegotiationState,
   message: string,
+  task?: ITask
   ratePerHour: number,
   budget: number,
   estimate: number,
@@ -338,7 +339,8 @@ export enum ITaskStatus {
   Canceled = 'canceled',
   InProgress = 'in_progress',
   Done = 'done',
-  Offers = 'offers'
+  Offers = 'offers',
+  OffersMaster = 'offers-master'
 }
 
 export interface ITaskCount {

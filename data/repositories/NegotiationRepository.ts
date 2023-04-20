@@ -1,5 +1,6 @@
 import request from 'utils/request'
-import { ITaskNegotiation } from 'types'
+import { ITask, ITaskNegotiation } from 'types'
+import { IPagination } from 'types/types'
 
 export default class NegotiationRepository {
 
@@ -33,6 +34,30 @@ export default class NegotiationRepository {
       data,
     })
 
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchOffersFromClient(page: number = 1, limit: number = 10): Promise<IPagination<ITaskNegotiation> | null> {
+    const res = await request({
+      url: '/api/task-negotiation/offers_from_client',
+      method: 'POST',
+      data: {page, limit}
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchOffersFromMaster(page: number = 1, limit: number = 10): Promise<IPagination<ITaskNegotiation> | null> {
+    const res = await request({
+      url: '/api/task-negotiation/offers_from_master',
+      method: 'POST',
+      data: {page, limit}
+    })
     if (res.err) {
       return null
     }
