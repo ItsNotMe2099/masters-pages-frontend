@@ -1,5 +1,5 @@
 import request from 'utils/request'
-import { ITask, ITaskNegotiation } from 'types'
+import { ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITypesWithStates } from 'types'
 import { IPagination } from 'types/types'
 
 export default class NegotiationRepository {
@@ -14,6 +14,8 @@ export default class NegotiationRepository {
     }
     return res.data
   }
+
+
 
   static async taskNegotiationFetchLastConditions(taskId: number, profileId: number = null): Promise<ITaskNegotiation> {
     const res = await request({
@@ -44,7 +46,7 @@ export default class NegotiationRepository {
     const res = await request({
       url: '/api/task-negotiation/offers_from_client',
       method: 'POST',
-      data: {page, limit}
+      data: { page, limit }
     })
     if (res.err) {
       return null
@@ -56,7 +58,20 @@ export default class NegotiationRepository {
     const res = await request({
       url: '/api/task-negotiation/offers_from_master',
       method: 'POST',
-      data: {page, limit}
+      data: { page, limit }
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async fetchListNegotiations(typesWithStates: ITypesWithStates[] , page: number = 1, limit: number = 10):
+    Promise<IPagination<ITaskNegotiation> | null> {
+    const res = await request({
+      url: '/api/task-negotiation',
+      method: 'POST',
+      data: { typesWithStates, page, limit }
     })
     if (res.err) {
       return null

@@ -11,6 +11,8 @@ function BookmarkSvg({color, className, isSaved}: Props) {
     switch (color) {
       case 'white':
         return '#ffffff'
+      case 'black':
+        return '#000'
       default:
         return '#2A2C39'
     }

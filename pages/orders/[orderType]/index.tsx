@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import * as React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { IRootState, ITask, ITaskNegotiation, ITaskStatus } from 'types'
+import { IRootState, ITask, ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus, ITypesWithStates } from 'types'
 import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { TabSelect } from 'components/TabSelect'
@@ -25,6 +25,7 @@ import Button from 'components/ui/Button'
 import { fetchSavedTasksRequest, resetSavedTasksList } from 'components/SavedTasks/actions'
 import { useAppContext } from 'context/state'
 import NegotiationRepository from 'data/repositories/NegotiationRepository'
+import TaskResponse from 'components/TaskResponse'
 interface Props {
 }
 const TabOrders = (props: Props) => {
@@ -85,6 +86,16 @@ const TabOrders = (props: Props) => {
     })
   }
 
+  const fetchListNegotiations = async (typesWithStates: ITypesWithStates[], page) => {
+    await NegotiationRepository.fetchListNegotiations(typesWithStates, page).then(i => {
+      if (i) {
+        setOffers(i.data)
+        setOffersTotal(i.total)
+      }
+
+    })
+  }
+
   useEffect(() => {
     if (orderType === 'saved') {
       dispatch(resetSavedTasksList())
@@ -92,6 +103,34 @@ const TabOrders = (props: Props) => {
       dispatch(fetchSavedTasksRequest(1, 10))
       dispatch(fetchTaskUserStatRequest())
       return
+    }
+    else if (orderType === ITaskStatus.Negotiation) {
+      setOffersPage(1)
+      const data = [
+        {
+          type: ITaskNegotiationType.TaskNegotiation,
+          states: [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToClient, ITaskNegotiationState.SentToMaster]
+        }
+      ]
+      fetchListNegotiations(data, offersPage)
+    }
+    else if (orderType === ITaskStatus.InProgress) {
+      setOffersPage(1)
+      const data = [
+        {
+          type: ITaskNegotiationType.TaskNegotiation,
+          states: []
+        },
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.Accepted],
+        },
+        {
+          type: ITaskNegotiationType.ResponseToTask,
+          states: [ITaskNegotiationState.Accepted],
+        },
+      ]
+      fetchListNegotiations(data, offersPage)
     }
     if (profile.role === 'client') {
       if (orderType === ITaskStatus.Offers) {
@@ -104,6 +143,16 @@ const TabOrders = (props: Props) => {
       }
       else {
         dispatch(setFilterTaskUser({ status: orderType }))
+      }
+    }
+    else if (profile.role === 'master') {
+      if (orderType === ITaskStatus.Offers) {
+        setOffersPage(1)
+        fetchOffersFromMaster(offersPage)
+      }
+      else if (orderType === ITaskStatus.Responses) {
+        setOffersPage(1)
+        fetchOffersFromClient(offersPage)
       }
     }
     else {
@@ -138,18 +187,56 @@ const TabOrders = (props: Props) => {
     }
     else if (orderType === ITaskStatus.Offers && profile.role === 'client') {
       setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchOffersFromClient(page + 1).then(i => {
+      await NegotiationRepository.fetchOffersFromClient(offersPage + 1).then(i => {
         if (i) {
           setOffers(offers => [...offers, ...i.data])
         }
       })
     }
-    else if (orderType === ITaskStatus.OffersMaster && profile.role === 'client') {
+    else if (orderType === ITaskStatus.OffersMaster && profile.role === 'client' || orderType === ITaskStatus.Offers && profile.role === 'master') {
       setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchOffersFromMaster(page + 1).then(i => {
+      await NegotiationRepository.fetchOffersFromMaster(offersPage + 1).then(i => {
         if (i) {
           setOffers(offers => [...offers, ...i.data])
         }
+      })
+    }
+    else if (orderType === ITaskStatus.Negotiation && profile.role === 'client') {
+      const data = [
+        {
+          type: ITaskNegotiationType.TaskNegotiation,
+          states: [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToClient, ITaskNegotiationState.SentToMaster]
+        }
+      ]
+      setOffersPage(offersPage + 1)
+      await NegotiationRepository.fetchListNegotiations(data, offersPage + 1).then(i => {
+        if (i) {
+          setOffers(offers => [...offers, ...i.data])
+        }
+
+      })
+    }
+    else if (orderType === ITaskStatus.InProgress && profile.role === 'client') {
+      const data = [
+        {
+          type: ITaskNegotiationType.TaskNegotiation,
+          states: []
+        },
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.Accepted],
+        },
+        {
+          type: ITaskNegotiationType.ResponseToTask,
+          states: [ITaskNegotiationState.Accepted],
+        },
+      ]
+      setOffersPage(offersPage + 1)
+      await NegotiationRepository.fetchListNegotiations(data, offersPage + 1).then(i => {
+        if (i) {
+          setOffers(offers => [...offers, ...i.data])
+        }
+
       })
     }
     else {
@@ -182,43 +269,82 @@ const TabOrders = (props: Props) => {
           }))} activeTab={orderType as string} />
 
         </div>
-        {orderType === ITaskStatus.Offers && profile.role === 'client' ?
+        {orderType === ITaskStatus.Offers ?
           <div className={styles.tasks}>
             {loading && offersTotal === 0 && <Loader />}
-            {total > 0 && <InfiniteScroll
+            {offersTotal > 0 && <InfiniteScroll
               dataLength={offers.length} //This is important field to render the next data
               next={handleScrollNext}
               hasMore={offersTotal > offers.length}
               loader={loading ? <Loader /> : null}
               scrollableTarget='scrollableDiv'>
-              {offers.map(task => <Task key={task.task.id} onEdit={handleTaskEdit} task={task.task} actionsType={'client'} showProfile={false} />)}
+              {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
             </InfiniteScroll>}
           </div>
           :
-          orderType === ITaskStatus.OffersMaster && profile.role === 'client' ?
+          orderType === ITaskStatus.Negotiation  ?
             <div className={styles.tasks}>
               {loading && offersTotal === 0 && <Loader />}
-              {total > 0 && <InfiniteScroll
+              {offersTotal > 0 && <InfiniteScroll
                 dataLength={offers.length} //This is important field to render the next data
                 next={handleScrollNext}
                 hasMore={offersTotal > offers.length}
                 loader={loading ? <Loader /> : null}
                 scrollableTarget='scrollableDiv'>
-                {offers.map(task => <Task key={task.task.id} onEdit={handleTaskEdit} task={task.task} actionsType={'client'} showProfile={false} />)}
+                {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
               </InfiniteScroll>}
             </div>
             :
-            <div className={styles.tasks}>
-              {loading && total === 0 && <Loader />}
-              {total > 0 && <InfiniteScroll
-                dataLength={tasks.length} //This is important field to render the next data
-                next={handleScrollNext}
-                hasMore={total > tasks.length}
-                loader={loading ? <Loader /> : null}
-                scrollableTarget='scrollableDiv'>
-                {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved' ? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false} />)}
-              </InfiniteScroll>}
-            </div>}
+            orderType === ITaskStatus.InProgress ?
+              <div className={styles.tasks}>
+                {loading && offersTotal === 0 && <Loader />}
+                {offersTotal > 0 && <InfiniteScroll
+                  dataLength={offers.length} //This is important field to render the next data
+                  next={handleScrollNext}
+                  hasMore={offersTotal > offers.length}
+                  loader={loading ? <Loader /> : null}
+                  scrollableTarget='scrollableDiv'>
+                  {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
+                </InfiniteScroll>}
+              </div>
+              :
+              orderType === ITaskStatus.OffersMaster ?
+                <div className={styles.tasks}>
+                  {loading && offersTotal === 0 && <Loader />}
+                  {total > 0 && <InfiniteScroll
+                    dataLength={offers.length} //This is important field to render the next data
+                    next={handleScrollNext}
+                    hasMore={offersTotal > offers.length}
+                    loader={loading ? <Loader /> : null}
+                    scrollableTarget='scrollableDiv'>
+                    {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
+                  </InfiniteScroll>}
+                </div>
+                :
+                orderType === ITaskStatus.Responses ?
+                <div className={styles.tasks}>
+                  {loading && offersTotal === 0 && <Loader />}
+                  {total > 0 && <InfiniteScroll
+                    dataLength={offers.length} //This is important field to render the next data
+                    next={handleScrollNext}
+                    hasMore={offersTotal > offers.length}
+                    loader={loading ? <Loader /> : null}
+                    scrollableTarget='scrollableDiv'>
+                    {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
+                  </InfiniteScroll>}
+                </div>
+                :
+                <div className={styles.tasks}>
+                  {loading && total === 0 && <Loader />}
+                  {total > 0 && <InfiniteScroll
+                    dataLength={tasks.length} //This is important field to render the next data
+                    next={handleScrollNext}
+                    hasMore={total > tasks.length}
+                    loader={loading ? <Loader /> : null}
+                    scrollableTarget='scrollableDiv'>
+                    {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved' ? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false} />)}
+                  </InfiniteScroll>}
+                </div>}
         <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'} onClose={() => dispatch(modalClose())} />
 
       </div>

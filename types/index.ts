@@ -340,7 +340,13 @@ export enum ITaskStatus {
   InProgress = 'in_progress',
   Done = 'done',
   Offers = 'offers',
-  OffersMaster = 'offers-master'
+  OffersMaster = 'offers-master',
+  Responses = 'responses'
+}
+
+export interface ITypesWithStates {
+  type: ITaskNegotiationType
+  states: ITaskNegotiationState[]
 }
 
 export interface ITaskCount {

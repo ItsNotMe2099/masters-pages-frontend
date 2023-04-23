@@ -544,7 +544,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
 
       </div>
 
-      {task.responses?.total > 0 && <div className={styles.responses}>
+      {/*task.responses?.total > 0 && <div className={styles.responses}>
         <div className={styles.responsesTop}>
           <div className={styles.responsesTitle}>{t('task.masterList')} ({task.responses?.total})</div>
           {task.responses?.total > 0 && <div className={styles.tasksSort}>
@@ -564,7 +564,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
           {task.responses?.total > task.responses?.data?.length &&
             <div className={styles.loadMore} onClick={handleLoadMore}>{t('loadMore')}</div>}
         </div>
-      </div>}
+          </div>*/}
     </div>
   )
 }
