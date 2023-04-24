@@ -109,7 +109,15 @@ const TabOrders = (props: Props) => {
       const data = [
         {
           type: ITaskNegotiationType.TaskNegotiation,
-          states: [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToClient, ITaskNegotiationState.SentToMaster]
+          states: []
+        },
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.Accepted],
+        },
+        {
+          type: ITaskNegotiationType.ResponseToTask,
+          states: [ITaskNegotiationState.Accepted],
         }
       ]
       fetchListNegotiations(data, offersPage)
@@ -304,7 +312,7 @@ const TabOrders = (props: Props) => {
                   hasMore={offersTotal > offers.length}
                   loader={loading ? <Loader /> : null}
                   scrollableTarget='scrollableDiv'>
-                  {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
+                  {offers.filter(i => i.task.status !== ITaskStatus.Canceled && i.task.status === ITaskStatus.InProgress).map(i => <TaskResponse res={i} actionsType={'client'} />)}
                 </InfiniteScroll>}
               </div>
               :

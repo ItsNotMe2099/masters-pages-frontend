@@ -1,5 +1,5 @@
 import { default as React, useEffect, useState } from 'react'
-import { ITaskNegotiation, ITaskNegotiationType } from 'types'
+import { ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType } from 'types'
 import styles from './index.module.scss'
 import { useAppContext } from 'context/state'
 import StarRatings from 'react-star-ratings'
@@ -20,7 +20,7 @@ import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
 import { confirmOpen, taskHireMasterOpen } from 'components/Modal/actions'
-import { taskNegotiationAcceptTaskResponse, taskNegotiationDeclineTaskResponse, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
+import { taskNegotiationAcceptTaskOffer, taskNegotiationAcceptTaskResponse, taskNegotiationDeclineTaskResponse, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
 
 interface Props {
   res: ITaskNegotiation,
@@ -90,7 +90,12 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
     dispatch(confirmOpen({
       description: `${t('taskResponse.confirmAccept')} ${res.profile?.firstName} ${res.profile?.lastName}?`,
       onConfirm: () => {
-        dispatch(taskNegotiationAcceptTaskResponse(res))
+        if (res.state === ITaskNegotiationState.SentToClient) {
+          dispatch(taskNegotiationAcceptTaskOffer(res))
+        }
+        else {
+          dispatch(taskNegotiationAcceptTaskResponse(res))
+        }
       }
     }))
   }
