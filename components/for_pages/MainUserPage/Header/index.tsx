@@ -65,7 +65,7 @@ const MainSectionHeader = (props: Props) => {
           <LangSelect isAuth={false}/>
           {router.asPath !== '/registration/user' ?
           <div className={styles.actionsButtons}>
-            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/guestpage'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/FindCompanies'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>
           </div> : null}
@@ -76,7 +76,7 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.actionsMobile}>
           <div className={styles.actionsButtons}>
             <MainSectionButton size={'small'} color='yellow' onClick={() => handleClick(Routes.organizationMain)}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
-            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' onClick={() => handleClick('/guestpage')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' onClick={() => handleClick('/FindCompanies')}>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
             {!isProd && <MainSectionButton size={'small'} outline={true} onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>}
             {!isProd && <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>}
           </div>
