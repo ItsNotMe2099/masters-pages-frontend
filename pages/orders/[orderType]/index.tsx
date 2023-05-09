@@ -34,7 +34,7 @@ const TabOrders = (props: Props) => {
   const dispatch = useDispatch()
 
   const { orderType } = router.query
-  const appContext = useAppContext();
+  const appContext = useAppContext()
   const profile = appContext.profile
   const loading = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.isLoading) : useSelector((state: IRootState) => state.taskUser.listLoading)
   const tasks = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.list) : useSelector((state: IRootState) => state.taskUser.list)
@@ -55,7 +55,7 @@ const TabOrders = (props: Props) => {
   const tabs = [
     ...(role === 'client' ? [{ name: t('personalArea.tabOrders.menu.draft'), key: 'draft' }, { name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount }] : []),
     ...(role !== 'client' ? [{ name: t('personalArea.tabOrders.menu.responses'), key: 'responses' }, { name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount },] : []),
-    ...(role === 'client' ? [{ name: t('Offers from master'), key: 'offers-master', badge: profile.notificationTaskOfferCount }] : []),
+    //...(role === 'client' ? [{ name: t('Offers from master'), key: 'offers-master', badge: profile.notificationTaskOfferCount }] : []),
     { name: t('Offers'), key: 'offers', badge: profile.notificationTaskOfferCount },
     { name: t('personalArea.tabOrders.menu.negotiation'), key: 'negotiation' },
     { name: t('personalArea.tabOrders.menu.inProgress'), key: 'in_progress' },
@@ -140,7 +140,21 @@ const TabOrders = (props: Props) => {
       ]
       fetchListNegotiations(data, offersPage)
     }
-    if (profile.role === 'client') {
+    else if (orderType === ITaskStatus.Offers) {
+      setOffersPage(1)
+      const data = [
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.SentToClient],
+        },
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.SentToMaster],
+        },
+      ]
+      fetchListNegotiations(data, offersPage)
+    }
+    /*if (profile.role === 'client') {
       if (orderType === ITaskStatus.Offers) {
         setOffersPage(1)
         fetchOffersFromClient(offersPage)
@@ -162,7 +176,7 @@ const TabOrders = (props: Props) => {
         setOffersPage(1)
         fetchOffersFromClient(offersPage)
       }
-    }
+    }*/
     else {
       dispatch(setFilterTaskUser({ status: orderType }))
     }
@@ -193,7 +207,7 @@ const TabOrders = (props: Props) => {
       dispatch(setPageTaskUser(page + 1))
       dispatch(fetchSavedTasksRequest(page + 1, 10))
     }
-    else if (orderType === ITaskStatus.Offers && profile.role === 'client') {
+    /*else if (orderType === ITaskStatus.Offers && profile.role === 'client') {
       setOffersPage(offersPage + 1)
       await NegotiationRepository.fetchOffersFromClient(offersPage + 1).then(i => {
         if (i) {
@@ -204,6 +218,24 @@ const TabOrders = (props: Props) => {
     else if (orderType === ITaskStatus.OffersMaster && profile.role === 'client' || orderType === ITaskStatus.Offers && profile.role === 'master') {
       setOffersPage(offersPage + 1)
       await NegotiationRepository.fetchOffersFromMaster(offersPage + 1).then(i => {
+        if (i) {
+          setOffers(offers => [...offers, ...i.data])
+        }
+      })
+    }*/
+    else if (orderType === ITaskStatus.Offers) {
+      const data = [
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.SentToClient],
+        },
+        {
+          type: ITaskNegotiationType.TaskOffer,
+          states: [ITaskNegotiationState.SentToMaster],
+        },
+      ]
+      setOffersPage(offersPage + 1)
+      await NegotiationRepository.fetchListNegotiations(data, offersPage + 1).then(i => {
         if (i) {
           setOffers(offers => [...offers, ...i.data])
         }
@@ -316,7 +348,7 @@ const TabOrders = (props: Props) => {
                 </InfiniteScroll>}
               </div>
               :
-              orderType === ITaskStatus.OffersMaster ?
+              /*orderType === ITaskStatus.OffersMaster ?
                 <div className={styles.tasks}>
                   {loading && offersTotal === 0 && <Loader />}
                   {total > 0 && <InfiniteScroll
@@ -328,7 +360,7 @@ const TabOrders = (props: Props) => {
                     {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
                   </InfiniteScroll>}
                 </div>
-                :
+                :*/
                 orderType === ITaskStatus.Responses ?
                 <div className={styles.tasks}>
                   {loading && offersTotal === 0 && <Loader />}

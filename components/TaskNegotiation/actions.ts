@@ -57,14 +57,14 @@ export const  taskNegotiationEditConditionsRequest = (taskNegotiationId: number,
     data,
   }
 })
-export const  taskNegotiationAcceptConditions = (taskNegotiationId: number, messageId: number) => action(ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS, {taskNegotiationId, messageId})
+export const  taskNegotiationAcceptConditions = (taskNegotiationId: number, messageId?: number) => action(ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS, {taskNegotiationId, messageId})
 export const  taskNegotiationAcceptConditionsRequest = (taskNegotiationId: number) => action(ActionTypes.TASK_NEGOTIATION_ACCEPT_CONDITIONS_REQUEST, {
   api: {
     url: `/api/task-negotiation/${taskNegotiationId}/accept-conditions`,
     method: 'GET',
   }
 })
-export const  taskNegotiationDeclineConditions = (taskNegotiationId: number, messageId: number) => action(ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS, {taskNegotiationId, messageId})
+export const  taskNegotiationDeclineConditions = (taskNegotiationId: number, messageId?: number) => action(ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS, {taskNegotiationId, messageId})
 export const  taskNegotiationDeclineConditionsRequest = (taskNegotiationId: number) => action(ActionTypes.TASK_NEGOTIATION_DECLINE_CONDITIONS_REQUEST, {
   api: {
     url: `/api/task-negotiation/${taskNegotiationId}/decline-conditions`,

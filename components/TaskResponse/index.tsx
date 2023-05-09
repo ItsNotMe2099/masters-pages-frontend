@@ -1,5 +1,5 @@
 import { default as React, useEffect, useState } from 'react'
-import { ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType } from 'types'
+import { ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import styles from './index.module.scss'
 import { useAppContext } from 'context/state'
 import StarRatings from 'react-star-ratings'
@@ -9,9 +9,9 @@ import ProfileActionButton from 'components/ui/Profile/components/ActionButton'
 import BookmarkSvg from 'components/svg/Bookmark'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
-import Routes from "pages/routes";
+import Routes from "pages/routes"
 import { getCategoryTranslation } from 'utils/translations'
-import { IProfile } from 'data/intefaces/IProfile'
+import { IProfile, ProfileRole } from 'data/intefaces/IProfile'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import { SkillData } from 'types'
 import ArrowDown from 'components/svg/ArrowDown'
@@ -19,8 +19,10 @@ import ChatSvg from 'components/svg/ChatSvg'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
-import { confirmOpen, taskHireMasterOpen } from 'components/Modal/actions'
-import { taskNegotiationAcceptTaskOffer, taskNegotiationAcceptTaskResponse, taskNegotiationDeclineTaskResponse, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
+import { confirmOpen, taskEditConditionsOpen, taskHireMasterOpen } from 'components/Modal/actions'
+import { taskNegotiationAcceptConditions, taskNegotiationAcceptTaskOffer, taskNegotiationAcceptTaskResponse, taskNegotiationDeclineConditions, taskNegotiationDeclineTaskOffer, taskNegotiationDeclineTaskResponse, taskNegotiationFetchLastConditions, taskNegotiationSetCurrentNegotiation, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
+import NegotiationRepository from 'data/repositories/NegotiationRepository'
+import { taskCancel } from 'components/TaskUser/actions'
 
 interface Props {
   res: ITaskNegotiation,
@@ -48,6 +50,22 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
       }
     })
   }
+
+  const [lastNegotiation, setLastNegotiation] = useState<ITaskNegotiation | null>(null)
+
+  const fetchTaskLastNegotiations = async () => {
+    await NegotiationRepository.taskNegotiationFetchLastConditions(res.task.id, profile.id).then(i => {
+      if (i) {
+        setLastNegotiation(i)
+      }
+    }
+    )
+  }
+
+  useEffect(() => {
+    dispatch(taskNegotiationFetchLastConditions(res.task.id, profile.id))
+    fetchTaskLastNegotiations()
+  }, [])
 
   useEffect(() => {
     const fetchMasterProfile = async () => {
@@ -78,19 +96,55 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
   const dispatch = useDispatch()
 
   const handleDecline = (e) => {
+    if(res.type === ITaskNegotiationType.TaskOffer){
+      dispatch(confirmOpen({
+        description: t('task.confirmDecline'),
+        onConfirm: () => {
+          dispatch(taskNegotiationDeclineTaskOffer(res))
+        }
+      }))
+    }else{
+      dispatch(confirmOpen({
+        description: t('chat.rejectConditions'),
+        onConfirm: () => {
+          dispatch(taskNegotiationDeclineConditions(res.id))
+        }
+      }))
+    }
+  }
+
+  const handleCancel = () => {
     dispatch(confirmOpen({
-      description: `${t('taskResponse.confirmDecline')} ${res.profile?.firstName} ${res.profile?.lastName}?`,
+      description: t('chat.cancelTask'),
       onConfirm: () => {
-        dispatch(taskNegotiationDeclineTaskResponse(res.taskId, res.id))
+        dispatch(taskCancel(res.task.id))
       }
     }))
   }
 
-  const handleAccept = (e) => {
+  const handleAccept = () => {
+    if(res.type === ITaskNegotiationType.TaskOffer) {
+      dispatch(confirmOpen({
+        description: t('chat.acceptOffer'),
+        onConfirm: () => {
+          dispatch(taskNegotiationAcceptTaskOffer(res))
+        }
+      }))
+    }else{
+      dispatch(confirmOpen({
+        description: t('chat.acceptConditions'),
+        onConfirm: () => {
+          dispatch(taskNegotiationAcceptConditions(res.id))
+        }
+      }))
+    }
+  }
+
+  /*const handleAccept = (e) => {
     dispatch(confirmOpen({
       description: `${t('taskResponse.confirmAccept')} ${res.profile?.firstName} ${res.profile?.lastName}?`,
       onConfirm: () => {
-        if (res.state === ITaskNegotiationState.SentToClient) {
+        if (res.state === ITaskNegotiationState.SentToClient || res.state === ITaskNegotiationState.SentToMaster && res.type !== ITaskNegotiationType.TaskNegotiation) {
           dispatch(taskNegotiationAcceptTaskOffer(res))
         }
         else {
@@ -98,11 +152,43 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
         }
       }
     }))
-  }
+  }*/
 
   const handleHireMaster = () => {
     dispatch(taskNegotiationSetCurrentTask(res.task))
     dispatch(taskHireMasterOpen())
+  }
+
+  const handleEditConditions = () => {
+    dispatch(taskNegotiationSetCurrentTask(res.task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(taskEditConditionsOpen())
+  }
+
+  const Buttons = (role: ProfileRole, state: ITaskNegotiationState) => {
+    if (role === ProfileRole.Master) {
+      switch (state) {
+        case ITaskNegotiationState.SentToMaster:
+          return <>
+            <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT</Button>
+            <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>COUNTER OFFER</Button>
+            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>DECLINE</Button></>
+      }
+    }
+    else {
+      switch (state) {
+        case ITaskNegotiationState.Accepted:
+          return <><Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
+            <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>EDIT</Button>
+            <Button bold smallFont transparent size='16px 0' onClick={handleCancel}>CANCEL</Button>
+          </>
+        case ITaskNegotiationState.SentToClient:
+          return <><Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
+            <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>EDIT</Button>
+            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>REJECT</Button>
+          </>
+      }
+    }
   }
 
   return (
@@ -143,7 +229,11 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
           <div className={styles.top}>
             <div className={styles.name}>
               <div className={styles.titleRes}>{res.task.title}</div>
-              <div className={styles.status}>{res.task.status}</div>
+              <div className={styles.status}>
+                {res.state === ITaskNegotiationState.SentToMaster ?
+                  'Private order created by client' : res.state === ITaskNegotiationState.SentToClient ?
+                    'Private order created by master' : null}
+              </div>
             </div>
             {mastersProfile && mastersProfile.skills && (
               <div className={styles.skills}>
@@ -179,12 +269,7 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
       </div>
       <div className={`${styles.payment}`}>
         <div className={styles.btnContainer}>
-          {res.type !== ITaskNegotiationType.TaskNegotiation && profile.role !== 'master' ? <>
-            <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>DECLINE</Button></> : null}
-          {res.type === ITaskNegotiationType.TaskNegotiation && profile.role !== 'master' ?
-            <Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
-            : null}
+          {Buttons(profile.role, res.state)}
         </div>
       </div>
     </div>

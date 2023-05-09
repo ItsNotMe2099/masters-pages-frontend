@@ -48,7 +48,6 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
         }
       }))
     }
-
   }
 
   const handleAccept = () => {
