@@ -20,7 +20,7 @@ import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
 import { confirmOpen, finishTaskAsClientOpen, taskEditConditionsOpen, taskHireMasterOpen, taskMarkAsDoneOpen } from 'components/Modal/actions'
-import { taskNegotiationAcceptConditions, taskNegotiationAcceptTaskOffer, taskNegotiationAcceptTaskResponse, taskNegotiationDeclineConditions, taskNegotiationDeclineTaskOffer, taskNegotiationDeclineTaskResponse, taskNegotiationFetchLastConditions, taskNegotiationSetCurrentNegotiation, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
+import { taskNegotiationAcceptConditions, taskNegotiationAcceptTaskOffer, taskNegotiationAcceptTaskResponse, taskNegotiationCreateTaskResponse, taskNegotiationDeclineConditions, taskNegotiationDeclineTaskOffer, taskNegotiationDeclineTaskResponse, taskNegotiationFetchLastConditions, taskNegotiationSetCurrentNegotiation, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
 import NegotiationRepository from 'data/repositories/NegotiationRepository'
 import { taskCancel } from 'components/TaskUser/actions'
 import TaskRepository from 'data/repositories/TaskRepository'
@@ -147,7 +147,7 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
       dispatch(confirmOpen({
         description: t('chat.acceptOffer'),
         onConfirm: () => {
-          dispatch(taskNegotiationAcceptTaskResponse(res))
+          dispatch(taskNegotiationCreateTaskResponse(res.task.id))
         }
       }))
     }

@@ -8,7 +8,7 @@ export const taskNegotiationSetCurrentTask = (task: ITask) => action(ActionTypes
 export const taskNegotiationSetCurrentProfile = (profile: IProfile) => action(ActionTypes.TASK_NEGOTIATION_SET_CURRENT_PROFILE, profile)
 export const taskNegotiationSetCurrentMessage = (message: IChatMessage) => action(ActionTypes.TASK_NEGOTIATION_SET_CURRENT_MESSAGE, message)
 export const taskNegotiationSetCurrentNegotiation = (task: ITaskNegotiation) => action(ActionTypes.TASK_NEGOTIATION_SET_CURRENT_NEGOTIATION, task)
-export const taskNegotiationCreateTaskResponse = (taskId: number, data: any) => action(ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE, {taskId, data})
+export const taskNegotiationCreateTaskResponse = (taskId: number, data?: any) => action(ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE, {taskId, data})
 export const taskNegotiationCreateTaskResponseRequest = (taskId: number, data: any) => action(ActionTypes.TASK_NEGOTIATION_CREATE_TASK_RESPONSE_REQUEST, {
   api: {
     url: '/api/task-negotiation/task-response',
