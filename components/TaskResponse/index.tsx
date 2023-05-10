@@ -1,5 +1,5 @@
 import { default as React, useEffect, useState } from 'react'
-import { ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
+import { ITask, ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus } from 'types'
 import styles from './index.module.scss'
 import { useAppContext } from 'context/state'
 import StarRatings from 'react-star-ratings'
@@ -19,10 +19,11 @@ import ChatSvg from 'components/svg/ChatSvg'
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
-import { confirmOpen, taskEditConditionsOpen, taskHireMasterOpen } from 'components/Modal/actions'
+import { confirmOpen, finishTaskAsClientOpen, taskEditConditionsOpen, taskHireMasterOpen, taskMarkAsDoneOpen } from 'components/Modal/actions'
 import { taskNegotiationAcceptConditions, taskNegotiationAcceptTaskOffer, taskNegotiationAcceptTaskResponse, taskNegotiationDeclineConditions, taskNegotiationDeclineTaskOffer, taskNegotiationDeclineTaskResponse, taskNegotiationFetchLastConditions, taskNegotiationSetCurrentNegotiation, taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
 import NegotiationRepository from 'data/repositories/NegotiationRepository'
 import { taskCancel } from 'components/TaskUser/actions'
+import TaskRepository from 'data/repositories/TaskRepository'
 
 interface Props {
   res: ITaskNegotiation,
@@ -43,10 +44,20 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
 
   const [show, setShow] = useState<boolean>(false)
 
+  const [task, setTask] = useState<ITask | null>(null)
+
   const fetchMasterProfileById = async () => {
     await ProfileRepository.fetchById(res.profile.id).then(i => {
       if (i) {
         setMastersProfile(i)
+      }
+    })
+  }
+
+  const fetchTaskById = async (id: number) => {
+    await TaskRepository.fetchOneTaskUserRequest(id).then(i => {
+      if (i) {
+        setTask(i)
       }
     })
   }
@@ -72,6 +83,7 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
       await fetchMasterProfileById()
     }
     fetchMasterProfile()
+    fetchTaskById(res.task.id)
   }, [])
 
   const renderCategory = (skill: SkillData) => {
@@ -96,14 +108,14 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
   const dispatch = useDispatch()
 
   const handleDecline = (e) => {
-    if(res.type === ITaskNegotiationType.TaskOffer){
+    if (res.type === ITaskNegotiationType.TaskOffer) {
       dispatch(confirmOpen({
         description: t('task.confirmDecline'),
         onConfirm: () => {
           dispatch(taskNegotiationDeclineTaskOffer(res))
         }
       }))
-    }else{
+    } else {
       dispatch(confirmOpen({
         description: t('chat.rejectConditions'),
         onConfirm: () => {
@@ -123,14 +135,23 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
   }
 
   const handleAccept = () => {
-    if(res.type === ITaskNegotiationType.TaskOffer) {
+    if (res.type === ITaskNegotiationType.TaskOffer) {
       dispatch(confirmOpen({
         description: t('chat.acceptOffer'),
         onConfirm: () => {
           dispatch(taskNegotiationAcceptTaskOffer(res))
         }
       }))
-    }else{
+    } 
+    else if(res.type === ITaskNegotiationType.ResponseToTask){
+      dispatch(confirmOpen({
+        description: t('chat.acceptOffer'),
+        onConfirm: () => {
+          dispatch(taskNegotiationAcceptTaskResponse(res))
+        }
+      }))
+    }
+    else {
       dispatch(confirmOpen({
         description: t('chat.acceptConditions'),
         onConfirm: () => {
@@ -165,28 +186,68 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
     dispatch(taskEditConditionsOpen())
   }
 
-  const Buttons = (role: ProfileRole, state: ITaskNegotiationState) => {
+  const handleMarkAsDone = () => {
+
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskMarkAsDoneOpen())
+  }
+  const handleFinish = () => {
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskNegotiationSetCurrentNegotiation(lastNegotiation))
+    dispatch(finishTaskAsClientOpen())
+  }
+
+  const handleAcceptAcceptTaskAsCompleted = async (id: number) => {
+    await NegotiationRepository.acceptAcceptTaskAsCompleted(id)
+  }
+
+  const handleDeclineAcceptTaskAsCompleted = async (id: number) => {
+    await NegotiationRepository.declineAcceptTaskAsCompleted(id)
+  }
+
+  const Buttons = (role: ProfileRole) => {
     if (role === ProfileRole.Master) {
-      switch (state) {
-        case ITaskNegotiationState.SentToMaster:
-          return <>
-            <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>COUNTER OFFER</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>DECLINE</Button></>
+      if (res.type === ITaskNegotiationType.TaskOffer && res.isSentToMaster && res.task.status !== ITaskStatus.InProgress ||
+        res.type === ITaskNegotiationType.ResponseToTask && res.task.status !== ITaskStatus.InProgress 
+        ) {
+        return <>
+          <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>COUNTER OFFER</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>DECLINE</Button></>
+      }
+      if (res.task.status === ITaskStatus.InProgress && lastNegotiation?.type !== ITaskNegotiationType.TaskCompleted) {
+        return <><Button bold smallFont transparent size='16px 0' onClick={handleMarkAsDone}>MARK AS DONE</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleCancel}>CANCEL</Button>
+        </>
+      }
+      if (lastNegotiation?.state === ITaskNegotiationState.SentToMaster && lastNegotiation?.type === ITaskNegotiationType.TaskCompleted) {
+        return <>
+          <Button bold smallFont transparent size='16px 0' onClick={() => handleAcceptAcceptTaskAsCompleted(res.id)}>ACCEPT</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={() => handleDeclineAcceptTaskAsCompleted(res.id)}>DECLINE</Button></>
       }
     }
     else {
-      switch (state) {
-        case ITaskNegotiationState.Accepted:
-          return <><Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>EDIT</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleCancel}>CANCEL</Button>
-          </>
-        case ITaskNegotiationState.SentToClient:
-          return <><Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>EDIT</Button>
-            <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>REJECT</Button>
-          </>
+      if (res.type === ITaskNegotiationType.TaskOffer && res.isSentToClient && res.task.status !== ITaskStatus.InProgress) {
+        return <>
+          <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>DECLINE</Button></>
+      }
+      if (res.state === ITaskNegotiationState.Accepted && res.task.status !== ITaskStatus.InProgress) {
+        return <><Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>EDIT</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleCancel}>CANCEL</Button>
+        </>
+      }
+      if (res.state === ITaskNegotiationState.SentToClient && res.task.status === ITaskStatus.Negotiation) {
+        return <><Button bold smallFont transparent size='16px 0' onClick={handleHireMaster}>HIRE</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>EDIT</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleDecline}>REJECT</Button>
+        </>
+      }
+      if (res.task.status === ITaskStatus.InProgress) {
+        return <><Button bold smallFont transparent size='16px 0' onClick={handleFinish}>FINISH TASK</Button>
+          <Button bold smallFont transparent size='16px 0' onClick={handleCancel}>CANCEL</Button>
+        </>
       }
     }
   }
@@ -230,9 +291,11 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
             <div className={styles.name}>
               <div className={styles.titleRes}>{res.task.title}</div>
               <div className={styles.status}>
-                {res.state === ITaskNegotiationState.SentToMaster ?
-                  'Private order created by client' : res.state === ITaskNegotiationState.SentToClient ?
-                    'Private order created by master' : null}
+                {res.type === ITaskNegotiationType.ResponseToTask ? 'Public order created by Client' :
+                  res.type === ITaskNegotiationType.TaskOffer && res.isSentToClient ? 'Private order created by Master' :
+                    res.type === ITaskNegotiationType.TaskOffer && res.isSentToMaster ? 'Private order created by Client' :
+                      null
+                }
               </div>
             </div>
             {mastersProfile && mastersProfile.skills && (
@@ -269,7 +332,7 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
       </div>
       <div className={`${styles.payment}`}>
         <div className={styles.btnContainer}>
-          {Buttons(profile.role, res.state)}
+          {Buttons(profile.role)}
         </div>
       </div>
     </div>

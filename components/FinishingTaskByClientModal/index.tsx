@@ -7,6 +7,7 @@ import FinishingTaskByClientForm from './Form'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+
 interface Props {
   isOpen: boolean
 }
@@ -15,6 +16,7 @@ export default function FinishingTaskByClientModal(props: Props) {
   const dispatch = useDispatch()
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
   const formLoading = useSelector((state: IRootState) => state.taskOffer.formLoading)
+
   const handleSubmit = (data) => {
     dispatch(taskNegotiationFinish(task.id, {...data, taskId: task.id}))
   }
