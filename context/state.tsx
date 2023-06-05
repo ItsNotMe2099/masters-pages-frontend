@@ -11,7 +11,7 @@ import UserRepository from 'data/repositories/UserRepostory'
 import {useRouter} from 'next/router'
 import {IProject} from "data/intefaces/IProject";
 import {IApplication} from "data/intefaces/IApplication";
-import {IFeedbacksToProfile} from "types";
+import {IFeedbacksToProfile, ITask, ITaskNegotiation} from "types";
 
 interface IState {
   isMobile: boolean
@@ -41,6 +41,8 @@ interface IState {
   feedbackUpdateState$: Subject<IFeedbacksToProfile>
   feedbackDeleteState$: Subject<IFeedbacksToProfile>
   feedbackCreateState$: Subject<IFeedbacksToProfile>
+  negotiationUpdateState$: Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>
+  taskUpdateState$: Subject<{before: ITask, after: ITask }>
 }
 
 const loginState$ = new Subject<boolean>()
@@ -53,6 +55,9 @@ const applicationCreateState$ = new Subject<IApplication>()
 const feedbackUpdateState$ = new Subject<IFeedbacksToProfile>()
 const feedbackDeleteState$ = new Subject<IFeedbacksToProfile>()
 const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
+
+const negotiationUpdateState$ = new Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>()
+const taskUpdateState$ = new Subject<{before: ITask, after: ITask}>()
 
 const defaultValue: IState = {
   isMobile: false,
@@ -75,6 +80,8 @@ const defaultValue: IState = {
   feedbackUpdateState$: feedbackUpdateState$,
   feedbackDeleteState$: feedbackDeleteState$,
   feedbackCreateState$: feedbackCreateState$,
+  negotiationUpdateState$: negotiationUpdateState$,
+  taskUpdateState$: taskUpdateState$,
   showModal: (type) => null,
   hideModal: () => null,
   showSnackbar: (text, type) => null,

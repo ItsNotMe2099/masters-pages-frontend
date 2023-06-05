@@ -7,7 +7,7 @@ import Button from 'components/ui/Button'
 
 import Modal from 'components/ui/Modal'
 import { format } from 'date-fns'
-import { useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import * as React from 'react'
 import { IRootState, ITaskNegotiation } from 'types'
 import styles from './index.module.scss'
@@ -17,15 +17,16 @@ import { getCurrencySymbol } from 'data/currency'
 import { useTranslation } from 'next-i18next'
 import { useAppContext } from 'context/state'
 import NegotiationRepository from 'data/repositories/NegotiationRepository'
+import {TaskWrapper, useTaskContext} from "context/task_state";
 interface Props {
   isOpen: boolean,
   onClose: () => void
 }
-const TaskHireMasterModal = ({ isOpen, onClose }: Props) => {
-  const loading = useSelector((state: IRootState) => state.taskOffer.actionLoading)
-  const taskNegotiationLoading = useSelector((state: IRootState) => state.taskOffer.lastConditionLoading)
-  const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
-  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+const TaskHireMasterModalInner = ({ isOpen, onClose }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const taskContext = useTaskContext();
+  const taskNegotiation = taskContext.negotiation
+  const task = taskContext.task
   const appContext = useAppContext();
   const currentProfile = appContext.profile
 
@@ -37,13 +38,12 @@ const TaskHireMasterModal = ({ isOpen, onClose }: Props) => {
     }
   }, [])
 
-  console.log('taskNegotiation.authorId', taskNegotiation.authorId)
-  console.log('taskNegotiation.profileId', taskNegotiation.profileId)
 
   const handleSubmit = async () => {
-    dispatch(taskNegotiationHireMaster(task.id, taskNegotiation.profileId == currentProfile.id ? taskNegotiation.authorId : taskNegotiation.profileId, taskNegotiation.id))
-    dispatch(taskNegotiationFetchLastConditions(task.id, taskNegotiation.profileId == currentProfile.id ? taskNegotiation.authorId : taskNegotiation.profileId))
-  }
+      setLoading(true);
+      await taskContext.hireMasterRequest();
+      setLoading(false);
+   }
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
@@ -88,4 +88,12 @@ const TaskHireMasterModal = ({ isOpen, onClose }: Props) => {
   )
 }
 
+
+const TaskHireMasterModal = (props: Props) => {
+  const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
+  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  return (<TaskWrapper negotiation={taskNegotiation} task={task}>
+    <TaskHireMasterModalInner {...props}/>
+  </TaskWrapper>)
+}
 export default TaskHireMasterModal

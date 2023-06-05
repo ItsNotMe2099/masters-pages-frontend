@@ -7,7 +7,7 @@ import Loader from 'components/ui/Loader'
 
 import Modal from 'components/ui/Modal'
 import { format } from 'date-fns'
-import { useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import * as React from 'react'
 import { IRootState } from 'types'
 import styles from './index.module.scss'
@@ -15,26 +15,25 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import {getCurrencySymbol} from 'data/currency'
 import { useTranslation } from 'next-i18next'
+import {TaskWrapper, useTaskContext} from "context/task_state";
+import {modalClose} from "components/Modal/actions";
 interface Props {
   isOpen: boolean,
   onClose: () => void
 }
-const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
-  const loading = useSelector((state: IRootState) => state.taskOffer.actionLoading)
-  const taskNegotiationLoading = useSelector((state: IRootState) => state.taskOffer.lastConditionLoading)
-  const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
-  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+const TaskMarkAsDoneModalInner = ({ isOpen, onClose}: Props) => {
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false);
+  const taskContext = useTaskContext();
+  const task = taskContext.task;
+  const taskNegotiation = taskContext.negotiation;
   const {t} = useTranslation('common')
 
-  const dispatch = useDispatch()
-  useEffect(() => {
-
-      dispatch(taskNegotiationFetchLastConditions(task.id))
-
-  }, [])
-  const handleSubmit = () => {
-
-    dispatch(taskNegotiationMarkAsDone(task.id))
+  const handleSubmit = async () => {
+    setLoading(true)
+    await taskContext.markAsDone();
+    setLoading(false)
+    dispatch(modalClose());
   }
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={loading} closeClassName={styles.modalClose} onRequestClose={onClose}>
@@ -45,7 +44,7 @@ const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
         <div className={styles.title}>{t('taskNegotiation.finishingTask')}</div>
       </div>
 
-      {taskNegotiationLoading || !taskNegotiation ? <Loader/> : <>
+      {loading || !taskNegotiation ? <Loader/> : <>
       <div className={styles.task}>
         <div className={styles.taskHeader}>
         <div className={styles.taskTitle}>{task?.title}</div>
@@ -80,4 +79,12 @@ const TaskMarkAsDoneModal = ({ isOpen, onClose}: Props) => {
   )
 }
 
+
+const TaskMarkAsDoneModal = (props: Props) => {
+  const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
+  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  return <TaskWrapper negotiation={taskNegotiation} task={task}>
+    <TaskMarkAsDoneModalInner {...props}/>
+  </TaskWrapper>
+}
 export default TaskMarkAsDoneModal

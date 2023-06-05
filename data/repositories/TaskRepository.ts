@@ -1,5 +1,5 @@
 import request from 'utils/request'
-import { IPagination } from 'types/types'
+import {DeepPartial, IPagination} from 'types/types'
 import { ITask, ITaskCount, ITaskFormData, ITaskStatus } from 'types'
 
 export interface ITaskSearchRequest {
@@ -40,10 +40,10 @@ export default class TaskRepository {
   }
 
   static async fetchTaskListByUser
-    (page: number = 1, limit: number = 10, sort: string = 'createdAt', sortOrder: string = 'DESC', status?: ITaskStatus):
+    (data: {page?: number, limit?: number, sort?: string, sortOrder?: string, status?: ITaskStatus}):
     Promise<IPagination<ITask> | null> {
     const res = await request({
-      url: `/api/tasks?page=${page}&limit=${limit}&sort=${sort}&sortOrder=${sortOrder}${status && `&status=${status}`}`,
+      url: `/api/tasks?page=${data.page ?? 1}&limit=${data.limit ?? 1}&sort=${data.sort ?? 'createdAt'}&sortOrder=${data.sortOrder ?? 'DESC'}${data.status && `&status=${data.status}`}`,
       method: 'GET',
     })
     if (res.err) {
@@ -67,6 +67,18 @@ export default class TaskRepository {
     const res = await request({
       url: `/api/tasks`,
       method: 'POST',
+      data
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async update(id: number, data: DeepPartial<ITask>): Promise<ITask> {
+    const res = await request({
+      url: `/api/tasks/${id}`,
+      method: 'PUT',
       data
     })
     if (res.err) {

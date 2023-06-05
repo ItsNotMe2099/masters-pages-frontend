@@ -7,18 +7,23 @@ import FinishingTaskByClientForm from './Form'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'next-i18next'
+import {TaskWrapper, useTaskContext} from "context/task_state";
+import {useState} from "react";
 
 interface Props {
   isOpen: boolean
 }
-
-export default function FinishingTaskByClientModal(props: Props) {
+const FinishingTaskByClientModalInner = (props: Props) => {
   const dispatch = useDispatch()
-  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
-  const formLoading = useSelector((state: IRootState) => state.taskOffer.formLoading)
+  const taskContext = useTaskContext()
+  const task = taskContext.task
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (data) => {
-    dispatch(taskNegotiationFinish(task.id, {...data, taskId: task.id}))
+  const handleSubmit = async (data) => {
+    setLoading(true);
+    await taskContext.markAsDone(data);
+    setLoading(false);
+    dispatch(modalClose());
   }
   const handleClose = () => {
     dispatch(modalClose())
@@ -27,18 +32,24 @@ export default function FinishingTaskByClientModal(props: Props) {
 
 
   return (
-    <Modal{...props} loading={formLoading} className={styles.root} size="medium" closeClassName={styles.close}
+    <Modal{...props} loading={loading} className={styles.root} size="medium" closeClassName={styles.close}
 
-    onRequestClose={handleClose}
+          onRequestClose={handleClose}
     >
 
-        <div className={styles.innards}>
-          {/*<div className={styles.money}>
+      <div className={styles.innards}>
+        {/*<div className={styles.money}>
             You own: <span> &nbsp;$ {props.money}</span>
           </div>*/}
-          <div className={styles.rate}>{t('feedBack.pleaseRate')} {task.master.firstName} {t('feedBack.work')}</div>
-          <div className={styles.form}><FinishingTaskByClientForm onSubmit={handleSubmit} onClose={handleClose}/></div>
-        </div>
+        <div className={styles.rate}>{t('feedBack.pleaseRate')} {task.master.firstName} {t('feedBack.work')}</div>
+        <div className={styles.form}><FinishingTaskByClientForm onSubmit={handleSubmit} onClose={handleClose}/></div>
+      </div>
     </Modal>
   )
+}
+export default function FinishingTaskByClientModal(props: Props) {
+  const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
+  return <TaskWrapper negotiation={null} task={task}>
+    <FinishingTaskByClientModalInner {...props}/>
+  </TaskWrapper>
 }

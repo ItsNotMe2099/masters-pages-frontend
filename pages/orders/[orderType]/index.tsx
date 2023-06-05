@@ -1,66 +1,84 @@
-import { modalClose, taskUpdateOpen } from 'components/Modal/actions'
+import {modalClose, taskUpdateOpen} from 'components/Modal/actions'
 import Task from 'components/Task'
-import {
-  fetchTaskUserList,
-  fetchTaskUserStatRequest, resetTaskUserList,
-  setFilterTaskUser,
-  setPageTaskUser, setSortOrderTaskUser, setSortTaskUser
-} from 'components/TaskUser/actions'
+import {fetchTaskUserList, setPageTaskUser} from 'components/TaskUser/actions'
 import Loader from 'components/ui/Loader'
 import Tabs from 'components/ui/Tabs'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import {useRouter} from 'next/router'
 import * as React from 'react'
+import {useEffect, useRef, useState} from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { IRootState, ITask, ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus, ITypesWithStates } from 'types'
+import {
+  IRootState,
+  ITask,
+  ITaskNegotiation,
+  ITaskNegotiationState,
+  ITaskNegotiationType,
+  ITaskStatus,
+  ITypesWithStates
+} from 'types'
 import styles from './index.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
-import { TabSelect } from 'components/TabSelect'
-import { useTranslation } from 'next-i18next'
+import {useDispatch, useSelector} from 'react-redux'
+import {TabSelect} from 'components/TabSelect'
+import {useTranslation} from 'next-i18next'
 import Layout from 'components/layout/Layout'
-import { getAuthServerSide } from 'utils/auth'
+import {getAuthServerSide} from 'utils/auth'
 import TabOrderModal from 'components/for_pages/Orders/TabOrderModal'
 import Modals from 'components/layout/Modals'
 import Button from 'components/ui/Button'
-import { fetchSavedTasksRequest, resetSavedTasksList } from 'components/SavedTasks/actions'
-import { useAppContext } from 'context/state'
+import {fetchSavedTasksRequest} from 'components/SavedTasks/actions'
+import {useAppContext} from 'context/state'
 import NegotiationRepository from 'data/repositories/NegotiationRepository'
 import TaskResponse from 'components/TaskResponse'
+import {IPagination} from "types/types";
+import TaskRepository from "data/repositories/TaskRepository";
+import TaskNegotiationRepository from "data/repositories/TaskNegotiationRepository";
+import ProfileRepository from "data/repositories/ProfileRepostory";
+import TaskNew from "components/TaskNew";
+import { updatedDiff } from 'deep-object-diff';
+enum TabKey {
+  Drafts = 'drafts',
+  Offers = 'offers',
+  Negotiation = 'negotiation',
+  Published = 'published',
+  InProgress = 'inProgress',
+  Closed = 'closed',
+  Saved = 'saved',
+
+}
+
 interface Props {
 }
+
 const TabOrders = (props: Props) => {
-  const { t } = useTranslation('common')
+  const {t} = useTranslation('common')
   const router = useRouter()
   const dispatch = useDispatch()
 
-  const { orderType } = router.query
+  const orderType = router.query.orderType as TabKey
   const appContext = useAppContext()
   const profile = appContext.profile
-  const loading = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.isLoading) : useSelector((state: IRootState) => state.taskUser.listLoading)
-  const tasks = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.list) : useSelector((state: IRootState) => state.taskUser.list)
-  const total = orderType === 'saved' ? useSelector((state: IRootState) => state.savedTasks.listTotal) : useSelector((state: IRootState) => state.taskUser.total)
-  const page = useSelector((state: IRootState) => state.taskUser.page)
-  const stat = useSelector((state: IRootState) => state.taskUser.stat)
+  const [items, setItems] = useState<{ task: ITask, negotiation: ITaskNegotiation }[]>([])
+  const itemsRef = useRef();
+  const [page, setPage] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
   const role = appContext.role
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentTaskEdit, setCurrentTaskEdit] = useState(null)
-
-  const [offers, setOffers] = useState<ITaskNegotiation[]>([])
-
-  const [offersTotal, setOffersTotal] = useState<number>(0)
-
-  const [offersPage, setOffersPage] = useState<number>(1)
-
-  console.log('profileEweqe', profile)
   const tabs = [
-    ...(role === 'client' ? [{ name: t('personalArea.tabOrders.menu.draft'), key: 'draft' }, { name: t('personalArea.tabOrders.menu.published'), key: 'published', badge: profile.notificationTaskResponseCount }] : []),
-    ...(role !== 'client' ? [{ name: t('personalArea.tabOrders.menu.responses'), key: 'responses' }, { name: t('personalArea.tabOrders.menu.declined'), key: 'declined_responses', badge: profile.notificationTaskResponseDeclinedCount + profile.notificationTaskOfferDeclinedCount },] : []),
+    ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: TabKey.Drafts},
+      {
+        name: t('personalArea.tabOrders.menu.published'),
+        key: TabKey.Published,
+        badge: profile.notificationTaskResponseCount
+      }
+    ] : []),
     //...(role === 'client' ? [{ name: t('Offers from master'), key: 'offers-master', badge: profile.notificationTaskOfferCount }] : []),
-    { name: t('Offers'), key: 'offers', badge: profile.notificationTaskOfferCount },
-    { name: t('personalArea.tabOrders.menu.negotiation'), key: 'negotiation' },
-    { name: t('personalArea.tabOrders.menu.inProgress'), key: 'in_progress' },
-    { name: t('personalArea.tabOrders.menu.closed'), key: 'closed' },
-    { name: t('personalArea.tabOrders.menu.saved'), key: 'saved' },
+    {name: t('Offers'), key: TabKey.Offers, badge: profile.notificationTaskOfferCount},
+    {name: t('personalArea.tabOrders.menu.negotiation'), key: TabKey.Negotiation},
+    {name: t('personalArea.tabOrders.menu.inProgress'), key: TabKey.InProgress},
+    {name: t('personalArea.tabOrders.menu.closed'), key: TabKey.Closed},
+    {name: t('personalArea.tabOrders.menu.saved'), key: TabKey.Saved},
   ].map(item => {
     return {
       ...item,
@@ -68,229 +86,103 @@ const TabOrders = (props: Props) => {
     }
   })
 
-  const fetchOffersFromClient = async (page: number) => {
-    await NegotiationRepository.fetchOffersFromClient(page).then(i => {
-      if (i) {
-        setOffers(i.data)
-        setOffersTotal(i.total)
+  useEffect(() => {
+    const subscriptionNegotiation = appContext.negotiationUpdateState$.subscribe(({before, after}) => {
+      let toDelete = false;
+      switch (after.type){
+        case ITaskNegotiationType.TaskOffer:
+          if([ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(after.state)){
+            toDelete = true
+          }
+          break;
+        case ITaskNegotiationType.ResponseToTask:
+          if([ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(after.state)){
+            toDelete = true
+          }
+          break;
+        case ITaskNegotiationType.MarkAsDone:
+          if([ITaskNegotiationState.Accepted].includes(after.state)){
+            toDelete = true
+          }
+          break;
+        case ITaskNegotiationType.TaskCompleted:
+          if([ITaskNegotiationState.Accepted].includes(after.state)){
+            toDelete = true
+          }
+          break;
+      }
+      if(toDelete){
+        setItems(i => i.filter(i => !i.negotiation || i.negotiation?.id !== after.id))
+      }else{
+        setItems( i => i.map(i => i.negotiation && i.negotiation?.id === after.id ? {...i, ...after} : i))
       }
     })
-  }
 
-  const fetchOffersFromMaster = async (page: number) => {
-    await NegotiationRepository.fetchOffersFromMaster(page).then(i => {
-      if (i) {
-        setOffers(i.data)
-        setOffersTotal(i.total)
+    const subscriptionTask = appContext.taskUpdateState$.subscribe(({before, after}) => {
+      let toDelete = false;
+
+      const afterDiff = updatedDiff(before, after);
+      if(afterDiff['status']){
+        toDelete = true;
       }
+      if(toDelete){
+        setItems(i => i.filter(i => !i.task || i.task?.id !== after.id))
+      }else{
+      setItems( i => i.map(i => i.task && i.task?.id === after.id ? {...i, ...after} : i))
+    }
     })
-  }
-
-  const fetchListNegotiations = async (typesWithStates: ITypesWithStates[], page) => {
-    await NegotiationRepository.fetchListNegotiations(typesWithStates, page).then(i => {
-      if (i) {
-        setOffers(i.data)
-        setOffersTotal(i.total)
-      }
-
-    })
-  }
+    return () => {
+      subscriptionNegotiation.unsubscribe()
+      subscriptionTask.unsubscribe()
+    }
+  }, [items])
 
   useEffect(() => {
-    if (orderType === 'saved') {
-      dispatch(resetSavedTasksList())
-      dispatch(resetTaskUserList())
-      dispatch(fetchSavedTasksRequest(1, 10))
-      dispatch(fetchTaskUserStatRequest())
-      return
-    }
-    else if (orderType === ITaskStatus.Negotiation) {
-      setOffersPage(1)
-      const data = [
-        {
-          type: ITaskNegotiationType.TaskNegotiation,
-          states: []
-        },
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.Accepted],
-        },
-        {
-          type: ITaskNegotiationType.ResponseToTask,
-          states: [ITaskNegotiationState.Accepted],
-        }
-      ]
-      fetchListNegotiations(data, offersPage)
-    }
-    else if (orderType === ITaskStatus.InProgress) {
-      setOffersPage(1)
-      const data = [
-        {
-          type: ITaskNegotiationType.TaskNegotiation,
-          states: []
-        },
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.Accepted],
-        },
-        {
-          type: ITaskNegotiationType.ResponseToTask,
-          states: [ITaskNegotiationState.Accepted],
-        },
-      ]
-      fetchListNegotiations(data, offersPage)
-    }
-    else if (orderType === ITaskStatus.Offers) {
-      setOffersPage(1)
-      const data = [
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.SentToClient],
-        },
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.SentToMaster],
-        },
-        {
-          type: ITaskNegotiationType.ResponseToTask,
-          states: [ITaskNegotiationState.SentToClient],
-        },
-      ]
-      fetchListNegotiations(data, offersPage)
-    }
-    /*if (profile.role === 'client') {
-      if (orderType === ITaskStatus.Offers) {
-        setOffersPage(1)
-        fetchOffersFromClient(offersPage)
-      }
-      else if (orderType === ITaskStatus.OffersMaster) {
-        setOffersPage(1)
-        fetchOffersFromMaster(offersPage)
-      }
-      else {
-        dispatch(setFilterTaskUser({ status: orderType }))
-      }
-    }
-    else if (profile.role === 'master') {
-      if (orderType === ITaskStatus.Offers) {
-        setOffersPage(1)
-        fetchOffersFromMaster(offersPage)
-      }
-      else if (orderType === ITaskStatus.Responses) {
-        setOffersPage(1)
-        fetchOffersFromClient(offersPage)
-      }
-    }*/
-    else {
-      dispatch(setFilterTaskUser({ status: orderType }))
-    }
-    if (['published', 'in_progress'].includes(orderType as string)) {
-      dispatch(setSortTaskUser('deadline'))
-      dispatch(setSortOrderTaskUser('DESC'))
-    } else {
-      dispatch(setSortTaskUser('createdAt'))
-      dispatch(setSortOrderTaskUser('DESC'))
-    }
-
-    dispatch(resetTaskUserList())
-    dispatch(fetchTaskUserList())
-    dispatch(fetchTaskUserStatRequest())
+    setItems([]);
+    setPage(1);
+    setLoading(true);
+    fetch(orderType, {page: 1, limit: 10})
   }, [orderType])
 
-  useEffect(() => {
-    return () => {
-      if (orderType === 'saved') {
-        dispatch(resetSavedTasksList())
-      }
-      dispatch(resetTaskUserList())
 
+  const setTasksData = (data: IPagination<ITask>) => {
+    setTotal(data.total);
+    setItems(cur => [...cur, ...data.data.map(task => ({task, negotiation: ![TabKey.Published, TabKey.Drafts].includes(orderType) ? task.lastNegotiation : null}))])
+  }
+  const setNegotiationsData = (data: IPagination<ITaskNegotiation>) => {
+    setTotal(data.total);
+    setItems(cur => [...cur, ...data.data.map(negotiation => ({task: negotiation.task , negotiation}))])
+  }
+
+  const fetch = async (tab: TabKey, data: {page: number, limit: number}) => {
+    console.log("FetchTab", tab);
+    switch (tab){
+      case TabKey.Drafts:
+        setTasksData(await TaskRepository.fetchTaskListByUser({...data, status: ITaskStatus.Draft}))
+        break;
+      case TabKey.Offers:
+        setNegotiationsData(await TaskNegotiationRepository.fetchOffers({...data}))
+        break;
+      case TabKey.Negotiation:
+        setNegotiationsData(await TaskNegotiationRepository.fetchNegotiations({...data}))
+        break;
+      case TabKey.Published:
+        setTasksData(await TaskRepository.fetchTaskListByUser({...data, status: ITaskStatus.Published}))
+        break;
+      case TabKey.InProgress:
+        setTasksData(await TaskRepository.fetchTaskListByUser({...data, status: ITaskStatus.InProgress}))
+        break;
+      case TabKey.Closed:
+        setTasksData(await TaskRepository.fetchTaskListByUser({...data, status: ITaskStatus.Done}))
+        break;
+      case TabKey.Saved:
+        setTasksData(await ProfileRepository.fetchSavedTasks(data.page, data.limit))
+        break;
     }
-  }, [])
+    setLoading(false);
+  }
   const handleScrollNext = async () => {
-    if (orderType === 'saved') {
-      dispatch(setPageTaskUser(page + 1))
-      dispatch(fetchSavedTasksRequest(page + 1, 10))
-    }
-    /*else if (orderType === ITaskStatus.Offers && profile.role === 'client') {
-      setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchOffersFromClient(offersPage + 1).then(i => {
-        if (i) {
-          setOffers(offers => [...offers, ...i.data])
-        }
-      })
-    }
-    else if (orderType === ITaskStatus.OffersMaster && profile.role === 'client' || orderType === ITaskStatus.Offers && profile.role === 'master') {
-      setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchOffersFromMaster(offersPage + 1).then(i => {
-        if (i) {
-          setOffers(offers => [...offers, ...i.data])
-        }
-      })
-    }*/
-    else if (orderType === ITaskStatus.Offers) {
-      const data = [
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.SentToClient],
-        },
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.SentToMaster],
-        },
-        {
-          type: ITaskNegotiationType.ResponseToTask,
-          states: [ITaskNegotiationState.SentToClient],
-        },
-      ]
-      setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchListNegotiations(data, offersPage + 1).then(i => {
-        if (i) {
-          setOffers(offers => [...offers, ...i.data])
-        }
-      })
-    }
-    else if (orderType === ITaskStatus.Negotiation && profile.role === 'client') {
-      const data = [
-        {
-          type: ITaskNegotiationType.TaskNegotiation,
-          states: [ITaskNegotiationState.Accepted, ITaskNegotiationState.SentToClient, ITaskNegotiationState.SentToMaster]
-        }
-      ]
-      setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchListNegotiations(data, offersPage + 1).then(i => {
-        if (i) {
-          setOffers(offers => [...offers, ...i.data])
-        }
-
-      })
-    }
-    else if (orderType === ITaskStatus.InProgress && profile.role === 'client') {
-      const data = [
-        {
-          type: ITaskNegotiationType.TaskNegotiation,
-          states: []
-        },
-        {
-          type: ITaskNegotiationType.TaskOffer,
-          states: [ITaskNegotiationState.Accepted],
-        },
-        {
-          type: ITaskNegotiationType.ResponseToTask,
-          states: [ITaskNegotiationState.Accepted],
-        },
-      ]
-      setOffersPage(offersPage + 1)
-      await NegotiationRepository.fetchListNegotiations(data, offersPage + 1).then(i => {
-        if (i) {
-          setOffers(offers => [...offers, ...i.data])
-        }
-
-      })
-    }
-    else {
-      dispatch(setPageTaskUser(page + 1))
-      dispatch(fetchTaskUserList())
-    }
+      fetch(orderType, {page: page + 1, limit : 10})
   }
   const handleTaskEdit = (task: ITask) => {
     setCurrentTaskEdit(task)
@@ -302,103 +194,41 @@ const TabOrders = (props: Props) => {
       <div className={styles.root}>
         <div className={styles.actions}>
           <Button red={true} bold={true} size={'12px 40px'}
-            type={'button'} onClick={() => router.push('/CreateTaskPage')}>{t('personalArea.tabOrders.menu.create')}</Button>
+                  type={'button'}
+                  onClick={() => router.push('/CreateTaskPage')}>{t('personalArea.tabOrders.menu.create')}</Button>
         </div>
         <div className={styles.desktop}>
           <Tabs style={'fullWidthRound'} tabs={tabs.map((tab => {
 
-            return { ...tab, name: tab.name }
-          }))} activeTab={orderType as string} />
+            return {...tab, name: tab.name}
+          }))} activeTab={orderType as string}/>
         </div>
         <div className={styles.mobile}>
           <TabSelect tabs={tabs.map((tab => {
 
-            return { ...tab, name: tab.name }
-          }))} activeTab={orderType as string} />
+            return {...tab, name: tab.name}
+          }))} activeTab={orderType as string}/>
 
         </div>
-        {orderType === ITaskStatus.Offers ?
           <div className={styles.tasks}>
-            {loading && offersTotal === 0 && <Loader />}
-            {offersTotal > 0 && <InfiniteScroll
-              dataLength={offers.length} //This is important field to render the next data
+            {loading && total === 0 && <Loader/>}
+            {total > 0 && <InfiniteScroll
+              dataLength={items.length} //This is important field to render the next data
               next={handleScrollNext}
-              hasMore={offersTotal > offers.length}
-              loader={loading ? <Loader /> : null}
+              hasMore={total > items.length}
+              loader={loading ? <Loader/> : null}
               scrollableTarget='scrollableDiv'>
-              {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
+              {items.map(i => <TaskNew task={i.task} negotiation={i.negotiation} actionsType={role === 'client' ? 'client' : 'master'}/>)}
             </InfiniteScroll>}
           </div>
-          :
-          orderType === ITaskStatus.Negotiation  ?
-            <div className={styles.tasks}>
-              {loading && offersTotal === 0 && <Loader />}
-              {offersTotal > 0 && <InfiniteScroll
-                dataLength={offers.length} //This is important field to render the next data
-                next={handleScrollNext}
-                hasMore={offersTotal > offers.length}
-                loader={loading ? <Loader /> : null}
-                scrollableTarget='scrollableDiv'>
-                {offers.filter(i => i.task.status !== ITaskStatus.Canceled && i.task.status !== ITaskStatus.InProgress).map(i => <TaskResponse res={i} actionsType={'client'} />)}
-              </InfiniteScroll>}
-            </div>
-            :
-            orderType === ITaskStatus.InProgress ?
-              <div className={styles.tasks}>
-                {loading && offersTotal === 0 && <Loader />}
-                {offersTotal > 0 && <InfiniteScroll
-                  dataLength={offers.length} //This is important field to render the next data
-                  next={handleScrollNext}
-                  hasMore={offersTotal > offers.length}
-                  loader={loading ? <Loader /> : null}
-                  scrollableTarget='scrollableDiv'>
-                  {offers.filter(i => i.task.status !== ITaskStatus.Canceled && i.task.status === ITaskStatus.InProgress).map(i => <TaskResponse res={i} actionsType={'client'} />)}
-                </InfiniteScroll>}
-              </div>
-              :
-              /*orderType === ITaskStatus.OffersMaster ?
-                <div className={styles.tasks}>
-                  {loading && offersTotal === 0 && <Loader />}
-                  {total > 0 && <InfiniteScroll
-                    dataLength={offers.length} //This is important field to render the next data
-                    next={handleScrollNext}
-                    hasMore={offersTotal > offers.length}
-                    loader={loading ? <Loader /> : null}
-                    scrollableTarget='scrollableDiv'>
-                    {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
-                  </InfiniteScroll>}
-                </div>
-                :*/
-                orderType === ITaskStatus.Responses ?
-                <div className={styles.tasks}>
-                  {loading && offersTotal === 0 && <Loader />}
-                  {total > 0 && <InfiniteScroll
-                    dataLength={offers.length} //This is important field to render the next data
-                    next={handleScrollNext}
-                    hasMore={offersTotal > offers.length}
-                    loader={loading ? <Loader /> : null}
-                    scrollableTarget='scrollableDiv'>
-                    {offers.filter(i => i.task.status !== ITaskStatus.Canceled).map(i => <TaskResponse res={i} actionsType={'client'} />)}
-                  </InfiniteScroll>}
-                </div>
-                :
-                <div className={styles.tasks}>
-                  {loading && total === 0 && <Loader />}
-                  {total > 0 && <InfiniteScroll
-                    dataLength={tasks.length} //This is important field to render the next data
-                    next={handleScrollNext}
-                    hasMore={total > tasks.length}
-                    loader={loading ? <Loader /> : null}
-                    scrollableTarget='scrollableDiv'>
-                    {tasks.map(task => <Task key={task.id} onEdit={handleTaskEdit} task={task} actionsType={orderType === 'saved' ? 'public' : role === 'client' ? 'client' : 'master'} showProfile={false} />)}
-                  </InfiniteScroll>}
-                </div>}
-        <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'} onClose={() => dispatch(modalClose())} />
+
+        <TabOrderModal task={currentTaskEdit} isOpen={modalKey === 'tabOrderEditModal'}
+                       onClose={() => dispatch(modalClose())}/>
 
       </div>
-      <Modals />
+      <Modals/>
     </Layout>
   )
 }
 export default TabOrders
-export const getServerSideProps = getAuthServerSide({ redirect: true })
+export const getServerSideProps = getAuthServerSide({redirect: true})
