@@ -41,7 +41,7 @@ const CreateTaskPage = (props) => {
     dispatch(createTaskComplete(data))
     reachGoal('order:create', {role: profile?.role})
   }
-   
+
   const handleChangeForStat = (key, value) => {
     statFilter[key] = value
     dispatch(setSearchStatFilter(statFilter))
@@ -79,7 +79,7 @@ const CreateTaskPage = (props) => {
         dispatch(createTaskeReset())
           dispatch(modalClose())
           if(profile.role === 'client') {
-            router.push('/orders/draft')
+            router.push('/orders/drafts')
           }else{
             router.push('/orders/offers')
           }

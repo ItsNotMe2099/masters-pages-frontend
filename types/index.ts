@@ -312,6 +312,8 @@ export interface ITaskNegotiation {
   id: number,
   profile: IProfile,
   profileId: number,
+
+  author: IProfile,
   authorId: number,
   clientId: number,
   taskId: number,

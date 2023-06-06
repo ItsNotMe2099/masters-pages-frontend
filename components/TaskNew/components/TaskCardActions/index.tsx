@@ -230,7 +230,7 @@ const TaskActions = (props: Props) => {
       case TaskAction.UnPublish:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={() => taskContext.unPublishTask()}>Unpublish</Button>
       case TaskAction.Delete:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={() => taskContext.updateTask({status: ITaskStatus.Draft})}>Delete</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.deleteTask}>Delete</Button>
       case TaskAction.HireMaster:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={() => taskContext.hireMaster()}>Hire Master</Button>
 

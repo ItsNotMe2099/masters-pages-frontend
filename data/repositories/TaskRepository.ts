@@ -86,4 +86,14 @@ export default class TaskRepository {
     }
     return res.data
   }
+  static async delete(id: number): Promise<ITask> {
+    const res = await request({
+      url: `/api/tasks/${id}`,
+      method: 'DELETE'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }

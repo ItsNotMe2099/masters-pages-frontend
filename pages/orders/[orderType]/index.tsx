@@ -118,7 +118,7 @@ const TabOrders = (props: Props) => {
       }
     })
 
-    const subscriptionTask = appContext.taskUpdateState$.subscribe(({before, after}) => {
+    const subscriptionTaskUpdate = appContext.taskUpdateState$.subscribe(({before, after}) => {
       let toDelete = false;
 
       const afterDiff = updatedDiff(before, after);
@@ -128,12 +128,16 @@ const TabOrders = (props: Props) => {
       if(toDelete){
         setItems(i => i.filter(i => !i.task || i.task?.id !== after.id))
       }else{
-      setItems( i => i.map(i => i.task && i.task?.id === after.id ? {...i, ...after} : i))
-    }
+        setItems( i => i.map(i => i.task && i.task?.id === after.id ? {...i, ...after} : i))
+      }
+    })
+    const subscriptionTaskDelete = appContext.taskDeleteState$.subscribe((task) => {
+      setItems(i => i.filter(i => !i.task || i.task?.id !== task.id))
     })
     return () => {
       subscriptionNegotiation.unsubscribe()
-      subscriptionTask.unsubscribe()
+      subscriptionTaskUpdate.unsubscribe()
+      subscriptionTaskDelete.unsubscribe();
     }
   }, [items])
 

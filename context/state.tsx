@@ -43,6 +43,7 @@ interface IState {
   feedbackCreateState$: Subject<IFeedbacksToProfile>
   negotiationUpdateState$: Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>
   taskUpdateState$: Subject<{before: ITask, after: ITask }>
+  taskDeleteState$: Subject<ITask>
 }
 
 const loginState$ = new Subject<boolean>()
@@ -58,6 +59,7 @@ const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
 
 const negotiationUpdateState$ = new Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>()
 const taskUpdateState$ = new Subject<{before: ITask, after: ITask}>()
+const taskDeleteState$ = new Subject<ITask>()
 
 const defaultValue: IState = {
   isMobile: false,
@@ -82,6 +84,7 @@ const defaultValue: IState = {
   feedbackCreateState$: feedbackCreateState$,
   negotiationUpdateState$: negotiationUpdateState$,
   taskUpdateState$: taskUpdateState$,
+  taskDeleteState$: taskDeleteState$,
   showModal: (type) => null,
   hideModal: () => null,
   showSnackbar: (text, type) => null,

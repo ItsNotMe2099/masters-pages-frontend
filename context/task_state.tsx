@@ -42,9 +42,11 @@ import {put, select, take} from "redux-saga/effects";
 import ActionTypes from "components/TaskNegotiation/const";
 import ApiActionTypes from "constants/api";
 import {fetchChat, fetchOneChatMessage} from "components/Chat/actions";
-import {fetchTaskResponseRequest, setPublishedTaskUser} from "components/TaskUser/actions";
+import {deleteTaskUser, fetchTaskResponseRequest, setPublishedTaskUser} from "components/TaskUser/actions";
 import {createFeedBackMasterRequest} from "components/ProfileFeedback/actions";
 import TaskRepository from "data/repositories/TaskRepository";
+import {IProfile} from "data/intefaces/IProfile";
+import {current} from "immer";
 
 interface IState {
   negotiation: ITaskNegotiation | null,
@@ -68,6 +70,8 @@ interface IState {
   hireMasterRequest: () => void
   publishTask: () => void
   unPublishTask: () => void
+  deleteTask: () => void
+  opponentProfile: IProfile | null
 
 }
 
@@ -92,7 +96,9 @@ const defaultValue: IState = {
   hireMaster: () => null,
   hireMasterRequest: () => null,
   publishTask: () => null,
-  unPublishTask: () => null
+  unPublishTask: () => null,
+  deleteTask: () => null,
+  opponentProfile: null
 }
 
 const TaskContext = createContext<IState>(defaultValue)
@@ -397,7 +403,7 @@ export function TaskWrapper(props: Props) {
       description: `${t('task.confirmUnPublish')} «${task.title}»?`,
       onConfirm: async () => {
         dispatch(confirmChangeData({ loading: true }))
-        await updateTask({status: ITaskStatus.Published})
+        await updateTask({status: ITaskStatus.Draft})
         dispatch(confirmChangeData({ loading: false }))
         dispatch(confirmModalClose())
       }
@@ -407,6 +413,21 @@ export function TaskWrapper(props: Props) {
     dispatch(taskNegotiationSetCurrentTask(task))
     dispatch(taskNegotiationSetCurrentNegotiation(negotiation))
     dispatch(taskHireMasterOpen())
+  }
+  const deleteTask = async () => {
+    dispatch(confirmOpen({
+      description: `${t('task.confirmDelete')} «${task.title}»?`,
+      onConfirm: async () => {
+        dispatch(confirmChangeData({ loading: true }))
+        await  TaskRepository.delete(task.id);
+        appContext.taskDeleteState$.next(task)
+        dispatch(confirmChangeData({ loading: false }))
+        dispatch(confirmModalClose())
+      }
+    }))
+
+
+
   }
 
   const value: IState = {
@@ -431,6 +452,8 @@ export function TaskWrapper(props: Props) {
     unPublishTask,
     declineTaskCompleted,
     acceptTaskCompletedOpen,
+    deleteTask,
+    opponentProfile: negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author
 
   }
 

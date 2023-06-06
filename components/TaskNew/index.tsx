@@ -314,7 +314,7 @@ const TaskInner = ({
   const canEdit = actionsType === 'client'
   const taskLink = `/task/${task.id}`
   const taskContext = useTaskContext();
-  const taskProfile = actionsType === 'master' && task.profileId === profile.id && taskContext.negotiation ? taskContext.negotiation.profile : task.profile
+  const taskProfile = taskContext.opponentProfile ?? task.profile
   console.log('TaskProfile', taskProfile, profile)
 
   const profileLink = `${Routes.profile(taskProfile)}`
@@ -336,10 +336,10 @@ const TaskInner = ({
       className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
 
       <div className={styles.wrapper}>
-        {actionsType === 'public' && <div className={styles.profile}>
+        <div className={styles.profile}>
           <Avatar href={profileLink} image={task.profile?.photo}/>
           <div className={styles.mobileWrapper}>
-            <div className={styles.name__mobile}>
+            <div className={styles.name}>
               <Link href={profileLink}>
                 <a
                   className={styles.nameText}>{`${taskProfile?.firstName}${taskProfile?.lastName ? ` ${taskProfile?.lastName}` : ''}`}</a></Link>
@@ -367,7 +367,7 @@ const TaskInner = ({
               <div className={styles.comments}>({taskProfile?.rating || 0})</div>
             </div>
           </div>
-        </div>}
+        </div>
         <div className={styles.main}>
           <div className={styles.mainInfo}>
             <div className={styles.top}>
