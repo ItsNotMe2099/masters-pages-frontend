@@ -112,6 +112,15 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.DeclineConditions)
           break;
       }
+    }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.Accepted){
+      switch (type){
+        case "master":
+          break;
+        case "client":
+          actions.push(TaskAction.HireMaster)
+          actions.push(TaskAction.DeclineConditions)
+          break;
+      }
     }else if(negotiation?.type === ITaskNegotiationType.MasterAssigned && [ ITaskNegotiationState.SentToMaster,  ITaskNegotiationState.SentToClient].includes( negotiation?.state)){
       switch (type){
         case "master":

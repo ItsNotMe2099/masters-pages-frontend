@@ -371,15 +371,9 @@ const TaskInner = ({
         <div className={styles.main}>
           <div className={styles.mainInfo}>
             <div className={styles.top}>
-              {['public', 'master'].includes(actionsType) && <div className={styles.name}>
-                <Link href={profileLink}>
-                  <a
-                    className={styles.nameText}>{`${taskProfile?.firstName}${taskProfile?.lastName ? ` ${taskProfile?.lastName}` : ''}`}</a></Link>
-                <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
-              </div>}
-              {(actionsType === 'client') && <div className={styles.taskTitle}>
+              <div className={styles.taskTitle}>
                 <Link href={taskLink}><a className={styles.title}>{task.title}</a></Link>
-              </div>}
+              </div>
               <div className={styles.mobile}>{actionsType !== 'client' &&
                 <Link href={taskLink}><a className={styles.title}>
                   {task.title}
@@ -392,20 +386,16 @@ const TaskInner = ({
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
+
             </div>
             <div>
-              {actionsType === 'client' && renderCategory(task)}
+              {renderCategory(task)}
               <div className={styles.timeMobile}>
                 <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
-              <div className={styles.desktop}>{actionsType !== 'client' && <Link href={taskLink}>
-                <div className={styles.title}>
-                  {task.title}
-                </div>
-              </Link>}</div>
-              {['public', 'master'].includes(actionsType) && renderCategory(task)}
+
               <div className={styles.desc}>
                 {task.description}
               </div>
