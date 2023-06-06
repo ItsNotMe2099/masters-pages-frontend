@@ -31,7 +31,7 @@ import Button from 'components/ui/Button'
 import {format} from 'date-fns'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import {default as React, useEffect, useState} from 'react'
+import {default as React, useEffect, useMemo, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {ITask, ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus} from 'types'
 import {getCategoryTranslation} from 'utils/translations'
@@ -99,62 +99,6 @@ const TaskInner = ({
   console.log('TaskUpdate', task.id, task)
   const router = useRouter()
 
-  const handlePublish = () => {
-    dispatch(confirmOpen({
-      description: `${t('task.confirmPublish')} «${task.title}»?`,
-      onConfirm: () => {
-        dispatch(setPublishedTaskUser(task.id, true))
-      }
-    }))
-  }
-  const handleUnPublish = () => {
-    dispatch(confirmOpen({
-      description: `${t('task.confirmUnPublish')} «${task.title}»?`,
-      onConfirm: () => {
-        dispatch(setPublishedTaskUser(task.id, false))
-      }
-    }))
-  }
-  const handleDelete = () => {
-    dispatch(confirmOpen({
-      description: `${t('task.confirmDelete')} «${task.title}»?`,
-      onConfirm: () => {
-        dispatch(deleteTaskUser(task.id))
-        onStatusChange()
-      }
-    }))
-  }
-
-  const handleTaskComplete = () => {
-    if (profile.role === 'client') {
-      dispatch(taskNegotiationSetCurrentTask(task))
-      dispatch(finishTaskAsClientOpen())
-    } else {
-      dispatch(taskNegotiationSetCurrentTask(task))
-      dispatch(taskMarkAsDoneOpen())
-    }
-  }
-
-
-  const handleCancel = () => {
-    dispatch(confirmOpen({
-      description: `${t('task.confirmCancel')}?`,
-      onConfirm: () => {
-        dispatch(taskCancel(task.id))
-        onStatusChange()
-      }
-    }))
-  }
-
-  const handleCancelNegotitation = () => {
-    dispatch(confirmOpen({
-      description: t('chat.cancelTask'),
-      onConfirm: () => {
-        dispatch(taskCancel(task.id))
-        onStatusChange()
-      }
-    }))
-  }
 
   const [taskStatus, setTaskStatus] = useState<ITaskStatus>(task.status)
 
@@ -306,18 +250,15 @@ const TaskInner = ({
   console.log('TaskProfile', taskProfile, profile)
 
   const profileLink = `${Routes.profile(taskProfile)}`
+  const orderTypeName = useMemo(() => {
+    switch (taskContext.task.status){
+      case ITaskStatus.Published:
+        return ''
+      case ITaskStatus.PrivatelyPublished:
 
-  const hasOfferActions = (((actionsType === 'master' && task.profileId !== profile.id && task.negotiations && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToMaster) || (actionsType === 'client' && task.negotiations && [ITaskStatus.Published, ITaskStatus.PrivatelyPublished].includes(task.status) && task.negotiations.length > 0 && task.negotiations[0].type === ITaskNegotiationType.TaskOffer && task.negotiations[0].state === ITaskNegotiationState.SentToClient)))
-  const isInProgress = taskStatus == ITaskStatus.InProgress
-  const isFinished = taskStatus == ITaskStatus.Done
-  const isCanceled = taskStatus == ITaskStatus.Canceled
-  //const showEdit = ['privately_published', 'published'].includes(task.status)
-
-
-  const handleHireMaster = () => {
-    dispatch(taskNegotiationSetCurrentTask(task))
-    dispatch(taskHireMasterOpen())
-  }
+        return ''
+    }
+  }, [taskContext.task])
 
   return (
     <div

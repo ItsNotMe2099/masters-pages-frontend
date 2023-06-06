@@ -1,6 +1,5 @@
-import TaskActionButton from 'components/Task/components/ActionButton'
-import {default as React, useEffect, useState} from 'react'
-import {ITask, ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus} from 'types'
+import {default as React} from 'react'
+import {ITaskNegotiationState, ITaskNegotiationType, ITaskStatus} from 'types'
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
 import {useTaskContext} from "context/task_state";
@@ -14,6 +13,7 @@ enum TaskAction {
   Publish = 'publish',
   UnPublish = 'unPublish',
 
+  ScheduleEvent = 'scheduleEvent',
   Cancel = 'cancel',
 
   MarkAsCompleted = 'markAsCompleted',
@@ -57,6 +57,9 @@ const TaskActions = (props: Props) => {
   const negotiation = taskContext.negotiation
   const actions = []
   const { t } = useTranslation('common')
+  if(task.status === ITaskStatus.InProgress){
+    actions.push(TaskAction.ScheduleEvent)
+  }
   if (type === 'public') {
     actions.push('share')
     actions.push('save')
@@ -121,13 +124,37 @@ const TaskActions = (props: Props) => {
     }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.Accepted){
       switch (type){
         case "master":
+          actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":
           actions.push(TaskAction.HireMaster)
           actions.push(TaskAction.DeclineConditions)
           break;
       }
-    }else if(negotiation?.type === ITaskNegotiationType.MasterAssigned && [ ITaskNegotiationState.SentToMaster,  ITaskNegotiationState.SentToClient].includes( negotiation?.state)){
+    }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.Declined){
+      switch (type){
+        case "master":
+          actions.push(TaskAction.CounterOffer)
+          actions.push(TaskAction.DeleteNegotiation)
+          break;
+        case "client":
+          actions.push(TaskAction.CounterOffer)
+          break;
+      }
+    }else if(negotiation?.type === ITaskNegotiationType.MasterAssigned && [ ITaskNegotiationState.SentToMaster].includes( negotiation?.state)){
+      switch (type){
+        case "master":
+          actions.push(TaskAction.MarkAsCompleted)
+          actions.push(TaskAction.Cancel)
+          actions.push(TaskAction.ReportViolation)
+          break;
+        case "client":
+          actions.push(TaskAction.MarkAsCompleted)
+          actions.push(TaskAction.Cancel)
+          actions.push(TaskAction.ReportViolation)
+          break;
+      }
+    }else if(negotiation?.type === ITaskNegotiationType.MasterAssigned && [ ITaskNegotiationState.SentToClient].includes( negotiation?.state)){
       switch (type){
         case "master":
           actions.push(TaskAction.MarkAsCompleted)
@@ -151,8 +178,8 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.CompletedDeclined)
           break;
       }
-    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.SentToMaster){
-      switch (type){
+    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.SentToMaster) {
+      switch (type) {
         case "master":
           actions.push(TaskAction.CompletedAccepted)
           actions.push(TaskAction.CompletedDeclined)
@@ -163,7 +190,20 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.ReportViolation)
           break;
       }
-    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.Accepted){
+    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.Declined){
+      switch (type){
+        case "master":
+          actions.push(TaskAction.MarkAsCompleted)
+          actions.push(TaskAction.Cancel)
+          actions.push(TaskAction.ReportViolation)
+          break;
+        case "client":
+          actions.push(TaskAction.MarkAsCompleted)
+          actions.push(TaskAction.Cancel)
+          actions.push(TaskAction.ReportViolation)
+          break;
+      }
+      }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.Accepted){
       switch (type){
         case "master":
           if(!task.feedbacks.find(f => f.target === 'client')){
@@ -211,15 +251,13 @@ const TaskActions = (props: Props) => {
     }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.SentToClient) {
       switch (type) {
         case "master":
-          actions.push(TaskAction.AcceptConditions)
-          actions.push(TaskAction.DeclineConditions)
-          actions.push(TaskAction.CounterOffer)
+          actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":
           actions.push(TaskAction.EditConditions)
           actions.push(TaskAction.AcceptConditions)
           actions.push(TaskAction.DeclineConditions)
-          actions.push(TaskAction.HireMaster)
+
           break;
       }
     }
@@ -239,6 +277,8 @@ const TaskActions = (props: Props) => {
     editConditions
      */
     switch (action) {
+      case TaskAction.ScheduleEvent:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' href={'/Calendar'}>Schedule event</Button>
       case TaskAction.DeleteSaved:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.deleteSavedTask}>Delete</Button>
       case TaskAction.CreateResponse:
@@ -259,9 +299,9 @@ const TaskActions = (props: Props) => {
       case TaskAction.DeclineOffer:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskOffer}>Decline offer</Button>
       case TaskAction.AcceptResponse:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskResponse}>Accept response</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskResponse}>Accept offer</Button>
       case TaskAction.DeclineResponse:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskResponse}>Decline response</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskResponse}>Decline offer</Button>
       case TaskAction.AcceptConditions:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.acceptConditions}>Accept conditions</Button>
       case TaskAction.DeclineConditions:

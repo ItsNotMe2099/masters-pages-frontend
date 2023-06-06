@@ -1,52 +1,25 @@
 import {createContext, useContext, useEffect, useState} from 'react'
-import Router, { useRouter } from 'next/router'
-import {IProject, ProjectStatus} from "data/intefaces/IProject";
-import {DeepPartial, IPagination} from 'types/types'
-import ProjectRepository from "data/repositories/ProjectRepository";
+import {useRouter} from 'next/router'
+import {DeepPartial} from 'types/types'
 import {useAppContext} from "context/state";
-import {IOrganization} from "data/intefaces/IOrganization";
 import {
   confirmChangeData,
   confirmModalClose,
-  confirmOpen, finishTaskAsClientOpen,
-  modalClose, taskEditConditionsOpen,
-  taskHireMasterOpen, taskMarkAsDoneOpen, taskOfferAcceptOpen, taskSuccessOpen
+  confirmOpen,
+  finishTaskAsClientOpen,
+  modalClose,
+  taskEditConditionsOpen,
+  taskHireMasterOpen,
+  taskMarkAsDoneOpen,
+  taskOfferAcceptOpen
 } from "components/Modal/actions";
 import {useTranslation} from "next-i18next";
 import {useDispatch} from "react-redux";
-import OrganizationRepository from "data/repositories/OrganizationRepository";
-import {IAutoMessages} from "data/intefaces/IAutoMessages";
-import {ApplicationStatus, IApplication} from "data/intefaces/IApplication";
-import ApplicationRepository from "data/repositories/ApplicationRepository";
-import {IRootState, ITask, ITaskFormData, ITaskNegotiation, ITaskNegotiationType, ITaskStatus} from "types";
+import {ITask, ITaskFormData, ITaskNegotiation, ITaskNegotiationType, ITaskStatus} from "types";
 import TaskNegotiationRepository from "data/repositories/TaskNegotiationRepository";
-import {
-  taskNegotiationAcceptAsCompleted,
-  taskNegotiationAcceptConditions,
-  taskNegotiationAcceptConditionsRequest,
-  taskNegotiationAcceptTaskOffer,
-  taskNegotiationAcceptTaskOfferRequest,
-  taskNegotiationAcceptTaskResponse,
-  taskNegotiationAcceptTaskResponseRequest,
-  taskNegotiationCreateTaskResponse,
-  taskNegotiationDeclineConditions,
-  taskNegotiationDeclineTaskOffer,
-  taskNegotiationDeclineTaskResponse,
-  taskNegotiationFinishFailed,
-  taskNegotiationFinishSuccess,
-  taskNegotiationMarkAsDoneRequest, taskNegotiationSetCurrentMessage,
-  taskNegotiationSetCurrentNegotiation,
-  taskNegotiationSetCurrentTask
-} from "components/TaskNegotiation/actions";
-import {put, select, take} from "redux-saga/effects";
-import ActionTypes from "components/TaskNegotiation/const";
-import ApiActionTypes from "constants/api";
-import {fetchChat, fetchOneChatMessage} from "components/Chat/actions";
-import {deleteTaskUser, fetchTaskResponseRequest, setPublishedTaskUser} from "components/TaskUser/actions";
-import {createFeedBackMasterRequest} from "components/ProfileFeedback/actions";
+import {taskNegotiationSetCurrentNegotiation, taskNegotiationSetCurrentTask} from "components/TaskNegotiation/actions";
 import TaskRepository from "data/repositories/TaskRepository";
 import {IProfile} from "data/intefaces/IProfile";
-import {current} from "immer";
 import ProfileRepository from "data/repositories/ProfileRepostory";
 
 interface IState {
@@ -355,7 +328,12 @@ export function TaskWrapper(props: Props) {
       description: `${t('taskResponse.confirmDecline')} ${negotiation.profile?.firstName} ${negotiation.profile?.lastName}?`,
       onConfirm: async () => {
         dispatch(confirmChangeData({ loading: true }))
-        await declineTaskCompletedRequest()
+        if(negotiation.type === ITaskNegotiationType.MarkAsDone){
+          await declineMarkAsDoneRequest()
+        }else{
+          await declineTaskCompletedRequest()
+        }
+
         dispatch(confirmChangeData({ loading: false }))
         dispatch(confirmModalClose())
 
@@ -377,6 +355,10 @@ export function TaskWrapper(props: Props) {
   }
   const declineTaskCompletedRequest = async () => {
     handleUpdateNegotiation(await TaskNegotiationRepository.declineAcceptAsCompleted(negotiation.id))
+
+  }
+  const declineMarkAsDoneRequest = async () => {
+    handleUpdateNegotiation(await TaskNegotiationRepository.declineMarkAsDone(negotiation.id))
 
   }
 

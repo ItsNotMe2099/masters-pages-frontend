@@ -171,6 +171,17 @@ export default class TaskNegotiationRepository {
     return res.data
   }
 
+  static async declineMarkAsDone(taskNegotiationId: number): Promise<ITaskNegotiation | null> {
+    const res = await request({
+      url: `/api/task-negotiation/${taskNegotiationId}/decline-mark-as-done`,
+      method: 'GET'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
   static async hireMaster(data: {taskId: number, profileId: number}): Promise<ITaskNegotiation | null> {
     const res = await request({
       url: '/api/task-negotiation/hire-master',
