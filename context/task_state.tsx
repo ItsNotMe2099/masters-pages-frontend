@@ -227,8 +227,6 @@ export function TaskWrapper(props: Props) {
     dispatch(confirmChangeData({ loading: false }))
     dispatch(modalClose())
 
-    router.push(`/Chat/task-dialog/${negotiation.taskId}/${negotiation.profileId}`)
-
   }
   const acceptTaskResponseRequest = async () => {
     dispatch(confirmChangeData({ loading: true }))
@@ -238,7 +236,6 @@ export function TaskWrapper(props: Props) {
     dispatch(confirmChangeData({ loading: false }))
     dispatch(modalClose())
 
-    router.push(`/Chat/task-dialog/${negotiation.taskId}/${negotiation.profileId}`)
 
   }
 

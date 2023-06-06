@@ -101,8 +101,8 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.Delete)
           break;
         case "client":
-          actions.push(TaskAction.CounterOffer)
           actions.push(TaskAction.HireMaster)
+          actions.push(TaskAction.CounterOffer)
           actions.push(TaskAction.DeclineOffer)
           break;
       }
