@@ -78,7 +78,8 @@ const TabOrders = (props: Props) => {
     {name: t('personalArea.tabOrders.menu.negotiation'), key: TabKey.Negotiation},
     {name: t('personalArea.tabOrders.menu.inProgress'), key: TabKey.InProgress},
     {name: t('personalArea.tabOrders.menu.closed'), key: TabKey.Closed},
-    {name: t('personalArea.tabOrders.menu.saved'), key: TabKey.Saved},
+    ...(role !== 'client' ? [
+    {name: t('personalArea.tabOrders.menu.saved'), key: TabKey.Saved}] : []),
   ].map(item => {
     return {
       ...item,
@@ -222,7 +223,7 @@ const TabOrders = (props: Props) => {
               hasMore={total > items.length}
               loader={loading ? <Loader/> : null}
               scrollableTarget='scrollableDiv'>
-              {items.map(i => <TaskNew task={i.task} negotiation={i.negotiation} actionsType={role === 'client' ? 'client' : 'master'}/>)}
+              {items.map(i => <TaskNew task={i.task} negotiation={i.negotiation} actionsType={orderType === TabKey.Saved ? 'saved' : role === 'client' ? 'client' : 'master'}/>)}
             </InfiniteScroll>}
           </div>
 

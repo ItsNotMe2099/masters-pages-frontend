@@ -104,6 +104,17 @@ export default class ProfileRepository {
     return res.data
   }
 
+  static async deleteSavedTask(taskId: number): Promise< ITask | null> {
+    const res = await request({
+      url: `/api/profile/saved-tasks/${taskId}`,
+      method: 'DELETE',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
   static async updateProfile(id: number, data: any): Promise<IProfile | null> {
     const res = await request({
       url: `/api/profile/${id}`,

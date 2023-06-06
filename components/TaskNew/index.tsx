@@ -65,7 +65,7 @@ enum TaskAction {
 interface Props {
   task: ITask,
   negotiation: ITaskNegotiation
-  actionsType: 'public' | 'client' | 'master'
+  actionsType: 'public' | 'client' | 'master' | 'saved'
   className?: string,
   isActive?: boolean,
   index?: number,
@@ -223,10 +223,10 @@ const TaskInner = ({
   }
 
   const actions = []
-
+  actions.push( TaskAction.ReadMore)
   if (actionsType === 'public') {
-    actions.push('share')
-    actions.push('save')
+    actions.push( TaskAction.Share)
+    actions.push( TaskAction.Save)
 
   } else {
     if(task.status === ITaskStatus.Draft){
@@ -276,26 +276,12 @@ const TaskInner = ({
     switch (action) {
       case TaskAction.ReadMore:
         return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>
-      case TaskAction.Edit:
-        return <TaskActionButton title={t('task.edit')} icon={'arrow-right'} onClick={handleEdit}/>
-      case TaskAction.Delete:
-        return <TaskActionButton title={t('task.delete')} icon={'delete'} onClick={handleDelete}/>
-      case TaskAction.Publish:
-        return <TaskActionButton title={t('task.publish')} icon={'publish'} onClick={handlePublish}/>
-      case TaskAction.UnPublish:
-        return <TaskActionButton title={t('task.unPublish')} icon={'unpublish'} onClick={handleUnPublish}/>
-      case TaskAction.Cancel:
-        return <TaskActionButton title={t('task.cancel')} icon={'delete'} onClick={handleCancel}/>
-      case TaskAction.MarkAsCompleted:
-        return <TaskActionButton title={t('task.markAsCompleted')} icon={'mark'} onClick={handleTaskComplete}/>
-      case TaskAction.Share:
+       case TaskAction.Share:
         return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>
       case TaskAction.Save:
         return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')}
                                  icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>
-      case TaskAction.FeedbackToClient:
-        return <TaskActionButton title={t('task.postFeedback')} icon={'mark'} onClick={handleFeedbackByMaster}/>
-    }
+      }
   }
 
   const renderCategory = (task) => {

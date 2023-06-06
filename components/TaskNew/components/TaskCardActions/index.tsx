@@ -41,11 +41,13 @@ enum TaskAction {
   CancelRequest = 'cancelRequest',
   CompletedAccepted = 'CompletedAccepted',
   CompletedDeclined = 'CompletedDeclined',
-  Recommend = 'Recommend'
+  Recommend = 'Recommend',
+  DeleteSaved = 'deleteSaved',
+  CreateResponse = 'createResponse'
 }
 
 interface Props {
-  type: 'client' | 'master' | 'public'
+  type: 'client' | 'master' | 'public' | 'saved'
 }
 
 const TaskActions = (props: Props) => {
@@ -58,6 +60,10 @@ const TaskActions = (props: Props) => {
   if (type === 'public') {
     actions.push('share')
     actions.push('save')
+
+  }else if (type === 'saved') {
+    actions.push(TaskAction.CreateResponse)
+    actions.push(TaskAction.DeleteSaved)
 
   } else {
     if(task.status === ITaskStatus.Draft){
@@ -233,6 +239,11 @@ const TaskActions = (props: Props) => {
     editConditions
      */
     switch (action) {
+      case TaskAction.DeleteSaved:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.deleteSavedTask}>Delete</Button>
+      case TaskAction.CreateResponse:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.createTaskResponseByMasterOpen}>Accept</Button>
+
       case TaskAction.Publish:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={() => taskContext.publishTask()}>Publish</Button>
 

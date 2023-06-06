@@ -10,7 +10,7 @@ import {
   confirmModalClose,
   confirmOpen, finishTaskAsClientOpen,
   modalClose, taskEditConditionsOpen,
-  taskHireMasterOpen, taskMarkAsDoneOpen, taskSuccessOpen
+  taskHireMasterOpen, taskMarkAsDoneOpen, taskOfferAcceptOpen, taskSuccessOpen
 } from "components/Modal/actions";
 import {useTranslation} from "next-i18next";
 import {useDispatch} from "react-redux";
@@ -47,6 +47,7 @@ import {createFeedBackMasterRequest} from "components/ProfileFeedback/actions";
 import TaskRepository from "data/repositories/TaskRepository";
 import {IProfile} from "data/intefaces/IProfile";
 import {current} from "immer";
+import ProfileRepository from "data/repositories/ProfileRepostory";
 
 interface IState {
   negotiation: ITaskNegotiation | null,
@@ -71,6 +72,9 @@ interface IState {
   publishTask: () => void
   unPublishTask: () => void
   deleteTask: () => void
+  createTaskResponseByMasterOpen: () => void
+  createTaskResponseByMaster: (data: any) => void
+  deleteSavedTask: () => void
   opponentProfile: IProfile | null
 
 }
@@ -98,6 +102,9 @@ const defaultValue: IState = {
   publishTask: () => null,
   unPublishTask: () => null,
   deleteTask: () => null,
+  createTaskResponseByMasterOpen: () => null,
+  createTaskResponseByMaster: (data: any) => null,
+  deleteSavedTask: () => null,
   opponentProfile: null
 }
 
@@ -425,8 +432,18 @@ export function TaskWrapper(props: Props) {
         dispatch(confirmModalClose())
       }
     }))
-
-
+  }
+  const createTaskResponseByMasterOpen = () => {
+    dispatch(taskNegotiationSetCurrentTask(task))
+    dispatch(taskOfferAcceptOpen())
+  }
+  const createTaskResponseByMaster = async (data: any) => {
+    await TaskNegotiationRepository.createTaskResponseByMaster({...data, taskId: task.id})
+    await deleteSavedTask();
+  }
+  const deleteSavedTask = async () => {
+    await ProfileRepository.deleteSavedTask(task.id);
+    appContext.taskDeleteState$.next(task)
 
   }
 
@@ -453,6 +470,9 @@ export function TaskWrapper(props: Props) {
     declineTaskCompleted,
     acceptTaskCompletedOpen,
     deleteTask,
+    createTaskResponseByMaster,
+    createTaskResponseByMasterOpen,
+    deleteSavedTask,
     opponentProfile: negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author
 
   }
