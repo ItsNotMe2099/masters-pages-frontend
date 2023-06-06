@@ -149,6 +149,10 @@ export function TaskWrapper(props: Props) {
     setNegotiation(n => ({...n, ...negotiation}))
     appContext.negotiationUpdateState$.next({before: negotiation, after: newNegotiation})
   }
+  const handleUpdateNegotiationTask = (newNegotiation: ITaskNegotiation) => {
+    setNegotiation(n => ({...n, ...negotiation}))
+    appContext.negotiationUpdateState$.next({before: negotiation, after: newNegotiation})
+  }
   const handleUpdateTask = (newTask: ITask) => {
     setTask(n => ({...n, ...negotiation}))
     appContext.taskUpdateState$.next({before: task, after: newTask})
@@ -283,6 +287,14 @@ export function TaskWrapper(props: Props) {
 
 
   const markAsDone = async (data: any = null) => {
+
+    if(appContext.profile.role === 'client'){
+
+      await acceptTaskCompletedRequest();
+    }else{
+      await markAsDoneRequest()
+    }
+    return;
     dispatch(confirmOpen({
       description: `Are you sure that you want mark as done task «${task.title}»?`,
       onConfirm: async () => {
@@ -355,7 +367,7 @@ export function TaskWrapper(props: Props) {
 
   }
   const markAsDoneRequest = async ()=> {
-    handleUpdateNegotiation(await TaskNegotiationRepository.markAsDone(task.id))
+    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.markAsDone(task.id)})
   }
   const acceptMarkAsDoneRequest = async () => {
     handleUpdateNegotiation(await TaskNegotiationRepository.acceptMarkAsDone(negotiation.id))
@@ -364,7 +376,7 @@ export function TaskWrapper(props: Props) {
     handleUpdateNegotiation(await TaskNegotiationRepository.acceptAcceptAsCompleted(negotiation.id))
   }
   const acceptTaskCompletedRequest = async () => {
-    handleUpdateNegotiation(await TaskNegotiationRepository.acceptAsCompleted(negotiation.id))
+    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.acceptAsCompleted(task.id)})
   }
   const declineTaskCompletedRequest = async () => {
     handleUpdateNegotiation(await TaskNegotiationRepository.declineAcceptAsCompleted(negotiation.id))

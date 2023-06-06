@@ -167,6 +167,8 @@ const TaskInner = ({
 
   }
 
+
+
   const handleShare = () => {
     if (profile) {
       dispatch(taskSearchSetCurrentTask(task))
@@ -230,7 +232,7 @@ const TaskInner = ({
 
   } else {
     if(task.status === ITaskStatus.Draft){
-
+      actions.push( TaskAction.Edit)
     }else if(task.status === ITaskStatus.Published){
 
     }else if(task.status === ITaskStatus.PrivatelyPublished){

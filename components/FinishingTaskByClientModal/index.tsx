@@ -49,7 +49,8 @@ const FinishingTaskByClientModalInner = (props: Props) => {
 }
 export default function FinishingTaskByClientModal(props: Props) {
   const task = useSelector((state: IRootState) => state.taskOffer.currentTask)
-  return <TaskWrapper negotiation={null} task={task}>
+  const negotiation = useSelector((state: IRootState) => state.taskOffer.currentTaskNegotiation)
+  return <TaskWrapper negotiation={negotiation} task={task}>
     <FinishingTaskByClientModalInner {...props}/>
   </TaskWrapper>
 }

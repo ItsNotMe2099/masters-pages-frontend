@@ -149,9 +149,9 @@ export default class TaskNegotiationRepository {
     return res.data
   }
 
-  static async acceptAsCompleted(taskNegotiationId: number): Promise<ITaskNegotiation | null> {
+  static async acceptAsCompleted(taskId: number): Promise<ITaskNegotiation | null> {
     const res = await request({
-      url: `/api/task-negotiation/${taskNegotiationId}/accept-as-completed`,
+      url: `/api/task-negotiation/${taskId}/accept-as-completed`,
       method: 'GET'
     })
     if (res.err) {

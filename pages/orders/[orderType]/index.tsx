@@ -115,7 +115,7 @@ const TabOrders = (props: Props) => {
       if(toDelete){
         setItems(i => i.filter(i => !i.negotiation || i.negotiation?.id !== after.id))
       }else{
-        setItems( i => i.map(i => i.negotiation && i.negotiation?.id === after.id ? {...i, ...after} : i))
+        setItems( i => i.map(i => i.negotiation && i.negotiation?.id === after.id ? {...i, negotiation: {...i.negotiation, ...after}} : i))
       }
     })
 
@@ -129,7 +129,8 @@ const TabOrders = (props: Props) => {
       if(toDelete){
         setItems(i => i.filter(i => !i.task || i.task?.id !== after.id))
       }else{
-        setItems( i => i.map(i => i.task && i.task?.id === after.id ? {...i, ...after} : i))
+        console.log("subscriptionTaskUpdate", after);
+        setItems( i => i.map(i => i.task && i.task?.id === after.id ? {...i, task: {...i.task, ...after}, negotiation: after.lastNegotiation ?? i.negotiation} : i))
       }
     })
     const subscriptionTaskDelete = appContext.taskDeleteState$.subscribe((task) => {
