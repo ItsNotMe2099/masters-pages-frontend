@@ -355,6 +355,14 @@ export interface ITaskCount {
   task_status: ITaskStatus
   count: string
 }
+export enum TaskCreatorType {
+  Client = 'client',
+  Master = 'master'
+}
+export enum TaskVisibilityType {
+  Public = 'public',
+  Private = 'private'
+}
 
 export interface ITask {
   id: number,
@@ -398,6 +406,8 @@ export interface ITask {
     total: number
   }
   feedbacks: IFeedbacksToProfile[]
+  creatorType: TaskCreatorType;
+  visibilityType: TaskVisibilityType;
 }
 
 export interface ISkills {

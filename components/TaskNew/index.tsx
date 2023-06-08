@@ -1,39 +1,18 @@
-import {
-  confirmOpen,
-  feedbackByMasterOpen,
-  finishTaskAsClientOpen,
-  taskEditConditionsOpen,
-  taskHireMasterOpen,
-  taskMarkAsDoneOpen,
-  taskOfferAcceptOpen,
-  taskShareOpen
-} from 'components/Modal/actions'
+import {feedbackByMasterOpen, taskShareOpen} from 'components/Modal/actions'
 
 import StarRatings from 'react-star-ratings'
 import BookmarkSvg from 'components/svg/Bookmark'
 import TaskActionButton from 'components/Task/components/ActionButton'
-import {
-  taskNegotiationAcceptTaskOffer,
-  taskNegotiationDeclineTaskOffer,
-  taskNegotiationFetchLastConditions,
-  taskNegotiationSetCurrentNegotiation,
-  taskNegotiationSetCurrentTask
-} from 'components/TaskNegotiation/actions'
+import {taskNegotiationSetCurrentTask} from 'components/TaskNegotiation/actions'
 import {taskSearchSetCurrentTask} from 'components/TaskSearch/actions'
-import {
-  deleteTaskUser,
-  fetchTaskUserResponseRequest,
-  setPublishedTaskUser,
-  taskCancel
-} from 'components/TaskUser/actions'
+import {fetchTaskUserResponseRequest} from 'components/TaskUser/actions'
 import Avatar from 'components/ui/Avatar'
-import Button from 'components/ui/Button'
 import {format} from 'date-fns'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {default as React, useEffect, useMemo, useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {ITask, ITaskNegotiation, ITaskNegotiationState, ITaskNegotiationType, ITaskStatus} from 'types'
+import {ITask, ITaskNegotiation, ITaskNegotiationType, ITaskStatus, TaskCreatorType, TaskVisibilityType} from 'types'
 import {getCategoryTranslation} from 'utils/translations'
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
@@ -43,7 +22,6 @@ import {useAppContext} from 'context/state'
 import Routes from "pages/routes";
 import ChatSvg from 'components/svg/ChatSvg'
 import classNames from 'classnames'
-import NegotiationRepository from 'data/repositories/NegotiationRepository'
 import TaskActions from "components/TaskNew/components/TaskCardActions";
 import {TaskWrapper, useTaskContext} from "context/task_state";
 
@@ -78,18 +56,18 @@ interface Props {
 }
 
 const TaskInner = ({
-                actionsType,
-                task,
-                negotiation,
-                className,
-                isActive,
-                onEdit,
-                onDelete,
-                onPublish,
-                onUnPublish,
-                index,
-                onStatusChange
-              }: Props) => {
+                     actionsType,
+                     task,
+                     negotiation,
+                     className,
+                     isActive,
+                     onEdit,
+                     onDelete,
+                     onPublish,
+                     onUnPublish,
+                     index,
+                     onStatusChange
+                   }: Props) => {
   const {t, i18n} = useTranslation('common')
   const dispatch = useDispatch()
   const [sortType, setSortType] = useState('newFirst')
@@ -110,7 +88,6 @@ const TaskInner = ({
   const handleReadMore = () => {
 
   }
-
 
 
   const handleShare = () => {
@@ -169,17 +146,17 @@ const TaskInner = ({
   }
 
   const actions = []
-  actions.push( TaskAction.ReadMore)
+  actions.push(TaskAction.ReadMore)
   if (actionsType === 'public') {
-    actions.push( TaskAction.Share)
-    actions.push( TaskAction.Save)
+    actions.push(TaskAction.Share)
+    actions.push(TaskAction.Save)
 
   } else {
-    if(task.status === ITaskStatus.Draft){
-      actions.push( TaskAction.Edit)
-    }else if(task.status === ITaskStatus.Published){
+    if (task.status === ITaskStatus.Draft) {
+      actions.push(TaskAction.Edit)
+    } else if (task.status === ITaskStatus.Published) {
 
-    }else if(task.status === ITaskStatus.PrivatelyPublished){
+    } else if (task.status === ITaskStatus.PrivatelyPublished) {
 
     }
 
@@ -222,12 +199,12 @@ const TaskInner = ({
     switch (action) {
       case TaskAction.ReadMore:
         return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>
-       case TaskAction.Share:
+      case TaskAction.Share:
         return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>
       case TaskAction.Save:
         return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')}
                                  icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>
-      }
+    }
   }
 
   const renderCategory = (task) => {
@@ -251,13 +228,15 @@ const TaskInner = ({
 
   const profileLink = `${Routes.profile(taskProfile)}`
   const orderTypeName = useMemo(() => {
-    switch (taskContext.task.status){
-      case ITaskStatus.Published:
-        return ''
-      case ITaskStatus.PrivatelyPublished:
-
-        return ''
+    const task = taskContext.task;
+    if (task.visibilityType === TaskVisibilityType.Private && task.creatorType === TaskCreatorType.Master) {
+      return 'Private order created by Master'
+    } else if (task.visibilityType === TaskVisibilityType.Private && task.creatorType === TaskCreatorType.Client) {
+      return 'Private order created by Client'
+    } else if (task.visibilityType === TaskVisibilityType.Public) {
+      return 'Public order created by Client'
     }
+
   }, [taskContext.task])
 
   return (
@@ -303,11 +282,11 @@ const TaskInner = ({
               <div className={styles.taskTitle}>
                 <Link href={taskLink}><a className={styles.title}>{task.title}</a></Link>
               </div>
-              <div className={styles.mobile}>{actionsType !== 'client' &&
-                <Link href={taskLink}><a className={styles.title}>
-                  {task.title}
-                </a></Link>}</div>
-              {(actionsType !== 'public') && <div className={`${styles.status} ${getStatusClassName()}`}>
+              <div className={styles.mobile}>{
+                actionsType !== 'client' && <Link href={taskLink}><a className={styles.title}>{task.title}</a></Link>}</div>
+              {(taskContext?.negotiation && [ITaskNegotiationType.TaskOffer, ITaskNegotiationType.ResponseToTask, ITaskNegotiationType.ResponseToTask].includes(taskContext?.negotiation.type)) ? <div className={classNames(styles.status)}>
+                {orderTypeName}
+              </div> : (actionsType !== 'public') && <div className={classNames(styles.status, getStatusClassName())}>
                 {getStatusText()}
               </div>}
               <div className={styles.time}>
@@ -377,7 +356,7 @@ const TaskInner = ({
           <div
             className={classNames(styles.btnContainer, {[styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}`})}>
             <TaskActions type={actionsType}/>
-         </div>
+          </div>
         </div>
 
       </div>
