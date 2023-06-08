@@ -79,7 +79,7 @@ const TaskActions = (props: Props) => {
       switch (type){
         case "master":
           actions.push(TaskAction.EditConditions)
-          actions.push(TaskAction.Delete)
+          actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":
           actions.push(TaskAction.AcceptOffer)
@@ -94,19 +94,20 @@ const TaskActions = (props: Props) => {
           break;
         case "client":
           actions.push(TaskAction.EditConditions)
-          actions.push(TaskAction.Delete)
+          actions.push(TaskAction.DeleteNegotiation)
           break;
       }
     }else if(negotiation?.type === ITaskNegotiationType.TaskOffer && negotiation?.state === ITaskNegotiationState.Accepted){
       switch (type){
         case "master":
           actions.push(TaskAction.EditConditions)
-          actions.push(TaskAction.Delete)
+          actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":
           actions.push(TaskAction.HireMaster)
           actions.push(TaskAction.CounterOffer)
           actions.push(TaskAction.DeclineOffer)
+          actions.push(TaskAction.DeleteNegotiation)
           break;
       }
     }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.SentToMaster){
@@ -115,6 +116,7 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.AcceptConditions)
           actions.push(TaskAction.DeclineConditions)
           actions.push(TaskAction.CounterOffer)
+          actions.push(TaskAction.DeleteNegotiation)
 
           break;
         case "client":
@@ -145,7 +147,6 @@ const TaskActions = (props: Props) => {
       switch (type){
         case "master":
           actions.push(TaskAction.MarkAsCompleted)
-          actions.push(TaskAction.Cancel)
           actions.push(TaskAction.ReportViolation)
           break;
         case "client":
@@ -316,6 +317,10 @@ const TaskActions = (props: Props) => {
         return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskCompletedOpen}>Accept Completed</Button>
       case TaskAction.CompletedDeclined:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskCompleted}>Decline Completed</Button>
+      case TaskAction.Cancel:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.cancelTask}>Cancel Task</Button>
+      case TaskAction.DeleteNegotiation:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.removeAllNegotiations}>Delete</Button>
     }
   }
 

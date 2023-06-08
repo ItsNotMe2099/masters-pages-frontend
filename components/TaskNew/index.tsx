@@ -284,7 +284,7 @@ const TaskInner = ({
               </div>
               <div className={styles.mobile}>{
                 actionsType !== 'client' && <Link href={taskLink}><a className={styles.title}>{task.title}</a></Link>}</div>
-              {(taskContext?.negotiation && [ITaskNegotiationType.TaskOffer, ITaskNegotiationType.ResponseToTask, ITaskNegotiationType.ResponseToTask].includes(taskContext?.negotiation.type)) ? <div className={classNames(styles.status)}>
+              {(taskContext?.negotiation && [ITaskNegotiationType.TaskOffer, ITaskNegotiationType.TaskNegotiation, ITaskNegotiationType.ResponseToTask].includes(taskContext?.negotiation.type)) ? <div className={classNames(styles.status)}>
                 {orderTypeName}
               </div> : (actionsType !== 'public') && <div className={classNames(styles.status, getStatusClassName())}>
                 {getStatusText()}

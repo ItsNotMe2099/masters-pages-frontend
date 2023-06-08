@@ -216,4 +216,26 @@ export default class TaskNegotiationRepository {
     }
     return res.data
   }
+  static async removeAllNegotiations(taskNegotiationId: number): Promise<ITaskNegotiation | null> {
+    const res = await request({
+      url: `/api/task-negotiation/${taskNegotiationId}/remove-negotiations`,
+      method: 'DELETE'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async cancelTask(taskNegotiationId: number): Promise<ITask> {
+    const res = await request({
+      url: `/api/task-negotiation/${taskNegotiationId}/cancel-task`,
+      method: 'POST'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
 }

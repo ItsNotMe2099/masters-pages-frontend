@@ -42,6 +42,7 @@ interface IState {
   feedbackDeleteState$: Subject<IFeedbacksToProfile>
   feedbackCreateState$: Subject<IFeedbacksToProfile>
   negotiationUpdateState$: Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>
+  negotiationDeleteState$: Subject<ITaskNegotiation>
   taskUpdateState$: Subject<{before: ITask, after: ITask }>
   taskDeleteState$: Subject<ITask>
 }
@@ -56,8 +57,8 @@ const applicationCreateState$ = new Subject<IApplication>()
 const feedbackUpdateState$ = new Subject<IFeedbacksToProfile>()
 const feedbackDeleteState$ = new Subject<IFeedbacksToProfile>()
 const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
-
 const negotiationUpdateState$ = new Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>()
+const negotiationDeleteState$ = new Subject<ITaskNegotiation>()
 const taskUpdateState$ = new Subject<{before: ITask, after: ITask}>()
 const taskDeleteState$ = new Subject<ITask>()
 
@@ -83,6 +84,7 @@ const defaultValue: IState = {
   feedbackDeleteState$: feedbackDeleteState$,
   feedbackCreateState$: feedbackCreateState$,
   negotiationUpdateState$: negotiationUpdateState$,
+  negotiationDeleteState$: negotiationDeleteState$,
   taskUpdateState$: taskUpdateState$,
   taskDeleteState$: taskDeleteState$,
   showModal: (type) => null,

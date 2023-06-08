@@ -88,7 +88,7 @@ const TabOrders = (props: Props) => {
   })
 
   useEffect(() => {
-    const subscriptionNegotiation = appContext.negotiationUpdateState$.subscribe(({before, after}) => {
+    const subscriptionNegotiationUpdate = appContext.negotiationUpdateState$.subscribe(({before, after}) => {
       let toDelete = false;
       switch (after.type){
         case ITaskNegotiationType.TaskOffer:
@@ -119,6 +119,10 @@ const TabOrders = (props: Props) => {
       }
     })
 
+    const subscriptionNegotiationDelete = appContext.negotiationDeleteState$.subscribe((negotiation) => {
+      setItems(i => i.filter(i => !i.negotiation || i.negotiation?.id !== negotiation.id))
+    })
+
     const subscriptionTaskUpdate = appContext.taskUpdateState$.subscribe(({before, after}) => {
       let toDelete = false;
 
@@ -136,8 +140,10 @@ const TabOrders = (props: Props) => {
     const subscriptionTaskDelete = appContext.taskDeleteState$.subscribe((task) => {
       setItems(i => i.filter(i => !i.task || i.task?.id !== task.id))
     })
+
     return () => {
-      subscriptionNegotiation.unsubscribe()
+      subscriptionNegotiationUpdate.unsubscribe()
+      subscriptionNegotiationDelete.unsubscribe()
       subscriptionTaskUpdate.unsubscribe()
       subscriptionTaskDelete.unsubscribe();
     }

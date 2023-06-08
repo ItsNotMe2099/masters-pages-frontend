@@ -21,6 +21,7 @@ import {taskNegotiationSetCurrentNegotiation, taskNegotiationSetCurrentTask} fro
 import TaskRepository from "data/repositories/TaskRepository";
 import {IProfile} from "data/intefaces/IProfile";
 import ProfileRepository from "data/repositories/ProfileRepostory";
+import {taskCancel} from "components/TaskUser/actions";
 
 interface IState {
   negotiation: ITaskNegotiation | null,
@@ -45,9 +46,11 @@ interface IState {
   publishTask: () => void
   unPublishTask: () => void
   deleteTask: () => void
+  cancelTask: () => void
   createTaskResponseByMasterOpen: () => void
   createTaskResponseByMaster: (data: any) => void
   deleteSavedTask: () => void
+  removeAllNegotiations: () => void,
   opponentProfile: IProfile | null
 
 }
@@ -75,9 +78,11 @@ const defaultValue: IState = {
   publishTask: () => null,
   unPublishTask: () => null,
   deleteTask: () => null,
+  cancelTask: () => null,
   createTaskResponseByMasterOpen: () => null,
   createTaskResponseByMaster: (data: any) => null,
   deleteSavedTask: () => null,
+  removeAllNegotiations: () => null,
   opponentProfile: null
 }
 
@@ -438,6 +443,32 @@ export function TaskWrapper(props: Props) {
 
   }
 
+  const removeAllNegotiations = () => {
+    dispatch(confirmOpen({
+      description: `Are you sure that you want delete all negotiations with ${negotiation.profile?.firstName} ${negotiation.profile?.lastName}?`,
+      onConfirm: async () => {
+        dispatch(confirmChangeData({ loading: true }))
+        await  TaskNegotiationRepository.removeAllNegotiations(negotiation.id),
+        appContext.negotiationDeleteState$.next(negotiation)
+        dispatch(confirmChangeData({ loading: false }))
+        dispatch(confirmModalClose())
+      }
+    }))
+  }
+  const cancelTask = () => {
+    dispatch(confirmOpen({
+      description: t('chat.cancelTask'),
+      onConfirm: async () => {
+        dispatch(confirmChangeData({ loading: true }))
+        await  TaskNegotiationRepository.cancelTask(negotiation.id),
+        appContext.taskDeleteState$.next(task)
+        dispatch(confirmChangeData({ loading: false }))
+        dispatch(confirmModalClose())
+      }
+    }))
+  }
+
+
   const value: IState = {
     ...defaultValue,
     task,
@@ -464,6 +495,8 @@ export function TaskWrapper(props: Props) {
     createTaskResponseByMaster,
     createTaskResponseByMasterOpen,
     deleteSavedTask,
+    removeAllNegotiations,
+    cancelTask,
     opponentProfile: negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author
 
   }
