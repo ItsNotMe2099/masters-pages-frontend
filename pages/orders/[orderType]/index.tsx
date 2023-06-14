@@ -76,7 +76,7 @@ const TabOrders = (props: Props) => {
     ] : []),
     //...(role === 'client' ? [{ name: t('Offers from master'), key: 'offers-master', badge: profile.notificationTaskOfferCount }] : []),
   //  {name: t('Offers'), key: TabKey.Offers, badge: profile.notificationTaskOfferCount},
-    {name: t('personalArea.tabOrders.menu.negotiation'), key: TabKey.Negotiation},
+    {name:  t('Offers'), key: TabKey.Negotiation},
     {name: t('personalArea.tabOrders.menu.inProgress'), key: TabKey.InProgress},
     {name: t('personalArea.tabOrders.menu.closed'), key: TabKey.Closed},
     ...(role !== 'client' ? [
@@ -229,7 +229,7 @@ const TabOrders = (props: Props) => {
               hasMore={total > items.length}
               loader={loading ? <Loader/> : null}
               scrollableTarget='scrollableDiv'>
-              {items.map(i => <TaskNew task={i.task} negotiation={i.negotiation} actionsType={orderType === TabKey.Saved ? 'saved' : role === 'client' ? 'client' : 'master'}/>)}
+              {items.map(i => <TaskNew onEdit={handleTaskEdit} task={i.task} negotiation={i.negotiation} actionsType={orderType === TabKey.Saved ? 'saved' : role === 'client' ? 'client' : 'master'}/>)}
             </InfiniteScroll>}
           </div>
 

@@ -49,6 +49,7 @@ enum TaskAction {
 
 interface Props {
   type: 'client' | 'master' | 'public' | 'saved'
+  onEdit: () => void
 }
 
 const TaskActions = (props: Props) => {
@@ -72,9 +73,11 @@ const TaskActions = (props: Props) => {
   } else {
     if(task.status === ITaskStatus.Draft && task.visibilityType === 'private'){
       actions.push(TaskAction.SendOffer)
+      actions.push(TaskAction.Edit)
       actions.push(TaskAction.Delete)
     }else if(task.status === ITaskStatus.Draft && task.visibilityType === 'public'){
       actions.push(TaskAction.Publish)
+      actions.push(TaskAction.Edit)
       actions.push(TaskAction.Delete)
     }else if(task.status === ITaskStatus.Published && !negotiation){
       actions.push(TaskAction.UnPublish)
@@ -334,6 +337,9 @@ const TaskActions = (props: Props) => {
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.cancelTask}>Cancel Task</Button>
       case TaskAction.DeleteNegotiation:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.removeAllNegotiations}>Delete</Button>
+      case TaskAction.Edit:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={props.onEdit}>Edit</Button>
+
     }
   }
 

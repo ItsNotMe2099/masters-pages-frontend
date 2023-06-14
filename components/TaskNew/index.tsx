@@ -368,7 +368,7 @@ const TaskInner = ({
           </div>}
           <div
             className={classNames(styles.btnContainer, {[styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}`})}>
-            <TaskActions type={actionsType}/>
+            <TaskActions type={actionsType} onEdit={handleEdit}/>
           </div>
         </div>
 
