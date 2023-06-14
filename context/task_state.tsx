@@ -104,7 +104,7 @@ export function TaskWrapper(props: Props) {
   const [task, setTask] = useState<ITask | null>(props.task)
   const [loading, setLoading] = useState<boolean>(false)
   const [actionLoading, setActionLoading] = useState<boolean>(false)
-  const opponentProfile =  negotiation ? negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author : (task?.profileId !== appContext.profile.id ? task?.profile : task?.master )
+  const opponentProfile = task.master  ? (task?.profileId !== appContext.profile.id ? task?.profile : task?.master) :  negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author;
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -243,15 +243,11 @@ export function TaskWrapper(props: Props) {
   const acceptTaskOfferRequest = async () => {
     dispatch(confirmChangeData({ loading: true }))
     handleUpdateNegotiation(await TaskNegotiationRepository.acceptTaskOffer(negotiation.id))
-
+    await TaskNegotiationRepository.acceptTask({taskId: task.id, profileId: appContext.profile.id});
+    appContext.taskDeleteState$.next(task)
     dispatch(confirmChangeData({ loading: false }))
     dispatch(confirmModalClose())
-    if(appContext.profile.role === 'client'){
-      router.push(`/Chat/task-dialog/${negotiation.taskId}/${negotiation.authorId}`)
 
-    }else{
-      router.push(`/Chat/task-dialog/${negotiation.taskId}/${negotiation.profileId}`)
-    }
   }
   const declineTaskOfferRequest = async ()  => {
     dispatch(confirmChangeData({ loading: true }))

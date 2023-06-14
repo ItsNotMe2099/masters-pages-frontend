@@ -138,6 +138,17 @@ export default class TaskNegotiationRepository {
     return res.data
   }
 
+  static async acceptTask(data: {taskId: number, profileId: number}): Promise<ITaskNegotiation | null> {
+    const res = await request({
+      url: `/api/task-negotiation/accept-task`,
+      method: 'POST',
+      data,
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
   static async acceptTaskOffer(taskNegotiationId: number): Promise<ITaskNegotiation | null> {
     const res = await request({
       url: `/api/task-negotiation/${taskNegotiationId}/accept-task-offer`,

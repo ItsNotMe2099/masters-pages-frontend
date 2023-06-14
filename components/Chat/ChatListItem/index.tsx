@@ -42,10 +42,13 @@ export default function ChatListItem({chat, isActive, onClick}: Props) {
     dispatch(fetchChat(chat.id))
   }
   const isProjectGroup = chat.isGroup && chat.projectId
-  const profile = chat.participantId === currentProfile.id ? chat.profile : chat.participant
+  const profile = chat.participantId === currentProfile.id ? chat.profile : chat.participant ?? chat.profile
+  if(!profile){
+    console.log("ShowChat", chat)
+  }
   return (
    <div className={`${styles.root} ${isActive && styles.rootActive}`} onClick={handleClick}>
-     {isProjectGroup ? <img src='/img/icons/chat_group.svg'/> : <AvatarRound image={profile.photo} name={profile.firstName}/>}
+     {isProjectGroup ? <img src='/img/icons/chat_group.svg'/> : <AvatarRound image={profile?.photo} name={profile?.firstName}/>}
       <div className={styles.info}>
         <div className={styles.title}>{isProjectGroup ? chat.name : `${profile.firstName} ${profile.lastName} ${chat.task ? `(${chat.task.title})` : ''}`}</div>
         {chat.lastMessageAt && <div className={styles.time}>{formatDistance(new Date(), new Date(chat.lastMessageAt))}</div>}

@@ -86,7 +86,9 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":
+
           actions.push(TaskAction.AcceptOffer)
+          actions.push(TaskAction.EditConditions)
           actions.push(TaskAction.DeclineOffer)
           break;
       }
@@ -94,6 +96,7 @@ const TaskActions = (props: Props) => {
       switch (type){
         case "master":
           actions.push(TaskAction.AcceptOffer)
+          actions.push(TaskAction.EditConditions)
           actions.push(TaskAction.DeclineOffer)
           break;
         case "client":
