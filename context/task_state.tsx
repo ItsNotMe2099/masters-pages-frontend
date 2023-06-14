@@ -344,7 +344,7 @@ export function TaskWrapper(props: Props) {
     handleUpdateNegotiation(await TaskNegotiationRepository.acceptAcceptAsCompleted(negotiation.id))
   }
   const acceptTaskCompletedRequest = async () => {
-    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.acceptAsCompleted(task.id)})
+    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.acceptAsCompleted(negotiation.id)})
   }
   const declineTaskCompletedRequest = async () => {
     handleUpdateNegotiation(await TaskNegotiationRepository.declineAcceptAsCompleted(negotiation.id))
@@ -356,7 +356,16 @@ export function TaskWrapper(props: Props) {
   }
 
   const hireMasterRequest = async () => {
-    await TaskNegotiationRepository.acceptConditions(negotiation.id);
+    if(negotiation?.type === ITaskNegotiationType.TaskOffer){
+      await TaskNegotiationRepository.acceptTaskOffer(negotiation.id)
+    }else if(negotiation?.type === ITaskNegotiationType.ResponseToTask){
+      await TaskNegotiationRepository.acceptConditions(negotiation.id);
+
+    }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation){
+      await TaskNegotiationRepository.acceptConditions(negotiation.id);
+
+    }
+    handleUpdateNegotiation(await TaskNegotiationRepository.acceptTaskOffer(negotiation.id))
     await TaskNegotiationRepository.hireMaster({taskId: task.id, profileId: negotiation.profileId})
     const newTask = await TaskRepository.fetchOneTaskUserRequest(task.id);
     handleUpdateTask(newTask);

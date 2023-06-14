@@ -173,7 +173,7 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.ReportViolation)
           break;
       }
-    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.SentToClient){
+    }else if([ITaskNegotiationType.MarkAsDone, ITaskNegotiationType.TaskCompleted].includes(negotiation?.type) && negotiation?.state === ITaskNegotiationState.SentToClient){
       switch (type){
         case "master":
           actions.push(TaskAction.CancelRequest)
@@ -184,7 +184,7 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.CompletedDeclined)
           break;
       }
-    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.SentToMaster) {
+    }else if([ITaskNegotiationType.MarkAsDone, ITaskNegotiationType.TaskCompleted].includes(negotiation?.type) && negotiation?.state === ITaskNegotiationState.SentToMaster) {
       switch (type) {
         case "master":
           actions.push(TaskAction.CompletedAccepted)
@@ -196,9 +196,10 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.ReportViolation)
           break;
       }
-    }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.Declined){
+    }else if([ITaskNegotiationType.MarkAsDone, ITaskNegotiationType.TaskCompleted].includes(negotiation?.type) && negotiation?.state === ITaskNegotiationState.Declined){
       switch (type){
         case "master":
+
           actions.push(TaskAction.MarkAsCompleted)
           actions.push(TaskAction.Cancel)
           actions.push(TaskAction.ReportViolation)
@@ -209,7 +210,7 @@ const TaskActions = (props: Props) => {
           actions.push(TaskAction.ReportViolation)
           break;
       }
-      }else if(negotiation?.type === ITaskNegotiationType.MarkAsDone && negotiation?.state === ITaskNegotiationState.Accepted){
+      }else if([ITaskNegotiationType.MarkAsDone, ITaskNegotiationType.TaskCompleted].includes(negotiation?.type) && negotiation?.state === ITaskNegotiationState.Accepted){
       switch (type){
         case "master":
           if(!task.feedbacks.find(f => f.target === 'client')){

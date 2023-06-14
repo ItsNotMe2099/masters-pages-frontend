@@ -66,7 +66,8 @@ const TabOrders = (props: Props) => {
   const modalKey = useSelector((state: IRootState) => state.modal.modalKey)
   const [currentTaskEdit, setCurrentTaskEdit] = useState(null)
   const tabs = [
-    ...(role === 'client' ? [{name: t('personalArea.tabOrders.menu.draft'), key: TabKey.Drafts},
+    {name: t('personalArea.tabOrders.menu.draft'), key: TabKey.Drafts},
+    ...(role === 'client' ? [
       {
         name: t('personalArea.tabOrders.menu.published'),
         key: TabKey.Published,
