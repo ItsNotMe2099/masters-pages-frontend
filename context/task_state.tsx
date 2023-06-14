@@ -340,7 +340,7 @@ export function TaskWrapper(props: Props) {
     handleUpdateNegotiation(await TaskNegotiationRepository.acceptAcceptAsCompleted(negotiation.id))
   }
   const acceptTaskCompletedRequest = async () => {
-    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.acceptAsCompleted(negotiation.id)})
+    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.acceptAsCompleted(task.id)})
   }
   const declineTaskCompletedRequest = async () => {
     handleUpdateNegotiation(await TaskNegotiationRepository.declineAcceptAsCompleted(negotiation.id))
