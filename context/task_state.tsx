@@ -43,6 +43,7 @@ interface IState {
   updateTask: (data: DeepPartial<ITask>) => void
   hireMaster: () => void
   hireMasterRequest: () => void
+  sendOffer: () => void
   publishTask: () => void
   unPublishTask: () => void
   deleteTask: () => void
@@ -74,6 +75,7 @@ const defaultValue: IState = {
   declineTaskCompleted: () => null,
   updateTask: () => null,
   hireMaster: () => null,
+  sendOffer: () => null,
   hireMasterRequest: () => null,
   publishTask: () => null,
   unPublishTask: () => null,
@@ -102,6 +104,7 @@ export function TaskWrapper(props: Props) {
   const [task, setTask] = useState<ITask | null>(props.task)
   const [loading, setLoading] = useState<boolean>(false)
   const [actionLoading, setActionLoading] = useState<boolean>(false)
+  const opponentProfile =  negotiation ? negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author : (task?.profileId !== appContext.profile.id ? task?.profile : task?.master )
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -269,22 +272,7 @@ export function TaskWrapper(props: Props) {
     }else{
       await markAsDoneRequest()
     }
-    return;
-    dispatch(confirmOpen({
-      description: `Are you sure that you want mark as done task «${task.title}»?`,
-      onConfirm: async () => {
-        dispatch(confirmChangeData({ loading: true }))
-        if(appContext.profile.role === 'client'){
 
-          await acceptTaskCompletedRequest();
-        }else{
-          await markAsDoneRequest()
-        }
-        dispatch(confirmChangeData({ loading: false }))
-        dispatch(confirmModalClose())
-
-      }
-    }))
 
 
   }
@@ -467,6 +455,22 @@ export function TaskWrapper(props: Props) {
       }
     }))
   }
+  const sendOffer = () => {
+    dispatch(confirmOpen({
+      description: `Are you sure that you want to send offer for ${opponentProfile.firstName} ${opponentProfile.lastName}?` ,
+      onConfirm: async () => {
+        dispatch(confirmChangeData({ loading: true }))
+        await  sendOfferRequest(),
+          appContext.taskDeleteState$.next(task)
+        dispatch(confirmChangeData({ loading: false }))
+        dispatch(confirmModalClose())
+      }
+    }))
+  }
+  const sendOfferRequest = async () => {
+    await TaskNegotiationRepository.createTaskOffer({taskId: task.id, profileId: opponentProfile.id})
+
+  }
 
 
   const value: IState = {
@@ -486,6 +490,7 @@ export function TaskWrapper(props: Props) {
     markAsDone,
     updateTask,
     hireMaster,
+    sendOffer,
     hireMasterRequest,
     publishTask,
     unPublishTask,
@@ -497,8 +502,7 @@ export function TaskWrapper(props: Props) {
     deleteSavedTask,
     removeAllNegotiations,
     cancelTask,
-    opponentProfile: negotiation?.profileId !== appContext.profile.id ? negotiation?.profile : negotiation?.author
-
+    opponentProfile,
   }
 
   return (

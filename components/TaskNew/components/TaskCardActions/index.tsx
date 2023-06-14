@@ -12,6 +12,7 @@ enum TaskAction {
   Delete = 'delete',
   Publish = 'publish',
   UnPublish = 'unPublish',
+  SendOffer = 'sendOffer',
 
   ScheduleEvent = 'scheduleEvent',
   Cancel = 'cancel',
@@ -69,7 +70,10 @@ const TaskActions = (props: Props) => {
     actions.push(TaskAction.DeleteSaved)
 
   } else {
-    if(task.status === ITaskStatus.Draft){
+    if(task.status === ITaskStatus.Draft && task.visibilityType === 'private'){
+      actions.push(TaskAction.SendOffer)
+      actions.push(TaskAction.Delete)
+    }else if(task.status === ITaskStatus.Draft && task.visibilityType === 'public'){
       actions.push(TaskAction.Publish)
       actions.push(TaskAction.Delete)
     }else if(task.status === ITaskStatus.Published && !negotiation){
@@ -295,6 +299,10 @@ const TaskActions = (props: Props) => {
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.deleteTask}>Delete</Button>
       case TaskAction.HireMaster:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={() => taskContext.hireMaster()}>Hire Master</Button>
+
+      case TaskAction.SendOffer:
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.sendOffer}>Send offer</Button>
+
 
       case TaskAction.AcceptOffer:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.acceptTaskOffer}>Accept offer</Button>
