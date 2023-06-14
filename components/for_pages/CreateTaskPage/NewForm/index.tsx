@@ -27,12 +27,15 @@ import { modalClose } from 'components/Modal/actions'
 import ServiceCategoryField from 'components/fields/ServiceCategoryField'
 import RadioListField from 'components/fields/RadioListField'
 import ProfileSearchField from 'components/fields/ProfileSearchField'
+import TaskNegotiationRepository from "data/repositories/TaskNegotiationRepository";
+import {ProjectStatus} from "data/intefaces/IProject";
 
 interface Props {
   isMaster: boolean
+  onSubmit: (data: ITaskFormData) => void
 }
 
-export default function CreateTaskForm({ isMaster }: Props) {
+export default function CreateTaskForm({ isMaster, onSubmit }: Props) {
 
   const appContext = useAppContext()
   const profile = appContext.profile
@@ -43,7 +46,7 @@ export default function CreateTaskForm({ isMaster }: Props) {
 
   const initialValues = {
     profileId: null,
-    title: '',
+    title: null,
     skills: {
       mainCategoryId: null,
       categoryId: null,
@@ -51,12 +54,12 @@ export default function CreateTaskForm({ isMaster }: Props) {
     },
     description: '',
     photos: [],
-    deadline: '',
-    executionType: '',
-    currency: '',
+    deadline: null,
+    executionType: null,
+    currency: 'USD',
     visibilityType: isMaster ? 'private' : 'public',
     masterRole: isMaster ? profile.role : null,
-    countryCode: '',
+    countryCode: null,
     geonameid: null,
     budget: null,
     ratePerHour: null,
@@ -67,42 +70,19 @@ export default function CreateTaskForm({ isMaster }: Props) {
     subCategoryId: null
   }
 
-  const handleSubmit = async (data: ITaskFormData) => {
-    setLoading(true)
-    const { skills, ...submittedValues } = data
-    submittedValues.budget = Number(submittedValues.budget)
-    submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
-    try {
-      if (submittedValues.deadline === '') {
-        const { deadline, skills, ...submittedValues } = data
-        submittedValues.budget = Number(submittedValues.budget)
-        submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
-        const res = await TaskRepository.create(submittedValues)
-        if (res) {
-          setSuccess(true)
-        }
-      }
-      else {
-        const res = await TaskRepository.create(submittedValues)
-        if (res) {
-          setSuccess(true)
-        }
-      }
-    }
-    catch (error: any) {
-      let errorMessage = error.toString()
-      // extract the error message from the error object
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message
-      }
-    }
-    setLoading(false)
+  const handleSubmitDraft = async () => {
+    console.log("handleSubmitDraft")
+    await formik.setFieldValue('_isDraft', true);
+    await formik.submitForm();
   }
-
-
+  const handleSubmit = async () => {
+    console.log("handleSubmitDraft")
+    await formik.setFieldValue('_isDraft', false);
+    await formik.submitForm();
+  }
   const formik = useFormik({
     initialValues,
-    onSubmit: handleSubmit,
+    onSubmit,
   })
 
   const dispatch = useDispatch()
@@ -178,8 +158,9 @@ export default function CreateTaskForm({ isMaster }: Props) {
               Complete optional fields<br />
               or
             </div>
-            <div className={styles.btnContainer}>
-              {isMaster ? <Button red size="14px 65px">CREATE ORDER NOW</Button> : <Button green size="14px 65px">CREATE ORDER NOW</Button>}
+            <div className={styles.buttons}>
+              <Button type={'button'} red={isMaster} green={!isMaster} size="14px 30px" onClick={handleSubmitDraft}>SAVE AS DRAFT</Button>
+              <Button type={'button'} red={isMaster} green={!isMaster} size="14px 30px" onClick={handleSubmit}>CREATE ORDER</Button>
             </div>
           </div>
           <div className={styles.optional}>
@@ -216,8 +197,9 @@ export default function CreateTaskForm({ isMaster }: Props) {
               null
             }
             <AddressField name='address' label={`${t('createTask.fieldAddress')}`} />
-            <div className={styles.wrapper}>
-              {isMaster ? <Button red size="14px 65px">CREATE ORDER</Button> : <Button green size="14px 65px">CREATE ORDER</Button>}
+            <div className={styles.buttons}>
+              <Button type={'button'} red={isMaster} green={!isMaster} size="14px 30px" onClick={handleSubmitDraft}>SAVE AS DRAFT</Button>
+              <Button type={'button'} red={isMaster} green={!isMaster} size="14px 30px" onClick={handleSubmit}>CREATE ORDER</Button>
             </div>
           </div>
         </Form>

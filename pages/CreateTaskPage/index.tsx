@@ -2,7 +2,7 @@
 import Loader from 'components/ui/Loader'
 import Modal from 'components/ui/Modal'
 import CreateTaskForm from 'components/for_pages/CreateTaskPage/NewForm'
-import { IRootState } from 'types'
+import {IRootState, ITask, ITaskFormData} from 'types'
 import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 import {createTaskComplete, createTaskeReset} from 'components/CreateTaskPage/actions'
@@ -12,22 +12,24 @@ import {
   resetSearchStat,
   setSearchStatFilter
 } from '../../components/ProfileSearch/actions'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import { useTranslation } from 'next-i18next'
 import {useRouter} from 'next/router'
 import Layout from 'components/layout/Layout'
 import {modalClose} from 'components/Modal/actions'
 import {reachGoal} from 'utils/ymetrika'
 import {useAppContext} from 'context/state'
+import TaskRepository from "data/repositories/TaskRepository";
+import TaskNegotiationRepository from "data/repositories/TaskNegotiationRepository";
 
 const CreateTaskPage = (props) => {
   const {t} = useTranslation()
   const router = useRouter()
   const dispatch = useDispatch()
-  const isCompleted = useSelector((state: IRootState) => state.createTaskComplete.isCompleted)
-  const isLoading = useSelector((state: IRootState) => state.createTaskComplete.loading)
-  const statFilter = useSelector((state: IRootState) => state.profileSearch.searchStatFilter)
-  const appContext = useAppContext();
+ const appContext = useAppContext();
+  const [loading, setLoading] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false)
+  const [task, setTask] = useState<ITask | null>(null);
   const profile = appContext.profile
   const isMaster = profile.role !== 'client'
   useEffect(() => {
@@ -37,37 +39,41 @@ const CreateTaskPage = (props) => {
       dispatch(resetSearchStat())
     }
   }, [])
-  const handleSubmit = (data) => {
-    dispatch(createTaskComplete(data))
+
+  const handleSubmit = async (data: ITaskFormData) => {
+    setLoading(true)
+    const { skills, ...submittedValues } = data
+    submittedValues.budget = Number(submittedValues.budget)
+    submittedValues.ratePerHour = Number(submittedValues.ratePerHour)
+    try {
+
+      const res = await TaskRepository.create(submittedValues)
+      console.log("SubmitData", data);
+      if(data.visibilityType === 'private' && !(data as any)._isDraft){
+        await TaskNegotiationRepository.createTaskOffer({taskId: res.id, profileId: data.profileId})
+      }
+      setTask(res)
+      if (res) {
+        setIsCompleted(true)
+      }
+
+    } catch (error: any) {
+      let errorMessage = error.toString()
+      // extract the error message from the error object
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message
+      }
+    }
+    setLoading(false)
     reachGoal('order:create', {role: profile?.role})
   }
 
-  const handleChangeForStat = (key, value) => {
-    statFilter[key] = value
-    dispatch(setSearchStatFilter(statFilter))
-    dispatch(fetchProfileSearchStatRequest({
-      limit: 1,
-      ...statFilter
-    }))
-  }
+
   return (
     <Layout>
-      {/*<div className={styles.steps}>
-        <div className={styles.stepsContainer}>
-        <SimpleSlider/>
-        </div>
-      </div>*/}
       <div className={styles.container}>
-
         <div className={styles.required}>* {t('forms.requiredFieldsTip')}</div>
-        {/*<CreateTaskForm onSubmit={handleSubmit}    isMaster={isMaster} onChangeForStat={handleChangeForStat} initialValues={{
-          countryCode: profile?.geoname?.country,
-          geonameid: profile?.geonameid,
-          visibilityType: isMaster ? 'private' : 'public',
-          masterRole: isMaster ? profile.role : null,
-        }}/>*/}
-        <CreateTaskForm isMaster={isMaster}/>
-
+        <CreateTaskForm isMaster={isMaster} onSubmit={handleSubmit}/>
       </div>
 
 
@@ -79,9 +85,14 @@ const CreateTaskPage = (props) => {
         dispatch(createTaskeReset())
           dispatch(modalClose())
           if(profile.role === 'client') {
-            router.push('/orders/drafts')
+            if(task.visibilityType === 'private'){
+              router.push('/orders/drafts')
+            }else{
+              router.push('/orders/negotiation')
+            }
+
           }else{
-            router.push('/orders/offers')
+            router.push('/orders/negotiation')
           }
       }}>
 
@@ -89,7 +100,7 @@ const CreateTaskPage = (props) => {
 
       <Modal
         {...props}
-        isOpen={isLoading} onRequestClose={() => {
+        isOpen={loading} onRequestClose={() => {
 
       }}>
         <Loader/>

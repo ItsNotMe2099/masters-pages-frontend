@@ -12,7 +12,15 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {default as React, useEffect, useMemo, useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {ITask, ITaskNegotiation, ITaskNegotiationType, ITaskStatus, TaskCreatorType, TaskVisibilityType} from 'types'
+import {
+  ITask,
+  ITaskNegotiation,
+  ITaskNegotiationState,
+  ITaskNegotiationType,
+  ITaskStatus,
+  TaskCreatorType,
+  TaskVisibilityType
+} from 'types'
 import {getCategoryTranslation} from 'utils/translations'
 import styles from './index.module.scss'
 import {useTranslation} from 'next-i18next'
@@ -133,15 +141,8 @@ const TaskInner = ({
     }
   }
   const handleMessages = () => {
-    if (actionsType === 'master') {
+    router.push(`/Chat/task-dialog/${task.id}/${taskContext.opponentProfile.id}`)
 
-      router.push(`/Chat/task-dialog/${task.id}/${profile.id}`)
-    } else if (actionsType === 'client') {
-      router.push(`/Chat/task-dialog/${task.id}/${task.masterId}`)
-    } else if (actionsType === 'public') {
-      const response = task.lastNegotiation
-      router.push(`/Chat/task-dialog/${response.taskId}/${response.profileId}`)
-    }
 
   }
 
@@ -239,6 +240,18 @@ const TaskInner = ({
 
   }, [taskContext.task])
 
+  const showChat = useMemo(() => {
+    if(!taskContext.negotiation){
+      return false;
+    }
+    if(taskContext.negotiation.type === ITaskNegotiationType.ResponseToTask && taskContext.negotiation.state !== ITaskNegotiationState.Accepted){
+      return false;
+    }
+    if(taskContext.negotiation.type === ITaskNegotiationType.TaskOffer && taskContext.negotiation.state !== ITaskNegotiationState.Accepted){
+      return false;
+    }
+    return true;
+  }, [taskContext.task, taskContext.negotiation])
   return (
     <div
       className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
@@ -316,7 +329,7 @@ const TaskInner = ({
                   className={styles.separatorLine}/>] : [])]
               })}
             </div>
-            {router.asPath === `/orders/${ITaskStatus.Negotiation}` &&
+            {showChat &&
               <div className={styles.chat} onClick={handleMessages}>
                 <ChatSvg/>
                 <div className={styles.text}>Chat</div>

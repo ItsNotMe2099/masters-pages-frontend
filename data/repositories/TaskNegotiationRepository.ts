@@ -27,6 +27,17 @@ export default class TaskNegotiationRepository {
     return res.data
   }
 
+  static async fetchOfferAndNegotiations(data: { page?: number, limit?: number }): Promise<IPagination<ITaskNegotiation> | null> {
+    const res = await request({
+      url: `/api/task-negotiation/offersAndNegotiations?page=${data.page ?? 1}&limit=${data.limit ?? 10}`,
+      method: 'POST'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
   static async createTaskResponseByMaster(data: { taskId: number, message: string, ratePerHour: number, estimate: number, deadline: string}): Promise<ITaskNegotiation | null> {
     const res = await request({
       url: `/api/task-negotiation/task-response`,

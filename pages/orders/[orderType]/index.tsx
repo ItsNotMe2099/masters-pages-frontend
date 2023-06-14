@@ -74,7 +74,7 @@ const TabOrders = (props: Props) => {
       }
     ] : []),
     //...(role === 'client' ? [{ name: t('Offers from master'), key: 'offers-master', badge: profile.notificationTaskOfferCount }] : []),
-    {name: t('Offers'), key: TabKey.Offers, badge: profile.notificationTaskOfferCount},
+  //  {name: t('Offers'), key: TabKey.Offers, badge: profile.notificationTaskOfferCount},
     {name: t('personalArea.tabOrders.menu.negotiation'), key: TabKey.Negotiation},
     {name: t('personalArea.tabOrders.menu.inProgress'), key: TabKey.InProgress},
     {name: t('personalArea.tabOrders.menu.closed'), key: TabKey.Closed},
@@ -92,13 +92,13 @@ const TabOrders = (props: Props) => {
       let toDelete = false;
       switch (after.type){
         case ITaskNegotiationType.TaskOffer:
-          if([ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(after.state)){
-            toDelete = true
+          if([ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(after.state) && orderType !== TabKey.Negotiation){
+        //    toDelete = true
           }
           break;
         case ITaskNegotiationType.ResponseToTask:
           if([ITaskNegotiationState.Accepted, ITaskNegotiationState.Declined].includes(after.state)){
-            toDelete = true
+          //  toDelete = true
           }
           break;
         case ITaskNegotiationType.MarkAsDone:
@@ -172,11 +172,9 @@ const TabOrders = (props: Props) => {
       case TabKey.Drafts:
         setTasksData(await TaskRepository.fetchTaskListByUser({...data, status: ITaskStatus.Draft}))
         break;
-      case TabKey.Offers:
-        setNegotiationsData(await TaskNegotiationRepository.fetchOffers({...data}))
-        break;
+
       case TabKey.Negotiation:
-        setNegotiationsData(await TaskNegotiationRepository.fetchNegotiations({...data}))
+        setNegotiationsData(await TaskNegotiationRepository.fetchOfferAndNegotiations({...data}))
         break;
       case TabKey.Published:
         setTasksData(await TaskRepository.fetchTaskListByUser({...data, status: ITaskStatus.Published}))

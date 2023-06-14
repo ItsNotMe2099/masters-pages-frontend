@@ -218,7 +218,7 @@ export function TaskWrapper(props: Props) {
   }
 
   const editConditionRequest = async (data: any) => {
-    await TaskNegotiationRepository.editConditions(negotiation.id, data)
+    handleUpdateTask({...task, lastNegotiation: await TaskNegotiationRepository.editConditions(negotiation.id, data)})
   }
 
   const acceptConditionsRequest = async () => {

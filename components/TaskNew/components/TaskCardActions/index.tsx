@@ -126,6 +126,7 @@ const TaskActions = (props: Props) => {
     }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.Accepted){
       switch (type){
         case "master":
+          actions.push(TaskAction.CounterOffer)
           actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":

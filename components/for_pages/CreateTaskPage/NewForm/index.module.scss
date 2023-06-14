@@ -68,7 +68,12 @@
   margin-bottom: 20px;
 }
 
-.wrapper {
+.buttons {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  > * + * {
+    margin-left: 15px;
+  }
 }
