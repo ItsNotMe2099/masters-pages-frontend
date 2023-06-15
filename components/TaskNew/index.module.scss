@@ -112,12 +112,47 @@
 
 .top {
   display: flex;
-  justify-content: space-between;
+  @include list(12px, true);
+  //justify-content: space-between;
   align-items: center;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
   }
+}
+
+.timeAndWallet {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  @include list(26px, true);
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 8px;
+  }
+
+  div {
+    margin: auto;
+    padding: 0;
+  }
+
+  @media screen and (max-width: $xs-max) {
+    display: none;
+  }
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000;
 }
 
 .mobileWrapper {
@@ -131,15 +166,16 @@
   align-items: center;
   flex-direction: row;
 
-  > * + * {
+  >*+* {
     margin-left: 10px;
   }
+
   margin-top: 8px;
 
 }
 
 .taskTitle {
-  flex: 1;
+  //flex: 1;
 
   .title {
     padding-top: 0px;
@@ -164,16 +200,20 @@
 .nameText {
   font-size: 12px;
   font-weight: 700;
-  color: #6D718C;O
+  color: #6D718C;
 
-  &:hover {
+  O &:hover {
     text-decoration: underline;
   }
 }
 
 .time {
   display: flex;
-  padding-left: 15px;
+
+  //padding-left: 15px;
+  svg {
+    margin-right: 8px;
+  }
 
   div {
     margin: auto;
@@ -186,6 +226,13 @@
 
   @media screen and (max-width: $xs-max) {
     display: none;
+  }
+
+  .desc {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000;
   }
 
 }
@@ -337,9 +384,7 @@
 
 }
 
-.altContainer {
-
-}
+.altContainer {}
 
 .separatorLine {
   height: 28px;

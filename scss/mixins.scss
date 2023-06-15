@@ -93,3 +93,16 @@
   top: -8px;
   left: 15px;
 }
+
+// gap workaround
+@mixin list($gap, $row: false) {
+  @if $row == true {
+    & > * + * {
+      margin: 0 0 0 $gap;
+    }
+  } @else {
+    & > * + * {
+      margin: $gap 0 0 0;
+    }
+  }
+}

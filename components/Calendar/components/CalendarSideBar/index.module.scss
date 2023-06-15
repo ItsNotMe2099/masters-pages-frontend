@@ -33,12 +33,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background: #e1e2e3;
+  background: #DC2626;
+  svg{
+    path{
+      fill: white;
+    }
+  }
   &:hover{
-    background: #DC2626;
+    background: #e1e2e3;
     svg{
       path{
-        fill: white;
+        fill: black;
       }
     }
   }

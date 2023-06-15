@@ -85,7 +85,7 @@ export default function ChatTitle({chat, onClick}: Props) {
      <div className={styles.more} onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>
        {isOpen ? t('taskSearch.filter.less') : t('taskSearch.filter.more')}
       </div>
-     <div className={cx(styles.btns, {[styles.none]: !isOpen})}>
+     {/*<div className={cx(styles.btns, {[styles.none]: !isOpen})}>
      { chat.task && !isCanceled && !isFinished && profile.role === 'client' && <Button className={styles.action} onClick={handleCancel}>{t('confirmModal.buttonCancel')}</Button>}
      { chat.task && isInProgress && profile.role !== 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleMarkAsDone}>{t('chat.markAsDone')}</Button>}
      { chat.task && isInProgress && profile.role === 'client' && <Button className={`${styles.action} ${styles.actionGreen}`}  onClick={handleFinish}>{t('chat.finishTask')}</Button>}
@@ -101,7 +101,7 @@ export default function ChatTitle({chat, onClick}: Props) {
      { chat.task && isInProgress && <div className={`${styles.status} ${styles.statusGreen}`}>{t('chat.taskAccepted')} <MarkIcon color={'#27C60D'}/></div>}
      { chat.task && isFinished && <div className={`${styles.status} ${styles.statusGreen}`}>{t('chat.taskFinished')} <MarkIcon color={'#27C60D'}/></div>}
      { chat.task && isCanceled && <div className={`${styles.status}`}>{t('chat.taskCanceled')} <CloseIcon /></div>}
-     </div>
+     </div>*/}
 
    </div>
   )

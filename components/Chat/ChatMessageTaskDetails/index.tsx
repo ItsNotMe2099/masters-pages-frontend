@@ -116,7 +116,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
       </div>
       <div className={styles.bottom}>
         {outDatedText && <div className={styles.outdated}>{outDatedText}</div>}
-        {!outDatedText && <div className={styles.actions}>
+        {/*!outDatedText && <div className={styles.actions}>
           {showReject && <Button className={`${styles.action}`} onClick={handleReject}>{t('reject')}</Button>}
           {showEdit && <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleEdit}>{t('edit')}</Button>}
           {showHire &&
@@ -125,7 +125,7 @@ export default function ChatMessageTaskDetails({ message, task, showHire, showEd
           <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleAccept}>{t('task.accept')}</Button>}
           {showFinish &&
           <Button className={`${styles.action} ${styles.actionRed}`} onClick={handleHire}>{t('chat.finishTask')}</Button>}
-        </div>}
+          </div>*/}
         {getStatus() === 'accepted' &&
         <div className={`${styles.status} ${styles.statusGreen}`}>{t('accepted')} <MarkIcon color={'#27C60D'}/></div>}
         {getStatus() === 'declined' && <div className={styles.status}>{t('declined')} <CloseIcon color={'#000000'}/></div>}

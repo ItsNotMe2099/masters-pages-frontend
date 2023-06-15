@@ -1,17 +1,17 @@
-import {feedbackByMasterOpen, taskShareOpen} from 'components/Modal/actions'
+import { feedbackByMasterOpen, taskShareOpen } from 'components/Modal/actions'
 
 import StarRatings from 'react-star-ratings'
 import BookmarkSvg from 'components/svg/Bookmark'
 import TaskActionButton from 'components/Task/components/ActionButton'
-import {taskNegotiationSetCurrentTask} from 'components/TaskNegotiation/actions'
-import {taskSearchSetCurrentTask} from 'components/TaskSearch/actions'
-import {fetchTaskUserResponseRequest} from 'components/TaskUser/actions'
+import { taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
+import { taskSearchSetCurrentTask } from 'components/TaskSearch/actions'
+import { fetchTaskUserResponseRequest } from 'components/TaskUser/actions'
 import Avatar from 'components/ui/Avatar'
-import {format} from 'date-fns'
+import { format } from 'date-fns'
 import Link from 'next/link'
-import {useRouter} from 'next/router'
-import {default as React, useEffect, useMemo, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import { useRouter } from 'next/router'
+import { default as React, useEffect, useMemo, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   ITask,
   ITaskNegotiation,
@@ -21,17 +21,19 @@ import {
   TaskCreatorType,
   TaskVisibilityType
 } from 'types'
-import {getCategoryTranslation} from 'utils/translations'
+import { getCategoryTranslation } from 'utils/translations'
 import styles from './index.module.scss'
-import {useTranslation} from 'next-i18next'
-import {getCurrencySymbol} from 'data/currency'
-import {saveTaskRequest} from 'components/SavedTasks/actions'
-import {useAppContext} from 'context/state'
+import { useTranslation } from 'next-i18next'
+import { getCurrencySymbol } from 'data/currency'
+import { saveTaskRequest } from 'components/SavedTasks/actions'
+import { useAppContext } from 'context/state'
 import Routes from "pages/routes";
 import ChatSvg from 'components/svg/ChatSvg'
 import classNames from 'classnames'
 import TaskActions from "components/TaskNew/components/TaskCardActions";
-import {TaskWrapper, useTaskContext} from "context/task_state";
+import { TaskWrapper, useTaskContext } from "context/task_state";
+import WalletSvg from 'components/svg/WalletSvg'
+import ClockSvg from 'components/svg/ClockSvg'
 
 enum TaskAction {
   ReadMore = 'readMore',
@@ -64,19 +66,19 @@ interface Props {
 }
 
 const TaskInner = ({
-                     actionsType,
-                     task,
-                     negotiation,
-                     className,
-                     isActive,
-                     onEdit,
-                     onDelete,
-                     onPublish,
-                     onUnPublish,
-                     index,
-                     onStatusChange
-                   }: Props) => {
-  const {t, i18n} = useTranslation('common')
+  actionsType,
+  task,
+  negotiation,
+  className,
+  isActive,
+  onEdit,
+  onDelete,
+  onPublish,
+  onUnPublish,
+  index,
+  onStatusChange
+}: Props) => {
+  const { t, i18n } = useTranslation('common')
   const dispatch = useDispatch()
   const [sortType, setSortType] = useState('newFirst')
   const appContext = useAppContext();
@@ -135,9 +137,9 @@ const TaskInner = ({
   const getSortData = (sortType) => {
     switch (sortType) {
       case 'newFirst':
-        return {sort: 'createdAt', sortOrder: 'DESC'}
+        return { sort: 'createdAt', sortOrder: 'DESC' }
       case 'oldFirst':
-        return {sort: 'createdAt', sortOrder: 'ASC'}
+        return { sort: 'createdAt', sortOrder: 'ASC' }
     }
   }
   const handleMessages = () => {
@@ -199,12 +201,12 @@ const TaskInner = ({
   const renderActionButton = (action) => {
     switch (action) {
       case TaskAction.ReadMore:
-        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore}/>
+        return <TaskActionButton title={t('task.readMore')} icon={'down'} onClick={handleReadMore} />
       case TaskAction.Share:
-        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare}/>
+        return <TaskActionButton title={t('task.share')} icon={'share'} onClick={handleShare} />
       case TaskAction.Save:
         return <TaskActionButton title={t(task.isSavedByCurrentProfile ? 'task.saved' : 'task.save')}
-                                 icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile}/>} onClick={handleFavorite}/>
+          icon={<BookmarkSvg isSaved={task.isSavedByCurrentProfile} />} onClick={handleFavorite} />
     }
   }
 
@@ -241,13 +243,13 @@ const TaskInner = ({
   }, [taskContext.task])
 
   const showChat = useMemo(() => {
-    if(!taskContext.negotiation){
+    if (!taskContext.negotiation) {
       return false;
     }
-    if(taskContext.negotiation.type === ITaskNegotiationType.ResponseToTask && taskContext.negotiation.state !== ITaskNegotiationState.Accepted){
+    if (taskContext.negotiation.type === ITaskNegotiationType.ResponseToTask && taskContext.negotiation.state !== ITaskNegotiationState.Accepted) {
       return false;
     }
-    if(taskContext.negotiation.type === ITaskNegotiationType.TaskOffer && taskContext.negotiation.state !== ITaskNegotiationState.Accepted){
+    if (taskContext.negotiation.type === ITaskNegotiationType.TaskOffer && taskContext.negotiation.state !== ITaskNegotiationState.Accepted) {
       return false;
     }
     return true;
@@ -258,18 +260,18 @@ const TaskInner = ({
 
       <div className={styles.wrapper}>
         <div className={styles.profile}>
-          <Avatar href={profileLink} image={task.profile?.photo}/>
+          <Avatar href={profileLink} image={task.profile?.photo} />
           <div className={styles.mobileWrapper}>
             <div className={styles.name}>
               <Link href={profileLink}>
                 <a
                   className={styles.nameText}>{`${taskProfile?.firstName}${taskProfile?.lastName ? ` ${taskProfile?.lastName}` : ''}`}</a></Link>
-              <img src="/img/SearchTaskPage/icons/verification.svg" alt=''/>
+              <img src="/img/SearchTaskPage/icons/verification.svg" alt='' />
             </div>
             <div className={styles.icons}>
-              <img src="/img/SearchTaskPage/icons/case.svg" alt=''/>
+              <img src="/img/SearchTaskPage/icons/case.svg" alt='' />
               <div>{taskProfile?.tasksCount || 0}</div>
-              <img src="/img/SearchTaskPage/icons/like.svg" alt=''/>
+              <img src="/img/SearchTaskPage/icons/like.svg" alt='' />
               <div>{taskProfile?.feedbacksCount || 0}</div>
             </div>
             <div className={styles.stars}>
@@ -302,17 +304,23 @@ const TaskInner = ({
               </div> : (actionsType !== 'public') && <div className={classNames(styles.status, getStatusClassName())}>
                 {getStatusText()}
               </div>}
-              <div className={styles.time}>
-                <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
-                <div
-                  className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
-              </div>
-
             </div>
             <div>
               {renderCategory(task)}
+              <div className={styles.timeAndWallet}>
+                <div className={styles.time}>
+                  <ClockSvg />
+                  <div
+                    className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
+                </div>
+                <div className={styles.wallet}>
+                  <WalletSvg color='black' />
+                  {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}` :
+                    `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
+                </div>
+              </div>
               <div className={styles.timeMobile}>
-                <img src="/img/SearchTaskPage/icons/clock.svg" alt=''/>
+                <img src="/img/SearchTaskPage/icons/clock.svg" alt='' />
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
@@ -326,12 +334,12 @@ const TaskInner = ({
             <div className={styles.left}>
               {actions.map((action, index) => {
                 return [renderActionButton(action), ...(index !== actions.length - 1 ? [<div
-                  className={styles.separatorLine}/>] : [])]
+                  className={styles.separatorLine} />] : [])]
               })}
             </div>
             {showChat &&
               <div className={styles.chat} onClick={handleMessages}>
-                <ChatSvg/>
+                <ChatSvg />
                 <div className={styles.text}>Chat</div>
               </div>}
           </div>
@@ -339,7 +347,7 @@ const TaskInner = ({
         <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
 
 
-          <div className={styles.priceWrapper}>
+          {/*<div className={styles.priceWrapper}>
             <div className={styles.price}>
               {t('task.price')} :
             </div>
@@ -347,7 +355,7 @@ const TaskInner = ({
               {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}` :
                 `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
             </div>
-          </div>
+            </div>*/}
 
           {task.priceType !== 'fixed' && task.estimate && <div className={styles.priceWrapper}>
             <div className={styles.price}>
@@ -367,8 +375,8 @@ const TaskInner = ({
             </div>
           </div>}
           <div
-            className={classNames(styles.btnContainer, {[styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}`})}>
-            <TaskActions type={actionsType} onEdit={handleEdit}/>
+            className={classNames(styles.btnContainer, { [styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}` })}>
+            <TaskActions type={actionsType} onEdit={handleEdit} />
           </div>
         </div>
 
@@ -380,7 +388,7 @@ const TaskInner = ({
 }
 const Task = (props: Props) => {
   return <TaskWrapper negotiation={props.negotiation} task={props.task}>
-    <TaskInner {...props}/>
+    <TaskInner {...props} />
   </TaskWrapper>
 }
 
