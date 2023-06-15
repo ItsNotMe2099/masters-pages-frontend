@@ -15,6 +15,40 @@
   }
 }
 
+.timeAndWallet {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  @include list(26px, true);
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 8px;
+  }
+
+  div {
+    margin: auto;
+    padding: 0;
+  }
+
+  @media screen and (max-width: $xs-max) {
+    display: none;
+  }
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000;
+}
+
 .wrapper {
   display: flex;
 
@@ -178,9 +212,52 @@
   }
 }
 
+.deadline {
+  display: flex;
+  margin-top: 10px;
+  @include list(8px, true);
+}
+
+.priceDetailsLabel {
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+
+  font-size: 14px;
+
+  line-height: 24px;
+
+  color: #000;
+
+  @media screen and (max-width: $xs-max) {
+    margin: auto 8px auto 0;
+  }
+}
+
+
+.priceDetailsValue {
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  line-height: 24px;
+
+  color: #000;
+
+  span {
+    margin-right: 22px;
+  }
+}
+
 .time {
   display: flex;
-  padding-left: 15px;
+  //padding-left: 15px;
+
+  svg {
+    margin-right: 8px;
+  }
 
   div {
     margin: auto;
@@ -193,6 +270,13 @@
 
   @media screen and (max-width: $xs-max) {
     display: none;
+  }
+
+  .desc {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000;
   }
 
 }
@@ -315,28 +399,6 @@
 .priceDetails {
   display: flex;
   flex-direction: row;
-}
-
-.priceDetailsLabel {
-  font-weight: bold;
-  font-size: 14px;
-  color: #000;
-
-  margin-top: 15px;
-
-  @media screen and (max-width: $xs-max) {
-    margin: auto 8px auto 0;
-  }
-}
-
-
-.priceDetailsValue {
-  font-weight: bold;
-  font-size: 18px;
-
-  span {
-    margin-right: 22px;
-  }
 }
 
 .btnContainer {

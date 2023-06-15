@@ -46,6 +46,8 @@ import Routes from "pages/routes";
 import ChatSvg from 'components/svg/ChatSvg'
 import classNames from 'classnames'
 import NegotiationRepository from 'data/repositories/NegotiationRepository'
+import ClockSvg from 'components/svg/ClockSvg'
+import WalletSvg from 'components/svg/WalletSvg'
 
 interface Props {
   task: ITask,
@@ -446,12 +448,27 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               {(actionsType !== 'public') && <div className={`${styles.status} ${getStatusClassName()}`}>
                 {getStatusText()}
               </div>}
+            </div>
+            <div className={styles.timeAndWallet}>
               <div className={styles.time}>
-                <img src="/img/SearchTaskPage/icons/clock.svg" alt='' />
+                <ClockSvg />
                 <div
                   className={styles.desc}>{task.createdAt ? format(new Date(task.createdAt), 'MM.dd.yyy HH:mm') : ''}</div>
               </div>
+              <div className={styles.wallet}>
+                <WalletSvg color='black' />
+                {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}` :
+                  `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
+              </div>
             </div>
+            {task.deadline && <div className={styles.deadline}>
+              <div className={styles.priceDetailsLabel}>
+                {t('task.deadline')} :
+              </div>
+              <div className={styles.priceDetailsValue}>
+                <span>{format(new Date(task.deadline), 'MM.dd.yyy')}</span>
+              </div>
+            </div>}
             <div>
               {actionsType === 'client' && renderCategory(task)}
               <div className={styles.timeMobile}>
@@ -485,7 +502,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
         <div className={`${styles.payment} ${actionsType !== 'public' && styles.paymentLarge}`}>
 
 
-          <div className={styles.priceWrapper}>
+          {/*<div className={styles.priceWrapper}>
             <div className={styles.price}>
               {t('task.price')} :
             </div>
@@ -493,7 +510,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
               {task.priceType === 'fixed' ? `${getCurrencySymbol(task.currency)} ${task.budget || '0'}` :
                 `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
             </div>
-          </div>
+            </div>*/}
 
           {task.priceType !== 'fixed' && task.estimate && <div className={styles.priceWrapper}>
             <div className={styles.price}>
@@ -501,15 +518,6 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
             </div>
             <div className={styles.priceDetailsValue}>
               {task.estimate} {t('daysSuffix')}
-            </div>
-          </div>}
-
-          {task.deadline && <div className={styles.priceDetailsItem}>
-            <div className={styles.priceDetailsLabel}>
-              {t('task.deadline')} :
-            </div>
-            <div className={styles.priceDetailsValue}>
-              <span>{format(new Date(task.deadline), 'MM.dd.yyy')}</span>
             </div>
           </div>}
           <div className={classNames(styles.btnContainer, { [styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}` })}>

@@ -237,6 +237,12 @@
 
 }
 
+.deadline {
+  display: flex;
+  margin-top: 10px;
+  @include list(8px, true);
+}
+
 .timeMobile {
   display: flex;
   padding: 12px 0;
@@ -355,14 +361,20 @@
 .priceDetails {
   display: flex;
   flex-direction: row;
+
 }
 
 .priceDetailsLabel {
   font-weight: bold;
   font-size: 14px;
   color: #000;
+  font-weight: 700;
 
-  margin-top: 15px;
+  font-size: 14px;
+
+  line-height: 24px;
+
+  color: #000;
 
   @media screen and (max-width: $xs-max) {
     margin: auto 8px auto 0;
@@ -371,8 +383,14 @@
 
 
 .priceDetailsValue {
-  font-weight: bold;
-  font-size: 18px;
+
+  font-weight: 700;
+
+  font-size: 14px;
+
+  line-height: 24px;
+
+  color: #000;
 
   span {
     margin-right: 22px;

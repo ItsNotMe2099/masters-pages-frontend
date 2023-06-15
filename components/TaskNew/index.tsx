@@ -319,6 +319,14 @@ const TaskInner = ({
                     `${getCurrencySymbol(task.currency)} ${task.ratePerHour}/${t('priceRateSuffix')}`}
                 </div>
               </div>
+              {task.deadline && <div className={styles.deadline}>
+                <div className={styles.priceDetailsLabel}>
+                  {t('task.deadline')} :
+                </div>
+                <div className={styles.priceDetailsValue}>
+                  <span>{format(new Date(task.deadline), 'MM.dd.yyy')}</span>
+                </div>
+              </div>}
               <div className={styles.timeMobile}>
                 <img src="/img/SearchTaskPage/icons/clock.svg" alt='' />
                 <div
@@ -366,14 +374,14 @@ const TaskInner = ({
             </div>
           </div>}
 
-          {task.deadline && <div className={styles.priceDetailsItem}>
+          {/*task.deadline && <div className={styles.priceDetailsItem}>
             <div className={styles.priceDetailsLabel}>
               {t('task.deadline')} :
             </div>
             <div className={styles.priceDetailsValue}>
               <span>{format(new Date(task.deadline), 'MM.dd.yyy')}</span>
             </div>
-          </div>}
+          </div>*/}
           <div
             className={classNames(styles.btnContainer, { [styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}` })}>
             <TaskActions type={actionsType} onEdit={handleEdit} />
