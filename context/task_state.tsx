@@ -453,7 +453,7 @@ export function TaskWrapper(props: Props) {
       description: t('chat.cancelTask'),
       onConfirm: async () => {
         dispatch(confirmChangeData({ loading: true }))
-        await  TaskNegotiationRepository.cancelTask(negotiation.id),
+        await  TaskNegotiationRepository.cancelTask(task.id),
         appContext.taskDeleteState$.next(task)
         dispatch(confirmChangeData({ loading: false }))
         dispatch(confirmModalClose())
