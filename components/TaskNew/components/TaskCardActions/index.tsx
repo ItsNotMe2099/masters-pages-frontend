@@ -248,7 +248,8 @@ const TaskActions = (props: Props) => {
           break;
         case "client":
           actions.push(TaskAction.HireMaster)
-          actions.push(TaskAction.DeclineResponse)
+          actions.push(TaskAction.CounterOffer)
+          actions.push(TaskAction.DeleteNegotiation)
           break;
       }
     }else if( negotiation?.type === ITaskNegotiationType.ResponseToTask && negotiation?.state === ITaskNegotiationState.SentToClient){
@@ -263,6 +264,7 @@ const TaskActions = (props: Props) => {
     }else if(negotiation?.type === ITaskNegotiationType.TaskNegotiation && negotiation?.state === ITaskNegotiationState.SentToClient) {
       switch (type) {
         case "master":
+          actions.push(TaskAction.EditConditions)
           actions.push(TaskAction.DeleteNegotiation)
           break;
         case "client":
