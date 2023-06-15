@@ -312,27 +312,27 @@ const TaskActions = (props: Props) => {
 
 
       case TaskAction.AcceptOffer:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.acceptTaskOffer}>Accept offer</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.acceptTaskOffer}>Accept</Button>
       case TaskAction.DeclineOffer:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskOffer}>Decline offer</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskOffer}>Decline</Button>
       case TaskAction.AcceptResponse:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskResponse}>Accept offer</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskResponse}>Accept</Button>
       case TaskAction.DeclineResponse:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskResponse}>Decline offer</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskResponse}>Decline</Button>
       case TaskAction.AcceptConditions:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.acceptConditions}>Accept conditions</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.acceptConditions}>Accept</Button>
       case TaskAction.DeclineConditions:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineConditions}>Decline conditions</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineConditions}>Decline</Button>
       case TaskAction.CounterOffer:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.editConditionsOpen}>Counter offer</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.editConditionsOpen}>Edit offer</Button>
       case TaskAction.EditConditions:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.editConditionsOpen}>Edit conditions</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.editConditionsOpen}>Edit offer</Button>
       case TaskAction.MarkAsCompleted:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.markAsDoneOpen}>Mark as done</Button>
       case TaskAction.CompletedAccepted:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskCompletedOpen}>Accept Completed</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0'onClick={taskContext.acceptTaskCompletedOpen}>Accept</Button>
       case TaskAction.CompletedDeclined:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskCompleted}>Decline Completed</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskCompleted}>Decline</Button>
       case TaskAction.Cancel:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.cancelTask}>Cancel Task</Button>
       case TaskAction.DeleteNegotiation:
