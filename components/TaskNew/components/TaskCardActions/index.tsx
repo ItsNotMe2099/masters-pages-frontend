@@ -116,7 +116,6 @@ const TaskActions = (props: Props) => {
         case "client":
           actions.push(TaskAction.HireMaster)
           actions.push(TaskAction.CounterOffer)
-          actions.push(TaskAction.DeclineOffer)
           actions.push(TaskAction.DeleteNegotiation)
           break;
       }
@@ -268,7 +267,7 @@ const TaskActions = (props: Props) => {
           break;
         case "client":
           actions.push(TaskAction.EditConditions)
-          actions.push(TaskAction.AcceptConditions)
+          actions.push(TaskAction.HireMaster)
           actions.push(TaskAction.DeclineConditions)
 
           break;
@@ -334,7 +333,7 @@ const TaskActions = (props: Props) => {
       case TaskAction.CompletedDeclined:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.declineTaskCompleted}>Decline</Button>
       case TaskAction.Cancel:
-        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.cancelTask}>Cancel Task</Button>
+        return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.cancelTask}>Cancel offer</Button>
       case TaskAction.DeleteNegotiation:
         return <Button className={styles.btn} bold smallFont transparent size='16px 0' onClick={taskContext.removeAllNegotiations}>Delete</Button>
       case TaskAction.Edit:
