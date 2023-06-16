@@ -123,7 +123,6 @@ const TaskActions = (props: Props) => {
       switch (type){
         case "master":
           actions.push(TaskAction.AcceptConditions)
-          actions.push(TaskAction.DeclineConditions)
           actions.push(TaskAction.CounterOffer)
           actions.push(TaskAction.DeleteNegotiation)
 
