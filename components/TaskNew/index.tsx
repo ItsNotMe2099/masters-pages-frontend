@@ -1,17 +1,17 @@
-import { feedbackByMasterOpen, taskShareOpen } from 'components/Modal/actions'
+import {feedbackByMasterOpen, taskShareOpen} from 'components/Modal/actions'
 
 import StarRatings from 'react-star-ratings'
 import BookmarkSvg from 'components/svg/Bookmark'
 import TaskActionButton from 'components/Task/components/ActionButton'
-import { taskNegotiationSetCurrentTask } from 'components/TaskNegotiation/actions'
-import { taskSearchSetCurrentTask } from 'components/TaskSearch/actions'
-import { fetchTaskUserResponseRequest } from 'components/TaskUser/actions'
+import {taskNegotiationSetCurrentTask} from 'components/TaskNegotiation/actions'
+import {taskSearchSetCurrentTask} from 'components/TaskSearch/actions'
+import {fetchTaskUserResponseRequest} from 'components/TaskUser/actions'
 import Avatar from 'components/ui/Avatar'
-import { format } from 'date-fns'
+import {format} from 'date-fns'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { default as React, useEffect, useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import {useRouter} from 'next/router'
+import {default as React, useEffect, useMemo, useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {
   ITask,
   ITaskNegotiation,
@@ -21,19 +21,20 @@ import {
   TaskCreatorType,
   TaskVisibilityType
 } from 'types'
-import { getCategoryTranslation } from 'utils/translations'
+import {getCategoryTranslation} from 'utils/translations'
 import styles from './index.module.scss'
-import { useTranslation } from 'next-i18next'
-import { getCurrencySymbol } from 'data/currency'
-import { saveTaskRequest } from 'components/SavedTasks/actions'
-import { useAppContext } from 'context/state'
+import {useTranslation} from 'next-i18next'
+import {getCurrencySymbol} from 'data/currency'
+import {saveTaskRequest} from 'components/SavedTasks/actions'
+import {useAppContext} from 'context/state'
 import Routes from "pages/routes";
 import ChatSvg from 'components/svg/ChatSvg'
 import classNames from 'classnames'
 import TaskActions from "components/TaskNew/components/TaskCardActions";
-import { TaskWrapper, useTaskContext } from "context/task_state";
+import {TaskWrapper, useTaskContext} from "context/task_state";
 import WalletSvg from 'components/svg/WalletSvg'
 import ClockSvg from 'components/svg/ClockSvg'
+import {ProfileRole} from "data/intefaces/IProfile";
 
 enum TaskAction {
   ReadMore = 'readMore',
@@ -254,6 +255,30 @@ const TaskInner = ({
     }
     return true;
   }, [taskContext.task, taskContext.negotiation])
+  const status = useMemo(() => {
+    switch (taskContext.negotiation?.type){
+      case ITaskNegotiationType.TaskOffer:
+      case ITaskNegotiationType.ResponseToTask:
+      case ITaskNegotiationType.TaskNegotiation:
+      case ITaskNegotiationType.TaskCompleted:
+      case ITaskNegotiationType.MarkAsDone:
+      case ITaskNegotiationType.TaskCanceled:
+        switch (taskContext.negotiation.state){
+          case ITaskNegotiationState.SentToMaster:
+            if(appContext.profile.role === ProfileRole.Master){
+              return 'Pending you'
+            }else{
+              return 'Pending master'
+            }
+          case ITaskNegotiationState.SentToClient:
+            if(appContext.profile.role === ProfileRole.Master){
+              return 'Pending client'
+            }else{
+              return 'Pending you'
+            }
+        }
+    }
+  }, [taskContext.negotiation])
   return (
     <div
       className={`${styles.root} ${className} ${task.responses?.data.find(item => !item.isRead) && styles.isActive}`}>
@@ -384,6 +409,7 @@ const TaskInner = ({
           </div>*/}
           <div
             className={classNames(styles.btnContainer, { [styles.altContainer]: router.asPath === `/orders/${ITaskStatus.Negotiation}` })}>
+            {status && <div className={styles.statusAction}>{status}</div>}
             <TaskActions type={actionsType} onEdit={handleEdit} />
           </div>
         </div>
