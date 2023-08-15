@@ -11,6 +11,7 @@ import styles from './index.module.scss'
 import cookie from 'js-cookie'
 import Instagram from 'components/svg/Instagram'
 import Facebook from 'components/svg/Facebook'
+import { CONTACTS } from 'types'
 const Home = (props) => {
 
   const [isOpen, setIsOpen] = useState(true)
@@ -76,8 +77,8 @@ const Home = (props) => {
 
           <h1>Our social networks</h1>
           <div className={styles.socials}>
-            <Instagram color='black' />
-            <Facebook color='black' />
+            <a className={styles.socialItem} href={CONTACTS.instagram}><Instagram color='black' /></a>
+            <a className={styles.socialItem} href={CONTACTS.facebook}><Facebook color='black' /></a>
           </div>
         </div>
         <MainSectionFooter />
