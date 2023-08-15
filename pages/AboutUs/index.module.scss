@@ -1,0 +1,17 @@
+@import "scss/index";
+
+.root {
+  background: white;
+  color: #000;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 64px auto;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  @include list(8px, true);
+}

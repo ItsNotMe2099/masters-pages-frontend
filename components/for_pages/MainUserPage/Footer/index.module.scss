@@ -1,22 +1,32 @@
 @import "../../../../scss/index";
-.root{
+
+.root {
   color: #F2F2F2;
   background: #EB5757;
   padding: 43px 0px;
+
   @media (max-width: 680px) {
     padding: 47px 0;
   }
+
+  a {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    color: #F2F2F2;
+  }
 }
 
-.right{
+.right {
   display: flex;
   flex: 1;
+
   @media (max-width: 680px) {
     flex-direction: column-reverse;
   }
 }
 
-.container{
+.container {
   position: relative;
   width: 90%;
   height: 65px;
@@ -24,71 +34,80 @@
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
+
   @media (max-width: 680px) {
     flex-direction: column;
     height: 100%;
   }
 }
 
-.items{
+.items {
   display: flex;
 }
 
-.mail{
-  a{
-  flex: 1;
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  color: #F2F2F2;
+.mail {
+  a {
+    flex: 1;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    color: #F2F2F2;
   }
+
   margin-top: 10px;
 }
 
-.copyright{
+.copyright {
   flex: 1;
   font-size: 18px;
   font-weight: 500;
   text-align: center;
   color: #F2F2F2;
+
   @media (max-width: 680px) {
     margin-top: 56px;
   }
 }
-.logo{
+
+.logo {
   display: flex;
   align-items: center;
-  img{
+
+  img {
     margin-right: 16px;
   }
 
-  .logoTitle{
+  .logoTitle {
     font-weight: 700;
     font-size: 20px;
   }
 }
-.socials{
+
+.socials {
   display: flex;
   align-items: center;
   flex-direction: column;
-  .socialItem{
-    &:first-of-type{
+
+  .socialItem {
+    &:first-of-type {
       margin-left: 0px;
     }
+
     margin-left: 45px;
   }
+
   @media (max-width: 680px) {
     justify-content: center;
     margin-top: 68px;
   }
 }
 
-.contacts{
+.contacts {
   margin-right: 50px;
 }
 
-.email{
-  a{
+.email {
+  a {
     color: #fff;
   }
 }
