@@ -59,7 +59,7 @@ const MainSectionFirst = (props: Props) => {
             <MainSectionButton size="normal" color="yellow" onClick={() => dispatch(signUpOpen())}>{t('newMainVolunteer.freeSignUp')}</MainSectionButton>*/}
             <div className={styles.hidden}>
               <FullScreen handle={handle}>
-                <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title=''
+                <Video className={styles.video} url='https://youtu.be/IFjXzakAMAw' title=''
                        playBtn={<MainSectionButton onClick={handle.enter} size="normal" color="yellow">WATCH
                          VIDEO</MainSectionButton>}/>
               </FullScreen>
@@ -69,7 +69,7 @@ const MainSectionFirst = (props: Props) => {
         <div className={styles.image}>
           <div className={classNames(styles.hidden, {[styles.imageVideo]: true})}>
             <FullScreen handle={handle}>
-              <Video className={styles.video} url='https://www.youtube.com/watch?v=O3i3XX6Fj-A' title=''
+              <Video className={styles.video} url='https://youtu.be/IFjXzakAMAw' title=''
                      playBtn={<Play onClick={handle.enter}/>}/>
             </FullScreen>
           </div>

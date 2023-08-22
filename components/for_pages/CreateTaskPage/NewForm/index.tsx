@@ -48,9 +48,9 @@ export default function CreateTaskForm({ isMaster, onSubmit }: Props) {
     profileId: null,
     title: null,
     skills: {
-      mainCategoryId: null,
-      categoryId: null,
-      subCategoryId: null
+      mainCategoryId: 7855,
+      categoryId: 7855,
+      subCategoryId: 7855
     },
     description: '',
     photos: [],
