@@ -19,6 +19,7 @@ interface Props<T> extends IField<T> {
 export default function SelectField<T>(props: Props<T>) {
   const [field, meta, helpers] = useField(props)
   const showError = meta.touched && !!meta.error
+  
   return (
     <div className={styles.root}>
       <Select<T>

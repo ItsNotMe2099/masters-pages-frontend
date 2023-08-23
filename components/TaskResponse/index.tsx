@@ -208,8 +208,7 @@ const TaskResponse = ({ actionsType, res, className }: Props) => {
   const Buttons = (role: ProfileRole) => {
     if (role === ProfileRole.Master) {
       if (res.type === ITaskNegotiationType.TaskOffer && res.isSentToMaster && res.task.status !== ITaskStatus.InProgress ||
-        res.type === ITaskNegotiationType.ResponseToTask && res.task.status !== ITaskStatus.InProgress 
-        ) {
+        res.type === ITaskNegotiationType.ResponseToTask && res.task.status !== ITaskStatus.InProgress) {
         return <>
           <Button bold smallFont transparent size='16px 0' onClick={handleAccept}>ACCEPT</Button>
           <Button bold smallFont transparent size='16px 0' onClick={handleEditConditions}>COUNTER OFFER</Button>

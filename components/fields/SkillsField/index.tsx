@@ -23,6 +23,7 @@ export default function SkillsField(props: Props<string>) {
   useEffect(() => {
     fetchData()
   }, [])
+  
 
   console.log('dsfewff', field.value)
 

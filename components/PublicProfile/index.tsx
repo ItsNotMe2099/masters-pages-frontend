@@ -179,6 +179,15 @@ const PublicProfile = (props) => {
     }
   }
 
+  console.log('RRORIJRIJIRJ', profile.id)
+
+  useEffect(() => {
+    const list = formatSkillList(profile.skills)
+    if(router.asPath === `/id${profile.id}` && !currentProfile){
+      router.replace(`/sk${list[0].id}`, undefined, {shallow: false})
+    }
+  }, [])
+
   const fetchProjects = (page: number, limit: number, keywords?: string, filter?: IProjectSearchRequest) => {
     ProjectRepository.search(page, limit, keywords, filter).then(data => {
       if(data){

@@ -61,6 +61,7 @@ console.log("isMaster111", profile.role)
           {isMaster && profile.role !== 'corporate' && <CardCategories onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit} onCategoryChange={onCategoryChange} subCategory={subCategory}/>}
           {profile.role !== 'corporate' && <CardLanguages onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit}/>}
           {isMaster && <CardBio onProfileUpdate={onProfileUpdate} profile={profile} isEdit={isEdit}/>}
+          
           {profile.role === 'corporate' && organization && <CardOrganizationLinks onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
           {profile.role === 'corporate' && organization && <CardOrganizationAbout onOrganizationUpdate={onOrganizationUpdate} organization={organization} isEdit={isEdit}/>}
           {isMaster && <CardRecommendationsShort profile={profile}/>}

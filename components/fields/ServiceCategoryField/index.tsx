@@ -28,7 +28,10 @@ export default function ServiceCategoryField(props: Props<number | IServiceCateg
   const handleMenuOpen = async () => {
     await fetchData()
   }
+
+  console.log('SERVICECATFIELDVAL', field.value)
   const handleLoadOptions =  async (initialValue) => {
+    console.log('INITFFFFFF', initialValue)
     const res = await fetchData(initialValue)
     console.log("ResData", res);
      return res;

@@ -49,8 +49,8 @@ export default function CreateTaskForm({ isMaster, onSubmit }: Props) {
     title: null,
     skills: {
       mainCategoryId: 7855,
-      categoryId: 7855,
-      subCategoryId: 7855
+      categoryId: 7856,
+      subCategoryId: 7857
     },
     description: '',
     photos: [],
@@ -146,6 +146,7 @@ export default function CreateTaskForm({ isMaster, onSubmit }: Props) {
               label='Master’s Profile (required field)*'
               validate={Validator.required}
             /> : null}
+
             {!isMaster ?
               <>
                 <ServiceCategoryField name={'mainCategoryId'} validate={Validator.required} label={'Main category (required field)*'} />

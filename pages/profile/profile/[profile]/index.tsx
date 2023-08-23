@@ -10,6 +10,7 @@ interface Props {
 
 const ProfilePage = (props) => {
  return <PublicProfile {...props}/>
+ 
 }
 export const getServerSideProps = getProfilePageProps('profile')
 export default ProfilePage
