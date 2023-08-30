@@ -65,7 +65,8 @@ let ProjectEventTimePlaceChargeForm = (props: Props) => {
 
   const getButtonKeys = () => {
     let keys = []
-    console.log("GetButtonsKeys", isTempEdit, isCurrentEventEditMode, event?.status)
+
+    console.log("GetButtonsKeys", isAuthor, '2323', isTempEdit, isCurrentEventEditMode, event?.status)
     if(isTempEdit || isCurrentEventEditMode){
       keys = [ButtonType.Cancel, ButtonType.Draft, ButtonType.Send]
     }else if(isAuthor){

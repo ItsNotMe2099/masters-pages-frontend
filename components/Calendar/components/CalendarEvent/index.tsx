@@ -89,7 +89,7 @@ export default function CalendarEvent(props: Props) {
 
          </div>
           <div className={styles.authorName}>{otherSide.firstName} {otherSide.lastName}</div></div>
-        <div className={styles.task}>{event.task?.title}</div>
+        {event.task && <div className={styles.task}>{event.task?.title}</div>}
         <div className={styles.title}>{event.title}</div>
       </div>
       {visible && (

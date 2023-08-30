@@ -16,6 +16,7 @@ import ProjectNewEventForm
 import {useEventCalendarContext} from "context/event_calendar";
 import {EventWrapper, useEventContext} from "context/event_state";
 import {useAppContext} from "context/state";
+import {useProjectContext} from "context/project_state";
 interface Props {
   isOpen: boolean,
   range?: any,
@@ -26,6 +27,7 @@ const ProjectNewEventModalInner = ({isOpen, onClose, range}: Props) => {
   const appContext = useAppContext()
   const calendarContext = useEventCalendarContext()
   const eventContext = useEventContext();
+  const projectContext = useProjectContext()
 
   const [activeTab, setActiveTab] = useState('tasks')
   const { t } = useTranslation('common')
@@ -35,9 +37,10 @@ const ProjectNewEventModalInner = ({isOpen, onClose, range}: Props) => {
     setActiveTab(item.key)
   }
 
+
   const handleSubmitNewEvent = (data) => {
     eventContext.create({...data, ...data.timeRange, timezone: format(new Date(), 'XXX'), ...(
-        appContext.profile.role !== 'corporate' ? {participantId: appContext.profile.id} : {}
+        appContext.profile.role !== 'corporate' ? {participantId: projectContext.project.corporateProfileId} : {}
       )})
     calendarContext.hideModal()
 

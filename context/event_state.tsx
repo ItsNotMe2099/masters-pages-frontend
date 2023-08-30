@@ -107,6 +107,7 @@ export function EventWrapper(props: Props) {
     try {
       const event = await EventRepository.create({...data, projectId: props.projectId})
       const formatted = formatEvent(event)
+      console.log("FormatEvent111", formatted)
       setEvent(formatted)
       appContext.eventCreateState$.next(formatted)
     } catch (err) {
