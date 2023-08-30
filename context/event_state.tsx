@@ -16,7 +16,6 @@ interface IState {
   projectId: number | null
   currentExpenses: IEventExpense[]
   currentActualExpenses: IEventExpense[]
-  isEditMode: boolean
   setCurrentExpenses: (data: IEventExpense[]) => void
   setCurrentActualExpenses: (data: IEventExpense[]) => void
   update: (event: string, data: IEvent | DeepPartial<IEvent>) => void,
@@ -41,7 +40,6 @@ const defaultValue: IState = {
   editLoading: false,
   currentExpenses: [],
   currentActualExpenses: [],
-  isEditMode: false,
   setCurrentExpenses: (data: IEventExpense[]) => null,
   setCurrentActualExpenses: (data: IEventExpense[]) => null,
   reject: () => null,
@@ -227,7 +225,6 @@ export function EventWrapper(props: Props) {
     delete: handleDelete,
     currentExpenses,
     currentActualExpenses,
-    isEditMode: ![EventStatus.Draft, EventStatus.Confirmed].includes(event?.status),
     setCurrentExpenses: (data: IEventExpense[]) =>{
       setCurrentExpenses(data)
     },

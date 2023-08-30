@@ -47,9 +47,9 @@ export default function CalendarEventToolTip(props: Props) {
         <div className={styles.label}>{t('master')}</div>
         <div className={styles.value}>
           <div className={styles.avatar}>
-          {event.participant.role !== 'client' ? (event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg/>) : (event.author.photo ? <Avatar image={event.author.photo} size={'exExSmall'} /> : <AvatarSvg/>) }
+          {!['client', 'corporate'].includes(event.participant.role) ? (event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg/>) : (event.author.photo ? <Avatar image={event.author.photo} size={'exExSmall'} /> : <AvatarSvg/>) }
           </div>
-          {event.participant.role !== 'client' ? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
+          {!['client', 'corporate'].includes(event.participant.role)? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
       </div>
       <div className={styles.row}>
         <div className={styles.label}>{t('status')}</div>
@@ -58,11 +58,11 @@ export default function CalendarEventToolTip(props: Props) {
       <div className={styles.separator}/>
       <div className={styles.row}>
         <div className={styles.label}>{t('client')}</div>
-        <div className={styles.value}>{event.participant.role === 'client' ? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
+        <div className={styles.value}>{['client', 'corporate'].includes(event.participant.role) ? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
       </div>
       <div className={styles.row}>
         <div className={styles.label}>{t('status')}</div>
-        <div className={`${styles.value} ${getValueClass(getEventColor(event, {isOtherSide: currentProfile.role !== 'client'}))}`}><div className={`${styles.circle}`}/>{getEventStatusName(event, {isOtherSide: currentProfile.role !== 'client'})}</div>
+        <div className={`${styles.value} ${getValueClass(getEventColor(event, {isOtherSide: !['client', 'corporate'].includes(event.participant.role)}))}`}><div className={`${styles.circle}`}/>{getEventStatusName(event, {isOtherSide: currentProfile.role !== 'client'})}</div>
       </div>
       <div className={styles.separator}/>
       <div className={styles.row}>

@@ -21,6 +21,7 @@ import {useEventContext} from "context/event_state";
 import {useEffect, useState} from "react";
 import ApplicationRepository from "data/repositories/ApplicationRepository";
 import {ApplicationStatus, IApplication} from "data/intefaces/IApplication";
+import {useAppContext} from "context/state";
 interface Props {
   onCancel: () => void
   initialValues?: any,
@@ -28,14 +29,16 @@ interface Props {
   onSubmit: (data) => void
 }
 let ProjectNewEventForm = (props: Props) => {
+  const appContext = useAppContext()
   const eventContext = useEventContext()
   const formLoading = eventContext.editLoading
   const { t } = useTranslation('common')
   const [applications, setApplications] = useState<IApplication[]>([])
 
   useEffect(() => {
-    ApplicationRepository.fetchApplicationsByCorporateForProject(eventContext.projectId).then(data => setApplications(data.data.filter(i => i.status === ApplicationStatus.Execution)))
-
+    if(appContext.profile?.role === 'corporate') {
+      ApplicationRepository.fetchApplicationsByCorporateForProject(eventContext.projectId).then(data => setApplications(data.data.filter(i => i.status === ApplicationStatus.Execution)))
+    }
   }, [])
 
 
@@ -58,14 +61,14 @@ let ProjectNewEventForm = (props: Props) => {
           label={t('event.eventTitle')}
           validate={required}
         />
-        <Field
+        {appContext.profile?.role === 'corporate' && <Field
           name="participantId"
           component={SelectInput}
           options={applications.map(item => ({label: `${item.profile.firstName} ${item.profile.lastName}`, value: item.profile.id}))}
           label={'Volunteer'}
           size={'small'}
           validate={required}
-        />
+        />}
          <Field
           name="priceType"
           component={RadioList}

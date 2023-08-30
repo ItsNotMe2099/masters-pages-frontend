@@ -11,16 +11,15 @@ import {useAppContext} from 'context/state'
 
 interface Props {
   event: IEvent,
-  type: 'client' | 'master'
+  type: 'client' | 'master' | 'volunteer'
 
 }
 
 const StateButton = ({event, type}: Props) => {
   const appContext = useAppContext();
   const currentProfile = appContext.profile
-  const isOtherSide = (currentProfile.role !== type)
   const showAuthor = type === currentProfile.role && event.isAuthor || type !== currentProfile.role && !event.isAuthor
-  const isOverdue = event.isOverdue && currentProfile.role !== 'client' && type === 'master'
+  const isOverdue = event.isOverdue && ['client', 'corporate'].includes(currentProfile.role) && (['master', 'volunteer'].includes(type))
   const router = useRouter()
   const {t} = useTranslation('common')
   const handleClick = (e) => {
@@ -57,18 +56,15 @@ const StateButton = ({event, type}: Props) => {
 
 
   }
+  console.log("GetEvent", event)
   const getTypeName = () => {
     switch (type) {
       case 'client':
         return t('client')
       case 'master':
-        if (event.participant?.role === 'volunteer') {
-          return t('volunteer')
-
-        } else {
           return t('master')
-
-        }
+    case 'volunteer':
+          return t('volunteer')
     }
   }
   const getStatusName = () => {

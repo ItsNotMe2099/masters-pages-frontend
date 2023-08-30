@@ -94,6 +94,9 @@ const TabProjectCalendarInner = (props) => {
       return
     }
     setCurrentEditEventRange({start, end})
+    if(![EventStatus.Draft, EventStatus.Confirmed].includes(event.status)) {
+      calendarContext.setIsEditMode(true)
+    }
     calendarContext.setCurrentEvent(event)
     calendarContext.showModal('eventEditModal')
   }
@@ -102,7 +105,9 @@ const TabProjectCalendarInner = (props) => {
     if([EventStatus.Approved, EventStatus.Deleted].includes(event.status)) {
       return
     }
-
+    if(![EventStatus.Draft, EventStatus.Confirmed].includes(event.status)) {
+      calendarContext.setIsEditMode(true)
+    }
     setCurrentEditEventRange({start, end})
   }
 

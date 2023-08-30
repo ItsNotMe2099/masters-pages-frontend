@@ -38,20 +38,20 @@ interface Props {
   initialValues?: any,
   handleSubmit?: (e) => void
   onSubmit: (data) => void
-  event?: IEvent,
   onAddExpense: (type) => void
   onEditExpense: (type, key, data) => void
   onSetSubmitEvent: (event: string) => void
 }
 
 let ProjectEventTimePlaceChargeForm = (props: Props) => {
-  const {event, handleSubmit, onAddExpense, onEditExpense, onCancel} = props
+  const { handleSubmit, onAddExpense, onEditExpense, onCancel} = props
   const eventContext = useEventContext()
+  const event = eventContext.event
   const calendarContext = useEventCalendarContext()
   const formLoading = eventContext.editLoading
   const appContext = useAppContext();
   const profile = appContext.profile
-  const isCurrentEventEditMode = eventContext.isEditMode
+  const isCurrentEventEditMode = calendarContext.isEditMode
   const [isTempEdit, setIsTempEdit] = useState(false)
   const isAuthor = isTempEdit || profile.id === event.authorId
   const dispatch = useDispatch()
@@ -65,6 +65,7 @@ let ProjectEventTimePlaceChargeForm = (props: Props) => {
 
   const getButtonKeys = () => {
     let keys = []
+    console.log("GetButtonsKeys", isTempEdit, isCurrentEventEditMode, event?.status)
     if(isTempEdit || isCurrentEventEditMode){
       keys = [ButtonType.Cancel, ButtonType.Draft, ButtonType.Send]
     }else if(isAuthor){
@@ -277,12 +278,13 @@ let ProjectEventTimePlaceChargeForm = (props: Props) => {
       }
     }))
   }
+  console.log("EventStatus!!!", event.status)
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
       <div className={styles.states}>
         <StateButton event={event} type={'client'}/>
         <div className={styles.spacer}/>
-        <StateButton event={event} type={'master'}/>
+        <StateButton event={event} type={'volunteer'}/>
 
       </div>
       {formLoading ? <Loader/> : <>

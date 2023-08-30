@@ -46,6 +46,7 @@ interface IState {
   rangeStartDate: Date
   rangeEndDate: Date
   currentDate: Date
+  isEditMode: boolean
   setRange: (start: Date, end: Date) => void,
   setCurrentView: (view: View) => void
   setCurrentDate: (date: Date) => void
@@ -54,6 +55,7 @@ interface IState {
   setCurrentEvent: (event: IEvent | null) => void
   setCurrentEventNext: () => void
   setCurrentEventPrev: () => void
+  setIsEditMode: (value: boolean) => void,
 }
 
 const defaultValue: IState = {
@@ -67,6 +69,7 @@ const defaultValue: IState = {
   rangeEndDate: endOfWeek(new Date(), {weekStartsOn: 1}),
   currentDate: new Date(),
   modalKey: null,
+  isEditMode: false,
   showModal: (value: string) => null,
     hideModal: () => null,
   setRange: (start: Date, end: Date) => {
@@ -80,6 +83,7 @@ const defaultValue: IState = {
   setCurrentEvent: (event: IEvent | null) => null,
   setCurrentEventNext: ()  => null,
   setCurrentEventPrev: () => null,
+  setIsEditMode: (value: boolean) => null,
 }
 const EventCalendarContext = createContext<IState>(defaultValue)
 
@@ -102,6 +106,7 @@ export function EventCalendarWrapper(props: Props) {
   const [calendarLoading, setCalendarLoading] = useState<boolean>(false)
   const [datesDisabled, setDatesDisabled] = useState<string[]>([])
   const [modalKey, setModalKey] = useState<string | null>(null)
+  const [isEditMode, setIsEditMode] = useState(false)
   useEffect(() => {
     const subscriptionUpdate = appContext.eventUpdateState$.subscribe((event) => {
       setEvents(i => i.map(i => i.id == event.id ? ({...i, ...event}) : i))
@@ -203,6 +208,8 @@ export function EventCalendarWrapper(props: Props) {
     mapCalendarColorStatus,
     currentEvent,
     modalKey,
+    isEditMode,
+    setIsEditMode,
     setCurrentEvent,
     setCurrentEventNext,
     setCurrentEventPrev,

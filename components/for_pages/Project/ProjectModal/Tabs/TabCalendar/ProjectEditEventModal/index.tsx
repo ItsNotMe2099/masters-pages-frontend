@@ -61,6 +61,9 @@ const ProjectEditEventModalInner = (props: Props) => {
     submitEventRef.current = event;
 
   }
+  useEffect(() => {
+    return () => calendarContext.setIsEditMode(false)
+  }, [])
 
 
   const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null
@@ -165,7 +168,7 @@ const ProjectEditEventModalInner = (props: Props) => {
         </div>}
 
         {(event && !currentLoading) && <div className={styles.body}>
-          {activeTab === 'time' && <ProjectEventTimePlaceChargeForm event={event}
+          {activeTab === 'time' && <ProjectEventTimePlaceChargeForm
                                                         onAddExpense={handleAddExpense}
                                                         onEditExpense={handleEditExpense}
                                                         onCancel={handleCancel}
