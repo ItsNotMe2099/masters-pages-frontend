@@ -64,6 +64,8 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
         {name: 'Description', key: 'description', icon: 'description'},
         {name: 'Application', key: 'application', icon: 'application'},
         {name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount},
+        {name: 'Events', key: 'events', icon: 'events'},
+
       ]
 
 
