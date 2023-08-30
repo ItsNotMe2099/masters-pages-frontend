@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.modeClien {
+.modeClient {
   &.active{
     background: #27AE60;
     border: 1px solid #27AE60;
@@ -33,7 +33,7 @@
   }
 }
 
-.modeCorproate{
+.modeCorporate{
   background: #F2B705;
   &.active{
     background: #F2B705;
@@ -55,7 +55,7 @@
   flex: 1;
   border-radius: 10px 10px 0px 0px;
   &:hover{
-    
+
   }
   &.active{
   }

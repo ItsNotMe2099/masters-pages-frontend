@@ -1251,6 +1251,7 @@
     "type": "Type",
     "clientAddress": "Client Address",
     "masterAddress": "Master Address",
+    "volunteerAddress": "Volunteer Address",
     "otherAddress": "Other Address",
     "address1": "Address 1",
     "address2": "Address 2",

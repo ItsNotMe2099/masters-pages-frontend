@@ -11,7 +11,7 @@ import UserRepository from 'data/repositories/UserRepostory'
 import {useRouter} from 'next/router'
 import {IProject} from "data/intefaces/IProject";
 import {IApplication} from "data/intefaces/IApplication";
-import {IFeedbacksToProfile, ITask, ITaskNegotiation} from "types";
+import {IEvent, IFeedbacksToProfile, ITask, ITaskNegotiation} from "types";
 
 interface IState {
   isMobile: boolean
@@ -41,6 +41,9 @@ interface IState {
   feedbackUpdateState$: Subject<IFeedbacksToProfile>
   feedbackDeleteState$: Subject<IFeedbacksToProfile>
   feedbackCreateState$: Subject<IFeedbacksToProfile>
+  eventUpdateState$: Subject<IEvent>
+  eventDeleteState$: Subject<IEvent>
+  eventCreateState$: Subject<IEvent>
   negotiationUpdateState$: Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>
   negotiationDeleteState$: Subject<ITaskNegotiation>
   taskUpdateState$: Subject<{before: ITask, after: ITask }>
@@ -57,6 +60,9 @@ const applicationCreateState$ = new Subject<IApplication>()
 const feedbackUpdateState$ = new Subject<IFeedbacksToProfile>()
 const feedbackDeleteState$ = new Subject<IFeedbacksToProfile>()
 const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
+const eventUpdateState$ = new Subject<IEvent>()
+const eventDeleteState$ = new Subject<IEvent>()
+const eventCreateState$ = new Subject<IEvent>()
 const negotiationUpdateState$ = new Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>()
 const negotiationDeleteState$ = new Subject<ITaskNegotiation>()
 const taskUpdateState$ = new Subject<{before: ITask, after: ITask}>()
@@ -83,6 +89,9 @@ const defaultValue: IState = {
   feedbackUpdateState$: feedbackUpdateState$,
   feedbackDeleteState$: feedbackDeleteState$,
   feedbackCreateState$: feedbackCreateState$,
+  eventUpdateState$,
+  eventDeleteState$,
+  eventCreateState$,
   negotiationUpdateState$: negotiationUpdateState$,
   negotiationDeleteState$: negotiationDeleteState$,
   taskUpdateState$: taskUpdateState$,

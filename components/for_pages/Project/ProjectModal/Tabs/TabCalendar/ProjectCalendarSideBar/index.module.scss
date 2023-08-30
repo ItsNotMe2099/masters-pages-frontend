@@ -1,0 +1,51 @@
+@import "scss/index";
+.root{
+  padding: 16px;
+  position: absolute;
+  width: 300px;
+  overflow-y: scroll;
+  top: 0px;
+  left: 0px;
+  bottom: 0;
+  background: #F3F3F3;
+  @media screen and (max-width: 1160px){
+    position: static;
+    align-self: center;
+  }
+
+}
+.toolbar{
+  display: flex;
+  align-items: center;
+  .timezone{
+    flex: 1;
+    font-size: 18px;
+  }
+}
+.events{
+  margin-top: 20px;
+}
+.create{
+  cursor: pointer;
+  width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #DC2626;
+  svg{
+    path{
+      fill: white;
+    }
+  }
+  &:hover{
+    background: #e1e2e3;
+    svg{
+      path{
+        fill: black;
+      }
+    }
+  }
+}
+

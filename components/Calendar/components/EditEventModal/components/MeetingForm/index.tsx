@@ -12,7 +12,7 @@ interface Props {
   change?: (key, value) => void
   placeType?: string
 }
-const MeetingForm = ({change, placeType}: Props) => {
+const MeetingForm = ({change, placeType, event}: Props) => {
   const handleOnlineClick = () => {
     change('placeType', 'Online')
   }
@@ -41,7 +41,7 @@ const MeetingForm = ({change, placeType}: Props) => {
             label={t('meetingForm.type')}
             options={[
               {label: t('meetingForm.clientAddress'), value: 'ClientAddress'},
-              {label: t('meetingForm.masterAddress'), value: 'MasterAddress'},
+              {label: event.participant?.role === 'master' ?  t('meetingForm.masterAddress') :  t('meetingForm.volunteerAddress'), value: 'MasterAddress'},
               {label: t('meetingForm.otherAddress'), value: 'OtherAddress'}
             ]}
           />}

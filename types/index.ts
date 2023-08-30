@@ -788,6 +788,8 @@ export interface IEvent {
   actualEnd?: Date,
   actualHours?: number
   task?: ITask,
+  projectId?: number
+  project?: IProject
   participant?: IProfile
   author?: IProfile
   feedbacks?: IFeedbacksToProfile[],

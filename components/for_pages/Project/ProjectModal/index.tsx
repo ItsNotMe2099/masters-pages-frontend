@@ -26,6 +26,7 @@ import {modalClose} from "components/Modal/actions";
 import {ProjectVolunteerFeedbackModal} from "components/for_pages/Project/ProjectVolunteerFeedback";
 import {ModalType} from "types/enums";
 import ProjectApplicationNote from "components/for_pages/Project/ProjectModal/ProjectApplicationNote";
+import TabProjectCalendar from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar";
 
 interface Props {
   showType: 'client' | 'public'
@@ -103,7 +104,7 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
           </div>
           <TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
         </div>
-        <div className={styles.content}>
+        <div className={classNames(styles.content, {[styles.events]: tab === 'events'})}>
           <div className={styles.topPanel}>
             <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
           </div>
@@ -115,6 +116,7 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
             {tab === 'messages' && <TabChat project={projectContext.project}/>}
             {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project}/>}
             {tab === 'reports' && <TabReports project={projectContext.project}/>}
+            {tab === 'events' && <TabProjectCalendar project={projectContext.project}/>}
           </>}
         </div>
       </div>
