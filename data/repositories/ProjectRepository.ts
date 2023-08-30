@@ -3,6 +3,7 @@ import request from 'utils/request'
 import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {IPagination} from 'types/types'
 import {IProjectCounts} from 'data/intefaces/IProjectCounts'
+import {IProjectEventsReport} from "data/intefaces/IProjectEventsReport";
 export interface IProjectSearchRequest{
   keywords?: string
   mainCategoryId?: number
@@ -130,5 +131,17 @@ export default class ProjectRepository {
       map[status] = item?.count ? parseInt(item?.count, 10) : 0;
     })
     return map;
+  }
+
+  static async fetchEventsReport(projectId: number): Promise<IProjectEventsReport> {
+    const res = await request({
+      url: `/api/project/reports/${projectId}?type=events`,
+      method: 'GET',
+    })
+    if (res.err) {
+      throw res.err
+    }
+    return res.data
+
   }
 }

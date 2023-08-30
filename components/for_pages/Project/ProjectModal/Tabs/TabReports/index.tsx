@@ -13,6 +13,7 @@ import classNames from 'classnames'
 import SliderVolunteers from './Slider'
 import { TabSelect } from 'components/TabSelect'
 import { useWindowWidth } from '@react-hook/window-size'
+import TabReportEvents from "components/for_pages/Project/ProjectModal/Tabs/TabReports/TabReportEvents";
 
 interface Props {
   project: IProject | null
@@ -51,7 +52,7 @@ const TabReports = ({project}: Props) => {
       {name: 'by Events', key: ProjectReportsTabTypeProject.Events},
       {name: 'by Volunteers', key: ProjectReportsTabTypeProject.Volunteers},
       {name: 'by Categories', key: ProjectReportsTabTypeProject.Categories},
-    ] : 
+    ] :
     currentTab === ProjectReportsTabType.Events ? [] : currentTab === ProjectReportsTabType.Volunteers ? [] : []
     ).map(item => {
       return{
@@ -61,7 +62,7 @@ const TabReports = ({project}: Props) => {
 
   const [tab, setTab] = useState(miniTabs[0]);
 
-  const [currentMiniTab, setCurrentMiniTab] = useState(miniTabs.length ? miniTabs[0].key : null) 
+  const [currentMiniTab, setCurrentMiniTab] = useState(miniTabs.length ? miniTabs[0].key : null)
 
   const [applications, setApplications] = useState<IApplication[]>([])
   const [total, setTotal] = useState(0)
@@ -99,13 +100,17 @@ const TabReports = ({project}: Props) => {
       {name: 'Rejected by us', value: applications.filter(i => i.status === ApplicationStatus.RejectedByCompany).length},
       {name: 'Rejected by volunteers', value: applications.filter(i => i.status === ApplicationStatus.RejectedByVolunteer).length},
   ]
+  console.log("currentTab", currentTab)
 
   return (
     <div className={styles.root}>
       <ProjectTabHeader project={project}/>
       <Tabs onChange={(item) => handleChange(item)} style={'reports'} tabs={tabs} activeTab={currentTab}/>
       <div className={classNames(styles.content, {[styles.border]: currentTab !== ProjectReportsTabType.Project})}>
-        {currentTab === ProjectReportsTabType.Project && 
+        {currentTab === ProjectReportsTabType.Events &&
+        <TabReportEvents project={project}/>
+        }
+        {currentTab === ProjectReportsTabType.Project &&
         <>
           {!isMobile ?
           <Tabs onChange={(item) => handleChange(item, true)} style={'mini'} tabs={miniTabs} activeTab={currentMiniTab}/>
@@ -120,7 +125,7 @@ const TabReports = ({project}: Props) => {
                   Dates
                 </div>
                 <div className={styles.table}>
-                  {firstTable.map(i => 
+                  {firstTable.map(i =>
                     <div className={styles.row}>
                     <div className={styles.cellFirst}>
                       {i.name}
@@ -128,7 +133,7 @@ const TabReports = ({project}: Props) => {
                     <div className={styles.cell}>
                       {i.value}
                     </div>
-                  </div>   
+                  </div>
                   )}
                 </div>
               </div>
@@ -137,7 +142,7 @@ const TabReports = ({project}: Props) => {
                   Volunteers
                 </div>
                 <div className={styles.table}>
-                {secondTable.map(i => 
+                {secondTable.map(i =>
                     <div className={styles.row}>
                     <div className={styles.cellFirst}>
                       {i.name}
@@ -145,7 +150,7 @@ const TabReports = ({project}: Props) => {
                     <div className={styles.cell}>
                       {i.value}
                     </div>
-                  </div>   
+                  </div>
                   )}
                 </div>
               </div>
@@ -154,7 +159,7 @@ const TabReports = ({project}: Props) => {
         </div>
         </>
         }
-        {currentTab === ProjectReportsTabType.Volunteers && 
+        {currentTab === ProjectReportsTabType.Volunteers &&
           <>
             <div className={styles.header}>
               <div>
@@ -163,7 +168,7 @@ const TabReports = ({project}: Props) => {
             <SliderVolunteers project={project}/>
           </>
         }
-      </div>    
+      </div>
     </div>
   )
 }
