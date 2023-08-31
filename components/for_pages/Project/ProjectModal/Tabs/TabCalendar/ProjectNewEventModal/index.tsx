@@ -39,7 +39,9 @@ const ProjectNewEventModalInner = ({isOpen, onClose, range}: Props) => {
 
 
   const handleSubmitNewEvent = (data) => {
-    eventContext.create({...data, ...data.timeRange, timezone: format(new Date(), 'XXX'), ...(
+    eventContext.create({...data, ...data.timeRange, timezone: format(new Date(), 'XXX'),
+      priceType: 'fixed',
+      ...(
         appContext.profile.role !== 'corporate' ? {participantId: projectContext.project.corporateProfileId} : {}
       )})
     calendarContext.hideModal()

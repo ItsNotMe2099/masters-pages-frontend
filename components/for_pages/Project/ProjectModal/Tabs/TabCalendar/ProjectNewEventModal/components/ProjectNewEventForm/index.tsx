@@ -69,16 +69,7 @@ let ProjectNewEventForm = (props: Props) => {
           size={'small'}
           validate={required}
         />}
-         <Field
-          name="priceType"
-          component={RadioList}
-          grid={2}
-          size={'small'}
-          labelType="static"
-          label={t('priceType')}
-          validate={required}
-          options={[ {label: t('perHour'), value: 'rate'}, {label: t('fixed'), value: 'fixed'}]}
-        />
+
     </div>
 
       {!formLoading && <div className={styles.buttons}>

@@ -292,7 +292,7 @@ let ProjectEventTimePlaceChargeForm = (props: Props) => {
         <div className={styles.form}>
           <EventInputsForm  {...props} isPlannedDisabled={isPlannedDisabled} isCompletedDisabled={isCompletedDisabled}  />
           <PricingForm {...props} isPlannedDisabled={isPlannedDisabled} isCompletedDisabled={isCompletedDisabled} onAddExpense={onAddExpense} onEditExpense={onEditExpense} event={event} />
-          <MeetingForm {...props}  event={event} />
+          {/*  <MeetingForm {...props}  event={event} />*/}
         </div>
         {!formLoading && <div className={styles.buttons}>
           {getButtonKeys().map(type => renderButton(type))}

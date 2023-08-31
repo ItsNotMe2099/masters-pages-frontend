@@ -73,8 +73,8 @@ const ProjectEditEventModalInner = (props: Props) => {
 
   const tabs = [
     {name: t('event.timePlaceCharge'), key: 'time'},
-    {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
-    {name: t('event.info'), key: 'info'},
+ //   {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
+  //  {name: t('event.info'), key: 'info'},
   ]
 
   const handleChangeTab = (item) => {
