@@ -154,8 +154,8 @@ const TabProjectCalendarInner = (props) => {
       calendarContext.setRange(dates[0], dates[dates.length - 1])
     }
     if (view) {
-      currentViewRef.current = Views.WEEK
-      calendarContext.setCurrentView(Views.WEEK)
+      currentViewRef.current = view
+      calendarContext.setCurrentView(view)
     }
     console.log('CLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl')
   }
