@@ -122,7 +122,7 @@ const TabProjectCalendarInner = (props) => {
     calendarContext.setCurrentEvent(event)
     calendarContext.showModal('eventEditModal')
     setCurrentEditEventRange(null)
-
+    
   }
   const getDayColor = (date) => {
     if (isSameDay(date, new Date())) {
@@ -154,9 +154,10 @@ const TabProjectCalendarInner = (props) => {
       calendarContext.setRange(dates[0], dates[dates.length - 1])
     }
     if (view) {
-      currentViewRef.current = view
-      calendarContext.setCurrentView(view)
+      currentViewRef.current = Views.WEEK
+      calendarContext.setCurrentView(Views.WEEK)
     }
+    console.log('CLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl')
   }
   const handleViewChange = (view) => {
     calendarContext.setCurrentView(view)
