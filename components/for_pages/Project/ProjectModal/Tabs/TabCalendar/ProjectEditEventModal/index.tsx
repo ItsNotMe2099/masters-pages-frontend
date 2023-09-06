@@ -163,7 +163,7 @@ const ProjectEditEventModalInner = (props: Props) => {
         <Tabs activeTab={activeTab} onChange={handleChangeTab} tabClassName={styles.mainTab} tabs={tabs}/>}
         {(event && !currentLoading) && <div className={styles.nav}>
          <div className={styles.navArrow} onClick={handlePrevClick}><ArrowLeftSmall/></div>
-         <div className={styles.navTitle}> {event.title}</div>
+         <div className={styles.navTitle}> {event.participant.firstName} {event.participant.lastName}</div>
           <div className={styles.navArrow} onClick={handleNextClick}><ArrowRightSmall/></div>
         </div>}
 

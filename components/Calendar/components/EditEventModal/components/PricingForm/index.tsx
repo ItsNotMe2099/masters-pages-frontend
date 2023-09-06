@@ -44,8 +44,8 @@ const PricingForm = (props: Props) => {
   return (
      <div className={styles.root}>
       <div className={styles.tabs}>
-        <div className={`${styles.tab} ${priceType === 'rate' && styles.tab__active}`}>{t('hourly')}</div>
-        <div className={`${styles.tab} ${priceType === 'fixed' && styles.tab__active}`}>{t('fixed')}</div>
+        <div className={`${styles.tab} ${priceType === 'rate' && styles.tab__active}`}>Time</div>
+        {/*<div className={`${styles.tab} ${priceType === 'fixed' && styles.tab__active}`}>{t('fixed')}</div>*/}
       </div>
        <div className={styles.columns}>
        <div className={styles.planned}>
@@ -72,7 +72,7 @@ const PricingForm = (props: Props) => {
            parse={parserPrice}
            validate={required}
          />}
-         <Expenses {...props} isDisabled={isPlannedDisabled} type={'planned'} event={props.event}/>
+         {/*<Expenses {...props} isDisabled={isPlannedDisabled} type={'planned'} event={props.event}/>*/}
        </div>
          <div className={styles.spacer}></div>
        <div className={styles.completed}>
@@ -97,7 +97,7 @@ const PricingForm = (props: Props) => {
            parse={parserPrice}
            validate={required}
          />}
-         <Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event}/>
+         {/*<Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event}/>*/}
        </div>
        </div>
     </div>

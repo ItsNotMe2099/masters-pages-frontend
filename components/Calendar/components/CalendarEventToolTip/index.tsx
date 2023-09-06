@@ -44,7 +44,7 @@ export default function CalendarEventToolTip(props: Props) {
       </div>
       <div className={styles.separator}/>
       <div className={styles.row}>
-        <div className={styles.label}>{t('master')}</div>
+        <div className={styles.label}>Volunteer</div>
         <div className={styles.value}>
           <div className={styles.avatar}>
           {!['client', 'corporate'].includes(event.participant.role) ? (event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg/>) : (event.author.photo ? <Avatar image={event.author.photo} size={'exExSmall'} /> : <AvatarSvg/>) }
@@ -57,7 +57,7 @@ export default function CalendarEventToolTip(props: Props) {
       </div>
       <div className={styles.separator}/>
       <div className={styles.row}>
-        <div className={styles.label}>{t('client')}</div>
+        <div className={styles.label}>Organization</div>
         <div className={styles.value}>{['client', 'corporate'].includes(event.participant.role) ? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
       </div>
       <div className={styles.row}>
