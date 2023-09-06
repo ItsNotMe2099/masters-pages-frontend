@@ -1,9 +1,9 @@
 import Modal from 'components/ui/Modal'
 import * as React from 'react'
 import styles from './index.module.scss'
-import {IProject} from 'data/intefaces/IProject'
+import { IProject } from 'data/intefaces/IProject'
 import ProjectTabs from 'components/for_pages/Project/ProjectModal/ProjectTabs'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import TabApplication from 'components/for_pages/Project/ProjectModal/Tabs/TabApplication'
 import TabProjectDescription from 'components/for_pages/Project/ProjectModal/Tabs/ProjectDescriptionTab'
@@ -20,13 +20,14 @@ import TabReports from './Tabs/TabReports'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import { IAutoMessages } from 'data/intefaces/IAutoMessages'
 import OrganizationRepository from "data/repositories/OrganizationRepository";
-import {ProjectWrapper, useProjectContext} from "context/project_state";
-import {useDispatch} from "react-redux";
-import {modalClose} from "components/Modal/actions";
-import {ProjectVolunteerFeedbackModal} from "components/for_pages/Project/ProjectVolunteerFeedback";
-import {ModalType} from "types/enums";
+import { ProjectWrapper, useProjectContext } from "context/project_state";
+import { useDispatch } from "react-redux";
+import { modalClose } from "components/Modal/actions";
+import { ProjectVolunteerFeedbackModal } from "components/for_pages/Project/ProjectVolunteerFeedback";
+import { ModalType } from "types/enums";
 import ProjectApplicationNote from "components/for_pages/Project/ProjectModal/ProjectApplicationNote";
 import TabProjectCalendar from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar";
+import TabReportsForVolunteer from './Tabs/TabReportsForVolunteer'
 
 interface Props {
   showType: 'client' | 'public'
@@ -37,7 +38,7 @@ interface Props {
   organization?: IOrganization
 
 }
-const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...props}: Props) => {
+const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ...props }: Props) => {
   const [tab, setTab] = useState(initialTab ? initialTab : 'description');
   const appContext = useAppContext()
   const projectContext = useProjectContext()
@@ -46,25 +47,28 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
 
   const dispatch = useDispatch()
   const tabs = (showType === 'client' && projectId && profile) ? [
-      {name: 'Description', key: 'description', icon: 'description'},
-      {name: 'Volunteers', key: 'volunteers', icon: 'volunteers', badge: projectContext.notification?.notificationNewApplicationCount +
-          projectContext.notification?.notificationApplicationCompleteRequestCount +
-          projectContext.notification?.notificationApplicationExecutionCount +
-          projectContext.notification?.notificationApplicationRejectedByVolunteerCount},
-      {name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount},
-      {name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies'},
-      {name: 'Events', key: 'events', icon: 'events'},
-      {name: 'Reports', key: 'reports', icon: 'reports'},
-    ] :
+    { name: 'Description', key: 'description', icon: 'description' },
+    {
+      name: 'Volunteers', key: 'volunteers', icon: 'volunteers', badge: projectContext.notification?.notificationNewApplicationCount +
+        projectContext.notification?.notificationApplicationCompleteRequestCount +
+        projectContext.notification?.notificationApplicationExecutionCount +
+        projectContext.notification?.notificationApplicationRejectedByVolunteerCount
+    },
+    { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
+    { name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies' },
+    { name: 'Events', key: 'events', icon: 'events' },
+    { name: 'Reports', key: 'reports', icon: 'reports' },
+  ] :
     ((!profile || showType === 'client' && !projectId)) ?
       [
-        {name: 'Description', key: 'description', icon: 'description'},
+        { name: 'Description', key: 'description', icon: 'description' },
       ] :
       [
-        {name: 'Description', key: 'description', icon: 'description'},
-        {name: 'Application', key: 'application', icon: 'application'},
-        {name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount},
-        {name: 'Events', key: 'events', icon: 'events'},
+        { name: 'Description', key: 'description', icon: 'description' },
+        { name: 'Application', key: 'application', icon: 'application' },
+        { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
+        { name: 'Events', key: 'events', icon: 'events' },
+        { name: 'Reports', key: 'reports', icon: 'reports' },
 
       ]
 
@@ -98,40 +102,43 @@ const ProjectModalInner = ({projectId, isOpen, showType, initialTab, isEdit, ...
     <Modal size={'large'} isOpen={isOpen} className={styles.modal} loading={false} closeClassName={styles.modalClose}>
       <div className={styles.root}>
         <div className={styles.desktop}>
-          <ProjectTabs tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
-         </div>
+          <ProjectTabs tabs={tabs} activeTab={tab} onChange={handleChangeTab} />
+        </div>
         <div className={classNames(styles.mobile, getModeClass())}>
           <div className={styles.topPanel}>
-            <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
+            <CloseIcon color='#000' className={styles.close} onClick={handleClose} />
           </div>
-          <TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={handleChangeTab}/>
+          <TabSelect style='projectModal' tabs={tabs} activeTab={tab} onChange={handleChangeTab} />
         </div>
-        <div className={classNames(styles.content, {[styles.events]: tab === 'events'})}>
+        <div className={classNames(styles.content, { [styles.events]: tab === 'events' })}>
           <div className={styles.topPanel}>
-            <CloseIcon color='#000' className={styles.close} onClick={handleClose}/>
+            <CloseIcon color='#000' className={styles.close} onClick={handleClose} />
           </div>
-          {tab === 'description' && (organization || props.organization) && <TabProjectDescription project={projectContext.project} isEdit={isEdit || !projectId} organization={organization ?? props.organization}  showType={showType} onApply={(item) => setTab('application')}/>}
+          {tab === 'description' && (organization || props.organization) && <TabProjectDescription project={projectContext.project} isEdit={isEdit || !projectId} organization={organization ?? props.organization} showType={showType} onApply={(item) => setTab('application')} />}
 
           {projectContext.projectId && <>
             {tab === 'application' && <TabApplication />}
-            {tab === 'volunteers' && <TabVolunteers project={projectContext.project}/>}
-            {tab === 'messages' && <TabChat project={projectContext.project}/>}
-            {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project}/>}
-            {tab === 'reports' && <TabReports project={projectContext.project}/>}
-            {tab === 'events' && <TabProjectCalendar project={projectContext.project}/>}
+            {tab === 'volunteers' && <TabVolunteers project={projectContext.project} />}
+            {tab === 'messages' && <TabChat project={projectContext.project} />}
+            {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project} />}
+            {tab === 'reports' && (profile.role !== ProfileRole.Volunteer ? <TabReports project={projectContext.project} />
+              :
+              <TabReportsForVolunteer project={projectContext.project} />
+            )}
+            {tab === 'events' && <TabProjectCalendar project={projectContext.project} />}
           </>}
         </div>
       </div>
-      {projectContext.modal === ModalType.VolunteerFeedBackModal && <ProjectVolunteerFeedbackModal  projectId={projectContext.projectId}/>}
+      {projectContext.modal === ModalType.VolunteerFeedBackModal && <ProjectVolunteerFeedbackModal projectId={projectContext.projectId} />}
       {projectContext.currentApplication && <ProjectApplicationNote application={projectContext.currentApplication} />}
 
     </Modal>
   )
 }
 
-export default function ProjectModal(props: Props){
+export default function ProjectModal(props: Props) {
   console.log("projectModal", props)
-  return <ProjectWrapper fetchOrganization projectId={props.projectId}  mode={props.showType === 'client' ? 'private' : 'public'}>
-    <ProjectModalInner {...props}/>
+  return <ProjectWrapper fetchOrganization projectId={props.projectId} mode={props.showType === 'client' ? 'private' : 'public'}>
+    <ProjectModalInner {...props} />
   </ProjectWrapper>
 }
