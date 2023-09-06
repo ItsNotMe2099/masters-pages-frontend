@@ -54,6 +54,7 @@ const TabReportEvents = ({project}: Props) => {
             <div className={classNames(styles.cell, styles.planned)}>Planned</div>
             <div className={classNames(styles.cell, styles.completed)}>Completed</div>
             <div className={classNames(styles.cell, styles.confirmed)}>Confirmed</div>
+            <div className={classNames(styles.cell, styles.confirmed)}>Approved</div>
           </div>
           {report.byVolunteer.map((i) => (<>
             <div className={styles.row} onClick={() => expandedVolunteers.find(a => a === i.participantId) ? setExpandedVolunteers(expandedVolunteers.filter(a => a !== i.participantId))  : setExpandedVolunteers(a => [...a, i.participantId])}>
@@ -68,6 +69,7 @@ const TabReportEvents = ({project}: Props) => {
               <div className={classNames(styles.cell, styles.planned)}>{i.planned}</div>
               <div className={classNames(styles.cell, styles.completed)}>{i.completed}</div>
               <div className={classNames(styles.cell, styles.confirmed)}>{i.confirmed}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{i.approved}</div>
             </div>
               {expandedVolunteers.includes(i.participantId) && report.byDate.filter(a => a.participantId === i.participantId).map(i => (
                 <div className={styles.row}>
@@ -78,6 +80,7 @@ const TabReportEvents = ({project}: Props) => {
                   <div className={classNames(styles.cell, styles.planned)}>{i.planned}</div>
                   <div className={classNames(styles.cell, styles.completed)}>{i.completed}</div>
                   <div className={classNames(styles.cell, styles.confirmed)}>{i.confirmed}</div>
+                  <div className={classNames(styles.cell, styles.confirmed)}>{i.approved}</div>
                 </div>
               ))}
             </>
