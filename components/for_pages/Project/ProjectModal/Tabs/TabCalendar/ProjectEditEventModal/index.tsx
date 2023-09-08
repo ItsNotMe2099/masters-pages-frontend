@@ -111,7 +111,8 @@ const ProjectEditEventModalInner = (props: Props) => {
       region: data.region,
       zipcode: data.zipcode,
       address1: data.address1,
-      address2: data.address2
+      address2: data.address2,
+      description: data.description
 
     }
 

@@ -9,6 +9,7 @@ interface Props {
   labelType?: string
   className?:string
   onKeyDown?: (e) => void
+  disabled?: boolean
 }
 
 export default function TextArea(props: Props) {
@@ -19,6 +20,7 @@ export default function TextArea(props: Props) {
       <textarea
         className={`${styles.textarea} ${(error && touched) && styles.textareaError}`}
         placeholder={label}
+        disabled={props.disabled}
         {...input}
         onKeyDown={props.onKeyDown}
       />

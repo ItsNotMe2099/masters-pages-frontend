@@ -11,6 +11,7 @@ import { getCurrencySymbol } from 'data/currency'
 import { useTranslation } from 'next-i18next'
 import { useAppContext } from 'context/state'
 import { ProfileRole } from 'data/intefaces/IProfile'
+import TextArea from 'components/ui/Inputs/TextArea'
 
 interface Props {
   event?: IEvent,
@@ -107,6 +108,14 @@ const PricingForm = (props: Props) => {
             <Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event} />}
         </div>
       </div>
+      {(appContext.profile.role === ProfileRole.Volunteer || appContext.profile.role === ProfileRole.Corporate) &&
+        <>
+          <div className={styles.label}>Description</div>
+          <div className={styles.description}>
+            <Field className={styles.desc} disabled={isPlannedDisabled} name='description' component={TextArea} size={'small'} />
+          </div>
+        </>
+      }
     </div>
   )
 }
