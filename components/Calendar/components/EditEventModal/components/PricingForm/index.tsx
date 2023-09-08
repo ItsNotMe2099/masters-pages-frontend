@@ -77,7 +77,8 @@ const PricingForm = (props: Props) => {
             parse={parserPrice}
             validate={required}
           />}
-          {/*<Expenses {...props} isDisabled={isPlannedDisabled} type={'planned'} event={props.event}/>*/}
+          {(appContext.profile.role === ProfileRole.Master || appContext.profile.role === ProfileRole.Client) &&
+            <Expenses {...props} isDisabled={isPlannedDisabled} type={'planned'} event={props.event} />}
         </div>
         <div className={styles.spacer}></div>
         <div className={styles.completed}>
@@ -102,7 +103,8 @@ const PricingForm = (props: Props) => {
             parse={parserPrice}
             validate={required}
           />}
-          {/*<Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event}/>*/}
+          {(appContext.profile.role === ProfileRole.Master || appContext.profile.role === ProfileRole.Client) &&
+            <Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event} />}
         </div>
       </div>
     </div>

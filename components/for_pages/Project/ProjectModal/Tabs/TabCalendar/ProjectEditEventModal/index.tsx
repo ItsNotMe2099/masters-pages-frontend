@@ -22,6 +22,8 @@ import ProjectEventTimePlaceChargeForm
   from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectEditEventModal/components/ProjectEventTimePlaceChargeForm";
 import ProjectEventInfoTab
   from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectEditEventModal/ProjectEventInfoTab";
+import { useAppContext } from 'context/state'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 
 interface Props {
@@ -65,6 +67,7 @@ const ProjectEditEventModalInner = (props: Props) => {
     return () => calendarContext.setIsEditMode(false)
   }, [])
 
+  const appContext = useAppContext()
 
   const newRangeStart = getEventPlannedAllowed(event) ? range?.start : null
   const newRangeEnd = getEventPlannedAllowed(event) ? range?.end : null
@@ -72,7 +75,8 @@ const ProjectEditEventModalInner = (props: Props) => {
   const newRangeActualEnd = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.end : null
 
   const tabs = [
-    {name: t('event.timePlaceCharge'), key: 'time'},
+    {name: (appContext.profile.role === ProfileRole.Master || appContext.profile.role === ProfileRole.Volunteer) ?
+       t('event.timePlaceCharge') : 'Time', key: 'time'},
  //   {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
   //  {name: t('event.info'), key: 'info'},
   ]
