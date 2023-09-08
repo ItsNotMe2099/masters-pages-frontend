@@ -25,6 +25,7 @@ import StateButton from 'components/Calendar/components/EditEventModal/component
 import {getEventPlannedAllowed} from 'utils/event'
 import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 
 enum ButtonType {
@@ -275,9 +276,9 @@ let TimePlaceChargeForm = (props: Props) => {
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
       <div className={styles.states}>
-        <StateButton event={event} type={'client'}/>
+        <StateButton event={event} type={ProfileRole.Client}/>
         <div className={styles.spacer}/>
-        <StateButton event={event} type={'master'}/>
+        <StateButton event={event} type={ProfileRole.Master}/>
 
       </div>
       {formLoading ? <Loader/> : <>

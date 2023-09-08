@@ -8,10 +8,11 @@ import {useSelector} from 'react-redux'
 import {getEventColor} from 'utils/event'
 import {useTranslation} from 'next-i18next'
 import {useAppContext} from 'context/state'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 interface Props {
   event: IEvent,
-  type: 'client' | 'master' | 'volunteer'
+  type: ProfileRole.Client | ProfileRole.Master | ProfileRole.Volunteer | ProfileRole.Corporate
 
 }
 
@@ -25,6 +26,8 @@ const StateButton = ({event, type}: Props) => {
   const handleClick = (e) => {
 
   }
+
+  console.log('ISAUTHOR', showAuthor)
 
 
   const isMarkVisible = () => {
@@ -65,6 +68,8 @@ const StateButton = ({event, type}: Props) => {
           return t('master')
     case 'volunteer':
           return t('volunteer')
+    case ProfileRole.Corporate:
+      return t('client')
     }
   }
   const getStatusName = () => {

@@ -1,25 +1,26 @@
 import styles from './index.module.scss'
-import { IEvent, IRootState} from 'types'
-import {format} from 'date-fns'
-import {getEventColor, getEventPlannedAllowed, getEventStatusName} from 'utils/event'
+import { IEvent, IRootState } from 'types'
+import { format } from 'date-fns'
+import { getEventColor, getEventPlannedAllowed, getEventStatusName } from 'utils/event'
 
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import Avatar from 'components/ui/Avatar'
 import AvatarSvg from 'components/svg/AvatarSvg'
 import { useTranslation } from 'next-i18next'
-import {useAppContext} from 'context/state'
+import { useAppContext } from 'context/state'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 interface Props {
   event: IEvent
 }
 
 export default function CalendarEventToolTip(props: Props) {
-  const {event} = props
+  const { event } = props
   const appContext = useAppContext();
   const currentProfile = appContext.profile
   const { t } = useTranslation('common')
   const getValueClass = (color) => {
-    switch (color){
+    switch (color) {
       case 'grey':
         return styles.value__grey
       case 'green':
@@ -37,41 +38,43 @@ export default function CalendarEventToolTip(props: Props) {
   return (
     <div className={`${styles.root}`}>
       <div className={styles.title}>{event.title}</div>
-      <div className={styles.separator}/>
+      <div className={styles.separator} />
       <div className={styles.row}>
         <div className={styles.label}>{t('event.eventNumber')}</div>
         <div className={styles.value}>#{event.id}</div>
       </div>
-      <div className={styles.separator}/>
+      <div className={styles.separator} />
       <div className={styles.row}>
-        <div className={styles.label}>Volunteer</div>
+        <div className={styles.label}>{(appContext.profile.role === ProfileRole.Corporate ||
+          appContext.profile.role === ProfileRole.Volunteer) ? 'Volunteer' : 'Master'}</div>
         <div className={styles.value}>
           <div className={styles.avatar}>
-          {!['client', 'corporate'].includes(event.participant.role) ? (event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg/>) : (event.author.photo ? <Avatar image={event.author.photo} size={'exExSmall'} /> : <AvatarSvg/>) }
+            {!['client', 'corporate'].includes(event.participant.role) ? (event.participant.photo ? <Avatar image={event.participant.photo} size={'exExSmall'} /> : <AvatarSvg />) : (event.author.photo ? <Avatar image={event.author.photo} size={'exExSmall'} /> : <AvatarSvg />)}
           </div>
-          {!['client', 'corporate'].includes(event.participant.role)? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
+          {!['client', 'corporate'].includes(event.participant.role) ? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
       </div>
       <div className={styles.row}>
         <div className={styles.label}>{t('status')}</div>
-        <div className={`${styles.value} ${getValueClass(getEventColor(event, {isOtherSide: currentProfile.role === 'client'}))}`}><div className={`${styles.circle}`}/>{getEventStatusName(event, {isOtherSide: currentProfile.role === 'client'})}</div>
+        <div className={`${styles.value} ${getValueClass(getEventColor(event, { isOtherSide: currentProfile.role === 'client' }))}`}><div className={`${styles.circle}`} />{getEventStatusName(event, { isOtherSide: currentProfile.role === 'client' })}</div>
       </div>
-      <div className={styles.separator}/>
+      <div className={styles.separator} />
       <div className={styles.row}>
-        <div className={styles.label}>Organization</div>
+        <div className={styles.label}>{(appContext.profile.role === ProfileRole.Corporate ||
+          appContext.profile.role === ProfileRole.Volunteer) ? 'Organization' : 'Client'}</div>
         <div className={styles.value}>{['client', 'corporate'].includes(event.participant.role) ? `${event.participant.firstName} ${event.participant.lastName}` : `${event.author.firstName} ${event.author.lastName}`}</div>
       </div>
       <div className={styles.row}>
         <div className={styles.label}>{t('status')}</div>
-        <div className={`${styles.value} ${getValueClass(getEventColor(event, {isOtherSide: !['client', 'corporate'].includes(event.participant.role)}))}`}><div className={`${styles.circle}`}/>{getEventStatusName(event, {isOtherSide: currentProfile.role !== 'client'})}</div>
+        <div className={`${styles.value} ${getValueClass(getEventColor(event, { isOtherSide: !['client', 'corporate'].includes(event.participant.role) }))}`}><div className={`${styles.circle}`} />{getEventStatusName(event, { isOtherSide: currentProfile.role !== 'client' })}</div>
       </div>
-      <div className={styles.separator}/>
+      <div className={styles.separator} />
       <div className={styles.row}>
         <div className={styles.label}>{t('startTime')}</div>
         <div className={styles.value}>{format(getEventPlannedAllowed(event) ? event.start : event.actualStart, 'HH:mm')}</div>
       </div>
       <div className={styles.row}>
         <div className={styles.label}>{t('endTime')}</div>
-        <div className={styles.value}>{format(getEventPlannedAllowed(event) ? event.end :  event.actualEnd, 'HH:mm')}</div>
+        <div className={styles.value}>{format(getEventPlannedAllowed(event) ? event.end : event.actualEnd, 'HH:mm')}</div>
       </div>
 
     </div>

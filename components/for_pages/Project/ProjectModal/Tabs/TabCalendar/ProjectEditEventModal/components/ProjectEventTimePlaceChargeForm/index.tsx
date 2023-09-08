@@ -16,6 +16,7 @@ import { useTranslation } from 'next-i18next'
 import {useAppContext} from 'context/state'
 import {useEventContext} from "context/event_state";
 import {useEventCalendarContext} from "context/event_calendar";
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 
 enum ButtonType {
@@ -283,9 +284,9 @@ let ProjectEventTimePlaceChargeForm = (props: Props) => {
   return (
     <form className={styles.root} onSubmit={handleSubmit}>
       <div className={styles.states}>
-        <StateButton event={event} type={'client'}/>
+        <StateButton event={event} type={ProfileRole.Corporate}/>
         <div className={styles.spacer}/>
-        <StateButton event={event} type={'volunteer'}/>
+        <StateButton event={event} type={ProfileRole.Volunteer}/>
 
       </div>
       {formLoading ? <Loader/> : <>
