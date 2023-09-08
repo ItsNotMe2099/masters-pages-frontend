@@ -69,7 +69,7 @@ const StateButton = ({event, type}: Props) => {
     case 'volunteer':
           return t('volunteer')
     case ProfileRole.Corporate:
-      return t('organization')
+      return 'Organization'
     }
   }
   const getStatusName = () => {

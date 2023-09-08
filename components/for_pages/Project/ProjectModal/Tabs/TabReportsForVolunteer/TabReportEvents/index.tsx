@@ -36,6 +36,7 @@ const TabReportEvents = ({ project }: Props) => {
     <div className={styles.root}>
       {loading && <Loader />}
       {!loading && report && <>
+        <div className={styles.title}>Summary</div>
         <div className={styles.table}>
           <div className={styles.row}>
             <div className={classNames(styles.cell, styles.draft)}>Draft</div>
