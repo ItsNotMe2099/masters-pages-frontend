@@ -5,10 +5,12 @@ import styles from './index.module.scss'
 import { Field } from 'redux-form'
 import TimeExpense from 'components/ui/Inputs/TimeExpense'
 import Expenses from 'components/Calendar/components/EditEventModal/components/Expenses'
-import {IEvent} from 'types'
-import {parserNumber, parserPrice} from 'utils/formatters'
-import {getCurrencySymbol} from 'data/currency'
+import { IEvent } from 'types'
+import { parserNumber, parserPrice } from 'utils/formatters'
+import { getCurrencySymbol } from 'data/currency'
 import { useTranslation } from 'next-i18next'
+import { useAppContext } from 'context/state'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 interface Props {
   event?: IEvent,
@@ -20,7 +22,9 @@ interface Props {
   isCompletedDisabled?: boolean
 }
 const PricingForm = (props: Props) => {
-  const {priceType, change, isPlannedDisabled, isCompletedDisabled, event} = props
+  const { priceType, change, isPlannedDisabled, isCompletedDisabled, event } = props
+
+  const appContext = useAppContext()
 
   const parseTimeExpense = (val) => {
     return {
@@ -29,77 +33,78 @@ const PricingForm = (props: Props) => {
     }
   }
   const handleChangedPricePlanned = (value) => {
-    if(isCompletedDisabled) {
+    if (isCompletedDisabled) {
       change('actualPrice', parseTimeExpense(value))
     }
   }
   const handleChangedBudgetPlanned = (e) => {
-    if(isCompletedDisabled) {
+    if (isCompletedDisabled) {
       console.log('handleChangedBudgetPlanned', e.currentTarget.value)
       change('actualBudget', parserPrice(e.currentTarget.value))
     }
   }
   console.log('priceType', priceType)
-  const {t} = useTranslation('common')
+  const { t } = useTranslation('common')
   return (
-     <div className={styles.root}>
+    <div className={styles.root}>
       <div className={styles.tabs}>
         <div className={`${styles.tab} ${priceType === 'rate' && styles.tab__active}`}>Time</div>
-        {/*<div className={`${styles.tab} ${priceType === 'fixed' && styles.tab__active}`}>{t('fixed')}</div>*/}
+        {(appContext.profile.role === ProfileRole.Master || appContext.profile.role === ProfileRole.Client) &&
+          <div className={`${styles.tab} ${priceType === 'fixed' && styles.tab__active}`}>{t('fixed')}</div>}
       </div>
-       <div className={styles.columns}>
-       <div className={styles.planned}>
-         <div className={styles.header}>{t('task.page.planned')}</div>
-         {priceType === 'rate' && <Field
-           name="price"
-           component={TimeExpense}
-           showIcon={false}
-           currency={getCurrencySymbol(event.task?.currency)}
-           label={t('start')}
-           onChange={handleChangedPricePlanned}
-           parse={parseTimeExpense}
-           disabled={isPlannedDisabled}
-           validate={required}
-         />}
-         {priceType === 'fixed' && <Field
-           name="budget"
-           component={Input}
-           size={'small'}
-           label=""
-           onChange={handleChangedBudgetPlanned}
-           disabled={isPlannedDisabled}
-           format={(value) => `${getCurrencySymbol(event.task?.currency)}   ${value || ''}`}
-           parse={parserPrice}
-           validate={required}
-         />}
-         {/*<Expenses {...props} isDisabled={isPlannedDisabled} type={'planned'} event={props.event}/>*/}
-       </div>
-         <div className={styles.spacer}></div>
-       <div className={styles.completed}>
-         <div className={styles.header}>{t('task.page.completed')}</div>
-         {priceType === 'rate' &&<Field
-           name="actualPrice"
-           component={TimeExpense}
-           showIcon={false}
-           currency={getCurrencySymbol(event.task?.currency)}
-           label={t('start')}
-           disabled={isCompletedDisabled}
-           parse={parseTimeExpense}
-           validate={required}
-         />}
-         {priceType === 'fixed' && <Field
-           name="actualBudget"
-           component={Input}
-           size={'small'}
-           label=""
-           disabled={isCompletedDisabled}
-           format={(value) => `${getCurrencySymbol(event.task?.currency)}   ${value || ''}`}
-           parse={parserPrice}
-           validate={required}
-         />}
-         {/*<Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event}/>*/}
-       </div>
-       </div>
+      <div className={styles.columns}>
+        <div className={styles.planned}>
+          <div className={styles.header}>{t('task.page.planned')}</div>
+          {priceType === 'rate' && <Field
+            name="price"
+            component={TimeExpense}
+            showIcon={false}
+            currency={getCurrencySymbol(event.task?.currency)}
+            label={t('start')}
+            onChange={handleChangedPricePlanned}
+            parse={parseTimeExpense}
+            disabled={isPlannedDisabled}
+            validate={required}
+          />}
+          {priceType === 'fixed' && <Field
+            name="budget"
+            component={Input}
+            size={'small'}
+            label=""
+            onChange={handleChangedBudgetPlanned}
+            disabled={isPlannedDisabled}
+            format={(value) => `${getCurrencySymbol(event.task?.currency)}   ${value || ''}`}
+            parse={parserPrice}
+            validate={required}
+          />}
+          {/*<Expenses {...props} isDisabled={isPlannedDisabled} type={'planned'} event={props.event}/>*/}
+        </div>
+        <div className={styles.spacer}></div>
+        <div className={styles.completed}>
+          <div className={styles.header}>{t('task.page.completed')}</div>
+          {priceType === 'rate' && <Field
+            name="actualPrice"
+            component={TimeExpense}
+            showIcon={false}
+            currency={getCurrencySymbol(event.task?.currency)}
+            label={t('start')}
+            disabled={isCompletedDisabled}
+            parse={parseTimeExpense}
+            validate={required}
+          />}
+          {priceType === 'fixed' && <Field
+            name="actualBudget"
+            component={Input}
+            size={'small'}
+            label=""
+            disabled={isCompletedDisabled}
+            format={(value) => `${getCurrencySymbol(event.task?.currency)}   ${value || ''}`}
+            parse={parserPrice}
+            validate={required}
+          />}
+          {/*<Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event}/>*/}
+        </div>
+      </div>
     </div>
   )
 }
