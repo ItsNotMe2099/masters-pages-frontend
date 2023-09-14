@@ -206,10 +206,10 @@ const TabDescriptionForm = ({project, ...props}: Props) => {
             <div className={styles.fieldset}>
               <div className={styles.fieldsetTitle}>Reply Options</div>
               <CheckBoxListField name={'replyOptions'} options={[
-                {value: 'volunteerProfile', label: 'Masterspages Volunter Profile'},
+                //{value: 'volunteerProfile', label: 'Masterspages Volunter Profile'},
                 {value: 'resume', label: 'Resume'},
                 {value: 'coverLetter', label: 'Cover Letter'},
-                {value: 'profileLink', label: 'Profile link'},
+                //{value: 'profileLink', label: 'Profile link'},
               ]}/>
             </div>
             <div className={styles.fieldset}>

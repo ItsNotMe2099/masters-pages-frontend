@@ -45,7 +45,7 @@ const TabApplicationInner = (props: Props) => {
       {!isLoading && (application && application.status !== ApplicationStatus.Draft && !isEdit) ?
       <TabApplicationView onEdit={handleEdit} application={application} project={projectContext.project}/>
       :
-        !isLoading ? <TabApplicationForm edit={isEdit} projectId={projectContext.project.id} application={application} onSave={handleSave}/> : null}
+        !isLoading ? <TabApplicationForm project={project} edit={isEdit} projectId={projectContext.project.id} application={application} onSave={handleSave}/> : null}
    </div>
   )
 }
