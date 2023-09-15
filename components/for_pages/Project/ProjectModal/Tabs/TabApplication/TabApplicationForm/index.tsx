@@ -130,9 +130,9 @@ const TabApplicationForm = ({ application, projectId, edit, project, ...props }:
                 /></>}
           </div>
           <div className={styles.colRight}>
-            <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal' />
+            {project.education && <SelectField name={'education'} options={Educations()} label={'Education Level'} size='normal' />}
             <TextField name={'age'} type={'number'} label={'Age'} />
-            <LanguageFormField name={'languages'} label={'Languages'} />
+            {project.languages.length > 0 && <LanguageFormField name={'languages'} label={'Languages'} />}
           </div>
         </div>
 
