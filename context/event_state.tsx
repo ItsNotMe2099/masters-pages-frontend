@@ -1,14 +1,13 @@
-import {createContext, useContext, useEffect, useState} from 'react'
-import {CookiesType, ModalType, SnackbarType} from 'types/enums'
-import {DeepPartial} from "redux";
-import {useAppContext} from "context/state";
-import {confirmChangeData, confirmModalClose, confirmOpen, modalClose} from "components/Modal/actions";
-import {useTranslation} from "next-i18next";
-import {useDispatch} from "react-redux";
-import ApplicationRepository from "data/repositories/ApplicationRepository";
-import {EventStatus, IEvent, IEventExpense} from "types";
+import { createContext, useContext, useEffect, useState } from 'react'
+import { SnackbarType } from 'types/enums'
+import { DeepPartial } from "redux";
+import { useAppContext } from "context/state";
+import { confirmChangeData } from "components/Modal/actions";
+import { useTranslation } from "next-i18next";
+import { useDispatch } from "react-redux";
+import { IEvent, IEventExpense } from "types";
 import EventRepository from "data/repositories/EventRepository";
-import {formatEvent} from "context/event_calendar";
+import { formatEvent } from "context/event_calendar";
 
 interface IState {
   eventId: number | null,
@@ -58,7 +57,7 @@ interface Props {
 }
 
 export function EventWrapper(props: Props) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const appContext = useAppContext()
   const [event, setEvent] = useState<IEvent | null>(props.event)
   const [eventId, setEventId] = useState<number | null>(props.eventId)
@@ -69,33 +68,33 @@ export function EventWrapper(props: Props) {
   const dispatch = useDispatch()
   useEffect(() => {
     setEvent(props.event)
-    if(props.event?.expenses){
+    if (props.event?.expenses) {
       setCurrentExpenses(props.event.expenses)
     }
-    if(props.event?.actualExpenses){
+    if (props.event?.actualExpenses) {
       setCurrentActualExpenses(props.event.actualExpenses)
     }
   }, [props.event])
 
   useEffect(() => {
-    if(props.eventId) {
+    if (props.eventId) {
       setLoading(true)
       fetch().then((i) => setLoading(false))
     }
   }, [props.eventId])
 
   const handleUpdate = (data: IEvent) => {
-    appContext.eventUpdateState$.next({...event, ...(data as any)})
+    appContext.eventUpdateState$.next({ ...event, ...(data as any) })
   }
 
   const fetch = async (_applicationId?: number) => {
     const newEvent = await EventRepository.findById(props.eventId);
 
     setEvent(newEvent)
-    if(newEvent.expenses){
+    if (newEvent.expenses) {
       setCurrentExpenses(newEvent.expenses)
     }
-    if(newEvent.actualExpenses){
+    if (newEvent.actualExpenses) {
       setCurrentActualExpenses(newEvent.actualExpenses)
     }
     setLoading(false)
@@ -105,7 +104,7 @@ export function EventWrapper(props: Props) {
   const create = async (data: DeepPartial<IEvent>) => {
     setEditLoading(true)
     try {
-      const event = await EventRepository.create({...data, projectId: props.projectId})
+      const event = await EventRepository.create({ ...data, projectId: props.projectId })
       const formatted = formatEvent(event)
       console.log("FormatEvent111", formatted)
       setEvent(formatted)
@@ -121,16 +120,16 @@ export function EventWrapper(props: Props) {
     try {
       setEditLoading(true)
       let res = await EventRepository.update(props.eventId, data);
-      switch (event){
-        case  'complete':
+      switch (event) {
+        case 'complete':
           res = await EventRepository.update(props.eventId, data);
           res = await EventRepository.complete(props.eventId)
           break;
-        case  'sendWithEdit':
+        case 'sendWithEdit':
           res = await EventRepository.update(props.eventId, data);
           res = await EventRepository.send(props.eventId)
           break;
-        case  'send':
+        case 'send':
           res = await EventRepository.send(props.eventId)
           break;
         case 'draftWithEdit':
@@ -202,17 +201,11 @@ export function EventWrapper(props: Props) {
     }
     setEditLoading(false)
   }
-  const handleDelete = () => {
-    dispatch(confirmOpen({
-      description: 'Do you want to proceed?',
-      onConfirm: async () => {
-        dispatch(confirmChangeData({loading: true}))
-        await EventRepository.delete(event.id)
-        console.log("Deleted111")
-        appContext.eventDeleteState$.next(event)
-        dispatch(confirmModalClose())
-      }
-    }))
+  const handleDelete = async () => {
+    dispatch(confirmChangeData({ loading: true }))
+    await EventRepository.delete(event.id)
+    console.log("Deleted111")
+    appContext.eventDeleteState$.next(event)
   }
   const value: IState = {
     ...defaultValue,
@@ -226,10 +219,10 @@ export function EventWrapper(props: Props) {
     delete: handleDelete,
     currentExpenses,
     currentActualExpenses,
-    setCurrentExpenses: (data: IEventExpense[]) =>{
+    setCurrentExpenses: (data: IEventExpense[]) => {
       setCurrentExpenses(data)
     },
-    setCurrentActualExpenses: (data: IEventExpense[]) =>{
+    setCurrentActualExpenses: (data: IEventExpense[]) => {
       setCurrentActualExpenses(data)
     },
     reject,

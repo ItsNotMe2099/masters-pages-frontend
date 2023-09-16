@@ -244,6 +244,7 @@ let ProjectEventTimePlaceChargeForm = (props: Props) => {
       onConfirm: () => {
         eventContext.delete()
         dispatch(confirmModalClose());
+        calendarContext.hideModal() // hide event modal after delete
       },
       onCancel: () => {
         dispatch(confirmModalClose());
