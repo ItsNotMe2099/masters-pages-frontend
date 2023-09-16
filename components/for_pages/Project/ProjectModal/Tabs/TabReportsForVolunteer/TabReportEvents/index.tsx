@@ -8,11 +8,6 @@ import ProjectRepository from "data/repositories/ProjectRepository";
 import { IProjectEventsReport } from "data/intefaces/IProjectEventsReport";
 import Loader from "components/ui/Loader";
 import classNames from "classnames";
-import ArrowDown from "components/svg/ArrowDown";
-import Avatar from "components/ui/Avatar";
-import Routes from "pages/routes";
-import { IProfile } from "data/intefaces/IProfile";
-import Link from "next/link";
 import { EventStatus } from 'types'
 
 interface Props {
@@ -39,6 +34,7 @@ const TabReportEvents = ({ project }: Props) => {
         <div className={styles.title}>Summary</div>
         <div className={styles.table}>
           <div className={styles.row}>
+            <div className={styles.label} />
             <div className={classNames(styles.cell, styles.draft)}>Draft</div>
             <div className={classNames(styles.cell, styles.planned)}>Planned</div>
             <div className={classNames(styles.cell, styles.completed)}>Completed</div>
@@ -46,6 +42,9 @@ const TabReportEvents = ({ project }: Props) => {
             <div className={classNames(styles.cell, styles.confirmed)}>Approved</div>
           </div>
           <div className={styles.row}>
+            <div className={styles.label}>
+              Total
+            </div>
             <div className={classNames(styles.cell, styles.draft)}>
               {report.summary.find(i => i.event_status === EventStatus.Draft)?.count ?? 0}</div>
             <div className={classNames(styles.cell, styles.planned)}>
@@ -57,6 +56,18 @@ const TabReportEvents = ({ project }: Props) => {
             <div className={classNames(styles.cell, styles.confirmed)}>
               {report.summary.find(i => i.event_status === EventStatus.Approved)?.count ?? 0}</div>
           </div>
+          {report.byDate.map(i => (
+            <div className={styles.row}>
+              <div className={styles.label}>
+                {i.date}
+              </div>
+              <div className={classNames(styles.cell, styles.draft)}>{i.draft}</div>
+              <div className={classNames(styles.cell, styles.planned)}>{i.planned}</div>
+              <div className={classNames(styles.cell, styles.completed)}>{i.completed}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{i.confirmed}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{i.approved}</div>
+            </div>
+          ))}
         </div>
       </>}
 
