@@ -65,7 +65,7 @@ const CardOrganizationDescription = (props: Props) => {
   const instLink = organization?.socialLinks?.find(item => item.type === 'instagram')
 
   return (
-    <Card isHidden={!isEdit && !organization.description} className={styles.root} isLoading={showForm && formLoading} title={t('personalArea.profile.desc')} toolbar={isEdit ? <FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/> : null}>
+    <Card isHidden={!isEdit && !organization.description} className={styles.root} isLoading={showForm && formLoading} title={'Join us to make a difference'} toolbar={isEdit ? <FormActionButton type={'edit'} title={t('edit')} onClick={handleEditClick}/> : null}>
       {!showForm ? 
         <div className={styles.desc}>
           <div className={styles.left}>
