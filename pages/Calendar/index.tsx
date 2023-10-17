@@ -13,7 +13,7 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import {default as React, useEffect, useRef, useState} from 'react'
 import CalendarEvent from 'components/Calendar/components/CalendarEvent'
-import {add, addDays, format, isSameDay, isWeekend} from 'date-fns'
+import {add, addDays, endOfWeek, format, isSameDay, isWeekend, startOfWeek} from 'date-fns'
 import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
 import CalendarMonthHeaderCell from 'components/Calendar/components/CalendarMonthHeaderCell'
 import CalendarToolbar from 'components/Calendar/components/CalendarToolbar'
@@ -21,6 +21,10 @@ import CalendarSideBar from 'components/Calendar/components/CalendarSideBar'
 import { ru } from 'date-fns/locale'
 import { useTranslation } from 'next-i18next'
 import {
+  getYearStart,
+
+  getYearEnd,
+
 
   getMonthStart,
   getMonthEnd,
@@ -215,6 +219,7 @@ const CalendarPage = (props) => {
     currentViewRef.current = view
   }
   const handleNavigate = (date) => {
+
     if (currentViewRef.current === Views.DAY) {
       setCurrentDate(date)
       setRangeStartDate(date)
@@ -223,10 +228,27 @@ const CalendarPage = (props) => {
   }
   const handleSideBarDateChange = (date) => {
     setCurrentDate(date)
-    toolbar.current.onView(Views.DAY)
-    toolbar.current.onNavigate('DATE', date)
-    setRangeStartDate(date)
-    setRangeEndDate(date)
+    switch (currentViewRef.current ) {
+      case 'year':
+        setRangeStartDate(getYearStart(date))
+        setRangeEndDate(getYearEnd(date))
+        break;
+      case 'month':
+        setRangeStartDate(getMonthStart(date))
+        setRangeEndDate(getMonthEnd(date))
+        break;
+      case 'week':
+        setRangeStartDate(startOfWeek(date))
+        setRangeEndDate(endOfWeek(date))
+        break;
+      case 'day':
+        setRangeStartDate(date)
+        setRangeEndDate(date)
+        break;
+      default:
+
+    }
+
   }
 
   const getToolbarLabel = () => {
@@ -270,6 +292,7 @@ return (
           onSelectEvent={handleClickEvent}
           onView={handleViewChange}
           defaultView={currentView}
+          date={rangeStartDate ?? new Date()}
           defaultDate={new Date()}
           dragFromOutsideItem={draggedEvent}
           onNavigate={handleNavigate}

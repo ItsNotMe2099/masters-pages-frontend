@@ -14,7 +14,7 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import {default as React, useEffect, useRef, useState} from 'react'
 import CalendarEvent from 'components/Calendar/components/CalendarEvent'
-import {add, addDays, format, isSameDay, isWeekend} from 'date-fns'
+import {add, addDays, endOfWeek, format, isSameDay, isWeekend, startOfWeek} from 'date-fns'
 import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
 import CalendarMonthHeaderCell from 'components/Calendar/components/CalendarMonthHeaderCell'
 import CalendarToolbar from 'components/Calendar/components/CalendarToolbar'
@@ -31,7 +31,15 @@ import ProjectCalendarSideBar from "components/for_pages/Project/ProjectModal/Ta
 import ProjectEditEventModal from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectEditEventModal";
 import ProjectNewEventModal from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectNewEventModal";
 import {IProject} from "data/intefaces/IProject";
+import {
+  getYearStart,
 
+  getYearEnd,
+
+
+  getMonthStart,
+  getMonthEnd,
+} from '@wojtekmaj/date-utils'
 const localizer = momentLocalizer(moment)
 const DnDCalendar = withDragAndDrop(Calendar)
 
@@ -122,7 +130,7 @@ const TabProjectCalendarInner = (props) => {
     calendarContext.setCurrentEvent(event)
     calendarContext.showModal('eventEditModal')
     setCurrentEditEventRange(null)
-    
+
   }
   const getDayColor = (date) => {
     if (isSameDay(date, new Date())) {
@@ -170,10 +178,26 @@ const TabProjectCalendarInner = (props) => {
     }
   }
   const handleSideBarDateChange = (date) => {
+
     calendarContext.setCurrentDate(date)
-    toolbar.current.onView(Views.DAY)
-    toolbar.current.onNavigate('DATE', date)
-    calendarContext.setRange(date, date)
+
+      switch (currentViewRef.current ) {
+        case 'year':
+          calendarContext.setRange(getYearStart(date), getYearEnd(date))
+          break;
+        case 'month':
+          calendarContext.setRange(getMonthStart(date), getMonthEnd(date))
+          break;
+        case 'week':
+          calendarContext.setRange(startOfWeek(date), endOfWeek(date))
+          break;
+        case 'day':
+          calendarContext.setRange(date, date)
+          break;
+        default:
+
+      }
+
   }
 
   const getToolbarLabel = () => {
@@ -220,6 +244,7 @@ return (
           dragFromOutsideItem={draggedEvent}
           onNavigate={handleNavigate}
           popup={true}
+          date={calendarContext.rangeStartDate ?? new Date()}
           startAccessor="actualStart"
           endAccessor="actualEnd"
           messages={{noEventsInRange: t('event.noEvents')}}
