@@ -1,23 +1,20 @@
 import Modal from 'components/ui/Modal'
 import Tabs from 'components/ui/Tabs'
-import {differenceInHours, differenceInMinutes} from 'date-fns'
+import { differenceInHours, differenceInMinutes } from 'date-fns'
 import * as React from 'react'
-import {useEffect, useRef, useState} from 'react'
-import {EventStatus, IEvent, IRootState} from 'types'
+import { useEffect, useRef, useState } from 'react'
+import { EventStatus, IEvent, IRootState } from 'types'
 import styles from './index.module.scss'
-
-import {useDispatch, useSelector} from 'react-redux'
-import InfoTab from 'components/Calendar/components/EditEventModal/InfoTab'
+import { useSelector } from 'react-redux'
 import Loader from 'components/ui/Loader'
 import ChatTab from 'components/Calendar/components/EditEventModal/components/ChatTab'
 import EventExpenseModal from 'components/Calendar/components/EventExpenseModal'
-import {editEventOpen, eventExpenseActualOpen, eventExpensePlannedOpen, modalClose} from 'components/Modal/actions'
-import {getEventCompletedAllowed, getEventPlannedAllowed} from 'utils/event'
+import { getEventCompletedAllowed, getEventPlannedAllowed } from 'utils/event'
 import ArrowLeftSmall from 'components/svg/ArrowLeftSmall'
 import ArrowRightSmall from 'components/svg/ArrowRightSmall'
 import { useTranslation } from 'next-i18next'
-import {EventWrapper, useEventContext} from "context/event_state";
-import {useEventCalendarContext} from "context/event_calendar";
+import { EventWrapper, useEventContext } from "context/event_state";
+import { useEventCalendarContext } from "context/event_calendar";
 import ProjectEventTimePlaceChargeForm
   from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectEditEventModal/components/ProjectEventTimePlaceChargeForm";
 import ProjectEventInfoTab
@@ -34,14 +31,14 @@ interface Props {
 }
 const differenceInHoursCeil = (end, start) => {
   const diff = differenceInHours(end, start)
-  if(differenceInMinutes(end, start) % 60 !== 0){
+  if (differenceInMinutes(end, start) % 60 !== 0) {
     return diff + 1
   }
   return diff
 }
 const ProjectEditEventModalInner = (props: Props) => {
-  const {isOpen, onClose, range} = props
-  const {t} = useTranslation('common')
+  const { isOpen, onClose, range } = props
+  const { t } = useTranslation('common')
   const calendarContext = useEventCalendarContext()
   const eventContext = useEventContext()
 
@@ -52,7 +49,7 @@ const ProjectEditEventModalInner = (props: Props) => {
   const [currentEventEditExpenseKey, setCurrentEventEditExpenseKey] = useState(0)
   const [currentEventEditExpense, setCurrentEventEditExpense] = useState(null)
 
-  const currentEventExpenses =  eventContext.currentExpenses
+  const currentEventExpenses = eventContext.currentExpenses
   const currentEventActualExpenses = eventContext.currentActualExpenses
 
   const formLoading = eventContext.editLoading
@@ -75,10 +72,12 @@ const ProjectEditEventModalInner = (props: Props) => {
   const newRangeActualEnd = getEventCompletedAllowed(event) || getEventPlannedAllowed(event) ? range?.end : null
 
   const tabs = [
-    {name: (appContext.profile.role === ProfileRole.Master || appContext.profile.role === ProfileRole.Volunteer) ?
-       t('event.timePlaceCharge') : 'Time', key: 'time'},
- //   {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
-  //  {name: t('event.info'), key: 'info'},
+    {
+      name: (appContext.profile.role === ProfileRole.Master || appContext.profile.role === ProfileRole.Volunteer) ?
+        t('event.timePlaceCharge') : 'Time', key: 'time'
+    },
+    //   {name: t('event.chatReview'), key: 'chat', badge: parseInt(event?.unreadTextMessagesCount, 10) + parseInt(event?.unreadMediaMessagesCount, 10)},
+    //  {name: t('event.info'), key: 'info'},
   ]
 
   const handleChangeTab = (item) => {
@@ -112,7 +111,7 @@ const ProjectEditEventModalInner = (props: Props) => {
       zipcode: data.zipcode,
       address1: data.address1,
       address2: data.address2,
-      description: data.description
+      description: data.description,
 
     }
 
@@ -163,59 +162,59 @@ const ProjectEditEventModalInner = (props: Props) => {
   return (
     <div>
       <Modal isOpen={isOpen} size={'medium'} className={styles.root} loading={false} closeClassName={styles.modalClose}
-             onRequestClose={onClose}>
+        onRequestClose={onClose}>
         {(event && !currentLoading) &&
-        <Tabs activeTab={activeTab} onChange={handleChangeTab} tabClassName={styles.mainTab} tabs={tabs}/>}
+          <Tabs activeTab={activeTab} onChange={handleChangeTab} tabClassName={styles.mainTab} tabs={tabs} />}
         {(event && !currentLoading) && <div className={styles.nav}>
-         <div className={styles.navArrow} onClick={handlePrevClick}><ArrowLeftSmall/></div>
-         <div className={styles.navTitle}> {event.participant.firstName} {event.participant.lastName}</div>
-          <div className={styles.navArrow} onClick={handleNextClick}><ArrowRightSmall/></div>
+          <div className={styles.navArrow} onClick={handlePrevClick}><ArrowLeftSmall /></div>
+          <div className={styles.navTitle}> {event.participant.firstName} {event.participant.lastName}</div>
+          <div className={styles.navArrow} onClick={handleNextClick}><ArrowRightSmall /></div>
         </div>}
 
         {(event && !currentLoading) && <div className={styles.body}>
           {activeTab === 'time' && <ProjectEventTimePlaceChargeForm
-                                                        onAddExpense={handleAddExpense}
-                                                        onEditExpense={handleEditExpense}
-                                                        onCancel={handleCancel}
-                                                        onSetSubmitEvent={handleSetSubmitEvent}
-                                                        initialValues={{
-                                                          ...event,
-                                                          start: newRangeStart || new Date(event.start),
-                                                          end: newRangeEnd || new Date(event.end),
-                                                          actualStart: newRangeActualStart || new Date(actualStart),
-                                                          actualEnd: newRangeActualEnd || new Date(actualEnd),
-                                                          price: {
-                                                            rate: event.ratePerHour || event.task?.ratePerHour,
-                                                            total: newRangeStart && newRangeEnd ? differenceInHoursCeil(new Date(newRangeEnd), new Date(newRangeStart)) : event.estimate || (differenceInHoursCeil(new Date(event.end), new Date(event.start)) > 0 ? differenceInHoursCeil(new Date(event.end), new Date(event.start)) : 1)
-                                                          },
-                                                          actualPrice: {
-                                                            rate: event.actualRatePerHour || event.task?.ratePerHour,
-                                                            total: newRangeActualStart && newRangeActualEnd ? differenceInHoursCeil(new Date(newRangeActualEnd), new Date(newRangeActualStart)) : event.actualHours || (differenceInHoursCeil(new Date(actualEnd), new Date(actualStart)) > 0 ? differenceInHoursCeil(new Date(actualEnd), new Date(actualStart)) : 1)
-                                                          }
-                                                        }} onSubmit={handleSubmit}/>}
-          {activeTab === 'chat' && <ChatTab event={event}/>}
-          {activeTab === 'info' && <ProjectEventInfoTab event={event}/>}
+            onAddExpense={handleAddExpense}
+            onEditExpense={handleEditExpense}
+            onCancel={handleCancel}
+            onSetSubmitEvent={handleSetSubmitEvent}
+            initialValues={{
+              ...event,
+              start: newRangeStart || new Date(event.start),
+              end: newRangeEnd || new Date(event.end),
+              actualStart: newRangeActualStart || new Date(actualStart),
+              actualEnd: newRangeActualEnd || new Date(actualEnd),
+              price: {
+                rate: event.ratePerHour || event.task?.ratePerHour,
+                total: newRangeStart && newRangeEnd ? differenceInHoursCeil(new Date(newRangeEnd), new Date(newRangeStart)) : event.estimate || (differenceInHoursCeil(new Date(event.end), new Date(event.start)) > 0 ? differenceInHoursCeil(new Date(event.end), new Date(event.start)) : 1)
+              },
+              actualPrice: {
+                rate: event.actualRatePerHour || event.task?.ratePerHour,
+                total: newRangeActualStart && newRangeActualEnd ? differenceInHoursCeil(new Date(newRangeActualEnd), new Date(newRangeActualStart)) : event.actualHours || (differenceInHoursCeil(new Date(actualEnd), new Date(actualStart)) > 0 ? differenceInHoursCeil(new Date(actualEnd), new Date(actualStart)) : 1)
+              }
+            }} onSubmit={handleSubmit} />}
+          {activeTab === 'chat' && <ChatTab event={event} />}
+          {activeTab === 'info' && <ProjectEventInfoTab event={event} />}
 
         </div>}
         {currentLoading && <div className={styles.body}>
-          <Loader/>
+          <Loader />
         </div>}
 
       </Modal>
       {modalKey === 'eventExpensePlannedModal' &&
-      <EventExpenseModal onSubmit={handleExpanseSubmit} type={'planned'} event={event} isOpen={true}
-                         onClose={() =>
-                           calendarContext.showModal('eventEditModal')}/>}
+        <EventExpenseModal onSubmit={handleExpanseSubmit} type={'planned'} event={event} isOpen={true}
+          onClose={() =>
+            calendarContext.showModal('eventEditModal')} />}
       {modalKey === 'eventExpenseActualModal' &&
-      <EventExpenseModal onSubmit={handleExpanseSubmit} type={'actual'} event={event} isOpen={true}
-                         onClose={() => calendarContext.showModal('eventEditModal')}/>}
+        <EventExpenseModal onSubmit={handleExpanseSubmit} type={'actual'} event={event} isOpen={true}
+          onClose={() => calendarContext.showModal('eventEditModal')} />}
 
     </div>
   )
 }
 
-export default function ProjectEditEventModal(props: Props){
+export default function ProjectEditEventModal(props: Props) {
   return <EventWrapper eventId={props.event.id} event={props.event}>
-    <ProjectEditEventModalInner {...props}/>
+    <ProjectEditEventModalInner {...props} />
   </EventWrapper>
 }

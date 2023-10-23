@@ -12,6 +12,9 @@ import { useTranslation } from 'next-i18next'
 import { useAppContext } from 'context/state'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import TextArea from 'components/ui/Inputs/TextArea'
+import InputCheckbox from 'components/ui/Inputs/InputCheckbox'
+import { useEventContext } from 'context/event_state'
+import Checkbox from 'react-custom-checkbox'
 
 interface Props {
   event?: IEvent,
@@ -25,7 +28,11 @@ interface Props {
 const PricingForm = (props: Props) => {
   const { priceType, change, isPlannedDisabled, isCompletedDisabled, event } = props
 
+  const eventContext = useEventContext()
+
   const appContext = useAppContext()
+
+  console.log('sendConfirmed', eventContext.sendConfirmed)
 
   const parseTimeExpense = (val) => {
     return {
@@ -108,6 +115,17 @@ const PricingForm = (props: Props) => {
             <Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event} />}
         </div>
       </div>
+      <Checkbox
+        checked={eventContext.sendConfirmed}
+        icon={<img src={'/img/icons/checkbox-checked.svg'} style={{ width: 21 }} alt="" />}
+        borderColor={'#e6e6e6'}
+        borderRadius={2}
+        size={21}
+        labelClassName={styles.label}
+        labelStyle={{}}
+        label={'Without confirm from volunteer'}
+        onChange={eventContext.setSendConfirmed}
+      />
       {(appContext.profile.role === ProfileRole.Volunteer || appContext.profile.role === ProfileRole.Corporate) &&
         <>
           <div className={styles.label}>Description</div>

@@ -26,6 +26,8 @@ interface IState {
   approve: () => void,
   decline: () => void,
   confirm: () => void,
+  sendConfirmed: boolean,
+  setSendConfirmed: (val: boolean) => void
 }
 
 const defaultValue: IState = {
@@ -45,6 +47,8 @@ const defaultValue: IState = {
   approve: () => null,
   decline: () => null,
   confirm: () => null,
+  sendConfirmed: false,
+  setSendConfirmed: (val) => null
 }
 
 const EventContext = createContext<IState>(defaultValue)
@@ -65,6 +69,7 @@ export function EventWrapper(props: Props) {
   const [editLoading, setEditLoading] = useState<boolean>(false)
   const [currentExpenses, setCurrentExpenses] = useState([])
   const [currentActualExpenses, setCurrentActualExpenses] = useState([])
+  const [sendConfirmed, setSendConfirmed] = useState<boolean>(false)
   const dispatch = useDispatch()
   useEffect(() => {
     setEvent(props.event)
@@ -120,21 +125,26 @@ export function EventWrapper(props: Props) {
     try {
       setEditLoading(true)
       let res = await EventRepository.update(props.eventId, data);
-      switch (event) {
-        case 'complete':
-          res = await EventRepository.update(props.eventId, data);
-          res = await EventRepository.complete(props.eventId)
-          break;
-        case 'sendWithEdit':
-          res = await EventRepository.update(props.eventId, data);
-          res = await EventRepository.send(props.eventId)
-          break;
-        case 'send':
-          res = await EventRepository.send(props.eventId)
-          break;
-        case 'draftWithEdit':
-          res = await EventRepository.update(props.eventId, data);
-          break;
+      if (sendConfirmed) {
+        res = await EventRepository.sendConfirmed(props.eventId)
+      }
+      else {
+        switch (event) {
+          case 'complete':
+            res = await EventRepository.update(props.eventId, data);
+            res = await EventRepository.complete(props.eventId)
+            break;
+          case 'sendWithEdit':
+            res = await EventRepository.update(props.eventId, data);
+            res = await EventRepository.send(props.eventId)
+            break;
+          case 'send':
+            res = await EventRepository.send(props.eventId)
+            break;
+          case 'draftWithEdit':
+            res = await EventRepository.update(props.eventId, data);
+            break;
+        }
       }
       const formatted = formatEvent(res)
       setEvent(formatted)
@@ -219,6 +229,10 @@ export function EventWrapper(props: Props) {
     delete: handleDelete,
     currentExpenses,
     currentActualExpenses,
+    sendConfirmed,
+    setSendConfirmed: (val: boolean) => {
+      setSendConfirmed(val)
+    },
     setCurrentExpenses: (data: IEventExpense[]) => {
       setCurrentExpenses(data)
     },

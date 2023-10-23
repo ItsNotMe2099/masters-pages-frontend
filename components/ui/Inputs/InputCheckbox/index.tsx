@@ -1,12 +1,14 @@
 import styles from './index.module.scss'
 import ErrorInput from 'components/ui/Inputs/Input/components/ErrorInput'
 import Checkbox from 'react-custom-checkbox'
+import classNames from 'classnames'
 
 interface Props {
   label: string
-  meta: any
+  meta?: any
   input: any
-  type: string
+  type?: string
+  className?: string
 }
 
 export default function InputCheckbox(props: Props) {
@@ -14,7 +16,7 @@ export default function InputCheckbox(props: Props) {
   const { error, touched } = props.meta ? props.meta : {error: null, touched: false}
 
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, props.className)}>
       <Checkbox
         checked={value}
         icon={<img src={'/img/icons/checkbox-checked.svg'} style={{ width: 21 }} alt="" />}

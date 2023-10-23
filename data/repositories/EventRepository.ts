@@ -1,8 +1,5 @@
 import request from 'utils/request'
-import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {DeepPartial, IPagination} from 'types/types'
-import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
-import {IApplicationCounts} from 'data/intefaces/IApplicationCounts'
 import {IEvent} from "types";
 import {IEventListRequest} from "data/intefaces/IEventListRequest";
 
@@ -50,6 +47,17 @@ export default class EventRepository {
   static async send(id: number): Promise<IEvent | null> {
     const res = await request({
       url: `/api/event/${id}/send`,
+      method: 'GET'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async sendConfirmed(id: number): Promise<IEvent | null> {
+    const res = await request({
+      url: `/api/event/${id}/sendConfirmed`,
       method: 'GET'
     })
     if (res.err) {
