@@ -55,7 +55,7 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
         projectContext.notification?.notificationApplicationRejectedByVolunteerCount
     },
     { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
-    { name: 'Auto replies', key: 'autoReplies', icon: 'autoReplies' },
+    { name: 'Settings', key: 'autoReplies', icon: 'autoReplies' },
     { name: 'Events', key: 'events', icon: 'events' },
     { name: 'Reports', key: 'reports', icon: 'reports' },
   ] :
