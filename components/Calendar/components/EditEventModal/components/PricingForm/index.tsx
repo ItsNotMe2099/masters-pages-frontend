@@ -115,7 +115,7 @@ const PricingForm = (props: Props) => {
             <Expenses {...props} isDisabled={isCompletedDisabled} type={'actual'} event={props.event} />}
         </div>
       </div>
-      <Checkbox
+      {/*<Checkbox
         checked={eventContext.sendConfirmed}
         icon={<img src={'/img/icons/checkbox-checked.svg'} style={{ width: 21 }} alt="" />}
         borderColor={'#e6e6e6'}
@@ -125,7 +125,7 @@ const PricingForm = (props: Props) => {
         labelStyle={{}}
         label={'Without confirm from volunteer'}
         onChange={eventContext.setSendConfirmed}
-      />
+          />*/}
       {(appContext.profile.role === ProfileRole.Volunteer || appContext.profile.role === ProfileRole.Corporate) &&
         <>
           <div className={styles.label}>Description</div>

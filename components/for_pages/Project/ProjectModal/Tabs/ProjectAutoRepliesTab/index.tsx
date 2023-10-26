@@ -1,19 +1,20 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import {IProject, ProjectStatus} from 'data/intefaces/IProject'
-import {useTranslation} from 'next-i18next'
-import {useAppContext} from 'context/state'
-import {useEffect, useState} from 'react'
+import { IProject, ProjectStatus } from 'data/intefaces/IProject'
+import { useTranslation } from 'next-i18next'
+import { useAppContext } from 'context/state'
+import { useEffect, useState } from 'react'
 import Tabs from '../TabVolunteers/Tabs'
-import {ApplicationStatus} from 'data/intefaces/IApplication'
+import { ApplicationStatus } from 'data/intefaces/IApplication'
 import ProjectTabHeader from '../../ProjectTabHeader'
 import MessageCard from './MessageCard'
-import {IAutoMessages} from 'data/intefaces/IAutoMessages'
+import { IAutoMessages } from 'data/intefaces/IAutoMessages'
 import AutoMessagesRepository from 'data/repositories/AutoMessagesRepository'
 import classNames from 'classnames'
-import {TabSelect} from 'components/TabSelect'
-import {useProjectContext} from "context/project_state";
+import { TabSelect } from 'components/TabSelect'
+import { useProjectContext } from "context/project_state";
 import Loader from "components/ui/Loader";
+import AutoConfirmedEventsForm from './AutoConfirmedEventsForm'
 
 interface Props {
   project: IProject | null
@@ -28,17 +29,17 @@ export enum ProjectAutoRepliesTabType {
   Completed = 'completed',
 }
 
-const ProjectAutorepliesTab = ({project}: Props) => {
-  const {t} = useTranslation();
+const ProjectAutorepliesTab = ({ project }: Props) => {
+  const { t } = useTranslation();
   const appContext = useAppContext();
   const projectContext = useProjectContext()
   const tabs = ([
-    {name: 'Status', key: ProjectAutoRepliesTabType.Status},
-    {name: 'Applications', key: ProjectAutoRepliesTabType.Applications},
-    {name: 'Shortlist', key: ProjectAutoRepliesTabType.Shortlist},
-    {name: 'Invited', key: ProjectAutoRepliesTabType.Invited},
+    { name: 'Status', key: ProjectAutoRepliesTabType.Status },
+    { name: 'Applications', key: ProjectAutoRepliesTabType.Applications },
+    { name: 'Shortlist', key: ProjectAutoRepliesTabType.Shortlist },
+    { name: 'Invited', key: ProjectAutoRepliesTabType.Invited },
     //{name: 'Accepted', key: ProjectAutoRepliesTabType.Accepted},
-    {name: 'Completed', key: ProjectAutoRepliesTabType.Completed},
+    { name: 'Completed', key: ProjectAutoRepliesTabType.Completed },
   ]).map(item => {
     return {
       ...item,
@@ -120,8 +121,8 @@ const ProjectAutorepliesTab = ({project}: Props) => {
           :
           currentTab === ProjectAutoRepliesTabType.Completed ?
             [
-              {name: 'Completed', nextStatus: 'feedback.created', isEvent: true},
-              {name: 'Completed', nextStatus: 'recommendation.created', isEvent: true},
+              { name: 'Completed', nextStatus: 'feedback.created', isEvent: true },
+              { name: 'Completed', nextStatus: 'recommendation.created', isEvent: true },
             ]
             :
             []
@@ -185,9 +186,9 @@ const ProjectAutorepliesTab = ({project}: Props) => {
       }
     }
     if (!autoMessages?.applicationStatusChangeMessages.length || !autoMessages?.projectStatusChangeMessages.length || !autoMessages?.eventMessages.length) {
-     await  AutoMessagesRepository.addProjectAutoMessages(autoMessages)
+      await AutoMessagesRepository.addProjectAutoMessages(autoMessages)
     } else {
-     await AutoMessagesRepository.updateProjectAutoMessages(autoMessages)
+      await AutoMessagesRepository.updateProjectAutoMessages(autoMessages)
     }
   }
 
@@ -205,25 +206,29 @@ const ProjectAutorepliesTab = ({project}: Props) => {
   }
 
 
-  if(projectContext.autoMessageLoading){
-    return (    <div className={styles.root}>
-      <ProjectTabHeader project={project}/>
-      <Loader/>
+  if (projectContext.autoMessageLoading) {
+    return (<div className={styles.root}>
+      <ProjectTabHeader project={project} />
+      <Loader />
     </div>)
   }
   return (
     <div className={styles.root}>
-      <ProjectTabHeader project={project}/>
+      <ProjectTabHeader project={project} />
+      <AutoConfirmedEventsForm project={project} />
+      <div className={styles.settings}>
+        REPLIES settings
+      </div>
       {currentTab === ProjectAutoRepliesTabType.Applications ?
         <div className={styles.altMessageCards}>
           <div className={styles.desktop}>
-            <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab}/>
+            <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab} />
           </div>
           <div className={styles.mobile}>
             <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab}
-                       onChange={(item) => setCurrentTab(item.key)}/>
+              onChange={(item) => setCurrentTab(item.key)} />
           </div>
-          <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
+          <div className={classNames(styles.messageCards, { [styles.columns]: isColumns() === true })}>
             {messages.map(item =>
               <MessageCard
                 name={item.name}
@@ -242,13 +247,13 @@ const ProjectAutorepliesTab = ({project}: Props) => {
         :
         <>
           <div className={styles.desktop}>
-            <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab}/>
+            <Tabs onChange={(item) => handleChange(item)} style={'fullWidthRound'} tabs={tabs} activeTab={currentTab} />
           </div>
           <div className={styles.mobile}>
             <TabSelect style='projectStatus' tabs={tabs} activeTab={currentTab}
-                       onChange={(item) => setCurrentTab(item.key)}/>
+              onChange={(item) => setCurrentTab(item.key)} />
           </div>
-          <div className={classNames(styles.messageCards, {[styles.columns]: isColumns() === true})}>
+          <div className={classNames(styles.messageCards, { [styles.columns]: isColumns() === true })}>
             {messages.map(item =>
               <MessageCard
                 name={item.name}

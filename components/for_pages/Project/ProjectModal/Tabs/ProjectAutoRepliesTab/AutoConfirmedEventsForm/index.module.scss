@@ -1,0 +1,45 @@
+@import "scss/index";
+
+.root {
+  margin: 16px 0;
+}
+
+.controls {
+  display: flex;
+
+  @media screen and (max-width: 428px) {
+    flex-direction: column;
+  }
+}
+
+.switch {
+  display: flex;
+
+  @media screen and (max-width: 428px) {
+    margin-bottom: 10px;
+  }
+}
+
+.fakeBtn {
+  margin-right: 16px;
+
+  @media screen and (max-width: 428px) {
+    width: 100%;
+  }
+
+  button {
+    padding: 12px 50px;
+
+    @media screen and (max-width: 428px) {
+      width: 100%;
+      padding: 12px 20px;
+    }
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 24px;
+}
