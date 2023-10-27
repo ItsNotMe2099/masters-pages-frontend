@@ -7,6 +7,7 @@ import { IProject } from 'data/intefaces/IProject'
 import { useState } from 'react'
 import SwitchField from 'components/fields/SwitchField'
 import ProjectRepository from 'data/repositories/ProjectRepository'
+import { useProjectContext } from 'context/project_state'
 
 interface Props {
   project: IProject
@@ -18,9 +19,10 @@ const AutoConfirmedEventsForm = ({ project, ...props }: Props) => {
   const appContext = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const projectContext = useProjectContext()
 
   const initialValues = {
-    autoConfirmedEvents: true
+    autoConfirmedEvents: projectContext.project.autoConfirmedEvents
   }
 
   const handleSubmit = async (data) => {
@@ -42,6 +44,7 @@ const AutoConfirmedEventsForm = ({ project, ...props }: Props) => {
     setIsLoading(true);
     try {
       await ProjectRepository.update(project.id, data)
+      projectContext.update(data)
     } catch (e) {
       setError(e)
     }
@@ -55,6 +58,8 @@ const AutoConfirmedEventsForm = ({ project, ...props }: Props) => {
   })
 
   const { values, setFieldValue } = formik
+
+  console.log('AUTO', project)
 
   return (
     <FormikProvider value={formik}>

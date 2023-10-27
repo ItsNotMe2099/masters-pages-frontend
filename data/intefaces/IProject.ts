@@ -50,6 +50,7 @@ export interface IProject {
   id: number;
   corporateProfile: IProfile;
   corporateProfileId: number;
+  autoConfirmedEvents: boolean
   title: string;
   executionType: ProjectExecutionType;
   description: string;
