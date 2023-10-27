@@ -115,12 +115,31 @@ const ApplicationList = (props: Props) => {
     if (projectType === 'saved') {
       const data = await ProfileRepository.fetchSavedProjects(page + 1, limit);
       if(data) {
-        setProjects(data.data);
+        setProjects(projects => [...projects, ...data.data])
+        setTotal(data.total)
+      }
+    }
+    else{
+      const data = await ApplicationRepository.fetchApplicationsByVolunteer(page + 1, limit)
+      const apps = data.data.filter(item => {
+        switch (projectType){
+          case 'applied':
+            return   (item.status === projectType || item.status === 'shortlist')
+          case 'rejected':
+            return (item.status === ApplicationStatus.RejectedByCompany || item.status === ApplicationStatus.RejectedByVolunteer)
+          default:
+            return item.status === projectType
+        }
+      })
+      if(data) {
+        setApplications(projects => [...projects, ...apps])
         setTotal(data.total)
       }
     }
 
   }
+
+  console.log(applications)
 
   const applied = counts['applied'] + counts['shortlist']
   const rejected = counts['rejectedByCompany'] + counts['rejectedByVolunteer']
@@ -192,17 +211,18 @@ const ApplicationList = (props: Props) => {
       <div className={styles.projects}>
         {(loading && total === 0) && <Loader/>}
         {total > 0 && <InfiniteScroll
+        scrollableTarget="scrollableDiv"
           dataLength={projects.length} //This is important field to render the next data
           next={handleScrollNext}
           hasMore={total > projects.length}
           loader={loading ? <Loader/> : null}>
-          {projectType === 'saved' ? projects.sort((a, b) => +new Date(b.updatedAt) - +new Date(a.updatedAt)).map(project =>
+          {projectType === 'saved' ? projects.map(project =>
               <ProjectCard
                 key={project.id}
                 actions={<ProjectActions onDelete={() => handleDeleteSaved(project)} onModalOpen={(mode) => props.onModalOpen(project, mode)}
                                          actionsType={actionsType} status={projectType} project={project}/>}
                 project={project}/>
-            ) : applications.sort((a, b) => +new Date(b.updatedAt) - +new Date(a.updatedAt)).map(app =>
+            ) : applications.map(app =>
             <ProjectCard
               key={app.id}
               actions={<ProjectActions onDelete={() => handleDeleteApplication(app)} onModalOpen={(mode) => props.onModalOpen(app.project, mode)}

@@ -47,7 +47,8 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
 
   const dispatch = useDispatch()
   const tabs = (showType === 'client' && projectId && profile) ? [
-    { name: 'Description', key: 'description', icon: 'description' },
+    { name: 'Advertisement', key: 'description', icon: 'description' },
+    { name: 'Settings', key: 'autoReplies', icon: 'autoReplies' },
     {
       name: 'Volunteers', key: 'volunteers', icon: 'volunteers', badge: projectContext.notification?.notificationNewApplicationCount +
         projectContext.notification?.notificationApplicationCompleteRequestCount +
@@ -55,20 +56,19 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
         projectContext.notification?.notificationApplicationRejectedByVolunteerCount
     },
     { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
-    { name: 'Settings', key: 'autoReplies', icon: 'autoReplies' },
     { name: 'Events', key: 'events', icon: 'events' },
-    { name: 'Reports', key: 'reports', icon: 'reports' },
+    { name: 'Live Stats', key: 'reports', icon: 'reports' },
   ] :
     ((!profile || showType === 'client' && !projectId)) ?
       [
-        { name: 'Description', key: 'description', icon: 'description' },
+        { name: 'Advertisement', key: 'description', icon: 'description' },
       ] :
       [
-        { name: 'Description', key: 'description', icon: 'description' },
+        { name: 'Advertisement', key: 'description', icon: 'description' },
         { name: 'Application', key: 'application', icon: 'application' },
         { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
         { name: 'Events', key: 'events', icon: 'events' },
-        { name: 'Reports', key: 'reports', icon: 'reports' },
+        { name: 'Live Stats', key: 'reports', icon: 'reports' },
 
       ]
 
