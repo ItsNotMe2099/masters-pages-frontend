@@ -1,9 +1,8 @@
 @import "scss/index";
 
-.root {
+.root {}
 
-}
-.title{
+.title {
   padding-bottom: 16px;
   font-weight: 700;
   font-size: 18px;
@@ -14,6 +13,7 @@
   display: table;
   width: 100%;
   margin-bottom: 24px;
+
   .row:nth-child(even) {
     background: #F6F6F6;
   }
@@ -24,6 +24,7 @@
     font-size: 14px;
     color: #000000;
     padding: 15px 10px;
+
     @media screen and (max-width: 428px) {
       width: 50%;
     }
@@ -50,6 +51,7 @@
     font-size: 14px;
     color: #000000;
     padding: 15px 10px;
+
     @media screen and (max-width: 428px) {
       width: 50%;
     }
@@ -63,26 +65,36 @@
     padding: 15px 10px;
     width: 20%;
     text-align: end;
+
     @media screen and (max-width: 1700px) {
       width: 100%;
     }
   }
 }
 
-.volunteer{
+.volunteer {
   display: flex;
   flex-direction: row;
   align-items: center;
   @include list(8px, true);
-  .name{
+
+  .name {
     flex: 1;
   }
 }
-.chevron{
+
+.chevron {
 
   transition: transform 0.6s ease;
   transform: rotate(-90deg);
-  &.opened{
+
+  &.opened {
     transform: rotate(0deg);
   }
+}
+
+.special {
+  padding: 10px;
+  background-color: lightgray;
+  border-radius: 8px;
 }
