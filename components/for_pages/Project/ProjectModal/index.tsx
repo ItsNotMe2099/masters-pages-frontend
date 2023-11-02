@@ -48,7 +48,7 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
   const dispatch = useDispatch()
   const tabs = (showType === 'client' && projectId && profile) ? [
     { name: 'Advertisement', key: 'description', icon: 'description' },
-    { name: 'Settings', key: 'autoReplies', icon: 'autoReplies' },
+    { name: 'Settings', key: 'settings', icon: 'settings' },
     {
       name: 'Volunteers', key: 'volunteers', icon: 'volunteers', badge: projectContext.notification?.notificationNewApplicationCount +
         projectContext.notification?.notificationApplicationCompleteRequestCount +
