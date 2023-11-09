@@ -17,6 +17,7 @@ interface Props {
   onIconClick?: (e) => void
   hidden?: boolean
   size?: any
+  disabled?: boolean
 }
 
 export default function Input({children, ...props}: Props) {
@@ -25,7 +26,7 @@ export default function Input({children, ...props}: Props) {
     <div className={`${styles.root} ${props.noMargin && styles.noMargin} ${(error && touched) && styles.rootWithError} ${props.labelType === 'cross' && styles.rootWithLabelCross} ${props.hidden && styles.hidden}`}>
       {props.labelType === 'static' && <label className={styles.labelStatic}>{props.label}</label>}
       <div className={styles.inputContainer}>
-        <BaseInput  {...props} placeholder={props.labelType === 'placeholder' ?  props.label : props.placeholder} withIcon={!!props.icon} />
+        <BaseInput disabled={props.disabled}  {...props} placeholder={props.labelType === 'placeholder' ?  props.label : props.placeholder} withIcon={!!props.icon} />
         {props.labelType === 'cross' && <label className={styles.labelCross}>{props.label}</label>}
         {props.icon && <div className={styles.icon} onClick={props.onIconClick}> {props.icon}</div>}
        </div>

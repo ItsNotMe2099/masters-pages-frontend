@@ -269,9 +269,9 @@ return (
       {confirmModalKey === 'confirm' && <ModalConfirm isOpen={true} onRequestClose={() => dispatch(confirmModalClose())}/>}
 
       {modalKey === 'eventCreateModal' &&
-      <ProjectNewEventModal projectId={props.project.id} range={newEventRange} isOpen={true} onClose={() => calendarContext.hideModal()}/>}
+      <ProjectNewEventModal  projectId={props.project.id} range={newEventRange} isOpen={true} onClose={() => calendarContext.hideModal()}/>}
       {(['confirm','eventEditModal', 'eventExpensePlannedModal', 'eventExpenseActualModal'].includes(modalKey) && (currentEvent)) &&
-      <ProjectEditEventModal  event={calendarContext.currentEvent} range={currentEditEventRange} isOpen={true} onClose={() => {
+      <ProjectNewEventModal projectId={props.project.id}  event={calendarContext.currentEvent} range={currentEditEventRange} isOpen={true} onClose={() => {
 
         calendarContext.hideModal()
       }}/>}

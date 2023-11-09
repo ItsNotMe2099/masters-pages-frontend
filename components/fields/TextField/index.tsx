@@ -59,7 +59,7 @@ export default function TextField(props: Props & FieldConfig) {
       <div className={styles.inputContainer}>
         {variant === 'currency' && !field.value ?
           <div className={styles.symbol}>{getCurrencySymbol(props.currency)}</div> : null}
-        <BaseTextField isNumbersOnly={props.isNumbersOnly} min={props.min} max={props.max} size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ? props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type} />
+        <BaseTextField disabled={props.disabled} isNumbersOnly={props.isNumbersOnly} min={props.min} max={props.max} size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ? props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type} />
         {props.labelType === LabelStyleType.Cross && <Label label={label} style={props.labelType} hasError={hasError} />}
         {props.icon && <div className={styles.icon} onClick={props.onIconClick}> {props.icon}</div>}
         {props.editable ? <EditFieldComponent className={styles.edit} onClick={props.onClick} /> : null}

@@ -165,4 +165,15 @@ export default class EventRepository {
     }
     return res.data
   }
+
+  static async list(projectId: number): Promise< IPagination<IEvent>> {
+    const res = await request({
+      url: `/api/event?projectId=${projectId}`,
+      method: 'GET'
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
 }
