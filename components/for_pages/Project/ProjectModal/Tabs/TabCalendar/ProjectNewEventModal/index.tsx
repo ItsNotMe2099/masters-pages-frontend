@@ -1,15 +1,9 @@
-import { fetchTaskUserListRequest, resetTaskUserList } from 'components/TaskUser/actions'
-
 import Modal from 'components/ui/Modal'
 import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
 import * as React from 'react'
-import { IEvent, IRootState } from 'types'
+import { IEvent} from 'types'
 import styles from './index.module.scss'
-
-import { useSelector, useDispatch } from 'react-redux'
-import NewEventForm from 'components/Calendar/components/NewEventModal/components/NewEventForm'
-import { createEvent } from 'components/Events/actions'
 import { useTranslation } from 'next-i18next'
 import ProjectNewEventForm
   from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectNewEventModal/components/ProjectNewEventForm";
@@ -30,6 +24,8 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
   const calendarContext = useEventCalendarContext()
   const eventContext = useEventContext();
   const projectContext = useProjectContext()
+
+  const [currentEvent, setCurrentEvent] = useState<string | null>(null)
 
   const [activeTab, setActiveTab] = useState('tasks')
   const { t } = useTranslation('common')
@@ -53,31 +49,28 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
     fetchEvents()
   }, [])
 
+  const submitEventRef = React.useRef<string | null>(null)
+
 
   const handleSubmitNewEvent = (data) => {
-    eventContext.create({
+     (!event || !eventContext.event) && eventContext.create({
       ...data, ...data.timeRange, timezone: format(new Date(), 'XXX'),
       priceType: 'fixed',
       ...(
         appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
       )
     })
-    //calendarContext.hideModal()
+    calendarContext.setCurrentEvent(event)
 
   }
+
   const handleCancel = () => {
     onClose()
   }
 
   console.log('TOTAL', total)
 
-  const submitEventRef = React.useRef<string | null>(null)
-  const handleSetSubmitEvent = (event: string | null) => {
-    submitEventRef.current = event;
-
-  }
-
-  console.log('EVVVVVENT', event)
+  console.log('EVVVVVENT', eventContext.event)
 
 
   return (
@@ -88,13 +81,13 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
       </div>
       <div className={styles.body}>
         {total !== null &&
-          <ProjectNewEventForm event={event} onSetSubmitEvent={handleSetSubmitEvent} total={total}
+          <ProjectNewEventForm event={event ? event : eventContext.event} total={total}
             initialValues=
             {{
-              title: event ? event.title : `Event #${total + 1}`, participantId: event ? event.participantId : null,
-              ...(range ? { timeRange: range } : {})
+              description: event? event.description : '', title: event ? event.title : `Event #${total + 1}`, participantId: event ? event.participantId : null,
+              ...(range ? { timeRange: range } : event ? { timeRange: { start: event.start, end: event.end } } : {})
             }}
-            onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={total + 1} />}
+        onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={total + 1} />}
       </div>
 
     </Modal>

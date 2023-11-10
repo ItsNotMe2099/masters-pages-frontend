@@ -26,6 +26,8 @@ import { useEventCalendarContext } from 'context/event_calendar'
 import EventRepository from 'data/repositories/EventRepository'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
+import { format } from 'date-fns'
+import { useProjectContext } from 'context/project_state'
 interface Props {
   onCancel: () => void
   initialValues?: any,
@@ -34,7 +36,7 @@ interface Props {
   eventNumber: number
   isPlannedDisabled?: boolean,
   total?: number
-  onSetSubmitEvent: (event: string) => void
+  //onSetSubmitEvent: (event: string, data?) => void
   event?: IEvent
 }
 let ProjectNewEventForm = (props: Props) => {
@@ -51,6 +53,9 @@ let ProjectNewEventForm = (props: Props) => {
   const participantId = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'participantId'))
   const title = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'title'))
   const timeRange = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'timeRange'))
+  const desc = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'description'))
+
+  const projectContext = useProjectContext()
 
   const { handleSubmit } = props
 
@@ -61,8 +66,11 @@ let ProjectNewEventForm = (props: Props) => {
     title: title,
     participantId: participantId,
     timeRange: timeRange,
+    description: desc
     // Add other form fields as needed
   }
+
+  console.log('TIMERANGE', timeRange)
 
 
   useEffect(() => {
@@ -71,11 +79,11 @@ let ProjectNewEventForm = (props: Props) => {
     }
   }, [])
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (timeRange && participantId) {
       props.onSubmit(formData)
     }
-  }, [participantId])
+  }, [participantId])*/
 
   console.log('participantId', participantId)
 
@@ -99,11 +107,10 @@ let ProjectNewEventForm = (props: Props) => {
   }
 
   const handleDraft = (e) => {
-    if (isTempEdit || isCurrentEventEditMode) {
-      props.onSetSubmitEvent('draftWithEdit')
-    }
-    handleSubmit(e)
+    
   }
+
+  console.log('EVEEVEVEVEVEVEVV', props.event)
 
   const handleSend = (e) => {
     const confirmText = props.event ? 
@@ -116,16 +123,33 @@ let ProjectNewEventForm = (props: Props) => {
       onConfirm: () => {
         if (isTempEdit || isCurrentEventEditMode) {
           if (props.event ? props.event.status === EventStatus.Completed : event.status === EventStatus.Completed) {
-            props.onSetSubmitEvent('complete')
+            eventContext.update('complete', {
+              ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+              priceType: 'fixed',
+              ...(
+                appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
+              )
+            })
           } else {
-            props.onSetSubmitEvent('sendWithEdit')
+            eventContext.update('sendWithEdit', {
+              ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+              priceType: 'fixed',
+              ...(
+                appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
+              )
+            }, props.event.id)
           }
 
         } else {
-          props.onSetSubmitEvent('send')
+          eventContext.update('send', {
+            ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+            priceType: 'fixed',
+            ...(
+              appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
+            )
+          }, props.event.id)
         }
 
-        handleSubmit(e)
         dispatch(confirmModalClose());
         calendarContext.showModal('eventEditModal')
       },
@@ -181,7 +205,7 @@ let ProjectNewEventForm = (props: Props) => {
         {!formLoading && <div className={styles.buttons}>
           <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
             type={'button'} onClick={handleDelete}>{t('delete')}</Button>
-          <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          <Button disabled={props.event ? props.event.status !== undefined : event ? event.status !== undefined : false}  className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
             type={'submit'} onClick={handleDraft}>{t('saveAsDraft')}</Button>
           <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
             type={'button'} onClick={handleSend}>{t('send')}</Button>

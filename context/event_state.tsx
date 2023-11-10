@@ -17,7 +17,7 @@ interface IState {
   currentActualExpenses: IEventExpense[]
   setCurrentExpenses: (data: IEventExpense[]) => void
   setCurrentActualExpenses: (data: IEventExpense[]) => void
-  update: (event: string, data: IEvent | DeepPartial<IEvent>) => void,
+  update: (event: string, data: IEvent | DeepPartial<IEvent>, id?: number) => void,
   create: (data: DeepPartial<IEvent>) => void,
   delete: () => void
   loading: boolean
@@ -34,7 +34,7 @@ const defaultValue: IState = {
   eventId: null,
   event: null,
   projectId: null,
-  update: (event: string, data: IEvent | DeepPartial<IEvent>) => null,
+  update: (event: string, data: IEvent | DeepPartial<IEvent>, id?: number) => null,
   create: (data: DeepPartial<IEvent>) => null,
   delete: () => null,
   loading: false,
@@ -121,28 +121,28 @@ export function EventWrapper(props: Props) {
     setEditLoading(false)
 
   }
-  const update = async (event: string, data: DeepPartial<IEvent>) => {
+  const update = async (event: string, data: DeepPartial<IEvent>, id?: number) => {
     try {
       setEditLoading(true)
-      let res = await EventRepository.update(props.eventId, data);
+      let res = await EventRepository.update(id, data);
       if (sendConfirmed) {
-        res = await EventRepository.sendConfirmed(props.eventId)
+        res = await EventRepository.sendConfirmed(id)
       }
       else {
         switch (event) {
           case 'complete':
-            res = await EventRepository.update(props.eventId, data);
-            res = await EventRepository.complete(props.eventId)
+            res = await EventRepository.update(id, data);
+            res = await EventRepository.complete(id)
             break;
           case 'sendWithEdit':
-            res = await EventRepository.update(props.eventId, data);
-            res = await EventRepository.send(props.eventId)
+            res = await EventRepository.update(id, data);
+            res = await EventRepository.send(id)
             break;
           case 'send':
-            res = await EventRepository.send(props.eventId)
+            res = await EventRepository.send(id)
             break;
           case 'draftWithEdit':
-            res = await EventRepository.update(props.eventId, data);
+            res = await EventRepository.update(id, data);
             break;
         }
       }
