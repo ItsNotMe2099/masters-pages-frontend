@@ -21,8 +21,11 @@ import ApplicationRepository from "data/repositories/ApplicationRepository";
 import { ApplicationStatus, IApplication } from "data/intefaces/IApplication";
 import { useAppContext } from "context/state";
 import TextArea from 'components/ui/Inputs/TextArea'
-import { confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import { confirmChangeData, confirmModalClose, confirmOpen } from 'components/Modal/actions'
 import { useEventCalendarContext } from 'context/event_calendar'
+import EventRepository from 'data/repositories/EventRepository'
+import { ProfileRole } from 'data/intefaces/IProfile'
+import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 interface Props {
   onCancel: () => void
   initialValues?: any,
@@ -79,8 +82,11 @@ let ProjectNewEventForm = (props: Props) => {
   const handleDelete = () => {
     dispatch(confirmOpen({
       description: t('timePlaceChargeForm.deletionIsFinal'),
-      onConfirm: () => {
-        eventContext.delete()
+      onConfirm: async () => {
+        dispatch(confirmChangeData({ loading: true }))
+        await EventRepository.delete(props.event ? props.event.id : event.id)
+        console.log("Deleted111")
+        appContext.eventDeleteState$.next(event)
         dispatch(confirmModalClose());
         calendarContext.hideModal() // hide event modal after delete
       },
@@ -100,13 +106,16 @@ let ProjectNewEventForm = (props: Props) => {
   }
 
   const handleSend = (e) => {
-    const confirmText = event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
+    const confirmText = props.event ? 
+    props.event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
+    :
+    event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
 
     dispatch(confirmOpen({
       description: confirmText,
       onConfirm: () => {
         if (isTempEdit || isCurrentEventEditMode) {
-          if (event.status === EventStatus.Completed) {
+          if (props.event ? props.event.status === EventStatus.Completed : event.status === EventStatus.Completed) {
             props.onSetSubmitEvent('complete')
           } else {
             props.onSetSubmitEvent('sendWithEdit')
@@ -151,10 +160,16 @@ let ProjectNewEventForm = (props: Props) => {
             validate={required}
             disabled={props.event?.participantId ? true : false}
           />}
+          {(props.event || event) && <div className={styles.states}>
+            <StateButton event={props.event ? props.event : event} type={ProfileRole.Client} />
+            <div className={styles.spacer} />
+            <StateButton event={props.event ? props.event : event} type={ProfileRole.Master} />
+
+          </div>}
           <Field
             name="timeRange"
             component={DateTimeRange}
-
+            disabled={props.event}
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
@@ -164,11 +179,11 @@ let ProjectNewEventForm = (props: Props) => {
         </div>
 
         {!formLoading && <div className={styles.buttons}>
-          <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
             type={'button'} onClick={handleDelete}>{t('delete')}</Button>
-          <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
             type={'submit'} onClick={handleDraft}>{t('saveAsDraft')}</Button>
-          <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
             type={'button'} onClick={handleSend}>{t('send')}</Button>
         </div>}
       </>}

@@ -77,6 +77,8 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
 
   }
 
+  console.log('EVVVVVENT', event)
+
 
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
@@ -89,7 +91,7 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
           <ProjectNewEventForm event={event} onSetSubmitEvent={handleSetSubmitEvent} total={total}
             initialValues=
             {{
-              title: `Event #${total + 1}`, participantId: event ? event.participantId : null,
+              title: event ? event.title : `Event #${total + 1}`, participantId: event ? event.participantId : null,
               ...(range ? { timeRange: range } : {})
             }}
             onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={total + 1} />}

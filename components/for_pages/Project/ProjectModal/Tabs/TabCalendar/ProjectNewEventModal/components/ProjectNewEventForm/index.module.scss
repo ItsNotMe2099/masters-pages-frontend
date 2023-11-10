@@ -1,3 +1,5 @@
+@import "scss/index";
+
 .root{
 
 }
@@ -14,6 +16,7 @@
   justify-content: flex-end;
   margin-top: 20px;
   padding: 0px 35px;
+  @include list(15px, true);
   @media screen and (max-width: 415px){
     padding: 0 15px;
   }
@@ -27,9 +30,24 @@
 }
 .buttonSubmit{
   flex: 1;
-  margin-left: 15px;
 }
 .containerButtons{
   padding: 20px 28px 0px;
   text-align: center;
+}
+
+.states{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 18px 30px 18px 30px;
+
+  > div{
+    flex: 1;
+
+  }
+  .spacer{
+    flex: none;
+    width: 16px;
+  }
 }
