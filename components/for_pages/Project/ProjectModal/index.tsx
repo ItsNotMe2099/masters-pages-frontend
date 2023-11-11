@@ -120,7 +120,7 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
             {tab === 'application' && <TabApplication />}
             {tab === 'volunteers' && <TabVolunteers project={projectContext.project} />}
             {tab === 'messages' && <TabChat project={projectContext.project} />}
-            {tab === 'autoReplies' && <ProjectAutorepliesTab project={projectContext.project} />}
+            {tab === 'settings' && <ProjectAutorepliesTab project={projectContext.project} />}
             {tab === 'reports' && (profile.role !== ProfileRole.Volunteer ? <TabReports project={projectContext.project} />
               :
               <TabReportsForVolunteer project={projectContext.project} />
