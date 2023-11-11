@@ -23,9 +23,9 @@ interface IState {
   loading: boolean
   editLoading: boolean,
   reject: () => void,
-  approve: () => void,
-  decline: () => void,
-  confirm: () => void,
+  approve: (id?: number) => void,
+  decline: (id?: number) => void,
+  confirm: (id?: number) => void,
   sendConfirmed: boolean,
   setSendConfirmed: (val: boolean) => void
 }
@@ -44,9 +44,9 @@ const defaultValue: IState = {
   setCurrentExpenses: (data: IEventExpense[]) => null,
   setCurrentActualExpenses: (data: IEventExpense[]) => null,
   reject: () => null,
-  approve: () => null,
-  decline: () => null,
-  confirm: () => null,
+  approve: (id?: number) => null,
+  decline: (id?: number) => null,
+  confirm: (id?: number) => null,
   sendConfirmed: false,
   setSendConfirmed: (val) => null
 }
@@ -172,10 +172,10 @@ export function EventWrapper(props: Props) {
     }
     setEditLoading(false)
   }
-  const approve = async () => {
+  const approve = async (id?: number) => {
     try {
       setEditLoading(true)
-      const res = await EventRepository.approve(props.eventId)
+      const res = await EventRepository.approve(id)
       const formatted = formatEvent(res)
       setEvent(formatted)
       handleUpdate(formatted)
@@ -187,10 +187,10 @@ export function EventWrapper(props: Props) {
     }
     setEditLoading(false)
   }
-  const confirm = async () => {
+  const confirm = async (id?: number) => {
     try {
       setEditLoading(true)
-      const res = await EventRepository.confirm(props.eventId)
+      const res = await EventRepository.confirm(id)
       const formatted = formatEvent(res)
       setEvent(formatted)
       handleUpdate(formatted)
@@ -199,10 +199,10 @@ export function EventWrapper(props: Props) {
     }
     setEditLoading(false)
   }
-  const decline = async () => {
+  const decline = async (id?: number) => {
     try {
       setEditLoading(true)
-      const res = await EventRepository.decline(props.eventId)
+      const res = await EventRepository.decline(id)
       const formatted = formatEvent(res)
       setEvent(formatted)
       handleUpdate(formatted)

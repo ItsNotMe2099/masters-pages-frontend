@@ -39,8 +39,25 @@ interface Props {
   //onSetSubmitEvent: (event: string, data?) => void
   event?: IEvent
 }
+
+enum ButtonType {
+  Delete = 'Delete',
+  Draft = 'Draft',
+  Send = 'Send',
+  Decline = 'Decline',
+  Confirm = 'Confirm',
+  Edit = 'Edit',
+  EditResults = 'EditResults',
+  Cancel = 'Cancel',
+  DeclineDelete = 'DeclineDelete',
+  RestoreDelete = 'RestoreDelete',
+  Complete = 'Complete',
+  Approve = 'Approve'
+}
+
 let ProjectNewEventForm = (props: Props) => {
   const appContext = useAppContext()
+  const profile = appContext.profile
   const eventContext = useEventContext()
   const formLoading = eventContext.editLoading
   const calendarContext = useEventCalendarContext()
@@ -49,6 +66,7 @@ let ProjectNewEventForm = (props: Props) => {
   const event = eventContext.event
   const isCurrentEventEditMode = calendarContext.isEditMode
   const [isTempEdit, setIsTempEdit] = useState(false)
+  const isAuthor = isTempEdit || event && profile.id === event.authorId || props.event && profile.id === props.event.authorId
 
   const participantId = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'participantId'))
   const title = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'title'))
@@ -107,16 +125,113 @@ let ProjectNewEventForm = (props: Props) => {
   }
 
   const handleDraft = (e) => {
-    
+
   }
 
   console.log('EVEEVEVEVEVEVEVV', props.event)
+  console.log('EVEEVEVEVEVEVEVV2', event)
+
+  const getButtonKeys = () => {
+    let keys = []
+
+    console.log("GetButtonsKeys", isAuthor, '2323', isTempEdit, isCurrentEventEditMode, event?.status)
+    if (isTempEdit || isCurrentEventEditMode) {
+      keys = [ButtonType.Cancel, ButtonType.Send]
+    } else if (isAuthor) {
+      if (!event && !props.event) {
+        keys = [ButtonType.Draft]
+      }
+      else if (event?.status === EventStatus.Draft || props.event.status === EventStatus.Draft) {
+        keys = [ButtonType.Delete, ButtonType.Send]
+      } else if (event?.status === EventStatus.Planned || props.event.status === EventStatus.Planned) {
+        keys = [ButtonType.Cancel, ButtonType.Delete]
+      } else if (event?.status === EventStatus.Declined || props.event.status === EventStatus.Declined) {
+        keys = [ButtonType.Cancel, ButtonType.Delete]
+      } else if (event?.status === EventStatus.Confirmed || props.event.status === EventStatus.Confirmed) {
+        keys = [ButtonType.DeclineDelete, ButtonType.Complete]
+      } else if (event?.status === EventStatus.Completed || props.event.status === EventStatus.Completed) {
+        keys = [ButtonType.Cancel, ButtonType.Delete]
+      } else if (event?.status === EventStatus.Approved || props.event.status === EventStatus.Approved) {
+        keys = [ButtonType.Cancel, ButtonType.Delete]
+      } else if (event?.status === EventStatus.Deleted || props.event.status === EventStatus.Deleted) {
+        keys = [ButtonType.Cancel, ButtonType.RestoreDelete]
+      }
+    } else {
+      if (!event && !props.event) {
+        keys = [ButtonType.Draft]
+      }
+      else if (event?.status === EventStatus.Draft || props.event.status === EventStatus.Draft) {
+        //Недостижмое
+        keys = [ButtonType.Delete, ButtonType.Send]
+      } else if (event?.status === EventStatus.Planned || props.event.status === EventStatus.Planned) {
+        keys = [ButtonType.Decline, ButtonType.Confirm]
+      } else if (event?.status === EventStatus.Declined || props.event.status === EventStatus.Declined) {
+        keys = [ButtonType.Cancel, ButtonType.Delete]
+      } else if (event?.status === EventStatus.Confirmed || props.event.status === EventStatus.Confirmed) {
+        keys = [ButtonType.DeclineDelete, ButtonType.Complete]
+      } else if (event?.status === EventStatus.Completed || props.event.status === EventStatus.Completed) {
+        keys = [ButtonType.DeclineDelete, ButtonType.Approve, ButtonType.EditResults]
+      } else if (event?.status === EventStatus.Approved || props.event.status === EventStatus.Approved) {
+        keys = [ButtonType.Cancel, ButtonType.Delete]
+      } else if (event?.status === EventStatus.Deleted) {
+        keys = [ButtonType.Cancel, ButtonType.RestoreDelete, ButtonType.Delete]
+      }
+    }
+    return keys
+
+  }
+
+  const handleComplete = (e) => {
+    dispatch(confirmOpen({
+      description: t('timePlaceChargeForm.yourConsent'),
+      onConfirm: () => {
+        calendarContext.showModal('eventEditModal')
+        eventContext.update('complete', {
+          ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+          priceType: 'fixed',
+          ...(
+            appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
+          )
+        }, event ? event.id : props.event.id)
+        dispatch(confirmModalClose());
+
+      },
+      onCancel: () => {
+        dispatch(confirmModalClose());
+        calendarContext.showModal('eventEditModal')
+      }
+    }))
+
+  }
+  const handleRestore = (e) => {
+    dispatch(confirmModalClose());
+    eventContext.reject()
+    calendarContext.showModal('eventEditModal')
+
+  }
+  const handleApprove = () => {
+
+    dispatch(confirmOpen({
+      description: t('timePlaceChargeForm.approvalIsFinal'),
+      onConfirm: () => {
+        dispatch(confirmModalClose());
+        calendarContext.showModal('eventEditModal')
+        eventContext.approve(event ? event.id : props.event.id)
+      },
+      onCancel: () => {
+        dispatch(confirmModalClose());
+        calendarContext.showModal('eventEditModal')
+      }
+    }))
+
+
+  }
 
   const handleSend = (e) => {
-    const confirmText = props.event ? 
-    props.event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
-    :
-    event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
+    const confirmText = props.event ?
+      props.event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
+      :
+      event.status === EventStatus.Completed ? t('timePlaceChargeForm.yourConsent') : t('timePlaceChargeForm.yourInvitation')
 
     dispatch(confirmOpen({
       description: confirmText,
@@ -129,7 +244,7 @@ let ProjectNewEventForm = (props: Props) => {
               ...(
                 appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
               )
-            })
+            }, event ? event.id : props.event.id)
           } else {
             eventContext.update('sendWithEdit', {
               ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
@@ -137,7 +252,7 @@ let ProjectNewEventForm = (props: Props) => {
               ...(
                 appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
               )
-            }, props.event.id)
+            }, event ? event.id : props.event.id)
           }
 
         } else {
@@ -147,7 +262,7 @@ let ProjectNewEventForm = (props: Props) => {
             ...(
               appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
             )
-          }, props.event.id)
+          }, event ? event.id : props.event.id)
         }
 
         dispatch(confirmModalClose());
@@ -159,6 +274,92 @@ let ProjectNewEventForm = (props: Props) => {
       }
     }))
   }
+
+
+  const handleCancel = () => {
+    if (isTempEdit) {
+      setIsTempEdit(false)
+    } else {
+      props.onCancel()
+    }
+  }
+
+  const handleConfirm = () => {
+    dispatch(confirmOpen({
+      description: t('timePlaceChargeForm.confirmIsFinal'),
+      onConfirm: () => {
+        dispatch(confirmModalClose());
+        eventContext.confirm(event ? event.id : props.event.id)
+      },
+      onCancel: () => {
+        dispatch(confirmModalClose());
+        calendarContext.showModal('eventEditModal')
+      }
+    }))
+  }
+  const handleDecline = () => {
+    dispatch(confirmOpen({
+      description: t('timePlaceChargeForm.declineIsFinal'),
+      onConfirm: () => {
+        dispatch(confirmModalClose());
+        eventContext.decline(event ? event.id : props.event.id)
+
+      },
+      onCancel: () => {
+        dispatch(confirmModalClose());
+        calendarContext.showModal('eventEditModal')
+      }
+    }))
+  }
+
+  const handleEdit = (e) => {
+    setIsTempEdit(true)
+    e.preventDefault()
+    //dispatch(editEventRequest(event.id))
+    // dispatch(deleteEvent(event.id))
+  }
+  const renderButton = (type: ButtonType) => {
+    switch (type) {
+      case ButtonType.Delete:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleDelete}>{t('delete')}</Button>
+      case ButtonType.Draft:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'submit'} onClick={handleDraft}>{t('saveAsDraft')}</Button>
+
+      case ButtonType.Send:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleSend}>{t('send')}</Button>
+      case ButtonType.Decline:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleDecline}>{t('decline')}</Button>
+      case ButtonType.Confirm:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleConfirm}>{t('confirm')}</Button>
+      case ButtonType.Edit:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleEdit}>{t('edit')}</Button>
+      case ButtonType.EditResults:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleEdit}>{t('editResults')}</Button>
+      case ButtonType.Cancel:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleCancel}>{t('cancel')}</Button>
+      case ButtonType.DeclineDelete:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleDelete}>{t('declineAndDelete')}</Button>
+      case ButtonType.RestoreDelete:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleRestore}>{t('restore')}</Button>
+      case ButtonType.Complete:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleComplete}>{t('complete')}</Button>
+      case ButtonType.Approve:
+        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+          type={'button'} onClick={handleApprove}>{t('approve')}</Button>
+    }
+  }
+
 
 
   return (
@@ -185,9 +386,9 @@ let ProjectNewEventForm = (props: Props) => {
             disabled={props.event?.participantId ? true : false}
           />}
           {(props.event || event) && <div className={styles.states}>
-            <StateButton event={props.event ? props.event : event} type={ProfileRole.Client} />
+            <StateButton event={props.event ? props.event : event} type={ProfileRole.Corporate} />
             <div className={styles.spacer} />
-            <StateButton event={props.event ? props.event : event} type={ProfileRole.Master} />
+            <StateButton event={props.event ? props.event : event} type={ProfileRole.Volunteer} />
 
           </div>}
           <Field
@@ -203,12 +404,7 @@ let ProjectNewEventForm = (props: Props) => {
         </div>
 
         {!formLoading && <div className={styles.buttons}>
-          <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-            type={'button'} onClick={handleDelete}>{t('delete')}</Button>
-          <Button disabled={props.event ? props.event.status !== undefined : event ? event.status !== undefined : false}  className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-            type={'submit'} onClick={handleDraft}>{t('saveAsDraft')}</Button>
-          <Button disabled={props.event ? false : event ? false : true} className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
-            type={'button'} onClick={handleSend}>{t('send')}</Button>
+          {getButtonKeys().map(type => renderButton(type))}
         </div>}
       </>}
     </form>

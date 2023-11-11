@@ -33,6 +33,16 @@ const TabReportEvents = ({ project }: Props) => {
     })
   }, [])
 
+  const convertMinutesToHoursAndMinutes = (minutes: number): string => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    const hoursText = hours > 0 ? `${hours} hr` : '';
+    const minutesText = remainingMinutes > 0 ? `${remainingMinutes} min` : '';
+
+    return `${hoursText} ${minutesText}`;
+  }
+
   return (
     <div className={styles.root}>
       {loading && <Loader />}
@@ -48,7 +58,7 @@ const TabReportEvents = ({ project }: Props) => {
           </div>
           <div className={styles.row}>
             {report.summary.map(i => (
-              <div className={classNames(styles.cell, styles.draft)}>{i.count}</div>
+              <div className={classNames(styles.cell, styles.draft)}>{convertMinutesToHoursAndMinutes(i.count)}</div>
             ))}
           </div>
         </div>
@@ -72,22 +82,22 @@ const TabReportEvents = ({ project }: Props) => {
                   <Link href={Routes.profile({ id: i.participantId, slug: i.slug } as any as IProfile)}><a className={styles.name}>{i.firstName ?? ''} {i.lastName ?? ''}</a></Link>
                 </div>
               </div>
-              <div className={classNames(styles.cell, styles.draft)}>{i.draft}</div>
-              <div className={classNames(styles.cell, styles.planned)}>{i.planned}</div>
-              <div className={classNames(styles.cell, styles.completed)}>{i.completed}</div>
-              <div className={classNames(styles.cell, styles.confirmed)}>{i.confirmed}</div>
-              <div className={classNames(styles.cell, styles.confirmed)}>{i.approved}</div>
+              <div className={classNames(styles.cell, styles.draft)}>{convertMinutesToHoursAndMinutes(i.draft)}</div>
+              <div className={classNames(styles.cell, styles.planned)}>{convertMinutesToHoursAndMinutes(i.planned)}</div>
+              <div className={classNames(styles.cell, styles.completed)}>{convertMinutesToHoursAndMinutes(i.completed)}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{convertMinutesToHoursAndMinutes(i.confirmed)}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{convertMinutesToHoursAndMinutes(i.approved)}</div>
             </div>
             {expandedVolunteers.includes(i.participantId) && report.byDate.filter(a => a.participantId === i.participantId).map(i => (
               <div className={styles.row}>
                 <div className={styles.label}>
                   {i.date}
                 </div>
-                <div className={classNames(styles.cell, styles.draft)}>{i.draft}</div>
-                <div className={classNames(styles.cell, styles.planned)}>{i.planned}</div>
-                <div className={classNames(styles.cell, styles.completed)}>{i.completed}</div>
-                <div className={classNames(styles.cell, styles.confirmed)}>{i.confirmed}</div>
-                <div className={classNames(styles.cell, styles.confirmed)}>{i.approved}</div>
+                <div className={classNames(styles.cell, styles.draft)}>{convertMinutesToHoursAndMinutes(i.draft)}</div>
+                <div className={classNames(styles.cell, styles.planned)}>{convertMinutesToHoursAndMinutes(i.planned)}</div>
+                <div className={classNames(styles.cell, styles.completed)}>{convertMinutesToHoursAndMinutes(i.completed)}</div>
+                <div className={classNames(styles.cell, styles.confirmed)}>{convertMinutesToHoursAndMinutes(i.confirmed)}</div>
+                <div className={classNames(styles.cell, styles.confirmed)}>{convertMinutesToHoursAndMinutes(i.approved)}</div>
               </div>
             ))}
           </>
