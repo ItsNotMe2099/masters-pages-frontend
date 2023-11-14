@@ -28,6 +28,7 @@ import { ModalType } from "types/enums";
 import ProjectApplicationNote from "components/for_pages/Project/ProjectModal/ProjectApplicationNote";
 import TabProjectCalendar from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar";
 import TabReportsForVolunteer from './Tabs/TabReportsForVolunteer'
+import TabPosts from './Tabs/TabPosts'
 
 interface Props {
   showType: 'client' | 'public'
@@ -57,6 +58,7 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
     },
     { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
     { name: 'Events', key: 'events', icon: 'events' },
+    { name: 'Posts', key: 'posts', icon: 'posts' },
     { name: 'Live Stats', key: 'reports', icon: 'reports' },
   ] :
     ((!profile || showType === 'client' && !projectId)) ?
@@ -68,6 +70,7 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
         { name: 'Application', key: 'application', icon: 'application' },
         { name: 'Messages', key: 'messages', icon: 'messages', badge: projectContext.notification?.notificationProjectGroupChatMessagesCount + projectContext.notification?.notificationProjectChatMessagesCount },
         { name: 'Events', key: 'events', icon: 'events' },
+        { name: 'Posts', key: 'posts', icon: 'posts' },
         { name: 'Live Stats', key: 'reports', icon: 'reports' },
 
       ]
@@ -126,6 +129,7 @@ const ProjectModalInner = ({ projectId, isOpen, showType, initialTab, isEdit, ..
               <TabReportsForVolunteer project={projectContext.project} />
             )}
             {tab === 'events' && <TabProjectCalendar project={projectContext.project} />}
+            {tab === 'posts' && <TabPosts project={projectContext.project} />}
           </>}
         </div>
       </div>
