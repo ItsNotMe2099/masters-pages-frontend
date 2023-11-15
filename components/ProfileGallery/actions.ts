@@ -4,7 +4,7 @@ import { action } from 'typesafe-actions'
 const queryString = require('query-string')
 interface IProfileGalleryList{
   profileTabId?: number
-  profileId: number,
+  profileId?: number,
   categoryId?: number,
   subCategoryId?: number,
   limit: number,

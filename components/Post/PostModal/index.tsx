@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import PostForm from 'components/Post/PostModal/PostForm'
 import {createProfileGallery, resetProfileGalleryForm, updateProfileGallery} from 'components/ProfileGallery/actions'
 import {useTranslation} from 'next-i18next'
+import { useAppContext } from 'context/state'
 interface Props {
   isOpen: boolean,
   currentEditPost?: IProfileGalleryItem
@@ -18,6 +19,7 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
   const loading = useSelector((state: IRootState) => state.skill.formLoading)
   const dispatch = useDispatch()
   const {t} = useTranslation('common')
+  const appContext = useAppContext()
   useEffect(() => {
     if(isOpen){
       dispatch(resetProfileGalleryForm())
@@ -31,6 +33,7 @@ const PostModal = ({isOpen, currentEditPost, onClose}: Props) => {
       dispatch(updateProfileGallery(currentEditPost.id, {...data
       }))
     }
+    appContext.hideModal()
   }
 
   return (

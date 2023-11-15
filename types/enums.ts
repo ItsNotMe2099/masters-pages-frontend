@@ -9,7 +9,8 @@ export enum RegistrationMode{
 }
 
 export enum ModalType {
-  VolunteerFeedBackModal
+  VolunteerFeedBackModal,
+  PostEditOpen
 }
 
 export enum SnackbarType {

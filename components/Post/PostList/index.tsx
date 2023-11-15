@@ -25,6 +25,7 @@ import {useAppContext} from 'context/state'
 interface Props{
   profileId?: number
   onEdit?: (item) => void
+  allPosts?: boolean
 }
 const PostList = (props: Props) => {
   const {t} = useTranslation('common')
@@ -45,13 +46,17 @@ const PostList = (props: Props) => {
   const limit = 30
   useEffect(() => {
     dispatch(resetProfileGalleryList())
-    dispatch(fetchProfileGalleryList({
+    const data = props.allPosts ? {
+      page: 1,
+      limit
+    } : {
       profileId: props.profileId || profile.id,
       page: 1,
       limit
-    }))
+    }
+    dispatch(fetchProfileGalleryList(data))
 
-  }, [])
+  }, [props.allPosts])
   const handleSortChange = (sort) => {
 
   }
@@ -86,12 +91,14 @@ const PostList = (props: Props) => {
     <div>
         {(listLoading && total === 0) && <Loader/>}
         {total > 0 && <InfiniteScroll
+          
           dataLength={list.length} //This is important field to render the next data
           next={handleScrollNext}
+          scrollableTarget='scrollableDiv'
           className={styles.list}
           hasMore={total > list.length}
           loader={listLoading ? <Loader/> : null}>
-          {list.map((item, index) => <GalleryItem isEdit={isEdit} model={item} onClick={(model) => showGallery(model, index)} onEdit={handleEdit} onDelete={handleDelete}/>)}
+          {list.map((item, index) => <GalleryItem isEdit={isEdit && item.profileId === profile.id} model={item} onClick={(model) => showGallery(model, index)} onEdit={handleEdit} onDelete={handleDelete}/>)}
         </InfiniteScroll>}
         {isGalleryOpen && <GalleryModal isNews={false} isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)}/>}
 

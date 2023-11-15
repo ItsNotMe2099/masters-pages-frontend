@@ -26,6 +26,8 @@ export enum ProjectReportsTabType {
   Categories = 'categories',
 }
 
+
+
 export enum ProjectReportsTabTypeProject {
   Summary = 'summary',
   Events = 'events',

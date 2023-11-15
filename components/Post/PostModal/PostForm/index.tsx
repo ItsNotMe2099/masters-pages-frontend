@@ -47,11 +47,7 @@ let PostForm = (props) => {
         labelType="placeholder"
         label={t('follower.postForm.uploadPhoto')}
       />
-      {profile.role !== 'client' && <Field
-        name="showInPortfolio"
-        component={Checkbox}
-        label={t('follower.postForm.showInPortfolio')}
-      />}
+      
 
       {(showInPortfolio) && <Field
         name="subCategoryId"
@@ -99,6 +95,11 @@ let PostForm = (props) => {
         component={Checkbox}
         label={<div>{t('follower.postForm.commentsAllowed')}</div>}
       />
+      {profile.role !== 'client' && <Field
+        name="showInPortfolio"
+        component={Checkbox}
+        label={t('follower.postForm.showInPortfolio')}
+      />}
       <FormError error={error}/>
       <div className={styles.buttons}>
         <Button size={'small'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>

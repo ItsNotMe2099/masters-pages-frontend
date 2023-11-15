@@ -1,7 +1,7 @@
 @import "scss/index";
 
 
-.chatArea{
+.chatArea {
   margin-top: 24px;
   position: relative;
   border: 1px solid #c9c9c9;
@@ -11,47 +11,56 @@
   flex-direction: row;
   width: 100%;
   align-items: stretch;
-  @media (max-width: $xs-max){
+
+  @media (max-width: $xs-max) {
     display: block;
   }
 }
-.rootLoading{
+
+.rootLoading {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.chatList{
+
+.chatList {
   min-width: 220px;
   border-right: 1px solid #DDDDE5;
   overflow-y: auto;
   min-height: 50%;
   width: 34%;
-  @media (max-width: $xs-max){
+
+  @media (max-width: $xs-max) {
     width: 100%;
   }
 }
-.chatMessages{
+
+.chatMessages {
   display: flex;
   flex: 1;
   align-items: stretch;
   width: 100%;
   min-height: 100%;
-  @media screen and (max-width: $xs-max){
+
+  @media screen and (max-width: $xs-max) {
     display: none;
   }
 }
-.chatMessagesMobile{
+
+.chatMessagesMobile {
   display: flex;
   flex: 1;
   align-items: stretch;
   width: 100%;
   position: absolute;
   min-height: 84%;
-  @media screen and (min-width: 769px){
+
+  @media screen and (min-width: 769px) {
     display: none;
   }
 }
-.tab{
+
+.tab {
   font-weight: 500;
   height: 72px;
   display: flex;
@@ -61,16 +70,18 @@
   background: #fff;
 }
 
-.section{
+.section {
   padding: 20px;
   border: 1px solid rgba(196, 196, 196, 1);
   border-radius: 3px;
-  .sectionHeader{
+
+  .sectionHeader {
     font-size: 14px;
     color: black;
     font-weight: 500;
   }
-  .sectionContent{
+
+  .sectionContent {
     margin-top: 25px;
     color: rgba(109, 113, 140, 1);
     font-size: 14px;
@@ -84,10 +95,12 @@
 .info {
 
   color: #6D718C;
-    font-size: 14px;
-  .left{
+  font-size: 14px;
+
+  .left {
     flex: 1;
   }
+
   .top {
     display: flex;
     flex-direction: row;
@@ -124,7 +137,8 @@
     align-items: center;
     margin-top: 16px;
     font-size: 14px;
-    @media screen and (max-width: 450px){
+
+    @media screen and (max-width: 450px) {
       font-size: 12px;
     }
 
@@ -140,7 +154,8 @@
       img {
         margin-right: 4px;
       }
-      @media screen and (max-width: 400px){
+
+      @media screen and (max-width: 400px) {
         flex-direction: column;
       }
     }
@@ -155,67 +170,83 @@
   }
 }
 
-.right{
+.right {
   display: flex;
   flex-direction: column;
   grid-gap: 24px 0px;
-  .sectionContent{
+
+  .sectionContent {
     margin-top: 15px;
   }
-  .header{
+
+  .header {
     text-transform: uppercase;
     font-size: 24px;
     font-weight: 700;
     color: black;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
   }
-  @media screen and (max-width: 450px){
+
+  @media screen and (max-width: 450px) {
     font-size: 10px;
   }
 }
 
-.date{
+.date {
   display: flex;
   align-self: flex-start;
   align-items: center;
-  @media screen and (max-width: 400px){
+
+  @media screen and (max-width: 400px) {
     margin-top: 5px;
   }
 }
 
-.desktop{
-  @media screen and (max-width: $xs-max){
+.desktop {
+  @media screen and (max-width: $xs-max) {
     display: none;
   }
 }
 
-.mobile{
-  @media screen and (min-width: 769px){
+.mobile {
+  @media screen and (min-width: 769px) {
     display: none;
   }
 }
 
-.container{
+.container {
   max-width: 100%;
   padding-top: 51px;
   padding-bottom: 50px;
-  @include lg{
+
+  @include lg {
     width: 100%;
     margin: auto;
   }
-  @media screen and (max-width: $xs-max){
+
+  @media screen and (max-width: $xs-max) {
     padding: 17px 0 0 0;
-}
-
-  @include xll {
-    
   }
+
+  @include xll {}
 }
 
-.list{
+.list {
   margin-top: 34px;
   display: grid;
   grid-template-columns: repeat(3, 2fr);
   grid-template-rows: 1fr 1fr 1fr;
   gap: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabs {
+  margin-top: 0;
 }
