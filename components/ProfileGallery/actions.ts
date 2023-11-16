@@ -11,7 +11,7 @@ interface IProfileGalleryList{
   page: number,
   sort?: string,
   sortOrder?: string
-  projectId: number
+  projectId?: number
 }
 
 interface IProfileGalleryItemCommentList{
