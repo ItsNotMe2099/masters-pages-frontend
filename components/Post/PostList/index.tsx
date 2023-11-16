@@ -26,6 +26,7 @@ interface Props{
   profileId?: number
   onEdit?: (item) => void
   allPosts?: boolean
+  projectId?: number
 }
 const PostList = (props: Props) => {
   const {t} = useTranslation('common')
@@ -47,10 +48,13 @@ const PostList = (props: Props) => {
   useEffect(() => {
     dispatch(resetProfileGalleryList())
     const data = props.allPosts ? {
+      profileId: null,
+      projectId: props.projectId,
       page: 1,
       limit
     } : {
       profileId: props.profileId || profile.id,
+      projectId: props.projectId,
       page: 1,
       limit
     }
@@ -64,6 +68,7 @@ const PostList = (props: Props) => {
     dispatch(setPageTaskUser(page + 1))
     dispatch(fetchProfileGalleryList({
       profileId: props.profileId || profile.id,
+      projectId: props.projectId,
       page: page + 1,
       limit
     }))

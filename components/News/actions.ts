@@ -8,6 +8,7 @@ interface INewsList{
   page: number,
   sort?: string,
   sortOrder?: string
+  projectId?: number
 }
 
 interface INewsItemCommentList{

@@ -7,28 +7,32 @@ import styles from './index.module.scss'
 import { useSelector, useDispatch, connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import Button from 'components/PublicProfile/components/Button'
-import { required} from 'utils/validations'
+import { required } from 'utils/validations'
 import SelectInput from 'components/ui/Inputs/SelectInput'
 import AvatarInput from 'components/ui/AvatarInput'
 import Checkbox from 'components/ui/Inputs/Checkbox'
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 
-import {fetchProfileTabList} from 'components/ProfileTab/actions'
-import {useTranslation} from 'next-i18next'
+import { fetchProfileTabList } from 'components/ProfileTab/actions'
+import { useTranslation } from 'next-i18next'
 import InputSkill from 'components/ui/Inputs/InputSkill'
-import {useAppContext} from 'context/state'
+import { useAppContext } from 'context/state'
+import ProjectRepository from 'data/repositories/ProjectRepository'
+import { IProject } from 'data/intefaces/IProject'
 
 let PostForm = (props) => {
-  const {categoryId, subCategoryId, showInPortfolio} = props
+  const { categoryId, subCategoryId, showInPortfolio } = props
   const dispatch = useDispatch()
   const appContext = useAppContext();
   const profile = appContext.profile
   const error = useSelector((state: IRootState) => state.profileGallery.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'gallery')
-  const {t} = useTranslation('common')
+  const { t } = useTranslation('common')
+
+  const [projects, setProjects] = React.useState<IProject[]>([])
 
   useEffect(() => {
-    if(categoryId && subCategoryId) {
+    if (categoryId && subCategoryId) {
       dispatch(fetchProfileTabList({
         profileId: profile.id,
         categoryId,
@@ -36,6 +40,18 @@ let PostForm = (props) => {
       }))
     }
   }, [categoryId, subCategoryId, showInPortfolio])
+
+  const fetchProjects = async () => {
+    await ProjectRepository.fetch().then(i => {
+      if (i) {
+        setProjects(i.data)
+      }
+    })
+  }
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
 
 
   return (
@@ -47,7 +63,7 @@ let PostForm = (props) => {
         labelType="placeholder"
         label={t('follower.postForm.uploadPhoto')}
       />
-      
+
 
       {(showInPortfolio) && <Field
         name="subCategoryId"
@@ -63,11 +79,19 @@ let PostForm = (props) => {
         label={t('follower.postForm.tab')}
         component={SelectInput}
         size={'small'}
-        options={profileTabs.map(item => ({label: item.title, value: item.id}))}
+        options={profileTabs.map(item => ({ label: item.title, value: item.id }))}
         withIcon={false}
         showEmpty={false}
         validate={required}
       />}
+      <Field
+        name="project"
+        component={SelectInput}
+        options={projects.map(i => ({ label: i.title, value: i.id }))}
+        size={'small'}
+        label={'Choose your project'}
+        labelType={'placeholder'}
+      />
       <Field
         name="title"
         component={Input}
@@ -88,7 +112,7 @@ let PostForm = (props) => {
         component={Checkbox}
         label={t('follower.postForm.published')}
         format={(value) => value === 'published'}
-        parse={(value) =>  value ? 'published' : 'draft'}/>
+        parse={(value) => value ? 'published' : 'draft'} />
 
       <Field
         name="commentsAllowed"
@@ -100,7 +124,7 @@ let PostForm = (props) => {
         component={Checkbox}
         label={t('follower.postForm.showInPortfolio')}
       />}
-      <FormError error={error}/>
+      <FormError error={error} />
       <div className={styles.buttons}>
         <Button size={'small'} onClick={props.onCancel}>{t('confirmModal.buttonCancel')}</Button>
         <Button size={'small'} type={'submit'}>{t('task.save')}</Button>
@@ -110,18 +134,17 @@ let PostForm = (props) => {
 }
 
 
-PostForm  = reduxForm({
+PostForm = reduxForm({
   form: 'PostForm',
 
-}) (PostForm)
+})(PostForm)
 const selector = formValueSelector('PostForm')
-PostForm = connect(state =>
-  {
-    const mainCategoryId = selector(state, 'mainCategoryId')
-    const categoryId = selector(state, 'categoryId')
-    const showInPortfolio = selector(state, 'showInPortfolio')
-    return {categoryId, mainCategoryId, showInPortfolio}
-  }
+PostForm = connect(state => {
+  const mainCategoryId = selector(state, 'mainCategoryId')
+  const categoryId = selector(state, 'categoryId')
+  const showInPortfolio = selector(state, 'showInPortfolio')
+  return { categoryId, mainCategoryId, showInPortfolio }
+}
 )(PostForm)
 
 export default PostForm

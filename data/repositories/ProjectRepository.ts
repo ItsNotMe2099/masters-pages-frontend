@@ -1,10 +1,10 @@
 import request from 'utils/request'
 
-import {IProject, ProjectStatus} from 'data/intefaces/IProject'
-import {IPagination} from 'types/types'
-import {IProjectCounts} from 'data/intefaces/IProjectCounts'
-import {IProjectEventsReport} from "data/intefaces/IProjectEventsReport";
-export interface IProjectSearchRequest{
+import { IProject, ProjectStatus } from 'data/intefaces/IProject'
+import { IPagination } from 'types/types'
+import { IProjectCounts } from 'data/intefaces/IProjectCounts'
+import { IProjectEventsReport } from "data/intefaces/IProjectEventsReport";
+export interface IProjectSearchRequest {
   keywords?: string
   mainCategoryId?: number
   subCategoryId?: number
@@ -49,6 +49,16 @@ export default class ProjectRepository {
     }
     return res.data
   }
+  static async fetch(): Promise<IPagination<IProject> | null> {
+    const res = await request({
+      url: `/api/project`,
+      method: 'GET',
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
   static async findById(id: number): Promise<IProject | null> {
     const res = await request({
       url: `/api/project/${id}`,
@@ -63,7 +73,7 @@ export default class ProjectRepository {
     const res = await request({
       url: `/api/project/search`,
       method: 'GET',
-      data: {projectId: id}
+      data: { projectId: id }
     })
     if (res.err) {
       return null
@@ -80,8 +90,8 @@ export default class ProjectRepository {
         limit,
         sort: 'id',
         sortOrder: 'DESC',
-        ...(data ? {...data} : {}),
-        ...(keywords ? {keywords} : {}),
+        ...(data ? { ...data } : {}),
+        ...(keywords ? { keywords } : {}),
       }
     })
     if (res.err) {
@@ -103,7 +113,7 @@ export default class ProjectRepository {
     const res = await request({
       url: `/api/project`,
       method: 'GET',
-      data: {s: JSON.stringify({status}), page, limit}
+      data: { s: JSON.stringify({ status }), page, limit }
     })
     if (res.err) {
       return null
@@ -114,17 +124,17 @@ export default class ProjectRepository {
     const res = await request({
       url: `/api/project/count`,
       method: 'GET',
-      data: {s: JSON.stringify({status})}
+      data: { s: JSON.stringify({ status }) }
     })
     if (res.err) {
       return null
     }
     const statuses = [ProjectStatus.Draft,
-      ProjectStatus.Published,
-      ProjectStatus.Execution,
-      ProjectStatus.Paused,
-      ProjectStatus.Canceled,
-      ProjectStatus.Completed ];
+    ProjectStatus.Published,
+    ProjectStatus.Execution,
+    ProjectStatus.Paused,
+    ProjectStatus.Canceled,
+    ProjectStatus.Completed];
     const map = {}
     statuses.forEach(status => {
       const item = res.data.find(i => i.project_status === status);

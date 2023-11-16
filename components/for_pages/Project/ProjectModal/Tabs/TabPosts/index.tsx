@@ -99,7 +99,7 @@ const TabPosts = ({ project, ...props }: Props) => {
           <Tabs className={styles.tabs} onChange={(item) => handleChange(item)} style={'reports'} tabs={tabs} activeTab={currentTab} />
           <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>{t('post.createPost')}</Button>
         </div>
-        <PostList allPosts={currentTab === PostsTabType.All} onEdit={handleEdit} />
+        <PostList profileId={project.id} allPosts={currentTab === PostsTabType.All} onEdit={handleEdit} />
       </div>
       {appContext.modal === ModalType.PostEditOpen && <PostModal currentEditPost={currentEditPost} isOpen={true} onClose={appContext.hideModal} />}
     </div>
