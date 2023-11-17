@@ -141,9 +141,9 @@ export function ProjectWrapper(props: Props) {
    fetchNotification();
   }, [props.projectId])
 
-  useInterval(() => {
+  /*useInterval(() => {
     fetchNotification();
-  }, 10000)
+  }, 10000)*/
 
   const fetchNotification = async () => {
     const res = await NotificationRepository.getProjectNotification(props.projectId);

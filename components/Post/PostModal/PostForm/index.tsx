@@ -19,9 +19,12 @@ import InputSkill from 'components/ui/Inputs/InputSkill'
 import { useAppContext } from 'context/state'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import { IProject } from 'data/intefaces/IProject'
+import { ProfileRole } from 'data/intefaces/IProfile'
+import { IApplication } from 'data/intefaces/IApplication'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
 
 let PostForm = (props) => {
-  const { categoryId, subCategoryId, showInPortfolio } = props
+  const { categoryId, subCategoryId, showInPortfolio, projectId } = props
   const dispatch = useDispatch()
   const appContext = useAppContext();
   const profile = appContext.profile
@@ -49,8 +52,23 @@ let PostForm = (props) => {
     })
   }
 
+  const [app, setApp] = React.useState<IApplication | null>(null)
+
+  const fetchApplication = async () => {
+    await ApplicationRepository.fetchOneByProject(projectId).then(i => {
+      if (i) {
+        setProjects([i.project])
+      }
+    })
+  }
+
   useEffect(() => {
-    fetchProjects()
+    if (profile.role === ProfileRole.Corporate) {
+      fetchProjects()
+    }
+    if (profile.role === ProfileRole.Volunteer) {
+      fetchApplication()
+    }
   }, [])
 
 
@@ -85,7 +103,7 @@ let PostForm = (props) => {
         validate={required}
       />}
       <Field
-        name="project"
+        name="projectId"
         component={SelectInput}
         options={projects.map(i => ({ label: i.title, value: i.id }))}
         size={'small'}

@@ -5,17 +5,18 @@ import { format } from 'date-fns'
 import ProjectStatusLabel from '../../ProjectStatusLabel'
 import Tabs from '../TabVolunteers/Tabs'
 import { useSelector, useDispatch } from 'react-redux'
-import { default as React, useState } from 'react'
+import { default as React, useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { IRootState } from 'types'
 import PostModal from 'components/Post/PostModal'
-import { modalClose, postEditOpen } from 'components/Modal/actions'
 import Button from 'components/ui/Button'
-import Modals from 'components/layout/Modals'
 import PostList from 'components/Post/PostList'
 import { useAppContext } from 'context/state'
 import { ModalType } from 'types/enums'
+import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 interface Props {
   project: IProject
@@ -63,6 +64,20 @@ const TabPosts = ({ project, ...props }: Props) => {
     setCurrentTab(item.key)
   }
 
+  const [app, setApp] = React.useState<IApplication | null>(null)
+
+  const fetchApplication = async () => {
+    await ApplicationRepository.fetchOneByProject(project.id).then(i => {
+      if (i) {
+        setApp(i)
+      }
+    })
+  }
+
+  useEffect(() => {
+    fetchApplication()
+  }, [])
+
   return (
     <div className={styles.root}>
       <div className={classNames(styles.section, styles.info)}>
@@ -97,11 +112,14 @@ const TabPosts = ({ project, ...props }: Props) => {
       <div className={styles.container}>
         <div className={styles.header}>
           <Tabs className={styles.tabs} onChange={(item) => handleChange(item)} style={'reports'} tabs={tabs} activeTab={currentTab} />
-          <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>{t('post.createPost')}</Button>
+          {(appContext.profile.role === ProfileRole.Corporate || app?.status !== ApplicationStatus.Draft &&
+            app?.status !== ApplicationStatus.Applied
+            && app?.status !== ApplicationStatus.Shortlist) &&
+            <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>{t('post.createPost')}</Button>}
         </div>
-        <PostList profileId={project.id} allPosts={currentTab === PostsTabType.All} onEdit={handleEdit} />
+        <PostList projectId={project.id} allPosts={currentTab === PostsTabType.All} onEdit={handleEdit} />
       </div>
-      {appContext.modal === ModalType.PostEditOpen && <PostModal currentEditPost={currentEditPost} isOpen={true} onClose={appContext.hideModal} />}
+      {appContext.modal === ModalType.PostEditOpen && <PostModal projectId={project.id} currentEditPost={currentEditPost} isOpen={true} onClose={appContext.hideModal} />}
     </div>
   )
 }
