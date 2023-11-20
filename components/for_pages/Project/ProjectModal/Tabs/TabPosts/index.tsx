@@ -114,7 +114,7 @@ const TabPosts = ({ project, ...props }: Props) => {
           <Tabs className={styles.tabs} onChange={(item) => handleChange(item)} style={'reports'} tabs={tabs} activeTab={currentTab} />
           {(appContext.profile.role === ProfileRole.Corporate || app?.status !== ApplicationStatus.Draft &&
             app?.status !== ApplicationStatus.Applied
-            && app?.status !== ApplicationStatus.Shortlist) &&
+            && app?.status !== ApplicationStatus.Shortlist && app?.status !== ApplicationStatus.Invited) &&
             <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>{t('post.createPost')}</Button>}
         </div>
         <PostList projectId={project.id} allPosts={currentTab === PostsTabType.All} onEdit={handleEdit} />
