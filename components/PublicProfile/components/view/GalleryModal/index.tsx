@@ -114,7 +114,7 @@ export default function GalleryModal(props: Props) {
       </div>
       <div className={styles.root}>
         <div className={styles.photo}>
-          <img src={getMediaPath(model.photo)}/>
+          <img src={getMediaPath(model?.photo)}/>
         </div>
         <div className={styles.details}>
           <div className={styles.detailsWrapper}>

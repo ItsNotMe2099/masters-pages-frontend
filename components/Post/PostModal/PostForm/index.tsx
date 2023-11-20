@@ -20,8 +20,9 @@ import { useAppContext } from 'context/state'
 import ProjectRepository from 'data/repositories/ProjectRepository'
 import { IProject } from 'data/intefaces/IProject'
 import { ProfileRole } from 'data/intefaces/IProfile'
-import { IApplication } from 'data/intefaces/IApplication'
+import { ApplicationStatus, IApplication } from 'data/intefaces/IApplication'
 import ApplicationRepository from 'data/repositories/ApplicationRepository'
+import { useRouter } from 'next/router'
 
 let PostForm = (props) => {
   const { categoryId, subCategoryId, showInPortfolio, projectId } = props
@@ -31,6 +32,7 @@ let PostForm = (props) => {
   const error = useSelector((state: IRootState) => state.profileGallery.formError)
   const profileTabs = useSelector((state: IRootState) => state.profileTab.list).filter(item => item.type === 'gallery')
   const { t } = useTranslation('common')
+  const router = useRouter()
 
   const [projects, setProjects] = React.useState<IProject[]>([])
 
@@ -62,12 +64,31 @@ let PostForm = (props) => {
     })
   }
 
+  const fetchApplicationsVolunteer = async (role: ProfileRole) => {
+    await ApplicationRepository.listApplicationsByProfileRole(role).then(data => {
+      if (data) {
+        const filtered = data.data.filter(i => i.status === ApplicationStatus.Execution
+          || i.status === ApplicationStatus.CompleteRequest || i.status === ApplicationStatus.Completed)
+        // Extract an array of i.project items from filtered
+      const projectArray = filtered.map(i => i.project)
+
+      // Now you can use projectArray as needed
+      setProjects(projectArray)
+      }
+    })
+  }
+
   useEffect(() => {
     if (profile.role === ProfileRole.Corporate) {
       fetchProjects()
     }
     if (profile.role === ProfileRole.Volunteer) {
-      fetchApplication()
+      if (router.asPath !== '/Posts') {
+        fetchApplication()
+      }
+      else {
+        fetchApplicationsVolunteer(ProfileRole.Volunteer)
+      }
     }
   }, [])
 

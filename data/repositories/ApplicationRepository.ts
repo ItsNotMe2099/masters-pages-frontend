@@ -3,6 +3,7 @@ import {IProject, ProjectStatus} from 'data/intefaces/IProject'
 import {IPagination} from 'types/types'
 import {ApplicationStatus, IApplication} from 'data/intefaces/IApplication'
 import {IApplicationCounts} from 'data/intefaces/IApplicationCounts'
+import { ProfileRole } from 'data/intefaces/IProfile'
 
 export interface IProjectSearchRequest{
   keywords?: string,
@@ -81,7 +82,7 @@ export default class ApplicationRepository {
     }
     return res.data
   }
-  static async fetchByProjectIdByStatus(projectId: number, status: ProjectStatus, page: number = 1, limit: number = 100): Promise<IPagination<IApplication> | null> {
+  static async fetchByProjectIdByStatus(projectId: number, status: ProjectStatus): Promise<IPagination<IApplication> | null> {
     const res = await request({
       url: `/api/application`,
       method: 'GET',
@@ -164,6 +165,18 @@ export default class ApplicationRepository {
       data: {
         page, limit
       }
+    })
+    if (res.err) {
+      return null
+    }
+    return res.data
+  }
+
+  static async listApplicationsByProfileRole(profileRole: ProfileRole): Promise<IPagination<IApplication>> {
+    const res = await request({
+      url: `/api/application`,
+      method: 'GET',
+      profileRole: profileRole,
     })
     if (res.err) {
       return null
