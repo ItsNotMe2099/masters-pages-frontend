@@ -1,5 +1,5 @@
 import Modal from 'components/ui/Modal'
-import { IRootState} from 'types'
+import { IProfileGalleryItem, IRootState} from 'types'
 import styles from './index.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import {getMediaPath} from 'utils/media'
@@ -30,14 +30,17 @@ interface Props {
   isOpen: boolean,
   isNews?: boolean
   onClose: () => void
+  allPostsModel?: IProfileGalleryItem
+  allPosts?: boolean
 }
 
 export default function GalleryModal(props: Props) {
   const {isNews} = props
+  console.log('ISNEWS', isNews)
   const dispatch = useDispatch()
   const appContext = useAppContext()
   const currentProfile = appContext.profile
-  const model = useSelector((state: IRootState) => isNews ? state.news.currentItem : state.profileGallery.currentItem)
+  const model = props.allPosts ? props.allPostsModel : useSelector((state: IRootState) => isNews ? state.news.currentItem : state.profileGallery.currentItem)
   const currentIndex = useSelector((state: IRootState) => isNews ? state.news.currentItemIndex : state.profileGallery.currentItemIndex)
   const total = useSelector((state: IRootState) => isNews ? state.news.total : state.profileGallery.total)
   const likeIsSending = useSelector((state: IRootState) => isNews ? state.news.likeIsSending : state.profileGallery.likeIsSending)
@@ -46,6 +49,8 @@ export default function GalleryModal(props: Props) {
   const commentsTotal = useSelector((state: IRootState) => isNews ? state.news.currentItemCommentTotal : state.profileGallery.currentItemCommentTotal)
   const commentsPage = useSelector((state: IRootState) => isNews ? state.news.currentItemCommentPage : state.profileGallery.currentItemCommentPage)
   const commentLimit = 10
+
+  console.log('MODELLLLL', model)
 
   const handleScrollNext = () => {
     if(isNews){

@@ -23,6 +23,7 @@ import { confirmOpen } from 'components/Modal/actions'
 import GalleryItem from 'components/GalleryItem'
 import { useAppContext } from 'context/state'
 import PostsRepository from 'data/repositories/PostsRepository'
+import { setNewsCurrentItemIndex } from 'components/News/actions'
 
 interface Props {
   profileId?: number
@@ -49,6 +50,7 @@ const PostList = (props: Props) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [currentEditPost, setCurrentEditPost] = useState(null)
+  const [model, setModel] = useState<IProfileGalleryItem | null>(null)
 
   const limit = 30
 
@@ -114,8 +116,9 @@ const PostList = (props: Props) => {
       }))
     }
   }
-  const showGallery = (model, index) => {
+  const showGallery = (model, index, item: IProfileGalleryItem) => {
     dispatch(setProfileGalleryCurrentItemIndex(index))
+    setModel(item)
     setIsGalleryOpen(true)
   }
 
@@ -133,6 +136,7 @@ const PostList = (props: Props) => {
     }
   }
 
+
   return (
     <div>
       {(loading && (props.allPosts ? total === 0 : totalMyPosts === 0)) && <Loader />}
@@ -144,9 +148,9 @@ const PostList = (props: Props) => {
         className={styles.list}
         hasMore={props.allPosts ? total > list.length : totalMyPosts > listMyPosts.length}
         loader={loading ? <Loader /> : null}>
-        {(props.allPosts ? list : listMyPosts).map((item, index) => <GalleryItem isEdit={isEdit && item.profileId === profile.id} model={item} onClick={(model) => showGallery(model, index)} onEdit={handleEdit} onDelete={handleDelete} />)}
+        {(props.allPosts ? list : listMyPosts).map((item, index) => <GalleryItem isEdit={isEdit && item.profileId === profile.id} model={item} onClick={(model) => showGallery(model, index, item)} onEdit={handleEdit} onDelete={handleDelete} />)}
       </InfiniteScroll>}
-      {isGalleryOpen && <GalleryModal isNews={false} isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)} />}
+      {isGalleryOpen && <GalleryModal allPosts={props.allPosts} allPostsModel={model} isNews={false} isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)} />}
 
 
     </div>
