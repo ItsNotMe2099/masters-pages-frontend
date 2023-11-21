@@ -87,7 +87,8 @@ let PostForm = (props) => {
         fetchApplication()
       }
       else {
-        fetchApplicationsVolunteer(ProfileRole.Volunteer)
+        //fetchApplicationsVolunteer(ProfileRole.Volunteer)
+        fetchProjects()
       }
     }
   }, [])
