@@ -68,7 +68,7 @@ const PostModal = ({ isOpen, currentEditPost, onClose, projectId }: Props) => {
         <div className={styles.title}>{currentEditPost ? t('follower.editPost') : t('follower.addPost')}</div>
       </div>
       <div className={styles.separator}></div>
-      <PostForm projectId={projectId} onSubmit={handleSubmit} initialValues={projectId ? { ...currentEditPost, projectId: projectId } :  currentEditPost} onCancel={() => dispatch(modalClose())}/>
+      <PostForm projectId={projectId} onSubmit={handleSubmit} initialValues={projectId ? { ...currentEditPost, projectId: projectId, state: 'published', commentsAllowed: true } : { ...currentEditPost, state: 'published', commentsAllowed: true }} onCancel={() => dispatch(modalClose())} />
     </Modal>
   )
 }

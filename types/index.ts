@@ -252,6 +252,7 @@ export interface IProfilePortfolio {
 export interface IProfileGalleryItem {
   id: number
   profileId: number
+  projectId: number
   profileTabId: number
   categoryId: number
   subCategoryId: number
