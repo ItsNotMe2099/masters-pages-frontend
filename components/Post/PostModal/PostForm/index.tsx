@@ -159,7 +159,7 @@ let PostForm = (props) => {
         component={Checkbox}
         label={<div>{t('follower.postForm.commentsAllowed')}</div>}
       />
-      {profile.role !== 'client' && <Field
+      {profile.role !== ProfileRole.Corporate && <Field
         name="showInPortfolio"
         component={Checkbox}
         label={t('follower.postForm.showInPortfolio')}
