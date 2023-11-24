@@ -27,6 +27,16 @@ const TabReportEvents = ({ project }: Props) => {
     })
   }, [])
 
+  const convertMinutesToHoursAndMinutes = (minutes: number): string => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    const hoursText = hours > 0 ? `${hours} hr` : '';
+    const minutesText = remainingMinutes > 0 ? `${remainingMinutes} min` : '';
+
+    return `${hoursText} ${minutesText}`;
+  }
+
   return (
     <div className={styles.root}>
       {loading && <Loader />}
@@ -46,26 +56,26 @@ const TabReportEvents = ({ project }: Props) => {
               Total
             </div>
             <div className={classNames(styles.cell, styles.draft)}>
-              {report.summary.find(i => i.event_status === EventStatus.Draft)?.count ?? 0}</div>
+              {convertMinutesToHoursAndMinutes(report.summary.find(i => i.event_status === EventStatus.Draft)?.count) ?? 0}</div>
             <div className={classNames(styles.cell, styles.planned)}>
-              {report.summary.find(i => i.event_status === EventStatus.Planned)?.count ?? 0}</div>
+              {convertMinutesToHoursAndMinutes(report.summary.find(i => i.event_status === EventStatus.Planned)?.count) ?? 0}</div>
             <div className={classNames(styles.cell, styles.completed)}>
-              {report.summary.find(i => i.event_status === EventStatus.Completed)?.count ?? 0}</div>
+              {convertMinutesToHoursAndMinutes(report.summary.find(i => i.event_status === EventStatus.Completed)?.count) ?? 0}</div>
             <div className={classNames(styles.cell, styles.confirmed)}>
-              {report.summary.find(i => i.event_status === EventStatus.Confirmed)?.count ?? 0}</div>
+              {convertMinutesToHoursAndMinutes(report.summary.find(i => i.event_status === EventStatus.Confirmed)?.count) ?? 0}</div>
             <div className={classNames(styles.cell, styles.confirmed)}>
-              {report.summary.find(i => i.event_status === EventStatus.Approved)?.count ?? 0}</div>
+              {convertMinutesToHoursAndMinutes(report.summary.find(i => i.event_status === EventStatus.Approved)?.count) ?? 0}</div>
           </div>
           {report.byDate.map(i => (
             <div className={styles.row}>
               <div className={styles.label}>
                 {i.date}
               </div>
-              <div className={classNames(styles.cell, styles.draft)}>{i.draft}</div>
-              <div className={classNames(styles.cell, styles.planned)}>{i.planned}</div>
-              <div className={classNames(styles.cell, styles.completed)}>{i.completed}</div>
-              <div className={classNames(styles.cell, styles.confirmed)}>{i.confirmed}</div>
-              <div className={classNames(styles.cell, styles.confirmed)}>{i.approved}</div>
+              <div className={classNames(styles.cell, styles.draft)}>{convertMinutesToHoursAndMinutes(i.draft)}</div>
+              <div className={classNames(styles.cell, styles.planned)}>{convertMinutesToHoursAndMinutes(i.planned)}</div>
+              <div className={classNames(styles.cell, styles.completed)}>{convertMinutesToHoursAndMinutes(i.completed)}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{convertMinutesToHoursAndMinutes(i.confirmed)}</div>
+              <div className={classNames(styles.cell, styles.confirmed)}>{convertMinutesToHoursAndMinutes(i.approved)}</div>
             </div>
           ))}
         </div>
