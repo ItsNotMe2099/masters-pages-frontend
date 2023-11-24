@@ -2,7 +2,7 @@ import Modal from 'components/ui/Modal'
 import { format } from 'date-fns'
 import { useEffect, useState } from 'react'
 import * as React from 'react'
-import { IEvent} from 'types'
+import { IEvent } from 'types'
 import styles from './index.module.scss'
 import { useTranslation } from 'next-i18next'
 import ProjectNewEventForm
@@ -12,6 +12,7 @@ import { EventWrapper, useEventContext } from "context/event_state";
 import { useAppContext } from "context/state";
 import { useProjectContext } from "context/project_state";
 import EventRepository from 'data/repositories/EventRepository'
+import { useSelector } from 'react-redux'
 interface Props {
   isOpen: boolean,
   range?: any,

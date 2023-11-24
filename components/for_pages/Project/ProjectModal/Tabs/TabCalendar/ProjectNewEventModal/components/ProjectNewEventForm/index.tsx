@@ -21,7 +21,7 @@ import ApplicationRepository from "data/repositories/ApplicationRepository";
 import { ApplicationStatus, IApplication } from "data/intefaces/IApplication";
 import { useAppContext } from "context/state";
 import TextArea from 'components/ui/Inputs/TextArea'
-import { confirmChangeData, confirmModalClose, confirmOpen } from 'components/Modal/actions'
+import { confirmChangeData, confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
 import { useEventCalendarContext } from 'context/event_calendar'
 import EventRepository from 'data/repositories/EventRepository'
 import { ProfileRole } from 'data/intefaces/IProfile'
@@ -114,6 +114,7 @@ let ProjectNewEventForm = (props: Props) => {
         console.log("Deleted111")
         appContext.eventDeleteState$.next(event)
         dispatch(confirmModalClose());
+        calendarContext.hideModal()
         calendarContext.hideModal() // hide event modal after delete
       },
       onCancel: () => {
@@ -194,7 +195,7 @@ let ProjectNewEventForm = (props: Props) => {
           )
         }, event ? event.id : props.event.id)
         dispatch(confirmModalClose());
-
+        calendarContext.hideModal()
       },
       onCancel: () => {
         dispatch(confirmModalClose());
@@ -215,6 +216,7 @@ let ProjectNewEventForm = (props: Props) => {
       description: t('timePlaceChargeForm.approvalIsFinal'),
       onConfirm: () => {
         dispatch(confirmModalClose());
+        calendarContext.hideModal()
         calendarContext.showModal('eventEditModal')
         eventContext.approve(event ? event.id : props.event.id)
       },
@@ -266,6 +268,7 @@ let ProjectNewEventForm = (props: Props) => {
         }
 
         dispatch(confirmModalClose());
+        calendarContext.hideModal()
         calendarContext.showModal('eventEditModal')
       },
       onCancel: () => {
@@ -289,6 +292,7 @@ let ProjectNewEventForm = (props: Props) => {
       description: t('timePlaceChargeForm.confirmIsFinal'),
       onConfirm: () => {
         dispatch(confirmModalClose());
+        calendarContext.hideModal()
         eventContext.confirm(event ? event.id : props.event.id)
       },
       onCancel: () => {
@@ -302,6 +306,7 @@ let ProjectNewEventForm = (props: Props) => {
       description: t('timePlaceChargeForm.declineIsFinal'),
       onConfirm: () => {
         dispatch(confirmModalClose());
+        calendarContext.hideModal()
         eventContext.decline(event ? event.id : props.event.id)
 
       },
