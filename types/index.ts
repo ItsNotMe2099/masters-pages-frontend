@@ -251,6 +251,7 @@ export interface IProfilePortfolio {
 
 export interface IProfileGalleryItem {
   id: number
+  state?: string
   profileId: number
   projectId: number
   profileTabId: number
