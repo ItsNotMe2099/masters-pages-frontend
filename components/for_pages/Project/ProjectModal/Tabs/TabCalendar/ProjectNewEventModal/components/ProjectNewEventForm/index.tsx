@@ -212,13 +212,15 @@ let ProjectNewEventForm = (props: Props) => {
   }
   const handleApprove = () => {
 
+    console.log('APPROVECLICK')
+
     dispatch(confirmOpen({
       description: t('timePlaceChargeForm.approvalIsFinal'),
       onConfirm: () => {
         dispatch(confirmModalClose());
-        calendarContext.hideModal()
         calendarContext.showModal('eventEditModal')
         eventContext.approve(event ? event.id : props.event.id)
+        calendarContext.hideModal()
       },
       onCancel: () => {
         dispatch(confirmModalClose());
