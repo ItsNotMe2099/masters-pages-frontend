@@ -70,11 +70,11 @@ export default function CalendarEventToolTip(props: Props) {
       <div className={styles.separator} />
       <div className={styles.row}>
         <div className={styles.label}>{t('startTime')}</div>
-        <div className={styles.value}>{format(getEventPlannedAllowed(event) ? event.start : event.actualStart, 'HH:mm')}</div>
+        <div className={styles.value}>{format(/*getEventPlannedAllowed(event) ?*/ event.start /*: event.actualStart*/, 'HH:mm')}</div>
       </div>
       <div className={styles.row}>
         <div className={styles.label}>{t('endTime')}</div>
-        <div className={styles.value}>{format(getEventPlannedAllowed(event) ? event.end : event.actualEnd, 'HH:mm')}</div>
+        <div className={styles.value}>{format(/*getEventPlannedAllowed(event) ?*/ event.end /*: event.actualStart*/, 'HH:mm')}</div>
       </div>
 
     </div>

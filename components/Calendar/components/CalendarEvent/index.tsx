@@ -81,7 +81,7 @@ export default function CalendarEvent(props: Props) {
     <div className={`${styles.root} ${getRootClass()} ${props.className}`} onClick={props.onClick} ref={setTriggerRef}>
       <div className={`${styles.leftBorder} ${getBorderClass()}`}></div>
       <div className={styles.wrapper}>
-        <div className={styles.time}>{format(getEventPlannedAllowed(event) ? event.start : event.actualStart, 'HH:mm')} - {format(getEventPlannedAllowed(event) ? event.end :  event.actualEnd, 'HH:mm')}</div>
+        <div className={styles.time}>{format(/*getEventPlannedAllowed(event) ?*/ event.start /*: event.actualStart*/, 'HH:mm')} - {format(/*getEventPlannedAllowed(event) ?*/ event.end /*:  event.actualEnd*/, 'HH:mm')}</div>
         <div className={`${styles.author} ${getBorderClass()}`}>
          <div className={styles.avatar}>
            {unreadCount > 0 && <div className={styles.notification}>{unreadCount > 10 ? '!' : unreadCount}</div>}
