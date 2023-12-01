@@ -144,6 +144,10 @@ export function EventWrapper(props: Props) {
           case 'draftWithEdit':
             res = await EventRepository.update(id, data);
             break;
+          case 'confirm':
+            res = await EventRepository.update(id, data);
+            res = await EventRepository.confirm(id)
+            break;
         }
       }
       const formatted = formatEvent(res)

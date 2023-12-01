@@ -295,7 +295,14 @@ let ProjectNewEventForm = (props: Props) => {
       onConfirm: () => {
         dispatch(confirmModalClose());
         calendarContext.hideModal()
-        eventContext.confirm(event ? event.id : props.event.id)
+        //eventContext.confirm(event ? event.id : props.event.id)
+        eventContext.update('confirm', {
+          ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+          priceType: 'fixed',
+          ...(
+            appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
+          )
+        }, event ? event.id : props.event.id)
       },
       onCancel: () => {
         dispatch(confirmModalClose());

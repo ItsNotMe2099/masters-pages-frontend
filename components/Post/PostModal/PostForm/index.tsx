@@ -12,7 +12,6 @@ import SelectInput from 'components/ui/Inputs/SelectInput'
 import AvatarInput from 'components/ui/AvatarInput'
 import Checkbox from 'components/ui/Inputs/Checkbox'
 import { useEffect } from 'react'
-
 import { fetchProfileTabList } from 'components/ProfileTab/actions'
 import { useTranslation } from 'next-i18next'
 import InputSkill from 'components/ui/Inputs/InputSkill'
@@ -25,7 +24,7 @@ import ApplicationRepository from 'data/repositories/ApplicationRepository'
 import { useRouter } from 'next/router'
 
 let PostForm = (props) => {
-  const { categoryId, subCategoryId, showInPortfolio, projectId } = props
+  const { categoryId, subCategoryId, showInPortfolio, projectId, handleSubmit } = props
   const dispatch = useDispatch()
   const appContext = useAppContext();
   const profile = appContext.profile
@@ -95,7 +94,7 @@ let PostForm = (props) => {
 
 
   return (
-    <form className={styles.root} onSubmit={props.handleSubmit}>
+    <form className={styles.root} onSubmit={handleSubmit}>
       <Field
         name="photo"
         component={AvatarInput}
