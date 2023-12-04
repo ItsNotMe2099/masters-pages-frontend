@@ -67,16 +67,6 @@ const PostList = (props: Props) => {
 
   useEffect(() => {
     dispatch(resetProfileGalleryList())
-    const data = props.allPosts ? {
-      projectId: props.projectId,
-      page: 1,
-      limit
-    } : {
-      profileId: props.profileId || profile.id,
-      projectId: props.projectId,
-      page: 1,
-      limit
-    }
     if (props.allPosts) {
       setLoading(true)
       fetchAllPostsByProject()

@@ -6,7 +6,7 @@ export default class PostsRepository {
 
   static async fetchAllPostsByProject(page: number, limit: number = 30, projectId: number): Promise<IPagination<IProfileGalleryItem>> {
     const res = await request({
-      url: `/api/news?limit=${limit}&page=${page}&projectId=${projectId}`,
+      url: `/api/profile-gallery?page=${page}&limit=${limit}&projectId=${projectId}`,
       method: 'GET',
     })
     if (res.err) {
