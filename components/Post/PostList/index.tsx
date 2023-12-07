@@ -56,13 +56,22 @@ const PostList = (props: Props) => {
 
   const fetchAllPostsByProject = async () => {
 
-    await PostsRepository.fetchAllPostsByProject(page, limit, props.projectId).then(i => {
-      if (i) {
-        setList(i.data)
-        setTotal(i.total)
-      }
-    })
-    
+    if (router.asPath === '/Posts') {
+      await PostsRepository.fetchAllPosts(page, limit).then(i => {
+        if (i) {
+          setList(i.data)
+          setTotal(i.total)
+        }
+      })
+    }
+    else {
+      await PostsRepository.fetchAllPostsByProject(page, limit, props.projectId).then(i => {
+        if (i) {
+          setList(i.data)
+          setTotal(i.total)
+        }
+      })
+    }
   }
 
   useEffect(() => {
@@ -90,11 +99,20 @@ const PostList = (props: Props) => {
   const handleScrollNext = () => {
     if (props.allPosts) {
       setPage(page + 1)
-      PostsRepository.fetchAllPostsByProject(page, limit, props.projectId).then(i => {
-        if (i) {
-          setList(data => [...data, ...i.data])
-        }
-      })
+      if (router.asPath === '/Posts') {
+        PostsRepository.fetchAllPosts(page, limit).then(i => {
+          if (i) {
+            setList(data => [...data, ...i.data])
+          }
+        })
+      }
+      else {
+        PostsRepository.fetchAllPostsByProject(page, limit, props.projectId).then(i => {
+          if (i) {
+            setList(data => [...data, ...i.data])
+          }
+        })
+      }
     }
     else {
       dispatch(setPageTaskUser(pageMyPosts + 1))

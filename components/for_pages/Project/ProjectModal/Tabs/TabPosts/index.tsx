@@ -116,6 +116,7 @@ const TabPosts = ({ project, ...props }: Props) => {
           app?.status === ApplicationStatus.CompleteRequest || app?.status === ApplicationStatus.Completed) &&
             <Button red={true} bold={true} size={'12px 40px'} type={'button'} onClick={handleCreate}>{t('post.createPost')}</Button>}
         </div>
+        
         <PostList projectId={project.id} allPosts={currentTab === PostsTabType.All} onEdit={handleEdit} />
       </div>
       {appContext.modal === ModalType.PostEditOpen && <PostModal projectId={project.id} currentEditPost={currentEditPost} isOpen={true} onClose={appContext.hideModal} />}
