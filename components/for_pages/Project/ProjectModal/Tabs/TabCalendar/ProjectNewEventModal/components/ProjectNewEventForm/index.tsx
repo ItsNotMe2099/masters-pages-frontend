@@ -388,7 +388,6 @@ let ProjectNewEventForm = (props: Props) => {
             size={'small'}
             label={t('event.eventTitle')}
             validate={required}
-            disabled
           />
           {appContext.profile?.role === 'corporate' && <Field
             name="participantId"
