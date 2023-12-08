@@ -1,26 +1,38 @@
 @import "scss/index";
 
-.container{
+.container {
   max-width: 100%;
   padding-top: 51px;
   padding-bottom: 50px;
-  @include lg{
+
+  @include lg {
     width: 100%;
     margin: auto;
   }
-  @media screen and (max-width: $xs-max){
+
+  @media screen and (max-width: $xs-max) {
     padding: 17px 0 0 0;
-}
+  }
 
   @include xll {
     width: $container-xll
   }
 }
 
-.list{
+.list {
   margin-top: 34px;
   display: grid;
   grid-template-columns: repeat(3, 2fr);
   grid-template-rows: 1fr 1fr 1fr;
   gap: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  height: 59px;
 }
