@@ -242,7 +242,7 @@ const TabProjectCalendarInner = (props) => {
   return (
     <div className={styles.root}>
       <ProjectCalendarSideBar onClickEvent={handleClickEvent} currentDate={currentDate} onChange={handleSideBarDateChange} onCreate={handleCreate} />
-      <div className={styles.rightSide}>
+      <div className={classNames(styles.rightSide, {[styles.alt]: toolbar.current?.view === 'agenda'})}>
         <div className={styles.toolbar}>
 
           <CalendarToolbar label={getToolbarLabel()} onChangeView={handleChangeView}

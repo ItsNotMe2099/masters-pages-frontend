@@ -24,6 +24,13 @@ $borderColor: #dcdbdc;
 
   :global .rbc-row-content {}
 
+  .alt{
+    :global .rbc-addons-dnd {
+      display: none;
+    }
+  }
+
+  
 
   :global .rbc-agenda-view {
     display: none;
