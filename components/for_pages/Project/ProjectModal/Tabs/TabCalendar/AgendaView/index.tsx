@@ -29,7 +29,7 @@ export default function AgendaView({ events, className }: Props) {
             {events.map((i, index) =>
               <tr key={index}>
                 <td className={styles.dateCell}>
-                  {format(new Date(i.createdAt), 'EEE MMM dd')}
+                  {format(new Date(i.start), 'EEE MMM dd')}
                 </td>
                 <td className={styles.timeCell}>
                   {`${format(new Date(i.start), "h:mmaaaaa'm'")} - ${format(new Date(i.end), "h:mmaaaaa'm'")}`}
