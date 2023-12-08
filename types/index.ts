@@ -807,7 +807,7 @@ export interface IEvent {
   totalHours?: number
   meetingLink?: string
   description?: string
-
+  createdAt?: string
   country?: string;
   city?: string;
   region?: string;

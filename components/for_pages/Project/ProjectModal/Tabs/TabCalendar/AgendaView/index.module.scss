@@ -1,0 +1,50 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+  overflow: auto;
+
+  th {
+    padding: 3px 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+  }
+}
+
+.content {
+  text-align: left;
+
+  td {
+    padding: 5px 10px;
+    white-space: nowrap;
+    vertical-align: top;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+.table {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.date {
+  width: 14%;
+}
+
+.dateCell {
+  width: 14%;
+}
+
+.time {
+  width: 21%;
+}
+
+.timeCell {
+  width: 21%;
+}
