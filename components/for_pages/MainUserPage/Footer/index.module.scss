@@ -2,112 +2,60 @@
 
 .root {
   color: #F2F2F2;
-  background: #EB5757;
-  padding: 43px 0px;
-
-  @media (max-width: 680px) {
-    padding: 47px 0;
-  }
-
-  a {
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-    color: #F2F2F2;
-  }
-}
-
-.right {
-  display: flex;
-  flex: 1;
-
-  @media (max-width: 680px) {
-    flex-direction: column-reverse;
-  }
+  background: #FFF;
+  padding-top: 20px;
+  padding-bottom: 104px;
 }
 
 .container {
   position: relative;
   width: 90%;
-  height: 65px;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0 auto;
-
-  @media (max-width: 680px) {
-    flex-direction: column;
-    height: 100%;
-  }
+  justify-content: space-between;
 }
 
-.items {
+.left {
   display: flex;
-}
-
-.mail {
-  a {
-    flex: 1;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
-    color: #F2F2F2;
-  }
-
-  margin-top: 10px;
-}
-
-.copyright {
-  flex: 1;
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  color: #F2F2F2;
-
-  @media (max-width: 680px) {
-    margin-top: 56px;
-  }
+  flex-direction: column;
+  @include list(14px, false);
 }
 
 .logo {
   display: flex;
+  @include list(9px, true);
   align-items: center;
+}
 
-  img {
-    margin-right: 16px;
-  }
+.text {
+  color: #000;
+  font-family: 'Montserrat';
+  font-size: 16.092px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 91.376%;
 
-  .logoTitle {
+  span {
+    color: #E4474E;
+    font-family: 'Gilroy';
+    font-size: 16.092px;
+    font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    line-height: 0%;
   }
 }
 
-.socials {
+.copyright {
+  color: #000;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.right {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  .socialItem {
-    &:first-of-type {
-      margin-left: 0px;
-    }
-
-    margin-left: 45px;
-  }
-
-  @media (max-width: 680px) {
-    justify-content: center;
-    margin-top: 68px;
-  }
-}
-
-.contacts {
-  margin-right: 50px;
-}
-
-.email {
-  a {
-    color: #fff;
-  }
 }

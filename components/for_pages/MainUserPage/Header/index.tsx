@@ -53,9 +53,9 @@ const MainSectionHeader = (props: Props) => {
           <div className={styles.logoTitle}>Masters<span> Pages</span></div>
         </a>
       </Link>
-      {router.asPath !== '/registration/user' ?
+      {/*router.asPath !== '/registration/user' ?
         <MainSectionButton size={'small'} color='yellow' href={Routes.organizationMain} className={styles.org}>{t('newMainVolunteer.forOrganization')}</MainSectionButton>
-      : null}
+  : null*/}
       </div>
         <div className={styles.menuMobile}>
           <LangSelect isAuth={false}/>
@@ -65,7 +65,7 @@ const MainSectionHeader = (props: Props) => {
           <LangSelect isAuth={false}/>
           {router.asPath !== '/registration/user' ?
           <div className={styles.actionsButtons}>
-            <MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/FindCompanies'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>
+            {/*<MainSectionButton className={styles.guest} size={'small'} color='outlineRed' href='/FindCompanies'>{t('newMainVolunteer.guestAccess')}</MainSectionButton>*/}
             <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
             <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>
           </div> : null}

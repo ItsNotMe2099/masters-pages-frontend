@@ -1,0 +1,35 @@
+@import "../../../../scss/index";
+
+.root {
+  background: #EEF1FC;
+  padding: 112px 0 100px 0;
+}
+
+.container {
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: space-between;
+  @include list(89px, false);
+}
+
+.title {
+  color: #6D718C;
+  font-family: 'Gilroy';
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  @include list(35px, true);
+}
+
+.text {
+  margin-top: 15px;
+}

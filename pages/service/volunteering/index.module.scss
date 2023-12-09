@@ -1,0 +1,11 @@
+@import "scss/index";
+
+.root {
+  
+}
+
+.content {
+  display: flex;
+  @include list(39px, true);
+  align-items: center;
+}

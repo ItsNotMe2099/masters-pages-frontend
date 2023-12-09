@@ -1,0 +1,176 @@
+@import "scss/index";
+
+.root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  border-radius: 8px;
+  display: flex;
+  @include list(48px, true);
+  position: relative;
+  z-index: 3;
+}
+
+.card {
+  position: relative;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.people {
+  height: 75%;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+
+  span {
+    position: relative !important;
+    height: 100% !important;
+  }
+}
+
+.text {
+  color: #FFF;
+  text-align: center;
+  font-family: 'Gilroy';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.right {
+  padding-top: 46px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.learn {
+  color: #FFF;
+  font-family: 'Gilroy';
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.top {
+  display: flex;
+  margin-top: 26px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.for {
+  display: flex;
+  flex-direction: column;
+  @include list(20px, false);
+}
+
+.forText {
+  color: #FFF;
+  font-family: 'Gilroy';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  text-align: center;
+}
+
+.btn {
+  display: flex;
+  padding: 8px 32px;
+  align-items: center;
+  border-radius: 44px;
+  border: 1px solid #FFF;
+  background: #FFF;
+}
+
+.btnBottom {
+  display: flex;
+  padding: 8px 32px;
+  align-items: center;
+  border-radius: 44px;
+  border: 1px solid #FFF;
+  background: #FFF;
+  margin-top: 26px;
+}
+
+.more {
+  font-family: 'Gilroy';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: #EB5757;
+}
+
+.separator {
+  width: 1px;
+  height: 50px;
+  background-color: #FFF;
+}
+
+.explore {
+  margin-top: 55px;
+  color: #FFF;
+  font-family: 'Gilroy';
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.bottom {
+  margin-top: 26px;
+  display: flex;
+  @include list(16px, true);
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+}
+
+.label {
+  color: #FFF;
+  font-family: 'Gilroy';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.next {
+  height: 44px;
+  width: 90%;
+  border-radius: 8px;
+  margin-top: -10px;
+  position: relative;
+  z-index: 2;
+}
+
+.prev {
+  height: 38px;
+  width: 80%;
+  border-radius: 8px;
+  margin-top: -10px;
+}

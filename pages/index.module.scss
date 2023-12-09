@@ -1,5 +1,24 @@
 @import "scss/index";
-.root{
+
+.root {
   background: black;
   color: white;
+}
+
+.options {
+  display: flex;
+  @include list(35px, true);
+}
+
+.text {
+  margin-top: 15px;
+}
+
+.textAbout {
+  color: #6D718C;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
 }

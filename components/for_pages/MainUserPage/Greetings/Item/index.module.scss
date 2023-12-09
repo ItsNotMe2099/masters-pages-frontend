@@ -1,0 +1,41 @@
+@import "scss/index";
+
+.root {
+  border-radius: 8px;
+  position: relative;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
+.people {
+  height: 75%;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+
+  span {
+    position: relative !important;
+    height: 100% !important;
+  }
+}
+
+.light {
+  span {
+    bottom: -35% !important;
+  }
+}
+
+.text {
+  color: #FFF;
+  text-align: center;
+  font-family: 'Gilroy';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 0 44px 0 30px;
+  position: relative;
+  z-index: 1;
+}

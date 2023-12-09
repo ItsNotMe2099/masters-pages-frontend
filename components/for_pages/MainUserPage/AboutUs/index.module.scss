@@ -1,0 +1,39 @@
+@import "../../../../scss/index";
+
+.root {
+  background: #F8F9FE;
+  padding: 74px 0 98px 0;
+}
+
+.container {
+  position: relative;
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  @include list(16px, false);
+  width: 50%;
+}
+
+.top {
+  color: #6D718C;
+  font-family: 'Gilroy';
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.text {
+  color: #6D718C;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
