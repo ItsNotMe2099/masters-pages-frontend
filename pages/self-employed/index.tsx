@@ -11,20 +11,20 @@ interface Props {
 
 }
 
-export default function Clubs(props: Props) {
+export default function SelfEmployed(props: Props) {
 
   return (
     <Layout>
       <Greetings title='Greetings, dear guest. Please select your identity 👋'>
         <div className={styles.content}>
-          <ChevronLeftSvg link='/service/volunteering' />
+          <ChevronLeftSvg className={styles.chevron} link='/clubs' />
           <ItemService
             textClass={styles.text}
-            color='#00CDC1'
-            text='Clubs and club members'
-            image='/img/MainPage/people-green-service.png'
+            color='#EB5757'
+            text='Self-employed and clients'
+            image='/img/MainPage/people-red-service.png'
           />
-          <ChevronRightSvg link='/service/self-employed' />
+          <ChevronRightSvg className={styles.chevron} link='/volunteering' />
         </div>
       </Greetings>
       <AboutUs title='About us 👋'>

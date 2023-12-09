@@ -9,3 +9,8 @@
   @include list(39px, true);
   align-items: center;
 }
+
+.chevron {
+  position: relative;
+  z-index: 1;
+}

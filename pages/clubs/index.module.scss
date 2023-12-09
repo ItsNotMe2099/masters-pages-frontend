@@ -1,9 +1,16 @@
 @import "scss/index";
 
-.root {}
+.root {
+  
+}
 
 .content {
   display: flex;
   @include list(39px, true);
   align-items: center;
+}
+
+.chevron {
+  position: relative;
+  z-index: 1;
 }

@@ -47,21 +47,21 @@ const Home = (props) => {
             <div className={styles.options}>
               <Item
                 textClass={styles.text}
-                link='/service/self-employed'
+                link='/self-employed'
                 color='#EB5757'
                 text='Self-employed and clients'
                 image='/img/MainPage/people-red.png'
                 light='/img/MainPage/red.png'
               />
               <Item
-                link='/service/volunteering'
+                link='/volunteering'
                 color='#EEBA1A'
                 text='Volunteering organizations and volunteers'
                 image='/img/MainPage/people-yellow.png'
                 light='/img/MainPage/yellow.png'
               />
               <Item
-                link='/service/clubs'
+                link='/clubs'
                 textClass={styles.text}
                 color='#00CDC1'
                 text='Clubs and club members'

@@ -18,14 +18,14 @@ export default function Volunteering(props: Props) {
       <Greetings title='Greetings, dear guest. Please select your identity 👋'>
         <div className={styles.content}>
           <div className={styles.content}>
-            <ChevronLeftSvg link='/service/self-employed' />
+            <ChevronLeftSvg className={styles.chevron} link='/self-employed' />
             <ItemService
               textClass={styles.text}
               color='#F0C131'
               text='Volunteering organizations and volunteers'
               image='/img/MainPage/people-yellow-service.png'
             />
-            <ChevronRightSvg link='/service/clubs' />
+            <ChevronRightSvg className={styles.chevron} link='/clubs' />
           </div>
         </div>
       </Greetings>
