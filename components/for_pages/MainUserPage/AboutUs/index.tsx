@@ -16,7 +16,6 @@ export default function AboutUs(props: Props) {
         <div className={styles.left}>
           <div className={styles.top}>
             {props.title}
-            About us 👋
           </div>
           {props.children}
         </div>

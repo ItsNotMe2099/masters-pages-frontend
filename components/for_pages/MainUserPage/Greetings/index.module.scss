@@ -3,6 +3,19 @@
 .root {
   background: #EEF1FC;
   padding: 112px 0 100px 0;
+  position: relative;
+
+  .abstraction1 {
+    top: -443px !important;
+    min-height: 50% !important;
+  }
+
+  .abstraction2 {
+    min-height: 50% !important;
+    bottom: -50% !important;
+    right: -50% !important;
+    min-width: 50% !important;
+  }
 }
 
 .container {
@@ -23,6 +36,8 @@
   font-weight: 500;
   line-height: normal;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .options {
