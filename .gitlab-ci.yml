@@ -60,6 +60,7 @@ deploy_dev:
       - echo "$SSH_PRIVATE_KEY" | ssh-add -
       - mkdir -p ~/.ssh
       - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+      - ssh -t glm-ci@glm-dev1-app.glob-com.ru "time"
       - ansible-playbook deploy/deploy.yml -i deploy/dev  -e CI_COMMIT_SHA="\"$CI_COMMIT_SHA\"" -e "CI_JOB_TOKEN=$CI_JOB_TOKEN" -e "CI_REGISTRY=$CI_REGISTRY" -e "APP_IMAGE=$IMAGE_TAG_DEV_APP" -e "NGINX_IMAGE=$IMAGE_TAG_DEV_NGINX" -e "branch=$CI_COMMIT_REF_NAME"
   only:
     - dev
