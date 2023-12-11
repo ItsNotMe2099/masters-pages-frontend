@@ -22,6 +22,7 @@ import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import InputSearch from 'components/ui/Inputs/InputSearch'
 import { useAppContext } from 'context/state'
+import LayoutGuestNew from 'components/layout/Layout/LayoutGuestNew'
 
 const FindCompanies = (props) => {
 
@@ -74,7 +75,7 @@ const FindCompanies = (props) => {
   }
 
   return (
-    <Layout>
+    <LayoutGuestNew>
       <div className={styles.root}>
 
         <div className={styles.container}>
@@ -131,7 +132,7 @@ const FindCompanies = (props) => {
         </div>
       </div>
       <Modals />
-    </Layout>
+    </LayoutGuestNew>
   )
 }
 

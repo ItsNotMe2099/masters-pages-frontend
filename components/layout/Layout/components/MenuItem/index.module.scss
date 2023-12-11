@@ -1,6 +1,6 @@
 @import "scss/index";
 
-.root{
+.root {
   position: relative;
 
   cursor: pointer;
@@ -12,63 +12,80 @@
   padding: 0px 13px 0px 12px;
 
 }
-.modeGuest{
+
+.modeGuest {
   color: #383838;
-  &:hover{
+
+  &:hover {
     background: #a39e9e;
   }
+}
+
+.modeClient {
+  &:hover {
+    background: #3AC073;
   }
-.modeClient{
-&:hover{
-  background: #3AC073;
 }
-}
-.modeMaster{
-  &:hover{
+
+.modeMaster {
+  &:hover {
     background: #F26464;
   }
 }
-.modeVolunteer{
-  &:hover{
+
+.modeVolunteer {
+  &:hover {
     background: #22A3CC;
   }
 }
-.modeCorporate{
-  &:hover{
+
+.modeCorporate {
+  &:hover {
     background: #E2AB05;
   }
 }
-.imageWrapper{
+
+.imageWrapper {
   min-width: 33px;
 }
-.icon{
 
-}
-.isActive{
+.icon {}
+
+.isActive {
+  .title {
+    color: white;
+  }
+
   &.modeGuest {
     background: #a39e9e;
   }
-  .border{
+
+  .border {
     display: block;
   }
-  &.modeClient{
+
+  &.modeClient {
     background: #007230;
   }
-  &.modeClient{
+
+  &.modeClient {
     background: #007230;
   }
-  &.modeMaster{
+
+  &.modeMaster {
     background: #860624;
   }
-  &.modeVolunteer{
+
+  &.modeVolunteer {
     background: #01516A;
   }
-  &.modeCorporate{
+
+  &.modeCorporate {
     background: #E2AB05;
   }
 }
 
-.border{
+.border {
   display: none;
   position: absolute;
   top: 0;
@@ -77,15 +94,18 @@
   width: 3px;
   background: white;
 }
-.title{
+
+.title {
   font-weight: 700;
   font-size: 14px;
   flex: 1;
-  @media screen and (max-width: 800px){
+
+  @media screen and (max-width: 800px) {
     font-size: 18px;
   }
 }
-.badge{
+
+.badge {
   padding: 5px;
   background: white;
   border-radius: 15px;

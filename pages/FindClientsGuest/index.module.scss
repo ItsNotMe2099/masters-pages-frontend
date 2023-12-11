@@ -1,0 +1,157 @@
+@import "scss/index";
+
+.root {}
+
+.projectsTobBar {
+  display: flex;
+  margin-bottom: 18px;
+  margin-top: 24px;
+}
+
+.projectsAmount {
+  flex: 1;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.projectsSort {
+  display: flex;
+
+  span {
+    margin-right: 8px;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  display: flex;
+  gap: 18px;
+
+  @media screen and (max-width: $container-lg) {
+    flex-direction: column-reverse;
+  }
+}
+
+.organization {
+  grid-area: a;
+}
+
+.left {
+  flex: 1;
+}
+
+.filters {
+  width: 68%;
+
+  @media screen and (max-width: $screen-lg-min) {
+    width: 100%;
+  }
+}
+
+.topContent {
+  display: flex;
+}
+
+.projects {
+  width: 70%;
+
+  @media screen and (max-width: $container-lg) {
+    width: 100%;
+  }
+}
+
+.sidebar {
+  visibility: hidden;
+  grid-area: b;
+  justify-self: flex-end;
+  height: 0;
+  width: 400px;
+
+
+  @media screen and (max-width: $screen-xll-min) {
+    width: 325px;
+  }
+
+  @media screen and (max-width: $lg-min) {
+    width: 290px;
+  }
+
+  @media screen and (max-width: $container-lg) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: $xs-max) {
+    width: 100%;
+    padding: 0 22px;
+    background-image: url("../../public/img/icons/mapBackgrnd.png");
+    display: flex;
+    justify-content: center;
+    height: 0;
+    background-size: cover;
+    box-shadow: (0px 33.0756px 44.1008px rgba(0, 0, 0, 0.04)), (0px 22.0504px 33.0756px rgba(0, 0, 0, 0.04)), (0px 5.51261px 11.0252px rgba(0, 0, 0, 0.04)), (0px 0px 1.37815px rgba(0, 0, 0, 0.04));
+
+    div {
+      width: 100%;
+    }
+
+    :global .sticky-inner-wrapper {
+      position: static !important;
+      transform: none !important;
+      width: auto !important;
+    }
+  }
+}
+
+.visible {
+  visibility: visible;
+  height: auto;
+
+  @media screen and (max-width: 1600px) {
+    display: block;
+  }
+
+  @media screen and (max-width: $xs-max) {
+    height: 85px;
+  }
+}
+
+
+
+.sidebarWrapper {}
+
+.tasks {
+  flex: 1;
+  padding-left: 30px;
+
+  @media screen and (max-width: 1500px) {
+    padding-left: 0px;
+  }
+
+  @media screen and (max-width: $xs-max) {
+    padding: 0 22px;
+  }
+}
+
+.map {
+  width: 100%;
+  height: 425px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  @media screen and (max-width: $xs-max) {
+    display: none;
+  }
+}
+
+.showOnTheMap {
+  max-width: 328px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+
+}

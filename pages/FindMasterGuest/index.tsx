@@ -22,6 +22,7 @@ import Profile from 'components/ui/Profile'
 import { fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, setRoleProfileSearch } from 'components/ProfileSearch/actions'
 import { IRootState } from 'types'
 import Modals from 'components/layout/Modals'
+import LayoutGuestNew from 'components/layout/Layout/LayoutGuestNew'
 
 const FindMasterGuest = (props) => {
 
@@ -64,7 +65,7 @@ const FindMasterGuest = (props) => {
   }
 
   return (
-    <Layout isGuest>
+    <LayoutGuestNew>
       <div className={styles.root}>
 
         <div className={styles.container}>
@@ -119,7 +120,7 @@ const FindMasterGuest = (props) => {
         </div>
       </div>
       <Modals/>
-    </Layout>
+    </LayoutGuestNew>
   )
 }
 

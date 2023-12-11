@@ -87,7 +87,7 @@ const Task = ({ actionsType, task, className, isActive, onEdit, onDelete, onPubl
   // const taskNegotiation = useSelector((state: IRootState) => state.taskOffer.lastCondition)
 
   useEffect(() => {
-    dispatch(taskNegotiationFetchLastConditions(task.id, profile.id))
+    dispatch(taskNegotiationFetchLastConditions(task.id, profile?.id))
     fetchTaskLastNegotiations()
     if (actionsType === 'client') {
       dispatch(fetchTaskUserResponseRequest(task.id, { limit: 1, ...getSortData(sortType) }))
