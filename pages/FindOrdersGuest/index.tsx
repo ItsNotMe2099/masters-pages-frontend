@@ -20,6 +20,7 @@ import TaskRepository, { ITaskSearchRequest } from 'data/repositories/TaskReposi
 import { ITask } from 'types'
 import Task from 'components/Task'
 import InputSearch from 'components/ui/Inputs/InputSearch'
+import LayoutGuestNew from 'components/layout/Layout/LayoutGuestNew'
 
 
 const FindOrdersGuest = (props) => {
@@ -71,7 +72,7 @@ const FindOrdersGuest = (props) => {
   }
 
   return (
-    <Layout isGuest>
+    <LayoutGuestNew>
       <div className={styles.root}>
 
         <div className={styles.container}>
@@ -129,7 +130,7 @@ const FindOrdersGuest = (props) => {
         </div>
       </div>
       <Modals />
-    </Layout>
+    </LayoutGuestNew>
   )
 }
 

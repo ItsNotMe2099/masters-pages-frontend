@@ -1,5 +1,7 @@
 import styles from 'components/for_pages/MainUserPage/Footer/index.module.scss'
 import LogoSvg from 'components/svg/LogoSvg'
+import NewFbSvg from 'components/svg/NewFbSvg'
+import NewInstSvg from 'components/svg/NewInstSvg'
 import { format } from 'date-fns'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
@@ -26,6 +28,14 @@ const MainSectionFooter = (props: Props) => {
           </div>
         </div>
         <div className={styles.right}>
+          <div className={styles.socials}>
+            <Link href={CONTACTS.facebook}>
+              <a><NewFbSvg /></a>
+            </Link>
+            <Link href={CONTACTS.instagram}>
+              <a><NewInstSvg /></a>
+            </Link>
+          </div>
           <Link href={'mailto:admin@masterspages.com'}>
             admin@masterspages.com
           </Link>

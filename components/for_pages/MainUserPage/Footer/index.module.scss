@@ -58,4 +58,11 @@
 
 .right {
   display: flex;
+  flex-direction: column;
+  @include list(10px, false);
+}
+
+.socials {
+  display: flex;
+  @include list(8px, true);
 }

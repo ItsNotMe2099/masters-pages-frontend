@@ -14,6 +14,7 @@ import { signInOpen, signUpOpen } from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 import classNames from 'classnames'
 import Routes from "pages/routes";
+import ArrowNewSvg from 'components/svg/ArrowNewSvg'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -133,15 +134,20 @@ export default function LayoutGuestNew(props: Props) {
         <div className={styles.headerLeft}>
           {!showLeftMenu && logo}
           <div
-            className={classNames(styles.hello, { [styles.none]: !showLeftMenu })}>Hello guest! Please register for <span onClick={() => router.push('/registration/user')}>FREE</span> to get full functionality.
+            className={classNames(styles.hello, { [styles.none]: !showLeftMenu })}>
+            Hello Guest! You’re exploring
           </div>
         </div>
         <div className={styles.btns}>
-          <MainSectionButton size={'small'} color='yellow' href={Routes.organizationMain}>{t('newMainVolunteer.forCompanies')}</MainSectionButton>
-          <MainSectionButton size={'small'} color='outlineGreen' href='/'>{t('newMainVolunteer.forIndividuals')}</MainSectionButton>
+          <div className={styles.free}>
+            <span>For FREE full access</span> <ArrowNewSvg />
+          </div>
+          <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>
+          <div className={styles.free}>
+            <span>or</span> <ArrowNewSvg />
+          </div>
           <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
           <LangSelect isAuth={false} />
-          <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>
         </div>
       </div>
       <div className={cx(styles.container)}>
