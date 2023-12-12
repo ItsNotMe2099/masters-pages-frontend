@@ -244,8 +244,34 @@
   }
 }
 
+.clubs {
+  border-top: 1px solid #d7d7d7;
+  border-bottom: 1px solid #d7d7d7;
+
+  .title {
+    color: #AE01FF;
+  }
+}
+
+.members {
+  border-top: 1px solid #d7d7d7;
+  border-bottom: 1px solid #d7d7d7;
+
+  .title {
+    color: #00CDC1;
+  }
+}
+
 .volunteersItem {
   color: #199AC2 !important;
+}
+
+.clubsItem {
+  color: #AE01FF !important;
+}
+
+.membersItem{
+  color: #00CDC1 !important;
 }
 
 .masters {

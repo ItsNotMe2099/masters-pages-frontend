@@ -52,6 +52,16 @@ export default function LayoutGuestNew(props: Props) {
     //{ title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '/FindMasterGuest', },
   ]
 
+  const itemsClubs = [
+    { title: 'Find Clubs', icon: 'find-clients-yellow', link: '/FindClubs' },
+    { title: 'Find Groups', icon: 'find-clients-yellow', link: '/FindGroups' },
+    //{ title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '/FindMasterGuest', },
+  ]
+
+  const itemsMembers= [
+    { title: 'Find Members', icon: 'find-clients-yellow', link: '/FindMembers' },
+  ]
+
   const itemsClients = [
     { title: 'Find Masters', icon: 'find-clients-green', link: '/FindMasterGuest', },
   ]
@@ -83,6 +93,30 @@ export default function LayoutGuestNew(props: Props) {
         {/*item.map(item => <>{item.isSeparator && <div className={styles.menuSeparator} />}<MenuItem
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
   link={item.link} /></>)*/}
+        {(currentRoute === '/FindClubs' || currentRoute === '/FindGroups' || currentRoute === '/FindMembers') &&
+          <div className={styles.clubs}>
+            <div className={styles.title}>
+              For Members
+            </div>
+            {itemsClubs.map(item =>
+              <MenuItem
+                className={styles.clubsItem}
+                isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
+                link={item.link} />)}
+          </div>
+        }
+        {(currentRoute === '/FindClubs' || currentRoute === '/FindGroups' || currentRoute === '/FindMembers') &&
+          <div className={styles.members}>
+            <div className={styles.title}>
+              For Clubs
+            </div>
+            {itemsMembers.map(item =>
+              <MenuItem
+                className={styles.membersItem}
+                isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
+                link={item.link} />)}
+          </div>
+        }
         {(currentRoute === '/FindCompanies' || currentRoute === '/FindVolunteerGuest' || currentRoute === '/FindProjectsGuest') &&
           <div className={styles.volunteers}>
             <div className={styles.title}>
