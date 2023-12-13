@@ -1,9 +1,12 @@
 import styles from 'components/for_pages/MainUserPage/Footer/index.module.scss'
+import AppStoreSvg from 'components/svg/AppStoreSvg'
+import GooglePlaySvg from 'components/svg/GooglePlaySvg'
 import LogoSvg from 'components/svg/LogoSvg'
 import NewFbSvg from 'components/svg/NewFbSvg'
 import NewInstSvg from 'components/svg/NewInstSvg'
 import { format } from 'date-fns'
 import { useTranslation } from 'next-i18next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { CONTACTS } from 'types'
 
@@ -34,6 +37,14 @@ const MainSectionFooter = (props: Props) => {
             </Link>
             <Link href={CONTACTS.instagram}>
               <a><NewInstSvg /></a>
+            </Link>
+          </div>
+          <div className={styles.apps}>
+            <Link href={CONTACTS.appStore}>
+              <a><AppStoreSvg /></a>
+            </Link>
+            <Link href={CONTACTS.googlePlay}>
+              <a><GooglePlaySvg /></a>
             </Link>
           </div>
           <Link href={'mailto:admin@masterspages.com'}>

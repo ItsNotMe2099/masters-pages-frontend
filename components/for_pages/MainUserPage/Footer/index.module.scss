@@ -62,7 +62,8 @@
   @include list(10px, false);
 }
 
-.socials {
+.socials,
+.apps {
   display: flex;
   @include list(8px, true);
 }

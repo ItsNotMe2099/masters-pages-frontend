@@ -908,5 +908,7 @@ export interface IProfileNote {
 export const CONTACTS = {
   email: 'admin@masterspages.com',
   instagram: 'https://www.instagram.com/masterspages',
-  facebook: 'https://www.facebook.com/masterspages'
+  facebook: 'https://www.facebook.com/masterspages',
+  appStore: 'https://apps.apple.com/ru/app/masters-pages/id6446769238',
+  googlePlay: 'https://play.google.com/store/apps/details?id=com.masters.pages'
 }
