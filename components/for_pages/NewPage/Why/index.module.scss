@@ -1,0 +1,35 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  @include list(64px, false);
+  margin-top: 134px;
+}
+
+.title {
+  color: #6D718C;
+  font-family: 'Gilroy';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  @include list(12px, true);
+  min-height: 328px;
+  align-items: center;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  @include list(20px, false);
+}
+
+.text {
+  white-space: nowrap;
+}
