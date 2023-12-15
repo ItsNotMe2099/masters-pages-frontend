@@ -32,20 +32,12 @@ const MainSectionFooter = (props: Props) => {
         </div>
         <div className={styles.right}>
           <div className={styles.socials}>
-            <Link href={CONTACTS.facebook}>
-              <a><NewFbSvg /></a>
-            </Link>
-            <Link href={CONTACTS.instagram}>
-              <a><NewInstSvg /></a>
-            </Link>
+            <a href={CONTACTS.facebook}><NewFbSvg /></a>
+            <a href={CONTACTS.instagram}><NewInstSvg /></a>
           </div>
           <div className={styles.apps}>
-            <Link href={CONTACTS.appStore}>
-              <a><AppStoreSvg /></a>
-            </Link>
-            <Link href={CONTACTS.googlePlay}>
-              <a><GooglePlaySvg /></a>
-            </Link>
+            <a href={CONTACTS.appStore}><AppStoreSvg /></a>
+            <a href={CONTACTS.googlePlay}><GooglePlaySvg /></a>
           </div>
           <Link href={'mailto:admin@masterspages.com'}>
             admin@masterspages.com
