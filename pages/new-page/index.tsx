@@ -13,6 +13,7 @@ import Explore from 'components/for_pages/NewPage/Explore'
 import Subscribe from 'components/for_pages/NewPage/Subscribe'
 import HowToJoin from 'components/for_pages/NewPage/HowToJoin'
 import DownloadAppNow from 'components/for_pages/NewPage/DownloadAppNow'
+import GreatJob from 'components/for_pages/NewPage/GreatJob'
 
 const NewPage = (props) => {
 
@@ -44,7 +45,7 @@ const NewPage = (props) => {
           </div>
           <div className={styles.second}>
             <div className={styles.container}>
-
+              <GreatJob />
             </div>
           </div>
           <div className={styles.third}>
