@@ -32,10 +32,11 @@ interface Props {
   max?: string
   isNumbersOnly?: boolean
   currency?: string
+  iconClass?: string
 }
 
 export default function TextField(props: Props & FieldConfig) {
-  const { label, placeholder, className, inputClassName, hasAutoComplete, icon, variant } = props
+  const { label, placeholder, className, inputClassName, hasAutoComplete, icon, variant, iconClass } = props
   const [field, meta, helpers] = useField(props)
   const hasError = !!meta.error && meta.touched
 
@@ -59,9 +60,9 @@ export default function TextField(props: Props & FieldConfig) {
       <div className={styles.inputContainer}>
         {variant === 'currency' && !field.value ?
           <div className={styles.symbol}>{getCurrencySymbol(props.currency)}</div> : null}
-        <BaseTextField disabled={props.disabled} isNumbersOnly={props.isNumbersOnly} min={props.min} max={props.max} size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ? props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type} />
+        <BaseTextField inputClassName={inputClassName} disabled={props.disabled} isNumbersOnly={props.isNumbersOnly} min={props.min} max={props.max} size={props.size} {...field} meta={meta} placeholder={props.labelType === LabelStyleType.Placeholder ? props.label : props.placeholder} withIcon={!!props.icon} hasError={hasError} type={props.type} />
         {props.labelType === LabelStyleType.Cross && <Label label={label} style={props.labelType} hasError={hasError} />}
-        {props.icon && <div className={styles.icon} onClick={props.onIconClick}> {props.icon}</div>}
+        {props.icon && <div className={classNames(styles.icon, iconClass)} onClick={props.onIconClick}> {props.icon}</div>}
         {props.editable ? <EditFieldComponent className={styles.edit} onClick={props.onClick} /> : null}
       </div>
       {props.children}

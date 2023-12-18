@@ -5,13 +5,14 @@ import Greetings from 'components/for_pages/MainUserPage/Greetings'
 import ChevronLeftSvg from 'components/svg/ChevronLeftSvg'
 import ChevronRightSvg from 'components/svg/ChevronRightSvg'
 import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
+import { getAuthServerSide } from 'utils/auth'
 
 
 interface Props {
 
 }
 
-export default function Volunteering(props: Props) {
+const Volunteering = (props: Props) => {
 
   return (
     <Layout>
@@ -73,3 +74,6 @@ export default function Volunteering(props: Props) {
     </Layout>
   )
 }
+
+export const getServerSideProps = getAuthServerSide({redirect: false})
+export default Volunteering

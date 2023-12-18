@@ -1,0 +1,40 @@
+@import "scss/index";
+
+.root {
+  border-radius: 22px;
+  background-color: #FFD580;
+  padding-top: 150px;
+  padding-bottom: 100px;
+  position: relative;
+  margin-top: 274px;
+}
+
+.title {
+  color: #000;
+  font-family: 'Gilroy';
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  @include list(16px, false);
+}
+
+.first {
+  display: flex;
+  @include list(27px, true);
+}
+
+.phoneText {
+  margin-top: 8px;
+}

@@ -1,5 +1,33 @@
 @import "scss/index";
 
 .form {
-  
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 45%;
+    align-self: center;
+}
+
+.icon {
+    left: 16px;
+    width: 24px;
+}
+
+.input {
+    padding-left: 44px !important;
+    border-radius: 16px !important;
+    height: 48px !important;
+    padding-right: 200px !important;
+}
+
+.field {
+    width: 100%;
+}
+
+.btn {
+    width: 142px;
+    height: 32px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }

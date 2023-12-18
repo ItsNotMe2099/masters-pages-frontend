@@ -74,8 +74,8 @@ export default function BaseTextField(props: Props) {
           [styles.inputSmall]: props.size === 'small',
           [styles.inputNormal]: props.size === 'small',
           [styles.withIcon]: props.withIcon,
-          [styles.inputError]: hasError
-        })} type={props.type || 'text'} disabled={props.disabled} />)
+          [styles.inputError]: hasError,
+        }, props.inputClassName)} type={props.type || 'text'} disabled={props.disabled} />)
   }
   return mask ? (
     <InputMask mask={mask} disabled={props.disabled} value={props.value} onChange={props.onChange} maskPlaceholder={null} alwaysShowMask={props.alwaysShowMask} maskChar={props.maskChar}>

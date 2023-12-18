@@ -1,0 +1,57 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  @include list(68px, true);
+  align-items: center;
+  margin-top: 74px;
+
+  span {
+    position: relative !important;
+  }
+}
+
+.img {
+  position: relative !important;
+  width: 684px !important;
+  height: 672px !important;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.title {
+  color: #6D718C;
+  font-family: 'Gilroy';
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.text {
+  color: #6D718C;
+  font-family: 'Gilroy';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 24px;
+}
+
+.apps {
+  display: flex;
+  @include list(8px, true);
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.stats {
+  display: flex;
+  @include list(18px, true);
+  justify-content: center;
+  margin-top: 32px;
+}

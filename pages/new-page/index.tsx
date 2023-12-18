@@ -11,6 +11,8 @@ import Layout from 'components/for_pages/MainUserPage/Layout'
 import Why from 'components/for_pages/NewPage/Why'
 import Explore from 'components/for_pages/NewPage/Explore'
 import Subscribe from 'components/for_pages/NewPage/Subscribe'
+import HowToJoin from 'components/for_pages/NewPage/HowToJoin'
+import DownloadAppNow from 'components/for_pages/NewPage/DownloadAppNow'
 
 const NewPage = (props) => {
 
@@ -48,6 +50,8 @@ const NewPage = (props) => {
           <div className={styles.third}>
             <div className={styles.container}>
               <Subscribe />
+              {/*<HowToJoin />*/}
+              <DownloadAppNow />
             </div>
           </div>
         </Layout>

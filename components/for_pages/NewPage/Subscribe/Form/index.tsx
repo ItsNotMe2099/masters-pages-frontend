@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAppContext } from 'context/state'
 import { SnackbarType } from 'types/enums'
+import TextField from 'components/fields/TextField'
+import MailSvg from 'components/svg/MailSvg'
+import Button from 'components/ui/Button'
 
 interface IFormData {
   email: string,
@@ -46,7 +49,16 @@ export default function SubscribeForm(props: Props) {
   return (
     <FormikProvider value={formik}>
       <Form className={styles.form}>
-
+        <TextField
+          inputClassName={styles.input}
+          className={styles.field}
+          iconClass={styles.icon}
+          name='email'
+          placeholder={'Your email here'}
+          icon={<MailSvg color='#1A92B7' />} />
+        <Button projectBtn='red' className={styles.btn}>
+          Subscribe
+        </Button>
       </Form>
     </FormikProvider>
   )
