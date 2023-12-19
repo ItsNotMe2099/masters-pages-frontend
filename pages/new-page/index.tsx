@@ -53,7 +53,7 @@ const NewPage = (props) => {
           <div className={styles.third}>
             <div className={styles.container}>
               <Subscribe />
-              {/*<HowToJoin />*/}
+              <HowToJoin />
               <DownloadAppNow />
             </div>
           </div>

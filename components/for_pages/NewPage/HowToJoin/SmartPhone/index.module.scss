@@ -3,14 +3,24 @@
 .root {
   display: flex;
   flex-direction: column;
-
-  span {
-    position: relative !important;
-  }
 }
 
 .img {
   position: relative;
+
+  span:first-child {
+    position: relative !important;
+    width: 215px !important;
+    height: 100% !important;
+    z-index: 1;
+  }
+}
+
+.inner {
+  width: inherit !important;
+  height: 97% !important;
+  min-width: auto !important;
+  min-height: auto !important;
 }
 
 .image {
