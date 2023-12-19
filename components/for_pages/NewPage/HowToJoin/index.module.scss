@@ -1,18 +1,9 @@
 @import "scss/index";
 
 .root {
-  border-radius: 22px;
-  background-color: #FFD580;
   padding-top: 150px;
   padding-bottom: 100px;
-  position: relative;
   margin-top: 274px;
-}
-
-.wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%;
 }
 
 .title {
@@ -44,8 +35,13 @@
 
 .second {
   display: flex;
-  margin-top: 29px;
-  @include list(10%, true);
+  margin-top: 32px;
+  @include list(1%, true);
+}
+
+.third {
+  display: flex;
+  margin-top: 24px;
 }
 
 .phoneText {
@@ -58,10 +54,6 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-}
-
-.smartPhoneFirst {
-  
 }
 
 .download {
@@ -87,6 +79,16 @@
   margin-top: 16px;
 }
 
-.smartPhoneSecond {
-  
+.bottom {
+  display: flex;
+  margin-top: 64px;
+  justify-content: space-between;
+}
+
+.icon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: -62px;
 }

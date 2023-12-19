@@ -3,8 +3,9 @@ import styles from './index.module.scss'
 
 interface Props {
   number: number
-  title: string
+  title: string | ReactElement
   children?: ReactElement | ReactElement[]
+  classTop?: string
 }
 
 export default function Item(props: Props) {

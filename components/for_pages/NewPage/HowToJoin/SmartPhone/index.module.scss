@@ -7,6 +7,8 @@
 
 .img {
   position: relative;
+  display: flex;
+  justify-content: center;
 
   span:first-child {
     position: relative !important;
@@ -26,7 +28,7 @@
 .image {
   position: relative !important;
   width: inherit !important;
-  height: inherit !important;
+  height: 417px !important;
 }
 
 .imageInner {
@@ -36,4 +38,12 @@
 
 .text {
   margin-top: 32px;
+  text-align: center;
+  color: #000;
+  text-align: center;
+  font-family: 'Gilroy';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }

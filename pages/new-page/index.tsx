@@ -15,6 +15,7 @@ import HowToJoin from 'components/for_pages/NewPage/HowToJoin'
 import DownloadAppNow from 'components/for_pages/NewPage/DownloadAppNow'
 import GreatJob from 'components/for_pages/NewPage/GreatJob'
 import CaseStudies from 'components/for_pages/NewPage/CaseStudies'
+import LastItem from 'components/for_pages/NewPage/LastItem'
 
 const NewPage = (props) => {
 
@@ -55,6 +56,7 @@ const NewPage = (props) => {
               <Subscribe />
               <HowToJoin />
               <DownloadAppNow />
+              <LastItem />
             </div>
           </div>
         </Layout>
