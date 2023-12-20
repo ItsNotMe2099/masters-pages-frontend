@@ -16,6 +16,7 @@ import DownloadAppNow from 'components/for_pages/NewPage/DownloadAppNow'
 import GreatJob from 'components/for_pages/NewPage/GreatJob'
 import CaseStudies from 'components/for_pages/NewPage/CaseStudies'
 import LastItem from 'components/for_pages/NewPage/LastItem'
+import Top from 'components/for_pages/NewPage/Top'
 
 const NewPage = (props) => {
 
@@ -40,6 +41,7 @@ const NewPage = (props) => {
         />
         <Layout>
           <div className={styles.first}>
+            <Top />
             <div className={styles.container}>
               <Why />
               <Explore />
