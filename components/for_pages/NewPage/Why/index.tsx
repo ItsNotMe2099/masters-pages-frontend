@@ -5,6 +5,7 @@ import PostSvg from 'components/svg/PostSvg'
 import ScheduleSvg from 'components/svg/ScheduleSvg'
 import Card from './Card'
 import CardActive from './CardActive'
+import Image from 'next/image'
 
 interface Props {
 

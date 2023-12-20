@@ -22,15 +22,18 @@
 .third {
   background: #EAEDF5;
 
-  .container {
-    padding-top: 110px;
-    padding-bottom: 90px;
+  .wrapper2 {
+    .container {
+      padding-top: 110px;
+      padding-bottom: 90px;
+    }
   }
 }
 
 .container {
   width: 70%;
   margin: 0 auto;
+  position: relative;
 }
 
 .header {
@@ -42,4 +45,62 @@
   z-index: 1;
   width: 40%;
   z-index: 10;
+}
+
+.abstraction3 {
+  span {
+    width: 271px !important;
+    height: 399px !important;
+    right: 0 !important;
+    top: -180px !important;
+    left: inherit !important;
+  }
+}
+
+.wrapper {
+  position: relative;
+
+  span {
+    width: 271px !important;
+    height: 271px !important;
+  }
+}
+
+.wrapper2 {
+  position: relative;
+
+  .abstraction2 {
+    span {
+      width: 271px !important;
+      height: 271px !important;
+      right: 0 !important;
+      top: -100px !important;
+      left: inherit !important;
+    }
+  }
+
+  .abstraction4 {
+    span {
+      width: 271px !important;
+      height: 271px !important;
+      left: 0 !important;
+      top: -130px !important;
+      right: inherit !important;
+    }
+  }
+
+}
+
+.wrapper3 {
+  position: relative;
+}
+
+.abstraction5 {
+  span {
+    width: 100% !important;
+    height: 624px !important;
+    left: 0 !important;
+    top: 100px !important;
+    right: inherit !important;
+  }
 }

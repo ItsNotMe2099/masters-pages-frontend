@@ -18,6 +18,7 @@ import CaseStudies from 'components/for_pages/NewPage/CaseStudies'
 import HowToUse from 'components/for_pages/NewPage/HowToUse'
 import Top from 'components/for_pages/NewPage/Top'
 import Header from 'components/for_pages/NewPage/Header'
+import Image from 'next/image'
 
 const NewPage = (props) => {
 
@@ -44,23 +45,42 @@ const NewPage = (props) => {
           <Header className={styles.header} />
           <div className={styles.first}>
             <Top />
-            <div className={styles.container}>
-              <Why />
-              <Explore />
+            <div className={styles.wrapper}>
+              <Image className={styles.abstraction1} src={'/img/New Page/abstraction1.png'} alt='' layout='fill' />
+              <div className={styles.container}>
+                <Why />
+                <Explore />
+              </div>
             </div>
           </div>
           <div className={styles.second}>
-            <div className={styles.container}>
-              <GreatJob />
-              <CaseStudies />
+            <div className={styles.wrapper3}>
+              <div className={styles.abstraction3}>
+                <Image src={'/img/New Page/abstraction3.png'} alt='' layout='fill' />
+              </div>
+              <div className={styles.abstraction5}>
+                <Image src={'/img/New Page/abstraction5.png'} alt='' layout='fill' />
+              </div>
+              <div className={styles.container}>
+                <GreatJob />
+                <CaseStudies />
+              </div>
             </div>
           </div>
           <div className={styles.third}>
-            <div className={styles.container}>
-              <Subscribe />
-              <HowToJoin />
-              <DownloadAppNow />
-              <HowToUse />
+            <div className={styles.wrapper2}>
+              <div className={styles.abstraction2}>
+                <Image src={'/img/New Page/abstraction2.png'} alt='' layout='fill' />
+              </div>
+              <div className={styles.abstraction4}>
+                <Image src={'/img/New Page/abstraction4.png'} alt='' layout='fill' />
+              </div>
+              <div className={styles.container}>
+                <Subscribe />
+                <HowToJoin />
+                <DownloadAppNow />
+                <HowToUse />
+              </div>
             </div>
           </div>
         </Layout>
