@@ -8,10 +8,10 @@ interface Props {
 
 }
 
-export default function LastItem(props: Props) {
+export default function HowToUse(props: Props) {
 
   return (
-    <Wrapper className={styles.root} color='#E3E6F0'>
+    <Wrapper className={styles.root} color='#E3E6F0' id={'howtouse'}>
       <div className={styles.content}>
         <Item number={1} title='Open your project'>
           <div className={styles.first}>

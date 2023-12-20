@@ -15,8 +15,9 @@ import HowToJoin from 'components/for_pages/NewPage/HowToJoin'
 import DownloadAppNow from 'components/for_pages/NewPage/DownloadAppNow'
 import GreatJob from 'components/for_pages/NewPage/GreatJob'
 import CaseStudies from 'components/for_pages/NewPage/CaseStudies'
-import LastItem from 'components/for_pages/NewPage/LastItem'
+import HowToUse from 'components/for_pages/NewPage/HowToUse'
 import Top from 'components/for_pages/NewPage/Top'
+import Header from 'components/for_pages/NewPage/Header'
 
 const NewPage = (props) => {
 
@@ -40,6 +41,7 @@ const NewPage = (props) => {
           onClick={handleAbout}
         />
         <Layout>
+          <Header className={styles.header} />
           <div className={styles.first}>
             <Top />
             <div className={styles.container}>
@@ -58,7 +60,7 @@ const NewPage = (props) => {
               <Subscribe />
               <HowToJoin />
               <DownloadAppNow />
-              <LastItem />
+              <HowToUse />
             </div>
           </div>
         </Layout>

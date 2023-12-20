@@ -19,7 +19,7 @@ export default function Explore(props: Props) {
   ]
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} id='capabilities'>
       <div className={styles.left}>
         <div className={styles.title}>
           Explore the full range of<br /> capabilities on our platform.

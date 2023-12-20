@@ -6,4 +6,12 @@
   padding-bottom: 300px;
   display: flex;
   justify-content: flex-start;
+
+  span {
+    top: -43px !important;
+
+    img {
+      background: #EAEDF5;
+    }
+  }
 }

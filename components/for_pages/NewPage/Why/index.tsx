@@ -36,7 +36,7 @@ export default function Why(props: Props) {
   ]
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} id='benefits'>
       <div className={styles.title}>
         Why volunteer with Masterspages 🔥
       </div>

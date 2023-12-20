@@ -13,7 +13,7 @@ interface Props {
 export default function HowToJoin(props: Props) {
 
   return (
-    <Wrapper className={styles.root} color='#FFD580'>
+    <Wrapper className={styles.root} color='#FFD580' id={'howtojoin'}>
       <div className={styles.title}>
         HOW TO JOIN
       </div>

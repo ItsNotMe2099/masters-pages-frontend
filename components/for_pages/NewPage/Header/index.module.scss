@@ -1,0 +1,29 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  height: 43px;
+  border-radius: 0px 0px 13px 13px;
+  background: #FFF;
+  padding: 8px 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  color: #6D718C;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.active {
+  display: flex;
+  padding: 8px 16px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  background: #E5E8F3;
+}

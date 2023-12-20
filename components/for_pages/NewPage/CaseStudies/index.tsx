@@ -30,7 +30,7 @@ export default function CaseStudies(props: Props) {
   ]
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} id='casestudies'>
       <div className={styles.title}>Case studies 🤗</div>
       <div className={styles.content}>
         {items.map((i, index) =>
