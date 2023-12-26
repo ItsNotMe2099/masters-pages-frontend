@@ -9,6 +9,18 @@
   background: #1A9AC1;
   @include list(8px, false);
   flex: 1;
+  max-width: 326px;
+
+  @include mq($MdDesktopWidth, max) {
+    width: calc(50% - 16px);
+    margin-bottom: 16px;
+  }
+
+  @include mq($PhoneWidth, max) {
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 0;
+  }
 }
 
 .icon {

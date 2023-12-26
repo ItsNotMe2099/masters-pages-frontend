@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   @include list(8px, false);
+
+  @include mq($PhoneWidth, max) {
+    align-items: center;
+  }
 }
 
 .icon {
@@ -32,4 +36,8 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @include mq($PhoneWidth, max) {
+    text-align: center;
+  }
 }

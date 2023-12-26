@@ -34,6 +34,14 @@
   width: 70%;
   margin: 0 auto;
   position: relative;
+
+  @include mq(1400px, max) {
+    width: 90%;
+  }
+
+  @include mq($PhoneWidth, max) {
+    width: 80%;
+  }
 }
 
 .header {
@@ -45,6 +53,18 @@
   z-index: 1;
   width: 40%;
   z-index: 10;
+
+  @include mq(1400px, max) {
+    width: 60%;
+  }
+
+  @include mq($SmDesktopWidth, max) {
+    width: 80%;
+  }
+
+  @include mq($TabletWidth, max) {
+    width: 100%;
+  }
 }
 
 .abstraction3 {
@@ -54,6 +74,10 @@
     right: 0 !important;
     top: -180px !important;
     left: inherit !important;
+  }
+
+  @include mq($PhoneWidth, max) {
+    display: none !important;
   }
 }
 
@@ -77,6 +101,10 @@
       top: -100px !important;
       left: inherit !important;
     }
+
+    @include mq($PhoneWidth, max) {
+      display: none !important;
+    }
   }
 
   .abstraction4 {
@@ -86,6 +114,10 @@
       left: 0 !important;
       top: -130px !important;
       right: inherit !important;
+    }
+
+    @include mq($PhoneWidth, max) {
+      display: none !important;
     }
   }
 
@@ -102,5 +134,15 @@
     left: 0 !important;
     top: 100px !important;
     right: inherit !important;
+  }
+
+  @include mq($PhoneWidth, max) {
+    display: none !important;
+  }
+}
+
+.abstraction1 {
+  @include mq($PhoneWidth, max) {
+    display: none !important;
   }
 }

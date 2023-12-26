@@ -7,11 +7,26 @@
   display: flex;
   justify-content: flex-start;
 
+  @include mq($TabletWidth, max) {
+    padding-top: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 0;
+  }
+
   span {
     top: -43px !important;
 
+    @include mq($TabletWidth, max) {
+      position: relative !important;
+      top: -13px !important;
+    }
+
     img {
       background: #EAEDF5;
+      width: 100% !important;
+      position: relative !important;
+      height: 100% !important;
     }
   }
 }

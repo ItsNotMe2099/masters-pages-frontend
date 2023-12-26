@@ -19,6 +19,7 @@ import HowToUse from 'components/for_pages/NewPage/HowToUse'
 import Top from 'components/for_pages/NewPage/Top'
 import Header from 'components/for_pages/NewPage/Header'
 import Image from 'next/image'
+import { useResize } from 'components/hooks/useResize'
 
 const NewPage = (props) => {
 
@@ -33,6 +34,8 @@ const NewPage = (props) => {
     setIsOpen(false)
   }
 
+  const { isPhoneWidth } = useResize()
+
   return (
     <>
       <div className={styles.root}>
@@ -42,7 +45,7 @@ const NewPage = (props) => {
           onClick={handleAbout}
         />
         <Layout>
-          <Header className={styles.header} />
+          {!isPhoneWidth && <Header className={styles.header} />}
           <div className={styles.first}>
             <Top />
             <div className={styles.wrapper}>

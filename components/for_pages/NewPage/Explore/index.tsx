@@ -2,6 +2,7 @@ import Link from 'next/link'
 import styles from './index.module.scss'
 import ChevronMoreSvg from 'components/svg/ChevronMoreSvg'
 import Card from './Card'
+import { useResize } from 'components/hooks/useResize'
 
 interface Props {
 
@@ -18,11 +19,13 @@ export default function Explore(props: Props) {
     { title: 'Reports', text: 'Instantly connect with fellow volunteers and coordinators...' },
   ]
 
+  const { isSmDesktopWidth } = useResize()
+
   return (
     <div className={styles.root} id='capabilities'>
       <div className={styles.left}>
         <div className={styles.title}>
-          Explore the full range of<br /> capabilities on our platform.
+          Explore the full range of{!isSmDesktopWidth && <br />} capabilities on our platform.
         </div>
         <div className={styles.text}>
           <div>From seamless collaboration and efficient project management

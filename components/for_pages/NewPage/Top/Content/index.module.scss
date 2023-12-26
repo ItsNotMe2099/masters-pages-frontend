@@ -7,6 +7,10 @@
   z-index: 1;
   width: 70%;
   margin: 0 auto;
+
+  @include mq($PhoneWidth, max) {
+    width: 80%;
+  }
 }
 
 .title {
@@ -16,6 +20,11 @@
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+
+  @include mq($PhoneWidth, max) {
+    font-size: 24px;
+    text-align: center;
+  }
 }
 
 .text {
@@ -31,4 +40,8 @@
 .btn {
   margin-top: 37px;
   width: 241px;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+  }
 }

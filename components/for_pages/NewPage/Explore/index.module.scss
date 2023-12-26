@@ -5,6 +5,12 @@
   justify-content: space-between;
   margin-top: 220px;
   margin-bottom: 110px;
+
+  @include mq($SmDesktopWidth, max) {
+    flex-direction: column;
+    margin-top: 70PX;
+    @include list(90px, false);
+  }
 }
 
 .left {
@@ -43,6 +49,10 @@
   border: 1px solid #6D718C;
   margin-top: 34px;
   width: 280px;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+  }
 }
 
 .more {
@@ -58,10 +68,19 @@
   display: flex;
   @include list(20px, true);
   flex: 1;
+
+  @include mq($PhoneWidth, max) {
+    flex-direction: column;
+    @include list(44px, false);
+  }
 }
 
 .column {
   display: flex;
   flex-direction: column;
   @include list(50px, false);
+
+  @include mq($PhoneWidth, max) {
+    @include list(44px, false);
+  }
 }

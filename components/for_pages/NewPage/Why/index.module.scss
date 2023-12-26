@@ -4,6 +4,11 @@
   display: flex;
   flex-direction: column;
   @include list(64px, false);
+
+  @include mq($PhoneWidth, max) {
+    @include list(30px, false);
+    margin-top: 60px;
+  }
 }
 
 .title {
@@ -14,6 +19,10 @@
   font-weight: 500;
   line-height: normal;
   text-align: center;
+
+  @include mq($PhoneWidth, max) {
+    font-size: 24px;
+  }
 }
 
 .cards {
@@ -21,6 +30,16 @@
   @include list(12px, true);
   min-height: 328px;
   align-items: center;
+
+  @include mq($MdDesktopWidth, max) {
+    flex-wrap: wrap;
+  }
+
+  @include mq($PhoneWidth, max) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    @include list(30px, false);
+  }
 }
 
 .schedule {
