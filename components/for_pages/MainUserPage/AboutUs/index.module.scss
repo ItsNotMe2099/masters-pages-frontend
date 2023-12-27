@@ -3,6 +3,13 @@
 .root {
   background: #F8F9FE;
   padding: 74px 0 98px 0;
+  position: relative;
+
+  svg {
+    @include mq($PhoneWidth, max) {
+      width: 100%;
+    }
+  }
 }
 
 .container {
@@ -11,6 +18,16 @@
   display: flex;
   margin: 0 auto;
   justify-content: space-between;
+
+  @include mq($MdDesktopWidth, max) {
+    width: inherit;
+    padding: 0 16px;
+  }
+
+  @include mq($SmDesktopWidth, max) {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }
 
 .left {
@@ -18,6 +35,10 @@
   flex-direction: column;
   @include list(16px, false);
   width: 50%;
+
+  @include mq($SmDesktopWidth, max) {
+    width: 100%;
+  }
 }
 
 .top {
@@ -27,6 +48,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @include mq($SmDesktopWidth, max) {
+    text-align: center;
+  }
 }
 
 .text {

@@ -26,6 +26,11 @@
   margin: 0 auto;
   justify-content: space-between;
   @include list(89px, false);
+
+  @include mq($MdDesktopWidth, max) {
+    width: inherit;
+    padding: 0 16px;
+  }
 }
 
 .title {

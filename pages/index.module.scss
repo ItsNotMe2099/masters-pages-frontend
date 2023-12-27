@@ -9,6 +9,10 @@
   display: flex;
   @include list(35px, true);
   justify-content: center;
+
+  @include mq($SmDesktopWidth, max) {
+    @include list(15px, true);
+  }
 }
 
 .text {
