@@ -15,6 +15,10 @@
   align-items: center;
   margin: 0 auto;
   justify-content: space-between;
+
+  @include mq(392px, max) {
+    flex-direction: column;
+  }
 }
 
 .left {
@@ -60,10 +64,22 @@
   display: flex;
   flex-direction: column;
   @include list(10px, false);
+
+  @include mq(392px, max) {
+    margin-top: 12px;
+    align-items: center;
+  }
 }
 
 .socials,
 .apps {
   display: flex;
   @include list(8px, true);
+}
+
+.apps {
+  @include mq($PhoneWidth, max) {
+    flex-direction: column;
+    @include list(8px, false);
+  }
 }

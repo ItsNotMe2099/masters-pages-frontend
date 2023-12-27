@@ -9,18 +9,32 @@
   span {
     position: relative !important;
   }
+
+  @include mq($SmDesktopWidth, max) {
+    flex-direction: column;
+    @include list(32px, false);
+  }
 }
 
 .img {
   position: relative !important;
   width: 684px !important;
   height: 672px !important;
+
+  @include mq($SmDesktopWidth, max) {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 
 .right {
   display: flex;
   flex-direction: column;
   width: 50%;
+
+  @include mq($SmDesktopWidth, max) {
+    width: 100%;
+  }
 }
 
 .title {
@@ -30,6 +44,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @include mq($SmDesktopWidth, max) {
+    font-size: 32px;
+  }
 }
 
 .text {
@@ -40,6 +58,10 @@
   font-weight: 500;
   line-height: normal;
   margin-top: 24px;
+
+  @include mq($SmDesktopWidth, max) {
+    font-size: 18px;
+  }
 }
 
 .apps {
@@ -47,6 +69,11 @@
   @include list(8px, true);
   justify-content: center;
   margin-top: 24px;
+
+  @include mq(390px, max) {
+    flex-direction: column;
+    @include list(8px, false);
+  }
 }
 
 .stats {

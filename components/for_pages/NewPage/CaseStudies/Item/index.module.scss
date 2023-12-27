@@ -5,10 +5,22 @@
   justify-content: space-between;
   align-items: center;
 
+  @include mq($SmDesktopWidth, max) {
+    flex-direction: column;
+  }
+
   span {
     position: relative !important;
     width: 100% !important;
     height: 100% !important;
+
+    @include mq($PhoneWidth, max) {
+      width: 450px !important;
+    }
+
+    @include mq(390px, max) {
+      width: 100% !important;
+    }
 
     img {
       position: relative !important;
@@ -20,12 +32,22 @@
 
 .reverse {
   flex-direction: row-reverse;
+
+  @include mq($SmDesktopWidth, max) {
+    flex-direction: column;
+  }
 }
 
 .right {
   display: flex;
   flex-direction: column;
   flex: 1;
+  position: relative;
+  z-index: 1;
+
+  @include mq($PhoneWidth, max) {
+    align-items: center;
+  }
 }
 
 .title {
@@ -52,6 +74,16 @@
   @include list(47px, true);
   align-items: center;
   margin-top: 34px;
+
+  @include mq($PhoneWidth, max) {
+    @include list(18px, true);
+  }
+
+  @include mq(390px, max) {
+    flex-direction: column;
+    @include list(18px, false);
+    align-items: baseline;
+  }
 }
 
 .item {
@@ -89,6 +121,10 @@
   width: 1px;
   height: 40px;
   background: #D9D9D9;
+
+  @include mq(390px, max) {
+    display: none;
+  }
 }
 
 .btn {
@@ -99,6 +135,11 @@
   border: 1px solid #6D718C;
   margin-top: 34px;
   width: 280px;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .more {

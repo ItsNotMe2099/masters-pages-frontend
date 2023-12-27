@@ -2,6 +2,11 @@
 
 .root {
   margin-top: 116px;
+  overflow: hidden;
+
+  @include mq($SmDesktopWidth, max) {
+    margin-top: 64px;
+  }
 }
 
 .title {
@@ -18,4 +23,9 @@
   display: flex;
   flex-direction: column;
   margin-top: 86px;
+
+  @include mq($SmDesktopWidth, max) {
+    @include list(90px, false);
+    margin-top: 32px;
+  }
 }

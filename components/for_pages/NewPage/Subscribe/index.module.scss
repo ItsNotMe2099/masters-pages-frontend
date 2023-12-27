@@ -9,6 +9,16 @@
   position: relative;
   padding-bottom: 118px;
   @include list(16px, false);
+
+  @include mq($PhoneWidth, max) {
+    padding-bottom: 93px;
+    padding-right: 32px;
+    padding-left: 32px;
+    @include list(24px, false);
+    margin-top: 50px;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
 }
 
 .title {
@@ -19,6 +29,11 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  position: relative;
+
+  @include mq($PhoneWidth, max) {
+    font-size: 36px;
+  }
 }
 
 .text {

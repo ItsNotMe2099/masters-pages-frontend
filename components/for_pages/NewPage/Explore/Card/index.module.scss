@@ -36,6 +36,8 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  position: relative;
+  z-index: 1;
 
   @include mq($PhoneWidth, max) {
     text-align: center;

@@ -13,9 +13,17 @@
 .second {
   background-color: #E5E8F3;
 
+  @include mq($PhoneWidth, max) {
+    background: #EAEDF5;
+  }
+
   .container {
     padding: 110px 0;
     padding-bottom: 0;
+
+    @include mq($PhoneWidth, max) {
+      padding: 0 16px;
+    }
   }
 }
 
@@ -40,7 +48,8 @@
   }
 
   @include mq($PhoneWidth, max) {
-    width: 80%;
+    padding: 0 16px;
+    width: inherit;
   }
 }
 

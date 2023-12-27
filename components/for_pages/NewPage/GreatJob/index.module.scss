@@ -14,6 +14,20 @@
   position: absolute;
   margin-top: 70px;
   z-index: 2;
+
+  @include mq($SmDesktopWidth, max) {
+    margin-top: 46px;
+  }
+
+  @include mq(390px + 1, max) {
+    position: relative;
+    background-color: #1A92B7;
+    border-radius: 50px;
+  }
+
+  @include mq(390px, max) {
+    padding: 56px 12px;
+  }
 }
 
 .text {
@@ -24,11 +38,21 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  @include mq($SmDesktopWidth, max) {
+    font-size: 24px;
+  }
 }
 
 .stats {
   display: flex;
   @include list(67px, true);
+
+  @include mq($SmDesktopWidth, max) {
+    flex-direction: column;
+    @include list(24px, false);
+    align-items: center;
+  }
 }
 
 .separator {
@@ -40,6 +64,10 @@
 .white {
   margin-top: -155px;
   width: 90%;
+
+  @include mq($MdDesktopWidth, max) {
+    margin-top: -200px;
+  }
 }
 
 .blue {
@@ -59,4 +87,20 @@
   right: 0;
   z-index: 1;
   bottom: 0;
+}
+
+.right,
+.left {
+  display: flex;
+  @include list(67px, true);
+
+  @include mq($SmDesktopWidth, max) {
+    @include list(27px, true);
+  }
+}
+
+.mobile {
+  @include mq(390px + 1, max) {
+    display: none;
+  }
 }

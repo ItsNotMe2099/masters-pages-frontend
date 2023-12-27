@@ -20,6 +20,8 @@ import Top from 'components/for_pages/NewPage/Top'
 import Header from 'components/for_pages/NewPage/Header'
 import Image from 'next/image'
 import { useResize } from 'components/hooks/useResize'
+import { useSelector } from 'react-redux'
+import { IRootState } from 'types'
 
 const NewPage = (props) => {
 
@@ -34,6 +36,8 @@ const NewPage = (props) => {
     setIsOpen(false)
   }
 
+  const key = useSelector((state: IRootState) => state.modal.modalKey)
+
   const { isPhoneWidth } = useResize()
 
   return (
@@ -45,7 +49,7 @@ const NewPage = (props) => {
           onClick={handleAbout}
         />
         <Layout>
-          {!isPhoneWidth && <Header className={styles.header} />}
+          {!isPhoneWidth && !key && <Header className={styles.header} />}
           <div className={styles.first}>
             <Top />
             <div className={styles.wrapper}>
