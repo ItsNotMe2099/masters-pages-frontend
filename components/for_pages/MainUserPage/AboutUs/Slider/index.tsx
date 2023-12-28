@@ -2,6 +2,9 @@ import * as React from 'react'
 import styles from './index.module.scss'
 import { useState, useEffect } from 'react'
 import Dot from './Dot'
+import Item from 'components/for_pages/MainUserPage/Greetings/Item'
+import Slider from 'react-slick'
+
 
 interface IItem {
   link: string
@@ -12,7 +15,7 @@ interface IItem {
 }
 
 interface Props {
-  items: IItem
+
 }
 
 const SliderAboutUs = (props: Props) => {
@@ -20,6 +23,29 @@ const SliderAboutUs = (props: Props) => {
   const pageCount = 3
   const [item, setItem] = useState<number | null>(null)
   const [currentItem, setCurrentItem] = useState<IItem | null>(null)
+
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dots: true,
+    centerMode: true,
+    centerPadding: "120px",
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 646,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          infinite: false,
+          centerPadding: "50px",
+        }
+      },
+    ]
+  }
 
   const items = [
     {
@@ -58,14 +84,11 @@ const SliderAboutUs = (props: Props) => {
 
   return (
     <div className={styles.root}>
-      {pageCount > 1 && <a className={styles.prev} onClick={() => page !== 1 && setPage(page - 1)}><img src='/img/Reports/Volunteers/prev.svg' alt='' /></a>}
-      <>
-        {pageCount > 1 && <a className={styles.next} onClick={() => pageCount !== page && setPage(page + 1)}><img src='/img/Reports/Volunteers/next.svg' alt='' /></a>}
-        {pageCount > 1 &&
-          <div className={styles.dots}>
-            {dots.map((i, index) => <Dot index={index} page={page} onClick={() => setPage(index + 1)} />)}
-          </div>}
-      </>
+      <Slider {...settings}>
+        {items.map((i, index) =>
+          <Item key={index} link={i.link} color={i.color} text={i.text} image={i.image} light={i.light} />
+        )}
+      </Slider>
     </div>
   )
 }

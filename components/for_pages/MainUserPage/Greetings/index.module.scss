@@ -16,6 +16,10 @@
     right: -50% !important;
     min-width: 50% !important;
   }
+
+  @include mq($TabletWidth, max) {
+    padding: 43px 0;
+  }
 }
 
 .container {
@@ -31,6 +35,10 @@
     width: inherit;
     padding: 0 16px;
   }
+
+  @include mq($TabletWidth, max) {
+    flex-direction: column-reverse;
+  }
 }
 
 .title {
@@ -43,6 +51,10 @@
   text-align: center;
   position: relative;
   z-index: 1;
+
+  @include mq($TabletWidth, max) {
+    margin-top: 32px;
+  }
 }
 
 .options {

@@ -23,7 +23,7 @@ import { useResize } from 'components/hooks/useResize'
 import { useSelector } from 'react-redux'
 import { IRootState } from 'types'
 
-const NewPage = (props) => {
+const Volunteers = (props) => {
 
   const [isOpen, setIsOpen] = useState(true)
   const signUpCookie = cookie.get('signUpMobile')
@@ -108,4 +108,4 @@ export const getServerSideProps = async (ctx) => {
   return { props: { ...res.props } }
 
 }
-export default NewPage
+export default Volunteers

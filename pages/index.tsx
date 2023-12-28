@@ -4,12 +4,6 @@ import { CookiesType, RegistrationMode } from 'types/enums'
 import { addDays } from 'date-fns'
 import { useEffect, useState } from 'react'
 import SignUpComponent from 'components/Auth/SignUp'
-import MainSectionHeader from 'components/for_pages/MainUserPage/Header'
-//import MainSectionFirst from 'components/for_pages/MainUserPage/MainSectionFirst'
-//import MainSectionSecond from 'components/for_pages/MainUserPage/MainSectionSecond'
-//import MainSectionThird from 'components/for_pages/MainUserPage/MainSectionThird'
-//import MainSectionFourth from 'components/for_pages/MainUserPage/MainSectionFourth'
-import MainSectionFooter from 'components/for_pages/MainUserPage/Footer'
 import Modals from 'components/layout/Modals'
 import styles from './index.module.scss'
 import cookie from 'js-cookie'
@@ -17,6 +11,9 @@ import AboutUs from 'components/for_pages/MainUserPage/AboutUs'
 import Greetings from 'components/for_pages/MainUserPage/Greetings'
 import Layout from 'components/for_pages/MainUserPage/Layout'
 import Item from 'components/for_pages/MainUserPage/Greetings/Item'
+import { useResize } from 'components/hooks/useResize'
+import SliderAboutUs from 'components/for_pages/MainUserPage/AboutUs/Slider'
+
 const Home = (props) => {
 
   const [isOpen, setIsOpen] = useState(true)
@@ -30,6 +27,8 @@ const Home = (props) => {
     setIsOpen(false)
   }
 
+  const { isTabletWidth } = useResize()
+
   return (
     <>
       <div className={styles.root}>
@@ -39,12 +38,8 @@ const Home = (props) => {
           onClick={handleAbout}
         />
         <Layout>
-          {/*<MainSectionFirst/>
-        <MainSectionSecond/>
-        <MainSectionThird/>
-  <MainSectionFourth/>*/}
           <Greetings title='Greetings, dear guest. Please select your identity 👋'>
-            <div className={styles.options}>
+            {!isTabletWidth ? <div className={styles.options}>
               <Item
                 textClass={styles.text}
                 link='/self-employed'
@@ -68,7 +63,7 @@ const Home = (props) => {
                 image='/img/MainPage/people-green.png'
                 light='/img/MainPage/green.png'
               />
-            </div>
+            </div> : <SliderAboutUs />}
           </Greetings>
           <AboutUs title='About us 👋'>
             <div className={styles.textAbout}>

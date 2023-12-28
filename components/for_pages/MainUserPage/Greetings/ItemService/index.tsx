@@ -125,7 +125,7 @@ export default function ItemService(props: Props) {
               <div className={styles.forText}>
                 {getSecondForText()}
               </div>
-              <Link href={router.asPath === '/self-employed' ? '/advertising' : router.asPath === '/volunteering' ? '/new-page' : '/FindMembers'}>
+              <Link href={router.asPath === '/self-employed' ? '/advertising' : router.asPath === '/volunteering' ? '/volunteers' : '/FindMembers'}>
                 <a className={styles.btn}>
                   <div className={styles.more}>Learn more</div>
                   <ChevronMoreSvg color='#EB5757' />

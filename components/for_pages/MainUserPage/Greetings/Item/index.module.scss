@@ -8,6 +8,10 @@
   flex-direction: column;
   width: 33%;
   max-width: 366px;
+
+  @include mq($TabletWidth, max) {
+    width: 100%;
+  }
 }
 
 .people {
