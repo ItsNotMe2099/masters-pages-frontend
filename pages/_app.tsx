@@ -13,7 +13,7 @@ import { AppWrapper } from 'context/state'
 import { AuthWrapper } from 'context/auth_state'
 import { getSelectorsByUserAgent } from 'react-device-detect'
 import Head from 'next/head'
-
+import 'swiper/css/bundle'
 import Snackbar from 'components/layout/Snackbar'
 import { useEffect, useState } from "react";
 import { RecommendWrapper } from "context/recommend_state";

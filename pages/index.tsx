@@ -12,7 +12,7 @@ import Greetings from 'components/for_pages/MainUserPage/Greetings'
 import Layout from 'components/for_pages/MainUserPage/Layout'
 import Item from 'components/for_pages/MainUserPage/Greetings/Item'
 import { useResize } from 'components/hooks/useResize'
-import SliderAboutUs from 'components/for_pages/MainUserPage/AboutUs/Slider'
+import SliderGreetings from 'components/for_pages/MainUserPage/Greetings/Slider'
 
 const Home = (props) => {
 
@@ -63,7 +63,7 @@ const Home = (props) => {
                 image='/img/MainPage/people-green.png'
                 light='/img/MainPage/green.png'
               />
-            </div> : <SliderAboutUs />}
+            </div> : <SliderGreetings />}
           </Greetings>
           <AboutUs title='About us 👋'>
             <div className={styles.textAbout}>

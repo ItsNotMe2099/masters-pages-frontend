@@ -53,7 +53,11 @@
   z-index: 1;
 
   @include mq($TabletWidth, max) {
-    margin-top: 32px;
+    margin-top: -92px;
+  }
+
+  @include mq($PhoneWidth, max) {
+    font-size: 24px;
   }
 }
 

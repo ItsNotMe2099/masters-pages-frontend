@@ -3,7 +3,9 @@ import styles from './index.module.scss'
 import { useState, useEffect } from 'react'
 import Dot from './Dot'
 import Item from 'components/for_pages/MainUserPage/Greetings/Item'
-import Slider from 'react-slick'
+import { Swiper as SwiperClass } from 'swiper/types'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Zoom, Pagination } from 'swiper/modules'
 
 
 interface IItem {
@@ -18,34 +20,13 @@ interface Props {
 
 }
 
-const SliderAboutUs = (props: Props) => {
+const SliderGreetings = (props: Props) => {
   const [page, setPage] = useState<number>(1)
   const pageCount = 3
   const [item, setItem] = useState<number | null>(null)
   const [currentItem, setCurrentItem] = useState<IItem | null>(null)
 
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    dots: true,
-    centerMode: true,
-    centerPadding: "120px",
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 646,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          infinite: false,
-          centerPadding: "50px",
-        }
-      },
-    ]
-  }
+  const swiperRef = React.useRef<SwiperClass | null>(null)
 
   const items = [
     {
@@ -82,15 +63,39 @@ const SliderAboutUs = (props: Props) => {
 
   const dots = array.fill(< Dot />)
 
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + '</span>';
+    },
+  }
+
   return (
     <div className={styles.root}>
-      <Slider {...settings}>
-        {items.map((i, index) =>
-          <Item key={index} link={i.link} color={i.color} text={i.text} image={i.image} light={i.light} />
-        )}
-      </Slider>
+      <Swiper
+        spaceBetween={8}
+        slidesPerView={1}
+        pagination={pagination}
+        onBeforeInit={(swiper) => {
+          swiperRef.current = swiper
+        }}
+        modules={[Zoom, Pagination]}
+        zoom={{
+          maxRatio: 2,
+          minRatio: 1
+
+        }}
+
+      >
+        {items.map((item, index) => (<SwiperSlide key={index} className={styles.slide} >
+          <div className={'swiper-zoom-container'}>
+            <Item link={item.link} color={item.color} text={item.text} image={item.image} light={item.light} />
+          </div>
+        </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   )
 }
 
-export default SliderAboutUs
+export default SliderGreetings

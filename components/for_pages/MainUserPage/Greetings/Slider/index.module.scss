@@ -1,0 +1,33 @@
+@import "scss/index";
+
+.root {
+  position: relative;
+  margin-top: 0;
+
+  :global .swiper {
+    padding-bottom: 135px;
+
+    .swiper-pagination {
+      top: 80% !important;
+
+      .swiper-pagination-bullet {
+        width: 6px !important;
+        height: 6px !important;
+        background-color: #6D718C;
+        opacity: 0.5;
+      }
+
+      .swiper-pagination-bullet-active {
+        background-color: #6D718C;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  position: relative;
+}
