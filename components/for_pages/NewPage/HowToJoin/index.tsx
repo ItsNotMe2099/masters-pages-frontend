@@ -5,12 +5,21 @@ import styles from './index.module.scss'
 import AppStoreSvg from 'components/svg/AppStoreSvg'
 import GooglePlaySvg from 'components/svg/GooglePlaySvg'
 import Wrapper from './Wrapper'
+import { useResize } from 'components/hooks/useResize'
+import SliderPhone from './Slider'
 
 interface Props {
 
 }
 
 export default function HowToJoin(props: Props) {
+
+  const { isTabletWidth } = useResize()
+
+  const slides1 = [
+    { image: '/img/New Page/phone1-slide.png', label: 'IOS' },
+    { image: '/img/New Page/phone2-slide.png', label: 'Android' },
+  ]
 
   return (
     <Wrapper className={styles.root} color='#FFD580' id={'howtojoin'}>
@@ -20,10 +29,13 @@ export default function HowToJoin(props: Props) {
       <div className={styles.content}>
         <div className={styles.top}>
           <Item number={1} title='Download MastersPages APP'>
-            <div className={styles.first}>
-              <SmartPhone image='/img/New Page/phone1.png' text='IOS' textClass={styles.phoneText} />
-              <SmartPhone image='/img/New Page/phone2.png' text='Android' textClass={styles.phoneText} />
-            </div>
+            {!isTabletWidth ?
+              <div className={styles.first}>
+                <SmartPhone image='/img/New Page/phone1.png' text='IOS' textClass={styles.phoneText} />
+                <SmartPhone image='/img/New Page/phone2.png' text='Android' textClass={styles.phoneText} />
+              </div> :
+              <SliderPhone items={slides1} />
+            }
             <div className={styles.download}>
               <div className={styles.now}>Download App Now:</div>
               <div className={styles.apps}>

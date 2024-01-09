@@ -6,6 +6,7 @@ import ChevronLeftSvg from 'components/svg/ChevronLeftSvg'
 import ChevronRightSvg from 'components/svg/ChevronRightSvg'
 import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
 import { getAuthServerSide } from 'utils/auth'
+import SliderCards from 'components/for_pages/NewPage2/Slider/Slider'
 
 
 interface Props {
@@ -17,6 +18,7 @@ const SelfEmployed = (props: Props) => {
   return (
     <Layout>
       <Greetings title='Greetings, dear guest. Please select your identity 👋'>
+        {/*<SliderCards />*/}
         <div className={styles.content}>
           <ChevronLeftSvg className={styles.chevron} link='/clubs' />
           <ItemService
@@ -73,5 +75,5 @@ const SelfEmployed = (props: Props) => {
   )
 }
 
-export const getServerSideProps = getAuthServerSide({redirect: false})
+export const getServerSideProps = getAuthServerSide({ redirect: false })
 export default SelfEmployed

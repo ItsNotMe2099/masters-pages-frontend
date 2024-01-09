@@ -1,0 +1,55 @@
+@import "scss/index";
+
+.root {
+  position: relative;
+  margin-top: 32px;
+  display: flex;
+  align-self: center;
+  height: 497px;
+
+  span:first-child {
+    height: 418px !important;
+  }
+
+  :global .swiper {
+    position: absolute;
+    width: 89%;
+    height: 97.4%;
+    border-radius: 28px;
+    top: 8px;
+    right: 12px;
+
+    .swiper-zoom-container {
+      span {
+        height: 83% !important;
+        border-radius: 28px;
+      }
+    }
+
+    .swiper-pagination {
+      top: 80% !important;
+
+      .swiper-pagination-bullet {
+        width: 6px !important;
+        height: 6px !important;
+        background-color: #6D718C;
+        opacity: 0.5;
+      }
+
+      .swiper-pagination-bullet-active {
+        background-color: #6D718C;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.label {
+  color: #000;
+  text-align: center;
+  font-family: 'Gilroy';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

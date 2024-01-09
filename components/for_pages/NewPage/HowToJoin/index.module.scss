@@ -25,23 +25,40 @@
   display: flex;
   margin-top: 82px;
   justify-content: space-between;
+
+  @include mq($MdDesktopWidth, max) {
+    flex-direction: column;
+    @include list(32px, false);
+  }
 }
 
 .first {
   display: flex;
   @include list(5%, true);
   margin-top: 32px;
+
+  @include mq($MdDesktopWidth, max) {
+    justify-content: center;
+  }
 }
 
 .second {
   display: flex;
   margin-top: 32px;
   @include list(1%, true);
+
+  @include mq($MdDesktopWidth, max) {
+    justify-content: center;
+  }
 }
 
 .third {
   display: flex;
   margin-top: 24px;
+
+  @include mq($MdDesktopWidth, max) {
+    justify-content: center;
+  }
 }
 
 .phoneText {
@@ -83,6 +100,11 @@
   display: flex;
   margin-top: 64px;
   justify-content: space-between;
+
+  @include mq($MdDesktopWidth, max) {
+    flex-direction: column;
+    @include list(32px, false);
+  }
 }
 
 .icon {

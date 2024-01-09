@@ -1,42 +1,22 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import Item from 'components/for_pages/MainUserPage/Greetings/Item'
 import { Swiper as SwiperClass } from 'swiper/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Zoom, Pagination } from 'swiper/modules'
+import Image from 'next/image'
 
-interface Props {
-
+interface IItem {
+  image: string
+  label: string
 }
 
-const SliderGreetings = (props: Props) => {
+interface Props {
+  items: IItem[]
+}
+
+const SliderPhone = ({ items }: Props) => {
 
   const swiperRef = React.useRef<SwiperClass | null>(null)
-
-  const items = [
-    {
-
-      link: '/self-employed',
-      color: '#EB5757',
-      text: 'Self-employed and clients',
-      image: '/img/MainPage/people-red.png',
-      light: '/img/MainPage/red.png',
-    },
-    {
-      link: '/volunteering',
-      color: '#EEBA1A',
-      text: 'Volunteering organizations and volunteers',
-      image: '/img/MainPage/people-yellow.png',
-      light: '/img/MainPage/yellow.png'
-    },
-    {
-      link: '/clubs',
-      color: '#00CDC1',
-      text: 'Clubs and club members',
-      image: '/img/MainPage/people-green.png',
-      light: '/img/MainPage/green.png'
-    }
-  ]
 
   const pagination = {
     clickable: true,
@@ -47,6 +27,7 @@ const SliderGreetings = (props: Props) => {
 
   return (
     <div className={styles.root}>
+      <Image src={'/img/New Page/iphone1.png'} alt='' width={206} height={418} />
       <Swiper
         spaceBetween={8}
         slidesPerView={1}
@@ -64,7 +45,8 @@ const SliderGreetings = (props: Props) => {
       >
         {items.map((item, index) => (<SwiperSlide key={index} className={styles.slide} >
           <div className={'swiper-zoom-container'}>
-            <Item link={item.link} color={item.color} text={item.text} image={item.image} light={item.light} />
+            <Image className={styles.image} src={item.image} alt='' layout='fill' />
+            <div className={styles.label}>{item.label}</div>
           </div>
         </SwiperSlide>
         ))}
@@ -73,4 +55,4 @@ const SliderGreetings = (props: Props) => {
   )
 }
 
-export default SliderGreetings
+export default SliderPhone

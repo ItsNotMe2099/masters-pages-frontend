@@ -1,40 +1,33 @@
 import * as React from 'react'
 import styles from './index.module.scss'
-import Item from 'components/for_pages/MainUserPage/Greetings/Item'
 import { Swiper as SwiperClass } from 'swiper/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Zoom, Pagination } from 'swiper/modules'
+import { Zoom, Pagination, EffectCards } from 'swiper/modules'
+import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
 
 interface Props {
 
 }
 
-const SliderGreetings = (props: Props) => {
+const SliderCards = (props: Props) => {
 
   const swiperRef = React.useRef<SwiperClass | null>(null)
 
   const items = [
     {
-
-      link: '/self-employed',
       color: '#EB5757',
       text: 'Self-employed and clients',
       image: '/img/MainPage/people-red.png',
-      light: '/img/MainPage/red.png',
     },
     {
-      link: '/volunteering',
       color: '#EEBA1A',
       text: 'Volunteering organizations and volunteers',
       image: '/img/MainPage/people-yellow.png',
-      light: '/img/MainPage/yellow.png'
     },
     {
-      link: '/clubs',
       color: '#00CDC1',
       text: 'Clubs and club members',
       image: '/img/MainPage/people-green.png',
-      light: '/img/MainPage/green.png'
     }
   ]
 
@@ -48,23 +41,19 @@ const SliderGreetings = (props: Props) => {
   return (
     <div className={styles.root}>
       <Swiper
+        effect={'cards'}
         spaceBetween={8}
         slidesPerView={1}
         pagination={pagination}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper
         }}
-        modules={[Zoom, Pagination]}
-        zoom={{
-          maxRatio: 2,
-          minRatio: 1
-
-        }}
+        modules={[Pagination, EffectCards]}
 
       >
         {items.map((item, index) => (<SwiperSlide key={index} className={styles.slide} >
           <div className={'swiper-zoom-container'}>
-            <Item link={item.link} color={item.color} text={item.text} image={item.image} light={item.light} />
+            <ItemService color={item.color} text={item.text} image={item.image} />
           </div>
         </SwiperSlide>
         ))}
@@ -73,4 +62,4 @@ const SliderGreetings = (props: Props) => {
   )
 }
 
-export default SliderGreetings
+export default SliderCards
