@@ -5,7 +5,9 @@
   margin-top: 32px;
   display: flex;
   align-self: center;
-  height: 497px;
+  height: 418px;
+  transform: scale(1);
+  margin-bottom: 79px;
 
   span:first-child {
     height: 418px !important;
@@ -13,33 +15,59 @@
 
   :global .swiper {
     position: absolute;
-    width: 89%;
+    width: 90%;
     height: 97.4%;
     border-radius: 28px;
-    top: 8px;
-    right: 12px;
+    top: 6px;
+    right: 10px;
 
     .swiper-zoom-container {
       span {
-        height: 83% !important;
+        height: 99% !important;
         border-radius: 28px;
       }
     }
 
     .swiper-pagination {
-      top: 80% !important;
+      top: 100% !important;
+      position: fixed;
 
       .swiper-pagination-bullet {
         width: 6px !important;
         height: 6px !important;
-        background-color: #6D718C;
+        background-color: #fff;
         opacity: 0.5;
+        margin: 0 1px;
       }
 
       .swiper-pagination-bullet-active {
-        background-color: #6D718C;
+        background-color: #fff;
         opacity: 1;
       }
+    }
+
+    .swiper-button-next {
+      position: fixed;
+      right: -20%;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+    }
+
+    .swiper-button-prev {
+      position: fixed;
+      left: -20%;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+    }
+
+    .swiper-button-next::after {
+      content: url('../../../../../public/img/New\ Page/slider-arrow-right.svg');
+    }
+
+    .swiper-button-prev::after {
+      content: url('../../../../../public/img/New\ Page/slider-arrow-left.svg');
     }
   }
 }
@@ -52,4 +80,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  position: fixed;
+  top: 105%;
+  width: 90%;
 }
