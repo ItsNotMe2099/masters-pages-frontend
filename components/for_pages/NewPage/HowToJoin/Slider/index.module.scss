@@ -37,7 +37,7 @@
         height: 6px !important;
         background-color: #fff;
         opacity: 0.5;
-        margin: 0 1px;
+        margin: 0 2px;
       }
 
       .swiper-pagination-bullet-active {
@@ -72,6 +72,11 @@
   }
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .label {
   color: #000;
   text-align: center;
@@ -82,5 +87,5 @@
   line-height: normal;
   position: fixed;
   top: 105%;
-  width: 90%;
+  white-space: nowrap;
 }

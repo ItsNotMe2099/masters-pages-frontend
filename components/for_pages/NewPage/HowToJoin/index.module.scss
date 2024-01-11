@@ -8,6 +8,8 @@
   @include mq($PhoneWidth, max) {
     margin-left: -16px;
     margin-right: -16px;
+    margin-top: 200px;
+    padding-top: 120px;
   }
 }
 
@@ -19,6 +21,10 @@
   font-weight: 500;
   line-height: normal;
   text-align: center;
+
+  @include mq($PhoneWidth, max) {
+    font-size: 32px;
+  }
 }
 
 .content {
@@ -34,6 +40,10 @@
   @include mq($MdDesktopWidth, max) {
     flex-direction: column;
     @include list(32px, false);
+  }
+
+  @include mq($PhoneWidth, max) {
+    margin-top: 64px;
   }
 }
 

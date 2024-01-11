@@ -57,7 +57,7 @@ const SliderPhone = ({ items }: Props) => {
           </div>
         </SwiperSlide>
         ))}
-        {items.map((item, index) => currentSlideIndex === index && <div className={styles.label}>{item.label}</div>)}
+        {items.map((item, index) => currentSlideIndex === index && <div className={styles.wrapper}><div className={styles.label}>{item.label}</div></div>)}
       </Swiper>
     </div>
   )

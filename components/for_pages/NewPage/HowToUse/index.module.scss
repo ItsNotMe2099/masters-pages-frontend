@@ -4,6 +4,11 @@
   padding-top: 130px;
   padding-bottom: 75px;
   margin-top: 67px;
+
+  @include mq($PhoneWidth, max) {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
 }
 
 .content {
