@@ -11,6 +11,10 @@
     margin-top: 200px;
     padding-top: 120px;
   }
+
+  @include mq($LPhoneWidth, max) {
+    padding-bottom: 0;
+  }
 }
 
 .title {
@@ -44,6 +48,10 @@
 
   @include mq($PhoneWidth, max) {
     margin-top: 64px;
+  }
+
+  @include mq($LPhoneWidth, max) {
+    align-items: center;
   }
 }
 
@@ -123,6 +131,11 @@
   @include mq($MdDesktopWidth, max) {
     flex-direction: column;
     @include list(32px, false);
+    margin-top: 32px;
+  }
+
+  @include mq($LPhoneWidth, max) {
+    align-items: center;
   }
 }
 

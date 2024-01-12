@@ -4,12 +4,16 @@ import Item from 'components/for_pages/MainUserPage/Greetings/Item'
 import { Swiper as SwiperClass } from 'swiper/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Zoom, Pagination } from 'swiper/modules'
+import classNames from 'classnames'
+import { useAppContext } from 'context/state'
 
 interface Props {
 
 }
 
 const SliderGreetings = (props: Props) => {
+
+  const appContext = useAppContext()
 
   const swiperRef = React.useRef<SwiperClass | null>(null)
 
@@ -46,7 +50,7 @@ const SliderGreetings = (props: Props) => {
   }
 
   return (
-    <div className={styles.root}>
+    <div className={classNames(styles.root, { [styles.none]: appContext.menuMobileOpen })}>
       <Swiper
         spaceBetween={8}
         slidesPerView={1}

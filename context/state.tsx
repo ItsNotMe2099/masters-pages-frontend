@@ -17,6 +17,8 @@ interface IState {
   isMobile: boolean
   isDesktop: boolean
   isLogged: boolean
+  menuMobileOpen: boolean
+  setMenuMobileOpen: () => void
   isNotLogged: boolean
   modal: ModalType | null
   modalArguments: any
@@ -103,6 +105,8 @@ const defaultValue: IState = {
   updateUser: () => null,
   updateProfile: () => null,
   updateRole: () => null,
+  setMenuMobileOpen: () => null,
+  menuMobileOpen: false
 }
 
 const AppContext = createContext<IState>(defaultValue)
@@ -124,6 +128,9 @@ export function AppWrapper(props: Props) {
   const [user, setUser] = useState<IUser | null>(props.user)
   const [profile, setProfile] = useState<IProfile | null>(props.profile)
   const [role, setRole] = useState<ProfileRole | null>(props.role)
+  const [menuMobileOpen, setMenuMobileOpen] = useState<boolean>(false)
+
+  console.log('ui3wgr784755348y943y954389', menuMobileOpen)
   const router = useRouter()
   useEffect(() => {
     setToken(props.token ?? null)
@@ -204,10 +211,14 @@ export function AppWrapper(props: Props) {
     user,
     profile,
     role,
+    menuMobileOpen,
     showModal: (type, args?: any) => {
       ReactModal.setAppElement('body')
       setModalArguments(args)
       setModal(type)
+    },
+    setMenuMobileOpen: () => {
+      setMenuMobileOpen(!menuMobileOpen)
     },
     showSnackbar: (text, type: SnackbarType) => {
       setSnackbar({text, type})

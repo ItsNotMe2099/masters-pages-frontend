@@ -5,6 +5,7 @@ import Wrapper from '../HowToJoin/Wrapper'
 import styles from './index.module.scss'
 import { useResize } from 'components/hooks/useResize'
 import SliderPhone from '../HowToJoin/Slider'
+import ArrowDownSvg from 'components/svg/ArrowDownSvg'
 
 interface Props {
 
@@ -12,7 +13,7 @@ interface Props {
 
 export default function HowToUse(props: Props) {
 
-  const { isTabletWidth } = useResize()
+  const { isTabletWidth, isLPhoneWidth } = useResize()
 
   const slides1 = [
     {
@@ -43,7 +44,10 @@ export default function HowToUse(props: Props) {
   ]
 
   return (
-    <Wrapper className={styles.root} color='#E3E6F0' id={'howtouse'}>
+    <Wrapper iconClass={styles.icon} className={styles.root} color='#E3E6F0' id={'howtouse'}>
+      <div className={styles.title}>
+        HOW TO USE
+      </div>
       <div className={styles.content}>
         <Item number={1} title='Open your project'>
           <div className={styles.first}>
@@ -52,6 +56,7 @@ export default function HowToUse(props: Props) {
                 menu</>} />
           </div>
         </Item>
+        {isLPhoneWidth && <ArrowDownSvg />}
         <Item className={styles.two} number={2} title='Log your hours'>
           {!isTabletWidth ? <div className={styles.second}>
             <SmartPhone image='/img/New Page/phone10.png'
@@ -69,6 +74,7 @@ export default function HowToUse(props: Props) {
             <SliderPhone items={slides1} />
           }
         </Item>
+        {isLPhoneWidth && <ArrowDownSvg />}
         <Item className={styles.three} number={3} title='Communicate'>
           {!isTabletWidth ? <div className={styles.third}>
             <SmartPhone image='/img/New Page/phone13.png'
@@ -80,6 +86,7 @@ export default function HowToUse(props: Props) {
             <SliderPhone items={slides2} />
           }
         </Item>
+        {isLPhoneWidth && <ArrowDownSvg />}
         <Item className={styles.two} number={4} title='Post your photos'>
           {!isTabletWidth ? <div className={styles.second}>
             <SmartPhone image='/img/New Page/phone15.png'
@@ -94,7 +101,8 @@ export default function HowToUse(props: Props) {
             <SliderPhone items={slides3} />
           }
         </Item>
-        <Item className={styles.two} number={5} title='Complete your engagement'>
+        {isLPhoneWidth && <ArrowDownSvg />}
+        <Item className={styles.two} number={5} title={<>Complete your{isLPhoneWidth && <br />} engagement</>}>
           <div className={styles.fifth}>
             <SmartPhone image='/img/New Page/phone18.png'
               text={<>To get your feedback press "Complete"<br /> button once you finish your project<br /> participation</>} />

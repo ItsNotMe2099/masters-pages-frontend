@@ -6,6 +6,11 @@
   border-top-left-radius: 22px;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
+
+  @include mq($LPhoneWidth, max) {
+    border-bottom-left-radius: 200px;
+    border-bottom-right-radius: 200px;
+  }
 }
 
 .icon {

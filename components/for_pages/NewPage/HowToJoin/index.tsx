@@ -7,6 +7,7 @@ import GooglePlaySvg from 'components/svg/GooglePlaySvg'
 import Wrapper from './Wrapper'
 import { useResize } from 'components/hooks/useResize'
 import SliderPhone from './Slider'
+import ArrowDownSvg from 'components/svg/ArrowDownSvg'
 
 interface Props {
 
@@ -14,7 +15,7 @@ interface Props {
 
 export default function HowToJoin(props: Props) {
 
-  const { isTabletWidth } = useResize()
+  const { isTabletWidth, isLPhoneWidth } = useResize()
 
   const slides1 = [
     { image: '/img/New Page/phone1-slide1.png', label: 'IOS' },
@@ -39,7 +40,7 @@ export default function HowToJoin(props: Props) {
       </div>
       <div className={styles.content}>
         <div className={styles.top}>
-          <Item number={1} title='Download MastersPages APP'>
+          <Item number={1} title={<>Download {isLPhoneWidth && <br />} MastersPages APP</>}>
             {!isTabletWidth ?
               <div className={styles.first}>
                 <SmartPhone image='/img/New Page/phone1.png' text='IOS' textClass={styles.phoneText} />
@@ -55,7 +56,8 @@ export default function HowToJoin(props: Props) {
               </div>
             </div>
           </Item>
-          <Item number={2} title='Setup your volunteer profile'>
+          {isLPhoneWidth && <ArrowDownSvg />}
+          <Item number={2} title={<>Setup your volunteer {isLPhoneWidth && <br />} profile</>}>
             {!isTabletWidth ?
               <div className={styles.first}>
                 <SmartPhone image='/img/New Page/phone3.png'
@@ -65,9 +67,10 @@ export default function HowToJoin(props: Props) {
               <SliderPhone items={slides2} />
             }
           </Item>
+          {isLPhoneWidth && <ArrowDownSvg />}
         </div>
         <div className={styles.bottom}>
-          <Item number={3} title='Find and join your project'>
+          <Item number={3} title={<>Find and join your{isLPhoneWidth && <br />} project</>}>
             {!isTabletWidth ?
               <div className={styles.second}>
                 <SmartPhone image='/img/New Page/phone5.png'
@@ -80,6 +83,7 @@ export default function HowToJoin(props: Props) {
               <SliderPhone items={slides3} />
             }
           </Item>
+          {isLPhoneWidth && <ArrowDownSvg />}
           <Item classTop={styles.fourthTop} number={4} title={<>Accept invitation<br /> once received</>}>
             <div className={styles.third}>
               <SmartPhone image='/img/New Page/phone8.png'

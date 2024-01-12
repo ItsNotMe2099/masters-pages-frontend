@@ -8,13 +8,14 @@ interface Props {
   className?: string
   children: ReactElement | ReactElement[]
   id: string
+  iconClass?: string
 }
 
 export default function Wrapper(props: Props) {
 
   return (
     <div className={classNames(styles.root, props.className)} style={{ backgroundColor: `${props.color}` }} id={props.id}>
-      <Icon color={props.color} className={styles.icon} />
+      <Icon color={props.color} className={classNames(styles.icon, props.iconClass)} />
       <div className={styles.container}>
         {props.children}
       </div>
