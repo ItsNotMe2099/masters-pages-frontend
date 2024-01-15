@@ -53,19 +53,31 @@
 
 .isActive {
   .title {
-    color: white;
+    
+    @include mq($SmDesktopWidth, min) {
+      color: white;
+    }
   }
 
   &.modeGuest {
     background: #a39e9e;
+
+    @include mq($SmDesktopWidth, max) {
+      background-color: transparent;
+    }
   }
 
   .border {
     display: block;
+
+    @include mq($SmDesktopWidth, max) {
+      display: none;
+    }
   }
 
   &.modeClient {
     background: #007230;
+    border-bottom: 3px solid #007230;
   }
 
   &.modeClient {

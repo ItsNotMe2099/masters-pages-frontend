@@ -22,7 +22,7 @@ export const useResize = () => {
 
   return {
     width,
-    isDesktopWidth: width >= breakpoints.MdDesktopWidth,
+    isDesktopWidth: width >= breakpoints.DesktopWidth,
     isMdDesktopWidth: width <= breakpoints.MdDesktopWidth,
     isSmDesktopWidth: width <= breakpoints.SmDesktopWidth,
     isPhoneWidth: width <= breakpoints.PhoneWidth,

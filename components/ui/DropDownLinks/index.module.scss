@@ -1,0 +1,176 @@
+@import "scss/index";
+
+.root {
+  position: relative;
+  border-radius: 16px;
+  border: 1px solid #6D718C;
+  padding: 8px;
+  background-color: #fff;
+}
+
+.more {
+  margin-bottom: 0;
+
+  .dropDownTrigger {
+    background: #F3F3F3;
+    border-radius: 16px;
+    height: 100%;
+    padding: 10px 19px;
+  }
+
+  .dropDown {
+    a {
+      &:hover {
+        background-color: #f3f3f3;
+      }
+    }
+
+    .optionCurrent {
+      a {
+        &:hover {
+          background-color: #812292;
+        }
+      }
+    }
+  }
+
+  .arrow {
+    margin-left: 22px;
+  }
+
+  .label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+
+    span {
+      color: #333333;
+    }
+  }
+
+  .optionCurrent {
+    background: #812292;
+
+    &:hover {
+      background: #812292;
+    }
+
+    a {
+      color: #000;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}
+
+.dropDown {
+  position: absolute;
+  left: -1px;
+  background: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: -10px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-left: 1px solid #6D718C;
+  border-right: 1px solid #6D718C;
+  border-bottom: 1px solid #6D718C;
+  min-width: 189px;
+  @include list(10px, false);
+
+  a {
+    color: #6D718C;
+    font-family: 'Gilroy';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    
+  }
+}
+
+.dropDownActive {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  background: #fff;
+  padding: 8px;
+}
+
+.dropDownTrigger {
+  height: 24px;
+  text-decoration: none;
+  @include list(8px, true);
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin: 0px;
+  color: #FFF;
+  font-family: 'Commissioner';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.32px;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 6;
+}
+
+
+.dropdownTriggerActive {
+  position: relative;
+  font-size: 13px;
+  color: #000000;
+  padding-bottom: 6px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  color: #6D718C;
+  padding: 8px;
+
+  &:hover {
+    border-radius: 8px;
+    background: #F8F6F9;
+  }
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  color: #6D718C;
+  font-family: 'Gilroy';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.arrow {
+  display: flex;
+  align-self: center;
+}
+
+.icon {
+  border-radius: 100px;
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  margin-top: 10px;
+  background: #D9D9D9;
+}

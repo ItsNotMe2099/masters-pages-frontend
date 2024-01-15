@@ -10,11 +10,13 @@ import LogoSvg from 'components/svg/Logo'
 import cookie from 'js-cookie'
 import LangSelect from 'components/LangSelect'
 import { IUser } from 'data/intefaces/IUser'
-import { signInOpen, signUpOpen } from 'components/Modal/actions'
+import { signInOpen } from 'components/Modal/actions'
 import MainSectionButton from 'components/for_pages/Corporate/Button'
 import classNames from 'classnames'
-import Routes from "pages/routes";
 import ArrowNewSvg from 'components/svg/ArrowNewSvg'
+import DropdownLinks from 'components/ui/DropDownLinks'
+import { useResize } from 'components/hooks/useResize'
+import MainSectionHeader from 'components/for_pages/MainUserPage/Header'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -58,7 +60,7 @@ export default function LayoutGuestNew(props: Props) {
     //{ title: t('menu.findMaster'), icon: 'find-clients-yellow', link: '/FindMasterGuest', },
   ]
 
-  const itemsMembers= [
+  const itemsMembers = [
     { title: 'Find Members', icon: 'find-clients-yellow', link: '/FindMembers' },
   ]
 
@@ -85,10 +87,12 @@ export default function LayoutGuestNew(props: Props) {
 
   const router = useRouter()
 
+  const { isDesktopWidth, isSmDesktopWidth, isTabletWidth } = useResize()
+
 
   return (
     <div className={cx(styles.root, { [styles.collapsed]: collapsed, [styles.menuHidden]: !showLeftMenu, [styles.noScroll]: !isScrollable })} id='scrollableDiv'>
-      {showLeftMenu && <div className={styles.leftMenu}>
+      {showLeftMenu && !isSmDesktopWidth && <div className={styles.leftMenu}>
         {logo}
         {/*item.map(item => <>{item.isSeparator && <div className={styles.menuSeparator} />}<MenuItem
           isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
@@ -164,18 +168,23 @@ export default function LayoutGuestNew(props: Props) {
                 link={item.link} />)}
           </div>}
       </div>}
-      <div className={classNames(styles.header, { [styles.proj]: !showLeftMenu })}>
+      {!isTabletWidth ? <div className={classNames(styles.header, { [styles.proj]: !showLeftMenu })}>
         <div className={styles.headerLeft}>
           {!showLeftMenu && logo}
           <div
             className={classNames(styles.hello, { [styles.none]: !showLeftMenu })}>
             Hello Guest! You’re exploring
           </div>
+          <DropdownLinks className={styles.dropdown} options={[{ label: 'Self-Employed', link: '/FindMasterGuest' },
+          { label: 'Volunteering', link: '/FindVolunteerGuest' },
+          { label: 'Clubs', link: '/FindClubs' }
+          ]} />
         </div>
+
         <div className={styles.btns}>
-          <div className={styles.free}>
+          {isDesktopWidth && <div className={styles.free}>
             <span>For FREE full access</span> <ArrowNewSvg />
-          </div>
+          </div>}
           <MainSectionButton size={'small'} href='/registration/user'>{t('auth.signUp.title')}</MainSectionButton>
           <div className={styles.free}>
             <span>or</span> <ArrowNewSvg />
@@ -183,7 +192,19 @@ export default function LayoutGuestNew(props: Props) {
           <MainSectionButton size={'small'} color='outlineRed' onClick={() => dispatch(signInOpen())}>{t('auth.signIn.title')}</MainSectionButton>
           <LangSelect isAuth={false} />
         </div>
-      </div>
+      </div> : <>
+        <MainSectionHeader />
+        <div className={styles.topContent}>
+          <div
+            className={styles.helloMobile}>
+            Hello Guest! You’re exploring
+          </div>
+          <DropdownLinks className={styles.dropdown} options={[{ label: 'Self-Employed', link: '/FindMasterGuest' },
+          { label: 'Volunteering', link: '/FindVolunteerGuest' },
+          { label: 'Clubs', link: '/FindClubs' }
+          ]} />
+        </div>
+      </>}
       <div className={cx(styles.container)}>
         {children}
       </div>

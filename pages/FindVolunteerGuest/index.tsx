@@ -22,6 +22,8 @@ import { fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, s
 import { IRootState } from 'types'
 import Modals from 'components/layout/Modals'
 import LayoutGuestNew from 'components/layout/Layout/LayoutGuestNew'
+import { useResize } from 'components/hooks/useResize'
+import Menu from 'components/layout/Layout/LayoutGuestNew/Menu'
 
 const FindVolunteerGuest = (props) => {
 
@@ -63,12 +65,15 @@ const FindVolunteerGuest = (props) => {
     dispatch(fetchProfileSearchList())
   }
 
+  const { isSmDesktopWidth } = useResize()
+
   return (
     <LayoutGuestNew>
       <div className={styles.root}>
 
         <div className={styles.container}>
           <div className={styles.left}>
+          {isSmDesktopWidth && <Menu />}
           <div className={styles.topContent}>
           <div className={styles.filters}>
           <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>

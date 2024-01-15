@@ -11,8 +11,8 @@ import classNames from 'classnames'
 import { getAuthServerSide } from 'utils/auth'
 import { setCookie } from 'nookies'
 import { CookiesType, RegistrationMode } from 'types/enums'
-import {addDays} from 'date-fns'
-import { useDispatch, useSelector} from 'react-redux'
+import { addDays } from 'date-fns'
+import { useDispatch, useSelector } from 'react-redux'
 import { signUpOpen } from 'components/Modal/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -23,6 +23,8 @@ import { fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, s
 import { IRootState } from 'types'
 import Modals from 'components/layout/Modals'
 import LayoutGuestNew from 'components/layout/Layout/LayoutGuestNew'
+import { useResize } from 'components/hooks/useResize'
+import Menu from 'components/layout/Layout/LayoutGuestNew/Menu'
 
 const FindMasterGuest = (props) => {
 
@@ -41,7 +43,7 @@ const FindMasterGuest = (props) => {
 
   const fetchVolunteers = (page?: number) => {
     ProfileRepository.fetchProfiles(page).then(data => {
-      if(data){
+      if (data) {
         //setVolunteers(data.data);
         //setTotal(data.total);
       }
@@ -64,70 +66,73 @@ const FindMasterGuest = (props) => {
     dispatch(fetchProfileSearchList())
   }
 
+  const { isSmDesktopWidth } = useResize()
+
   return (
     <LayoutGuestNew>
       <div className={styles.root}>
 
         <div className={styles.container}>
           <div className={styles.left}>
-          <div className={styles.topContent}>
-          <div className={styles.filters}>
-          <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
-      <div className={styles.projectsTobBar}>
-           {!loading && <div className={styles.projectsAmount}>{t('menu.masters')}: <span>{total}</span></div>}
-          {masters.length > 0 && <div className={styles.projectsSort}>
-            <span>{t('sort.title')}:</span>
-            <DropDown onChange={handleSortChange} value={sortType} options={[
-              {value: 'newFirst',  label: t('sort.newFirst')},
-              {value: 'highPrice', label: t('sort.highestPrice')},
-              {value: 'lowPrice', label: t('sort.lowestPrice')}]}
+          {isSmDesktopWidth && <Menu />}
+            <div className={styles.topContent}>
+              <div className={styles.filters}>
+                <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)} />
+                <div className={styles.projectsTobBar}>
+                  {!loading && <div className={styles.projectsAmount}>{t('menu.masters')}: <span>{total}</span></div>}
+                  {masters.length > 0 && <div className={styles.projectsSort}>
+                    <span>{t('sort.title')}:</span>
+                    <DropDown onChange={handleSortChange} value={sortType} options={[
+                      { value: 'newFirst', label: t('sort.newFirst') },
+                      { value: 'highPrice', label: t('sort.highestPrice') },
+                      { value: 'lowPrice', label: t('sort.lowestPrice') }]}
                       item={(item) => <div>{item?.label}</div>}
-            />
-          </div>}
-        </div>
-        </div>
-        <div className={styles.block}></div>
-        </div>
-        <div className={styles.content}>
-          <div>
-          {(loading && total === 0) && <Loader/>}
-          {total > 0 &&  <InfiniteScroll
-          dataLength={masters.length} //This is important field to render the next data
-          next={handleScrollNext}
-          scrollableTarget="scrollableDiv"
-          hasMore={total > masters.length}
-          loader={<Loader/>}
-        >
-          {masters.map(profile =>
-              <Profile key={profile.id} profile={profile}/>
-          )}
-          </InfiniteScroll>}
+                    />
+                  </div>}
+                </div>
+              </div>
+              <div className={styles.block}></div>
+            </div>
+            <div className={styles.content}>
+              <div>
+                {(loading && total === 0) && <Loader />}
+                {total > 0 && <InfiniteScroll
+                  dataLength={masters.length} //This is important field to render the next data
+                  next={handleScrollNext}
+                  scrollableTarget="scrollableDiv"
+                  hasMore={total > masters.length}
+                  loader={<Loader />}
+                >
+                  {masters.map(profile =>
+                    <Profile key={profile.id} profile={profile} />
+                  )}
+                </InfiniteScroll>}
+              </div>
+              <div className={classNames(styles.sidebar, { [styles.visible]: isVisible })}>
+                <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
+                  <div className={styles.sidebarWrapper}>
+                    <div className={styles.map}>
+                      <Map />
+                    </div>
+                    <Button className={styles.showOnTheMap}
+                      fullWidth={true} white={true} largeFont={true} bold={true} borderRed={true} size={'16px 20px'}
+                      href='/registration/user'>{t('taskSearch.showOnTheMap')}</Button>
+                  </div>
+                </Sticky>
+              </div>
+            </div>
           </div>
-          <div className={classNames(styles.sidebar, {[styles.visible]: isVisible})}>
-        <Sticky enabled={true} top={100} bottomBoundary={'#tasks-list'}>
-          <div className={styles.sidebarWrapper}>
-        <div className={styles.map}>
-          <Map/>
         </div>
-        <Button className={styles.showOnTheMap} 
-        fullWidth={true} white={true} largeFont={true} bold={true}  borderRed={true} size={'16px 20px'} 
-        href='/registration/user'>{t('taskSearch.showOnTheMap')}</Button>
-          </div>
-        </Sticky>
       </div>
-        </div>
-          </div>
-        </div>
-      </div>
-      <Modals/>
+      <Modals />
     </LayoutGuestNew>
   )
 }
 
 export const getServerSideProps = async (ctx) => {
   const res = await getAuthServerSide()(ctx as any)
-  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, {expires: addDays(new Date(), 5)})
-  return {props: {...res.props}}
+  setCookie(ctx, CookiesType.registrationMode, RegistrationMode.User, { expires: addDays(new Date(), 5) })
+  return { props: { ...res.props } }
 
 }
 
