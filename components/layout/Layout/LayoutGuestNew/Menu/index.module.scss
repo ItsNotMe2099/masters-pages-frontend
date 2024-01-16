@@ -4,9 +4,12 @@
   position: relative;
   min-height: 100%;
   height: 100%;
-  padding-top: 60px;
-  overflow-x: hidden;
+  padding-top: 30px;
+  overflow: auto;
+  width: 100%;
+  margin: 0 -16px;
   margin-bottom: 30px;
+  scrollbar-width: none;
 
   &.menuHidden {
     margin-left: 0px;
@@ -85,7 +88,6 @@
 .leftMenu {
   display: flex;
   height: 100%;
-  overflow: hidden;
   z-index: 1;
   background: #F8F6F9;
 }
@@ -230,7 +232,6 @@
 }
 
 .volunteers {
-  border-top: 1px solid #d7d7d7;
   border-bottom: 1px solid #d7d7d7;
 
   .title {
@@ -239,7 +240,6 @@
 }
 
 .clubs {
-  border-top: 1px solid #d7d7d7;
   border-bottom: 1px solid #d7d7d7;
 
   .title {
@@ -248,7 +248,6 @@
 }
 
 .members {
-  border-top: 1px solid #d7d7d7;
   border-bottom: 1px solid #d7d7d7;
 
   .title {
@@ -260,12 +259,24 @@
   color: #199AC2 !important;
 }
 
+.volunteersLine {
+  background-color: #199AC2 !important;
+}
+
 .clubsItem {
   color: #AE01FF !important;
 }
 
+.clubsLine {
+  background-color: #AE01FF !important;
+}
+
 .membersItem {
   color: #00CDC1 !important;
+}
+
+.membersLine {
+  background-color: #00CDC1 !important;
 }
 
 .masters {
@@ -288,8 +299,16 @@
   color: #DC2626 !important;
 }
 
+.mastersLine {
+  background-color: #DC2626 !important;
+}
+
 .clientsItem {
   color: #27AE60 !important;
+}
+
+.clientsLine {
+  background-color: #27AE60 !important;
 }
 
 .companies {
@@ -302,6 +321,10 @@
 
 .companiesItem {
   color: #F2B705;
+}
+
+.companiesLine {
+  background-color: #F2B705 !important;
 }
 
 .red {

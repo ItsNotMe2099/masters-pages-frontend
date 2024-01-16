@@ -17,6 +17,7 @@ import ArrowNewSvg from 'components/svg/ArrowNewSvg'
 import DropdownLinks from 'components/ui/DropDownLinks'
 import { useResize } from 'components/hooks/useResize'
 import MainSectionHeader from 'components/for_pages/MainUserPage/Header'
+import Menu from './Menu'
 
 interface Props {
   children?: ReactElement[] | ReactElement,
@@ -88,6 +89,53 @@ export default function LayoutGuestNew(props: Props) {
   const router = useRouter()
 
   const { isDesktopWidth, isSmDesktopWidth, isTabletWidth } = useResize()
+
+  const getLinkSelf = () => {
+    if (currentRoute === '/FindOrdersGuest') {
+      return '/FindOrdersGuest'
+    }
+    else if (currentRoute === '/FindClientsGuest') {
+      return '/FindClientsGuest'
+    }
+    else {
+      return '/FindOrdersGuest'
+    }
+  }
+
+  const getLinkVol = () => {
+    if (currentRoute === '/FindVolunteerGuest') {
+      return '/FindVolunteerGuest'
+    }
+    else if (currentRoute === '/FindProjectsGuest') {
+      return '/FindProjectsGuest'
+    }
+    else {
+      return '/FindCompanies'
+    }
+  }
+
+  const getLinkClubs = () => {
+    if (currentRoute === '/FindGroups') {
+      return '/FindGroups'
+    }
+    else if (currentRoute === '/FindMembers') {
+      return '/FindMembers'
+    }
+    else {
+      return '/FindClubs'
+    }
+  }
+
+  const options = [{
+    label: 'Self-Employed', link: getLinkSelf()
+  },
+  {
+    label: 'Volunteering', link: getLinkVol()
+  },
+  {
+    label: 'Clubs', link: getLinkClubs()
+  }
+  ]
 
 
   return (
@@ -168,17 +216,14 @@ export default function LayoutGuestNew(props: Props) {
                 link={item.link} />)}
           </div>}
       </div>}
-      {!isTabletWidth ? <div className={classNames(styles.header, { [styles.proj]: !showLeftMenu })}>
+      {!isSmDesktopWidth ? <div className={classNames(styles.header, { [styles.proj]: !showLeftMenu })}>
         <div className={styles.headerLeft}>
           {!showLeftMenu && logo}
           <div
             className={classNames(styles.hello, { [styles.none]: !showLeftMenu })}>
             Hello Guest! You’re exploring
           </div>
-          <DropdownLinks className={styles.dropdown} options={[{ label: 'Self-Employed', link: '/FindMasterGuest' },
-          { label: 'Volunteering', link: '/FindVolunteerGuest' },
-          { label: 'Clubs', link: '/FindClubs' }
-          ]} />
+          <DropdownLinks className={styles.dropdown} options={options} />
         </div>
 
         <div className={styles.btns}>
@@ -199,10 +244,10 @@ export default function LayoutGuestNew(props: Props) {
             className={styles.helloMobile}>
             Hello Guest! You’re exploring
           </div>
-          <DropdownLinks className={styles.dropdown} options={[{ label: 'Self-Employed', link: '/FindMasterGuest' },
-          { label: 'Volunteering', link: '/FindVolunteerGuest' },
-          { label: 'Clubs', link: '/FindClubs' }
-          ]} />
+          <div className={styles.wrapper}>
+            <DropdownLinks className={styles.dropdown} options={options} />
+          </div>
+          <Menu />
         </div>
       </>}
       <div className={cx(styles.container)}>

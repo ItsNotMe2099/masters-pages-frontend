@@ -94,6 +94,7 @@ export default function Menu(props: Props) {
               {itemsClubs.map(item =>
                 <MenuItem
                   className={styles.clubsItem}
+                  lineClass={styles.clubsLine}
                   isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
                   link={item.link} />)}
             </div>
@@ -108,6 +109,7 @@ export default function Menu(props: Props) {
               {itemsMembers.map(item =>
                 <MenuItem
                   className={styles.membersItem}
+                  lineClass={styles.membersLine}
                   isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
                   link={item.link} />)}
             </div>
@@ -122,6 +124,7 @@ export default function Menu(props: Props) {
               {itemsVolunteer.map(item =>
                 <MenuItem
                   className={styles.volunteersItem}
+                  lineClass={styles.volunteersLine}
                   isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
                   link={item.link} />)}
             </div>
@@ -136,6 +139,7 @@ export default function Menu(props: Props) {
                 {itemsMaster.map(item =>
                   <MenuItem
                     className={styles.mastersItem}
+                    lineClass={styles.mastersLine}
                     isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
                     link={item.link} />)}
               </div>
@@ -148,6 +152,7 @@ export default function Menu(props: Props) {
                 {itemsClients.map(item =>
                   <MenuItem
                     className={styles.clientsItem}
+                    lineClass={styles.clientsLine}
                     isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
                     link={item.link} />)}
               </div>
@@ -163,6 +168,7 @@ export default function Menu(props: Props) {
               {itemsCompanies.map(item =>
                 <MenuItem
                   className={styles.companiesItem}
+                  lineClass={styles.companiesLine}
                   isActive={(item.link && currentRoute.indexOf(`${item.link}`) >= 0)} title={item.title} icon={item.icon}
                   link={item.link} />)}
             </div>

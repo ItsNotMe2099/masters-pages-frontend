@@ -1,6 +1,5 @@
 import styles from 'pages/FindMasterGuest/index.module.scss'
 import { useEffect, useState } from 'react'
-import Layout from 'components/layout/Layout'
 import { DropDown } from 'components/ui/DropDown'
 import { useTranslation } from 'next-i18next'
 import GuestFilter from 'components/for_pages/GuestPage/GuestFilter'
@@ -13,18 +12,14 @@ import { setCookie } from 'nookies'
 import { CookiesType, RegistrationMode } from 'types/enums'
 import { addDays } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux'
-import { signUpOpen } from 'components/Modal/actions'
 import Loader from 'components/ui/Loader'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { IProfile } from 'data/intefaces/IProfile'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import Profile from 'components/ui/Profile'
 import { fetchProfileSearchList, resetProfileSearchList, setPageProfileSearch, setRoleProfileSearch } from 'components/ProfileSearch/actions'
 import { IRootState } from 'types'
 import Modals from 'components/layout/Modals'
 import LayoutGuestNew from 'components/layout/Layout/LayoutGuestNew'
-import { useResize } from 'components/hooks/useResize'
-import Menu from 'components/layout/Layout/LayoutGuestNew/Menu'
 
 const FindMasterGuest = (props) => {
 
@@ -66,15 +61,11 @@ const FindMasterGuest = (props) => {
     dispatch(fetchProfileSearchList())
   }
 
-  const { isSmDesktopWidth } = useResize()
-
   return (
     <LayoutGuestNew>
       <div className={styles.root}>
-
         <div className={styles.container}>
           <div className={styles.left}>
-          {isSmDesktopWidth && <Menu />}
             <div className={styles.topContent}>
               <div className={styles.filters}>
                 <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)} />
