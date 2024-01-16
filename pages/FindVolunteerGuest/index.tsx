@@ -72,7 +72,6 @@ const FindVolunteerGuest = (props) => {
 
         <div className={styles.container}>
           <div className={styles.left}>
-          {isSmDesktopWidth && <Menu />}
           <div className={styles.topContent}>
           <div className={styles.filters}>
           <GuestFilter state={isVisible} onClick={() => setIsVisible(isVisible ? false : true)}/>
