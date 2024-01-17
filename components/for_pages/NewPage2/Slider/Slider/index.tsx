@@ -2,8 +2,9 @@ import * as React from 'react'
 import styles from './index.module.scss'
 import { Swiper as SwiperClass } from 'swiper/types'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Zoom, Pagination, EffectCards } from 'swiper/modules'
+import { Pagination, Parallax } from 'swiper/modules'
 import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
+import EffectCarousel from 'components/ui/Slider/EffectCarousel'
 
 interface Props {
 
@@ -41,19 +42,21 @@ const SliderCards = (props: Props) => {
   return (
     <div className={styles.root}>
       <Swiper
-        effect={'cards'}
+        effect={'carousel'}
         spaceBetween={8}
+        loop
+        centeredSlides
         slidesPerView={1}
         pagination={pagination}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper
         }}
-        modules={[Pagination, EffectCards]}
+        modules={[Pagination, EffectCarousel, Parallax]}
 
       >
         {items.map((item, index) => (<SwiperSlide key={index} className={styles.slide} >
           <div className={'swiper-zoom-container'}>
-            <ItemService color={item.color} text={item.text} image={item.image} />
+            <ItemService index={index} color={item.color} text={item.text} image={item.image} />
           </div>
         </SwiperSlide>
         ))}

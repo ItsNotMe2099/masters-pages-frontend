@@ -18,7 +18,7 @@ const SelfEmployed = (props: Props) => {
   return (
     <Layout>
       <Greetings title='Greetings, dear guest. Please select your identity 👋'>
-        {/*<SliderCards />*/}
+        <SliderCards />
         <div className={styles.content}>
           <ChevronLeftSvg className={styles.chevron} link='/clubs' />
           <ItemService

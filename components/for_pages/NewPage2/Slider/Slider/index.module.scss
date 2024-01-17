@@ -3,9 +3,12 @@
 .root {
   position: relative;
   margin-top: 0;
+  height: 600px;
 
   :global .swiper {
     padding-bottom: 135px;
+
+    height: 600px;
 
     .swiper-pagination {
       top: 80% !important;
@@ -23,4 +26,8 @@
       }
     }
   }
+}
+
+.slide {
+  
 }

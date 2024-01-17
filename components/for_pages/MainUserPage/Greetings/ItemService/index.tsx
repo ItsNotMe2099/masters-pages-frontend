@@ -12,6 +12,7 @@ interface Props {
   image: string
   text: string
   textClass?: string
+  index?: number
 }
 
 export default function ItemService(props: Props) {
@@ -154,8 +155,8 @@ export default function ItemService(props: Props) {
           </div>
         </div>
       </div>
-      <div className={styles.next} style={{backgroundColor: `${getColorNext()}`}} />
-      <div className={styles.prev} style={{backgroundColor: `${getColorPrev()}`}} />
+      {props.index === 2 && <div className={styles.next} style={{backgroundColor: `${getColorNext()}`}} />}
+      {/*<div className={styles.prev} style={{backgroundColor: `${getColorPrev()}`}} />*/}
       <div className={styles.lightLeft}><Image src={getLeftLight()} alt='' layout='fill' /></div>
       <div className={styles.lightRight}><Image src={getRightLight()} alt='' layout='fill' /></div>
     </div>
