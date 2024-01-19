@@ -6,7 +6,7 @@
   position: relative;
 
   .abstraction1 {
-    top: -443px !important;
+    top: -473px !important;
     min-height: 50% !important;
   }
 
@@ -35,10 +35,6 @@
     width: inherit;
     padding: 0 16px;
   }
-
-  @include mq($TabletWidth, max) {
-    flex-direction: column-reverse;
-  }
 }
 
 .title {
@@ -51,10 +47,6 @@
   text-align: center;
   position: relative;
   z-index: 1;
-
-  @include mq($TabletWidth, max) {
-    margin-top: -92px;
-  }
 
   @include mq($PhoneWidth, max) {
     font-size: 24px;

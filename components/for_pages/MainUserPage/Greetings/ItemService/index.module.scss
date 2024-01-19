@@ -15,6 +15,17 @@
   @include list(48px, true);
   position: relative;
   z-index: 3;
+
+  @include mq($DesktopWidth, max) {
+    flex-direction: column;
+    align-items: center;
+    @include list(43px, false);
+    padding-bottom: 28px;
+  }
+
+  @include mq($PhoneWidth, max) {
+    @include list(34px, false);
+  }
 }
 
 .card {
@@ -23,6 +34,15 @@
   display: flex;
   flex-direction: column;
   width: 40%;
+
+  @include mq($DesktopWidth, max) {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  @include mq($PhoneWidth, max) {
+    flex-direction: column;
+  }
 }
 
 .people {
@@ -30,6 +50,15 @@
   margin-bottom: 28px;
   position: relative;
   z-index: 1;
+
+  @include mq($DesktopWidth, max) {
+    width: 50%;
+  }
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+    height: 100%;
+  }
 
   span {
     position: relative !important;
@@ -48,6 +77,10 @@
   position: relative;
   z-index: 1;
   text-align: center;
+
+  @include mq($DesktopWidth, max) {
+    align-self: center;
+  }
 }
 
 .right {
@@ -55,6 +88,18 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  @include mq($DesktopWidth, max) {
+    padding-top: 0;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  @include mq($PhoneWidth, max) {
+    margin-top: 34px;
+    align-items: center;
+    padding: 0 19px;
+  }
 }
 
 .learn {
@@ -72,6 +117,14 @@
   margin-top: 26px;
   justify-content: space-around;
   align-items: center;
+
+  @include mq($PhoneWidth, max) {
+    flex-direction: column;
+    @include list(16px, false);
+    margin-bottom: 34px;
+    margin-top: 16px;
+    width: 100%;
+  }
 }
 
 .for {
@@ -79,6 +132,10 @@
   flex-direction: column;
   @include list(20px, false);
   align-items: center;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+  }
 }
 
 .forText {
@@ -99,6 +156,13 @@
   border: 1px solid #FFF;
   background: #FFF;
   width: 170px;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 16px;
+    height: 50px;
+  }
 }
 
 .btnBottom {
@@ -109,6 +173,14 @@
   border: 1px solid #FFF;
   background: #FFF;
   margin-top: 26px;
+
+  @include mq($PhoneWidth, max) {
+    margin-top: 16px;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 16px;
+    height: 50px;
+  }
 }
 
 .more {
@@ -135,6 +207,10 @@
   font-weight: 500;
   line-height: normal;
   text-align: center;
+
+  @include mq($PhoneWidth, max) {
+    margin-top: 34px;
+  }
 }
 
 .bottom {
@@ -142,6 +218,10 @@
   display: flex;
   @include list(16px, true);
   justify-content: center;
+
+  @include mq($PhoneWidth, max) {
+    margin-top: 16px;
+  }
 }
 
 .item {
@@ -160,6 +240,10 @@
 .wrapper {
   display: flex;
   justify-content: center;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+  }
 }
 
 .next {
@@ -192,4 +276,10 @@
   height: 100%;
   right: -20%;
   top: -30%;
+}
+
+.separatorMobile {
+  height: 1px;
+  width: 50px;
+  background-color: #FFF;
 }

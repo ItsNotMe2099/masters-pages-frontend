@@ -12,7 +12,7 @@ export default function EffectCarousel({ swiper, on }: any) {
   })
   on('progress', () => {
     if (swiper.params.effect !== 'carousel') return
-    const scaleStep = 0.1
+    const scaleStep = 0.4
     const zIndexMax = swiper.slides.length
     for (let i = 0; i < swiper.slides.length; i += 1) {
       const slideEl = swiper.slides[i]
@@ -25,17 +25,10 @@ export default function EffectCarousel({ swiper, on }: any) {
       const opacityEls = slideEl.querySelectorAll(
         '.swiper-carousel-animate-opacity',
       )
-      const translateX = `${slideProgress * modify * 100}%`
-      const translateY = `${slideProgress * modify * 15}%`
+      const translate = `${slideProgress * modify * 50}%`
       const scale = 1 - absProgress * scaleStep
       const zIndex = zIndexMax - Math.abs(Math.round(slideProgress))
-      const slideFirstEl = swiper.slides[0]
-      const slideSecondEl = swiper.slides[1]
-      const slideThirdEl = swiper.slides[2]
-      //slideFirstEl.style.transform = `translate(100%, 30%) scale(0.8)`
-      //slideThirdEl.style.transform = `translate(-100%, 15%) scale(0.9)`
-      //slideSecondEl.style.transform = `translateY(0%) scale(1)`
-      slideEl.style.transform = `translate(${translateX}, ${translateY}) scale(${scale})`
+      slideEl.style.transform = `translateX(${translate}) scale(${scale})`
       slideEl.style.zIndex = zIndex
       if (absProgress > 2) {
         slideEl.style.opacity = 0

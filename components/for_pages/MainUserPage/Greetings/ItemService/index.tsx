@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
 import Image from 'next/image'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ChevronMoreSvg from 'components/svg/ChevronMoreSvg'
 import CheckSvg from 'components/svg/CheckSvg'
+import { useResize } from 'components/hooks/useResize'
 
 
 interface Props {
@@ -17,84 +17,40 @@ interface Props {
 
 export default function ItemService(props: Props) {
 
-  const router = useRouter()
-
   const getFirstForText = () => {
-    switch (router.asPath) {
-      case '/self-employed':
+    switch (props.color) {
+      case '#EB5757':
         return 'for Masters'
-      case '/volunteering':
+      case '#EEBA1A':
         return 'for Volunteering organizations'
-      case '/clubs':
+      case '#00CDC1':
         return 'for Clubs'
     }
   }
 
   const getSecondForText = () => {
-    switch (router.asPath) {
-      case '/self-employed':
+    switch (props.color) {
+      case '#EB5757':
         return 'for Clients'
-      case '/volunteering':
+      case '#EEBA1A':
         return 'for Volunteers'
-      case '/clubs':
+      case '#00CDC1':
         return 'for Club members'
     }
   }
 
   const getList = () => {
-    switch (router.asPath) {
-      case '/self-employed':
+    switch (props.color) {
+      case '#EB5757':
         return [{ label: 'Orders' }, { label: 'Masters' }, { label: 'Clients' }]
-      case '/volunteering':
+      case '#EEBA1A':
         return [{ label: 'Volunteering organizations profiles' }, { label: 'Volunteers profiles' }, { label: 'Ads of volunteering projects' }]
-      case '/clubs':
+      case '#00CDC1':
         return [{ label: 'Clubs' }, { label: 'Groups' }, { label: 'Members' }]
     }
   }
 
-  const getColorNext = () => {
-    switch (router.asPath) {
-      case '/self-employed':
-        return '#F0C131'
-      case '/volunteering':
-        return '#00CDC1'
-      case '/clubs':
-        return '#EB5757'
-    }
-  }
-
-  const getColorPrev = () => {
-    switch (router.asPath) {
-      case '/self-employed':
-        return '#00CDC1'
-      case '/volunteering':
-        return '#EB5757'
-      case '/clubs':
-        return '#F0C131'
-    }
-  }
-
-  const getLeftLight = () => {
-    switch (router.asPath) {
-      case '/self-employed':
-        return '/img/MainPage/red.png'
-      case '/volunteering':
-        return '/img/MainPage/yellow.png'
-      case '/clubs':
-        return '/img/MainPage/green.png'
-    }
-  }
-
-  const getRightLight = () => {
-    switch (router.asPath) {
-      case '/self-employed':
-        return '/img/MainPage/yellow.png'
-      case '/volunteering':
-        return '/img/MainPage/green.png'
-      case '/clubs':
-        return '/img/MainPage/red.png'
-    }
-  }
+  const { isDesktopWidth, isPhoneWidth } = useResize()
 
   return (
     <div className={styles.root}>
@@ -105,35 +61,37 @@ export default function ItemService(props: Props) {
             {props.text}
           </div>
         </div>
+        {isPhoneWidth && <div className={styles.separatorMobile} />}
         <div className={styles.right}>
           <div className={styles.learn}>
             Learn about services:
           </div>
           <div className={styles.top}>
             <div className={styles.for}>
-              <div className={styles.forText}>
+              {!isPhoneWidth && <div className={styles.forText}>
                 {getFirstForText()}
-              </div>
-              <Link href={router.asPath === '/self-employed' ? '/advertising' : router.asPath === '/volunteering' ? '/organization' : '/FindClubs'}>
+              </div>}
+              <Link href={props.color === '#EB5757' ? '/advertising' : props.color === '#EEBA1A' ? '/organization' : '/FindClubs'}>
                 <a className={styles.btn}>
-                  <div className={styles.more}>Learn more</div>
+                  <div className={styles.more}>{!isPhoneWidth ? 'Learn more' : getFirstForText()}</div>
                   <ChevronMoreSvg color='#EB5757' />
                 </a>
               </Link>
             </div>
-            <div className={styles.separator} />
+            {!isPhoneWidth && <div className={styles.separator} />}
             <div className={styles.for}>
-              <div className={styles.forText}>
+              {!isPhoneWidth && <div className={styles.forText}>
                 {getSecondForText()}
-              </div>
-              <Link href={router.asPath === '/self-employed' ? '/advertising' : router.asPath === '/volunteering' ? '/volunteers' : '/FindMembers'}>
+              </div>}
+              <Link href={props.color === '#EB5757' ? '/advertising' : props.color === '#EEBA1A' ? '/volunteers' : '/FindMembers'}>
                 <a className={styles.btn}>
-                  <div className={styles.more}>Learn more</div>
+                  <div className={styles.more}>{!isPhoneWidth ? 'Learn more' : getSecondForText()}</div>
                   <ChevronMoreSvg color='#EB5757' />
                 </a>
               </Link>
             </div>
           </div>
+          {isPhoneWidth && <div className={styles.separatorMobile} />}
           <div className={styles.explore}>
             Explore:
           </div>
@@ -146,7 +104,7 @@ export default function ItemService(props: Props) {
             )}
           </div>
           <div className={styles.wrapper}>
-            <Link href={router.asPath === '/self-employed' ? '/FindMasterGuest' : router.asPath === '/volunteering' ? '/FindVolunteerGuest' : '/FindMembers'}>
+            <Link href={props.color === '#EB5757' ? '/FindMasterGuest' : props.color === '#EEBA1A' ? '/FindVolunteerGuest' : '/FindMembers'}>
               <a className={styles.btnBottom}>
                 <div className={styles.more}>Learn more</div>
                 <ChevronMoreSvg color='#EB5757' />
@@ -155,10 +113,10 @@ export default function ItemService(props: Props) {
           </div>
         </div>
       </div>
-      {props.index === 2 && <div className={styles.next} style={{backgroundColor: `${getColorNext()}`}} />}
-      {/*<div className={styles.prev} style={{backgroundColor: `${getColorPrev()}`}} />*/}
-      <div className={styles.lightLeft}><Image src={getLeftLight()} alt='' layout='fill' /></div>
-      <div className={styles.lightRight}><Image src={getRightLight()} alt='' layout='fill' /></div>
+      {isDesktopWidth && <><div className={styles.lightLeft}><Image src={props.color === '#EB5757' ? '/img/MainPage/red.png' :
+        props.color === '#EEBA1A' ? '/img/MainPage/yellow.png' : '/img/MainPage/green.png'} alt='' layout='fill' /></div>
+        <div className={styles.lightRight}><Image src={props.color === '#EB5757' ? '/img/MainPage/yellow.png' :
+          props.color === '#EEBA1A' ? '/img/MainPage/green.png' : '/img/MainPage/red.png'} alt='' layout='fill' /></div></>}
     </div>
 
   )

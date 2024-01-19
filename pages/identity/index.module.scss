@@ -1,0 +1,32 @@
+@import "scss/index";
+
+.root {}
+
+.content {
+  display: flex;
+  @include list(39px, true);
+  align-items: center;
+  justify-content: center;
+}
+
+.chevron {
+  position: relative;
+  z-index: 1;
+}
+
+.about {
+  @include mq($DesktopWidth, max) {
+    margin-top: 400px;
+  }
+
+  @include mq($PhoneWidth, max) {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.greetingsTitle {
+  @include mq($PhoneWidth, max) {
+    margin-top: 420px !important;
+  }
+}

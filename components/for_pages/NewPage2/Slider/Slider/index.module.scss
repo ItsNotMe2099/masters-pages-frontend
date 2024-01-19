@@ -4,14 +4,19 @@
   position: relative;
   margin-top: 0;
   height: 600px;
+  width: 80%;
+
+  @include mq($TabletWidth, max) {
+    width: 100%;
+  }
 
   :global .swiper {
     padding-bottom: 135px;
-
-    height: 600px;
+    padding-top: 25px;
+    overflow: visible;
 
     .swiper-pagination {
-      top: 80% !important;
+      top: 85% !important;
 
       .swiper-pagination-bullet {
         width: 6px !important;
@@ -25,6 +30,20 @@
         opacity: 1;
       }
     }
+  }
+}
+
+.arrow{
+  position: absolute;
+  top: 50%;
+  margin-top: -20px;
+  &.prev{
+    left: 0px;
+    transform: translate(-200%, -50%);
+  }
+  &.next{
+    right: 0px;
+    transform: translate(200%, -50%);
   }
 }
 

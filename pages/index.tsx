@@ -38,7 +38,7 @@ const Home = (props) => {
           onClick={handleAbout}
         />
         <Layout>
-          <Greetings title='Greetings, dear guest. Please select your identity 👋'>
+          <Greetings titleClass={styles.greetingsTitle} title='Greetings, dear guest. Please select your identity 👋'>
             {!isTabletWidth ? <div className={styles.options}>
               <Item
                 textClass={styles.text}
@@ -65,7 +65,7 @@ const Home = (props) => {
               />
             </div> : <SliderGreetings />}
           </Greetings>
-          <AboutUs title='About us 👋'>
+          <AboutUs className={styles.about} title='About us 👋'>
             <div className={styles.textAbout}>
               <h3>Our Mission</h3>
               At Masterspages, we harness the power of social media technologies on the internet to create seamless solutions for two distinct communities:

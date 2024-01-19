@@ -13,24 +13,16 @@ interface Props {
 
 }
 
-const SelfEmployed = (props: Props) => {
+const Identity = (props: Props) => {
 
   return (
     <Layout>
-      <Greetings title='Greetings, dear guest. Please select your identity 👋'>
-        <SliderCards />
+      <Greetings titleClass={styles.greetingsTitle} title='Greetings, dear guest. Please select your identity 👋'>
         <div className={styles.content}>
-          <ChevronLeftSvg className={styles.chevron} link='/clubs' />
-          <ItemService
-            textClass={styles.text}
-            color='#EB5757'
-            text='Self-employed and clients'
-            image='/img/MainPage/people-red-service.png'
-          />
-          <ChevronRightSvg className={styles.chevron} link='/volunteering' />
+          <SliderCards />
         </div>
       </Greetings>
-      <AboutUs title='About us 👋'>
+      <AboutUs className={styles.about} title='About us 👋'>
         <div className={styles.textAbout}>
           <h3>Our Mission</h3>
           At Masterspages, we harness the power of social media technologies on the internet to create seamless solutions for two distinct communities:
@@ -76,4 +68,4 @@ const SelfEmployed = (props: Props) => {
 }
 
 export const getServerSideProps = getAuthServerSide({ redirect: false })
-export default SelfEmployed
+export default Identity

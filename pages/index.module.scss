@@ -27,3 +27,13 @@
   font-weight: 500;
   line-height: 150%;
 }
+
+.about {
+  padding-top: 0 !important;
+}
+
+.greetingsTitle {
+  @include mq($PhoneWidth, max) {
+    margin-top: -89px !important;
+  }
+}
