@@ -42,21 +42,21 @@ const Home = (props) => {
             {!isTabletWidth ? <div className={styles.options}>
               <Item
                 textClass={styles.text}
-                link='/self-employed'
+                link='/identity'
                 color='#EB5757'
                 text='Self-employed and clients'
                 image='/img/MainPage/people-red.png'
                 light='/img/MainPage/red.png'
               />
               <Item
-                link='/volunteering'
+                link='/identity'
                 color='#EEBA1A'
                 text='Volunteering organizations and volunteers'
                 image='/img/MainPage/people-yellow.png'
                 light='/img/MainPage/yellow.png'
               />
               <Item
-                link='/clubs'
+                link='/identity'
                 textClass={styles.text}
                 color='#00CDC1'
                 text='Clubs and club members'
