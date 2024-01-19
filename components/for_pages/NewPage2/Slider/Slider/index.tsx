@@ -1,9 +1,9 @@
 import * as React from 'react'
 import styles from './index.module.scss'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
-import { Pagination, Parallax } from 'swiper/modules'
+import { Pagination, Parallax, EffectCards } from 'swiper/modules'
 import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
-import EffectCarousel from 'components/ui/Slider/EffectCarousel'
+import EffectStack from 'components/ui/Slider/EffectStack'
 import SliderArrow from './SliderArrow'
 import classNames from 'classnames'
 import { useResize } from 'components/hooks/useResize'
@@ -47,13 +47,13 @@ const SliderCards = (props: Props) => {
     <div className={styles.root}>
       {isDesktopWidth && <SliderArrow direction='prev' sliderRef={swiperRef} className={classNames(styles.arrow, styles.prev)} />}
       <Swiper
-        effect={'carousel'}
+        effect={'stack'}
         spaceBetween={8}
         loop
         centeredSlides
         slidesPerView={1}
         pagination={!isDesktopWidth ? pagination : false}
-        modules={[Pagination, EffectCarousel, Parallax]}
+        modules={[Pagination, EffectStack, Parallax]}
         ref={swiperRef}
       >
         {items.map((item, index) => (<SwiperSlide key={index} className={styles.slide} >

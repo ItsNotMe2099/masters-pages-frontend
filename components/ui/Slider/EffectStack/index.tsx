@@ -1,7 +1,7 @@
-export default function EffectCarousel({ swiper, on }: any) {
+export default function Effectstack({ swiper, on }: any) {
   on('beforeInit', () => {
-    if (swiper.params.effect !== 'carousel') return
-    swiper.classNames.push(`${swiper.params.containerModifierClass}carousel`)
+    if (swiper.params.effect !== 'stack') return
+    swiper.classNames.push(`${swiper.params.containerModifierClass}stack`)
     const overwriteParams = {
       watchSlidesProgress: true,
       centeredSlides: true,
@@ -11,7 +11,7 @@ export default function EffectCarousel({ swiper, on }: any) {
     Object.assign(swiper.originalParams, overwriteParams)
   })
   on('progress', () => {
-    if (swiper.params.effect !== 'carousel') return
+    if (swiper.params.effect !== 'stack') return
     const scaleStep = 0.4
     const zIndexMax = swiper.slides.length
     for (let i = 0; i < swiper.slides.length; i += 1) {
@@ -23,7 +23,7 @@ export default function EffectCarousel({ swiper, on }: any) {
         modify = (absProgress - 1) * 0.3 + 1
       }
       const opacityEls = slideEl.querySelectorAll(
-        '.swiper-carousel-animate-opacity',
+        '.swiper-stack-animate-opacity',
       )
       const translate = `${slideProgress * modify * 50}%`
       const scale = 1 - absProgress * scaleStep
@@ -43,11 +43,11 @@ export default function EffectCarousel({ swiper, on }: any) {
   })
 
   on('setTransition', (s: any, duration: number) => {
-    if (swiper.params.effect !== 'carousel') return
+    if (swiper.params.effect !== 'stack') return
     for (let i = 0; i < swiper.slides.length; i += 1) {
       const slideEl = swiper.slides[i]
       const opacityEls = slideEl.querySelectorAll(
-        '.swiper-carousel-animate-opacity',
+        '.swiper-stack-animate-opacity',
       )
       slideEl.style.transitionDuration = `${duration}ms`
       opacityEls.forEach((opacityEl: any) => {
