@@ -3,10 +3,13 @@
 .root {
   position: relative;
   margin-top: 0;
-  height: 600px;
   width: 80%;
 
-  @include mq($TabletWidth, max) {
+  @include mq($MdDesktopWidth, max) {
+    width: 90%;
+  }
+
+  @include mq($SmDesktopWidth, max) {
     width: 100%;
   }
 
@@ -20,7 +23,7 @@
     }
 
     .swiper-pagination {
-      top: 85% !important;
+      top: 95% !important;
 
       .swiper-pagination-bullet {
         width: 6px !important;

@@ -29,7 +29,9 @@
 }
 
 .about {
-  padding-top: 0 !important;
+  @include mq($PhoneWidth, max) {
+    padding-top: 0 !important;
+  }
 }
 
 .greetingsTitle {

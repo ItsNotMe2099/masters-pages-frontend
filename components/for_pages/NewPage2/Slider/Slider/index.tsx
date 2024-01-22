@@ -51,6 +51,7 @@ const SliderCards = (props: Props) => {
         spaceBetween={8}
         loop
         centeredSlides
+        watchSlidesProgress
         slidesPerView={1}
         pagination={!isDesktopWidth ? pagination : false}
         modules={[Pagination, EffectStack, Parallax]}

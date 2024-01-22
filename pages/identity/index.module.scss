@@ -15,18 +15,12 @@
 }
 
 .about {
-  @include mq($DesktopWidth, max) {
-    margin-top: 400px;
-  }
 
   @include mq($PhoneWidth, max) {
-    margin-top: 0;
     padding-top: 0;
   }
 }
 
 .greetingsTitle {
-  @include mq($PhoneWidth, max) {
-    margin-top: 420px !important;
-  }
+  
 }
