@@ -1,4 +1,4 @@
-export default function Effectstack({ swiper, on }: any) {
+export default function EffectStack({ swiper, on }: any) {
   on('beforeInit', () => {
     if (swiper.params.effect !== 'stack') return
     swiper.classNames.push(`${swiper.params.containerModifierClass}stack`)
@@ -42,11 +42,11 @@ export default function Effectstack({ swiper, on }: any) {
         translateY = '0px'
         zIndex = 3
       } else if (translateX === '-100%' || translateX === '200%') {
-        scale = 0.8
+        scale = 0.9
         translateY = '10%'
         zIndex = 2
       } else {
-        scale = 0.7
+        scale = 0.8
         translateY = '20%'
         zIndex = 1
       }

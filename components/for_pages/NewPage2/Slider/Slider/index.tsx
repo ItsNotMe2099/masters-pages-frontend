@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styles from './index.module.scss'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
-import { Pagination, Parallax, EffectCards } from 'swiper/modules'
+import { Pagination, Parallax } from 'swiper/modules'
 import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
 import EffectStack from 'components/ui/Slider/EffectStack'
 import SliderArrow from './SliderArrow'
