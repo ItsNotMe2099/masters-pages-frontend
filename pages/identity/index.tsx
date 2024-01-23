@@ -2,11 +2,10 @@ import AboutUs from 'components/for_pages/MainUserPage/AboutUs'
 import styles from './index.module.scss'
 import Layout from 'components/for_pages/MainUserPage/Layout'
 import Greetings from 'components/for_pages/MainUserPage/Greetings'
-import ChevronLeftSvg from 'components/svg/ChevronLeftSvg'
-import ChevronRightSvg from 'components/svg/ChevronRightSvg'
-import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
 import { getAuthServerSide } from 'utils/auth'
 import SliderCards from 'components/for_pages/NewPage2/Slider/Slider'
+import { useResize } from 'components/hooks/useResize'
+import SliderCardsMobile from 'components/for_pages/NewPage2/Slider/SliderMobile'
 
 
 interface Props {
@@ -15,11 +14,13 @@ interface Props {
 
 const Identity = (props: Props) => {
 
+  const { isTabletWidth } = useResize()
+
   return (
     <Layout>
       <Greetings titleClass={styles.greetingsTitle} title='Greetings, dear guest. Please select your identity 👋'>
         <div className={styles.content}>
-          <SliderCards />
+          {isTabletWidth ? <SliderCardsMobile /> : <SliderCards />}
         </div>
       </Greetings>
       <AboutUs className={styles.about} title='About us 👋'>

@@ -3,16 +3,14 @@ import styles from './index.module.scss'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { Pagination, Parallax } from 'swiper/modules'
 import ItemService from 'components/for_pages/MainUserPage/Greetings/ItemService'
-import EffectStack from 'components/ui/Slider/EffectStack'
-import SliderArrow from './SliderArrow'
-import classNames from 'classnames'
 import { useResize } from 'components/hooks/useResize'
+import EffectStackMobile from 'components/ui/Slider/EffectStackMobile'
 
 interface Props {
 
 }
 
-const SliderCards = (props: Props) => {
+const SliderCardsMobile = (props: Props) => {
 
   const swiperRef = React.useRef<SwiperRef>(null)
 
@@ -45,15 +43,14 @@ const SliderCards = (props: Props) => {
 
   return (
     <div className={styles.root}>
-      {isDesktopWidth && <SliderArrow direction='prev' sliderRef={swiperRef} className={classNames(styles.arrow, styles.prev)} />}
       <Swiper
-        effect={'stack'}
+        effect={'stack-mobile'}
         loop
         centeredSlides
         watchSlidesProgress
         slidesPerView={1}
         pagination={!isDesktopWidth ? pagination : false}
-        modules={[Pagination, EffectStack, Parallax]}
+        modules={[Pagination, EffectStackMobile, Parallax]}
         ref={swiperRef}
       >
         {items.map((item, index) => (<SwiperSlide key={index} className={styles.slide} >
@@ -63,9 +60,8 @@ const SliderCards = (props: Props) => {
         </SwiperSlide>
         ))}
       </Swiper>
-      {isDesktopWidth && <SliderArrow direction='next' sliderRef={swiperRef} className={classNames(styles.arrow, styles.next)} />}
     </div>
   )
 }
 
-export default SliderCards
+export default SliderCardsMobile

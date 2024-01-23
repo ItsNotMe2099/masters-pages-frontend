@@ -17,6 +17,8 @@ interface Props {
 
 export default function ItemService(props: Props) {
 
+  const { isDesktopWidth, isTabletWidth, isPhoneWidth } = useResize()
+
   const getFirstForText = () => {
     switch (props.color) {
       case '#EB5757':
@@ -44,13 +46,13 @@ export default function ItemService(props: Props) {
       case '#EB5757':
         return [{ label: 'Orders' }, { label: 'Masters' }, { label: 'Clients' }]
       case '#EEBA1A':
-        return [{ label: 'Volunteering organizations profiles' }, { label: 'Volunteers profiles' }, { label: 'Ads of volunteering projects' }]
+        return [{ label: isTabletWidth ? 'Organizations' : 'Volunteering organizations profiles' },
+        { label: isTabletWidth ? 'Volunteers' : 'Volunteers profiles' },
+        { label: isTabletWidth ? 'Ads' : 'Ads of volunteering projects' }]
       case '#00CDC1':
         return [{ label: 'Clubs' }, { label: 'Groups' }, { label: 'Members' }]
     }
   }
-
-  const { isDesktopWidth, isPhoneWidth } = useResize()
 
   return (
     <div className={styles.root}>
