@@ -1,0 +1,133 @@
+@import "scss/index";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.calendarIcon {
+  margin-right: 12px;
+
+  @media (max-width: 1100px) {
+    margin-right: 0;
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  @include list(18px, false);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  background: white;
+
+}
+
+.inputDate {
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.dateRange {
+  position: absolute;
+  z-index: 5;
+  top: 30px;
+  visibility: hidden;
+
+  @media (max-width: 1540px) {
+    right: 100%;
+  }
+
+  @media (max-width: 390px) {
+    right: 0;
+  }
+
+  @media (max-width: 340px) {
+    right: -25%;
+  }
+}
+
+.dateRangeOpen {
+
+  visibility: visible;
+}
+
+.timeRange {
+  width: 87px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.separator {
+  width: 1px;
+  background: #C4C4C4;
+  height: 26px;
+  margin-left: 10px;
+  margin-right: 2px;
+}
+
+.text {
+  color: #828282;
+  font-family: 'Gilroy';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-right: 31px;
+  flex: 1;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  @include list(4px, true);
+  margin-right: 37px;
+  color: #0B0B0B;
+  font-family: 'Gilroy';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.16px;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  @include list(4px, true);
+}
+
+.start, .end {
+  display: flex;
+}
+
+.picker {
+
+  input {
+    color: #0B0B0B !important;
+    font-family: 'Gilroy';
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 500 !important;
+    line-height: 24px;
+    letter-spacing: 0.16px;
+    text-align: start !important;
+    height: auto !important;
+  }
+}

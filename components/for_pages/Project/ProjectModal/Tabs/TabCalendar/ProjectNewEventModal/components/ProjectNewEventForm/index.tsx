@@ -28,6 +28,7 @@ import { ProfileRole } from 'data/intefaces/IProfile'
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
 import { format } from 'date-fns'
 import { useProjectContext } from 'context/project_state'
+import DateTimeRangeNew from 'components/ui/Inputs/DateTimeRangeNew'
 interface Props {
   onCancel: () => void
   initialValues?: any,
@@ -56,6 +57,7 @@ enum ButtonType {
 }
 
 let ProjectNewEventForm = (props: Props) => {
+
   const appContext = useAppContext()
   const profile = appContext.profile
   const eventContext = useEventContext()
@@ -406,7 +408,7 @@ let ProjectNewEventForm = (props: Props) => {
           </div>}
           <Field
             name="timeRange"
-            component={DateTimeRange}
+            component={DateTimeRangeNew}
             disabled={props.event}
             label={t('date')}
             validate={[required, eventMinDuration]}
