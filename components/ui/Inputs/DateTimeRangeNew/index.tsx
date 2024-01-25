@@ -14,6 +14,8 @@ import { useTranslation } from 'next-i18next'
 import * as dLocales from 'date-fns/locale'
 import CalendarInputSvg from 'components/svg/CalendarInputSvg'
 import ClockInputSvg from 'components/svg/ClockInputSvg'
+import DatePicker from "react-datepicker"
+
 interface Props {
   input: any,
   showIcon?: boolean
@@ -32,7 +34,9 @@ export default function DateTimeRangeNew(props: Props) {
   const { value, onChange } = props.input
   const { t, i18n } = useTranslation()
   const dateRangeRef = useRef(null)
+  const startDateRef = useRef(null)
   const [isDateRangeOpen, setDateRangeOpen] = useDetectOutsideClick(dateRangeRef, false)
+  //const [isStartDatePickerOpen, setStartDatePickerOpen] = useDetectOutsideClick(startDateRef, false)
   useEffect(() => {
     if (!value) {
       onChange({
@@ -78,7 +82,7 @@ export default function DateTimeRangeNew(props: Props) {
     if (!value.start || !value.end) {
       return
     }
-    const startDate = format(value.start, 'dd.MM.yyyy')
+    const startDate = format(value.start, 'dd MMM yyyy')
 
     if (isSameDay(value.start, value.end)) {
       return `${startDate}`
@@ -94,7 +98,7 @@ export default function DateTimeRangeNew(props: Props) {
     if (!value.start || !value.end) {
       return
     }
-    const endDate = format(value.end, 'dd.MM.yyyy')
+    const endDate = format(value.end, 'dd MMM yyyy')
 
     if (isSameDay(value.start, value.end)) {
       return `${endDate}`
@@ -123,7 +127,12 @@ export default function DateTimeRangeNew(props: Props) {
             <div className={styles.text}>Start time</div>
             <div className={styles.date}>
               {props.showIcon && <CalendarInputSvg color={'#000'} onClick={() => setDateRangeOpen(true)} />}
-              <div className={styles.inputStartDate} onClick={() => setDateRangeOpen(true)}>{getStartDate()}</div>
+              <DatePicker
+                className={styles.datePicker}
+                onChange={handleChange}
+                withPortal
+                selected={value.start}
+                dateFormat={'dd MMM yyyy'} />
             </div>
             {props.showTime &&
               <div className={styles.time}>
@@ -138,7 +147,12 @@ export default function DateTimeRangeNew(props: Props) {
             <div className={styles.text}>End time</div>
             <div className={styles.date}>
               {props.showIcon && <CalendarInputSvg color={'#000'} onClick={() => setDateRangeOpen(true)} />}
-              <div className={styles.inputStartDate} onClick={() => setDateRangeOpen(true)}>{getEndDate()}</div>
+              <DatePicker
+                className={styles.datePicker}
+                onChange={handleChange}
+                withPortal
+                selected={value.end}
+                dateFormat={'dd MMM yyyy'} />
             </div>
             {props.showTime &&
               <div className={styles.time}>

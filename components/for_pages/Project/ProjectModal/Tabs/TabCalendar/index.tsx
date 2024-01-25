@@ -212,7 +212,8 @@ const TabProjectCalendarInner = (props) => {
         if (centerDate)
           return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' && ru })}`
       } else {
-        return `${format(rangeStartDate, 'MMMM dd', { locale: i18n.language === 'ru' && ru })} - ${format(rangeEndDate, 'MMMM dd', { locale: i18n.language === 'ru' && ru })}`
+        return `${format(rangeStartDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })} - ${format(rangeEndDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })}`
+
       }
 
     } else if (isSameDay(rangeStartDate, rangeEndDate)) {
