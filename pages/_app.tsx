@@ -18,6 +18,7 @@ import Snackbar from 'components/layout/Snackbar'
 import { useEffect, useState } from "react";
 import { RecommendWrapper } from "context/recommend_state";
 import "react-datepicker/dist/react-datepicker.css"
+
 interface IPageProps {
   namespacesRequired: string[]
 }

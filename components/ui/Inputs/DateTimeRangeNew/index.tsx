@@ -57,6 +57,7 @@ export default function DateTimeRangeNew(props: Props) {
 
     onChange(newValue)
   }
+
   const getDateRange = () => {
     if (!value) {
       return
@@ -119,6 +120,7 @@ export default function DateTimeRangeNew(props: Props) {
     console.log('NewValue1', newValue, value)
     onChange(newValue)
   }
+
   return (
     <div className={`${props.className} ${styles.root}`} ref={dateRangeRef}>
       <div className={styles.inputWrapper}>
@@ -129,7 +131,13 @@ export default function DateTimeRangeNew(props: Props) {
               {props.showIcon && <CalendarInputSvg color={'#000'} onClick={() => setDateRangeOpen(true)} />}
               <DatePicker
                 className={styles.datePicker}
-                onChange={handleChange}
+                renderCustomHeader={({ prevMonthButtonDisabled,
+                  nextMonthButtonDisabled, }) => (
+                  <div className={styles.title}>
+                    Date
+                  </div>
+                )}
+                onChange={(date: Date) => onChange({ ...value, start: date })}
                 withPortal
                 selected={value.start}
                 dateFormat={'dd MMM yyyy'} />
@@ -149,7 +157,7 @@ export default function DateTimeRangeNew(props: Props) {
               {props.showIcon && <CalendarInputSvg color={'#000'} onClick={() => setDateRangeOpen(true)} />}
               <DatePicker
                 className={styles.datePicker}
-                onChange={handleChange}
+                onChange={(date: Date) => onChange({ ...value, end: date })}
                 withPortal
                 selected={value.end}
                 dateFormat={'dd MMM yyyy'} />

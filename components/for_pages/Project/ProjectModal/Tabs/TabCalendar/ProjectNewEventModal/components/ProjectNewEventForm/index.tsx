@@ -29,6 +29,8 @@ import StateButton from 'components/Calendar/components/EditEventModal/component
 import { format } from 'date-fns'
 import { useProjectContext } from 'context/project_state'
 import DateTimeRangeNew from 'components/ui/Inputs/DateTimeRangeNew'
+import classNames from 'classnames'
+
 interface Props {
   onCancel: () => void
   initialValues?: any,
@@ -63,6 +65,7 @@ let ProjectNewEventForm = (props: Props) => {
   const eventContext = useEventContext()
   const formLoading = eventContext.editLoading
   const calendarContext = useEventCalendarContext()
+
   const { t } = useTranslation('common')
   const [applications, setApplications] = useState<IApplication[]>([])
   const event = eventContext.event
@@ -334,44 +337,58 @@ let ProjectNewEventForm = (props: Props) => {
     //dispatch(editEventRequest(event.id))
     // dispatch(deleteEvent(event.id))
   }
-  const renderButton = (type: ButtonType) => {
+
+  const getBtnBckgrnd = (role: ProfileRole) => {
+    switch (role) {
+      case ProfileRole.Volunteer:
+        return '#22A3CC'
+      case ProfileRole.Master:
+        return '#F26464'
+      case ProfileRole.Client:
+        return '#3bba70'
+      case ProfileRole.Corporate:
+        return '#FCD240'
+    }
+  }
+
+  const renderButton = (type: ButtonType, index: number, length: number) => {
     switch (type) {
       case ButtonType.Delete:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleDelete}>{t('delete')}</Button>
       case ButtonType.Draft:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'submit'} onClick={handleDraft}>{t('saveAsDraft')}</Button>
 
       case ButtonType.Send:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={getBtnBckgrnd(profile.role)} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleSend}>{t('send')}</Button>
       case ButtonType.Decline:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleDecline}>{t('decline')}</Button>
       case ButtonType.Confirm:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleConfirm}>{t('confirm')}</Button>
       case ButtonType.Edit:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleEdit}>{t('edit')}</Button>
       case ButtonType.EditResults:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleEdit}>{t('editResults')}</Button>
       case ButtonType.Cancel:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleCancel}>{t('cancel')}</Button>
       case ButtonType.DeclineDelete:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleDelete}>{t('declineAndDelete')}</Button>
       case ButtonType.RestoreDelete:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleRestore}>{t('restore')}</Button>
       case ButtonType.Complete:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleComplete}>{t('complete')}</Button>
       case ButtonType.Approve:
-        return <Button className={`${styles.button} ${styles.buttonSubmit}`} red={true} bold={true}
+        return <Button backGrndColor={index + 1 === length ? getBtnBckgrnd(profile.role) : null} className={classNames(styles.button, styles.buttonSubmit, { [styles.btnBorder]: index + 1 !== length })} bold={true}
           type={'button'} onClick={handleApprove}>{t('approve')}</Button>
     }
   }
@@ -419,7 +436,7 @@ let ProjectNewEventForm = (props: Props) => {
         </div>
 
         {!formLoading && <div className={styles.buttons}>
-          {getButtonKeys().map(type => renderButton(type))}
+          {getButtonKeys().map((type, index) => renderButton(type, index, getButtonKeys().length))}
         </div>}
       </>}
     </form>

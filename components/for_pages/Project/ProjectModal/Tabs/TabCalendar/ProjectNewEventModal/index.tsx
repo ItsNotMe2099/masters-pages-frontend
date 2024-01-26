@@ -78,7 +78,7 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.header}>
 
-        <div className={styles.title}>{t('event.newEvent')}</div>
+        <div className={styles.title}>Create an event</div>
       </div>
       <div className={styles.body}>
         {total !== null &&

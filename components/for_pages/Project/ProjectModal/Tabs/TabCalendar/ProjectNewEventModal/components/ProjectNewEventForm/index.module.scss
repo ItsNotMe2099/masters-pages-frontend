@@ -1,52 +1,71 @@
 @import "scss/index";
 
-.root{
+.root {}
 
-}
-
-.form{
+.form {
   padding: 30px 30px 0px 30px;
 }
-.acceptTerms{
+
+.acceptTerms {
   padding: 0px 30px;
   margin-top: 20px;
 }
-.buttons{
+
+.buttons {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
   padding: 0px 35px;
   @include list(15px, true);
-  @media screen and (max-width: 415px){
+
+  @media screen and (max-width: 415px) {
     padding: 0 15px;
   }
-  @media screen and (max-width: 350px){
+
+  @media screen and (max-width: 350px) {
     font-size: 12px;
   }
 }
-.button{
-  height: 38px;
-  text-transform: uppercase;
+
+.button {
+  height: 45px;
+  color: #000;
+  text-align: center;
+  font-family: 'Gilroy';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 5px;
+  background-color: transparent;
+  background: #FFF;
 }
-.buttonSubmit{
+
+.btnBorder {
+  border: 1px solid #AEAEAE;
+}
+
+.buttonSubmit {
   flex: 1;
 }
-.containerButtons{
+
+.containerButtons {
   padding: 20px 28px 0px;
   text-align: center;
 }
 
-.states{
+.states {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 18px 30px 18px 30px;
 
-  > div{
+  >div {
     flex: 1;
 
   }
-  .spacer{
+
+  .spacer {
     flex: none;
     width: 16px;
   }

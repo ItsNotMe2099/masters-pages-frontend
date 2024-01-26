@@ -36,6 +36,7 @@ interface Props {
   outlineBlack?: boolean
   projectBtn?: 'default' | 'red' | 'recycleBin'
   style?: 'applyFilters'
+  backGrndColor?: string
 }
 
 export default function Button(props: Props) {
@@ -72,18 +73,18 @@ export default function Button(props: Props) {
     }, props.className)
   }
   return (props.href ? <Link href={props.href}>
-        <a href={props.href} target={props.target} className={getClasses()}
-           style={{padding: props.size}}>{props.children}</a>
-      </Link> :
-      <button
-        type={props.type}
-        onClick={props.onClick}
-        disabled={props.disabled}
-        className={getClasses()}
-        style={{padding: props.size}}
-      >
-        {props.children}
-      </button>
+    <a href={props.href} target={props.target} className={getClasses()}
+      style={{ padding: props.size }}>{props.children}</a>
+  </Link> :
+    <button
+      type={props.type}
+      onClick={props.onClick}
+      disabled={props.disabled}
+      className={getClasses()}
+      style={{ padding: props.size, backgroundColor: props.backGrndColor }}
+    >
+      {props.children}
+    </button>
   )
 }
 Button.defaultProps = {
