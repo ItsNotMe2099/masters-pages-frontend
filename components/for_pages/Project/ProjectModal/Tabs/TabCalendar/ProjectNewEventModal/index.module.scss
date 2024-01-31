@@ -1,6 +1,12 @@
 .root {
   padding: 0px 0px 28px 0px;
   width: 714px !important;
+
+  @media screen and (max-width: 768px) {
+    width: 100% !important;
+    height: 100%;
+    overflow-y: hidden;
+  }
 }
 
 .header {
@@ -10,6 +16,10 @@
   display: flex;
   height: 60px;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    left: 21px;
+  }
 
 }
 
@@ -35,6 +45,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+  }
 }
 
 .body {
