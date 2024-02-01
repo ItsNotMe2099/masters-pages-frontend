@@ -60,9 +60,11 @@
 
 .states {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  @include list(16px, false);
   padding: 18px 30px 18px 30px;
+  padding-left: 0;
+  padding-right: 0;
 
   >div {
     flex: 1;
@@ -73,4 +75,22 @@
     flex: none;
     width: 16px;
   }
+}
+
+.status {
+  font-family: 'Gilroy';
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: #0B0B0B;
+}
+
+.btns {
+  display: flex;
+}
+
+.stateBtn {
+  width: 100%;
 }

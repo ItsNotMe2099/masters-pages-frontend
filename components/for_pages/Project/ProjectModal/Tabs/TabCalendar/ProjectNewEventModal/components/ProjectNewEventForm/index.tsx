@@ -393,12 +393,30 @@ let ProjectNewEventForm = (props: Props) => {
     }
   }
 
+ const currentParticipant = props.event ? applications.find(item => item.profile.id === props.event?.participantId) : null
 
+console.log('currentParticipant?.profile.avatar', currentParticipant?.profile.avatar)
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
       {formLoading ? <Loader /> : <>
         <div className={styles.form}>
+
+          {(props.event || event) && <div className={styles.states}>
+            <div className={styles.status}>Status</div>
+            <div className={styles.btns}>
+              <StateButton className={styles.stateBtn} event={props.event ? props.event : event} type={ProfileRole.Corporate} />
+              <div className={styles.spacer} />
+              <StateButton className={styles.stateBtn} event={props.event ? props.event : event} type={ProfileRole.Volunteer} />
+            </div>
+          </div>}
+          {(props.event || event) && <div className={styles.states}>
+            <div className={styles.status}>Volunteer</div>
+            <div className={styles.volunteer}>
+              {currentParticipant?.profile.avatar}
+              {currentParticipant?.profile.firstName} {currentParticipant?.profile.lastName}
+            </div>
+          </div>}
 
           <Field
             name="title"
@@ -417,12 +435,6 @@ let ProjectNewEventForm = (props: Props) => {
             validate={required}
             disabled={props.event?.participantId ? true : false}
           />}
-          {(props.event || event) && <div className={styles.states}>
-            <StateButton event={props.event ? props.event : event} type={ProfileRole.Corporate} />
-            <div className={styles.spacer} />
-            <StateButton event={props.event ? props.event : event} type={ProfileRole.Volunteer} />
-
-          </div>}
           <Field
             name="timeRange"
             component={DateTimeRangeNew}
