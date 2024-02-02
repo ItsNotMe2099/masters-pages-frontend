@@ -1,4 +1,4 @@
-import { IProfilePreferWorkIn, SkillData, UserActivityStatus} from 'types'
+import { IProfilePreferWorkIn, IUserFile, SkillData, UserActivityStatus} from 'types'
 import {ILocation} from 'data/intefaces/ILocation'
 import {IOrganization} from 'data/intefaces/IOrganization'
 
@@ -28,6 +28,7 @@ export interface IProfile{
   address1?: string
   address2?: string
   photo?: string
+  photoObject: IUserFile
   geoname?: any,
   rating?: number
   location?: ILocation,

@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
-import { IEvent} from 'types'
-import {format} from 'date-fns'
-import { getEventColor, getEventPlannedAllowed} from 'utils/event'
+import { IEvent } from 'types'
+import { format } from 'date-fns'
+import { getEventColor } from 'utils/event'
 import { usePopperTooltip } from 'react-popper-tooltip'
 import 'react-popper-tooltip/dist/styles.css'
-import {useState} from 'react'
+import { useState } from 'react'
 import CalendarEventToolTip from 'components/Calendar/components/CalendarEventToolTip'
 import Avatar from 'components/ui/Avatar'
 import AvatarSvg from 'components/svg/AvatarSvg'
@@ -17,7 +17,7 @@ interface Props {
 
 export default function CalendarEvent(props: Props) {
 
-  const {event} = props
+  const { event } = props
   const [isToolTipVisible, setIsToolTipVisible] = useState(false)
   const {
     getArrowProps,
@@ -37,7 +37,7 @@ export default function CalendarEvent(props: Props) {
       isOtherSide: false
     })
 
-    switch (color){
+    switch (color) {
       case 'grey':
         return styles.root__grey
       case 'green':
@@ -57,7 +57,7 @@ export default function CalendarEvent(props: Props) {
       isOtherSide: true,
       showUnreadAlert: true
     })
-    switch (color){
+    switch (color) {
       case 'grey':
         return styles.border__grey
       case 'green':
@@ -73,7 +73,7 @@ export default function CalendarEvent(props: Props) {
     }
 
   }
-  const unreadCount = parseInt(event.unreadTextMessagesCount, 10) + parseInt(event.unreadMediaMessagesCount,10)
+  const unreadCount = parseInt(event.unreadTextMessagesCount, 10) + parseInt(event.unreadMediaMessagesCount, 10)
 
   const otherSide = event.isAuthor ? event.participant : event.author
   // @ts-ignore
@@ -83,11 +83,11 @@ export default function CalendarEvent(props: Props) {
       <div className={styles.wrapper}>
         <div className={styles.time}>{format(/*getEventPlannedAllowed(event) ?*/ new Date(event.start) /*: event.actualStart*/, 'HH:mm')} - {format(/*getEventPlannedAllowed(event) ?*/ new Date(event.end) /*:  event.actualEnd*/, 'HH:mm')}</div>
         <div className={`${styles.author} ${getBorderClass()}`}>
-         <div className={styles.avatar}>
-           {unreadCount > 0 && <div className={styles.notification}>{unreadCount > 10 ? '!' : unreadCount}</div>}
-           {unreadCount === 0  && <>  {otherSide.photo ? <Avatar image={otherSide.photo} size={'exExSmall'} /> : <AvatarSvg/>}</>}
+          <div className={styles.avatar}>
+            {unreadCount > 0 && <div className={styles.notification}>{unreadCount > 10 ? '!' : unreadCount}</div>}
+            {unreadCount === 0 && <>  {otherSide.photo ? <Avatar image={otherSide.photo} size={'exExSmall'} /> : <AvatarSvg />}</>}
 
-         </div>
+          </div>
           <div className={styles.authorName}>{otherSide.firstName} {otherSide.lastName}</div></div>
         {event.task && <div className={styles.task}>{event.task?.title}</div>}
         <div className={styles.title}>{event.title}</div>
@@ -97,7 +97,7 @@ export default function CalendarEvent(props: Props) {
           ref={setTooltipRef}
           {...getTooltipProps({ className: 'tooltip-container' }) as any}
         >
-       <CalendarEventToolTip event={event}/>
+          <CalendarEventToolTip event={event} />
           <div {...getArrowProps({ className: 'tooltip-arrow' }) as any} />
         </div>
       )}

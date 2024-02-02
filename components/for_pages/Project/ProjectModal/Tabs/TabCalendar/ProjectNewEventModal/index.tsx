@@ -26,7 +26,9 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
   const eventContext = useEventContext();
   const projectContext = useProjectContext()
 
-  const [currentEvent, setCurrentEvent] = useState<string | null>(null)
+  const [currentEvent, setCurrentEvent] = useState<IEvent>(event ? event : eventContext.event)
+
+  const [events, setEvents] = useState<IEvent[]>([])
 
   const [activeTab, setActiveTab] = useState('tasks')
   const { t } = useTranslation('common')
@@ -41,6 +43,7 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
   const fetchEvents = async () => {
     await EventRepository.list(projectId).then(i => {
       if (i) {
+        setEvents(i.data)
         setTotal(i.total)
       }
     })
@@ -54,7 +57,7 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
 
 
   const handleSubmitNewEvent = (data) => {
-     (!event || !eventContext.event) && eventContext.create({
+    (!event || !eventContext.event) && eventContext.create({
       ...data, ...data.timeRange, timezone: format(new Date(), 'XXX'),
       priceType: 'fixed',
       ...(
@@ -73,6 +76,22 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
 
   console.log('EVVVVVENT', eventContext.event)
 
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const handleNext = () => {
+    if (currentIndex + 1 < total) {
+      setCurrentIndex(currentIndex + 1)
+      setCurrentEvent(events[currentIndex + 1])
+    }
+  }
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1)
+      setCurrentEvent(events[currentIndex - 1])
+    }
+  }
+
 
   return (
     <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
@@ -82,13 +101,15 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
       </div>
       <div className={styles.body}>
         {total !== null &&
-          <ProjectNewEventForm event={event ? event : eventContext.event} total={total}
+          <ProjectNewEventForm index={currentIndex} event={currentEvent} total={total}
+            onPrev={handlePrev}
+            onNext={handleNext}
             initialValues=
             {{
-              description: event? event.description : '', title: event ? event.title : `Event #${total + 1}`, participantId: event ? event.participantId : null,
-              ...(range ? { timeRange: range } : event ? { timeRange: { start: event.start, end: event.end } } : {})
+              description: event ? currentEvent.description : '', title: event ? currentEvent.title : `Event #${total + 1}`, participantId: event ? currentEvent.participantId : null,
+              ...(range ? { timeRange: range } : event ? { timeRange: { start: currentEvent.start, end: currentEvent.end } } : {})
             }}
-        onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={total + 1} />}
+            onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={event ? currentEvent.title : total + 1} />}
       </div>
 
     </Modal>

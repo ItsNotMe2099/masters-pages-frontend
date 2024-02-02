@@ -30,17 +30,25 @@ import { format } from 'date-fns'
 import { useProjectContext } from 'context/project_state'
 import DateTimeRangeNew from 'components/ui/Inputs/DateTimeRangeNew'
 import classNames from 'classnames'
+import Image from 'next/image'
+import { getMediaPath } from 'utils/media'
+import AvatarSvg from 'components/svg/AvatarSvg'
+import ControlLeftEventSvg from 'components/svg/ControlLeftEventSvg'
+import ControlRightEventSvg from 'components/svg/ControlRightEventSvg'
 
 interface Props {
   onCancel: () => void
   initialValues?: any,
   handleSubmit?: (e) => void
   onSubmit: (data) => void
-  eventNumber: number
+  eventNumber: number | string
   isPlannedDisabled?: boolean,
   total?: number
   //onSetSubmitEvent: (event: string, data?) => void
   event?: IEvent
+  index?: number
+  onNext?: () => void,
+  onPrev?: () => void
 }
 
 enum ButtonType {
@@ -65,6 +73,9 @@ let ProjectNewEventForm = (props: Props) => {
   const eventContext = useEventContext()
   const formLoading = eventContext.editLoading
   const calendarContext = useEventCalendarContext()
+
+  const hasNext = props.index < props.total
+  const hasPrev = props.index > 0
 
   const { t } = useTranslation('common')
   const [applications, setApplications] = useState<IApplication[]>([])
@@ -393,15 +404,25 @@ let ProjectNewEventForm = (props: Props) => {
     }
   }
 
- const currentParticipant = props.event ? applications.find(item => item.profile.id === props.event?.participantId) : null
+  const currentParticipant = props.event ? applications.find(item => item.profile.id === props.event?.participantId) : null
 
-console.log('currentParticipant?.profile.avatar', currentParticipant?.profile.avatar)
+  console.log('currentParticipant?.profile.avatar', currentParticipant?.profile.avatar)
 
   return (
     <form className={styles.root} onSubmit={props.handleSubmit}>
       {formLoading ? <Loader /> : <>
         <div className={styles.form}>
-
+          {(props.event || event) &&
+            <div className={styles.controls}>
+              <div className={styles.prev} onClick={hasPrev ? props.onPrev : null}>
+                <ControlLeftEventSvg />
+              </div>
+              <div className={styles.number}>{props.eventNumber}</div>
+              <div className={styles.next} onClick={hasNext ? props.onNext : null}>
+                <ControlRightEventSvg />
+              </div>
+            </div>
+          }
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Status</div>
             <div className={styles.btns}>
@@ -413,12 +434,15 @@ console.log('currentParticipant?.profile.avatar', currentParticipant?.profile.av
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Volunteer</div>
             <div className={styles.volunteer}>
-              {currentParticipant?.profile.avatar}
-              {currentParticipant?.profile.firstName} {currentParticipant?.profile.lastName}
+              {currentParticipant?.profile.photo ?
+                <img className={styles.avatar} src={getMediaPath(currentParticipant?.profile.photo)} alt='' />
+                :
+                <div className={styles.noAvatar}><AvatarSvg /></div>}
+              <div className={styles.name}>{currentParticipant?.profile.firstName} {currentParticipant?.profile.lastName}</div>
             </div>
           </div>}
 
-          <Field
+          {(!props.event && !event) && <><Field
             name="title"
             component={Input}
             labelType={'static'}
@@ -426,15 +450,18 @@ console.log('currentParticipant?.profile.avatar', currentParticipant?.profile.av
             label={t('event.eventTitle')}
             validate={required}
           />
-          {appContext.profile?.role === 'corporate' && <Field
-            name="participantId"
-            component={SelectInput}
-            options={applications.map(item => ({ label: `${item.profile.firstName} ${item.profile.lastName}`, value: item.profile.id }))}
-            label={'Volunteer'}
-            size={'small'}
-            validate={required}
-            disabled={props.event?.participantId ? true : false}
-          />}
+            {appContext.profile?.role === 'corporate' && <Field
+              name="participantId"
+              component={SelectInput}
+              options={applications.map(item => ({ label: `${item.profile.firstName} ${item.profile.lastName}`, value: item.profile.id }))}
+              label={'Volunteer'}
+              size={'small'}
+              validate={required}
+              disabled={props.event?.participantId ? true : false}
+            />}</>}
+          {(props.event || event) && <div className={styles.states}>
+            <div className={styles.status}>Time & date</div>
+          </div>}
           <Field
             name="timeRange"
             component={DateTimeRangeNew}
@@ -442,7 +469,9 @@ console.log('currentParticipant?.profile.avatar', currentParticipant?.profile.av
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
-
+          {(props.event || event) && <div className={styles.states}>
+            <div className={styles.status}>Description</div>
+          </div>}
           <Field className={styles.desc} name='description' component={TextArea} size={'small'} />
 
         </div>

@@ -94,3 +94,64 @@
 .stateBtn {
   width: 100%;
 }
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+}
+
+.noAvatar {
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  background: #DCDCDC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.volunteer {
+  display: flex;
+  align-items: center;
+  @include list(8px, true);
+}
+
+.name {
+  font-family: 'Gilroy';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+.controls {
+  padding: 17px 0;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+}
+
+.number {
+  font-family: 'Montserrat';
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
