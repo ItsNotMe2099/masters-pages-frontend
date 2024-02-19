@@ -35,6 +35,7 @@ import { getMediaPath } from 'utils/media'
 import AvatarSvg from 'components/svg/AvatarSvg'
 import ControlLeftEventSvg from 'components/svg/ControlLeftEventSvg'
 import ControlRightEventSvg from 'components/svg/ControlRightEventSvg'
+import TimeZoneSelectInput from 'components/ui/Inputs/TimeZoneSelectInput'
 
 interface Props {
   onCancel: () => void
@@ -469,6 +470,7 @@ let ProjectNewEventForm = (props: Props) => {
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
+          <Field name='timezone' component={TimeZoneSelectInput} />
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Description</div>
           </div>}

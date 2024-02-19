@@ -1,0 +1,15 @@
+.input{
+  input{
+  border: none;
+    padding: 0px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+  &[disabled]{
+    color: #333333;
+    background: transparent;
+    opacity: .7;
+  }
+  }
+}
