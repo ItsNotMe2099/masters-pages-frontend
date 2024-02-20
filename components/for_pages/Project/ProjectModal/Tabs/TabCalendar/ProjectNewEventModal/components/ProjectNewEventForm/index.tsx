@@ -470,7 +470,7 @@ let ProjectNewEventForm = (props: Props) => {
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
-          <Field name='timezone' component={TimeZoneSelectInput} />
+          {/*<Field name='timezone' component={TimeZoneSelectInput} />*/}
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Description</div>
           </div>}

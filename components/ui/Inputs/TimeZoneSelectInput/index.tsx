@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import classNames from 'classnames'
 import { useState } from 'react'
-import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
+//import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
 
 interface Props {
   input: any,
@@ -20,9 +20,9 @@ export default function TimeZoneSelectInput(props: Props) {
   }
 
   return (
-    <TimezoneSelect
+    {/*<TimezoneSelect
       value={timezone}
       onChange={handleChange}
-    />
+  />*/}
   )
 }
