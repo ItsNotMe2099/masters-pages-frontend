@@ -106,7 +106,7 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
             onNext={handleNext}
             initialValues=
             {{
-              description: event ? currentEvent.description : '', title: event ? currentEvent.title : `Event #${total + 1}`, participantId: event ? currentEvent.participantId : null,
+              description: event ? currentEvent.description : '', timezone: event && currentEvent.timezone, title: event ? currentEvent.title : `Event #${total + 1}`, participantId: event ? currentEvent.participantId : null,
               ...(range ? { timeRange: range } : event ? { timeRange: { start: currentEvent.start, end: currentEvent.end } } : {})
             }}
             onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={event ? currentEvent.title : total + 1} />}

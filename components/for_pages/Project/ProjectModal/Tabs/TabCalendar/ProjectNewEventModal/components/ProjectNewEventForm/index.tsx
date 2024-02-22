@@ -89,6 +89,7 @@ let ProjectNewEventForm = (props: Props) => {
   const title = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'title'))
   const timeRange = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'timeRange'))
   const desc = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'description'))
+  const timezone = useSelector(state => formValueSelector('ProjectNewEventForm')(state, 'timezone'))
 
   const projectContext = useProjectContext()
 
@@ -101,7 +102,8 @@ let ProjectNewEventForm = (props: Props) => {
     title: title,
     participantId: participantId,
     timeRange: timeRange,
-    description: desc
+    description: desc,
+    timezone: timezone
     // Add other form fields as needed
   }
 
@@ -205,7 +207,7 @@ let ProjectNewEventForm = (props: Props) => {
       onConfirm: () => {
         calendarContext.showModal('eventEditModal')
         eventContext.update('complete', {
-          ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+          ...formData, ...formData.timeRange, ...formData.timezone,
           priceType: 'fixed',
           ...(
             appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
@@ -260,7 +262,7 @@ let ProjectNewEventForm = (props: Props) => {
         if (isTempEdit || isCurrentEventEditMode) {
           if (props.event ? props.event.status === EventStatus.Completed : event.status === EventStatus.Completed) {
             eventContext.update('complete', {
-              ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+              ...formData, ...formData.timeRange, ...formData.timezone,
               priceType: 'fixed',
               ...(
                 appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
@@ -268,7 +270,7 @@ let ProjectNewEventForm = (props: Props) => {
             }, event ? event.id : props.event.id)
           } else {
             eventContext.update('sendWithEdit', {
-              ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+              ...formData, ...formData.timeRange, ...formData.timezone,
               priceType: 'fixed',
               ...(
                 appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
@@ -278,7 +280,7 @@ let ProjectNewEventForm = (props: Props) => {
 
         } else {
           eventContext.update('send', {
-            ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+            ...formData, ...formData.timeRange, ...formData.timezone,
             priceType: 'fixed',
             ...(
               appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
@@ -314,7 +316,7 @@ let ProjectNewEventForm = (props: Props) => {
         calendarContext.hideModal()
         //eventContext.confirm(event ? event.id : props.event.id)
         eventContext.update('confirm', {
-          ...formData, ...formData.timeRange, timezone: format(new Date(), 'XXX'),
+          ...formData, ...formData.timeRange, ...formData.timezone,
           priceType: 'fixed',
           ...(
             appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
@@ -470,7 +472,7 @@ let ProjectNewEventForm = (props: Props) => {
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
-          {/*<Field name='timezone' component={TimeZoneSelectInput} />*/}
+          <Field name='timezone' component={TimeZoneSelectInput} />
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Description</div>
           </div>}

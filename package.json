@@ -84,6 +84,7 @@
     "react-stickynode": "^4.0.0",
     "react-switch": "^7.0.0",
     "react-textarea-autosize": "^8.3.4",
+    "react-timezone": "^2.4.0",
     "react-use-s3": "^2.0.8",
     "recompose": "^0.30.0",
     "redux": "^4.1.2",

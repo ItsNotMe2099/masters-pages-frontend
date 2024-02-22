@@ -784,6 +784,7 @@ export interface IEvent {
   title?: string,
   status?: EventStatus
   isOverdue?: boolean
+  timezone?: string
   start?: Date
   end?: Date
   actualStart?: Date,

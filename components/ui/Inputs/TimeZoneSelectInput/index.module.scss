@@ -1,15 +1,36 @@
-.input{
-  input{
-  border: none;
+.input {
+  input {
+    border: none;
     padding: 0px;
     text-align: center;
     font-size: 14px;
     font-weight: 500;
     color: #333333;
-  &[disabled]{
-    color: #333333;
-    background: transparent;
-    opacity: .7;
+
+    &[disabled] {
+      color: #333333;
+      background: transparent;
+      opacity: .7;
+    }
   }
+}
+
+.root {
+  margin: 32px 0;
+
+  input {
+    border: 0 !important;
+    font-family: 'Gilroy' !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    letter-spacing: 0.01em !important;
+    text-align: left !important;
+    color: #828282 !important;
+  }
+
+  ul {
+    z-index: 1;
+    background-color: #FFF;
   }
 }

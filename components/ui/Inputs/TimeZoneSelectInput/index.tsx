@@ -1,28 +1,42 @@
-import styles from './index.module.scss'
-import classNames from 'classnames'
-import { useState } from 'react'
-//import TimezoneSelect, { type ITimezone } from 'react-timezone-select'
+import styles from './index.module.scss';
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const TimezonePicker = dynamic(() => import('react-timezone'), {
+  ssr: false,
+});
 
 interface Props {
-  input: any,
-  disabled?: boolean
-  className?: string
+  input: any;
+  disabled?: boolean;
+  className?: string;
 }
 
 export default function TimeZoneSelectInput(props: Props) {
-  const { value, onChange } = props.input
-  const { disabled } = props
+  const { input, disabled, className } = props;
+  const { value, onChange } = input;
   const [timezone, setTimezone] = useState(
     Intl.DateTimeFormat().resolvedOptions().timeZone
-  )
+  );
+
   const handleChange = (v) => {
-    onChange(v)
-  }
+    onChange(v);
+    setTimezone(v);
+  };
 
   return (
-    {/*<TimezoneSelect
+    <TimezonePicker
+      // @ts-ignore
       value={timezone}
-      onChange={handleChange}
-  />*/}
-  )
+      className={styles.root}
+      onChange={(selectedTimezone) => {
+        console.log('New Timezone Selected:', selectedTimezone);
+        handleChange(selectedTimezone);
+      }}
+      inputProps={{
+        placeholder: 'Select Timezone...',
+        name: 'timezone',
+      }}
+    />
+  );
 }
