@@ -1,5 +1,6 @@
 @import "scss/index";
-.root{
+
+.root {
   padding: 16px;
   position: absolute;
   width: 300px;
@@ -8,24 +9,28 @@
   left: 0px;
   bottom: 0;
   background: #F3F3F3;
-  @media screen and (max-width: 1160px){
+
+  @include mq($MdDesktopWidth, max) {
     position: static;
-    align-self: center;
   }
 
 }
-.toolbar{
+
+.toolbar {
   display: flex;
   align-items: center;
-  .timezone{
+
+  .timezone {
     flex: 1;
     font-size: 18px;
   }
 }
-.events{
+
+.events {
   margin-top: 20px;
 }
-.create{
+
+.create {
   cursor: pointer;
   width: 32px;
   height: 28px;
@@ -34,18 +39,20 @@
   justify-content: center;
   border-radius: 8px;
   background: #DC2626;
-  svg{
-    path{
+
+  svg {
+    path {
       fill: white;
     }
   }
-  &:hover{
+
+  &:hover {
     background: #e1e2e3;
-    svg{
-      path{
+
+    svg {
+      path {
         fill: black;
       }
     }
   }
 }
-

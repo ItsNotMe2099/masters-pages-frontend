@@ -11,6 +11,10 @@ $borderColor: #dcdbdc;
 
   justify-content: stretch;
 
+  @include mq($MdDesktopWidth, max) {
+    height: auto;
+  }
+
   :global .rbc-event-label {
     display: none;
   }
@@ -145,7 +149,7 @@ $borderColor: #dcdbdc;
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 1160px) {
+  @include mq($MdDesktopWidth, max) {
     position: static;
   }
 
