@@ -6,6 +6,10 @@
   @media screen and (max-width: 1500px){
     flex-direction: column;
   }
+
+  @include mq($PhoneWidth, max) {
+    padding: 16px 0;
+  }
 }
 .center{
   flex: 1;
@@ -16,6 +20,10 @@
   @media screen and (max-width: 1500px){
     flex-direction: column;
     margin-bottom: 15px;
+  }
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
   }
 
 }
@@ -29,6 +37,10 @@
 }
 .views{
   flex: 1;
+
+  @include mq($PhoneWidth, max) {
+    width: 100%;
+  }
 }
 .centerSpacer{
   flex: 1;

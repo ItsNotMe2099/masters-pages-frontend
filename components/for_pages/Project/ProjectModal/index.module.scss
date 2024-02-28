@@ -1,83 +1,100 @@
 @import "scss/index";
 
-.modal{
+.modal {
   background: none;
   padding: 0px 80px !important;
   width: 100%;
-  @media screen and (max-width: $xs-max){
+
+  @media screen and (max-width: $xs-max) {
     padding: 70px 16px 0 16px !important;
   }
+
+  @include mq($PhoneWidth, max) {
+    padding: 0 !important;
+  }
 }
-.modalClose{
+
+.modalClose {
   top: 20px;
   right: 100px;
-  @media screen and (max-width: $xs-max){
+
+  @media screen and (max-width: $xs-max) {
     right: 0;
   }
 }
-.root{
+
+.root {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  @media screen and (max-width: 900px){
+
+  @media screen and (max-width: 900px) {
     display: block;
   }
 }
-.content{
+
+.content {
   flex: 1;
   background: white;
   padding: 30px;
   text-align: left;
-  .topPanel{
+
+  .topPanel {
     padding: 0;
     padding-bottom: 15px;
-    @media screen and (max-width: 900px){
+
+    @media screen and (max-width: 900px) {
       display: none;
     }
   }
-  @media screen and (max-width: $xs-max){
+
+  @media screen and (max-width: $xs-max) {
     padding: 16px;
   }
-  
+
 }
 
-.desktop{
-  @media screen and (max-width: 900px){
+.desktop {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 }
 
-.mobile{
+.mobile {
   width: 100%;
-  @media screen and (min-width: 901px){
+
+  @media screen and (min-width: 901px) {
     display: none;
   }
 }
 
-.modeMaster{
-    background: #EB5757;
-}
-.modeClient{
-    background: #27AE60;
-}
-.modeVolunteer{
-    background: #199AC2;
-}
-.modeCorporate{
-    background: #F2B705;
+.modeMaster {
+  background: #EB5757;
 }
 
-.modeGuest{
+.modeClient {
+  background: #27AE60;
+}
+
+.modeVolunteer {
+  background: #199AC2;
+}
+
+.modeCorporate {
+  background: #F2B705;
+}
+
+.modeGuest {
   background: #a39e9e;
 }
 
-.topPanel{
+.topPanel {
   padding: 15px 16px;
   display: flex;
   justify-content: flex-end;
 }
 
-.close{
+.close {
   width: 12px;
   height: 12px;
 }

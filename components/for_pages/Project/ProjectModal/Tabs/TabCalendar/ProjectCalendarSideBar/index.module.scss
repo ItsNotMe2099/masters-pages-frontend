@@ -12,6 +12,7 @@
 
   @include mq($MdDesktopWidth, max) {
     position: static;
+    width: 100%;
   }
 
 }

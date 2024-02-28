@@ -3,6 +3,7 @@ import CalendarToolbarViews from 'components/Calendar/components/CalendarToolbar
 import CalendarToolbarNav from 'components/Calendar/components/CalendarToolbar/CalendarToolbarNav'
 import CalendarToolbarSearch from 'components/Calendar/components/CalendarToolbar/CalendarToolbarSearch'
 import Bell from 'components/svg/Bell'
+import { useResize } from 'components/hooks/useResize'
 
 interface Props {
   onChangeView: (view) => void,
@@ -12,24 +13,25 @@ interface Props {
 }
 
 export default function CalendarToolbar(props: Props) {
-  const {currentView, onChangeView, onNavigate, label} = props
+  const { currentView, onChangeView, onNavigate, label } = props
+  const { isPhoneWidth } = useResize()
   const handleBellClick = () => {
 
   }
   return (
     <div className={`${styles.root}`}>
-      <CalendarToolbarNav onNavigate={onNavigate}/>
+      {!isPhoneWidth && <CalendarToolbarNav onNavigate={onNavigate} />}
 
       <div className={styles.center}>
-        <div className={styles.label}>{label}</div>
+        {!isPhoneWidth && <div className={styles.label}>{label}</div>}
         <div className={styles.views}>
-        <CalendarToolbarViews onChange={onChangeView} currentView={currentView}/>
+          <CalendarToolbarViews onChange={onChangeView} currentView={currentView} />
         </div>
-        <div className={styles.centerSpacer}/>
+        <div className={styles.centerSpacer} />
       </div>
       <div className={styles.right}>
         <Bell className={styles.bell} onClick={handleBellClick} />
-        <CalendarToolbarSearch/></div>
+        <CalendarToolbarSearch /></div>
     </div>
   )
 }

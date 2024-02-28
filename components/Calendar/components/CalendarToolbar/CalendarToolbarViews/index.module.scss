@@ -1,7 +1,12 @@
 @import "scss/index";
-.root{
+
+.root {
   text-align: left;
 
   display: flex;
   align-items: center;
+
+  @include mq($PhoneWidth, max) {
+    justify-content: space-between;
+  }
 }
