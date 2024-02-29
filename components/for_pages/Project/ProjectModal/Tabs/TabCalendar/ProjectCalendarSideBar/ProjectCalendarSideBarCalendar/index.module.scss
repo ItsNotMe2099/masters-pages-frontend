@@ -1,60 +1,80 @@
 @import "scss/index";
-.root{
+
+.root {
   position: relative;
 }
-.calendar{
-    width: 350px;
-    max-width: 100%;
+
+.calendar {
+  width: 350px;
+  max-width: 100%;
 
 
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.125em;
-  button{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+
+  button {
     border: none;
   }
 
 
 }
 
-.toolbar{
+.toolbar {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 16px;
   margin-bottom: 20px;
+
+  @include mq($LPhoneWidth, max) {
+    margin-bottom: 0;
+  }
 }
-.label{
+
+.label {
   cursor: pointer;
   text-transform: capitalize;
   flex: 1;
   font-size: 30px;
   font-weight: 500;
   color: #333333;
-  &:hover{
+
+  &:hover {
     text-decoration: underline;
   }
 
+  @include mq($LPhoneWidth, max) {
+    font-size: 18px;
+    flex: 0;
+    white-space: nowrap;
+  }
+
 }
-.arrows{
+
+.arrows {
   display: flex;
   flex-direction: row;
   align-items: center;
-  .arrow{
-      padding: 8px;
+
+  .arrow {
+    padding: 8px;
     cursor: pointer;
+
     svg {
       width: 7px;
       height: 12px;
     }
-    &:hover{
-      svg{
-        path{
+
+    &:hover {
+      svg {
+        path {
           fill: #DC2626;
         }
       }
     }
   }
 }
-.year{
+
+.year {
   color: #DC2626;
 }
