@@ -78,3 +78,60 @@
 .year {
   color: #DC2626;
 }
+
+.create {
+  cursor: pointer;
+  width: 32px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #e1e2e3;
+
+
+  svg {
+    path {
+      fill: black;
+    }
+  }
+
+  &:hover {
+    background: #DC2626;
+
+    svg {
+      path {
+        fill: white;
+      }
+    }
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+  @include list(16px, true);
+}
+
+.bell {
+  cursor: pointer;
+  margin-top: 2px;
+
+  path {
+    fill: #000;
+  }
+
+  &:hover {
+    path {
+      fill: #DC2626;
+    }
+
+  }
+}
+
+.search {
+  left: 6px;
+  top: 6px;
+}

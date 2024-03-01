@@ -19,16 +19,21 @@ import { useTranslation } from 'next-i18next'
 import ProjectCalendarSideBarCalendarCell
   from "components/for_pages/Project/ProjectModal/Tabs/TabCalendar/ProjectCalendarSideBar/ProjectCalendarSideBarCalendar/ProjectCalendarSideBarCalendarCell";
 import { useResize } from 'components/hooks/useResize'
+import Plus from 'components/svg/Plus'
+import Bell from 'components/svg/Bell'
+import DateRangeSvg from 'components/svg/DateRangeSvg'
+import Search from 'components/svg/Search'
 
 
 interface Props {
   onChange: (value) => void,
   value: Date,
+  onCreate?: () => void
 }
 const views = ['decade', 'year', 'month']
 
 export default function ProjectCalendarSideBarCalendar(props: Props) {
-  const { value, onChange } = props
+  const { value, onChange, onCreate } = props
   const [activeStartDate, setActiveStartDate] = useState(getMonthStart(new Date()))
   const [view, setView] = useState('month')
   const { t, i18n } = useTranslation('common')
@@ -76,6 +81,11 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
         throw new Error(`Invalid view: ${view}.`)
     }
   }
+
+  const handleBellClick = () => {
+
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.toolbar}>
@@ -84,6 +94,13 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
           <div className={styles.arrow} onClick={handlePrevClick}><CalendarArrowLeft /></div>
           <div className={styles.arrow} onClick={handleNextClick}><CalendarArrowRight /></div>
         </div>
+        {isLPhoneWidth &&
+          <div className={styles.right}>
+            <Search className={styles.search} />
+            <DateRangeSvg />
+            <Bell className={styles.bell} onClick={handleBellClick} />
+            <div className={styles.create} onClick={onCreate}><Plus /></div>
+          </div>}
       </div>
       {!isLPhoneWidth && <Calendar
         className={styles.calendar}

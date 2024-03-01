@@ -18,6 +18,9 @@ export default function CalendarToolbar(props: Props) {
   const handleBellClick = () => {
 
   }
+
+  const { isLPhoneWidth } = useResize()
+
   return (
     <div className={`${styles.root}`}>
       {!isPhoneWidth && <CalendarToolbarNav onNavigate={onNavigate} />}
@@ -29,9 +32,10 @@ export default function CalendarToolbar(props: Props) {
         </div>
         <div className={styles.centerSpacer} />
       </div>
-      <div className={styles.right}>
+      {!isLPhoneWidth && <div className={styles.right}>
+
         <Bell className={styles.bell} onClick={handleBellClick} />
-        <CalendarToolbarSearch /></div>
+        <CalendarToolbarSearch /></div>}
     </div>
   )
 }
