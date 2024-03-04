@@ -1,17 +1,17 @@
-import {createContext, useContext, useEffect, useState} from 'react'
-import {CookiesType, ModalType, SnackbarType} from 'types/enums'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { CookiesType, ModalType, SnackbarType } from 'types/enums'
 import ReactModal from 'react-modal'
-import {SnackbarData} from 'types/types'
+import { SnackbarData } from 'types/types'
 import Cookies from 'js-cookie'
-import {Subject} from 'rxjs'
-import {IProfile, ProfileRole} from 'data/intefaces/IProfile'
-import {IUser} from 'data/intefaces/IUser'
+import { Subject } from 'rxjs'
+import { IProfile, ProfileRole } from 'data/intefaces/IProfile'
+import { IUser } from 'data/intefaces/IUser'
 import ProfileRepository from 'data/repositories/ProfileRepostory'
 import UserRepository from 'data/repositories/UserRepostory'
-import {useRouter} from 'next/router'
-import {IProject} from "data/intefaces/IProject";
-import {IApplication} from "data/intefaces/IApplication";
-import {IEvent, IFeedbacksToProfile, ITask, ITaskNegotiation} from "types";
+import { useRouter } from 'next/router'
+import { IProject } from "data/intefaces/IProject";
+import { IApplication } from "data/intefaces/IApplication";
+import { IEvent, IFeedbacksToProfile, ITask, ITaskNegotiation } from "types";
 
 interface IState {
   isMobile: boolean
@@ -46,10 +46,13 @@ interface IState {
   eventUpdateState$: Subject<IEvent>
   eventDeleteState$: Subject<IEvent>
   eventCreateState$: Subject<IEvent>
-  negotiationUpdateState$: Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>
+  negotiationUpdateState$: Subject<{ before: ITaskNegotiation, after: ITaskNegotiation }>
   negotiationDeleteState$: Subject<ITaskNegotiation>
-  taskUpdateState$: Subject<{before: ITask, after: ITask }>
+  taskUpdateState$: Subject<{ before: ITask, after: ITask }>
   taskDeleteState$: Subject<ITask>
+  isOverlayShown?: boolean
+  showOverlay: () => void
+  hideOverlay: () => void
 }
 
 const loginState$ = new Subject<boolean>()
@@ -65,9 +68,9 @@ const feedbackCreateState$ = new Subject<IFeedbacksToProfile>()
 const eventUpdateState$ = new Subject<IEvent>()
 const eventDeleteState$ = new Subject<IEvent>()
 const eventCreateState$ = new Subject<IEvent>()
-const negotiationUpdateState$ = new Subject<{before: ITaskNegotiation, after: ITaskNegotiation }>()
+const negotiationUpdateState$ = new Subject<{ before: ITaskNegotiation, after: ITaskNegotiation }>()
 const negotiationDeleteState$ = new Subject<ITaskNegotiation>()
-const taskUpdateState$ = new Subject<{before: ITask, after: ITask}>()
+const taskUpdateState$ = new Subject<{ before: ITask, after: ITask }>()
 const taskDeleteState$ = new Subject<ITask>()
 
 const defaultValue: IState = {
@@ -106,7 +109,10 @@ const defaultValue: IState = {
   updateProfile: () => null,
   updateRole: () => null,
   setMenuMobileOpen: () => null,
-  menuMobileOpen: false
+  menuMobileOpen: false,
+  isOverlayShown: false,
+  showOverlay: () => null,
+  hideOverlay: () => null
 }
 
 const AppContext = createContext<IState>(defaultValue)
@@ -129,6 +135,7 @@ export function AppWrapper(props: Props) {
   const [profile, setProfile] = useState<IProfile | null>(props.profile)
   const [role, setRole] = useState<ProfileRole | null>(props.role)
   const [menuMobileOpen, setMenuMobileOpen] = useState<boolean>(false)
+  const [isOverlayShown, setIsOverlayShown] = useState<boolean>(false)
 
   console.log('ui3wgr784755348y943y954389', menuMobileOpen)
   const router = useRouter()
@@ -192,8 +199,8 @@ export function AppWrapper(props: Props) {
     console.log("updateRole", role);
     setRole(role);
     const newProfile = await updateProfile(role)
-    if(newProfile) {
-      Cookies.set(CookiesType.profileRole, role, {expires: 365})
+    if (newProfile) {
+      Cookies.set(CookiesType.profileRole, role, { expires: 365 })
     }
     return newProfile
 
@@ -212,6 +219,13 @@ export function AppWrapper(props: Props) {
     profile,
     role,
     menuMobileOpen,
+    isOverlayShown,
+    showOverlay: () => {
+      setIsOverlayShown(true)
+    },
+    hideOverlay: () => {
+      setIsOverlayShown(false)
+    },
     showModal: (type, args?: any) => {
       ReactModal.setAppElement('body')
       setModalArguments(args)
@@ -221,7 +235,7 @@ export function AppWrapper(props: Props) {
       setMenuMobileOpen(!menuMobileOpen)
     },
     showSnackbar: (text, type: SnackbarType) => {
-      setSnackbar({text, type})
+      setSnackbar({ text, type })
       setTimeout(() => {
         setSnackbar(null)
       }, 2000)

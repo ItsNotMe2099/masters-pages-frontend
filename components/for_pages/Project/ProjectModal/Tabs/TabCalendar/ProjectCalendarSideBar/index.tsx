@@ -38,7 +38,7 @@ export default function ProjectCalendarSideBar(props: Props) {
         {!isLPhoneWidth && <div className={styles.timezone}>{format(new Date(), 'zzzz')}</div>}
         {!isLPhoneWidth && <div className={styles.create} onClick={onCreate}><Plus /></div>}
       </div>
-      <ProjectCalendarSideBarCalendar value={currentDate} onChange={onChange} />
+      <ProjectCalendarSideBarCalendar value={currentDate} onChange={onChange} onCreate={onCreate} />
       {!isLPhoneWidth && <div className={styles.events}>
         <CalendarSideBarEvents onClickEvent={onClickEvent} type={'today'} events={eventsSidebar.filter(item => isSameDay(new Date(), item.actualStart))} />
         <CalendarSideBarEvents onClickEvent={onClickEvent} type={'tomorrow'} events={eventsSidebar.filter(item => isSameDay(getTomorrowDate(), item.actualStart))} />

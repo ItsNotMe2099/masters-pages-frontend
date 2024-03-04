@@ -135,3 +135,9 @@
   left: 6px;
   top: 6px;
 }
+
+.modal {
+  position: fixed;
+  z-index: 300;
+  background-color: #FFF;
+}

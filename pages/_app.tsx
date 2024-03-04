@@ -18,6 +18,7 @@ import Snackbar from 'components/layout/Snackbar'
 import { useEffect, useState } from "react";
 import { RecommendWrapper } from "context/recommend_state";
 import "react-datepicker/dist/react-datepicker.css"
+import AppOverlay from 'components/ui/AppOverlay'
 
 interface IPageProps {
   namespacesRequired: string[]
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </RecommendWrapper>
         </AuthWrapper>
         {clientVisible && <Snackbar />}
+        <AppOverlay />
       </AppWrapper>
 
     </Provider>

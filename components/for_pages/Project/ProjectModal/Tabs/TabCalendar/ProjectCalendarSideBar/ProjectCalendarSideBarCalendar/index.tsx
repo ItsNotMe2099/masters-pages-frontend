@@ -23,6 +23,7 @@ import Plus from 'components/svg/Plus'
 import Bell from 'components/svg/Bell'
 import DateRangeSvg from 'components/svg/DateRangeSvg'
 import Search from 'components/svg/Search'
+import { useAppContext } from 'context/state'
 
 
 interface Props {
@@ -86,22 +87,56 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
 
   }
 
+  const [calendarModal, setCalendarModal] = useState<boolean>(false)
+
+  const appContext = useAppContext()
+
+  const handleMobileCalendar = () => {
+    setCalendarModal(true)
+    appContext.showOverlay()
+  }
+
+  useEffect(() => {
+    if (!appContext.isOverlayShown) {
+      setCalendarModal(false)
+    }
+  }, [appContext.isOverlayShown])
+
   return (
     <div className={styles.root}>
       <div className={styles.toolbar}>
+        {isLPhoneWidth && <div className={styles.arrows}>
+          <div className={styles.arrow} onClick={handlePrevClick}><CalendarArrowLeft /></div>
+        </div>}
         <div className={styles.label} onClick={handleDrillUp}>{renderLabel(activeStartDate)}</div>
         <div className={styles.arrows}>
-          <div className={styles.arrow} onClick={handlePrevClick}><CalendarArrowLeft /></div>
+          {!isLPhoneWidth && <div className={styles.arrow} onClick={handlePrevClick}><CalendarArrowLeft /></div>}
           <div className={styles.arrow} onClick={handleNextClick}><CalendarArrowRight /></div>
         </div>
         {isLPhoneWidth &&
           <div className={styles.right}>
             <Search className={styles.search} />
-            <DateRangeSvg />
+            <DateRangeSvg onClick={handleMobileCalendar} />
             <Bell className={styles.bell} onClick={handleBellClick} />
             <div className={styles.create} onClick={onCreate}><Plus /></div>
           </div>}
       </div>
+      {calendarModal &&
+        <div className={styles.modal}>
+          <Calendar
+            className={styles.modal}
+            onChange={onChange}
+            value={value}
+            locale={i18n.language}
+            activeStartDate={activeStartDate}
+            defaultActiveStartDate={activeStartDate}
+            showNavigation={false}
+            onViewChange={handleViewChange}
+            view={view as any}
+            tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
+              <ProjectCalendarSideBarCalendarCell date={date} />) : null}
+          />
+        </div>}
       {!isLPhoneWidth && <Calendar
         className={styles.calendar}
         onChange={onChange}
