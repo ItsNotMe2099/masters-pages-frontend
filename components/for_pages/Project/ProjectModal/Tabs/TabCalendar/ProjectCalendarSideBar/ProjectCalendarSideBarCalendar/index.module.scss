@@ -138,6 +138,12 @@
 
 .modal {
   position: fixed;
-  z-index: 300;
+  z-index: 301;
+  opacity: 1;
   background-color: #FFF;
+  left: 0;
+}
+
+.modalCalendar {
+  
 }

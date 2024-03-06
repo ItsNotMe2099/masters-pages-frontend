@@ -1,9 +1,10 @@
 import Loader from 'components/ui/Loader'
 import { ReactElement, useEffect, useRef } from 'react'
 import styles from './index.module.scss'
-
+import classNames from 'classnames'
 import ReactModal from 'react-modal'
 import CloseIcon from 'components/svg/CloseIcon'
+import { useAppContext } from 'context/state'
 
 
 interface Props {
@@ -43,18 +44,18 @@ export default function Modal(props: Props) {
   }
   useEffect(() => {
 
-    if(!  bodyRef.current){
+    if (!bodyRef.current) {
       return
     }
 
-    if(props.loading){
+    if (props.loading) {
       bodyRef.current.style.visibility = 'hidden'
-    }else{
+    } else {
       bodyRef.current.style.visibility = 'inherit'
     }
   }, [props.loading])
   useEffect(() => {
-    if(props.isOpen){
+    if (props.isOpen) {
       ReactModal.setAppElement('body')
     }
   }, [props.isOpen])
@@ -69,32 +70,35 @@ export default function Modal(props: Props) {
         return styles.rootNormal
     }
   }
+
+  const appContext = useAppContext()
+
   return (
     <ReactModal
-    style={customStyles}
-    isOpen={props.isOpen}
-    ariaHideApp={false}
-    onRequestClose={props.onRequestClose}
+      style={customStyles}
+      isOpen={props.isOpen}
+      ariaHideApp={false}
+      onRequestClose={props.onRequestClose}
     >
-      <div className={styles.frame} >
-        <div className={styles.overlay} onClick={props.onRequestClose}/>
-      <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
-        {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`} onClick={props.onRequestClose}>
-          <CloseIcon/>
-        </div>}
-       <div className={styles.center} ref={bodyRef}>
-        {(props.image && !props.loading) && <div className={styles.image}>
-          <img src={props.image} />
-        </div>}
-        {(props.title && !props.loading) && <div className={styles.title}>
-         {props.title}
-        </div>}
+      <div className={classNames(styles.frame, { [styles.noOverflow]: appContext.isOverlayShown })} >
+        <div className={styles.overlay} onClick={props.onRequestClose} />
+        <div className={`${styles.root} ${getSizeClass(props.size)} ${props.className}`}>
+          {props.onRequestClose && <div className={`${styles.close} ${props.closeClassName}`} onClick={props.onRequestClose}>
+            <CloseIcon />
+          </div>}
+          <div className={styles.center} ref={bodyRef}>
+            {(props.image && !props.loading) && <div className={styles.image}>
+              <img src={props.image} />
+            </div>}
+            {(props.title && !props.loading) && <div className={styles.title}>
+              {props.title}
+            </div>}
 
-        {props.children}
+            {props.children}
+          </div>
+          {props.loading && <div className={styles.loader}><Loader /></div>}
+        </div>
       </div>
-        {props.loading && <div className={styles.loader}><Loader/></div>}
-      </div>
-</div>
     </ReactModal>
   )
 }

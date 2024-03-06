@@ -1,26 +1,31 @@
 @import "scss/index";
+
 .root {
   position: relative;
   border-radius: 21px;
   background: white;
   padding: 50px 30px 64px;
   z-index: 5;
-  margin:  auto;
-  @media screen and (max-width: $xs-max){
+  margin: auto;
+
+  @media screen and (max-width: $xs-max) {
     width: 100% !important;
   }
-  @media screen and (max-width: 600px){
+
+  @media screen and (max-width: 600px) {
     border-radius: 0;
   }
 }
-.rootNormal{
+
+.rootNormal {
   width: 441px;
 }
-.rootLarge{
+
+.rootLarge {
   width: 946px
 }
 
-.rootMedium{
+.rootMedium {
   width: 509px;
 }
 
@@ -29,7 +34,8 @@
   top: 30px;
   right: 24px;
   z-index: 2;
-  button{
+
+  button {
     display: block;
   }
 
@@ -59,14 +65,16 @@
   z-index: 3;
 }
 
-.center, .body {
+.center,
+.body {
   display: flex;
   justify-content: center;
   align-items: stretch;
   flex-direction: column;
   text-align: center;
 }
-.frame{
+
+.frame {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
@@ -78,11 +86,13 @@
   padding-top: 50px;
   padding-bottom: 50px;
   z-index: 3;
-  @media screen and (max-width: 600px){
+
+  @media screen and (max-width: 600px) {
     padding: 0;
   }
 }
-.overlay{
+
+.overlay {
   position: absolute;
   left: 0;
   right: 0;
@@ -90,5 +100,9 @@
   bottom: 0;
   z-index: 2;
 }
-.scroll{
+
+.scroll {}
+
+.noOverflow {
+  overflow-y: hidden;
 }

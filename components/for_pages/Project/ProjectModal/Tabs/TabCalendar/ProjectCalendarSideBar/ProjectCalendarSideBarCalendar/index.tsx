@@ -121,36 +121,41 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
             <div className={styles.create} onClick={onCreate}><Plus /></div>
           </div>}
       </div>
-      {calendarModal &&
-        <div className={styles.modal}>
-          <Calendar
-            className={styles.modal}
-            onChange={onChange}
-            value={value}
-            locale={i18n.language}
-            activeStartDate={activeStartDate}
-            defaultActiveStartDate={activeStartDate}
-            showNavigation={false}
-            onViewChange={handleViewChange}
-            view={view as any}
-            tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
-              <ProjectCalendarSideBarCalendarCell date={date} />) : null}
-          />
-        </div>}
-      {!isLPhoneWidth && <Calendar
-        className={styles.calendar}
-        onChange={onChange}
-        value={value}
-        locale={i18n.language}
-        activeStartDate={activeStartDate}
-        defaultActiveStartDate={activeStartDate}
-        showNavigation={false}
-        onViewChange={handleViewChange}
-        view={view as any}
-        tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
-          <ProjectCalendarSideBarCalendarCell date={date} />) : null}
-      />}
-    </div>
+      <div className={styles.modal}>
+        {calendarModal &&
+          <>
+            <div className={styles.label} onClick={handleDrillUp}>{renderLabel(activeStartDate)}</div>
+            <Calendar
+              className={styles.modalCalendar}
+              onChange={onChange}
+              value={value}
+              locale={i18n.language}
+              activeStartDate={activeStartDate}
+              defaultActiveStartDate={activeStartDate}
+              showNavigation={false}
+              onViewChange={handleViewChange}
+              view={view as any}
+              tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
+                <ProjectCalendarSideBarCalendarCell date={date} />) : null}
+            />
+          </>
+        }</div>
+      {
+        !isLPhoneWidth && <Calendar
+          className={styles.calendar}
+          onChange={onChange}
+          value={value}
+          locale={i18n.language}
+          activeStartDate={activeStartDate}
+          defaultActiveStartDate={activeStartDate}
+          showNavigation={false}
+          onViewChange={handleViewChange}
+          view={view as any}
+          tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
+            <ProjectCalendarSideBarCalendarCell date={date} />) : null}
+        />
+      }
+    </div >
   )
 }
 

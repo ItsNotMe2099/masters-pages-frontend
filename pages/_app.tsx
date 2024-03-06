@@ -44,10 +44,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AuthWrapper>
           <RecommendWrapper>
             <Component {...pageProps} />
+            <AppOverlay />
           </RecommendWrapper>
         </AuthWrapper>
         {clientVisible && <Snackbar />}
-        <AppOverlay />
+        
       </AppWrapper>
 
     </Provider>
