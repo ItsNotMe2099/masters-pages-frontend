@@ -24,6 +24,9 @@ import Bell from 'components/svg/Bell'
 import DateRangeSvg from 'components/svg/DateRangeSvg'
 import Search from 'components/svg/Search'
 import { useAppContext } from 'context/state'
+import CloseIcon from 'components/svg/CloseIcon'
+import NewCloseSvg from 'components/svg/NewCloseSvg'
+import AppOverlay from 'components/ui/AppOverlay'
 
 
 interface Props {
@@ -96,6 +99,11 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
     appContext.showOverlay()
   }
 
+  const handleMobileCalendarOnClose = () => {
+    setCalendarModal(false)
+    appContext.hideOverlay()
+  }
+
   useEffect(() => {
     if (!appContext.isOverlayShown) {
       setCalendarModal(false)
@@ -104,6 +112,7 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
 
   return (
     <div className={styles.root}>
+      <AppOverlay />
       <div className={styles.toolbar}>
         {isLPhoneWidth && <div className={styles.arrows}>
           <div className={styles.arrow} onClick={handlePrevClick}><CalendarArrowLeft /></div>
@@ -116,14 +125,15 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
         {isLPhoneWidth &&
           <div className={styles.right}>
             <Search className={styles.search} />
-            <DateRangeSvg onClick={handleMobileCalendar} />
+            {calendarModal ? <div className={styles.close}><NewCloseSvg onClick={handleMobileCalendarOnClose} /></div>
+              : <DateRangeSvg onClick={handleMobileCalendar} />}
             <Bell className={styles.bell} onClick={handleBellClick} />
             <div className={styles.create} onClick={onCreate}><Plus /></div>
           </div>}
       </div>
-      <div className={styles.modal}>
-        {calendarModal &&
-          <>
+      {calendarModal &&
+        <div className={styles.modal}>
+          <div className={styles.wrapper}>
             <div className={styles.label} onClick={handleDrillUp}>{renderLabel(activeStartDate)}</div>
             <Calendar
               className={styles.modalCalendar}
@@ -138,8 +148,9 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
               tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
                 <ProjectCalendarSideBarCalendarCell date={date} />) : null}
             />
-          </>
-        }</div>
+          </div>
+        </div>
+      }
       {
         !isLPhoneWidth && <Calendar
           className={styles.calendar}

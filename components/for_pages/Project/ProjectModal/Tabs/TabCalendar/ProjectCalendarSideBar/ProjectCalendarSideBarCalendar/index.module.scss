@@ -136,14 +136,32 @@
   top: 6px;
 }
 
-.modal {
+.wrapper {
   position: fixed;
   z-index: 301;
   opacity: 1;
   background-color: #FFF;
   left: 0;
+  right: 0;
+
+  .label {
+    padding: 16px 0;
+    text-align: center;
+  }
 }
 
-.modalCalendar {
-  
+.modal {}
+
+.close {
+  width: 46px;
+  height: 49px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+  border-top-right-radius: 100%;
+  border-top-left-radius: 100%;
+  cursor: pointer;
+  position: relative;
+  z-index: 302;
 }
