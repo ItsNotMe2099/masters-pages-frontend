@@ -174,3 +174,13 @@
 .events {
   padding: 0 24px;
 }
+
+.searchInput {
+  position: absolute;
+  width: 100%;
+
+  input {
+    background-color: #fff;
+    width: 100%;
+  }
+}

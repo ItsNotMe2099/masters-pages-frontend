@@ -27,6 +27,7 @@ import NewCloseSvg from 'components/svg/NewCloseSvg'
 import AppOverlay from 'components/ui/AppOverlay'
 import CalendarSideBarEvents from 'components/Calendar/components/CalendarSideBar/CalendarSideBarEvents'
 import { useEventCalendarContext } from 'context/event_calendar'
+import CalendarToolbarSearch from 'components/Calendar/components/CalendarToolbar/CalendarToolbarSearch'
 
 
 interface Props {
@@ -34,6 +35,7 @@ interface Props {
   value: Date,
   onCreate?: () => void
   onClickEvent: (event) => void
+  onSearch?: (value) => void
 }
 const views = ['decade', 'year', 'month']
 
@@ -127,6 +129,17 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
     return tomorrow
   }
 
+  const [showSearch, setShowSearch] = useState<boolean>(false)
+
+  const handleShowSearch = () => {
+    if (!showSearch) {
+      setShowSearch(true)
+    }
+    else {
+
+    }
+  }
+
   return (
     <div className={styles.root}>
       <AppOverlay />
@@ -141,7 +154,8 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
         </div>
         {isLPhoneWidth &&
           <div className={styles.right}>
-            <Search className={styles.search} />
+            {showSearch ? <CalendarToolbarSearch className={styles.searchInput} isClose onClose={() => setShowSearch(false)} />
+              : <Search className={styles.search} onClick={() => setShowSearch(true)} />}
             {calendarModal ? <div className={styles.close}><NewCloseSvg onClick={handleMobileCalendarOnClose} /></div>
               : <DateRangeSvg onClick={handleMobileCalendar} />}
             {eventsModal ? <div className={styles.close}><NewCloseSvg onClick={handleMobileCalendarOnClose} /></div>
