@@ -1,7 +1,5 @@
 import styles from './index.module.scss'
 import Calendar from 'react-calendar'
-import CalendarSideBarCalendarCell
-  from 'components/Calendar/components/CalendarSideBar/CalendarSideBarCalendar/CalendarSideBarCalendarCell'
 import CalendarArrowLeft from 'components/svg/CalendarArrowLeft'
 import CalendarArrowRight from 'components/svg/CalendarArrowRight'
 import { useEffect, useState } from 'react'
@@ -24,15 +22,18 @@ import Bell from 'components/svg/Bell'
 import DateRangeSvg from 'components/svg/DateRangeSvg'
 import Search from 'components/svg/Search'
 import { useAppContext } from 'context/state'
-import CloseIcon from 'components/svg/CloseIcon'
+import { isSameDay } from 'date-fns'
 import NewCloseSvg from 'components/svg/NewCloseSvg'
 import AppOverlay from 'components/ui/AppOverlay'
+import CalendarSideBarEvents from 'components/Calendar/components/CalendarSideBar/CalendarSideBarEvents'
+import { useEventCalendarContext } from 'context/event_calendar'
 
 
 interface Props {
   onChange: (value) => void,
   value: Date,
   onCreate?: () => void
+  onClickEvent: (event) => void
 }
 const views = ['decade', 'year', 'month']
 
@@ -90,7 +91,13 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
 
   }
 
+  const handleMobileBellClick = () => {
+    setEventsModal(true)
+    appContext.showOverlay()
+  }
+
   const [calendarModal, setCalendarModal] = useState<boolean>(false)
+  const [eventsModal, setEventsModal] = useState<boolean>(false)
 
   const appContext = useAppContext()
 
@@ -107,8 +114,18 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
   useEffect(() => {
     if (!appContext.isOverlayShown) {
       setCalendarModal(false)
+      setEventsModal(false)
     }
   }, [appContext.isOverlayShown])
+
+  const calendarContext = useEventCalendarContext()
+  const eventsSidebar = calendarContext.sidebarEvents
+
+  const getTomorrowDate = () => {
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    return tomorrow
+  }
 
   return (
     <div className={styles.root}>
@@ -127,7 +144,8 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
             <Search className={styles.search} />
             {calendarModal ? <div className={styles.close}><NewCloseSvg onClick={handleMobileCalendarOnClose} /></div>
               : <DateRangeSvg onClick={handleMobileCalendar} />}
-            <Bell className={styles.bell} onClick={handleBellClick} />
+            {eventsModal ? <div className={styles.close}><NewCloseSvg onClick={handleMobileCalendarOnClose} /></div>
+              : <Bell className={styles.bell} onClick={handleMobileBellClick} />}
             <div className={styles.create} onClick={onCreate}><Plus /></div>
           </div>}
       </div>
@@ -148,6 +166,16 @@ export default function ProjectCalendarSideBarCalendar(props: Props) {
               tileContent={({ activeStartDate, date, view }) => view === 'month' ? (
                 <ProjectCalendarSideBarCalendarCell date={date} />) : null}
             />
+          </div>
+        </div>
+      }
+      {eventsModal &&
+        <div className={styles.modal}>
+          <div className={styles.wrapperEvents}>
+            <div className={styles.events}>
+              <CalendarSideBarEvents onClickEvent={props.onClickEvent} type={'today'} events={eventsSidebar.filter(item => isSameDay(new Date(), item.actualStart))} />
+              <CalendarSideBarEvents onClickEvent={props.onClickEvent} type={'tomorrow'} events={eventsSidebar.filter(item => isSameDay(getTomorrowDate(), item.actualStart))} />
+            </div>
           </div>
         </div>
       }

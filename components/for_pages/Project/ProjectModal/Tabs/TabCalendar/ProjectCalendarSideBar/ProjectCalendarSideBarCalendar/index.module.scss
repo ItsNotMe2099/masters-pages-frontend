@@ -136,7 +136,8 @@
   top: 6px;
 }
 
-.wrapper {
+.wrapper,
+.wrapperEvents {
   position: fixed;
   z-index: 301;
   opacity: 1;
@@ -148,6 +149,10 @@
     padding: 16px 0;
     text-align: center;
   }
+}
+
+.wrapperEvents {
+  height: 100%;
 }
 
 .modal {}
@@ -164,4 +169,8 @@
   cursor: pointer;
   position: relative;
   z-index: 302;
+}
+
+.events {
+  padding: 0 24px;
 }
