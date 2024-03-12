@@ -55,10 +55,20 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
 
   const submitEventRef = React.useRef<string | null>(null)
 
+  const handleTimezoneOffset = (offset: number) => {
+    if (offset < 10 && offset > -10) {
+      return offset >= 0 ? `+0${offset}:00` : `-0${offset + (offset * 2)}:00`
+    }
+    else {
+      return offset >= 0 ? `+${offset}:00` : `-${offset + (offset * 2)}:00`
+    }
+  }
+
 
   const handleSubmitNewEvent = (data) => {
     (!event || !eventContext.event) && eventContext.create({
-      ...data, ...data.timeRange, timezone: format(new Date(), 'XXX'),
+      ...data, ...data.timeRange,
+      timezone: handleTimezoneOffset(data?.timezone?.offset),
       priceType: 'fixed',
       ...(
         appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}

@@ -5,7 +5,7 @@ import SelectInput from 'components/ui/Inputs/SelectInput'
 import Loader from 'components/ui/Loader'
 
 import * as React from 'react'
-import { EventStatus, IEvent, IRootState } from 'types'
+import { EventStatus, IEvent } from 'types'
 import { eventMinDuration, required } from 'utils/validations'
 import styles from './index.module.scss'
 
@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-import DateTimeRange from 'components/ui/Inputs/DateTimeRange'
 import { useTranslation } from 'next-i18next'
 import { useEventContext } from "context/event_state";
 import { useEffect, useState } from "react";
@@ -21,7 +20,7 @@ import ApplicationRepository from "data/repositories/ApplicationRepository";
 import { ApplicationStatus, IApplication } from "data/intefaces/IApplication";
 import { useAppContext } from "context/state";
 import TextArea from 'components/ui/Inputs/TextArea'
-import { confirmChangeData, confirmModalClose, confirmOpen, modalClose } from 'components/Modal/actions'
+import { confirmChangeData, confirmModalClose, confirmOpen } from 'components/Modal/actions'
 import { useEventCalendarContext } from 'context/event_calendar'
 import EventRepository from 'data/repositories/EventRepository'
 import { ProfileRole } from 'data/intefaces/IProfile'
@@ -30,12 +29,11 @@ import { format } from 'date-fns'
 import { useProjectContext } from 'context/project_state'
 import DateTimeRangeNew from 'components/ui/Inputs/DateTimeRangeNew'
 import classNames from 'classnames'
-import Image from 'next/image'
 import { getMediaPath } from 'utils/media'
 import AvatarSvg from 'components/svg/AvatarSvg'
 import ControlLeftEventSvg from 'components/svg/ControlLeftEventSvg'
 import ControlRightEventSvg from 'components/svg/ControlRightEventSvg'
-import TimeZoneSelectInput from 'components/ui/Inputs/TimeZoneSelectInput'
+import InputTimezone from 'components/ui/Inputs/InputTimezone'
 
 interface Props {
   onCancel: () => void
@@ -68,6 +66,7 @@ enum ButtonType {
 }
 
 let ProjectNewEventForm = (props: Props) => {
+  
 
   const appContext = useAppContext()
   const profile = appContext.profile
@@ -472,7 +471,7 @@ let ProjectNewEventForm = (props: Props) => {
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
-          <Field name='timezone' component={TimeZoneSelectInput} />
+          <Field name='timezone' component={InputTimezone} />
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Description</div>
           </div>}
