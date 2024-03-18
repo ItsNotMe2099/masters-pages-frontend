@@ -14,7 +14,7 @@ export default function CalendarMonthCell(props: Props) {
 
   return (
     <div className={`${styles.root}`}>
-      <div className={styles.week}>{format(date, 'eee', {locale: i18n.language === 'ru' && ru})}</div>
+      <div className={styles.week}>{format(date, 'eee', {locale: i18n.language === 'ru' ? ru : undefined })}</div>
       <div className={styles.day} onClick={onDrillDown}>{label}</div>
     </div>
   )

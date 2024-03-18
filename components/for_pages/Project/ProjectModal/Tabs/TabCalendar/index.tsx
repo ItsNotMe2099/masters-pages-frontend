@@ -210,7 +210,7 @@ const TabProjectCalendarInner = (props) => {
       if (currentView === Views.MONTH) {
         const centerDate = add(rangeStartDate, { days: 15 })
         if (centerDate)
-          return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' && ru })}`
+          return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' ? ru : undefined  })}`
       } else {
         return `${format(rangeStartDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })} - ${format(rangeEndDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })}`
 
