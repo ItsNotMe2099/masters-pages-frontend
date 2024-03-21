@@ -157,6 +157,7 @@ const TabProjectCalendarInner = (props) => {
   const handleToolbarNavigate = (action) => {
     if (toolbar.current) {
       toolbar.current.onNavigate(action)
+      console.log('ACTION', action)
     }
   }
   const handleRangeChange = (dates: Date[] | { start: Date; end: Date }, view?: View) => {
@@ -171,6 +172,7 @@ const TabProjectCalendarInner = (props) => {
       calendarContext.setCurrentView(view)
     }
     console.log('CLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl')
+    console.log('handleRangeChange dates', dates)
   }
   const handleViewChange = (view) => {
     calendarContext.setCurrentView(view)
@@ -209,6 +211,7 @@ const TabProjectCalendarInner = (props) => {
     if (rangeStartDate && rangeEndDate && !isSameDay(rangeStartDate, rangeEndDate)) {
       if (currentView === Views.MONTH) {
         const centerDate = add(rangeStartDate, { days: 15 })
+        console.log('centerDate', centerDate)
         if (centerDate)
           return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' ? ru : undefined  })}`
       } else {
@@ -239,6 +242,8 @@ const TabProjectCalendarInner = (props) => {
   }, [currentView])
 
   console.log('CURRENTVIEW', toolbar.current?.view)
+  console.log('rangeStartDate', rangeStartDate)
+  console.log('rangeEndDate', rangeEndDate)
 
   return (
     <div className={styles.root}>
@@ -265,7 +270,7 @@ const TabProjectCalendarInner = (props) => {
           dragFromOutsideItem={draggedEvent}
           onNavigate={handleNavigate}
           popup={true}
-          date={calendarContext.rangeStartDate ?? new Date()}
+          //date={calendarContext.rangeStartDate ?? new Date()}
           startAccessor="actualStart"
           endAccessor="actualEnd"
           messages={{ noEventsInRange: t('event.noEvents') }}
