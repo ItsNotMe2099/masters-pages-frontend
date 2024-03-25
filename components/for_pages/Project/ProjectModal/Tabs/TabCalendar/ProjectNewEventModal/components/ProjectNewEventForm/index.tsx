@@ -25,7 +25,6 @@ import { useEventCalendarContext } from 'context/event_calendar'
 import EventRepository from 'data/repositories/EventRepository'
 import { ProfileRole } from 'data/intefaces/IProfile'
 import StateButton from 'components/Calendar/components/EditEventModal/components/StateButton'
-import { format } from 'date-fns'
 import { useProjectContext } from 'context/project_state'
 import DateTimeRangeNew from 'components/ui/Inputs/DateTimeRangeNew'
 import classNames from 'classnames'
@@ -33,7 +32,6 @@ import { getMediaPath } from 'utils/media'
 import AvatarSvg from 'components/svg/AvatarSvg'
 import ControlLeftEventSvg from 'components/svg/ControlLeftEventSvg'
 import ControlRightEventSvg from 'components/svg/ControlRightEventSvg'
-import InputTimezone from 'components/ui/Inputs/InputTimezone'
 
 interface Props {
   onCancel: () => void
@@ -66,7 +64,7 @@ enum ButtonType {
 }
 
 let ProjectNewEventForm = (props: Props) => {
-  
+
 
   const appContext = useAppContext()
   const profile = appContext.profile
@@ -95,6 +93,129 @@ let ProjectNewEventForm = (props: Props) => {
   const { handleSubmit } = props
 
   const dispatch = useDispatch()
+
+  const timezones = [
+    {
+      label: 'GMT -11',
+      value: '-11:00'
+    },
+    {
+      label: 'GMT -10',
+      value: '-10:00'
+    },
+    {
+      label: 'GMT -8',
+      value: '-08:00'
+    },
+    {
+      label: 'GMT -7',
+      value: '-07:00'
+    },
+    {
+      label: 'GMT -6',
+      value: '-06:00'
+    },
+    {
+      label: 'GMT -5',
+      value: '-05:00'
+    },
+    {
+      label: 'GMT -4',
+      value: '-04:00'
+    },
+    {
+      label: 'GMT -3',
+      value: '-03:00'
+    },
+    {
+      label: 'GMT -2:30',
+      value: '-02:30'
+    },
+    {
+      label: 'GMT -1',
+      value: '-01:00'
+    },
+    {
+      label: 'GMT +0',
+      value: '+00:00'
+    },
+    {
+      label: 'GMT +1',
+      value: '+01:00'
+    },
+    {
+      label: 'GMT +2',
+      value: '+02:00'
+    },
+    {
+      label: 'GMT +3',
+      value: '+03:00'
+    },
+    {
+      label: 'GMT +4',
+      value: '+04:00'
+    },
+    {
+      label: 'GMT +4:30',
+      value: '+04:30'
+    },
+    {
+      label: 'GMT +5',
+      value: '+05:00'
+    },
+    {
+      label: 'GMT +5:30',
+      value: '+05:30'
+    },
+    {
+      label: 'GMT +5:45',
+      value: '+05:45'
+    },
+    {
+      label: 'GMT +6',
+      value: '+06:00'
+    },
+    {
+      label: 'GMT +6:30',
+      value: '+06:30'
+    },
+    {
+      label: 'GMT +7',
+      value: '+07:00'
+    },
+    {
+      label: 'GMT +8',
+      value: '+08:00'
+    },
+    {
+      label: 'GMT +9',
+      value: '+09:00'
+    },
+    {
+      label: 'GMT +9:30',
+      value: '+09:30'
+    },
+    {
+      label: 'GMT +10',
+      value: '+10:00'
+    },
+    {
+      label: 'GMT +10:30',
+      value: '+10:30'
+    },
+    {
+      label: 'GMT +11',
+      value: '+11:00'
+    },
+    {
+      label: 'GMT +12',
+      value: '+12:00'
+    },
+    {
+      label: 'GMT +13',
+      value: '+13:00'
+    },
+  ]
 
   // Access the form values using Redux Form's formValueSelector
   const formData = {
@@ -471,7 +592,12 @@ let ProjectNewEventForm = (props: Props) => {
             label={t('date')}
             validate={[required, eventMinDuration]}
           />
-          <Field name='timezone' component={InputTimezone} />
+          <Field
+            name='timezone'
+            component={SelectInput}
+            options={timezones}
+            containerClass={styles.timezone}
+          />
           {(props.event || event) && <div className={styles.states}>
             <div className={styles.status}>Description</div>
           </div>}

@@ -55,26 +55,17 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
 
   const submitEventRef = React.useRef<string | null>(null)
 
-  const handleTimezoneOffset = (offset: number) => {
-    if (offset < 10 && offset > -10) {
-      return offset >= 0 ? `+0${offset}:00` : `-0${offset + (offset * 2)}:00`
-    }
-    else {
-      return offset >= 0 ? `+${offset}:00` : `-${offset + (offset * 2)}:00`
-    }
-  }
-
-
   const handleSubmitNewEvent = (data) => {
     (!event || !eventContext.event) && eventContext.create({
       ...data, ...data.timeRange,
-      timezone: handleTimezoneOffset(data?.timezone?.offset),
+      timezone: data?.timezone,
       priceType: 'fixed',
       ...(
         appContext.profile.role !== 'corporate' ? { participantId: projectContext.project.corporateProfileId } : {}
       )
     })
     calendarContext.setCurrentEvent(event)
+    console.log('data.timezone', data.timezone)
 
   }
 
@@ -116,7 +107,8 @@ const ProjectNewEventModalInner = ({ isOpen, onClose, range, projectId, event }:
             onNext={handleNext}
             initialValues=
             {{
-              description: event ? currentEvent.description : '', timezone: event && currentEvent.timezone, title: event ? currentEvent.title : `Event #${total + 1}`, participantId: event ? currentEvent.participantId : null,
+              description: event ? currentEvent.description : '', timezone: event ? currentEvent.timezone : format(new Date(), 'XXX'),
+              title: event ? currentEvent.title : `Event #${total + 1}`, participantId: event ? currentEvent.participantId : null,
               ...(range ? { timeRange: range } : event ? { timeRange: { start: currentEvent.start, end: currentEvent.end } } : {})
             }}
             onSubmit={handleSubmitNewEvent} onCancel={handleCancel} eventNumber={event ? currentEvent.title : total + 1} />}

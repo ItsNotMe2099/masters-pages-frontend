@@ -5,6 +5,7 @@ import BaseInput from 'components/ui/Inputs/Input/components/BaseInput'
 import { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
 import cx from 'classnames'
+import classNames from 'classnames'
 import { useTranslation } from 'next-i18next'
 
 interface Props {
@@ -22,12 +23,12 @@ interface Props {
   withIcon?: boolean,
   showEmpty?: boolean,
   emptyText?: string
-
+  containerClass?: string
 }
 
 const SelectInput = (props: Props) => {
-  const {t} = useTranslation()
-  const { meta: { error, touched },restrictedValues, input, onOpenDropDown, label, ...rest } = props
+  const { t } = useTranslation()
+  const { meta: { error, touched }, restrictedValues, input, onOpenDropDown, label, ...rest } = props
   const dropdownRef = useRef(null)
   const searchInputRef = useRef(null)
   const valueInputRef = useRef(null)
@@ -63,9 +64,9 @@ const SelectInput = (props: Props) => {
   const handleOptionClick = (e, item) => {
     e.preventDefault()
 
-    if(props.changeWithValue){
+    if (props.changeWithValue) {
       input.onChange(item)
-    }else {
+    } else {
       input.onChange(item.value)
     }
     setIsActive(false)
@@ -84,54 +85,54 @@ const SelectInput = (props: Props) => {
     setCurrentLabel('')
   }
   useEffect(() => {
-    if(!input){
+    if (!input) {
       return
     }
     console.log('MainCateogryFormChange', input.value)
     let _setCurrentLabel = null
-    if(props.allowCustomInput){
-      _setCurrentLabel = (props.changeWithValue ? input.value.label :  input.value )
-    }else {
+    if (props.allowCustomInput) {
+      _setCurrentLabel = (props.changeWithValue ? input.value.label : input.value)
+    } else {
       _setCurrentLabel = (options.find(item => props.changeWithValue ? input.value.value === item.value : input.value === item.value)?.label)
     }
 
 
     setCurrentLabel(_setCurrentLabel || '')
-    }, [input, options])
+  }, [input, options])
 
   const handleActiveOptionClick = (e) => {
     e.preventDefault()
     setIsActive(false)
   }
   const handleSearchChange = (value) => {
-    if(    props.onSearchChange) {
+    if (props.onSearchChange) {
       props.onSearchChange(value)
-    }else{
+    } else {
       setFilter(value)
     }
   }
   return (
-    <Input {...props} onClick={onClick}
-           input={{value: currentLabel, onChange: null, name: props.input.name}}
-           onIconClick={onClick}
-           icon={
-             <img src={`/img/field/${props.size === 'small' ? 'arrowDownRed' : 'arrowDown'}.svg`} alt=''/>
-           }>
+    <Input containerClass={props.containerClass} {...props} onClick={onClick}
+      input={{ value: currentLabel, onChange: null, name: props.input.name }}
+      onIconClick={onClick}
+      icon={
+        <img src={`/img/field/${props.size === 'small' ? 'arrowDownRed' : 'arrowDown'}.svg`} alt='' />
+      }>
       <div ref={dropdownRef} className={`${cx(styles.dropDown, { [styles.dropDownActive]: isActive, [styles.dropDownWithLabelCross]: props.labelType === 'cross' })} ${getSizeClass(props.size)}`}>
         <div className={styles.inputContainer}>
           <BaseInput onChange={(e) => {
-            if(props.allowCustomInput){
+            if (props.allowCustomInput) {
               input.onChange(e.currentTarget.value)
-              }
+            }
             handleSearchChange(e.currentTarget.value)
-            }}
+          }}
             value={props.allowCustomInput ? input.value : null}
-                     input={{
-                       name: props.input.name
-                     }}
+            input={{
+              name: props.input.name
+            }}
             withBorder={false}
-            parentRef={searchInputRef}/>
-           </div>
+            parentRef={searchInputRef} />
+        </div>
 
         <ul className={styles.dropDownList}>
           {props.showEmpty && <li className={styles.dropdownItem}>
@@ -160,7 +161,7 @@ const SelectInput = (props: Props) => {
 
 SelectInput.defaultProps = {
   labelType: 'static',
-  onOpenDropDown: () => {},
+  onOpenDropDown: () => { },
   restrictedValues: [],
   withIcon: true
 }
