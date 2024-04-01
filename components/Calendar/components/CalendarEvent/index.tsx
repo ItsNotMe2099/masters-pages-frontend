@@ -76,6 +76,13 @@ export default function CalendarEvent(props: Props) {
   const unreadCount = parseInt(event.unreadTextMessagesCount, 10) + parseInt(event.unreadMediaMessagesCount, 10)
 
   const otherSide = event.isAuthor ? event.participant : event.author
+  if(event._isStub){
+    return <div className={`${styles.root} ${getRootClass()} ${props.className} ${styles.stub}`} onClick={props.onClick}>
+      <div className={styles.stubCount}>
+      +{event._count}
+      </div>
+    </div>
+  }
   // @ts-ignore
   return (
     <div className={`${styles.root} ${getRootClass()} ${props.className}`} onClick={props.onClick} ref={setTriggerRef}>

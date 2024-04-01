@@ -12,7 +12,7 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import { useSelector, useDispatch } from 'react-redux'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { default as React, useEffect, useRef, useState } from 'react'
+import {default as React, useEffect, useMemo, useRef, useState} from 'react'
 import CalendarEvent from 'components/Calendar/components/CalendarEvent'
 import { add, addDays, endOfWeek, format, isSameDay, isWeekend, startOfWeek } from 'date-fns'
 import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
@@ -69,8 +69,6 @@ const TabProjectCalendarInner = (props) => {
 
   const [currentEditEventRange, setCurrentEditEventRange] = useState(null)
   const currentView = calendarContext.currentView
-  const [rangeStartDate, setRangeStartDate] = useState(startWeek)
-  const [rangeEndDate, setRangeEndDate] = useState(endWeek)
   const [currentDate, setCurrentDate] = useState(new Date())
   const [draggedEvent, setDraggedEvent] = useState(null)
   const intervalRef = useRef(null)
@@ -131,10 +129,14 @@ const TabProjectCalendarInner = (props) => {
     })
     calendarContext.showModal('eventCreateModal')
   }
-  const handleClickEvent = (event) => {
-    calendarContext.setCurrentEvent(event)
-    calendarContext.showModal('eventEditModal')
-    setCurrentEditEventRange(null)
+  const handleClickEvent = (event: IEvent) => {
+    if(event._isStub){
+     //TODO Show modal
+    }else {
+      calendarContext.setCurrentEvent(event)
+      calendarContext.showModal('eventEditModal')
+      setCurrentEditEventRange(null)
+    }
 
   }
   const getDayColor = (date) => {
@@ -163,6 +165,7 @@ const TabProjectCalendarInner = (props) => {
   const handleRangeChange = (dates: Date[] | { start: Date; end: Date }, view?: View) => {
 
     if (!Array.isArray(dates) && dates.start && dates.end && currentViewRef.current !== Views.DAY) {
+      console.log("StartRange11", dates);
       calendarContext.setRange(dates.start, dates.end)
     } else if (Array.isArray(dates)) {
       calendarContext.setRange(dates[0], dates[dates.length - 1])
@@ -207,22 +210,22 @@ const TabProjectCalendarInner = (props) => {
 
   }
 
-  const getToolbarLabel = () => {
-    if (rangeStartDate && rangeEndDate && !isSameDay(rangeStartDate, rangeEndDate)) {
+  const toolbarLabel = useMemo(() => {
+    if (calendarContext.rangeStartDate && calendarContext.rangeEndDate && !isSameDay(calendarContext.rangeStartDate, calendarContext.rangeEndDate)) {
       if (currentView === Views.MONTH) {
-        const centerDate = add(rangeStartDate, { days: 15 })
+        const centerDate = add(calendarContext.rangeStartDate, { days: 15 })
         console.log('centerDate', centerDate)
         if (centerDate)
           return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' ? ru : undefined  })}`
       } else {
-        return `${format(rangeStartDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })} - ${format(rangeEndDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })}`
+        return `${format(calendarContext.rangeStartDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })} - ${format(calendarContext.rangeEndDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })}`
 
       }
 
-    } else if (isSameDay(rangeStartDate, rangeEndDate)) {
-      return `${format(rangeStartDate, 'MMMM dd EEEE', { locale: i18n.language === 'ru' && ru })}`
+    } else if (isSameDay(calendarContext.rangeStartDate, calendarContext.rangeEndDate)) {
+      return `${format(calendarContext.rangeStartDate, 'MMMM dd EEEE', { locale: i18n.language === 'ru' && ru })}`
     }
-  }
+  }, [calendarContext.rangeStartDate, calendarContext.rangeEndDate, calendarContext.currentView])
   const handleCreate = () => {
     setNewEventRange(null)
     calendarContext.showModal('eventCreateModal')
@@ -241,23 +244,49 @@ const TabProjectCalendarInner = (props) => {
     listEvents()
   }, [currentView])
 
-  console.log('CURRENTVIEW', toolbar.current?.view)
-  console.log('rangeStartDate', rangeStartDate)
-  console.log('rangeEndDate', rangeEndDate)
+  const filteredEvents = useMemo<IEvent[]>(() => {
 
+    console.log('CURRENTVIEW2323', currentView)
+    if(currentView === 'week'){
+
+      const newEvents: IEvent[] = [];
+      const eventsMap: {[key: string]: IEvent[]} = {}
+      events.sort((a, b) => a.actualStart.getTime() - b.actualStart.getTime()).forEach((event) => {
+        const day = format(event.actualStart, 'dd.MM.yyyy')
+        if(!eventsMap[day]){
+          eventsMap[day] = [];
+        }
+        eventsMap[day].push(event)
+      })
+      for(const key of Object.keys(eventsMap)){
+        newEvents.push(eventsMap[key][0]);
+        if(eventsMap[key].length > 2){
+          newEvents.push({...eventsMap[key][1], _isStub: true, _count: eventsMap[key].length - 1, _allEvents: eventsMap[key]})
+        }else if(eventsMap[key].length > 1){
+          newEvents.push(eventsMap[key][1]);
+
+        }
+      }
+
+      console.log("newEvents",eventsMap, newEvents)
+      return newEvents
+    }else{
+      return events;
+    }
+  }, [currentView, events])
   return (
     <div className={styles.root}>
       <ProjectCalendarSideBar onClickEvent={handleClickEvent} currentDate={currentDate} onChange={handleSideBarDateChange} onCreate={handleCreate} />
       <div className={classNames(styles.rightSide, { [styles.alt]: toolbar.current?.view === 'agenda' })}>
         <div className={styles.toolbar}>
 
-          <CalendarToolbar label={getToolbarLabel()} onChangeView={handleChangeView}
+          <CalendarToolbar label={toolbarLabel} onChangeView={handleChangeView}
             onNavigate={handleToolbarNavigate} currentView={currentView} /></div>
         <DnDCalendar
           selectable
           localizer={localizer}
           culture={i18n.language}
-          events={events}
+          events={currentView === 'week' ? filteredEvents :  events}
           onEventDrop={moveEvent}
           resizable
           onEventResize={resizeEvent}
@@ -266,14 +295,14 @@ const TabProjectCalendarInner = (props) => {
           onSelectEvent={handleClickEvent}
           onView={handleViewChange}
           defaultView={currentView}
-          defaultDate={new Date()}
+          defaultDate={ new Date()}
           dragFromOutsideItem={draggedEvent}
           onNavigate={handleNavigate}
           popup={true}
-          //date={calendarContext.rangeStartDate ?? new Date()}
           startAccessor="actualStart"
           endAccessor="actualEnd"
           messages={{ noEventsInRange: t('event.noEvents') }}
+          dayLayoutAlgorithm={'no-overlap'}
           components={{
             event: CalendarEvent,
             toolbar: getToolBar,

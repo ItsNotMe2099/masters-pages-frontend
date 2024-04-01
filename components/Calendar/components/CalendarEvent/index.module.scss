@@ -42,8 +42,21 @@
       border-color: transparent !important;
     }
   }
+  &.stub{
+    align-items: center;
+    justify-content: center;
+  }
 }
-
+.stubCount{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  width: 24px;
+  height: 24px;
+  background-color: $white;
+  border-radius: 8px;
+}
 .leftBorder{
   width: 10px;
   border-top-left-radius: 4px;

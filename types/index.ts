@@ -817,6 +817,10 @@ export interface IEvent {
   address2?: string;
 
   isAuthor?: boolean
+
+  _isStub?: boolean
+  _count?: number
+  _allEvents?: IEvent[]
 }
 
 

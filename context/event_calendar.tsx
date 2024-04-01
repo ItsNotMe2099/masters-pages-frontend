@@ -215,6 +215,8 @@ export function EventCalendarWrapper(props: Props) {
     setCurrentEventPrev,
     setRange: (start: Date, end: Date) => {
       fetch(start, end)
+      setRangeStartDate(start);
+      setRangeEndDate(end);
     },
     setCurrentView: (view: View) => {
       setCurrentView(view)

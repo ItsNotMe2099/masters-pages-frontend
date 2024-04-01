@@ -2,7 +2,7 @@ import {getAuthServerSide} from 'utils/auth'
 import styles from './index.module.scss'
 
 import * as dates from 'date-arithmetic'
-import {EventStatus, IRootState} from 'types'
+import {EventStatus, IEvent, IRootState} from 'types'
 
 import {Calendar, Views, momentLocalizer} from 'react-big-calendar'
 import 'moment/locale/ru'
@@ -11,7 +11,7 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import {useSelector, useDispatch} from 'react-redux'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import {default as React, useEffect, useRef, useState} from 'react'
+import {default as React, useEffect, useMemo, useRef, useState} from 'react'
 import CalendarEvent from 'components/Calendar/components/CalendarEvent'
 import {add, addDays, endOfWeek, format, isSameDay, isWeekend, startOfWeek} from 'date-fns'
 import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
@@ -270,6 +270,36 @@ const CalendarPage = (props) => {
     dispatch(createEventOpen())
   }
 
+
+  const filteredEvents = useMemo<IEvent[]>(() => {
+
+    console.log('CURRENTVIEW2323', currentView)
+    if(currentView === 'week'){
+
+      const newEvents: IEvent[] = [];
+      const eventsMap: {[key: string]: IEvent[]} = {}
+      events.sort((a, b) => a.actualStart.getTime() - b.actualStart.getTime()).forEach((event) => {
+        const day = format(event.actualStart, 'dd.MM.yyyy')
+        if(!eventsMap[day]){
+          eventsMap[day] = [];
+        }
+        eventsMap[day].push(event)
+      })
+      for(const key of Object.keys(eventsMap)){
+        newEvents.push(eventsMap[key][0]);
+        if(eventsMap[key].length > 2){
+          newEvents.push({...eventsMap[key][1], _isStub: true, _count: eventsMap[key].length - 1, _allEvents: eventsMap[key]})
+        }else if(eventsMap[key].length > 1){
+          newEvents.push(eventsMap[key][1]);
+
+        }
+      }
+
+      return newEvents
+    }else{
+      return events;
+    }
+  }, [currentView, events])
 return (
   <Layout>
     <div className={styles.root}>
@@ -283,7 +313,7 @@ return (
           selectable
           localizer={localizer}
           culture={i18n.language}
-          events={events}
+          events={currentView === 'week' ? filteredEvents :  events}
           onEventDrop={moveEvent}
           resizable
           onEventResize={resizeEvent}
@@ -300,6 +330,7 @@ return (
           startAccessor="actualStart"
           endAccessor="actualEnd"
           messages={{noEventsInRange: t('event.noEvents')}}
+          dayLayoutAlgorithm={'no-overlap'}
           components={{
             event: CalendarEvent,
             toolbar: getToolBar,
