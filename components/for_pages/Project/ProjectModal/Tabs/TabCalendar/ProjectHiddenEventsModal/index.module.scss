@@ -1,0 +1,55 @@
+@import "scss/index";
+
+.root {
+  width: 439px;
+  height: 315px;
+  gap: 0px;
+  border-radius: 8px;
+  border: 2px dashed #6F84CF;
+  opacity: 0px;
+  background-color: transparent;
+  padding: 50px;
+  overflow-y: scroll;
+
+  @include mq($TabletWidth, max) {
+    width: 439px !important;
+  }
+
+  @include mq($PhoneWidth, max) {
+    width: 350px !important;
+    padding: 50px 19px
+  }
+
+  @include mq($MPhoneWidth, max) {
+    width: 300px !important;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @include mq($PhoneWidth, min) {
+    .event:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+
+  @include mq($PhoneWidth, max) {
+    .event:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.event {
+  width: 25%;
+  max-width: 70px;
+  margin-right: 18px;
+  margin-bottom: 18px;
+}
+
+.modalClose {
+  display: none;
+}

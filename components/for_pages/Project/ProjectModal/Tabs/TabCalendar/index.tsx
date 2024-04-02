@@ -12,7 +12,7 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import { useSelector, useDispatch } from 'react-redux'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import {default as React, useEffect, useMemo, useRef, useState} from 'react'
+import { default as React, useEffect, useMemo, useRef, useState } from 'react'
 import CalendarEvent from 'components/Calendar/components/CalendarEvent'
 import { add, addDays, endOfWeek, format, isSameDay, isWeekend, startOfWeek } from 'date-fns'
 import CalendarMonthCell from 'components/Calendar/components/CalendarMonthCell'
@@ -43,6 +43,7 @@ import {
 import EventRepository from 'data/repositories/EventRepository'
 import AgendaView from './AgendaView'
 import classNames from 'classnames'
+import ProjectHiddenEventsModal from './ProjectHiddenEventsModal'
 const localizer = momentLocalizer(moment)
 const DnDCalendar = withDragAndDrop(Calendar)
 
@@ -129,10 +130,19 @@ const TabProjectCalendarInner = (props) => {
     })
     calendarContext.showModal('eventCreateModal')
   }
+
+  const [showHiddenEventsModal, setShowHiddenEventsModal] = useState<boolean>(false)
+  const [hiddenEvents, setHiddenEvents] = useState<IEvent[]>([])
+
   const handleClickEvent = (event: IEvent) => {
-    if(event._isStub){
-     //TODO Show modal
-    }else {
+    if (event._isStub) {
+      //TODO Show modal
+      setShowHiddenEventsModal(true)
+      setHiddenEvents(event._allEvents)
+    } else {
+      if (showHiddenEventsModal) {
+        setShowHiddenEventsModal(false)
+      }
       calendarContext.setCurrentEvent(event)
       calendarContext.showModal('eventEditModal')
       setCurrentEditEventRange(null)
@@ -216,7 +226,7 @@ const TabProjectCalendarInner = (props) => {
         const centerDate = add(calendarContext.rangeStartDate, { days: 15 })
         console.log('centerDate', centerDate)
         if (centerDate)
-          return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' ? ru : undefined  })}`
+          return `${format(centerDate, 'MMMM yyyy', { locale: i18n.language === 'ru' ? ru : undefined })}`
       } else {
         return `${format(calendarContext.rangeStartDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })} - ${format(calendarContext.rangeEndDate, 'MMMM dd', { locale: i18n.language === 'ru' ? ru : undefined })}`
 
@@ -247,30 +257,30 @@ const TabProjectCalendarInner = (props) => {
   const filteredEvents = useMemo<IEvent[]>(() => {
 
     console.log('CURRENTVIEW2323', currentView)
-    if(currentView === 'week'){
+    if (currentView === 'week') {
 
       const newEvents: IEvent[] = [];
-      const eventsMap: {[key: string]: IEvent[]} = {}
+      const eventsMap: { [key: string]: IEvent[] } = {}
       events.sort((a, b) => a.actualStart.getTime() - b.actualStart.getTime()).forEach((event) => {
         const day = format(event.actualStart, 'dd.MM.yyyy')
-        if(!eventsMap[day]){
+        if (!eventsMap[day]) {
           eventsMap[day] = [];
         }
         eventsMap[day].push(event)
       })
-      for(const key of Object.keys(eventsMap)){
+      for (const key of Object.keys(eventsMap)) {
         newEvents.push(eventsMap[key][0]);
-        if(eventsMap[key].length > 2){
-          newEvents.push({...eventsMap[key][1], _isStub: true, _count: eventsMap[key].length - 1, _allEvents: eventsMap[key]})
-        }else if(eventsMap[key].length > 1){
+        if (eventsMap[key].length > 2) {
+          newEvents.push({ ...eventsMap[key][1], _isStub: true, _count: eventsMap[key].length - 1, _allEvents: eventsMap[key] })
+        } else if (eventsMap[key].length > 1) {
           newEvents.push(eventsMap[key][1]);
 
         }
       }
 
-      console.log("newEvents",eventsMap, newEvents)
+      console.log("newEvents", eventsMap, newEvents)
       return newEvents
-    }else{
+    } else {
       return events;
     }
   }, [currentView, events])
@@ -286,7 +296,7 @@ const TabProjectCalendarInner = (props) => {
           selectable
           localizer={localizer}
           culture={i18n.language}
-          events={currentView === 'week' ? filteredEvents :  events}
+          events={currentView === 'week' ? filteredEvents : events}
           onEventDrop={moveEvent}
           resizable
           onEventResize={resizeEvent}
@@ -295,7 +305,7 @@ const TabProjectCalendarInner = (props) => {
           onSelectEvent={handleClickEvent}
           onView={handleViewChange}
           defaultView={currentView}
-          defaultDate={ new Date()}
+          defaultDate={new Date()}
           dragFromOutsideItem={draggedEvent}
           onNavigate={handleNavigate}
           popup={true}
@@ -331,6 +341,15 @@ const TabProjectCalendarInner = (props) => {
 
           calendarContext.hideModal()
         }} />}
+      {showHiddenEventsModal &&
+        <ProjectHiddenEventsModal
+          onEventClick={handleClickEvent}
+          events={hiddenEvents}
+          isOpen={true} onClose={() => {
+
+            setShowHiddenEventsModal(false)
+          }} />
+      }
     </div>
   )
 }
