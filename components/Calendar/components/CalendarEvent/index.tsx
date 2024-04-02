@@ -13,6 +13,7 @@ interface Props {
   className?: string,
   onClick?: () => void
   showDate?: boolean
+  modal?: boolean
 }
 
 export default function CalendarEvent(props: Props) {
@@ -29,7 +30,7 @@ export default function CalendarEvent(props: Props) {
     trigger: 'hover',
     offset: [10, 10],
     closeOnOutsideClick: false,
-    visible: isToolTipVisible,
+    visible: props.modal ? false : isToolTipVisible,
     onVisibleChange: setIsToolTipVisible,
   })
   const getRootClass = () => {

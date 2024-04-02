@@ -2,7 +2,7 @@ import Modal from 'components/ui/Modal'
 import * as React from 'react'
 import { IEvent } from 'types'
 import styles from './index.module.scss'
-import { EventWrapper, useEventContext } from "context/event_state";
+import { useEventContext } from "context/event_state";
 import CalendarEvent from 'components/Calendar/components/CalendarEvent';
 
 interface Props {
@@ -16,10 +16,10 @@ const ProjectHiddenEventsModalInner = ({ isOpen, onClose, events, onEventClick }
   const eventContext = useEventContext()
 
   return (
-    <Modal isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
+    <Modal blurOverlay isOpen={isOpen} className={styles.root} loading={false} closeClassName={styles.modalClose} onRequestClose={onClose}>
       <div className={styles.list}>
         {events.map((i, index) =>
-          <CalendarEvent onClick={() => onEventClick(i)} className={styles.event} event={i} key={index} />
+          <CalendarEvent modal onClick={() => onEventClick(i)} className={styles.event} event={i} key={index} />
         )}
       </div>
     </Modal>

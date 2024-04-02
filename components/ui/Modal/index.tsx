@@ -19,15 +19,20 @@ interface Props {
   closeClassName?: string,
   header?: ReactElement
   noRadius?: boolean
+  blurOverlay?: boolean
 }
 
 export default function Modal(props: Props) {
   const bodyRef = useRef(null)
   const customStyles = {
-    overlay: {
+    overlay: !props.blurOverlay ? {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       display: 'flex',
       zIndex: '4',
+    } : {
+      display: 'flex',
+      zIndex: '4',
+      backdropFilter: 'blur(5px)'
     },
     content: {
       width: '100%',
