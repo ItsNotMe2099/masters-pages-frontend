@@ -14,6 +14,27 @@ Open [http://localhost:3002](http://localhost:3002) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
+ЛОГИНЫ:
+Клиент:
++79175843797
+123454321
+
++79990001122
+123454321
+
+Мастер:
++79055552211
+123454321
+
+89153063181
+89150778368
+пароль 123454321
+и там и там
+
+Организация:
+9153063181v@gmail.com
+qwerty
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
